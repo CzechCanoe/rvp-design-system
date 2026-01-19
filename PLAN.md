@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 4 - Specifické komponenty (Tier 3)
-**Další krok:** AthleteCard komponenta
+**Další krok:** ResultsTable komponenta
 
 ---
 
@@ -97,7 +97,7 @@
 - [x] Dropzone (file upload)
 - [x] Timeline (workflow vizualizace)
 - [x] StatCard (dashboard widget)
-- [ ] AthleteCard (profil závodníka)
+- [x] AthleteCard (profil závodníka)
 - [ ] ResultsTable (s highlighty)
 - [ ] LiveIndicator (pulsující)
 - [ ] EmptyState

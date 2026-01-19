@@ -1655,3 +1655,77 @@ src/components/
 
 ### Další kroky
 - Fáze 4: AthleteCard komponenta (profil závodníka)
+
+---
+
+## 2026-01-19 - Iterace 34 / AthleteCard komponenta (Fáze 4.5)
+
+### Dokončeno
+- [x] AthleteCard komponenta s TypeScript a CSS
+- [x] Varianty: default, compact, featured
+- [x] Velikosti: sm, md, lg
+- [x] Profilový obrázek s fallback na initials/ikonu
+- [x] CSK sekce barvy (DV modrá, RY zelená, VT červená) jako levý border
+- [x] VT třídy badges (M, A, B, C) s body
+- [x] Informace o klubu (název, ID)
+- [x] Meta informace (rok narození, licence)
+- [x] Ranking badge pro top 10 závodníky
+- [x] Ranking zobrazení pro featured variantu
+- [x] Custom stats slot pro statistiky
+- [x] Klikatelný stav a podpora linků (href)
+- [x] Country kód (ISO 3166-1 alpha-3)
+- [x] WCAG 2.1 AA - role="button" pro clickable, focus visible
+- [x] Reduced motion support
+- [x] Dark mode support
+- [x] Responsive design
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Tři varianty** - default (standard profil), compact (seznam/inline), featured (hero karta s velkým avatarem)
+2. **Section accent** - levý border pro default/compact, horní border pro featured variantu
+3. **Fallback chain** - image → initials → default icon pro robustní zobrazení
+4. **VT badge s body** - badge zobrazuje třídu a volitelně body oddělené svislou čarou
+5. **Ranking badge** - zobrazuje se pouze pro top 10 závodníky na avataru
+
+### Poznámky
+- AthleteCard je pátá komponenta Fáze 4 (specifické komponenty)
+- Kombinuje koncepty z Avatar, Badge a Card komponent
+- Vhodná pro: profily závodníků, startovní listiny, výsledky vyhledávání, soupisky klubů
+- Build projde bez chyb (CSS varování jsou známé esbuild issue)
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+├── Navigation/
+├── Pagination/
+├── Progress/
+├── Header/
+├── Avatar/
+├── Dropdown/
+├── Calendar/
+├── Dropzone/
+├── Timeline/
+├── StatCard/
+└── AthleteCard/
+    ├── index.ts       # Public API
+    ├── AthleteCard.tsx   # Component implementation
+    ├── AthleteCard.css   # Styles
+    └── AthleteCard.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 4: ResultsTable komponenta (s highlighty)
