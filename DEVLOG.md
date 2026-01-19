@@ -167,3 +167,30 @@ src/
 
 ### Další kroky
 - Fáze 1.2: Design Tokens (barvy, typografie, spacing)
+
+---
+
+## 2026-01-19 - Iterace 5 / Design Tokens - barvy (Fáze 1.2a)
+
+### Dokončeno
+- [x] Barevná paleta pro light theme (primitives)
+- [x] CSK specifické barvy (sekce DV/RY/VT, VT třídy M/A/B/C)
+- [x] Sémantické barvy (backgrounds, text, borders, interactive states, feedback)
+- [x] Vytvoření `src/tokens/colors.css`
+- [x] Vytvoření `src/tokens/index.css` (centrální import)
+
+### Rozhodnutí
+1. **CSS Custom Properties** - tokeny jako CSS proměnné pro snadné přepínání témat
+2. **Třívrstvá architektura** - primitives → semantic → component (budoucnost)
+3. **Plná škála pro hlavní barvy** - 50-900 pro primary, neutral, success, warning, error, info
+4. **Disciplínové barvy** - DV modrá (#2563eb), RY zelená (#16a34a), VT červená (#dc2626)
+5. **VT třídy** - M fialová, A červená, B oranžová, C zelená
+
+### Poznámky
+- Dark theme bude v dalším kroku (přepíše semantic vrstvu)
+- Tokeny jsou připraveny na import do globals.css
+- Struktura umožňuje budoucí rozšíření o component-level aliasy
+
+### Další kroky
+- Fáze 1.2b: Dark theme barvy
+- Fáze 1.2c: Typografie tokeny

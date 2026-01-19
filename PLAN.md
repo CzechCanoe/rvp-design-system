@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 1 - Projektová struktura a tokeny
-**Další krok:** 1.2 - Design Tokens
+**Další krok:** 1.2 - Design Tokens (dark theme, typografie, spacing...)
 
 ---
 
@@ -46,9 +46,9 @@
 - [x] Struktura složek (src/tokens, src/components, etc.)
 
 ### 1.2 Design Tokens
-- [ ] Barevná paleta (light theme)
+- [x] Barevná paleta (light theme) - `src/tokens/colors.css`
+- [x] CSK specifické barvy (sekce DV/RY/VT, VT třídy)
 - [ ] Barevná paleta (dark theme)
-- [ ] CSK specifické barvy (sekce DV/RY/VT, VT třídy)
 - [ ] Typografie (font family, scale, weights)
 - [ ] Spacing (4px base scale)
 - [ ] Border radius
