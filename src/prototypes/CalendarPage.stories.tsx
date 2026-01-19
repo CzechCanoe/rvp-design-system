@@ -1,0 +1,662 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState, useMemo } from 'react';
+import { Header } from '../components/Header';
+import { MainNav } from '../components/Navigation';
+import { Calendar, type CalendarEvent } from '../components/Calendar';
+import { Card } from '../components/Card';
+import { Badge } from '../components/Badge';
+import { Button } from '../components/Button';
+import { Input } from '../components/Input';
+import { Select } from '../components/Select';
+import { Tabs } from '../components/Tabs';
+import { LiveIndicator } from '../components/LiveIndicator';
+import { EmptyState } from '../components/EmptyState';
+import './CalendarPage.css';
+
+// ============================================================================
+// Page Component
+// ============================================================================
+
+interface CalendarPageProps {
+  /** Initial section filter */
+  initialSection?: 'all' | 'dv' | 'ry' | 'vt';
+  /** Show live races */
+  showLive?: boolean;
+}
+
+// Sample race data
+const generateRaces = (year: number, month: number): CalendarEvent[] => {
+  return [
+    // DV - Divoká voda (Whitewater)
+    {
+      id: 'dv-mcr',
+      title: 'MČR ve slalomu',
+      start: new Date(year, month, 3),
+      end: new Date(year, month, 5),
+      section: 'dv',
+      data: {
+        location: 'Praha - Troja',
+        discipline: 'Slalom',
+        level: 'MČR',
+        entries: 156,
+        isLive: month === new Date().getMonth() && new Date().getDate() >= 3 && new Date().getDate() <= 5,
+      },
+    },
+    {
+      id: 'dv-cp1',
+      title: 'Český pohár #1',
+      start: new Date(year, month, 10),
+      end: new Date(year, month, 11),
+      section: 'dv',
+      data: {
+        location: 'Trnávka',
+        discipline: 'Slalom',
+        level: 'ČP',
+        entries: 98,
+      },
+    },
+    {
+      id: 'dv-cp2',
+      title: 'Český pohár #2',
+      start: new Date(year, month, 17),
+      end: new Date(year, month, 18),
+      section: 'dv',
+      data: {
+        location: 'Praha - Troja',
+        discipline: 'Slalom + Sjezd',
+        level: 'ČP',
+        entries: 112,
+      },
+    },
+    {
+      id: 'dv-nominace',
+      title: 'Nominace na MS',
+      start: new Date(year, month, 24),
+      end: new Date(year, month, 25),
+      section: 'dv',
+      data: {
+        location: 'Praha - Troja',
+        discipline: 'Slalom',
+        level: 'Nominace',
+        entries: 42,
+      },
+    },
+
+    // RY - Rychlostní kanoistika (Sprint/Marathon)
+    {
+      id: 'ry-regata',
+      title: 'Regata Račice',
+      start: new Date(year, month, 8),
+      end: new Date(year, month, 9),
+      section: 'ry',
+      data: {
+        location: 'Račice',
+        discipline: 'Sprint',
+        level: 'MČR',
+        entries: 234,
+      },
+    },
+    {
+      id: 'ry-maraton',
+      title: 'Český maraton',
+      start: new Date(year, month, 22),
+      section: 'ry',
+      data: {
+        location: 'Slapy',
+        discipline: 'Maraton',
+        level: 'MČR',
+        entries: 89,
+      },
+    },
+
+    // VT - Vodní turistika (Touring)
+    {
+      id: 'vt-vltava',
+      title: 'Sjíždění Vltavy',
+      start: new Date(year, month, 6),
+      end: new Date(year, month, 7),
+      section: 'vt',
+      data: {
+        location: 'Vyšší Brod - Boršov',
+        discipline: 'Turistika',
+        level: 'Veřejný',
+        entries: 456,
+      },
+    },
+    {
+      id: 'vt-sazava',
+      title: 'Vodácký víkend Sázava',
+      start: new Date(year, month, 20),
+      end: new Date(year, month, 21),
+      section: 'vt',
+      data: {
+        location: 'Sázava',
+        discipline: 'Turistika',
+        level: 'Veřejný',
+        entries: 178,
+      },
+    },
+
+    // Administrative events
+    {
+      id: 'admin-deadline',
+      title: 'Deadline přihlášek MČR',
+      start: new Date(year, month, 1),
+      variant: 'warning',
+      data: {
+        type: 'deadline',
+      },
+    },
+    {
+      id: 'admin-meeting',
+      title: 'Valná hromada CSK',
+      start: new Date(year, month, 15),
+      variant: 'info',
+      data: {
+        location: 'Praha',
+        type: 'meeting',
+      },
+    },
+  ];
+};
+
+const sectionNames: Record<string, string> = {
+  dv: 'Divoká voda',
+  ry: 'Rychlostní',
+  vt: 'Vodní turistika',
+};
+
+const sectionShortNames: Record<string, string> = {
+  dv: 'DV',
+  ry: 'RY',
+  vt: 'VT',
+};
+
+// Navigation items
+const navItems = [
+  { id: 'home', label: 'Domů', href: '#' },
+  { id: 'calendar', label: 'Kalendář', href: '#', active: true },
+  { id: 'results', label: 'Výsledky', href: '#' },
+  { id: 'athletes', label: 'Závodníci', href: '#' },
+  { id: 'clubs', label: 'Kluby', href: '#' },
+];
+
+// Search icon
+const SearchIcon = () => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="11" cy="11" r="8" />
+    <path d="M21 21l-4.35-4.35" />
+  </svg>
+);
+
+// Location icon
+const LocationIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
+
+// Calendar icon
+const CalendarIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <line x1="16" y1="2" x2="16" y2="6" />
+    <line x1="8" y1="2" x2="8" y2="6" />
+    <line x1="3" y1="10" x2="21" y2="10" />
+  </svg>
+);
+
+// Users icon
+const UsersIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+);
+
+// Arrow right icon
+const ArrowRightIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <line x1="5" y1="12" x2="19" y2="12" />
+    <polyline points="12 5 19 12 12 19" />
+  </svg>
+);
+
+const CalendarPage = ({ initialSection = 'all', showLive = true }: CalendarPageProps) => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedSection, setSelectedSection] = useState<string>(initialSection);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
+
+  // Generate races for current month
+  const allRaces = useMemo(() => {
+    return generateRaces(currentDate.getFullYear(), currentDate.getMonth());
+  }, [currentDate]);
+
+  // Filter races by section and search query
+  const filteredRaces = useMemo(() => {
+    return allRaces.filter((race) => {
+      // Section filter
+      if (selectedSection !== 'all' && race.section !== selectedSection) {
+        return false;
+      }
+
+      // Search filter
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        const matchesTitle = race.title.toLowerCase().includes(query);
+        const matchesLocation = (race.data?.location as string)?.toLowerCase().includes(query);
+        return matchesTitle || matchesLocation;
+      }
+
+      return true;
+    });
+  }, [allRaces, selectedSection, searchQuery]);
+
+  // Get upcoming races (sorted by date)
+  const upcomingRaces = useMemo(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return filteredRaces
+      .filter((race) => race.start >= today || (race.end && race.end >= today))
+      .sort((a, b) => a.start.getTime() - b.start.getTime())
+      .slice(0, 5);
+  }, [filteredRaces]);
+
+  // Section tabs
+  const sectionTabs = [
+    { id: 'all', label: 'Všechny sekce' },
+    { id: 'dv', label: 'Divoká voda' },
+    { id: 'ry', label: 'Rychlostní' },
+    { id: 'vt', label: 'Vodní turistika' },
+  ];
+
+  // Format date range
+  const formatDateRange = (start: Date, end?: Date) => {
+    const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short' };
+    if (!end || start.getTime() === end.getTime()) {
+      return start.toLocaleDateString('cs-CZ', options);
+    }
+    return `${start.toLocaleDateString('cs-CZ', { day: 'numeric' })}–${end.toLocaleDateString('cs-CZ', options)}`;
+  };
+
+  // Handle event click
+  const handleEventClick = (event: CalendarEvent) => {
+    setSelectedEvent(event);
+  };
+
+  return (
+    <div className="prototype-calendar-page">
+      {/* Header */}
+      <Header
+        variant="default"
+        size="md"
+        bordered
+        brand={
+          <a href="#" className="prototype-calendar-page__logo">
+            <span className="prototype-calendar-page__logo-text">CSK</span>
+            <span className="prototype-calendar-page__logo-subtitle">Český svaz kanoistů</span>
+          </a>
+        }
+        navigation={
+          <MainNav
+            items={navItems}
+            variant="horizontal"
+            showMobileToggle={false}
+            onItemClick={(item) => console.log('Nav click:', item)}
+          />
+        }
+        search={
+          <Input
+            type="search"
+            placeholder="Hledat..."
+            size="sm"
+            iconLeft={<SearchIcon />}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            clearable
+            onClear={() => setSearchQuery('')}
+          />
+        }
+        userMenu={
+          <Button variant="primary" size="sm">
+            Přihlásit se
+          </Button>
+        }
+      />
+
+      {/* Main content */}
+      <main className="prototype-calendar-page__main">
+        <div className="prototype-calendar-page__container">
+          {/* Page header */}
+          <div className="prototype-calendar-page__header">
+            <h1 className="prototype-calendar-page__title">Kalendář závodů</h1>
+            <p className="prototype-calendar-page__subtitle">
+              Přehled všech závodů a akcí Českého svazu kanoistů
+            </p>
+          </div>
+
+          {/* Filters */}
+          <div className="prototype-calendar-page__filters">
+            <Tabs
+              tabs={sectionTabs.map((tab) => ({ ...tab, content: null }))}
+              activeTab={selectedSection}
+              onChange={(tabId) => setSelectedSection(tabId)}
+              variant="pills"
+            />
+
+            <div className="prototype-calendar-page__filters-right">
+              <Select
+                options={[
+                  { value: 'all', label: 'Všechny úrovně' },
+                  { value: 'mcr', label: 'MČR' },
+                  { value: 'cp', label: 'Český pohár' },
+                  { value: 'krajske', label: 'Krajské' },
+                  { value: 'verejne', label: 'Veřejné akce' },
+                ]}
+                defaultValue="all"
+                size="sm"
+              />
+            </div>
+          </div>
+
+          {/* Content grid */}
+          <div className="prototype-calendar-page__content">
+            {/* Calendar */}
+            <div className="prototype-calendar-page__calendar">
+              <Calendar
+                date={currentDate}
+                onDateChange={setCurrentDate}
+                events={filteredRaces}
+                size="lg"
+                onEventClick={handleEventClick}
+                onDayClick={(date) => console.log('Day clicked:', date)}
+              />
+            </div>
+
+            {/* Sidebar */}
+            <aside className="prototype-calendar-page__sidebar">
+              {/* Live races */}
+              {showLive && upcomingRaces.some((race) => race.data?.isLive) && (
+                <Card variant="outlined" padding="md" className="prototype-calendar-page__live-card">
+                  <div className="prototype-calendar-page__live-header">
+                    <LiveIndicator variant="live" size="md" label="LIVE" />
+                    <span>Právě probíhá</span>
+                  </div>
+                  {upcomingRaces
+                    .filter((race) => race.data?.isLive)
+                    .map((race) => (
+                      <div key={race.id} className="prototype-calendar-page__live-race">
+                        <div className="prototype-calendar-page__race-title">{race.title}</div>
+                        <div className="prototype-calendar-page__race-meta">
+                          <LocationIcon />
+                          <span>{String(race.data?.location || '')}</span>
+                        </div>
+                        <Button variant="primary" size="sm" fullWidth>
+                          Sledovat živě
+                        </Button>
+                      </div>
+                    ))}
+                </Card>
+              )}
+
+              {/* Upcoming races */}
+              <Card variant="surface" padding="none">
+                <div className="prototype-calendar-page__upcoming-header">
+                  <h2 className="prototype-calendar-page__upcoming-title">Nadcházející závody</h2>
+                </div>
+
+                {upcomingRaces.length > 0 ? (
+                  <div className="prototype-calendar-page__upcoming-list">
+                    {upcomingRaces.map((race) => (
+                      <button
+                        key={race.id}
+                        type="button"
+                        className={`prototype-calendar-page__upcoming-item ${
+                          selectedEvent?.id === race.id ? 'prototype-calendar-page__upcoming-item--selected' : ''
+                        }`}
+                        onClick={() => handleEventClick(race)}
+                      >
+                        <div className="prototype-calendar-page__upcoming-date">
+                          <CalendarIcon />
+                          <span>{formatDateRange(race.start, race.end)}</span>
+                        </div>
+                        <div className="prototype-calendar-page__upcoming-content">
+                          <div className="prototype-calendar-page__upcoming-name">
+                            {race.section && (
+                              <Badge section={race.section as 'dv' | 'ry' | 'vt'} size="sm">
+                                {sectionShortNames[race.section]}
+                              </Badge>
+                            )}
+                            <span>{race.title}</span>
+                          </div>
+                          <div className="prototype-calendar-page__upcoming-meta">
+                            <span className="prototype-calendar-page__upcoming-location">
+                              <LocationIcon />
+                              {String(race.data?.location || '')}
+                            </span>
+                            {race.data?.entries ? (
+                              <span className="prototype-calendar-page__upcoming-entries">
+                                <UsersIcon />
+                                {String(race.data.entries)} přihlášených
+                              </span>
+                            ) : null}
+                          </div>
+                        </div>
+                        <ArrowRightIcon />
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <EmptyState
+                    title="Žádné nadcházející závody"
+                    description="V této sekci nejsou plánovány žádné závody."
+                    size="sm"
+                  />
+                )}
+
+                <div className="prototype-calendar-page__upcoming-footer">
+                  <Button variant="ghost" size="sm" fullWidth>
+                    Zobrazit všechny závody
+                  </Button>
+                </div>
+              </Card>
+
+              {/* Event detail (when selected) */}
+              {selectedEvent && (
+                <Card variant="elevated" padding="md" className="prototype-calendar-page__detail-card">
+                  <div className="prototype-calendar-page__detail-header">
+                    <h3 className="prototype-calendar-page__detail-title">{selectedEvent.title}</h3>
+                    {selectedEvent.section && (
+                      <Badge section={selectedEvent.section as 'dv' | 'ry' | 'vt'}>
+                        {sectionNames[selectedEvent.section]}
+                      </Badge>
+                    )}
+                  </div>
+
+                  <div className="prototype-calendar-page__detail-info">
+                    <div className="prototype-calendar-page__detail-row">
+                      <CalendarIcon />
+                      <span>{formatDateRange(selectedEvent.start, selectedEvent.end)}</span>
+                    </div>
+                    {selectedEvent.data?.location ? (
+                      <div className="prototype-calendar-page__detail-row">
+                        <LocationIcon />
+                        <span>{String(selectedEvent.data.location)}</span>
+                      </div>
+                    ) : null}
+                    {selectedEvent.data?.discipline ? (
+                      <div className="prototype-calendar-page__detail-row">
+                        <span className="prototype-calendar-page__detail-label">Disciplína:</span>
+                        <span>{String(selectedEvent.data.discipline)}</span>
+                      </div>
+                    ) : null}
+                    {selectedEvent.data?.level ? (
+                      <div className="prototype-calendar-page__detail-row">
+                        <span className="prototype-calendar-page__detail-label">Úroveň:</span>
+                        <span>{String(selectedEvent.data.level)}</span>
+                      </div>
+                    ) : null}
+                    {selectedEvent.data?.entries ? (
+                      <div className="prototype-calendar-page__detail-row">
+                        <UsersIcon />
+                        <span>{String(selectedEvent.data.entries)} přihlášených závodníků</span>
+                      </div>
+                    ) : null}
+                  </div>
+
+                  <div className="prototype-calendar-page__detail-actions">
+                    <Button variant="primary" fullWidth>
+                      Detail závodu
+                    </Button>
+                    <Button variant="secondary" fullWidth>
+                      Přihlásit se
+                    </Button>
+                  </div>
+                </Card>
+              )}
+            </aside>
+          </div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="prototype-calendar-page__footer">
+        <div className="prototype-calendar-page__footer-content">
+          <p>© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+// ============================================================================
+// Storybook Meta
+// ============================================================================
+
+const meta = {
+  title: 'Prototypes/Calendar Page',
+  component: CalendarPage,
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        component:
+          'Prototyp stránky kalendáře závodů CSK. Zobrazuje měsíční přehled závodů s filtry podle sekcí (DV, RY, VT) a seznamem nadcházejících událostí.',
+      },
+    },
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    initialSection: {
+      control: 'select',
+      options: ['all', 'dv', 'ry', 'vt'],
+      description: 'Initial section filter',
+    },
+    showLive: {
+      control: 'boolean',
+      description: 'Show live races indicator',
+    },
+  },
+} satisfies Meta<typeof CalendarPage>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+/**
+ * Výchozí zobrazení kalendáře se všemi sekcemi.
+ */
+export const Default: Story = {
+  args: {
+    initialSection: 'all',
+    showLive: true,
+  },
+};
+
+/**
+ * Kalendář filtrovaný na sekci Divoká voda (DV).
+ */
+export const DivokáVoda: Story = {
+  args: {
+    initialSection: 'dv',
+    showLive: true,
+  },
+};
+
+/**
+ * Kalendář filtrovaný na sekci Rychlostní kanoistika (RY).
+ */
+export const Rychlostní: Story = {
+  args: {
+    initialSection: 'ry',
+    showLive: true,
+  },
+};
+
+/**
+ * Kalendář filtrovaný na sekci Vodní turistika (VT).
+ */
+export const VodníTuristika: Story = {
+  args: {
+    initialSection: 'vt',
+    showLive: true,
+  },
+};
+
+/**
+ * Kalendář bez indikátoru živých závodů.
+ */
+export const BezLive: Story = {
+  args: {
+    initialSection: 'all',
+    showLive: false,
+  },
+};

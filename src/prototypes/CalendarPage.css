@@ -1,0 +1,363 @@
+/* ============================================================================
+   Calendar Page Prototype - Styles
+   ============================================================================ */
+
+.prototype-calendar-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-primary);
+}
+
+/* ============================================================================
+   Logo
+   ============================================================================ */
+
+.prototype-calendar-page__logo {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-2);
+  text-decoration: none;
+  color: inherit;
+}
+
+.prototype-calendar-page__logo-text {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.prototype-calendar-page__logo-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ============================================================================
+   Main Content
+   ============================================================================ */
+
+.prototype-calendar-page__main {
+  flex: 1;
+  padding: var(--spacing-6) var(--spacing-4);
+}
+
+.prototype-calendar-page__container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ============================================================================
+   Page Header
+   ============================================================================ */
+
+.prototype-calendar-page__header {
+  margin-bottom: var(--spacing-6);
+}
+
+.prototype-calendar-page__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.prototype-calendar-page__subtitle {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ============================================================================
+   Filters
+   ============================================================================ */
+
+.prototype-calendar-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+  padding-bottom: var(--spacing-4);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.prototype-calendar-page__filters-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+/* ============================================================================
+   Content Grid
+   ============================================================================ */
+
+.prototype-calendar-page__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-6);
+}
+
+@media (min-width: 1024px) {
+  .prototype-calendar-page__content {
+    grid-template-columns: 1fr 380px;
+  }
+}
+
+/* ============================================================================
+   Calendar Section
+   ============================================================================ */
+
+.prototype-calendar-page__calendar {
+  min-width: 0; /* Prevent grid blowout */
+}
+
+/* ============================================================================
+   Sidebar
+   ============================================================================ */
+
+.prototype-calendar-page__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+/* ============================================================================
+   Live Card
+   ============================================================================ */
+
+.prototype-calendar-page__live-card {
+  border-color: var(--color-error);
+  background-color: var(--color-error-bg);
+}
+
+.prototype-calendar-page__live-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-error);
+  margin-bottom: var(--spacing-4);
+}
+
+.prototype-calendar-page__live-race {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.prototype-calendar-page__race-title {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.prototype-calendar-page__race-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ============================================================================
+   Upcoming Races
+   ============================================================================ */
+
+.prototype-calendar-page__upcoming-header {
+  padding: var(--spacing-4);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.prototype-calendar-page__upcoming-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.prototype-calendar-page__upcoming-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.prototype-calendar-page__upcoming-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  border: none;
+  border-bottom: 1px solid var(--color-border-primary);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background-color var(--transition-fast);
+}
+
+.prototype-calendar-page__upcoming-item:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+.prototype-calendar-page__upcoming-item--selected {
+  background-color: var(--color-primary-bg);
+}
+
+.prototype-calendar-page__upcoming-item:last-child {
+  border-bottom: none;
+}
+
+.prototype-calendar-page__upcoming-date {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.prototype-calendar-page__upcoming-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.prototype-calendar-page__upcoming-name {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-1);
+}
+
+.prototype-calendar-page__upcoming-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+.prototype-calendar-page__upcoming-location,
+.prototype-calendar-page__upcoming-entries {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.prototype-calendar-page__upcoming-footer {
+  padding: var(--spacing-3) var(--spacing-4);
+  border-top: 1px solid var(--color-border-primary);
+}
+
+/* ============================================================================
+   Event Detail Card
+   ============================================================================ */
+
+.prototype-calendar-page__detail-card {
+  position: sticky;
+  top: var(--spacing-4);
+}
+
+.prototype-calendar-page__detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+}
+
+.prototype-calendar-page__detail-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.prototype-calendar-page__detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+}
+
+.prototype-calendar-page__detail-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.prototype-calendar-page__detail-label {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-tertiary);
+}
+
+.prototype-calendar-page__detail-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+/* ============================================================================
+   Footer
+   ============================================================================ */
+
+.prototype-calendar-page__footer {
+  padding: var(--spacing-6) var(--spacing-4);
+  border-top: 1px solid var(--color-border-primary);
+  background-color: var(--color-bg-secondary);
+}
+
+.prototype-calendar-page__footer-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.prototype-calendar-page__footer-content p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+/* ============================================================================
+   Responsive Adjustments
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .prototype-calendar-page__main {
+    padding: var(--spacing-4) var(--spacing-3);
+  }
+
+  .prototype-calendar-page__title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .prototype-calendar-page__filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .prototype-calendar-page__filters-right {
+    justify-content: flex-start;
+  }
+
+  .prototype-calendar-page__upcoming-date {
+    min-width: auto;
+  }
+
+  .prototype-calendar-page__detail-card {
+    position: static;
+  }
+}
+
+/* ============================================================================
+   Dark Mode Overrides
+   ============================================================================ */
+
+[data-theme="dark"] .prototype-calendar-page__live-card {
+  background-color: rgba(239, 68, 68, 0.1);
+}

@@ -2029,3 +2029,49 @@ src/components/
 
 ### Další kroky
 - Fáze 5: prototype-calendar - Kalendář závodů
+
+---
+
+## 2026-01-19 - Iterace 24 / Prototyp kalendáře závodů
+
+### Dokončeno
+- [x] CalendarPage prototyp s kompletní stránkou
+- [x] Header s navigací, logem CSK a vyhledáváním
+- [x] Filtry podle sekcí (DV, RY, VT) pomocí Tabs komponenty
+- [x] Filtr podle úrovně závodu (Select)
+- [x] Kalendář s ukázkovými závody pro aktuální měsíc
+- [x] Sidebar s nadcházejícími závody
+- [x] Live indikátor pro probíhající závody
+- [x] Detail karty vybraného závodu
+- [x] Responsive layout (desktop 2 sloupce, mobile 1 sloupec)
+- [x] Dark mode podpora
+- [x] Storybook stories s variantami (Default, DivokáVoda, Rychlostní, VodníTuristika, BezLive)
+
+### Použité komponenty
+- Header, MainNav
+- Calendar
+- Card
+- Badge (s section prop)
+- Button
+- Input (search)
+- Select
+- Tabs (pills variant)
+- LiveIndicator
+- EmptyState
+
+### Architektura prototypu
+```
+src/prototypes/
+├── CalendarPage.stories.tsx  # Kompletní page component + Storybook
+└── CalendarPage.css          # Styly prototypu
+```
+
+### Poznámky
+- Prototyp používá všechny relevantní komponenty z design systému
+- Sample data generována pro aktuální měsíc s realistickými závody
+- Závody rozděleny podle CSK sekcí (DV, RY, VT) a obecných (deadline, meeting)
+- Kliknutím na závod v kalendáři nebo seznamu se zobrazí detail
+- Build a typecheck projdou bez chyb
+
+### Další kroky
+- prototype-results - Výsledky závodu
