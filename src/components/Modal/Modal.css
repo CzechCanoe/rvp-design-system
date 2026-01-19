@@ -1,0 +1,270 @@
+/**
+ * Modal Component Styles
+ *
+ * Design tokens used:
+ * - Colors: bg-primary, bg-elevated, text-primary, text-secondary, border-secondary
+ * - Spacing: spacing-4, spacing-6, spacing-8
+ * - Radius: radius-lg, radius-xl
+ * - Shadows: shadow-modal, shadow-modal-backdrop
+ * - Transitions: transition-modal, transition-modal-backdrop
+ */
+
+/* ==========================================================================
+ * BACKDROP
+ * ========================================================================== */
+
+.csk-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4);
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: modal-backdrop-in var(--duration-moderate) var(--ease-out);
+}
+
+@keyframes modal-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+ * MODAL CONTAINER
+ * ========================================================================== */
+
+.csk-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: calc(100vh - var(--spacing-8));
+  overflow: hidden;
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-modal);
+  animation: modal-in var(--duration-moderate) var(--ease-out);
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ==========================================================================
+ * SIZE VARIANTS
+ * ========================================================================== */
+
+.csk-modal--sm {
+  max-width: 400px;
+}
+
+.csk-modal--md {
+  max-width: 500px;
+}
+
+.csk-modal--lg {
+  max-width: 700px;
+}
+
+.csk-modal--xl {
+  max-width: 900px;
+}
+
+.csk-modal--full {
+  max-width: calc(100vw - var(--spacing-8));
+  max-height: calc(100vh - var(--spacing-8));
+}
+
+/* ==========================================================================
+ * HEADER
+ * ========================================================================== */
+
+.csk-modal__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  padding: var(--spacing-6);
+  border-bottom: 1px solid var(--color-border-secondary);
+}
+
+.csk-modal__title-wrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+.csk-modal__title {
+  margin: 0;
+  font-size: var(--text-lg-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+.csk-modal__description {
+  margin: var(--spacing-1) 0 0;
+  font-size: var(--text-sm-size);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+ * CLOSE BUTTON
+ * ========================================================================== */
+
+.csk-modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-md);
+  background-color: transparent;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition: var(--transition-button);
+}
+
+.csk-modal__close:hover {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+.csk-modal__close:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-button-focus);
+}
+
+.csk-modal__close:active {
+  background-color: var(--color-bg-tertiary);
+}
+
+.csk-modal__close-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ==========================================================================
+ * BODY
+ * ========================================================================== */
+
+.csk-modal__body {
+  flex: 1;
+  padding: var(--spacing-6);
+  overflow-y: auto;
+}
+
+/* Scrollable variant */
+.csk-modal--scrollable .csk-modal__body {
+  overflow-y: auto;
+}
+
+/* Remove padding when no header/footer */
+.csk-modal:not(:has(.csk-modal__header)) .csk-modal__body {
+  padding-top: var(--spacing-6);
+}
+
+.csk-modal:not(:has(.csk-modal__footer)) .csk-modal__body {
+  padding-bottom: var(--spacing-6);
+}
+
+/* ==========================================================================
+ * FOOTER
+ * ========================================================================== */
+
+.csk-modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4) var(--spacing-6);
+  border-top: 1px solid var(--color-border-secondary);
+  background-color: var(--color-bg-secondary);
+}
+
+/* ==========================================================================
+ * DARK MODE
+ * ========================================================================== */
+
+[data-theme="dark"] .csk-modal__backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="dark"] .csk-modal {
+  background-color: var(--color-bg-elevated);
+}
+
+[data-theme="dark"] .csk-modal__footer {
+  background-color: var(--color-bg-primary);
+}
+
+/* System preference detection */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .csk-modal__backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  :root:not([data-theme="light"]) .csk-modal {
+    background-color: var(--color-bg-elevated);
+  }
+
+  :root:not([data-theme="light"]) .csk-modal__footer {
+    background-color: var(--color-bg-primary);
+  }
+}
+
+/* ==========================================================================
+ * REDUCED MOTION
+ * ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-modal__backdrop,
+  .csk-modal {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+ * RESPONSIVE
+ * ========================================================================== */
+
+@media (max-width: 575px) {
+  .csk-modal__backdrop {
+    padding: var(--spacing-2);
+    align-items: flex-end;
+  }
+
+  .csk-modal {
+    max-height: calc(100vh - var(--spacing-4));
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .csk-modal--full {
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .csk-modal__header,
+  .csk-modal__body,
+  .csk-modal__footer {
+    padding-left: var(--spacing-4);
+    padding-right: var(--spacing-4);
+  }
+}

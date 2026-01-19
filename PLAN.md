@@ -1,8 +1,8 @@
 # PLAN.md - CSK RVP Design System
 
 ## Aktuální stav
-**Fáze:** 2 - Core komponenty (Tier 1) ✅ DOKONČENO
-**Další krok:** Fáze 3 - Pokročilé komponenty (Modal)
+**Fáze:** 3 - Pokročilé komponenty (Tier 2)
+**Další krok:** Tabs komponenta
 
 ---
 
@@ -77,7 +77,7 @@
 
 ## Fáze 3: Pokročilé komponenty (Tier 2)
 
-- [ ] Modal (dialog, confirm, wizard)
+- [x] Modal (dialog, confirm, wizard)
 - [ ] Tabs (horizontal, pills)
 - [ ] Toast (notifications provider)
 - [ ] Navigation (main nav, breadcrumbs)

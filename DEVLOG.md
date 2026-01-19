@@ -819,3 +819,62 @@ src/components/
 
 ### Další kroky
 - Fáze 3: Pokročilé komponenty (Modal, Tabs, Toast, Navigation, Pagination...)
+
+---
+
+## 2026-01-19 - Iterace 21 / Modal komponenta (Fáze 3.1)
+
+### Dokončeno
+- [x] Modal komponenta s TypeScript a CSS
+- [x] Velikosti: sm (400px), md (500px), lg (700px), xl (900px), full
+- [x] Portal rendering pro správné vrstvení (createPortal)
+- [x] Focus trap pro přístupnost (Tab cycling, první element focus)
+- [x] Klávesová navigace (Escape pro zavření)
+- [x] Backdrop click pro zavření (volitelné)
+- [x] Body scroll lock při otevření
+- [x] Title, description, footer sloty
+- [x] Show/hide close button
+- [x] Scrollable content varianta
+- [x] Animace vstupu (fade + scale + slide)
+- [x] WCAG 2.1 AA - role="dialog", aria-modal, aria-labelledby, focus management
+- [x] Reduced motion support
+- [x] Mobile responsive (bottom sheet pattern na mobilech)
+- [x] Dark mode support
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Portal rendering** - Modal se renderuje do document.body pro správné z-index chování
+2. **Focus trap** - Tab key cykluje pouze přes focusable elementy uvnitř modalu
+3. **Previous focus restore** - Po zavření se focus vrátí na element, který byl fokusovaný před otevřením
+4. **Mobile bottom sheet** - Na mobilech se modal zarovnává ke spodnímu okraji (align-items: flex-end)
+5. **Scrollable body** - overflow-y: auto na body, ne na celý modal
+
+### Poznámky
+- Modal je první komponenta Fáze 3 (pokročilé komponenty)
+- Používá existing tokeny (shadow-modal, transition-modal, duration-moderate)
+- Storybook stories obsahují CSK-specifické příklady (registrace závodníka, potvrzení startovní listiny, detail závodu, smazání)
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+└── Modal/
+    ├── index.ts       # Public API
+    ├── Modal.tsx      # Component implementation
+    ├── Modal.css      # Styles
+    └── Modal.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 3: Tabs komponenta (horizontal, pills)
