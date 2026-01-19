@@ -2228,3 +2228,71 @@ src/prototypes/
 
 ### Další kroky
 - prototype-profile - Profil závodníka
+
+---
+
+## 2026-01-19 - Iterace 57 / Profile Page Prototype (Fáze 5.5)
+
+### Dokončeno
+- [x] Analýza požadavků profilu závodníka z business analýzy (UC-1.1 až UC-1.9)
+- [x] Vytvoření ProfilePage.stories.tsx - kompletní profil závodníka
+- [x] Vytvoření ProfilePage.css - stylování prototypu
+
+### Architektura prototypu
+```
+src/prototypes/
+├── ProfilePage.stories.tsx  # Profil závodníka
+└── ProfilePage.css
+```
+
+### Funkcionality prototypu
+1. **Hero karta** - avatar, jméno, sekce, VT třída, základní údaje (klub, ročník, licence)
+2. **Status karty** - 3 karty zobrazující:
+   - Právo startu (aktivní/neaktivní)
+   - Zdravotní prohlídka (platná/expirující/vypršelá)
+   - Příspěvky (zaplaceno/čeká/nezaplaceno)
+3. **Záložky** s 3 sekcemi:
+   - Přehled: StatCard grid, poslední výsledky, průběh sezóny
+   - Výsledky: kompletní tabulka s řazením
+   - Historie: Timeline životního cyklu závodníka
+
+### Použité komponenty
+- Header (s brand a navigation)
+- MainNav (navigace)
+- Card (layout kontejnery)
+- Badge (sekce, VT třída, kategorie, statusy)
+- Button (akce)
+- Avatar (profilová fotka)
+- StatCard (statistiky - závody, vítězství, pódia, žebříček)
+- Table (výsledky závodů)
+- Tabs (přepínání sekcí)
+- Timeline (historie událostí)
+- Progress (průběh sezóny)
+
+### Problémy a řešení
+1. **Problém:** Neexistující export `Column` z Table komponenty
+   **Řešení:** Použit správný typ `ColumnDef`
+
+2. **Problém:** Timeline používá `timestamp` místo `date`
+   **Řešení:** Přejmenováno na `timestamp`
+
+3. **Problém:** Badge nemá varianty "section", "vt", "outline"
+   **Řešení:** Použity správné props: `section={...}`, `vtClass={...}`, `outlined`
+
+4. **Problém:** StatCard nemá prop `title`, vyžaduje `label`
+   **Řešení:** Přejmenováno a upraven formát `trend`
+
+5. **Problém:** Tabs vyžadují `content` property
+   **Řešení:** Přidáno `content: null` pro každý tab
+
+6. **Problém:** Header používá `brand` místo `logo`, `navigation` místo children
+   **Řešení:** Opraveno API dle CalendarPage vzoru
+
+### Poznámky
+- Prototyp zobrazuje veřejný profil závodníka
+- Story varianty: Default, OwnProfile (s edit tlačítkem), AdminView
+- Mapuje use cases UC-1.1 až UC-1.9 (životní cyklus závodníka)
+- Build a typecheck projdou bez chyb
+
+### Další kroky
+- prototype-dashboard - Dashboard správce

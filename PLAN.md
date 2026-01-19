@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 5 - Prototypy
-**Další krok:** prototype-profile - Profil závodníka
+**Další krok:** prototype-dashboard - Dashboard správce
 
 ---
 
@@ -113,7 +113,7 @@
 - [x] prototype-results - Výsledky závodu
 - [x] prototype-live - Live výsledky
 - [x] prototype-registration - přihlašování na závody - oddílová přihláška
-- [ ] prototype-profile - Profil závodníka
+- [x] prototype-profile - Profil závodníka
 - [ ] prototype-dashboard - Dashboard správce
 
 **Milestone M5:** Klikatelné prototypy

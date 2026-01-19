@@ -1,0 +1,493 @@
+/* ============================================================================
+   Profile Page Styles
+   ============================================================================ */
+
+.profile-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface-secondary);
+}
+
+/* Header Logo */
+.profile-header-logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+.profile-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* Main Content */
+.profile-main {
+  flex: 1;
+  padding: var(--spacing-6) var(--spacing-4);
+}
+
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+/* ============================================================================
+   Hero Card
+   ============================================================================ */
+
+.profile-hero-card {
+  overflow: visible;
+}
+
+.profile-hero {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--spacing-6);
+  align-items: flex-start;
+  padding: var(--spacing-6);
+}
+
+.profile-hero-avatar {
+  position: relative;
+}
+
+.profile-hero-avatar .csk-avatar {
+  width: 120px;
+  height: 120px;
+  font-size: 2.5rem;
+}
+
+.profile-ranking-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: white;
+  box-shadow: var(--shadow-md);
+  border: 3px solid white;
+}
+
+.profile-ranking-badge--1 {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+}
+
+.profile-ranking-badge--2 {
+  background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%);
+}
+
+.profile-ranking-badge--3 {
+  background: linear-gradient(135deg, #cd7f32 0%, #a0522d 100%);
+}
+
+/* Hero Info */
+.profile-hero-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.profile-hero-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.profile-hero-name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.profile-hero-country {
+  padding: var(--spacing-1) var(--spacing-2);
+  background-color: var(--color-surface-secondary);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.profile-hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.profile-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-6);
+  margin-top: var(--spacing-2);
+}
+
+.profile-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.profile-meta-label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.profile-meta-value {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+/* Hero Actions */
+.profile-hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.profile-hero-actions .csk-button svg {
+  width: 16px;
+  height: 16px;
+  margin-right: var(--spacing-1);
+}
+
+/* ============================================================================
+   Status Cards Grid
+   ============================================================================ */
+
+.profile-status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-4);
+}
+
+.profile-status-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  border-left: 4px solid transparent;
+}
+
+.profile-status-card--valid {
+  border-left-color: var(--color-success);
+}
+
+.profile-status-card--invalid,
+.profile-status-card--expired {
+  border-left-color: var(--color-danger);
+}
+
+.profile-status-card--expiring {
+  border-left-color: var(--color-warning);
+}
+
+.profile-status-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-status-card--valid .profile-status-icon {
+  background-color: var(--color-success-subtle);
+  color: var(--color-success);
+}
+
+.profile-status-card--invalid .profile-status-icon,
+.profile-status-card--expired .profile-status-icon {
+  background-color: var(--color-danger-subtle);
+  color: var(--color-danger);
+}
+
+.profile-status-card--expiring .profile-status-icon {
+  background-color: var(--color-warning-subtle);
+  color: var(--color-warning);
+}
+
+.profile-status-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.profile-status-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-status-title {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--spacing-1);
+}
+
+.profile-status-value {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.profile-status-warning {
+  font-size: 0.8125rem;
+  color: var(--color-warning);
+  margin: var(--spacing-1) 0 0;
+}
+
+/* ============================================================================
+   Tab Content
+   ============================================================================ */
+
+.profile-tab-content {
+  margin-top: var(--spacing-4);
+}
+
+/* ============================================================================
+   Overview Tab
+   ============================================================================ */
+
+.profile-overview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.profile-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-4);
+}
+
+.profile-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-4) var(--spacing-4) 0;
+}
+
+.profile-section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.profile-section-description {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin: var(--spacing-2) 0 var(--spacing-4);
+  padding: 0 var(--spacing-4);
+}
+
+/* ============================================================================
+   Results Table
+   ============================================================================ */
+
+.profile-result-race {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profile-result-race-name {
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.profile-result-race-location {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.profile-result-rank {
+  font-weight: 600;
+}
+
+.profile-result-rank--gold {
+  color: #b8860b;
+}
+
+.profile-result-rank--silver {
+  color: #6b6b6b;
+}
+
+.profile-result-rank--bronze {
+  color: #8b4513;
+}
+
+/* ============================================================================
+   Season Progress
+   ============================================================================ */
+
+.profile-season-stats {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--spacing-6);
+  padding: var(--spacing-4);
+}
+
+.profile-season-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.profile-season-label {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.profile-season-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.profile-season-value {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.profile-season-big-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+/* ============================================================================
+   Footer
+   ============================================================================ */
+
+.profile-footer {
+  background-color: var(--color-surface-primary);
+  border-top: 1px solid var(--color-border);
+  padding: var(--spacing-6) var(--spacing-4);
+  text-align: center;
+}
+
+.profile-footer p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* ============================================================================
+   Dark Mode
+   ============================================================================ */
+
+[data-theme="dark"] .profile-hero-country {
+  background-color: var(--color-surface-tertiary);
+}
+
+[data-theme="dark"] .profile-ranking-badge {
+  border-color: var(--color-surface-primary);
+}
+
+/* ============================================================================
+   Responsive Design
+   ============================================================================ */
+
+@media (max-width: 1024px) {
+  .profile-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-main {
+    padding: var(--spacing-4) var(--spacing-3);
+  }
+
+  .profile-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: var(--spacing-4);
+  }
+
+  .profile-hero-avatar {
+    margin: 0 auto;
+  }
+
+  .profile-hero-header {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .profile-hero-badges {
+    justify-content: center;
+  }
+
+  .profile-hero-meta {
+    justify-content: center;
+  }
+
+  .profile-hero-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .profile-status-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .profile-season-stats {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .profile-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-hero-name {
+    font-size: 1.5rem;
+  }
+
+  .profile-hero-avatar .csk-avatar {
+    width: 96px;
+    height: 96px;
+    font-size: 2rem;
+  }
+
+  .profile-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-result-race {
+    max-width: 150px;
+  }
+
+  .profile-result-race-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
