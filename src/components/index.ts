@@ -147,3 +147,13 @@ export type {
   TimelineColor,
   TimelineItemStatus,
 } from './Timeline';
+
+// StatCard
+export { StatCard } from './StatCard';
+export type {
+  StatCardProps,
+  StatCardVariant,
+  StatCardSize,
+  StatCardColor,
+  StatCardTrend,
+} from './StatCard';

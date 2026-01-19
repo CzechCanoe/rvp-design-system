@@ -1586,3 +1586,72 @@ src/components/
 
 ### Další kroky
 - Fáze 4: StatCard komponenta (dashboard widget)
+
+---
+
+## 2026-01-19 - Iterace 33 / StatCard komponenta (Fáze 4.4)
+
+### Dokončeno
+- [x] StatCard komponenta s TypeScript a CSS
+- [x] Varianty: default (s borderem), outlined (silnější border), elevated (stín)
+- [x] Velikosti: sm, md, lg
+- [x] Barevné varianty: default, primary, success, warning, error, info
+- [x] Trend indikátory (up/down/neutral) s ikonami a hodnotou
+- [x] Ikona v barevném kontejneru
+- [x] Sekundární hodnota pro srovnání (např. předchozí období)
+- [x] Footer slot pro akce nebo odkazy
+- [x] Klikatelný stav s hover/active efekty
+- [x] Loading stav se spinnerem
+- [x] WCAG 2.1 AA - role="button" pro clickable, focus visible
+- [x] Reduced motion support
+- [x] Dark mode support
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Value jako string | number** - flexibilita pro formátované hodnoty ("1,234" vs 1234)
+2. **Trend jako samostatný indikátor** - pill badge s ikonou a hodnotou v pravém horním rohu
+3. **Icon container** - barevné pozadí odpovídající color prop pro vizuální rozlišení
+4. **Secondary value** - pro srovnání s předchozím obdobím (menší text pod hlavní hodnotou)
+5. **tabular-nums** - pro správné zarovnání číslic ve value
+
+### Poznámky
+- StatCard je čtvrtá komponenta Fáze 4 (specifické komponenty)
+- Ideální pro dashboardy: počty členů, statistiky závodů, výkonnostní metriky
+- CSS varování pro vnořené @media jsou známý esbuild issue, nefungují na výstup
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+├── Navigation/
+├── Pagination/
+├── Progress/
+├── Header/
+├── Avatar/
+├── Dropdown/
+├── Calendar/
+├── Dropzone/
+├── Timeline/
+└── StatCard/
+    ├── index.ts       # Public API
+    ├── StatCard.tsx   # Component implementation
+    ├── StatCard.css   # Styles
+    └── StatCard.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 4: AthleteCard komponenta (profil závodníka)
