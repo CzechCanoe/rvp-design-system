@@ -188,3 +188,11 @@ export type {
   LiveIndicatorSize,
   LiveIndicatorColor,
 } from './LiveIndicator';
+
+// EmptyState
+export { EmptyState } from './EmptyState';
+export type {
+  EmptyStateProps,
+  EmptyStateSize,
+  EmptyStateVariant,
+} from './EmptyState';

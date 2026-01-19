@@ -1,0 +1,289 @@
+/* ==========================================================================
+   EmptyState Component
+   ========================================================================== */
+
+.csk-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--spacing-8);
+}
+
+/* Variants
+   ========================================================================== */
+
+/* Default - transparent background */
+.csk-empty-state--default {
+  background: transparent;
+}
+
+/* Card - with background and border */
+.csk-empty-state--card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+}
+
+/* Inline - horizontal compact layout */
+.csk-empty-state--inline {
+  flex-direction: row;
+  text-align: left;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+}
+
+.csk-empty-state--inline .csk-empty-state__icon-container {
+  margin-bottom: 0;
+}
+
+.csk-empty-state--inline .csk-empty-state__content {
+  flex: 1;
+}
+
+.csk-empty-state--inline .csk-empty-state__actions {
+  margin-top: 0;
+}
+
+/* Sizes
+   ========================================================================== */
+
+/* Small */
+.csk-empty-state--sm {
+  padding: var(--spacing-4);
+  gap: var(--spacing-2);
+}
+
+.csk-empty-state--sm .csk-empty-state__icon-container {
+  width: 40px;
+  height: 40px;
+  margin-bottom: var(--spacing-2);
+}
+
+.csk-empty-state--sm .csk-empty-state__icon {
+  width: 24px;
+  height: 24px;
+}
+
+.csk-empty-state--sm .csk-empty-state__illustration {
+  max-width: 120px;
+  margin-bottom: var(--spacing-2);
+}
+
+.csk-empty-state--sm .csk-empty-state__title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.csk-empty-state--sm .csk-empty-state__description {
+  font-size: var(--font-size-xs);
+}
+
+.csk-empty-state--sm .csk-empty-state__actions {
+  margin-top: var(--spacing-3);
+  gap: var(--spacing-2);
+}
+
+/* Medium (default) */
+.csk-empty-state--md {
+  padding: var(--spacing-8);
+  gap: var(--spacing-3);
+}
+
+.csk-empty-state--md .csk-empty-state__icon-container {
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--spacing-3);
+}
+
+.csk-empty-state--md .csk-empty-state__icon {
+  width: 28px;
+  height: 28px;
+}
+
+.csk-empty-state--md .csk-empty-state__illustration {
+  max-width: 180px;
+  margin-bottom: var(--spacing-4);
+}
+
+.csk-empty-state--md .csk-empty-state__title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.csk-empty-state--md .csk-empty-state__description {
+  font-size: var(--font-size-sm);
+}
+
+.csk-empty-state--md .csk-empty-state__actions {
+  margin-top: var(--spacing-4);
+  gap: var(--spacing-3);
+}
+
+/* Large */
+.csk-empty-state--lg {
+  padding: var(--spacing-12);
+  gap: var(--spacing-4);
+}
+
+.csk-empty-state--lg .csk-empty-state__icon-container {
+  width: 80px;
+  height: 80px;
+  margin-bottom: var(--spacing-4);
+}
+
+.csk-empty-state--lg .csk-empty-state__icon {
+  width: 40px;
+  height: 40px;
+}
+
+.csk-empty-state--lg .csk-empty-state__illustration {
+  max-width: 280px;
+  margin-bottom: var(--spacing-6);
+}
+
+.csk-empty-state--lg .csk-empty-state__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.csk-empty-state--lg .csk-empty-state__description {
+  font-size: var(--font-size-base);
+  max-width: 400px;
+}
+
+.csk-empty-state--lg .csk-empty-state__actions {
+  margin-top: var(--spacing-6);
+  gap: var(--spacing-3);
+}
+
+/* Icon Container
+   ========================================================================== */
+
+.csk-empty-state__icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-full);
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.csk-empty-state__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.csk-empty-state__icon > svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Illustration
+   ========================================================================== */
+
+.csk-empty-state__illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.csk-empty-state__illustration > img,
+.csk-empty-state__illustration > svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Content
+   ========================================================================== */
+
+.csk-empty-state__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.csk-empty-state__title {
+  margin: 0;
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+}
+
+.csk-empty-state__description {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+/* Custom Content (children)
+   ========================================================================== */
+
+.csk-empty-state__custom-content {
+  margin-top: var(--spacing-2);
+}
+
+/* Actions
+   ========================================================================== */
+
+.csk-empty-state__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Inline variant actions alignment */
+.csk-empty-state--inline .csk-empty-state__actions {
+  justify-content: flex-start;
+}
+
+/* Dark Mode
+   ========================================================================== */
+
+[data-theme='dark'] .csk-empty-state--card {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border-default);
+}
+
+[data-theme='dark'] .csk-empty-state__icon-container {
+  background: var(--color-bg-tertiary);
+}
+
+@media (prefers-color-scheme: dark) {
+  .csk-empty-state--card:not([data-theme='light'] *) {
+    background: var(--color-bg-secondary);
+    border-color: var(--color-border-default);
+  }
+
+  .csk-empty-state__icon-container:not([data-theme='light'] *) {
+    background: var(--color-bg-tertiary);
+  }
+}
+
+/* Responsive
+   ========================================================================== */
+
+@media (max-width: 639px) {
+  /* Inline becomes stacked on mobile */
+  .csk-empty-state--inline {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .csk-empty-state--inline .csk-empty-state__actions {
+    justify-content: center;
+    margin-top: var(--spacing-3);
+  }
+
+  /* Reduce padding on mobile */
+  .csk-empty-state--lg {
+    padding: var(--spacing-8);
+  }
+
+  .csk-empty-state--lg .csk-empty-state__illustration {
+    max-width: 200px;
+  }
+}

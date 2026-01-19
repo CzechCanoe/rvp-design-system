@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 4 - Specifické komponenty (Tier 3)
-**Další krok:** EmptyState komponenta
+**Další krok:** Skeleton komponenta
 
 ---
 
@@ -100,7 +100,7 @@
 - [x] AthleteCard (profil závodníka)
 - [x] ResultsTable (s highlighty)
 - [x] LiveIndicator (pulsující)
-- [ ] EmptyState
+- [x] EmptyState
 - [ ] Skeleton
 
 **Milestone M4:** Use-case komponenty v Storybook

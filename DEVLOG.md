@@ -1882,3 +1882,76 @@ src/components/
 
 ### Další kroky
 - Fáze 4: EmptyState komponenta
+
+---
+
+## 2026-01-19 - Iterace 37 / EmptyState komponenta (Fáze 4.8)
+
+### Dokončeno
+- [x] EmptyState komponenta s TypeScript a CSS
+- [x] Varianty: default (průhledné), card (s pozadím a borderem), inline (horizontální)
+- [x] Velikosti: sm, md, lg
+- [x] Defaultní inbox ikona (SVG)
+- [x] Custom icon podpora
+- [x] Custom illustration slot pro větší grafiky
+- [x] Title a description texty
+- [x] Primární a sekundární akce (tlačítka)
+- [x] Children slot pro vlastní obsah
+- [x] hideIcon prop pro skrytí defaultní ikony
+- [x] WCAG 2.1 AA - aria-hidden na dekorativní prvky
+- [x] Dark mode support
+- [x] Responsive design (inline → stacked na mobilech)
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Tři varianty** - default (průhledné), card (kontejner), inline (kompaktní horizontální)
+2. **Defaultní inbox ikona** - SVG ikona pro případ, kdy není zadán custom icon ani illustration
+3. **hideIcon prop** - explicitní skrytí defaultní ikony pro text-only stavy
+4. **Flexibilní akce** - action a secondaryAction jako ReactNode pro libovolná tlačítka
+5. **Children slot** - pro custom obsah mezi description a akcemi
+
+### Poznámky
+- EmptyState je osmá komponenta Fáze 4 (specifické komponenty)
+- Vhodná pro: prázdné tabulky, žádné výsledky vyhledávání, onboarding, prázdný kalendář
+- Inline varianta se na mobilech transformuje na vertikální layout
+- Build projde bez chyb (CSS varování jsou známé esbuild issue)
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+├── Navigation/
+├── Pagination/
+├── Progress/
+├── Header/
+├── Avatar/
+├── Dropdown/
+├── Calendar/
+├── Dropzone/
+├── Timeline/
+├── StatCard/
+├── AthleteCard/
+├── ResultsTable/
+├── LiveIndicator/
+└── EmptyState/
+    ├── index.ts       # Public API
+    ├── EmptyState.tsx   # Component implementation
+    ├── EmptyState.css   # Styles
+    └── EmptyState.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 4: Skeleton komponenta
