@@ -1,0 +1,171 @@
+/**
+ * Spacing Tokens - CSK RVP Design System
+ *
+ * 4px base scale spacing system with semantic aliases.
+ * Includes dual personality spacing for utility and expressive modes.
+ */
+
+:root {
+  /* ==========================================================================
+     BASE SPACING SCALE (4px increments)
+     ========================================================================== */
+
+  --spacing-0: 0;
+  --spacing-px: 1px;
+  --spacing-0-5: 2px;
+  --spacing-1: 4px;
+  --spacing-1-5: 6px;
+  --spacing-2: 8px;
+  --spacing-2-5: 10px;
+  --spacing-3: 12px;
+  --spacing-3-5: 14px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-9: 36px;
+  --spacing-10: 40px;
+  --spacing-11: 44px;
+  --spacing-12: 48px;
+  --spacing-14: 56px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  --spacing-28: 112px;
+  --spacing-32: 128px;
+  --spacing-36: 144px;
+  --spacing-40: 160px;
+  --spacing-44: 176px;
+  --spacing-48: 192px;
+  --spacing-52: 208px;
+  --spacing-56: 224px;
+  --spacing-60: 240px;
+  --spacing-64: 256px;
+  --spacing-72: 288px;
+  --spacing-80: 320px;
+  --spacing-96: 384px;
+
+  /* ==========================================================================
+     SEMANTIC COMPONENT SPACING
+     General-purpose spacing for components
+     ========================================================================== */
+
+  --spacing-component-xs: var(--spacing-1);  /* 4px - tight padding, small gaps */
+  --spacing-component-sm: var(--spacing-2);  /* 8px - default inner spacing */
+  --spacing-component-md: var(--spacing-4);  /* 16px - comfortable padding */
+  --spacing-component-lg: var(--spacing-6);  /* 24px - generous spacing */
+  --spacing-component-xl: var(--spacing-8);  /* 32px - extra large spacing */
+
+  /* ==========================================================================
+     SEMANTIC LAYOUT SPACING
+     Spacing between sections and major layout elements
+     ========================================================================== */
+
+  --spacing-section-sm: var(--spacing-8);   /* 32px - compact section gap */
+  --spacing-section-md: var(--spacing-12);  /* 48px - default section gap */
+  --spacing-section-lg: var(--spacing-16);  /* 64px - generous section gap */
+  --spacing-section-xl: var(--spacing-24);  /* 96px - major page divisions */
+
+  /* ==========================================================================
+     DUAL PERSONALITY - UTILITY MODE
+     Compact spacing for backoffice, admin interfaces, data-heavy UIs
+     ========================================================================== */
+
+  --spacing-util-xs: var(--spacing-1);   /* 4px */
+  --spacing-util-sm: var(--spacing-2);   /* 8px */
+  --spacing-util-md: var(--spacing-3);   /* 12px */
+  --spacing-util-lg: var(--spacing-4);   /* 16px */
+  --spacing-util-xl: var(--spacing-6);   /* 24px */
+
+  /* ==========================================================================
+     DUAL PERSONALITY - EXPRESSIVE MODE
+     Generous spacing for public pages, profiles, marketing
+     ========================================================================== */
+
+  --spacing-expr-xs: var(--spacing-2);   /* 8px */
+  --spacing-expr-sm: var(--spacing-4);   /* 16px */
+  --spacing-expr-md: var(--spacing-6);   /* 24px */
+  --spacing-expr-lg: var(--spacing-8);   /* 32px */
+  --spacing-expr-xl: var(--spacing-12);  /* 48px */
+
+  /* ==========================================================================
+     SPECIFIC USE CASES
+     ========================================================================== */
+
+  /* Touch targets (WCAG 2.1 - minimum 44x44px) */
+  --spacing-touch-target: var(--spacing-11); /* 44px */
+
+  /* Form elements */
+  --spacing-input-padding-x: var(--spacing-3);  /* 12px horizontal padding */
+  --spacing-input-padding-y: var(--spacing-2);  /* 8px vertical padding */
+  --spacing-input-gap: var(--spacing-2);        /* 8px gap between inputs */
+  --spacing-form-group: var(--spacing-4);       /* 16px between form groups */
+  --spacing-form-section: var(--spacing-8);     /* 32px between form sections */
+
+  /* Cards */
+  --spacing-card-padding: var(--spacing-4);     /* 16px default card padding */
+  --spacing-card-padding-lg: var(--spacing-6);  /* 24px larger card padding */
+  --spacing-card-gap: var(--spacing-4);         /* 16px gap between cards */
+
+  /* Tables */
+  --spacing-table-cell-x: var(--spacing-3);     /* 12px horizontal cell padding */
+  --spacing-table-cell-y: var(--spacing-2);     /* 8px vertical cell padding */
+  --spacing-table-cell-compact-y: var(--spacing-1); /* 4px compact cell */
+
+  /* Buttons */
+  --spacing-button-padding-x: var(--spacing-4); /* 16px horizontal */
+  --spacing-button-padding-y: var(--spacing-2); /* 8px vertical */
+  --spacing-button-padding-x-sm: var(--spacing-3); /* 12px small */
+  --spacing-button-padding-y-sm: var(--spacing-1-5); /* 6px small */
+  --spacing-button-padding-x-lg: var(--spacing-6); /* 24px large */
+  --spacing-button-padding-y-lg: var(--spacing-3); /* 12px large */
+  --spacing-button-gap: var(--spacing-2);       /* 8px between icon and text */
+
+  /* Navigation */
+  --spacing-nav-item-x: var(--spacing-4);       /* 16px nav item horizontal */
+  --spacing-nav-item-y: var(--spacing-2);       /* 8px nav item vertical */
+  --spacing-nav-gap: var(--spacing-1);          /* 4px between nav items */
+
+  /* Modal / Dialog */
+  --spacing-modal-padding: var(--spacing-6);    /* 24px modal padding */
+  --spacing-modal-header: var(--spacing-4);     /* 16px below header */
+  --spacing-modal-footer: var(--spacing-4);     /* 16px above footer */
+
+  /* Page layout */
+  --spacing-page-gutter: var(--spacing-4);      /* 16px page side margins */
+  --spacing-page-gutter-md: var(--spacing-6);   /* 24px on medium screens */
+  --spacing-page-gutter-lg: var(--spacing-8);   /* 32px on large screens */
+
+  /* Stack (vertical spacing between elements) */
+  --spacing-stack-xs: var(--spacing-1);         /* 4px */
+  --spacing-stack-sm: var(--spacing-2);         /* 8px */
+  --spacing-stack-md: var(--spacing-4);         /* 16px */
+  --spacing-stack-lg: var(--spacing-6);         /* 24px */
+  --spacing-stack-xl: var(--spacing-8);         /* 32px */
+
+  /* Inline (horizontal spacing between elements) */
+  --spacing-inline-xs: var(--spacing-1);        /* 4px */
+  --spacing-inline-sm: var(--spacing-2);        /* 8px */
+  --spacing-inline-md: var(--spacing-4);        /* 16px */
+  --spacing-inline-lg: var(--spacing-6);        /* 24px */
+}
+
+/* ==========================================================================
+   RESPONSIVE ADJUSTMENTS
+   Mobile-first responsive spacing
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  :root {
+    /* Increase page gutters on tablet+ */
+    --spacing-page-gutter: var(--spacing-page-gutter-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    /* Further increase on desktop */
+    --spacing-page-gutter: var(--spacing-page-gutter-lg);
+  }
+}

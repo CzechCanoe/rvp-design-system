@@ -253,3 +253,34 @@ src/
 
 ### Další kroky
 - Fáze 1.2d: Spacing, radius, shadows, transitions tokeny
+
+---
+
+## 2026-01-19 - Iterace 8 / Spacing tokens (Fáze 1.2d partial)
+
+### Dokončeno
+- [x] Base spacing scale (4px increments, 0-96 steps)
+- [x] Semantic component spacing (xs, sm, md, lg, xl)
+- [x] Semantic layout spacing (section-sm to section-xl)
+- [x] Dual personality spacing (utility mode compact, expressive mode generous)
+- [x] Specific use case tokens (forms, cards, tables, buttons, navigation, modals)
+- [x] Touch target spacing (44px pro WCAG 2.1)
+- [x] Responsive adjustments for page gutters
+- [x] Vytvoření `src/tokens/spacing.css`
+- [x] Aktualizace `src/tokens/index.css`
+
+### Rozhodnutí
+1. **Rozšířená škála** - přidány mezikroky (0.5, 1.5, 2.5, 3.5) pro jemnější kontrolu
+2. **Kompletní Tailwind-like škála** - 0-96 pro kompatibilitu s moderními design systémy
+3. **Specifické use case tokeny** - předpřipravené hodnoty pro běžné komponenty (forms, cards, tables)
+4. **Stack a Inline** - sémantické názvy pro vertikální a horizontální spacing
+
+### Poznámky
+- Spacing tokeny vycházejí z DESIGN_PRINCIPLES.md sekce 7 (základní škála) a sekce 3 (dual personality)
+- Touch target 44px je důležitý pro WCAG 2.1 Level AA compliance
+- Responsive adjustments pouze pro page gutters - zbytek je mobile-first
+
+### Další kroky
+- Fáze 1.2: Border radius tokeny
+- Fáze 1.2: Shadows tokeny
+- Fáze 1.2: Transitions tokeny
