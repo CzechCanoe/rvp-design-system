@@ -284,3 +284,28 @@ src/
 - Fáze 1.2: Border radius tokeny
 - Fáze 1.2: Shadows tokeny
 - Fáze 1.2: Transitions tokeny
+
+---
+
+## 2026-01-19 - Iterace 9 / Border radius tokens (Fáze 1.2d partial)
+
+### Dokončeno
+- [x] Base radius scale (none až full)
+- [x] Semantic component radius (buttons, inputs, cards, badges, modals)
+- [x] Image and avatar radius presets
+- [x] Vytvoření `src/tokens/radius.css`
+- [x] Aktualizace `src/tokens/index.css`
+
+### Rozhodnutí
+1. **Rozšířená škála** - přidán 3xl (32px) pro velmi zaoblené elementy
+2. **Sémantické aliasy** - komponenty používají pojmenované tokeny místo přímých hodnot
+3. **Konzistence s design principy** - hodnoty odpovídají DESIGN_PRINCIPLES.md sekce 8.1
+
+### Poznámky
+- Radius tokeny jsou připraveny pro použití v komponentách
+- Pill shape (radius-full: 9999px) pro buttons, badges, switches, progress bars
+- Avatary mají variantu circular i square
+
+### Další kroky
+- Fáze 1.2: Shadows tokeny
+- Fáze 1.2: Transitions tokeny

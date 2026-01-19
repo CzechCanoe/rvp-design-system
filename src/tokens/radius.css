@@ -1,0 +1,60 @@
+/**
+ * Border Radius Tokens - CSK RVP Design System
+ *
+ * Consistent border radius scale for rounded corners.
+ * Includes semantic aliases for common component use cases.
+ */
+
+:root {
+  /* ==========================================================================
+     BASE RADIUS SCALE
+     ========================================================================== */
+
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-3xl: 32px;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+     SEMANTIC COMPONENT RADIUS
+     ========================================================================== */
+
+  /* Buttons */
+  --radius-button: var(--radius-md);          /* 8px - default button */
+  --radius-button-sm: var(--radius-sm);       /* 4px - small button */
+  --radius-button-pill: var(--radius-full);   /* pill-shaped button */
+
+  /* Inputs & Form elements */
+  --radius-input: var(--radius-md);           /* 8px - text inputs, selects */
+  --radius-checkbox: var(--radius-sm);        /* 4px - checkboxes */
+  --radius-switch: var(--radius-full);        /* pill for toggle switches */
+
+  /* Cards & Containers */
+  --radius-card: var(--radius-lg);            /* 12px - default card */
+  --radius-card-sm: var(--radius-md);         /* 8px - compact card */
+  --radius-card-lg: var(--radius-xl);         /* 16px - large/featured card */
+
+  /* Badges & Tags */
+  --radius-badge: var(--radius-sm);           /* 4px - default badge */
+  --radius-badge-pill: var(--radius-full);    /* pill-shaped badge */
+
+  /* Modals & Dialogs */
+  --radius-modal: var(--radius-xl);           /* 16px - modal dialog */
+  --radius-popover: var(--radius-lg);         /* 12px - popovers, dropdowns */
+  --radius-tooltip: var(--radius-md);         /* 8px - tooltips */
+
+  /* Images & Avatars */
+  --radius-avatar: var(--radius-full);        /* circular avatars */
+  --radius-avatar-square: var(--radius-md);   /* 8px - square avatars */
+  --radius-image: var(--radius-md);           /* 8px - image thumbnails */
+  --radius-image-lg: var(--radius-lg);        /* 12px - larger images */
+
+  /* Miscellaneous */
+  --radius-skeleton: var(--radius-md);        /* 8px - skeleton loaders */
+  --radius-progress: var(--radius-full);      /* pill for progress bars */
+  --radius-notification: var(--radius-lg);    /* 12px - toast notifications */
+}

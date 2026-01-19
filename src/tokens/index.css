@@ -8,9 +8,9 @@
 @import './colors.css';
 @import './typography.css';
 @import './spacing.css';
+@import './radius.css';
 
 /* Additional token files will be added here:
- * @import './radius.css';
  * @import './shadows.css';
  * @import './transitions.css';
  */

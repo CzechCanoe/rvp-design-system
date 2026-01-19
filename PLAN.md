@@ -51,7 +51,7 @@
 - [x] Barevná paleta (dark theme)
 - [x] Typografie (font family, scale, weights) - `src/tokens/typography.css`
 - [x] Spacing (4px base scale) - `src/tokens/spacing.css`
-- [ ] Border radius
+- [x] Border radius - `src/tokens/radius.css`
 - [ ] Shadows
 - [ ] Transitions
 
