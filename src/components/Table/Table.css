@@ -1,0 +1,369 @@
+/* =============================================================================
+   Table Component Styles
+   ============================================================================= */
+
+/* Wrapper */
+.csk-table-wrapper {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.csk-table-wrapper--sticky {
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.csk-table-wrapper--sticky .csk-table__thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.csk-table-wrapper--loading {
+  min-height: 200px;
+}
+
+/* =============================================================================
+   Table Base
+   ============================================================================= */
+
+.csk-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+}
+
+/* Caption */
+.csk-table__caption {
+  padding: var(--spacing-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-align: left;
+  caption-side: top;
+}
+
+.csk-table__caption--sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =============================================================================
+   Table Header
+   ============================================================================= */
+
+.csk-table__thead {
+  background-color: var(--color-bg-secondary);
+}
+
+.csk-table__th {
+  padding: var(--spacing-3) var(--spacing-4);
+  font-weight: var(--font-weight-semibold);
+  text-align: left;
+  white-space: nowrap;
+  color: var(--color-text-primary);
+  border-bottom: 2px solid var(--color-border-strong);
+  vertical-align: middle;
+}
+
+.csk-table__th-content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+/* Sortable header */
+.csk-table__th--sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--transition-fast);
+}
+
+.csk-table__th--sortable:hover {
+  background-color: var(--color-bg-tertiary);
+}
+
+.csk-table__th--sortable:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: -2px;
+}
+
+/* Sort icon */
+.csk-table__sort-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--color-text-tertiary);
+  transition: color var(--transition-fast);
+}
+
+.csk-table__th--sortable:hover .csk-table__sort-icon {
+  color: var(--color-text-secondary);
+}
+
+.csk-table__th--sorted-asc .csk-table__sort-icon,
+.csk-table__th--sorted-desc .csk-table__sort-icon {
+  color: var(--color-primary-500);
+}
+
+.csk-table__sort-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Checkbox column */
+.csk-table__th--checkbox,
+.csk-table__td--checkbox {
+  width: 44px;
+  padding-left: var(--spacing-3);
+  padding-right: var(--spacing-2);
+}
+
+/* =============================================================================
+   Table Body
+   ============================================================================= */
+
+.csk-table__tbody {
+  background-color: var(--color-bg-primary);
+}
+
+.csk-table__tr {
+  transition: background-color var(--transition-fast);
+}
+
+.csk-table__tr--selected {
+  background-color: var(--color-primary-50);
+}
+
+.csk-table--hoverable .csk-table__tr:hover:not(.csk-table__tr--empty) {
+  background-color: var(--color-bg-hover);
+}
+
+.csk-table--hoverable .csk-table__tr--selected:hover {
+  background-color: var(--color-primary-100);
+}
+
+.csk-table__td {
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+/* Empty state */
+.csk-table__tr--empty .csk-table__td {
+  text-align: center;
+  padding: var(--spacing-8) var(--spacing-4);
+}
+
+.csk-table__empty {
+  display: block;
+  color: var(--color-text-tertiary);
+  font-style: italic;
+}
+
+/* =============================================================================
+   Checkbox
+   ============================================================================= */
+
+.csk-table__checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--color-primary-500);
+}
+
+.csk-table__checkbox:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   Size Variants
+   ============================================================================= */
+
+/* Small */
+.csk-table--sm .csk-table__th,
+.csk-table--sm .csk-table__td {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-xs);
+}
+
+.csk-table--sm .csk-table__checkbox {
+  width: 16px;
+  height: 16px;
+}
+
+/* Large */
+.csk-table--lg .csk-table__th,
+.csk-table--lg .csk-table__td {
+  padding: var(--spacing-4) var(--spacing-5);
+  font-size: var(--font-size-base);
+}
+
+.csk-table--lg .csk-table__checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+/* =============================================================================
+   Style Variants
+   ============================================================================= */
+
+/* Striped */
+.csk-table--striped .csk-table__tbody .csk-table__tr:nth-child(even) {
+  background-color: var(--color-bg-secondary);
+}
+
+.csk-table--striped.csk-table--hoverable .csk-table__tr:hover:not(.csk-table__tr--empty) {
+  background-color: var(--color-bg-hover);
+}
+
+/* Bordered */
+.csk-table--bordered {
+  border: 1px solid var(--color-border);
+}
+
+.csk-table--bordered .csk-table__th,
+.csk-table--bordered .csk-table__td {
+  border: 1px solid var(--color-border);
+}
+
+/* =============================================================================
+   Loading Overlay
+   ============================================================================= */
+
+.csk-table__loading-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 2;
+}
+
+.csk-table__spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary-500);
+  border-radius: 50%;
+  animation: csk-table-spin 0.8s linear infinite;
+}
+
+@keyframes csk-table-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =============================================================================
+   Dark Mode
+   ============================================================================= */
+
+[data-theme='dark'] .csk-table__tr--selected {
+  background-color: var(--color-primary-900);
+}
+
+[data-theme='dark'] .csk-table--hoverable .csk-table__tr--selected:hover {
+  background-color: var(--color-primary-800);
+}
+
+[data-theme='dark'] .csk-table__loading-overlay {
+  background-color: rgba(10, 10, 10, 0.8);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .csk-table__tr--selected {
+    background-color: var(--color-primary-900);
+  }
+
+  :root:not([data-theme='light']) .csk-table--hoverable .csk-table__tr--selected:hover {
+    background-color: var(--color-primary-800);
+  }
+
+  :root:not([data-theme='light']) .csk-table__loading-overlay {
+    background-color: rgba(10, 10, 10, 0.8);
+  }
+}
+
+/* =============================================================================
+   Responsive: Mobile Card Layout
+   ============================================================================= */
+
+@media (max-width: 575px) {
+  /* Optional: Convert to card layout on mobile */
+  .csk-table-wrapper--responsive .csk-table,
+  .csk-table-wrapper--responsive .csk-table__thead,
+  .csk-table-wrapper--responsive .csk-table__tbody,
+  .csk-table-wrapper--responsive .csk-table__tr,
+  .csk-table-wrapper--responsive .csk-table__th,
+  .csk-table-wrapper--responsive .csk-table__td {
+    display: block;
+  }
+
+  .csk-table-wrapper--responsive .csk-table__thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .csk-table-wrapper--responsive .csk-table__tr {
+    margin-bottom: var(--spacing-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .csk-table-wrapper--responsive .csk-table__td {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-3) var(--spacing-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .csk-table-wrapper--responsive .csk-table__td:last-child {
+    border-bottom: none;
+  }
+
+  .csk-table-wrapper--responsive .csk-table__td::before {
+    content: attr(data-label);
+    font-weight: var(--font-weight-semibold);
+    margin-right: var(--spacing-4);
+  }
+}
+
+/* =============================================================================
+   Reduced Motion
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-table__tr,
+  .csk-table__th--sortable,
+  .csk-table__sort-icon {
+    transition: none;
+  }
+
+  .csk-table__spinner {
+    animation: none;
+  }
+}

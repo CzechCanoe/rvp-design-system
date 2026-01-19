@@ -760,4 +760,62 @@ src/components/
 ```
 
 ### Další kroky
-- Fáze 2: Table komponenta (sortable, selectable)
+- Fáze 3: Modal komponenta (dialog, confirm, wizard)
+
+---
+
+## 2026-01-19 - Iterace 20 / Table komponenta (Fáze 2.9)
+
+### Dokončeno
+- [x] Table komponenta s TypeScript a CSS
+- [x] Generický typ pro typově bezpečné sloupce a data
+- [x] Varianty: default, striped, bordered
+- [x] Velikosti: sm (kompaktní), md (default), lg (prostorný)
+- [x] Sortable sloupce s třícyklickým přepínáním (asc → desc → none)
+- [x] Selectable řádky s checkbox a indeterminate "select all"
+- [x] Controlled i uncontrolled režim pro sort a selection
+- [x] Custom cell rendering pomocí cell funkce
+- [x] Sticky header pro dlouhé tabulky
+- [x] Loading overlay se spinnerem
+- [x] Empty state s custom obsahem
+- [x] Caption pro accessibility (viditelný i sr-only)
+- [x] WCAG 2.1 AA - aria-sort, focus visible, klávesová navigace
+- [x] Storybook stories s CSK-specifickými příklady (athletes, results, events)
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Generic component** - Table<T> pro typově bezpečné columns a data
+2. **forwardRef wrapper** - speciální pattern pro generické komponenty s ref
+3. **Třícyklový sort** - asc → desc → none (reset) pro intuitivní UX
+4. **Dual mode** - controlled (sortKey/sortDirection) i uncontrolled (defaultSortKey)
+5. **Czech collation** - localeCompare('cs') pro správné řazení českých znaků
+6. **CSS-only spinner** - bez závislosti na externí icon knihovně
+
+### Poznámky
+- **Milestone M2 dokončen** - všechny core komponenty Fáze 2 jsou hotové
+- Table doplňuje Badge pro zobrazení sekcí a stavů v buňkách
+- Sticky header používá CSS position: sticky pro nativní výkon
+- Responsive layout (scroll) místo card transformace na mobilu (lze přidat třídou)
+- Build projde bez chyb
+
+### Struktura komponent (kompletní Fáze 2)
+```
+src/components/
+├── index.ts           # Central export
+├── Button/            # Primary, secondary, ghost, danger
+├── Input/             # Text, password, search, number, validation
+├── Select/            # Native select s custom styling
+├── Checkbox/          # Včetně indeterminate
+├── Radio/             # Radio buttons
+├── Switch/            # Toggle switch
+├── Card/              # Surface, elevated, outlined, clickable
+├── Badge/             # Variants, sections, VT classes
+└── Table/             # Sortable, selectable, generic
+    ├── index.ts       # Public API
+    ├── Table.tsx      # Component implementation
+    ├── Table.css      # Styles
+    └── Table.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 3: Pokročilé komponenty (Modal, Tabs, Toast, Navigation, Pagination...)

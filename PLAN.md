@@ -1,8 +1,8 @@
 # PLAN.md - CSK RVP Design System
 
 ## Aktuální stav
-**Fáze:** 2 - Core komponenty (Tier 1)
-**Další krok:** Table komponenta
+**Fáze:** 2 - Core komponenty (Tier 1) ✅ DOKONČENO
+**Další krok:** Fáze 3 - Pokročilé komponenty (Modal)
 
 ---
 
@@ -69,9 +69,9 @@
 - [x] Switch
 - [x] Card (surface, elevated, clickable)
 - [x] Badge (status, VT, sekce)
-- [ ] Table (sortable, selectable)
+- [x] Table (sortable, selectable)
 
-**Milestone M2:** Core komponenty v Storybook
+**Milestone M2:** Core komponenty v Storybook ✅
 
 ---
 
