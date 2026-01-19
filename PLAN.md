@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 0 - Výzkum a příprava
-**Další krok:** 0.2 - Audit kanoe.cz
+**Další krok:** 0.3 - Design principy
 
 ---
 
@@ -19,10 +19,10 @@
 - [x] Dokument `docs/research/sports-presentation-research.md`
 
 ### 0.2 Audit kanoe.cz
-- [ ] Extrakce stávající barevné palety
-- [ ] Mapování Inspinia komponent
-- [ ] Identifikace co zachovat vs. nahradit
-- [ ] Dokument `docs/research/kanoe-cz-audit.md`
+- [x] Extrakce stávající barevné palety
+- [x] Mapování komponent (Bootstrap 4, jQuery, DataTables)
+- [x] Identifikace co zachovat vs. nahradit
+- [x] Dokument `docs/research/kanoe-cz-audit.md`
 
 ### 0.3 Design principy
 - [ ] Mobile-first strategie
