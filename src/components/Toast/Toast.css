@@ -1,0 +1,388 @@
+/**
+ * Toast Component Styles
+ *
+ * Design tokens used:
+ * - Colors: bg-elevated, text-primary, text-secondary, success, warning, error, info
+ * - Spacing: spacing-2, spacing-3, spacing-4
+ * - Radius: radius-lg
+ * - Shadows: shadow-toast
+ * - Transitions: duration-fast, duration-moderate, ease-out
+ */
+
+/* ==========================================================================
+ * TOAST CONTAINER
+ * ========================================================================== */
+
+.csk-toast-container {
+  position: fixed;
+  z-index: 800; /* --z-toast */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  pointer-events: none;
+  max-width: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+/* Position variants */
+.csk-toast-container--top-left {
+  top: 0;
+  left: 0;
+  align-items: flex-start;
+}
+
+.csk-toast-container--top-center {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+}
+
+.csk-toast-container--top-right {
+  top: 0;
+  right: 0;
+  align-items: flex-end;
+}
+
+.csk-toast-container--bottom-left {
+  bottom: 0;
+  left: 0;
+  align-items: flex-start;
+  flex-direction: column-reverse;
+}
+
+.csk-toast-container--bottom-center {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+  flex-direction: column-reverse;
+}
+
+.csk-toast-container--bottom-right {
+  bottom: 0;
+  right: 0;
+  align-items: flex-end;
+  flex-direction: column-reverse;
+}
+
+/* ==========================================================================
+ * TOAST ITEM
+ * ========================================================================== */
+
+.csk-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  width: 360px;
+  max-width: calc(100vw - var(--spacing-8));
+  padding: var(--spacing-4);
+  background-color: var(--color-bg-elevated);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-toast);
+  pointer-events: auto;
+  animation: toast-in var(--duration-moderate) var(--ease-out);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Exit animation */
+.csk-toast--exiting {
+  animation: toast-out var(--duration-fast) var(--ease-in) forwards;
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+}
+
+/* Top positions animate differently */
+.csk-toast-container--top-left .csk-toast,
+.csk-toast-container--top-center .csk-toast,
+.csk-toast-container--top-right .csk-toast {
+  animation-name: toast-in-top;
+}
+
+@keyframes toast-in-top {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.csk-toast-container--top-left .csk-toast--exiting,
+.csk-toast-container--top-center .csk-toast--exiting,
+.csk-toast-container--top-right .csk-toast--exiting {
+  animation-name: toast-out-top;
+}
+
+@keyframes toast-out-top {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+}
+
+/* ==========================================================================
+ * TOAST ICON
+ * ========================================================================== */
+
+.csk-toast__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--color-text-tertiary);
+}
+
+.csk-toast__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================================================
+ * TOAST CONTENT
+ * ========================================================================== */
+
+.csk-toast__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.csk-toast__title {
+  font-size: var(--text-sm-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-1);
+}
+
+.csk-toast__message {
+  font-size: var(--text-sm-size);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-secondary);
+}
+
+/* Without title, message uses primary color */
+.csk-toast__content:not(:has(.csk-toast__title)) .csk-toast__message {
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+ * TOAST ACTION
+ * ========================================================================== */
+
+.csk-toast__action {
+  flex-shrink: 0;
+  padding: var(--spacing-1) var(--spacing-2);
+  border: none;
+  border-radius: var(--radius-md);
+  background-color: transparent;
+  font-size: var(--text-sm-size);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary-500);
+  cursor: pointer;
+  transition: var(--transition-button);
+}
+
+.csk-toast__action:hover {
+  background-color: var(--color-primary-50);
+}
+
+.csk-toast__action:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-button-focus);
+}
+
+.csk-toast__action:active {
+  background-color: var(--color-primary-100);
+}
+
+/* ==========================================================================
+ * TOAST DISMISS
+ * ========================================================================== */
+
+.csk-toast__dismiss {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-md);
+  background-color: transparent;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition: var(--transition-button);
+}
+
+.csk-toast__dismiss:hover {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+.csk-toast__dismiss:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-button-focus);
+}
+
+.csk-toast__dismiss svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ==========================================================================
+ * VARIANT STYLES
+ * ========================================================================== */
+
+/* Default variant */
+.csk-toast--default {
+  border-left: 3px solid var(--color-border-secondary);
+}
+
+.csk-toast--default .csk-toast__icon {
+  color: var(--color-text-tertiary);
+}
+
+/* Success variant */
+.csk-toast--success {
+  border-left: 3px solid var(--color-success-500);
+}
+
+.csk-toast--success .csk-toast__icon {
+  color: var(--color-success-500);
+}
+
+/* Warning variant */
+.csk-toast--warning {
+  border-left: 3px solid var(--color-warning-500);
+}
+
+.csk-toast--warning .csk-toast__icon {
+  color: var(--color-warning-500);
+}
+
+/* Error variant */
+.csk-toast--error {
+  border-left: 3px solid var(--color-error-500);
+}
+
+.csk-toast--error .csk-toast__icon {
+  color: var(--color-error-500);
+}
+
+/* Info variant */
+.csk-toast--info {
+  border-left: 3px solid var(--color-info-500);
+}
+
+.csk-toast--info .csk-toast__icon {
+  color: var(--color-info-500);
+}
+
+/* ==========================================================================
+ * DARK MODE
+ * ========================================================================== */
+
+[data-theme="dark"] .csk-toast {
+  background-color: var(--color-bg-elevated);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .csk-toast__action:hover {
+  background-color: var(--color-primary-900);
+}
+
+[data-theme="dark"] .csk-toast__action:active {
+  background-color: var(--color-primary-800);
+}
+
+/* System preference detection */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .csk-toast {
+    background-color: var(--color-bg-elevated);
+    box-shadow: var(--shadow-lg);
+  }
+
+  :root:not([data-theme="light"]) .csk-toast__action:hover {
+    background-color: var(--color-primary-900);
+  }
+
+  :root:not([data-theme="light"]) .csk-toast__action:active {
+    background-color: var(--color-primary-800);
+  }
+}
+
+/* ==========================================================================
+ * REDUCED MOTION
+ * ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-toast,
+  .csk-toast--exiting {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+ * RESPONSIVE
+ * ========================================================================== */
+
+@media (max-width: 575px) {
+  .csk-toast-container {
+    padding: var(--spacing-2);
+  }
+
+  /* Center on mobile */
+  .csk-toast-container--top-left,
+  .csk-toast-container--top-right {
+    left: 0;
+    right: 0;
+    align-items: stretch;
+  }
+
+  .csk-toast-container--bottom-left,
+  .csk-toast-container--bottom-right {
+    left: 0;
+    right: 0;
+    align-items: stretch;
+  }
+
+  .csk-toast-container--top-center,
+  .csk-toast-container--bottom-center {
+    left: 0;
+    right: 0;
+    transform: none;
+  }
+
+  .csk-toast {
+    width: 100%;
+    max-width: none;
+  }
+}

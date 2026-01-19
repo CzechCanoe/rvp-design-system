@@ -931,3 +931,63 @@ src/components/
 
 ### Další kroky
 - Fáze 3: Toast komponenta (notifications provider)
+
+---
+
+## 2026-01-19 - Iterace 23 / Toast komponenta (Fáze 3.3)
+
+### Dokončeno
+- [x] Toast komponenta s TypeScript a CSS
+- [x] ToastProvider pro správu notifikací
+- [x] useToast hook pro přístup k toast API
+- [x] Varianty: default, success, warning, error, info
+- [x] 6 pozic: top-left, top-center, top-right, bottom-left, bottom-center, bottom-right
+- [x] Auto-dismiss s konfigurovatelnou dobou (default 5s)
+- [x] Pause na hover (timer se zastaví)
+- [x] Action buttons pro undo/retry patterny
+- [x] Stacking s maximálním počtem viditelných (default 5)
+- [x] Animace vstupu/výstupu (direction-aware)
+- [x] WCAG 2.1 AA - role="alert", aria-live (polite/assertive)
+- [x] Reduced motion support
+- [x] Mobile responsive (full-width na mobilech)
+- [x] Dark mode support
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Context + Portal pattern** - ToastProvider poskytuje context, toasty se renderují přes portal do body
+2. **useToast hook** - jednoduchý API přístup (toast, success, error, warning, info, dismiss, dismissAll)
+3. **Pause on hover** - timer se zastaví při hoveru a obnoví po mouse leave
+4. **Direction-aware animations** - top pozice animují odshora, bottom pozice odspoda
+5. **aria-live polite vs assertive** - error toasty používají assertive pro okamžité oznámení
+
+### Poznámky
+- Toast je 3. komponenta Fáze 3 (pokročilé komponenty)
+- Používá existing tokeny (shadow-toast, duration-moderate, ease-out)
+- Storybook stories obsahují CSK-specifické příklady (registrace, správa závodů, live výsledky)
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+└── Toast/
+    ├── index.ts       # Public API
+    ├── Toast.tsx      # Component + Provider + Hook
+    ├── Toast.css      # Styles
+    └── Toast.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 3: Navigation komponenta (main nav, breadcrumbs)
