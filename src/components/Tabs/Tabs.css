@@ -1,0 +1,241 @@
+/**
+ * Tabs Component Styles
+ *
+ * Variants:
+ * - line: Traditional underlined tabs
+ * - pills: Filled pill-shaped tabs
+ *
+ * Sizes: sm, md, lg
+ */
+
+/* =============================================================================
+   BASE STYLES
+   ============================================================================= */
+
+.csk-tabs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Tab List */
+.csk-tabs__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1);
+  position: relative;
+}
+
+/* Tab Button */
+.csk-tabs__tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  transition:
+    color var(--transition-base),
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.csk-tabs__tab:hover:not(:disabled) {
+  color: var(--color-text-primary);
+}
+
+.csk-tabs__tab:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-bg-primary), 0 0 0 4px var(--color-border-focus);
+}
+
+.csk-tabs__tab--active {
+  color: var(--color-interactive-default);
+}
+
+.csk-tabs__tab--disabled {
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}
+
+/* Icon */
+.csk-tabs__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Label */
+.csk-tabs__label {
+  display: inline-block;
+}
+
+/* Panel */
+.csk-tabs__panel {
+  padding-top: var(--spacing-4);
+}
+
+.csk-tabs__panel:focus {
+  outline: none;
+}
+
+.csk-tabs__panel[hidden] {
+  display: none;
+}
+
+/* =============================================================================
+   VARIANT: LINE
+   ============================================================================= */
+
+.csk-tabs--line .csk-tabs__list {
+  border-bottom: 1px solid var(--color-border-default);
+  gap: 0;
+}
+
+.csk-tabs--line .csk-tabs__tab {
+  position: relative;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  border-radius: 0;
+}
+
+.csk-tabs--line .csk-tabs__tab--active {
+  border-bottom-color: var(--color-interactive-default);
+}
+
+.csk-tabs--line .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active) {
+  border-bottom-color: var(--color-border-strong);
+}
+
+/* =============================================================================
+   VARIANT: PILLS
+   ============================================================================= */
+
+.csk-tabs--pills .csk-tabs__list {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-1);
+  gap: var(--spacing-1);
+}
+
+.csk-tabs--pills .csk-tabs__tab {
+  border-radius: var(--radius-md);
+}
+
+.csk-tabs--pills .csk-tabs__tab--active {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.csk-tabs--pills .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active) {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* =============================================================================
+   SIZES
+   ============================================================================= */
+
+/* Small */
+.csk-tabs--sm .csk-tabs__tab {
+  padding: var(--spacing-1-5) var(--spacing-3);
+  font-size: var(--font-size-sm);
+  min-height: 32px;
+}
+
+.csk-tabs--sm .csk-tabs__icon {
+  width: 14px;
+  height: 14px;
+}
+
+.csk-tabs--sm .csk-tabs__icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.csk-tabs--sm .csk-tabs__panel {
+  padding-top: var(--spacing-3);
+}
+
+/* Medium (default) */
+.csk-tabs--md .csk-tabs__tab {
+  padding: var(--spacing-2) var(--spacing-4);
+  font-size: var(--font-size-base);
+  min-height: 44px;
+}
+
+.csk-tabs--md .csk-tabs__icon {
+  width: 18px;
+  height: 18px;
+}
+
+.csk-tabs--md .csk-tabs__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.csk-tabs--md .csk-tabs__panel {
+  padding-top: var(--spacing-4);
+}
+
+/* Large */
+.csk-tabs--lg .csk-tabs__tab {
+  padding: var(--spacing-3) var(--spacing-6);
+  font-size: var(--font-size-lg);
+  min-height: 52px;
+}
+
+.csk-tabs--lg .csk-tabs__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.csk-tabs--lg .csk-tabs__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.csk-tabs--lg .csk-tabs__panel {
+  padding-top: var(--spacing-6);
+}
+
+/* =============================================================================
+   FULL WIDTH
+   ============================================================================= */
+
+.csk-tabs--full-width .csk-tabs__list {
+  flex-wrap: nowrap;
+}
+
+.csk-tabs--full-width .csk-tabs__tab {
+  flex: 1;
+}
+
+/* =============================================================================
+   DARK MODE
+   ============================================================================= */
+
+[data-theme="dark"] .csk-tabs--pills .csk-tabs__list {
+  background-color: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .csk-tabs--pills .csk-tabs__tab--active {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* =============================================================================
+   REDUCED MOTION
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-tabs__tab {
+    transition: none;
+  }
+}

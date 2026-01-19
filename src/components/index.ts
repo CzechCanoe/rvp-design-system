@@ -51,3 +51,7 @@ export type {
 // Modal
 export { Modal } from './Modal';
 export type { ModalProps, ModalSize } from './Modal';
+
+// Tabs
+export { Tabs } from './Tabs';
+export type { TabsProps, TabItem, TabsVariant, TabsSize } from './Tabs';

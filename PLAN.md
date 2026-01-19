@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 3 - Pokročilé komponenty (Tier 2)
-**Další krok:** Tabs komponenta
+**Další krok:** Toast komponenta (notifications provider)
 
 ---
 
@@ -78,7 +78,7 @@
 ## Fáze 3: Pokročilé komponenty (Tier 2)
 
 - [x] Modal (dialog, confirm, wizard)
-- [ ] Tabs (horizontal, pills)
+- [x] Tabs (horizontal, pills)
 - [ ] Toast (notifications provider)
 - [ ] Navigation (main nav, breadcrumbs)
 - [ ] Pagination

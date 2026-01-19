@@ -878,3 +878,56 @@ src/components/
 
 ### Další kroky
 - Fáze 3: Tabs komponenta (horizontal, pills)
+
+---
+
+## 2026-01-19 - Iterace 22 / Tabs komponenta (Fáze 3.2)
+
+### Dokončeno
+- [x] Tabs komponenta s TypeScript a CSS
+- [x] Varianty: line (podtržené), pills (vyplněné)
+- [x] Velikosti: sm (32px), md (44px), lg (52px)
+- [x] Full width mód pro rovnoměrné rozložení záložek
+- [x] Podpora ikon v záložkách
+- [x] Disabled záložky
+- [x] Klávesová navigace (ArrowLeft/Right, Home, End)
+- [x] Controlled i uncontrolled režim
+- [x] WCAG 2.1 AA - role="tablist", aria-selected, tabIndex management
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **roving tabindex** - pouze aktivní tab má tabIndex=0, ostatní -1 pro správnou klávesovou navigaci
+2. **useId hook** - pro generování unikátních ID panelů a záložek (React 18+)
+3. **Lazy rendering** - obsah panelu se renderuje pouze když je aktivní
+4. **Pills s pozadím** - pills varianta má kontejner s pozadím pro vizuální seskupení
+
+### Poznámky
+- Tabs doplňuje Modal pro organizaci obsahu v dialozích
+- Storybook stories obsahují CSK-specifické příklady (profil závodníka, detail závodu, filtr sekcí, dashboard)
+- Klávesová navigace funguje i s disabled záložkami (přeskakuje je)
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+└── Tabs/
+    ├── index.ts       # Public API
+    ├── Tabs.tsx       # Component implementation
+    ├── Tabs.css       # Styles
+    └── Tabs.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 3: Toast komponenta (notifications provider)
