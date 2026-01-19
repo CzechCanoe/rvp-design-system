@@ -475,3 +475,50 @@ src/components/
 
 ### Další kroky
 - Fáze 2: Select komponenta (native, custom dropdown)
+
+---
+
+## 2026-01-19 - Iterace 14 / Select komponenta (Fáze 2.3)
+
+### Dokončeno
+- [x] Select komponenta s TypeScript a CSS
+- [x] Použití nativního `<select>` pro optimální přístupnost a mobilní UX
+- [x] Velikosti: sm (32px), md (44px), lg (52px)
+- [x] Stavy: default, error, success, disabled
+- [x] Podpora levé ikony (iconLeft)
+- [x] Vlastní chevron ikona (skryté nativní šipky)
+- [x] Placeholder jako první disabled option
+- [x] Label a helper text s ARIA propojením
+- [x] Error message s role="alert"
+- [x] Podpora disabled options
+- [x] WCAG 2.1 AA - focus visible, aria-invalid, aria-describedby
+- [x] Storybook stories s autodocs a CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Native select** - místo custom dropdown pro lepší mobile UX a přístupnost (OS native pickers)
+2. **Placeholder jako disabled option** - standardní pattern pro native selects
+3. **Chevron vpravo** - konzistentní s Input komponentou (ikony na stejných pozicích)
+4. **Appearance: none** - skryté nativní styly, plná kontrola nad vzhledem
+
+### Poznámky
+- Select používá stejnou strukturu jako Input (wrapper → label → container → element → helper)
+- Nativní select má lepší UX na mobilních zařízeních (OS native picker)
+- Storybook stories obsahují CSK-specifické příklady (země, disciplíny, kategorie, VT třídy)
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+└── Select/
+    ├── index.ts       # Public API
+    ├── Select.tsx     # Component implementation
+    ├── Select.css     # Styles
+    └── Select.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 2: Checkbox komponenta

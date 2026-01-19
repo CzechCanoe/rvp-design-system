@@ -1,0 +1,278 @@
+/**
+ * Select Component Styles - CSK RVP Design System
+ *
+ * Uses design tokens for consistent styling.
+ * Supports sizes: sm, md, lg
+ * Supports states: default, error, success
+ */
+
+/* ==========================================================================
+   WRAPPER
+   ========================================================================== */
+
+.csk-select-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.csk-select-wrapper--full-width {
+  display: flex;
+  width: 100%;
+}
+
+/* ==========================================================================
+   LABEL
+   ========================================================================== */
+
+.csk-select-label {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   CONTAINER (for icons and select positioning)
+   ========================================================================== */
+
+.csk-select-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* ==========================================================================
+   BASE SELECT STYLES
+   ========================================================================== */
+
+.csk-select {
+  /* Layout */
+  display: block;
+  width: 100%;
+
+  /* Typography */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+
+  /* Default size (md) */
+  padding: var(--spacing-input-padding-y) var(--spacing-input-padding-x);
+  padding-right: calc(var(--spacing-input-padding-x) * 2 + 1.25em);
+  min-height: var(--spacing-touch-target);
+
+  /* Shape */
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-input);
+
+  /* Remove native appearance */
+  appearance: none;
+  cursor: pointer;
+
+  /* Interaction */
+  transition: var(--transition-input);
+  outline: none;
+}
+
+/* Placeholder style (first disabled option) */
+.csk-select:invalid,
+.csk-select option[value=""][disabled] {
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   FOCUS STATES
+   ========================================================================== */
+
+.csk-select:focus {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px var(--color-primary-500-alpha-30, rgba(17, 118, 166, 0.3));
+}
+
+.csk-select-container--error .csk-select:focus {
+  border-color: var(--color-error-500);
+  box-shadow: 0 0 0 3px var(--color-error-500-alpha-30, rgba(239, 68, 68, 0.3));
+}
+
+.csk-select-container--success .csk-select:focus {
+  border-color: var(--color-success-500);
+  box-shadow: 0 0 0 3px var(--color-success-500-alpha-30, rgba(34, 197, 94, 0.3));
+}
+
+/* ==========================================================================
+   HOVER STATES
+   ========================================================================== */
+
+.csk-select:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-border-strong);
+}
+
+.csk-select-container--error .csk-select:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-error-600);
+}
+
+.csk-select-container--success .csk-select:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-success-600);
+}
+
+/* ==========================================================================
+   VALIDATION STATES
+   ========================================================================== */
+
+.csk-select-container--error .csk-select {
+  border-color: var(--color-error-500);
+}
+
+.csk-select-container--success .csk-select {
+  border-color: var(--color-success-500);
+}
+
+/* ==========================================================================
+   DISABLED STATE
+   ========================================================================== */
+
+.csk-select:disabled,
+.csk-select-container--disabled .csk-select {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background-color: var(--color-bg-secondary);
+}
+
+.csk-select-container--disabled .csk-select-chevron {
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   SIZES
+   ========================================================================== */
+
+/* Small */
+.csk-select-container--sm .csk-select {
+  padding: var(--spacing-1-5) var(--spacing-2-5);
+  padding-right: calc(var(--spacing-2-5) * 2 + 1em);
+  font-size: var(--font-size-xs);
+  min-height: 32px;
+  border-radius: var(--radius-input-sm, var(--radius-sm));
+}
+
+/* Medium (default) - defined in base */
+
+/* Large */
+.csk-select-container--lg .csk-select {
+  padding: var(--spacing-3) var(--spacing-4);
+  padding-right: calc(var(--spacing-4) * 2 + 1.5em);
+  font-size: var(--font-size-base);
+  min-height: 52px;
+}
+
+/* ==========================================================================
+   CHEVRON ICON
+   ========================================================================== */
+
+.csk-select-chevron {
+  position: absolute;
+  right: var(--spacing-input-padding-x);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transition: var(--transition-fast);
+}
+
+.csk-select-chevron svg {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* Size adjustments for chevron */
+.csk-select-container--sm .csk-select-chevron {
+  right: var(--spacing-2);
+}
+
+.csk-select-container--sm .csk-select-chevron svg {
+  width: 1em;
+  height: 1em;
+}
+
+.csk-select-container--lg .csk-select-chevron {
+  right: var(--spacing-4);
+}
+
+.csk-select-container--lg .csk-select-chevron svg {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+/* ==========================================================================
+   LEFT ICON
+   ========================================================================== */
+
+.csk-select-icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.csk-select-icon svg {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* Left icon positioning */
+.csk-select-icon--left {
+  left: var(--spacing-input-padding-x);
+}
+
+.csk-select-container--has-icon-left .csk-select {
+  padding-left: calc(var(--spacing-input-padding-x) * 2 + 1.25em);
+}
+
+/* Size adjustments for icons */
+.csk-select-container--sm .csk-select-icon {
+  left: var(--spacing-2);
+}
+
+.csk-select-container--sm.csk-select-container--has-icon-left .csk-select {
+  padding-left: calc(var(--spacing-2) * 2 + 1em);
+}
+
+.csk-select-container--sm .csk-select-icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.csk-select-container--lg .csk-select-icon {
+  left: var(--spacing-4);
+}
+
+.csk-select-container--lg.csk-select-container--has-icon-left .csk-select {
+  padding-left: calc(var(--spacing-4) * 2 + 1.5em);
+}
+
+.csk-select-container--lg .csk-select-icon svg {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+/* ==========================================================================
+   HELPER TEXT
+   ========================================================================== */
+
+.csk-select-helper {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-secondary);
+}
+
+.csk-select-helper--error {
+  color: var(--color-error-500);
+}
