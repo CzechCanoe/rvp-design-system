@@ -1117,3 +1117,66 @@ src/components/
 
 ### Další kroky
 - Fáze 3: Progress komponenta (bar, steps)
+
+---
+
+## 2026-01-19 - Iterace 26 / Progress komponenta (Fáze 3.6)
+
+### Dokončeno
+- [x] Progress komponenta s TypeScript a CSS
+- [x] Dvě varianty: bar (progress bar) a steps (kroková navigace)
+- [x] Bar: velikosti sm (4px), md (8px), lg (12px)
+- [x] Bar: barvy primary, success, warning, error, info
+- [x] Bar: striped pattern s animací
+- [x] Bar: indeterminate loading stav
+- [x] Bar: custom label format (např. "750 / 1000 MB")
+- [x] Steps: horizontální a vertikální orientace
+- [x] Steps: velikosti sm (24px), md (32px), lg (40px)
+- [x] Steps: popis a ikony u kroků
+- [x] Steps: clickable completed steps pro návrat
+- [x] Steps: check ikona pro dokončené kroky
+- [x] WCAG 2.1 AA - role="progressbar", aria-valuenow, aria-current="step"
+- [x] Reduced motion support
+- [x] Dark mode support
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Dva oddělené interní komponenty** - ProgressBar a ProgressSteps s jednotným Progress exportem
+2. **Union type props** - ProgressBarProps | ProgressStepsProps pro typovou bezpečnost
+3. **0-indexed currentStep** - snadnější práce s poli, zobrazení je 1-indexed
+4. **Connector pattern pro steps** - čára mezi kroky jako samostatný element
+5. **Inline SVG check ikona** - nezávislost na icon knihovně
+
+### Poznámky
+- Progress je 6. komponenta Fáze 3 (pokročilé komponenty)
+- Storybook stories obsahují CSK-specifické příklady (registrace závodníka, nahrávání souborů, stav členství, postup ve VT třídách, zpracování výsledků)
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+├── Navigation/
+├── Pagination/
+└── Progress/
+    ├── index.ts       # Public API
+    ├── Progress.tsx   # Component implementation (Bar + Steps)
+    ├── Progress.css   # Styles
+    └── Progress.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 3: Header komponenta (app header)
