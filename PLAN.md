@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 5 - Prototypy
-**Další krok:** prototype-results - Výsledky závodu
+**Další krok:** prototype-live - Live výsledky
 
 ---
 
@@ -110,7 +110,7 @@
 ## Fáze 5: Prototypy
 
 - [x] prototype-calendar - Kalendář závodů
-- [ ] prototype-results - Výsledky závodu
+- [x] prototype-results - Výsledky závodu
 - [ ] prototype-live - Live výsledky
 - [ ] prototype-registration - Self-service registrace
 - [ ] prototype-profile - Profil závodníka

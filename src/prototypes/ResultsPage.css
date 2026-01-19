@@ -1,0 +1,504 @@
+/* ============================================================================
+   Results Page Prototype - Styles
+   ============================================================================ */
+
+.prototype-results-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-primary);
+}
+
+/* ============================================================================
+   Logo
+   ============================================================================ */
+
+.prototype-results-page__logo {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-2);
+  text-decoration: none;
+  color: inherit;
+}
+
+.prototype-results-page__logo-text {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.prototype-results-page__logo-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ============================================================================
+   Main Content
+   ============================================================================ */
+
+.prototype-results-page__main {
+  flex: 1;
+  padding: var(--spacing-6) var(--spacing-4);
+}
+
+.prototype-results-page__container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ============================================================================
+   Race Header
+   ============================================================================ */
+
+.prototype-results-page__race-header {
+  margin-bottom: var(--spacing-6);
+}
+
+.prototype-results-page__race-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+}
+
+.prototype-results-page__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+.prototype-results-page__breadcrumb a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.prototype-results-page__breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.prototype-results-page__breadcrumb-separator {
+  color: var(--color-text-tertiary);
+}
+
+.prototype-results-page__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-3) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.prototype-results-page__subtitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.prototype-results-page__info-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* ============================================================================
+   Content Layout
+   ============================================================================ */
+
+.prototype-results-page__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-6);
+}
+
+@media (min-width: 1024px) {
+  .prototype-results-page__content {
+    grid-template-columns: 1fr 320px;
+  }
+}
+
+/* ============================================================================
+   Results Section
+   ============================================================================ */
+
+.prototype-results-page__results {
+  min-width: 0;
+}
+
+.prototype-results-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  padding-bottom: var(--spacing-4);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.prototype-results-page__filters-left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.prototype-results-page__filters-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.prototype-results-page__results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-4);
+}
+
+.prototype-results-page__results-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.prototype-results-page__results-count {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-tertiary);
+}
+
+.prototype-results-page__results-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* ============================================================================
+   Podium Section
+   ============================================================================ */
+
+.prototype-results-page__podium {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+}
+
+@media (max-width: 640px) {
+  .prototype-results-page__podium {
+    grid-template-columns: 1fr;
+  }
+}
+
+.prototype-results-page__podium-card {
+  position: relative;
+  padding: var(--spacing-4);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-primary);
+}
+
+.prototype-results-page__podium-card--gold {
+  border-color: #fbbf24;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(251, 191, 36, 0.05) 100%);
+}
+
+.prototype-results-page__podium-card--silver {
+  border-color: #9ca3af;
+  background: linear-gradient(135deg, rgba(156, 163, 175, 0.1) 0%, rgba(156, 163, 175, 0.05) 100%);
+}
+
+.prototype-results-page__podium-card--bronze {
+  border-color: #d97706;
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.1) 0%, rgba(217, 119, 6, 0.05) 100%);
+}
+
+.prototype-results-page__podium-rank {
+  position: absolute;
+  top: var(--spacing-2);
+  left: var(--spacing-2);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+  color: white;
+}
+
+.prototype-results-page__podium-card--gold .prototype-results-page__podium-rank {
+  background-color: #fbbf24;
+  color: #92400e;
+}
+
+.prototype-results-page__podium-card--silver .prototype-results-page__podium-rank {
+  background-color: #9ca3af;
+  color: #1f2937;
+}
+
+.prototype-results-page__podium-card--bronze .prototype-results-page__podium-rank {
+  background-color: #d97706;
+  color: white;
+}
+
+.prototype-results-page__podium-avatar {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--spacing-3);
+  border-radius: 50%;
+  background-color: var(--color-bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  overflow: hidden;
+}
+
+.prototype-results-page__podium-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.prototype-results-page__podium-name {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-1);
+}
+
+.prototype-results-page__podium-club {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-2);
+}
+
+.prototype-results-page__podium-time {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.prototype-results-page__podium-diff {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================================
+   Sidebar
+   ============================================================================ */
+
+.prototype-results-page__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+/* Race Info Card */
+.prototype-results-page__race-info {
+  padding: var(--spacing-4);
+}
+
+.prototype-results-page__race-info-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+.prototype-results-page__race-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.prototype-results-page__race-info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+}
+
+.prototype-results-page__race-info-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  flex-shrink: 0;
+}
+
+.prototype-results-page__race-info-value {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  text-align: right;
+}
+
+/* Categories Card */
+.prototype-results-page__categories {
+  padding: 0;
+}
+
+.prototype-results-page__categories-header {
+  padding: var(--spacing-4);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.prototype-results-page__categories-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.prototype-results-page__categories-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.prototype-results-page__category-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-3) var(--spacing-4);
+  border: none;
+  border-bottom: 1px solid var(--color-border-primary);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background-color var(--transition-fast);
+}
+
+.prototype-results-page__category-item:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+.prototype-results-page__category-item--active {
+  background-color: var(--color-primary-bg);
+}
+
+.prototype-results-page__category-item:last-child {
+  border-bottom: none;
+}
+
+.prototype-results-page__category-name {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.prototype-results-page__category-count {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+/* Downloads Card */
+.prototype-results-page__downloads {
+  padding: var(--spacing-4);
+}
+
+.prototype-results-page__downloads-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-3) 0;
+}
+
+.prototype-results-page__downloads-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+/* ============================================================================
+   Footer
+   ============================================================================ */
+
+.prototype-results-page__footer {
+  padding: var(--spacing-6) var(--spacing-4);
+  border-top: 1px solid var(--color-border-primary);
+  background-color: var(--color-bg-secondary);
+}
+
+.prototype-results-page__footer-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.prototype-results-page__footer-content p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+/* ============================================================================
+   Responsive Adjustments
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .prototype-results-page__main {
+    padding: var(--spacing-4) var(--spacing-3);
+  }
+
+  .prototype-results-page__title {
+    font-size: var(--font-size-2xl);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .prototype-results-page__subtitle {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+  }
+
+  .prototype-results-page__filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .prototype-results-page__filters-left,
+  .prototype-results-page__filters-right {
+    justify-content: flex-start;
+  }
+
+  .prototype-results-page__results-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+  }
+}
+
+/* ============================================================================
+   Dark Mode Overrides
+   ============================================================================ */
+
+[data-theme="dark"] .prototype-results-page__podium-card--gold {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.05) 100%);
+}
+
+[data-theme="dark"] .prototype-results-page__podium-card--silver {
+  background: linear-gradient(135deg, rgba(156, 163, 175, 0.15) 0%, rgba(156, 163, 175, 0.05) 100%);
+}
+
+[data-theme="dark"] .prototype-results-page__podium-card--bronze {
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.15) 0%, rgba(217, 119, 6, 0.05) 100%);
+}

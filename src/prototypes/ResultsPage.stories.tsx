@@ -1,0 +1,643 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState, useMemo } from 'react';
+import { Header } from '../components/Header';
+import { MainNav } from '../components/Navigation';
+import { Card } from '../components/Card';
+import { Badge } from '../components/Badge';
+import { Button } from '../components/Button';
+import { Input } from '../components/Input';
+import { Select } from '../components/Select';
+import { Tabs } from '../components/Tabs';
+import { LiveIndicator } from '../components/LiveIndicator';
+import { Pagination } from '../components/Pagination';
+import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
+import './ResultsPage.css';
+
+// ============================================================================
+// Types
+// ============================================================================
+
+interface ResultsPageProps {
+  /** Race ID */
+  raceId?: string;
+  /** Initial category filter */
+  initialCategory?: string;
+  /** Whether the race is currently live */
+  isLive?: boolean;
+  /** Show podium section */
+  showPodium?: boolean;
+}
+
+// ============================================================================
+// Sample Data
+// ============================================================================
+
+const generateResults = (category: string): ResultEntry[] => {
+  const baseResults: Record<string, ResultEntry[]> = {
+    'K1M': [
+      { id: 1, rank: 1, name: 'Jiří Prskavec', club: 'USK Praha', category: 'K1M', totalTime: 92.34, timeDiff: 0, section: 'dv' },
+      { id: 2, rank: 2, name: 'Vít Přindiš', club: 'USK Praha', category: 'K1M', totalTime: 93.87, timeDiff: 1.53, section: 'dv' },
+      { id: 3, rank: 3, name: 'Jakub Krejčí', club: 'Dukla Praha', category: 'K1M', totalTime: 94.21, timeDiff: 1.87, section: 'dv' },
+      { id: 4, rank: 4, name: 'Vavřinec Hradilek', club: 'Dukla Praha', category: 'K1M', totalTime: 95.45, timeDiff: 3.11, section: 'dv' },
+      { id: 5, rank: 5, name: 'Ondřej Tunka', club: 'SK Trnávka', category: 'K1M', totalTime: 96.12, timeDiff: 3.78, section: 'dv' },
+      { id: 6, rank: 6, name: 'Filip Roháč', club: 'Bohemians Praha', category: 'K1M', totalTime: 97.34, timeDiff: 5.00, section: 'dv' },
+      { id: 7, rank: 7, name: 'Martin Sládek', club: 'KK Roudnice', category: 'K1M', totalTime: 98.56, timeDiff: 6.22, section: 'dv' },
+      { id: 8, rank: 8, name: 'Tomáš Ježek', club: 'SK Hradec Králové', category: 'K1M', totalTime: 99.23, timeDiff: 6.89, section: 'dv' },
+      { id: 9, rank: 9, name: 'David Novák', club: 'USK Praha', category: 'K1M', totalTime: 100.45, timeDiff: 8.11, section: 'dv' },
+      { id: 10, rank: 10, name: 'Petr Svoboda', club: 'Dukla Praha', category: 'K1M', totalTime: 101.23, timeDiff: 8.89, section: 'dv' },
+      { id: 11, rank: 11, name: 'Jan Horák', club: 'KK Brandýs', category: 'K1M', totalTime: 102.56, timeDiff: 10.22, section: 'dv' },
+      { id: 12, rank: 12, name: 'Lukáš Dvořák', club: 'SK Trnávka', category: 'K1M', totalTime: 103.89, timeDiff: 11.55, section: 'dv' },
+      { id: 13, rank: undefined, name: 'Marek Procházka', club: 'Bohemians Praha', category: 'K1M', status: 'dnf', section: 'dv' },
+      { id: 14, rank: undefined, name: 'Štěpán Král', club: 'KK Roudnice', category: 'K1M', status: 'dsq', section: 'dv' },
+    ],
+    'K1W': [
+      { id: 101, rank: 1, name: 'Tereza Fišerová', club: 'Dukla Praha', category: 'K1W', totalTime: 98.45, timeDiff: 0, section: 'dv' },
+      { id: 102, rank: 2, name: 'Kateřina Minařík Kudějová', club: 'USK Praha', category: 'K1W', totalTime: 99.23, timeDiff: 0.78, section: 'dv' },
+      { id: 103, rank: 3, name: 'Antonie Galušková', club: 'Dukla Praha', category: 'K1W', totalTime: 100.56, timeDiff: 2.11, section: 'dv' },
+      { id: 104, rank: 4, name: 'Veronika Vojtová', club: 'USK Praha', category: 'K1W', totalTime: 101.34, timeDiff: 2.89, section: 'dv' },
+      { id: 105, rank: 5, name: 'Monika Jančová', club: 'SK Trnávka', category: 'K1W', totalTime: 102.45, timeDiff: 4.00, section: 'dv' },
+      { id: 106, rank: 6, name: 'Barbora Seemanová', club: 'Bohemians Praha', category: 'K1W', totalTime: 103.78, timeDiff: 5.33, section: 'dv' },
+      { id: 107, rank: 7, name: 'Eva Rybářová', club: 'KK Roudnice', category: 'K1W', totalTime: 104.23, timeDiff: 5.78, section: 'dv' },
+      { id: 108, rank: 8, name: 'Jana Nováková', club: 'SK Hradec Králové', category: 'K1W', totalTime: 105.67, timeDiff: 7.22, section: 'dv' },
+    ],
+    'C1M': [
+      { id: 201, rank: 1, name: 'Lukáš Rohan', club: 'USK Praha', category: 'C1M', totalTime: 96.78, timeDiff: 0, section: 'dv' },
+      { id: 202, rank: 2, name: 'Jan Masopust', club: 'Dukla Praha', category: 'C1M', totalTime: 97.45, timeDiff: 0.67, section: 'dv' },
+      { id: 203, rank: 3, name: 'Vojtěch Heger', club: 'Dukla Praha', category: 'C1M', totalTime: 98.23, timeDiff: 1.45, section: 'dv' },
+      { id: 204, rank: 4, name: 'Matěj Beňuš', club: 'SK Trnávka', category: 'C1M', totalTime: 99.56, timeDiff: 2.78, section: 'dv' },
+      { id: 205, rank: 5, name: 'Tomáš Kořínek', club: 'Bohemians Praha', category: 'C1M', totalTime: 100.89, timeDiff: 4.11, section: 'dv' },
+      { id: 206, rank: 6, name: 'David Vlček', club: 'KK Roudnice', category: 'C1M', totalTime: 101.34, timeDiff: 4.56, section: 'dv' },
+    ],
+    'C1W': [
+      { id: 301, rank: 1, name: 'Gabriela Satková', club: 'USK Praha', category: 'C1W', totalTime: 104.23, timeDiff: 0, section: 'dv' },
+      { id: 302, rank: 2, name: 'Martina Satkova', club: 'Dukla Praha', category: 'C1W', totalTime: 105.67, timeDiff: 1.44, section: 'dv' },
+      { id: 303, rank: 3, name: 'Tereza Kneblová', club: 'SK Trnávka', category: 'C1W', totalTime: 106.45, timeDiff: 2.22, section: 'dv' },
+      { id: 304, rank: 4, name: 'Klára Veselá', club: 'Bohemians Praha', category: 'C1W', totalTime: 107.89, timeDiff: 3.66, section: 'dv' },
+    ],
+  };
+
+  return baseResults[category] || [];
+};
+
+const categories = [
+  { id: 'K1M', name: 'K1 Muži', count: 14 },
+  { id: 'K1W', name: 'K1 Ženy', count: 8 },
+  { id: 'C1M', name: 'C1 Muži', count: 6 },
+  { id: 'C1W', name: 'C1 Ženy', count: 4 },
+];
+
+// Navigation items
+const navItems = [
+  { id: 'home', label: 'Domů', href: '#' },
+  { id: 'calendar', label: 'Kalendář', href: '#' },
+  { id: 'results', label: 'Výsledky', href: '#', active: true },
+  { id: 'athletes', label: 'Závodníci', href: '#' },
+  { id: 'clubs', label: 'Kluby', href: '#' },
+];
+
+// ============================================================================
+// Icons
+// ============================================================================
+
+const SearchIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="11" cy="11" r="8" />
+    <path d="M21 21l-4.35-4.35" />
+  </svg>
+);
+
+const LocationIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
+
+const CalendarIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <line x1="16" y1="2" x2="16" y2="6" />
+    <line x1="8" y1="2" x2="8" y2="6" />
+    <line x1="3" y1="10" x2="21" y2="10" />
+  </svg>
+);
+
+const UsersIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+);
+
+const DownloadIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+    <polyline points="7 10 12 15 17 10" />
+    <line x1="12" y1="15" x2="12" y2="3" />
+  </svg>
+);
+
+const PrintIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="6 9 6 2 18 2 18 9" />
+    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+    <rect x="6" y="14" width="12" height="8" />
+  </svg>
+);
+
+const ShareIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="18" cy="5" r="3" />
+    <circle cx="6" cy="12" r="3" />
+    <circle cx="18" cy="19" r="3" />
+    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+  </svg>
+);
+
+const ChevronRightIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="9 18 15 12 9 6" />
+  </svg>
+);
+
+// ============================================================================
+// Helper Functions
+// ============================================================================
+
+function formatTime(seconds: number | undefined): string {
+  if (seconds === undefined || seconds === null) return '-';
+  const minutes = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${minutes}:${secs.toFixed(2).padStart(5, '0')}`;
+}
+
+function formatTimeDiff(seconds: number | undefined): string {
+  if (seconds === undefined || seconds === null || seconds === 0) return '';
+  return `+${formatTime(seconds)}`;
+}
+
+function getInitials(name: string): string {
+  return name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2);
+}
+
+// ============================================================================
+// Page Component
+// ============================================================================
+
+const ResultsPage = ({
+  initialCategory = 'K1M',
+  isLive = false,
+  showPodium = true,
+}: ResultsPageProps) => {
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Get results for selected category
+  const results = useMemo(() => {
+    let data = generateResults(selectedCategory);
+
+    // Apply search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      data = data.filter(
+        (r) =>
+          r.name.toLowerCase().includes(query) ||
+          r.club?.toLowerCase().includes(query)
+      );
+    }
+
+    return data;
+  }, [selectedCategory, searchQuery]);
+
+  // Get podium (top 3)
+  const podium = useMemo(() => {
+    return results
+      .filter((r) => r.rank && r.rank <= 3)
+      .sort((a, b) => (a.rank || 0) - (b.rank || 0));
+  }, [results]);
+
+  // Category tabs
+  const categoryTabs = categories.map((cat) => ({
+    id: cat.id,
+    label: (
+      <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        {cat.name}
+        <Badge variant="default" size="sm">
+          {cat.count}
+        </Badge>
+      </span>
+    ),
+    content: null,
+  }));
+
+  // Pagination
+  const pageSize = 20;
+  const totalPages = Math.ceil(results.length / pageSize);
+  const paginatedResults = results.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
+
+  return (
+    <div className="prototype-results-page">
+      {/* Header */}
+      <Header
+        variant="default"
+        size="md"
+        bordered
+        brand={
+          <a href="#" className="prototype-results-page__logo">
+            <span className="prototype-results-page__logo-text">CSK</span>
+            <span className="prototype-results-page__logo-subtitle">Český svaz kanoistů</span>
+          </a>
+        }
+        navigation={
+          <MainNav
+            items={navItems}
+            variant="horizontal"
+            showMobileToggle={false}
+            onItemClick={(item) => console.log('Nav click:', item)}
+          />
+        }
+        search={
+          <Input
+            type="search"
+            placeholder="Hledat..."
+            size="sm"
+            iconLeft={<SearchIcon />}
+          />
+        }
+        userMenu={
+          <Button variant="primary" size="sm">
+            Přihlásit se
+          </Button>
+        }
+      />
+
+      {/* Main content */}
+      <main className="prototype-results-page__main">
+        <div className="prototype-results-page__container">
+          {/* Race Header */}
+          <div className="prototype-results-page__race-header">
+            <div className="prototype-results-page__breadcrumb">
+              <a href="#">Výsledky</a>
+              <span className="prototype-results-page__breadcrumb-separator">/</span>
+              <a href="#">2026</a>
+              <span className="prototype-results-page__breadcrumb-separator">/</span>
+              <span>MČR ve slalomu</span>
+            </div>
+
+            <h1 className="prototype-results-page__title">
+              MČR ve slalomu 2026
+              {isLive && <LiveIndicator variant="live" size="md" label="LIVE" />}
+              {!isLive && <Badge variant="success">Oficiální</Badge>}
+            </h1>
+
+            <div className="prototype-results-page__subtitle">
+              <span className="prototype-results-page__info-item">
+                <CalendarIcon />
+                3.–5. května 2026
+              </span>
+              <span className="prototype-results-page__info-item">
+                <LocationIcon />
+                Praha – Troja
+              </span>
+              <span className="prototype-results-page__info-item">
+                <UsersIcon />
+                156 závodníků
+              </span>
+              <Badge section="dv">Divoká voda</Badge>
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="prototype-results-page__content">
+            {/* Results Section */}
+            <div className="prototype-results-page__results">
+              {/* Category Tabs */}
+              <div className="prototype-results-page__filters">
+                <div className="prototype-results-page__filters-left">
+                  <Tabs
+                    tabs={categoryTabs}
+                    activeTab={selectedCategory}
+                    onChange={(id) => {
+                      setSelectedCategory(id);
+                      setCurrentPage(1);
+                    }}
+                    variant="pills"
+                    size="sm"
+                  />
+                </div>
+                <div className="prototype-results-page__filters-right">
+                  <Input
+                    type="search"
+                    placeholder="Hledat závodníka..."
+                    size="sm"
+                    iconLeft={<SearchIcon />}
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      setCurrentPage(1);
+                    }}
+                    clearable
+                    onClear={() => setSearchQuery('')}
+                    style={{ width: '200px' }}
+                  />
+                  <Select
+                    options={[
+                      { value: 'final', label: 'Finále' },
+                      { value: 'semifinal', label: 'Semifinále' },
+                      { value: 'qualification', label: 'Kvalifikace' },
+                    ]}
+                    defaultValue="final"
+                    size="sm"
+                  />
+                </div>
+              </div>
+
+              {/* Podium */}
+              {showPodium && podium.length >= 3 && !searchQuery && (
+                <div className="prototype-results-page__podium">
+                  {/* Silver - 2nd place */}
+                  <div className="prototype-results-page__podium-card prototype-results-page__podium-card--silver">
+                    <div className="prototype-results-page__podium-rank">2</div>
+                    <div className="prototype-results-page__podium-avatar">
+                      {getInitials(podium[1].name)}
+                    </div>
+                    <div className="prototype-results-page__podium-name">{podium[1].name}</div>
+                    <div className="prototype-results-page__podium-club">{podium[1].club}</div>
+                    <div className="prototype-results-page__podium-time">
+                      {formatTime(podium[1].totalTime)}
+                    </div>
+                    <div className="prototype-results-page__podium-diff">
+                      {formatTimeDiff(podium[1].timeDiff)}
+                    </div>
+                  </div>
+
+                  {/* Gold - 1st place */}
+                  <div className="prototype-results-page__podium-card prototype-results-page__podium-card--gold">
+                    <div className="prototype-results-page__podium-rank">1</div>
+                    <div className="prototype-results-page__podium-avatar">
+                      {getInitials(podium[0].name)}
+                    </div>
+                    <div className="prototype-results-page__podium-name">{podium[0].name}</div>
+                    <div className="prototype-results-page__podium-club">{podium[0].club}</div>
+                    <div className="prototype-results-page__podium-time">
+                      {formatTime(podium[0].totalTime)}
+                    </div>
+                  </div>
+
+                  {/* Bronze - 3rd place */}
+                  <div className="prototype-results-page__podium-card prototype-results-page__podium-card--bronze">
+                    <div className="prototype-results-page__podium-rank">3</div>
+                    <div className="prototype-results-page__podium-avatar">
+                      {getInitials(podium[2].name)}
+                    </div>
+                    <div className="prototype-results-page__podium-name">{podium[2].name}</div>
+                    <div className="prototype-results-page__podium-club">{podium[2].club}</div>
+                    <div className="prototype-results-page__podium-time">
+                      {formatTime(podium[2].totalTime)}
+                    </div>
+                    <div className="prototype-results-page__podium-diff">
+                      {formatTimeDiff(podium[2].timeDiff)}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Results Header */}
+              <div className="prototype-results-page__results-header">
+                <h2 className="prototype-results-page__results-title">
+                  Výsledky
+                  <span className="prototype-results-page__results-count">
+                    ({results.length} závodníků)
+                  </span>
+                </h2>
+                <div className="prototype-results-page__results-actions">
+                  <Button variant="ghost" size="sm" iconLeft={<PrintIcon />}>
+                    Tisk
+                  </Button>
+                  <Button variant="ghost" size="sm" iconLeft={<ShareIcon />}>
+                    Sdílet
+                  </Button>
+                </div>
+              </div>
+
+              {/* Results Table */}
+              <ResultsTable
+                results={paginatedResults}
+                variant="striped"
+                size="md"
+                showRuns={false}
+                showTimeDiff={true}
+                showClub={true}
+                showPodiumHighlights={true}
+                stickyHeader
+                onRowClick={(entry) => console.log('Row clicked:', entry)}
+              />
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div style={{ marginTop: 'var(--spacing-4)', display: 'flex', justifyContent: 'center' }}>
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Sidebar */}
+            <aside className="prototype-results-page__sidebar">
+              {/* Race Info */}
+              <Card variant="surface" className="prototype-results-page__race-info">
+                <h3 className="prototype-results-page__race-info-title">Informace o závodě</h3>
+                <div className="prototype-results-page__race-info-list">
+                  <div className="prototype-results-page__race-info-item">
+                    <span className="prototype-results-page__race-info-label">Organizátor</span>
+                    <span className="prototype-results-page__race-info-value">USK Praha</span>
+                  </div>
+                  <div className="prototype-results-page__race-info-item">
+                    <span className="prototype-results-page__race-info-label">Rozhodčí</span>
+                    <span className="prototype-results-page__race-info-value">Jan Novák</span>
+                  </div>
+                  <div className="prototype-results-page__race-info-item">
+                    <span className="prototype-results-page__race-info-label">Délka tratě</span>
+                    <span className="prototype-results-page__race-info-value">300 m</span>
+                  </div>
+                  <div className="prototype-results-page__race-info-item">
+                    <span className="prototype-results-page__race-info-label">Počet branek</span>
+                    <span className="prototype-results-page__race-info-value">24</span>
+                  </div>
+                  <div className="prototype-results-page__race-info-item">
+                    <span className="prototype-results-page__race-info-label">Stav výsledků</span>
+                    <span className="prototype-results-page__race-info-value">
+                      {isLive ? (
+                        <Badge variant="warning" size="sm">Probíhá</Badge>
+                      ) : (
+                        <Badge variant="success" size="sm">Oficiální</Badge>
+                      )}
+                    </span>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Categories */}
+              <Card variant="surface" className="prototype-results-page__categories">
+                <div className="prototype-results-page__categories-header">
+                  <h3 className="prototype-results-page__categories-title">Kategorie</h3>
+                </div>
+                <div className="prototype-results-page__categories-list">
+                  {categories.map((cat) => (
+                    <button
+                      key={cat.id}
+                      type="button"
+                      className={`prototype-results-page__category-item ${
+                        selectedCategory === cat.id ? 'prototype-results-page__category-item--active' : ''
+                      }`}
+                      onClick={() => {
+                        setSelectedCategory(cat.id);
+                        setCurrentPage(1);
+                      }}
+                    >
+                      <span className="prototype-results-page__category-name">{cat.name}</span>
+                      <span className="prototype-results-page__category-count">
+                        {cat.count}
+                        <ChevronRightIcon />
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </Card>
+
+              {/* Downloads */}
+              <Card variant="surface" className="prototype-results-page__downloads">
+                <h3 className="prototype-results-page__downloads-title">Ke stažení</h3>
+                <div className="prototype-results-page__downloads-list">
+                  <Button variant="secondary" size="sm" fullWidth iconLeft={<DownloadIcon />}>
+                    Výsledky PDF
+                  </Button>
+                  <Button variant="secondary" size="sm" fullWidth iconLeft={<DownloadIcon />}>
+                    Výsledky Excel
+                  </Button>
+                  <Button variant="secondary" size="sm" fullWidth iconLeft={<DownloadIcon />}>
+                    Startovní listina
+                  </Button>
+                </div>
+              </Card>
+            </aside>
+          </div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="prototype-results-page__footer">
+        <div className="prototype-results-page__footer-content">
+          <p>© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+// ============================================================================
+// Storybook Meta
+// ============================================================================
+
+const meta = {
+  title: 'Prototypes/Results Page',
+  component: ResultsPage,
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        component:
+          'Prototyp stránky výsledků závodu CSK. Zobrazuje výsledkovou listinu s pódiem, filtrováním podle kategorií a vyhledáváním.',
+      },
+    },
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    initialCategory: {
+      control: 'select',
+      options: ['K1M', 'K1W', 'C1M', 'C1W'],
+      description: 'Initial category filter',
+    },
+    isLive: {
+      control: 'boolean',
+      description: 'Whether the race is currently live',
+    },
+    showPodium: {
+      control: 'boolean',
+      description: 'Show podium section',
+    },
+  },
+} satisfies Meta<typeof ResultsPage>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+/**
+ * Výchozí zobrazení stránky výsledků s kategorií K1 Muži.
+ */
+export const Default: Story = {
+  args: {
+    initialCategory: 'K1M',
+    isLive: false,
+    showPodium: true,
+  },
+};
+
+/**
+ * Stránka výsledků s živým závodem.
+ */
+export const Live: Story = {
+  args: {
+    initialCategory: 'K1M',
+    isLive: true,
+    showPodium: true,
+  },
+};
+
+/**
+ * Výsledky kategorie K1 Ženy.
+ */
+export const K1Zeny: Story = {
+  args: {
+    initialCategory: 'K1W',
+    isLive: false,
+    showPodium: true,
+  },
+};
+
+/**
+ * Výsledky kategorie C1 Muži.
+ */
+export const C1Muzi: Story = {
+  args: {
+    initialCategory: 'C1M',
+    isLive: false,
+    showPodium: true,
+  },
+};
+
+/**
+ * Stránka výsledků bez podium sekce.
+ */
+export const BezPodia: Story = {
+  args: {
+    initialCategory: 'K1M',
+    isLive: false,
+    showPodium: false,
+  },
+};

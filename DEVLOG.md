@@ -2075,3 +2075,45 @@ src/prototypes/
 
 ### Další kroky
 - prototype-results - Výsledky závodu
+
+---
+
+## 2026-01-19 - Iterace 16 / Results Page prototype (phase 5.2)
+
+### Dokončeno
+- [x] Vytvoření ResultsPage.css se styly pro stránku výsledků
+- [x] Vytvoření ResultsPage.stories.tsx s kompletním prototypem
+- [x] Podium sekce s vizuálním rozlišením zlato/stříbro/bronz
+- [x] Integrace ResultsTable komponenty s filtrováním a stránkováním
+- [x] Sidebar s informacemi o závodě, seznamem kategorií a downloady
+- [x] Storybook stories s variantami (Default, Live, K1Zeny, C1Muzi, BezPodia)
+
+### Použité komponenty
+- Header, MainNav
+- ResultsTable
+- Card
+- Badge (s section prop, variant success/warning)
+- Button
+- Input (search)
+- Select
+- Tabs (pills variant)
+- LiveIndicator
+- Pagination
+
+### Architektura prototypu
+```
+src/prototypes/
+├── CalendarPage.stories.tsx  # Kalendář závodů
+├── CalendarPage.css
+├── ResultsPage.stories.tsx   # Výsledky závodu
+└── ResultsPage.css
+```
+
+### Poznámky
+- Prototyp zobrazuje realistická data pro MČR ve slalomu
+- Kategorie K1M/K1W/C1M/C1W s různým počtem závodníků
+- Podium sekce se zobrazuje pouze pokud není aktivní vyhledávání
+- Build a typecheck projdou bez chyb
+
+### Další kroky
+- prototype-live - Live výsledky
