@@ -6,9 +6,9 @@
  */
 
 @import './colors.css';
+@import './typography.css';
 
 /* Additional token files will be added here:
- * @import './typography.css';
  * @import './spacing.css';
  * @import './radius.css';
  * @import './shadows.css';

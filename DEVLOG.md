@@ -221,3 +221,35 @@ src/
 
 ### Další kroky
 - Fáze 1.2c: Typografie tokeny (font family, scale, weights, line-height)
+
+---
+
+## 2026-01-19 - Iterace 7 / Typography tokens (Fáze 1.2c)
+
+### Dokončeno
+- [x] Font families (Inter pro UI, JetBrains Mono pro časy/data)
+- [x] Font size škála (xs 12px až 6xl 60px)
+- [x] Font weights (normal, medium, semibold, bold)
+- [x] Line heights (tight až loose)
+- [x] Letter spacing (tighter až wider)
+- [x] Typography presets (display, h1-h5, body, caption, lead)
+- [x] Monospace presets pro časy (time-lg, time-md, time-sm, code)
+- [x] Responsive typography (mobile-first adjustments)
+- [x] Vytvoření `src/tokens/typography.css`
+- [x] Aktualizace `src/tokens/index.css` (import typography)
+
+### Rozhodnutí
+1. **Inter jako primární font** - moderní, čitelný, výborná podpora češtiny, designed for screens
+2. **JetBrains Mono pro časy** - monospace s ligaturami, perfektní pro výsledkové tabulky
+3. **Composite tokens** - text-h1-size, text-h1-weight atd. pro snadnou aplikaci
+4. **Mobile-first responsive** - headings se zmenšují na mobilech (display 60px → 36px)
+5. **Time presets** - speciální nastavení pro live timing a výsledky
+
+### Poznámky
+- Typography tokeny vycházejí přesně z DESIGN_PRINCIPLES.md
+- Responzivní úpravy zajistí čitelnost na všech zařízeních
+- Presets zjednodušují aplikaci - stačí použít composite proměnné
+- Fonty nejsou součástí CSS - musí být načteny z Google Fonts nebo lokálně
+
+### Další kroky
+- Fáze 1.2d: Spacing, radius, shadows, transitions tokeny

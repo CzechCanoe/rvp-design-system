@@ -49,7 +49,7 @@
 - [x] Barevná paleta (light theme) - `src/tokens/colors.css`
 - [x] CSK specifické barvy (sekce DV/RY/VT, VT třídy)
 - [x] Barevná paleta (dark theme)
-- [ ] Typografie (font family, scale, weights)
+- [x] Typografie (font family, scale, weights) - `src/tokens/typography.css`
 - [ ] Spacing (4px base scale)
 - [ ] Border radius
 - [ ] Shadows

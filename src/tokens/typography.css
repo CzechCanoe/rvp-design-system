@@ -1,0 +1,186 @@
+/**
+ * Typography Tokens - CSK RVP Design System
+ *
+ * Font system based on DESIGN_PRINCIPLES.md
+ *
+ * Fonts:
+ * - Inter: Primary font for headings and body text
+ * - JetBrains Mono: Monospace for times, results, code
+ *
+ * Base: 16px = 1rem
+ */
+
+:root {
+  /* ==========================================================================
+     FONT FAMILIES
+     ========================================================================== */
+
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco',
+    'Courier New', monospace;
+
+  /* ==========================================================================
+     FONT SIZES
+     ========================================================================== */
+
+  --font-size-xs: 0.75rem;    /* 12px - captions, labels */
+  --font-size-sm: 0.875rem;   /* 14px - secondary text */
+  --font-size-base: 1rem;     /* 16px - body text */
+  --font-size-lg: 1.125rem;   /* 18px - lead text */
+  --font-size-xl: 1.25rem;    /* 20px - h5 */
+  --font-size-2xl: 1.5rem;    /* 24px - h4 */
+  --font-size-3xl: 1.875rem;  /* 30px - h3 */
+  --font-size-4xl: 2.25rem;   /* 36px - h2 */
+  --font-size-5xl: 3rem;      /* 48px - h1 */
+  --font-size-6xl: 3.75rem;   /* 60px - display */
+
+  /* ==========================================================================
+     FONT WEIGHTS
+     ========================================================================== */
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ==========================================================================
+     LINE HEIGHTS
+     ========================================================================== */
+
+  --line-height-none: 1;
+  --line-height-tight: 1.25;    /* Headings */
+  --line-height-snug: 1.375;    /* Compact text */
+  --line-height-normal: 1.5;    /* Body text */
+  --line-height-relaxed: 1.625; /* Long-form text */
+  --line-height-loose: 2;       /* Extra spacing */
+
+  /* ==========================================================================
+     LETTER SPACING (Tracking)
+     ========================================================================== */
+
+  --letter-spacing-tighter: -0.02em;  /* Display headings */
+  --letter-spacing-tight: -0.01em;    /* H1 */
+  --letter-spacing-normal: 0;         /* Default */
+  --letter-spacing-wide: 0.01em;      /* Captions, uppercase */
+  --letter-spacing-wider: 0.02em;     /* Small caps */
+
+  /* ==========================================================================
+     TYPOGRAPHY PRESETS
+     Composite tokens for common text styles
+     ========================================================================== */
+
+  /* Display - hero sections, athlete names */
+  --text-display-size: var(--font-size-6xl);
+  --text-display-weight: var(--font-weight-bold);
+  --text-display-line-height: 1.1;
+  --text-display-tracking: var(--letter-spacing-tighter);
+
+  /* Heading 1 - page titles */
+  --text-h1-size: var(--font-size-5xl);
+  --text-h1-weight: var(--font-weight-bold);
+  --text-h1-line-height: 1.2;
+  --text-h1-tracking: var(--letter-spacing-tight);
+
+  /* Heading 2 - section titles */
+  --text-h2-size: var(--font-size-4xl);
+  --text-h2-weight: var(--font-weight-semibold);
+  --text-h2-line-height: 1.25;
+  --text-h2-tracking: var(--letter-spacing-normal);
+
+  /* Heading 3 - subsection titles */
+  --text-h3-size: var(--font-size-3xl);
+  --text-h3-weight: var(--font-weight-semibold);
+  --text-h3-line-height: 1.3;
+  --text-h3-tracking: var(--letter-spacing-normal);
+
+  /* Heading 4 - card titles */
+  --text-h4-size: var(--font-size-2xl);
+  --text-h4-weight: var(--font-weight-semibold);
+  --text-h4-line-height: 1.35;
+  --text-h4-tracking: var(--letter-spacing-normal);
+
+  /* Heading 5 - small titles */
+  --text-h5-size: var(--font-size-xl);
+  --text-h5-weight: var(--font-weight-medium);
+  --text-h5-line-height: 1.4;
+  --text-h5-tracking: var(--letter-spacing-normal);
+
+  /* Body - default text */
+  --text-body-size: var(--font-size-base);
+  --text-body-weight: var(--font-weight-normal);
+  --text-body-line-height: var(--line-height-normal);
+  --text-body-tracking: var(--letter-spacing-normal);
+
+  /* Body small - secondary content */
+  --text-body-sm-size: var(--font-size-sm);
+  --text-body-sm-weight: var(--font-weight-normal);
+  --text-body-sm-line-height: var(--line-height-normal);
+  --text-body-sm-tracking: var(--letter-spacing-normal);
+
+  /* Caption - labels, metadata */
+  --text-caption-size: var(--font-size-xs);
+  --text-caption-weight: var(--font-weight-normal);
+  --text-caption-line-height: 1.4;
+  --text-caption-tracking: var(--letter-spacing-wide);
+
+  /* Lead - intro paragraphs */
+  --text-lead-size: var(--font-size-lg);
+  --text-lead-weight: var(--font-weight-normal);
+  --text-lead-line-height: var(--line-height-relaxed);
+  --text-lead-tracking: var(--letter-spacing-normal);
+
+  /* ==========================================================================
+     MONOSPACE PRESETS
+     For times, results, and technical data
+     ========================================================================== */
+
+  /* Time display - large (live results) */
+  --text-time-lg-size: var(--font-size-4xl);
+  --text-time-lg-weight: var(--font-weight-semibold);
+  --text-time-lg-line-height: 1;
+
+  /* Time display - medium (result tables) */
+  --text-time-md-size: var(--font-size-lg);
+  --text-time-md-weight: var(--font-weight-medium);
+  --text-time-md-line-height: 1;
+
+  /* Time display - small (inline) */
+  --text-time-sm-size: var(--font-size-sm);
+  --text-time-sm-weight: var(--font-weight-normal);
+  --text-time-sm-line-height: 1;
+
+  /* Code - technical content */
+  --text-code-size: var(--font-size-sm);
+  --text-code-weight: var(--font-weight-normal);
+  --text-code-line-height: var(--line-height-normal);
+
+  /* ==========================================================================
+     RESPONSIVE TYPOGRAPHY
+     Mobile-first adjustments for smaller screens
+     ========================================================================== */
+}
+
+/* Mobile adjustments (default styles are mobile-first) */
+@media (min-width: 768px) {
+  :root {
+    /* Slightly larger display text on tablets and up */
+    --text-display-size: var(--font-size-6xl);
+    --text-h1-size: var(--font-size-5xl);
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    /* Reduced sizes for mobile */
+    --text-display-size: var(--font-size-4xl);    /* 36px instead of 60px */
+    --text-h1-size: var(--font-size-3xl);         /* 30px instead of 48px */
+    --text-h2-size: var(--font-size-2xl);         /* 24px instead of 36px */
+    --text-h3-size: var(--font-size-xl);          /* 20px instead of 30px */
+    --text-h4-size: var(--font-size-lg);          /* 18px instead of 24px */
+    --text-h5-size: var(--font-size-base);        /* 16px instead of 20px */
+
+    /* Larger time display stays readable */
+    --text-time-lg-size: var(--font-size-2xl);    /* 24px instead of 36px */
+  }
+}
