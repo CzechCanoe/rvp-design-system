@@ -1,0 +1,98 @@
+import { test, expect } from '@playwright/test';
+
+/**
+ * Visual regression tests for page prototypes
+ * Tests all prototype pages in both light and dark modes
+ */
+
+interface PrototypeConfig {
+  name: string;
+  storyId: string;
+  maxDiffPixels?: number;
+  timeout?: number;
+}
+
+const prototypes: PrototypeConfig[] = [
+  {
+    name: 'CalendarPage',
+    storyId: 'prototypes-calendar-page--default',
+  },
+  {
+    name: 'ResultsPage',
+    storyId: 'prototypes-results-page--default',
+  },
+  {
+    name: 'LivePage',
+    storyId: 'prototypes-live-page--default',
+    maxDiffPixels: 500, // Higher tolerance for animated LiveIndicator
+    timeout: 15000,
+  },
+  {
+    name: 'RegistrationPage',
+    storyId: 'prototypes-registration-page--default',
+  },
+  {
+    name: 'ProfilePage',
+    storyId: 'prototypes-profilepage--default',
+  },
+  {
+    name: 'DashboardPage-ClubAdmin',
+    storyId: 'prototypes-dashboard-page--club-admin',
+    timeout: 60000, // Larger page needs more time
+  },
+];
+
+test.describe('Prototype Pages - Light Mode', () => {
+  for (const prototype of prototypes) {
+    test(`${prototype.name} - screenshot`, async ({ page }) => {
+      // Use iframe.html for direct story access
+      await page.goto(`/iframe.html?id=${prototype.storyId}&viewMode=story`);
+
+      // Wait for the story root to be visible with custom timeout
+      await page.waitForSelector('#storybook-root', {
+        state: 'visible',
+        timeout: prototype.timeout ?? 30000,
+      });
+      await page.waitForLoadState('networkidle');
+
+      // Additional wait for animations and lazy content
+      await page.waitForTimeout(1500);
+
+      await expect(page.locator('#storybook-root')).toHaveScreenshot(
+        `${prototype.name}-light.png`,
+        {
+          maxDiffPixels: prototype.maxDiffPixels ?? 100,
+          animations: 'disabled',
+          timeout: prototype.timeout ?? 10000,
+        }
+      );
+    });
+  }
+});
+
+test.describe('Prototype Pages - Dark Mode', () => {
+  for (const prototype of prototypes) {
+    test(`${prototype.name} - dark mode screenshot`, async ({ page }) => {
+      // Navigate with dark mode global
+      await page.goto(
+        `/iframe.html?id=${prototype.storyId}&viewMode=story&globals=theme:dark`
+      );
+
+      await page.waitForSelector('#storybook-root', {
+        state: 'visible',
+        timeout: prototype.timeout ?? 30000,
+      });
+      await page.waitForLoadState('networkidle');
+      await page.waitForTimeout(1500);
+
+      await expect(page.locator('#storybook-root')).toHaveScreenshot(
+        `${prototype.name}-dark.png`,
+        {
+          maxDiffPixels: prototype.maxDiffPixels ?? 100,
+          animations: 'disabled',
+          timeout: prototype.timeout ?? 10000,
+        }
+      );
+    });
+  }
+});

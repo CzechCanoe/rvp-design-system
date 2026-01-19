@@ -2447,3 +2447,49 @@ Fáze 4 (Specifické - Tier 3):
 
 ### Další kroky
 - Fáze 6.2: Pořízení screenshotů s Playwright
+
+---
+
+## 2026-01-19 - Iterace 32 / Playwright visual regression testy (Fáze 6.2)
+
+### Dokončeno
+- [x] Konfigurace Playwright pro visual regression testing
+- [x] Instalace Playwright a Chromium browseru
+- [x] Vytvoření testů pro všechny prototypy (6 stránek × 2 režimy = 12 testů)
+- [x] Vytvoření testů pro komponenty (32 komponent × 2 režimy = 64 testů)
+- [x] Pořízení baseline screenshotů (76 PNG souborů)
+- [x] Přidání npm skriptů: test, test:update, test:report
+- [x] Všech 76 testů prošlo úspěšně
+
+### Struktura testů
+```
+tests/
+├── prototypes.spec.ts      # 6 prototypů × 2 režimy (light/dark)
+├── components.spec.ts      # 32 komponent × 2 režimy (light/dark)
+├── prototypes.spec.ts-snapshots/  # Baseline screenshoty prototypů
+└── components.spec.ts-snapshots/  # Baseline screenshoty komponent
+```
+
+### Problémy a řešení
+1. **Problém:** Story ID neodpovídalo skutečným ID ve Storybook
+   **Řešení:** Zjištěny skutečné story ID z meta.title a export názvů
+
+2. **Problém:** LivePage měla nestabilní screenshoty kvůli animacím
+   **Řešení:** Zvýšena tolerance pixelů (maxDiffPixels: 500)
+
+3. **Problém:** DashboardPage neměla Default story
+   **Řešení:** Použito ClubAdmin story místo default
+
+### Rozhodnutí
+1. **iframe.html přístup** - Používáme přímý přístup na story přes /iframe.html místo hlavního UI
+2. **Chromium-only** - Pro CI bude stačit jeden browser, pro lokální vývoj je to rychlejší
+3. **Baseline v gitu** - Screenshoty budou součástí repozitáře pro snadné porovnání při review
+
+### Poznámky
+- Screenshoty zachycují light i dark mode pro všechny komponenty
+- Animace jsou při screenshotech vypnuté (animations: 'disabled')
+- Test timeout je nastaven na 30s, pro velké prototypy až 60s
+- Tolerance je 50-100 pixelů pro komponenty, 500 pro LivePage s animacemi
+
+### Další kroky
+- Fáze 6.3: README.md s quick start

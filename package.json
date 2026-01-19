@@ -27,7 +27,10 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "lint": "eslint src --ext ts,tsx",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "playwright test",
+    "test:update": "playwright test --update-snapshots",
+    "test:report": "playwright show-report"
   },
   "keywords": [
     "design-system",
