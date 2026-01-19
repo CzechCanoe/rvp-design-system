@@ -1,8 +1,8 @@
 # PLAN.md - CSK RVP Design System
 
 ## Aktuální stav
-**Fáze:** 4 - Specifické komponenty (Tier 3)
-**Další krok:** Skeleton komponenta
+**Fáze:** 5 - Prototypy
+**Další krok:** prototype-calendar - Kalendář závodů
 
 ---
 
@@ -101,9 +101,9 @@
 - [x] ResultsTable (s highlighty)
 - [x] LiveIndicator (pulsující)
 - [x] EmptyState
-- [ ] Skeleton
+- [x] Skeleton
 
-**Milestone M4:** Use-case komponenty v Storybook
+**Milestone M4:** Use-case komponenty v Storybook ✅
 
 ---
 

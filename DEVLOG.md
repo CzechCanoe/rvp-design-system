@@ -1955,3 +1955,77 @@ src/components/
 
 ### Další kroky
 - Fáze 4: Skeleton komponenta
+
+---
+
+## 2026-01-19 - Iterace 38 / Skeleton komponenta (Fáze 4.9)
+
+### Dokončeno
+- [x] Skeleton komponenta s TypeScript a CSS
+- [x] Varianty: text, circular, rectangular, rounded
+- [x] Animace: pulse (opacity fade), wave (shimmer), none
+- [x] Podpora width/height jako string nebo number (auto-konverze na px)
+- [x] Multi-line text s lastLineWidth prop
+- [x] SkeletonText - convenience komponenta s fontSize presets
+- [x] SkeletonAvatar - convenience komponenta s size presets (xs-2xl)
+- [x] SkeletonButton - convenience komponenta s size presets (sm/md/lg)
+- [x] SkeletonCard - kompozitní komponenta pro card placeholders (image, avatar, lines, actions)
+- [x] SkeletonTable - kompozitní komponenta pro table placeholders (rows, columns, header)
+- [x] aria-hidden pro správnou přístupnost (skrytí od screen readerů)
+- [x] Reduced motion support
+- [x] Dark mode support (tmavší shimmer)
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Pulse vs Wave animace** - pulse je defaultní (subtilnější), wave pro výraznější loading efekt
+2. **Convenience komponenty** - SkeletonText/Avatar/Button/Card/Table pro běžné use cases
+3. **formatSize helper** - automatická konverze number → px string pro snazší použití
+4. **Multi-line v Skeleton** - místo SkeletonText, základní Skeleton s lines prop
+5. **Kompozitní komponenty** - SkeletonCard a SkeletonTable kombinují základní skeletony
+
+### Poznámky
+- **Milestone M4 dokončen** - všechny specifické komponenty Fáze 4 jsou hotové
+- Skeleton doplňuje EmptyState pro různé loading/empty stavy
+- Storybook stories obsahují CSK-specifické příklady (athlete profile, results table, calendar, dashboard stats, start list)
+- Build projde bez chyb (CSS varování jsou známé esbuild issue)
+
+### Struktura komponent (kompletní Fáze 4)
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+├── Navigation/
+├── Pagination/
+├── Progress/
+├── Header/
+├── Avatar/
+├── Dropdown/
+├── Calendar/
+├── Dropzone/
+├── Timeline/
+├── StatCard/
+├── AthleteCard/
+├── ResultsTable/
+├── LiveIndicator/
+├── EmptyState/
+└── Skeleton/
+    ├── index.ts       # Public API
+    ├── Skeleton.tsx   # Component implementation (Skeleton + convenience components)
+    ├── Skeleton.css   # Styles
+    └── Skeleton.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 5: prototype-calendar - Kalendář závodů

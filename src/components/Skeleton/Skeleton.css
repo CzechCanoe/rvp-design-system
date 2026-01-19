@@ -1,0 +1,209 @@
+/**
+ * Skeleton Component Styles - CSK RVP Design System
+ *
+ * Loading placeholder component with multiple variants and animations.
+ */
+
+/* ==========================================================================
+ * BASE SKELETON
+ * ========================================================================== */
+
+.csk-skeleton {
+  display: block;
+  background-color: var(--color-bg-tertiary);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ==========================================================================
+ * VARIANTS
+ * ========================================================================== */
+
+/* Text skeleton - for text lines */
+.csk-skeleton--text {
+  height: 1em;
+  border-radius: var(--radius-sm);
+  transform-origin: 0 55%;
+}
+
+/* Circular skeleton - for avatars, icons */
+.csk-skeleton--circular {
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+/* Rectangular skeleton - for images, cards */
+.csk-skeleton--rectangular {
+  border-radius: 0;
+}
+
+/* Rounded skeleton - for buttons, badges */
+.csk-skeleton--rounded {
+  border-radius: var(--radius-md);
+}
+
+/* ==========================================================================
+ * ANIMATIONS
+ * ========================================================================== */
+
+/* Pulse animation - opacity fade */
+.csk-skeleton--pulse {
+  animation: csk-skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes csk-skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Wave animation - shimmer effect */
+.csk-skeleton--wave {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-bg-tertiary);
+}
+
+.csk-skeleton--wave::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: csk-skeleton-wave 1.6s ease-in-out infinite;
+}
+
+@keyframes csk-skeleton-wave {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ==========================================================================
+ * MULTI-LINE TEXT
+ * ========================================================================== */
+
+.csk-skeleton-lines {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ==========================================================================
+ * SKELETON CARD
+ * ========================================================================== */
+
+.csk-skeleton-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border-secondary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--color-bg-primary);
+}
+
+.csk-skeleton-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+}
+
+.csk-skeleton-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.csk-skeleton-card__header-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  flex: 1;
+}
+
+.csk-skeleton-card__actions {
+  display: flex;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-2);
+}
+
+/* ==========================================================================
+ * SKELETON TABLE
+ * ========================================================================== */
+
+.csk-skeleton-table {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border-secondary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.csk-skeleton-table__row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: var(--spacing-4);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--color-border-secondary);
+}
+
+.csk-skeleton-table__row:last-child {
+  border-bottom: none;
+}
+
+.csk-skeleton-table__row--header {
+  background-color: var(--color-bg-secondary);
+}
+
+.csk-skeleton-table__row--header .csk-skeleton {
+  height: 14px;
+}
+
+/* ==========================================================================
+ * DARK MODE
+ * ========================================================================== */
+
+[data-theme='dark'] .csk-skeleton--wave::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .csk-skeleton--wave::after {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+  }
+}
+
+/* ==========================================================================
+ * REDUCED MOTION
+ * ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-skeleton--pulse,
+  .csk-skeleton--wave {
+    animation: none;
+  }
+
+  .csk-skeleton--wave::after {
+    animation: none;
+    display: none;
+  }
+}
