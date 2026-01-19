@@ -52,7 +52,7 @@
 - [x] Typografie (font family, scale, weights) - `src/tokens/typography.css`
 - [x] Spacing (4px base scale) - `src/tokens/spacing.css`
 - [x] Border radius - `src/tokens/radius.css`
-- [ ] Shadows
+- [x] Shadows - `src/tokens/shadows.css`
 - [ ] Transitions
 
 **Milestone M1:** Tokeny hotové, Storybook story

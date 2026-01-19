@@ -1,0 +1,159 @@
+/**
+ * Shadow Tokens - CSK RVP Design System
+ *
+ * Shadows for elevation and depth.
+ * Light mode uses traditional shadows, dark mode uses elevated backgrounds.
+ *
+ * Reference: DESIGN_PRINCIPLES.md Section 8.2
+ */
+
+:root {
+  /* ==========================================================================
+   * BASE SHADOW SCALE
+   * ========================================================================== */
+
+  /**
+   * Shadow primitives - light mode
+   * Used for cards, dropdowns, modals, popovers
+   */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /**
+   * Inner shadows - for inset effects
+   */
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-inner-lg: inset 0 4px 8px rgba(0, 0, 0, 0.08);
+
+  /* ==========================================================================
+   * COLORED SHADOWS
+   * For interactive elements and branding
+   * ========================================================================== */
+
+  --shadow-primary-sm: 0 1px 2px rgba(17, 118, 166, 0.15);
+  --shadow-primary-md: 0 4px 6px -1px rgba(17, 118, 166, 0.2), 0 2px 4px -2px rgba(17, 118, 166, 0.1);
+  --shadow-primary-lg: 0 10px 15px -3px rgba(17, 118, 166, 0.25), 0 4px 6px -4px rgba(17, 118, 166, 0.1);
+
+  --shadow-success-sm: 0 1px 2px rgba(34, 197, 94, 0.15);
+  --shadow-success-md: 0 4px 6px -1px rgba(34, 197, 94, 0.2), 0 2px 4px -2px rgba(34, 197, 94, 0.1);
+
+  --shadow-warning-sm: 0 1px 2px rgba(245, 158, 11, 0.15);
+  --shadow-warning-md: 0 4px 6px -1px rgba(245, 158, 11, 0.2), 0 2px 4px -2px rgba(245, 158, 11, 0.1);
+
+  --shadow-error-sm: 0 1px 2px rgba(239, 68, 68, 0.15);
+  --shadow-error-md: 0 4px 6px -1px rgba(239, 68, 68, 0.2), 0 2px 4px -2px rgba(239, 68, 68, 0.1);
+
+  /* ==========================================================================
+   * SEMANTIC COMPONENT SHADOWS
+   * ========================================================================== */
+
+  /* Cards */
+  --shadow-card: var(--shadow-sm);
+  --shadow-card-hover: var(--shadow-md);
+  --shadow-card-active: var(--shadow-lg);
+
+  /* Buttons */
+  --shadow-button: var(--shadow-sm);
+  --shadow-button-hover: var(--shadow-md);
+  --shadow-button-focus: 0 0 0 3px rgba(17, 118, 166, 0.3);
+
+  /* Inputs */
+  --shadow-input: var(--shadow-inner);
+  --shadow-input-focus: 0 0 0 3px rgba(17, 118, 166, 0.15);
+
+  /* Dropdowns and popovers */
+  --shadow-dropdown: var(--shadow-lg);
+  --shadow-popover: var(--shadow-xl);
+
+  /* Modals */
+  --shadow-modal: var(--shadow-2xl);
+  --shadow-modal-backdrop: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+
+  /* Toast notifications */
+  --shadow-toast: var(--shadow-lg);
+
+  /* Navigation */
+  --shadow-navbar: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-sticky: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================================================
+ * DARK MODE SHADOWS
+ * In dark mode, shadows are less visible. Elevation is shown via
+ * lighter backgrounds instead. We still provide subtle shadows for depth.
+ * ========================================================================== */
+
+[data-theme="dark"] {
+  /* Base shadows - more subtle in dark mode */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+
+  /* Inner shadows */
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-inner-lg: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+
+  /* Colored shadows - adjusted for dark backgrounds */
+  --shadow-primary-sm: 0 1px 2px rgba(77, 163, 204, 0.2);
+  --shadow-primary-md: 0 4px 6px -1px rgba(77, 163, 204, 0.25), 0 2px 4px -2px rgba(77, 163, 204, 0.15);
+  --shadow-primary-lg: 0 10px 15px -3px rgba(77, 163, 204, 0.3), 0 4px 6px -4px rgba(77, 163, 204, 0.15);
+
+  --shadow-success-sm: 0 1px 2px rgba(74, 222, 128, 0.2);
+  --shadow-success-md: 0 4px 6px -1px rgba(74, 222, 128, 0.25), 0 2px 4px -2px rgba(74, 222, 128, 0.15);
+
+  --shadow-warning-sm: 0 1px 2px rgba(251, 191, 36, 0.2);
+  --shadow-warning-md: 0 4px 6px -1px rgba(251, 191, 36, 0.25), 0 2px 4px -2px rgba(251, 191, 36, 0.15);
+
+  --shadow-error-sm: 0 1px 2px rgba(248, 113, 113, 0.2);
+  --shadow-error-md: 0 4px 6px -1px rgba(248, 113, 113, 0.25), 0 2px 4px -2px rgba(248, 113, 113, 0.15);
+
+  /* Component shadows */
+  --shadow-button-focus: 0 0 0 3px rgba(77, 163, 204, 0.4);
+  --shadow-input-focus: 0 0 0 3px rgba(77, 163, 204, 0.25);
+  --shadow-modal-backdrop: 0 0 0 9999px rgba(0, 0, 0, 0.7);
+  --shadow-navbar: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-sticky: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+/* System preference detection (when no explicit theme set) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* Base shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+
+    /* Inner shadows */
+    --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    --shadow-inner-lg: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+
+    /* Colored shadows */
+    --shadow-primary-sm: 0 1px 2px rgba(77, 163, 204, 0.2);
+    --shadow-primary-md: 0 4px 6px -1px rgba(77, 163, 204, 0.25), 0 2px 4px -2px rgba(77, 163, 204, 0.15);
+    --shadow-primary-lg: 0 10px 15px -3px rgba(77, 163, 204, 0.3), 0 4px 6px -4px rgba(77, 163, 204, 0.15);
+
+    --shadow-success-sm: 0 1px 2px rgba(74, 222, 128, 0.2);
+    --shadow-success-md: 0 4px 6px -1px rgba(74, 222, 128, 0.25), 0 2px 4px -2px rgba(74, 222, 128, 0.15);
+
+    --shadow-warning-sm: 0 1px 2px rgba(251, 191, 36, 0.2);
+    --shadow-warning-md: 0 4px 6px -1px rgba(251, 191, 36, 0.25), 0 2px 4px -2px rgba(251, 191, 36, 0.15);
+
+    --shadow-error-sm: 0 1px 2px rgba(248, 113, 113, 0.2);
+    --shadow-error-md: 0 4px 6px -1px rgba(248, 113, 113, 0.25), 0 2px 4px -2px rgba(248, 113, 113, 0.15);
+
+    /* Component shadows */
+    --shadow-button-focus: 0 0 0 3px rgba(77, 163, 204, 0.4);
+    --shadow-input-focus: 0 0 0 3px rgba(77, 163, 204, 0.25);
+    --shadow-modal-backdrop: 0 0 0 9999px rgba(0, 0, 0, 0.7);
+    --shadow-navbar: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-sticky: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  }
+}

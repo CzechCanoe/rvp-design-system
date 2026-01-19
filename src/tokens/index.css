@@ -9,8 +9,8 @@
 @import './typography.css';
 @import './spacing.css';
 @import './radius.css';
+@import './shadows.css';
 
 /* Additional token files will be added here:
- * @import './shadows.css';
  * @import './transitions.css';
  */

@@ -309,3 +309,32 @@ src/
 ### Další kroky
 - Fáze 1.2: Shadows tokeny
 - Fáze 1.2: Transitions tokeny
+
+---
+
+## 2026-01-19 - Iterace 10 / Shadow tokens (Fáze 1.2d partial)
+
+### Dokončeno
+- [x] Base shadow scale (none, sm, md, lg, xl, 2xl)
+- [x] Inner shadows (inner, inner-lg)
+- [x] Colored shadows (primary, success, warning, error)
+- [x] Semantic component shadows (cards, buttons, inputs, dropdowns, modals, toast, navbar)
+- [x] Dark mode shadow adjustments (více kontrastní stíny)
+- [x] System preference detection (@media prefers-color-scheme)
+- [x] Vytvoření `src/tokens/shadows.css`
+- [x] Aktualizace `src/tokens/index.css`
+
+### Rozhodnutí
+1. **Multi-layer shadows** - md a lg používají dva stíny pro přirozenější vzhled
+2. **Colored shadows pro interaktivní prvky** - primární barva pro focus states
+3. **Darker shadows v dark mode** - vyšší opacity pro viditelnost na tmavém pozadí
+4. **Semantic aliasy** - komponenty používají pojmenované tokeny (shadow-card, shadow-modal, etc.)
+5. **Focus ring pattern** - 3px outline s 30% opacity primární barvy
+
+### Poznámky
+- Dark mode používá elevation model (světlejší pozadí = vyšší elevace) spolu se stíny
+- Colored shadows používají přesné RGB hodnoty z barevných tokenů
+- Modal backdrop je speciální stín přes celou obrazovku
+
+### Další kroky
+- Fáze 1.2: Transitions tokeny
