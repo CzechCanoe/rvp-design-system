@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 3 - Pokročilé komponenty (Tier 2)
-**Další krok:** Pagination komponenta
+**Další krok:** Progress komponenta (bar, steps)
 
 ---
 
@@ -81,7 +81,7 @@
 - [x] Tabs (horizontal, pills)
 - [x] Toast (notifications provider)
 - [x] Navigation (main nav, breadcrumbs)
-- [ ] Pagination
+- [x] Pagination
 - [ ] Progress (bar, steps)
 - [ ] Header (app header)
 - [ ] Avatar (image, initials)

@@ -1058,3 +1058,62 @@ src/components/
 
 ### Další kroky
 - Fáze 3: Pagination komponenta
+
+---
+
+## 2026-01-19 - Iterace 25 / Pagination komponenta (Fáze 3.5)
+
+### Dokončeno
+- [x] Pagination komponenta s TypeScript a CSS
+- [x] Varianty: default (plná navigace), simple (bez first/last), minimal (jen prev/next + info)
+- [x] Velikosti: sm (32px), md (44px), lg (52px)
+- [x] Inteligentní generování page range s ellipsis
+- [x] Konfigurovatelné siblingCount a boundaryCount
+- [x] Volitelné first/last a prev/next tlačítka
+- [x] Custom labels pro lokalizaci
+- [x] Disabled stav
+- [x] Klávesová navigace a ARIA atributy
+- [x] Responsive design (skryté page numbers na mobilu)
+- [x] Dark mode support
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **usePaginationRange hook** - memoizovaný výpočet viditelných stránek s ellipsis
+2. **Tři varianty** - default (plná), simple (bez krajních), minimal (jen šipky + čísla)
+3. **1-indexed stránkování** - intuitivnější pro uživatele než 0-indexed
+4. **Responsive mobile fallback** - na malých obrazovkách se skryjí page buttons
+5. **Inline SVG ikony** - bez závislosti na icon knihovně
+
+### Poznámky
+- Pagination je 5. komponenta Fáze 3 (pokročilé komponenty)
+- Používá existing tokeny (color-interactive, radius-md, transition-button)
+- Storybook stories obsahují CSK-specifické příklady (výsledky závodů, vyhledávání závodníků, kalendář, VT třídy)
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+├── Navigation/
+└── Pagination/
+    ├── index.ts       # Public API
+    ├── Pagination.tsx # Component implementation
+    ├── Pagination.css # Styles
+    └── Pagination.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 3: Progress komponenta (bar, steps)

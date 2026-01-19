@@ -1,0 +1,296 @@
+/**
+ * Pagination Component Styles - CSK RVP Design System
+ *
+ * Uses design tokens for consistent styling.
+ * Supports variants: default, simple, minimal
+ * Supports sizes: sm, md, lg
+ */
+
+/* ==========================================================================
+   BASE PAGINATION STYLES
+   ========================================================================== */
+
+.csk-pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-family: var(--font-family-sans);
+}
+
+.csk-pagination--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   PAGINATION LIST
+   ========================================================================== */
+
+.csk-pagination__list {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.csk-pagination__item {
+  display: flex;
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+
+.csk-pagination__button {
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Typography */
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+
+  /* Default size (md) */
+  min-width: var(--spacing-touch-target);
+  min-height: var(--spacing-touch-target);
+  padding: var(--spacing-2);
+  font-size: var(--font-size-sm);
+
+  /* Shape */
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+
+  /* Interaction */
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition-button);
+
+  /* Focus visible */
+  outline: none;
+}
+
+.csk-pagination__button:hover:not(:disabled) {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border-strong);
+}
+
+.csk-pagination__button:active:not(:disabled) {
+  background-color: var(--color-bg-tertiary);
+}
+
+.csk-pagination__button:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.csk-pagination__button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Active page button */
+.csk-pagination__button--active {
+  background-color: var(--color-interactive-default);
+  border-color: var(--color-interactive-default);
+  color: var(--color-text-inverse);
+}
+
+.csk-pagination__button--active:hover:not(:disabled) {
+  background-color: var(--color-interactive-hover);
+  border-color: var(--color-interactive-hover);
+}
+
+.csk-pagination__button--active:active:not(:disabled) {
+  background-color: var(--color-interactive-active);
+  border-color: var(--color-interactive-active);
+}
+
+/* Icon buttons */
+.csk-pagination__button--first,
+.csk-pagination__button--prev,
+.csk-pagination__button--next,
+.csk-pagination__button--last {
+  padding: var(--spacing-2);
+}
+
+.csk-pagination__button svg {
+  width: 1.25em;
+  height: 1.25em;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   ELLIPSIS
+   ========================================================================== */
+
+.csk-pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--spacing-touch-target);
+  min-height: var(--spacing-touch-target);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.1em;
+}
+
+/* ==========================================================================
+   INFO (minimal variant)
+   ========================================================================== */
+
+.csk-pagination__info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--spacing-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   SIZE VARIANTS
+   ========================================================================== */
+
+/* Small */
+.csk-pagination--sm .csk-pagination__button {
+  min-width: 32px;
+  min-height: 32px;
+  padding: var(--spacing-1);
+  font-size: var(--font-size-xs);
+  border-radius: var(--radius-sm);
+}
+
+.csk-pagination--sm .csk-pagination__button svg {
+  width: 1em;
+  height: 1em;
+}
+
+.csk-pagination--sm .csk-pagination__ellipsis,
+.csk-pagination--sm .csk-pagination__info {
+  min-width: 32px;
+  min-height: 32px;
+  font-size: var(--font-size-xs);
+}
+
+/* Large */
+.csk-pagination--lg .csk-pagination__button {
+  min-width: 52px;
+  min-height: 52px;
+  padding: var(--spacing-3);
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-lg);
+}
+
+.csk-pagination--lg .csk-pagination__button svg {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.csk-pagination--lg .csk-pagination__ellipsis,
+.csk-pagination--lg .csk-pagination__info {
+  min-width: 52px;
+  min-height: 52px;
+  font-size: var(--font-size-base);
+}
+
+/* ==========================================================================
+   VARIANT: SIMPLE
+   ========================================================================== */
+
+.csk-pagination--simple .csk-pagination__button--page {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.csk-pagination--simple .csk-pagination__button--page:hover:not(:disabled) {
+  background-color: var(--color-bg-secondary);
+  border-color: transparent;
+}
+
+.csk-pagination--simple .csk-pagination__button--active {
+  background-color: var(--color-interactive-default);
+  border-color: var(--color-interactive-default);
+  color: var(--color-text-inverse);
+}
+
+/* ==========================================================================
+   VARIANT: MINIMAL
+   ========================================================================== */
+
+.csk-pagination--minimal {
+  gap: var(--spacing-2);
+}
+
+.csk-pagination--minimal .csk-pagination__button {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.csk-pagination--minimal .csk-pagination__button:hover:not(:disabled) {
+  background-color: var(--color-bg-secondary);
+}
+
+.csk-pagination--minimal .csk-pagination__info {
+  min-width: auto;
+  padding: 0 var(--spacing-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+/* Hide page numbers on very small screens, keep minimal controls */
+@media (max-width: 480px) {
+  .csk-pagination--default .csk-pagination__list,
+  .csk-pagination--simple .csk-pagination__list {
+    display: none;
+  }
+
+  /* Show page info instead on mobile */
+  .csk-pagination--default::after,
+  .csk-pagination--simple::after {
+    content: attr(data-page-info);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--spacing-3);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ==========================================================================
+   DARK MODE ADJUSTMENTS
+   ========================================================================== */
+
+[data-theme='dark'] .csk-pagination__button {
+  background-color: var(--color-bg-primary);
+  border-color: var(--color-border-default);
+}
+
+[data-theme='dark'] .csk-pagination__button:hover:not(:disabled) {
+  background-color: var(--color-bg-secondary);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .csk-pagination__button {
+    background-color: var(--color-bg-primary);
+    border-color: var(--color-border-default);
+  }
+
+  :root:not([data-theme='light']) .csk-pagination__button:hover:not(:disabled) {
+    background-color: var(--color-bg-secondary);
+  }
+}
