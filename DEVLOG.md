@@ -2170,3 +2170,61 @@ src/prototypes/
 
 ### Další kroky
 - prototype-registration - Self-service registrace
+
+---
+
+## 2026-01-19 - Iterace 56 / Registration Page Prototype (Fáze 5.4)
+
+### Dokončeno
+- [x] Analýza registračního procesu z UC-1.6 (přihlašování klubu na závod)
+- [x] Vytvoření RegistrationPage.stories.tsx - třístupňový wizard
+- [x] Vytvoření RegistrationPage.css - kompletní stylování prototypu
+
+### Architektura prototypu
+```
+src/prototypes/
+├── RegistrationPage.stories.tsx  # Přihlašování klubu na závod
+└── RegistrationPage.css
+```
+
+### Funkcionality prototypu
+1. **Krok 1 - Hlavička přihlášky**: vedoucí výpravy, kontakt, poznámky
+2. **Krok 2 - Výběr závodníků**: tabulka s filtrováním dle kategorie lodě, vyhledávání, modal pro přidání
+3. **Krok 3 - Souhrn a potvrzení**: přehled přihlášených, validační upozornění
+
+### Použité komponenty
+- Breadcrumbs (navigace)
+- Card (layout kontejnery)
+- Button (akce)
+- Input (formulářová pole)
+- Select (výběr kategorie)
+- Table (seznam závodníků)
+- Modal (dialog pro přidání závodníka)
+- Badge (statusy - zdravotní prohlídka, příspěvky)
+- Toast (notifikace)
+- Progress (wizard steps)
+
+### Validační pravidla (z business analýzy UC-1.6)
+- Kontrola zdravotní prohlídky (platnost)
+- Kontrola zaplacených příspěvků
+- Kontrola věku vs. kategorie
+- Upozornění na VT třídu závodníka
+
+### Problémy a řešení
+1. **Problém:** České uvozovky „ a " v JSX způsobovaly parsing error
+   **Řešení:** Nahrazeny standardními ASCII uvozovkami
+
+2. **Problém:** Nesprávné API volání komponent (Toast, Modal, Table, Breadcrumbs)
+   **Řešení:** Opraveno dle skutečného API:
+   - ToastProvider + useToast() hook s metodami .success(), .info()
+   - Modal používá `open` místo `isOpen`
+   - Table columns používají `key` místo `id`, přidán `rowKey`
+   - BreadcrumbItem vyžaduje `id` property
+
+### Poznámky
+- Prototyp simuluje přihlášku oddílu, ne individuální registraci
+- Aktoři: Oddílový správce, Přihlašovatel (z UC-1.6)
+- Build projde bez chyb (pouze CSS warnings)
+
+### Další kroky
+- prototype-profile - Profil závodníka

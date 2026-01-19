@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 5 - Prototypy
-**Další krok:** prototype-registration - Self-service registrace
+**Další krok:** prototype-profile - Profil závodníka
 
 ---
 
@@ -112,7 +112,7 @@
 - [x] prototype-calendar - Kalendář závodů
 - [x] prototype-results - Výsledky závodu
 - [x] prototype-live - Live výsledky
-- [ ] prototype-registration - Self-service registrace
+- [x] prototype-registration - přihlašování na závody - oddílová přihláška
 - [ ] prototype-profile - Profil závodníka
 - [ ] prototype-dashboard - Dashboard správce
 
@@ -126,7 +126,6 @@
 - [ ] pořízení screenshotů všech prototypů a storubooků s playwright
 - [ ] README.md s quick start
 - [ ] Component API dokumentace
-- [ ] Migration guide z Inspinia
 - [ ] GitHub Actions CI/CD
 - [ ] NPM publikace (@czechcanoe/rvp-design-system)
 - [ ] GitHub Pages pro Storybook
