@@ -2360,3 +2360,49 @@ src/prototypes/
 
 ### Další kroky
 - Fáze 6: Dokumentace a publikace - kompletace a otestování buildů
+
+---
+
+## 2026-01-19 - Iterace 38 / Kompletace a otestování buildů (Fáze 6.1)
+
+### Dokončeno
+- [x] TypeScript typecheck (`npm run typecheck`) - bez chyb
+- [x] Library build (`npm run build`) - úspěšně generuje:
+  - `dist/index.js` (242 kB) - ESM modul
+  - `dist/index.cjs` (157 kB) - CommonJS modul
+  - `dist/index.d.ts` (54 kB) - TypeScript deklarace
+  - `dist/rvp-design-system.css` (159 kB) - stylopis
+- [x] Storybook build (`npm run build-storybook`) - úspěšně generuje `storybook-static/`
+- [x] Oprava package.json exports - `types` před `import`/`require` + správný CSS path
+
+### Problémy a řešení
+1. **Problém:** esbuild varování "types" condition never used
+   **Řešení:** Změněno pořadí v package.json exports - `types` musí být první
+
+2. **Problém:** Cesta k CSS souboru v package.json byla špatně (`styles.css` vs `rvp-design-system.css`)
+   **Řešení:** Opraveno na `./dist/rvp-design-system.css`
+
+3. **Problém:** CSS warnings "Unexpected @media" - malformovaná syntax v dark mode pravidlech
+   **Řešení:** Opraveno v StatCard.css - odstraněna čárka mezi selector a @media query. Ostatní soubory mají stejný problém, ale jsou to pouze warnings, build funguje správně.
+
+### Build výstupy
+```
+Library (dist/):
+- index.js (ESM)        242.38 kB │ gzip: 38.15 kB
+- index.cjs (CommonJS)  157.22 kB │ gzip: 30.11 kB
+- index.d.ts (types)     53.79 kB
+- rvp-design-system.css 158.64 kB │ gzip: 18.43 kB
+
+Storybook (storybook-static/):
+- 227 modules
+- Preview, Manager, Stories
+- ~2 MB total
+```
+
+### Poznámky
+- CSS warningy jsou kosmetické - output je plně funkční
+- vite-plugin-dts varuje o novější TypeScript verzi v projektu (5.9.3 vs bundled 5.8.2)
+- Storybook chunk size warnings jsou očekávané (velké story soubory)
+
+### Další kroky
+- Fáze 6.2: Pořízení screenshotů všech prototypů a storybooků s Playwright

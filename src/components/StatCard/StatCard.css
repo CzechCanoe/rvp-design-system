@@ -133,7 +133,11 @@
 }
 
 /* Dark mode trend colors */
-[data-theme='dark'] .csk-stat-card__trend--up,
+[data-theme='dark'] .csk-stat-card__trend--up {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: var(--color-success-400);
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .csk-stat-card__trend--up {
     background-color: rgba(34, 197, 94, 0.15);
@@ -141,7 +145,11 @@
   }
 }
 
-[data-theme='dark'] .csk-stat-card__trend--down,
+[data-theme='dark'] .csk-stat-card__trend--down {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: var(--color-error-400);
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .csk-stat-card__trend--down {
     background-color: rgba(239, 68, 68, 0.15);
@@ -149,7 +157,11 @@
   }
 }
 
-[data-theme='dark'] .csk-stat-card__trend--neutral,
+[data-theme='dark'] .csk-stat-card__trend--neutral {
+  background-color: var(--color-neutral-800);
+  color: var(--color-neutral-400);
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .csk-stat-card__trend--neutral {
     background-color: var(--color-neutral-800);
@@ -337,81 +349,83 @@
 }
 
 /* Dark mode color adjustments */
-[data-theme='dark'] .csk-stat-card--primary .csk-stat-card__icon-container,
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light'])
-    .csk-stat-card--primary
-    .csk-stat-card__icon-container {
-    background-color: rgba(17, 118, 166, 0.15);
-  }
+[data-theme='dark'] .csk-stat-card--primary .csk-stat-card__icon-container {
+  background-color: rgba(17, 118, 166, 0.15);
 }
 
-[data-theme='dark'] .csk-stat-card--primary .csk-stat-card__icon,
+[data-theme='dark'] .csk-stat-card--primary .csk-stat-card__icon {
+  color: var(--color-primary-400);
+}
+
+[data-theme='dark'] .csk-stat-card--success .csk-stat-card__icon-container {
+  background-color: rgba(34, 197, 94, 0.15);
+}
+
+[data-theme='dark'] .csk-stat-card--success .csk-stat-card__icon {
+  color: var(--color-success-400);
+}
+
+[data-theme='dark'] .csk-stat-card--warning .csk-stat-card__icon-container {
+  background-color: rgba(245, 158, 11, 0.15);
+}
+
+[data-theme='dark'] .csk-stat-card--warning .csk-stat-card__icon {
+  color: var(--color-warning-400);
+}
+
+[data-theme='dark'] .csk-stat-card--error .csk-stat-card__icon-container {
+  background-color: rgba(239, 68, 68, 0.15);
+}
+
+[data-theme='dark'] .csk-stat-card--error .csk-stat-card__icon {
+  color: var(--color-error-400);
+}
+
+[data-theme='dark'] .csk-stat-card--info .csk-stat-card__icon-container {
+  background-color: rgba(59, 130, 246, 0.15);
+}
+
+[data-theme='dark'] .csk-stat-card--info .csk-stat-card__icon {
+  color: var(--color-info-400);
+}
+
 @media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .csk-stat-card--primary .csk-stat-card__icon-container {
+    background-color: rgba(17, 118, 166, 0.15);
+  }
+
   :root:not([data-theme='light']) .csk-stat-card--primary .csk-stat-card__icon {
     color: var(--color-primary-400);
   }
-}
 
-[data-theme='dark'] .csk-stat-card--success .csk-stat-card__icon-container,
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light'])
-    .csk-stat-card--success
-    .csk-stat-card__icon-container {
+  :root:not([data-theme='light']) .csk-stat-card--success .csk-stat-card__icon-container {
     background-color: rgba(34, 197, 94, 0.15);
   }
-}
 
-[data-theme='dark'] .csk-stat-card--success .csk-stat-card__icon,
-@media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .csk-stat-card--success .csk-stat-card__icon {
     color: var(--color-success-400);
   }
-}
 
-[data-theme='dark'] .csk-stat-card--warning .csk-stat-card__icon-container,
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light'])
-    .csk-stat-card--warning
-    .csk-stat-card__icon-container {
+  :root:not([data-theme='light']) .csk-stat-card--warning .csk-stat-card__icon-container {
     background-color: rgba(245, 158, 11, 0.15);
   }
-}
 
-[data-theme='dark'] .csk-stat-card--warning .csk-stat-card__icon,
-@media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .csk-stat-card--warning .csk-stat-card__icon {
     color: var(--color-warning-400);
   }
-}
 
-[data-theme='dark'] .csk-stat-card--error .csk-stat-card__icon-container,
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light'])
-    .csk-stat-card--error
-    .csk-stat-card__icon-container {
+  :root:not([data-theme='light']) .csk-stat-card--error .csk-stat-card__icon-container {
     background-color: rgba(239, 68, 68, 0.15);
   }
-}
 
-[data-theme='dark'] .csk-stat-card--error .csk-stat-card__icon,
-@media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .csk-stat-card--error .csk-stat-card__icon {
     color: var(--color-error-400);
   }
-}
 
-[data-theme='dark'] .csk-stat-card--info .csk-stat-card__icon-container,
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light'])
-    .csk-stat-card--info
-    .csk-stat-card__icon-container {
+  :root:not([data-theme='light']) .csk-stat-card--info .csk-stat-card__icon-container {
     background-color: rgba(59, 130, 246, 0.15);
   }
-}
 
-[data-theme='dark'] .csk-stat-card--info .csk-stat-card__icon,
-@media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .csk-stat-card--info .csk-stat-card__icon {
     color: var(--color-info-400);
   }
@@ -468,7 +482,10 @@
   z-index: 1;
 }
 
-[data-theme='dark'] .csk-stat-card__loading-overlay,
+[data-theme='dark'] .csk-stat-card__loading-overlay {
+  background-color: rgba(10, 10, 10, 0.8);
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .csk-stat-card__loading-overlay {
     background-color: rgba(10, 10, 10, 0.8);

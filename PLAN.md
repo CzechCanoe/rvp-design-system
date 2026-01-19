@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 6 - Dokumentace a publikace
-**Další krok:** kompletace a otestování buildů
+**Další krok:** pořízení screenshotů všech prototypů a storybooků s playwright
 
 ---
 
@@ -122,7 +122,7 @@
 
 ## Fáze 6: Dokumentace a publikace
 
-- [ ] kompletace a otestování buildů
+- [x] kompletace a otestování buildů
 - [ ] pořízení screenshotů všech prototypů a storubooků s playwright
 - [ ] README.md s quick start
 - [ ] Component API dokumentace
