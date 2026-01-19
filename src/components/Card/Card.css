@@ -1,0 +1,178 @@
+/**
+ * Card Component Styles - CSK RVP Design System
+ *
+ * Uses design tokens for consistent styling.
+ * Supports variants: surface, elevated, outlined
+ * Supports padding: none, sm, md, lg
+ */
+
+/* ==========================================================================
+   BASE CARD STYLES
+   ========================================================================== */
+
+.csk-card {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+
+  /* Shape */
+  border-radius: var(--radius-card);
+  overflow: hidden;
+
+  /* Default background */
+  background-color: var(--color-bg-primary);
+
+  /* Text */
+  color: var(--color-text-primary);
+  text-decoration: none;
+
+  /* Transition for interactive states */
+  transition: var(--transition-card);
+}
+
+/* ==========================================================================
+   VARIANTS
+   ========================================================================== */
+
+/* Surface - flat card with subtle background */
+.csk-card--surface {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-default);
+}
+
+/* Elevated - card with shadow */
+.csk-card--elevated {
+  background-color: var(--color-bg-primary);
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-card);
+}
+
+/* Outlined - card with visible border */
+.csk-card--outlined {
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-strong);
+}
+
+/* ==========================================================================
+   PADDING
+   ========================================================================== */
+
+.csk-card--padding-none .csk-card__body {
+  padding: 0;
+}
+
+.csk-card--padding-sm .csk-card__body {
+  padding: var(--spacing-card-padding-sm);
+}
+
+.csk-card--padding-md .csk-card__body {
+  padding: var(--spacing-card-padding);
+}
+
+.csk-card--padding-lg .csk-card__body {
+  padding: var(--spacing-card-padding-lg);
+}
+
+/* ==========================================================================
+   HEADER & FOOTER
+   ========================================================================== */
+
+.csk-card__header {
+  padding: var(--spacing-card-padding);
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.csk-card--padding-sm .csk-card__header {
+  padding: var(--spacing-card-padding-sm);
+}
+
+.csk-card--padding-lg .csk-card__header {
+  padding: var(--spacing-card-padding-lg);
+}
+
+.csk-card--padding-none .csk-card__header {
+  padding: var(--spacing-card-padding);
+}
+
+.csk-card__footer {
+  padding: var(--spacing-card-padding);
+  border-top: 1px solid var(--color-border-default);
+  margin-top: auto;
+}
+
+.csk-card--padding-sm .csk-card__footer {
+  padding: var(--spacing-card-padding-sm);
+}
+
+.csk-card--padding-lg .csk-card__footer {
+  padding: var(--spacing-card-padding-lg);
+}
+
+.csk-card--padding-none .csk-card__footer {
+  padding: var(--spacing-card-padding);
+}
+
+/* ==========================================================================
+   BODY
+   ========================================================================== */
+
+.csk-card__body {
+  flex: 1;
+}
+
+/* ==========================================================================
+   CLICKABLE STATE
+   ========================================================================== */
+
+.csk-card--clickable {
+  cursor: pointer;
+}
+
+.csk-card--clickable:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* Hover states for clickable cards */
+.csk-card--clickable.csk-card--surface:hover {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-strong);
+}
+
+.csk-card--clickable.csk-card--elevated:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.csk-card--clickable.csk-card--outlined:hover {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-interactive-default);
+}
+
+/* Active states for clickable cards */
+.csk-card--clickable.csk-card--surface:active {
+  background-color: var(--color-bg-tertiary);
+}
+
+.csk-card--clickable.csk-card--elevated:active {
+  box-shadow: var(--shadow-card);
+  transform: translateY(0);
+}
+
+.csk-card--clickable.csk-card--outlined:active {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-card--clickable.csk-card--elevated:hover {
+    transform: none;
+  }
+
+  .csk-card--clickable.csk-card--elevated:active {
+    transform: none;
+  }
+}

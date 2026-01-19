@@ -21,3 +21,7 @@ export type { RadioProps, RadioSize, RadioState } from './Radio';
 // Switch
 export { Switch } from './Switch';
 export type { SwitchProps, SwitchSize, SwitchState } from './Switch';
+
+// Card
+export { Card } from './Card';
+export type { CardProps, CardVariant, CardPadding } from './Card';

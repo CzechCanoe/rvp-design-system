@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 2 - Core komponenty (Tier 1)
-**Další krok:** Card komponenta
+**Další krok:** Badge komponenta
 
 ---
 
@@ -67,7 +67,7 @@
 - [x] Checkbox
 - [x] Radio
 - [x] Switch
-- [ ] Card (surface, elevated, clickable)
+- [x] Card (surface, elevated, clickable)
 - [ ] Badge (status, VT, sekce)
 - [ ] Table (sortable, selectable)
 

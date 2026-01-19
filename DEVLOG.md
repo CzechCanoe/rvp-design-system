@@ -662,3 +662,53 @@ src/components/
 
 ### Další kroky
 - Fáze 2: Card komponenta (surface, elevated, clickable)
+
+---
+
+## 2026-01-19 - Iterace 18 / Card komponenta (Fáze 2.7)
+
+### Dokončeno
+- [x] Card komponenta s TypeScript a CSS
+- [x] Varianty: surface (subtilní pozadí), elevated (stín), outlined (viditelný border)
+- [x] Padding: none, sm, md, lg
+- [x] Clickable stav s hover/active efekty
+- [x] Podpora link karty (href prop) - renderuje se jako `<a>`
+- [x] Header a footer sloty s oddělovacími bordery
+- [x] Klávesová navigace pro clickable karty (Enter, Space)
+- [x] WCAG 2.1 AA - focus visible, role="button" pro clickable
+- [x] Reduced motion support pro elevated hover animace
+- [x] Storybook stories s autodocs a CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Conditional rendering** - anchor vs div místo ElementType pro lepší TypeScript podporu
+2. **role="button" pro clickable** - non-link clickable karty mají správnou ARIA roli
+3. **tabIndex: 0** - clickable karty jsou focusable klávesnicí
+4. **translateY animace pro elevated** - subtilní lift efekt na hover (+2px)
+5. **Header/footer padding** - konzistentní s body padding, ale s vlastními bordery
+
+### Poznámky
+- Card komponenta doplňuje formy (Button, Input, Select, Checkbox, Radio, Switch)
+- Vhodná pro seznamy událostí, profily závodníků, výsledkové karty
+- Storybook stories obsahují CSK-specifické příklady (AthleteCard, EventCard, ResultCard, StatCard)
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+└── Card/
+    ├── index.ts       # Public API
+    ├── Card.tsx       # Component implementation
+    ├── Card.css       # Styles
+    └── Card.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 2: Badge komponenta (status, VT, sekce)
