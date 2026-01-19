@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 2 - Core komponenty (Tier 1)
-**Další krok:** Checkbox komponenta
+**Další krok:** Radio komponenta
 
 ---
 
@@ -64,7 +64,7 @@
 - [x] Button (primary, secondary, ghost, danger, sizes)
 - [x] Input (text, password, search, number, validation)
 - [x] Select (native, custom dropdown)
-- [ ] Checkbox
+- [x] Checkbox
 - [ ] Radio
 - [ ] Switch
 - [ ] Card (surface, elevated, clickable)

@@ -522,3 +522,48 @@ src/components/
 
 ### Další kroky
 - Fáze 2: Checkbox komponenta
+
+---
+
+## 2026-01-19 - Iterace 15 / Checkbox komponenta (Fáze 2.4)
+
+### Dokončeno
+- [x] Checkbox komponenta s TypeScript a CSS
+- [x] Velikosti: sm (16px), md (20px), lg (24px)
+- [x] Stavy: default, error, success, disabled
+- [x] Indeterminate stav pro částečný výběr (např. select all)
+- [x] Label a helper text s ARIA propojením
+- [x] Error message s role="alert"
+- [x] Custom check a indeterminate ikony (SVG)
+- [x] WCAG 2.1 AA - focus visible, aria-invalid, aria-describedby
+- [x] Storybook stories s autodocs a CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Skrytý nativní checkbox** - appearance: none + custom visual box pro konzistentní vzhled
+2. **SVG ikony** - inline SVG pro check a indeterminate ikony (nezávislé na icon library)
+3. **Indeterminate via JavaScript** - nativní checkbox indeterminate se nastavuje pouze přes JS
+4. **Dual ref handling** - interní ref pro indeterminate + forwarded ref pro rodiče
+
+### Poznámky
+- Checkbox používá design tokeny z Fáze 1 (colors, spacing, radius, transitions)
+- Indeterminate stav je užitečný pro "Select all" patterny v tabulkách
+- Storybook stories obsahují praktické příklady (registrační formulář, filtry, výběr v tabulce)
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+└── Checkbox/
+    ├── index.ts       # Public API
+    ├── Checkbox.tsx   # Component implementation
+    ├── Checkbox.css   # Styles
+    └── Checkbox.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 2: Radio komponenta

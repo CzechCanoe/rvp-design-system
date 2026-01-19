@@ -9,3 +9,7 @@ export type { InputProps, InputType, InputSize, InputState } from './Input';
 // Select
 export { Select } from './Select';
 export type { SelectProps, SelectOption, SelectSize, SelectState } from './Select';
+
+// Checkbox
+export { Checkbox } from './Checkbox';
+export type { CheckboxProps, CheckboxSize, CheckboxState } from './Checkbox';
