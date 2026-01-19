@@ -1,0 +1,227 @@
+/**
+ * Button Component Styles - CSK RVP Design System
+ *
+ * Uses design tokens for consistent styling.
+ * Supports variants: primary, secondary, ghost, danger
+ * Supports sizes: sm, md, lg
+ */
+
+/* ==========================================================================
+   BASE BUTTON STYLES
+   ========================================================================== */
+
+.csk-button {
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-button-gap);
+
+  /* Typography */
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  text-decoration: none;
+  white-space: nowrap;
+
+  /* Default size (md) */
+  padding: var(--spacing-button-padding-y) var(--spacing-button-padding-x);
+  font-size: var(--font-size-sm);
+  min-height: var(--spacing-touch-target);
+
+  /* Shape */
+  border: 1px solid transparent;
+  border-radius: var(--radius-button);
+
+  /* Interaction */
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition-button);
+
+  /* Focus visible */
+  outline: none;
+}
+
+.csk-button:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.csk-button:disabled,
+.csk-button[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   VARIANTS
+   ========================================================================== */
+
+/* Primary - main call-to-action */
+.csk-button--primary {
+  background-color: var(--color-interactive-default);
+  border-color: var(--color-interactive-default);
+  color: var(--color-text-inverse);
+}
+
+.csk-button--primary:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-interactive-hover);
+  border-color: var(--color-interactive-hover);
+}
+
+.csk-button--primary:active:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-interactive-active);
+  border-color: var(--color-interactive-active);
+}
+
+/* Secondary - secondary actions */
+.csk-button--secondary {
+  background-color: var(--color-bg-primary);
+  border-color: var(--color-border-strong);
+  color: var(--color-text-primary);
+}
+
+.csk-button--secondary:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border-strong);
+}
+
+.csk-button--secondary:active:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* Ghost - minimal visual weight */
+.csk-button--ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--color-text-primary);
+}
+
+.csk-button--ghost:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-bg-secondary);
+}
+
+.csk-button--ghost:active:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* Danger - destructive actions */
+.csk-button--danger {
+  background-color: var(--color-error-500);
+  border-color: var(--color-error-500);
+  color: var(--color-text-inverse);
+}
+
+.csk-button--danger:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-error-600);
+  border-color: var(--color-error-600);
+}
+
+.csk-button--danger:active:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-error-700);
+  border-color: var(--color-error-700);
+}
+
+.csk-button--danger:focus-visible {
+  outline-color: var(--color-error-500);
+}
+
+/* ==========================================================================
+   SIZES
+   ========================================================================== */
+
+/* Small */
+.csk-button--sm {
+  padding: var(--spacing-button-padding-y-sm) var(--spacing-button-padding-x-sm);
+  font-size: var(--font-size-xs);
+  min-height: 32px;
+  border-radius: var(--radius-button-sm);
+}
+
+/* Medium (default) - defined in base */
+
+/* Large */
+.csk-button--lg {
+  padding: var(--spacing-button-padding-y-lg) var(--spacing-button-padding-x-lg);
+  font-size: var(--font-size-base);
+  min-height: 52px;
+}
+
+/* ==========================================================================
+   MODIFIERS
+   ========================================================================== */
+
+/* Full width */
+.csk-button--full-width {
+  width: 100%;
+}
+
+/* Loading state */
+.csk-button--loading {
+  position: relative;
+  color: transparent;
+}
+
+.csk-button--loading .csk-button__label {
+  visibility: hidden;
+}
+
+.csk-button__spinner {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.csk-button__spinner-icon {
+  width: 1.25em;
+  height: 1.25em;
+  animation: var(--animation-spin);
+}
+
+/* Restore text color for spinner */
+.csk-button--loading.csk-button--primary .csk-button__spinner,
+.csk-button--loading.csk-button--danger .csk-button__spinner {
+  color: var(--color-text-inverse);
+}
+
+.csk-button--loading.csk-button--secondary .csk-button__spinner,
+.csk-button--loading.csk-button--ghost .csk-button__spinner {
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   ICON STYLES
+   ========================================================================== */
+
+.csk-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.csk-button__icon svg {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* Adjust icon size for small buttons */
+.csk-button--sm .csk-button__icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+/* Adjust icon size for large buttons */
+.csk-button--lg .csk-button__icon svg {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+/* ==========================================================================
+   LABEL
+   ========================================================================== */
+
+.csk-button__label {
+  display: inline-block;
+}

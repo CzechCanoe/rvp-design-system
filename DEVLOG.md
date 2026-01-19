@@ -383,3 +383,46 @@ src/tokens/
 
 ### Další kroky
 - Fáze 2: Core komponenty (Button, Input, Select, Checkbox, Radio, Switch, Card, Badge, Table)
+
+---
+
+## 2026-01-19 - Iterace 12 / Button komponenta (Fáze 2.1)
+
+### Dokončeno
+- [x] Button komponenta s TypeScript a CSS
+- [x] Varianty: primary, secondary, ghost, danger
+- [x] Velikosti: sm (32px), md (44px), lg (52px)
+- [x] Stavy: default, hover, active, disabled, loading
+- [x] Podpora ikon (iconLeft, iconRight)
+- [x] Full width modifikátor
+- [x] Loading spinner s animací
+- [x] WCAG 2.1 AA - focus visible, aria atributy
+- [x] Storybook stories s autodocs
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **CSS namespace** - `.csk-button` prefix pro izolaci stylů
+2. **forwardRef** - pro přístup k DOM elementu z rodičovských komponent
+3. **min-height místo fixed height** - pro flexibilitu obsahu
+4. **Loading state** - text zůstává ve stromě (visibility: hidden) pro zachování šířky
+5. **Touch target** - minimum 44px (md), 32px (sm) pro mobilní zařízení
+
+### Poznámky
+- Button je první komponenta Fáze 2
+- Používá design tokeny z Fáze 1 (colors, spacing, radius, transitions)
+- Storybook stories demonstrují všechny varianty a stavy
+- Připraveno pro rozšíření o IconButton a ButtonGroup
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+└── Button/
+    ├── index.ts       # Public API
+    ├── Button.tsx     # Component implementation
+    ├── Button.css     # Styles
+    └── Button.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 2: Input komponenta (text, password, search, number, validation)

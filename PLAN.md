@@ -1,8 +1,8 @@
 # PLAN.md - CSK RVP Design System
 
 ## Aktuální stav
-**Fáze:** 1 - Projektová struktura a tokeny ✅
-**Další krok:** Fáze 2 - Core komponenty (Tier 1)
+**Fáze:** 2 - Core komponenty (Tier 1)
+**Další krok:** Input komponenta
 
 ---
 
@@ -61,7 +61,7 @@
 
 ## Fáze 2: Core komponenty (Tier 1)
 
-- [ ] Button (primary, secondary, ghost, danger, sizes)
+- [x] Button (primary, secondary, ghost, danger, sizes)
 - [ ] Input (text, password, search, number, validation)
 - [ ] Select (native, custom dropdown)
 - [ ] Checkbox
