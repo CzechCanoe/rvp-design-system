@@ -1445,3 +1445,75 @@ src/components/
 
 ### Další kroky
 - Fáze 4: Dropzone komponenta (file upload)
+
+---
+
+## 2026-01-19 - Iterace 31 / Dropzone komponenta (Fáze 4.2)
+
+### Dokončeno
+- [x] Dropzone komponenta s TypeScript a CSS
+- [x] Drag & drop podpora s vizuální zpětnou vazbou
+- [x] Velikosti: sm, md, lg
+- [x] Stavy: default, error, success
+- [x] Validace typu souboru (accept prop - MIME typy i přípony)
+- [x] Validace velikosti souboru (maxSize prop)
+- [x] Validace počtu souborů (maxFiles prop)
+- [x] Single i multiple file upload mód
+- [x] Náhled obrázků s object URL
+- [x] Progress bar pro upload (řízeno zvenčí)
+- [x] Seznam souborů s odstranění
+- [x] Custom label, hint a error message
+- [x] Custom icon a children pro vlastní obsah
+- [x] File type ikony s barevným kódováním
+- [x] WCAG 2.1 AA - klávesová navigace, aria-label
+- [x] Responsive design
+- [x] Dark mode support
+- [x] Reduced motion support
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Controlled files state** - files prop a onFilesChange callback pro plnou kontrolu nad stavem
+2. **DropzoneFile interface** - file, id, progress, error, preview pro kompletní informace
+3. **Object URL preview** - automatické vytvoření náhledu pro obrázky s cleanup v handleRemove
+4. **Validace na klientu** - okamžitá zpětná vazba bez čekání na server
+5. **onError prop override** - vyloučeno z HTMLAttributes kvůli konfliktu typů
+
+### Poznámky
+- Dropzone je druhá komponenta Fáze 4 (specifické komponenty)
+- Vhodná pro nahrávání fotografií závodníků, dokumentů závodů, log klubů
+- Upload progress je řízen externě - komponenta pouze zobrazuje
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+├── Navigation/
+├── Pagination/
+├── Progress/
+├── Header/
+├── Avatar/
+├── Dropdown/
+├── Calendar/
+└── Dropzone/
+    ├── index.ts       # Public API
+    ├── Dropzone.tsx   # Component implementation
+    ├── Dropzone.css   # Styles
+    └── Dropzone.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 4: Timeline komponenta (workflow vizualizace)

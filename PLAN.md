@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 4 - Specifické komponenty (Tier 3)
-**Další krok:** Dropzone komponenta
+**Další krok:** Timeline komponenta
 
 ---
 
@@ -94,7 +94,7 @@
 ## Fáze 4: Specifické komponenty (Tier 3)
 
 - [x] Calendar (event grid)
-- [ ] Dropzone (file upload)
+- [x] Dropzone (file upload)
 - [ ] Timeline (workflow vizualizace)
 - [ ] StatCard (dashboard widget)
 - [ ] AthleteCard (profil závodníka)

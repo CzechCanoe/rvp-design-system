@@ -1,0 +1,552 @@
+/**
+ * Dropzone Component Styles - CSK RVP Design System
+ *
+ * Uses design tokens for consistent styling.
+ * Supports sizes: sm, md, lg
+ * Supports states: default, error, success
+ */
+
+/* ==========================================================================
+   BASE DROPZONE STYLES
+   ========================================================================== */
+
+.csk-dropzone {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+
+  /* Text */
+  font-family: var(--font-family);
+}
+
+/* ==========================================================================
+   DROP AREA
+   ========================================================================== */
+
+.csk-dropzone__area {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-8) var(--spacing-4);
+
+  /* Shape */
+  border: 2px dashed var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-secondary);
+
+  /* Cursor */
+  cursor: pointer;
+
+  /* Transition */
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.csk-dropzone__area:hover {
+  border-color: var(--color-primary-400);
+  background-color: var(--color-primary-50);
+}
+
+.csk-dropzone__area:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* Hidden input */
+.csk-dropzone__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   CONTENT
+   ========================================================================== */
+
+.csk-dropzone__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.csk-dropzone__area:hover .csk-dropzone__icon {
+  color: var(--color-primary-500);
+}
+
+.csk-dropzone__icon-svg {
+  width: 40px;
+  height: 40px;
+}
+
+.csk-dropzone__label {
+  font-size: var(--text-base-size);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.csk-dropzone__hint {
+  font-size: var(--text-sm-size);
+  color: var(--color-text-tertiary);
+  text-align: center;
+}
+
+/* ==========================================================================
+   STATES
+   ========================================================================== */
+
+/* Drag over */
+.csk-dropzone--drag-over .csk-dropzone__area {
+  border-color: var(--color-primary-500);
+  background-color: var(--color-primary-50);
+}
+
+.csk-dropzone--drag-over .csk-dropzone__icon {
+  color: var(--color-primary-500);
+}
+
+/* Error state */
+.csk-dropzone--error .csk-dropzone__area {
+  border-color: var(--color-error-300);
+  background-color: var(--color-feedback-error-bg);
+}
+
+.csk-dropzone--error .csk-dropzone__area:hover {
+  border-color: var(--color-error-400);
+  background-color: var(--color-error-100);
+}
+
+.csk-dropzone--error .csk-dropzone__icon {
+  color: var(--color-error-500);
+}
+
+/* Success state */
+.csk-dropzone--success .csk-dropzone__area {
+  border-color: var(--color-success-300);
+  background-color: var(--color-feedback-success-bg);
+}
+
+.csk-dropzone--success .csk-dropzone__area:hover {
+  border-color: var(--color-success-400);
+  background-color: var(--color-success-100);
+}
+
+.csk-dropzone--success .csk-dropzone__icon {
+  color: var(--color-success-500);
+}
+
+/* Disabled */
+.csk-dropzone--disabled .csk-dropzone__area {
+  cursor: not-allowed;
+  border-color: var(--color-border-subtle);
+  background-color: var(--color-bg-tertiary);
+  opacity: 0.6;
+}
+
+.csk-dropzone--disabled .csk-dropzone__area:hover {
+  border-color: var(--color-border-subtle);
+  background-color: var(--color-bg-tertiary);
+}
+
+.csk-dropzone--disabled .csk-dropzone__icon {
+  color: var(--color-text-disabled);
+}
+
+.csk-dropzone--disabled .csk-dropzone__label,
+.csk-dropzone--disabled .csk-dropzone__hint {
+  color: var(--color-text-disabled);
+}
+
+/* ==========================================================================
+   ERROR MESSAGE
+   ========================================================================== */
+
+.csk-dropzone__error {
+  font-size: var(--text-sm-size);
+  color: var(--color-error-500);
+}
+
+/* ==========================================================================
+   FILE LIST
+   ========================================================================== */
+
+.csk-dropzone__files {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.csk-dropzone__file {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.csk-dropzone__file:hover {
+  border-color: var(--color-border-strong);
+}
+
+.csk-dropzone__file--error {
+  border-color: var(--color-error-300);
+  background-color: var(--color-feedback-error-bg);
+}
+
+/* File preview */
+.csk-dropzone__file-preview {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-10);
+  height: var(--spacing-10);
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.csk-dropzone__file-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* File info */
+.csk-dropzone__file-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+}
+
+.csk-dropzone__file-name {
+  font-size: var(--text-sm-size);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.csk-dropzone__file-size {
+  font-size: var(--text-xs-size);
+  color: var(--color-text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.csk-dropzone__file-error-text {
+  color: var(--color-error-500);
+}
+
+/* Progress bar */
+.csk-dropzone__file-progress {
+  width: 100%;
+  height: 4px;
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.csk-dropzone__file-progress-bar {
+  height: 100%;
+  background-color: var(--color-primary-500);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-normal) var(--ease-out);
+}
+
+/* Remove button */
+.csk-dropzone__file-remove {
+  /* Reset */
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+
+  /* Layout */
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-6);
+  height: var(--spacing-6);
+
+  /* Shape */
+  border-radius: var(--radius-sm);
+
+  /* Colors */
+  color: var(--color-text-tertiary);
+
+  /* Transition */
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.csk-dropzone__file-remove:hover {
+  color: var(--color-error-500);
+  background-color: var(--color-error-50);
+}
+
+.csk-dropzone__file-remove:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 1px;
+}
+
+/* ==========================================================================
+   SIZES
+   ========================================================================== */
+
+/* Small */
+.csk-dropzone--sm .csk-dropzone__area {
+  padding: var(--spacing-4) var(--spacing-3);
+  gap: var(--spacing-1);
+}
+
+.csk-dropzone--sm .csk-dropzone__icon-svg {
+  width: 28px;
+  height: 28px;
+}
+
+.csk-dropzone--sm .csk-dropzone__label {
+  font-size: var(--text-sm-size);
+}
+
+.csk-dropzone--sm .csk-dropzone__hint {
+  font-size: var(--text-xs-size);
+}
+
+.csk-dropzone--sm .csk-dropzone__file {
+  padding: var(--spacing-2);
+  gap: var(--spacing-2);
+}
+
+.csk-dropzone--sm .csk-dropzone__file-preview {
+  width: var(--spacing-8);
+  height: var(--spacing-8);
+}
+
+/* Large */
+.csk-dropzone--lg .csk-dropzone__area {
+  padding: var(--spacing-12) var(--spacing-6);
+  gap: var(--spacing-3);
+}
+
+.csk-dropzone--lg .csk-dropzone__icon-svg {
+  width: 56px;
+  height: 56px;
+}
+
+.csk-dropzone--lg .csk-dropzone__label {
+  font-size: var(--text-lg-size);
+}
+
+.csk-dropzone--lg .csk-dropzone__hint {
+  font-size: var(--text-base-size);
+}
+
+.csk-dropzone--lg .csk-dropzone__file {
+  padding: var(--spacing-4);
+  gap: var(--spacing-4);
+}
+
+.csk-dropzone--lg .csk-dropzone__file-preview {
+  width: var(--spacing-12);
+  height: var(--spacing-12);
+}
+
+.csk-dropzone--lg .csk-dropzone__file-name {
+  font-size: var(--text-base-size);
+}
+
+.csk-dropzone--lg .csk-dropzone__file-size {
+  font-size: var(--text-sm-size);
+}
+
+/* ==========================================================================
+   DARK MODE
+   ========================================================================== */
+
+[data-theme='dark'] .csk-dropzone__area {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border-default);
+}
+
+[data-theme='dark'] .csk-dropzone__area:hover {
+  background-color: rgba(77, 163, 204, 0.1);
+  border-color: var(--color-primary-500);
+}
+
+[data-theme='dark'] .csk-dropzone--drag-over .csk-dropzone__area {
+  background-color: rgba(77, 163, 204, 0.15);
+  border-color: var(--color-primary-500);
+}
+
+[data-theme='dark'] .csk-dropzone--error .csk-dropzone__area {
+  background-color: rgba(248, 113, 113, 0.1);
+  border-color: var(--color-error-500);
+}
+
+[data-theme='dark'] .csk-dropzone--error .csk-dropzone__area:hover {
+  background-color: rgba(248, 113, 113, 0.15);
+}
+
+[data-theme='dark'] .csk-dropzone--success .csk-dropzone__area {
+  background-color: rgba(74, 222, 128, 0.1);
+  border-color: var(--color-success-500);
+}
+
+[data-theme='dark'] .csk-dropzone--success .csk-dropzone__area:hover {
+  background-color: rgba(74, 222, 128, 0.15);
+}
+
+[data-theme='dark'] .csk-dropzone__file {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border-default);
+}
+
+[data-theme='dark'] .csk-dropzone__file:hover {
+  border-color: var(--color-border-strong);
+}
+
+[data-theme='dark'] .csk-dropzone__file--error {
+  background-color: rgba(248, 113, 113, 0.1);
+  border-color: var(--color-error-500);
+}
+
+[data-theme='dark'] .csk-dropzone__file-preview {
+  background-color: var(--color-bg-tertiary);
+}
+
+[data-theme='dark'] .csk-dropzone__file-remove:hover {
+  background-color: rgba(248, 113, 113, 0.15);
+}
+
+/* Dark mode with system preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .csk-dropzone__area {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border-default);
+  }
+
+  :root:not([data-theme='light']) .csk-dropzone__area:hover {
+    background-color: rgba(77, 163, 204, 0.1);
+    border-color: var(--color-primary-500);
+  }
+
+  :root:not([data-theme='light']) .csk-dropzone--drag-over .csk-dropzone__area {
+    background-color: rgba(77, 163, 204, 0.15);
+    border-color: var(--color-primary-500);
+  }
+
+  :root:not([data-theme='light']) .csk-dropzone--error .csk-dropzone__area {
+    background-color: rgba(248, 113, 113, 0.1);
+    border-color: var(--color-error-500);
+  }
+
+  :root:not([data-theme='light']) .csk-dropzone--error .csk-dropzone__area:hover {
+    background-color: rgba(248, 113, 113, 0.15);
+  }
+
+  :root:not([data-theme='light']) .csk-dropzone--success .csk-dropzone__area {
+    background-color: rgba(74, 222, 128, 0.1);
+    border-color: var(--color-success-500);
+  }
+
+  :root:not([data-theme='light']) .csk-dropzone--success .csk-dropzone__area:hover {
+    background-color: rgba(74, 222, 128, 0.15);
+  }
+
+  :root:not([data-theme='light']) .csk-dropzone__file {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border-default);
+  }
+
+  :root:not([data-theme='light']) .csk-dropzone__file:hover {
+    border-color: var(--color-border-strong);
+  }
+
+  :root:not([data-theme='light']) .csk-dropzone__file--error {
+    background-color: rgba(248, 113, 113, 0.1);
+    border-color: var(--color-error-500);
+  }
+
+  :root:not([data-theme='light']) .csk-dropzone__file-preview {
+    background-color: var(--color-bg-tertiary);
+  }
+
+  :root:not([data-theme='light']) .csk-dropzone__file-remove:hover {
+    background-color: rgba(248, 113, 113, 0.15);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .csk-dropzone__area {
+    padding: var(--spacing-6) var(--spacing-3);
+  }
+
+  .csk-dropzone__icon-svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .csk-dropzone__label {
+    font-size: var(--text-sm-size);
+  }
+
+  .csk-dropzone__file {
+    padding: var(--spacing-2);
+    gap: var(--spacing-2);
+  }
+
+  .csk-dropzone__file-preview {
+    width: var(--spacing-8);
+    height: var(--spacing-8);
+  }
+
+  .csk-dropzone__file-name {
+    font-size: var(--text-xs-size);
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-dropzone__area,
+  .csk-dropzone__icon,
+  .csk-dropzone__file,
+  .csk-dropzone__file-remove,
+  .csk-dropzone__file-progress-bar {
+    transition: none;
+  }
+}

@@ -127,3 +127,12 @@ export type {
   CalendarView,
   CalendarSize,
 } from './Calendar';
+
+// Dropzone
+export { Dropzone } from './Dropzone';
+export type {
+  DropzoneProps,
+  DropzoneFile,
+  DropzoneSize,
+  DropzoneState,
+} from './Dropzone';
