@@ -10,7 +10,4 @@
 @import './spacing.css';
 @import './radius.css';
 @import './shadows.css';
-
-/* Additional token files will be added here:
- * @import './transitions.css';
- */
+@import './transitions.css';

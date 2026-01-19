@@ -337,4 +337,49 @@ src/
 - Modal backdrop je speciální stín přes celou obrazovku
 
 ### Další kroky
-- Fáze 1.2: Transitions tokeny
+- Fáze 2: Core komponenty (Tier 1)
+
+---
+
+## 2026-01-19 - Iterace 11 / Transition tokens (Fáze 1.2d final)
+
+### Dokončeno
+- [x] Base transition durations (instant, fastest, fast, normal, moderate, slow, slower, slowest)
+- [x] Easing functions (linear, in, out, in-out, bounce, elastic, spring)
+- [x] Composite transitions (fast, base, slow, slower)
+- [x] Dual personality mode tokens (utility: 100-200ms, expressive: 150-400ms)
+- [x] Semantic component transitions (button, input, link, card, dropdown, modal, tooltip, sidebar, collapse, switch, tab, badge, skeleton, theme)
+- [x] Animation properties with keyframe references
+- [x] Keyframe definitions (fade, scale, slide, pulse, spin, bounce, live-pulse)
+- [x] Reduced motion support (@media prefers-reduced-motion)
+- [x] Vytvoření `src/tokens/transitions.css`
+- [x] Aktualizace `src/tokens/index.css`
+
+### Rozhodnutí
+1. **Kompletní duration škála** - od 0ms do 500ms pro různé use cases
+2. **Specializované easings** - bounce a elastic pro expresivní režim (attention-grabbing UI)
+3. **Composite transitions pro komponenty** - předpřipravené multi-property transitions (např. button má bg, border, color, shadow, transform)
+4. **Keyframes přímo v souboru** - základní animace jsou součástí tokenů pro snadné použití
+5. **Live pulse animace** - specifická pro CSK live timing indikátory
+
+### Poznámky
+- **Milestone M1 dokončen** - všechny design tokeny jsou implementovány
+- Fáze 1 (Projektová struktura a tokeny) je kompletně hotová
+- Reduced motion respektuje WCAG 2.1 a uživatelské preference
+- Dual personality (utility vs expressive) je konzistentní s ostatními tokeny
+- Připraveno pro Fázi 2 - core komponenty
+
+### Struktura tokenů (kompletní)
+```
+src/tokens/
+├── index.css       # Central import
+├── colors.css      # Color primitives + semantic + dark mode
+├── typography.css  # Font families, sizes, weights, presets
+├── spacing.css     # 4px scale, component/layout spacing, dual personality
+├── radius.css      # Border radius scale + semantic
+├── shadows.css     # Shadow scale + colored + semantic + dark mode
+└── transitions.css # Durations, easings, animations, reduced motion
+```
+
+### Další kroky
+- Fáze 2: Core komponenty (Button, Input, Select, Checkbox, Radio, Switch, Card, Badge, Table)

@@ -1,8 +1,8 @@
 # PLAN.md - CSK RVP Design System
 
 ## Aktuální stav
-**Fáze:** 1 - Projektová struktura a tokeny
-**Další krok:** 1.2 - Design Tokens (typografie, spacing, radius, shadows...)
+**Fáze:** 1 - Projektová struktura a tokeny ✅
+**Další krok:** Fáze 2 - Core komponenty (Tier 1)
 
 ---
 
@@ -53,9 +53,9 @@
 - [x] Spacing (4px base scale) - `src/tokens/spacing.css`
 - [x] Border radius - `src/tokens/radius.css`
 - [x] Shadows - `src/tokens/shadows.css`
-- [ ] Transitions
+- [x] Transitions - `src/tokens/transitions.css`
 
-**Milestone M1:** Tokeny hotové, Storybook story
+**Milestone M1:** Tokeny hotové, Storybook story ✅
 
 ---
 

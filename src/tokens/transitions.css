@@ -1,0 +1,325 @@
+/**
+ * Transition Tokens - CSK RVP Design System
+ *
+ * Timing and easing for animations and transitions.
+ * Includes dual personality modes (utility vs expressive).
+ *
+ * Reference: DESIGN_PRINCIPLES.md Section 8.3, 10.2
+ */
+
+:root {
+  /* ==========================================================================
+   * BASE TRANSITION DURATIONS
+   * ========================================================================== */
+
+  /**
+   * Core timing values
+   * Used as building blocks for transitions
+   */
+  --duration-instant: 0ms;
+  --duration-fastest: 50ms;
+  --duration-fast: 100ms;
+  --duration-normal: 150ms;
+  --duration-moderate: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 400ms;
+  --duration-slowest: 500ms;
+
+  /* ==========================================================================
+   * EASING FUNCTIONS
+   * ========================================================================== */
+
+  /**
+   * Standard easings
+   */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /**
+   * Specialized easings
+   */
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-spring: cubic-bezier(0.5, 1.5, 0.5, 1);
+
+  /* ==========================================================================
+   * COMPOSITE TRANSITIONS
+   * Shorthand properties combining duration and easing
+   * ========================================================================== */
+
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
+  --transition-slower: 500ms ease;
+
+  /* ==========================================================================
+   * DUAL PERSONALITY - UTILITY MODE
+   * Fast, subtle transitions for backoffice and data-heavy interfaces
+   * ========================================================================== */
+
+  --motion-util-fast: 100ms;
+  --motion-util-base: 150ms;
+  --motion-util-slow: 200ms;
+
+  --transition-util-fast: var(--motion-util-fast) var(--ease-out);
+  --transition-util-base: var(--motion-util-base) var(--ease-out);
+  --transition-util-slow: var(--motion-util-slow) var(--ease-out);
+
+  /* ==========================================================================
+   * DUAL PERSONALITY - EXPRESSIVE MODE
+   * Longer, more noticeable transitions for public-facing pages
+   * ========================================================================== */
+
+  --motion-expr-fast: 150ms;
+  --motion-expr-base: 250ms;
+  --motion-expr-slow: 400ms;
+
+  --transition-expr-fast: var(--motion-expr-fast) var(--ease-out);
+  --transition-expr-base: var(--motion-expr-base) var(--ease-out);
+  --transition-expr-slow: var(--motion-expr-slow) var(--ease-in-out);
+
+  /* ==========================================================================
+   * SEMANTIC COMPONENT TRANSITIONS
+   * Pre-defined transitions for common UI patterns
+   * ========================================================================== */
+
+  /* Buttons - quick feedback */
+  --transition-button: background-color var(--motion-util-fast) var(--ease-out),
+                       border-color var(--motion-util-fast) var(--ease-out),
+                       color var(--motion-util-fast) var(--ease-out),
+                       box-shadow var(--motion-util-fast) var(--ease-out),
+                       transform var(--motion-util-fast) var(--ease-out);
+
+  /* Form inputs - focus states */
+  --transition-input: border-color var(--motion-util-base) var(--ease-out),
+                      box-shadow var(--motion-util-base) var(--ease-out),
+                      background-color var(--motion-util-base) var(--ease-out);
+
+  /* Links - color changes */
+  --transition-link: color var(--motion-util-fast) var(--ease-out),
+                     text-decoration-color var(--motion-util-fast) var(--ease-out);
+
+  /* Cards - hover effects */
+  --transition-card: box-shadow var(--motion-util-base) var(--ease-out),
+                     transform var(--motion-util-base) var(--ease-out),
+                     border-color var(--motion-util-base) var(--ease-out);
+
+  /* Dropdowns and menus */
+  --transition-dropdown: opacity var(--motion-util-fast) var(--ease-out),
+                         transform var(--motion-util-fast) var(--ease-out);
+
+  /* Modals */
+  --transition-modal: opacity var(--duration-moderate) var(--ease-out),
+                      transform var(--duration-moderate) var(--ease-out);
+
+  --transition-modal-backdrop: opacity var(--duration-moderate) var(--ease-out);
+
+  /* Tooltips and popovers */
+  --transition-tooltip: opacity var(--motion-util-fast) var(--ease-out),
+                        transform var(--motion-util-fast) var(--ease-out);
+
+  /* Sidebar and navigation */
+  --transition-sidebar: transform var(--duration-slow) var(--ease-in-out),
+                        opacity var(--duration-slow) var(--ease-in-out);
+
+  /* Accordion and collapsible */
+  --transition-collapse: height var(--duration-moderate) var(--ease-in-out),
+                         opacity var(--duration-moderate) var(--ease-in-out);
+
+  /* Toggle switches */
+  --transition-switch: background-color var(--motion-util-fast) var(--ease-out),
+                       transform var(--motion-util-fast) var(--ease-bounce);
+
+  /* Tabs */
+  --transition-tab: color var(--motion-util-fast) var(--ease-out),
+                    border-color var(--motion-util-fast) var(--ease-out),
+                    background-color var(--motion-util-fast) var(--ease-out);
+
+  /* Badges and indicators */
+  --transition-badge: background-color var(--motion-util-fast) var(--ease-out),
+                      transform var(--motion-util-fast) var(--ease-out);
+
+  /* Loading states */
+  --transition-skeleton: opacity var(--duration-slow) var(--ease-in-out);
+
+  /* Theme switching */
+  --transition-theme: background-color var(--duration-slow) var(--ease-out),
+                      color var(--duration-slow) var(--ease-out),
+                      border-color var(--duration-slow) var(--ease-out);
+
+  /* ==========================================================================
+   * ANIMATION PROPERTIES
+   * For CSS animations (keyframes)
+   * ========================================================================== */
+
+  /* Fade in/out */
+  --animation-fade-in: fade-in var(--duration-moderate) var(--ease-out);
+  --animation-fade-out: fade-out var(--duration-moderate) var(--ease-in);
+
+  /* Scale */
+  --animation-scale-in: scale-in var(--duration-moderate) var(--ease-out);
+  --animation-scale-out: scale-out var(--duration-moderate) var(--ease-in);
+
+  /* Slide */
+  --animation-slide-in-up: slide-in-up var(--duration-moderate) var(--ease-out);
+  --animation-slide-in-down: slide-in-down var(--duration-moderate) var(--ease-out);
+  --animation-slide-in-left: slide-in-left var(--duration-moderate) var(--ease-out);
+  --animation-slide-in-right: slide-in-right var(--duration-moderate) var(--ease-out);
+
+  /* Pulse - for live indicators */
+  --animation-pulse: pulse 2s var(--ease-in-out) infinite;
+
+  /* Spin - for loading spinners */
+  --animation-spin: spin 1s var(--ease-linear) infinite;
+
+  /* Bounce - for attention */
+  --animation-bounce: bounce 1s var(--ease-bounce);
+}
+
+/* ==========================================================================
+ * KEYFRAME DEFINITIONS
+ * ========================================================================== */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scale-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes slide-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Live indicator pulse - CSK specific */
+@keyframes live-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+/* ==========================================================================
+ * REDUCED MOTION
+ * Respect user preferences for reduced motion
+ * ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  :root {
+    /* Override all durations to instant */
+    --duration-fastest: 0.01ms;
+    --duration-fast: 0.01ms;
+    --duration-normal: 0.01ms;
+    --duration-moderate: 0.01ms;
+    --duration-slow: 0.01ms;
+    --duration-slower: 0.01ms;
+    --duration-slowest: 0.01ms;
+
+    --motion-util-fast: 0.01ms;
+    --motion-util-base: 0.01ms;
+    --motion-util-slow: 0.01ms;
+
+    --motion-expr-fast: 0.01ms;
+    --motion-expr-base: 0.01ms;
+    --motion-expr-slow: 0.01ms;
+  }
+}
