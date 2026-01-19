@@ -1,13 +1,43 @@
-# Ignore
+# Dependencies
 node_modules/
+
+# Build outputs
 dist/
 build/
+*.tsbuildinfo
+
+# Environment and secrets
 .env*
 *.pem
 credentials.json
+
+# Logs
 _logs/
 *.log.txt
+*.log
+
+# Core dumps
 core
+
+# Private resources
 resources-private/
 *-private/
 *-donotsync/
+
+# Storybook
+storybook-static/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Package manager locks (keep one)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml

@@ -1,8 +1,8 @@
 # PLAN.md - CSK RVP Design System
 
 ## Aktuální stav
-**Fáze:** 0 - Výzkum a příprava ✓
-**Další krok:** 1.1 - Setup projektu
+**Fáze:** 1 - Projektová struktura a tokeny
+**Další krok:** 1.2 - Design Tokens
 
 ---
 
@@ -39,11 +39,11 @@
 ## Fáze 1: Projektová struktura a tokeny
 
 ### 1.1 Setup projektu
-- [ ] Inicializace npm projektu
-- [ ] Konfigurace TypeScript
-- [ ] Konfigurace Vite
-- [ ] Konfigurace Storybook 8
-- [ ] Struktura složek (src/tokens, src/components, etc.)
+- [x] Inicializace npm projektu
+- [x] Konfigurace TypeScript
+- [x] Konfigurace Vite
+- [x] Konfigurace Storybook 8
+- [x] Struktura složek (src/tokens, src/components, etc.)
 
 ### 1.2 Design Tokens
 - [ ] Barevná paleta (light theme)

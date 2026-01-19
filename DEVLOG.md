@@ -124,3 +124,46 @@
 
 ### Další kroky
 - Fáze 1.1: Setup projektu (npm, TypeScript, Vite, Storybook)
+
+---
+
+## 2026-01-19 - Iterace 4 / Setup projektu (Fáze 1.1)
+
+### Dokončeno
+- [x] Inicializace npm projektu s `@czechcanoe/rvp-design-system` scope
+- [x] Konfigurace TypeScript (strict mode, ESNext, bundler resolution)
+- [x] Konfigurace Vite (library mode, React plugin, DTS generation)
+- [x] Konfigurace Storybook 8 (react-vite, essential addons, dark/light preview)
+- [x] Struktura složek (src/tokens, src/components, src/styles, src/utils, src/hooks)
+- [x] Základní soubory (index.ts, globals.css, Introduction.mdx)
+- [x] Aktualizace .gitignore pro moderní React projekt
+
+### Rozhodnutí
+1. **ESM-first** - `"type": "module"` v package.json, dual ESM/CJS export
+2. **Path alias** - `@/*` mapuje na `src/*` pro čisté importy
+3. **Vite library mode** - build jako knihovna s externím React
+4. **vite-plugin-dts** - automatická generace TypeScript definic
+5. **AGPL-3.0 licence** - v souladu s CSK projekty
+
+### Poznámky
+- Projekt je připraven pro `npm install` a `npm run storybook`
+- Storybook preview má přepínač light/dark theme
+- CSS reset připraven v globals.css
+- Tokeny zatím placeholder - budou implementovány v 1.2
+
+### Struktura projektu
+```
+src/
+├── index.ts           # Main export
+├── Introduction.mdx   # Storybook welcome page
+├── tokens/
+│   └── index.ts       # Design tokens (TBD)
+├── components/        # React components (TBD)
+├── styles/
+│   └── globals.css    # CSS reset + variables
+├── utils/             # Utility functions (TBD)
+└── hooks/             # React hooks (TBD)
+```
+
+### Další kroky
+- Fáze 1.2: Design Tokens (barvy, typografie, spacing)
