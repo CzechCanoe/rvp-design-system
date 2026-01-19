@@ -13,3 +13,7 @@ export type { SelectProps, SelectOption, SelectSize, SelectState } from './Selec
 // Checkbox
 export { Checkbox } from './Checkbox';
 export type { CheckboxProps, CheckboxSize, CheckboxState } from './Checkbox';
+
+// Radio
+export { Radio } from './Radio';
+export type { RadioProps, RadioSize, RadioState } from './Radio';

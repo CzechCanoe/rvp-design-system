@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 2 - Core komponenty (Tier 1)
-**Další krok:** Radio komponenta
+**Další krok:** Switch komponenta
 
 ---
 
@@ -65,7 +65,7 @@
 - [x] Input (text, password, search, number, validation)
 - [x] Select (native, custom dropdown)
 - [x] Checkbox
-- [ ] Radio
+- [x] Radio
 - [ ] Switch
 - [ ] Card (surface, elevated, clickable)
 - [ ] Badge (status, VT, sekce)

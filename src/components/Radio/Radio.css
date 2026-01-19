@@ -1,0 +1,264 @@
+/**
+ * Radio Component Styles - CSK RVP Design System
+ *
+ * Uses design tokens for consistent styling.
+ * Supports sizes: sm, md, lg
+ * Supports states: default, error, success
+ */
+
+/* ==========================================================================
+   WRAPPER
+   ========================================================================== */
+
+.csk-radio-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+/* ==========================================================================
+   LABEL (clickable container)
+   ========================================================================== */
+
+.csk-radio-label {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.csk-radio-wrapper--disabled .csk-radio-label {
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   CONTROL (contains hidden input + visual circle)
+   ========================================================================== */
+
+.csk-radio-control {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+/* Hidden native radio */
+.csk-radio {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.csk-radio:disabled {
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   VISUAL CIRCLE
+   ========================================================================== */
+
+.csk-radio-circle {
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Default size (md) */
+  width: 20px;
+  height: 20px;
+
+  /* Shape - circular */
+  background-color: var(--color-bg-primary);
+  border: 2px solid var(--color-border-default);
+  border-radius: var(--radius-full);
+
+  /* Interaction */
+  transition: var(--transition-input);
+}
+
+/* ==========================================================================
+   DOT (inner indicator)
+   ========================================================================== */
+
+.csk-radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-neutral-0);
+  opacity: 0;
+  transform: scale(0);
+  transition: var(--transition-fast);
+}
+
+/* ==========================================================================
+   CHECKED STATE
+   ========================================================================== */
+
+.csk-radio:checked + .csk-radio-circle {
+  background-color: var(--color-primary-500);
+  border-color: var(--color-primary-500);
+}
+
+.csk-radio:checked + .csk-radio-circle .csk-radio-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ==========================================================================
+   FOCUS STATE
+   ========================================================================== */
+
+.csk-radio:focus-visible + .csk-radio-circle {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px var(--color-primary-500-alpha-30, rgba(17, 118, 166, 0.3));
+}
+
+/* ==========================================================================
+   HOVER STATE
+   ========================================================================== */
+
+.csk-radio:hover:not(:disabled) + .csk-radio-circle {
+  border-color: var(--color-border-strong);
+}
+
+.csk-radio:hover:not(:disabled):checked + .csk-radio-circle {
+  background-color: var(--color-primary-600);
+  border-color: var(--color-primary-600);
+}
+
+/* ==========================================================================
+   VALIDATION STATES
+   ========================================================================== */
+
+/* Error state */
+.csk-radio-wrapper--error .csk-radio-circle {
+  border-color: var(--color-error-500);
+}
+
+.csk-radio-wrapper--error .csk-radio:checked + .csk-radio-circle {
+  background-color: var(--color-error-500);
+  border-color: var(--color-error-500);
+}
+
+.csk-radio-wrapper--error .csk-radio:hover:not(:disabled):checked + .csk-radio-circle {
+  background-color: var(--color-error-600);
+  border-color: var(--color-error-600);
+}
+
+.csk-radio-wrapper--error .csk-radio:focus-visible + .csk-radio-circle {
+  box-shadow: 0 0 0 3px var(--color-error-500-alpha-30, rgba(239, 68, 68, 0.3));
+}
+
+/* Success state */
+.csk-radio-wrapper--success .csk-radio-circle {
+  border-color: var(--color-success-500);
+}
+
+.csk-radio-wrapper--success .csk-radio:checked + .csk-radio-circle {
+  background-color: var(--color-success-500);
+  border-color: var(--color-success-500);
+}
+
+.csk-radio-wrapper--success .csk-radio:hover:not(:disabled):checked + .csk-radio-circle {
+  background-color: var(--color-success-600);
+  border-color: var(--color-success-600);
+}
+
+.csk-radio-wrapper--success .csk-radio:focus-visible + .csk-radio-circle {
+  box-shadow: 0 0 0 3px var(--color-success-500-alpha-30, rgba(34, 197, 94, 0.3));
+}
+
+/* ==========================================================================
+   DISABLED STATE
+   ========================================================================== */
+
+.csk-radio:disabled + .csk-radio-circle {
+  opacity: 0.5;
+  background-color: var(--color-bg-secondary);
+}
+
+.csk-radio:disabled:checked + .csk-radio-circle {
+  background-color: var(--color-primary-300);
+  border-color: var(--color-primary-300);
+}
+
+.csk-radio-wrapper--disabled .csk-radio-text {
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   SIZES
+   ========================================================================== */
+
+/* Small */
+.csk-radio-wrapper--sm .csk-radio-circle {
+  width: 16px;
+  height: 16px;
+}
+
+.csk-radio-wrapper--sm .csk-radio-dot {
+  width: 6px;
+  height: 6px;
+}
+
+.csk-radio-wrapper--sm .csk-radio-text {
+  font-size: var(--font-size-xs);
+}
+
+/* Medium (default) - defined in base */
+
+/* Large */
+.csk-radio-wrapper--lg .csk-radio-circle {
+  width: 24px;
+  height: 24px;
+}
+
+.csk-radio-wrapper--lg .csk-radio-dot {
+  width: 10px;
+  height: 10px;
+}
+
+.csk-radio-wrapper--lg .csk-radio-text {
+  font-size: var(--font-size-base);
+}
+
+/* ==========================================================================
+   LABEL TEXT
+   ========================================================================== */
+
+.csk-radio-text {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  padding-top: 1px; /* Visual alignment with radio */
+}
+
+/* ==========================================================================
+   HELPER TEXT
+   ========================================================================== */
+
+.csk-radio-helper {
+  margin-left: calc(20px + var(--spacing-2)); /* Align with label text */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-secondary);
+}
+
+.csk-radio-helper--error {
+  color: var(--color-error-500);
+}
+
+/* Size adjustments for helper alignment */
+.csk-radio-wrapper--sm .csk-radio-helper {
+  margin-left: calc(16px + var(--spacing-2));
+}
+
+.csk-radio-wrapper--lg .csk-radio-helper {
+  margin-left: calc(24px + var(--spacing-2));
+}

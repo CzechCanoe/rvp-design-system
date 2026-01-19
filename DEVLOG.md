@@ -567,3 +567,49 @@ src/components/
 
 ### Další kroky
 - Fáze 2: Radio komponenta
+
+---
+
+## 2026-01-19 - Iterace 16 / Radio komponenta (Fáze 2.5)
+
+### Dokončeno
+- [x] Radio komponenta s TypeScript a CSS
+- [x] Velikosti: sm (16px), md (20px), lg (24px)
+- [x] Stavy: default, error, success, disabled
+- [x] Circular design (radius-full) pro odlišení od Checkbox
+- [x] Inner dot indicator místo checkmark ikony
+- [x] Label a helper text s ARIA propojením
+- [x] Error message s role="alert"
+- [x] WCAG 2.1 AA - focus visible, aria-invalid, aria-describedby
+- [x] Storybook stories s autodocs a CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Circular shape** - Radio je vždy kruhové (radius-full), na rozdíl od Checkbox (radius-sm/md)
+2. **Inner dot** - místo SVG ikony používá jednoduchý kruhový prvek s scale animací
+3. **Bez indeterminate** - Radio nemá indeterminate stav (to je specifické pro Checkbox)
+4. **Same name pattern** - Radios se seskupují pomocí stejného `name` atributu
+
+### Poznámky
+- Radio komponenta sdílí strukturu s Checkbox (wrapper → label → control → text)
+- Hlavní vizuální rozdíl: kruhový tvar vs. zaoblený čtverec
+- Storybook stories obsahují CSK-specifické příklady (výběr sekce DV/RY/VT, VT třídy, typ členství)
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+└── Radio/
+    ├── index.ts       # Public API
+    ├── Radio.tsx      # Component implementation
+    ├── Radio.css      # Styles
+    └── Radio.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 2: Switch komponenta
