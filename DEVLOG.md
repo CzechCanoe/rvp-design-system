@@ -1729,3 +1729,84 @@ src/components/
 
 ### Další kroky
 - Fáze 4: ResultsTable komponenta (s highlighty)
+
+---
+
+## 2026-01-19 - Iterace 35 / ResultsTable komponenta (Fáze 4.6)
+
+### Dokončeno
+- [x] ResultsTable komponenta s TypeScript a CSS
+- [x] Varianty: default, striped, compact
+- [x] Velikosti: sm, md, lg
+- [x] Podium highlights pro pozice 1-3 (gold, silver, bronze)
+- [x] Konfigurovatelný počet zvýrazněných pozic (highlightPositions)
+- [x] Barevné kódování sekcí (DV/RY/VT) - levý border + inline badge
+- [x] Monospace font pro časy (JetBrains Mono)
+- [x] Formátování času (MM:SS.ss) s penalty
+- [x] Time difference k lídrovi (+MM:SS.ss)
+- [x] Statusy: DNS, DNF, DSQ, final, provisional, live
+- [x] Live indikátor (pulsující červená tečka)
+- [x] Highlighted row animace pro live aktualizace
+- [x] Run 1 / Run 2 zobrazení s penalizacemi
+- [x] Filtrace podle sekce (section prop)
+- [x] Custom columns a custom cell renderer
+- [x] Klikatelné řádky s klávesovou navigací
+- [x] Loading state se spinnerem
+- [x] Empty state s custom obsahem
+- [x] Sticky header pro dlouhé tabulky
+- [x] WCAG 2.1 AA - focus visible, role="button" pro clickable
+- [x] Dark mode support
+- [x] Reduced motion support
+- [x] Responsive design (mobilní zjednodušení)
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Rozšíření Table** - ResultsTable je samostatná komponenta, ne rozšíření Table (specifické pro výsledky závodů)
+2. **ResultEntry interface** - komplexní interface pro závodní data (run times, penalties, status, section)
+3. **Podium barvy** - gold (#ffd700), silver (#c0c0c0), bronze (#cd7f32) jako standardní olympijské barvy
+4. **DSQ styling** - přeškrtnutý text (line-through) pro diskvalifikované závodníky
+5. **Live pulse** - CSS animace pro živé závodníky (scale + opacity)
+
+### Poznámky
+- ResultsTable je šestá komponenta Fáze 4 (specifické komponenty)
+- Ideální pro výsledkové portály, live timing, semifinále/finále závodů
+- Formátování času odpovídá konvencím vodního slalomu (MM:SS.ss + penalty)
+- Build projde bez chyb (CSS varování jsou známé esbuild issue)
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+├── Navigation/
+├── Pagination/
+├── Progress/
+├── Header/
+├── Avatar/
+├── Dropdown/
+├── Calendar/
+├── Dropzone/
+├── Timeline/
+├── StatCard/
+├── AthleteCard/
+└── ResultsTable/
+    ├── index.ts       # Public API
+    ├── ResultsTable.tsx   # Component implementation
+    ├── ResultsTable.css   # Styles
+    └── ResultsTable.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 4: LiveIndicator komponenta (pulsující)

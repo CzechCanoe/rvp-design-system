@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 4 - Specifické komponenty (Tier 3)
-**Další krok:** ResultsTable komponenta
+**Další krok:** LiveIndicator komponenta
 
 ---
 
@@ -98,7 +98,7 @@
 - [x] Timeline (workflow vizualizace)
 - [x] StatCard (dashboard widget)
 - [x] AthleteCard (profil závodníka)
-- [ ] ResultsTable (s highlighty)
+- [x] ResultsTable (s highlighty)
 - [ ] LiveIndicator (pulsující)
 - [ ] EmptyState
 - [ ] Skeleton

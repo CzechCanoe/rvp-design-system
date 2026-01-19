@@ -167,3 +167,15 @@ export type {
   AthleteSection,
   AthleteVtClass,
 } from './AthleteCard';
+
+// ResultsTable
+export { ResultsTable } from './ResultsTable';
+export type {
+  ResultsTableProps,
+  ResultsTableSize,
+  ResultsTableVariant,
+  ResultsTableColumn,
+  ResultEntry,
+  ResultSection,
+  ResultStatus,
+} from './ResultsTable';
