@@ -67,3 +67,14 @@ export type {
   ToastProviderProps,
   ToastItemProps,
 } from './Toast';
+
+// Navigation
+export { Breadcrumbs, BreadcrumbChevronIcon, MainNav } from './Navigation';
+export type {
+  BreadcrumbsProps,
+  BreadcrumbItem,
+  MainNavProps,
+  MainNavVariant,
+  MainNavSize,
+  NavItem,
+} from './Navigation';

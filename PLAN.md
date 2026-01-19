@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 3 - Pokročilé komponenty (Tier 2)
-**Další krok:** Navigation komponenta (main nav, breadcrumbs)
+**Další krok:** Pagination komponenta
 
 ---
 
@@ -80,7 +80,7 @@
 - [x] Modal (dialog, confirm, wizard)
 - [x] Tabs (horizontal, pills)
 - [x] Toast (notifications provider)
-- [ ] Navigation (main nav, breadcrumbs)
+- [x] Navigation (main nav, breadcrumbs)
 - [ ] Pagination
 - [ ] Progress (bar, steps)
 - [ ] Header (app header)

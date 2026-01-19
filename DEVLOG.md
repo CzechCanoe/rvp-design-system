@@ -990,4 +990,71 @@ src/components/
 ```
 
 ### Další kroky
-- Fáze 3: Navigation komponenta (main nav, breadcrumbs)
+- Fáze 3: Pagination komponenta
+
+---
+
+## 2026-01-19 - Iterace 24 / Navigation komponenta (Fáze 3.4)
+
+### Dokončeno
+- [x] Breadcrumbs komponenta s TypeScript a CSS
+- [x] MainNav komponenta s TypeScript a CSS
+- [x] Breadcrumbs: collapsible path pro dlouhé cesty (maxItems prop)
+- [x] Breadcrumbs: custom separator support
+- [x] Breadcrumbs: custom link renderer pro router integraci
+- [x] Breadcrumbs: ikony u položek
+- [x] MainNav: horizontal a vertical varianty
+- [x] MainNav: velikosti sm, md, lg
+- [x] MainNav: dropdown submenus s animací
+- [x] MainNav: responsive mobile menu toggle
+- [x] MainNav: brand slot pro logo
+- [x] MainNav: actions slot pro tlačítka (login, registrace)
+- [x] MainNav: klávesová navigace (Escape zavře dropdown)
+- [x] MainNav: podpora disabled položek
+- [x] WCAG 2.1 AA - aria-label, aria-current, aria-expanded, focus management
+- [x] Dark mode support
+- [x] Reduced motion support
+- [x] Mobile responsive (hamburger menu, bottom-aligned dropdowns)
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Dva oddělené komponenty** - Breadcrumbs a MainNav místo jedné Navigation komponenty pro flexibilitu
+2. **Native links** - defaultní renderLink používá `<a>` tagy, custom renderer pro React Router/Next.js
+3. **Dropdown animace** - CSS opacity + transform pro plynulý vstup
+4. **Mobile-first responsive** - horizontální nav se transformuje na hamburger menu pod 768px
+5. **Vertical nav pro sidebar** - self-contained sidebar s vlastním brand a actions
+
+### Poznámky
+- Navigation je 4. komponenta Fáze 3 (pokročilé komponenty)
+- Používá existing tokeny (shadow-dropdown, transition-dropdown, duration-normal)
+- Storybook stories obsahují kombinovaný příklad s Breadcrumbs + MainNav
+- MainNav vertical varianta vhodná pro dashboard sidebar
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+└── Navigation/
+    ├── index.ts       # Public API
+    ├── Breadcrumbs.tsx    # Breadcrumbs component
+    ├── MainNav.tsx        # Main navigation component
+    ├── Navigation.css     # Styles
+    └── Navigation.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 3: Pagination komponenta
