@@ -1374,3 +1374,74 @@ src/components/
 
 ### Další kroky
 - Fáze 4: Calendar komponenta (event grid)
+
+---
+
+## 2026-01-19 - Iterace 30 / Calendar komponenta (Fáze 4.1)
+
+### Dokončeno
+- [x] Calendar komponenta s TypeScript a CSS
+- [x] Měsíční zobrazení (month view) s event gridem
+- [x] Navigace (předchozí/další měsíc, dnes)
+- [x] Velikosti: sm (70px), md (100px), lg (130px) výška buňky
+- [x] CSK disciplínové barvy pro události (DV modrá, RY zelená, VT červená)
+- [x] Semantic varianty: default, primary, success, warning, error, info
+- [x] Multi-day events (zobrazení na všech dnech rozsahu)
+- [x] Max events per day s "+N more" indikátorem
+- [x] Zvýraznění dnešního dne
+- [x] Klikatelné dny a události s callbacky
+- [x] Custom event rendering pomocí renderEvent prop
+- [x] Podpora locale (cs-CZ default) a firstDayOfWeek (pondělí default)
+- [x] WCAG 2.1 AA - role="grid", aria-label, klávesová navigace
+- [x] Responsive design (mobilní verze s barvovými indikátory místo textu)
+- [x] Dark mode support
+- [x] Reduced motion support
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Přidány tokeny --color-section-*-light pro pozadí událostí
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Month view only** - Week view připraven v typech, ale implementace pouze month (nejběžnější use case pro kalendář závodů)
+2. **Helper funkce inline** - datové utility přímo v komponentě pro jednoduchost (startOfMonth, addDays, isSameDay, etc.)
+3. **6 týdnů grid** - 42 dnů zajišťuje konzistentní výšku, trailing week se ořízne pokud celý patří do dalšího měsíce
+4. **Mobile event dots** - na mobilech se události zobrazují jako barevné tečky místo textu pro lepší přehlednost
+5. **Section light tokens** - přidány nové tokeny pro světlejší pozadí disciplínových barev
+
+### Poznámky
+- Calendar je první komponenta Fáze 4 (specifické komponenty)
+- Ideální pro kalendář závodů na portálu CSK
+- Multi-day události se zobrazují na každém dni zvlášť (ne jako průběžný pruh - zjednodušení)
+- Responsive design automaticky přepíná na kompaktní zobrazení pod 640px
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+├── Navigation/
+├── Pagination/
+├── Progress/
+├── Header/
+├── Avatar/
+├── Dropdown/
+└── Calendar/
+    ├── index.ts       # Public API
+    ├── Calendar.tsx   # Component implementation
+    ├── Calendar.css   # Styles
+    └── Calendar.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 4: Dropzone komponenta (file upload)
