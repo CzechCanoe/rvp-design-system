@@ -1308,3 +1308,69 @@ src/components/
 
 ### Další kroky
 - Fáze 3: Dropdown komponenta
+
+---
+
+## 2026-01-19 - Iterace 29 / Dropdown komponenta (Fáze 3.9)
+
+### Dokončeno
+- [x] Dropdown komponenta s TypeScript a CSS
+- [x] Pozice: bottom-start, bottom-end, top-start, top-end
+- [x] Velikosti: sm (32px), md (40px), lg (48px)
+- [x] Controlled i uncontrolled režim
+- [x] Portal rendering pro správné vrstvení
+- [x] Klávesová navigace (ArrowUp/Down, Enter, Escape, Home, End)
+- [x] Focus management s roving tabindex
+- [x] Outside click pro zavření
+- [x] Items: akce, linky, dividers, disabled, danger variant
+- [x] Items s ikonami a descriptions
+- [x] DropdownButton - předstylovaný trigger s chevronem
+- [x] WCAG 2.1 AA - role="menu", aria-haspopup, aria-expanded
+- [x] Reduced motion support
+- [x] Dark mode support
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Portal rendering** - Menu se renderuje do document.body pro správné z-index chování
+2. **Native button trigger** - Trigger je vždy button pro správnou přístupnost
+3. **DropdownButton helper** - Předstylovaný trigger s chevronem a variantami (default, primary, ghost)
+4. **closeOnClick prop na item** - Umožňuje multi-select pattern (checkbox v dropdown)
+5. **Roving tabindex** - Fokusovaná položka má tabIndex=0, ostatní -1
+
+### Poznámky
+- **Milestone M3 dokončen** - všechny pokročilé komponenty Fáze 3 jsou hotové
+- Dropdown doplňuje Header pro user menu
+- Vhodný pro akce v tabulkách, filtry, exporty
+- Build projde bez chyb
+
+### Struktura komponent (kompletní Fáze 3)
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+├── Navigation/
+├── Pagination/
+├── Progress/
+├── Header/
+├── Avatar/
+└── Dropdown/
+    ├── index.ts       # Public API
+    ├── Dropdown.tsx   # Component implementation (Dropdown + DropdownButton)
+    ├── Dropdown.css   # Styles
+    └── Dropdown.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 4: Calendar komponenta (event grid)

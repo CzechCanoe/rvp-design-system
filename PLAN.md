@@ -1,8 +1,8 @@
 # PLAN.md - CSK RVP Design System
 
 ## Aktuální stav
-**Fáze:** 3 - Pokročilé komponenty (Tier 2)
-**Další krok:** Dropdown komponenta
+**Fáze:** 4 - Specifické komponenty (Tier 3)
+**Další krok:** Calendar komponenta
 
 ---
 
@@ -85,9 +85,9 @@
 - [x] Progress (bar, steps)
 - [x] Header (app header)
 - [x] Avatar (image, initials)
-- [ ] Dropdown
+- [x] Dropdown
 
-**Milestone M3:** Pokročilé komponenty v Storybook
+**Milestone M3:** Pokročilé komponenty v Storybook ✅
 
 ---
 
