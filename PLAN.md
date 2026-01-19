@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 2 - Core komponenty (Tier 1)
-**Další krok:** Input komponenta
+**Další krok:** Select komponenta
 
 ---
 
@@ -62,7 +62,7 @@
 ## Fáze 2: Core komponenty (Tier 1)
 
 - [x] Button (primary, secondary, ghost, danger, sizes)
-- [ ] Input (text, password, search, number, validation)
+- [x] Input (text, password, search, number, validation)
 - [ ] Select (native, custom dropdown)
 - [ ] Checkbox
 - [ ] Radio

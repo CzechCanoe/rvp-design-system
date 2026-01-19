@@ -1,0 +1,329 @@
+/**
+ * Input Component Styles - CSK RVP Design System
+ *
+ * Uses design tokens for consistent styling.
+ * Supports sizes: sm, md, lg
+ * Supports states: default, error, success
+ */
+
+/* ==========================================================================
+   WRAPPER
+   ========================================================================== */
+
+.csk-input-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.csk-input-wrapper--full-width {
+  display: flex;
+  width: 100%;
+}
+
+/* ==========================================================================
+   LABEL
+   ========================================================================== */
+
+.csk-input-label {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   CONTAINER (for icons and input positioning)
+   ========================================================================== */
+
+.csk-input-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* ==========================================================================
+   BASE INPUT STYLES
+   ========================================================================== */
+
+.csk-input {
+  /* Layout */
+  display: block;
+  width: 100%;
+
+  /* Typography */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+
+  /* Default size (md) */
+  padding: var(--spacing-input-padding-y) var(--spacing-input-padding-x);
+  min-height: var(--spacing-touch-target);
+
+  /* Shape */
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-input);
+
+  /* Interaction */
+  transition: var(--transition-input);
+  outline: none;
+}
+
+.csk-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   FOCUS STATES
+   ========================================================================== */
+
+.csk-input:focus {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px var(--color-primary-500-alpha-30, rgba(17, 118, 166, 0.3));
+}
+
+.csk-input-container--error .csk-input:focus {
+  border-color: var(--color-error-500);
+  box-shadow: 0 0 0 3px var(--color-error-500-alpha-30, rgba(239, 68, 68, 0.3));
+}
+
+.csk-input-container--success .csk-input:focus {
+  border-color: var(--color-success-500);
+  box-shadow: 0 0 0 3px var(--color-success-500-alpha-30, rgba(34, 197, 94, 0.3));
+}
+
+/* ==========================================================================
+   HOVER STATES
+   ========================================================================== */
+
+.csk-input:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-border-strong);
+}
+
+.csk-input-container--error .csk-input:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-error-600);
+}
+
+.csk-input-container--success .csk-input:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-success-600);
+}
+
+/* ==========================================================================
+   VALIDATION STATES
+   ========================================================================== */
+
+.csk-input-container--error .csk-input {
+  border-color: var(--color-error-500);
+}
+
+.csk-input-container--success .csk-input {
+  border-color: var(--color-success-500);
+}
+
+/* ==========================================================================
+   DISABLED STATE
+   ========================================================================== */
+
+.csk-input:disabled,
+.csk-input-container--disabled .csk-input {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background-color: var(--color-bg-secondary);
+}
+
+/* ==========================================================================
+   SIZES
+   ========================================================================== */
+
+/* Small */
+.csk-input-container--sm .csk-input {
+  padding: var(--spacing-1-5) var(--spacing-2-5);
+  font-size: var(--font-size-xs);
+  min-height: 32px;
+  border-radius: var(--radius-input-sm, var(--radius-sm));
+}
+
+/* Medium (default) - defined in base */
+
+/* Large */
+.csk-input-container--lg .csk-input {
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-base);
+  min-height: 52px;
+}
+
+/* ==========================================================================
+   ICONS
+   ========================================================================== */
+
+.csk-input-icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.csk-input-icon svg {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* Left icon positioning */
+.csk-input-icon--left {
+  left: var(--spacing-input-padding-x);
+}
+
+.csk-input-container--has-icon-left .csk-input {
+  padding-left: calc(var(--spacing-input-padding-x) * 2 + 1.25em);
+}
+
+/* Right icon positioning */
+.csk-input-icon--right {
+  right: var(--spacing-input-padding-x);
+}
+
+.csk-input-container--has-icon-right .csk-input {
+  padding-right: calc(var(--spacing-input-padding-x) * 2 + 1.25em);
+}
+
+/* Size adjustments for icons */
+.csk-input-container--sm .csk-input-icon {
+  left: var(--spacing-2);
+}
+
+.csk-input-container--sm .csk-input-icon--right {
+  left: auto;
+  right: var(--spacing-2);
+}
+
+.csk-input-container--sm.csk-input-container--has-icon-left .csk-input {
+  padding-left: calc(var(--spacing-2) * 2 + 1em);
+}
+
+.csk-input-container--sm.csk-input-container--has-icon-right .csk-input {
+  padding-right: calc(var(--spacing-2) * 2 + 1em);
+}
+
+.csk-input-container--sm .csk-input-icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.csk-input-container--lg .csk-input-icon {
+  left: var(--spacing-4);
+}
+
+.csk-input-container--lg .csk-input-icon--right {
+  left: auto;
+  right: var(--spacing-4);
+}
+
+.csk-input-container--lg.csk-input-container--has-icon-left .csk-input {
+  padding-left: calc(var(--spacing-4) * 2 + 1.5em);
+}
+
+.csk-input-container--lg.csk-input-container--has-icon-right .csk-input {
+  padding-right: calc(var(--spacing-4) * 2 + 1.5em);
+}
+
+.csk-input-container--lg .csk-input-icon svg {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+/* ==========================================================================
+   CLEAR BUTTON
+   ========================================================================== */
+
+.csk-input-clear {
+  position: absolute;
+  right: var(--spacing-input-padding-x);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.csk-input-clear:hover {
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-tertiary);
+}
+
+.csk-input-clear svg {
+  width: 1em;
+  height: 1em;
+}
+
+/* Size adjustments for clear button */
+.csk-input-container--sm .csk-input-clear {
+  right: var(--spacing-2);
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.csk-input-container--sm .csk-input-clear svg {
+  width: 0.75em;
+  height: 0.75em;
+}
+
+.csk-input-container--lg .csk-input-clear {
+  right: var(--spacing-4);
+  width: 1.75em;
+  height: 1.75em;
+}
+
+.csk-input-container--lg .csk-input-clear svg {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* ==========================================================================
+   HELPER TEXT
+   ========================================================================== */
+
+.csk-input-helper {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-secondary);
+}
+
+.csk-input-helper--error {
+  color: var(--color-error-500);
+}
+
+/* ==========================================================================
+   NUMBER INPUT - hide spinners
+   ========================================================================== */
+
+.csk-input[type='number'] {
+  appearance: textfield;
+}
+
+.csk-input[type='number']::-webkit-outer-spin-button,
+.csk-input[type='number']::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+/* ==========================================================================
+   SEARCH INPUT - hide native clear
+   ========================================================================== */
+
+.csk-input[type='search']::-webkit-search-cancel-button {
+  display: none;
+}

@@ -426,3 +426,52 @@ src/components/
 
 ### Další kroky
 - Fáze 2: Input komponenta (text, password, search, number, validation)
+
+---
+
+## 2026-01-19 - Iterace 13 / Input komponenta (Fáze 2.2)
+
+### Dokončeno
+- [x] Input komponenta s TypeScript a CSS
+- [x] Typy: text, password, email, search, number, tel, url
+- [x] Velikosti: sm (32px), md (44px), lg (52px)
+- [x] Stavy: default, error, success, disabled
+- [x] Podpora ikon (iconLeft, iconRight)
+- [x] Clearable mód pro vyhledávání
+- [x] Label a helper text s ARIA propojením
+- [x] Error message s role="alert"
+- [x] WCAG 2.1 AA - focus visible, aria-invalid, aria-describedby
+- [x] Storybook stories s autodocs
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Wrapper pattern** - Input je obalen divem pro label a helper text
+2. **Container pro ikony** - relativní pozicování pro absolutní ikony
+3. **Clearable jako opt-in** - pouze pro search a kontrolované inputy
+4. **Skryté nativní spinners** - number input bez šipek pro čistší vzhled
+5. **Skryté nativní clear** - search input používá vlastní clear button
+
+### Poznámky
+- Input používá design tokeny z Fáze 1 (colors, spacing, radius, transitions)
+- ARIA propojení zajišťuje přístupnost pro screen readery
+- Error message má role="alert" pro okamžité oznámení
+- Focus ring používá box-shadow s 30% opacity primární barvy
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+│   ├── index.ts
+│   ├── Button.tsx
+│   ├── Button.css
+│   └── Button.stories.tsx
+└── Input/
+    ├── index.ts
+    ├── Input.tsx
+    ├── Input.css
+    └── Input.stories.tsx
+```
+
+### Další kroky
+- Fáze 2: Select komponenta (native, custom dropdown)
