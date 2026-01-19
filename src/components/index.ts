@@ -136,3 +136,14 @@ export type {
   DropzoneSize,
   DropzoneState,
 } from './Dropzone';
+
+// Timeline
+export { Timeline } from './Timeline';
+export type {
+  TimelineProps,
+  TimelineItem,
+  TimelineVariant,
+  TimelineSize,
+  TimelineColor,
+  TimelineItemStatus,
+} from './Timeline';

@@ -1,0 +1,496 @@
+/* =============================================================================
+   Timeline Component Styles
+   ============================================================================= */
+
+.csk-timeline {
+  --timeline-dot-size: var(--spacing-8);
+  --timeline-dot-border: 2px;
+  --timeline-icon-size: var(--spacing-4);
+  --timeline-connector-width: 2px;
+  --timeline-content-gap: var(--spacing-3);
+  --timeline-item-gap: var(--spacing-6);
+  --timeline-marker-width: var(--spacing-12);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--timeline-item-gap);
+  position: relative;
+}
+
+/* =============================================================================
+   Size Variants
+   ============================================================================= */
+
+.csk-timeline--sm {
+  --timeline-dot-size: var(--spacing-6);
+  --timeline-icon-size: var(--spacing-3);
+  --timeline-content-gap: var(--spacing-2);
+  --timeline-item-gap: var(--spacing-4);
+  --timeline-marker-width: var(--spacing-10);
+}
+
+.csk-timeline--md {
+  --timeline-dot-size: var(--spacing-8);
+  --timeline-icon-size: var(--spacing-4);
+  --timeline-content-gap: var(--spacing-3);
+  --timeline-item-gap: var(--spacing-6);
+  --timeline-marker-width: var(--spacing-12);
+}
+
+.csk-timeline--lg {
+  --timeline-dot-size: var(--spacing-10);
+  --timeline-icon-size: var(--spacing-5);
+  --timeline-content-gap: var(--spacing-4);
+  --timeline-item-gap: var(--spacing-8);
+  --timeline-marker-width: var(--spacing-14);
+}
+
+/* =============================================================================
+   Timeline Item
+   ============================================================================= */
+
+.csk-timeline__item {
+  display: flex;
+  gap: var(--spacing-4);
+  position: relative;
+  min-height: var(--timeline-dot-size);
+}
+
+.csk-timeline__item--clickable {
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  margin: calc(var(--spacing-2) * -1);
+  padding: var(--spacing-2);
+  transition: background-color var(--transition-fast);
+}
+
+.csk-timeline__item--clickable:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+.csk-timeline__item--clickable:focus-visible {
+  outline: 2px solid var(--color-interactive-focus);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   Marker (Dot + Connector)
+   ============================================================================= */
+
+.csk-timeline__marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: var(--timeline-marker-width);
+}
+
+.csk-timeline__dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--timeline-dot-size);
+  height: var(--timeline-dot-size);
+  border-radius: var(--radius-full);
+  border: var(--timeline-dot-border) solid var(--color-border-secondary);
+  background-color: var(--color-bg-primary);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.csk-timeline__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--timeline-icon-size);
+  height: var(--timeline-icon-size);
+  color: var(--color-text-tertiary);
+}
+
+.csk-timeline__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.csk-timeline__connector {
+  flex: 1;
+  width: var(--timeline-connector-width);
+  min-height: var(--spacing-4);
+  background-color: var(--color-border-secondary);
+  margin-top: var(--spacing-2);
+}
+
+/* =============================================================================
+   Content
+   ============================================================================= */
+
+.csk-timeline__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--timeline-content-gap);
+  padding-bottom: var(--spacing-2);
+  min-width: 0;
+}
+
+.csk-timeline__timestamp {
+  font-size: var(--text-xs-size);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.csk-timeline__title {
+  font-size: var(--text-sm-size);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-snug);
+  margin: 0;
+}
+
+.csk-timeline--lg .csk-timeline__title {
+  font-size: var(--text-base-size);
+}
+
+.csk-timeline__description {
+  font-size: var(--text-sm-size);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.csk-timeline--sm .csk-timeline__description {
+  font-size: var(--text-xs-size);
+}
+
+.csk-timeline__meta {
+  font-size: var(--text-xs-size);
+  color: var(--color-text-tertiary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.csk-timeline__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-1);
+}
+
+/* =============================================================================
+   Status Variants
+   ============================================================================= */
+
+/* Completed */
+.csk-timeline__item--completed .csk-timeline__dot {
+  border-color: var(--color-success-500);
+  background-color: var(--color-success-500);
+}
+
+.csk-timeline__item--completed .csk-timeline__icon {
+  color: white;
+}
+
+.csk-timeline__item--completed .csk-timeline__connector {
+  background-color: var(--color-success-500);
+}
+
+/* Current */
+.csk-timeline__item--current .csk-timeline__dot {
+  border-color: var(--color-primary-500);
+  background-color: var(--color-primary-50);
+  box-shadow: 0 0 0 4px var(--color-primary-100);
+}
+
+.csk-timeline__item--current .csk-timeline__icon {
+  color: var(--color-primary-500);
+}
+
+/* Pending */
+.csk-timeline__item--pending .csk-timeline__dot {
+  border-color: var(--color-border-secondary);
+  background-color: var(--color-bg-secondary);
+}
+
+.csk-timeline__item--pending .csk-timeline__icon {
+  color: var(--color-text-tertiary);
+}
+
+.csk-timeline__item--pending .csk-timeline__title {
+  color: var(--color-text-tertiary);
+}
+
+.csk-timeline__item--pending .csk-timeline__connector {
+  background-color: var(--color-border-secondary);
+  border-style: dashed;
+}
+
+/* Error */
+.csk-timeline__item--error .csk-timeline__dot {
+  border-color: var(--color-error-500);
+  background-color: var(--color-error-500);
+}
+
+.csk-timeline__item--error .csk-timeline__icon {
+  color: white;
+}
+
+.csk-timeline__item--error .csk-timeline__title {
+  color: var(--color-error-600);
+}
+
+/* =============================================================================
+   Color Variants (override status colors)
+   ============================================================================= */
+
+/* Primary */
+.csk-timeline__item--primary .csk-timeline__dot {
+  border-color: var(--color-primary-500);
+}
+
+.csk-timeline__item--primary.csk-timeline__item--completed .csk-timeline__dot {
+  background-color: var(--color-primary-500);
+}
+
+.csk-timeline__item--primary.csk-timeline__item--completed .csk-timeline__connector {
+  background-color: var(--color-primary-500);
+}
+
+/* Success */
+.csk-timeline__item--success .csk-timeline__dot {
+  border-color: var(--color-success-500);
+}
+
+.csk-timeline__item--success.csk-timeline__item--completed .csk-timeline__dot {
+  background-color: var(--color-success-500);
+}
+
+.csk-timeline__item--success.csk-timeline__item--completed .csk-timeline__connector {
+  background-color: var(--color-success-500);
+}
+
+/* Warning */
+.csk-timeline__item--warning .csk-timeline__dot {
+  border-color: var(--color-warning-500);
+}
+
+.csk-timeline__item--warning.csk-timeline__item--completed .csk-timeline__dot {
+  background-color: var(--color-warning-500);
+}
+
+.csk-timeline__item--warning.csk-timeline__item--completed .csk-timeline__connector {
+  background-color: var(--color-warning-500);
+}
+
+/* Error color */
+.csk-timeline__item--error .csk-timeline__dot {
+  border-color: var(--color-error-500);
+}
+
+/* Info */
+.csk-timeline__item--info .csk-timeline__dot {
+  border-color: var(--color-info-500);
+}
+
+.csk-timeline__item--info.csk-timeline__item--completed .csk-timeline__dot {
+  background-color: var(--color-info-500);
+}
+
+.csk-timeline__item--info.csk-timeline__item--completed .csk-timeline__connector {
+  background-color: var(--color-info-500);
+}
+
+/* =============================================================================
+   Variant: Compact
+   ============================================================================= */
+
+.csk-timeline--compact {
+  --timeline-dot-size: var(--spacing-3);
+  --timeline-icon-size: var(--spacing-2);
+  --timeline-item-gap: var(--spacing-3);
+  --timeline-marker-width: var(--spacing-6);
+}
+
+.csk-timeline--compact .csk-timeline__dot {
+  border-width: 0;
+}
+
+.csk-timeline--compact .csk-timeline__item--completed .csk-timeline__dot,
+.csk-timeline--compact .csk-timeline__item--current .csk-timeline__dot,
+.csk-timeline--compact .csk-timeline__item--error .csk-timeline__dot {
+  background-color: currentColor;
+}
+
+.csk-timeline--compact .csk-timeline__item--completed .csk-timeline__dot {
+  color: var(--color-success-500);
+}
+
+.csk-timeline--compact .csk-timeline__item--current .csk-timeline__dot {
+  color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px var(--color-primary-100);
+}
+
+.csk-timeline--compact .csk-timeline__item--pending .csk-timeline__dot {
+  color: var(--color-border-secondary);
+}
+
+.csk-timeline--compact .csk-timeline__item--error .csk-timeline__dot {
+  color: var(--color-error-500);
+}
+
+.csk-timeline--compact .csk-timeline__icon {
+  display: none;
+}
+
+.csk-timeline--compact .csk-timeline__content {
+  gap: var(--spacing-1);
+}
+
+.csk-timeline--compact .csk-timeline__timestamp {
+  font-size: 10px;
+}
+
+/* =============================================================================
+   Variant: Card
+   ============================================================================= */
+
+.csk-timeline--card .csk-timeline__content {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+}
+
+.csk-timeline--card .csk-timeline__item--current .csk-timeline__content {
+  background-color: var(--color-primary-50);
+  border-color: var(--color-primary-200);
+}
+
+.csk-timeline--card .csk-timeline__item--error .csk-timeline__content {
+  background-color: var(--color-error-50);
+  border-color: var(--color-error-200);
+}
+
+/* =============================================================================
+   Alternate Layout (desktop only)
+   ============================================================================= */
+
+@media (min-width: 768px) {
+  .csk-timeline--alternate {
+    --timeline-marker-width: auto;
+  }
+
+  .csk-timeline--alternate .csk-timeline__item {
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 50%;
+    margin-left: 50%;
+    padding-left: var(--spacing-4);
+  }
+
+  .csk-timeline--alternate .csk-timeline__item--alternate {
+    flex-direction: row-reverse;
+    margin-left: 0;
+    margin-right: 50%;
+    padding-left: 0;
+    padding-right: var(--spacing-4);
+    text-align: right;
+  }
+
+  .csk-timeline--alternate .csk-timeline__item--alternate .csk-timeline__content {
+    align-items: flex-end;
+  }
+
+  .csk-timeline--alternate .csk-timeline__item--alternate .csk-timeline__actions {
+    justify-content: flex-end;
+  }
+
+  .csk-timeline--alternate .csk-timeline__marker {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* =============================================================================
+   Dark Mode
+   ============================================================================= */
+
+[data-theme="dark"] .csk-timeline__item--clickable:hover {
+  background-color: var(--color-bg-elevated);
+}
+
+[data-theme="dark"] .csk-timeline__item--completed .csk-timeline__icon {
+  color: var(--color-neutral-900);
+}
+
+[data-theme="dark"] .csk-timeline__item--error .csk-timeline__icon {
+  color: var(--color-neutral-900);
+}
+
+[data-theme="dark"] .csk-timeline__item--current .csk-timeline__dot {
+  background-color: var(--color-primary-900);
+  box-shadow: 0 0 0 4px var(--color-primary-800);
+}
+
+[data-theme="dark"] .csk-timeline--card .csk-timeline__content {
+  background-color: var(--color-bg-elevated);
+}
+
+[data-theme="dark"] .csk-timeline--card .csk-timeline__item--current .csk-timeline__content {
+  background-color: var(--color-primary-900);
+  border-color: var(--color-primary-700);
+}
+
+[data-theme="dark"] .csk-timeline--card .csk-timeline__item--error .csk-timeline__content {
+  background-color: var(--color-error-900);
+  border-color: var(--color-error-700);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .csk-timeline__item--clickable:hover {
+    background-color: var(--color-bg-elevated);
+  }
+
+  :root:not([data-theme="light"]) .csk-timeline__item--completed .csk-timeline__icon {
+    color: var(--color-neutral-900);
+  }
+
+  :root:not([data-theme="light"]) .csk-timeline__item--error .csk-timeline__icon {
+    color: var(--color-neutral-900);
+  }
+
+  :root:not([data-theme="light"]) .csk-timeline__item--current .csk-timeline__dot {
+    background-color: var(--color-primary-900);
+    box-shadow: 0 0 0 4px var(--color-primary-800);
+  }
+
+  :root:not([data-theme="light"]) .csk-timeline--card .csk-timeline__content {
+    background-color: var(--color-bg-elevated);
+  }
+
+  :root:not([data-theme="light"]) .csk-timeline--card .csk-timeline__item--current .csk-timeline__content {
+    background-color: var(--color-primary-900);
+    border-color: var(--color-primary-700);
+  }
+
+  :root:not([data-theme="light"]) .csk-timeline--card .csk-timeline__item--error .csk-timeline__content {
+    background-color: var(--color-error-900);
+    border-color: var(--color-error-700);
+  }
+}
+
+/* =============================================================================
+   Reduced Motion
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-timeline__item--clickable {
+    transition: none;
+  }
+
+  .csk-timeline__dot {
+    transition: none;
+  }
+}

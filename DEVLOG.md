@@ -1517,3 +1517,72 @@ src/components/
 
 ### Další kroky
 - Fáze 4: Timeline komponenta (workflow vizualizace)
+
+---
+
+## 2026-01-19 - Iterace 32 / Timeline komponenta (Fáze 4.3)
+
+### Dokončeno
+- [x] Timeline komponenta s TypeScript a CSS
+- [x] Varianty: default, compact, card
+- [x] Velikosti: sm, md, lg
+- [x] Stavy položek: completed, current, pending, error
+- [x] Barevné varianty: default, primary, success, warning, error, info
+- [x] Custom ikony pro jednotlivé položky
+- [x] Timestamp, description, meta a actions sloty
+- [x] Klikatelné položky s callback
+- [x] Alternativní layout (vlevo/vpravo na desktopech)
+- [x] Reverse pořadí pro nejnovější nahoře
+- [x] Connector lines mezi položkami
+- [x] WCAG 2.1 AA - role="list", klávesová navigace, focus visible
+- [x] Dark mode support
+- [x] Reduced motion support
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Tři varianty** - default (standard), compact (activity feed), card (důležité události s pozadím)
+2. **Status-based ikony** - automatické ikony podle stavu (check, dot, clock, X)
+3. **Color fallback chain** - error status → error color, current → primary, ostatní → defaultColor
+4. **Alternate layout** - střídavé vlevo/vpravo pouze na md+ breakpointu
+5. **Unused props void** - variant a size předány pro budoucí rozšíření, marked as void
+
+### Poznámky
+- Timeline je třetí komponenta Fáze 4 (specifické komponenty)
+- Odlišná od Progress (steps) - Timeline je vertikální s časovými údaji a bohatším obsahem
+- Vhodná pro: historii registrace, stav přihlášky na závod, activity feed, sezónní přehled
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+├── Navigation/
+├── Pagination/
+├── Progress/
+├── Header/
+├── Avatar/
+├── Dropdown/
+├── Calendar/
+├── Dropzone/
+└── Timeline/
+    ├── index.ts       # Public API
+    ├── Timeline.tsx   # Component implementation
+    ├── Timeline.css   # Styles
+    └── Timeline.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 4: StatCard komponenta (dashboard widget)
