@@ -1,0 +1,607 @@
+/* ============================================================================
+   Dashboard Page Styles
+   ============================================================================ */
+
+.dashboard-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface-secondary);
+}
+
+/* Header */
+.dashboard-header-logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+.dashboard-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* Main Content */
+.dashboard-main {
+  flex: 1;
+  padding: var(--spacing-6) var(--spacing-4);
+}
+
+.dashboard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+/* ============================================================================
+   Welcome Header
+   ============================================================================ */
+
+.dashboard-welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+}
+
+.dashboard-welcome-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.dashboard-welcome-greeting {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.dashboard-welcome-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.dashboard-welcome-subtitle {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  margin: var(--spacing-1) 0 0;
+}
+
+.dashboard-welcome-actions {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+/* ============================================================================
+   Stats Grid
+   ============================================================================ */
+
+.dashboard-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-4);
+}
+
+/* ============================================================================
+   Content Grid (2 columns)
+   ============================================================================ */
+
+.dashboard-content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-6);
+}
+
+/* ============================================================================
+   Alerts Section
+   ============================================================================ */
+
+.dashboard-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.dashboard-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-4) var(--spacing-4) 0;
+}
+
+.dashboard-section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.dashboard-section-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-full);
+  background-color: var(--color-danger-subtle);
+  color: var(--color-danger);
+}
+
+/* Alert List */
+.dashboard-alert-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-alert-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color var(--transition-fast);
+}
+
+.dashboard-alert-item:last-child {
+  border-bottom: none;
+}
+
+.dashboard-alert-item:hover {
+  background-color: var(--color-surface-secondary);
+}
+
+.dashboard-alert-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-alert-icon--warning {
+  background-color: var(--color-warning-subtle);
+  color: var(--color-warning);
+}
+
+.dashboard-alert-icon--danger {
+  background-color: var(--color-danger-subtle);
+  color: var(--color-danger);
+}
+
+.dashboard-alert-icon--info {
+  background-color: var(--color-info-subtle);
+  color: var(--color-info);
+}
+
+.dashboard-alert-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.dashboard-alert-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.dashboard-alert-title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.dashboard-alert-description {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin: 2px 0 0;
+}
+
+.dashboard-alert-action {
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+   Upcoming Races
+   ============================================================================ */
+
+.dashboard-races {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.dashboard-race-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-race-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color var(--transition-fast);
+}
+
+.dashboard-race-item:last-child {
+  border-bottom: none;
+}
+
+.dashboard-race-item:hover {
+  background-color: var(--color-surface-secondary);
+}
+
+.dashboard-race-date {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+}
+
+.dashboard-race-date-day {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
+.dashboard-race-date-month {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.dashboard-race-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.dashboard-race-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.dashboard-race-title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.dashboard-race-location {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin: 2px 0 0;
+}
+
+.dashboard-race-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-2);
+}
+
+.dashboard-race-meta-item {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.dashboard-race-meta-item svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.7;
+}
+
+/* ============================================================================
+   Quick Actions
+   ============================================================================ */
+
+.dashboard-quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.dashboard-quick-action {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-primary);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dashboard-quick-action:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-subtle);
+}
+
+.dashboard-quick-action-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary-subtle);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-quick-action-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.dashboard-quick-action-text {
+  flex: 1;
+}
+
+.dashboard-quick-action-title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.dashboard-quick-action-description {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin: 2px 0 0;
+}
+
+.dashboard-quick-action-arrow {
+  color: var(--color-text-muted);
+  transition: transform var(--transition-fast);
+}
+
+.dashboard-quick-action:hover .dashboard-quick-action-arrow {
+  transform: translateX(4px);
+  color: var(--color-primary);
+}
+
+.dashboard-quick-action-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ============================================================================
+   Recent Activity
+   ============================================================================ */
+
+.dashboard-activity {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-activity-item {
+  display: flex;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dashboard-activity-item:last-child {
+  border-bottom: none;
+}
+
+.dashboard-activity-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-surface-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+}
+
+.dashboard-activity-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.dashboard-activity-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.dashboard-activity-text {
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.dashboard-activity-text strong {
+  font-weight: 600;
+}
+
+.dashboard-activity-time {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin: 2px 0 0;
+}
+
+/* ============================================================================
+   Members Table
+   ============================================================================ */
+
+.dashboard-members-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+}
+
+.dashboard-members-search {
+  flex: 1;
+  max-width: 300px;
+}
+
+.dashboard-members-filters {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+.dashboard-member-name {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.dashboard-member-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-surface-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.dashboard-member-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-member-fullname {
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.dashboard-member-id {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* ============================================================================
+   Footer
+   ============================================================================ */
+
+.dashboard-footer {
+  background-color: var(--color-surface-primary);
+  border-top: 1px solid var(--color-border);
+  padding: var(--spacing-6) var(--spacing-4);
+  text-align: center;
+}
+
+.dashboard-footer p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* ============================================================================
+   Dark Mode
+   ============================================================================ */
+
+[data-theme="dark"] .dashboard-race-date {
+  background-color: var(--color-surface-tertiary);
+}
+
+[data-theme="dark"] .dashboard-quick-action {
+  background-color: var(--color-surface-tertiary);
+}
+
+[data-theme="dark"] .dashboard-quick-action:hover {
+  background-color: var(--color-primary-subtle);
+}
+
+/* ============================================================================
+   Responsive Design
+   ============================================================================ */
+
+@media (max-width: 1200px) {
+  .dashboard-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-main {
+    padding: var(--spacing-4) var(--spacing-3);
+  }
+
+  .dashboard-welcome {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-welcome-title {
+    font-size: 1.5rem;
+  }
+
+  .dashboard-welcome-actions {
+    width: 100%;
+  }
+
+  .dashboard-welcome-actions .csk-button {
+    flex: 1;
+  }
+
+  .dashboard-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-members-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-members-search {
+    max-width: none;
+  }
+
+  .dashboard-members-filters {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-welcome-actions {
+    flex-direction: column;
+  }
+
+  .dashboard-quick-action {
+    padding: var(--spacing-3);
+  }
+
+  .dashboard-quick-action-description {
+    display: none;
+  }
+}

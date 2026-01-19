@@ -2296,3 +2296,67 @@ src/prototypes/
 
 ### Další kroky
 - prototype-dashboard - Dashboard správce
+
+---
+
+## 2026-01-19 - Iterace 11 / Dashboard Page prototype
+
+### Dokončeno
+- [x] DashboardPage.css - kompletní styly pro dashboard správce
+- [x] DashboardPage.stories.tsx - prototyp s 3 story variantami
+- [x] PLAN.md aktualizován - Milestone M5 dokončen
+
+### Implementované prvky
+1. **Welcome sekce** - personalizovaný pozdrav, název oddílu, rychlé akce
+2. **Stats grid** - 4 StatCard komponenty (aktivní závodníci, nadcházející závody, bez práva startu, nové registrace)
+3. **Upozornění** - seznam urgentních položek (bez práva startu, expirující prohlídky, nezaplacené příspěvky, uzávěrky)
+4. **Tabulka závodníků** - s filtrováním (stav, sekce) a vyhledáváním
+5. **Nadcházející závody** - kompaktní přehled s datem, místem, počtem přihlášených
+6. **Rychlé akce** - 3 nejčastější úkony (registrace, přihláška, příspěvky)
+7. **Poslední aktivita** - feed změn v oddíle
+
+### Použité komponenty
+- Header (brand, navigation, actions)
+- MainNav (horizontální navigace)
+- Card (layout kontejnery)
+- Badge (sekce, VT třídy, statusy)
+- Button (akce)
+- Input (vyhledávání)
+- Select (filtry)
+- StatCard (statistiky)
+- Table (závodníci)
+- Avatar (profilové fotky)
+- LiveIndicator (živé závody)
+
+### Story varianty
+1. **ClubAdmin** - oddílový správce (USK Praha)
+2. **SectionAdmin** - sekční správce (Divoká voda)
+3. **FederationAdmin** - svazový správce (ČSK)
+
+### Problémy a řešení
+1. **Problém:** `ColumnDef` používá `key` místo `id`, `accessor` místo `accessorKey`
+   **Řešení:** Opraveno API podle definice v Table.tsx
+
+2. **Problém:** Badge nemá varianty jako `dv`, `ry`, `vt`, `vt-m` atd.
+   **Řešení:** Použity správné props `section={...}` a `vtClass={...}`
+
+3. **Problém:** Badge varianta `danger` neexistuje, je `error`
+   **Řešení:** Změněno na `variant="error"`
+
+4. **Problém:** Header props `left`, `center`, `right` neexistují
+   **Řešení:** Použito `brand`, `navigation`, `actions`
+
+5. **Problém:** MainNav nemá prop `activeId`
+   **Řešení:** Použito `active: true` přímo v navItems
+
+6. **Problém:** Select vyžaduje `options` array, nepodporuje children
+   **Řešení:** Vytvořeny `statusOptions` a `sectionOptions` arrays
+
+### Poznámky
+- Dashboard je utilitární (backoffice) design - funkční a přehledný
+- Responsive layout s breakpointy pro 1200px, 768px, 480px
+- Mapuje use cases z business analýzy (správa závodníků, přihlašování na závody)
+- Fáze 5 (Prototypy) kompletně dokončena - Milestone M5 ✅
+
+### Další kroky
+- Fáze 6: Dokumentace a publikace - kompletace a otestování buildů

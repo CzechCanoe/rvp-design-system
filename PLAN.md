@@ -1,8 +1,8 @@
 # PLAN.md - CSK RVP Design System
 
 ## Aktuální stav
-**Fáze:** 5 - Prototypy
-**Další krok:** prototype-dashboard - Dashboard správce
+**Fáze:** 6 - Dokumentace a publikace
+**Další krok:** kompletace a otestování buildů
 
 ---
 
@@ -114,9 +114,9 @@
 - [x] prototype-live - Live výsledky
 - [x] prototype-registration - přihlašování na závody - oddílová přihláška
 - [x] prototype-profile - Profil závodníka
-- [ ] prototype-dashboard - Dashboard správce
+- [x] prototype-dashboard - Dashboard správce
 
-**Milestone M5:** Klikatelné prototypy
+**Milestone M5:** Klikatelné prototypy ✅
 
 ---
 
