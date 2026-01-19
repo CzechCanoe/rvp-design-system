@@ -1,0 +1,13 @@
+# Ignore
+node_modules/
+dist/
+build/
+.env*
+*.pem
+credentials.json
+_logs/
+*.log.txt
+core
+resources-private/
+*-private/
+*-donotsync/
