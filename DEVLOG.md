@@ -192,5 +192,32 @@ src/
 - Struktura umožňuje budoucí rozšíření o component-level aliasy
 
 ### Další kroky
-- Fáze 1.2b: Dark theme barvy
 - Fáze 1.2c: Typografie tokeny
+- Fáze 1.2d: Spacing, radius, shadows, transitions tokeny
+
+---
+
+## 2026-01-19 - Iterace 6 / Dark theme barvy (Fáze 1.2b)
+
+### Dokončeno
+- [x] Dark theme primitive colors (primary, neutral, success, warning, error, info)
+- [x] Dark theme CSK-specific colors (disciplínové sekce, VT třídy)
+- [x] Dark theme semantic colors (backgrounds, text, borders, interactive, feedback)
+- [x] System preference detection via @media (prefers-color-scheme: dark)
+- [x] Aktualizace `src/tokens/colors.css`
+
+### Rozhodnutí
+1. **Inverted neutral scale** - v dark mode je neutral-0 nejtmavší (#0a0a0a)
+2. **Brighter accent colors** - primární 500 je #4da3cc místo #1176a6 pro lepší viditelnost
+3. **87% opacity pro text** - bílý text na tmavém pozadí není 100% bílý pro komfort očí
+4. **Elevation model** - světlejší pozadí = vyšší elevace (elevated bg je neutral-200 v dark mode)
+5. **Dual implementation** - `[data-theme="dark"]` pro explicitní volbu + `@media prefers-color-scheme` pro auto
+
+### Poznámky
+- Dark theme používá stejné sémantické názvy jako light theme (bg-primary, text-primary, etc.)
+- Přepínání témat funguje přes `data-theme` atribut na root elementu
+- System preference se aplikuje pouze když není explicitní `data-theme="light"`
+- CSK disciplínové barvy jsou jasnější verze (např. DV modrá #60a5fa místo #2563eb)
+
+### Další kroky
+- Fáze 1.2c: Typografie tokeny (font family, scale, weights, line-height)

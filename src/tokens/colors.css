@@ -153,3 +153,287 @@
   --color-feedback-info-bg: var(--color-info-50);
   --color-feedback-info-border: var(--color-info-200);
 }
+
+/* =============================================================================
+   DARK THEME
+   ============================================================================= */
+
+[data-theme="dark"] {
+  /* ==========================================================================
+     PRIMITIVE COLORS - Dark Theme Adjustments
+     Desaturated and lighter variants for better dark mode contrast
+     ========================================================================== */
+
+  /* Primary (Brand) - lighter and less saturated for dark backgrounds */
+  --color-primary-50: #041721;
+  --color-primary-100: #072f43;
+  --color-primary-200: #0b4664;
+  --color-primary-300: #0e5e85;
+  --color-primary-400: #1176a6;
+  --color-primary-500: #4da3cc;  /* Lighter, desaturated for dark mode */
+  --color-primary-600: #7ab8d9;
+  --color-primary-700: #99c9e3;
+  --color-primary-800: #b8daec;
+  --color-primary-900: #d6ebf6;
+
+  /* Neutral (Grays) - inverted for dark mode */
+  --color-neutral-0: #0a0a0a;
+  --color-neutral-50: #171717;
+  --color-neutral-100: #262626;
+  --color-neutral-200: #404040;
+  --color-neutral-300: #525252;
+  --color-neutral-400: #737373;
+  --color-neutral-500: #a3a3a3;
+  --color-neutral-600: #d4d4d4;
+  --color-neutral-700: #e5e5e5;
+  --color-neutral-800: #f5f5f5;
+  --color-neutral-900: #fafafa;
+  --color-neutral-950: #ffffff;
+
+  /* Success (Green) - brighter for dark backgrounds */
+  --color-success-50: #14532d;
+  --color-success-100: #166534;
+  --color-success-200: #15803d;
+  --color-success-300: #16a34a;
+  --color-success-400: #22c55e;
+  --color-success-500: #4ade80;  /* Brighter for dark mode */
+  --color-success-600: #86efac;
+  --color-success-700: #bbf7d0;
+  --color-success-800: #dcfce7;
+  --color-success-900: #f0fdf4;
+
+  /* Warning (Amber) - brighter for dark backgrounds */
+  --color-warning-50: #78350f;
+  --color-warning-100: #92400e;
+  --color-warning-200: #b45309;
+  --color-warning-300: #d97706;
+  --color-warning-400: #f59e0b;
+  --color-warning-500: #fbbf24;  /* Brighter for dark mode */
+  --color-warning-600: #fcd34d;
+  --color-warning-700: #fde68a;
+  --color-warning-800: #fef3c7;
+  --color-warning-900: #fffbeb;
+
+  /* Error (Red) - brighter for dark backgrounds */
+  --color-error-50: #7f1d1d;
+  --color-error-100: #991b1b;
+  --color-error-200: #b91c1c;
+  --color-error-300: #dc2626;
+  --color-error-400: #ef4444;
+  --color-error-500: #f87171;  /* Brighter for dark mode */
+  --color-error-600: #fca5a5;
+  --color-error-700: #fecaca;
+  --color-error-800: #fee2e2;
+  --color-error-900: #fef2f2;
+
+  /* Info (Blue) - brighter for dark backgrounds */
+  --color-info-50: #1e3a8a;
+  --color-info-100: #1e40af;
+  --color-info-200: #1d4ed8;
+  --color-info-300: #2563eb;
+  --color-info-400: #3b82f6;
+  --color-info-500: #60a5fa;  /* Brighter for dark mode */
+  --color-info-600: #93c5fd;
+  --color-info-700: #bfdbfe;
+  --color-info-800: #dbeafe;
+  --color-info-900: #eff6ff;
+
+  /* ==========================================================================
+     CSK-SPECIFIC COLORS - Dark Theme
+     Brighter variants for better visibility on dark backgrounds
+     ========================================================================== */
+
+  /* Discipline Sections - slightly brighter */
+  --color-section-dv: #60a5fa;  /* Divoka voda (Whitewater) - lighter blue */
+  --color-section-ry: #4ade80;  /* Rychlostni (Sprint) - lighter green */
+  --color-section-vt: #f87171;  /* Vodni turistika (Touring) - lighter red */
+
+  /* VT Classes - slightly brighter */
+  --color-vt-m: #a78bfa;   /* Mistr (Master) - lighter purple */
+  --color-vt-a: #f87171;   /* Class A - lighter red */
+  --color-vt-b: #fbbf24;   /* Class B - lighter amber */
+  --color-vt-c: #4ade80;   /* Class C - lighter green */
+
+  /* ==========================================================================
+     SEMANTIC COLORS - Dark Theme
+     ========================================================================== */
+
+  /* Backgrounds - elevation model (lighter = higher) */
+  --color-bg-primary: var(--color-neutral-0);      /* #0a0a0a - base */
+  --color-bg-secondary: var(--color-neutral-50);   /* #171717 - raised */
+  --color-bg-tertiary: var(--color-neutral-100);   /* #262626 - higher */
+  --color-bg-elevated: var(--color-neutral-200);   /* #404040 - highest */
+  --color-bg-inverse: var(--color-neutral-900);    /* #fafafa */
+
+  /* Text - max 87% opacity for comfort on dark backgrounds */
+  --color-text-primary: rgba(255, 255, 255, 0.87);
+  --color-text-secondary: rgba(255, 255, 255, 0.60);
+  --color-text-tertiary: rgba(255, 255, 255, 0.38);
+  --color-text-disabled: rgba(255, 255, 255, 0.38);
+  --color-text-inverse: var(--color-neutral-0);
+  --color-text-link: var(--color-primary-500);
+  --color-text-link-hover: var(--color-primary-600);
+
+  /* Borders - subtle on dark backgrounds */
+  --color-border-default: var(--color-neutral-200);
+  --color-border-strong: var(--color-neutral-300);
+  --color-border-subtle: var(--color-neutral-100);
+  --color-border-focus: var(--color-primary-500);
+
+  /* Interactive states */
+  --color-interactive-default: var(--color-primary-500);
+  --color-interactive-hover: var(--color-primary-600);
+  --color-interactive-active: var(--color-primary-700);
+  --color-interactive-disabled: var(--color-neutral-300);
+
+  /* Semantic feedback - using darker backgrounds for cards/banners */
+  --color-feedback-success: var(--color-success-500);
+  --color-feedback-success-bg: var(--color-success-50);
+  --color-feedback-success-border: var(--color-success-200);
+
+  --color-feedback-warning: var(--color-warning-500);
+  --color-feedback-warning-bg: var(--color-warning-50);
+  --color-feedback-warning-border: var(--color-warning-200);
+
+  --color-feedback-error: var(--color-error-500);
+  --color-feedback-error-bg: var(--color-error-50);
+  --color-feedback-error-border: var(--color-error-200);
+
+  --color-feedback-info: var(--color-info-500);
+  --color-feedback-info-bg: var(--color-info-50);
+  --color-feedback-info-border: var(--color-info-200);
+}
+
+/* =============================================================================
+   SYSTEM PREFERENCE - Auto dark mode
+   Applied when user hasn't set explicit preference
+   ============================================================================= */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* Primary (Brand) */
+    --color-primary-50: #041721;
+    --color-primary-100: #072f43;
+    --color-primary-200: #0b4664;
+    --color-primary-300: #0e5e85;
+    --color-primary-400: #1176a6;
+    --color-primary-500: #4da3cc;
+    --color-primary-600: #7ab8d9;
+    --color-primary-700: #99c9e3;
+    --color-primary-800: #b8daec;
+    --color-primary-900: #d6ebf6;
+
+    /* Neutral (Grays) */
+    --color-neutral-0: #0a0a0a;
+    --color-neutral-50: #171717;
+    --color-neutral-100: #262626;
+    --color-neutral-200: #404040;
+    --color-neutral-300: #525252;
+    --color-neutral-400: #737373;
+    --color-neutral-500: #a3a3a3;
+    --color-neutral-600: #d4d4d4;
+    --color-neutral-700: #e5e5e5;
+    --color-neutral-800: #f5f5f5;
+    --color-neutral-900: #fafafa;
+    --color-neutral-950: #ffffff;
+
+    /* Success (Green) */
+    --color-success-50: #14532d;
+    --color-success-100: #166534;
+    --color-success-200: #15803d;
+    --color-success-300: #16a34a;
+    --color-success-400: #22c55e;
+    --color-success-500: #4ade80;
+    --color-success-600: #86efac;
+    --color-success-700: #bbf7d0;
+    --color-success-800: #dcfce7;
+    --color-success-900: #f0fdf4;
+
+    /* Warning (Amber) */
+    --color-warning-50: #78350f;
+    --color-warning-100: #92400e;
+    --color-warning-200: #b45309;
+    --color-warning-300: #d97706;
+    --color-warning-400: #f59e0b;
+    --color-warning-500: #fbbf24;
+    --color-warning-600: #fcd34d;
+    --color-warning-700: #fde68a;
+    --color-warning-800: #fef3c7;
+    --color-warning-900: #fffbeb;
+
+    /* Error (Red) */
+    --color-error-50: #7f1d1d;
+    --color-error-100: #991b1b;
+    --color-error-200: #b91c1c;
+    --color-error-300: #dc2626;
+    --color-error-400: #ef4444;
+    --color-error-500: #f87171;
+    --color-error-600: #fca5a5;
+    --color-error-700: #fecaca;
+    --color-error-800: #fee2e2;
+    --color-error-900: #fef2f2;
+
+    /* Info (Blue) */
+    --color-info-50: #1e3a8a;
+    --color-info-100: #1e40af;
+    --color-info-200: #1d4ed8;
+    --color-info-300: #2563eb;
+    --color-info-400: #3b82f6;
+    --color-info-500: #60a5fa;
+    --color-info-600: #93c5fd;
+    --color-info-700: #bfdbfe;
+    --color-info-800: #dbeafe;
+    --color-info-900: #eff6ff;
+
+    /* CSK-SPECIFIC COLORS */
+    --color-section-dv: #60a5fa;
+    --color-section-ry: #4ade80;
+    --color-section-vt: #f87171;
+
+    --color-vt-m: #a78bfa;
+    --color-vt-a: #f87171;
+    --color-vt-b: #fbbf24;
+    --color-vt-c: #4ade80;
+
+    /* SEMANTIC COLORS */
+    --color-bg-primary: var(--color-neutral-0);
+    --color-bg-secondary: var(--color-neutral-50);
+    --color-bg-tertiary: var(--color-neutral-100);
+    --color-bg-elevated: var(--color-neutral-200);
+    --color-bg-inverse: var(--color-neutral-900);
+
+    --color-text-primary: rgba(255, 255, 255, 0.87);
+    --color-text-secondary: rgba(255, 255, 255, 0.60);
+    --color-text-tertiary: rgba(255, 255, 255, 0.38);
+    --color-text-disabled: rgba(255, 255, 255, 0.38);
+    --color-text-inverse: var(--color-neutral-0);
+    --color-text-link: var(--color-primary-500);
+    --color-text-link-hover: var(--color-primary-600);
+
+    --color-border-default: var(--color-neutral-200);
+    --color-border-strong: var(--color-neutral-300);
+    --color-border-subtle: var(--color-neutral-100);
+    --color-border-focus: var(--color-primary-500);
+
+    --color-interactive-default: var(--color-primary-500);
+    --color-interactive-hover: var(--color-primary-600);
+    --color-interactive-active: var(--color-primary-700);
+    --color-interactive-disabled: var(--color-neutral-300);
+
+    --color-feedback-success: var(--color-success-500);
+    --color-feedback-success-bg: var(--color-success-50);
+    --color-feedback-success-border: var(--color-success-200);
+
+    --color-feedback-warning: var(--color-warning-500);
+    --color-feedback-warning-bg: var(--color-warning-50);
+    --color-feedback-warning-border: var(--color-warning-200);
+
+    --color-feedback-error: var(--color-error-500);
+    --color-feedback-error-bg: var(--color-error-50);
+    --color-feedback-error-border: var(--color-error-200);
+
+    --color-feedback-info: var(--color-info-500);
+    --color-feedback-info-bg: var(--color-info-50);
+    --color-feedback-info-border: var(--color-info-200);
+  }
+}
