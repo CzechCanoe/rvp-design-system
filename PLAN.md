@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 5 - Prototypy
-**Další krok:** prototype-live - Live výsledky
+**Další krok:** prototype-registration - Self-service registrace
 
 ---
 
@@ -111,7 +111,7 @@
 
 - [x] prototype-calendar - Kalendář závodů
 - [x] prototype-results - Výsledky závodu
-- [ ] prototype-live - Live výsledky
+- [x] prototype-live - Live výsledky
 - [ ] prototype-registration - Self-service registrace
 - [ ] prototype-profile - Profil závodníka
 - [ ] prototype-dashboard - Dashboard správce
@@ -122,6 +122,8 @@
 
 ## Fáze 6: Dokumentace a publikace
 
+- [ ] kompletace a otestování buildů
+- [ ] pořízení screenshotů všech prototypů a storubooků s playwright
 - [ ] README.md s quick start
 - [ ] Component API dokumentace
 - [ ] Migration guide z Inspinia

@@ -1,0 +1,722 @@
+/* ============================================================================
+   Live Results Page Prototype - Styles
+   ============================================================================ */
+
+.prototype-live-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-primary);
+}
+
+/* ============================================================================
+   Logo
+   ============================================================================ */
+
+.prototype-live-page__logo {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-2);
+  text-decoration: none;
+  color: inherit;
+}
+
+.prototype-live-page__logo-text {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.prototype-live-page__logo-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ============================================================================
+   Main Content
+   ============================================================================ */
+
+.prototype-live-page__main {
+  flex: 1;
+  padding: var(--spacing-6) var(--spacing-4);
+}
+
+.prototype-live-page__container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ============================================================================
+   Race Header
+   ============================================================================ */
+
+.prototype-live-page__race-header {
+  margin-bottom: var(--spacing-6);
+}
+
+.prototype-live-page__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--spacing-2);
+}
+
+.prototype-live-page__breadcrumb a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.prototype-live-page__breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.prototype-live-page__breadcrumb-separator {
+  color: var(--color-text-tertiary);
+}
+
+.prototype-live-page__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-3) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.prototype-live-page__subtitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.prototype-live-page__info-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* ============================================================================
+   Content Layout - Three Column
+   ============================================================================ */
+
+.prototype-live-page__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-6);
+}
+
+@media (min-width: 1024px) {
+  .prototype-live-page__content {
+    grid-template-columns: 320px 1fr 320px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .prototype-live-page__content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ============================================================================
+   Current Run Panel (Left Sidebar)
+   ============================================================================ */
+
+.prototype-live-page__current-run {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.prototype-live-page__current-card {
+  padding: var(--spacing-5);
+  border: 2px solid var(--color-error);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, transparent 100%);
+}
+
+.prototype-live-page__current-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-4);
+}
+
+.prototype-live-page__current-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-error);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.prototype-live-page__current-athlete {
+  text-align: center;
+  margin-bottom: var(--spacing-4);
+}
+
+.prototype-live-page__current-avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--spacing-3);
+  border-radius: 50%;
+  background-color: var(--color-bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  border: 3px solid var(--color-error);
+}
+
+.prototype-live-page__current-name {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-1) 0;
+}
+
+.prototype-live-page__current-club {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--spacing-1) 0;
+}
+
+.prototype-live-page__current-bib {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  margin: 0;
+}
+
+.prototype-live-page__current-timer {
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-4);
+  text-align: center;
+  margin-bottom: var(--spacing-4);
+}
+
+.prototype-live-page__current-timer-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-2);
+}
+
+.prototype-live-page__current-timer-value {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-family-mono, monospace);
+}
+
+.prototype-live-page__current-timer-value--running {
+  color: var(--color-error);
+}
+
+.prototype-live-page__current-splits {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-3);
+}
+
+.prototype-live-page__split {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-3);
+  text-align: center;
+}
+
+.prototype-live-page__split-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--spacing-1);
+}
+
+.prototype-live-page__split-value {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.prototype-live-page__split-value--pending {
+  color: var(--color-text-tertiary);
+}
+
+.prototype-live-page__split-diff {
+  font-size: var(--font-size-xs);
+  margin-top: var(--spacing-1);
+}
+
+.prototype-live-page__split-diff--faster {
+  color: var(--color-success);
+}
+
+.prototype-live-page__split-diff--slower {
+  color: var(--color-error);
+}
+
+/* On Deck / Next Up */
+.prototype-live-page__next-card {
+  padding: var(--spacing-4);
+}
+
+.prototype-live-page__next-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--spacing-3) 0;
+}
+
+.prototype-live-page__next-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.prototype-live-page__next-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.prototype-live-page__next-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--color-bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.prototype-live-page__next-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.prototype-live-page__next-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.prototype-live-page__next-club {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin: 0;
+}
+
+/* ============================================================================
+   Results Section (Center)
+   ============================================================================ */
+
+.prototype-live-page__results {
+  min-width: 0;
+}
+
+.prototype-live-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  padding-bottom: var(--spacing-4);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.prototype-live-page__filters-left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.prototype-live-page__filters-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.prototype-live-page__results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-4);
+}
+
+.prototype-live-page__results-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.prototype-live-page__results-count {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-tertiary);
+}
+
+.prototype-live-page__results-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.prototype-live-page__auto-update {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ============================================================================
+   Activity Feed (Right Sidebar)
+   ============================================================================ */
+
+.prototype-live-page__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.prototype-live-page__feed-card {
+  padding: 0;
+  max-height: 500px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.prototype-live-page__feed-header {
+  padding: var(--spacing-4);
+  border-bottom: 1px solid var(--color-border-primary);
+  flex-shrink: 0;
+}
+
+.prototype-live-page__feed-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.prototype-live-page__feed-count {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  font-weight: var(--font-weight-normal);
+}
+
+.prototype-live-page__feed-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-2) 0;
+}
+
+.prototype-live-page__feed-item {
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--color-border-primary);
+  transition: background-color var(--transition-fast);
+}
+
+.prototype-live-page__feed-item:last-child {
+  border-bottom: none;
+}
+
+.prototype-live-page__feed-item:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+.prototype-live-page__feed-item--new {
+  background-color: var(--color-primary-bg);
+  animation: feedItemHighlight 2s ease-out;
+}
+
+@keyframes feedItemHighlight {
+  0% {
+    background-color: var(--color-primary-bg);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.prototype-live-page__feed-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-1);
+}
+
+.prototype-live-page__feed-item-type {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.prototype-live-page__feed-item-type--finish {
+  color: var(--color-success);
+}
+
+.prototype-live-page__feed-item-type--start {
+  color: var(--color-primary);
+}
+
+.prototype-live-page__feed-item-type--penalty {
+  color: var(--color-warning);
+}
+
+.prototype-live-page__feed-item-type--dsq {
+  color: var(--color-error);
+}
+
+.prototype-live-page__feed-item-type--leader {
+  color: #fbbf24;
+}
+
+.prototype-live-page__feed-item-time {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.prototype-live-page__feed-item-content {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  line-height: 1.4;
+}
+
+.prototype-live-page__feed-item-content strong {
+  font-weight: var(--font-weight-semibold);
+}
+
+.prototype-live-page__feed-item-result {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-1);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Race Progress Card */
+.prototype-live-page__progress-card {
+  padding: var(--spacing-4);
+}
+
+.prototype-live-page__progress-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+.prototype-live-page__progress-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+}
+
+.prototype-live-page__progress-stat {
+  text-align: center;
+}
+
+.prototype-live-page__progress-stat-value {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.prototype-live-page__progress-stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.prototype-live-page__progress-bar-container {
+  margin-bottom: var(--spacing-2);
+}
+
+.prototype-live-page__progress-bar {
+  height: 8px;
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.prototype-live-page__progress-bar-fill {
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  transition: width 0.5s ease;
+}
+
+.prototype-live-page__progress-text {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  text-align: center;
+}
+
+/* Race Info Card */
+.prototype-live-page__race-info {
+  padding: var(--spacing-4);
+}
+
+.prototype-live-page__race-info-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+.prototype-live-page__race-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.prototype-live-page__race-info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+}
+
+.prototype-live-page__race-info-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  flex-shrink: 0;
+}
+
+.prototype-live-page__race-info-value {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  text-align: right;
+}
+
+/* ============================================================================
+   Footer
+   ============================================================================ */
+
+.prototype-live-page__footer {
+  padding: var(--spacing-6) var(--spacing-4);
+  border-top: 1px solid var(--color-border-primary);
+  background-color: var(--color-bg-secondary);
+}
+
+.prototype-live-page__footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.prototype-live-page__footer-content p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+/* ============================================================================
+   Responsive Adjustments
+   ============================================================================ */
+
+@media (max-width: 1023px) {
+  .prototype-live-page__current-run {
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .prototype-live-page__main {
+    padding: var(--spacing-4) var(--spacing-3);
+  }
+
+  .prototype-live-page__title {
+    font-size: var(--font-size-2xl);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .prototype-live-page__subtitle {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+  }
+
+  .prototype-live-page__filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .prototype-live-page__filters-left,
+  .prototype-live-page__filters-right {
+    justify-content: flex-start;
+  }
+
+  .prototype-live-page__results-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+  }
+
+  .prototype-live-page__current-splits {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================================
+   Dark Mode Overrides
+   ============================================================================ */
+
+[data-theme="dark"] .prototype-live-page__current-card {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, transparent 100%);
+}
+
+[data-theme="dark"] .prototype-live-page__feed-item--new {
+  background-color: rgba(17, 118, 166, 0.2);
+}
+
+/* ============================================================================
+   Animation for live updates
+   ============================================================================ */
+
+.prototype-live-page__pulse {
+  animation: livePulse 2s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}

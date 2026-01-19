@@ -2117,3 +2117,56 @@ src/prototypes/
 
 ### Další kroky
 - prototype-live - Live výsledky
+
+---
+
+## 2026-01-19 - Iterace 17 / Live Page prototype (phase 5.3)
+
+### Dokončeno
+- [x] Vytvoření LivePage.css se styly pro stránku živých výsledků
+- [x] Vytvoření LivePage.stories.tsx s kompletním prototypem
+- [x] Three-column layout: aktuální jízda | výsledky | activity feed
+- [x] Real-time simulace běžícího času závodníka na trati
+- [x] Simulovaný live feed s událostmi (start, cíl, penalizace, DSQ)
+- [x] Mezičasy (splits) s porovnáním vůči leaderu
+- [x] Progress bar pro průběh kategorie
+- [x] Auto-refresh toggle s vizuální indikací
+- [x] Storybook stories s variantami (Default, Static, K1Zeny, FastUpdates, SlowUpdates)
+
+### Použité komponenty
+- Header, MainNav
+- ResultsTable (s live status podporou)
+- Card
+- Badge (section, warning variant)
+- Button
+- Input (search)
+- Tabs (pills variant)
+- Switch (pro auto-refresh toggle)
+- LiveIndicator (s glow efektem)
+
+### Klíčové funkce prototypu
+1. **Na trati panel** - zobrazuje aktuálního závodníka s běžícím časem
+2. **Mezičasy** - split times s diff oproti leaderu (zelená/červená)
+3. **Další na startu** - seznam 3 dalších závodníků
+4. **Activity feed** - živý tok událostí s animovaným highlightem nových
+5. **Průběh kategorie** - progress bar s počtem dokončených/zbývajících
+
+### Architektura prototypu
+```
+src/prototypes/
+├── CalendarPage.stories.tsx  # Kalendář závodů
+├── CalendarPage.css
+├── ResultsPage.stories.tsx   # Výsledky závodu
+├── ResultsPage.css
+├── LivePage.stories.tsx      # Live výsledky
+└── LivePage.css
+```
+
+### Poznámky
+- Simulace používá useEffect hooks pro real-time aktualizace
+- Feed items mají 2s animaci pro vizuální feedback nových položek
+- Konfigurovatelný update interval (1-10s) pro demo účely
+- Build a typecheck projdou bez chyb
+
+### Další kroky
+- prototype-registration - Self-service registrace
