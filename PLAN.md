@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 2 - Core komponenty (Tier 1)
-**Další krok:** Switch komponenta
+**Další krok:** Card komponenta
 
 ---
 
@@ -66,7 +66,7 @@
 - [x] Select (native, custom dropdown)
 - [x] Checkbox
 - [x] Radio
-- [ ] Switch
+- [x] Switch
 - [ ] Card (surface, elevated, clickable)
 - [ ] Badge (status, VT, sekce)
 - [ ] Table (sortable, selectable)

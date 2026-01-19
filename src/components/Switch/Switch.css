@@ -1,0 +1,299 @@
+/**
+ * Switch Component Styles - CSK RVP Design System
+ *
+ * Uses design tokens for consistent styling.
+ * Supports sizes: sm, md, lg
+ * Supports states: default, error, success
+ * Supports label positions: left, right
+ */
+
+/* ==========================================================================
+   WRAPPER
+   ========================================================================== */
+
+.csk-switch-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+/* ==========================================================================
+   LABEL (clickable container)
+   ========================================================================== */
+
+.csk-switch-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.csk-switch-wrapper--disabled .csk-switch-label {
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   CONTROL (contains hidden input + visual track)
+   ========================================================================== */
+
+.csk-switch-control {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+/* Hidden native checkbox */
+.csk-switch {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.csk-switch:disabled {
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   TRACK (background pill)
+   ========================================================================== */
+
+.csk-switch-track {
+  /* Layout */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+  /* Default size (md) - 44px wide x 24px tall */
+  width: 44px;
+  height: 24px;
+
+  /* Shape - pill */
+  background-color: var(--color-neutral-300);
+  border-radius: var(--radius-full);
+
+  /* Interaction */
+  transition: var(--transition-switch);
+}
+
+/* ==========================================================================
+   THUMB (sliding circle)
+   ========================================================================== */
+
+.csk-switch-thumb {
+  /* Layout */
+  position: absolute;
+  left: 2px;
+
+  /* Default size (md) - 20px circle */
+  width: 20px;
+  height: 20px;
+
+  /* Shape */
+  background-color: var(--color-neutral-0);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+
+  /* Animation */
+  transition: var(--transition-switch);
+}
+
+/* ==========================================================================
+   CHECKED STATE
+   ========================================================================== */
+
+.csk-switch:checked + .csk-switch-track {
+  background-color: var(--color-primary-500);
+}
+
+.csk-switch:checked + .csk-switch-track .csk-switch-thumb {
+  /* Move to right: track width - thumb width - offset */
+  /* md: 44 - 20 - 2 = 22px */
+  left: 22px;
+}
+
+/* ==========================================================================
+   FOCUS STATE
+   ========================================================================== */
+
+.csk-switch:focus-visible + .csk-switch-track {
+  box-shadow: 0 0 0 3px var(--color-primary-500-alpha-30, rgba(17, 118, 166, 0.3));
+}
+
+/* ==========================================================================
+   HOVER STATE
+   ========================================================================== */
+
+.csk-switch:hover:not(:disabled) + .csk-switch-track {
+  background-color: var(--color-neutral-400);
+}
+
+.csk-switch:hover:not(:disabled):checked + .csk-switch-track {
+  background-color: var(--color-primary-600);
+}
+
+/* ==========================================================================
+   VALIDATION STATES
+   ========================================================================== */
+
+/* Error state */
+.csk-switch-wrapper--error .csk-switch-track {
+  background-color: var(--color-error-200);
+}
+
+.csk-switch-wrapper--error .csk-switch:checked + .csk-switch-track {
+  background-color: var(--color-error-500);
+}
+
+.csk-switch-wrapper--error .csk-switch:hover:not(:disabled) + .csk-switch-track {
+  background-color: var(--color-error-300);
+}
+
+.csk-switch-wrapper--error .csk-switch:hover:not(:disabled):checked + .csk-switch-track {
+  background-color: var(--color-error-600);
+}
+
+.csk-switch-wrapper--error .csk-switch:focus-visible + .csk-switch-track {
+  box-shadow: 0 0 0 3px var(--color-error-500-alpha-30, rgba(239, 68, 68, 0.3));
+}
+
+/* Success state */
+.csk-switch-wrapper--success .csk-switch-track {
+  background-color: var(--color-success-200);
+}
+
+.csk-switch-wrapper--success .csk-switch:checked + .csk-switch-track {
+  background-color: var(--color-success-500);
+}
+
+.csk-switch-wrapper--success .csk-switch:hover:not(:disabled) + .csk-switch-track {
+  background-color: var(--color-success-300);
+}
+
+.csk-switch-wrapper--success .csk-switch:hover:not(:disabled):checked + .csk-switch-track {
+  background-color: var(--color-success-600);
+}
+
+.csk-switch-wrapper--success .csk-switch:focus-visible + .csk-switch-track {
+  box-shadow: 0 0 0 3px var(--color-success-500-alpha-30, rgba(34, 197, 94, 0.3));
+}
+
+/* ==========================================================================
+   DISABLED STATE
+   ========================================================================== */
+
+.csk-switch:disabled + .csk-switch-track {
+  opacity: 0.5;
+  background-color: var(--color-neutral-200);
+}
+
+.csk-switch:disabled:checked + .csk-switch-track {
+  background-color: var(--color-primary-300);
+}
+
+.csk-switch-wrapper--disabled .csk-switch-text {
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   SIZES
+   ========================================================================== */
+
+/* Small - 36px x 20px track, 16px thumb */
+.csk-switch-wrapper--sm .csk-switch-track {
+  width: 36px;
+  height: 20px;
+}
+
+.csk-switch-wrapper--sm .csk-switch-thumb {
+  width: 16px;
+  height: 16px;
+}
+
+.csk-switch-wrapper--sm .csk-switch:checked + .csk-switch-track .csk-switch-thumb {
+  /* 36 - 16 - 2 = 18px */
+  left: 18px;
+}
+
+.csk-switch-wrapper--sm .csk-switch-text {
+  font-size: var(--font-size-xs);
+}
+
+/* Medium (default) - defined in base */
+
+/* Large - 52px x 28px track, 24px thumb */
+.csk-switch-wrapper--lg .csk-switch-track {
+  width: 52px;
+  height: 28px;
+}
+
+.csk-switch-wrapper--lg .csk-switch-thumb {
+  width: 24px;
+  height: 24px;
+}
+
+.csk-switch-wrapper--lg .csk-switch:checked + .csk-switch-track .csk-switch-thumb {
+  /* 52 - 24 - 2 = 26px */
+  left: 26px;
+}
+
+.csk-switch-wrapper--lg .csk-switch-text {
+  font-size: var(--font-size-base);
+}
+
+/* ==========================================================================
+   LABEL POSITIONS
+   ========================================================================== */
+
+.csk-switch-wrapper--label-left .csk-switch-label {
+  flex-direction: row;
+}
+
+.csk-switch-wrapper--label-right .csk-switch-label {
+  flex-direction: row;
+}
+
+/* ==========================================================================
+   LABEL TEXT
+   ========================================================================== */
+
+.csk-switch-text {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   HELPER TEXT
+   ========================================================================== */
+
+.csk-switch-helper {
+  margin-left: calc(44px + var(--spacing-2)); /* Align with label text (track width + gap) */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-secondary);
+}
+
+.csk-switch-helper--error {
+  color: var(--color-error-500);
+}
+
+/* Size adjustments for helper alignment */
+.csk-switch-wrapper--sm .csk-switch-helper {
+  margin-left: calc(36px + var(--spacing-2));
+}
+
+.csk-switch-wrapper--lg .csk-switch-helper {
+  margin-left: calc(52px + var(--spacing-2));
+}
+
+/* Label position adjustments for helper */
+.csk-switch-wrapper--label-left .csk-switch-helper {
+  margin-left: 0;
+}

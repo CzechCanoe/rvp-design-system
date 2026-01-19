@@ -17,3 +17,7 @@ export type { CheckboxProps, CheckboxSize, CheckboxState } from './Checkbox';
 // Radio
 export { Radio } from './Radio';
 export type { RadioProps, RadioSize, RadioState } from './Radio';
+
+// Switch
+export { Switch } from './Switch';
+export type { SwitchProps, SwitchSize, SwitchState } from './Switch';

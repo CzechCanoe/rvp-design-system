@@ -613,3 +613,52 @@ src/components/
 
 ### Další kroky
 - Fáze 2: Switch komponenta
+
+---
+
+## 2026-01-19 - Iterace 17 / Switch komponenta (Fáze 2.6)
+
+### Dokončeno
+- [x] Switch komponenta s TypeScript a CSS
+- [x] Velikosti: sm (36x20px), md (44x24px), lg (52x28px)
+- [x] Stavy: default, error, success, disabled
+- [x] Pill-shaped track s posuvným thumb
+- [x] Podpora label na levé nebo pravé straně (labelPosition prop)
+- [x] Helper text a error message s ARIA propojením
+- [x] role="switch" pro správnou sémantiku
+- [x] WCAG 2.1 AA - focus visible, aria-invalid, aria-describedby
+- [x] Storybook stories s autodocs a CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Pill-shaped track** - Switch má charakteristický oválný tvar (radius-full) na rozdíl od Checkbox (zaoblený čtverec)
+2. **role="switch"** - použita správná ARIA role místo výchozího checkbox
+3. **Thumb animace** - posun thumb zleva doprava při aktivaci pomocí CSS transition
+4. **labelPosition prop** - možnost umístit label vlevo nebo vpravo od switch
+5. **Konzistentní sizing** - track šířka odpovídá poměru 1.83:1 (šířka:výška)
+
+### Poznámky
+- Switch je vizuálně odlišitelný od Checkbox (pill vs. box)
+- Vhodný pro okamžitě aplikované nastavení (on/off)
+- Pro formuláře s submit akcí zvážit použití Checkbox
+- Storybook stories obsahují CSK-specifické příklady (nastavení účtu, live results, přihlášení na závod)
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+└── Switch/
+    ├── index.ts       # Public API
+    ├── Switch.tsx     # Component implementation
+    ├── Switch.css     # Styles
+    └── Switch.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 2: Card komponenta (surface, elevated, clickable)
