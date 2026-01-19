@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 2 - Core komponenty (Tier 1)
-**Další krok:** Badge komponenta
+**Další krok:** Table komponenta
 
 ---
 
@@ -68,7 +68,7 @@
 - [x] Radio
 - [x] Switch
 - [x] Card (surface, elevated, clickable)
-- [ ] Badge (status, VT, sekce)
+- [x] Badge (status, VT, sekce)
 - [ ] Table (sortable, selectable)
 
 **Milestone M2:** Core komponenty v Storybook

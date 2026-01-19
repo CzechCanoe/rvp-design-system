@@ -712,3 +712,52 @@ src/components/
 
 ### Další kroky
 - Fáze 2: Badge komponenta (status, VT, sekce)
+
+---
+
+## 2026-01-19 - Iterace 19 / Badge komponenta (Fáze 2.8)
+
+### Dokončeno
+- [x] Badge komponenta s TypeScript a CSS
+- [x] Varianty: default, primary, success, warning, error, info
+- [x] CSK sekce: dv (modrá), ry (zelená), vt (červená)
+- [x] VT třídy: m (fialová), a (červená), b (oranžová), c (zelená)
+- [x] Velikosti: sm (20px), md (24px), lg (32px)
+- [x] Outlined varianta pro subtilní vzhled
+- [x] Pill shape pro plně zaoblené rohy
+- [x] Podpora ikon (iconLeft)
+- [x] Storybook stories s autodocs a CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Priority řazení** - vtClass > section > variant pro určení barvy
+2. **Outlined jako modifikátor** - ne samostatná varianta, kombinovatelné se všemi barvami
+3. **Pill jako modifikátor** - radius-full pro notifikační badge a tagy
+4. **Bez interaktivity** - Badge je čistě prezentační, ne klikatelný
+
+### Poznámky
+- Badge doplňuje Card a Button pro zobrazení stavů a kategorií
+- CSK-specifické barvy jsou definovány v tokenech (section-dv, section-ry, section-vt, vt-m/a/b/c)
+- Dark mode varianty automaticky použijí jasnější verze barev z tokenů
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+└── Badge/
+    ├── index.ts       # Public API
+    ├── Badge.tsx      # Component implementation
+    ├── Badge.css      # Styles
+    └── Badge.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 2: Table komponenta (sortable, selectable)

@@ -25,3 +25,13 @@ export type { SwitchProps, SwitchSize, SwitchState } from './Switch';
 // Card
 export { Card } from './Card';
 export type { CardProps, CardVariant, CardPadding } from './Card';
+
+// Badge
+export { Badge } from './Badge';
+export type {
+  BadgeProps,
+  BadgeVariant,
+  BadgeSection,
+  BadgeVtClass,
+  BadgeSize,
+} from './Badge';
