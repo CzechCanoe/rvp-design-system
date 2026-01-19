@@ -94,3 +94,7 @@ export type {
   ProgressColor,
   ProgressStep,
 } from './Progress';
+
+// Header
+export { Header } from './Header';
+export type { HeaderProps, HeaderSize, HeaderVariant } from './Header';

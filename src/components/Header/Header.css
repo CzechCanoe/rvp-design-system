@@ -1,0 +1,336 @@
+/**
+ * Header Component Styles
+ *
+ * A responsive application header with mobile drawer menu.
+ */
+
+/* =============================================================================
+   BASE STYLES
+   ============================================================================= */
+
+.csk-header {
+  position: relative;
+  z-index: var(--z-sticky, 200);
+  font-family: var(--font-family-sans);
+  background-color: var(--color-bg-primary);
+}
+
+.csk-header--bordered {
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.csk-header--sticky {
+  position: sticky;
+  top: 0;
+}
+
+/* =============================================================================
+   VARIANTS
+   ============================================================================= */
+
+.csk-header--transparent {
+  background-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.csk-header--elevated {
+  background-color: var(--color-bg-primary);
+  box-shadow: var(--shadow-md);
+  border-bottom: none;
+}
+
+/* =============================================================================
+   CONTAINER
+   ============================================================================= */
+
+.csk-header__container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin: 0 auto;
+  padding: 0 var(--spacing-4);
+}
+
+/* Max width variants */
+.csk-header--max-sm .csk-header__container {
+  max-width: 640px;
+}
+
+.csk-header--max-md .csk-header__container {
+  max-width: 768px;
+}
+
+.csk-header--max-lg .csk-header__container {
+  max-width: 1024px;
+}
+
+.csk-header--max-xl .csk-header__container {
+  max-width: 1280px;
+}
+
+.csk-header--max-full .csk-header__container {
+  max-width: none;
+}
+
+/* =============================================================================
+   SIZES
+   ============================================================================= */
+
+/* Small */
+.csk-header--sm .csk-header__container {
+  min-height: 48px;
+  gap: var(--spacing-3);
+}
+
+/* Medium (default) */
+.csk-header--md .csk-header__container {
+  min-height: 56px;
+  gap: var(--spacing-4);
+}
+
+/* Large */
+.csk-header--lg .csk-header__container {
+  min-height: 64px;
+  gap: var(--spacing-6);
+}
+
+/* =============================================================================
+   SLOTS
+   ============================================================================= */
+
+.csk-header__brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.csk-header__brand a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.csk-header__brand img {
+  display: block;
+  height: auto;
+}
+
+/* Small brand sizing */
+.csk-header--sm .csk-header__brand img {
+  max-height: 28px;
+}
+
+.csk-header--md .csk-header__brand img {
+  max-height: 32px;
+}
+
+.csk-header--lg .csk-header__brand img {
+  max-height: 40px;
+}
+
+.csk-header__nav {
+  display: none;
+  align-items: center;
+}
+
+.csk-header__spacer {
+  flex: 1;
+}
+
+.csk-header__search {
+  display: none;
+  align-items: center;
+}
+
+.csk-header__actions {
+  display: none;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.csk-header__user {
+  display: flex;
+  align-items: center;
+}
+
+/* =============================================================================
+   MOBILE TOGGLE
+   ============================================================================= */
+
+.csk-header__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-base);
+}
+
+.csk-header__toggle:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+.csk-header__toggle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-bg-primary), 0 0 0 4px var(--color-border-focus);
+}
+
+/* =============================================================================
+   MOBILE DRAWER
+   ============================================================================= */
+
+.csk-header__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal-backdrop, 400);
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--transition-base),
+    visibility var(--transition-base);
+}
+
+.csk-header__backdrop--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.csk-header__drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-modal, 500);
+  width: 100%;
+  max-width: 320px;
+  background-color: var(--color-bg-primary);
+  box-shadow: var(--shadow-xl);
+  transform: translateX(100%);
+  transition: transform var(--duration-moderate, 250ms) var(--ease-out, ease-out);
+}
+
+.csk-header__drawer--open {
+  transform: translateX(0);
+}
+
+.csk-header__drawer-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--spacing-6);
+  padding-top: calc(var(--spacing-6) + 56px); /* Account for header height */
+  overflow-y: auto;
+}
+
+/* Drawer search */
+.csk-header__drawer-search {
+  margin-bottom: var(--spacing-6);
+}
+
+/* Drawer navigation */
+.csk-header__drawer-nav {
+  flex: 1;
+}
+
+/* Drawer footer */
+.csk-header__drawer-footer {
+  margin-top: auto;
+  padding-top: var(--spacing-6);
+  border-top: 1px solid var(--color-border-default);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.csk-header__drawer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.csk-header__drawer-user {
+  display: flex;
+  align-items: center;
+}
+
+/* =============================================================================
+   RESPONSIVE - DESKTOP
+   ============================================================================= */
+
+@media (min-width: 768px) {
+  .csk-header__toggle {
+    display: none;
+  }
+
+  .csk-header__nav {
+    display: flex;
+  }
+
+  .csk-header__search {
+    display: flex;
+  }
+
+  .csk-header__actions {
+    display: flex;
+  }
+
+  .csk-header__backdrop,
+  .csk-header__drawer {
+    display: none;
+  }
+}
+
+/* =============================================================================
+   DARK MODE
+   ============================================================================= */
+
+[data-theme="dark"] .csk-header {
+  background-color: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .csk-header--transparent {
+  background-color: transparent;
+}
+
+[data-theme="dark"] .csk-header--elevated {
+  background-color: var(--color-bg-elevated);
+}
+
+[data-theme="dark"] .csk-header__drawer {
+  background-color: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .csk-header__backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* System preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .csk-header__backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  :root:not([data-theme="light"]) .csk-header--elevated {
+    background-color: var(--color-bg-elevated);
+  }
+}
+
+/* =============================================================================
+   REDUCED MOTION
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-header__toggle,
+  .csk-header__backdrop,
+  .csk-header__drawer {
+    transition: none;
+  }
+}

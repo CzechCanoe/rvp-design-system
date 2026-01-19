@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 3 - Pokročilé komponenty (Tier 2)
-**Další krok:** Header komponenta (app header)
+**Další krok:** Avatar komponenta (image, initials)
 
 ---
 
@@ -83,7 +83,7 @@
 - [x] Navigation (main nav, breadcrumbs)
 - [x] Pagination
 - [x] Progress (bar, steps)
-- [ ] Header (app header)
+- [x] Header (app header)
 - [ ] Avatar (image, initials)
 - [ ] Dropdown
 

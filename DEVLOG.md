@@ -1180,3 +1180,66 @@ src/components/
 
 ### Další kroky
 - Fáze 3: Header komponenta (app header)
+
+---
+
+## 2026-01-19 - Iterace 27 / Header komponenta (Fáze 3.7)
+
+### Dokončeno
+- [x] Header komponenta s TypeScript a CSS
+- [x] Velikosti: sm (48px), md (56px), lg (64px)
+- [x] Varianty: default (s borderem), transparent (bez pozadí), elevated (se stínem)
+- [x] Sticky positioning support
+- [x] Flexibilní sloty: brand, navigation, search, actions, userMenu
+- [x] Mobile drawer menu s backdrop a slide-in animací
+- [x] Body scroll lock při otevřeném mobile menu
+- [x] Konfigurovatelná max-width (sm, md, lg, xl, full)
+- [x] Klávesová navigace (Escape zavře menu)
+- [x] Outside click handling
+- [x] WCAG 2.1 AA - role="dialog", aria-modal, aria-expanded
+- [x] Reduced motion support
+- [x] Dark mode support
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Slot-based architektura** - flexibilní sloty místo pevné struktury pro různé use cases
+2. **Drawer místo dropdown** - mobile menu je slide-in drawer z pravé strany pro lepší UX
+3. **Body scroll lock** - zamykání scrollu při otevřeném draweru
+4. **Separate mobileMenuContent** - možnost předat jiný obsah pro mobile menu než je desktop navigace
+5. **maxWidth prop** - kontrola šířky obsahu pro různé layouty stránek
+
+### Poznámky
+- Header je 7. komponenta Fáze 3 (pokročilé komponenty)
+- Doplňuje MainNav - může obsahovat MainNav jako navigation slot
+- Vhodný pro veřejný portál i administrační rozhraní
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+├── Navigation/
+├── Pagination/
+├── Progress/
+└── Header/
+    ├── index.ts       # Public API
+    ├── Header.tsx     # Component implementation
+    ├── Header.css     # Styles
+    └── Header.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 3: Avatar komponenta (image, initials)
