@@ -1,8 +1,8 @@
 # PLAN.md - CSK RVP Design System
 
 ## Aktuální stav
-**Fáze:** 0 - Výzkum a příprava
-**Další krok:** 0.3 - Design principy
+**Fáze:** 0 - Výzkum a příprava ✓
+**Další krok:** 1.1 - Setup projektu
 
 ---
 
@@ -25,14 +25,14 @@
 - [x] Dokument `docs/research/kanoe-cz-audit.md`
 
 ### 0.3 Design principy
-- [ ] Mobile-first strategie
-- [ ] WCAG 2.1 AA požadavky
-- [ ] Dual personality (utilitární vs. expressive)
-- [ ] Dark/light mode strategie
-- [ ] Výběr fontu (na základě výzkumu)
-- [ ] Dokument `docs/DESIGN_PRINCIPLES.md`
+- [x] Mobile-first strategie
+- [x] WCAG 2.1 AA požadavky
+- [x] Dual personality (utilitární vs. expressive)
+- [x] Dark/light mode strategie
+- [x] Výběr fontu (na základě výzkumu)
+- [x] Dokument `docs/DESIGN_PRINCIPLES.md`
 
-**Milestone M0:** Design principy schváleny
+**Milestone M0:** Design principy schváleny ✓
 
 ---
 

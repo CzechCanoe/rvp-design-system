@@ -93,3 +93,34 @@
 
 ### Další kroky
 - Fáze 0.3: Design principy (mobile-first, WCAG 2.1, dual personality, dark mode)
+
+---
+
+## 2026-01-19 - Iterace 3 / Design principy
+
+### Dokončeno
+- [x] Mobile-first strategie - breakpointy, touch targets (44px), font size (16px min)
+- [x] WCAG 2.1 AA požadavky - kontrastní poměry, klávesová navigace, ARIA standardy
+- [x] Dual personality - utilitární (kompaktní) vs. expresivní (vzdušný) režim
+- [x] Dark/light mode strategie - CSS variables, system preference, elevation model
+- [x] Výběr fontu - Inter (nadpisy i body), JetBrains Mono (časy/data)
+- [x] Barevný systém - primární paleta (#1176a6), neutrály, sémantické, disciplínové barvy
+- [x] Spacing systém - 4px base škála
+- [x] Další tokeny - radius, shadows, transitions, z-index
+- [x] Vytvoření dokumentu `docs/DESIGN_PRINCIPLES.md`
+
+### Rozhodnutí
+1. **Inter místo Poppins** - lepší podpora češtiny, užší řez (efektivnější pro data-heavy UI), designován pro obrazovky
+2. **Jednotný font** - Inter pro nadpisy i body text pro konzistenci (menší payload, snadnější maintenance)
+3. **4px base grid** - standard pro moderní design systémy, umožňuje jemnější spacing
+4. **CSS Variables** - pro dark mode přepínání místo duplicitních stylů
+5. **Lucide Icons** - open-source, konzistentní, dobrá React podpora
+
+### Poznámky
+- Fáze 0 (výzkum a design principy) je kompletně dokončena
+- Milestone M0 dosažen - design principy jsou připraveny ke schválení
+- Disciplínové barvy (DV/RY/VT) a VT třídy (M/A/B/C) jsou definovány
+- Dark mode je first-class citizen, ne dodatečná úprava
+
+### Další kroky
+- Fáze 1.1: Setup projektu (npm, TypeScript, Vite, Storybook)
