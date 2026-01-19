@@ -2406,3 +2406,44 @@ Storybook (storybook-static/):
 
 ### Další kroky
 - Fáze 6.2: Pořízení screenshotů všech prototypů a storybooků s Playwright
+
+---
+
+## 2026-01-19 - Iterace 39 / Kontrola komponent a Storybook kompletnost (Fáze 6.1)
+
+### Dokončeno
+- [x] Kontrola struktury komponent - 27 komponent v src/components/
+- [x] Kontrola exportů v src/components/index.ts - všechny komponenty exportovány
+- [x] Kontrola stories - 27 stories (každá komponenta má svou story)
+- [x] Kontrola prototypů - 6 prototypů (Calendar, Results, Live, Registration, Profile, Dashboard)
+- [x] Ověření Storybook build - úspěšný
+- [x] Ověření library build - úspěšný
+
+### Výsledky kontroly
+
+**Komponenty podle fází:**
+
+Fáze 2 (Core - Tier 1):
+- Button, Input, Select, Checkbox, Radio, Switch, Card, Badge, Table ✓
+
+Fáze 3 (Pokročilé - Tier 2):
+- Modal, Tabs, Toast, Navigation (MainNav, Breadcrumbs), Pagination, Progress, Header, Avatar, Dropdown ✓
+
+Fáze 4 (Specifické - Tier 3):
+- Calendar, Dropzone, Timeline, StatCard, AthleteCard, ResultsTable, LiveIndicator, EmptyState, Skeleton ✓
+
+**Prototypy:**
+- CalendarPage, ResultsPage, LivePage, RegistrationPage, ProfilePage, DashboardPage ✓
+
+### Build výstupy
+- Library build: 242 kB ESM, 157 kB CJS, 159 kB CSS, 54 kB types
+- Storybook build: 33 stories (27 komponent + 6 prototypů)
+
+### Poznámky
+- Všechny komponenty jsou správně propojené a exportované
+- Storybook obsahuje kompletní dokumentaci všech komponent
+- CSS warningy o @media pravidlech jsou z externích knihoven, ne z našeho kódu
+- TypeScript warningy o novější verzi jsou kosmetické
+
+### Další kroky
+- Fáze 6.2: Pořízení screenshotů s Playwright

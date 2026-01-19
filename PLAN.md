@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 6 - Dokumentace a publikace
-**Další krok:** pořízení screenshotů všech prototypů a storybooků s playwright
+**Další krok:** pořízení screenshotů všech prototypů a storybooků s Playwright
 
 ---
 
@@ -122,8 +122,9 @@
 
 ## Fáze 6: Dokumentace a publikace
 
+- [x] kontrola, že jsou všechny komponenty správně includované a propojené, že storybook obsahuje vše co má
 - [x] kompletace a otestování buildů
-- [ ] pořízení screenshotů všech prototypů a storubooků s playwright
+- [ ] pořízení screenshotů všech prototypů a storybooků s playwright, kontrola proti screenshotům
 - [ ] README.md s quick start
 - [ ] Component API dokumentace
 - [ ] GitHub Actions CI/CD
