@@ -1810,3 +1810,75 @@ src/components/
 
 ### Další kroky
 - Fáze 4: LiveIndicator komponenta (pulsující)
+
+---
+
+## 2026-01-19 - Iterace 36 / LiveIndicator komponenta (Fáze 4.7)
+
+### Dokončeno
+- [x] LiveIndicator komponenta s TypeScript a CSS
+- [x] Varianty: default, live, recording, offline, connecting
+- [x] Velikosti: sm (8px), md (10px), lg (12px)
+- [x] Barevné varianty: default, primary, success, warning, error, info
+- [x] Pulse animace s expandujícím kruhem
+- [x] Glow efekt pro emphasis na tmavém pozadí
+- [x] Blink animace pro connecting stav
+- [x] Label s konfigurovatelnou pozicí (left/right)
+- [x] Inline mode pro použití v textu
+- [x] WCAG 2.1 AA - aria-hidden na dekorativní prvky
+- [x] Reduced motion support
+- [x] Dark mode support
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **Pulse ring pattern** - samostatný element pro animaci místo ::after pseudo-elementu (lepší kontrola)
+2. **currentColor** - barva tečky i glow používá currentColor pro konzistenci
+3. **Variant overrides color** - live/recording vždy červené, connecting vždy žluté, offline vždy šedé
+4. **Blink pro connecting** - odlišná animace (opacity) od pulse (scale) pro jasné rozlišení stavů
+5. **Glow efekt** - box-shadow s currentColor pro univerzální barevnou podporu
+
+### Poznámky
+- LiveIndicator je sedmá komponenta Fáze 4 (specifické komponenty)
+- Vhodná pro: live výsledky, status připojení, nahrávání, real-time aktualizace
+- Může být použita samostatně (jen tečka) nebo s labelem
+- Inline mode umožňuje vložení do textu
+- Build projde bez chyb (CSS varování jsou známé esbuild issue)
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+├── Navigation/
+├── Pagination/
+├── Progress/
+├── Header/
+├── Avatar/
+├── Dropdown/
+├── Calendar/
+├── Dropzone/
+├── Timeline/
+├── StatCard/
+├── AthleteCard/
+├── ResultsTable/
+└── LiveIndicator/
+    ├── index.ts       # Public API
+    ├── LiveIndicator.tsx   # Component implementation
+    ├── LiveIndicator.css   # Styles
+    └── LiveIndicator.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 4: EmptyState komponenta

@@ -1,0 +1,370 @@
+/**
+ * LiveIndicator Component Styles - CSK RVP Design System
+ *
+ * Pulsing indicator for live status, recording, connection status.
+ */
+
+/* ==========================================================================
+ * BASE STYLES
+ * ========================================================================== */
+
+.csk-live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-family: var(--font-family-sans);
+}
+
+.csk-live-indicator--inline {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+ * DOT STYLES
+ * ========================================================================== */
+
+.csk-live-indicator__dot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background-color: currentColor;
+}
+
+/* Pulse ring - animated ring around the dot */
+.csk-live-indicator__pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  background-color: currentColor;
+  animation: live-indicator-pulse 2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+ * SIZES
+ * ========================================================================== */
+
+/* Small - 8px dot */
+.csk-live-indicator--sm .csk-live-indicator__dot {
+  width: 8px;
+  height: 8px;
+}
+
+.csk-live-indicator--sm .csk-live-indicator__label {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-tight);
+}
+
+/* Medium - 10px dot (default) */
+.csk-live-indicator--md .csk-live-indicator__dot {
+  width: 10px;
+  height: 10px;
+}
+
+.csk-live-indicator--md .csk-live-indicator__label {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-tight);
+}
+
+/* Large - 12px dot */
+.csk-live-indicator--lg .csk-live-indicator__dot {
+  width: 12px;
+  height: 12px;
+}
+
+.csk-live-indicator--lg .csk-live-indicator__label {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+}
+
+/* ==========================================================================
+ * LABEL POSITION
+ * ========================================================================== */
+
+.csk-live-indicator--label-left {
+  flex-direction: row-reverse;
+}
+
+.csk-live-indicator--label-right {
+  flex-direction: row;
+}
+
+/* ==========================================================================
+ * COLORS
+ * ========================================================================== */
+
+/* Default - gray */
+.csk-live-indicator--color-default {
+  color: var(--color-neutral-400);
+}
+
+.csk-live-indicator--color-default .csk-live-indicator__label {
+  color: var(--color-text-secondary);
+}
+
+/* Primary */
+.csk-live-indicator--color-primary {
+  color: var(--color-primary-500);
+}
+
+.csk-live-indicator--color-primary .csk-live-indicator__label {
+  color: var(--color-primary-700);
+}
+
+/* Success - green */
+.csk-live-indicator--color-success {
+  color: var(--color-success-500);
+}
+
+.csk-live-indicator--color-success .csk-live-indicator__label {
+  color: var(--color-success-700);
+}
+
+/* Warning - yellow/amber */
+.csk-live-indicator--color-warning {
+  color: var(--color-warning-500);
+}
+
+.csk-live-indicator--color-warning .csk-live-indicator__label {
+  color: var(--color-warning-700);
+}
+
+/* Error - red (used for live/recording) */
+.csk-live-indicator--color-error {
+  color: var(--color-error-500);
+}
+
+.csk-live-indicator--color-error .csk-live-indicator__label {
+  color: var(--color-error-700);
+}
+
+/* Info - blue */
+.csk-live-indicator--color-info {
+  color: var(--color-info-500);
+}
+
+.csk-live-indicator--color-info .csk-live-indicator__label {
+  color: var(--color-info-700);
+}
+
+/* ==========================================================================
+ * VARIANTS
+ * ========================================================================== */
+
+/* Live - red with "LIVE" text styling */
+.csk-live-indicator--live .csk-live-indicator__label {
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+/* Recording - similar to live */
+.csk-live-indicator--recording .csk-live-indicator__label {
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+}
+
+/* Offline - muted styling */
+.csk-live-indicator--offline .csk-live-indicator__dot {
+  opacity: 0.5;
+}
+
+.csk-live-indicator--offline .csk-live-indicator__label {
+  color: var(--color-text-tertiary);
+}
+
+/* Connecting - blinking animation */
+.csk-live-indicator--connecting .csk-live-indicator__dot {
+  animation: live-indicator-blink 1s ease-in-out infinite;
+}
+
+/* ==========================================================================
+ * PULSE ANIMATION
+ * ========================================================================== */
+
+.csk-live-indicator--pulse .csk-live-indicator__pulse-ring {
+  display: block;
+}
+
+.csk-live-indicator:not(.csk-live-indicator--pulse) .csk-live-indicator__pulse-ring {
+  display: none;
+}
+
+/* ==========================================================================
+ * GLOW EFFECT
+ * ========================================================================== */
+
+.csk-live-indicator--glow .csk-live-indicator__dot {
+  box-shadow: 0 0 8px currentColor, 0 0 16px currentColor;
+}
+
+.csk-live-indicator--glow.csk-live-indicator--pulse .csk-live-indicator__dot {
+  animation: live-indicator-glow 2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+ * KEYFRAME ANIMATIONS
+ * ========================================================================== */
+
+@keyframes live-indicator-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes live-indicator-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes live-indicator-glow {
+  0%, 100% {
+    box-shadow: 0 0 8px currentColor, 0 0 16px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 12px currentColor, 0 0 24px currentColor, 0 0 36px currentColor;
+  }
+}
+
+/* ==========================================================================
+ * DARK MODE
+ * ========================================================================== */
+
+[data-theme='dark'] .csk-live-indicator--color-default {
+  color: var(--color-neutral-500);
+}
+
+[data-theme='dark'] .csk-live-indicator--color-default .csk-live-indicator__label {
+  color: var(--color-text-secondary);
+}
+
+[data-theme='dark'] .csk-live-indicator--color-primary {
+  color: var(--color-primary-400);
+}
+
+[data-theme='dark'] .csk-live-indicator--color-primary .csk-live-indicator__label {
+  color: var(--color-primary-300);
+}
+
+[data-theme='dark'] .csk-live-indicator--color-success {
+  color: var(--color-success-400);
+}
+
+[data-theme='dark'] .csk-live-indicator--color-success .csk-live-indicator__label {
+  color: var(--color-success-300);
+}
+
+[data-theme='dark'] .csk-live-indicator--color-warning {
+  color: var(--color-warning-400);
+}
+
+[data-theme='dark'] .csk-live-indicator--color-warning .csk-live-indicator__label {
+  color: var(--color-warning-300);
+}
+
+[data-theme='dark'] .csk-live-indicator--color-error {
+  color: var(--color-error-400);
+}
+
+[data-theme='dark'] .csk-live-indicator--color-error .csk-live-indicator__label {
+  color: var(--color-error-300);
+}
+
+[data-theme='dark'] .csk-live-indicator--color-info {
+  color: var(--color-info-400);
+}
+
+[data-theme='dark'] .csk-live-indicator--color-info .csk-live-indicator__label {
+  color: var(--color-info-300);
+}
+
+[data-theme='dark'] .csk-live-indicator--offline .csk-live-indicator__label {
+  color: var(--color-text-tertiary);
+}
+
+/* System preference detection */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .csk-live-indicator--color-default {
+    color: var(--color-neutral-500);
+  }
+
+  :root:not([data-theme='light']) .csk-live-indicator--color-default .csk-live-indicator__label {
+    color: var(--color-text-secondary);
+  }
+
+  :root:not([data-theme='light']) .csk-live-indicator--color-primary {
+    color: var(--color-primary-400);
+  }
+
+  :root:not([data-theme='light']) .csk-live-indicator--color-primary .csk-live-indicator__label {
+    color: var(--color-primary-300);
+  }
+
+  :root:not([data-theme='light']) .csk-live-indicator--color-success {
+    color: var(--color-success-400);
+  }
+
+  :root:not([data-theme='light']) .csk-live-indicator--color-success .csk-live-indicator__label {
+    color: var(--color-success-300);
+  }
+
+  :root:not([data-theme='light']) .csk-live-indicator--color-warning {
+    color: var(--color-warning-400);
+  }
+
+  :root:not([data-theme='light']) .csk-live-indicator--color-warning .csk-live-indicator__label {
+    color: var(--color-warning-300);
+  }
+
+  :root:not([data-theme='light']) .csk-live-indicator--color-error {
+    color: var(--color-error-400);
+  }
+
+  :root:not([data-theme='light']) .csk-live-indicator--color-error .csk-live-indicator__label {
+    color: var(--color-error-300);
+  }
+
+  :root:not([data-theme='light']) .csk-live-indicator--color-info {
+    color: var(--color-info-400);
+  }
+
+  :root:not([data-theme='light']) .csk-live-indicator--color-info .csk-live-indicator__label {
+    color: var(--color-info-300);
+  }
+
+  :root:not([data-theme='light']) .csk-live-indicator--offline .csk-live-indicator__label {
+    color: var(--color-text-tertiary);
+  }
+}
+
+/* ==========================================================================
+ * REDUCED MOTION
+ * ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-live-indicator__pulse-ring,
+  .csk-live-indicator--connecting .csk-live-indicator__dot,
+  .csk-live-indicator--glow.csk-live-indicator--pulse .csk-live-indicator__dot {
+    animation: none;
+  }
+
+  .csk-live-indicator__pulse-ring {
+    display: none;
+  }
+}
