@@ -1243,3 +1243,68 @@ src/components/
 
 ### Další kroky
 - Fáze 3: Avatar komponenta (image, initials)
+
+---
+
+## 2026-01-19 - Iterace 28 / Avatar komponenta (Fáze 3.8)
+
+### Dokončeno
+- [x] Avatar komponenta s TypeScript a CSS
+- [x] Velikosti: xs (24px), sm (32px), md (40px), lg (48px), xl (64px), 2xl (96px)
+- [x] Varianty tvarů: circular, rounded, square
+- [x] Zobrazení obrázku s fallback na initials nebo ikonu
+- [x] Automatické generování initiálů z jména (name prop)
+- [x] Barevné varianty: default, primary, success, warning, error, info
+- [x] CSK sekce barvy: dv (modrá), ry (zelená), vt (červená)
+- [x] Status indikátory: online, offline, busy, away
+- [x] AvatarGroup pro stacking s +N indikátorem
+- [x] Konfigurovatelný spacing pro skupinu (tight, normal, loose)
+- [x] Image error handling s fallback
+- [x] WCAG 2.1 AA - aria-label pro fallback, role="group" pro skupinu
+- [x] Reduced motion support
+- [x] Dark mode support
+- [x] Storybook stories s CSK-specifickými příklady
+- [x] Export z hlavního indexu
+
+### Rozhodnutí
+1. **6 velikostí** - xs až 2xl pro různé kontexty (od inline mentions po profilové stránky)
+2. **Automatické initials** - getInitialsFromName() extrahuje první písmena z prvního a posledního slova
+3. **Fallback chain** - image → initials → default icon pro robustní zobrazení
+4. **AvatarGroup flex-direction: row-reverse** - pro správné překrývání s CSS margin-left
+5. **Status indicator relativní velikost** - 25% velikosti avataru s min 8px
+
+### Poznámky
+- Avatar je 8. komponenta Fáze 3 (pokročilé komponenty)
+- Vhodný pro profily závodníků, startovní listiny, seznamy členů klubu
+- AvatarGroup užitečný pro zobrazení rozhodčích, pořadatelů, týmů
+- Build projde bez chyb
+
+### Struktura komponent
+```
+src/components/
+├── index.ts           # Central export
+├── Button/
+├── Input/
+├── Select/
+├── Checkbox/
+├── Radio/
+├── Switch/
+├── Card/
+├── Badge/
+├── Table/
+├── Modal/
+├── Tabs/
+├── Toast/
+├── Navigation/
+├── Pagination/
+├── Progress/
+├── Header/
+└── Avatar/
+    ├── index.ts       # Public API
+    ├── Avatar.tsx     # Component implementation (Avatar + AvatarGroup)
+    ├── Avatar.css     # Styles
+    └── Avatar.stories.tsx  # Storybook
+```
+
+### Další kroky
+- Fáze 3: Dropdown komponenta

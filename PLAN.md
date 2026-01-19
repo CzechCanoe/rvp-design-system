@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 3 - Pokročilé komponenty (Tier 2)
-**Další krok:** Avatar komponenta (image, initials)
+**Další krok:** Dropdown komponenta
 
 ---
 
@@ -84,7 +84,7 @@
 - [x] Pagination
 - [x] Progress (bar, steps)
 - [x] Header (app header)
-- [ ] Avatar (image, initials)
+- [x] Avatar (image, initials)
 - [ ] Dropdown
 
 **Milestone M3:** Pokročilé komponenty v Storybook

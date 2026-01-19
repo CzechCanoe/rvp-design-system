@@ -98,3 +98,13 @@ export type {
 // Header
 export { Header } from './Header';
 export type { HeaderProps, HeaderSize, HeaderVariant } from './Header';
+
+// Avatar
+export { Avatar, AvatarGroup } from './Avatar';
+export type {
+  AvatarProps,
+  AvatarSize,
+  AvatarVariant,
+  AvatarColor,
+  AvatarGroupProps,
+} from './Avatar';
