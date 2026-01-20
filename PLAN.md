@@ -1,8 +1,10 @@
 # PLAN.md - CSK RVP Design System
 
 ## Aktuální stav
-**Fáze:** 6 - Dokumentace a publikace
-**Další krok:** README.md s quick start
+**Fáze:** 7 - Hloubkové review a redesign
+**Další krok:** 7.1 Vizuální audit
+
+**Problém:** Současná implementace nedosahuje vizuální úrovně studovaných referencí (World Athletics, FIS, ICF). Komponenty jsou funkční, ale "utilitární" - chybí vizuální polish, branded feel, moderní detaily.
 
 ---
 
@@ -135,6 +137,83 @@
 
 ---
 
+## Fáze 7: Hloubkové review a redesign
+
+### 7.1 Vizuální audit a analýza mezer
+- [x] Porovnání současných komponent s top referencemi (World Athletics, FIS, UCI)
+- [x] Dokumentace konkrétních vizuálních nedostatků
+- [ ] Screenshot comparison - naše komponenty vs. reference
+- [x] Identifikace chybějících vizuálních prvků (gradienty, shadows, micro-interactions)
+- [x] Dokument `docs/review/visual-gap-analysis.md`
+
+### 7.2 Light mode priorita (technický fix)
+- [x] Změna výchozího chování - light mode jako default
+- [x] Storybook: explicitní `data-theme="light"` v preview
+- [x] Odstranění automatického dark mode z `prefers-color-scheme`
+- [x] Dark mode pouze explicitním přepnutím
+- [x] Testování static build
+
+### 7.3 Redesign tokenů
+- [ ] Review barevné palety - je dostatečně expresivní?
+- [ ] Přidání gradient tokenů (pro hero sekce, karty)
+- [ ] Vylepšení shadow systému (více úrovní, měkčí)
+- [ ] Review typografie - dostatečně výrazné nadpisy?
+- [ ] Nové tokeny pro "expresivní režim" (větší spacing, dramatičtější)
+
+### 7.4 Redesign core komponent (Tier 1)
+- [ ] **Button** - gradient varianty, lepší hover states, subtle shadows
+- [ ] **Card** - gradient backgrounds, glassmorphism efekty pro elevated
+- [ ] **Badge** - více variant, pill style, gradient backgrounds
+- [ ] **Input/Select** - modernější focus states, floating labels?
+- [ ] **Table** - lepší row highlights, sticky headers, micro-animations
+
+### 7.5 Redesign pokročilých komponent (Tier 2)
+- [ ] **Header** - gradient background, blur efekt při scrollu
+- [ ] **Navigation** - aktivní stavy, hover animace
+- [ ] **Modal** - backdrop blur, slide-in animace
+- [ ] **Tabs** - animated underline, pill varianty
+- [ ] **Toast** - slide-in animace, progress bar
+
+### 7.6 Redesign specifických komponent (Tier 3)
+- [ ] **AthleteCard** - hero varianta s gradient overlay
+- [ ] **ResultsTable** - highlighting pro pozice, animované změny
+- [ ] **LiveIndicator** - dramatičtější pulsování, gradient glow
+- [ ] **StatCard** - trend šipky, sparkline grafy, gradient backgrounds
+- [ ] **Calendar** - hover efekty, event preview
+
+### 7.7 Branded visual elements
+- [ ] CSK logo integrace guidelines
+- [ ] Vodní/sportovní vizuální prvky (vlny, dynamické tvary?)
+- [ ] Hero patterns/backgrounds
+- [ ] Fotografické overlay styly
+- [ ] Disciplínové vizuální identity (DV/RY/VT)
+
+### 7.8 Redesign prototypů
+- [ ] **CalendarPage** - hero sekce, featured events, vizuálně bohatší
+- [ ] **ResultsPage** - dramatický leaderboard, pozice highlighting
+- [ ] **LivePage** - immersive experience, real-time feel
+- [ ] **ProfilePage** - hero header s fotkou, achievement showcase
+- [ ] **RegistrationPage** - přehledný wizard, progress indication
+- [ ] **DashboardPage** - widget karty, statistiky s grafy
+
+### 7.9 Expresivní vs. utilitární režim
+- [ ] Implementace dual-mode systému (jak definováno v DESIGN_PRINCIPLES.md)
+- [ ] Expresivní spacing scale
+- [ ] Expresivní animace (delší, dramatičtější)
+- [ ] Context provider pro přepínání režimů
+- [ ] Storybook stories pro oba režimy
+
+### 7.10 Finální polish
+- [ ] Konzistence napříč všemi komponentami
+- [ ] Micro-interactions audit
+- [ ] Reduced motion support
+- [ ] Performance check (CSS bundle size)
+- [ ] Cross-browser testing
+
+**Milestone M7:** Vizuálně atraktivní design systém na úrovni top sportovních federací
+
+---
+
 ## Technický stack
 
 - **React 18+** s TypeScript (strict mode)
@@ -150,3 +229,27 @@
 - React-first přístup, CSS jako by-product
 - Font bude vybrán během výzkumné fáze
 - Kompletní výzkum sportovních federací před návrhem vizuálu
+
+### Poznámky k fázi 7 (redesign)
+
+**Klíčové vizuální inspirace z research:**
+- World Athletics: fialová/oranžová kombinace, moderní feel, generous whitespace
+- FIS: widget systém, rounded corners (4px), konzistentní component reuse
+- ICF: fotografický přístup, akční záběry, mega-menu navigace
+- ČAS: Poppins font, červeno-modrý toggle, AJAX plynulost
+
+**Co chybí v současné implementaci:**
+1. Gradienty (hero sekce, karty, buttony)
+2. Soft shadows s více úrovněmi
+3. Micro-interactions a animace
+4. Branded feel (CSK identita)
+5. Expresivní režim (je definovaný, ale neimplementovaný)
+6. Fotografické overlay styly
+7. Dramatické hover states
+
+**Priorita režimů:**
+- **Light mode = primární** (kanoe.cz integrace, veřejné stránky)
+- **Dark mode = sekundární** (live výsledky na mobilech, volitelné)
+
+**Cílová kvalita:**
+Design systém by měl být na úrovni World Athletics nebo FIS - ne generický Bootstrap/Tailwind look.

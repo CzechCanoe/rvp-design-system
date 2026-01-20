@@ -2493,3 +2493,87 @@ tests/
 
 ### Další kroky
 - Fáze 6.3: README.md s quick start
+
+## 2026-01-20 - Fáze 7: Light mode priorita fix
+
+### Dokončeno
+- [x] Odstranění automatického dark mode z `prefers-color-scheme: dark`
+- [x] Aktualizace `.storybook/preview.tsx` - přidán dekorátor pro nastavení `data-theme`
+- [x] Aktualizace `src/tokens/colors.css` - zakomentován auto dark mode blok
+- [x] Aktualizace `src/tokens/shadows.css` - zakomentován auto dark mode blok
+- [x] Odstranění `@media (prefers-color-scheme: dark)` ze 17 komponentních CSS souborů
+- [x] Rebuild storybook - verifikace že auto dark mode je odstraněn
+
+### Technické změny
+1. **preview.ts → preview.tsx**: Přejmenování kvůli JSX syntaxi, přidán theme dekorátor
+2. **colors.css**: Odstraněn `@media (prefers-color-scheme: dark)` blok (140 řádků)
+3. **shadows.css**: Odstraněn `@media (prefers-color-scheme: dark)` blok
+4. **17 komponent**: Odstranění auto dark mode bloků (Avatar, Calendar, Dropdown, atd.)
+
+### Poznámky
+- Light mode je nyní výchozí pro všechny buildy
+- Dark mode se aktivuje pouze explicitně přes `data-theme="dark"` atribut
+- Storybook toolbar stále umožňuje přepínání témat
+- Toto řeší problém s černým pozadím ve static storybook buildu
+
+---
+
+## 2026-01-20 - Fáze 7.1: Vizuální audit a analýza mezer
+
+### Dokončeno
+- [x] Porovnání současných komponent s top referencemi (World Athletics, FIS, UCI)
+- [x] Dokumentace konkrétních vizuálních nedostatků pro klíčové komponenty
+- [x] Identifikace chybějících vizuálních prvků (gradienty, shadows, micro-interactions)
+- [x] Vytvoření dokumentu `docs/review/visual-gap-analysis.md`
+
+### Klíčová zjištění
+
+**Vs. World Athletics:**
+- Chybí gradient tokeny a jejich použití v komponentách
+- Nadpisy jsou méně výrazné (chybí uppercase, bold custom font)
+- Shadows jsou subtilní, reference má vícevrstvé dramatic shadows
+- Whitespace je kompaktní, chybí expresivní režim
+
+**Vs. FIS:**
+- Leaderboard postrádá position highlighting (medaile 1-2-3)
+- Table nemá sticky headers
+- Widget systém je podobný, ale méně polish
+
+**Vs. UCI:**
+- StatCard nemá sparkline mini-grafy
+- Chybí countdown timer komponenta
+- Ranking vizualizace v tabulkách chybí
+
+### Identifikované nedostatky komponent
+
+| Komponenta | Hlavní nedostatek |
+|------------|-------------------|
+| Button | Žádné gradienty, slabé hover efekty |
+| Card | Chybí gradient/glassmorphism varianty |
+| Header | Bez backdrop blur, chybí scroll transition |
+| AthleteCard | Featured varianta je basic |
+| StatCard | Bez sparklines a animated numbers |
+| ResultsTable | Chybí medal badges, sticky header |
+| LiveIndicator | Málo dramatické pulsování |
+
+### Chybějící design tokeny
+- Gradient scale
+- Glow/blur efekty
+- Expresivní spacing (1.5x scale)
+- Backdrop blur values
+
+### Chybějící komponenty
+- HeroSection
+- CountdownTimer
+- Sparkline
+- MedalBadge
+- PhotoOverlay
+- GradientCard
+
+### Poznámky
+- Současná implementace je na úrovni kvalitního Bootstrap/Tailwind projektu
+- Nedosahuje vizuální úrovně World Athletics nebo FIS
+- Priorita redesignu: gradient tokeny → Button → Card → ResultsTable medals → Header blur
+
+### Další kroky
+- Fáze 7.3: Redesign tokenů (gradienty, expresivní shadows)
