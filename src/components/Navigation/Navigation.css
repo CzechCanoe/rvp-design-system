@@ -2,8 +2,14 @@
  * Navigation Component Styles
  *
  * Includes:
- * - Breadcrumbs
- * - MainNav (horizontal and vertical)
+ * - Breadcrumbs (with hover effects and visual polish)
+ * - MainNav (horizontal and vertical with gradient/glass variants)
+ *
+ * Redesigned with:
+ * - Active states with animated underline
+ * - Hover animations and micro-interactions
+ * - Gradient and glass variants
+ * - Enhanced visual hierarchy
  */
 
 /* =============================================================================
@@ -33,17 +39,28 @@
 }
 
 .csk-breadcrumbs__link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-1-5);
   color: var(--color-text-secondary);
   text-decoration: none;
-  transition: color var(--transition-base);
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--transition-base),
+    background-color var(--transition-base),
+    transform var(--transition-fast);
 }
 
 .csk-breadcrumbs__link:hover {
   color: var(--color-interactive-default);
-  text-decoration: underline;
+  background-color: var(--color-interactive-soft);
+  transform: translateY(-1px);
+}
+
+.csk-breadcrumbs__link:active {
+  transform: translateY(0);
 }
 
 .csk-breadcrumbs__link:focus-visible {
@@ -56,19 +73,24 @@
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-1-5);
   color: var(--color-text-primary);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-semibold);
+  background: var(--gradient-primary-soft);
+  border-radius: var(--radius-sm);
 }
 
 .csk-breadcrumbs__collapsed {
   color: var(--color-text-tertiary);
   padding: 0 var(--spacing-1);
+  cursor: default;
 }
 
 .csk-breadcrumbs__separator {
   color: var(--color-text-tertiary);
-  margin: 0 var(--spacing-1);
+  margin: 0 var(--spacing-0-5);
   user-select: none;
+  opacity: 0.6;
 }
 
 .csk-breadcrumbs__icon {
@@ -78,6 +100,11 @@
   flex-shrink: 0;
   width: 16px;
   height: 16px;
+  transition: transform var(--transition-fast);
+}
+
+.csk-breadcrumbs__link:hover .csk-breadcrumbs__icon {
+  transform: scale(1.1);
 }
 
 .csk-breadcrumbs__icon svg {
@@ -97,6 +124,10 @@
   font-family: var(--font-family-sans);
   background-color: var(--color-bg-primary);
   border-bottom: 1px solid var(--color-border-default);
+  transition:
+    background-color var(--transition-base),
+    box-shadow var(--transition-base),
+    backdrop-filter var(--transition-base);
 }
 
 .csk-mainnav__container {
@@ -124,7 +155,7 @@
 .csk-mainnav__list {
   display: flex;
   align-items: center;
-  gap: var(--spacing-1);
+  gap: var(--spacing-0-5);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -135,6 +166,7 @@
 }
 
 .csk-mainnav__link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-2);
@@ -148,22 +180,59 @@
   white-space: nowrap;
   transition:
     color var(--transition-base),
-    background-color var(--transition-base);
+    background-color var(--transition-base),
+    transform var(--transition-fast);
+}
+
+/* Animated underline effect */
+.csk-mainnav--horizontal .csk-mainnav__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: 1px;
+  transform: translateX(-50%);
+  transition:
+    width var(--transition-base),
+    opacity var(--transition-base);
+  opacity: 0;
 }
 
 .csk-mainnav__link:hover {
   color: var(--color-text-primary);
   background-color: var(--color-bg-secondary);
+  transform: translateY(-1px);
+}
+
+.csk-mainnav--horizontal .csk-mainnav__link:hover::after {
+  width: 80%;
+  opacity: 0.5;
+}
+
+.csk-mainnav__link:active {
+  transform: translateY(0);
 }
 
 .csk-mainnav__link:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--color-bg-primary), 0 0 0 4px var(--color-border-focus);
+  border-radius: var(--radius-md);
 }
 
+/* Active state with gradient underline */
 .csk-mainnav__item--active > .csk-mainnav__link,
 .csk-mainnav__item--active > span > .csk-mainnav__link {
   color: var(--color-interactive-default);
+  font-weight: var(--font-weight-semibold);
+}
+
+.csk-mainnav--horizontal .csk-mainnav__item--active > .csk-mainnav__link::after,
+.csk-mainnav--horizontal .csk-mainnav__item--active > span > .csk-mainnav__link::after {
+  width: 100%;
+  opacity: 1;
 }
 
 .csk-mainnav__item--disabled > .csk-mainnav__link,
@@ -171,6 +240,7 @@
   color: var(--color-text-disabled);
   cursor: not-allowed;
   pointer-events: none;
+  opacity: 0.6;
 }
 
 .csk-mainnav__icon {
@@ -178,6 +248,11 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.csk-mainnav__link:hover .csk-mainnav__icon {
+  transform: scale(1.1);
 }
 
 .csk-mainnav__label {
@@ -215,16 +290,103 @@
   color: var(--color-text-primary);
   cursor: pointer;
   border-radius: var(--radius-md);
-  transition: background-color var(--transition-base);
+  transition:
+    background-color var(--transition-base),
+    transform var(--transition-base);
 }
 
 .csk-mainnav__toggle:hover {
   background-color: var(--color-bg-secondary);
+  transform: scale(1.05);
+}
+
+.csk-mainnav__toggle:active {
+  transform: scale(0.95);
 }
 
 .csk-mainnav__toggle:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--color-bg-primary), 0 0 0 4px var(--color-border-focus);
+}
+
+/* Toggle icon animation */
+.csk-mainnav__toggle svg {
+  transition: transform var(--transition-base);
+}
+
+.csk-mainnav--mobile-open .csk-mainnav__toggle svg {
+  transform: rotate(90deg);
+}
+
+/* =============================================================================
+   MAIN NAVIGATION - VARIANTS
+   ============================================================================= */
+
+/* Gradient variant - branded look with primary gradient */
+.csk-mainnav--gradient {
+  background: var(--gradient-primary);
+  border-bottom: none;
+  color: var(--color-neutral-0);
+}
+
+.csk-mainnav--gradient .csk-mainnav__link {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.csk-mainnav--gradient .csk-mainnav__link:hover {
+  color: var(--color-neutral-0);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.csk-mainnav--gradient .csk-mainnav__item--active > .csk-mainnav__link,
+.csk-mainnav--gradient .csk-mainnav__item--active > span > .csk-mainnav__link {
+  color: var(--color-neutral-0);
+}
+
+.csk-mainnav--gradient .csk-mainnav__link::after {
+  background: var(--color-neutral-0);
+}
+
+.csk-mainnav--gradient .csk-mainnav__toggle {
+  color: var(--color-neutral-0);
+}
+
+.csk-mainnav--gradient .csk-mainnav__toggle:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.csk-mainnav--gradient .csk-mainnav__toggle:focus-visible {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3), 0 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+/* Glass variant - frosted glass effect */
+.csk-mainnav--glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+/* Pills variant - nav items as pills */
+.csk-mainnav--pills .csk-mainnav__link {
+  border-radius: var(--radius-full);
+}
+
+.csk-mainnav--pills .csk-mainnav__link::after {
+  display: none;
+}
+
+.csk-mainnav--pills .csk-mainnav__item--active > .csk-mainnav__link,
+.csk-mainnav--pills .csk-mainnav__item--active > span > .csk-mainnav__link {
+  background: var(--gradient-primary);
+  color: var(--color-neutral-0);
+}
+
+.csk-mainnav--pills .csk-mainnav__item--active > .csk-mainnav__link:hover,
+.csk-mainnav--pills .csk-mainnav__item--active > span > .csk-mainnav__link:hover {
+  background: var(--gradient-primary-hover);
+  color: var(--color-neutral-0);
 }
 
 /* =============================================================================
@@ -236,27 +398,40 @@
   top: 100%;
   left: 0;
   z-index: 100;
-  min-width: 200px;
-  margin: 0;
+  min-width: 220px;
+  margin: var(--spacing-1) 0 0;
   padding: var(--spacing-2);
   list-style: none;
   background-color: var(--color-bg-primary);
   border: 1px solid var(--color-border-default);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-xl);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-8px);
+  transform: translateY(-8px) scale(0.98);
+  transform-origin: top center;
   transition:
     opacity var(--transition-base),
     visibility var(--transition-base),
     transform var(--transition-base);
 }
 
+/* Gradient accent line at top of dropdown */
+.csk-mainnav__dropdown::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--spacing-3);
+  right: var(--spacing-3);
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: 1px;
+}
+
 .csk-mainnav__item--open > .csk-mainnav__dropdown {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .csk-mainnav__dropdown .csk-mainnav__item {
@@ -267,6 +442,32 @@
   width: 100%;
   padding: var(--spacing-2) var(--spacing-3);
   border-radius: var(--radius-md);
+}
+
+/* Dropdown link doesn't have underline effect */
+.csk-mainnav__dropdown .csk-mainnav__link::after {
+  display: none;
+}
+
+/* Dropdown active item with left border accent */
+.csk-mainnav__dropdown .csk-mainnav__item--active > .csk-mainnav__link,
+.csk-mainnav__dropdown .csk-mainnav__item--active > span > .csk-mainnav__link {
+  background-color: var(--color-interactive-soft);
+  box-shadow: inset 3px 0 0 var(--color-interactive-default);
+}
+
+/* Gradient variant dropdown */
+.csk-mainnav--gradient .csk-mainnav__dropdown {
+  background-color: var(--color-bg-primary);
+}
+
+.csk-mainnav--gradient .csk-mainnav__dropdown .csk-mainnav__link {
+  color: var(--color-text-secondary);
+}
+
+.csk-mainnav--gradient .csk-mainnav__dropdown .csk-mainnav__link:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-secondary);
 }
 
 /* =============================================================================
@@ -483,8 +684,30 @@
   background-color: var(--color-bg-primary);
 }
 
+[data-theme="dark"] .csk-mainnav--gradient {
+  background: var(--gradient-primary-deep);
+}
+
+[data-theme="dark"] .csk-mainnav--glass {
+  background: rgba(0, 0, 0, 0.7);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
 [data-theme="dark"] .csk-mainnav__dropdown {
   background-color: var(--color-bg-elevated);
+  border-color: var(--color-border-default);
+}
+
+[data-theme="dark"] .csk-mainnav__toggle:hover {
+  background-color: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .csk-breadcrumbs__link:hover {
+  background-color: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .csk-breadcrumbs__current {
+  background: var(--gradient-primary-soft);
 }
 
 @media (max-width: 768px) {
@@ -498,11 +721,28 @@
    ============================================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+  .csk-mainnav,
   .csk-mainnav__link,
+  .csk-mainnav__link::after,
   .csk-mainnav__chevron,
   .csk-mainnav__dropdown,
   .csk-mainnav__menu,
-  .csk-breadcrumbs__link {
+  .csk-mainnav__toggle,
+  .csk-mainnav__toggle svg,
+  .csk-mainnav__icon,
+  .csk-breadcrumbs__link,
+  .csk-breadcrumbs__icon {
     transition: none;
+  }
+
+  .csk-mainnav__link:hover,
+  .csk-mainnav__toggle:hover,
+  .csk-breadcrumbs__link:hover {
+    transform: none;
+  }
+
+  .csk-mainnav__link:hover .csk-mainnav__icon,
+  .csk-breadcrumbs__link:hover .csk-breadcrumbs__icon {
+    transform: none;
   }
 }

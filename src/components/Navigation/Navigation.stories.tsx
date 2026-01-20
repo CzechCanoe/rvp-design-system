@@ -155,7 +155,7 @@ export const MainNavMeta: Meta<typeof MainNav> = {
     docs: {
       description: {
         component:
-          'MainNav component for primary site navigation. Supports horizontal and vertical variants, dropdowns, and responsive mobile menu.',
+          'MainNav component for primary site navigation. Supports horizontal and vertical layouts, gradient/glass/pills style variants, animated active states, and responsive mobile menu.',
       },
     },
   },
@@ -165,6 +165,11 @@ export const MainNavMeta: Meta<typeof MainNav> = {
       control: 'select',
       options: ['horizontal', 'vertical'],
       description: 'Navigation layout variant',
+    },
+    styleVariant: {
+      control: 'select',
+      options: ['default', 'gradient', 'glass', 'pills'],
+      description: 'Visual style variant',
     },
     size: {
       control: 'select',
@@ -480,6 +485,269 @@ export const CombinedExample: MainNavStory = {
     docs: {
       description: {
         story: 'Kombinovaný příklad hlavní navigace s drobečkovou navigací.',
+      },
+    },
+  },
+};
+
+// =============================================================================
+// NEW STYLE VARIANTS (Phase 7.5 Redesign)
+// =============================================================================
+
+// Gradient variant - branded look
+export const GradientNav: MainNavStory = {
+  args: {
+    items: basicNavItems,
+    variant: 'horizontal',
+    styleVariant: 'gradient',
+    brand: (
+      <div
+        style={{
+          width: '120px',
+          height: '32px',
+          background: 'rgba(255, 255, 255, 0.2)',
+          borderRadius: 'var(--radius-sm)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'white',
+          fontWeight: 600,
+          fontSize: '14px',
+        }}
+      >
+        CSK
+      </div>
+    ),
+    actions: (
+      <>
+        <Button variant="secondary" size="sm">
+          Přihlásit se
+        </Button>
+      </>
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Navigace s gradient pozadím pro branded look. Vhodné pro hlavní stránky a hero sekce.',
+      },
+    },
+  },
+};
+
+// Glass variant - frosted glass effect
+export const GlassNav: MainNavStory = {
+  args: {
+    items: basicNavItems,
+    variant: 'horizontal',
+    styleVariant: 'glass',
+    brand: <LogoPlaceholder />,
+  },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          background: 'linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-800) 100%)',
+          minHeight: '200px',
+          padding: '0',
+        }}
+      >
+        <Story />
+        <div style={{ padding: '24px', color: 'white' }}>
+          <h2>Obsah za navigací</h2>
+          <p>Glass efekt vytváří frosted glass vzhled nad barevným pozadím.</p>
+        </div>
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Navigace s frosted glass efektem. Skvěle funguje nad barevným nebo obrázkovým pozadím.',
+      },
+    },
+  },
+};
+
+// Pills variant - nav items as pills
+export const PillsNav: MainNavStory = {
+  args: {
+    items: basicNavItems,
+    variant: 'horizontal',
+    styleVariant: 'pills',
+    brand: <LogoPlaceholder />,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Navigace s pill stylem pro aktivní položky. Aktivní stav má gradient pozadí.',
+      },
+    },
+  },
+};
+
+// All style variants showcase
+export const AllStyleVariants: MainNavStory = {
+  render: () => (
+    <div style={{ display: 'grid', gap: '32px' }}>
+      <div>
+        <h3 style={{ margin: '0 0 8px', padding: '16px' }}>Default</h3>
+        <MainNav items={basicNavItems.slice(0, 4)} styleVariant="default" />
+      </div>
+      <div>
+        <h3 style={{ margin: '0 0 8px', padding: '16px' }}>Gradient</h3>
+        <MainNav items={basicNavItems.slice(0, 4)} styleVariant="gradient" />
+      </div>
+      <div
+        style={{
+          background: 'linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-800) 100%)',
+        }}
+      >
+        <h3 style={{ margin: '0 0 8px', padding: '16px', color: 'white' }}>Glass (na barevném pozadí)</h3>
+        <MainNav items={basicNavItems.slice(0, 4)} styleVariant="glass" />
+      </div>
+      <div>
+        <h3 style={{ margin: '0 0 8px', padding: '16px' }}>Pills</h3>
+        <MainNav items={basicNavItems.slice(0, 4)} styleVariant="pills" />
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Porovnání všech stylových variant navigace.',
+      },
+    },
+  },
+};
+
+// Hover and active states demo
+export const HoverActiveStates: MainNavStory = {
+  args: {
+    items: [
+      { id: 'home', label: 'Domů', href: '/', active: true },
+      { id: 'calendar', label: 'Kalendář závodů', href: '/kalendar' },
+      { id: 'results', label: 'Výsledky', href: '/vysledky' },
+      { id: 'athletes', label: 'Závodníci (hover me)', href: '/zavodnici' },
+      { id: 'disabled', label: 'Disabled', href: '/disabled', disabled: true },
+    ],
+    variant: 'horizontal',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstrace hover a aktivních stavů. Aktivní položka má animovaný gradient underline.',
+      },
+    },
+  },
+};
+
+// Gradient with dropdown
+export const GradientWithDropdown: MainNavStory = {
+  args: {
+    items: navItemsWithDropdown,
+    variant: 'horizontal',
+    styleVariant: 'gradient',
+    brand: (
+      <div
+        style={{
+          width: '120px',
+          height: '32px',
+          background: 'rgba(255, 255, 255, 0.2)',
+          borderRadius: 'var(--radius-sm)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'white',
+          fontWeight: 600,
+          fontSize: '14px',
+        }}
+      >
+        CSK
+      </div>
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Gradient navigace s dropdown menu. Dropdown má gradient accent linku nahoře.',
+      },
+    },
+  },
+};
+
+// Featured showcase - CSK branded navigation
+export const FeaturedShowcase: MainNavStory = {
+  render: () => (
+    <div>
+      {/* Hero section with gradient nav */}
+      <MainNav
+        items={cskNavItems}
+        variant="horizontal"
+        styleVariant="gradient"
+        size="lg"
+        brand={
+          <div
+            style={{
+              width: '140px',
+              height: '40px',
+              background: 'rgba(255, 255, 255, 0.2)',
+              borderRadius: 'var(--radius-md)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'white',
+              fontWeight: 700,
+              fontSize: '16px',
+              letterSpacing: '0.05em',
+            }}
+          >
+            ČSK
+          </div>
+        }
+        actions={
+          <>
+            <Button variant="secondary" size="sm">
+              Přihlásit se
+            </Button>
+            <Button
+              variant="primary"
+              size="sm"
+              style={{
+                background: 'rgba(255, 255, 255, 0.2)',
+                borderColor: 'rgba(255, 255, 255, 0.3)',
+                color: 'white',
+              }}
+            >
+              Registrace
+            </Button>
+          </>
+        }
+      />
+      {/* Content */}
+      <div
+        style={{
+          background: 'linear-gradient(180deg, var(--color-primary-50) 0%, var(--color-bg-primary) 100%)',
+          padding: '48px 24px',
+          minHeight: '300px',
+        }}
+      >
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <h1 style={{ fontSize: '2.5rem', marginBottom: '16px' }}>Český svaz kanoistů</h1>
+          <p style={{ fontSize: '1.25rem', color: 'var(--color-text-secondary)' }}>
+            Registrační a výsledkový portál pro českou kanoistiku
+          </p>
+          <div style={{ marginTop: '32px' }}>
+            <Breadcrumbs items={basicBreadcrumbs} />
+          </div>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Kompletní ukázka branded navigace pro hlavní stránku CSK.',
       },
     },
   },

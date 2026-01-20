@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 7 - Hloubkové review a redesign
-**Další krok:** 7.5 Redesign pokročilých komponent (Tier 2) - Navigation
+**Další krok:** 7.5 Redesign pokročilých komponent (Tier 2) - Modal
 
 **Problém:** Současná implementace nedosahuje vizuální úrovně studovaných referencí (World Athletics, FIS, ICF). Komponenty jsou funkční, ale "utilitární" - chybí vizuální polish, branded feel, moderní detaily.
 
@@ -169,7 +169,7 @@
 
 ### 7.5 Redesign pokročilých komponent (Tier 2)
 - [x] **Header** - gradient background, blur efekt při scrollu
-- [ ] **Navigation** - aktivní stavy, hover animace
+- [x] **Navigation** - aktivní stavy, hover animace, gradient/glass/pills varianty
 - [ ] **Modal** - backdrop blur, slide-in animace
 - [ ] **Tabs** - animated underline, pill varianty
 - [ ] **Toast** - slide-in animace, progress bar

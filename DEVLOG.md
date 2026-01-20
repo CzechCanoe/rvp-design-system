@@ -1,5 +1,44 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.5 / Redesign Navigation komponenty
+
+### Dokončeno
+- [x] MainNav: Nové stylové varianty: `gradient`, `glass`, `pills`
+- [x] MainNav: Gradient varianta s primary gradient pozadím a bílým textem
+- [x] MainNav: Glass varianta s backdrop-filter blur pro frosted glass efekt
+- [x] MainNav: Pills varianta s gradient pill pro aktivní položky
+- [x] MainNav: Animovaný underline efekt pro aktivní stavy (horizontal)
+- [x] MainNav: Hover animace - translateY, icon scale, underline preview
+- [x] MainNav: Dropdown s gradient accent čárou nahoře a scale animací
+- [x] MainNav: Dropdown active item s levým border accentem
+- [x] MainNav: Toggle button animace (scale, rotate ikony)
+- [x] Breadcrumbs: Hover efekty s translateY a background color
+- [x] Breadcrumbs: Current item s gradient pozadím
+- [x] Breadcrumbs: Icon scale animace při hoveru
+- [x] Dark mode podpora pro všechny nové varianty
+- [x] Reduced motion podpora
+- [x] Nový `styleVariant` prop v MainNav.tsx
+- [x] 8 nových stories: GradientNav, GlassNav, PillsNav, AllStyleVariants, HoverActiveStates, GradientWithDropdown, FeaturedShowcase
+
+### Změněné soubory
+- `src/components/Navigation/Navigation.css` - kompletní redesign stylů
+- `src/components/Navigation/MainNav.tsx` - nový `styleVariant` prop
+- `src/components/Navigation/Navigation.stories.tsx` - 8 nových stories
+
+### Klíčové změny
+1. **Nové varianty** - `gradient` (branded look), `glass` (frosted effect), `pills` (rounded active)
+2. **Animated underline** - aktivní položky mají gradient underline, hover zobrazí preview
+3. **Micro-interactions** - hover translate, icon scale, dropdown scale animace
+4. **Dropdown** - gradient accent linka nahoře, active item má levý border
+5. **Breadcrumbs** - hover efekty, current item s gradient pozadím
+
+### Poznámky
+- Fáze 7.5 (Redesign Navigation) je dokončena
+- Build proběhl úspěšně
+- Další krok: 7.5 Modal komponenta
+
+---
+
 ## 2026-01-20 - Fáze 7.5 / Redesign Header komponenty
 
 ### Dokončeno

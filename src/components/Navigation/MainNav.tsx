@@ -30,12 +30,15 @@ export interface NavItem {
 
 export type MainNavVariant = 'horizontal' | 'vertical';
 export type MainNavSize = 'sm' | 'md' | 'lg';
+export type MainNavStyle = 'default' | 'gradient' | 'glass' | 'pills';
 
 export interface MainNavProps extends HTMLAttributes<HTMLElement> {
   /** Array of navigation items */
   items: NavItem[];
-  /** Navigation variant */
+  /** Navigation layout variant */
   variant?: MainNavVariant;
+  /** Visual style variant */
+  styleVariant?: MainNavStyle;
   /** Size of the navigation */
   size?: MainNavSize;
   /** Whether to show the mobile menu toggle */
@@ -121,6 +124,7 @@ export const MainNav = forwardRef<HTMLElement, MainNavProps>(
     {
       items,
       variant = 'horizontal',
+      styleVariant = 'default',
       size = 'md',
       showMobileToggle = true,
       mobileToggleLabel = 'Toggle navigation menu',
@@ -207,6 +211,7 @@ export const MainNav = forwardRef<HTMLElement, MainNavProps>(
       'csk-mainnav',
       `csk-mainnav--${variant}`,
       `csk-mainnav--${size}`,
+      styleVariant !== 'default' && `csk-mainnav--${styleVariant}`,
       mobileMenuOpen && 'csk-mainnav--mobile-open',
       className,
     ]
