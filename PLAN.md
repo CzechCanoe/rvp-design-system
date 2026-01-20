@@ -1,313 +1,99 @@
 # PLAN.md - CSK RVP Design System
 
 ## Aktuální stav
-**Fáze:** 8 - Integrace s kanoe.cz
-**Další krok:** 8.2 ResultsTable refaktoring
 
-**Problém:** Design systém je technicky kvalitní, ale koncepčně chybí řešení integrace. Komponenty budou embedovány do Joomla šablony na kanoe.cz - potřebují embed mode, container queries a vizuální kompatibilitu.
-
----
-
-## Fáze 0: Výzkum a design principy
-
-### 0.1 Výzkum sportovních prezentací
-- [x] Analýza ICF (canoeicf.com) - barvy, typografie, layout
-- [x] Analýza World Athletics (worldathletics.org)
-- [x] Analýza UCI (uci.org)
-- [x] Analýza FIS (fis-ski.com)
-- [x] Analýza českých svazů (ČAS, FAČR)
-- [x] Analýza Paddle UK - nedostupné (403), nahrazeno ČUS
-- [x] Vytvoření moodboardu s vizuálními referencemi
-- [x] Dokument `docs/research/sports-presentation-research.md`
-
-### 0.2 Audit kanoe.cz
-- [x] Extrakce stávající barevné palety
-- [x] Mapování komponent (Bootstrap 4, jQuery, DataTables)
-- [x] Identifikace co zachovat vs. nahradit
-- [x] Dokument `docs/research/kanoe-cz-audit.md`
-
-### 0.3 Design principy
-- [x] Mobile-first strategie
-- [x] WCAG 2.1 AA požadavky
-- [x] Dual personality (utilitární vs. expressive)
-- [x] Dark/light mode strategie
-- [x] Výběr fontu (na základě výzkumu)
-- [x] Dokument `docs/DESIGN_PRINCIPLES.md`
-
-**Milestone M0:** Design principy schváleny ✓
+| Fáze | Krok | Status |
+|------|------|--------|
+| **8 - Integrace s kanoe.cz** | 8.2 ResultsTable refaktoring | 🔲 Další |
 
 ---
 
-## Fáze 1: Projektová struktura a tokeny
+## Fáze 8: Integrace s kanoe.cz
 
-### 1.1 Setup projektu
-- [x] Inicializace npm projektu
-- [x] Konfigurace TypeScript
-- [x] Konfigurace Vite
-- [x] Konfigurace Storybook 8
-- [x] Struktura složek (src/tokens, src/components, etc.)
+**Kontext:** Komponenty budou embedovány do Joomla šablony na kanoe.cz (Bootstrap 4, jQuery). Potřebují embed mode, container queries a vizuální kompatibilitu.
 
-### 1.2 Design Tokens
-- [x] Barevná paleta (light theme) - `src/tokens/colors.css`
-- [x] CSK specifické barvy (sekce DV/RY/VT, VT třídy)
-- [x] Barevná paleta (dark theme)
-- [x] Typografie (font family, scale, weights) - `src/tokens/typography.css`
-- [x] Spacing (4px base scale) - `src/tokens/spacing.css`
-- [x] Border radius - `src/tokens/radius.css`
-- [x] Shadows - `src/tokens/shadows.css`
-- [x] Transitions - `src/tokens/transitions.css`
+**Strategie - tři vizuální kontexty:**
+1. **Embed** - neutrální moderní, pro komponenty v kanoe.cz
+2. **Standalone** - pro satelitní aplikace (Registr, Přihlášky)
+3. **Expressive** - wow faktor pro veřejné profily
 
-**Milestone M1:** Tokeny hotové, Storybook story ✅
-
----
-
-## Fáze 2: Core komponenty (Tier 1)
-
-- [x] Button (primary, secondary, ghost, danger, sizes)
-- [x] Input (text, password, search, number, validation)
-- [x] Select (native, custom dropdown)
-- [x] Checkbox
-- [x] Radio
-- [x] Switch
-- [x] Card (surface, elevated, clickable)
-- [x] Badge (status, VT, sekce)
-- [x] Table (sortable, selectable)
-
-**Milestone M2:** Core komponenty v Storybook ✅
-
----
-
-## Fáze 3: Pokročilé komponenty (Tier 2)
-
-- [x] Modal (dialog, confirm, wizard)
-- [x] Tabs (horizontal, pills)
-- [x] Toast (notifications provider)
-- [x] Navigation (main nav, breadcrumbs)
-- [x] Pagination
-- [x] Progress (bar, steps)
-- [x] Header (app header)
-- [x] Avatar (image, initials)
-- [x] Dropdown
-
-**Milestone M3:** Pokročilé komponenty v Storybook ✅
-
----
-
-## Fáze 4: Specifické komponenty (Tier 3)
-
-- [x] Calendar (event grid)
-- [x] Dropzone (file upload)
-- [x] Timeline (workflow vizualizace)
-- [x] StatCard (dashboard widget)
-- [x] AthleteCard (profil závodníka)
-- [x] ResultsTable (s highlighty)
-- [x] LiveIndicator (pulsující)
-- [x] EmptyState
-- [x] Skeleton
-
-**Milestone M4:** Use-case komponenty v Storybook ✅
-
----
-
-## Fáze 5: Prototypy
-
-- [x] prototype-calendar - Kalendář závodů
-- [x] prototype-results - Výsledky závodu
-- [x] prototype-live - Live výsledky
-- [x] prototype-registration - přihlašování na závody - oddílová přihláška
-- [x] prototype-profile - Profil závodníka
-- [x] prototype-dashboard - Dashboard správce
-
-**Milestone M5:** Klikatelné prototypy ✅
-
----
-
-## Fáze 6: Dokumentace a publikace
-
-- [x] kontrola, že jsou všechny komponenty správně includované a propojené, že storybook obsahuje vše co má
-- [x] kompletace a otestování buildů
-- [x] pořízení screenshotů všech prototypů a storybooků s playwright, kontrola proti screenshotům
-- [x] README.md s quick start
-- [x] Component API dokumentace
-- [ ] GitHub Actions CI/CD
-- [ ] NPM publikace (@czechcanoe/rvp-design-system)
-- [ ] GitHub Pages pro Storybook
-
-**Milestone M6:** NPM release, dokumentace online
-
----
-
-## Fáze 7: Hloubkové review a redesign
-
-### 7.1 Vizuální audit a analýza mezer
-- [x] Porovnání současných komponent s top referencemi (World Athletics, FIS, UCI)
-- [x] Dokumentace konkrétních vizuálních nedostatků
-- [x] Screenshot comparison - naše komponenty vs. reference
-- [x] Identifikace chybějících vizuálních prvků (gradienty, shadows, micro-interactions)
-- [x] Dokument `docs/review/visual-gap-analysis.md`
-
-### 7.2 Light mode priorita (technický fix)
-- [x] Změna výchozího chování - light mode jako default
-- [x] Storybook: explicitní `data-theme="light"` v preview
-- [x] Odstranění automatického dark mode z `prefers-color-scheme`
-- [x] Dark mode pouze explicitním přepnutím
-- [x] Testování static build
-
-### 7.3 Redesign tokenů
-- [x] Review barevné palety - je dostatečně expresivní?
-- [x] Přidání gradient tokenů (pro hero sekce, karty)
-- [x] Vylepšení shadow systému (více úrovní, měkčí)
-- [x] Review typografie - dostatečně výrazné nadpisy?
-- [x] Nové tokeny pro "expresivní režim" (větší spacing, dramatičtější)
-
-### 7.4 Redesign core komponent (Tier 1)
-- [x] **Button** - gradient varianty, lepší hover states, subtle shadows
-- [x] **Card** - gradient backgrounds, glassmorphism efekty pro elevated
-- [x] **Badge** - gradient varianty, pill style, glow efekty, vylepšené CSK sekce
-- [x] **Input/Select** - modernější focus states, gradient glow efekty, enhanced shadows
-- [x] **Table** - lepší row highlights, sticky headers, micro-animations
-
-### 7.5 Redesign pokročilých komponent (Tier 2)
-- [x] **Header** - gradient background, blur efekt při scrollu
-- [x] **Navigation** - aktivní stavy, hover animace, gradient/glass/pills varianty
-- [x] **Modal** - backdrop blur, slide-in animace, gradient/glass/danger varianty
-- [x] **Tabs** - animated underline, gradient/gradient-line/glass varianty
-- [x] **Toast** - slide-in animace, progress bar, gradient/glass varianty, micro-interactions
-
-### 7.6 Redesign specifických komponent (Tier 3)
-- [x] **AthleteCard** - hero varianta s gradient overlay
-- [x] **ResultsTable** - highlighting pro pozice, animované změny
-- [x] **LiveIndicator** - dramatičtější pulsování, gradient glow
-- [x] **StatCard** - trend šipky, sparkline grafy, gradient backgrounds
-- [x] **Calendar** - hover efekty, event preview, style varianty (gradient/glass/bordered)
-
-### 7.7 Branded visual elements
-- [x] CSK logo integrace guidelines
-- [x] Vodní/sportovní vizuální prvky (vlny, dynamické tvary?)
-- [x] Hero patterns/backgrounds
-- [x] Fotografické overlay styly
-- [x] Disciplínové vizuální identity (DV/RY/VT)
-
-### 7.8 Redesign prototypů
-- [x] **CalendarPage** - hero sekce, featured events, vizuálně bohatší
-- [x] **ResultsPage** - dramatický leaderboard, pozice highlighting
-- [x] **LivePage** - immersive experience, real-time feel
-- [x] **ProfilePage** - hero header s fotkou, achievement showcase
-- [x] **RegistrationPage** - přehledný wizard, progress indication
-- [x] **DashboardPage** - widget karty, statistiky s grafy
-
-### 7.9 Expresivní vs. utilitární režim
-- [x] Implementace dual-mode systému (jak definováno v DESIGN_PRINCIPLES.md)
-- [x] Expresivní spacing scale
-- [x] Expresivní animace (delší, dramatičtější)
-- [x] Context provider pro přepínání režimů
-- [x] Storybook stories pro oba režimy
-
-### 7.10 Finální polish
-- [x] Konzistence napříč všemi komponentami (audit provedený, opraveny syntax chyby a undefined tokeny)
-- [x] Micro-interactions audit (opraveny hardcoded transitions, přidán reduced motion do Pagination)
-- [x] Reduced motion support (doplněno pro Checkbox, Switch, Radio; opraveno Skeleton, Dropdown)
-- [x] Performance check (CSS bundle size) - 26.51 KB gzipped, opraveny CSS warningy
-- [x] Cross-browser testing - Chrome, Firefox, WebKit (desktop + mobile), 125 testů, 100% pass
-
-**Milestone M7:** Vizuálně atraktivní design systém na úrovni top sportovních federací
-
----
-
-## Fáze 8: Integrace s kanoe.cz (Feedback Round 1)
-
-**Problém:** Design systém byl navržen jako izolovaný luxusní produkt. V realitě budou komponenty embedovány do Joomla šablony na kanoe.cz (Bootstrap 4, jQuery). Vizuálně nenavazuje na existující web.
-
-**Strategie:** Tři vizuální kontexty:
-1. **Embed (neutrální moderní)** - pro komponenty v kanoe.cz
-2. **Standalone satelit** - pro aplikace (Registr, Přihlášky)
-3. **Expressive** - pro veřejné profily závodníků (wow faktor)
-
-### 8.1 Infrastruktura pro embed režim
-- [x] Nový display mode `embed` v ThemeContext
-- [x] CSS pravidla pro `[data-mode="embed"]` (jemné stíny, bez dramatických efektů)
-- [x] Container Queries foundation (`src/tokens/container-queries.css`)
-- [x] Storybook: KanoeCzContext mock (simulace kanoe.cz layoutu)
-- [x] Integration stories - komponenty uvnitř Bootstrap 4 struktury
+### 8.1 Infrastruktura pro embed režim ✅
+- [x] Display mode `embed` v ThemeContext
+- [x] CSS pravidla `[data-mode="embed"]`
+- [x] Container Queries foundation
+- [x] KanoeCzContext mock + integration stories
 
 ### 8.2 ResultsTable refaktoring
 - [ ] Embed varianta (bez stínů, kompaktní padding, border místo shadow)
-- [ ] Container-responsive sloupce (skrývání méně důležitých při úzké šířce)
-- [ ] Slalom-specifické zobrazení (1./2. jízda, Q/SF/F, zvýraznění postupu)
-- [ ] Storybook stories: "V kontextu kanoe.cz", "Slalom kvalifikace"
+- [ ] Container-responsive sloupce (skrývání při úzké šířce)
+- [ ] Slalom-specifické zobrazení (1./2. jízda, Q/SF/F, postupy)
+- [ ] Stories: "V kontextu kanoe.cz", "Slalom kvalifikace"
 
 ### 8.3 Calendar refaktoring
-- [ ] List view (chronologický seznam s datumovými hlavičkami)
-- [ ] Cards view (měsíční karty pro homepage)
-- [ ] Embed mode (zjednodušené event cards, bez animací)
-- [ ] Container query responzivita
+- [ ] List view (chronologický seznam)
+- [ ] Cards view (měsíční karty)
+- [ ] Embed mode + container query responzivita
 
 ### 8.4 Nové šablony
-- [ ] **Event Detail Page** - životní cyklus akce:
-  - Před: propozice, mapa, přihlášky
-  - Během: live výsledky, feed
-  - Po: finální výsledky, download, fotogalerie
-- [ ] **Athlete Public Profile (EXPRESSIVE)** - celostránkový wow profil:
-  - Velké hero foto s gradient overlay
-  - Statistiky v kartách, timeline kariéry
-  - Historie výsledků
-- [ ] **Athlete Card (embed)** - kompaktní verze pro seznamy
+- [ ] **Event Detail Page** - před/během/po závodu
+- [ ] **Athlete Public Profile (EXPRESSIVE)** - celostránkový wow profil
+- [ ] **Athlete Card (embed)** - kompaktní verze
 
 ### 8.5 Header satellite varianta
-- [ ] Nový variant `satellite` - jen logo + user + kontextové akce
-- [ ] Bez mega-menu, kompaktní výška
-- [ ] Pro standalone aplikace (Registr, Přihlášky)
+- [ ] Variant `satellite` - logo + user + kontextové akce
+- [ ] Pro standalone aplikace
 
 ### 8.6 Vizuální harmonizace
-- [ ] Oprava WCAG - kontrast textu na hero gradientech ≥ 4.5:1
-- [ ] Úprava/odstranění wave overlay kde snižuje čitelnost
-- [ ] Realistická data v prototypech (skutečné závody, závodníci, časy)
+- [ ] WCAG kontrast na hero gradientech ≥ 4.5:1
+- [ ] Realistická data v prototypech
 
 ### 8.7 Testování integrace
 - [ ] Playwright testy pro embed varianty
 - [ ] Container query breakpoint testy
 - [ ] WCAG contrast audit
 
-**Milestone M8:** Komponenty připravené pro embed do kanoe.cz, KanoeCzContext mock v Storybooku
+**Milestone M8:** Komponenty připravené pro embed do kanoe.cz
 
 ---
 
-## Technický stack
+## Backlog (nedokončené z předchozích fází)
+
+### Fáze 6: Publikace
+- [ ] GitHub Actions CI/CD
+- [ ] NPM publikace (@czechcanoe/rvp-design-system)
+- [ ] GitHub Pages pro Storybook
+
+---
+
+## Dokončené fáze (reference)
+
+| Fáze | Popis | Milestone |
+|------|-------|-----------|
+| 0 | Výzkum a design principy | M0 ✅ |
+| 1 | Projektová struktura a tokeny | M1 ✅ |
+| 2 | Core komponenty (Tier 1) | M2 ✅ |
+| 3 | Pokročilé komponenty (Tier 2) | M3 ✅ |
+| 4 | Specifické komponenty (Tier 3) | M4 ✅ |
+| 5 | Prototypy | M5 ✅ |
+| 6 | Dokumentace (částečně) | - |
+| 7 | Hloubkové review a redesign | M7 ✅ |
+
+*Detaily dokončených fází viz `PLAN-history.md`*
+
+---
+
+## Tech stack
 
 - **React 18+** s TypeScript (strict mode)
 - **Vite** pro build
 - **Storybook 8** pro dokumentaci
-- **CSS strategie:** TBD (Vanilla Extract / CSS Modules / Tailwind+CVA)
-- **GitHub Actions** pro CI/CD
+- **CSS custom properties** + režimy (utility/expressive/embed)
 
 ---
 
-## Poznámky
+## Klíčové principy
 
-- React-first přístup, CSS jako by-product
-- Font bude vybrán během výzkumné fáze
-- Kompletní výzkum sportovních federací před návrhem vizuálu
-
-### Poznámky k fázi 7 (redesign)
-
-**Klíčové vizuální inspirace z research:**
-- World Athletics: fialová/oranžová kombinace, moderní feel, generous whitespace
-- FIS: widget systém, rounded corners (4px), konzistentní component reuse
-- ICF: fotografický přístup, akční záběry, mega-menu navigace
-- ČAS: Poppins font, červeno-modrý toggle, AJAX plynulost
-
-**Co chybí v současné implementaci:**
-1. Gradienty (hero sekce, karty, buttony)
-2. Soft shadows s více úrovněmi
-3. Micro-interactions a animace
-4. Branded feel (CSK identita)
-5. Expresivní režim (je definovaný, ale neimplementovaný)
-6. Fotografické overlay styly
-7. Dramatické hover states
-
-**Priorita režimů:**
-- **Light mode = primární** (kanoe.cz integrace, veřejné stránky)
-- **Dark mode = sekundární** (live výsledky na mobilech, volitelné)
-
-**Cílová kvalita:**
-Design systém by měl být na úrovni World Athletics nebo FIS - ne generický Bootstrap/Tailwind look.
+- **Light mode = primární** (kanoe.cz, veřejné stránky)
+- **Dark mode = sekundární** (live výsledky, volitelné)
+- **Mobile-first** responsive design
+- **WCAG 2.1 AA** accessibility
