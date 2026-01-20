@@ -67,6 +67,8 @@ jobs:
     name: Playwright Tests
     runs-on: ubuntu-latest
     needs: build
+    # Run tests only on PRs, not on every push to main
+    if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v4
 
