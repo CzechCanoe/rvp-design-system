@@ -3,6 +3,8 @@ import { useState, useMemo } from 'react';
 import { Header } from '../components/Header';
 import { MainNav } from '../components/Navigation';
 import { Calendar, type CalendarEvent } from '../components/Calendar';
+import { CalendarList } from '../components/Calendar/CalendarList';
+import { CalendarCards } from '../components/Calendar/CalendarCards';
 import { Card } from '../components/Card';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
@@ -21,6 +23,9 @@ import './CalendarPage.css';
 /** Display variant for the page */
 type CalendarPageVariant = 'standalone' | 'satellite' | 'embed';
 
+/** Calendar view type */
+type CalendarViewType = 'month' | 'list' | 'cards';
+
 interface CalendarPageProps {
   /** Initial section filter */
   initialSection?: 'all' | 'dv' | 'ry' | 'vt';
@@ -28,6 +33,10 @@ interface CalendarPageProps {
   showLive?: boolean;
   /** Display variant */
   variant?: CalendarPageVariant;
+  /** Initial view type */
+  initialView?: CalendarViewType;
+  /** Show view switcher */
+  showViewSwitcher?: boolean;
 }
 
 // Sample race data
@@ -278,6 +287,65 @@ const ArrowRightIcon = () => (
 
 // Note: TrophyIcon, StarIcon, WaveDecoration removed - hero section cleaned (Phase 8.6.3)
 
+// Grid/Month view icon
+const GridIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect x="3" y="3" width="7" height="7" />
+    <rect x="14" y="3" width="7" height="7" />
+    <rect x="14" y="14" width="7" height="7" />
+    <rect x="3" y="14" width="7" height="7" />
+  </svg>
+);
+
+// List view icon
+const ListIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <line x1="8" y1="6" x2="21" y2="6" />
+    <line x1="8" y1="12" x2="21" y2="12" />
+    <line x1="8" y1="18" x2="21" y2="18" />
+    <circle cx="4" cy="6" r="1" fill="currentColor" />
+    <circle cx="4" cy="12" r="1" fill="currentColor" />
+    <circle cx="4" cy="18" r="1" fill="currentColor" />
+  </svg>
+);
+
+// Cards view icon
+const CardsIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect x="2" y="3" width="20" height="6" rx="1" />
+    <rect x="2" y="11" width="20" height="6" rx="1" />
+    <line x1="6" y1="6" x2="18" y2="6" />
+    <line x1="6" y1="14" x2="18" y2="14" />
+  </svg>
+);
+
 // CSK Logo component for satellite header
 const CSKLogo = () => (
   <span className="prototype-calendar-page__logo">
@@ -285,11 +353,18 @@ const CSKLogo = () => (
   </span>
 );
 
-const CalendarPage = ({ initialSection = 'all', showLive = true, variant = 'standalone' }: CalendarPageProps) => {
+const CalendarPage = ({
+  initialSection = 'all',
+  showLive = true,
+  variant = 'standalone',
+  initialView = 'month',
+  showViewSwitcher = true,
+}: CalendarPageProps) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedSection, setSelectedSection] = useState<string>(initialSection);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
+  const [currentView, setCurrentView] = useState<CalendarViewType>(initialView);
 
   // Generate races for current month
   const allRaces = useMemo(() => {
@@ -466,21 +541,81 @@ const CalendarPage = ({ initialSection = 'all', showLive = true, variant = 'stan
                 defaultValue="all"
                 size="sm"
               />
+
+              {showViewSwitcher && (
+                <div className="prototype-calendar-page__view-switcher">
+                  <button
+                    type="button"
+                    className={`prototype-calendar-page__view-btn ${currentView === 'month' ? 'prototype-calendar-page__view-btn--active' : ''}`}
+                    onClick={() => setCurrentView('month')}
+                    aria-label="Měsíční pohled"
+                    title="Měsíční pohled"
+                  >
+                    <GridIcon />
+                  </button>
+                  <button
+                    type="button"
+                    className={`prototype-calendar-page__view-btn ${currentView === 'list' ? 'prototype-calendar-page__view-btn--active' : ''}`}
+                    onClick={() => setCurrentView('list')}
+                    aria-label="Seznam"
+                    title="Seznam"
+                  >
+                    <ListIcon />
+                  </button>
+                  <button
+                    type="button"
+                    className={`prototype-calendar-page__view-btn ${currentView === 'cards' ? 'prototype-calendar-page__view-btn--active' : ''}`}
+                    onClick={() => setCurrentView('cards')}
+                    aria-label="Měsíční karty"
+                    title="Měsíční karty"
+                  >
+                    <CardsIcon />
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 
           {/* Content grid */}
           <div className="prototype-calendar-page__content">
-            {/* Calendar */}
+            {/* Calendar - different views */}
             <div className="prototype-calendar-page__calendar">
-              <Calendar
-                date={currentDate}
-                onDateChange={setCurrentDate}
-                events={filteredRaces}
-                size="lg"
-                onEventClick={handleEventClick}
-                onDayClick={(date) => console.log('Day clicked:', date)}
-              />
+              {currentView === 'month' && (
+                <Calendar
+                  date={currentDate}
+                  onDateChange={setCurrentDate}
+                  events={filteredRaces}
+                  size="lg"
+                  onEventClick={handleEventClick}
+                  onDayClick={(date) => console.log('Day clicked:', date)}
+                />
+              )}
+
+              {currentView === 'list' && (
+                <CalendarList
+                  events={filteredRaces}
+                  groupBy="month"
+                  showSection
+                  showEndDate
+                  onEventClick={handleEventClick}
+                  styleVariant={variant === 'embed' ? 'embed' : 'default'}
+                />
+              )}
+
+              {currentView === 'cards' && (
+                <CalendarCards
+                  events={filteredRaces}
+                  maxMonths={4}
+                  maxEventsPerMonth={5}
+                  showSection
+                  onEventClick={handleEventClick}
+                  onMonthClick={(year, month) => {
+                    setCurrentDate(new Date(year, month, 1));
+                    setCurrentView('month');
+                  }}
+                  styleVariant={variant === 'embed' ? 'embed' : 'default'}
+                />
+              )}
             </div>
 
             {/* Sidebar */}
@@ -667,6 +802,15 @@ const meta = {
       options: ['standalone', 'satellite', 'embed'],
       description: 'Display variant for different integration contexts',
     },
+    initialView: {
+      control: 'select',
+      options: ['month', 'list', 'cards'],
+      description: 'Initial calendar view type',
+    },
+    showViewSwitcher: {
+      control: 'boolean',
+      description: 'Show view type switcher buttons',
+    },
   },
 } satisfies Meta<typeof CalendarPage>;
 
@@ -798,6 +942,83 @@ export const EmbedWithSidebar: Story = {
           { label: 'Divoká voda', href: '#' },
           { label: 'Kalendář' },
         ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
+};
+
+// ============================================================================
+// View Type Variants
+// ============================================================================
+
+/**
+ * Kalendář v pohledu Seznam - chronologický výpis závodů seskupený podle měsíců.
+ */
+export const ListView: Story = {
+  args: {
+    initialSection: 'all',
+    showLive: true,
+    initialView: 'list',
+  },
+};
+
+/**
+ * Kalendář v pohledu Karty - přehled závodů po měsících v kartách.
+ */
+export const CardsView: Story = {
+  args: {
+    initialSection: 'all',
+    showLive: true,
+    initialView: 'cards',
+  },
+};
+
+/**
+ * Embed varianta s pohledem Seznam - vhodné pro úzké sloupce.
+ */
+export const EmbedListView: Story = {
+  args: {
+    initialSection: 'all',
+    showLive: true,
+    variant: 'embed',
+    initialView: 'list',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="sidebar"
+        pageVariant="subpage"
+        pageTitle="Nadcházející závody"
+        breadcrumbs={[
+          { label: 'Domů', href: '#' },
+          { label: 'Závody' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
+};
+
+/**
+ * Embed varianta s pohledem Karty - přehled na homepage.
+ */
+export const EmbedCardsView: Story = {
+  args: {
+    initialSection: 'all',
+    showLive: false,
+    variant: 'embed',
+    initialView: 'cards',
+    showViewSwitcher: false,
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="full"
+        pageVariant="homepage"
+        pageTitle=""
       >
         <Story />
       </KanoeCzContext>
