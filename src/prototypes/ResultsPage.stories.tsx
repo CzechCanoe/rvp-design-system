@@ -24,8 +24,12 @@ interface ResultsPageProps {
   initialCategory?: string;
   /** Whether the race is currently live */
   isLive?: boolean;
+  /** Show hero section */
+  showHero?: boolean;
   /** Show podium section */
   showPodium?: boolean;
+  /** Section/discipline for theming */
+  section?: 'dv' | 'ry' | 'vt';
 }
 
 // ============================================================================
@@ -163,6 +167,41 @@ const ChevronRightIcon = () => (
   </svg>
 );
 
+const TrophyIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+    <path d="M4 22h16" />
+    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+  </svg>
+);
+
+const MedalIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="15" r="6" />
+    <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" />
+    <path d="M15.29 8.71A6 6 0 1 0 8.71 8.71" />
+  </svg>
+);
+
+// Wave decoration component
+const WaveDecoration = ({ className = '' }: { className?: string }) => (
+  <svg
+    className={`results-page-wave ${className}`}
+    viewBox="0 0 1440 100"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+  >
+    <path
+      d="M0 50C240 20 480 80 720 50C960 20 1200 80 1440 50V100H0V50Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
 // ============================================================================
 // Helper Functions
 // ============================================================================
@@ -195,7 +234,9 @@ function getInitials(name: string): string {
 const ResultsPage = ({
   initialCategory = 'K1M',
   isLive = false,
+  showHero = true,
   showPodium = true,
+  section = 'dv',
 }: ResultsPageProps) => {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [searchQuery, setSearchQuery] = useState('');
@@ -247,6 +288,9 @@ const ResultsPage = ({
     currentPage * pageSize
   );
 
+  // Hero section class based on discipline
+  const heroClass = `results-page-hero results-page-hero--${section}`;
+
   return (
     <div className="prototype-results-page">
       {/* Header */}
@@ -283,42 +327,146 @@ const ResultsPage = ({
         }
       />
 
-      {/* Main content */}
-      <main className="prototype-results-page__main">
-        <div className="prototype-results-page__container">
-          {/* Race Header */}
-          <div className="prototype-results-page__race-header">
-            <div className="prototype-results-page__breadcrumb">
+      {/* Hero Section */}
+      {showHero && (
+        <section className={heroClass}>
+          <div className="results-page-hero__background">
+            <div className="results-page-hero__gradient" />
+            <div className="results-page-hero__pattern" />
+          </div>
+          <div className="results-page-hero__content">
+            <div className="results-page-hero__breadcrumb">
               <a href="#">Výsledky</a>
-              <span className="prototype-results-page__breadcrumb-separator">/</span>
+              <span className="results-page-hero__breadcrumb-separator">/</span>
               <a href="#">2026</a>
-              <span className="prototype-results-page__breadcrumb-separator">/</span>
+              <span className="results-page-hero__breadcrumb-separator">/</span>
               <span>MČR ve slalomu</span>
             </div>
 
-            <h1 className="prototype-results-page__title">
-              MČR ve slalomu 2026
-              {isLive && <LiveIndicator variant="live" size="md" label="LIVE" />}
-              {!isLive && <Badge variant="success">Oficiální</Badge>}
-            </h1>
+            <div className="results-page-hero__header">
+              <h1 className="results-page-hero__title">MČR ve slalomu 2026</h1>
+              <div className="results-page-hero__badges">
+                {isLive && <LiveIndicator variant="live" size="md" label="LIVE" styleVariant="glass" />}
+                {!isLive && <Badge variant="success" glow>Oficiální výsledky</Badge>}
+              </div>
+            </div>
 
-            <div className="prototype-results-page__subtitle">
-              <span className="prototype-results-page__info-item">
+            <div className="results-page-hero__meta">
+              <span className="results-page-hero__meta-item">
                 <CalendarIcon />
                 3.–5. května 2026
               </span>
-              <span className="prototype-results-page__info-item">
+              <span className="results-page-hero__meta-item">
                 <LocationIcon />
                 Praha – Troja
               </span>
-              <span className="prototype-results-page__info-item">
+              <span className="results-page-hero__meta-item">
                 <UsersIcon />
                 156 závodníků
               </span>
-              <Badge section="dv">Divoká voda</Badge>
+            </div>
+
+            <div className="results-page-hero__stats">
+              <div className="results-page-hero__stat">
+                <span className="results-page-hero__stat-value">4</span>
+                <span className="results-page-hero__stat-label">kategorie</span>
+              </div>
+              <div className="results-page-hero__stat">
+                <span className="results-page-hero__stat-value">156</span>
+                <span className="results-page-hero__stat-label">závodníků</span>
+              </div>
+              <div className="results-page-hero__stat">
+                <span className="results-page-hero__stat-value">24</span>
+                <span className="results-page-hero__stat-label">branek</span>
+              </div>
             </div>
           </div>
+          <WaveDecoration className="results-page-hero__wave" />
+        </section>
+      )}
 
+      {/* Podium Section */}
+      {showHero && showPodium && podium.length >= 3 && !searchQuery && (
+        <section className="results-page-podium">
+          <div className="results-page-podium__container">
+            <div className="results-page-podium__header">
+              <TrophyIcon />
+              <h2 className="results-page-podium__title">Stupně vítězů – {categories.find(c => c.id === selectedCategory)?.name}</h2>
+            </div>
+            <div className="results-page-podium__grid">
+              {/* Silver - 2nd place */}
+              <button
+                type="button"
+                className="results-page-podium__card results-page-podium__card--silver"
+                onClick={() => console.log('Clicked:', podium[1].name)}
+              >
+                <span className="results-page-podium__trophy">
+                  <MedalIcon />
+                </span>
+                <div className="results-page-podium__rank">2</div>
+                <div className="results-page-podium__avatar">
+                  {getInitials(podium[1].name)}
+                </div>
+                <div className="results-page-podium__name">{podium[1].name}</div>
+                <div className="results-page-podium__club">{podium[1].club}</div>
+                <div className="results-page-podium__time">
+                  {formatTime(podium[1].totalTime)}
+                </div>
+                <div className="results-page-podium__diff">
+                  {formatTimeDiff(podium[1].timeDiff)}
+                </div>
+              </button>
+
+              {/* Gold - 1st place */}
+              <button
+                type="button"
+                className="results-page-podium__card results-page-podium__card--gold"
+                onClick={() => console.log('Clicked:', podium[0].name)}
+              >
+                <span className="results-page-podium__trophy">
+                  <MedalIcon />
+                </span>
+                <div className="results-page-podium__rank">1</div>
+                <div className="results-page-podium__avatar">
+                  {getInitials(podium[0].name)}
+                </div>
+                <div className="results-page-podium__name">{podium[0].name}</div>
+                <div className="results-page-podium__club">{podium[0].club}</div>
+                <div className="results-page-podium__time">
+                  {formatTime(podium[0].totalTime)}
+                </div>
+              </button>
+
+              {/* Bronze - 3rd place */}
+              <button
+                type="button"
+                className="results-page-podium__card results-page-podium__card--bronze"
+                onClick={() => console.log('Clicked:', podium[2].name)}
+              >
+                <span className="results-page-podium__trophy">
+                  <MedalIcon />
+                </span>
+                <div className="results-page-podium__rank">3</div>
+                <div className="results-page-podium__avatar">
+                  {getInitials(podium[2].name)}
+                </div>
+                <div className="results-page-podium__name">{podium[2].name}</div>
+                <div className="results-page-podium__club">{podium[2].club}</div>
+                <div className="results-page-podium__time">
+                  {formatTime(podium[2].totalTime)}
+                </div>
+                <div className="results-page-podium__diff">
+                  {formatTimeDiff(podium[2].timeDiff)}
+                </div>
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Main content */}
+      <main className="prototype-results-page__main">
+        <div className="prototype-results-page__container">
           {/* Content */}
           <div className="prototype-results-page__content">
             {/* Results Section */}
@@ -364,56 +512,6 @@ const ResultsPage = ({
                 </div>
               </div>
 
-              {/* Podium */}
-              {showPodium && podium.length >= 3 && !searchQuery && (
-                <div className="prototype-results-page__podium">
-                  {/* Silver - 2nd place */}
-                  <div className="prototype-results-page__podium-card prototype-results-page__podium-card--silver">
-                    <div className="prototype-results-page__podium-rank">2</div>
-                    <div className="prototype-results-page__podium-avatar">
-                      {getInitials(podium[1].name)}
-                    </div>
-                    <div className="prototype-results-page__podium-name">{podium[1].name}</div>
-                    <div className="prototype-results-page__podium-club">{podium[1].club}</div>
-                    <div className="prototype-results-page__podium-time">
-                      {formatTime(podium[1].totalTime)}
-                    </div>
-                    <div className="prototype-results-page__podium-diff">
-                      {formatTimeDiff(podium[1].timeDiff)}
-                    </div>
-                  </div>
-
-                  {/* Gold - 1st place */}
-                  <div className="prototype-results-page__podium-card prototype-results-page__podium-card--gold">
-                    <div className="prototype-results-page__podium-rank">1</div>
-                    <div className="prototype-results-page__podium-avatar">
-                      {getInitials(podium[0].name)}
-                    </div>
-                    <div className="prototype-results-page__podium-name">{podium[0].name}</div>
-                    <div className="prototype-results-page__podium-club">{podium[0].club}</div>
-                    <div className="prototype-results-page__podium-time">
-                      {formatTime(podium[0].totalTime)}
-                    </div>
-                  </div>
-
-                  {/* Bronze - 3rd place */}
-                  <div className="prototype-results-page__podium-card prototype-results-page__podium-card--bronze">
-                    <div className="prototype-results-page__podium-rank">3</div>
-                    <div className="prototype-results-page__podium-avatar">
-                      {getInitials(podium[2].name)}
-                    </div>
-                    <div className="prototype-results-page__podium-name">{podium[2].name}</div>
-                    <div className="prototype-results-page__podium-club">{podium[2].club}</div>
-                    <div className="prototype-results-page__podium-time">
-                      {formatTime(podium[2].totalTime)}
-                    </div>
-                    <div className="prototype-results-page__podium-diff">
-                      {formatTimeDiff(podium[2].timeDiff)}
-                    </div>
-                  </div>
-                </div>
-              )}
-
               {/* Results Header */}
               <div className="prototype-results-page__results-header">
                 <h2 className="prototype-results-page__results-title">
@@ -436,6 +534,7 @@ const ResultsPage = ({
               <ResultsTable
                 results={paginatedResults}
                 variant="striped"
+                styleVariant="gradient"
                 size="md"
                 showRuns={false}
                 showTimeDiff={true}
@@ -562,7 +661,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Prototyp stránky výsledků závodu CSK. Zobrazuje výsledkovou listinu s pódiem, filtrováním podle kategorií a vyhledáváním.',
+          'Prototyp stránky výsledků závodu CSK. Zobrazuje výsledkovou listinu s dramatickým pódiem, hero sekcí a filtrováním podle kategorií.',
       },
     },
   },
@@ -577,9 +676,18 @@ const meta = {
       control: 'boolean',
       description: 'Whether the race is currently live',
     },
+    showHero: {
+      control: 'boolean',
+      description: 'Show hero section',
+    },
     showPodium: {
       control: 'boolean',
       description: 'Show podium section',
+    },
+    section: {
+      control: 'select',
+      options: ['dv', 'ry', 'vt'],
+      description: 'Section/discipline for hero theming',
     },
   },
 } satisfies Meta<typeof ResultsPage>;
@@ -588,13 +696,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /**
- * Výchozí zobrazení stránky výsledků s kategorií K1 Muži.
+ * Výchozí zobrazení stránky výsledků s hero sekcí a pódiem.
  */
 export const Default: Story = {
   args: {
     initialCategory: 'K1M',
     isLive: false,
+    showHero: true,
     showPodium: true,
+    section: 'dv',
   },
 };
 
@@ -605,7 +715,9 @@ export const Live: Story = {
   args: {
     initialCategory: 'K1M',
     isLive: true,
+    showHero: true,
     showPodium: true,
+    section: 'dv',
   },
 };
 
@@ -616,7 +728,9 @@ export const K1Zeny: Story = {
   args: {
     initialCategory: 'K1W',
     isLive: false,
+    showHero: true,
     showPodium: true,
+    section: 'dv',
   },
 };
 
@@ -627,17 +741,47 @@ export const C1Muzi: Story = {
   args: {
     initialCategory: 'C1M',
     isLive: false,
+    showHero: true,
     showPodium: true,
+    section: 'dv',
   },
 };
 
 /**
- * Stránka výsledků bez podium sekce.
+ * Kompaktní zobrazení bez hero sekce.
  */
-export const BezPodia: Story = {
+export const Compact: Story = {
   args: {
     initialCategory: 'K1M',
     isLive: false,
+    showHero: false,
     showPodium: false,
+    section: 'dv',
+  },
+};
+
+/**
+ * Rychlostní kanoistika - zelené téma.
+ */
+export const Rychlostni: Story = {
+  args: {
+    initialCategory: 'K1M',
+    isLive: false,
+    showHero: true,
+    showPodium: true,
+    section: 'ry',
+  },
+};
+
+/**
+ * Vodní turistika - červené téma.
+ */
+export const VodniTuristika: Story = {
+  args: {
+    initialCategory: 'K1M',
+    isLive: false,
+    showHero: true,
+    showPodium: true,
+    section: 'vt',
   },
 };

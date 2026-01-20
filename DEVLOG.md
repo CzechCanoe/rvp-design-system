@@ -1,5 +1,40 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.8 / Redesign ResultsPage prototypu
+
+### Dokončeno
+- [x] Hero sekce s gradient overlay, wave decoration a discipline theming (DV/RY/VT)
+- [x] Breadcrumb navigace v hero sekci
+- [x] Statistiky závodu (kategorie, závodníci, branky)
+- [x] Dramatické podium sekce se stupni vítězů
+- [x] Podium karty s gold/silver/bronze styly, gradient backgrounds, animace
+- [x] Medal ikony a trophy dekorace
+- [x] Hover efekty na podium kartách
+- [x] Race info card s gradient accent barem
+- [x] Categories sidebar s active state a chevron animace
+- [x] Discipline-specific hero theming (modrá DV, zelená RY, červená VT)
+- [x] Dark mode podpora
+- [x] Reduced motion support
+- [x] Nové stories: Rychlostni, VodniTuristika, Compact
+
+### Změněné soubory
+- `src/prototypes/ResultsPage.stories.tsx` - kompletní redesign s hero, podium, discipline theming
+- `src/prototypes/ResultsPage.css` - nové styly pro hero, podium, branded elements
+
+### Klíčové vylepšení
+- Hero sekce odpovídající CalendarPage stylu pro konzistenci
+- Dramatické podium zobrazení (1. uprostřed větší, 2. vlevo, 3. vpravo)
+- Podium karty s animovaným vstupem (staggered animation)
+- Disciplínové barevné schéma (section prop)
+- ResultsTable nyní používá gradient styleVariant
+
+### Poznámky
+- Prototyp vizuálně odpovídá CalendarPage redesignu
+- Build a Storybook úspěšně proběhly
+- CSS warningy ve vite jsou předexistující, netýkají se těchto změn
+
+---
+
 ## 2026-01-20 - Fáze 7.8 / Redesign CalendarPage prototypu
 
 ### Dokončeno

@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 7 - Hloubkové review a redesign
-**Další krok:** 7.8 Redesign prototypů - ResultsPage
+**Další krok:** 7.8 Redesign prototypů - LivePage
 
 **Problém:** Současná implementace nedosahuje vizuální úrovně studovaných referencí (World Athletics, FIS, ICF). Komponenty jsou funkční, ale "utilitární" - chybí vizuální polish, branded feel, moderní detaily.
 
@@ -190,7 +190,7 @@
 
 ### 7.8 Redesign prototypů
 - [x] **CalendarPage** - hero sekce, featured events, vizuálně bohatší
-- [ ] **ResultsPage** - dramatický leaderboard, pozice highlighting
+- [x] **ResultsPage** - dramatický leaderboard, pozice highlighting
 - [ ] **LivePage** - immersive experience, real-time feel
 - [ ] **ProfilePage** - hero header s fotkou, achievement showcase
 - [ ] **RegistrationPage** - přehledný wizard, progress indication
