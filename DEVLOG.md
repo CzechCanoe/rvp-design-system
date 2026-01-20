@@ -3557,3 +3557,62 @@ tests/
 
 ### Další kroky
 - Fáze 7.8: ProfilePage - hero header s fotkou, achievement showcase
+
+---
+
+## 2026-01-20 - Fáze 7.8: Redesign DashboardPage
+
+### Dokončeno
+- [x] Hero sekce s gradient pozadím a disciplínovým themingem
+- [x] Wave SVG dekorace mezi hero a obsahem
+- [x] Pulse rings animace v hero sekci
+- [x] Gradient stat cards (primary, info, warning, success)
+- [x] Discipline-specific hero gradienty (DV modrá, RY zelená, VT červená)
+- [x] Federation multi-color gradient pro svazového správce
+- [x] Section cards s gradient hlavičkou a stíny
+- [x] Quick actions s glass efektem a hover animacemi
+- [x] Activity feed s barevnými type-specific ikonami
+- [x] Race list s discipline-specific date badges
+- [x] Nové Storybook stories pro všechny role (ClubAdmin, SectionAdminDV/RY/VT, FederationAdmin)
+- [x] Dark mode podpora
+- [x] Reduced motion podpora
+- [x] Responsive design pro všechny breakpointy
+
+### Klíčové vizuální změny
+
+**Hero sekce:**
+- Gradient pozadí podle role/sekce
+- Radial gradient pattern overlay
+- Animované pulse rings v pravém rohu
+- Wave SVG na spodním okraji pro plynulý přechod
+- Gradient button pro primární CTA
+
+**Stats grid:**
+- Karty vysunuty do hero sekce (negative margin)
+- Gradient pozadí pro každou kategorii
+- Hover efekt s translateY a shadow
+- Bílý text a ikony na gradient pozadí
+
+**Section cards:**
+- Rounded xl corners
+- Gradient hlavička s section header
+- Shadow lg pro elevation
+- Pulsující badge pro upozornění
+
+### Změny v souborech
+- `DashboardPage.css` - kompletně přepsáno (~1000 řádků)
+- `DashboardPage.stories.tsx` - přidány nové stories, hero sekce, wave dekorace
+
+### Problémy a řešení
+1. **Problém:** Nepoužitý import Card v stories
+   **Řešení:** Odstraněn nepoužitý import
+
+### Poznámky
+- **Milestone 7.8 dokončen** - všechny prototypy jsou redesignovány
+- DashboardPage nyní nabízí vizuálně bohatý dashboard na úrovni moderních SaaS aplikací
+- Discipline theming umožňuje personalizovaný vzhled pro různé sekce CSK
+- Federation admin má multi-color gradient reprezentující všechny sekce
+- Build prochází (CSS warnings jsou z jiných komponent)
+
+### Další kroky
+- Fáze 7.9: Expresivní vs. utilitární režim

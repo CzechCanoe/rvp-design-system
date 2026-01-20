@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { Header } from '../components/Header';
 import { MainNav } from '../components/Navigation';
-import { Card } from '../components/Card';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
@@ -72,37 +71,37 @@ const alerts: AlertItem[] = [
   {
     id: '1',
     type: 'danger',
-    title: '3 závodníci bez práva startu',
-    description: 'Nemohou startovat na nadcházejících závodech',
+    title: '3 zavodnici bez prava startu',
+    description: 'Nemohou startovat na nadchazejicich zavodech',
     actionLabel: 'Zobrazit',
   },
   {
     id: '2',
     type: 'warning',
-    title: '5 prohlídek expiruje do 30 dnů',
-    description: 'Jan Novák, Petr Svoboda a další...',
+    title: '5 prohlidek expiruje do 30 dnu',
+    description: 'Jan Novak, Petr Svoboda a dalsi...',
     actionLabel: 'Upozornit',
   },
   {
     id: '3',
     type: 'warning',
-    title: '2 nezaplacené příspěvky',
+    title: '2 nezaplacene prispevky',
     description: 'Splatnost do 15.2.2026',
     actionLabel: 'Detail',
   },
   {
     id: '4',
     type: 'info',
-    title: 'Uzávěrka přihlášek: Český pohár #1',
-    description: 'Zbývá 3 dny (do 22.1.2026)',
-    actionLabel: 'Přihlásit',
+    title: 'Uzaverka prihlasek: Cesky pohar #1',
+    description: 'Zbyva 3 dny (do 22.1.2026)',
+    actionLabel: 'Prihlasit',
   },
 ];
 
 const upcomingRaces: RaceItem[] = [
   {
     id: '1',
-    title: 'Český pohár #1',
+    title: 'Cesky pohar #1',
     location: 'Praha - Troja',
     date: new Date(2026, 0, 25),
     section: 'dv',
@@ -112,8 +111,8 @@ const upcomingRaces: RaceItem[] = [
   },
   {
     id: '2',
-    title: 'Zimní regata',
-    location: 'Račice',
+    title: 'Zimni regata',
+    location: 'Racice',
     date: new Date(2026, 1, 1),
     section: 'ry',
     registeredAthletes: 15,
@@ -122,8 +121,8 @@ const upcomingRaces: RaceItem[] = [
   },
   {
     id: '3',
-    title: 'Jarní sprint',
-    location: 'Brandýs nad Labem',
+    title: 'Jarni sprint',
+    location: 'Brandys nad Labem',
     date: new Date(2026, 1, 8),
     section: 'dv',
     registeredAthletes: 5,
@@ -133,7 +132,7 @@ const upcomingRaces: RaceItem[] = [
   },
   {
     id: '4',
-    title: 'MČR v maratonu',
+    title: 'MCR v maratonu',
     location: 'Slapy',
     date: new Date(2026, 1, 15),
     section: 'ry',
@@ -146,7 +145,7 @@ const upcomingRaces: RaceItem[] = [
 const members: MemberItem[] = [
   {
     id: '1',
-    name: 'Jiří Prskavec',
+    name: 'Jiri Prskavec',
     registrationNumber: 'RGC-2008-0042',
     section: 'dv',
     vtClass: 'm',
@@ -156,7 +155,7 @@ const members: MemberItem[] = [
   },
   {
     id: '2',
-    name: 'Vít Přindiš',
+    name: 'Vit Prindis',
     registrationNumber: 'RGC-2006-0128',
     section: 'dv',
     vtClass: 'm',
@@ -166,7 +165,7 @@ const members: MemberItem[] = [
   },
   {
     id: '3',
-    name: 'Jan Novák',
+    name: 'Jan Novak',
     registrationNumber: 'RGC-2015-0234',
     section: 'dv',
     vtClass: 'a',
@@ -186,7 +185,7 @@ const members: MemberItem[] = [
   },
   {
     id: '5',
-    name: 'Tereza Fišerová',
+    name: 'Tereza Fiserova',
     registrationNumber: 'RGC-2012-0089',
     section: 'dv',
     vtClass: 'm',
@@ -196,7 +195,7 @@ const members: MemberItem[] = [
   },
   {
     id: '6',
-    name: 'Lukáš Rohan',
+    name: 'Lukas Rohan',
     registrationNumber: 'RGC-2010-0167',
     section: 'dv',
     vtClass: 'm',
@@ -210,31 +209,31 @@ const recentActivity: ActivityItem[] = [
   {
     id: '1',
     type: 'registration',
-    text: 'Nová registrace: <strong>Martin Dvořák</strong>',
+    text: 'Nova registrace: <strong>Martin Dvorak</strong>',
     timestamp: new Date(2026, 0, 19, 14, 30),
   },
   {
     id: '2',
     type: 'payment',
-    text: '<strong>Tereza Fišerová</strong> zaplatila příspěvky',
+    text: '<strong>Tereza Fiserova</strong> zaplatila prispevky',
     timestamp: new Date(2026, 0, 19, 11, 15),
   },
   {
     id: '3',
     type: 'race',
-    text: 'Přihláška na <strong>Český pohár #1</strong> potvrzena',
+    text: 'Prihlaska na <strong>Cesky pohar #1</strong> potvrzena',
     timestamp: new Date(2026, 0, 18, 16, 45),
   },
   {
     id: '4',
     type: 'medical',
-    text: '<strong>Vít Přindiš</strong> - nová zdravotní prohlídka',
+    text: '<strong>Vit Prindis</strong> - nova zdravotni prohlidka',
     timestamp: new Date(2026, 0, 18, 9, 20),
   },
   {
     id: '5',
     type: 'transfer',
-    text: '<strong>Ondřej Karlík</strong> - přestup schválen',
+    text: '<strong>Ondrej Karlik</strong> - prestup schvalen',
     timestamp: new Date(2026, 0, 17, 13, 0),
   },
 ];
@@ -252,26 +251,26 @@ const formatTime = (date: Date): string => {
   const diff = now.getTime() - date.getTime();
   const hours = Math.floor(diff / (1000 * 60 * 60));
 
-  if (hours < 1) return 'Právě teď';
-  if (hours < 24) return `Před ${hours}h`;
+  if (hours < 1) return 'Prave ted';
+  if (hours < 24) return `Pred ${hours}h`;
 
   const days = Math.floor(hours / 24);
-  if (days === 1) return 'Včera';
-  return `Před ${days} dny`;
+  if (days === 1) return 'Vcera';
+  return `Pred ${days} dny`;
 };
 
 const getMonthAbbr = (date: Date): string => {
   const months = [
     'led',
-    'úno',
-    'bře',
+    'uno',
+    'bre',
     'dub',
-    'kvě',
-    'čvn',
-    'čvc',
+    'kve',
+    'cvn',
+    'cvc',
     'srp',
-    'zář',
-    'říj',
+    'zar',
+    'rij',
     'lis',
     'pro',
   ];
@@ -279,12 +278,34 @@ const getMonthAbbr = (date: Date): string => {
 };
 
 const getSectionLabel = (section: 'dv' | 'ry' | 'vt'): string => {
-  const labels = { dv: 'Divoká voda', ry: 'Rychlost', vt: 'VT' };
+  const labels = { dv: 'Divoka voda', ry: 'Rychlost', vt: 'VT' };
   return labels[section];
 };
 
 const getVtClassLabel = (vtClass: 'm' | 'a' | 'b' | 'c'): string => {
   return vtClass.toUpperCase();
+};
+
+const getRoleLabel = (role: string): string => {
+  const labels: Record<string, string> = {
+    club_admin: 'Oddilovy spravce',
+    section_admin: 'Sekcni spravce',
+    federation_admin: 'Svazovy spravce',
+  };
+  return labels[role] || role;
+};
+
+const getHeroSectionClass = (
+  role: string,
+  section?: 'dv' | 'ry' | 'vt'
+): string => {
+  if (role === 'section_admin' && section) {
+    return `dashboard-hero-section--${section}`;
+  }
+  if (role === 'federation_admin') {
+    return 'dashboard-hero-section--federation';
+  }
+  return '';
 };
 
 // ============================================================================
@@ -384,7 +405,29 @@ const Icons = {
       <path d="M21 13v2a4 4 0 01-4 4H3" />
     </svg>
   ),
+  trendUp: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <polyline points="23,6 13.5,15.5 8.5,10.5 1,18" />
+      <polyline points="17,6 23,6 23,12" />
+    </svg>
+  ),
 };
+
+// Wave SVG for hero section
+const WaveSVG = () => (
+  <svg
+    className="dashboard-page-wave"
+    viewBox="0 0 1440 60"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+  >
+    <path
+      d="M0 60V30C240 10 480 0 720 10C960 20 1200 40 1440 30V60H0Z"
+      fill="currentColor"
+    />
+  </svg>
+);
 
 // ============================================================================
 // Navigation Items
@@ -392,11 +435,11 @@ const Icons = {
 
 const navItems = [
   { id: 'dashboard', label: 'Dashboard', href: '#', active: true },
-  { id: 'athletes', label: 'Závodníci', href: '#' },
-  { id: 'races', label: 'Závody', href: '#' },
-  { id: 'registrations', label: 'Přihlášky', href: '#' },
+  { id: 'athletes', label: 'Zavodnici', href: '#' },
+  { id: 'races', label: 'Zavody', href: '#' },
+  { id: 'registrations', label: 'Prihlasky', href: '#' },
   { id: 'finance', label: 'Finance', href: '#' },
-  { id: 'settings', label: 'Nastavení', href: '#' },
+  { id: 'settings', label: 'Nastaveni', href: '#' },
 ];
 
 // ============================================================================
@@ -404,14 +447,14 @@ const navItems = [
 // ============================================================================
 
 const statusOptions = [
-  { value: 'all', label: 'Všichni' },
-  { value: 'active', label: 'Aktivní' },
-  { value: 'inactive', label: 'Neaktivní' },
+  { value: 'all', label: 'Vsichni' },
+  { value: 'active', label: 'Aktivni' },
+  { value: 'inactive', label: 'Neaktivni' },
 ];
 
 const sectionOptions = [
-  { value: 'all', label: 'Všechny sekce' },
-  { value: 'dv', label: 'Divoká voda' },
+  { value: 'all', label: 'Vsechny sekce' },
+  { value: 'dv', label: 'Divoka voda' },
   { value: 'ry', label: 'Rychlost' },
   { value: 'vt', label: 'VT' },
 ];
@@ -423,6 +466,7 @@ const sectionOptions = [
 const DashboardPage = ({
   role = 'club_admin',
   clubName = 'USK Praha',
+  section,
 }: DashboardPageProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -446,7 +490,7 @@ const DashboardPage = ({
   const columns: ColumnDef<MemberItem>[] = [
     {
       key: 'name',
-      header: 'Jméno',
+      header: 'Jmeno',
       cell: (row) => (
         <div className="dashboard-member-name">
           <Avatar name={row.name} size="sm" />
@@ -477,21 +521,21 @@ const DashboardPage = ({
     },
     {
       key: 'rightToStart',
-      header: 'Právo startu',
+      header: 'Pravo startu',
       cell: (row) =>
         row.rightToStart ? (
           <Badge variant="success" size="sm">
-            Aktivní
+            Aktivni
           </Badge>
         ) : (
           <Badge variant="error" size="sm">
-            Neaktivní
+            Neaktivni
           </Badge>
         ),
     },
     {
       key: 'medicalExpiry',
-      header: 'Zdravotní',
+      header: 'Zdravotni',
       cell: (row) => {
         const now = new Date();
         const daysUntil = Math.ceil(
@@ -518,7 +562,7 @@ const DashboardPage = ({
     },
     {
       key: 'feesStatus',
-      header: 'Příspěvky',
+      header: 'Prispevky',
       cell: (row) => {
         const variants = {
           paid: 'success' as const,
@@ -527,7 +571,7 @@ const DashboardPage = ({
         };
         const labels = {
           paid: 'Zaplaceno',
-          pending: 'Čeká',
+          pending: 'Ceka',
           expired: 'Po splatnosti',
         };
         return (
@@ -564,42 +608,64 @@ const DashboardPage = ({
         actions={
           <div className="dashboard-header-actions">
             <Button variant="ghost" size="sm">
-              Nápověda
+              Napoveda
             </Button>
-            <Avatar name="Jan Správce" size="sm" />
+            <Avatar name="Jan Spravce" size="sm" />
           </div>
         }
       />
 
-      {/* Main Content */}
-      <main className="dashboard-main">
-        <div className="dashboard-container">
-          {/* Welcome Section */}
-          <div className="dashboard-welcome">
-            <div className="dashboard-welcome-text">
-              <p className="dashboard-welcome-greeting">Dobrý den, Jene</p>
-              <h1 className="dashboard-welcome-title">{clubName}</h1>
-              <p className="dashboard-welcome-subtitle">
-                {role === 'club_admin' && 'Správa oddílu'}
-                {role === 'section_admin' && 'Správa sekce'}
-                {role === 'federation_admin' && 'Správa svazu'}
+      {/* Hero Section */}
+      <section
+        className={`dashboard-hero-section ${getHeroSectionClass(role, section)}`}
+      >
+        <div className="dashboard-hero-section__background">
+          <div className="dashboard-hero-section__gradient" />
+          <div className="dashboard-hero-section__pattern" />
+          <div className="dashboard-hero-section__pulse-rings">
+            <div className="dashboard-pulse-ring" />
+            <div className="dashboard-pulse-ring" />
+            <div className="dashboard-pulse-ring" />
+          </div>
+        </div>
+        <div className="dashboard-hero-section__content">
+          <div className="dashboard-hero-content">
+            <div className="dashboard-hero-welcome">
+              <p className="dashboard-hero-greeting">Dobry den, Jane</p>
+              <h1 className="dashboard-hero-title">{clubName}</h1>
+              <p className="dashboard-hero-subtitle">
+                <span className="dashboard-hero-badge">
+                  {getRoleLabel(role)}
+                </span>
+                {section && (
+                  <Badge section={section} size="sm">
+                    {getSectionLabel(section)}
+                  </Badge>
+                )}
               </p>
             </div>
-            <div className="dashboard-welcome-actions">
+            <div className="dashboard-hero-actions">
               <Button variant="secondary" size="md">
                 Exportovat
               </Button>
-              <Button variant="primary" size="md">
-                + Nový závodník
+              <Button variant="gradient" size="md">
+                + Novy zavodnik
               </Button>
             </div>
           </div>
+        </div>
+        <div className="dashboard-hero-section__wave">
+          <WaveSVG />
+        </div>
+      </section>
 
-          {/* Stats Grid */}
-          <div className="dashboard-stats-grid">
+      {/* Stats Grid */}
+      <div className="dashboard-stats-section">
+        <div className="dashboard-stats-grid">
+          <div className="dashboard-stat-card--gradient-primary">
             <StatCard
               value={activeAthletesCount}
-              label="Aktivní závodníci"
+              label="Aktivni zavodnici"
               icon={Icons.users}
               color="primary"
               trend="up"
@@ -607,51 +673,62 @@ const DashboardPage = ({
               secondaryValue={`${members.length} celkem`}
               clickable
             />
+          </div>
+          <div className="dashboard-stat-card--gradient-info">
             <StatCard
               value={upcomingRaces.length}
-              label="Nadcházející závody"
+              label="Nadchazejici zavody"
               icon={Icons.calendar}
               color="info"
-              secondaryValue="Nejbližší za 6 dní"
+              secondaryValue="Nejblizsi za 6 dni"
               clickable
             />
+          </div>
+          <div className="dashboard-stat-card--gradient-warning">
             <StatCard
               value={inactiveAthletesCount}
-              label="Bez práva startu"
+              label="Bez prava startu"
               icon={Icons.clock}
               color={inactiveAthletesCount > 0 ? 'warning' : 'success'}
               description={
-                inactiveAthletesCount > 0 ? 'Vyžaduje pozornost' : 'Vše v pořádku'
+                inactiveAthletesCount > 0 ? 'Vyzaduje pozornost' : 'Vse v poradku'
               }
               clickable
             />
+          </div>
+          <div className="dashboard-stat-card--gradient-success">
             <StatCard
               value={registrationsThisMonth}
-              label="Nové registrace"
+              label="Nove registrace"
               icon={Icons.userPlus}
               color="success"
-              secondaryValue="Tento měsíc"
+              secondaryValue="Tento mesic"
               trend="up"
               trendValue="+50%"
               clickable
             />
           </div>
+        </div>
+      </div>
 
+      {/* Main Content */}
+      <main className="dashboard-main">
+        <div className="dashboard-container">
           {/* Content Grid */}
           <div className="dashboard-content-grid">
             {/* Left Column */}
             <div className="dashboard-alerts">
               {/* Alerts Card */}
-              <Card>
+              <div className="dashboard-section-card">
                 <div className="dashboard-section-header">
                   <h2 className="dashboard-section-title">
-                    Upozornění
+                    Upozorneni
                     {alerts.length > 0 && (
                       <span className="dashboard-section-badge">{alerts.length}</span>
                     )}
                   </h2>
                   <Button variant="ghost" size="sm">
-                    Zobrazit vše
+                    Zobrazit vse
                   </Button>
                 </div>
                 <div className="dashboard-alert-list">
@@ -680,21 +757,21 @@ const DashboardPage = ({
                     </div>
                   ))}
                 </div>
-              </Card>
+              </div>
 
               {/* Members Table */}
-              <Card>
+              <div className="dashboard-section-card">
                 <div className="dashboard-section-header">
-                  <h2 className="dashboard-section-title">Závodníci</h2>
+                  <h2 className="dashboard-section-title">Zavodnici</h2>
                   <Button variant="ghost" size="sm">
-                    Zobrazit vše
+                    Zobrazit vse
                   </Button>
                 </div>
                 <div className="dashboard-members-header">
                   <div className="dashboard-members-search">
                     <Input
                       type="search"
-                      placeholder="Hledat závodníka..."
+                      placeholder="Hledat zavodnika..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       size="sm"
@@ -721,22 +798,25 @@ const DashboardPage = ({
                   rowKey="id"
                   hoverable
                 />
-              </Card>
+              </div>
             </div>
 
             {/* Right Column */}
             <div className="dashboard-races">
               {/* Upcoming Races */}
-              <Card>
+              <div className="dashboard-section-card">
                 <div className="dashboard-section-header">
-                  <h2 className="dashboard-section-title">Nadcházející závody</h2>
+                  <h2 className="dashboard-section-title">Nadchazejici zavody</h2>
                   <Button variant="ghost" size="sm">
-                    Kalendář
+                    Kalendar
                   </Button>
                 </div>
                 <div className="dashboard-race-list">
                   {upcomingRaces.map((race) => (
-                    <div key={race.id} className="dashboard-race-item">
+                    <div
+                      key={race.id}
+                      className={`dashboard-race-item dashboard-race-item--${race.section}`}
+                    >
                       <div className="dashboard-race-date">
                         <span className="dashboard-race-date-day">
                           {race.date.getDate()}
@@ -768,22 +848,22 @@ const DashboardPage = ({
                     </div>
                   ))}
                 </div>
-              </Card>
+              </div>
 
               {/* Quick Actions */}
-              <Card>
+              <div className="dashboard-section-card">
                 <div className="dashboard-section-header">
-                  <h2 className="dashboard-section-title">Rychlé akce</h2>
+                  <h2 className="dashboard-section-title">Rychle akce</h2>
                 </div>
                 <div className="dashboard-quick-actions">
                   <button className="dashboard-quick-action" type="button">
                     <div className="dashboard-quick-action-icon">{Icons.userPlus}</div>
                     <div className="dashboard-quick-action-text">
                       <p className="dashboard-quick-action-title">
-                        Registrovat závodníka
+                        Registrovat zavodnika
                       </p>
                       <p className="dashboard-quick-action-description">
-                        Přidat nového člena do oddílu
+                        Pridat noveho clena do oddilu
                       </p>
                     </div>
                     <div className="dashboard-quick-action-arrow">
@@ -793,9 +873,9 @@ const DashboardPage = ({
                   <button className="dashboard-quick-action" type="button">
                     <div className="dashboard-quick-action-icon">{Icons.fileText}</div>
                     <div className="dashboard-quick-action-text">
-                      <p className="dashboard-quick-action-title">Hromadná přihláška</p>
+                      <p className="dashboard-quick-action-title">Hromadna prihlaska</p>
                       <p className="dashboard-quick-action-description">
-                        Přihlásit závodníky na závod
+                        Prihlasit zavodniky na zavod
                       </p>
                     </div>
                     <div className="dashboard-quick-action-arrow">
@@ -807,9 +887,9 @@ const DashboardPage = ({
                       {Icons.creditCard}
                     </div>
                     <div className="dashboard-quick-action-text">
-                      <p className="dashboard-quick-action-title">Správa příspěvků</p>
+                      <p className="dashboard-quick-action-title">Sprava prispevku</p>
                       <p className="dashboard-quick-action-description">
-                        Evidovat platby členů
+                        Evidovat platby clenu
                       </p>
                     </div>
                     <div className="dashboard-quick-action-arrow">
@@ -817,17 +897,19 @@ const DashboardPage = ({
                     </div>
                   </button>
                 </div>
-              </Card>
+              </div>
 
               {/* Recent Activity */}
-              <Card>
+              <div className="dashboard-section-card">
                 <div className="dashboard-section-header">
-                  <h2 className="dashboard-section-title">Poslední aktivita</h2>
+                  <h2 className="dashboard-section-title">Posledni aktivita</h2>
                 </div>
                 <div className="dashboard-activity">
                   {recentActivity.map((activity) => (
                     <div key={activity.id} className="dashboard-activity-item">
-                      <div className="dashboard-activity-icon">
+                      <div
+                        className={`dashboard-activity-icon dashboard-activity-icon--${activity.type}`}
+                      >
                         {getActivityIcon(activity.type)}
                       </div>
                       <div className="dashboard-activity-content">
@@ -842,7 +924,7 @@ const DashboardPage = ({
                     </div>
                   ))}
                 </div>
-              </Card>
+              </div>
             </div>
           </div>
         </div>
@@ -850,7 +932,7 @@ const DashboardPage = ({
 
       {/* Footer */}
       <footer className="dashboard-footer">
-        <p>Český svaz kanoistů - Registrační a výsledkový portál</p>
+        <p>Cesky svaz kanoistu - Registracni a vysledkovy portal</p>
       </footer>
     </div>
   );
@@ -868,29 +950,40 @@ const meta: Meta<typeof DashboardPage> = {
     docs: {
       description: {
         component: `
-# Dashboard správce
+# Dashboard spravce
 
-Prototyp dashboardu pro správce oddílu nebo sekce. Obsahuje:
+Redesignovany prototyp dashboardu pro spravce oddilu nebo sekce. Obsahuje:
 
-## Klíčové prvky
-- **Welcome sekce** - personalizovaný pozdrav a rychlé akce
-- **Statistiky** - přehled klíčových metrik (aktivní závodníci, nadcházející závody, upozornění)
-- **Upozornění** - urgentní položky vyžadující pozornost (expirující prohlídky, nezaplacené příspěvky)
-- **Tabulka závodníků** - s filtrováním a vyhledáváním
-- **Nadcházející závody** - s přehledem přihlášených
-- **Rychlé akce** - nejčastější úkony
-- **Poslední aktivita** - feed změn v oddíle
+## Nove vizualni prvky (Faze 7.8)
+- **Hero sekce** - gradient pozadi s disciplinovym themingem
+- **Wave dekorace** - plynuly prechod mezi hero a obsahem
+- **Pulse rings** - animovane kruhy v hero sekci
+- **Gradient stat cards** - statistiky s gradient pozadim
+- **Vylepene karty** - section cards s gradient hlavickou
 
-## Role uživatelů
-- **Oddílový správce** - spravuje závodníky svého oddílu
-- **Sekční správce** - přehled napříč oddíly v sekci
-- **Svazový správce** - celkový přehled
+## Klicove prvky
+- **Welcome sekce** - personalizovany pozdrav a rychle akce v hero
+- **Statistiky** - gradient karty s klicovymi metrikami
+- **Upozorneni** - urgentni polozky s gradient ikonami
+- **Tabulka zavodniku** - s filtrovanim a vyhledavanim
+- **Nadchazejici zavody** - s discipline-specific barvami
+- **Rychle akce** - glass efekt s hover animacemi
+- **Posledni aktivita** - feed zmen s barevnymi ikonami
+
+## Role uzivatelu a theming
+- **Oddilovy spravce** - primarni modry gradient
+- **Sekcni spravce DV** - modry gradient (Divoka voda)
+- **Sekcni spravce RY** - zeleny gradient (Rychlost)
+- **Sekcni spravce VT** - cerveny gradient (Vodni turistika)
+- **Svazovy spravce** - multi-color gradient (vsechny sekce)
 
 ## Funkce
-- Filtrování závodníků dle stavu a sekce
-- Vyhledávání závodníků
-- Barevné indikátory stavu (právo startu, zdravotní prohlídka, příspěvky)
-- Responsive layout pro všechny velikosti obrazovky
+- Filtrovani zavodniku dle stavu a sekce
+- Vyhledavani zavodniku
+- Barevne indikatory stavu
+- Responsive layout pro vsechny velikosti obrazovky
+- Dark mode podpora
+- Reduced motion podpora
         `,
       },
     },
@@ -899,16 +992,16 @@ Prototyp dashboardu pro správce oddílu nebo sekce. Obsahuje:
     role: {
       control: 'select',
       options: ['club_admin', 'section_admin', 'federation_admin'],
-      description: 'Role uživatele',
+      description: 'Role uzivatele',
     },
     clubName: {
       control: 'text',
-      description: 'Název oddílu',
+      description: 'Nazev oddilu',
     },
     section: {
       control: 'select',
       options: ['dv', 'ry', 'vt'],
-      description: 'Sekce (pro sekčního správce)',
+      description: 'Sekce (pro sekcniho spravce)',
     },
   },
 };
@@ -921,26 +1014,44 @@ type Story = StoryObj<typeof DashboardPage>;
 // ============================================================================
 
 export const ClubAdmin: Story = {
-  name: 'Oddílový správce',
+  name: 'Oddilovy spravce',
   args: {
     role: 'club_admin',
     clubName: 'USK Praha',
   },
 };
 
-export const SectionAdmin: Story = {
-  name: 'Sekční správce',
+export const SectionAdminDV: Story = {
+  name: 'Sekcni spravce - Divoka voda',
   args: {
     role: 'section_admin',
-    clubName: 'Sekce Divoká voda',
+    clubName: 'Sekce Divoka voda',
     section: 'dv',
   },
 };
 
+export const SectionAdminRY: Story = {
+  name: 'Sekcni spravce - Rychlost',
+  args: {
+    role: 'section_admin',
+    clubName: 'Sekce Rychlost',
+    section: 'ry',
+  },
+};
+
+export const SectionAdminVT: Story = {
+  name: 'Sekcni spravce - Vodni turistika',
+  args: {
+    role: 'section_admin',
+    clubName: 'Sekce Vodni turistika',
+    section: 'vt',
+  },
+};
+
 export const FederationAdmin: Story = {
-  name: 'Svazový správce',
+  name: 'Svazovy spravce',
   args: {
     role: 'federation_admin',
-    clubName: 'Český svaz kanoistů',
+    clubName: 'Cesky svaz kanoistu',
   },
 };

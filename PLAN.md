@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 7 - Hloubkové review a redesign
-**Další krok:** 7.8 Redesign prototypů - DashboardPage
+**Další krok:** 7.9 Expresivní vs. utilitární režim
 
 **Problém:** Současná implementace nedosahuje vizuální úrovně studovaných referencí (World Athletics, FIS, ICF). Komponenty jsou funkční, ale "utilitární" - chybí vizuální polish, branded feel, moderní detaily.
 
@@ -194,7 +194,7 @@
 - [x] **LivePage** - immersive experience, real-time feel
 - [x] **ProfilePage** - hero header s fotkou, achievement showcase
 - [x] **RegistrationPage** - přehledný wizard, progress indication
-- [ ] **DashboardPage** - widget karty, statistiky s grafy
+- [x] **DashboardPage** - widget karty, statistiky s grafy
 
 ### 7.9 Expresivní vs. utilitární režim
 - [ ] Implementace dual-mode systému (jak definováno v DESIGN_PRINCIPLES.md)
