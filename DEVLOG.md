@@ -1,5 +1,34 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.8 / Redesign CalendarPage prototypu
+
+### Dokončeno
+- [x] Hero sekce s gradient overlay a wave decoration
+- [x] Featured events sekce s disciplínovými kartami (MČR, Nominace)
+- [x] Statistiky v hero sekci (počet závodů, sekcí, MČR)
+- [x] Barevné akcenty podle disciplín (DV/RY/VT)
+- [x] Animované star ikony pro první featured event
+- [x] Hover efekty a micro-interactions na kartách
+- [x] Responsive styly a reduced motion support
+- [x] Dark mode podpora
+
+### Změněné soubory
+- `src/prototypes/CalendarPage.stories.tsx` - nová hero sekce, featured events, nové ikony
+- `src/prototypes/CalendarPage.css` - kompletní styly pro hero a featured sekce
+
+### Klíčové vylepšení
+- Hero sekce s gradient pozadím a wave dekorací
+- Featured events grid s disciplínovými akcenty
+- Statistiky sezóny přímo v hero
+- Vizuálně bohatší stránka odpovídající branded guidelines
+
+### Poznámky
+- Prototyp nyní odpovídá vizuálnímu jazyku dokumentovanému v `docs/branding/`
+- Zachována podpora pro kompaktní zobrazení (showHero=false)
+- CSS warningy ve vite build jsou předexistující, netýkají se těchto změn
+
+---
+
 ## 2026-01-20 - Fáze 7.7 / Branded visual elements
 
 ### Dokončeno
