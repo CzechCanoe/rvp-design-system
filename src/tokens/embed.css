@@ -1,0 +1,174 @@
+/**
+ * Embed Mode Tokens - CSK RVP Design System
+ *
+ * Neutral, modern tokens for components embedded in kanoe.cz (Joomla/Bootstrap 4).
+ * Designed to coexist with existing site styles without visual conflict.
+ *
+ * Key characteristics:
+ * - Subtle shadows (or borders instead of shadows)
+ * - Compact padding for content density
+ * - No dramatic effects (gradients, glows, animations)
+ * - Neutral color accents compatible with kanoe.cz palette
+ *
+ * Usage:
+ * - Apply [data-mode="embed"] to embedded component containers
+ * - Or use --embed-* variables directly
+ */
+
+:root {
+  /* ==========================================================================
+     EMBED TYPOGRAPHY
+     Standard sizes, compatible with Bootstrap 4 base
+     ========================================================================== */
+
+  /* Embed font sizes - match Bootstrap 4 defaults where practical */
+  --text-embed-h1-size: 2rem;          /* 32px - Bootstrap h1 */
+  --text-embed-h1-weight: var(--font-weight-semibold);
+  --text-embed-h1-line-height: 1.2;
+
+  --text-embed-h2-size: 1.5rem;        /* 24px - Bootstrap h2 */
+  --text-embed-h2-weight: var(--font-weight-semibold);
+  --text-embed-h2-line-height: 1.25;
+
+  --text-embed-h3-size: 1.25rem;       /* 20px - Bootstrap h3 */
+  --text-embed-h3-weight: var(--font-weight-medium);
+  --text-embed-h3-line-height: 1.3;
+
+  --text-embed-h4-size: 1.125rem;      /* 18px */
+  --text-embed-h4-weight: var(--font-weight-medium);
+  --text-embed-h4-line-height: 1.35;
+
+  --text-embed-body-size: 1rem;        /* 16px - Bootstrap default */
+  --text-embed-body-weight: var(--font-weight-normal);
+  --text-embed-body-line-height: 1.5;
+
+  --text-embed-small-size: 0.875rem;   /* 14px */
+  --text-embed-small-weight: var(--font-weight-normal);
+  --text-embed-small-line-height: 1.4;
+
+  /* ==========================================================================
+     EMBED SPACING
+     Compact but not cramped, works with Bootstrap grid
+     ========================================================================== */
+
+  --spacing-embed-xs: 4px;
+  --spacing-embed-sm: 8px;
+  --spacing-embed-md: 12px;
+  --spacing-embed-lg: 16px;
+  --spacing-embed-xl: 24px;
+
+  /* Section spacing - slightly smaller than utility */
+  --spacing-embed-section-sm: var(--spacing-4);    /* 16px */
+  --spacing-embed-section-md: var(--spacing-6);    /* 24px */
+  --spacing-embed-section-lg: var(--spacing-8);    /* 32px */
+  --spacing-embed-section-xl: var(--spacing-12);   /* 48px */
+
+  /* Card spacing - compact for embed context */
+  --spacing-embed-card-padding: var(--spacing-3);      /* 12px */
+  --spacing-embed-card-padding-lg: var(--spacing-4);   /* 16px */
+  --spacing-embed-card-gap: var(--spacing-2);          /* 8px */
+
+  /* ==========================================================================
+     EMBED TRANSITIONS
+     Minimal, fast - avoid distracting from main site
+     ========================================================================== */
+
+  --motion-embed-fast: 100ms;
+  --motion-embed-base: 150ms;
+  --motion-embed-slow: 200ms;
+
+  /* Embed button transition - subtle */
+  --transition-embed-button: background-color var(--motion-embed-fast) var(--ease-out),
+                             border-color var(--motion-embed-fast) var(--ease-out),
+                             color var(--motion-embed-fast) var(--ease-out);
+
+  /* Embed card transition - minimal */
+  --transition-embed-card: border-color var(--motion-embed-base) var(--ease-out);
+
+  /* ==========================================================================
+     EMBED SHADOWS
+     Very subtle or replaced by borders for cleaner look
+     ========================================================================== */
+
+  --shadow-embed-sm: none;
+  --shadow-embed-md: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-embed-lg: 0 2px 4px rgba(0, 0, 0, 0.08);
+
+  /* Embed prefers borders over shadows */
+  --border-embed-card: 1px solid var(--color-border-secondary);
+
+  /* ==========================================================================
+     EMBED BORDERS
+     Visible borders to define component boundaries
+     ========================================================================== */
+
+  --border-embed-width: 1px;
+  --border-embed-width-thick: 2px;
+  --border-embed-color: var(--color-border-secondary);
+
+  /* ==========================================================================
+     EMBED COMPONENT SCALES
+     Standard sizes, compatible with Bootstrap 4 forms
+     ========================================================================== */
+
+  /* Button sizes - match Bootstrap btn sizes */
+  --button-embed-height-sm: 31px;      /* Bootstrap btn-sm */
+  --button-embed-height-md: 38px;      /* Bootstrap btn default */
+  --button-embed-height-lg: 48px;      /* Bootstrap btn-lg */
+
+  --button-embed-padding-x-sm: var(--spacing-2);   /* 8px */
+  --button-embed-padding-x-md: var(--spacing-3);   /* 12px */
+  --button-embed-padding-x-lg: var(--spacing-4);   /* 16px */
+
+  /* Avatar sizes */
+  --avatar-embed-size-sm: 24px;
+  --avatar-embed-size-md: 32px;
+  --avatar-embed-size-lg: 40px;
+  --avatar-embed-size-xl: 48px;
+
+  /* Card border radius - subtle, matches Bootstrap cards */
+  --radius-embed-card: 4px;            /* Bootstrap card-border-radius */
+  --radius-embed-card-lg: 6px;
+
+  /* Badge sizes */
+  --badge-embed-height: 22px;
+  --badge-embed-padding-x: var(--spacing-2); /* 8px */
+
+  /* ==========================================================================
+     EMBED EFFECTS
+     Disabled for clean integration
+     ========================================================================== */
+
+  /* No gradient overlays in embed mode */
+  --gradient-embed-hero: none;
+  --gradient-embed-card: none;
+
+  /* No glow effects */
+  --glow-embed-primary: none;
+  --glow-embed-focus: 0 0 0 2px var(--color-primary-100);
+}
+
+/* =============================================================================
+   DARK MODE EMBED
+   Adjusted values for dark theme in embed context
+   ============================================================================= */
+
+[data-theme="dark"] {
+  --shadow-embed-sm: none;
+  --shadow-embed-md: 0 1px 3px rgba(0, 0, 0, 0.15);
+  --shadow-embed-lg: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  --border-embed-card: 1px solid var(--color-border-primary);
+  --glow-embed-focus: 0 0 0 2px var(--color-primary-900);
+}
+
+/* =============================================================================
+   REDUCED MOTION
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-embed-button: none;
+    --transition-embed-card: none;
+  }
+}

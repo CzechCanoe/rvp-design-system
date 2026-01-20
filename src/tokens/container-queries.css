@@ -1,0 +1,200 @@
+/**
+ * Container Queries Foundation - CSK RVP Design System
+ *
+ * Container queries allow components to respond to their container's size
+ * rather than the viewport. Essential for embed mode where components
+ * live inside arbitrary parent containers on kanoe.cz.
+ *
+ * Usage:
+ * 1. Add `container-type: inline-size` to parent
+ * 2. Use @container queries in component CSS
+ *
+ * Example:
+ * ```css
+ * .results-widget {
+ *   container-type: inline-size;
+ *   container-name: results;
+ * }
+ *
+ * @container results (max-width: 400px) {
+ *   .results-table { ... }
+ * }
+ * ```
+ */
+
+/* =============================================================================
+   CONTAINER BREAKPOINTS
+   Named breakpoints for consistent container query usage
+   ============================================================================= */
+
+:root {
+  /* Container size tokens (for reference in JS/documentation) */
+  --container-xs: 320px;    /* Very narrow - single column */
+  --container-sm: 480px;    /* Narrow - compact layout */
+  --container-md: 640px;    /* Medium - standard layout */
+  --container-lg: 800px;    /* Wide - expanded layout */
+  --container-xl: 1024px;   /* Extra wide - full features */
+}
+
+/* =============================================================================
+   CONTAINER TYPE UTILITIES
+   Helper classes for establishing query containers
+   ============================================================================= */
+
+/* Generic query container */
+.csk-container {
+  container-type: inline-size;
+}
+
+/* Named containers for specific components */
+.csk-container-results {
+  container-type: inline-size;
+  container-name: results;
+}
+
+.csk-container-calendar {
+  container-type: inline-size;
+  container-name: calendar;
+}
+
+.csk-container-card {
+  container-type: inline-size;
+  container-name: card;
+}
+
+.csk-container-table {
+  container-type: inline-size;
+  container-name: table;
+}
+
+.csk-container-athlete {
+  container-type: inline-size;
+  container-name: athlete;
+}
+
+/* =============================================================================
+   EMBED-SPECIFIC CONTAINERS
+   Containers with embed mode defaults
+   ============================================================================= */
+
+.csk-embed-widget {
+  container-type: inline-size;
+  container-name: widget;
+
+  /* Reset styles to prevent kanoe.cz CSS bleed */
+  font-family: var(--font-family-sans);
+  font-size: var(--text-embed-body-size);
+  line-height: var(--text-embed-body-line-height);
+  color: var(--color-text-primary);
+  box-sizing: border-box;
+}
+
+.csk-embed-widget *,
+.csk-embed-widget *::before,
+.csk-embed-widget *::after {
+  box-sizing: border-box;
+}
+
+/* =============================================================================
+   CONTAINER QUERY MIXINS (as CSS custom properties for documentation)
+   These values are used in @container queries throughout components
+   ============================================================================= */
+
+/*
+ * Usage pattern in components:
+ *
+ * @container (max-width: 320px) {
+ *   // xs: single column, minimal info
+ * }
+ *
+ * @container (min-width: 321px) and (max-width: 480px) {
+ *   // sm: compact layout
+ * }
+ *
+ * @container (min-width: 481px) and (max-width: 640px) {
+ *   // md: standard layout
+ * }
+ *
+ * @container (min-width: 641px) and (max-width: 800px) {
+ *   // lg: expanded layout
+ * }
+ *
+ * @container (min-width: 801px) {
+ *   // xl: full features
+ * }
+ */
+
+/* =============================================================================
+   RESPONSIVE UTILITIES FOR CONTAINER QUERIES
+   Hide/show elements based on container size
+   ============================================================================= */
+
+/* Hide at specific container sizes */
+@container (max-width: 320px) {
+  .csk-hide-xs { display: none !important; }
+}
+
+@container (max-width: 480px) {
+  .csk-hide-sm { display: none !important; }
+}
+
+@container (max-width: 640px) {
+  .csk-hide-md { display: none !important; }
+}
+
+/* Show only at specific container sizes */
+@container (min-width: 321px) {
+  .csk-show-xs-only { display: none !important; }
+}
+
+@container (min-width: 481px) {
+  .csk-show-sm-only { display: none !important; }
+}
+
+@container (min-width: 641px) {
+  .csk-show-md-only { display: none !important; }
+}
+
+/* =============================================================================
+   TABLE COLUMN VISIBILITY
+   Container-responsive table column hiding
+   ============================================================================= */
+
+@container table (max-width: 480px) {
+  .csk-table-col-tertiary { display: none; }
+}
+
+@container table (max-width: 400px) {
+  .csk-table-col-secondary { display: none; }
+}
+
+@container table (max-width: 320px) {
+  .csk-table-col-optional { display: none; }
+}
+
+/* =============================================================================
+   CARD LAYOUT VARIATIONS
+   Container-responsive card layouts
+   ============================================================================= */
+
+@container card (max-width: 300px) {
+  .csk-card-layout {
+    flex-direction: column;
+  }
+
+  .csk-card-layout .csk-card-media {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@container card (min-width: 301px) {
+  .csk-card-layout {
+    flex-direction: row;
+  }
+
+  .csk-card-layout .csk-card-media {
+    width: 120px;
+    flex-shrink: 0;
+  }
+}

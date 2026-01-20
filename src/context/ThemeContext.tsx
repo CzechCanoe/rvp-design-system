@@ -26,9 +26,12 @@ import {
 } from 'react';
 
 /**
- * Display mode: utility (compact) vs expressive (generous)
+ * Display mode:
+ * - utility: compact, efficient - for backoffice and admin interfaces
+ * - expressive: generous, dramatic - for public-facing pages
+ * - embed: neutral, modern - for components embedded in kanoe.cz (Joomla)
  */
-export type DisplayMode = 'utility' | 'expressive';
+export type DisplayMode = 'utility' | 'expressive' | 'embed';
 
 /**
  * Color theme: light or dark
@@ -199,7 +202,10 @@ export function ThemeProvider({
   );
 
   const toggleMode = useCallback(() => {
-    setMode(mode === 'utility' ? 'expressive' : 'utility');
+    const modes: DisplayMode[] = ['utility', 'expressive', 'embed'];
+    const currentIndex = modes.indexOf(mode);
+    const nextIndex = (currentIndex + 1) % modes.length;
+    setMode(modes[nextIndex]);
   }, [mode, setMode]);
 
   const toggleTheme = useCallback(() => {

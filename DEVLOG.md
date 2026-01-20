@@ -3873,3 +3873,36 @@ tests/
 
 ### Další kroky
 - Fáze 7.10: Cross-browser testing
+
+---
+
+## 2026-01-20 - Fáze 8.1: Infrastruktura pro embed režim
+
+### Dokončeno
+- [x] Přidán nový display mode `embed` do ThemeContext (vedle `utility` a `expressive`)
+- [x] Vytvořen `src/tokens/embed.css` s tokeny pro embed režim (jemné stíny, Bootstrap 4 kompatibilní velikosti)
+- [x] Přidána pravidla pro `[data-mode="embed"]` do `mode.css`
+- [x] Vytvořen `src/tokens/container-queries.css` s foundation pro container queries
+- [x] Aktualizován Storybook preview s přepínačem režimů (utility/expressive/embed)
+- [x] Vytvořena `KanoeCzContext` mock komponenta simulující kanoe.cz layout
+- [x] Vytvořeny integration stories demonstrující komponenty v Bootstrap 4 kontextu
+
+### Nové soubory
+- `src/tokens/embed.css` - tokeny pro embed režim
+- `src/tokens/container-queries.css` - foundation pro container queries
+- `src/components/KanoeCzContext/KanoeCzContext.tsx` - mock komponenta
+- `src/components/KanoeCzContext/KanoeCzContext.css` - Bootstrap 4-like styly
+- `src/components/KanoeCzContext/KanoeCzContext.stories.tsx` - integration stories
+
+### Problémy a řešení
+1. **Problém:** Badge a Card typy v stories neodpovídaly skutečným typům
+   **Řešení:** Opraveny na správné hodnoty (`error` místo `danger`, `surface` místo `default`, lowercase vtClass)
+
+### Poznámky
+- Embed režim je navržen jako neutrální, bez dramatických efektů
+- KanoeCzContext simuluje tři layout varianty: full, sidebar, narrow
+- Container queries umožní komponentám reagovat na šířku kontejneru místo viewportu
+- Build projde úspěšně, CSS bundle size zůstává 26.51 KB gzipped
+
+### Další kroky
+- Fáze 8.2: ResultsTable refaktoring

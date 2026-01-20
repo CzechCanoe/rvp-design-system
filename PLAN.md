@@ -1,10 +1,10 @@
 # PLAN.md - CSK RVP Design System
 
 ## Aktuální stav
-**Fáze:** 7 - Hloubkové review a redesign
-**Další krok:** 7.10 Finální polish
+**Fáze:** 8 - Integrace s kanoe.cz
+**Další krok:** 8.2 ResultsTable refaktoring
 
-**Problém:** Současná implementace nedosahuje vizuální úrovně studovaných referencí (World Athletics, FIS, ICF). Komponenty jsou funkční, ale "utilitární" - chybí vizuální polish, branded feel, moderní detaily.
+**Problém:** Design systém je technicky kvalitní, ale koncepčně chybí řešení integrace. Komponenty budou embedovány do Joomla šablony na kanoe.cz - potřebují embed mode, container queries a vizuální kompatibilitu.
 
 ---
 
@@ -211,6 +211,64 @@
 - [x] Cross-browser testing - Chrome, Firefox, WebKit (desktop + mobile), 125 testů, 100% pass
 
 **Milestone M7:** Vizuálně atraktivní design systém na úrovni top sportovních federací
+
+---
+
+## Fáze 8: Integrace s kanoe.cz (Feedback Round 1)
+
+**Problém:** Design systém byl navržen jako izolovaný luxusní produkt. V realitě budou komponenty embedovány do Joomla šablony na kanoe.cz (Bootstrap 4, jQuery). Vizuálně nenavazuje na existující web.
+
+**Strategie:** Tři vizuální kontexty:
+1. **Embed (neutrální moderní)** - pro komponenty v kanoe.cz
+2. **Standalone satelit** - pro aplikace (Registr, Přihlášky)
+3. **Expressive** - pro veřejné profily závodníků (wow faktor)
+
+### 8.1 Infrastruktura pro embed režim
+- [x] Nový display mode `embed` v ThemeContext
+- [x] CSS pravidla pro `[data-mode="embed"]` (jemné stíny, bez dramatických efektů)
+- [x] Container Queries foundation (`src/tokens/container-queries.css`)
+- [x] Storybook: KanoeCzContext mock (simulace kanoe.cz layoutu)
+- [x] Integration stories - komponenty uvnitř Bootstrap 4 struktury
+
+### 8.2 ResultsTable refaktoring
+- [ ] Embed varianta (bez stínů, kompaktní padding, border místo shadow)
+- [ ] Container-responsive sloupce (skrývání méně důležitých při úzké šířce)
+- [ ] Slalom-specifické zobrazení (1./2. jízda, Q/SF/F, zvýraznění postupu)
+- [ ] Storybook stories: "V kontextu kanoe.cz", "Slalom kvalifikace"
+
+### 8.3 Calendar refaktoring
+- [ ] List view (chronologický seznam s datumovými hlavičkami)
+- [ ] Cards view (měsíční karty pro homepage)
+- [ ] Embed mode (zjednodušené event cards, bez animací)
+- [ ] Container query responzivita
+
+### 8.4 Nové šablony
+- [ ] **Event Detail Page** - životní cyklus akce:
+  - Před: propozice, mapa, přihlášky
+  - Během: live výsledky, feed
+  - Po: finální výsledky, download, fotogalerie
+- [ ] **Athlete Public Profile (EXPRESSIVE)** - celostránkový wow profil:
+  - Velké hero foto s gradient overlay
+  - Statistiky v kartách, timeline kariéry
+  - Historie výsledků
+- [ ] **Athlete Card (embed)** - kompaktní verze pro seznamy
+
+### 8.5 Header satellite varianta
+- [ ] Nový variant `satellite` - jen logo + user + kontextové akce
+- [ ] Bez mega-menu, kompaktní výška
+- [ ] Pro standalone aplikace (Registr, Přihlášky)
+
+### 8.6 Vizuální harmonizace
+- [ ] Oprava WCAG - kontrast textu na hero gradientech ≥ 4.5:1
+- [ ] Úprava/odstranění wave overlay kde snižuje čitelnost
+- [ ] Realistická data v prototypech (skutečné závody, závodníci, časy)
+
+### 8.7 Testování integrace
+- [ ] Playwright testy pro embed varianty
+- [ ] Container query breakpoint testy
+- [ ] WCAG contrast audit
+
+**Milestone M8:** Komponenty připravené pro embed do kanoe.cz, KanoeCzContext mock v Storybooku
 
 ---
 

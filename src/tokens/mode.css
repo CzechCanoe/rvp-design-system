@@ -186,3 +186,85 @@
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
 }
+
+/* =============================================================================
+   EMBED MODE
+   Neutral, modern - for components embedded in kanoe.cz (Joomla/Bootstrap 4)
+   ============================================================================= */
+
+[data-mode="embed"] {
+  /* Typography */
+  --text-h1-size: var(--text-embed-h1-size);
+  --text-h1-weight: var(--text-embed-h1-weight);
+  --text-h1-line-height: var(--text-embed-h1-line-height);
+
+  --text-h2-size: var(--text-embed-h2-size);
+  --text-h2-weight: var(--text-embed-h2-weight);
+  --text-h2-line-height: var(--text-embed-h2-line-height);
+
+  --text-h3-size: var(--text-embed-h3-size);
+  --text-h3-weight: var(--text-embed-h3-weight);
+  --text-h3-line-height: var(--text-embed-h3-line-height);
+
+  --text-body-size: var(--text-embed-body-size);
+  --text-body-weight: var(--text-embed-body-weight);
+  --text-body-line-height: var(--text-embed-body-line-height);
+
+  /* Spacing */
+  --spacing-mode-xs: var(--spacing-embed-xs);
+  --spacing-mode-sm: var(--spacing-embed-sm);
+  --spacing-mode-md: var(--spacing-embed-md);
+  --spacing-mode-lg: var(--spacing-embed-lg);
+  --spacing-mode-xl: var(--spacing-embed-xl);
+
+  --spacing-section-mode-sm: var(--spacing-embed-section-sm);
+  --spacing-section-mode-md: var(--spacing-embed-section-md);
+  --spacing-section-mode-lg: var(--spacing-embed-section-lg);
+  --spacing-section-mode-xl: var(--spacing-embed-section-xl);
+
+  --spacing-card-mode-padding: var(--spacing-embed-card-padding);
+  --spacing-card-mode-padding-lg: var(--spacing-embed-card-padding-lg);
+  --spacing-card-mode-gap: var(--spacing-embed-card-gap);
+
+  /* Transitions */
+  --motion-mode-fast: var(--motion-embed-fast);
+  --motion-mode-base: var(--motion-embed-base);
+  --motion-mode-slow: var(--motion-embed-slow);
+
+  --transition-mode-button: var(--transition-embed-button);
+  --transition-mode-card: var(--transition-embed-card);
+
+  /* Shadows - subtle or replaced by borders */
+  --shadow-mode-sm: var(--shadow-embed-sm);
+  --shadow-mode-md: var(--shadow-embed-md);
+  --shadow-mode-lg: var(--shadow-embed-lg);
+
+  /* Borders */
+  --border-mode-width: var(--border-embed-width);
+  --border-mode-width-thick: var(--border-embed-width-thick);
+
+  /* Component scales */
+  --button-mode-height-sm: var(--button-embed-height-sm);
+  --button-mode-height-md: var(--button-embed-height-md);
+  --button-mode-height-lg: var(--button-embed-height-lg);
+
+  --button-mode-padding-x-sm: var(--button-embed-padding-x-sm);
+  --button-mode-padding-x-md: var(--button-embed-padding-x-md);
+  --button-mode-padding-x-lg: var(--button-embed-padding-x-lg);
+
+  --avatar-mode-size-sm: var(--avatar-embed-size-sm);
+  --avatar-mode-size-md: var(--avatar-embed-size-md);
+  --avatar-mode-size-lg: var(--avatar-embed-size-lg);
+  --avatar-mode-size-xl: var(--avatar-embed-size-xl);
+
+  --radius-mode-card: var(--radius-embed-card);
+  --radius-mode-card-lg: var(--radius-embed-card-lg);
+
+  --badge-mode-height: var(--badge-embed-height);
+  --badge-mode-padding-x: var(--badge-embed-padding-x);
+}
+
+[data-mode="embed"] .mode-aware-text {
+  font-size: var(--text-embed-body-size);
+  line-height: var(--text-embed-body-line-height);
+}

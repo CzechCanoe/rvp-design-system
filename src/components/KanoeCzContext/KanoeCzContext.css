@@ -1,0 +1,343 @@
+/**
+ * KanoeCzContext - Mock kanoe.cz styles
+ *
+ * Simulates Bootstrap 4 + Joomla environment.
+ * Primary color: #1176a6 (from kanoe.cz audit)
+ */
+
+/* =============================================================================
+   CSS RESET FOR MOCK CONTEXT
+   Prevent design system styles from affecting mock
+   ============================================================================= */
+
+.kanoe-context {
+  /* Reset to Bootstrap 4 defaults */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.kanoe-context *,
+.kanoe-context *::before,
+.kanoe-context *::after {
+  box-sizing: border-box;
+}
+
+/* =============================================================================
+   CONTAINER (Bootstrap 4 style)
+   ============================================================================= */
+
+.kanoe-container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.kanoe-container--sm {
+  max-width: 540px;
+}
+
+.kanoe-container--md {
+  max-width: 720px;
+}
+
+.kanoe-container--lg {
+  max-width: 960px;
+}
+
+.kanoe-container--xl {
+  max-width: 1140px;
+}
+
+.kanoe-container--fluid {
+  max-width: 100%;
+}
+
+/* =============================================================================
+   HEADER
+   ============================================================================= */
+
+.kanoe-header {
+  background-color: #1176a6;
+  color: #fff;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.kanoe-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  gap: 24px;
+}
+
+.kanoe-header__logo {
+  flex-shrink: 0;
+}
+
+.kanoe-logo-placeholder {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.kanoe-header__nav {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+}
+
+.kanoe-nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.15s ease;
+}
+
+.kanoe-nav-link:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.kanoe-nav-link--active {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.kanoe-header__actions {
+  flex-shrink: 0;
+}
+
+.kanoe-btn {
+  display: inline-block;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.kanoe-btn--outline {
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.kanoe-btn--outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+
+/* =============================================================================
+   BREADCRUMB
+   ============================================================================= */
+
+.kanoe-breadcrumb {
+  background-color: #fff;
+  border-bottom: 1px solid #dee2e6;
+  padding: 12px 0;
+}
+
+.kanoe-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+.kanoe-breadcrumb__item {
+  display: flex;
+  align-items: center;
+}
+
+.kanoe-breadcrumb__item + .kanoe-breadcrumb__item::before {
+  content: "/";
+  padding: 0 8px;
+  color: #6c757d;
+}
+
+.kanoe-breadcrumb__item a {
+  color: #1176a6;
+  text-decoration: none;
+}
+
+.kanoe-breadcrumb__item a:hover {
+  text-decoration: underline;
+}
+
+.kanoe-breadcrumb__item--active {
+  color: #6c757d;
+}
+
+/* =============================================================================
+   MAIN CONTENT
+   ============================================================================= */
+
+.kanoe-main {
+  padding: 24px 0;
+  min-height: calc(100vh - 200px);
+}
+
+/* =============================================================================
+   GRID (Bootstrap 4 style)
+   ============================================================================= */
+
+.kanoe-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  gap: 0;
+}
+
+.kanoe-row--centered {
+  justify-content: center;
+}
+
+.kanoe-col {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.kanoe-col--main {
+  flex: 1;
+  min-width: 0;
+}
+
+.kanoe-col--sidebar {
+  flex: 0 0 280px;
+  max-width: 280px;
+}
+
+.kanoe-col--narrow {
+  flex: 0 0 720px;
+  max-width: 720px;
+}
+
+@media (max-width: 991px) {
+  .kanoe-row {
+    flex-direction: column;
+  }
+
+  .kanoe-col--sidebar {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-top: 24px;
+  }
+
+  .kanoe-col--narrow {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* =============================================================================
+   SIDEBAR WIDGETS
+   ============================================================================= */
+
+.kanoe-sidebar-widget {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.kanoe-widget-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #1176a6;
+}
+
+.kanoe-widget-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.kanoe-widget-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.kanoe-widget-list li:last-child {
+  border-bottom: none;
+}
+
+.kanoe-widget-list a {
+  color: #212529;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.kanoe-widget-list a:hover {
+  color: #1176a6;
+}
+
+.kanoe-widget-text {
+  font-size: 14px;
+  color: #6c757d;
+  margin: 0;
+}
+
+/* =============================================================================
+   EMBED AREA
+   ============================================================================= */
+
+.kanoe-embed {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+/* =============================================================================
+   FOOTER
+   ============================================================================= */
+
+.kanoe-footer {
+  background-color: #343a40;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 24px 0;
+  margin-top: auto;
+}
+
+.kanoe-footer__inner {
+  text-align: center;
+}
+
+.kanoe-footer__text {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* =============================================================================
+   RESPONSIVE HEADER
+   ============================================================================= */
+
+@media (max-width: 767px) {
+  .kanoe-header__nav {
+    display: none;
+  }
+
+  .kanoe-header__inner {
+    justify-content: space-between;
+  }
+}
