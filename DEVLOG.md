@@ -1,5 +1,46 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.5 / Redesign Toast komponenty
+
+### Dokončeno
+- [x] Slide-in animace místo scale - toast se vysune z hrany obrazovky podle pozice (right/left/top/bottom)
+- [x] Směrové exit animace - slide-out odpovídá pozici (left/right/top/bottom)
+- [x] Progress bar pro auto-dismiss vizualizaci s CSS animací
+- [x] Progress bar pause na hover - animace se pozastaví při hoveru
+- [x] Nová `styleVariant` prop: `default`, `gradient`, `glass`
+- [x] Gradient varianta s plným gradient pozadím podle typu (success/error/warning/info)
+- [x] Glass varianta s backdrop-filter blur pro frosted glass efekt
+- [x] Vylepšené variant styly - gradient border zleva místo solid border
+- [x] Icon glow efekt pro status varianty (drop-shadow)
+- [x] Icon pulse animace při zobrazení toastu
+- [x] Dismiss button micro-interactions - scale, rotate ikony o 90°
+- [x] Toast hover lift efekt - translateY a enhanced shadow
+- [x] Dark mode podpora pro všechny nové styly a varianty
+- [x] Reduced motion podpora
+- [x] Nový `showProgress` prop na ToastProvider i jednotlivých toastech
+- [x] 6 nových stories: GradientStyle, GlassStyle, ProgressBar, SlideAnimation, AllStyleVariants, FeaturedShowcase
+
+### Změněné soubory
+- `src/components/Toast/Toast.css` - kompletní redesign, slide-in/out animace, progress bar, style varianty
+- `src/components/Toast/Toast.tsx` - nové props (styleVariant, showProgress), progress bar element, pause logika
+- `src/components/Toast/Toast.stories.tsx` - 6 nových stories, aktualizovaná dokumentace
+
+### Klíčové změny
+1. **Slide-in animace** - `translateX(100%)` nebo `translateY(100%)` podle pozice, elastický cubic-bezier
+2. **Progress bar** - absolutně pozicionovaný na spodu, CSS `scaleX` animace s `animation-duration` z duration prop
+3. **Pause on hover** - `animation-play-state: paused` při hover, správný tracking remaining time
+4. **Gradient varianta** - plné gradient pozadí pro branded look, bílý text
+5. **Glass varianta** - `backdrop-filter: blur(12px)`, semi-transparentní pozadí
+6. **Icon effects** - `filter: drop-shadow()` pro glow, pulse animace při vstupu
+7. **Dismiss button** - `transform: scale(1.1)` a `rotate(90deg)` na ikoně při hover
+
+### Poznámky
+- Fáze 7.5 (Redesign Toast) je dokončena
+- Fáze 7.5 (Redesign pokročilých komponent Tier 2) je nyní kompletní
+- Další krok: 7.6 Redesign specifických komponent (Tier 3) - AthleteCard
+
+---
+
 ## 2026-01-20 - Fáze 7.5 / Redesign Tabs komponenty
 
 ### Dokončeno

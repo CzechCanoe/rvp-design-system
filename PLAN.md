@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 7 - Hloubkové review a redesign
-**Další krok:** 7.5 Redesign pokročilých komponent (Tier 2) - Toast
+**Další krok:** 7.6 Redesign specifických komponent (Tier 3) - AthleteCard
 
 **Problém:** Současná implementace nedosahuje vizuální úrovně studovaných referencí (World Athletics, FIS, ICF). Komponenty jsou funkční, ale "utilitární" - chybí vizuální polish, branded feel, moderní detaily.
 
@@ -172,7 +172,7 @@
 - [x] **Navigation** - aktivní stavy, hover animace, gradient/glass/pills varianty
 - [x] **Modal** - backdrop blur, slide-in animace, gradient/glass/danger varianty
 - [x] **Tabs** - animated underline, gradient/gradient-line/glass varianty
-- [ ] **Toast** - slide-in animace, progress bar
+- [x] **Toast** - slide-in animace, progress bar, gradient/glass varianty, micro-interactions
 
 ### 7.6 Redesign specifických komponent (Tier 3)
 - [ ] **AthleteCard** - hero varianta s gradient overlay

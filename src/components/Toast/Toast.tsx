@@ -23,6 +23,7 @@ export type ToastPosition =
   | 'bottom-left'
   | 'bottom-center'
   | 'bottom-right';
+export type ToastStyleVariant = 'default' | 'gradient' | 'glass';
 
 export interface Toast {
   /** Unique identifier for the toast */
@@ -33,10 +34,14 @@ export interface Toast {
   title?: string;
   /** Visual variant */
   variant?: ToastVariant;
+  /** Style variant for visual appearance */
+  styleVariant?: ToastStyleVariant;
   /** Duration in ms before auto-dismiss (0 = no auto-dismiss) */
   duration?: number;
   /** Whether to show close button */
   dismissible?: boolean;
+  /** Whether to show progress bar */
+  showProgress?: boolean;
   /** Callback when toast is dismissed */
   onDismiss?: () => void;
   /** Custom icon (overrides variant icon) */
@@ -76,6 +81,10 @@ export interface ToastProviderProps {
   duration?: number;
   /** Maximum number of visible toasts */
   maxToasts?: number;
+  /** Default style variant */
+  styleVariant?: ToastStyleVariant;
+  /** Whether to show progress bar by default */
+  showProgress?: boolean;
 }
 
 export interface ToastItemProps extends HTMLAttributes<HTMLDivElement> {
@@ -83,6 +92,8 @@ export interface ToastItemProps extends HTMLAttributes<HTMLDivElement> {
   toast: Toast;
   /** Callback to dismiss this toast */
   onDismiss: (id: string) => void;
+  /** Whether to show progress bar */
+  showProgress?: boolean;
 }
 
 // =============================================================================
@@ -95,9 +106,12 @@ const ToastContext = createContext<ToastContextValue | null>(null);
 // TOAST ITEM COMPONENT
 // =============================================================================
 
-const ToastItem = ({ toast, onDismiss, className, ...props }: ToastItemProps) => {
+const ToastItem = ({ toast, onDismiss, showProgress = true, className, ...props }: ToastItemProps) => {
   const [isExiting, setIsExiting] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef<number | null>(null);
+  const remainingTimeRef = useRef<number>(toast.duration || 0);
+  const startTimeRef = useRef<number>(Date.now());
 
   const handleDismiss = useCallback(() => {
     setIsExiting(true);
@@ -111,6 +125,8 @@ const ToastItem = ({ toast, onDismiss, className, ...props }: ToastItemProps) =>
   // Auto-dismiss timer
   useEffect(() => {
     if (toast.duration && toast.duration > 0) {
+      remainingTimeRef.current = toast.duration;
+      startTimeRef.current = Date.now();
       timerRef.current = window.setTimeout(handleDismiss, toast.duration);
     }
     return () => {
@@ -122,24 +138,35 @@ const ToastItem = ({ toast, onDismiss, className, ...props }: ToastItemProps) =>
 
   // Pause timer on hover
   const handleMouseEnter = useCallback(() => {
-    if (timerRef.current) {
+    if (timerRef.current && toast.duration && toast.duration > 0) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
+      // Calculate remaining time
+      const elapsed = Date.now() - startTimeRef.current;
+      remainingTimeRef.current = Math.max(0, remainingTimeRef.current - elapsed);
+      setIsPaused(true);
     }
-  }, []);
+  }, [toast.duration]);
 
   const handleMouseLeave = useCallback(() => {
-    if (toast.duration && toast.duration > 0) {
-      timerRef.current = window.setTimeout(handleDismiss, toast.duration);
+    if (toast.duration && toast.duration > 0 && remainingTimeRef.current > 0) {
+      startTimeRef.current = Date.now();
+      timerRef.current = window.setTimeout(handleDismiss, remainingTimeRef.current);
+      setIsPaused(false);
     }
   }, [toast.duration, handleDismiss]);
 
   const variant = toast.variant || 'default';
+  const styleVariant = toast.styleVariant || 'default';
+  const shouldShowProgress = toast.showProgress ?? showProgress;
+  const hasDuration = toast.duration && toast.duration > 0;
 
   const classes = [
     'csk-toast',
     `csk-toast--${variant}`,
+    styleVariant !== 'default' && `csk-toast--style-${styleVariant}`,
     isExiting && 'csk-toast--exiting',
+    isPaused && 'csk-toast--paused',
     className,
   ]
     .filter(Boolean)
@@ -200,6 +227,16 @@ const ToastItem = ({ toast, onDismiss, className, ...props }: ToastItemProps) =>
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         </button>
+      )}
+
+      {/* Progress bar */}
+      {shouldShowProgress && hasDuration && (
+        <div className="csk-toast__progress">
+          <div
+            className="csk-toast__progress-bar"
+            style={{ animationDuration: `${toast.duration}ms` }}
+          />
+        </div>
       )}
     </div>
   );
@@ -300,18 +337,23 @@ const generateId = () => `toast-${++toastCounter}`;
  *
  * Features:
  * - Multiple variants (default, success, warning, error, info)
+ * - Style variants (default, gradient, glass)
  * - Configurable position (6 positions)
  * - Auto-dismiss with configurable duration
+ * - Progress bar visualization
  * - Pause on hover
  * - Action buttons
  * - WCAG 2.1 AA compliant (role="alert", aria-live)
  * - Stacking with max visible limit
+ * - Slide-in/out animations
  */
 export const ToastProvider = ({
   children,
   position = 'bottom-right',
   duration = 5000,
   maxToasts = 5,
+  styleVariant = 'default',
+  showProgress = true,
 }: ToastProviderProps) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
@@ -323,6 +365,8 @@ export const ToastProvider = ({
         message,
         duration: options.duration ?? duration,
         dismissible: options.dismissible ?? true,
+        styleVariant: options.styleVariant ?? styleVariant,
+        showProgress: options.showProgress ?? showProgress,
         ...options,
       };
 
@@ -337,7 +381,7 @@ export const ToastProvider = ({
 
       return id;
     },
-    [duration, maxToasts]
+    [duration, maxToasts, styleVariant, showProgress]
   );
 
   const dismiss = useCallback((id: string) => {
@@ -366,7 +410,12 @@ export const ToastProvider = ({
       {createPortal(
         <div className={containerClasses} aria-label="Oznámení">
           {toasts.map((toast) => (
-            <ToastItem key={toast.id} toast={toast} onDismiss={dismiss} />
+            <ToastItem
+              key={toast.id}
+              toast={toast}
+              onDismiss={dismiss}
+              showProgress={toast.showProgress ?? showProgress}
+            />
           ))}
         </div>,
         document.body
@@ -396,6 +445,12 @@ export const ToastProvider = ({
  * toast('Závodník byl smazán', {
  *   action: { label: 'Zpět', onClick: handleUndo }
  * });
+ *
+ * // Show gradient style toast
+ * success('Registrace dokončena', { styleVariant: 'gradient' });
+ *
+ * // Show glass style toast
+ * info('Nová verze k dispozici', { styleVariant: 'glass' });
  * ```
  */
 export const useToast = (): ToastContextValue => {

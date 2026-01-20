@@ -14,13 +14,18 @@ Toast component for displaying temporary notifications.
 
 ## Features
 - Multiple variants (default, success, warning, error, info)
+- Style variants (default, gradient, glass)
 - Configurable position (6 positions)
 - Auto-dismiss with configurable duration
+- **Progress bar** visualization with pause on hover
+- **Slide-in/out animations** from edge of screen
 - Pause timer on hover
 - Action buttons for undo/retry patterns
 - WCAG 2.1 AA compliant (role="alert", aria-live)
 - Stacking with configurable max visible limit
 - Responsive design (full-width on mobile)
+- Icon glow effects for status variants
+- Dismiss button with rotate animation
 
 ## Usage
 \`\`\`tsx
@@ -29,7 +34,7 @@ import { ToastProvider, useToast } from '@czechcanoe/rvp-design-system';
 // Wrap your app with ToastProvider
 function App() {
   return (
-    <ToastProvider position="bottom-right">
+    <ToastProvider position="bottom-right" showProgress>
       <YourApp />
     </ToastProvider>
   );
@@ -47,6 +52,12 @@ function MyComponent() {
       error('Nepodařilo se uložit změny');
     }
   };
+
+  // Gradient style toast
+  success('Dokončeno!', { styleVariant: 'gradient' });
+
+  // Glass style toast
+  info('Nová verze', { styleVariant: 'glass' });
 
   return <Button onClick={handleSave}>Uložit</Button>;
 }
@@ -75,6 +86,15 @@ function MyComponent() {
     maxToasts: {
       control: { type: 'number', min: 1, max: 10 },
       description: 'Maximum number of visible toasts',
+    },
+    styleVariant: {
+      control: 'select',
+      options: ['default', 'gradient', 'glass'],
+      description: 'Default style variant for toasts',
+    },
+    showProgress: {
+      control: 'boolean',
+      description: 'Whether to show progress bar by default',
     },
   },
 };
@@ -233,6 +253,317 @@ const ToastStackDemo = () => {
 };
 
 // =============================================================================
+// NEW STYLE VARIANT DEMOS
+// =============================================================================
+
+const GradientToastDemo = () => {
+  const { toast, success, warning, error, info } = useToast();
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}>
+      <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 600 }}>Gradient Style</h4>
+      <Button
+        onClick={() =>
+          toast('Gradient default toast', {
+            styleVariant: 'gradient',
+            title: 'Gradient Style',
+          })
+        }
+      >
+        Gradient Default
+      </Button>
+      <Button
+        variant="secondary"
+        onClick={() =>
+          success('Operace byla úspěšná!', {
+            styleVariant: 'gradient',
+            title: 'Úspěch',
+          })
+        }
+      >
+        Gradient Success
+      </Button>
+      <Button
+        variant="secondary"
+        onClick={() =>
+          warning('Pozor na tuto akci', {
+            styleVariant: 'gradient',
+            title: 'Varování',
+          })
+        }
+      >
+        Gradient Warning
+      </Button>
+      <Button
+        variant="danger"
+        onClick={() =>
+          error('Něco se pokazilo', {
+            styleVariant: 'gradient',
+            title: 'Chyba',
+          })
+        }
+      >
+        Gradient Error
+      </Button>
+      <Button
+        variant="ghost"
+        onClick={() =>
+          info('Nová aktualizace', {
+            styleVariant: 'gradient',
+            title: 'Info',
+          })
+        }
+      >
+        Gradient Info
+      </Button>
+    </div>
+  );
+};
+
+const GlassToastDemo = () => {
+  const { toast, success, info } = useToast();
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '12px',
+        width: '300px',
+        padding: '24px',
+        background: 'linear-gradient(135deg, var(--color-primary-500), var(--color-primary-700))',
+        borderRadius: '12px',
+      }}
+    >
+      <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 600, color: 'white' }}>
+        Glass Style (na barevném pozadí)
+      </h4>
+      <Button
+        onClick={() =>
+          toast('Glass effect toast', {
+            styleVariant: 'glass',
+            title: 'Glass Style',
+          })
+        }
+      >
+        Glass Default
+      </Button>
+      <Button
+        variant="secondary"
+        onClick={() =>
+          success('Glassmorphism success', {
+            styleVariant: 'glass',
+          })
+        }
+      >
+        Glass Success
+      </Button>
+      <Button
+        variant="secondary"
+        onClick={() =>
+          info('Frosted glass info', {
+            styleVariant: 'glass',
+          })
+        }
+      >
+        Glass Info
+      </Button>
+    </div>
+  );
+};
+
+const ProgressBarDemo = () => {
+  const { toast, success, warning, error, info } = useToast();
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}>
+      <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 600 }}>Progress Bar</h4>
+      <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-text-secondary)' }}>
+        Progress bar ukazuje zbývající čas. Při hoveru se pozastaví.
+      </p>
+      <Button onClick={() => toast('S progress barem (5s)', { duration: 5000 })}>
+        Default (5s)
+      </Button>
+      <Button
+        variant="secondary"
+        onClick={() => success('Success s progress barem', { duration: 4000 })}
+      >
+        Success (4s)
+      </Button>
+      <Button
+        variant="secondary"
+        onClick={() => warning('Warning s progress barem', { duration: 6000 })}
+      >
+        Warning (6s)
+      </Button>
+      <Button
+        variant="danger"
+        onClick={() => error('Error s progress barem', { duration: 8000 })}
+      >
+        Error (8s)
+      </Button>
+      <Button
+        variant="ghost"
+        onClick={() => info('Info s progress barem', { duration: 3000 })}
+      >
+        Info (3s)
+      </Button>
+      <hr style={{ margin: '8px 0', border: 'none', borderTop: '1px solid var(--color-border-secondary)' }} />
+      <Button
+        variant="ghost"
+        onClick={() =>
+          toast('Bez progress baru', {
+            showProgress: false,
+            duration: 5000,
+          })
+        }
+      >
+        Bez progress baru
+      </Button>
+    </div>
+  );
+};
+
+const SlideAnimationDemo = () => {
+  const { success, info } = useToast();
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}>
+      <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 600 }}>Slide-in Animace</h4>
+      <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-text-secondary)' }}>
+        Toast se vysune z hrany obrazovky podle své pozice (right/left/top/bottom).
+      </p>
+      <Button
+        onClick={() => success('Vysune se zprava', { title: 'Slide-in' })}
+      >
+        Zobrazit toast
+      </Button>
+      <Button
+        variant="ghost"
+        onClick={() =>
+          info('Hover pro zvětšení, klikni dismiss pro rotaci ikony', {
+            title: 'Micro-interactions',
+            duration: 8000,
+          })
+        }
+      >
+        Micro-interactions demo
+      </Button>
+    </div>
+  );
+};
+
+const AllStyleVariantsDemo = () => {
+  const { success } = useToast();
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}>
+      <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 600 }}>Všechny styly</h4>
+      <Button
+        onClick={() =>
+          success('Default style - klasický vzhled', {
+            styleVariant: 'default',
+            title: 'Default',
+          })
+        }
+      >
+        Default Style
+      </Button>
+      <Button
+        variant="secondary"
+        onClick={() =>
+          success('Gradient style - výrazný branded vzhled', {
+            styleVariant: 'gradient',
+            title: 'Gradient',
+          })
+        }
+      >
+        Gradient Style
+      </Button>
+      <Button
+        variant="ghost"
+        onClick={() =>
+          success('Glass style - frosted glass efekt', {
+            styleVariant: 'glass',
+            title: 'Glass',
+          })
+        }
+      >
+        Glass Style
+      </Button>
+    </div>
+  );
+};
+
+const FeaturedShowcaseDemo = () => {
+  const { success, error, info, warning } = useToast();
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '320px' }}>
+      <h4 style={{ margin: 0, fontSize: '16px', fontWeight: 600 }}>Featured Showcase</h4>
+      <p style={{ margin: 0, fontSize: '13px', color: 'var(--color-text-secondary)' }}>
+        Ukázka všech nových funkcí Toast komponenty.
+      </p>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <Button
+          onClick={() =>
+            success('Registrace závodníka byla úspěšně dokončena!', {
+              title: 'Registrace dokončena',
+              styleVariant: 'gradient',
+              duration: 6000,
+            })
+          }
+        >
+          🎉 Gradient Success
+        </Button>
+
+        <Button
+          variant="danger"
+          onClick={() =>
+            error('Nepodařilo se připojit k serveru. Zkontrolujte připojení.', {
+              title: 'Chyba připojení',
+              action: {
+                label: 'Zkusit znovu',
+                onClick: () => info('Pokus o opětovné připojení...'),
+              },
+              duration: 8000,
+            })
+          }
+        >
+          ⚠️ Error s akcí
+        </Button>
+
+        <Button
+          variant="secondary"
+          onClick={() =>
+            warning('Vaše členství vyprší za 7 dní. Obnovte si ho včas.', {
+              title: 'Blíží se expirace',
+              styleVariant: 'glass',
+              duration: 10000,
+            })
+          }
+        >
+          💎 Glass Warning
+        </Button>
+
+        <Button
+          variant="ghost"
+          onClick={() =>
+            info('Nový závodník právě startuje na trati!', {
+              title: 'Live update',
+              duration: 4000,
+            })
+          }
+        >
+          📡 Live notifikace
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+// =============================================================================
 // CSK SPECIFIC DEMOS
 // =============================================================================
 
@@ -341,6 +672,7 @@ const CSKLiveResultsDemo = () => {
         onClick={() =>
           success('Jan Novák (KC Praha) - 98.45s - 1. místo!', {
             title: 'Nový nejlepší čas',
+            styleVariant: 'gradient',
             duration: 8000,
           })
         }
@@ -382,6 +714,7 @@ export const Default: Story = {
     position: 'bottom-right',
     duration: 5000,
     maxToasts: 5,
+    showProgress: true,
   },
   render: (args) => (
     <ToastProvider {...args}>
@@ -434,6 +767,126 @@ export const Stacking: Story = {
     </ToastProvider>
   ),
 };
+
+// =============================================================================
+// NEW STYLE VARIANT STORIES
+// =============================================================================
+
+export const GradientStyle: Story = {
+  args: {
+    position: 'bottom-right',
+    styleVariant: 'gradient',
+  },
+  render: (args) => (
+    <ToastProvider {...args}>
+      <GradientToastDemo />
+    </ToastProvider>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Gradient style variant with full-color backgrounds for a bold, branded look.',
+      },
+    },
+  },
+};
+
+export const GlassStyle: Story = {
+  args: {
+    position: 'bottom-right',
+    styleVariant: 'glass',
+  },
+  render: (args) => (
+    <ToastProvider {...args}>
+      <GlassToastDemo />
+    </ToastProvider>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Glass style variant with backdrop blur for a frosted glass effect. Best used on colored backgrounds.',
+      },
+    },
+  },
+};
+
+export const ProgressBar: Story = {
+  args: {
+    position: 'bottom-right',
+    showProgress: true,
+  },
+  render: (args) => (
+    <ToastProvider {...args}>
+      <ProgressBarDemo />
+    </ToastProvider>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Progress bar shows remaining time before auto-dismiss. Pauses on hover.',
+      },
+    },
+  },
+};
+
+export const SlideAnimation: Story = {
+  args: {
+    position: 'bottom-right',
+  },
+  render: (args) => (
+    <ToastProvider {...args}>
+      <SlideAnimationDemo />
+    </ToastProvider>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Slide-in animation from edge of screen based on position. Includes micro-interactions on hover and dismiss.',
+      },
+    },
+  },
+};
+
+export const AllStyleVariants: Story = {
+  args: {
+    position: 'bottom-right',
+  },
+  render: (args) => (
+    <ToastProvider {...args}>
+      <AllStyleVariantsDemo />
+    </ToastProvider>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Comparison of all three style variants: default, gradient, and glass.',
+      },
+    },
+  },
+};
+
+export const FeaturedShowcase: Story = {
+  args: {
+    position: 'bottom-right',
+    showProgress: true,
+  },
+  render: (args) => (
+    <ToastProvider {...args}>
+      <FeaturedShowcaseDemo />
+    </ToastProvider>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Showcase of all new Toast features: gradient/glass styles, progress bar, slide animations, and micro-interactions.',
+      },
+    },
+  },
+};
+
+// =============================================================================
+// POSITION STORIES
+// =============================================================================
 
 export const TopLeft: Story = {
   args: {
@@ -543,7 +996,7 @@ export const CSKLiveResults: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Toast notifications for live results during competitions.',
+        story: 'Toast notifications for live results during competitions. Uses gradient style for important updates.',
       },
     },
   },
