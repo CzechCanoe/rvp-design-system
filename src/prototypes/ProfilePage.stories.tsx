@@ -352,21 +352,7 @@ function StarIcon() {
   );
 }
 
-// Wave decoration component
-const WaveDecoration = ({ className = '' }: { className?: string }) => (
-  <svg
-    className={`profile-page-wave ${className}`}
-    viewBox="0 0 1440 100"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    preserveAspectRatio="none"
-  >
-    <path
-      d="M0 50C240 20 480 80 720 50C960 20 1200 80 1440 50V100H0V50Z"
-      fill="currentColor"
-    />
-  </svg>
-);
+// Note: WaveDecoration removed for cleaner design (Phase 8.6.3)
 
 // ============================================================================
 // Helper Functions
@@ -601,7 +587,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv' }: ProfilePageProps)
             </div>
           </div>
         </div>
-        <WaveDecoration className="profile-hero-section__wave" />
+        {/* Note: WaveDecoration removed for cleaner design (Phase 8.6.3) */}
       </section>
 
       {/* Main Content */}

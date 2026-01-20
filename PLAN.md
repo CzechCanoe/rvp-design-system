@@ -65,9 +65,11 @@
 #### 8.6.3 Odstranit HERO vlny ze všech prototypů ✅
 - [x] LivePage - odstranit hero sekci s vlnou (nahrazeno čistým headerem)
 - [x] ResultsPage - odstranit hero sekci s vlnou (nahrazeno čistým headerem)
-- [x] CalendarPage - nemá hero s vlnou (nebylo třeba měnit)
-- [x] EventDetailPage - nemá hero s vlnou (nebylo třeba měnit)
-- [x] ProfilePage - nemá hero s vlnou (nebylo třeba měnit)
+- [x] CalendarPage - odstraněn WaveDecoration, showHero prop
+- [x] DashboardPage - odstraněn WaveSVG, pulse rings, zjednodušen header
+- [x] EventDetailPage - odstraněn WaveDecoration z hero
+- [x] ProfilePage - odstraněn WaveDecoration z hero
+- [x] RegistrationPage - odstraněn WaveDecoration z hero
 - [x] AthletePublicProfile - AthleteCard.hero varianta zachována jako expressive styl
 
 ---

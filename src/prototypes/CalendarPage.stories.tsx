@@ -26,8 +26,6 @@ interface CalendarPageProps {
   initialSection?: 'all' | 'dv' | 'ry' | 'vt';
   /** Show live races */
   showLive?: boolean;
-  /** Show hero section */
-  showHero?: boolean;
   /** Display variant */
   variant?: CalendarPageVariant;
 }
@@ -278,56 +276,7 @@ const ArrowRightIcon = () => (
   </svg>
 );
 
-// Trophy icon
-const TrophyIcon = () => (
-  <svg
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
-    <path d="M4 22h16" />
-    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
-    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
-    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
-  </svg>
-);
-
-// Star icon
-const StarIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-  </svg>
-);
-
-// Wave decoration component
-const WaveDecoration = ({ className = '' }: { className?: string }) => (
-  <svg
-    className={`calendar-page-wave ${className}`}
-    viewBox="0 0 1440 100"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    preserveAspectRatio="none"
-  >
-    <path
-      d="M0 50C240 20 480 80 720 50C960 20 1200 80 1440 50V100H0V50Z"
-      fill="currentColor"
-    />
-  </svg>
-);
+// Note: TrophyIcon, StarIcon, WaveDecoration removed - hero section cleaned (Phase 8.6.3)
 
 // CSK Logo component for satellite header
 const CSKLogo = () => (
@@ -336,7 +285,7 @@ const CSKLogo = () => (
   </span>
 );
 
-const CalendarPage = ({ initialSection = 'all', showLive = true, showHero = true, variant = 'standalone' }: CalendarPageProps) => {
+const CalendarPage = ({ initialSection = 'all', showLive = true, variant = 'standalone' }: CalendarPageProps) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedSection, setSelectedSection] = useState<string>(initialSection);
   const [searchQuery, setSearchQuery] = useState('');
@@ -376,13 +325,6 @@ const CalendarPage = ({ initialSection = 'all', showLive = true, showHero = true
       .sort((a, b) => a.start.getTime() - b.start.getTime())
       .slice(0, 5);
   }, [filteredRaces]);
-
-  // Get featured events (MČR and Nominace)
-  const featuredEvents = useMemo(() => {
-    return allRaces
-      .filter((race) => race.data?.level === 'MČR' || race.data?.level === 'Nominace')
-      .slice(0, 3);
-  }, [allRaces]);
 
   // Section tabs
   const sectionTabs = [
@@ -492,116 +434,16 @@ const CalendarPage = ({ initialSection = 'all', showLive = true, showHero = true
       {/* Header */}
       {renderHeader()}
 
-      {/* Hero Section */}
-      {showHero && (
-        <section className="calendar-page-hero">
-          <div className="calendar-page-hero__background">
-            <div className="calendar-page-hero__gradient" />
-            <div className="calendar-page-hero__pattern" />
-          </div>
-          <div className="calendar-page-hero__content">
-            <div className="calendar-page-hero__text">
-              <h1 className="calendar-page-hero__title">Kalendář závodů</h1>
-              <p className="calendar-page-hero__subtitle">
-                Přehled všech závodů a akcí Českého svazu kanoistů pro sezónu {currentDate.getFullYear()}
-              </p>
-              <div className="calendar-page-hero__stats">
-                <div className="calendar-page-hero__stat">
-                  <span className="calendar-page-hero__stat-value">{allRaces.filter(r => r.section).length}</span>
-                  <span className="calendar-page-hero__stat-label">závodů v měsíci</span>
-                </div>
-                <div className="calendar-page-hero__stat">
-                  <span className="calendar-page-hero__stat-value">3</span>
-                  <span className="calendar-page-hero__stat-label">sekce</span>
-                </div>
-                <div className="calendar-page-hero__stat">
-                  <span className="calendar-page-hero__stat-value">{allRaces.filter(r => r.data?.level === 'MČR').length}</span>
-                  <span className="calendar-page-hero__stat-label">MČR</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <WaveDecoration className="calendar-page-hero__wave" />
-        </section>
-      )}
-
-      {/* Featured Events Section */}
-      {showHero && featuredEvents.length > 0 && (
-        <section className="calendar-page-featured">
-          <div className="calendar-page-featured__container">
-            <div className="calendar-page-featured__header">
-              <TrophyIcon />
-              <h2 className="calendar-page-featured__title">Hlavní události sezóny</h2>
-            </div>
-            <div className="calendar-page-featured__grid">
-              {featuredEvents.map((event, index) => (
-                <button
-                  key={event.id}
-                  type="button"
-                  className={`calendar-page-featured__card calendar-page-featured__card--${event.section || 'default'}`}
-                  onClick={() => handleEventClick(event)}
-                >
-                  <div className="calendar-page-featured__card-accent" />
-                  <div className="calendar-page-featured__card-content">
-                    <div className="calendar-page-featured__card-top">
-                      {index === 0 && (
-                        <span className="calendar-page-featured__card-star">
-                          <StarIcon />
-                        </span>
-                      )}
-                      {event.section && (
-                        <Badge section={event.section as 'dv' | 'ry' | 'vt'} size="sm" glow>
-                          {sectionShortNames[event.section]}
-                        </Badge>
-                      )}
-                      {event.data?.level ? (
-                        <Badge variant="default" size="sm" outlined>
-                          {String(event.data.level)}
-                        </Badge>
-                      ) : null}
-                    </div>
-                    <h3 className="calendar-page-featured__card-title">{event.title}</h3>
-                    <div className="calendar-page-featured__card-meta">
-                      <span className="calendar-page-featured__card-date">
-                        <CalendarIcon />
-                        {formatDateRange(event.start, event.end)}
-                      </span>
-                      {event.data?.location ? (
-                        <span className="calendar-page-featured__card-location">
-                          <LocationIcon />
-                          {String(event.data.location)}
-                        </span>
-                      ) : null}
-                    </div>
-                    {event.data?.entries ? (
-                      <div className="calendar-page-featured__card-entries">
-                        <UsersIcon />
-                        <span>{String(event.data.entries)} přihlášených</span>
-                      </div>
-                    ) : null}
-                  </div>
-                  <div className="calendar-page-featured__card-arrow">
-                    <ArrowRightIcon />
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Main content */}
+      {/* Main content - Clean design without hero waves (Phase 8.6.3) */}
       <main className="prototype-calendar-page__main">
         <div className="prototype-calendar-page__container">
-          {/* Page header - only show if no hero */}
-          {!showHero && (
-            <div className="prototype-calendar-page__header">
-              <h1 className="prototype-calendar-page__title">Kalendář závodů</h1>
-              <p className="prototype-calendar-page__subtitle">
-                Přehled všech závodů a akcí Českého svazu kanoistů
-              </p>
-            </div>
-          )}
+          {/* Page header */}
+          <div className="prototype-calendar-page__header">
+            <h1 className="prototype-calendar-page__title">Kalendář závodů</h1>
+            <p className="prototype-calendar-page__subtitle">
+              Přehled všech závodů a akcí Českého svazu kanoistů
+            </p>
+          </div>
 
           {/* Filters */}
           <div className="prototype-calendar-page__filters">
@@ -820,10 +662,6 @@ const meta = {
       control: 'boolean',
       description: 'Show live races indicator',
     },
-    showHero: {
-      control: 'boolean',
-      description: 'Show hero section with featured events',
-    },
     variant: {
       control: 'select',
       options: ['standalone', 'satellite', 'embed'],
@@ -836,13 +674,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /**
- * Výchozí zobrazení kalendáře s hero sekcí a featured events.
+ * Výchozí zobrazení kalendáře závodů.
  */
 export const Default: Story = {
   args: {
     initialSection: 'all',
     showLive: true,
-    showHero: true,
   },
 };
 
@@ -853,7 +690,6 @@ export const DivokáVoda: Story = {
   args: {
     initialSection: 'dv',
     showLive: true,
-    showHero: true,
   },
 };
 
@@ -864,7 +700,6 @@ export const Rychlostní: Story = {
   args: {
     initialSection: 'ry',
     showLive: true,
-    showHero: true,
   },
 };
 
@@ -875,18 +710,16 @@ export const VodníTuristika: Story = {
   args: {
     initialSection: 'vt',
     showLive: true,
-    showHero: true,
   },
 };
 
 /**
- * Kompaktní zobrazení bez hero sekce.
+ * Kompaktní zobrazení s filtrem na všechny sekce.
  */
 export const Compact: Story = {
   args: {
     initialSection: 'all',
     showLive: true,
-    showHero: false,
   },
 };
 
@@ -897,7 +730,6 @@ export const BezLive: Story = {
   args: {
     initialSection: 'all',
     showLive: false,
-    showHero: true,
   },
 };
 
@@ -913,7 +745,6 @@ export const Embed: Story = {
   args: {
     initialSection: 'all',
     showLive: true,
-    showHero: false,
     variant: 'embed',
   },
   decorators: [
@@ -942,7 +773,6 @@ export const Satellite: Story = {
   args: {
     initialSection: 'all',
     showLive: true,
-    showHero: false,
     variant: 'satellite',
   },
 };
@@ -955,7 +785,6 @@ export const EmbedWithSidebar: Story = {
   args: {
     initialSection: 'dv',
     showLive: true,
-    showHero: false,
     variant: 'embed',
   },
   decorators: [

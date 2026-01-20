@@ -53,7 +53,7 @@ export interface Toast {
   };
 }
 
-export interface ToastOptions extends Omit<Toast, 'id' | 'message'> {}
+export type ToastOptions = Omit<Toast, 'id' | 'message'>;
 
 export interface ToastContextValue {
   /** Add a new toast */

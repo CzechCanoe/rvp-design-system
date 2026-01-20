@@ -295,18 +295,7 @@ const getRoleLabel = (role: string): string => {
   return labels[role] || role;
 };
 
-const getHeroSectionClass = (
-  role: string,
-  section?: 'dv' | 'ry' | 'vt'
-): string => {
-  if (role === 'section_admin' && section) {
-    return `dashboard-hero-section--${section}`;
-  }
-  if (role === 'federation_admin') {
-    return 'dashboard-hero-section--federation';
-  }
-  return '';
-};
+// Note: getHeroSectionClass removed - hero section cleaned (Phase 8.6.3)
 
 // ============================================================================
 // Icons
@@ -413,21 +402,7 @@ const Icons = {
   ),
 };
 
-// Wave SVG for hero section
-const WaveSVG = () => (
-  <svg
-    className="dashboard-page-wave"
-    viewBox="0 0 1440 60"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    preserveAspectRatio="none"
-  >
-    <path
-      d="M0 60V30C240 10 480 0 720 10C960 20 1200 40 1440 30V60H0Z"
-      fill="currentColor"
-    />
-  </svg>
-);
+// Note: WaveSVG and pulse rings removed for cleaner design (Phase 8.6.3)
 
 // ============================================================================
 // Navigation Items
@@ -615,47 +590,31 @@ const DashboardPage = ({
         }
       />
 
-      {/* Hero Section */}
-      <section
-        className={`dashboard-hero-section ${getHeroSectionClass(role, section)}`}
-      >
-        <div className="dashboard-hero-section__background">
-          <div className="dashboard-hero-section__gradient" />
-          <div className="dashboard-hero-section__pattern" />
-          <div className="dashboard-hero-section__pulse-rings">
-            <div className="dashboard-pulse-ring" />
-            <div className="dashboard-pulse-ring" />
-            <div className="dashboard-pulse-ring" />
+      {/* Page Header - Clean design without hero waves (Phase 8.6.3) */}
+      <section className={`dashboard-page-header dashboard-page-header--${section || 'default'}`}>
+        <div className="dashboard-page-header__content">
+          <div className="dashboard-page-header__welcome">
+            <p className="dashboard-page-header__greeting">Dobry den, Jane</p>
+            <h1 className="dashboard-page-header__title">{clubName}</h1>
+            <p className="dashboard-page-header__subtitle">
+              <span className="dashboard-page-header__badge">
+                {getRoleLabel(role)}
+              </span>
+              {section && (
+                <Badge section={section} size="sm">
+                  {getSectionLabel(section)}
+                </Badge>
+              )}
+            </p>
           </div>
-        </div>
-        <div className="dashboard-hero-section__content">
-          <div className="dashboard-hero-content">
-            <div className="dashboard-hero-welcome">
-              <p className="dashboard-hero-greeting">Dobry den, Jane</p>
-              <h1 className="dashboard-hero-title">{clubName}</h1>
-              <p className="dashboard-hero-subtitle">
-                <span className="dashboard-hero-badge">
-                  {getRoleLabel(role)}
-                </span>
-                {section && (
-                  <Badge section={section} size="sm">
-                    {getSectionLabel(section)}
-                  </Badge>
-                )}
-              </p>
-            </div>
-            <div className="dashboard-hero-actions">
-              <Button variant="secondary" size="md">
-                Exportovat
-              </Button>
-              <Button variant="gradient" size="md">
-                + Novy zavodnik
-              </Button>
-            </div>
+          <div className="dashboard-page-header__actions">
+            <Button variant="secondary" size="md">
+              Exportovat
+            </Button>
+            <Button variant="primary" size="md">
+              + Novy zavodnik
+            </Button>
           </div>
-        </div>
-        <div className="dashboard-hero-section__wave">
-          <WaveSVG />
         </div>
       </section>
 
@@ -952,38 +911,28 @@ const meta: Meta<typeof DashboardPage> = {
         component: `
 # Dashboard spravce
 
-Redesignovany prototyp dashboardu pro spravce oddilu nebo sekce. Obsahuje:
-
-## Nove vizualni prvky (Faze 7.8)
-- **Hero sekce** - gradient pozadi s disciplinovym themingem
-- **Wave dekorace** - plynuly prechod mezi hero a obsahem
-- **Pulse rings** - animovane kruhy v hero sekci
-- **Gradient stat cards** - statistiky s gradient pozadim
-- **Vylepene karty** - section cards s gradient hlavickou
+Prototyp dashboardu pro spravce oddilu nebo sekce. Ciste zobrazeni bez hero vln (Phase 8.6.3).
 
 ## Klicove prvky
-- **Welcome sekce** - personalizovany pozdrav a rychle akce v hero
-- **Statistiky** - gradient karty s klicovymi metrikami
-- **Upozorneni** - urgentni polozky s gradient ikonami
+- **Page header** - personalizovany pozdrav a rychle akce
+- **Statistiky** - karty s klicovymi metrikami
+- **Upozorneni** - urgentni polozky
 - **Tabulka zavodniku** - s filtrovanim a vyhledavanim
 - **Nadchazejici zavody** - s discipline-specific barvami
-- **Rychle akce** - glass efekt s hover animacemi
-- **Posledni aktivita** - feed zmen s barevnymi ikonami
+- **Rychle akce** - hover animace
+- **Posledni aktivita** - feed zmen
 
-## Role uzivatelu a theming
-- **Oddilovy spravce** - primarni modry gradient
-- **Sekcni spravce DV** - modry gradient (Divoka voda)
-- **Sekcni spravce RY** - zeleny gradient (Rychlost)
-- **Sekcni spravce VT** - cerveny gradient (Vodni turistika)
-- **Svazovy spravce** - multi-color gradient (vsechny sekce)
+## Role uzivatelu
+- **Oddilovy spravce** - sprava clenu oddilu
+- **Sekcni spravce** - sprava sekce (DV/RY/VT)
+- **Svazovy spravce** - celkovy prehled
 
 ## Funkce
 - Filtrovani zavodniku dle stavu a sekce
 - Vyhledavani zavodniku
 - Barevne indikatory stavu
-- Responsive layout pro vsechny velikosti obrazovky
+- Responsive layout
 - Dark mode podpora
-- Reduced motion podpora
         `,
       },
     },

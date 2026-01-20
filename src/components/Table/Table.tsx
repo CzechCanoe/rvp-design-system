@@ -150,7 +150,7 @@ Th.displayName = 'Th';
 // Table Data Cell (Td)
 // ============================================================================
 
-export interface TdProps extends TdHTMLAttributes<HTMLTableCellElement> {}
+export type TdProps = TdHTMLAttributes<HTMLTableCellElement>;
 
 const Td = forwardRef<HTMLTableCellElement, TdProps>(({ className, children, ...props }, ref) => {
   const classes = ['csk-table__td', className].filter(Boolean).join(' ');
