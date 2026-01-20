@@ -35,7 +35,7 @@
 - [x] Cards view (měsíční karty) - CalendarCards komponenta
 
 ### 8.4 Nové šablony
-- [ ] **Event Detail Page** - před/během/po závodu
+- [x] **Event Detail Page** - před/během/po závodu
 - [ ] **Athlete Public Profile (EXPRESSIVE)** - celostránkový wow profil
 - [ ] **Athlete Card (embed)** - kompaktní verze
 

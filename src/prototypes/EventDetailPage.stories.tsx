@@ -1,0 +1,921 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+import { Header } from '../components/Header';
+import { MainNav } from '../components/Navigation';
+import { Card } from '../components/Card';
+import { Badge } from '../components/Badge';
+import { Button } from '../components/Button';
+import { Input } from '../components/Input';
+import { Tabs } from '../components/Tabs';
+import { LiveIndicator } from '../components/LiveIndicator';
+import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
+import { KanoeCzContext } from '../components/KanoeCzContext';
+import './EventDetailPage.css';
+
+// ============================================================================
+// Types
+// ============================================================================
+
+type EventStatus = 'upcoming' | 'registration' | 'live' | 'finished';
+
+interface EventDetailPageProps {
+  /** Event status determines the page layout and available sections */
+  status?: EventStatus;
+  /** Section/discipline for theming */
+  section?: 'dv' | 'ry' | 'vt';
+  /** Show hero section */
+  showHero?: boolean;
+  /** Initial active tab */
+  initialTab?: string;
+  /** Embed mode for kanoe.cz integration */
+  embedMode?: boolean;
+}
+
+// ============================================================================
+// Sample Data
+// ============================================================================
+
+const eventData = {
+  id: 'mcr-slalom-2026',
+  title: 'MČR ve slalomu 2026',
+  subtitle: 'Mistrovství České republiky v kanoistickém slalomu',
+  dates: {
+    start: new Date(2026, 4, 3),
+    end: new Date(2026, 4, 5),
+    registrationDeadline: new Date(2026, 3, 25),
+  },
+  location: {
+    name: 'Praha – Troja',
+    venue: 'Vodácký areál Troja',
+    address: 'Vodácká 791/8, 171 00 Praha 7',
+    coordinates: { lat: 50.1167, lng: 14.4167 },
+  },
+  organizer: {
+    name: 'USK Praha',
+    contact: 'zavody@uskpraha.cz',
+    phone: '+420 123 456 789',
+  },
+  discipline: 'Slalom',
+  level: 'MČR',
+  section: 'dv' as const,
+  categories: ['K1M', 'K1W', 'C1M', 'C1W', 'K1MJ', 'K1WJ', 'C1MJ', 'C1WJ'],
+  stats: {
+    entries: 156,
+    clubs: 24,
+    gates: 24,
+    courseLength: 300,
+  },
+  schedule: [
+    { time: '08:00', day: 1, event: 'Registrace účastníků', category: 'all' },
+    { time: '09:00', day: 1, event: 'Tréninkové jízdy', category: 'all' },
+    { time: '14:00', day: 1, event: '1. kvalifikační jízda K1M, K1W', category: 'K1' },
+    { time: '08:00', day: 2, event: '2. kvalifikační jízda K1M, K1W', category: 'K1' },
+    { time: '11:00', day: 2, event: 'Semifinále K1M, K1W', category: 'K1' },
+    { time: '14:00', day: 2, event: '1. kvalifikační jízda C1M, C1W', category: 'C1' },
+    { time: '08:00', day: 3, event: '2. kvalifikační jízda C1M, C1W', category: 'C1' },
+    { time: '11:00', day: 3, event: 'Semifinále C1M, C1W', category: 'C1' },
+    { time: '14:00', day: 3, event: 'Finále všech kategorií', category: 'all' },
+    { time: '17:00', day: 3, event: 'Vyhlášení výsledků', category: 'all' },
+  ],
+  documents: [
+    { id: 'prop', name: 'Propozice závodu', type: 'pdf', size: '245 KB' },
+    { id: 'startlist', name: 'Startovní listina', type: 'pdf', size: '156 KB' },
+    { id: 'map', name: 'Mapa areálu', type: 'pdf', size: '1.2 MB' },
+    { id: 'results', name: 'Výsledky (PDF)', type: 'pdf', size: '312 KB' },
+  ],
+};
+
+const generateResults = (category: string): ResultEntry[] => {
+  const baseResults: Record<string, ResultEntry[]> = {
+    'K1M': [
+      { id: 1, rank: 1, name: 'Jiří Prskavec', club: 'USK Praha', category: 'K1M', totalTime: 92.34, timeDiff: 0, section: 'dv' },
+      { id: 2, rank: 2, name: 'Vít Přindiš', club: 'USK Praha', category: 'K1M', totalTime: 93.87, timeDiff: 1.53, section: 'dv' },
+      { id: 3, rank: 3, name: 'Jakub Krejčí', club: 'Dukla Praha', category: 'K1M', totalTime: 94.21, timeDiff: 1.87, section: 'dv' },
+      { id: 4, rank: 4, name: 'Vavřinec Hradilek', club: 'Dukla Praha', category: 'K1M', totalTime: 95.45, timeDiff: 3.11, section: 'dv' },
+      { id: 5, rank: 5, name: 'Ondřej Tunka', club: 'SK Trnávka', category: 'K1M', totalTime: 96.12, timeDiff: 3.78, section: 'dv' },
+    ],
+    'K1W': [
+      { id: 101, rank: 1, name: 'Tereza Fišerová', club: 'Dukla Praha', category: 'K1W', totalTime: 98.45, timeDiff: 0, section: 'dv' },
+      { id: 102, rank: 2, name: 'Kateřina Minařík Kudějová', club: 'USK Praha', category: 'K1W', totalTime: 99.23, timeDiff: 0.78, section: 'dv' },
+      { id: 103, rank: 3, name: 'Antonie Galušková', club: 'Dukla Praha', category: 'K1W', totalTime: 100.56, timeDiff: 2.11, section: 'dv' },
+    ],
+  };
+  return baseResults[category] || baseResults['K1M'];
+};
+
+const participants = [
+  { id: 1, name: 'Jiří Prskavec', club: 'USK Praha', category: 'K1M', bib: 1, seed: 1 },
+  { id: 2, name: 'Vít Přindiš', club: 'USK Praha', category: 'K1M', bib: 2, seed: 2 },
+  { id: 3, name: 'Jakub Krejčí', club: 'Dukla Praha', category: 'K1M', bib: 3, seed: 3 },
+  { id: 4, name: 'Tereza Fišerová', club: 'Dukla Praha', category: 'K1W', bib: 101, seed: 1 },
+  { id: 5, name: 'Kateřina Minařík Kudějová', club: 'USK Praha', category: 'K1W', bib: 102, seed: 2 },
+];
+
+// Navigation items
+const navItems = [
+  { id: 'home', label: 'Domů', href: '#' },
+  { id: 'calendar', label: 'Kalendář', href: '#' },
+  { id: 'results', label: 'Výsledky', href: '#' },
+  { id: 'athletes', label: 'Závodníci', href: '#' },
+  { id: 'clubs', label: 'Kluby', href: '#' },
+];
+
+// ============================================================================
+// Icons
+// ============================================================================
+
+const SearchIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="11" cy="11" r="8" />
+    <path d="M21 21l-4.35-4.35" />
+  </svg>
+);
+
+const LocationIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
+
+const CalendarIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <line x1="16" y1="2" x2="16" y2="6" />
+    <line x1="8" y1="2" x2="8" y2="6" />
+    <line x1="3" y1="10" x2="21" y2="10" />
+  </svg>
+);
+
+const UsersIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+);
+
+const ClockIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+
+const DownloadIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+    <polyline points="7 10 12 15 17 10" />
+    <line x1="12" y1="15" x2="12" y2="3" />
+  </svg>
+);
+
+const FileIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+    <polyline points="14 2 14 8 20 8" />
+    <line x1="16" y1="13" x2="8" y2="13" />
+    <line x1="16" y1="17" x2="8" y2="17" />
+    <polyline points="10 9 9 9 8 9" />
+  </svg>
+);
+
+const MapIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+    <line x1="8" y1="2" x2="8" y2="18" />
+    <line x1="16" y1="6" x2="16" y2="22" />
+  </svg>
+);
+
+const ExternalLinkIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" y1="14" x2="21" y2="3" />
+  </svg>
+);
+
+// Wave decoration component
+const WaveDecoration = ({ className = '' }: { className?: string }) => (
+  <svg
+    className={`event-detail-wave ${className}`}
+    viewBox="0 0 1440 100"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+  >
+    <path
+      d="M0 50C240 20 480 80 720 50C960 20 1200 80 1440 50V100H0V50Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
+// ============================================================================
+// Helper Functions
+// ============================================================================
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('cs-CZ', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+
+function formatDateRange(start: Date, end: Date): string {
+  const startDay = start.getDate();
+  const endDay = end.getDate();
+  const month = start.toLocaleDateString('cs-CZ', { month: 'long' });
+  const year = start.getFullYear();
+  return `${startDay}.–${endDay}. ${month} ${year}`;
+}
+
+function getStatusBadge(status: EventStatus) {
+  switch (status) {
+    case 'upcoming':
+      return <Badge variant="info">Nadcházející</Badge>;
+    case 'registration':
+      return <Badge variant="warning" glow>Registrace otevřena</Badge>;
+    case 'live':
+      return <LiveIndicator variant="live" size="md" label="LIVE" styleVariant="glass" />;
+    case 'finished':
+      return <Badge variant="success">Dokončeno</Badge>;
+  }
+}
+
+function getDaysUntil(date: Date): number {
+  const now = new Date();
+  const diff = date.getTime() - now.getTime();
+  return Math.ceil(diff / (1000 * 60 * 60 * 24));
+}
+
+// ============================================================================
+// Page Component
+// ============================================================================
+
+const EventDetailPage = ({
+  status = 'upcoming',
+  section = 'dv',
+  showHero = true,
+  initialTab = 'info',
+  embedMode = false,
+}: EventDetailPageProps) => {
+  const [activeTab, setActiveTab] = useState(initialTab);
+  const [selectedCategory, setSelectedCategory] = useState('K1M');
+
+  // Determine available tabs based on status
+  const getTabs = () => {
+    const baseTabs = [
+      { id: 'info', label: 'Informace', content: null },
+      { id: 'schedule', label: 'Program', content: null },
+    ];
+
+    if (status === 'registration' || status === 'upcoming') {
+      baseTabs.push({ id: 'participants', label: 'Přihlášení', content: null });
+    }
+
+    if (status === 'live' || status === 'finished') {
+      baseTabs.push({ id: 'results', label: 'Výsledky', content: null });
+    }
+
+    baseTabs.push({ id: 'documents', label: 'Dokumenty', content: null });
+
+    return baseTabs;
+  };
+
+  const tabs = getTabs();
+  const heroClass = `event-detail-hero event-detail-hero--${section}`;
+
+  // Render content based on active tab
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'info':
+        return (
+          <div className="event-detail-info">
+            <div className="event-detail-info__section">
+              <h3 className="event-detail-info__title">O závodě</h3>
+              <p className="event-detail-info__text">
+                Mistrovství České republiky v kanoistickém slalomu je vrcholná domácí soutěž,
+                která každoročně přiláká nejlepší české vodní slalomáře. Závod se koná na
+                olympijském kanálu v Praze-Troji, který je považován za jednu z nejnáročnějších
+                tratí na světě.
+              </p>
+            </div>
+
+            <div className="event-detail-info__section">
+              <h3 className="event-detail-info__title">Místo konání</h3>
+              <Card variant="outlined" padding="md" className="event-detail-info__location-card">
+                <div className="event-detail-info__location">
+                  <div className="event-detail-info__location-icon">
+                    <MapIcon />
+                  </div>
+                  <div className="event-detail-info__location-details">
+                    <div className="event-detail-info__location-name">{eventData.location.venue}</div>
+                    <div className="event-detail-info__location-address">{eventData.location.address}</div>
+                    <a href="#" className="event-detail-info__location-link">
+                      Zobrazit na mapě <ExternalLinkIcon />
+                    </a>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            <div className="event-detail-info__section">
+              <h3 className="event-detail-info__title">Kategorie</h3>
+              <div className="event-detail-info__categories">
+                {eventData.categories.map((cat) => (
+                  <Badge key={cat} variant="default" size="md">
+                    {cat}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            <div className="event-detail-info__section">
+              <h3 className="event-detail-info__title">Organizátor</h3>
+              <Card variant="outlined" padding="md">
+                <div className="event-detail-info__organizer">
+                  <div className="event-detail-info__organizer-name">{eventData.organizer.name}</div>
+                  <div className="event-detail-info__organizer-contact">
+                    <a href={`mailto:${eventData.organizer.contact}`}>{eventData.organizer.contact}</a>
+                    <span> · </span>
+                    <a href={`tel:${eventData.organizer.phone}`}>{eventData.organizer.phone}</a>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        );
+
+      case 'schedule':
+        return (
+          <div className="event-detail-schedule">
+            <div className="event-detail-schedule__days">
+              {[1, 2, 3].map((day) => (
+                <div key={day} className="event-detail-schedule__day">
+                  <h3 className="event-detail-schedule__day-title">
+                    {day}. den – {new Date(eventData.dates.start.getTime() + (day - 1) * 24 * 60 * 60 * 1000).toLocaleDateString('cs-CZ', { weekday: 'long', day: 'numeric', month: 'numeric' })}
+                  </h3>
+                  <div className="event-detail-schedule__events">
+                    {eventData.schedule
+                      .filter((item) => item.day === day)
+                      .map((item, index) => (
+                        <div key={index} className="event-detail-schedule__event">
+                          <span className="event-detail-schedule__time">{item.time}</span>
+                          <span className="event-detail-schedule__name">{item.event}</span>
+                          {item.category !== 'all' && (
+                            <Badge variant="default" size="sm">{item.category}</Badge>
+                          )}
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'participants':
+        return (
+          <div className="event-detail-participants">
+            <div className="event-detail-participants__header">
+              <div className="event-detail-participants__count">
+                <strong>{eventData.stats.entries}</strong> přihlášených závodníků z <strong>{eventData.stats.clubs}</strong> klubů
+              </div>
+              <div className="event-detail-participants__filter">
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="event-detail-participants__select"
+                >
+                  {eventData.categories.map((cat) => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <Card variant="surface" padding="none">
+              <table className="event-detail-participants__table">
+                <thead>
+                  <tr>
+                    <th>St. č.</th>
+                    <th>Jméno</th>
+                    <th>Klub</th>
+                    <th>Nasazení</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {participants
+                    .filter((p) => p.category === selectedCategory)
+                    .map((participant) => (
+                      <tr key={participant.id}>
+                        <td className="event-detail-participants__bib">{participant.bib}</td>
+                        <td className="event-detail-participants__name">{participant.name}</td>
+                        <td className="event-detail-participants__club">{participant.club}</td>
+                        <td className="event-detail-participants__seed">{participant.seed}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </Card>
+          </div>
+        );
+
+      case 'results':
+        return (
+          <div className="event-detail-results">
+            <div className="event-detail-results__header">
+              <Tabs
+                tabs={eventData.categories.slice(0, 4).map((cat) => ({
+                  id: cat,
+                  label: cat,
+                  content: null,
+                }))}
+                activeTab={selectedCategory}
+                onChange={setSelectedCategory}
+                variant="pills"
+                size="sm"
+              />
+            </div>
+            <ResultsTable
+              results={generateResults(selectedCategory)}
+              variant="striped"
+              styleVariant={embedMode ? 'embed' : 'gradient'}
+              size="md"
+              showTimeDiff
+              showClub
+              showPodiumHighlights
+              stickyHeader
+            />
+          </div>
+        );
+
+      case 'documents':
+        return (
+          <div className="event-detail-documents">
+            <div className="event-detail-documents__list">
+              {eventData.documents
+                .filter((doc) => {
+                  if (status === 'upcoming' || status === 'registration') {
+                    return doc.id !== 'results';
+                  }
+                  return true;
+                })
+                .map((doc) => (
+                  <Card
+                    key={doc.id}
+                    variant="outlined"
+                    padding="md"
+                    clickable
+                    className="event-detail-documents__item"
+                  >
+                    <div className="event-detail-documents__icon">
+                      <FileIcon />
+                    </div>
+                    <div className="event-detail-documents__info">
+                      <div className="event-detail-documents__name">{doc.name}</div>
+                      <div className="event-detail-documents__meta">
+                        {doc.type.toUpperCase()} · {doc.size}
+                      </div>
+                    </div>
+                    <Button variant="ghost" size="sm" iconLeft={<DownloadIcon />}>
+                      Stáhnout
+                    </Button>
+                  </Card>
+                ))}
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  const content = (
+    <div className={`event-detail-page ${embedMode ? 'event-detail-page--embed' : ''}`}>
+      {/* Header - only in non-embed mode */}
+      {!embedMode && (
+        <Header
+          variant="default"
+          size="md"
+          bordered
+          brand={
+            <a href="#" className="event-detail-page__logo">
+              <span className="event-detail-page__logo-text">CSK</span>
+              <span className="event-detail-page__logo-subtitle">Český svaz kanoistů</span>
+            </a>
+          }
+          navigation={
+            <MainNav
+              items={navItems}
+              variant="horizontal"
+              showMobileToggle={false}
+              onItemClick={(item) => console.log('Nav click:', item)}
+            />
+          }
+          search={
+            <Input
+              type="search"
+              placeholder="Hledat..."
+              size="sm"
+              iconLeft={<SearchIcon />}
+            />
+          }
+          userMenu={
+            <Button variant="primary" size="sm">
+              Přihlásit se
+            </Button>
+          }
+        />
+      )}
+
+      {/* Hero Section */}
+      {showHero && (
+        <section className={heroClass}>
+          <div className="event-detail-hero__background">
+            <div className="event-detail-hero__gradient" />
+            <div className="event-detail-hero__pattern" />
+          </div>
+          <div className="event-detail-hero__content">
+            {!embedMode && (
+              <div className="event-detail-hero__breadcrumb">
+                <a href="#">Kalendář</a>
+                <span className="event-detail-hero__breadcrumb-separator">/</span>
+                <a href="#">2026</a>
+                <span className="event-detail-hero__breadcrumb-separator">/</span>
+                <span>{eventData.title}</span>
+              </div>
+            )}
+
+            <div className="event-detail-hero__header">
+              <div className="event-detail-hero__badges">
+                <Badge section={section} size="md">{section.toUpperCase()}</Badge>
+                <Badge variant="default">{eventData.level}</Badge>
+                {getStatusBadge(status)}
+              </div>
+              <h1 className="event-detail-hero__title">{eventData.title}</h1>
+              {!embedMode && (
+                <p className="event-detail-hero__subtitle">{eventData.subtitle}</p>
+              )}
+            </div>
+
+            <div className="event-detail-hero__meta">
+              <span className="event-detail-hero__meta-item">
+                <CalendarIcon />
+                {formatDateRange(eventData.dates.start, eventData.dates.end)}
+              </span>
+              <span className="event-detail-hero__meta-item">
+                <LocationIcon />
+                {eventData.location.name}
+              </span>
+              <span className="event-detail-hero__meta-item">
+                <UsersIcon />
+                {eventData.stats.entries} závodníků
+              </span>
+            </div>
+
+            {/* Status-specific CTA */}
+            {status === 'registration' && !embedMode && (
+              <div className="event-detail-hero__cta">
+                <Button variant="gradient" size="lg">
+                  Přihlásit se na závod
+                </Button>
+                <span className="event-detail-hero__deadline">
+                  <ClockIcon />
+                  Deadline: {formatDate(eventData.dates.registrationDeadline)}
+                </span>
+              </div>
+            )}
+
+            {status === 'live' && !embedMode && (
+              <div className="event-detail-hero__cta">
+                <Button variant="gradient" size="lg">
+                  Sledovat LIVE výsledky
+                </Button>
+              </div>
+            )}
+          </div>
+          {!embedMode && <WaveDecoration className="event-detail-hero__wave" />}
+        </section>
+      )}
+
+      {/* Stats Bar */}
+      {!embedMode && (
+        <section className="event-detail-stats">
+          <div className="event-detail-stats__container">
+            <div className="event-detail-stats__item">
+              <span className="event-detail-stats__value">{eventData.stats.entries}</span>
+              <span className="event-detail-stats__label">závodníků</span>
+            </div>
+            <div className="event-detail-stats__item">
+              <span className="event-detail-stats__value">{eventData.stats.clubs}</span>
+              <span className="event-detail-stats__label">klubů</span>
+            </div>
+            <div className="event-detail-stats__item">
+              <span className="event-detail-stats__value">{eventData.stats.gates}</span>
+              <span className="event-detail-stats__label">branek</span>
+            </div>
+            <div className="event-detail-stats__item">
+              <span className="event-detail-stats__value">{eventData.stats.courseLength}m</span>
+              <span className="event-detail-stats__label">délka tratě</span>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Main content */}
+      <main className="event-detail-page__main">
+        <div className="event-detail-page__container">
+          <div className="event-detail-page__content">
+            {/* Tabs */}
+            <div className="event-detail-page__tabs">
+              <Tabs
+                tabs={tabs}
+                activeTab={activeTab}
+                onChange={setActiveTab}
+                variant="line"
+                size="md"
+              />
+            </div>
+
+            {/* Tab Content */}
+            <div className="event-detail-page__tab-content">
+              {renderTabContent()}
+            </div>
+          </div>
+
+          {/* Sidebar - only in non-embed mode */}
+          {!embedMode && (
+            <aside className="event-detail-page__sidebar">
+              {/* Quick Info */}
+              <Card variant="surface" className="event-detail-sidebar__card">
+                <h3 className="event-detail-sidebar__title">Rychlé informace</h3>
+                <div className="event-detail-sidebar__list">
+                  <div className="event-detail-sidebar__item">
+                    <span className="event-detail-sidebar__label">Disciplína</span>
+                    <span className="event-detail-sidebar__value">{eventData.discipline}</span>
+                  </div>
+                  <div className="event-detail-sidebar__item">
+                    <span className="event-detail-sidebar__label">Úroveň</span>
+                    <span className="event-detail-sidebar__value">{eventData.level}</span>
+                  </div>
+                  <div className="event-detail-sidebar__item">
+                    <span className="event-detail-sidebar__label">Sekce</span>
+                    <span className="event-detail-sidebar__value">
+                      <Badge section={section} size="sm">{section.toUpperCase()}</Badge>
+                    </span>
+                  </div>
+                  {status === 'upcoming' && (
+                    <div className="event-detail-sidebar__item event-detail-sidebar__item--highlight">
+                      <span className="event-detail-sidebar__label">Zbývá</span>
+                      <span className="event-detail-sidebar__value">
+                        {getDaysUntil(eventData.dates.start)} dní
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </Card>
+
+              {/* Registration CTA */}
+              {status === 'registration' && (
+                <Card variant="gradient" className="event-detail-sidebar__card event-detail-sidebar__card--cta">
+                  <h3 className="event-detail-sidebar__title">Přihlášky</h3>
+                  <p className="event-detail-sidebar__text">
+                    Registrace je otevřena do {formatDate(eventData.dates.registrationDeadline)}
+                  </p>
+                  <Button variant="secondary" size="md" fullWidth>
+                    Přihlásit závodníka
+                  </Button>
+                </Card>
+              )}
+
+              {/* Location */}
+              <Card variant="surface" className="event-detail-sidebar__card">
+                <h3 className="event-detail-sidebar__title">Místo konání</h3>
+                <div className="event-detail-sidebar__location">
+                  <div className="event-detail-sidebar__location-name">{eventData.location.venue}</div>
+                  <div className="event-detail-sidebar__location-address">{eventData.location.address}</div>
+                  <Button variant="ghost" size="sm" iconLeft={<MapIcon />}>
+                    Zobrazit mapu
+                  </Button>
+                </div>
+              </Card>
+
+              {/* Contact */}
+              <Card variant="surface" className="event-detail-sidebar__card">
+                <h3 className="event-detail-sidebar__title">Kontakt</h3>
+                <div className="event-detail-sidebar__contact">
+                  <div className="event-detail-sidebar__contact-name">{eventData.organizer.name}</div>
+                  <a href={`mailto:${eventData.organizer.contact}`} className="event-detail-sidebar__contact-link">
+                    {eventData.organizer.contact}
+                  </a>
+                </div>
+              </Card>
+            </aside>
+          )}
+        </div>
+      </main>
+
+      {/* Footer - only in non-embed mode */}
+      {!embedMode && (
+        <footer className="event-detail-page__footer">
+          <div className="event-detail-page__footer-content">
+            <p>© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
+          </div>
+        </footer>
+      )}
+    </div>
+  );
+
+  // Wrap in KanoeCzContext for embed mode
+  if (embedMode) {
+    return (
+      <KanoeCzContext layout="full" showSidebar={false}>
+        {content}
+      </KanoeCzContext>
+    );
+  }
+
+  return content;
+};
+
+// ============================================================================
+// Storybook Meta
+// ============================================================================
+
+const meta = {
+  title: 'Prototypes/Event Detail Page',
+  component: EventDetailPage,
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        component:
+          'Prototyp stránky detailu závodu CSK. Zobrazuje informace o závodě s různými stavy: nadcházející, registrace otevřena, probíhá (LIVE) a dokončeno.',
+      },
+    },
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    status: {
+      control: 'select',
+      options: ['upcoming', 'registration', 'live', 'finished'],
+      description: 'Event status determines available sections and CTA',
+    },
+    section: {
+      control: 'select',
+      options: ['dv', 'ry', 'vt'],
+      description: 'Section/discipline for hero theming',
+    },
+    showHero: {
+      control: 'boolean',
+      description: 'Show hero section',
+    },
+    initialTab: {
+      control: 'select',
+      options: ['info', 'schedule', 'participants', 'results', 'documents'],
+      description: 'Initial active tab',
+    },
+    embedMode: {
+      control: 'boolean',
+      description: 'Embed mode for kanoe.cz integration',
+    },
+  },
+} satisfies Meta<typeof EventDetailPage>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+/**
+ * Nadcházející závod - základní informace, program, dokumenty.
+ */
+export const Upcoming: Story = {
+  args: {
+    status: 'upcoming',
+    section: 'dv',
+    showHero: true,
+    initialTab: 'info',
+    embedMode: false,
+  },
+};
+
+/**
+ * Registrace otevřena - s výzvou k přihlášení a deadlinem.
+ */
+export const Registration: Story = {
+  args: {
+    status: 'registration',
+    section: 'dv',
+    showHero: true,
+    initialTab: 'info',
+    embedMode: false,
+  },
+};
+
+/**
+ * Závod probíhá - LIVE výsledky, průběžné pořadí.
+ */
+export const Live: Story = {
+  args: {
+    status: 'live',
+    section: 'dv',
+    showHero: true,
+    initialTab: 'results',
+    embedMode: false,
+  },
+};
+
+/**
+ * Dokončený závod - finální výsledky, podium.
+ */
+export const Finished: Story = {
+  args: {
+    status: 'finished',
+    section: 'dv',
+    showHero: true,
+    initialTab: 'results',
+    embedMode: false,
+  },
+};
+
+/**
+ * Rychlostní kanoistika - zelené téma.
+ */
+export const Rychlostni: Story = {
+  args: {
+    status: 'upcoming',
+    section: 'ry',
+    showHero: true,
+    initialTab: 'info',
+    embedMode: false,
+  },
+};
+
+/**
+ * Vodní turistika - oranžové téma.
+ */
+export const VodniTuristika: Story = {
+  args: {
+    status: 'upcoming',
+    section: 'vt',
+    showHero: true,
+    initialTab: 'info',
+    embedMode: false,
+  },
+};
+
+/**
+ * Embed verze pro kanoe.cz - kompaktní bez headeru a footeru.
+ */
+export const EmbedKanoeCz: Story = {
+  args: {
+    status: 'finished',
+    section: 'dv',
+    showHero: true,
+    initialTab: 'results',
+    embedMode: true,
+  },
+};
+
+/**
+ * Program závodu - tab s harmonogramem.
+ */
+export const Schedule: Story = {
+  args: {
+    status: 'upcoming',
+    section: 'dv',
+    showHero: true,
+    initialTab: 'schedule',
+    embedMode: false,
+  },
+};
+
+/**
+ * Seznam přihlášených závodníků.
+ */
+export const Participants: Story = {
+  args: {
+    status: 'registration',
+    section: 'dv',
+    showHero: true,
+    initialTab: 'participants',
+    embedMode: false,
+  },
+};
+
+/**
+ * Dokumenty ke stažení.
+ */
+export const Documents: Story = {
+  args: {
+    status: 'upcoming',
+    section: 'dv',
+    showHero: true,
+    initialTab: 'documents',
+    embedMode: false,
+  },
+};

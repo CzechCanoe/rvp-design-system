@@ -3967,3 +3967,42 @@ tests/
 - Cards view (měsíční karty) zbývá na další iteraci
 - CalendarList podporuje groupBy: none | day | month
 - Container queries fungují na 500px a 350px breakpoints
+
+---
+
+## 2026-01-20 - Fáze 8.3: CalendarCards komponenta (dokončení)
+
+### Dokončeno
+- [x] CalendarCards komponenta - měsíční karty view
+- [x] Tři style varianty: default, gradient, embed
+- [x] Container query responzivita (1-3 sloupce podle šířky)
+- [x] Storybook stories včetně kanoe.cz kontextu
+
+### Poznámky
+- Fáze 8.3 Calendar refaktoring je kompletní
+- Další krok: 8.4 Nové šablony (Event Detail Page, Athlete Profile)
+
+---
+
+## 2026-01-20 - Fáze 8.4: Event Detail Page
+
+### Dokončeno
+- [x] Event Detail Page prototyp - komplexní šablona pro detail závodu
+  - 4 stavy: upcoming, registration, live, finished
+  - 5 tabů: info, schedule, participants, results, documents
+  - Hero sekce s discipline-specific gradientem (DV/RY/VT)
+  - Stats bar s klíčovými čísly
+  - Sidebar s rychlými informacemi a CTA
+  - Embed mode pro kanoe.cz integraci
+- [x] 10 stories: Upcoming, Registration, Live, Finished, Rychlostní, VodníTuristika, EmbedKanoeCz, Schedule, Participants, Documents
+
+### Problémy a řešení
+1. **Problém:** Nesprávný typ pro Tabs variant ('underline' místo 'line')
+   **Řešení:** Opraveno na 'line' podle TabsVariant typu
+2. **Problém:** Nesprávný typ pro KanoeCzContext layout ('article')
+   **Řešení:** Opraveno na 'full' podle dostupných hodnot
+
+### Poznámky
+- Event Detail Page je nejkomplexnější prototyp - pokrývá celý životní cyklus závodu
+- Embed mode funguje v KanoeCzContext pro testování integrace
+- Zbývá: Athlete Public Profile (EXPRESSIVE), Athlete Card (embed)
