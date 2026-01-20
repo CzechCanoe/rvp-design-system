@@ -19,7 +19,7 @@ const meta: Meta<typeof Tabs> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['line', 'pills'],
+      options: ['line', 'pills', 'gradient', 'gradient-line', 'glass'],
       description: 'Visual variant of the tabs',
     },
     size: {
@@ -672,4 +672,203 @@ export const AllSizes: Story = {
       </div>
     </div>
   ),
+};
+
+// =============================================================================
+// NEW VARIANTS (Phase 7.5)
+// =============================================================================
+
+export const GradientPills: Story = {
+  args: {
+    tabs: basicTabs,
+    variant: 'gradient',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Gradient pills variant with primary gradient background on active tab.',
+      },
+    },
+  },
+};
+
+export const GradientLine: Story = {
+  args: {
+    tabs: basicTabs,
+    variant: 'gradient-line',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Line variant with gradient underline and thicker indicator.',
+      },
+    },
+  },
+};
+
+export const GlassTabs: Story = {
+  args: {
+    tabs: basicTabs,
+    variant: 'glass',
+  },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          background: 'var(--gradient-primary-deep)',
+          padding: '32px',
+          borderRadius: 'var(--radius-lg)',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Glassmorphism variant for use on gradient or image backgrounds.',
+      },
+    },
+  },
+};
+
+export const GradientWithIcons: Story = {
+  args: {
+    tabs: tabsWithIcons,
+    variant: 'gradient',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Gradient pills with icons - icon scales on hover.',
+      },
+    },
+  },
+};
+
+export const AnimatedUnderline: Story = {
+  args: {
+    tabs: basicTabs,
+    variant: 'line',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Line variant with animated underline. Hover shows a preview underline, active tab has full-width underline.',
+      },
+    },
+  },
+};
+
+export const AllStyleVariants: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gap: '48px' }}>
+      <div>
+        <h3 style={{ marginBottom: '16px' }}>Line (Animated Underline)</h3>
+        <Tabs tabs={basicTabs} variant="line" />
+      </div>
+      <div>
+        <h3 style={{ marginBottom: '16px' }}>Pills</h3>
+        <Tabs tabs={basicTabs} variant="pills" />
+      </div>
+      <div>
+        <h3 style={{ marginBottom: '16px' }}>Gradient Pills</h3>
+        <Tabs tabs={basicTabs} variant="gradient" />
+      </div>
+      <div>
+        <h3 style={{ marginBottom: '16px' }}>Gradient Line</h3>
+        <Tabs tabs={basicTabs} variant="gradient-line" />
+      </div>
+      <div
+        style={{
+          background: 'var(--gradient-primary-deep)',
+          padding: '24px',
+          borderRadius: 'var(--radius-lg)',
+        }}
+      >
+        <h3 style={{ marginBottom: '16px', color: 'white' }}>Glass (on gradient background)</h3>
+        <Tabs tabs={basicTabs} variant="glass" />
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Showcase of all available style variants.',
+      },
+    },
+  },
+};
+
+export const GradientFullWidth: Story = {
+  args: {
+    tabs: basicTabs,
+    variant: 'gradient',
+    fullWidth: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Full width gradient pills.',
+      },
+    },
+  },
+};
+
+export const HoverEffectsDemo: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gap: '32px' }}>
+      <div>
+        <p style={{ marginBottom: '12px', color: 'var(--color-text-secondary)' }}>
+          Hover over tabs to see animations: icon scale, translateY, underline preview
+        </p>
+        <Tabs tabs={tabsWithIcons} variant="line" />
+      </div>
+      <div>
+        <p style={{ marginBottom: '12px', color: 'var(--color-text-secondary)' }}>
+          Gradient line with hover preview
+        </p>
+        <Tabs tabs={tabsWithIcons} variant="gradient-line" />
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstration of hover effects and micro-interactions.',
+      },
+    },
+  },
+};
+
+export const FeaturedShowcase: Story = {
+  render: () => (
+    <div
+      style={{
+        background: 'var(--gradient-hero)',
+        padding: '48px 32px',
+        borderRadius: 'var(--radius-xl)',
+      }}
+    >
+      <h2
+        style={{
+          color: 'white',
+          marginBottom: '24px',
+          fontWeight: 'var(--font-weight-bold)',
+        }}
+      >
+        Přehled závodníka
+      </h2>
+      <Tabs tabs={athleteProfileTabs} variant="glass" />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Featured showcase with glass tabs on hero gradient background.',
+      },
+    },
+  },
 };

@@ -10,7 +10,7 @@ import {
 } from 'react';
 import './Tabs.css';
 
-export type TabsVariant = 'line' | 'pills';
+export type TabsVariant = 'line' | 'pills' | 'gradient' | 'gradient-line' | 'glass';
 export type TabsSize = 'sm' | 'md' | 'lg';
 
 export interface TabItem {
@@ -49,8 +49,10 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
  * Tabs component for organizing content into switchable panels.
  *
  * Features:
- * - Two variants: line (underlined) and pills (filled)
+ * - Five variants: line, pills, gradient, gradient-line, glass
  * - Three sizes: sm, md, lg
+ * - Animated underline for line variants
+ * - Gradient backgrounds for gradient variants
  * - Full width option for equal tab widths
  * - Keyboard navigation (Arrow keys, Home, End)
  * - WCAG 2.1 AA compliant (role="tablist", aria-selected, focus management)

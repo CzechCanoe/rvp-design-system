@@ -1,5 +1,40 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.5 / Redesign Tabs komponenty
+
+### Dokončeno
+- [x] Animated underline pro `line` variantu - plynulá CSS animace pozice a šířky
+- [x] Hover preview - při hoveru se zobrazí 50% underline jako náhled
+- [x] Nová varianta `gradient` - gradient pills s primary gradient pozadím aktivního tabu
+- [x] Nová varianta `gradient-line` - line tabs s gradient underline (3px) a zaoblenými rohy
+- [x] Nová varianta `glass` - glassmorphism pills pro použití na barevných pozadích
+- [x] Icon scale animace při hoveru (1.1x)
+- [x] TranslateY micro-interactions při hoveru (-1px až -2px)
+- [x] Panel fade-in animace při přepnutí tabu
+- [x] Dark mode podpora pro všechny nové varianty
+- [x] Reduced motion podpora - vypnutí všech animací
+- [x] 9 nových stories: GradientPills, GradientLine, GlassTabs, GradientWithIcons, AnimatedUnderline, AllStyleVariants, GradientFullWidth, HoverEffectsDemo, FeaturedShowcase
+
+### Změněné soubory
+- `src/components/Tabs/Tabs.css` - kompletní redesign, nové varianty, animace
+- `src/components/Tabs/Tabs.tsx` - rozšíření TabsVariant typu o `gradient`, `gradient-line`, `glass`
+- `src/components/Tabs/Tabs.stories.tsx` - 9 nových stories pro nové varianty
+
+### Klíčové změny
+1. **Animated underline** - `::after` pseudo-element s `width` a `left` transicí
+2. **Hover preview** - 50% šířka underline při hoveru jako vizuální hint
+3. **Gradient pills** - aktivní tab má `--gradient-primary`, hover má `--gradient-primary-hover`
+4. **Gradient line** - 3px gradient underline s rounded rohy nahoře
+5. **Glass varianta** - `backdrop-filter: blur(8px)` s semi-transparentním pozadím
+6. **Panel animace** - fade-in + translateY při změně aktivního tabu
+
+### Poznámky
+- Fáze 7.5 (Redesign Tabs) je dokončena
+- Build i Storybook build prošly
+- Další krok: 7.5 Toast komponenta
+
+---
+
 ## 2026-01-20 - Fáze 7.5 / Redesign Modal komponenty
 
 ### Dokončeno
