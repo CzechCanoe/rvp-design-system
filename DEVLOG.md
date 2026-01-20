@@ -3435,3 +3435,51 @@ tests/
 
 ### Další kroky
 - Fáze 7.4 (pokračování): Badge - více variant, pill style, gradient backgrounds
+
+---
+
+## 2026-01-20 - Iterace 19 / Redesign LivePage prototypu (Fáze 7.8)
+
+### Dokončeno
+- [x] LivePage hero sekce s immersive gradient background a pulse ring animacemi
+- [x] Discipline-specific theming (DV modrá, RY zelená, VT červená)
+- [x] Přepracovaný "Na trati" panel s glow efekty a animovaným avatarem
+- [x] Mini podium sekce s top 3 závodníky (zlaté/stříbrné/bronzové pozadí)
+- [x] Hero sekce zobrazuje aktuálního závodníka s běžícím časem
+- [x] Wave dekorace mezi hero sekcí a hlavním obsahem
+- [x] Vylepšené split times s timeline stylem a checkmark indikátory
+- [x] Nové Storybook stories pro DV/RY/VT sekce
+- [x] Reduced motion support pro všechny animace
+- [x] Dark mode overrides pro hero a karty
+
+### Nové vizuální prvky
+
+**Hero sekce:**
+- Gradient background dle sekce (DV/RY/VT)
+- Pulse ring animace v pravém rohu
+- Breadcrumb navigace
+- Aktuální závodník s avatarem a běžícím časem
+- Wave SVG dekorace na spodním okraji
+
+**Current card ("Na trati"):**
+- Animated glow effect kolem karty (dle sekce)
+- Pulsující avatar ring
+- Timeline-style split times s checkmark indikátory
+- Barevné diff badges (zelené pro rychlejší, červené pro pomalejší)
+
+**Podium karta:**
+- Top 3 závodníci s medal emoji (🥇🥈🥉)
+- Gradient pozadí pro každou pozici (gold/silver/bronze)
+- Trophy ikona v hlavičce
+
+### Změny v souborech
+- `LivePage.stories.tsx` - přidán section prop, hero sekce, current card redesign, podium karta
+- `LivePage.css` - kompletně přepsáno s novými styly pro hero, current card, podium
+
+### Poznámky
+- LivePage nyní nabízí immersive experience pro sledování živých závodů
+- Discipline theming umožňuje vizuální odlišení DV/RY/VT sekcí
+- Build prochází bez chyb
+
+### Další kroky
+- Fáze 7.8: ProfilePage - hero header s fotkou, achievement showcase

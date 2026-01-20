@@ -23,6 +23,8 @@ interface LivePageProps {
   simulateLive?: boolean;
   /** Update interval in milliseconds */
   updateInterval?: number;
+  /** Discipline section for theming */
+  section?: 'dv' | 'ry' | 'vt';
 }
 
 interface FeedItem {
@@ -166,6 +168,43 @@ const ActivityIcon = () => (
   </svg>
 );
 
+// Trophy icon for podium
+const TrophyIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+    <path d="M4 22h16" />
+    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+  </svg>
+);
+
+// Wave decoration component
+const WaveDecoration = ({ className = '' }: { className?: string }) => (
+  <svg
+    className={`live-page-wave ${className}`}
+    viewBox="0 0 1440 100"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+  >
+    <path
+      d="M0 50C240 20 480 80 720 50C960 20 1200 80 1440 50V100H0V50Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
+// Pulse ring animation component
+const PulseRings = () => (
+  <div className="live-page-hero__pulse-rings">
+    <div className="live-page-hero__pulse-ring live-page-hero__pulse-ring--1" />
+    <div className="live-page-hero__pulse-ring live-page-hero__pulse-ring--2" />
+    <div className="live-page-hero__pulse-ring live-page-hero__pulse-ring--3" />
+  </div>
+);
+
 // ============================================================================
 // Helper Functions
 // ============================================================================
@@ -211,12 +250,20 @@ const LivePage = ({
   initialCategory = 'K1M',
   simulateLive = true,
   updateInterval = 3000,
+  section = 'dv',
 }: LivePageProps) => {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [searchQuery, setSearchQuery] = useState('');
   const [autoUpdate, setAutoUpdate] = useState(true);
   const [feedItems, setFeedItems] = useState<FeedItem[]>(initialFeedItems);
   const [runningTime, setRunningTime] = useState(45.67);
+
+  // Section names for display
+  const sectionNames: Record<string, string> = {
+    dv: 'Divoká voda',
+    ry: 'Rychlostní kanoistika',
+    vt: 'Vodní turistika',
+  };
 
   // Current run data
   const currentRun: CurrentRun = {
@@ -331,7 +378,7 @@ const LivePage = ({
   const progress = currentCat ? (currentCat.finished / currentCat.count) * 100 : 0;
 
   return (
-    <div className="prototype-live-page">
+    <div className={`prototype-live-page prototype-live-page--${section}`}>
       {/* Header */}
       <Header
         variant="default"
@@ -366,86 +413,132 @@ const LivePage = ({
         }
       />
 
-      {/* Main content */}
-      <main className="prototype-live-page__main">
-        <div className="prototype-live-page__container">
-          {/* Race Header */}
-          <div className="prototype-live-page__race-header">
-            <div className="prototype-live-page__breadcrumb">
+      {/* Hero Section - Immersive Live Header */}
+      <section className={`live-page-hero live-page-hero--${section}`}>
+        <div className="live-page-hero__background">
+          <div className="live-page-hero__gradient" />
+          <div className="live-page-hero__pattern" />
+          <PulseRings />
+        </div>
+        <div className="live-page-hero__content">
+          <div className="live-page-hero__left">
+            <div className="live-page-hero__breadcrumb">
               <a href="#">Výsledky</a>
-              <span className="prototype-live-page__breadcrumb-separator">/</span>
+              <span>/</span>
               <a href="#">2026</a>
-              <span className="prototype-live-page__breadcrumb-separator">/</span>
+              <span>/</span>
               <span>MČR ve slalomu</span>
             </div>
-
-            <h1 className="prototype-live-page__title">
-              MČR ve slalomu 2026
+            <div className="live-page-hero__title-row">
+              <h1 className="live-page-hero__title">MČR ve slalomu 2026</h1>
               <LiveIndicator variant="live" size="lg" label="LIVE" glow />
-            </h1>
-
-            <div className="prototype-live-page__subtitle">
-              <span className="prototype-live-page__info-item">
+            </div>
+            <div className="live-page-hero__meta">
+              <span className="live-page-hero__meta-item">
                 <CalendarIcon />
                 3. května 2026 • 14:32
               </span>
-              <span className="prototype-live-page__info-item">
+              <span className="live-page-hero__meta-item">
                 <LocationIcon />
                 Praha – Troja
               </span>
-              <span className="prototype-live-page__info-item">
+              <span className="live-page-hero__meta-item">
                 <UsersIcon />
                 70 závodníků
               </span>
-              <Badge section="dv">Divoká voda</Badge>
+              <Badge section={section} glow>
+                {sectionNames[section]}
+              </Badge>
             </div>
           </div>
+          <div className="live-page-hero__right">
+            <div className="live-page-hero__current-label">Na trati</div>
+            <div className="live-page-hero__current-athlete">
+              <div className="live-page-hero__current-avatar">
+                {getInitials(currentRun.name)}
+              </div>
+              <div className="live-page-hero__current-info">
+                <div className="live-page-hero__current-name">{currentRun.name}</div>
+                <div className="live-page-hero__current-details">
+                  #{currentRun.bib} • {currentRun.club} • {currentRun.category}
+                </div>
+              </div>
+            </div>
+            <div className={`live-page-hero__timer ${autoUpdate ? 'live-page-hero__timer--running' : ''}`}>
+              {formatRunningTime(runningTime)}
+            </div>
+          </div>
+        </div>
+        <WaveDecoration className="live-page-hero__wave" />
+      </section>
+
+      {/* Main content */}
+      <main className="prototype-live-page__main">
+        <div className="prototype-live-page__container">
 
           {/* Content - Three Column Layout */}
           <div className="prototype-live-page__content">
             {/* Left Sidebar - Current Run */}
             <div className="prototype-live-page__current-run">
-              {/* Current Athlete Card */}
-              <Card variant="elevated" className="prototype-live-page__current-card">
-                <div className="prototype-live-page__current-header">
-                  <h3 className="prototype-live-page__current-title">
-                    Na trati
-                  </h3>
-                  <LiveIndicator variant="live" size="sm" />
-                </div>
-
-                <div className="prototype-live-page__current-athlete">
-                  <div className="prototype-live-page__current-avatar">
-                    {getInitials(currentRun.name)}
+              {/* Current Athlete Card - Enhanced with glow */}
+              <div className={`live-page-current-card live-page-current-card--${section}`}>
+                <div className="live-page-current-card__glow" />
+                <div className="live-page-current-card__content">
+                  <div className="live-page-current-card__header">
+                    <span className="live-page-current-card__label">Na trati</span>
+                    <LiveIndicator variant="live" size="sm" glow />
                   </div>
-                  <h4 className="prototype-live-page__current-name">{currentRun.name}</h4>
-                  <p className="prototype-live-page__current-club">{currentRun.club}</p>
-                  <p className="prototype-live-page__current-bib">#{currentRun.bib} • {currentRun.category}</p>
-                </div>
 
-                <div className="prototype-live-page__current-timer">
-                  <div className="prototype-live-page__current-timer-label">Aktuální čas</div>
-                  <div className={`prototype-live-page__current-timer-value ${autoUpdate ? 'prototype-live-page__current-timer-value--running' : ''}`}>
-                    {formatRunningTime(runningTime)}
-                  </div>
-                </div>
-
-                <div className="prototype-live-page__current-splits">
-                  {currentRun.splits.map((split, index) => (
-                    <div key={index} className="prototype-live-page__split">
-                      <div className="prototype-live-page__split-label">{split.label}</div>
-                      <div className={`prototype-live-page__split-value ${split.time === undefined ? 'prototype-live-page__split-value--pending' : ''}`}>
-                        {split.time !== undefined ? formatTime(split.time) : '—'}
-                      </div>
-                      {split.diff !== undefined && (
-                        <div className={`prototype-live-page__split-diff ${split.diff < 0 ? 'prototype-live-page__split-diff--faster' : 'prototype-live-page__split-diff--slower'}`}>
-                          {split.diff < 0 ? '' : '+'}{split.diff.toFixed(2)}s
-                        </div>
-                      )}
+                  <div className="live-page-current-card__athlete">
+                    <div className="live-page-current-card__avatar">
+                      <div className="live-page-current-card__avatar-ring" />
+                      <span className="live-page-current-card__avatar-text">
+                        {getInitials(currentRun.name)}
+                      </span>
                     </div>
-                  ))}
+                    <h4 className="live-page-current-card__name">{currentRun.name}</h4>
+                    <p className="live-page-current-card__club">{currentRun.club}</p>
+                    <div className="live-page-current-card__badges">
+                      <Badge variant="default" size="sm">#{currentRun.bib}</Badge>
+                      <Badge section={section} size="sm">{currentRun.category}</Badge>
+                    </div>
+                  </div>
+
+                  <div className="live-page-current-card__timer-container">
+                    <div className="live-page-current-card__timer-label">Aktuální čas</div>
+                    <div className={`live-page-current-card__timer ${autoUpdate ? 'live-page-current-card__timer--running' : ''}`}>
+                      {formatRunningTime(runningTime)}
+                    </div>
+                  </div>
+
+                  <div className="live-page-current-card__splits">
+                    {currentRun.splits.map((split, index) => (
+                      <div key={index} className={`live-page-current-card__split ${split.time !== undefined ? 'live-page-current-card__split--completed' : ''}`}>
+                        <div className="live-page-current-card__split-indicator">
+                          {split.time !== undefined ? (
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                            </svg>
+                          ) : (
+                            <span className="live-page-current-card__split-dot" />
+                          )}
+                        </div>
+                        <div className="live-page-current-card__split-content">
+                          <span className="live-page-current-card__split-label">{split.label}</span>
+                          <span className="live-page-current-card__split-time">
+                            {split.time !== undefined ? formatTime(split.time) : '—'}
+                          </span>
+                        </div>
+                        {split.diff !== undefined && (
+                          <span className={`live-page-current-card__split-diff ${split.diff < 0 ? 'live-page-current-card__split-diff--faster' : 'live-page-current-card__split-diff--slower'}`}>
+                            {split.diff < 0 ? '' : '+'}{split.diff.toFixed(2)}s
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </Card>
+              </div>
 
               {/* Next Up Card */}
               <Card variant="surface" className="prototype-live-page__next-card">
@@ -532,6 +625,28 @@ const LivePage = ({
 
             {/* Right Sidebar - Activity Feed */}
             <aside className="prototype-live-page__sidebar">
+              {/* Mini Podium - Top 3 */}
+              <div className={`live-page-podium live-page-podium--${section}`}>
+                <div className="live-page-podium__header">
+                  <TrophyIcon />
+                  <h3 className="live-page-podium__title">Aktuální pořadí</h3>
+                </div>
+                <div className="live-page-podium__list">
+                  {results.slice(0, 3).map((athlete, index) => (
+                    <div key={athlete.id} className={`live-page-podium__item live-page-podium__item--${index + 1}`}>
+                      <div className="live-page-podium__rank">{index + 1}</div>
+                      <div className="live-page-podium__info">
+                        <span className="live-page-podium__name">{athlete.name}</span>
+                        <span className="live-page-podium__time">{formatTime(athlete.totalTime)}</span>
+                      </div>
+                      {index === 0 && <span className="live-page-podium__medal">🥇</span>}
+                      {index === 1 && <span className="live-page-podium__medal">🥈</span>}
+                      {index === 2 && <span className="live-page-podium__medal">🥉</span>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Activity Feed */}
               <Card variant="surface" className="prototype-live-page__feed-card">
                 <div className="prototype-live-page__feed-header">
@@ -655,7 +770,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Prototyp stránky živých výsledků CSK. Zobrazuje aktuálně probíhající závod s real-time aktualizacemi, živým feedem událostí a aktuálním závodníkem na trati.',
+          'Prototyp stránky živých výsledků CSK. Zobrazuje aktuálně probíhající závod s real-time aktualizacemi, živým feedem událostí a aktuálním závodníkem na trati. Redesignováno s immersive hero sekcí a discipline-specific themingem.',
       },
     },
   },
@@ -674,6 +789,11 @@ const meta = {
       control: { type: 'range', min: 1000, max: 10000, step: 500 },
       description: 'Update interval in milliseconds',
     },
+    section: {
+      control: 'select',
+      options: ['dv', 'ry', 'vt'],
+      description: 'Discipline section for theming (DV = Whitewater, RY = Sprint, VT = Touring)',
+    },
   },
 } satisfies Meta<typeof LivePage>;
 
@@ -681,13 +801,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /**
- * Výchozí zobrazení živých výsledků s automatickými aktualizacemi.
+ * Výchozí zobrazení živých výsledků s hero sekcí a immersive designem.
+ * Sekce Divoká voda (DV) s modrým themingem.
  */
 export const Default: Story = {
   args: {
     initialCategory: 'K1M',
     simulateLive: true,
     updateInterval: 3000,
+    section: 'dv',
   },
 };
 
@@ -699,6 +821,31 @@ export const Static: Story = {
     initialCategory: 'K1M',
     simulateLive: false,
     updateInterval: 3000,
+    section: 'dv',
+  },
+};
+
+/**
+ * Sekce Rychlostní kanoistika (RY) se zeleným themingem.
+ */
+export const Rychlostni: Story = {
+  args: {
+    initialCategory: 'K1M',
+    simulateLive: true,
+    updateInterval: 3000,
+    section: 'ry',
+  },
+};
+
+/**
+ * Sekce Vodní turistika (VT) s červeným themingem.
+ */
+export const VodniTuristika: Story = {
+  args: {
+    initialCategory: 'K1M',
+    simulateLive: true,
+    updateInterval: 3000,
+    section: 'vt',
   },
 };
 
@@ -710,6 +857,7 @@ export const K1Zeny: Story = {
     initialCategory: 'K1W',
     simulateLive: true,
     updateInterval: 3000,
+    section: 'dv',
   },
 };
 
@@ -721,6 +869,7 @@ export const FastUpdates: Story = {
     initialCategory: 'K1M',
     simulateLive: true,
     updateInterval: 1000,
+    section: 'dv',
   },
 };
 
@@ -732,5 +881,6 @@ export const SlowUpdates: Story = {
     initialCategory: 'K1M',
     simulateLive: true,
     updateInterval: 5000,
+    section: 'dv',
   },
 };
