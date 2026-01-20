@@ -1,5 +1,45 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.10 / Konzistence a reduced motion support
+
+### Dokončeno
+- [x] Provedení hloubkového auditu konzistence napříč všemi komponentami
+- [x] Oprava malformed @media query v `Skeleton.css` (řádek 184)
+- [x] Oprava malformed @media query v `Dropdown.css` (řádky 357-358)
+- [x] Oprava undefined shadow tokenů v `mode.css` (`--shadow-soft-sm/md` → `--shadow-sm/md`)
+- [x] Přidání `prefers-reduced-motion` support do `Checkbox.css`
+- [x] Přidání `prefers-reduced-motion` support do `Switch.css`
+- [x] Přidání `prefers-reduced-motion` support do `Radio.css`
+- [x] Ověření build
+
+### Změněné soubory
+- `src/components/Skeleton/Skeleton.css` - odstraněna prázdná @media deklarace
+- `src/components/Dropdown/Dropdown.css` - odstraněna prázdná @media deklarace
+- `src/tokens/mode.css` - opraveny reference na shadow tokeny
+- `src/components/Checkbox/Checkbox.css` - přidán reduced motion support
+- `src/components/Switch/Switch.css` - přidán reduced motion support
+- `src/components/Radio/Radio.css` - přidán reduced motion support
+
+### Výsledky auditu
+**Silné stránky:**
+- BEM naming: 100% konzistentní napříč 27 komponentami
+- Token usage: 95%+ compliance
+- Dark mode: komplexní pokrytí
+- Spacing a radius: plně tokenizované
+
+**Opravené problémy:**
+1. P0: Skeleton.css - malformed @media query způsobující CSS parsing failure
+2. P0: Dropdown.css - malformed @media query
+3. P0: mode.css - undefined shadow tokeny (`--shadow-soft-sm/md`)
+4. P1: Chybějící reduced motion pro form controls
+
+### Poznámky
+- CSS bundle size: 224 KB (26.83 KB gzip)
+- Předexistující CSS warningy v build (Timeline komponenta) - netýkají se této iterace
+- Token `--color-text-muted` zmíněný v auditu nebyl nalezen v kódu (pravděpodobně false positive)
+
+---
+
 ## 2026-01-20 - Fáze 7.9 / Expresivní vs. utilitární režim
 
 ### Dokončeno

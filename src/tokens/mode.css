@@ -134,8 +134,8 @@
   --transition-mode-card: var(--transition-expr-card);
 
   /* Shadows */
-  --shadow-mode-sm: var(--shadow-soft-sm);
-  --shadow-mode-md: var(--shadow-soft-md);
+  --shadow-mode-sm: var(--shadow-sm);
+  --shadow-mode-md: var(--shadow-md);
   --shadow-mode-lg: var(--shadow-expr-featured);
 
   /* Borders */

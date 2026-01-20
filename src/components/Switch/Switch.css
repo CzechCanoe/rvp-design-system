@@ -297,3 +297,14 @@
 .csk-switch-wrapper--label-left .csk-switch-helper {
   margin-left: 0;
 }
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-switch-track,
+  .csk-switch-thumb {
+    transition: none;
+  }
+}

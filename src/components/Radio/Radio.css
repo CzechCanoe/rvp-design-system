@@ -262,3 +262,18 @@
 .csk-radio-wrapper--lg .csk-radio-helper {
   margin-left: calc(24px + var(--spacing-2));
 }
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-radio-circle,
+  .csk-radio-dot {
+    transition: none;
+  }
+
+  .csk-radio-dot {
+    transform: scale(1);
+  }
+}
