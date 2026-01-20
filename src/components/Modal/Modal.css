@@ -7,6 +7,13 @@
  * - Radius: radius-lg, radius-xl
  * - Shadows: shadow-modal, shadow-modal-backdrop
  * - Transitions: transition-modal, transition-modal-backdrop
+ *
+ * Phase 7.5 enhancements:
+ * - Backdrop blur effect for frosted glass feel
+ * - Slide-in animation from bottom
+ * - Gradient header variant with accent line
+ * - Close button micro-animations
+ * - Enhanced dark mode support
  */
 
 /* ==========================================================================
@@ -21,16 +28,22 @@
   align-items: center;
   justify-content: center;
   padding: var(--spacing-4);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   animation: modal-backdrop-in var(--duration-moderate) var(--ease-out);
 }
 
 @keyframes modal-backdrop-in {
   from {
     opacity: 0;
+    backdrop-filter: blur(0);
+    -webkit-backdrop-filter: blur(0);
   }
   to {
     opacity: 1;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 }
 
@@ -48,17 +61,34 @@
   background-color: var(--color-bg-primary);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-modal);
-  animation: modal-in var(--duration-moderate) var(--ease-out);
+  animation: modal-slide-in var(--duration-moderate) cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes modal-in {
+/* Slide-in from bottom animation */
+@keyframes modal-slide-in {
   from {
     opacity: 0;
-    transform: scale(0.95) translateY(10px);
+    transform: translateY(24px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Alternative: Scale animation for centered feel */
+.csk-modal--animate-scale {
+  animation: modal-scale-in var(--duration-moderate) cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modal-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -92,12 +122,25 @@
  * ========================================================================== */
 
 .csk-modal__header {
+  position: relative;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--spacing-4);
   padding: var(--spacing-6);
   border-bottom: 1px solid var(--color-border-secondary);
+}
+
+/* Gradient accent line at top of header */
+.csk-modal__header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 
 .csk-modal__title-wrapper {
@@ -121,6 +164,63 @@
 }
 
 /* ==========================================================================
+ * STYLE VARIANTS
+ * ========================================================================== */
+
+/* Gradient header variant */
+.csk-modal--gradient .csk-modal__header {
+  background: var(--gradient-primary);
+  border-bottom: none;
+}
+
+.csk-modal--gradient .csk-modal__header::before {
+  display: none;
+}
+
+.csk-modal--gradient .csk-modal__title {
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.csk-modal--gradient .csk-modal__description {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.csk-modal--gradient .csk-modal__close {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.csk-modal--gradient .csk-modal__close:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.csk-modal--gradient .csk-modal__close:active {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Glass variant */
+.csk-modal--glass {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.csk-modal--glass .csk-modal__header {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.csk-modal--glass .csk-modal__footer {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Danger variant for destructive actions */
+.csk-modal--danger .csk-modal__header::before {
+  background: var(--gradient-danger, linear-gradient(135deg, var(--color-danger) 0%, var(--color-danger-dark, #c0392b) 100%));
+}
+
+/* ==========================================================================
  * CLOSE BUTTON
  * ========================================================================== */
 
@@ -137,12 +237,17 @@
   background-color: transparent;
   color: var(--color-text-tertiary);
   cursor: pointer;
-  transition: var(--transition-button);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .csk-modal__close:hover {
   background-color: var(--color-bg-secondary);
   color: var(--color-text-primary);
+  transform: scale(1.1);
 }
 
 .csk-modal__close:focus-visible {
@@ -152,11 +257,17 @@
 
 .csk-modal__close:active {
   background-color: var(--color-bg-tertiary);
+  transform: scale(0.95);
 }
 
 .csk-modal__close-icon {
   width: 20px;
   height: 20px;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.csk-modal__close:hover .csk-modal__close-icon {
+  transform: rotate(90deg);
 }
 
 /* ==========================================================================
@@ -202,23 +313,32 @@
  * ========================================================================== */
 
 [data-theme="dark"] .csk-modal__backdrop {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 [data-theme="dark"] .csk-modal {
   background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-secondary);
 }
 
 [data-theme="dark"] .csk-modal__footer {
   background-color: var(--color-bg-primary);
 }
 
-/* System preference detection */
-@media
+/* Dark mode glass variant */
+[data-theme="dark"] .csk-modal--glass {
+  background-color: rgba(30, 30, 30, 0.85);
+  border-color: rgba(255, 255, 255, 0.1);
+}
 
-  :root:not([data-theme="light"]) .csk-modal__footer {
-    background-color: var(--color-bg-primary);
-  }
+[data-theme="dark"] .csk-modal--glass .csk-modal__header {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .csk-modal--glass .csk-modal__footer {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* ==========================================================================

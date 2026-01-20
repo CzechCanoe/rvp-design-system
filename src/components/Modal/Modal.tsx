@@ -11,6 +11,7 @@ import { createPortal } from 'react-dom';
 import './Modal.css';
 
 export type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
+export type ModalStyleVariant = 'default' | 'gradient' | 'glass' | 'danger';
 
 export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Whether the modal is open */
@@ -23,6 +24,8 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
   description?: ReactNode;
   /** Size of the modal */
   size?: ModalSize;
+  /** Style variant of the modal */
+  styleVariant?: ModalStyleVariant;
   /** Whether clicking the backdrop closes the modal */
   closeOnBackdropClick?: boolean;
   /** Whether pressing Escape closes the modal */
@@ -46,6 +49,9 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
  *
  * Features:
  * - Multiple sizes (sm, md, lg, xl, full)
+ * - Style variants (default, gradient, glass, danger)
+ * - Backdrop blur effect
+ * - Slide-in animation
  * - Focus trap for accessibility
  * - Keyboard navigation (Escape to close)
  * - Backdrop click to close (optional)
@@ -60,6 +66,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       title,
       description,
       size = 'md',
+      styleVariant = 'default',
       closeOnBackdropClick = true,
       closeOnEscape = true,
       showCloseButton = true,
@@ -180,6 +187,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     const classes = [
       'csk-modal',
       `csk-modal--${size}`,
+      styleVariant !== 'default' && `csk-modal--${styleVariant}`,
       scrollable && 'csk-modal--scrollable',
       className,
     ]

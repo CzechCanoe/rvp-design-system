@@ -1,5 +1,38 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.5 / Redesign Modal komponenty
+
+### Dokončeno
+- [x] Backdrop blur efekt - frosted glass feel s animovaným rozostřením
+- [x] Slide-in animace - nová animace z dolní části místo scale
+- [x] Gradient accent linka nahoře headeru
+- [x] Nový `styleVariant` prop: `default`, `gradient`, `glass`, `danger`
+- [x] Gradient varianta s primary gradient pozadím headeru
+- [x] Glass varianta s glassmorphism efektem
+- [x] Danger varianta s červenou accent linkou
+- [x] Close button micro-animace - scale a rotace ikony
+- [x] Vylepšené dark mode styly pro všechny varianty
+- [x] 8 nových stories: GradientVariant, GlassVariant, DangerVariant, AllStyleVariants, SlideInAnimation, BackdropBlurDemo, FeaturedShowcase
+
+### Změněné soubory
+- `src/components/Modal/Modal.css` - kompletní redesign stylů, nové varianty
+- `src/components/Modal/Modal.tsx` - nový `styleVariant` prop
+- `src/components/Modal/Modal.stories.tsx` - 8 nových stories
+
+### Klíčové změny
+1. **Backdrop blur** - pozadí je rozostřené pro lepší focus na obsah
+2. **Slide-in animace** - modal se vysouvá zdola s elastickým cubic-bezier
+3. **Accent linka** - gradient linka nahoře headeru pro branded feel
+4. **Nové varianty** - `gradient` (branded header), `glass` (frosted), `danger` (destructive)
+5. **Close button** - scale efekt při hover, rotace ikony o 90°
+
+### Poznámky
+- Fáze 7.5 (Redesign Modal) je dokončena
+- Build proběhl úspěšně
+- Další krok: 7.5 Tabs komponenta
+
+---
+
 ## 2026-01-20 - Fáze 7.5 / Redesign Navigation komponenty
 
 ### Dokončeno

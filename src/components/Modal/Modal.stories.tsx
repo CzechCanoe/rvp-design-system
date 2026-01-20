@@ -60,6 +60,10 @@ function Example() {
       control: 'select',
       options: ['sm', 'md', 'lg', 'xl', 'full'],
     },
+    styleVariant: {
+      control: 'select',
+      options: ['default', 'gradient', 'glass', 'danger'],
+    },
     open: {
       control: 'boolean',
     },
@@ -86,6 +90,7 @@ const ModalDemo = ({
   size = 'md',
   title = 'Modal Title',
   description,
+  styleVariant = 'default',
   footer,
   children,
   ...props
@@ -98,6 +103,7 @@ const ModalDemo = ({
         open={open}
         onClose={() => setOpen(false)}
         size={size}
+        styleVariant={styleVariant}
         title={title}
         description={description}
         footer={footer}
@@ -470,4 +476,356 @@ export const AllSizes: Story = {
       <ModalDemo size="full" title="Full Screen" />
     </div>
   ),
+};
+
+/* ==========================================================================
+ * STYLE VARIANTS (Phase 7.5)
+ * ========================================================================== */
+
+export const GradientVariant: Story = {
+  name: 'Style: Gradient Header',
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open Gradient Modal</Button>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          styleVariant="gradient"
+          title="Gradient Header Modal"
+          description="Beautiful gradient header with branded colors"
+          footer={
+            <>
+              <Button variant="secondary" onClick={() => setOpen(false)}>
+                Cancel
+              </Button>
+              <Button onClick={() => setOpen(false)}>
+                Confirm
+              </Button>
+            </>
+          }
+        >
+          <p>
+            This modal features a gradient header using the primary brand colors.
+            Perfect for important dialogs and featured content.
+          </p>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const GlassVariant: Story = {
+  name: 'Style: Glass Effect',
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <div style={{
+        minHeight: '300px',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        padding: '2rem',
+        borderRadius: '8px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <Button onClick={() => setOpen(true)}>Open Glass Modal</Button>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          styleVariant="glass"
+          title="Glass Effect Modal"
+          description="Frosted glass with backdrop blur"
+          footer={
+            <>
+              <Button variant="secondary" onClick={() => setOpen(false)}>
+                Cancel
+              </Button>
+              <Button onClick={() => setOpen(false)}>
+                Confirm
+              </Button>
+            </>
+          }
+        >
+          <p>
+            This modal uses a glassmorphism effect with backdrop blur.
+            Works best over colorful or image backgrounds.
+          </p>
+        </Modal>
+      </div>
+    );
+  },
+};
+
+export const DangerVariant: Story = {
+  name: 'Style: Danger',
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button variant="danger" onClick={() => setOpen(true)}>
+          Delete Item
+        </Button>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          styleVariant="danger"
+          size="sm"
+          title="Delete Permanently?"
+          closeOnBackdropClick={false}
+          footer={
+            <>
+              <Button variant="secondary" onClick={() => setOpen(false)}>
+                Cancel
+              </Button>
+              <Button variant="danger" onClick={() => setOpen(false)}>
+                Delete Forever
+              </Button>
+            </>
+          }
+        >
+          <p style={{ margin: 0 }}>
+            This action cannot be undone. All data associated with this item
+            will be permanently removed from the system.
+          </p>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const AllStyleVariants: Story = {
+  name: 'All Style Variants',
+  render: () => (
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <ModalDemo title="Default Style" />
+      <ModalDemo styleVariant="gradient" title="Gradient Header" />
+      <ModalDemo styleVariant="danger" title="Danger Style" />
+    </div>
+  ),
+};
+
+/* ==========================================================================
+ * ANIMATION SHOWCASE
+ * ========================================================================== */
+
+export const SlideInAnimation: Story = {
+  name: 'Animation: Slide In',
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open Modal (Slide In)</Button>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Slide-In Animation"
+          description="Notice the smooth slide-up effect when opening"
+        >
+          <p>
+            This modal slides in from the bottom with a subtle scale effect.
+            The animation uses a custom cubic-bezier curve for a natural feel.
+          </p>
+          <p>
+            Try opening and closing to see the smooth transition.
+          </p>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const BackdropBlurDemo: Story = {
+  name: 'Animation: Backdrop Blur',
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <div style={{
+        minHeight: '400px',
+        padding: '2rem',
+        background: `
+          linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%),
+          url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+        `,
+        borderRadius: '8px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        gap: '1rem'
+      }}>
+        <p style={{ textAlign: 'center', maxWidth: '400px', color: 'var(--color-text-secondary)' }}>
+          Notice how the backdrop blurs the background content when the modal opens,
+          creating depth and focus.
+        </p>
+        <Button onClick={() => setOpen(true)}>Open Modal</Button>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Backdrop Blur Effect"
+          description="The background is blurred for better focus"
+        >
+          <p>
+            The backdrop uses a blur filter that creates a frosted glass effect.
+            This helps draw attention to the modal content while keeping
+            context of what's behind.
+          </p>
+        </Modal>
+      </div>
+    );
+  },
+};
+
+/* ==========================================================================
+ * CSK FEATURED SHOWCASE
+ * ========================================================================== */
+
+export const FeaturedShowcase: Story = {
+  name: 'Featured: CSK Modals Showcase',
+  render: () => {
+    const [openGradient, setOpenGradient] = useState(false);
+    const [openGlass, setOpenGlass] = useState(false);
+    const [openDanger, setOpenDanger] = useState(false);
+
+    return (
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '2rem',
+        padding: '2rem',
+        background: 'var(--color-bg-secondary)',
+        borderRadius: '12px'
+      }}>
+        <div>
+          <h3 style={{ margin: '0 0 1rem', fontSize: '1.125rem', fontWeight: 600 }}>
+            Registration Flow
+          </h3>
+          <Button onClick={() => setOpenGradient(true)}>
+            Registrovat závodníka
+          </Button>
+          <Modal
+            open={openGradient}
+            onClose={() => setOpenGradient(false)}
+            styleVariant="gradient"
+            size="lg"
+            title="Registrace nového závodníka"
+            description="Vyplňte údaje pro registraci"
+            footer={
+              <>
+                <Button variant="secondary" onClick={() => setOpenGradient(false)}>
+                  Zrušit
+                </Button>
+                <Button onClick={() => setOpenGradient(false)}>
+                  Registrovat
+                </Button>
+              </>
+            }
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <Input label="Jméno" placeholder="Jan" required />
+                <Input label="Příjmení" placeholder="Novák" required />
+              </div>
+              <Input label="Datum narození" type="text" placeholder="DD.MM.RRRR" required />
+              <Select
+                label="Sekce"
+                options={[
+                  { value: 'dv', label: 'Divoká voda (DV)' },
+                  { value: 'ry', label: 'Rychlostní kanoistika (RY)' },
+                  { value: 'vt', label: 'Vodní turistika (VT)' },
+                ]}
+                required
+              />
+            </div>
+          </Modal>
+        </div>
+
+        <div style={{
+          background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+          padding: '2rem',
+          borderRadius: '8px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem'
+        }}>
+          <h3 style={{ margin: 0, fontSize: '1.125rem', fontWeight: 600, color: 'white' }}>
+            Event Details (Glass on branded bg)
+          </h3>
+          <Button variant="secondary" onClick={() => setOpenGlass(true)}>
+            Zobrazit detail závodu
+          </Button>
+          <Modal
+            open={openGlass}
+            onClose={() => setOpenGlass(false)}
+            styleVariant="glass"
+            size="lg"
+            title="Mistrovství ČR ve slalomu"
+            description="14. - 16. června 2026, Troja"
+            footer={
+              <>
+                <Button variant="secondary" onClick={() => setOpenGlass(false)}>
+                  Zavřít
+                </Button>
+                <Button onClick={() => setOpenGlass(false)}>
+                  Přihlásit se
+                </Button>
+              </>
+            }
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div>
+                <h4 style={{ margin: '0 0 0.5rem', fontSize: '0.875rem', fontWeight: 600 }}>
+                  Disciplíny
+                </h4>
+                <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+                  K1 muži, K1 ženy, C1 muži, C1 ženy, C2 muži, C2 mix
+                </p>
+              </div>
+              <div>
+                <h4 style={{ margin: '0 0 0.5rem', fontSize: '0.875rem', fontWeight: 600 }}>
+                  Pořadatel
+                </h4>
+                <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+                  USK Praha, ve spolupráci s ČSK
+                </p>
+              </div>
+            </div>
+          </Modal>
+        </div>
+
+        <div>
+          <h3 style={{ margin: '0 0 1rem', fontSize: '1.125rem', fontWeight: 600 }}>
+            Destructive Actions
+          </h3>
+          <Button variant="danger" onClick={() => setOpenDanger(true)}>
+            Smazat závodníka
+          </Button>
+          <Modal
+            open={openDanger}
+            onClose={() => setOpenDanger(false)}
+            styleVariant="danger"
+            size="sm"
+            title="Smazat závodníka?"
+            closeOnBackdropClick={false}
+            footer={
+              <>
+                <Button variant="secondary" onClick={() => setOpenDanger(false)}>
+                  Zrušit
+                </Button>
+                <Button variant="danger" onClick={() => setOpenDanger(false)}>
+                  Smazat
+                </Button>
+              </>
+            }
+          >
+            <p style={{ margin: 0 }}>
+              Opravdu chcete smazat závodníka <strong>Jan Novák</strong>?
+              Tato akce je nevratná a smaže všechny jeho výsledky.
+            </p>
+          </Modal>
+        </div>
+      </div>
+    );
+  },
 };
