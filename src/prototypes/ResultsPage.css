@@ -909,7 +909,57 @@
 }
 
 .prototype-results-page--embed .results-page-podium__card {
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+}
+
+.prototype-results-page--embed .results-page-podium__card::before {
+  display: none;
+}
+
+.prototype-results-page--embed .results-page-podium__card--gold {
+  border-left: 3px solid #ffc107;
+  background: linear-gradient(90deg, rgba(255, 193, 7, 0.08) 0%, transparent 100%);
+}
+
+.prototype-results-page--embed .results-page-podium__card--silver {
+  border-left: 3px solid #adb5bd;
+  background: linear-gradient(90deg, rgba(173, 181, 189, 0.08) 0%, transparent 100%);
+}
+
+.prototype-results-page--embed .results-page-podium__card--bronze {
+  border-left: 3px solid #cd7f32;
+  background: linear-gradient(90deg, rgba(205, 127, 50, 0.08) 0%, transparent 100%);
+}
+
+.prototype-results-page--embed .results-page-podium__rank {
+  font-size: 14px;
+  padding: 4px 8px;
+}
+
+.prototype-results-page--embed .results-page-podium__avatar {
+  width: 48px;
+  height: 48px;
+  font-size: 16px;
+  border-width: 2px;
+}
+
+.prototype-results-page--embed .results-page-podium__name {
+  font-size: 15px;
+}
+
+.prototype-results-page--embed .results-page-podium__time {
+  font-size: 20px;
+}
+
+.prototype-results-page--embed .results-page-podium__trophy {
+  display: none;
+}
+
+/* Stats values in embed - use text color instead of primary */
+.prototype-results-page--embed .results-page-header__stat-value {
+  color: #212529;
 }
 
 /* Simpler main content in embed mode */
