@@ -360,19 +360,7 @@
 /* Gold - 1st place */
 .csk-results-table__tr--gold {
   background: linear-gradient(90deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%);
-  position: relative;
-}
-
-/* Gold gradient border via ::before (positioned over transparent border-left) */
-
-.csk-results-table__tr--gold::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(180deg, #ffd700, #ffb800);
+  border-left-color: #ffd700;
 }
 
 .csk-results-table__tr--gold:hover {
@@ -381,30 +369,12 @@
 
 .csk-results-table__tr--gold .csk-results-table__rank {
   color: #b8860b;
-  text-shadow: 0 1px 2px rgba(255, 215, 0, 0.3);
 }
-
-.csk-results-table__tr--gold .csk-results-table__td:first-child {
-  position: relative;
-  overflow: hidden;
-}
-
-/* Medal emoji removed - was causing overflow issues */
 
 /* Silver - 2nd place */
 .csk-results-table__tr--silver {
   background: linear-gradient(90deg, rgba(192, 192, 192, 0.15) 0%, rgba(192, 192, 192, 0.05) 100%);
-  position: relative;
-}
-
-.csk-results-table__tr--silver::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(180deg, #e8e8e8, #a8a8a8);
+  border-left-color: #c0c0c0;
 }
 
 .csk-results-table__tr--silver:hover {
@@ -413,23 +383,12 @@
 
 .csk-results-table__tr--silver .csk-results-table__rank {
   color: #6b7280;
-  text-shadow: 0 1px 2px rgba(192, 192, 192, 0.3);
 }
 
 /* Bronze - 3rd place */
 .csk-results-table__tr--bronze {
   background: linear-gradient(90deg, rgba(205, 127, 50, 0.15) 0%, rgba(205, 127, 50, 0.05) 100%);
-  position: relative;
-}
-
-.csk-results-table__tr--bronze::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(180deg, #cd7f32, #a66928);
+  border-left-color: #cd7f32;
 }
 
 .csk-results-table__tr--bronze:hover {
@@ -438,7 +397,6 @@
 
 .csk-results-table__tr--bronze .csk-results-table__rank {
   color: #8b4513;
-  text-shadow: 0 1px 2px rgba(205, 127, 50, 0.3);
 }
 
 /* Generic highlight positions 4-5 */
