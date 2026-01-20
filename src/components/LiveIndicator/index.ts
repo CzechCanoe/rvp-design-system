@@ -4,4 +4,6 @@ export type {
   LiveIndicatorVariant,
   LiveIndicatorSize,
   LiveIndicatorColor,
+  LiveIndicatorStyleVariant,
+  LiveIndicatorIntensity,
 } from './LiveIndicator';

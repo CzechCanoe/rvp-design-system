@@ -2,6 +2,7 @@
  * LiveIndicator Component Styles - CSK RVP Design System
  *
  * Pulsing indicator for live status, recording, connection status.
+ * Phase 7.6 redesign: dramatic pulsing, gradient glow, style variants
  */
 
 /* ==========================================================================
@@ -13,6 +14,11 @@
   align-items: center;
   gap: var(--spacing-2);
   font-family: var(--font-family-sans);
+  transition: transform var(--transition-fast);
+}
+
+.csk-live-indicator:hover {
+  transform: scale(1.02);
 }
 
 .csk-live-indicator--inline {
@@ -32,6 +38,14 @@
   flex-shrink: 0;
   border-radius: var(--radius-full);
   background-color: currentColor;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+/* Hover effect on dot */
+.csk-live-indicator:hover .csk-live-indicator__dot {
+  transform: scale(1.1);
 }
 
 /* Pulse ring - animated ring around the dot */
@@ -41,6 +55,13 @@
   border-radius: var(--radius-full);
   background-color: currentColor;
   animation: live-indicator-pulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Secondary pulse ring for dramatic intensity */
+.csk-live-indicator__pulse-ring--secondary {
+  animation: live-indicator-pulse-secondary 2s ease-in-out infinite;
+  animation-delay: 0.5s;
 }
 
 /* ==========================================================================
@@ -78,6 +99,18 @@
 .csk-live-indicator--lg .csk-live-indicator__label {
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
+}
+
+/* Extra Large - 16px dot */
+.csk-live-indicator--xl .csk-live-indicator__dot {
+  width: 16px;
+  height: 16px;
+}
+
+.csk-live-indicator--xl .csk-live-indicator__label {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-semibold);
 }
 
 /* ==========================================================================
@@ -151,6 +184,140 @@
 }
 
 /* ==========================================================================
+ * STYLE VARIANTS
+ * ========================================================================== */
+
+/* Default style - standard solid dot */
+.csk-live-indicator--style-default {
+  /* Base styles only */
+}
+
+/* Gradient style - gradient background on dot with enhanced glow */
+.csk-live-indicator--style-gradient .csk-live-indicator__dot {
+  background: var(--gradient-danger);
+}
+
+.csk-live-indicator--style-gradient.csk-live-indicator--color-primary .csk-live-indicator__dot {
+  background: var(--gradient-primary);
+}
+
+.csk-live-indicator--style-gradient.csk-live-indicator--color-success .csk-live-indicator__dot {
+  background: linear-gradient(135deg, var(--color-success-400) 0%, var(--color-success-600) 100%);
+}
+
+.csk-live-indicator--style-gradient.csk-live-indicator--color-warning .csk-live-indicator__dot {
+  background: linear-gradient(135deg, var(--color-warning-400) 0%, var(--color-warning-600) 100%);
+}
+
+.csk-live-indicator--style-gradient.csk-live-indicator--color-error .csk-live-indicator__dot,
+.csk-live-indicator--style-gradient.csk-live-indicator--live .csk-live-indicator__dot,
+.csk-live-indicator--style-gradient.csk-live-indicator--recording .csk-live-indicator__dot {
+  background: linear-gradient(135deg, var(--color-error-400) 0%, var(--color-error-600) 100%);
+}
+
+.csk-live-indicator--style-gradient.csk-live-indicator--color-info .csk-live-indicator__dot {
+  background: linear-gradient(135deg, var(--color-info-400) 0%, var(--color-info-600) 100%);
+}
+
+/* Glass style - frosted glass effect with backdrop blur */
+.csk-live-indicator--style-glass {
+  padding: var(--spacing-1) var(--spacing-2);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.csk-live-indicator--style-glass .csk-live-indicator__dot {
+  box-shadow: 0 0 8px currentColor;
+}
+
+.csk-live-indicator--style-glass .csk-live-indicator__label {
+  color: var(--color-text-primary);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Badge style - pill-shaped container with background */
+.csk-live-indicator--style-badge {
+  padding: var(--spacing-1) var(--spacing-3);
+  border-radius: var(--radius-full);
+  gap: var(--spacing-2);
+}
+
+.csk-live-indicator--style-badge.csk-live-indicator--color-error,
+.csk-live-indicator--style-badge.csk-live-indicator--live,
+.csk-live-indicator--style-badge.csk-live-indicator--recording {
+  background: var(--color-error-50);
+  border: 1px solid var(--color-error-200);
+}
+
+.csk-live-indicator--style-badge.csk-live-indicator--color-success {
+  background: var(--color-success-50);
+  border: 1px solid var(--color-success-200);
+}
+
+.csk-live-indicator--style-badge.csk-live-indicator--color-warning,
+.csk-live-indicator--style-badge.csk-live-indicator--connecting {
+  background: var(--color-warning-50);
+  border: 1px solid var(--color-warning-200);
+}
+
+.csk-live-indicator--style-badge.csk-live-indicator--color-info {
+  background: var(--color-info-50);
+  border: 1px solid var(--color-info-200);
+}
+
+.csk-live-indicator--style-badge.csk-live-indicator--color-primary {
+  background: var(--color-primary-50);
+  border: 1px solid var(--color-primary-200);
+}
+
+.csk-live-indicator--style-badge.csk-live-indicator--color-default,
+.csk-live-indicator--style-badge.csk-live-indicator--offline {
+  background: var(--color-neutral-100);
+  border: 1px solid var(--color-neutral-200);
+}
+
+/* Badge hover effect */
+.csk-live-indicator--style-badge:hover {
+  transform: scale(1.03);
+}
+
+/* ==========================================================================
+ * INTENSITY LEVELS
+ * ========================================================================== */
+
+/* Subtle intensity - gentler animations */
+.csk-live-indicator--intensity-subtle .csk-live-indicator__pulse-ring {
+  animation-duration: 3s;
+}
+
+.csk-live-indicator--intensity-subtle.csk-live-indicator--glow .csk-live-indicator__dot {
+  box-shadow: 0 0 4px currentColor, 0 0 8px currentColor;
+}
+
+/* Normal intensity - default */
+.csk-live-indicator--intensity-normal .csk-live-indicator__pulse-ring {
+  animation-duration: 2s;
+}
+
+/* Dramatic intensity - more aggressive animations */
+.csk-live-indicator--intensity-dramatic .csk-live-indicator__pulse-ring {
+  animation-duration: 1.5s;
+  animation-name: live-indicator-pulse-dramatic;
+}
+
+.csk-live-indicator--intensity-dramatic .csk-live-indicator__pulse-ring--secondary {
+  animation-name: live-indicator-pulse-dramatic-secondary;
+  animation-delay: 0.4s;
+}
+
+.csk-live-indicator--intensity-dramatic.csk-live-indicator--glow .csk-live-indicator__dot {
+  animation: live-indicator-glow-dramatic 1.5s ease-in-out infinite;
+}
+
+/* ==========================================================================
  * VARIANTS
  * ========================================================================== */
 
@@ -181,6 +348,11 @@
   animation: live-indicator-blink 1s ease-in-out infinite;
 }
 
+/* Connecting with dramatic intensity - faster blink */
+.csk-live-indicator--connecting.csk-live-indicator--intensity-dramatic .csk-live-indicator__dot {
+  animation-duration: 0.6s;
+}
+
 /* ==========================================================================
  * PULSE ANIMATION
  * ========================================================================== */
@@ -205,6 +377,44 @@
   animation: live-indicator-glow 2s ease-in-out infinite;
 }
 
+/* Color-specific glow effects for gradient variant */
+.csk-live-indicator--style-gradient.csk-live-indicator--glow.csk-live-indicator--color-error .csk-live-indicator__dot,
+.csk-live-indicator--style-gradient.csk-live-indicator--glow.csk-live-indicator--live .csk-live-indicator__dot,
+.csk-live-indicator--style-gradient.csk-live-indicator--glow.csk-live-indicator--recording .csk-live-indicator__dot {
+  box-shadow:
+    0 0 8px var(--color-error-500),
+    0 0 16px var(--color-error-400),
+    0 0 24px rgba(239, 68, 68, 0.4);
+}
+
+.csk-live-indicator--style-gradient.csk-live-indicator--glow.csk-live-indicator--color-success .csk-live-indicator__dot {
+  box-shadow:
+    0 0 8px var(--color-success-500),
+    0 0 16px var(--color-success-400),
+    0 0 24px rgba(34, 197, 94, 0.4);
+}
+
+.csk-live-indicator--style-gradient.csk-live-indicator--glow.csk-live-indicator--color-primary .csk-live-indicator__dot {
+  box-shadow:
+    0 0 8px var(--color-primary-500),
+    0 0 16px var(--color-primary-400),
+    0 0 24px rgba(17, 118, 166, 0.4);
+}
+
+.csk-live-indicator--style-gradient.csk-live-indicator--glow.csk-live-indicator--color-warning .csk-live-indicator__dot {
+  box-shadow:
+    0 0 8px var(--color-warning-500),
+    0 0 16px var(--color-warning-400),
+    0 0 24px rgba(245, 158, 11, 0.4);
+}
+
+.csk-live-indicator--style-gradient.csk-live-indicator--glow.csk-live-indicator--color-info .csk-live-indicator__dot {
+  box-shadow:
+    0 0 8px var(--color-info-500),
+    0 0 16px var(--color-info-400),
+    0 0 24px rgba(59, 130, 246, 0.4);
+}
+
 /* ==========================================================================
  * KEYFRAME ANIMATIONS
  * ========================================================================== */
@@ -216,6 +426,61 @@
   }
   50% {
     transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Secondary pulse for layered effect */
+@keyframes live-indicator-pulse-secondary {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Dramatic pulse - larger, faster */
+@keyframes live-indicator-pulse-dramatic {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes live-indicator-pulse-dramatic-secondary {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  25% {
+    transform: scale(2);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(3);
     opacity: 0;
   }
   100% {
@@ -239,6 +504,26 @@
   }
   50% {
     box-shadow: 0 0 12px currentColor, 0 0 24px currentColor, 0 0 36px currentColor;
+  }
+}
+
+/* Dramatic glow animation */
+@keyframes live-indicator-glow-dramatic {
+  0%, 100% {
+    box-shadow: 0 0 8px currentColor, 0 0 16px currentColor;
+    transform: scale(1);
+  }
+  25% {
+    box-shadow: 0 0 12px currentColor, 0 0 24px currentColor, 0 0 32px currentColor;
+    transform: scale(1.05);
+  }
+  50% {
+    box-shadow: 0 0 16px currentColor, 0 0 32px currentColor, 0 0 48px currentColor;
+    transform: scale(1.1);
+  }
+  75% {
+    box-shadow: 0 0 12px currentColor, 0 0 24px currentColor, 0 0 32px currentColor;
+    transform: scale(1.05);
   }
 }
 
@@ -298,52 +583,49 @@
   color: var(--color-text-tertiary);
 }
 
-/* System preference detection */
-@media
+/* Dark mode glass style */
+[data-theme='dark'] .csk-live-indicator--style-glass {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
 
-  :root:not([data-theme='light']) .csk-live-indicator--color-primary {
-    color: var(--color-primary-400);
-  }
+[data-theme='dark'] .csk-live-indicator--style-glass .csk-live-indicator__label {
+  color: rgba(255, 255, 255, 0.87);
+}
 
-  :root:not([data-theme='light']) .csk-live-indicator--color-primary .csk-live-indicator__label {
-    color: var(--color-primary-300);
-  }
+/* Dark mode badge style */
+[data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-error,
+[data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--live,
+[data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--recording {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+}
 
-  :root:not([data-theme='light']) .csk-live-indicator--color-success {
-    color: var(--color-success-400);
-  }
+[data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-success {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.3);
+}
 
-  :root:not([data-theme='light']) .csk-live-indicator--color-success .csk-live-indicator__label {
-    color: var(--color-success-300);
-  }
+[data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-warning,
+[data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--connecting {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.3);
+}
 
-  :root:not([data-theme='light']) .csk-live-indicator--color-warning {
-    color: var(--color-warning-400);
-  }
+[data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-info {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+}
 
-  :root:not([data-theme='light']) .csk-live-indicator--color-warning .csk-live-indicator__label {
-    color: var(--color-warning-300);
-  }
+[data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-primary {
+  background: rgba(17, 118, 166, 0.15);
+  border-color: rgba(17, 118, 166, 0.3);
+}
 
-  :root:not([data-theme='light']) .csk-live-indicator--color-error {
-    color: var(--color-error-400);
-  }
-
-  :root:not([data-theme='light']) .csk-live-indicator--color-error .csk-live-indicator__label {
-    color: var(--color-error-300);
-  }
-
-  :root:not([data-theme='light']) .csk-live-indicator--color-info {
-    color: var(--color-info-400);
-  }
-
-  :root:not([data-theme='light']) .csk-live-indicator--color-info .csk-live-indicator__label {
-    color: var(--color-info-300);
-  }
-
-  :root:not([data-theme='light']) .csk-live-indicator--offline .csk-live-indicator__label {
-    color: var(--color-text-tertiary);
-  }
+[data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-default,
+[data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--offline {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* ==========================================================================
@@ -351,13 +633,25 @@
  * ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
+  .csk-live-indicator,
+  .csk-live-indicator__dot {
+    transition: none;
+  }
+
   .csk-live-indicator__pulse-ring,
+  .csk-live-indicator__pulse-ring--secondary,
   .csk-live-indicator--connecting .csk-live-indicator__dot,
-  .csk-live-indicator--glow.csk-live-indicator--pulse .csk-live-indicator__dot {
+  .csk-live-indicator--glow.csk-live-indicator--pulse .csk-live-indicator__dot,
+  .csk-live-indicator--intensity-dramatic.csk-live-indicator--glow .csk-live-indicator__dot {
     animation: none;
   }
 
   .csk-live-indicator__pulse-ring {
     display: none;
+  }
+
+  .csk-live-indicator:hover,
+  .csk-live-indicator:hover .csk-live-indicator__dot {
+    transform: none;
   }
 }

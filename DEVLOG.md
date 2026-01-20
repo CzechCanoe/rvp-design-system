@@ -1,5 +1,48 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.6 / Redesign LiveIndicator komponenty
+
+### Dokončeno
+- [x] Nový `styleVariant` prop: `default`, `gradient`, `glass`, `badge`
+- [x] Gradient varianta - gradient pozadí dot s vylepšeným glow efektem
+- [x] Glass varianta - glassmorphism efekt s backdrop blur
+- [x] Badge varianta - pill-shaped kontejner s barevným pozadím
+- [x] Nový `intensity` prop: `subtle`, `normal`, `dramatic`
+- [x] Subtle intensity - pomalejší animace (3s), jemnější glow
+- [x] Dramatic intensity - rychlejší animace (1.5s), dvojité pulse rings, agresivní glow
+- [x] Sekundární pulse ring pro dramatic intensity s offsetem
+- [x] Nová XL velikost (16px dot)
+- [x] Micro-interactions - hover scale efekt na komponentu i dot
+- [x] Color-specific gradient glow efekty pro gradient variantu
+- [x] Dark mode podpora pro všechny nové varianty
+- [x] Reduced motion podpora
+- [x] 11 nových stories: StyleDefault, StyleGradient, StyleGlass, StyleBadge, StyleVariantsComparison, IntensitySubtle, IntensityNormal, IntensityDramatic, IntensityComparison, LiveResultsHero, DramaticLiveShowcase
+
+### Změněné soubory
+- `src/components/LiveIndicator/LiveIndicator.tsx` - nové props (styleVariant, intensity), sekundární pulse ring pro dramatic intensity
+- `src/components/LiveIndicator/LiveIndicator.css` - kompletní redesign, nové style varianty, intensity levels, dramatičtější animace
+- `src/components/LiveIndicator/LiveIndicator.stories.tsx` - 11 nových stories pro nové varianty
+- `src/components/LiveIndicator/index.ts` - export nových typů LiveIndicatorStyleVariant, LiveIndicatorIntensity
+
+### Klíčové změny
+1. **Style variants** - nový `styleVariant` prop pro vizuální stylování (default/gradient/glass/badge)
+2. **Gradient style** - gradient pozadí dot s color-specific glow efekty
+3. **Glass style** - `backdrop-filter: blur()` s semi-transparentním pozadím, border
+4. **Badge style** - pill kontejner s barevným pozadím podle stavu
+5. **Intensity levels** - `intensity` prop pro řízení agresivity animací
+6. **Dramatic pulsing** - dvojité pulse rings, rychlejší animace, větší scale
+7. **Dramatic glow** - kombinuje glow animaci s scale animací
+8. **XL size** - nová velikost 16px pro hero sekce
+9. **Micro-interactions** - hover efekty na celou komponentu i dot
+
+### Poznámky
+- LiveIndicator redesign je dokončen
+- Build prošel bez chyb
+- CSS warningy v buildu jsou z jiných komponent (předexistující)
+- Další krok: 7.6 StatCard - trend šipky, sparkline grafy, gradient backgrounds
+
+---
+
 ## 2026-01-20 - Fáze 7.6 / Redesign ResultsTable komponenty
 
 ### Dokončeno
