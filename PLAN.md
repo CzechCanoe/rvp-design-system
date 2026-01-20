@@ -4,7 +4,7 @@
 
 | Fáze | Krok | Status |
 |------|------|--------|
-| **8 - Integrace s kanoe.cz** | 8.5 Header satellite | 🔲 Další |
+| **8 - Integrace s kanoe.cz** | 8.6 Vizuální harmonizace | 🔲 Další |
 
 ---
 
@@ -39,9 +39,9 @@
 - [x] **Athlete Public Profile (EXPRESSIVE)** - celostránkový wow profil
 - [x] **Athlete Card (embed)** - kompaktní verze + embed stories
 
-### 8.5 Header satellite varianta
-- [ ] Variant `satellite` - logo + user + kontextové akce
-- [ ] Pro standalone aplikace
+### 8.5 Header satellite varianta ✅
+- [x] Variant `satellite` - logo + user + kontextové akce
+- [x] Pro standalone aplikace (Registr, Přihlášky, Live výsledky)
 
 ### 8.6 Vizuální harmonizace
 - [ ] WCAG kontrast na hero gradientech ≥ 4.5:1

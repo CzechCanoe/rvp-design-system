@@ -4006,3 +4006,25 @@ tests/
 - Event Detail Page je nejkomplexnější prototyp - pokrývá celý životní cyklus závodu
 - Embed mode funguje v KanoeCzContext pro testování integrace
 - Zbývá: Athlete Public Profile (EXPRESSIVE), Athlete Card (embed)
+
+---
+
+## 2026-01-20 - Fáze 8.5: Header satellite varianta
+
+### Dokončeno
+- [x] Přidána varianta `satellite` do Header komponenty
+- [x] CSS styly pro satellite (kompaktní design, home link, app name)
+- [x] Nové props: `appName`, `homeLink`, `homeLinkLabel`
+- [x] HomeIcon pro odkaz zpět na hlavní web
+- [x] Stories: Satellite, SatelliteRegistr, SatellitePrihlasky, SatelliteLive, SatelliteCustomHomeLink
+- [x] Aktualizace AllVariants story s satellite příkladem
+
+### Technické detaily
+- Satellite varianta automaticky deaktivuje mobile toggle (standalone aplikace mají jednoduchou strukturu)
+- Home link zobrazuje pouze ikonu na mobilních zařízeních
+- Brand má oddělovač (border-right) od app name
+- Navigace, actions a search jsou viditelné na všech obrazovkách (bez responsive skrývání)
+
+### Poznámky
+- Varianta je určena pro samostatné aplikace jako Registr závodníků, Přihlášky na závody, Live výsledky
+- Design je minimalistický a neutrální, zapadá do kontextu kanoe.cz

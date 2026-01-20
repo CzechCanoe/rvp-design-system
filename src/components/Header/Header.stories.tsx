@@ -47,7 +47,19 @@ import { Header } from '@czechcanoe/rvp-design-system';
     },
     variant: {
       control: 'select',
-      options: ['default', 'transparent', 'elevated', 'gradient', 'glass'],
+      options: ['default', 'transparent', 'elevated', 'gradient', 'glass', 'satellite'],
+    },
+    appName: {
+      control: 'text',
+      description: 'Application name for satellite variant',
+    },
+    homeLink: {
+      control: 'text',
+      description: 'Link to main website for satellite variant',
+    },
+    homeLinkLabel: {
+      control: 'text',
+      description: 'Label for home link',
     },
     maxWidth: {
       control: 'select',
@@ -922,6 +934,176 @@ export const AllVariants: Story = {
           userMenu={<UserAvatar />}
         />
       </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+          Variant: satellite (pro standalone aplikace)
+        </p>
+        <Header
+          variant="satellite"
+          appName="Registrace"
+          brand={<Logo />}
+          userMenu={<UserAvatar />}
+          actions={
+            <Button size="sm" variant="secondary">
+              Nápověda
+            </Button>
+          }
+        />
+      </div>
     </div>
   ),
+};
+
+// =============================================================================
+// SATELLITE VARIANT STORIES
+// =============================================================================
+
+/**
+ * Satellite varianta pro samostatné aplikace jako Registr nebo Přihlášky.
+ * Obsahuje odkaz zpět na hlavní web, název aplikace a minimální navigaci.
+ */
+export const Satellite: Story = {
+  args: {
+    variant: 'satellite',
+    appName: 'Registrace',
+    brand: <Logo />,
+    userMenu: <UserAvatar />,
+    actions: (
+      <Button size="sm" variant="secondary">
+        Nápověda
+      </Button>
+    ),
+  },
+};
+
+/**
+ * Satellite varianta - Registr závodníků.
+ */
+export const SatelliteRegistr: Story = {
+  args: {
+    variant: 'satellite',
+    appName: 'Registr závodníků',
+    homeLink: 'https://kanoe.cz',
+    homeLinkLabel: 'Zpět na kanoe.cz',
+    brand: (
+      <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="var(--color-primary-500)"/>
+          <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
+        </svg>
+      </a>
+    ),
+    userMenu: (
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <UserAvatar />
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <span style={{ fontSize: '14px', fontWeight: 500 }}>Jan Novák</span>
+          <span style={{ fontSize: '12px', color: 'var(--color-text-tertiary)' }}>USK Praha</span>
+        </div>
+      </div>
+    ),
+    actions: (
+      <div style={{ display: 'flex', gap: '8px' }}>
+        <Button size="sm" variant="ghost">
+          Nápověda
+        </Button>
+        <Button size="sm" variant="secondary">
+          Odhlásit
+        </Button>
+      </div>
+    ),
+    size: 'sm',
+  },
+};
+
+/**
+ * Satellite varianta - Přihlášky na závody.
+ */
+export const SatellitePrihlasky: Story = {
+  args: {
+    variant: 'satellite',
+    appName: 'Přihlášky na závody',
+    homeLink: 'https://kanoe.cz',
+    homeLinkLabel: 'Zpět na kanoe.cz',
+    brand: (
+      <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="var(--color-primary-500)"/>
+          <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
+        </svg>
+      </a>
+    ),
+    navigation: (
+      <div style={{ display: 'flex', gap: '4px' }}>
+        {['Moje přihlášky', 'Kalendář', 'Historie'].map((item, index) => (
+          <a
+            key={item}
+            href="#"
+            style={{
+              padding: '6px 12px',
+              borderRadius: '6px',
+              textDecoration: 'none',
+              color: index === 0 ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+              fontWeight: 500,
+              fontSize: '14px',
+              backgroundColor: index === 0 ? 'var(--color-bg-secondary)' : 'transparent',
+            }}
+          >
+            {item}
+          </a>
+        ))}
+      </div>
+    ),
+    userMenu: <UserAvatar />,
+    actions: (
+      <Badge variant="info" size="sm">
+        3 aktivní přihlášky
+      </Badge>
+    ),
+  },
+};
+
+/**
+ * Satellite varianta - Live výsledky.
+ */
+export const SatelliteLive: Story = {
+  args: {
+    variant: 'satellite',
+    appName: 'Live výsledky',
+    homeLink: 'https://kanoe.cz',
+    homeLinkLabel: 'Zpět na kanoe.cz',
+    brand: (
+      <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="var(--color-primary-500)"/>
+          <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
+        </svg>
+      </a>
+    ),
+    actions: (
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <Badge variant="error" size="sm" pill>
+          LIVE
+        </Badge>
+        <span style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+          Český pohár #2 - Praha Troja
+        </span>
+      </div>
+    ),
+    size: 'sm',
+  },
+};
+
+/**
+ * Satellite varianta s vlastním odkazem na hlavní web.
+ */
+export const SatelliteCustomHomeLink: Story = {
+  args: {
+    variant: 'satellite',
+    appName: 'Členská sekce',
+    homeLink: 'https://kanoe.cz/clenstvi',
+    homeLinkLabel: 'Členství',
+    brand: <Logo />,
+    userMenu: <UserAvatar />,
+  },
 };

@@ -420,6 +420,129 @@
 }
 
 /* =============================================================================
+   SATELLITE VARIANT
+   For standalone apps (Registr, Přihlášky) - compact, minimal design
+   ============================================================================= */
+
+.csk-header--satellite {
+  background: linear-gradient(
+    135deg,
+    var(--color-neutral-50) 0%,
+    var(--color-neutral-100) 100%
+  );
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+/* Home link - subtle return navigation */
+.csk-header__home-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-2);
+  margin-right: var(--spacing-2);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base);
+}
+
+.csk-header__home-link:hover {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+.csk-header__home-link:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.csk-header__home-link svg {
+  flex-shrink: 0;
+}
+
+.csk-header__home-link-text {
+  white-space: nowrap;
+}
+
+/* Hide text on mobile, show icon only */
+@media (max-width: 767px) {
+  .csk-header__home-link-text {
+    display: none;
+  }
+
+  .csk-header__home-link {
+    padding: var(--spacing-2);
+  }
+}
+
+/* App name - displayed after brand */
+.csk-header__app-name {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.csk-header__app-separator {
+  color: var(--color-text-tertiary);
+  font-weight: var(--font-weight-normal);
+  user-select: none;
+}
+
+.csk-header__app-title {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+}
+
+/* Satellite brand adjustments */
+.csk-header--satellite .csk-header__brand {
+  border-right: 1px solid var(--color-border-subtle);
+  padding-right: var(--spacing-3);
+  margin-right: var(--spacing-1);
+}
+
+/* Satellite nav - visible on all screens since no mobile toggle */
+.csk-header--satellite .csk-header__nav {
+  display: flex;
+}
+
+/* Satellite actions - visible on all screens */
+.csk-header--satellite .csk-header__actions {
+  display: flex;
+}
+
+/* Satellite search - visible on all screens */
+.csk-header--satellite .csk-header__search {
+  display: flex;
+}
+
+/* Satellite dark mode */
+[data-theme="dark"] .csk-header--satellite {
+  background: linear-gradient(
+    135deg,
+    var(--color-neutral-800) 0%,
+    var(--color-neutral-900) 100%
+  );
+}
+
+[data-theme="dark"] .csk-header__home-link {
+  color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .csk-header__home-link:hover {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .csk-header--satellite .csk-header__brand {
+  border-right-color: var(--color-border-default);
+}
+
+/* =============================================================================
    REDUCED MOTION
    ============================================================================= */
 
