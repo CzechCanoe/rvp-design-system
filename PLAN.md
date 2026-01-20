@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 7 - Hloubkové review a redesign
-**Další krok:** 7.7 Branded visual elements
+**Další krok:** 7.8 Redesign prototypů
 
 **Problém:** Současná implementace nedosahuje vizuální úrovně studovaných referencí (World Athletics, FIS, ICF). Komponenty jsou funkční, ale "utilitární" - chybí vizuální polish, branded feel, moderní detaily.
 
@@ -182,11 +182,11 @@
 - [x] **Calendar** - hover efekty, event preview, style varianty (gradient/glass/bordered)
 
 ### 7.7 Branded visual elements
-- [ ] CSK logo integrace guidelines
-- [ ] Vodní/sportovní vizuální prvky (vlny, dynamické tvary?)
-- [ ] Hero patterns/backgrounds
-- [ ] Fotografické overlay styly
-- [ ] Disciplínové vizuální identity (DV/RY/VT)
+- [x] CSK logo integrace guidelines
+- [x] Vodní/sportovní vizuální prvky (vlny, dynamické tvary?)
+- [x] Hero patterns/backgrounds
+- [x] Fotografické overlay styly
+- [x] Disciplínové vizuální identity (DV/RY/VT)
 
 ### 7.8 Redesign prototypů
 - [ ] **CalendarPage** - hero sekce, featured events, vizuálně bohatší

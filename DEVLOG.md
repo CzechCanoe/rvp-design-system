@@ -1,5 +1,66 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.7 / Branded visual elements
+
+### Dokončeno
+- [x] CSK logo integrace guidelines - pravidla použití, varianty, ochranné zóny, responsive chování
+- [x] Vodní/sportovní vizuální prvky - wave patterns (subtle, dynamic, layered), ripple efekty, speed lines
+- [x] Hero patterns/backgrounds - gradient hero, dot patterns, mesh gradients, disciplínové hero gradienty
+- [x] Fotografické overlay styly - solid, gradient, brand tint, duotone, glassmorphism na fotkách
+- [x] Disciplínové vizuální identity (DV/RY/VT) - kompletní barevné palety, badge komponenty, hero sekce, VT třídy
+
+### Vytvořené soubory
+- `docs/branding/logo-guidelines.md` - Logo usage guidelines
+- `docs/branding/visual-elements.md` - Waves, patterns, hero backgrounds
+- `docs/branding/photo-overlays.md` - Image treatment a overlay styly
+- `docs/branding/discipline-identity.md` - DV/RY/VT vizuální systém + VT třídy (M/A/B/C)
+
+### Klíčový obsah dokumentace
+
+**Logo guidelines:**
+- Varianty loga (full, symbol, white, mono)
+- Ochranná zóna a minimální velikosti
+- Použití v Header, Footer, Hero, Cards
+- Responsive breakpointy
+- Povolené/zakázané animace
+- Co-branding pravidla
+
+**Visual elements:**
+- SVG wave patterns (subtle single-wave, dynamic multi-layer)
+- Ripple patterns pro pozadí a interakce
+- Speed lines pro live/racing kontexty
+- Hero backgrounds: gradient, dots, mesh, disciplínové
+- Glassmorphism karty a badges
+- CSS tokeny pro patterns
+
+**Photo overlays:**
+- Solid overlays (light/medium/heavy intenzita)
+- Gradient overlays (bottom, top, diagonal, spotlight)
+- Brand tint overlays (primary, DV/RY/VT)
+- Duotone efekty pro stylizaci
+- Glassmorphism na fotografiích
+- Text shadows a backdrop blur pro čitelnost
+- Aspect ratio containers a image filters
+
+**Discipline identity:**
+- Kompletní barevné palety pro DV (modrá), RY (zelená), VT (červená)
+- VT výkonnostní třídy: M (fialová), A (červená), B (oranžová), C (zelená)
+- Badge komponenty: solid, outline, soft, gradient varianty
+- Disciplínové tabs a sidebar navigace
+- Cards s barevným akcentem
+- Hero sekce pro každou disciplínu
+- Tabulky s disciplínovým highlighting
+- Dark mode adaptace
+
+### Poznámky
+- Dokumentace je připravena pro implementaci CSS tokenů a React komponent
+- Všechny dokumenty obsahují code snippets připravené k použití
+- Accessibility checklisty jsou součástí každého dokumentu
+- Performance doporučení zahrnuta (lazy loading, fallbacks, reduced motion)
+- Další krok: 7.8 Redesign prototypů s využitím nových branded elements
+
+---
+
 ## 2026-01-20 - Fáze 7.6 / Redesign Calendar komponenty
 
 ### Dokončeno
