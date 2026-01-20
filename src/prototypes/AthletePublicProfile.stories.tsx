@@ -3,17 +3,23 @@ import { Header } from '../components/Header';
 import { MainNav } from '../components/Navigation';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
+import { KanoeCzContext } from '../components/KanoeCzContext';
 import './AthletePublicProfile.css';
 
 // ============================================================================
 // Types
 // ============================================================================
 
+/** Display variant for the page */
+type AthletePublicProfileVariant = 'standalone' | 'satellite' | 'embed';
+
 interface AthletePublicProfileProps {
   /** Athlete section/discipline for theming */
   section?: 'dv' | 'ry' | 'vt';
   /** Show background image */
   showBackgroundImage?: boolean;
+  /** Display variant */
+  variant?: AthletePublicProfileVariant;
 }
 
 // ============================================================================
@@ -274,10 +280,18 @@ function getRankClass(rank: number): string {
 // AthletePublicProfile Component
 // ============================================================================
 
+// CSK Logo component for satellite header
+const CSKLogo = () => (
+  <span className="athlete-public-profile__logo">CSK</span>
+);
+
 function AthletePublicProfile({
   section = 'dv',
   showBackgroundImage = true,
+  variant = 'standalone',
 }: AthletePublicProfileProps) {
+  // Helper to check if we're in embed mode
+  const isEmbed = variant === 'embed';
   // Select data based on section
   const athlete = section === 'ry' ? ryAthleteData : section === 'vt' ? vtAthleteData : athleteData;
 
@@ -285,15 +299,63 @@ function AthletePublicProfile({
     ? { backgroundImage: `url(${athlete.imageUrl})` }
     : { background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)' };
 
-  return (
-    <div className="athlete-public-profile" data-mode="expressive">
-      {/* Header */}
+  // Render header based on variant
+  const renderHeader = () => {
+    if (isEmbed) {
+      return null;
+    }
+
+    if (variant === 'satellite') {
+      return (
+        <Header
+          variant="satellite"
+          size="sm"
+          bordered
+          brand={<CSKLogo />}
+          appName="Profil závodníka"
+          homeLink="https://kanoe.cz"
+          homeLinkLabel="kanoe.cz"
+          userMenu={
+            <Button variant="ghost" size="sm">
+              Přihlásit se
+            </Button>
+          }
+        />
+      );
+    }
+
+    // Default: standalone with full navigation
+    return (
       <Header
         brand={<span className="athlete-public-profile__logo">CSK</span>}
         navigation={<MainNav items={navItems} />}
         userMenu={<Button variant="ghost" size="sm">Přihlásit se</Button>}
         bordered
       />
+    );
+  };
+
+  // Render footer based on variant
+  const renderFooter = () => {
+    if (isEmbed) {
+      return null;
+    }
+
+    return (
+      <footer className="athlete-footer">
+        <div className="athlete-footer__container">
+          <p className="athlete-footer__text">
+            © 2026 Český svaz kanoistů. Veřejný profil závodníka.
+          </p>
+        </div>
+      </footer>
+    );
+  };
+
+  return (
+    <div className={`athlete-public-profile ${isEmbed ? 'athlete-public-profile--embed' : ''}`} data-mode="expressive">
+      {/* Header */}
+      {renderHeader()}
 
       {/* Hero Section */}
       <section className={`athlete-hero athlete-hero--${section}`}>
@@ -487,13 +549,7 @@ function AthletePublicProfile({
       </main>
 
       {/* Footer */}
-      <footer className="athlete-footer">
-        <div className="athlete-footer__container">
-          <p className="athlete-footer__text">
-            © 2026 Český svaz kanoistů. Veřejný profil závodníka - Expressive Mode Prototype.
-          </p>
-        </div>
-      </footer>
+      {renderFooter()}
     </div>
   );
 }
@@ -553,6 +609,22 @@ Využívá expressive tokeny:
     },
   },
   tags: ['autodocs'],
+  argTypes: {
+    section: {
+      control: 'select',
+      options: ['dv', 'ry', 'vt'],
+      description: 'Athlete section/discipline for theming',
+    },
+    showBackgroundImage: {
+      control: 'boolean',
+      description: 'Show background image in hero',
+    },
+    variant: {
+      control: 'select',
+      options: ['standalone', 'satellite', 'embed'],
+      description: 'Display variant for different integration contexts',
+    },
+  },
 };
 
 export default meta;
@@ -613,6 +685,102 @@ export const BezFotky: Story = {
     docs: {
       description: {
         story: 'Profil bez fotky závodníka - používá iniciály a abstraktní pozadí.',
+      },
+    },
+  },
+};
+
+// ============================================================================
+// Integration Variants (Phase 8.7.5)
+// ============================================================================
+
+/**
+ * Embed varianta pro vložení do kanoe.cz.
+ * Bez vlastního headeru a footeru, kompaktní styl.
+ */
+export const Embed: Story = {
+  name: 'Embed (kanoe.cz)',
+  args: {
+    section: 'dv',
+    showBackgroundImage: true,
+    variant: 'embed',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="full"
+        pageVariant="detail"
+        pageTitle="Jiří Prskavec - Profil závodníka"
+        breadcrumbs={[
+          { label: 'Domů', href: '#' },
+          { label: 'Závodníci', href: '#' },
+          { label: 'Jiří Prskavec' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Embed varianta pro vložení do kanoe.cz - bez vlastního headeru a footeru.',
+      },
+    },
+  },
+};
+
+/**
+ * Satellite varianta pro standalone aplikace.
+ * Minimální header s odkazem na kanoe.cz.
+ */
+export const Satellite: Story = {
+  name: 'Satellite',
+  args: {
+    section: 'dv',
+    showBackgroundImage: true,
+    variant: 'satellite',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Satellite varianta pro standalone aplikace s minimálním headerem.',
+      },
+    },
+  },
+};
+
+/**
+ * Embed varianta se sidebarem v kanoe.cz layoutu.
+ * Demonstrace container queries v úzkém sloupci.
+ */
+export const EmbedWithSidebar: Story = {
+  name: 'Embed se sidebarem',
+  args: {
+    section: 'ry',
+    showBackgroundImage: false,
+    variant: 'embed',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="sidebar"
+        pageVariant="detail"
+        pageTitle="Martin Fuksa - Profil závodníka"
+        breadcrumbs={[
+          { label: 'Domů', href: '#' },
+          { label: 'Závodníci', href: '#' },
+          { label: 'Martin Fuksa' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Embed varianta v úzkém sloupci - demonstrace container queries.',
       },
     },
   },

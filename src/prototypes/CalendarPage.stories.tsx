@@ -11,11 +11,15 @@ import { Select } from '../components/Select';
 import { Tabs } from '../components/Tabs';
 import { LiveIndicator } from '../components/LiveIndicator';
 import { EmptyState } from '../components/EmptyState';
+import { KanoeCzContext } from '../components/KanoeCzContext';
 import './CalendarPage.css';
 
 // ============================================================================
 // Page Component
 // ============================================================================
+
+/** Display variant for the page */
+type CalendarPageVariant = 'standalone' | 'satellite' | 'embed';
 
 interface CalendarPageProps {
   /** Initial section filter */
@@ -24,6 +28,8 @@ interface CalendarPageProps {
   showLive?: boolean;
   /** Show hero section */
   showHero?: boolean;
+  /** Display variant */
+  variant?: CalendarPageVariant;
 }
 
 // Sample race data
@@ -323,7 +329,14 @@ const WaveDecoration = ({ className = '' }: { className?: string }) => (
   </svg>
 );
 
-const CalendarPage = ({ initialSection = 'all', showLive = true, showHero = true }: CalendarPageProps) => {
+// CSK Logo component for satellite header
+const CSKLogo = () => (
+  <span className="prototype-calendar-page__logo">
+    <span className="prototype-calendar-page__logo-text">CSK</span>
+  </span>
+);
+
+const CalendarPage = ({ initialSection = 'all', showLive = true, showHero = true, variant = 'standalone' }: CalendarPageProps) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedSection, setSelectedSection] = useState<string>(initialSection);
   const [searchQuery, setSearchQuery] = useState('');
@@ -393,9 +406,33 @@ const CalendarPage = ({ initialSection = 'all', showLive = true, showHero = true
     setSelectedEvent(event);
   };
 
-  return (
-    <div className="prototype-calendar-page">
-      {/* Header */}
+  // Render header based on variant
+  const renderHeader = () => {
+    if (variant === 'embed') {
+      return null;
+    }
+
+    if (variant === 'satellite') {
+      return (
+        <Header
+          variant="satellite"
+          size="sm"
+          bordered
+          brand={<CSKLogo />}
+          appName="Kalendář závodů"
+          homeLink="https://kanoe.cz"
+          homeLinkLabel="kanoe.cz"
+          userMenu={
+            <Button variant="ghost" size="sm">
+              Přihlásit se
+            </Button>
+          }
+        />
+      );
+    }
+
+    // Default: standalone with full navigation
+    return (
       <Header
         variant="default"
         size="md"
@@ -432,6 +469,28 @@ const CalendarPage = ({ initialSection = 'all', showLive = true, showHero = true
           </Button>
         }
       />
+    );
+  };
+
+  // Render footer based on variant
+  const renderFooter = () => {
+    if (variant === 'embed') {
+      return null;
+    }
+
+    return (
+      <footer className="prototype-calendar-page__footer">
+        <div className="prototype-calendar-page__footer-content">
+          <p>© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
+        </div>
+      </footer>
+    );
+  };
+
+  return (
+    <div className={`prototype-calendar-page ${variant === 'embed' ? 'prototype-calendar-page--embed' : ''}`}>
+      {/* Header */}
+      {renderHeader()}
 
       {/* Hero Section */}
       {showHero && (
@@ -729,11 +788,7 @@ const CalendarPage = ({ initialSection = 'all', showLive = true, showHero = true
       </main>
 
       {/* Footer */}
-      <footer className="prototype-calendar-page__footer">
-        <div className="prototype-calendar-page__footer-content">
-          <p>© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
-        </div>
-      </footer>
+      {renderFooter()}
     </div>
   );
 };
@@ -768,6 +823,11 @@ const meta = {
     showHero: {
       control: 'boolean',
       description: 'Show hero section with featured events',
+    },
+    variant: {
+      control: 'select',
+      options: ['standalone', 'satellite', 'embed'],
+      description: 'Display variant for different integration contexts',
     },
   },
 } satisfies Meta<typeof CalendarPage>;
@@ -839,4 +899,79 @@ export const BezLive: Story = {
     showLive: false,
     showHero: true,
   },
+};
+
+// ============================================================================
+// Integration Variants (Phase 8.7.3)
+// ============================================================================
+
+/**
+ * Embed varianta pro vložení do kanoe.cz.
+ * Bez vlastního headeru a footeru, kompaktní styl.
+ */
+export const Embed: Story = {
+  args: {
+    initialSection: 'all',
+    showLive: true,
+    showHero: false,
+    variant: 'embed',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="full"
+        pageVariant="subpage"
+        pageTitle="Kalendář závodů 2026"
+        breadcrumbs={[
+          { label: 'Domů', href: '#' },
+          { label: 'Závody', href: '#' },
+          { label: 'Kalendář 2026' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
+};
+
+/**
+ * Satellite varianta pro standalone aplikace.
+ * Minimální header s odkazem na kanoe.cz.
+ */
+export const Satellite: Story = {
+  args: {
+    initialSection: 'all',
+    showLive: true,
+    showHero: false,
+    variant: 'satellite',
+  },
+};
+
+/**
+ * Embed varianta se sidebarem v kanoe.cz layoutu.
+ * Demonstrace container queries v úzkém sloupci.
+ */
+export const EmbedWithSidebar: Story = {
+  args: {
+    initialSection: 'dv',
+    showLive: true,
+    showHero: false,
+    variant: 'embed',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="sidebar"
+        pageVariant="subpage"
+        pageTitle="Kalendář - Divoká voda"
+        breadcrumbs={[
+          { label: 'Domů', href: '#' },
+          { label: 'Divoká voda', href: '#' },
+          { label: 'Kalendář' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
 };

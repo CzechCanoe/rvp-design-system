@@ -694,3 +694,56 @@
     transition: none;
   }
 }
+
+/* ============================================================================
+   Embed Mode - For integration into kanoe.cz (Phase 8.7.3)
+   ============================================================================ */
+
+.prototype-calendar-page--embed {
+  min-height: auto;
+  background-color: transparent;
+}
+
+.prototype-calendar-page--embed .prototype-calendar-page__main {
+  padding: var(--spacing-4) 0;
+}
+
+.prototype-calendar-page--embed .prototype-calendar-page__container {
+  max-width: none;
+}
+
+.prototype-calendar-page--embed .prototype-calendar-page__header {
+  margin-bottom: var(--spacing-4);
+}
+
+.prototype-calendar-page--embed .prototype-calendar-page__title {
+  font-size: var(--font-size-2xl);
+}
+
+.prototype-calendar-page--embed .prototype-calendar-page__filters {
+  margin-bottom: var(--spacing-4);
+  padding-bottom: var(--spacing-3);
+}
+
+/* Container queries for narrow containers */
+@container (max-width: 900px) {
+  .prototype-calendar-page--embed .prototype-calendar-page__content {
+    grid-template-columns: 1fr;
+  }
+
+  .prototype-calendar-page--embed .prototype-calendar-page__sidebar {
+    order: -1;
+  }
+}
+
+@container (max-width: 600px) {
+  .prototype-calendar-page--embed .prototype-calendar-page__upcoming-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+  }
+
+  .prototype-calendar-page--embed .prototype-calendar-page__upcoming-date {
+    min-width: auto;
+  }
+}

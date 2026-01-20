@@ -18,6 +18,9 @@ import './EventDetailPage.css';
 
 type EventStatus = 'upcoming' | 'registration' | 'live' | 'finished';
 
+/** Display variant for the page */
+type EventDetailPageVariant = 'standalone' | 'satellite' | 'embed';
+
 interface EventDetailPageProps {
   /** Event status determines the page layout and available sections */
   status?: EventStatus;
@@ -27,8 +30,8 @@ interface EventDetailPageProps {
   showHero?: boolean;
   /** Initial active tab */
   initialTab?: string;
-  /** Embed mode for kanoe.cz integration */
-  embedMode?: boolean;
+  /** Display variant */
+  variant?: EventDetailPageVariant;
 }
 
 // ============================================================================
@@ -256,13 +259,22 @@ function getDaysUntil(date: Date): number {
 // Page Component
 // ============================================================================
 
+// CSK Logo component for satellite header
+const CSKLogo = () => (
+  <span className="event-detail-page__logo">
+    <span className="event-detail-page__logo-text">CSK</span>
+  </span>
+);
+
 const EventDetailPage = ({
   status = 'upcoming',
   section = 'dv',
   showHero = true,
   initialTab = 'info',
-  embedMode = false,
+  variant = 'standalone',
 }: EventDetailPageProps) => {
+  // Helper to check if we're in embed mode
+  const isEmbed = variant === 'embed';
   const [activeTab, setActiveTab] = useState(initialTab);
   const [selectedCategory, setSelectedCategory] = useState('K1M');
 
@@ -443,7 +455,7 @@ const EventDetailPage = ({
             <ResultsTable
               results={generateResults(selectedCategory)}
               variant="striped"
-              styleVariant={embedMode ? 'embed' : 'gradient'}
+              styleVariant={isEmbed ? 'embed' : 'gradient'}
               size="md"
               showTimeDiff
               showClub
@@ -495,43 +507,72 @@ const EventDetailPage = ({
     }
   };
 
-  const content = (
-    <div className={`event-detail-page ${embedMode ? 'event-detail-page--embed' : ''}`}>
-      {/* Header - only in non-embed mode */}
-      {!embedMode && (
+  // Render header based on variant
+  const renderHeader = () => {
+    if (isEmbed) {
+      return null;
+    }
+
+    if (variant === 'satellite') {
+      return (
         <Header
-          variant="default"
-          size="md"
+          variant="satellite"
+          size="sm"
           bordered
-          brand={
-            <a href="#" className="event-detail-page__logo">
-              <span className="event-detail-page__logo-text">CSK</span>
-              <span className="event-detail-page__logo-subtitle">Český svaz kanoistů</span>
-            </a>
-          }
-          navigation={
-            <MainNav
-              items={navItems}
-              variant="horizontal"
-              showMobileToggle={false}
-              onItemClick={(item) => console.log('Nav click:', item)}
-            />
-          }
-          search={
-            <Input
-              type="search"
-              placeholder="Hledat..."
-              size="sm"
-              iconLeft={<SearchIcon />}
-            />
-          }
+          brand={<CSKLogo />}
+          appName="Detail závodu"
+          homeLink="https://kanoe.cz"
+          homeLinkLabel="kanoe.cz"
           userMenu={
-            <Button variant="primary" size="sm">
+            <Button variant="ghost" size="sm">
               Přihlásit se
             </Button>
           }
         />
-      )}
+      );
+    }
+
+    // Default: standalone with full navigation
+    return (
+      <Header
+        variant="default"
+        size="md"
+        bordered
+        brand={
+          <a href="#" className="event-detail-page__logo">
+            <span className="event-detail-page__logo-text">CSK</span>
+            <span className="event-detail-page__logo-subtitle">Český svaz kanoistů</span>
+          </a>
+        }
+        navigation={
+          <MainNav
+            items={navItems}
+            variant="horizontal"
+            showMobileToggle={false}
+            onItemClick={(item) => console.log('Nav click:', item)}
+          />
+        }
+        search={
+          <Input
+            type="search"
+            placeholder="Hledat..."
+            size="sm"
+            iconLeft={<SearchIcon />}
+          />
+        }
+        userMenu={
+          <Button variant="primary" size="sm">
+            Přihlásit se
+          </Button>
+        }
+      />
+    );
+  };
+
+  const content = (
+    <div className={`event-detail-page ${isEmbed ? 'event-detail-page--embed' : ''}`}>
+      {/* Header */}
+      {renderHeader()}
 
       {/* Hero Section */}
       {showHero && (
@@ -541,7 +582,7 @@ const EventDetailPage = ({
             <div className="event-detail-hero__pattern" />
           </div>
           <div className="event-detail-hero__content">
-            {!embedMode && (
+            {!isEmbed && (
               <div className="event-detail-hero__breadcrumb">
                 <a href="#">Kalendář</a>
                 <span className="event-detail-hero__breadcrumb-separator">/</span>
@@ -558,7 +599,7 @@ const EventDetailPage = ({
                 {getStatusBadge(status)}
               </div>
               <h1 className="event-detail-hero__title">{eventData.title}</h1>
-              {!embedMode && (
+              {!isEmbed && (
                 <p className="event-detail-hero__subtitle">{eventData.subtitle}</p>
               )}
             </div>
@@ -579,7 +620,7 @@ const EventDetailPage = ({
             </div>
 
             {/* Status-specific CTA */}
-            {status === 'registration' && !embedMode && (
+            {status === 'registration' && !isEmbed && (
               <div className="event-detail-hero__cta">
                 <Button variant="gradient" size="lg">
                   Přihlásit se na závod
@@ -591,7 +632,7 @@ const EventDetailPage = ({
               </div>
             )}
 
-            {status === 'live' && !embedMode && (
+            {status === 'live' && !isEmbed && (
               <div className="event-detail-hero__cta">
                 <Button variant="gradient" size="lg">
                   Sledovat LIVE výsledky
@@ -599,12 +640,12 @@ const EventDetailPage = ({
               </div>
             )}
           </div>
-          {!embedMode && <WaveDecoration className="event-detail-hero__wave" />}
+          {!isEmbed && <WaveDecoration className="event-detail-hero__wave" />}
         </section>
       )}
 
       {/* Stats Bar */}
-      {!embedMode && (
+      {!isEmbed && (
         <section className="event-detail-stats">
           <div className="event-detail-stats__container">
             <div className="event-detail-stats__item">
@@ -649,7 +690,7 @@ const EventDetailPage = ({
           </div>
 
           {/* Sidebar - only in non-embed mode */}
-          {!embedMode && (
+          {!isEmbed && (
             <aside className="event-detail-page__sidebar">
               {/* Quick Info */}
               <Card variant="surface" className="event-detail-sidebar__card">
@@ -721,7 +762,7 @@ const EventDetailPage = ({
       </main>
 
       {/* Footer - only in non-embed mode */}
-      {!embedMode && (
+      {!isEmbed && (
         <footer className="event-detail-page__footer">
           <div className="event-detail-page__footer-content">
             <p>© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
@@ -730,15 +771,6 @@ const EventDetailPage = ({
       )}
     </div>
   );
-
-  // Wrap in KanoeCzContext for embed mode
-  if (embedMode) {
-    return (
-      <KanoeCzContext layout="full" showSidebar={false}>
-        {content}
-      </KanoeCzContext>
-    );
-  }
 
   return content;
 };
@@ -780,9 +812,10 @@ const meta = {
       options: ['info', 'schedule', 'participants', 'results', 'documents'],
       description: 'Initial active tab',
     },
-    embedMode: {
-      control: 'boolean',
-      description: 'Embed mode for kanoe.cz integration',
+    variant: {
+      control: 'select',
+      options: ['standalone', 'satellite', 'embed'],
+      description: 'Display variant for different integration contexts',
     },
   },
 } satisfies Meta<typeof EventDetailPage>;
@@ -799,7 +832,6 @@ export const Upcoming: Story = {
     section: 'dv',
     showHero: true,
     initialTab: 'info',
-    embedMode: false,
   },
 };
 
@@ -812,7 +844,6 @@ export const Registration: Story = {
     section: 'dv',
     showHero: true,
     initialTab: 'info',
-    embedMode: false,
   },
 };
 
@@ -825,7 +856,6 @@ export const Live: Story = {
     section: 'dv',
     showHero: true,
     initialTab: 'results',
-    embedMode: false,
   },
 };
 
@@ -838,7 +868,6 @@ export const Finished: Story = {
     section: 'dv',
     showHero: true,
     initialTab: 'results',
-    embedMode: false,
   },
 };
 
@@ -851,7 +880,6 @@ export const Rychlostni: Story = {
     section: 'ry',
     showHero: true,
     initialTab: 'info',
-    embedMode: false,
   },
 };
 
@@ -864,20 +892,6 @@ export const VodniTuristika: Story = {
     section: 'vt',
     showHero: true,
     initialTab: 'info',
-    embedMode: false,
-  },
-};
-
-/**
- * Embed verze pro kanoe.cz - kompaktní bez headeru a footeru.
- */
-export const EmbedKanoeCz: Story = {
-  args: {
-    status: 'finished',
-    section: 'dv',
-    showHero: true,
-    initialTab: 'results',
-    embedMode: true,
   },
 };
 
@@ -890,7 +904,6 @@ export const Schedule: Story = {
     section: 'dv',
     showHero: true,
     initialTab: 'schedule',
-    embedMode: false,
   },
 };
 
@@ -903,7 +916,6 @@ export const Participants: Story = {
     section: 'dv',
     showHero: true,
     initialTab: 'participants',
-    embedMode: false,
   },
 };
 
@@ -916,6 +928,83 @@ export const Documents: Story = {
     section: 'dv',
     showHero: true,
     initialTab: 'documents',
-    embedMode: false,
   },
+};
+
+// ============================================================================
+// Integration Variants (Phase 8.7.4)
+// ============================================================================
+
+/**
+ * Embed varianta pro vložení do kanoe.cz.
+ * Bez vlastního headeru a footeru, kompaktní styl.
+ */
+export const Embed: Story = {
+  args: {
+    status: 'finished',
+    section: 'dv',
+    showHero: true,
+    initialTab: 'results',
+    variant: 'embed',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="full"
+        pageVariant="detail"
+        pageTitle="MČR ve slalomu 2026"
+        breadcrumbs={[
+          { label: 'Domů', href: '#' },
+          { label: 'Kalendář', href: '#' },
+          { label: 'MČR ve slalomu 2026' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
+};
+
+/**
+ * Satellite varianta pro standalone aplikace.
+ * Minimální header s odkazem na kanoe.cz.
+ */
+export const Satellite: Story = {
+  args: {
+    status: 'live',
+    section: 'dv',
+    showHero: true,
+    initialTab: 'results',
+    variant: 'satellite',
+  },
+};
+
+/**
+ * Embed varianta se sidebarem v kanoe.cz layoutu.
+ * Demonstrace container queries v úzkém sloupci.
+ */
+export const EmbedWithSidebar: Story = {
+  args: {
+    status: 'registration',
+    section: 'dv',
+    showHero: false,
+    initialTab: 'info',
+    variant: 'embed',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="sidebar"
+        pageVariant="detail"
+        pageTitle="MČR ve slalomu 2026"
+        breadcrumbs={[
+          { label: 'Domů', href: '#' },
+          { label: 'Kalendář', href: '#' },
+          { label: 'MČR ve slalomu 2026' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
 };

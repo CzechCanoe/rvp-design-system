@@ -59,6 +59,42 @@
 }
 
 /* =============================================================================
+   TOP BAR
+   ============================================================================= */
+
+.kanoe-topbar {
+  background-color: #0d5a7d;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+}
+
+.kanoe-topbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.kanoe-topbar__text {
+  font-weight: 500;
+}
+
+.kanoe-topbar__links {
+  display: flex;
+  gap: 16px;
+}
+
+.kanoe-topbar__link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.kanoe-topbar__link:hover {
+  color: #fff;
+}
+
+/* =============================================================================
    HEADER
    ============================================================================= */
 
@@ -69,18 +105,32 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .kanoe-header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
+  height: 64px;
   gap: 24px;
 }
 
 .kanoe-header__logo {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.kanoe-header__logo:hover {
+  opacity: 0.9;
+}
+
+/* Logo SVG Styling */
+.kanoe-logo-svg {
+  color: #fff;
 }
 
 .kanoe-logo-placeholder {
@@ -141,6 +191,41 @@
   border-color: #fff;
 }
 
+.kanoe-btn--primary {
+  color: #1176a6;
+  background-color: #fff;
+  border: 1px solid #fff;
+}
+
+.kanoe-btn--primary:hover {
+  background-color: #f0f0f0;
+}
+
+.kanoe-btn--search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.8);
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.kanoe-btn--search:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.kanoe-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 /* =============================================================================
    BREADCRUMB
    ============================================================================= */
@@ -182,6 +267,23 @@
 
 .kanoe-breadcrumb__item--active {
   color: #6c757d;
+}
+
+/* =============================================================================
+   PAGE TITLE
+   ============================================================================= */
+
+.kanoe-page-title {
+  background-color: #fff;
+  padding: 20px 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.kanoe-page-title__heading {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #212529;
 }
 
 /* =============================================================================
@@ -313,14 +415,78 @@
    ============================================================================= */
 
 .kanoe-footer {
-  background-color: #343a40;
+  background-color: #212529;
   color: rgba(255, 255, 255, 0.7);
-  padding: 24px 0;
+  padding: 40px 0 24px;
   margin-top: auto;
 }
 
 .kanoe-footer__inner {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.kanoe-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kanoe-footer__brand .kanoe-logo-svg {
+  color: #fff;
+  opacity: 0.9;
+}
+
+.kanoe-footer__tagline {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.kanoe-footer__links {
+  display: flex;
+  gap: 48px;
+}
+
+.kanoe-footer__column h4 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kanoe-footer__column ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.kanoe-footer__column li {
+  margin: 8px 0;
+}
+
+.kanoe-footer__column a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.kanoe-footer__column a:hover {
+  color: #fff;
+}
+
+.kanoe-footer__bottom {
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.kanoe-footer__copyright {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .kanoe-footer__text {

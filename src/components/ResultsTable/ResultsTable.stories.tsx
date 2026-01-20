@@ -25,6 +25,14 @@ const meta: Meta<typeof ResultsTable> = {
       control: 'select',
       options: [undefined, 'dv', 'ry', 'vt'],
     },
+    showAgeCategory: {
+      control: 'boolean',
+      description: 'Show age category column (U23, Junior, Senior, Master)',
+    },
+    showPoints: {
+      control: 'boolean',
+      description: 'Show points column',
+    },
   },
 };
 
@@ -1140,6 +1148,133 @@ export const ContainerQueryDemo: Story = {
     docs: {
       description: {
         story: 'Demonstrates container query-based responsive column hiding. As the container width decreases, less important columns are automatically hidden.',
+      },
+    },
+  },
+};
+
+// Sample data with age categories and points
+const resultsWithAgeCategoryAndPoints: ResultEntry[] = [
+  {
+    id: 1,
+    rank: 1,
+    name: 'Jiří Prskavec',
+    club: 'USK Praha',
+    category: 'K1M',
+    ageCategory: 'Senior',
+    points: 1000,
+    totalTime: 89.12,
+    timeDiff: 0,
+    section: 'dv',
+    status: 'final',
+  },
+  {
+    id: 2,
+    rank: 2,
+    name: 'Vojtěch Heger',
+    club: 'Dukla Praha',
+    category: 'K1M',
+    ageCategory: 'U23',
+    points: 800,
+    totalTime: 90.45,
+    timeDiff: 1.33,
+    section: 'dv',
+    status: 'final',
+  },
+  {
+    id: 3,
+    rank: 3,
+    name: 'Adam Novák',
+    club: 'SK Trnávka',
+    category: 'K1M',
+    ageCategory: 'Junior',
+    points: 650,
+    totalTime: 91.23,
+    timeDiff: 2.11,
+    section: 'dv',
+    status: 'final',
+  },
+  {
+    id: 4,
+    rank: 4,
+    name: 'Petr Svoboda',
+    club: 'Bohemians Praha',
+    category: 'K1M',
+    ageCategory: 'Senior',
+    points: 525,
+    totalTime: 92.67,
+    timeDiff: 3.55,
+    section: 'dv',
+    status: 'final',
+  },
+  {
+    id: 5,
+    rank: 5,
+    name: 'Karel Veselý',
+    club: 'KK Roudnice',
+    category: 'K1M',
+    ageCategory: 'Master',
+    points: 420,
+    totalTime: 93.89,
+    timeDiff: 4.77,
+    section: 'dv',
+    status: 'final',
+  },
+  {
+    id: 6,
+    rank: 6,
+    name: 'Tomáš Dvořák',
+    club: 'KK Brandýs',
+    category: 'K1M',
+    ageCategory: 'U23',
+    points: 340,
+    totalTime: 95.12,
+    timeDiff: 6.00,
+    section: 'dv',
+    status: 'final',
+  },
+];
+
+/**
+ * Tabulka s věkovými kategoriemi a body.
+ * Důležité pro bodovací závody a přehledy výsledků.
+ */
+export const WithAgeCategoryAndPoints: Story = {
+  args: {
+    results: resultsWithAgeCategoryAndPoints,
+    showAgeCategory: true,
+    showPoints: true,
+    showCategory: true,
+    showClub: true,
+    showTimeDiff: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Tabulka zobrazující věkové kategorie (Senior, U23, Junior, Master) a body získané v závodě. Důležité pro bodovací soutěže a seriály závodů.',
+      },
+    },
+  },
+};
+
+/**
+ * Kompaktní tabulka s body - pro přehledy seriálů.
+ */
+export const PointsTableCompact: Story = {
+  args: {
+    results: resultsWithAgeCategoryAndPoints,
+    variant: 'compact',
+    size: 'sm',
+    showAgeCategory: true,
+    showPoints: true,
+    showCategory: false,
+    showClub: false,
+    showTimeDiff: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Kompaktní verze bodovací tabulky - vhodná pro celkové pořadí seriálu závodů.',
       },
     },
   },

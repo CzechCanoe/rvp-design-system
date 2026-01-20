@@ -10,11 +10,15 @@ import { Tabs } from '../components/Tabs';
 import { Switch } from '../components/Switch';
 import { LiveIndicator } from '../components/LiveIndicator';
 import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
+import { KanoeCzContext } from '../components/KanoeCzContext';
 import './LivePage.css';
 
 // ============================================================================
 // Types
 // ============================================================================
+
+/** Display variant for the page */
+type LivePageVariant = 'standalone' | 'satellite' | 'embed';
 
 interface LivePageProps {
   /** Initial category filter */
@@ -25,6 +29,8 @@ interface LivePageProps {
   updateInterval?: number;
   /** Discipline section for theming */
   section?: 'dv' | 'ry' | 'vt';
+  /** Display variant - standalone (full), satellite (minimal header), embed (no chrome) */
+  variant?: LivePageVariant;
 }
 
 interface FeedItem {
@@ -180,30 +186,7 @@ const TrophyIcon = () => (
   </svg>
 );
 
-// Wave decoration component
-const WaveDecoration = ({ className = '' }: { className?: string }) => (
-  <svg
-    className={`live-page-wave ${className}`}
-    viewBox="0 0 1440 100"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    preserveAspectRatio="none"
-  >
-    <path
-      d="M0 50C240 20 480 80 720 50C960 20 1200 80 1440 50V100H0V50Z"
-      fill="currentColor"
-    />
-  </svg>
-);
-
-// Pulse ring animation component
-const PulseRings = () => (
-  <div className="live-page-hero__pulse-rings">
-    <div className="live-page-hero__pulse-ring live-page-hero__pulse-ring--1" />
-    <div className="live-page-hero__pulse-ring live-page-hero__pulse-ring--2" />
-    <div className="live-page-hero__pulse-ring live-page-hero__pulse-ring--3" />
-  </div>
-);
+// Note: Wave decoration and pulse rings removed for cleaner design (Phase 8.6.3)
 
 // ============================================================================
 // Helper Functions
@@ -246,11 +229,19 @@ function getInitials(name: string): string {
 // Page Component
 // ============================================================================
 
+// CSK Logo for satellite header
+const CSKLogo = () => (
+  <span className="prototype-live-page__logo">
+    <span className="prototype-live-page__logo-text">CSK</span>
+  </span>
+);
+
 const LivePage = ({
   initialCategory = 'K1M',
   simulateLive = true,
   updateInterval = 3000,
   section = 'dv',
+  variant = 'standalone',
 }: LivePageProps) => {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [searchQuery, setSearchQuery] = useState('');
@@ -377,9 +368,33 @@ const LivePage = ({
   const currentCat = categories.find((c) => c.id === selectedCategory);
   const progress = currentCat ? (currentCat.finished / currentCat.count) * 100 : 0;
 
-  return (
-    <div className={`prototype-live-page prototype-live-page--${section}`}>
-      {/* Header */}
+  // Header rendering based on variant
+  const renderHeader = () => {
+    if (variant === 'embed') {
+      return null; // No header for embed - KanoeCzContext provides it
+    }
+
+    if (variant === 'satellite') {
+      return (
+        <Header
+          variant="satellite"
+          size="sm"
+          bordered
+          brand={<CSKLogo />}
+          appName="Live výsledky"
+          homeLink="https://kanoe.cz"
+          homeLinkLabel="kanoe.cz"
+          userMenu={
+            <Button variant="ghost" size="sm">
+              Přihlásit se
+            </Button>
+          }
+        />
+      );
+    }
+
+    // Default: standalone with full navigation
+    return (
       <Header
         variant="default"
         size="md"
@@ -412,64 +427,65 @@ const LivePage = ({
           </Button>
         }
       />
+    );
+  };
 
-      {/* Hero Section - Immersive Live Header */}
-      <section className={`live-page-hero live-page-hero--${section}`}>
-        <div className="live-page-hero__background">
-          <div className="live-page-hero__gradient" />
-          <div className="live-page-hero__pattern" />
-          <PulseRings />
+  // Footer rendering based on variant
+  const renderFooter = () => {
+    if (variant === 'embed') {
+      return null; // No footer for embed - KanoeCzContext provides it
+    }
+
+    return (
+      <footer className="prototype-live-page__footer">
+        <div className="prototype-live-page__footer-content">
+          <p>© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
         </div>
-        <div className="live-page-hero__content">
-          <div className="live-page-hero__left">
-            <div className="live-page-hero__breadcrumb">
-              <a href="#">Výsledky</a>
-              <span>/</span>
-              <a href="#">2026</a>
-              <span>/</span>
-              <span>MČR ve slalomu</span>
-            </div>
-            <div className="live-page-hero__title-row">
-              <h1 className="live-page-hero__title">MČR ve slalomu 2026</h1>
-              <LiveIndicator variant="live" size="lg" label="LIVE" glow />
-            </div>
-            <div className="live-page-hero__meta">
-              <span className="live-page-hero__meta-item">
-                <CalendarIcon />
-                3. května 2026 • 14:32
-              </span>
-              <span className="live-page-hero__meta-item">
-                <LocationIcon />
-                Praha – Troja
-              </span>
-              <span className="live-page-hero__meta-item">
-                <UsersIcon />
-                70 závodníků
-              </span>
-              <Badge section={section} glow>
-                {sectionNames[section]}
-              </Badge>
+      </footer>
+    );
+  };
+
+  return (
+    <div className={`prototype-live-page prototype-live-page--${section} ${variant === 'embed' ? 'prototype-live-page--embed' : ''}`}>
+      {/* Header */}
+      {renderHeader()}
+
+      {/* Page Header - Clean design without waves */}
+      <section className={`live-page-header live-page-header--${section}`}>
+        <div className="live-page-header__container">
+          <div className="live-page-header__breadcrumb">
+            <a href="#">Výsledky</a>
+            <span>/</span>
+            <a href="#">2026</a>
+            <span>/</span>
+            <span>MČR ve slalomu</span>
+          </div>
+          <div className="live-page-header__content">
+            <div className="live-page-header__left">
+              <div className="live-page-header__title-row">
+                <h1 className="live-page-header__title">MČR ve slalomu 2026</h1>
+                <LiveIndicator variant="live" size="lg" label="LIVE" />
+              </div>
+              <div className="live-page-header__meta">
+                <span className="live-page-header__meta-item">
+                  <CalendarIcon />
+                  3. května 2026 • 14:32
+                </span>
+                <span className="live-page-header__meta-item">
+                  <LocationIcon />
+                  Praha – Troja
+                </span>
+                <span className="live-page-header__meta-item">
+                  <UsersIcon />
+                  70 závodníků
+                </span>
+                <Badge section={section}>
+                  {sectionNames[section]}
+                </Badge>
+              </div>
             </div>
           </div>
-          <div className="live-page-hero__right">
-            <div className="live-page-hero__current-label">Na trati</div>
-            <div className="live-page-hero__current-athlete">
-              <div className="live-page-hero__current-avatar">
-                {getInitials(currentRun.name)}
-              </div>
-              <div className="live-page-hero__current-info">
-                <div className="live-page-hero__current-name">{currentRun.name}</div>
-                <div className="live-page-hero__current-details">
-                  #{currentRun.bib} • {currentRun.club} • {currentRun.category}
-                </div>
-              </div>
-            </div>
-            <div className={`live-page-hero__timer ${autoUpdate ? 'live-page-hero__timer--running' : ''}`}>
-              {formatRunningTime(runningTime)}
-            </div>
-          </div>
         </div>
-        <WaveDecoration className="live-page-hero__wave" />
       </section>
 
       {/* Main content */}
@@ -749,11 +765,7 @@ const LivePage = ({
       </main>
 
       {/* Footer */}
-      <footer className="prototype-live-page__footer">
-        <div className="prototype-live-page__footer-content">
-          <p>© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
-        </div>
-      </footer>
+      {renderFooter()}
     </div>
   );
 };
@@ -793,6 +805,11 @@ const meta = {
       control: 'select',
       options: ['dv', 'ry', 'vt'],
       description: 'Discipline section for theming (DV = Whitewater, RY = Sprint, VT = Touring)',
+    },
+    variant: {
+      control: 'select',
+      options: ['standalone', 'satellite', 'embed'],
+      description: 'Display variant - standalone (full header), satellite (minimal), embed (no chrome)',
     },
   },
 } satisfies Meta<typeof LivePage>;
@@ -882,5 +899,113 @@ export const SlowUpdates: Story = {
     simulateLive: true,
     updateInterval: 5000,
     section: 'dv',
+  },
+};
+
+// ============================================================================
+// Integration Variants (Phase 8.7.1)
+// ============================================================================
+
+/**
+ * **EMBED varianta** - Live výsledky vložené do kanoe.cz layoutu.
+ *
+ * Komponenta bez vlastního headeru a footeru, určená pro embedding
+ * do existujícího webu kanoe.cz (Joomla + Bootstrap 4).
+ *
+ * Používá data-mode="embed" pro neutrální styling.
+ */
+export const Embed: Story = {
+  args: {
+    initialCategory: 'K1M',
+    simulateLive: true,
+    updateInterval: 3000,
+    section: 'dv',
+    variant: 'embed',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="full"
+        pageVariant="detail"
+        pageTitle="Live výsledky - MČR ve slalomu 2026"
+        breadcrumbs={[
+          { label: 'Úvod', href: '#' },
+          { label: 'Výsledky', href: '#' },
+          { label: 'MČR ve slalomu 2026' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Live výsledky embedované v kontextu kanoe.cz. Bez vlastního headeru/footeru - používá layout hostitelské stránky.',
+      },
+    },
+  },
+};
+
+/**
+ * **SATELLITE varianta** - Standalone live výsledky s minimálním headerem.
+ *
+ * Pro samostatnou aplikaci live výsledků s odkazem zpět na kanoe.cz.
+ * Header obsahuje pouze logo CSK, název aplikace a přihlášení.
+ */
+export const Satellite: Story = {
+  args: {
+    initialCategory: 'K1M',
+    simulateLive: true,
+    updateInterval: 3000,
+    section: 'dv',
+    variant: 'satellite',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Standalone aplikace live výsledků s minimálním satellite headerem. Obsahuje odkaz zpět na kanoe.cz.',
+      },
+    },
+  },
+};
+
+/**
+ * **EMBED + Sidebar** - Live výsledky v úzkém sloupci s postranním panelem.
+ *
+ * Demonstrace responzivity v omezeném prostoru typickém pro
+ * Joomla šablony s postranním panelem.
+ */
+export const EmbedWithSidebar: Story = {
+  args: {
+    initialCategory: 'K1M',
+    simulateLive: true,
+    updateInterval: 3000,
+    section: 'dv',
+    variant: 'embed',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="sidebar"
+        showSidebar={true}
+        pageVariant="detail"
+        pageTitle="Live výsledky"
+        breadcrumbs={[
+          { label: 'Úvod', href: '#' },
+          { label: 'Divoká voda', href: '#' },
+          { label: 'Live výsledky' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Live výsledky v layoutu se sidebarem. Demonstrace container queries a responzivity v úzkém prostoru.',
+      },
+    },
   },
 };

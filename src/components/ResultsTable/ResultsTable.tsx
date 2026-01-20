@@ -26,6 +26,10 @@ export interface ResultEntry {
   section?: ResultSection;
   /** Category (e.g., K1M, C1W) */
   category?: string;
+  /** Age category (e.g., U23, Junior, Senior, Master) */
+  ageCategory?: string;
+  /** Points scored in this race */
+  points?: number;
   /** Run 1 time in seconds */
   run1Time?: number;
   /** Run 1 penalty seconds */
@@ -92,6 +96,10 @@ export interface ResultsTableProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   showClub?: boolean;
   /** Show category column */
   showCategory?: boolean;
+  /** Show age category column (U23, Junior, Senior, etc.) */
+  showAgeCategory?: boolean;
+  /** Show points column */
+  showPoints?: boolean;
   /** Enable podium highlights (gold, silver, bronze) */
   showPodiumHighlights?: boolean;
   /** Number of positions to highlight (default: 3) */
@@ -208,6 +216,8 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
       showCountry = false,
       showClub = true,
       showCategory = false,
+      showAgeCategory = false,
+      showPoints = false,
       showPodiumHighlights = true,
       highlightPositions = 3,
       showLiveIndicator = true,
@@ -242,11 +252,13 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
       { key: 'club', header: 'Klub', align: 'left', visible: showClub, hideAt: 'md', priority: 4 },
       { key: 'country', header: 'Země', width: '70px', align: 'center', visible: showCountry, hideAt: 'sm', priority: 5 },
       { key: 'category', header: 'Kat.', width: '70px', align: 'center', visible: showCategory, hideAt: 'sm', priority: 5 },
+      { key: 'ageCategory', header: 'Věk', width: '70px', align: 'center', visible: showAgeCategory, hideAt: 'md', priority: 5 },
       { key: 'round', header: 'Kolo', width: '60px', align: 'center', visible: showRound, priority: 3 },
       { key: 'run1', header: '1. jízda', width: '120px', align: 'right', visible: showRuns, hideAt: 'md', priority: 4 },
       { key: 'run2', header: '2. jízda', width: '120px', align: 'right', visible: showRuns, hideAt: 'md', priority: 4 },
       { key: 'totalTime', header: 'Čas', width: '100px', align: 'right', visible: true, priority: 1 },
       { key: 'timeDiff', header: 'Rozdíl', width: '100px', align: 'right', visible: showTimeDiff, hideAt: 'sm', priority: 3 },
+      { key: 'points', header: 'Body', width: '70px', align: 'right', visible: showPoints, hideAt: 'sm', priority: 3 },
       { key: 'progression', header: '', width: '40px', align: 'center', visible: showProgression, priority: 2 },
     ];
 
@@ -309,6 +321,14 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
           return entry.country || '-';
         case 'category':
           return entry.category || '-';
+        case 'ageCategory':
+          return entry.ageCategory ? (
+            <span className="csk-results-table__age-category">{entry.ageCategory}</span>
+          ) : '-';
+        case 'points':
+          return entry.points !== undefined ? (
+            <span className="csk-results-table__points">{entry.points}</span>
+          ) : '-';
         case 'run1':
           return (
             <span className="csk-results-table__time">

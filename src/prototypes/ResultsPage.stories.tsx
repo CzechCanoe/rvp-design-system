@@ -11,11 +11,15 @@ import { Tabs } from '../components/Tabs';
 import { LiveIndicator } from '../components/LiveIndicator';
 import { Pagination } from '../components/Pagination';
 import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
+import { KanoeCzContext } from '../components/KanoeCzContext';
 import './ResultsPage.css';
 
 // ============================================================================
 // Types
 // ============================================================================
+
+/** Display variant for the page */
+type ResultsPageVariant = 'standalone' | 'satellite' | 'embed';
 
 interface ResultsPageProps {
   /** Race ID */
@@ -30,6 +34,8 @@ interface ResultsPageProps {
   showPodium?: boolean;
   /** Section/discipline for theming */
   section?: 'dv' | 'ry' | 'vt';
+  /** Display variant - standalone (full), satellite (minimal header), embed (no chrome) */
+  variant?: ResultsPageVariant;
 }
 
 // ============================================================================
@@ -186,21 +192,7 @@ const MedalIcon = () => (
   </svg>
 );
 
-// Wave decoration component
-const WaveDecoration = ({ className = '' }: { className?: string }) => (
-  <svg
-    className={`results-page-wave ${className}`}
-    viewBox="0 0 1440 100"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    preserveAspectRatio="none"
-  >
-    <path
-      d="M0 50C240 20 480 80 720 50C960 20 1200 80 1440 50V100H0V50Z"
-      fill="currentColor"
-    />
-  </svg>
-);
+// Note: Wave decoration removed for cleaner design (Phase 8.6.3)
 
 // ============================================================================
 // Helper Functions
@@ -231,12 +223,20 @@ function getInitials(name: string): string {
 // Page Component
 // ============================================================================
 
+// CSK Logo for satellite header
+const CSKLogo = () => (
+  <span className="prototype-results-page__logo">
+    <span className="prototype-results-page__logo-text">CSK</span>
+  </span>
+);
+
 const ResultsPage = ({
   initialCategory = 'K1M',
   isLive = false,
   showHero = true,
   showPodium = true,
   section = 'dv',
+  variant = 'standalone',
 }: ResultsPageProps) => {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [searchQuery, setSearchQuery] = useState('');
@@ -288,12 +288,33 @@ const ResultsPage = ({
     currentPage * pageSize
   );
 
-  // Hero section class based on discipline
-  const heroClass = `results-page-hero results-page-hero--${section}`;
+  // Header rendering based on variant
+  const renderHeader = () => {
+    if (variant === 'embed') {
+      return null; // No header for embed - KanoeCzContext provides it
+    }
 
-  return (
-    <div className="prototype-results-page">
-      {/* Header */}
+    if (variant === 'satellite') {
+      return (
+        <Header
+          variant="satellite"
+          size="sm"
+          bordered
+          brand={<CSKLogo />}
+          appName="Výsledky"
+          homeLink="https://kanoe.cz"
+          homeLinkLabel="kanoe.cz"
+          userMenu={
+            <Button variant="ghost" size="sm">
+              Přihlásit se
+            </Button>
+          }
+        />
+      );
+    }
+
+    // Default: standalone with full navigation
+    return (
       <Header
         variant="default"
         size="md"
@@ -326,62 +347,78 @@ const ResultsPage = ({
           </Button>
         }
       />
+    );
+  };
 
-      {/* Hero Section */}
+  // Footer rendering based on variant
+  const renderFooter = () => {
+    if (variant === 'embed') {
+      return null; // No footer for embed - KanoeCzContext provides it
+    }
+
+    return (
+      <footer className="prototype-results-page__footer">
+        <div className="prototype-results-page__footer-content">
+          <p>© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
+        </div>
+      </footer>
+    );
+  };
+
+  return (
+    <div className={`prototype-results-page ${variant === 'embed' ? 'prototype-results-page--embed' : ''}`}>
+      {/* Header */}
+      {renderHeader()}
+
+      {/* Page Header - Clean design without waves */}
       {showHero && (
-        <section className={heroClass}>
-          <div className="results-page-hero__background">
-            <div className="results-page-hero__gradient" />
-            <div className="results-page-hero__pattern" />
-          </div>
-          <div className="results-page-hero__content">
-            <div className="results-page-hero__breadcrumb">
+        <section className={`results-page-header results-page-header--${section}`}>
+          <div className="results-page-header__container">
+            <div className="results-page-header__breadcrumb">
               <a href="#">Výsledky</a>
-              <span className="results-page-hero__breadcrumb-separator">/</span>
+              <span>/</span>
               <a href="#">2026</a>
-              <span className="results-page-hero__breadcrumb-separator">/</span>
+              <span>/</span>
               <span>MČR ve slalomu</span>
             </div>
-
-            <div className="results-page-hero__header">
-              <h1 className="results-page-hero__title">MČR ve slalomu 2026</h1>
-              <div className="results-page-hero__badges">
-                {isLive && <LiveIndicator variant="live" size="md" label="LIVE" styleVariant="glass" />}
-                {!isLive && <Badge variant="success" glow>Oficiální výsledky</Badge>}
+            <div className="results-page-header__content">
+              <div className="results-page-header__left">
+                <div className="results-page-header__title-row">
+                  <h1 className="results-page-header__title">MČR ve slalomu 2026</h1>
+                  {isLive && <LiveIndicator variant="live" size="md" label="LIVE" />}
+                  {!isLive && <Badge variant="success">Oficiální výsledky</Badge>}
+                </div>
+                <div className="results-page-header__meta">
+                  <span className="results-page-header__meta-item">
+                    <CalendarIcon />
+                    3.–5. května 2026
+                  </span>
+                  <span className="results-page-header__meta-item">
+                    <LocationIcon />
+                    Praha – Troja
+                  </span>
+                  <span className="results-page-header__meta-item">
+                    <UsersIcon />
+                    156 závodníků
+                  </span>
+                </div>
               </div>
-            </div>
-
-            <div className="results-page-hero__meta">
-              <span className="results-page-hero__meta-item">
-                <CalendarIcon />
-                3.–5. května 2026
-              </span>
-              <span className="results-page-hero__meta-item">
-                <LocationIcon />
-                Praha – Troja
-              </span>
-              <span className="results-page-hero__meta-item">
-                <UsersIcon />
-                156 závodníků
-              </span>
-            </div>
-
-            <div className="results-page-hero__stats">
-              <div className="results-page-hero__stat">
-                <span className="results-page-hero__stat-value">4</span>
-                <span className="results-page-hero__stat-label">kategorie</span>
-              </div>
-              <div className="results-page-hero__stat">
-                <span className="results-page-hero__stat-value">156</span>
-                <span className="results-page-hero__stat-label">závodníků</span>
-              </div>
-              <div className="results-page-hero__stat">
-                <span className="results-page-hero__stat-value">24</span>
-                <span className="results-page-hero__stat-label">branek</span>
+              <div className="results-page-header__stats">
+                <div className="results-page-header__stat">
+                  <span className="results-page-header__stat-value">4</span>
+                  <span className="results-page-header__stat-label">kategorie</span>
+                </div>
+                <div className="results-page-header__stat">
+                  <span className="results-page-header__stat-value">156</span>
+                  <span className="results-page-header__stat-label">závodníků</span>
+                </div>
+                <div className="results-page-header__stat">
+                  <span className="results-page-header__stat-value">24</span>
+                  <span className="results-page-header__stat-label">branek</span>
+                </div>
               </div>
             </div>
           </div>
-          <WaveDecoration className="results-page-hero__wave" />
         </section>
       )}
 
@@ -640,11 +677,7 @@ const ResultsPage = ({
       </main>
 
       {/* Footer */}
-      <footer className="prototype-results-page__footer">
-        <div className="prototype-results-page__footer-content">
-          <p>© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
-        </div>
-      </footer>
+      {renderFooter()}
     </div>
   );
 };
@@ -688,6 +721,11 @@ const meta = {
       control: 'select',
       options: ['dv', 'ry', 'vt'],
       description: 'Section/discipline for hero theming',
+    },
+    variant: {
+      control: 'select',
+      options: ['standalone', 'satellite', 'embed'],
+      description: 'Display variant - standalone (full header), satellite (minimal), embed (no chrome)',
     },
   },
 } satisfies Meta<typeof ResultsPage>;
@@ -783,5 +821,151 @@ export const VodniTuristika: Story = {
     showHero: true,
     showPodium: true,
     section: 'vt',
+  },
+};
+
+// ============================================================================
+// Integration Variants (Phase 8.7.2)
+// ============================================================================
+
+/**
+ * **EMBED varianta** - Výsledky vložené do kanoe.cz layoutu.
+ *
+ * Komponenta bez vlastního headeru a footeru, určená pro embedding
+ * do existujícího webu kanoe.cz (Joomla + Bootstrap 4).
+ *
+ * Používá data-mode="embed" pro neutrální styling.
+ */
+export const Embed: Story = {
+  args: {
+    initialCategory: 'K1M',
+    isLive: false,
+    showHero: true,
+    showPodium: true,
+    section: 'dv',
+    variant: 'embed',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="full"
+        pageVariant="detail"
+        pageTitle="MČR ve slalomu 2026 - Výsledky"
+        breadcrumbs={[
+          { label: 'Úvod', href: '#' },
+          { label: 'Výsledky', href: '#' },
+          { label: 'MČR ve slalomu 2026' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Výsledky embedované v kontextu kanoe.cz. Bez vlastního headeru/footeru - používá layout hostitelské stránky.',
+      },
+    },
+  },
+};
+
+/**
+ * **SATELLITE varianta** - Standalone výsledky s minimálním headerem.
+ *
+ * Pro samostatnou aplikaci výsledků s odkazem zpět na kanoe.cz.
+ * Header obsahuje pouze logo CSK, název aplikace a přihlášení.
+ */
+export const Satellite: Story = {
+  args: {
+    initialCategory: 'K1M',
+    isLive: false,
+    showHero: true,
+    showPodium: true,
+    section: 'dv',
+    variant: 'satellite',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Standalone aplikace výsledků s minimálním satellite headerem. Obsahuje odkaz zpět na kanoe.cz.',
+      },
+    },
+  },
+};
+
+/**
+ * **EMBED + Sidebar** - Výsledky v úzkém sloupci s postranním panelem.
+ *
+ * Demonstrace responzivity v omezeném prostoru typickém pro
+ * Joomla šablony s postranním panelem.
+ */
+export const EmbedWithSidebar: Story = {
+  args: {
+    initialCategory: 'K1M',
+    isLive: false,
+    showHero: false,
+    showPodium: false,
+    section: 'dv',
+    variant: 'embed',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="sidebar"
+        showSidebar={true}
+        pageVariant="detail"
+        pageTitle="Výsledky závodu"
+        breadcrumbs={[
+          { label: 'Úvod', href: '#' },
+          { label: 'Divoká voda', href: '#' },
+          { label: 'Výsledky' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Výsledky v layoutu se sidebarem. Kompaktní zobrazení bez hero sekce a pódia.',
+      },
+    },
+  },
+};
+
+/**
+ * **EMBED kompaktní** - Minimální výsledková tabulka pro embed.
+ *
+ * Bez hero sekce a pódia - pouze výsledková tabulka.
+ * Ideální pro vložení do omezených prostorů.
+ */
+export const EmbedCompact: Story = {
+  args: {
+    initialCategory: 'K1M',
+    isLive: false,
+    showHero: false,
+    showPodium: false,
+    section: 'dv',
+    variant: 'embed',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="full"
+        pageVariant="subpage"
+        pageTitle="Výsledky - K1 Muži"
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Kompaktní embed výsledků - pouze tabulka bez hero sekce a pódia.',
+      },
+    },
   },
 };

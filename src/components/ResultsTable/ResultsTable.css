@@ -384,22 +384,10 @@
 
 .csk-results-table__tr--gold .csk-results-table__td:first-child {
   position: relative;
+  overflow: hidden;
 }
 
-.csk-results-table__tr--gold .csk-results-table__td:first-child::before {
-  content: '🥇';
-  position: absolute;
-  left: var(--spacing-1);
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: var(--font-size-base);
-  opacity: 0;
-  transition: opacity var(--transition-fast);
-}
-
-.csk-results-table__tr--gold:hover .csk-results-table__td:first-child::before {
-  opacity: 1;
-}
+/* Medal emoji removed - was causing overflow issues */
 
 /* Silver - 2nd place */
 .csk-results-table__tr--silver {
@@ -815,10 +803,6 @@
     height: 8px;
   }
 
-  /* Hide medal emoji on mobile */
-  .csk-results-table__tr--gold .csk-results-table__td:first-child::before {
-    display: none;
-  }
 }
 
 /* =============================================================================
@@ -915,11 +899,6 @@
 .csk-results-table--style-embed .csk-results-table__tr--silver::before,
 .csk-results-table--style-embed .csk-results-table__tr--bronze::before {
   width: 3px;
-}
-
-/* No medal emoji in embed */
-.csk-results-table--style-embed .csk-results-table__tr--gold .csk-results-table__td:first-child::before {
-  display: none;
 }
 
 /* Subtle live indicator */
@@ -1043,4 +1022,39 @@
 /* Progressed row highlight */
 .csk-results-table__tr--progressed {
   background: linear-gradient(90deg, rgba(34, 197, 94, 0.05) 0%, transparent 100%);
+}
+
+/* =============================================================================
+   AGE CATEGORY & POINTS
+   ============================================================================= */
+
+/* Age category badge */
+.csk-results-table__age-category {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  padding: var(--spacing-0-5) var(--spacing-1-5);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-sm);
+  background: var(--color-gray-100);
+  color: var(--color-text-secondary);
+}
+
+[data-theme='dark'] .csk-results-table__age-category {
+  background: var(--color-gray-800);
+  color: var(--color-text-secondary);
+}
+
+/* Points display */
+.csk-results-table__points {
+  font-family: var(--font-family-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-600);
+}
+
+[data-theme='dark'] .csk-results-table__points {
+  color: var(--color-primary-400);
 }
