@@ -76,6 +76,8 @@ export interface TableProps<T> extends Omit<HTMLAttributes<HTMLTableElement>, 'c
   sortKey?: string | null;
   /** Controlled sort direction */
   sortDirection?: SortDirection;
+  /** Key to use for rank-based highlighting (highlights rows where this value is 1, 2, or 3) */
+  rankKey?: keyof T;
 }
 
 // ============================================================================
@@ -187,6 +189,7 @@ function TableInner<T>(
     onSortChange,
     sortKey: controlledSortKey,
     sortDirection: controlledSortDirection,
+    rankKey,
     className,
     ...props
   }: TableProps<T>,
@@ -385,6 +388,11 @@ function TableInner<T>(
             sortedData.map((row, rowIndex) => {
               const key = getRowKey(row, rowIndex);
               const isSelected = selectedKeys.has(key);
+              const rankValue = rankKey ? row[rankKey] : undefined;
+              const rankClass = rankValue === 1 ? 'csk-table__tr--rank-1'
+                : rankValue === 2 ? 'csk-table__tr--rank-2'
+                : rankValue === 3 ? 'csk-table__tr--rank-3'
+                : undefined;
 
               return (
                 <tr
@@ -392,6 +400,7 @@ function TableInner<T>(
                   className={[
                     'csk-table__tr',
                     isSelected && 'csk-table__tr--selected',
+                    rankClass,
                   ]
                     .filter(Boolean)
                     .join(' ')}

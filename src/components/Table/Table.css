@@ -1,5 +1,8 @@
 /* =============================================================================
-   Table Component Styles
+   Table Component Styles - CSK RVP Design System
+
+   Enhanced with gradient headers, improved row highlights, sticky header
+   blur effects, and micro-animations.
    ============================================================================= */
 
 /* Wrapper */
@@ -8,6 +11,9 @@
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  background-color: var(--color-bg-primary);
 }
 
 .csk-table-wrapper--sticky {
@@ -18,7 +24,9 @@
 .csk-table-wrapper--sticky .csk-table__thead {
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 10;
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
 }
 
 .csk-table-wrapper--loading {
@@ -36,7 +44,7 @@
   font-family: var(--font-family-sans);
   font-size: var(--font-size-sm);
   color: var(--color-text-primary);
-  background-color: var(--color-bg-primary);
+  background-color: transparent;
 }
 
 /* Caption */
@@ -65,7 +73,7 @@
    ============================================================================= */
 
 .csk-table__thead {
-  background-color: var(--color-bg-secondary);
+  background: var(--gradient-primary-soft);
 }
 
 .csk-table__th {
@@ -73,30 +81,47 @@
   font-weight: var(--font-weight-semibold);
   text-align: left;
   white-space: nowrap;
-  color: var(--color-text-primary);
-  border-bottom: 2px solid var(--color-border-strong);
+  color: var(--color-text-inverse);
+  border-bottom: none;
   vertical-align: middle;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* First header cell - rounded left corner */
+.csk-table__thead .csk-table__tr .csk-table__th:first-child {
+  border-top-left-radius: var(--radius-md);
+}
+
+/* Last header cell - rounded right corner */
+.csk-table__thead .csk-table__tr .csk-table__th:last-child {
+  border-top-right-radius: var(--radius-md);
 }
 
 .csk-table__th-content {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-1);
+  gap: var(--spacing-2);
 }
 
 /* Sortable header */
 .csk-table__th--sortable {
   cursor: pointer;
   user-select: none;
-  transition: background-color var(--transition-fast);
+  transition: background-color var(--transition-fast),
+              transform 0.15s ease-out;
 }
 
 .csk-table__th--sortable:hover {
-  background-color: var(--color-bg-tertiary);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.csk-table__th--sortable:active {
+  transform: scale(0.98);
 }
 
 .csk-table__th--sortable:focus-visible {
-  outline: 2px solid var(--color-focus-ring);
+  outline: 2px solid rgba(255, 255, 255, 0.5);
   outline-offset: -2px;
 }
 
@@ -106,17 +131,23 @@
   flex-shrink: 0;
   width: 16px;
   height: 16px;
-  color: var(--color-text-tertiary);
-  transition: color var(--transition-fast);
+  color: rgba(255, 255, 255, 0.5);
+  transition: color var(--transition-fast),
+              transform 0.2s ease-out;
 }
 
 .csk-table__th--sortable:hover .csk-table__sort-icon {
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.8);
 }
 
-.csk-table__th--sorted-asc .csk-table__sort-icon,
+.csk-table__th--sorted-asc .csk-table__sort-icon {
+  color: white;
+  transform: translateY(-1px);
+}
+
 .csk-table__th--sorted-desc .csk-table__sort-icon {
-  color: var(--color-primary-500);
+  color: white;
+  transform: translateY(1px);
 }
 
 .csk-table__sort-icon svg {
@@ -141,25 +172,64 @@
 }
 
 .csk-table__tr {
-  transition: background-color var(--transition-fast);
+  transition: background-color 0.2s ease-out,
+              transform 0.15s ease-out,
+              box-shadow 0.2s ease-out;
 }
 
 .csk-table__tr--selected {
   background-color: var(--color-primary-50);
+  box-shadow: inset 3px 0 0 var(--color-primary-500);
 }
 
-.csk-table--hoverable .csk-table__tr:hover:not(.csk-table__tr--empty) {
+.csk-table--hoverable .csk-table__tbody .csk-table__tr:hover:not(.csk-table__tr--empty) {
   background-color: var(--color-bg-hover);
+  transform: translateX(2px);
 }
 
 .csk-table--hoverable .csk-table__tr--selected:hover {
   background-color: var(--color-primary-100);
 }
 
+/* Position highlighting for results (1st, 2nd, 3rd) */
+.csk-table__tr--rank-1 {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.15) 0%, transparent 100%);
+  box-shadow: inset 4px 0 0 #ffd700;
+}
+
+.csk-table__tr--rank-2 {
+  background: linear-gradient(90deg, rgba(192, 192, 192, 0.15) 0%, transparent 100%);
+  box-shadow: inset 4px 0 0 #c0c0c0;
+}
+
+.csk-table__tr--rank-3 {
+  background: linear-gradient(90deg, rgba(205, 127, 50, 0.15) 0%, transparent 100%);
+  box-shadow: inset 4px 0 0 #cd7f32;
+}
+
+/* Hover states for rank rows */
+.csk-table--hoverable .csk-table__tr--rank-1:hover {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.25) 0%, var(--color-bg-hover) 100%);
+}
+
+.csk-table--hoverable .csk-table__tr--rank-2:hover {
+  background: linear-gradient(90deg, rgba(192, 192, 192, 0.25) 0%, var(--color-bg-hover) 100%);
+}
+
+.csk-table--hoverable .csk-table__tr--rank-3:hover {
+  background: linear-gradient(90deg, rgba(205, 127, 50, 0.25) 0%, var(--color-bg-hover) 100%);
+}
+
 .csk-table__td {
   padding: var(--spacing-3) var(--spacing-4);
   border-bottom: 1px solid var(--color-border);
   vertical-align: middle;
+  transition: padding 0.15s ease-out;
+}
+
+/* Subtle left border accent on hover */
+.csk-table--hoverable .csk-table__tbody .csk-table__tr:hover:not(.csk-table__tr--empty):not(.csk-table__tr--rank-1):not(.csk-table__tr--rank-2):not(.csk-table__tr--rank-3) {
+  box-shadow: inset 3px 0 0 var(--color-primary-300);
 }
 
 /* Empty state */
@@ -183,11 +253,19 @@
   height: 18px;
   cursor: pointer;
   accent-color: var(--color-primary-500);
+  border-radius: var(--radius-sm);
+  transition: transform 0.15s ease-out,
+              box-shadow 0.2s ease-out;
+}
+
+.csk-table__checkbox:hover {
+  transform: scale(1.1);
 }
 
 .csk-table__checkbox:focus-visible {
   outline: 2px solid var(--color-focus-ring);
   outline-offset: 2px;
+  box-shadow: var(--glow-primary-sm);
 }
 
 /* =============================================================================
@@ -227,18 +305,35 @@
   background-color: var(--color-bg-secondary);
 }
 
-.csk-table--striped.csk-table--hoverable .csk-table__tr:hover:not(.csk-table__tr--empty) {
+.csk-table--striped.csk-table--hoverable .csk-table__tbody .csk-table__tr:hover:not(.csk-table__tr--empty) {
   background-color: var(--color-bg-hover);
 }
 
 /* Bordered */
 .csk-table--bordered {
   border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
 .csk-table--bordered .csk-table__th,
 .csk-table--bordered .csk-table__td {
   border: 1px solid var(--color-border);
+}
+
+/* Bordered header - remove top border radius since container has it */
+.csk-table--bordered .csk-table__thead .csk-table__tr .csk-table__th:first-child {
+  border-top-left-radius: 0;
+}
+
+.csk-table--bordered .csk-table__thead .csk-table__tr .csk-table__th:last-child {
+  border-top-right-radius: 0;
+}
+
+/* Compact variant - denser data presentation */
+.csk-table--compact .csk-table__th,
+.csk-table--compact .csk-table__td {
+  padding: var(--spacing-2) var(--spacing-3);
 }
 
 /* =============================================================================
@@ -251,17 +346,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.8);
-  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: var(--blur-sm);
+  -webkit-backdrop-filter: var(--blur-sm);
+  z-index: 20;
+  border-radius: var(--radius-lg);
 }
 
 .csk-table__spinner {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border: 3px solid var(--color-border);
   border-top-color: var(--color-primary-500);
   border-radius: 50%;
   animation: csk-table-spin 0.8s linear infinite;
+  box-shadow: var(--glow-primary-sm);
 }
 
 @keyframes csk-table-spin {
@@ -274,8 +373,17 @@
    Dark Mode
    ============================================================================= */
 
+[data-theme='dark'] .csk-table-wrapper {
+  box-shadow: var(--shadow-md);
+}
+
+[data-theme='dark'] .csk-table__thead {
+  background: var(--gradient-primary-deep);
+}
+
 [data-theme='dark'] .csk-table__tr--selected {
   background-color: var(--color-primary-900);
+  box-shadow: inset 3px 0 0 var(--color-primary-400);
 }
 
 [data-theme='dark'] .csk-table--hoverable .csk-table__tr--selected:hover {
@@ -283,14 +391,24 @@
 }
 
 [data-theme='dark'] .csk-table__loading-overlay {
-  background-color: rgba(10, 10, 10, 0.8);
+  background-color: rgba(10, 10, 10, 0.85);
 }
 
-@media
+/* Dark mode rank rows */
+[data-theme='dark'] .csk-table__tr--rank-1 {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.2) 0%, transparent 100%);
+}
 
-  :root:not([data-theme='light']) .csk-table__loading-overlay {
-    background-color: rgba(10, 10, 10, 0.8);
-  }
+[data-theme='dark'] .csk-table__tr--rank-2 {
+  background: linear-gradient(90deg, rgba(192, 192, 192, 0.2) 0%, transparent 100%);
+}
+
+[data-theme='dark'] .csk-table__tr--rank-3 {
+  background: linear-gradient(90deg, rgba(205, 127, 50, 0.2) 0%, transparent 100%);
+}
+
+[data-theme='dark'] .csk-table--hoverable .csk-table__tbody .csk-table__tr:hover:not(.csk-table__tr--empty):not(.csk-table__tr--rank-1):not(.csk-table__tr--rank-2):not(.csk-table__tr--rank-3) {
+  box-shadow: inset 3px 0 0 var(--color-primary-400);
 }
 
 /* =============================================================================
@@ -352,8 +470,18 @@
 @media (prefers-reduced-motion: reduce) {
   .csk-table__tr,
   .csk-table__th--sortable,
-  .csk-table__sort-icon {
+  .csk-table__sort-icon,
+  .csk-table__checkbox,
+  .csk-table__td {
     transition: none;
+  }
+
+  .csk-table--hoverable .csk-table__tbody .csk-table__tr:hover:not(.csk-table__tr--empty) {
+    transform: none;
+  }
+
+  .csk-table__checkbox:hover {
+    transform: none;
   }
 
   .csk-table__spinner {

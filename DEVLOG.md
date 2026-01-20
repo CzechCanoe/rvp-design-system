@@ -1,5 +1,40 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.4 / Redesign Table komponenty
+
+### Dokončeno
+- [x] Gradient header - `--gradient-primary-soft` pro moderní vzhled
+- [x] Bílý text na headeru s text-shadow pro čitelnost
+- [x] Rounded corners na header cells (první/poslední)
+- [x] Rank highlighting - automatické pozice 1/2/3 (zlato/stříbro/bronz)
+- [x] Nový `rankKey` prop pro automatické zvýraznění pozic
+- [x] Hover micro-animations - translateX + left border accent
+- [x] Sticky header s backdrop blur efektem
+- [x] Enhanced loading overlay s blur
+- [x] Checkbox hover/focus animace
+- [x] Dark mode podpora pro všechny nové efekty
+- [x] Reduced motion podpora
+- [x] Nové stories: RankHighlighting, GradientHeader, HoverEffects, FeaturedShowcase
+
+### Změněné soubory
+- `src/components/Table/Table.css` - kompletní redesign stylů
+- `src/components/Table/Table.tsx` - nový `rankKey` prop
+- `src/components/Table/Table.stories.tsx` - 4 nové stories
+
+### Klíčové změny
+1. **Header** - gradient background místo plain color, bílý text
+2. **Rank rows** - CSS třídy `.csk-table__tr--rank-1/2/3` s gradient backgrounds a barevnou levou hranou
+3. **Hover** - subtle translateX(2px) + inset box-shadow pro vizuální feedback
+4. **Loading** - backdrop-filter blur pro moderní overlay
+5. **Wrapper** - border-radius a shadow pro card-like vzhled
+
+### Poznámky
+- Fáze 7.4 (Redesign core komponent Tier 1) je nyní kompletní
+- Build proběhl úspěšně
+- Další krok: 7.5 Redesign pokročilých komponent (Tier 2) - Header
+
+---
+
 ## 2026-01-20 - Fáze 7.4 / Redesign Input/Select komponent
 
 ### Dokončeno
