@@ -1,5 +1,41 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.4 / Redesign Input/Select komponent
+
+### Dokončeno
+- [x] Input komponenta - modernější focus states s gradient glow efekty
+- [x] Input komponenta - enhanced shadows (inner shadow pro hloubku)
+- [x] Input komponenta - lepší hover stavy s border color transitions
+- [x] Input komponenta - validation states s barevným pozadím
+- [x] Input komponenta - label highlighting při focus-within
+- [x] Input komponenta - vylepšené clear button animace
+- [x] Select komponenta - konzistentní styling s Input
+- [x] Select komponenta - chevron animace při focusu
+- [x] Obě komponenty - dark mode podpora
+- [x] Obě komponenty - reduced motion podpora
+
+### Změněné soubory
+- `src/components/Input/Input.css` - kompletní redesign stylů
+- `src/components/Select/Select.css` - kompletní redesign stylů
+
+### Klíčové změny
+1. **Focus states** - multi-layer box-shadow vytváří gradient-like glow efekt
+2. **Inner shadows** - subtilní vnitřní stín dodává inputům hloubku
+3. **Border width** - 1.5px pro md, 1px pro sm, 2px pro lg - lepší vizuální hierarchie
+4. **Label interaction** - label mění barvu podle stavu inputu (focus, error, success)
+5. **Validation backgrounds** - jemné barevné pozadí pro error/success stavy
+6. **Chevron animation** - select šipka reaguje na focus a hover
+
+### Poznámky
+- Input/Select nyní vizuálně odpovídají redesignovaným Button, Card a Badge
+- Build proběhl úspěšně (CSS warnings jsou pre-existující, nesouvisí s touto změnou)
+- Použité tokeny: `--shadow-inner`, `--color-primary-*`, `--color-error-*`, `--color-success-*`
+
+### Další kroky
+- 7.4: Redesign Table komponenty
+
+---
+
 ## 2026-01-20 - Fáze 7.4 / Redesign Badge komponenty
 
 ### Dokončeno

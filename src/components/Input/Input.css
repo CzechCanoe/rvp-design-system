@@ -1,7 +1,7 @@
 /**
  * Input Component Styles - CSK RVP Design System
  *
- * Uses design tokens for consistent styling.
+ * Enhanced with modern focus states, gradient accents, and subtle shadows.
  * Supports sizes: sm, md, lg
  * Supports states: default, error, success
  */
@@ -13,7 +13,7 @@
 .csk-input-wrapper {
   display: inline-flex;
   flex-direction: column;
-  gap: var(--spacing-1);
+  gap: var(--spacing-1-5);
 }
 
 .csk-input-wrapper--full-width {
@@ -31,6 +31,20 @@
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-tight);
   color: var(--color-text-primary);
+  transition: color 0.2s ease;
+}
+
+/* Label enhancement on focus-within */
+.csk-input-wrapper:focus-within .csk-input-label {
+  color: var(--color-primary-600);
+}
+
+.csk-input-wrapper:has(.csk-input-container--error) .csk-input-label {
+  color: var(--color-error-600);
+}
+
+.csk-input-wrapper:has(.csk-input-container--success) .csk-input-label {
+  color: var(--color-success-600);
 }
 
 /* ==========================================================================
@@ -65,63 +79,92 @@
 
   /* Shape */
   background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-default);
+  border: 1.5px solid var(--color-border-default);
   border-radius: var(--radius-input);
 
-  /* Interaction */
-  transition: var(--transition-input);
+  /* Subtle inner shadow for depth */
+  box-shadow: var(--shadow-inner);
+
+  /* Interaction - enhanced transitions */
+  transition: border-color 0.2s ease,
+              box-shadow 0.25s ease,
+              background-color 0.2s ease,
+              transform 0.15s ease;
   outline: none;
 }
 
 .csk-input::placeholder {
   color: var(--color-text-muted);
+  transition: color 0.2s ease;
 }
 
 /* ==========================================================================
-   FOCUS STATES
+   FOCUS STATES - Enhanced with gradient-like glow
    ========================================================================== */
 
 .csk-input:focus {
-  border-color: var(--color-border-focus);
-  box-shadow: 0 0 0 3px var(--color-primary-500-alpha-30, rgba(17, 118, 166, 0.3));
+  border-color: var(--color-primary-500);
+  box-shadow: var(--shadow-inner),
+              0 0 0 3px rgba(17, 118, 166, 0.15),
+              0 0 0 1px rgba(17, 118, 166, 0.3);
+  background-color: var(--color-bg-primary);
+}
+
+.csk-input:focus::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
 }
 
 .csk-input-container--error .csk-input:focus {
   border-color: var(--color-error-500);
-  box-shadow: 0 0 0 3px var(--color-error-500-alpha-30, rgba(239, 68, 68, 0.3));
+  box-shadow: var(--shadow-inner),
+              0 0 0 3px rgba(239, 68, 68, 0.12),
+              0 0 0 1px rgba(239, 68, 68, 0.25),
+              0 0 12px rgba(239, 68, 68, 0.15);
 }
 
 .csk-input-container--success .csk-input:focus {
   border-color: var(--color-success-500);
-  box-shadow: 0 0 0 3px var(--color-success-500-alpha-30, rgba(34, 197, 94, 0.3));
+  box-shadow: var(--shadow-inner),
+              0 0 0 3px rgba(34, 197, 94, 0.12),
+              0 0 0 1px rgba(34, 197, 94, 0.25),
+              0 0 12px rgba(34, 197, 94, 0.15);
 }
 
 /* ==========================================================================
-   HOVER STATES
+   HOVER STATES - Subtle lift and border enhancement
    ========================================================================== */
 
 .csk-input:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-border-strong);
+  border-color: var(--color-primary-300);
+  box-shadow: var(--shadow-inner),
+              0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .csk-input-container--error .csk-input:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-error-600);
+  border-color: var(--color-error-400);
+  box-shadow: var(--shadow-inner),
+              0 1px 3px rgba(239, 68, 68, 0.1);
 }
 
 .csk-input-container--success .csk-input:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-success-600);
+  border-color: var(--color-success-400);
+  box-shadow: var(--shadow-inner),
+              0 1px 3px rgba(34, 197, 94, 0.1);
 }
 
 /* ==========================================================================
-   VALIDATION STATES
+   VALIDATION STATES - With accent indicators
    ========================================================================== */
 
 .csk-input-container--error .csk-input {
-  border-color: var(--color-error-500);
+  border-color: var(--color-error-400);
+  background-color: rgba(239, 68, 68, 0.02);
 }
 
 .csk-input-container--success .csk-input {
-  border-color: var(--color-success-500);
+  border-color: var(--color-success-400);
+  background-color: rgba(34, 197, 94, 0.02);
 }
 
 /* ==========================================================================
@@ -131,8 +174,14 @@
 .csk-input:disabled,
 .csk-input-container--disabled .csk-input {
   cursor: not-allowed;
-  opacity: 0.5;
+  opacity: 0.6;
   background-color: var(--color-bg-secondary);
+  box-shadow: none;
+  border-color: var(--color-border-muted);
+}
+
+.csk-input-container--disabled .csk-input-label {
+  color: var(--color-text-muted);
 }
 
 /* ==========================================================================
@@ -143,8 +192,9 @@
 .csk-input-container--sm .csk-input {
   padding: var(--spacing-1-5) var(--spacing-2-5);
   font-size: var(--font-size-xs);
-  min-height: 32px;
-  border-radius: var(--radius-input-sm, var(--radius-sm));
+  min-height: 34px;
+  border-radius: var(--radius-sm);
+  border-width: 1px;
 }
 
 /* Medium (default) - defined in base */
@@ -154,6 +204,8 @@
   padding: var(--spacing-3) var(--spacing-4);
   font-size: var(--font-size-base);
   min-height: 52px;
+  border-radius: var(--radius-md);
+  border-width: 2px;
 }
 
 /* ==========================================================================
@@ -255,12 +307,19 @@
   border: none;
   border-radius: var(--radius-full);
   cursor: pointer;
-  transition: var(--transition-fast);
+  transition: color 0.15s ease,
+              background-color 0.15s ease,
+              transform 0.15s ease;
 }
 
 .csk-input-clear:hover {
-  color: var(--color-text-secondary);
-  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  background-color: var(--color-neutral-100);
+  transform: scale(1.1);
+}
+
+.csk-input-clear:active {
+  transform: scale(0.95);
 }
 
 .csk-input-clear svg {
@@ -298,12 +357,21 @@
 .csk-input-helper {
   font-family: var(--font-family-sans);
   font-size: var(--font-size-xs);
-  line-height: var(--line-height-tight);
+  line-height: var(--line-height-normal);
   color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  transition: color 0.2s ease;
 }
 
 .csk-input-helper--error {
-  color: var(--color-error-500);
+  color: var(--color-error-600);
+  font-weight: var(--font-weight-medium);
+}
+
+.csk-input-helper--success {
+  color: var(--color-success-600);
 }
 
 /* ==========================================================================
@@ -326,4 +394,57 @@
 
 .csk-input[type='search']::-webkit-search-cancel-button {
   display: none;
+}
+
+/* ==========================================================================
+   DARK MODE
+   ========================================================================== */
+
+[data-theme="dark"] .csk-input {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border-default);
+  box-shadow: var(--shadow-inner);
+}
+
+[data-theme="dark"] .csk-input:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-primary-400);
+  box-shadow: var(--shadow-inner),
+              0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .csk-input:focus {
+  border-color: var(--color-primary-400);
+  box-shadow: var(--shadow-inner),
+              0 0 0 3px rgba(77, 163, 204, 0.2),
+              0 0 0 1px rgba(77, 163, 204, 0.4);
+}
+
+[data-theme="dark"] .csk-input-container--error .csk-input {
+  background-color: rgba(239, 68, 68, 0.05);
+}
+
+[data-theme="dark"] .csk-input-container--success .csk-input {
+  background-color: rgba(34, 197, 94, 0.05);
+}
+
+[data-theme="dark"] .csk-input-clear:hover {
+  background-color: var(--color-neutral-700);
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-input,
+  .csk-input-label,
+  .csk-input-helper,
+  .csk-input-clear {
+    transition: none;
+  }
+
+  .csk-input-clear:hover,
+  .csk-input-clear:active {
+    transform: none;
+  }
 }

@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 7 - Hloubkové review a redesign
-**Další krok:** 7.4 Redesign core komponent (Tier 1) - Input/Select
+**Další krok:** 7.4 Redesign core komponent (Tier 1) - Table
 
 **Problém:** Současná implementace nedosahuje vizuální úrovně studovaných referencí (World Athletics, FIS, ICF). Komponenty jsou funkční, ale "utilitární" - chybí vizuální polish, branded feel, moderní detaily.
 
@@ -164,7 +164,7 @@
 - [x] **Button** - gradient varianty, lepší hover states, subtle shadows
 - [x] **Card** - gradient backgrounds, glassmorphism efekty pro elevated
 - [x] **Badge** - gradient varianty, pill style, glow efekty, vylepšené CSK sekce
-- [ ] **Input/Select** - modernější focus states, floating labels?
+- [x] **Input/Select** - modernější focus states, gradient glow efekty, enhanced shadows
 - [ ] **Table** - lepší row highlights, sticky headers, micro-animations
 
 ### 7.5 Redesign pokročilých komponent (Tier 2)

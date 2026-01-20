@@ -1,7 +1,8 @@
 /**
  * Select Component Styles - CSK RVP Design System
  *
- * Uses design tokens for consistent styling.
+ * Enhanced with modern focus states, gradient accents, and subtle shadows.
+ * Matches Input component styling for consistency.
  * Supports sizes: sm, md, lg
  * Supports states: default, error, success
  */
@@ -13,7 +14,7 @@
 .csk-select-wrapper {
   display: inline-flex;
   flex-direction: column;
-  gap: var(--spacing-1);
+  gap: var(--spacing-1-5);
 }
 
 .csk-select-wrapper--full-width {
@@ -31,6 +32,20 @@
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-tight);
   color: var(--color-text-primary);
+  transition: color 0.2s ease;
+}
+
+/* Label enhancement on focus-within */
+.csk-select-wrapper:focus-within .csk-select-label {
+  color: var(--color-primary-600);
+}
+
+.csk-select-wrapper:has(.csk-select-container--error) .csk-select-label {
+  color: var(--color-error-600);
+}
+
+.csk-select-wrapper:has(.csk-select-container--success) .csk-select-label {
+  color: var(--color-success-600);
 }
 
 /* ==========================================================================
@@ -66,15 +81,20 @@
 
   /* Shape */
   background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-default);
+  border: 1.5px solid var(--color-border-default);
   border-radius: var(--radius-input);
+
+  /* Subtle inner shadow for depth */
+  box-shadow: var(--shadow-inner);
 
   /* Remove native appearance */
   appearance: none;
   cursor: pointer;
 
-  /* Interaction */
-  transition: var(--transition-input);
+  /* Interaction - enhanced transitions */
+  transition: border-color 0.2s ease,
+              box-shadow 0.25s ease,
+              background-color 0.2s ease;
   outline: none;
 }
 
@@ -85,50 +105,67 @@
 }
 
 /* ==========================================================================
-   FOCUS STATES
+   FOCUS STATES - Enhanced with gradient-like glow
    ========================================================================== */
 
 .csk-select:focus {
-  border-color: var(--color-border-focus);
-  box-shadow: 0 0 0 3px var(--color-primary-500-alpha-30, rgba(17, 118, 166, 0.3));
+  border-color: var(--color-primary-500);
+  box-shadow: var(--shadow-inner),
+              0 0 0 3px rgba(17, 118, 166, 0.15),
+              0 0 0 1px rgba(17, 118, 166, 0.3);
+  background-color: var(--color-bg-primary);
 }
 
 .csk-select-container--error .csk-select:focus {
   border-color: var(--color-error-500);
-  box-shadow: 0 0 0 3px var(--color-error-500-alpha-30, rgba(239, 68, 68, 0.3));
+  box-shadow: var(--shadow-inner),
+              0 0 0 3px rgba(239, 68, 68, 0.12),
+              0 0 0 1px rgba(239, 68, 68, 0.25),
+              0 0 12px rgba(239, 68, 68, 0.15);
 }
 
 .csk-select-container--success .csk-select:focus {
   border-color: var(--color-success-500);
-  box-shadow: 0 0 0 3px var(--color-success-500-alpha-30, rgba(34, 197, 94, 0.3));
+  box-shadow: var(--shadow-inner),
+              0 0 0 3px rgba(34, 197, 94, 0.12),
+              0 0 0 1px rgba(34, 197, 94, 0.25),
+              0 0 12px rgba(34, 197, 94, 0.15);
 }
 
 /* ==========================================================================
-   HOVER STATES
+   HOVER STATES - Subtle enhancement
    ========================================================================== */
 
 .csk-select:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-border-strong);
+  border-color: var(--color-primary-300);
+  box-shadow: var(--shadow-inner),
+              0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .csk-select-container--error .csk-select:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-error-600);
+  border-color: var(--color-error-400);
+  box-shadow: var(--shadow-inner),
+              0 1px 3px rgba(239, 68, 68, 0.1);
 }
 
 .csk-select-container--success .csk-select:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-success-600);
+  border-color: var(--color-success-400);
+  box-shadow: var(--shadow-inner),
+              0 1px 3px rgba(34, 197, 94, 0.1);
 }
 
 /* ==========================================================================
-   VALIDATION STATES
+   VALIDATION STATES - With accent indicators
    ========================================================================== */
 
 .csk-select-container--error .csk-select {
-  border-color: var(--color-error-500);
+  border-color: var(--color-error-400);
+  background-color: rgba(239, 68, 68, 0.02);
 }
 
 .csk-select-container--success .csk-select {
-  border-color: var(--color-success-500);
+  border-color: var(--color-success-400);
+  background-color: rgba(34, 197, 94, 0.02);
 }
 
 /* ==========================================================================
@@ -138,12 +175,18 @@
 .csk-select:disabled,
 .csk-select-container--disabled .csk-select {
   cursor: not-allowed;
-  opacity: 0.5;
+  opacity: 0.6;
   background-color: var(--color-bg-secondary);
+  box-shadow: none;
+  border-color: var(--color-border-muted);
 }
 
 .csk-select-container--disabled .csk-select-chevron {
   opacity: 0.5;
+}
+
+.csk-select-container--disabled .csk-select-label {
+  color: var(--color-text-muted);
 }
 
 /* ==========================================================================
@@ -155,8 +198,9 @@
   padding: var(--spacing-1-5) var(--spacing-2-5);
   padding-right: calc(var(--spacing-2-5) * 2 + 1em);
   font-size: var(--font-size-xs);
-  min-height: 32px;
-  border-radius: var(--radius-input-sm, var(--radius-sm));
+  min-height: 34px;
+  border-radius: var(--radius-sm);
+  border-width: 1px;
 }
 
 /* Medium (default) - defined in base */
@@ -167,6 +211,8 @@
   padding-right: calc(var(--spacing-4) * 2 + 1.5em);
   font-size: var(--font-size-base);
   min-height: 52px;
+  border-radius: var(--radius-md);
+  border-width: 2px;
 }
 
 /* ==========================================================================
@@ -181,12 +227,24 @@
   justify-content: center;
   color: var(--color-text-muted);
   pointer-events: none;
-  transition: var(--transition-fast);
+  transition: color 0.2s ease,
+              transform 0.2s ease;
 }
 
 .csk-select-chevron svg {
   width: 1.25em;
   height: 1.25em;
+}
+
+/* Chevron animation on focus */
+.csk-select:focus + .csk-select-chevron {
+  color: var(--color-primary-500);
+  transform: translateY(1px);
+}
+
+/* Chevron hover state */
+.csk-select:hover:not(:disabled):not(:focus) + .csk-select-chevron {
+  color: var(--color-text-secondary);
 }
 
 /* Size adjustments for chevron */
@@ -269,10 +327,63 @@
 .csk-select-helper {
   font-family: var(--font-family-sans);
   font-size: var(--font-size-xs);
-  line-height: var(--line-height-tight);
+  line-height: var(--line-height-normal);
   color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  transition: color 0.2s ease;
 }
 
 .csk-select-helper--error {
-  color: var(--color-error-500);
+  color: var(--color-error-600);
+  font-weight: var(--font-weight-medium);
+}
+
+.csk-select-helper--success {
+  color: var(--color-success-600);
+}
+
+/* ==========================================================================
+   DARK MODE
+   ========================================================================== */
+
+[data-theme="dark"] .csk-select {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border-default);
+  box-shadow: var(--shadow-inner);
+}
+
+[data-theme="dark"] .csk-select:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-primary-400);
+  box-shadow: var(--shadow-inner),
+              0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .csk-select:focus {
+  border-color: var(--color-primary-400);
+  box-shadow: var(--shadow-inner),
+              0 0 0 3px rgba(77, 163, 204, 0.2),
+              0 0 0 1px rgba(77, 163, 204, 0.4);
+}
+
+[data-theme="dark"] .csk-select-container--error .csk-select {
+  background-color: rgba(239, 68, 68, 0.05);
+}
+
+[data-theme="dark"] .csk-select-container--success .csk-select {
+  background-color: rgba(34, 197, 94, 0.05);
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-select,
+  .csk-select-label,
+  .csk-select-helper,
+  .csk-select-chevron {
+    transition: none;
+  }
 }
