@@ -339,44 +339,6 @@
   border-color: var(--color-bg-primary);
 }
 
-/* System preference dark mode */
-@media
-
-  :root:not([data-theme='light']) .csk-avatar--success {
-    background-color: var(--color-success-900);
-    color: var(--color-success-200);
-  }
-
-  :root:not([data-theme='light']) .csk-avatar--warning {
-    background-color: var(--color-warning-900);
-    color: var(--color-warning-200);
-  }
-
-  :root:not([data-theme='light']) .csk-avatar--error {
-    background-color: var(--color-error-900);
-    color: var(--color-error-200);
-  }
-
-  :root:not([data-theme='light']) .csk-avatar--info {
-    background-color: var(--color-info-900);
-    color: var(--color-info-200);
-  }
-
-  :root:not([data-theme='light']) .csk-avatar--overflow {
-    background-color: var(--color-neutral-800);
-    color: var(--color-neutral-200);
-    border-color: var(--color-bg-primary);
-  }
-
-  :root:not([data-theme='light']) .csk-avatar-group > .csk-avatar {
-    border-color: var(--color-bg-primary);
-  }
-
-  :root:not([data-theme='light']) .csk-avatar__status {
-    border-color: var(--color-bg-primary);
-  }
-}
-
 /* ==========================================================================
    Reduced Motion
    ========================================================================== */

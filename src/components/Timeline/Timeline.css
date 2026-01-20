@@ -448,32 +448,6 @@
   border-color: var(--color-error-700);
 }
 
-@media
-
-  :root:not([data-theme="light"]) .csk-timeline__item--error .csk-timeline__icon {
-    color: var(--color-neutral-900);
-  }
-
-  :root:not([data-theme="light"]) .csk-timeline__item--current .csk-timeline__dot {
-    background-color: var(--color-primary-900);
-    box-shadow: 0 0 0 4px var(--color-primary-800);
-  }
-
-  :root:not([data-theme="light"]) .csk-timeline--card .csk-timeline__content {
-    background-color: var(--color-bg-elevated);
-  }
-
-  :root:not([data-theme="light"]) .csk-timeline--card .csk-timeline__item--current .csk-timeline__content {
-    background-color: var(--color-primary-900);
-    border-color: var(--color-primary-700);
-  }
-
-  :root:not([data-theme="light"]) .csk-timeline--card .csk-timeline__item--error .csk-timeline__content {
-    background-color: var(--color-error-900);
-    border-color: var(--color-error-700);
-  }
-}
-
 /* =============================================================================
    Reduced Motion
    ============================================================================= */

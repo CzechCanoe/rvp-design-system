@@ -3731,3 +3731,50 @@ tests/
 
 ### Další kroky
 - Fáze 7.9: Expresivní vs. utilitární režim
+
+---
+
+## 2026-01-20 - Fáze 7.10: Performance check (CSS bundle size)
+
+### Dokončeno
+- [x] Build analýza - měření velikosti CSS bundle
+- [x] Vytvoření dokumentu `docs/review/css-bundle-analysis.md`
+- [x] Oprava CSS syntax warningů v Progress.css, Avatar.css, Dropzone.css, Timeline.css
+- [x] Odstranění nevalidních `@media` bloků (pozůstatek automatického dark mode)
+
+### Výsledky analýzy
+
+**Finální bundle velikost:**
+- CSS: 221.44 KB (minified)
+- Gzipped: 26.51 KB
+- Minification ratio: 40%
+
+**Rozdělení:**
+- Components: 332 KB (60%)
+- Prototypes: 132 KB (24%)
+- Tokens: 90 KB (16%)
+
+**Srovnání s jinými knihovnami:**
+- Bootstrap 5: ~25 KB gzipped
+- Material UI (core): ~30 KB gzipped
+- **RVP Design System: 26.51 KB gzipped** ✓
+
+### Problémy a řešení
+1. **Problém:** Build vykazoval CSS syntax warningy z esbuild minifier
+   **Příčina:** Nevalidní `@media` bloky bez podmínky (pozůstatek z automatického dark mode)
+   **Řešení:** Odstranění nevalidních bloků ze 4 souborů (Progress, Avatar, Dropzone, Timeline)
+
+### Změny v souborech
+- `src/components/Progress/Progress.css` - odstraněn nevalidní @media blok
+- `src/components/Avatar/Avatar.css` - odstraněn nevalidní @media blok
+- `src/components/Dropzone/Dropzone.css` - odstraněn nevalidní @media blok
+- `src/components/Timeline/Timeline.css` - odstraněn nevalidní @media blok
+- `docs/review/css-bundle-analysis.md` - nový dokument s analýzou
+
+### Poznámky
+- Bundle size je v akceptovatelném rozmezí pro produkční design systém
+- Doporučený budget pro budoucí rozšíření: 35 KB gzipped
+- Build nyní prochází bez warningů
+
+### Další kroky
+- Fáze 7.10: Cross-browser testing

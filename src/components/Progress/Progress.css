@@ -427,13 +427,6 @@
   background-color: var(--color-bg-primary);
 }
 
-@media
-
-  :root:not([data-theme='light']) .csk-progress__step--current .csk-progress__indicator {
-    background-color: var(--color-bg-primary);
-  }
-}
-
 /* ============================================================================
  * Reduced Motion
  * ============================================================================ */
