@@ -15,19 +15,50 @@
   /**
    * Shadow primitives - light mode
    * Used for cards, dropdowns, modals, popovers
+   * Multi-layered for softer, more realistic appearance
    */
   --shadow-none: none;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* Extra small - subtle depth hint */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+
+  /* Small - light elevation */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06),
+               0 1px 3px rgba(0, 0, 0, 0.04);
+
+  /* Medium - standard cards */
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.04),
+               0 4px 8px rgba(0, 0, 0, 0.06),
+               0 1px 2px rgba(0, 0, 0, 0.04);
+
+  /* Large - elevated elements */
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.04),
+               0 8px 16px rgba(0, 0, 0, 0.06),
+               0 16px 32px rgba(0, 0, 0, 0.04);
+
+  /* Extra large - modals, popovers */
+  --shadow-xl: 0 8px 16px rgba(0, 0, 0, 0.04),
+               0 16px 32px rgba(0, 0, 0, 0.08),
+               0 32px 64px rgba(0, 0, 0, 0.06);
+
+  /* 2XL - dramatic floating elements */
+  --shadow-2xl: 0 16px 32px rgba(0, 0, 0, 0.08),
+                0 32px 64px rgba(0, 0, 0, 0.1),
+                0 64px 128px rgba(0, 0, 0, 0.06);
+
+  /* 3XL - hero elements, maximum elevation */
+  --shadow-3xl: 0 24px 48px rgba(0, 0, 0, 0.1),
+                0 48px 96px rgba(0, 0, 0, 0.12),
+                0 96px 192px rgba(0, 0, 0, 0.08);
 
   /**
    * Inner shadows - for inset effects
    */
   --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-  --shadow-inner-lg: inset 0 4px 8px rgba(0, 0, 0, 0.08);
+  --shadow-inner-md: inset 0 2px 4px rgba(0, 0, 0, 0.06),
+                     inset 0 4px 8px rgba(0, 0, 0, 0.04);
+  --shadow-inner-lg: inset 0 4px 8px rgba(0, 0, 0, 0.08),
+                     inset 0 8px 16px rgba(0, 0, 0, 0.04);
 
   /* ==========================================================================
    * COLORED SHADOWS
@@ -55,10 +86,12 @@
   --shadow-card: var(--shadow-sm);
   --shadow-card-hover: var(--shadow-md);
   --shadow-card-active: var(--shadow-lg);
+  --shadow-card-featured: var(--shadow-lg);
 
   /* Buttons */
-  --shadow-button: var(--shadow-sm);
-  --shadow-button-hover: var(--shadow-md);
+  --shadow-button: var(--shadow-xs);
+  --shadow-button-hover: var(--shadow-sm);
+  --shadow-button-active: var(--shadow-xs);
   --shadow-button-focus: 0 0 0 3px rgba(17, 118, 166, 0.3);
 
   /* Inputs */
@@ -77,8 +110,22 @@
   --shadow-toast: var(--shadow-lg);
 
   /* Navigation */
-  --shadow-navbar: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-sticky: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --shadow-navbar: var(--shadow-sm);
+  --shadow-navbar-elevated: var(--shadow-md);
+  --shadow-sticky: var(--shadow-md);
+
+  /* Hero elements */
+  --shadow-hero: var(--shadow-3xl);
+
+  /* ==========================================================================
+   * EXPRESSIVE MODE SHADOWS
+   * More dramatic shadows for public-facing pages
+   * ========================================================================== */
+
+  --shadow-expr-card: var(--shadow-md);
+  --shadow-expr-card-hover: var(--shadow-xl);
+  --shadow-expr-button: var(--shadow-sm);
+  --shadow-expr-button-hover: var(--shadow-md);
 }
 
 /* ==========================================================================
@@ -88,16 +135,38 @@
  * ========================================================================== */
 
 [data-theme="dark"] {
-  /* Base shadows - more subtle in dark mode */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  /* Base shadows - deeper on dark backgrounds with multi-layer approach */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25),
+               0 2px 4px rgba(0, 0, 0, 0.2);
+
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.2),
+               0 4px 8px rgba(0, 0, 0, 0.25),
+               0 8px 16px rgba(0, 0, 0, 0.15);
+
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.2),
+               0 8px 16px rgba(0, 0, 0, 0.25),
+               0 16px 32px rgba(0, 0, 0, 0.2);
+
+  --shadow-xl: 0 8px 16px rgba(0, 0, 0, 0.2),
+               0 16px 32px rgba(0, 0, 0, 0.3),
+               0 32px 64px rgba(0, 0, 0, 0.25);
+
+  --shadow-2xl: 0 16px 32px rgba(0, 0, 0, 0.25),
+                0 32px 64px rgba(0, 0, 0, 0.35),
+                0 64px 128px rgba(0, 0, 0, 0.25);
+
+  --shadow-3xl: 0 24px 48px rgba(0, 0, 0, 0.3),
+                0 48px 96px rgba(0, 0, 0, 0.4),
+                0 96px 192px rgba(0, 0, 0, 0.3);
 
   /* Inner shadows */
   --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-  --shadow-inner-lg: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-inner-md: inset 0 2px 4px rgba(0, 0, 0, 0.25),
+                     inset 0 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-inner-lg: inset 0 4px 8px rgba(0, 0, 0, 0.3),
+                     inset 0 8px 16px rgba(0, 0, 0, 0.2);
 
   /* Colored shadows - adjusted for dark backgrounds */
   --shadow-primary-sm: 0 1px 2px rgba(77, 163, 204, 0.2);

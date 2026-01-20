@@ -154,9 +154,9 @@
 - [x] Testování static build
 
 ### 7.3 Redesign tokenů
-- [ ] Review barevné palety - je dostatečně expresivní?
-- [ ] Přidání gradient tokenů (pro hero sekce, karty)
-- [ ] Vylepšení shadow systému (více úrovní, měkčí)
+- [x] Review barevné palety - je dostatečně expresivní?
+- [x] Přidání gradient tokenů (pro hero sekce, karty)
+- [x] Vylepšení shadow systému (více úrovní, měkčí)
 - [ ] Review typografie - dostatečně výrazné nadpisy?
 - [ ] Nové tokeny pro "expresivní režim" (větší spacing, dramatičtější)
 

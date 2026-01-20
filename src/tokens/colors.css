@@ -89,6 +89,18 @@
   --color-info-800: #1e40af;
   --color-info-900: #1e3a8a;
 
+  /* Accent (Warm Amber) - for CTA, highlights, expressive mode */
+  --color-accent-50: #fffbeb;
+  --color-accent-100: #fef3c7;
+  --color-accent-200: #fde68a;
+  --color-accent-300: #fcd34d;
+  --color-accent-400: #fbbf24;
+  --color-accent-500: #f59e0b;
+  --color-accent-600: #d97706;
+  --color-accent-700: #b45309;
+  --color-accent-800: #92400e;
+  --color-accent-900: #78350f;
+
   /* ==========================================================================
      CSK-SPECIFIC COLORS
      ========================================================================== */
@@ -242,6 +254,18 @@
   --color-info-700: #bfdbfe;
   --color-info-800: #dbeafe;
   --color-info-900: #eff6ff;
+
+  /* Accent (Warm Amber) - brighter for dark backgrounds */
+  --color-accent-50: #78350f;
+  --color-accent-100: #92400e;
+  --color-accent-200: #b45309;
+  --color-accent-300: #d97706;
+  --color-accent-400: #f59e0b;
+  --color-accent-500: #fbbf24;  /* Brighter for dark mode */
+  --color-accent-600: #fcd34d;
+  --color-accent-700: #fde68a;
+  --color-accent-800: #fef3c7;
+  --color-accent-900: #fffbeb;
 
   /* ==========================================================================
      CSK-SPECIFIC COLORS - Dark Theme

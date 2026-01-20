@@ -2578,3 +2578,60 @@ tests/
 
 ### Další kroky
 - Fáze 7.3: Redesign tokenů (gradienty, expresivní shadows)
+
+---
+
+## 2026-01-20 - Fáze 7.3: Redesign tokenů (část 1)
+
+### Dokončeno
+- [x] Review barevné palety - vytvořen `docs/review/color-palette-review.md`
+- [x] Přidání akcentní barvy (warm amber) do `colors.css`
+- [x] Vytvoření `gradients.css` s kompletní gradient škálou
+- [x] Vytvoření `effects.css` s backdrop blur a glow tokeny
+- [x] Vylepšení shadow systému - vícevrstvé, měkčí shadows
+- [x] Přidání shadow-xs, shadow-3xl, expresivní shadow varianty
+- [x] Aktualizace `tokens/index.css` o nové importy
+
+### Nové tokeny
+
+**Akcentní barva (colors.css):**
+- `--color-accent-50` až `--color-accent-900` - warm amber škála
+- Light i dark mode varianty
+
+**Gradienty (gradients.css):**
+- Brand gradienty: `--gradient-primary`, `--gradient-primary-deep`, `--gradient-primary-soft`
+- Accent gradienty: `--gradient-accent`, `--gradient-accent-deep`
+- Hero gradienty: `--gradient-hero`, `--gradient-hero-overlay`, `--gradient-hero-spotlight`
+- Section gradienty: `--gradient-section-dv/ry/vt`
+- Feedback gradienty: `--gradient-success/warning/error/info`
+- Overlay gradienty: `--gradient-overlay-bottom/full/brand/accent`
+- Glass gradienty: `--gradient-glass`, `--gradient-glass-dark`
+
+**Efekty (effects.css):**
+- Backdrop blur: `--blur-xs` až `--blur-3xl`
+- Glassmorphism presets: `--glass-light/dark/subtle-*`
+- Glow efekty: `--glow-primary/accent/success/error-sm/md/lg`
+- Section glows: `--glow-section-dv/ry/vt`
+- Component glows: `--glow-button-hover`, `--glow-card-featured`, `--glow-avatar`
+- Opacity scale: `--opacity-0` až `--opacity-100`
+- Filters: grayscale, brightness, contrast, saturate, sepia
+
+**Vylepšené shadows (shadows.css):**
+- Vícevrstvé shadows pro realističtější vzhled
+- Nové: `--shadow-xs`, `--shadow-3xl`
+- Expresivní varianty: `--shadow-expr-card`, `--shadow-expr-button`
+- Hero shadow: `--shadow-hero`
+- Navbar varianty: `--shadow-navbar-elevated`
+
+### Rozhodnutí
+1. **Akcentní barva** - zvolena warm amber (#f59e0b) pro kontrast s primární modrou
+2. **Multi-layer shadows** - 3 vrstvy pro měkčí, realističtější vzhled
+3. **Oddělené soubory** - gradienty a efekty v samostatných souborech pro přehlednost
+
+### Poznámky
+- Tokeny jsou připravené, ale ještě nejsou použité v komponentách
+- Další krok: Review typografie a expresivní spacing tokeny
+- Poté: Aplikace tokenů na komponenty (Button, Card, Header...)
+
+### Další kroky
+- Fáze 7.3 (pokračování): Review typografie, expresivní tokeny
