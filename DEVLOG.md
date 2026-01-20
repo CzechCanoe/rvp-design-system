@@ -2762,3 +2762,52 @@ tests/
 
 ### Další kroky
 - Fáze 7.4 (pokračování): Card - gradient backgrounds, glassmorphism
+
+---
+
+## 2026-01-20 - Iterace 18 / Redesign Card komponenty (Fáze 7.4)
+
+### Dokončeno
+- [x] Přidány chybějící gradient tokeny (`--gradient-primary-hover`, `--gradient-primary-active`, `--gradient-accent-hover`)
+- [x] Card komponenta: přidány 3 nové varianty (`gradient`, `glass`, `featured`)
+- [x] Card CSS: gradient varianta s brand barvami a shadow
+- [x] Card CSS: glass varianta s backdrop-blur a glassmorphism efektem
+- [x] Card CSS: featured varianta s gradient border (::before pseudo-element) a glow efektem
+- [x] Card CSS: hover/active stavy pro všechny nové varianty
+- [x] Card CSS: dark mode podpora pro glass variantu
+- [x] Card CSS: reduced motion podpora
+- [x] Card stories: přidány stories pro `Gradient`, `Glass`, `Featured`
+- [x] Card stories: přidány clickable varianty `ClickableGradient`, `ClickableFeatured`
+- [x] Card stories: aktualizována `AllVariants` story pro zobrazení všech 6 variant
+- [x] Build: ověřeno že prochází bez chyb
+
+### Změny v Card komponentě
+
+**Nové varianty:**
+1. `gradient` - plný gradient background s primárními barvami, bílý text
+2. `glass` - glassmorphism efekt s backdrop-blur a semi-transparentním pozadím
+3. `featured` - gradient border pomocí ::before pseudo-elementu + glow efekt
+
+**Hover efekty:**
+- `gradient`: hover přepíná na `--gradient-primary-hover`, translateY(-3px), větší shadow
+- `glass`: hover zesvětluje background, translateY(-2px)
+- `featured`: hover zesiluje glow (`--glow-primary-md`), translateY(-3px)
+
+**Dark mode:**
+- Glass varianta používá `--glass-dark-bg` a `--glass-dark-border` v dark mode
+
+**Reduced motion:**
+- Všechny transformace jsou vypnuty při `prefers-reduced-motion: reduce`
+
+### Rozhodnutí
+1. **Featured border pomocí ::before** - gradient border není nativně podporován, pseudo-element je robustní řešení
+2. **Glow efekt pro featured** - kombinace shadow + glow vytváří premium vzhled
+3. **Glass na barevném pozadí** - story ukazuje glass variantu na gradientovém pozadí pro demonstraci blur efektu
+
+### Poznámky
+- Card nyní nabízí 6 variant: surface, elevated, outlined, gradient, glass, featured
+- Gradient a featured varianty jsou ideální pro hero sekce a featured content
+- Glass varianta vyžaduje barevné/obrazové pozadí pro viditelný efekt
+
+### Další kroky
+- Fáze 7.4 (pokračování): Badge - více variant, pill style, gradient backgrounds

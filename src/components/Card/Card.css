@@ -53,6 +53,57 @@
   border: 1px solid var(--color-border-strong);
 }
 
+/* Gradient - card with gradient background */
+.csk-card--gradient {
+  background: var(--gradient-primary);
+  border: 1px solid transparent;
+  color: var(--color-text-inverse);
+  box-shadow: var(--shadow-md);
+}
+
+.csk-card--gradient .csk-card__header {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.csk-card--gradient .csk-card__footer {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Glass - glassmorphism effect with backdrop blur */
+.csk-card--glass {
+  background: var(--glass-light-bg);
+  backdrop-filter: var(--glass-light-blur);
+  -webkit-backdrop-filter: var(--glass-light-blur);
+  border: 1px solid var(--glass-light-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.csk-card--glass .csk-card__header {
+  border-bottom-color: var(--glass-light-border);
+}
+
+.csk-card--glass .csk-card__footer {
+  border-top-color: var(--glass-light-border);
+}
+
+/* Featured - premium card with gradient border and glow */
+.csk-card--featured {
+  background-color: var(--color-bg-primary);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: var(--shadow-lg), var(--glow-primary-sm);
+  position: relative;
+}
+
+.csk-card--featured::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: var(--gradient-primary);
+  z-index: -1;
+}
+
 /* ==========================================================================
    PADDING
    ========================================================================== */
@@ -149,6 +200,23 @@
   border-color: var(--color-interactive-default);
 }
 
+.csk-card--clickable.csk-card--gradient:hover {
+  background: var(--gradient-primary-hover);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+.csk-card--clickable.csk-card--glass:hover {
+  background: var(--glass-subtle-bg);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.csk-card--clickable.csk-card--featured:hover {
+  box-shadow: var(--shadow-xl), var(--glow-primary-md);
+  transform: translateY(-3px);
+}
+
 /* Active states for clickable cards */
 .csk-card--clickable.csk-card--surface:active {
   background-color: var(--color-bg-tertiary);
@@ -163,16 +231,64 @@
   background-color: var(--color-bg-tertiary);
 }
 
+.csk-card--clickable.csk-card--gradient:active {
+  background: var(--gradient-primary-active);
+  box-shadow: var(--shadow-md);
+  transform: translateY(0);
+}
+
+.csk-card--clickable.csk-card--glass:active {
+  background: var(--glass-light-bg);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(0);
+}
+
+.csk-card--clickable.csk-card--featured:active {
+  box-shadow: var(--shadow-lg), var(--glow-primary-sm);
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   DARK MODE VARIANTS
+   ========================================================================== */
+
+[data-theme="dark"] .csk-card--glass {
+  background: var(--glass-dark-bg);
+  border-color: var(--glass-dark-border);
+}
+
+[data-theme="dark"] .csk-card--glass .csk-card__header {
+  border-bottom-color: var(--glass-dark-border);
+}
+
+[data-theme="dark"] .csk-card--glass .csk-card__footer {
+  border-top-color: var(--glass-dark-border);
+}
+
+[data-theme="dark"] .csk-card--clickable.csk-card--glass:hover {
+  background: var(--glass-subtle-bg);
+}
+
+[data-theme="dark"] .csk-card--clickable.csk-card--glass:active {
+  background: var(--glass-dark-bg);
+}
+
 /* ==========================================================================
    REDUCED MOTION
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  .csk-card--clickable.csk-card--elevated:hover {
+  .csk-card--clickable.csk-card--elevated:hover,
+  .csk-card--clickable.csk-card--gradient:hover,
+  .csk-card--clickable.csk-card--glass:hover,
+  .csk-card--clickable.csk-card--featured:hover {
     transform: none;
   }
 
-  .csk-card--clickable.csk-card--elevated:active {
+  .csk-card--clickable.csk-card--elevated:active,
+  .csk-card--clickable.csk-card--gradient:active,
+  .csk-card--clickable.csk-card--glass:active,
+  .csk-card--clickable.csk-card--featured:active {
     transform: none;
   }
 }

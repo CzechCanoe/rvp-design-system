@@ -12,7 +12,7 @@ const meta: Meta<typeof Card> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['surface', 'elevated', 'outlined'],
+      options: ['surface', 'elevated', 'outlined', 'gradient', 'glass', 'featured'],
       description: 'Visual variant of the card',
     },
     padding: {
@@ -79,6 +79,55 @@ export const Outlined: Story = {
   args: {
     variant: 'outlined',
     children: 'This is an outlined card with a visible border.',
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ width: '320px' }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+export const Gradient: Story = {
+  args: {
+    variant: 'gradient',
+    children: 'This is a gradient card with primary brand colors.',
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ width: '320px' }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+export const Glass: Story = {
+  args: {
+    variant: 'glass',
+    children: 'This is a glass card with backdrop blur effect.',
+  },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          width: '320px',
+          padding: '40px',
+          background: 'linear-gradient(135deg, #1176a6 0%, #0d5a80 100%)',
+          borderRadius: '8px',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+export const Featured: Story = {
+  args: {
+    variant: 'featured',
+    children: 'This is a featured card with gradient border and glow effect.',
   },
   decorators: [
     (Story) => (
@@ -267,6 +316,38 @@ export const ClickableOutlined: Story = {
   ],
 };
 
+export const ClickableGradient: Story = {
+  args: {
+    variant: 'gradient',
+    clickable: true,
+    children: 'Clickable gradient card with enhanced hover state.',
+    onClick: () => alert('Gradient card clicked!'),
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ width: '320px' }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+export const ClickableFeatured: Story = {
+  args: {
+    variant: 'featured',
+    clickable: true,
+    children: 'Clickable featured card with glow on hover.',
+    onClick: () => alert('Featured card clicked!'),
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ width: '320px' }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+
 // Link cards
 export const AsLink: Story = {
   args: {
@@ -303,22 +384,47 @@ export const ExternalLink: Story = {
 export const AllVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-      <div style={{ width: '250px' }}>
+      <div style={{ width: '220px' }}>
         <Card variant="surface">
           <strong>Surface</strong>
           <p style={{ margin: '8px 0 0', fontSize: '14px' }}>Subtle background</p>
         </Card>
       </div>
-      <div style={{ width: '250px' }}>
+      <div style={{ width: '220px' }}>
         <Card variant="elevated">
           <strong>Elevated</strong>
           <p style={{ margin: '8px 0 0', fontSize: '14px' }}>Shadow elevation</p>
         </Card>
       </div>
-      <div style={{ width: '250px' }}>
+      <div style={{ width: '220px' }}>
         <Card variant="outlined">
           <strong>Outlined</strong>
           <p style={{ margin: '8px 0 0', fontSize: '14px' }}>Visible border</p>
+        </Card>
+      </div>
+      <div style={{ width: '220px' }}>
+        <Card variant="gradient">
+          <strong>Gradient</strong>
+          <p style={{ margin: '8px 0 0', fontSize: '14px' }}>Brand gradient</p>
+        </Card>
+      </div>
+      <div
+        style={{
+          width: '220px',
+          padding: '16px',
+          background: 'linear-gradient(135deg, #1176a6 0%, #0d5a80 100%)',
+          borderRadius: '8px',
+        }}
+      >
+        <Card variant="glass">
+          <strong>Glass</strong>
+          <p style={{ margin: '8px 0 0', fontSize: '14px' }}>Glassmorphism</p>
+        </Card>
+      </div>
+      <div style={{ width: '220px' }}>
+        <Card variant="featured">
+          <strong>Featured</strong>
+          <p style={{ margin: '8px 0 0', fontSize: '14px' }}>Gradient border + glow</p>
         </Card>
       </div>
     </div>
