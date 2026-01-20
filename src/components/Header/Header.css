@@ -2,6 +2,7 @@
  * Header Component Styles
  *
  * A responsive application header with mobile drawer menu.
+ * Redesigned with gradient backgrounds, backdrop blur, and enhanced animations.
  */
 
 /* =============================================================================
@@ -13,6 +14,10 @@
   z-index: var(--z-sticky, 200);
   font-family: var(--font-family-sans);
   background-color: var(--color-bg-primary);
+  transition:
+    background-color var(--transition-base),
+    box-shadow var(--transition-base),
+    backdrop-filter var(--transition-base);
 }
 
 .csk-header--bordered {
@@ -37,6 +42,51 @@
   background-color: var(--color-bg-primary);
   box-shadow: var(--shadow-md);
   border-bottom: none;
+}
+
+/* Gradient variant - branded look with primary gradient */
+.csk-header--gradient {
+  background: var(--gradient-primary);
+  border-bottom: none;
+  color: var(--color-neutral-0);
+}
+
+.csk-header--gradient .csk-header__toggle {
+  color: var(--color-neutral-0);
+}
+
+.csk-header--gradient .csk-header__toggle:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.csk-header--gradient .csk-header__toggle:focus-visible {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3), 0 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+/* Glass variant - frosted glass effect */
+.csk-header--glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Scrolled state - adds blur effect when sticky header has scrolled */
+.csk-header--scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-lg);
+}
+
+.csk-header--gradient.csk-header--scrolled {
+  background: linear-gradient(
+    135deg,
+    rgba(17, 118, 166, 0.95) 0%,
+    rgba(14, 100, 141, 0.95) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 /* =============================================================================
@@ -170,16 +220,33 @@
   color: var(--color-text-primary);
   cursor: pointer;
   border-radius: var(--radius-md);
-  transition: background-color var(--transition-base);
+  transition:
+    background-color var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
 .csk-header__toggle:hover {
   background-color: var(--color-bg-secondary);
+  transform: scale(1.05);
+}
+
+.csk-header__toggle:active {
+  transform: scale(0.95);
 }
 
 .csk-header__toggle:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--color-bg-primary), 0 0 0 4px var(--color-border-focus);
+}
+
+/* Toggle icon animation */
+.csk-header__toggle svg {
+  transition: transform var(--transition-base);
+}
+
+.csk-header--mobile-open .csk-header__toggle svg {
+  transform: rotate(90deg);
 }
 
 /* =============================================================================
@@ -191,11 +258,14 @@
   inset: 0;
   z-index: var(--z-modal-backdrop, 400);
   background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   opacity: 0;
   visibility: hidden;
   transition:
-    opacity var(--transition-base),
-    visibility var(--transition-base);
+    opacity var(--duration-moderate, 250ms) var(--ease-out, ease-out),
+    visibility var(--duration-moderate, 250ms) var(--ease-out, ease-out),
+    backdrop-filter var(--duration-moderate, 250ms) var(--ease-out, ease-out);
 }
 
 .csk-header__backdrop--visible {
@@ -212,13 +282,25 @@
   width: 100%;
   max-width: 320px;
   background-color: var(--color-bg-primary);
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-2xl, var(--shadow-xl));
   transform: translateX(100%);
-  transition: transform var(--duration-moderate, 250ms) var(--ease-out, ease-out);
+  transition:
+    transform var(--duration-moderate, 250ms) cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .csk-header__drawer--open {
   transform: translateX(0);
+}
+
+/* Drawer header with gradient accent */
+.csk-header__drawer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
 }
 
 .csk-header__drawer-content {
@@ -304,16 +386,37 @@
   background-color: var(--color-bg-elevated);
 }
 
+[data-theme="dark"] .csk-header--gradient {
+  background: var(--gradient-primary-deep);
+}
+
+[data-theme="dark"] .csk-header--glass {
+  background: rgba(0, 0, 0, 0.7);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .csk-header--scrolled {
+  background: rgba(15, 23, 42, 0.95);
+}
+
+[data-theme="dark"] .csk-header--gradient.csk-header--scrolled {
+  background: linear-gradient(
+    135deg,
+    rgba(17, 118, 166, 0.95) 0%,
+    rgba(14, 100, 141, 0.95) 100%
+  );
+}
+
+[data-theme="dark"] .csk-header__toggle:hover {
+  background-color: var(--color-bg-tertiary);
+}
+
 [data-theme="dark"] .csk-header__drawer {
   background-color: var(--color-bg-primary);
 }
 
 [data-theme="dark"] .csk-header__backdrop {
   background-color: rgba(0, 0, 0, 0.7);
-}
-
-/* System preference */
-@media
 }
 
 /* =============================================================================

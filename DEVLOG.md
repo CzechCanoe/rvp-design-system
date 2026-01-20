@@ -1,5 +1,41 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.5 / Redesign Header komponenty
+
+### Dokončeno
+- [x] Nové varianty: `gradient` a `glass` pro moderní branded vzhled
+- [x] Gradient varianta s primary gradient a bílým textem
+- [x] Glass varianta s backdrop-filter blur pro frosted glass efekt
+- [x] Scroll-aware funkcionalita - `blurOnScroll` prop
+- [x] Nový `scrollThreshold` prop pro nastavení prahu aktivace blur efektu
+- [x] Scrolled stav s backdrop blur a enhanced shadow
+- [x] Vylepšené toggle button animace (scale, rotate ikony)
+- [x] Backdrop overlay s blur efektem
+- [x] Drawer s gradient accent čárou nahoře
+- [x] Smoother cubic-bezier animace pro drawer
+- [x] Dark mode podpora pro všechny nové varianty
+- [x] Oprava prázdného @media pravidla v CSS
+- [x] 5 nových stories: Gradient, Glass, StickyWithBlur, GradientStickyWithBlur, AllVariants
+
+### Změněné soubory
+- `src/components/Header/Header.tsx` - nové varianty, scroll-aware state
+- `src/components/Header/Header.css` - gradient/glass styly, animace, dark mode
+- `src/components/Header/Header.stories.tsx` - 5 nových stories
+
+### Klíčové změny
+1. **Nové varianty** - `gradient` (branded modrý gradient), `glass` (frosted glass efekt)
+2. **Scroll-aware** - header automaticky získá blur efekt a enhanced shadow po scrollu
+3. **Toggle animace** - scale efekt při hover/active, rotace ikony při otevření menu
+4. **Drawer** - gradient accent linka nahoře, smoothernější animace
+5. **Backdrop** - blur efekt pro lepší vizuální oddělení
+
+### Poznámky
+- Fáze 7.5 (Redesign Header) je dokončena
+- Build proběhl úspěšně
+- Další krok: 7.5 Navigation komponenta
+
+---
+
 ## 2026-01-20 - Fáze 7.4 / Redesign Table komponenty
 
 ### Dokončeno

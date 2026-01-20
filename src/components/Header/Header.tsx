@@ -11,7 +11,7 @@ import {
 import './Header.css';
 
 export type HeaderSize = 'sm' | 'md' | 'lg';
-export type HeaderVariant = 'default' | 'transparent' | 'elevated';
+export type HeaderVariant = 'default' | 'transparent' | 'elevated' | 'gradient' | 'glass';
 
 export interface HeaderProps extends HTMLAttributes<HTMLElement> {
   /** Logo or brand element */
@@ -42,6 +42,10 @@ export interface HeaderProps extends HTMLAttributes<HTMLElement> {
   bordered?: boolean;
   /** Maximum width constraint */
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  /** Enable blur effect when scrolled (for sticky headers) */
+  blurOnScroll?: boolean;
+  /** Scroll threshold in pixels before blur effect activates */
+  scrollThreshold?: number;
 }
 
 const MenuIcon = () => (
@@ -109,14 +113,33 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(
       mobileMenuContent,
       bordered = true,
       maxWidth = 'xl',
+      blurOnScroll = false,
+      scrollThreshold = 10,
       className,
       ...props
     },
     ref
   ) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
     const headerRef = useRef<HTMLElement>(null);
     const mobileMenuRef = useRef<HTMLDivElement>(null);
+
+    // Handle scroll for blur effect
+    useEffect(() => {
+      if (!blurOnScroll || !sticky) return;
+
+      const handleScroll = () => {
+        const scrollY = window.scrollY;
+        setIsScrolled(scrollY > scrollThreshold);
+      };
+
+      // Check initial scroll position
+      handleScroll();
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      return () => window.removeEventListener('scroll', handleScroll);
+    }, [blurOnScroll, sticky, scrollThreshold]);
 
     // Toggle mobile menu
     const toggleMobileMenu = useCallback(() => {
@@ -181,6 +204,7 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(
       sticky && 'csk-header--sticky',
       bordered && 'csk-header--bordered',
       mobileMenuOpen && 'csk-header--mobile-open',
+      isScrolled && 'csk-header--scrolled',
       className,
     ]
       .filter(Boolean)

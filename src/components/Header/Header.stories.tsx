@@ -47,7 +47,7 @@ import { Header } from '@czechcanoe/rvp-design-system';
     },
     variant: {
       control: 'select',
-      options: ['default', 'transparent', 'elevated'],
+      options: ['default', 'transparent', 'elevated', 'gradient', 'glass'],
     },
     maxWidth: {
       control: 'select',
@@ -61,6 +61,12 @@ import { Header } from '@czechcanoe/rvp-design-system';
     },
     showMobileToggle: {
       control: 'boolean',
+    },
+    blurOnScroll: {
+      control: 'boolean',
+    },
+    scrollThreshold: {
+      control: 'number',
     },
   },
 };
@@ -592,4 +598,330 @@ export const Minimal: Story = {
     ),
     showMobileToggle: false,
   },
+};
+
+/**
+ * Gradient varianta s branded vzhledem.
+ */
+export const Gradient: Story = {
+  args: {
+    brand: (
+      <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'white' }}>
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="rgba(255,255,255,0.2)"/>
+          <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
+        </svg>
+        <span style={{ fontWeight: 600, fontSize: '1.125rem' }}>Kanoistika</span>
+      </a>
+    ),
+    navigation: (
+      <div style={{ display: 'flex', gap: '4px' }}>
+        {['Závody', 'Výsledky', 'Závodníci', 'Kluby'].map((item) => (
+          <a
+            key={item}
+            href="#"
+            style={{
+              padding: '8px 16px',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              color: 'rgba(255,255,255,0.9)',
+              fontWeight: 500,
+              transition: 'background-color 0.15s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
+          >
+            {item}
+          </a>
+        ))}
+      </div>
+    ),
+    userMenu: (
+      <button
+        style={{
+          width: '36px',
+          height: '36px',
+          borderRadius: '50%',
+          border: '2px solid rgba(255,255,255,0.5)',
+          backgroundColor: 'rgba(255,255,255,0.2)',
+          color: 'white',
+          fontWeight: 600,
+          fontSize: '14px',
+          cursor: 'pointer',
+        }}
+      >
+        JB
+      </button>
+    ),
+    variant: 'gradient',
+    bordered: false,
+    mobileMenuContent: <MobileNavLinks />,
+  },
+};
+
+/**
+ * Glass varianta s blur efektem.
+ */
+export const Glass: Story = {
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          background: 'linear-gradient(135deg, var(--color-primary-100), var(--color-accent-100))',
+          minHeight: '300px',
+        }}
+      >
+        <Story />
+        <div style={{ padding: '48px 24px' }}>
+          <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+            Kalendář závodů 2026
+          </h1>
+          <p style={{ marginTop: '16px', color: 'var(--color-text-secondary)' }}>
+            Glass efekt vytváří moderní, vzdušný vzhled.
+          </p>
+        </div>
+      </div>
+    ),
+  ],
+  args: {
+    brand: <Logo />,
+    navigation: <NavLinks />,
+    search: (
+      <Input
+        type="search"
+        placeholder="Hledat..."
+        size="sm"
+        iconLeft={<SearchIcon />}
+        style={{ width: '200px' }}
+      />
+    ),
+    userMenu: <UserAvatar />,
+    variant: 'glass',
+    bordered: false,
+    mobileMenuContent: <MobileNavLinks />,
+  },
+};
+
+/**
+ * Sticky header s blur efektem při scrollu.
+ */
+export const StickyWithBlur: Story = {
+  decorators: [
+    (Story) => (
+      <div style={{ minHeight: '200vh' }}>
+        <Story />
+        <div style={{ padding: '24px' }}>
+          <h2>Blur efekt při scrollu</h2>
+          <p style={{ color: 'var(--color-text-secondary)' }}>
+            Scrollujte dolů - header získá blur efekt a stín po překročení prahu 10px.
+          </p>
+          {Array.from({ length: 20 }).map((_, i) => (
+            <p key={i} style={{ marginTop: '16px' }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+          ))}
+        </div>
+      </div>
+    ),
+  ],
+  args: {
+    brand: <Logo />,
+    navigation: <NavLinks />,
+    search: (
+      <Input
+        type="search"
+        placeholder="Hledat..."
+        size="sm"
+        iconLeft={<SearchIcon />}
+        style={{ width: '200px' }}
+      />
+    ),
+    userMenu: <UserAvatar />,
+    sticky: true,
+    blurOnScroll: true,
+    bordered: true,
+    mobileMenuContent: <MobileNavLinks />,
+  },
+};
+
+/**
+ * Gradient sticky header s blur efektem.
+ */
+export const GradientStickyWithBlur: Story = {
+  decorators: [
+    (Story) => (
+      <div style={{ minHeight: '200vh' }}>
+        <Story />
+        <div style={{ padding: '24px' }}>
+          <h2>Gradient header s blur efektem</h2>
+          <p style={{ color: 'var(--color-text-secondary)' }}>
+            Kombinace gradient varianty se sticky a blur efektem pro prémiový vzhled.
+          </p>
+          {Array.from({ length: 20 }).map((_, i) => (
+            <p key={i} style={{ marginTop: '16px' }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua.
+            </p>
+          ))}
+        </div>
+      </div>
+    ),
+  ],
+  args: {
+    brand: (
+      <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'white' }}>
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="rgba(255,255,255,0.2)"/>
+          <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
+        </svg>
+        <span style={{ fontWeight: 600, fontSize: '1.125rem' }}>Kanoistika</span>
+      </a>
+    ),
+    navigation: (
+      <div style={{ display: 'flex', gap: '4px' }}>
+        {['Závody', 'Výsledky', 'Závodníci', 'Kluby'].map((item) => (
+          <a
+            key={item}
+            href="#"
+            style={{
+              padding: '8px 16px',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              color: 'rgba(255,255,255,0.9)',
+              fontWeight: 500,
+            }}
+          >
+            {item}
+          </a>
+        ))}
+      </div>
+    ),
+    userMenu: (
+      <button
+        style={{
+          width: '36px',
+          height: '36px',
+          borderRadius: '50%',
+          border: '2px solid rgba(255,255,255,0.5)',
+          backgroundColor: 'rgba(255,255,255,0.2)',
+          color: 'white',
+          fontWeight: 600,
+          fontSize: '14px',
+          cursor: 'pointer',
+        }}
+      >
+        JB
+      </button>
+    ),
+    variant: 'gradient',
+    sticky: true,
+    blurOnScroll: true,
+    bordered: false,
+    mobileMenuContent: <MobileNavLinks />,
+  },
+};
+
+/**
+ * Showcase všech variant headeru.
+ */
+export const AllVariants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+          Variant: default
+        </p>
+        <Header
+          variant="default"
+          brand={<Logo />}
+          navigation={<NavLinks />}
+          userMenu={<UserAvatar />}
+        />
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+          Variant: elevated
+        </p>
+        <Header
+          variant="elevated"
+          bordered={false}
+          brand={<Logo />}
+          navigation={<NavLinks />}
+          userMenu={<UserAvatar />}
+        />
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+          Variant: gradient
+        </p>
+        <Header
+          variant="gradient"
+          bordered={false}
+          brand={
+            <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'white' }}>
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="8" fill="rgba(255,255,255,0.2)"/>
+                <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
+              </svg>
+              <span style={{ fontWeight: 600, fontSize: '1.125rem' }}>Kanoistika</span>
+            </a>
+          }
+          navigation={
+            <div style={{ display: 'flex', gap: '4px' }}>
+              {['Závody', 'Výsledky', 'Závodníci'].map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  style={{
+                    padding: '8px 16px',
+                    borderRadius: '8px',
+                    textDecoration: 'none',
+                    color: 'rgba(255,255,255,0.9)',
+                    fontWeight: 500,
+                  }}
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+          }
+          userMenu={
+            <button
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                border: '2px solid rgba(255,255,255,0.5)',
+                backgroundColor: 'rgba(255,255,255,0.2)',
+                color: 'white',
+                fontWeight: 600,
+                fontSize: '14px',
+                cursor: 'pointer',
+              }}
+            >
+              JB
+            </button>
+          }
+        />
+      </div>
+      <div style={{ background: 'linear-gradient(135deg, var(--color-primary-100), var(--color-accent-100))', padding: '0 0 24px' }}>
+        <p style={{ margin: '0 0 8px', padding: '8px 0 0 8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+          Variant: glass (na barevném pozadí)
+        </p>
+        <Header
+          variant="glass"
+          bordered={false}
+          brand={<Logo />}
+          navigation={<NavLinks />}
+          userMenu={<UserAvatar />}
+        />
+      </div>
+    </div>
+  ),
 };
