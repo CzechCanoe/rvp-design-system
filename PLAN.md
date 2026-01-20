@@ -157,8 +157,8 @@
 - [x] Review barevné palety - je dostatečně expresivní?
 - [x] Přidání gradient tokenů (pro hero sekce, karty)
 - [x] Vylepšení shadow systému (více úrovní, měkčí)
-- [ ] Review typografie - dostatečně výrazné nadpisy?
-- [ ] Nové tokeny pro "expresivní režim" (větší spacing, dramatičtější)
+- [x] Review typografie - dostatečně výrazné nadpisy?
+- [x] Nové tokeny pro "expresivní režim" (větší spacing, dramatičtější)
 
 ### 7.4 Redesign core komponent (Tier 1)
 - [ ] **Button** - gradient varianty, lepší hover states, subtle shadows

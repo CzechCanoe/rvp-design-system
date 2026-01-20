@@ -2635,3 +2635,61 @@ tests/
 
 ### Další kroky
 - Fáze 7.3 (pokračování): Review typografie, expresivní tokeny
+
+---
+
+## 2026-01-20 - Fáze 7.3: Expresivní tokeny (část 2)
+
+### Dokončeno
+- [x] Review typografie - přidány větší font-size (7xl, 8xl, 9xl)
+- [x] Přidány nové font-weights (extrabold 800, black 900)
+- [x] Přidán letter-spacing-tightest pro mega nadpisy
+- [x] Vytvořen nový soubor `expressive.css` s kompletní sadou expresivních tokenů
+- [x] Aktualizace `tokens/index.css` o import expressive.css
+- [x] Ověření buildu - vše funguje
+
+### Nové expresivní tokeny (expressive.css)
+
+**Typografie:**
+- `--text-expr-mega-*` - 96px, weight 900, pro hero sekce
+- `--text-expr-display-*` - 72px, weight 800, pro nadpisy sekcí
+- `--text-expr-h1/h2/h3-*` - větší a výraznější varianty heading presets
+- `--text-expr-stat-*` - pro velká čísla statistik
+- `--text-expr-rank-*` - 128px pro zobrazení pozic 1-2-3
+- `--text-expr-time-xl-*` - větší časy pro live výsledky
+
+**Spacing:**
+- `--spacing-expr-section-*` - až 160px pro sekce
+- `--spacing-expr-card-*` - 32-48px padding pro karty
+- `--spacing-expr-hero-*` - 96px padding pro hero sekce
+
+**Komponenty:**
+- `--button-expr-*` - větší buttony (40-64px)
+- `--avatar-expr-*` - až 200px pro hero avatary
+- `--radius-expr-*` - větší border-radius
+- `--badge-expr-*` - větší badges
+
+**Shadows a transitions:**
+- `--shadow-expr-hero/featured/float/avatar` - dramatičtější stíny
+- `--transition-expr-*` - delší, plynulejší animace
+
+### Rozšíření typography.css
+- `--font-size-7xl: 4.5rem` (72px)
+- `--font-size-8xl: 6rem` (96px)
+- `--font-size-9xl: 8rem` (128px)
+- `--font-weight-extrabold: 800`
+- `--font-weight-black: 900`
+- `--letter-spacing-tightest: -0.03em`
+
+### Rozhodnutí
+1. **Oddělený soubor** - expresivní tokeny v samostatném souboru pro lepší organizaci
+2. **Responsive varianty** - mega/display se zmenšují na mobile (4xl místo 8xl)
+3. **Dark mode** - expresivní shadows mají větší opacitu pro dark theme
+
+### Poznámky
+- Fáze 7.3 je kompletní
+- Všechny tokeny jsou připraveny, ale zatím nejsou aplikovány na komponenty
+- Build prochází s běžnými CSS warningy (nested :root)
+
+### Další kroky
+- Fáze 7.4: Redesign core komponent (Button, Card, Badge, Input, Table)

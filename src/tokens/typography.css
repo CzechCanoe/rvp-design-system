@@ -34,6 +34,9 @@
   --font-size-4xl: 2.25rem;   /* 36px - h2 */
   --font-size-5xl: 3rem;      /* 48px - h1 */
   --font-size-6xl: 3.75rem;   /* 60px - display */
+  --font-size-7xl: 4.5rem;    /* 72px - hero (expressive) */
+  --font-size-8xl: 6rem;      /* 96px - mega (expressive) */
+  --font-size-9xl: 8rem;      /* 128px - rank numbers (expressive) */
 
   /* ==========================================================================
      FONT WEIGHTS
@@ -43,6 +46,8 @@
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+  --font-weight-extrabold: 800;  /* For expressive headings */
+  --font-weight-black: 900;      /* For maximum impact */
 
   /* ==========================================================================
      LINE HEIGHTS
@@ -59,6 +64,7 @@
      LETTER SPACING (Tracking)
      ========================================================================== */
 
+  --letter-spacing-tightest: -0.03em; /* Expressive mega headlines */
   --letter-spacing-tighter: -0.02em;  /* Display headings */
   --letter-spacing-tight: -0.01em;    /* H1 */
   --letter-spacing-normal: 0;         /* Default */

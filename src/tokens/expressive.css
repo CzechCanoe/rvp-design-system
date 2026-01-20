@@ -1,0 +1,300 @@
+/**
+ * Expressive Mode Tokens - CSK RVP Design System
+ *
+ * Dramatic, generous tokens for public-facing pages.
+ * Used on athlete profiles, results, live timing, marketing pages.
+ *
+ * Reference: docs/DESIGN_PRINCIPLES.md Section 3.2
+ *
+ * Usage:
+ * - Apply [data-mode="expressive"] to containers
+ * - Or use --expr-* variables directly
+ */
+
+:root {
+  /* ==========================================================================
+     EXPRESSIVE TYPOGRAPHY
+     Larger sizes, bolder weights, more dramatic feel
+     ========================================================================== */
+
+  /* Extended font sizes for expressive displays */
+  --font-size-7xl: 4.5rem;    /* 72px - hero headlines */
+  --font-size-8xl: 6rem;      /* 96px - mega display */
+  --font-size-9xl: 8rem;      /* 128px - numbers, ranks */
+
+  /* Extra bold weight for maximum impact */
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  /* Expressive letter spacing - tighter for drama */
+  --letter-spacing-tightest: -0.03em;   /* Mega headlines */
+  --letter-spacing-expressive: -0.025em; /* Display text */
+
+  /* ==========================================================================
+     EXPRESSIVE TYPOGRAPHY PRESETS
+     Complete text style definitions for expressive mode
+     ========================================================================== */
+
+  /* Mega display - hero sections, athlete names */
+  --text-expr-mega-size: var(--font-size-8xl);
+  --text-expr-mega-weight: var(--font-weight-black);
+  --text-expr-mega-line-height: 0.95;
+  --text-expr-mega-tracking: var(--letter-spacing-tightest);
+
+  /* Display expressive - section heroes */
+  --text-expr-display-size: var(--font-size-7xl);
+  --text-expr-display-weight: var(--font-weight-extrabold);
+  --text-expr-display-line-height: 1.0;
+  --text-expr-display-tracking: var(--letter-spacing-expressive);
+
+  /* H1 expressive */
+  --text-expr-h1-size: var(--font-size-5xl);
+  --text-expr-h1-weight: var(--font-weight-bold);
+  --text-expr-h1-line-height: 1.1;
+  --text-expr-h1-tracking: var(--letter-spacing-tighter);
+
+  /* H2 expressive */
+  --text-expr-h2-size: var(--font-size-4xl);
+  --text-expr-h2-weight: var(--font-weight-bold);
+  --text-expr-h2-line-height: 1.15;
+  --text-expr-h2-tracking: var(--letter-spacing-tight);
+
+  /* H3 expressive */
+  --text-expr-h3-size: var(--font-size-3xl);
+  --text-expr-h3-weight: var(--font-weight-semibold);
+  --text-expr-h3-line-height: 1.2;
+  --text-expr-h3-tracking: var(--letter-spacing-normal);
+
+  /* Lead text expressive - intro paragraphs */
+  --text-expr-lead-size: var(--font-size-xl);
+  --text-expr-lead-weight: var(--font-weight-normal);
+  --text-expr-lead-line-height: 1.6;
+  --text-expr-lead-tracking: var(--letter-spacing-normal);
+
+  /* Stat number - for statistics, rankings */
+  --text-expr-stat-size: var(--font-size-6xl);
+  --text-expr-stat-weight: var(--font-weight-extrabold);
+  --text-expr-stat-line-height: 1;
+  --text-expr-stat-tracking: var(--letter-spacing-tight);
+
+  /* Rank number - 1st, 2nd, 3rd place */
+  --text-expr-rank-size: var(--font-size-9xl);
+  --text-expr-rank-weight: var(--font-weight-black);
+  --text-expr-rank-line-height: 0.85;
+  --text-expr-rank-tracking: var(--letter-spacing-tightest);
+
+  /* Time display expressive - live results */
+  --text-expr-time-lg-size: var(--font-size-5xl);
+  --text-expr-time-lg-weight: var(--font-weight-bold);
+  --text-expr-time-lg-line-height: 1;
+
+  --text-expr-time-xl-size: var(--font-size-6xl);
+  --text-expr-time-xl-weight: var(--font-weight-bold);
+  --text-expr-time-xl-line-height: 1;
+
+  /* ==========================================================================
+     EXPRESSIVE SPACING
+     More generous whitespace for visual impact
+     (Extends spacing.css --spacing-expr-* values)
+     ========================================================================== */
+
+  /* Section spacing expressive */
+  --spacing-expr-section-sm: var(--spacing-12);   /* 48px */
+  --spacing-expr-section-md: var(--spacing-20);   /* 80px */
+  --spacing-expr-section-lg: var(--spacing-32);   /* 128px */
+  --spacing-expr-section-xl: var(--spacing-40);   /* 160px */
+
+  /* Card spacing expressive */
+  --spacing-expr-card-padding: var(--spacing-8);      /* 32px */
+  --spacing-expr-card-padding-lg: var(--spacing-12);  /* 48px */
+  --spacing-expr-card-gap: var(--spacing-8);          /* 32px */
+
+  /* Hero spacing */
+  --spacing-expr-hero-padding-y: var(--spacing-24);   /* 96px */
+  --spacing-expr-hero-padding-x: var(--spacing-8);    /* 32px */
+
+  /* Content block spacing */
+  --spacing-expr-content-gap: var(--spacing-10);      /* 40px */
+
+  /* ==========================================================================
+     EXPRESSIVE TRANSITIONS
+     Longer, more dramatic animations
+     (Extends transitions.css values)
+     ========================================================================== */
+
+  /* Expressive button transition */
+  --transition-expr-button: background-color var(--motion-expr-base) var(--ease-out),
+                            border-color var(--motion-expr-base) var(--ease-out),
+                            color var(--motion-expr-base) var(--ease-out),
+                            box-shadow var(--motion-expr-base) var(--ease-out),
+                            transform var(--motion-expr-fast) var(--ease-out);
+
+  /* Expressive card transition */
+  --transition-expr-card: box-shadow var(--motion-expr-slow) var(--ease-out),
+                          transform var(--motion-expr-base) var(--ease-out),
+                          border-color var(--motion-expr-base) var(--ease-out);
+
+  /* Hero content transition */
+  --transition-expr-hero: opacity var(--duration-slow) var(--ease-out),
+                          transform var(--duration-slower) var(--ease-out);
+
+  /* Stats counter animation */
+  --transition-expr-counter: all var(--duration-slowest) var(--ease-out);
+
+  /* ==========================================================================
+     EXPRESSIVE SHADOWS
+     Softer, more prominent shadows for elevated content
+     ========================================================================== */
+
+  /* Hero card shadow - maximum elevation */
+  --shadow-expr-hero: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
+                      0 10px 15px -3px rgba(0, 0, 0, 0.08),
+                      0 25px 50px -12px rgba(0, 0, 0, 0.15);
+
+  /* Featured card shadow */
+  --shadow-expr-featured: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+                          0 10px 20px -5px rgba(0, 0, 0, 0.08),
+                          0 20px 40px -10px rgba(0, 0, 0, 0.12);
+
+  /* Floating element shadow */
+  --shadow-expr-float: 0 8px 16px -4px rgba(0, 0, 0, 0.08),
+                       0 16px 32px -8px rgba(0, 0, 0, 0.12),
+                       0 32px 64px -16px rgba(0, 0, 0, 0.16);
+
+  /* Avatar/profile image shadow */
+  --shadow-expr-avatar: 0 4px 8px -2px rgba(0, 0, 0, 0.1),
+                        0 8px 16px -4px rgba(0, 0, 0, 0.1);
+
+  /* ==========================================================================
+     EXPRESSIVE BORDERS
+     Thicker, more prominent borders
+     ========================================================================== */
+
+  --border-expr-width: 2px;
+  --border-expr-width-thick: 3px;
+  --border-expr-width-accent: 4px;
+
+  /* ==========================================================================
+     EXPRESSIVE COMPONENT SCALES
+     Larger touch targets and visual presence
+     ========================================================================== */
+
+  /* Button sizes expressive */
+  --button-expr-height-sm: 40px;
+  --button-expr-height-md: 52px;
+  --button-expr-height-lg: 64px;
+
+  --button-expr-padding-x-sm: var(--spacing-5);   /* 20px */
+  --button-expr-padding-x-md: var(--spacing-8);   /* 32px */
+  --button-expr-padding-x-lg: var(--spacing-12);  /* 48px */
+
+  /* Avatar sizes expressive */
+  --avatar-expr-size-sm: 48px;
+  --avatar-expr-size-md: 80px;
+  --avatar-expr-size-lg: 120px;
+  --avatar-expr-size-xl: 160px;
+  --avatar-expr-size-hero: 200px;
+
+  /* Card border radius expressive */
+  --radius-expr-card: var(--radius-xl);     /* 16px */
+  --radius-expr-card-lg: var(--radius-2xl); /* 24px */
+
+  /* Badge sizes expressive */
+  --badge-expr-height: 28px;
+  --badge-expr-padding-x: var(--spacing-4); /* 16px */
+
+  /* ==========================================================================
+     EXPRESSIVE DECORATIVE ELEMENTS
+     Visual embellishments for hero sections
+     ========================================================================== */
+
+  /* Accent line widths */
+  --accent-line-width-sm: 3px;
+  --accent-line-width-md: 4px;
+  --accent-line-width-lg: 6px;
+
+  /* Highlight bar for featured content */
+  --highlight-bar-width: 4px;
+  --highlight-bar-width-lg: 6px;
+}
+
+/* =============================================================================
+   RESPONSIVE EXPRESSIVE TYPOGRAPHY
+   Adjust expressive sizes for different screens
+   ============================================================================= */
+
+@media (max-width: 1023px) {
+  :root {
+    /* Tablet adjustments */
+    --text-expr-mega-size: var(--font-size-6xl);
+    --text-expr-display-size: var(--font-size-5xl);
+    --text-expr-rank-size: var(--font-size-7xl);
+
+    --spacing-expr-hero-padding-y: var(--spacing-16);
+    --spacing-expr-section-lg: var(--spacing-24);
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    /* Mobile adjustments */
+    --text-expr-mega-size: var(--font-size-4xl);
+    --text-expr-mega-line-height: 1.05;
+
+    --text-expr-display-size: var(--font-size-3xl);
+    --text-expr-display-line-height: 1.1;
+
+    --text-expr-h1-size: var(--font-size-2xl);
+    --text-expr-h2-size: var(--font-size-xl);
+
+    --text-expr-rank-size: var(--font-size-5xl);
+    --text-expr-stat-size: var(--font-size-4xl);
+
+    --text-expr-time-xl-size: var(--font-size-4xl);
+    --text-expr-time-lg-size: var(--font-size-3xl);
+
+    --spacing-expr-hero-padding-y: var(--spacing-12);
+    --spacing-expr-section-md: var(--spacing-12);
+    --spacing-expr-section-lg: var(--spacing-16);
+
+    --avatar-expr-size-hero: 120px;
+    --avatar-expr-size-xl: 100px;
+  }
+}
+
+/* =============================================================================
+   DARK MODE EXPRESSIVE
+   Adjusted expressive values for dark theme
+   ============================================================================= */
+
+[data-theme="dark"] {
+  /* Shadows are less visible on dark, increase opacity */
+  --shadow-expr-hero: 0 4px 6px -1px rgba(0, 0, 0, 0.15),
+                      0 10px 15px -3px rgba(0, 0, 0, 0.2),
+                      0 25px 50px -12px rgba(0, 0, 0, 0.35);
+
+  --shadow-expr-featured: 0 4px 6px -1px rgba(0, 0, 0, 0.12),
+                          0 10px 20px -5px rgba(0, 0, 0, 0.2),
+                          0 20px 40px -10px rgba(0, 0, 0, 0.3);
+
+  --shadow-expr-float: 0 8px 16px -4px rgba(0, 0, 0, 0.2),
+                       0 16px 32px -8px rgba(0, 0, 0, 0.3),
+                       0 32px 64px -16px rgba(0, 0, 0, 0.4);
+
+  --shadow-expr-avatar: 0 4px 8px -2px rgba(0, 0, 0, 0.2),
+                        0 8px 16px -4px rgba(0, 0, 0, 0.25);
+}
+
+/* =============================================================================
+   REDUCED MOTION
+   Disable dramatic animations for users who prefer reduced motion
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-expr-button: none;
+    --transition-expr-card: none;
+    --transition-expr-hero: none;
+    --transition-expr-counter: none;
+  }
+}
