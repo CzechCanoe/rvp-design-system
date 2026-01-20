@@ -284,5 +284,12 @@
   background-color: var(--color-bg-secondary);
 }
 
-@media
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-pagination__button {
+    transition: none;
+  }
 }

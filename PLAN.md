@@ -205,7 +205,7 @@
 
 ### 7.10 Finální polish
 - [x] Konzistence napříč všemi komponentami (audit provedený, opraveny syntax chyby a undefined tokeny)
-- [ ] Micro-interactions audit
+- [x] Micro-interactions audit (opraveny hardcoded transitions, přidán reduced motion do Pagination)
 - [x] Reduced motion support (doplněno pro Checkbox, Switch, Radio; opraveno Skeleton, Dropdown)
 - [ ] Performance check (CSS bundle size)
 - [ ] Cross-browser testing

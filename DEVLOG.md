@@ -1,5 +1,43 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.10 / Micro-interactions audit
+
+### Dokončeno
+- [x] Oprava malformed `@media }` v EmptyState.css (řádek 255-256)
+- [x] Oprava malformed `@media }` v Pagination.css (řádek 287-288)
+- [x] Přidání `prefers-reduced-motion` support do Pagination.css
+- [x] Nahrazení hardcoded transition hodnot za tokeny v Badge.css
+- [x] Nahrazení hardcoded transition hodnot za tokeny v Input.css (4 místa)
+- [x] Nahrazení hardcoded transition hodnot za tokeny v Select.css (4 místa)
+- [x] Nahrazení hardcoded transition hodnot za tokeny v Table.css (3 místa)
+- [x] Ověření build
+
+### Změněné soubory
+- `src/components/EmptyState/EmptyState.css` - odstraněna prázdná @media deklarace
+- `src/components/Pagination/Pagination.css` - odstraněna prázdná @media, přidán reduced motion support
+- `src/components/Badge/Badge.css` - hardcoded transitions → `--transition-badge`
+- `src/components/Input/Input.css` - hardcoded transitions → token-based
+- `src/components/Select/Select.css` - hardcoded transitions → token-based
+- `src/components/Table/Table.css` - hardcoded transitions → token-based
+
+### Výsledky auditu
+**Opravené problémy:**
+1. EmptyState.css - malformed @media query (syntax error)
+2. Pagination.css - malformed @media query + chybějící reduced motion
+3. Badge/Input/Select/Table - hardcoded `0.2s ease` a `0.15s ease-out` hodnoty nahrazeny tokeny
+
+**Použité tokeny:**
+- `--transition-badge` - pro Badge komponenty
+- `--transition-input` - pro Input/Select komponenty
+- `--duration-moderate` / `--duration-fast` s `--ease-out` - pro jednotlivé vlastnosti
+
+### Poznámky
+- CSS bundle size: 224.37 KB (26.81 KB gzip) - bez změny
+- Předexistující CSS warningy (Timeline, Progress, Avatar, Dropzone) - neovlivněny touto iterací
+- Všechny transitions jsou nyní konzistentně tokenizované
+
+---
+
 ## 2026-01-20 - Fáze 7.10 / Konzistence a reduced motion support
 
 ### Dokončeno

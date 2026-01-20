@@ -31,10 +31,7 @@
   border: 1px solid transparent;
 
   /* Transition - enhanced for modern feel */
-  transition: background-color 0.2s ease-out,
-              border-color 0.2s ease-out,
-              box-shadow 0.2s ease-out,
-              transform 0.15s ease-out;
+  transition: var(--transition-badge);
 }
 
 /* ==========================================================================
