@@ -155,6 +155,8 @@
     background-color var(--transition-fast),
     transform var(--transition-fast),
     box-shadow var(--transition-fast);
+  /* All rows need same border-left for alignment */
+  border-left: 4px solid transparent;
 }
 
 .csk-results-table__tr:hover:not(.csk-results-table__tr--empty):not(.csk-results-table__tr--header) {
@@ -358,10 +360,10 @@
 /* Gold - 1st place */
 .csk-results-table__tr--gold {
   background: linear-gradient(90deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%);
-  border-left: 4px solid;
-  border-image: linear-gradient(180deg, #ffd700, #ffb800) 1;
   position: relative;
 }
+
+/* Gold gradient border via ::before (positioned over transparent border-left) */
 
 .csk-results-table__tr--gold::before {
   content: '';
@@ -392,7 +394,6 @@
 /* Silver - 2nd place */
 .csk-results-table__tr--silver {
   background: linear-gradient(90deg, rgba(192, 192, 192, 0.15) 0%, rgba(192, 192, 192, 0.05) 100%);
-  border-left: 4px solid;
   position: relative;
 }
 
@@ -418,7 +419,6 @@
 /* Bronze - 3rd place */
 .csk-results-table__tr--bronze {
   background: linear-gradient(90deg, rgba(205, 127, 50, 0.15) 0%, rgba(205, 127, 50, 0.05) 100%);
-  border-left: 4px solid;
   position: relative;
 }
 

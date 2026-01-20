@@ -1,0 +1,298 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "CSK Český svaz kanoistů" [ref=e7]:
+        - /url: "#"
+        - generic [ref=e8]: CSK
+        - generic [ref=e9]: Český svaz kanoistů
+      - button "Přihlásit se" [ref=e11] [cursor=pointer]:
+        - generic [ref=e12]: Přihlásit se
+      - button "Toggle menu" [ref=e13] [cursor=pointer]:
+        - img [ref=e14]
+  - dialog "Mobile menu" [ref=e15]:
+    - generic [ref=e16]:
+      - generic [ref=e19]:
+        - generic:
+          - img
+        - searchbox "Hledat..." [ref=e20]
+      - navigation "Mobile navigation" [ref=e21]:
+        - navigation "Main navigation" [ref=e22]
+      - button "Přihlásit se" [ref=e26] [cursor=pointer]:
+        - generic [ref=e27]: Přihlásit se
+  - generic [ref=e28]:
+    - generic [ref=e33]:
+      - heading "Kalendář závodů" [level=1] [ref=e34]
+      - paragraph [ref=e35]: Přehled všech závodů a akcí Českého svazu kanoistů pro sezónu 2026
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e38]: "8"
+          - generic [ref=e39]: závodů v měsíci
+        - generic [ref=e40]:
+          - generic [ref=e41]: "3"
+          - generic [ref=e42]: sekce
+        - generic [ref=e43]:
+          - generic [ref=e44]: "3"
+          - generic [ref=e45]: MČR
+    - img [ref=e46]
+  - generic [ref=e49]:
+    - generic [ref=e50]:
+      - img [ref=e51]
+      - heading "Hlavní události sezóny" [level=2] [ref=e57]
+    - generic [ref=e58]:
+      - button "DV MČR MČR ve slalomu 3.–5. 1. Praha - Troja 156 přihlášených" [ref=e59] [cursor=pointer]:
+        - generic [ref=e61]:
+          - generic [ref=e62]:
+            - img [ref=e64]
+            - generic [ref=e67]: DV
+            - generic [ref=e69]: MČR
+          - heading "MČR ve slalomu" [level=3] [ref=e70]
+          - generic [ref=e71]:
+            - generic [ref=e72]:
+              - img [ref=e73]
+              - text: 3.–5. 1.
+            - generic [ref=e75]:
+              - img [ref=e76]
+              - text: Praha - Troja
+          - generic [ref=e79]:
+            - img [ref=e80]
+            - generic [ref=e85]: 156 přihlášených
+        - img [ref=e87]
+      - button "DV Nominace Nominace na MS 24.–25. 1. Praha - Troja 42 přihlášených" [ref=e89] [cursor=pointer]:
+        - generic [ref=e91]:
+          - generic [ref=e92]:
+            - generic [ref=e94]: DV
+            - generic [ref=e96]: Nominace
+          - heading "Nominace na MS" [level=3] [ref=e97]
+          - generic [ref=e98]:
+            - generic [ref=e99]:
+              - img [ref=e100]
+              - text: 24.–25. 1.
+            - generic [ref=e102]:
+              - img [ref=e103]
+              - text: Praha - Troja
+          - generic [ref=e106]:
+            - img [ref=e107]
+            - generic [ref=e112]: 42 přihlášených
+        - img [ref=e114]
+      - button "RY MČR Regata Račice 8.–9. 1. Račice 234 přihlášených" [ref=e116] [cursor=pointer]:
+        - generic [ref=e118]:
+          - generic [ref=e119]:
+            - generic [ref=e121]: RY
+            - generic [ref=e123]: MČR
+          - heading "Regata Račice" [level=3] [ref=e124]
+          - generic [ref=e125]:
+            - generic [ref=e126]:
+              - img [ref=e127]
+              - text: 8.–9. 1.
+            - generic [ref=e129]:
+              - img [ref=e130]
+              - text: Račice
+          - generic [ref=e133]:
+            - img [ref=e134]
+            - generic [ref=e139]: 234 přihlášených
+        - img [ref=e141]
+  - main [ref=e143]:
+    - generic [ref=e144]:
+      - generic [ref=e145]:
+        - generic [ref=e146]:
+          - tablist [ref=e147]:
+            - tab "Všechny sekce" [selected] [ref=e148] [cursor=pointer]:
+              - generic [ref=e149]: Všechny sekce
+            - tab "Divoká voda" [ref=e150] [cursor=pointer]:
+              - generic [ref=e151]: Divoká voda
+            - tab "Rychlostní" [ref=e152] [cursor=pointer]:
+              - generic [ref=e153]: Rychlostní
+            - tab "Vodní turistika" [ref=e154] [cursor=pointer]:
+              - generic [ref=e155]: Vodní turistika
+          - tabpanel "Všechny sekce" [ref=e156]
+        - generic [ref=e159]:
+          - combobox [ref=e160] [cursor=pointer]:
+            - option "Všechny úrovně" [selected]
+            - option "MČR"
+            - option "Český pohár"
+            - option "Krajské"
+            - option "Veřejné akce"
+          - generic:
+            - img
+      - generic [ref=e161]:
+        - generic [ref=e163]:
+          - generic [ref=e164]:
+            - generic [ref=e165]: leden 2026
+            - generic [ref=e166]:
+              - button "Dnes" [ref=e167] [cursor=pointer]
+              - button "Předchozí měsíc" [ref=e168] [cursor=pointer]:
+                - img [ref=e169]
+              - button "Další měsíc" [ref=e171] [cursor=pointer]:
+                - img [ref=e172]
+          - grid "Kalendář" [ref=e174]:
+            - row "po út st čt pá so ne" [ref=e175]:
+              - columnheader "po" [ref=e176]
+              - columnheader "út" [ref=e177]
+              - columnheader "st" [ref=e178]
+              - columnheader "čt" [ref=e179]
+              - columnheader "pá" [ref=e180]
+              - columnheader "so" [ref=e181]
+              - columnheader "ne" [ref=e182]
+            - generic [ref=e183]:
+              - gridcell "29. prosinec 2025" [ref=e184] [cursor=pointer]:
+                - generic [ref=e186]: "29"
+              - gridcell "30. prosinec 2025" [ref=e188] [cursor=pointer]:
+                - generic [ref=e190]: "30"
+              - gridcell "31. prosinec 2025" [ref=e192] [cursor=pointer]:
+                - generic [ref=e194]: "31"
+              - gridcell "1. leden 2026, 1 událost" [ref=e196] [cursor=pointer]:
+                - generic [ref=e198]: "1"
+                - button "Deadline přihlášek MČR" [ref=e200]
+              - gridcell "2. leden 2026" [ref=e201] [cursor=pointer]:
+                - generic [ref=e203]: "2"
+              - gridcell "3. leden 2026, 1 událost" [ref=e205] [cursor=pointer]:
+                - generic [ref=e207]: "3"
+                - button "MČR ve slalomu" [ref=e209]
+              - gridcell "4. leden 2026, 1 událost" [ref=e210] [cursor=pointer]:
+                - generic [ref=e212]: "4"
+                - button "MČR ve slalomu" [ref=e214]
+              - gridcell "5. leden 2026, 1 událost" [ref=e215] [cursor=pointer]:
+                - generic [ref=e217]: "5"
+                - button "MČR ve slalomu" [ref=e219]
+              - gridcell "6. leden 2026, 1 událost" [ref=e220] [cursor=pointer]:
+                - generic [ref=e222]: "6"
+                - button "Sjíždění Vltavy" [ref=e224]
+              - gridcell "7. leden 2026, 1 událost" [ref=e225] [cursor=pointer]:
+                - generic [ref=e227]: "7"
+                - button "Sjíždění Vltavy" [ref=e229]
+              - gridcell "8. leden 2026, 1 událost" [ref=e230] [cursor=pointer]:
+                - generic [ref=e232]: "8"
+                - button "Regata Račice" [ref=e234]
+              - gridcell "9. leden 2026, 1 událost" [ref=e235] [cursor=pointer]:
+                - generic [ref=e237]: "9"
+                - button "Regata Račice" [ref=e239]
+              - gridcell "10. leden 2026, 1 událost" [ref=e240] [cursor=pointer]:
+                - generic [ref=e242]: "10"
+                - 'button "Český pohár #1" [ref=e244]'
+              - gridcell "11. leden 2026, 1 událost" [ref=e245] [cursor=pointer]:
+                - generic [ref=e247]: "11"
+                - 'button "Český pohár #1" [ref=e249]'
+              - gridcell "12. leden 2026" [ref=e250] [cursor=pointer]:
+                - generic [ref=e252]: "12"
+              - gridcell "13. leden 2026" [ref=e254] [cursor=pointer]:
+                - generic [ref=e256]: "13"
+              - gridcell "14. leden 2026" [ref=e258] [cursor=pointer]:
+                - generic [ref=e260]: "14"
+              - gridcell "15. leden 2026, 1 událost" [ref=e262] [cursor=pointer]:
+                - generic [ref=e264]: "15"
+                - button "Valná hromada CSK" [ref=e266]
+              - gridcell "16. leden 2026" [ref=e267] [cursor=pointer]:
+                - generic [ref=e269]: "16"
+              - gridcell "17. leden 2026, 1 událost" [ref=e271] [cursor=pointer]:
+                - generic [ref=e273]: "17"
+                - 'button "Český pohár #2" [ref=e275]'
+              - gridcell "18. leden 2026, 1 událost" [ref=e276] [cursor=pointer]:
+                - generic [ref=e278]: "18"
+                - 'button "Český pohár #2" [ref=e280]'
+              - gridcell "19. leden 2026" [ref=e281] [cursor=pointer]:
+                - generic [ref=e283]: "19"
+              - gridcell "20. leden 2026, 1 událost" [ref=e285] [cursor=pointer]:
+                - generic [ref=e287]: "20"
+                - button "Vodácký víkend Sázava" [ref=e289]
+              - gridcell "21. leden 2026, 1 událost" [ref=e290] [cursor=pointer]:
+                - generic [ref=e292]: "21"
+                - button "Vodácký víkend Sázava" [ref=e294]
+              - gridcell "22. leden 2026, 1 událost" [ref=e295] [cursor=pointer]:
+                - generic [ref=e297]: "22"
+                - button "Český maraton" [ref=e299]
+              - gridcell "23. leden 2026" [ref=e300] [cursor=pointer]:
+                - generic [ref=e302]: "23"
+              - gridcell "24. leden 2026, 1 událost" [ref=e304] [cursor=pointer]:
+                - generic [ref=e306]: "24"
+                - button "Nominace na MS" [ref=e308]
+              - gridcell "25. leden 2026, 1 událost" [ref=e309] [cursor=pointer]:
+                - generic [ref=e311]: "25"
+                - button "Nominace na MS" [ref=e313]
+              - gridcell "26. leden 2026" [ref=e314] [cursor=pointer]:
+                - generic [ref=e316]: "26"
+              - gridcell "27. leden 2026" [ref=e318] [cursor=pointer]:
+                - generic [ref=e320]: "27"
+              - gridcell "28. leden 2026" [ref=e322] [cursor=pointer]:
+                - generic [ref=e324]: "28"
+              - gridcell "29. leden 2026" [ref=e326] [cursor=pointer]:
+                - generic [ref=e328]: "29"
+              - gridcell "30. leden 2026" [ref=e330] [cursor=pointer]:
+                - generic [ref=e332]: "30"
+              - gridcell "31. leden 2026" [ref=e334] [cursor=pointer]:
+                - generic [ref=e336]: "31"
+              - gridcell "1. únor 2026" [ref=e338] [cursor=pointer]:
+                - generic [ref=e340]: "1"
+              - gridcell "2. únor 2026" [ref=e342] [cursor=pointer]:
+                - generic [ref=e344]: "2"
+              - gridcell "3. únor 2026" [ref=e346] [cursor=pointer]:
+                - generic [ref=e348]: "3"
+              - gridcell "4. únor 2026" [ref=e350] [cursor=pointer]:
+                - generic [ref=e352]: "4"
+              - gridcell "5. únor 2026" [ref=e354] [cursor=pointer]:
+                - generic [ref=e356]: "5"
+              - gridcell "6. únor 2026" [ref=e358] [cursor=pointer]:
+                - generic [ref=e360]: "6"
+              - gridcell "7. únor 2026" [ref=e362] [cursor=pointer]:
+                - generic [ref=e364]: "7"
+              - gridcell "8. únor 2026" [ref=e366] [cursor=pointer]:
+                - generic [ref=e368]: "8"
+        - complementary [ref=e370]:
+          - generic [ref=e372]:
+            - heading "Nadcházející závody" [level=2] [ref=e374]
+            - generic [ref=e375]:
+              - button "20.–21. 1. VT Vodácký víkend Sázava Sázava 178 přihlášených" [ref=e376] [cursor=pointer]:
+                - generic [ref=e377]:
+                  - img [ref=e378]
+                  - generic [ref=e380]: 20.–21. 1.
+                - generic [ref=e381]:
+                  - generic [ref=e382]:
+                    - generic [ref=e384]: VT
+                    - generic [ref=e385]: Vodácký víkend Sázava
+                  - generic [ref=e386]:
+                    - generic [ref=e387]:
+                      - img [ref=e388]
+                      - text: Sázava
+                    - generic [ref=e391]:
+                      - img [ref=e392]
+                      - text: 178 přihlášených
+                - img [ref=e397]
+              - button "22. 1. RY Český maraton Slapy 89 přihlášených" [ref=e399] [cursor=pointer]:
+                - generic [ref=e400]:
+                  - img [ref=e401]
+                  - generic [ref=e403]: 22. 1.
+                - generic [ref=e404]:
+                  - generic [ref=e405]:
+                    - generic [ref=e407]: RY
+                    - generic [ref=e408]: Český maraton
+                  - generic [ref=e409]:
+                    - generic [ref=e410]:
+                      - img [ref=e411]
+                      - text: Slapy
+                    - generic [ref=e414]:
+                      - img [ref=e415]
+                      - text: 89 přihlášených
+                - img [ref=e420]
+              - button "24.–25. 1. DV Nominace na MS Praha - Troja 42 přihlášených" [ref=e422] [cursor=pointer]:
+                - generic [ref=e423]:
+                  - img [ref=e424]
+                  - generic [ref=e426]: 24.–25. 1.
+                - generic [ref=e427]:
+                  - generic [ref=e428]:
+                    - generic [ref=e430]: DV
+                    - generic [ref=e431]: Nominace na MS
+                  - generic [ref=e432]:
+                    - generic [ref=e433]:
+                      - img [ref=e434]
+                      - text: Praha - Troja
+                    - generic [ref=e437]:
+                      - img [ref=e438]
+                      - text: 42 přihlášených
+                - img [ref=e443]
+            - button "Zobrazit všechny závody" [ref=e446] [cursor=pointer]:
+              - generic [ref=e447]: Zobrazit všechny závody
+  - contentinfo [ref=e448]:
+    - paragraph [ref=e450]: © 2026 Český svaz kanoistů. Všechna práva vyhrazena.
+```

@@ -1,0 +1,120 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]: leden 2026
+    - generic [ref=e6]:
+      - button "Dnes" [ref=e7] [cursor=pointer]
+      - button "Předchozí měsíc" [ref=e8] [cursor=pointer]:
+        - img [ref=e9]
+      - button "Další měsíc" [ref=e11] [cursor=pointer]:
+        - img [ref=e12]
+  - grid "Kalendář" [ref=e14]:
+    - row "po út st čt pá so ne" [ref=e15]:
+      - columnheader "po" [ref=e16]
+      - columnheader "út" [ref=e17]
+      - columnheader "st" [ref=e18]
+      - columnheader "čt" [ref=e19]
+      - columnheader "pá" [ref=e20]
+      - columnheader "so" [ref=e21]
+      - columnheader "ne" [ref=e22]
+    - generic [ref=e23]:
+      - gridcell "29. prosinec 2025" [ref=e24] [cursor=pointer]:
+        - generic [ref=e26]: "29"
+      - gridcell "30. prosinec 2025" [ref=e28] [cursor=pointer]:
+        - generic [ref=e30]: "30"
+      - gridcell "31. prosinec 2025" [ref=e32] [cursor=pointer]:
+        - generic [ref=e34]: "31"
+      - gridcell "1. leden 2026" [ref=e36] [cursor=pointer]:
+        - generic [ref=e38]: "1"
+      - gridcell "2. leden 2026" [ref=e40] [cursor=pointer]:
+        - generic [ref=e42]: "2"
+      - gridcell "3. leden 2026" [ref=e44] [cursor=pointer]:
+        - generic [ref=e46]: "3"
+      - gridcell "4. leden 2026" [ref=e48] [cursor=pointer]:
+        - generic [ref=e50]: "4"
+      - gridcell "5. leden 2026, 1 událost" [ref=e52] [cursor=pointer]:
+        - generic [ref=e54]: "5"
+        - button "MS slalom" [ref=e56]
+      - gridcell "6. leden 2026, 1 událost" [ref=e57] [cursor=pointer]:
+        - generic [ref=e59]: "6"
+        - button "MS slalom" [ref=e61]
+      - gridcell "7. leden 2026, 1 událost" [ref=e62] [cursor=pointer]:
+        - generic [ref=e64]: "7"
+        - button "MS slalom" [ref=e66]
+      - gridcell "8. leden 2026, 1 událost" [ref=e67] [cursor=pointer]:
+        - generic [ref=e69]: "8"
+        - button "Trénink mládeže" [ref=e71]
+      - gridcell "9. leden 2026" [ref=e72] [cursor=pointer]:
+        - generic [ref=e74]: "9"
+      - gridcell "10. leden 2026, 1 událost" [ref=e76] [cursor=pointer]:
+        - generic [ref=e78]: "10"
+        - button "Deadline přihlášek" [ref=e80]
+      - gridcell "11. leden 2026" [ref=e81] [cursor=pointer]:
+        - generic [ref=e83]: "11"
+      - gridcell "12. leden 2026, 1 událost" [ref=e85] [cursor=pointer]:
+        - generic [ref=e87]: "12"
+        - button "MR K1" [ref=e89]
+      - gridcell "13. leden 2026" [ref=e90] [cursor=pointer]:
+        - generic [ref=e92]: "13"
+      - gridcell "14. leden 2026" [ref=e94] [cursor=pointer]:
+        - generic [ref=e96]: "14"
+      - gridcell "15. leden 2026, 1 událost" [ref=e98] [cursor=pointer]:
+        - generic [ref=e100]: "15"
+        - button "Regata Praha" [ref=e102]
+      - gridcell "16. leden 2026" [ref=e103] [cursor=pointer]:
+        - generic [ref=e105]: "16"
+      - gridcell "17. leden 2026" [ref=e107] [cursor=pointer]:
+        - generic [ref=e109]: "17"
+      - gridcell "18. leden 2026, 1 událost" [ref=e111] [cursor=pointer]:
+        - generic [ref=e113]: "18"
+        - button "Vodácký maraton" [ref=e115]
+      - gridcell "19. leden 2026, 1 událost" [ref=e116] [cursor=pointer]:
+        - generic [ref=e118]: "19"
+        - button "Vodácký maraton" [ref=e120]
+      - gridcell "20. leden 2026, 2 událostí" [ref=e121] [cursor=pointer]:
+        - generic [ref=e123]: "20"
+        - generic [ref=e124]:
+          - button "Ranní trénink" [ref=e125]
+          - button "Schůzka oddílu" [ref=e126]
+      - gridcell "21. leden 2026" [ref=e127] [cursor=pointer]:
+        - generic [ref=e129]: "21"
+      - gridcell "22. leden 2026" [ref=e131] [cursor=pointer]:
+        - generic [ref=e133]: "22"
+      - gridcell "23. leden 2026" [ref=e135] [cursor=pointer]:
+        - generic [ref=e137]: "23"
+      - gridcell "24. leden 2026" [ref=e139] [cursor=pointer]:
+        - generic [ref=e141]: "24"
+      - gridcell "25. leden 2026, 1 událost" [ref=e143] [cursor=pointer]:
+        - generic [ref=e145]: "25"
+        - button "Ukončení sezóny" [ref=e147]
+      - gridcell "26. leden 2026" [ref=e148] [cursor=pointer]:
+        - generic [ref=e150]: "26"
+      - gridcell "27. leden 2026" [ref=e152] [cursor=pointer]:
+        - generic [ref=e154]: "27"
+      - gridcell "28. leden 2026" [ref=e156] [cursor=pointer]:
+        - generic [ref=e158]: "28"
+      - gridcell "29. leden 2026" [ref=e160] [cursor=pointer]:
+        - generic [ref=e162]: "29"
+      - gridcell "30. leden 2026" [ref=e164] [cursor=pointer]:
+        - generic [ref=e166]: "30"
+      - gridcell "31. leden 2026" [ref=e168] [cursor=pointer]:
+        - generic [ref=e170]: "31"
+      - gridcell "1. únor 2026" [ref=e172] [cursor=pointer]:
+        - generic [ref=e174]: "1"
+      - gridcell "2. únor 2026" [ref=e176] [cursor=pointer]:
+        - generic [ref=e178]: "2"
+      - gridcell "3. únor 2026" [ref=e180] [cursor=pointer]:
+        - generic [ref=e182]: "3"
+      - gridcell "4. únor 2026" [ref=e184] [cursor=pointer]:
+        - generic [ref=e186]: "4"
+      - gridcell "5. únor 2026" [ref=e188] [cursor=pointer]:
+        - generic [ref=e190]: "5"
+      - gridcell "6. únor 2026" [ref=e192] [cursor=pointer]:
+        - generic [ref=e194]: "6"
+      - gridcell "7. únor 2026" [ref=e196] [cursor=pointer]:
+        - generic [ref=e198]: "7"
+      - gridcell "8. únor 2026" [ref=e200] [cursor=pointer]:
+        - generic [ref=e202]: "8"
+```

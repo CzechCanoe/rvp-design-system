@@ -1,0 +1,369 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e7]: Kanoe.cz
+      - navigation "Main navigation" [ref=e8]:
+        - navigation "Main navigation" [ref=e9]:
+          - button "Toggle navigation menu" [ref=e11] [cursor=pointer]:
+            - img [ref=e12]
+      - generic [ref=e14]:
+        - button "Napoveda" [ref=e15] [cursor=pointer]:
+          - generic [ref=e16]: Napoveda
+        - generic "Jan Spravce" [ref=e18]: JS
+  - generic [ref=e19]:
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - paragraph [ref=e26]: Dobry den, Jane
+        - heading "USK Praha" [level=1] [ref=e27]
+        - paragraph [ref=e28]:
+          - generic [ref=e29]: Oddilovy spravce
+      - generic [ref=e30]:
+        - button "Exportovat" [ref=e31] [cursor=pointer]:
+          - generic [ref=e32]: Exportovat
+        - button "+ Novy zavodnik" [ref=e33] [cursor=pointer]:
+          - generic [ref=e34]: + Novy zavodnik
+    - img [ref=e36]
+  - generic [ref=e39]:
+    - button "Aktivni zavodnici +2 5 6 celkem" [ref=e41] [cursor=pointer]:
+      - generic [ref=e42]:
+        - img [ref=e45]
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - generic [ref=e51]: Aktivni zavodnici
+            - generic [ref=e52]:
+              - img [ref=e53]
+              - generic [ref=e55]: "+2"
+          - generic [ref=e57]: "5"
+          - generic [ref=e59]: 6 celkem
+    - button "Nadchazejici zavody 4 Nejblizsi za 6 dni" [ref=e61] [cursor=pointer]:
+      - generic [ref=e62]:
+        - img [ref=e65]
+        - generic [ref=e67]:
+          - generic [ref=e69]: Nadchazejici zavody
+          - generic [ref=e71]: "4"
+          - generic [ref=e73]: Nejblizsi za 6 dni
+    - button "Bez prava startu 1 Vyzaduje pozornost" [ref=e75] [cursor=pointer]:
+      - generic [ref=e76]:
+        - img [ref=e79]
+        - generic [ref=e82]:
+          - generic [ref=e84]: Bez prava startu
+          - generic [ref=e86]: "1"
+          - paragraph [ref=e87]: Vyzaduje pozornost
+    - button "Nove registrace +50% 3 Tento mesic" [ref=e89] [cursor=pointer]:
+      - generic [ref=e90]:
+        - img [ref=e93]
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - generic [ref=e98]: Nove registrace
+            - generic [ref=e99]:
+              - img [ref=e100]
+              - generic [ref=e102]: +50%
+          - generic [ref=e104]: "3"
+          - generic [ref=e106]: Tento mesic
+  - main [ref=e107]:
+    - generic [ref=e109]:
+      - generic [ref=e110]:
+        - generic [ref=e111]:
+          - generic [ref=e112]:
+            - heading "Upozorneni 4" [level=2] [ref=e113]:
+              - text: Upozorneni
+              - generic [ref=e114]: "4"
+            - button "Zobrazit vse" [ref=e115] [cursor=pointer]:
+              - generic [ref=e116]: Zobrazit vse
+          - generic [ref=e117]:
+            - generic [ref=e118]:
+              - img [ref=e120]
+              - generic [ref=e124]:
+                - paragraph [ref=e125]: 3 zavodnici bez prava startu
+                - paragraph [ref=e126]: Nemohou startovat na nadchazejicich zavodech
+              - button "Zobrazit" [ref=e128] [cursor=pointer]:
+                - generic [ref=e129]: Zobrazit
+            - generic [ref=e130]:
+              - img [ref=e132]
+              - generic [ref=e134]:
+                - paragraph [ref=e135]: 5 prohlidek expiruje do 30 dnu
+                - paragraph [ref=e136]: Jan Novak, Petr Svoboda a dalsi...
+              - button "Upozornit" [ref=e138] [cursor=pointer]:
+                - generic [ref=e139]: Upozornit
+            - generic [ref=e140]:
+              - img [ref=e142]
+              - generic [ref=e144]:
+                - paragraph [ref=e145]: 2 nezaplacene prispevky
+                - paragraph [ref=e146]: Splatnost do 15.2.2026
+              - button "Detail" [ref=e148] [cursor=pointer]:
+                - generic [ref=e149]: Detail
+            - generic [ref=e150]:
+              - img [ref=e152]
+              - generic [ref=e154]:
+                - paragraph [ref=e155]: "Uzaverka prihlasek: Cesky pohar #1"
+                - paragraph [ref=e156]: Zbyva 3 dny (do 22.1.2026)
+              - button "Prihlasit" [ref=e158] [cursor=pointer]:
+                - generic [ref=e159]: Prihlasit
+        - generic [ref=e160]:
+          - generic [ref=e161]:
+            - heading "Zavodnici" [level=2] [ref=e162]
+            - button "Zobrazit vse" [ref=e163] [cursor=pointer]:
+              - generic [ref=e164]: Zobrazit vse
+          - generic [ref=e165]:
+            - searchbox "Hledat zavodnika..." [ref=e169]
+            - generic [ref=e170]:
+              - generic [ref=e172]:
+                - combobox [ref=e173] [cursor=pointer]:
+                  - option "Vsichni" [selected]
+                  - option "Aktivni"
+                  - option "Neaktivni"
+                - generic:
+                  - img
+              - generic [ref=e175]:
+                - combobox [ref=e176] [cursor=pointer]:
+                  - option "Vsechny sekce" [selected]
+                  - option "Divoka voda"
+                  - option "Rychlost"
+                  - option "VT"
+                - generic:
+                  - img
+          - table [ref=e178]:
+            - rowgroup [ref=e179]:
+              - row "Jmeno Sekce VT Pravo startu Zdravotni Prispevky" [ref=e180]:
+                - columnheader "Jmeno" [ref=e181]:
+                  - generic [ref=e182]: Jmeno
+                - columnheader "Sekce" [ref=e183]:
+                  - generic [ref=e184]: Sekce
+                - columnheader "VT" [ref=e185]:
+                  - generic [ref=e186]: VT
+                - columnheader "Pravo startu" [ref=e187]:
+                  - generic [ref=e188]: Pravo startu
+                - columnheader "Zdravotni" [ref=e189]:
+                  - generic [ref=e190]: Zdravotni
+                - columnheader "Prispevky" [ref=e191]:
+                  - generic [ref=e192]: Prispevky
+            - rowgroup [ref=e193]:
+              - row "Jiri Prskavec Jiri Prskavec RGC-2008-0042 Divoka voda M Aktivni 30. 6. Zaplaceno" [ref=e194]:
+                - cell "Jiri Prskavec Jiri Prskavec RGC-2008-0042" [ref=e195]:
+                  - generic [ref=e196]:
+                    - generic "Jiri Prskavec" [ref=e198]: JP
+                    - generic [ref=e199]:
+                      - generic [ref=e200]: Jiri Prskavec
+                      - generic [ref=e201]: RGC-2008-0042
+                - cell "Divoka voda" [ref=e202]:
+                  - generic [ref=e204]: Divoka voda
+                - cell "M" [ref=e205]:
+                  - generic [ref=e207]: M
+                - cell "Aktivni" [ref=e208]:
+                  - generic [ref=e210]: Aktivni
+                - cell "30. 6." [ref=e211]
+                - cell "Zaplaceno" [ref=e212]:
+                  - generic [ref=e214]: Zaplaceno
+              - row "Vit Prindis Vit Prindis RGC-2006-0128 Divoka voda M Aktivni 15. 4. Zaplaceno" [ref=e215]:
+                - cell "Vit Prindis Vit Prindis RGC-2006-0128" [ref=e216]:
+                  - generic [ref=e217]:
+                    - generic "Vit Prindis" [ref=e219]: VP
+                    - generic [ref=e220]:
+                      - generic [ref=e221]: Vit Prindis
+                      - generic [ref=e222]: RGC-2006-0128
+                - cell "Divoka voda" [ref=e223]:
+                  - generic [ref=e225]: Divoka voda
+                - cell "M" [ref=e226]:
+                  - generic [ref=e228]: M
+                - cell "Aktivni" [ref=e229]:
+                  - generic [ref=e231]: Aktivni
+                - cell "15. 4." [ref=e232]
+                - cell "Zaplaceno" [ref=e233]:
+                  - generic [ref=e235]: Zaplaceno
+              - row "Jan Novak Jan Novak RGC-2015-0234 Divoka voda A Neaktivni 10. 1. Po splatnosti" [ref=e236]:
+                - cell "Jan Novak Jan Novak RGC-2015-0234" [ref=e237]:
+                  - generic [ref=e238]:
+                    - generic "Jan Novak" [ref=e240]: JN
+                    - generic [ref=e241]:
+                      - generic [ref=e242]: Jan Novak
+                      - generic [ref=e243]: RGC-2015-0234
+                - cell "Divoka voda" [ref=e244]:
+                  - generic [ref=e246]: Divoka voda
+                - cell "A" [ref=e247]:
+                  - generic [ref=e249]: A
+                - cell "Neaktivni" [ref=e250]:
+                  - generic [ref=e252]: Neaktivni
+                - cell "10. 1." [ref=e253]
+                - cell "Po splatnosti" [ref=e254]:
+                  - generic [ref=e256]: Po splatnosti
+              - row "Petr Svoboda Petr Svoboda RGC-2018-0456 Rychlost B Aktivni 5. 2. Zaplaceno" [ref=e257]:
+                - cell "Petr Svoboda Petr Svoboda RGC-2018-0456" [ref=e258]:
+                  - generic [ref=e259]:
+                    - generic "Petr Svoboda" [ref=e261]: PS
+                    - generic [ref=e262]:
+                      - generic [ref=e263]: Petr Svoboda
+                      - generic [ref=e264]: RGC-2018-0456
+                - cell "Rychlost" [ref=e265]:
+                  - generic [ref=e267]: Rychlost
+                - cell "B" [ref=e268]:
+                  - generic [ref=e270]: B
+                - cell "Aktivni" [ref=e271]:
+                  - generic [ref=e273]: Aktivni
+                - cell "5. 2." [ref=e274]
+                - cell "Zaplaceno" [ref=e275]:
+                  - generic [ref=e277]: Zaplaceno
+              - row "Tereza Fiserova Tereza Fiserova RGC-2012-0089 Divoka voda M Aktivni 20. 9. Zaplaceno" [ref=e278]:
+                - cell "Tereza Fiserova Tereza Fiserova RGC-2012-0089" [ref=e279]:
+                  - generic [ref=e280]:
+                    - generic "Tereza Fiserova" [ref=e282]: TF
+                    - generic [ref=e283]:
+                      - generic [ref=e284]: Tereza Fiserova
+                      - generic [ref=e285]: RGC-2012-0089
+                - cell "Divoka voda" [ref=e286]:
+                  - generic [ref=e288]: Divoka voda
+                - cell "M" [ref=e289]:
+                  - generic [ref=e291]: M
+                - cell "Aktivni" [ref=e292]:
+                  - generic [ref=e294]: Aktivni
+                - cell "20. 9." [ref=e295]
+                - cell "Zaplaceno" [ref=e296]:
+                  - generic [ref=e298]: Zaplaceno
+              - row "Lukas Rohan Lukas Rohan RGC-2010-0167 Divoka voda M Aktivni 12. 5. Ceka" [ref=e299]:
+                - cell "Lukas Rohan Lukas Rohan RGC-2010-0167" [ref=e300]:
+                  - generic [ref=e301]:
+                    - generic "Lukas Rohan" [ref=e303]: LR
+                    - generic [ref=e304]:
+                      - generic [ref=e305]: Lukas Rohan
+                      - generic [ref=e306]: RGC-2010-0167
+                - cell "Divoka voda" [ref=e307]:
+                  - generic [ref=e309]: Divoka voda
+                - cell "M" [ref=e310]:
+                  - generic [ref=e312]: M
+                - cell "Aktivni" [ref=e313]:
+                  - generic [ref=e315]: Aktivni
+                - cell "12. 5." [ref=e316]
+                - cell "Ceka" [ref=e317]:
+                  - generic [ref=e319]: Ceka
+      - generic [ref=e320]:
+        - generic [ref=e321]:
+          - generic [ref=e322]:
+            - heading "Nadchazejici zavody" [level=2] [ref=e323]
+            - button "Kalendar" [ref=e324] [cursor=pointer]:
+              - generic [ref=e325]: Kalendar
+          - generic [ref=e326]:
+            - generic [ref=e327]:
+              - generic [ref=e328]:
+                - generic [ref=e329]: "25"
+                - generic [ref=e330]: led
+              - generic [ref=e331]:
+                - 'heading "Cesky pohar #1" [level=3] [ref=e333]'
+                - paragraph [ref=e334]: Praha - Troja
+                - generic [ref=e335]:
+                  - generic [ref=e337]: Divoka voda
+                  - generic [ref=e338]:
+                    - img [ref=e339]
+                    - text: 8/12
+                  - generic [ref=e343]:
+                    - img [ref=e344]
+                    - text: do 22. 1.
+            - generic [ref=e347]:
+              - generic [ref=e348]:
+                - generic [ref=e349]: "1"
+                - generic [ref=e350]: uno
+              - generic [ref=e351]:
+                - heading "Zimni regata" [level=3] [ref=e353]
+                - paragraph [ref=e354]: Racice
+                - generic [ref=e355]:
+                  - generic [ref=e357]: Rychlost
+                  - generic [ref=e358]:
+                    - img [ref=e359]
+                    - text: 15/20
+                  - generic [ref=e363]:
+                    - img [ref=e364]
+                    - text: do 28. 1.
+            - generic [ref=e367]:
+              - generic [ref=e368]:
+                - generic [ref=e369]: "8"
+                - generic [ref=e370]: uno
+              - generic [ref=e371]:
+                - heading "Jarni sprint" [level=3] [ref=e373]
+                - paragraph [ref=e376]: Brandys nad Labem
+                - generic [ref=e377]:
+                  - generic [ref=e379]: Divoka voda
+                  - generic [ref=e380]:
+                    - img [ref=e381]
+                    - text: 5/15
+                  - generic [ref=e385]:
+                    - img [ref=e386]
+                    - text: do 5. 2.
+            - generic [ref=e389]:
+              - generic [ref=e390]:
+                - generic [ref=e391]: "15"
+                - generic [ref=e392]: uno
+              - generic [ref=e393]:
+                - heading "MCR v maratonu" [level=3] [ref=e395]
+                - paragraph [ref=e396]: Slapy
+                - generic [ref=e397]:
+                  - generic [ref=e399]: Rychlost
+                  - generic [ref=e400]:
+                    - img [ref=e401]
+                    - text: 3/10
+                  - generic [ref=e405]:
+                    - img [ref=e406]
+                    - text: do 12. 2.
+        - generic [ref=e409]:
+          - heading "Rychle akce" [level=2] [ref=e411]
+          - generic [ref=e412]:
+            - button "Registrovat zavodnika Pridat noveho clena do oddilu" [ref=e413] [cursor=pointer]:
+              - img [ref=e415]
+              - generic [ref=e418]:
+                - paragraph [ref=e419]: Registrovat zavodnika
+                - paragraph [ref=e420]: Pridat noveho clena do oddilu
+              - img [ref=e422]
+            - button "Hromadna prihlaska Prihlasit zavodniky na zavod" [ref=e424] [cursor=pointer]:
+              - img [ref=e426]
+              - generic [ref=e429]:
+                - paragraph [ref=e430]: Hromadna prihlaska
+                - paragraph [ref=e431]: Prihlasit zavodniky na zavod
+              - img [ref=e433]
+            - button "Sprava prispevku Evidovat platby clenu" [ref=e435] [cursor=pointer]:
+              - img [ref=e437]
+              - generic [ref=e439]:
+                - paragraph [ref=e440]: Sprava prispevku
+                - paragraph [ref=e441]: Evidovat platby clenu
+              - img [ref=e443]
+        - generic [ref=e445]:
+          - heading "Posledni aktivita" [level=2] [ref=e447]
+          - generic [ref=e448]:
+            - generic [ref=e449]:
+              - img [ref=e451]
+              - generic [ref=e454]:
+                - paragraph [ref=e455]:
+                  - text: "Nova registrace:"
+                  - strong [ref=e456]: Martin Dvorak
+                - paragraph [ref=e457]: Pred 21h
+            - generic [ref=e458]:
+              - img [ref=e460]
+              - generic [ref=e462]:
+                - paragraph [ref=e463]:
+                  - strong [ref=e464]: Tereza Fiserova
+                  - text: zaplatila prispevky
+                - paragraph [ref=e465]: Vcera
+            - generic [ref=e466]:
+              - img [ref=e468]
+              - generic [ref=e474]:
+                - paragraph [ref=e475]:
+                  - text: Prihlaska na
+                  - strong [ref=e476]: "Cesky pohar #1"
+                  - text: potvrzena
+                - paragraph [ref=e477]: Vcera
+            - generic [ref=e478]:
+              - img [ref=e480]
+              - generic [ref=e482]:
+                - paragraph [ref=e483]:
+                  - strong [ref=e484]: Vit Prindis
+                  - text: "- nova zdravotni prohlidka"
+                - paragraph [ref=e485]: Pred 2 dny
+            - generic [ref=e486]:
+              - img [ref=e488]
+              - generic [ref=e493]:
+                - paragraph [ref=e494]:
+                  - strong [ref=e495]: Ondrej Karlik
+                  - text: "- prestup schvalen"
+                - paragraph [ref=e496]: Pred 2 dny
+  - contentinfo [ref=e497]:
+    - paragraph [ref=e498]: Cesky svaz kanoistu - Registracni a vysledkovy portal
+```
