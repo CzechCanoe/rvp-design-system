@@ -855,3 +855,192 @@
     transform: none;
   }
 }
+
+/* =============================================================================
+   EMBED STYLE VARIANT
+   Neutral, modern look for kanoe.cz integration
+   ============================================================================= */
+
+.csk-results-table--style-embed {
+  /* No shadows, use borders instead */
+  box-shadow: none;
+  border: var(--border-embed-card);
+  border-radius: var(--radius-embed-card);
+  font-size: var(--text-embed-small-size);
+}
+
+.csk-results-table--style-embed .csk-results-table__thead {
+  /* Simple flat header, no gradient */
+  background: var(--color-bg-secondary);
+}
+
+.csk-results-table--style-embed .csk-results-table__th {
+  /* Compact padding */
+  padding: var(--spacing-embed-sm) var(--spacing-embed-md);
+  border-bottom: var(--border-embed-width) solid var(--color-border-secondary);
+  font-size: var(--text-embed-small-size);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.csk-results-table--style-embed .csk-results-table__td {
+  /* Compact padding */
+  padding: var(--spacing-embed-sm) var(--spacing-embed-md);
+  border-bottom: var(--border-embed-width) solid var(--color-border);
+}
+
+.csk-results-table--style-embed .csk-results-table__tr:hover:not(.csk-results-table__tr--empty):not(.csk-results-table__tr--header) {
+  /* Subtle hover, no dramatic effects */
+  background-color: var(--color-bg-secondary);
+}
+
+/* Disable animations in embed mode */
+.csk-results-table--style-embed .csk-results-table__tr {
+  transition: background-color var(--motion-embed-fast);
+}
+
+.csk-results-table--style-embed .csk-results-table__tr--clickable:hover {
+  transform: none;
+  box-shadow: inset 3px 0 0 var(--color-primary-500);
+}
+
+/* Simplified podium highlights for embed */
+.csk-results-table--style-embed .csk-results-table__tr--gold,
+.csk-results-table--style-embed .csk-results-table__tr--silver,
+.csk-results-table--style-embed .csk-results-table__tr--bronze {
+  border-left-width: 3px;
+}
+
+.csk-results-table--style-embed .csk-results-table__tr--gold::before,
+.csk-results-table--style-embed .csk-results-table__tr--silver::before,
+.csk-results-table--style-embed .csk-results-table__tr--bronze::before {
+  width: 3px;
+}
+
+/* No medal emoji in embed */
+.csk-results-table--style-embed .csk-results-table__tr--gold .csk-results-table__td:first-child::before {
+  display: none;
+}
+
+/* Subtle live indicator */
+.csk-results-table--style-embed .csk-results-table__live-indicator {
+  width: 8px;
+  height: 8px;
+}
+
+/* Dark mode embed */
+[data-theme='dark'] .csk-results-table--style-embed {
+  border-color: var(--color-border-secondary);
+}
+
+[data-theme='dark'] .csk-results-table--style-embed .csk-results-table__thead {
+  background: var(--color-bg-tertiary);
+}
+
+/* =============================================================================
+   CONTAINER QUERIES - Responsive Column Hiding
+   ============================================================================= */
+
+.csk-results-table-wrapper {
+  container-type: inline-size;
+  container-name: results-table;
+}
+
+/* Hide columns at small container width (<400px) */
+@container results-table (max-width: 400px) {
+  .csk-results-table__col--hide-sm {
+    display: none;
+  }
+}
+
+/* Hide columns at medium container width (<600px) */
+@container results-table (max-width: 600px) {
+  .csk-results-table__col--hide-md {
+    display: none;
+  }
+}
+
+/* Hide columns at large container width (<800px) */
+@container results-table (max-width: 800px) {
+  .csk-results-table__col--hide-lg {
+    display: none;
+  }
+}
+
+/* =============================================================================
+   SLALOM-SPECIFIC ELEMENTS
+   Round badges and progression indicators
+   ============================================================================= */
+
+/* Round badge (Q/SF/F) */
+.csk-results-table__round {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  padding: var(--spacing-0-5) var(--spacing-1-5);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  background: var(--color-gray-100);
+  color: var(--color-text-secondary);
+}
+
+.csk-results-table__round--q {
+  background: var(--color-info-100);
+  color: var(--color-info-700);
+}
+
+.csk-results-table__round--sf {
+  background: var(--color-warning-100);
+  color: var(--color-warning-700);
+}
+
+.csk-results-table__round--f {
+  background: var(--color-success-100);
+  color: var(--color-success-700);
+}
+
+[data-theme='dark'] .csk-results-table__round {
+  background: var(--color-gray-800);
+}
+
+[data-theme='dark'] .csk-results-table__round--q {
+  background: rgba(59, 130, 246, 0.2);
+  color: var(--color-info-400);
+}
+
+[data-theme='dark'] .csk-results-table__round--sf {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--color-warning-400);
+}
+
+[data-theme='dark'] .csk-results-table__round--f {
+  background: rgba(34, 197, 94, 0.2);
+  color: var(--color-success-400);
+}
+
+/* Progression indicator (checkmark) */
+.csk-results-table__progression {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--color-success-600);
+}
+
+.csk-results-table__progression svg {
+  width: 16px;
+  height: 16px;
+}
+
+[data-theme='dark'] .csk-results-table__progression {
+  color: var(--color-success-400);
+}
+
+/* Progressed row highlight */
+.csk-results-table__tr--progressed {
+  background: linear-gradient(90deg, rgba(34, 197, 94, 0.05) 0%, transparent 100%);
+}

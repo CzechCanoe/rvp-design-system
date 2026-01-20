@@ -7,7 +7,7 @@ import './ResultsTable.css';
 
 export type ResultsTableSize = 'sm' | 'md' | 'lg';
 export type ResultsTableVariant = 'default' | 'striped' | 'compact';
-export type ResultsTableStyleVariant = 'default' | 'gradient' | 'glass';
+export type ResultsTableStyleVariant = 'default' | 'gradient' | 'glass' | 'embed';
 export type ResultSection = 'dv' | 'ry' | 'vt';
 export type ResultStatus = 'dns' | 'dnf' | 'dsq' | 'final' | 'provisional' | 'live';
 
@@ -46,6 +46,12 @@ export interface ResultEntry {
   meta?: Record<string, unknown>;
   /** Previous rank for position change animation */
   previousRank?: number;
+  /** Slalom round (Q = qualification, SF = semifinal, F = final) */
+  round?: 'Q' | 'SF' | 'F';
+  /** Whether athlete progressed to next round */
+  progressed?: boolean;
+  /** Starting position in current round */
+  startNumber?: number;
 }
 
 export interface ResultsTableColumn {
@@ -59,6 +65,10 @@ export interface ResultsTableColumn {
   align?: 'left' | 'center' | 'right';
   /** Whether to show this column */
   visible?: boolean;
+  /** Hide column at container width (uses container queries) */
+  hideAt?: 'sm' | 'md' | 'lg';
+  /** Priority for responsive hiding (lower = hide first) */
+  priority?: number;
 }
 
 export interface ResultsTableProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'results'> {
@@ -88,6 +98,12 @@ export interface ResultsTableProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   highlightPositions?: number;
   /** Enable live indicator for live status */
   showLiveIndicator?: boolean;
+  /** Show slalom round column (Q/SF/F) */
+  showRound?: boolean;
+  /** Show progression indicator (checkmark for athletes who progressed) */
+  showProgression?: boolean;
+  /** Show start number column */
+  showStartNumber?: boolean;
   /** Custom columns override */
   columns?: ResultsTableColumn[];
   /** Custom cell renderer */
@@ -195,6 +211,9 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
       showPodiumHighlights = true,
       highlightPositions = 3,
       showLiveIndicator = true,
+      showRound = false,
+      showProgression = false,
+      showStartNumber = false,
       columns: customColumns,
       renderCell,
       onRowClick,
@@ -215,17 +234,20 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
       ? results.filter((r) => r.section === section)
       : results;
 
-    // Default columns
+    // Default columns with container query responsive hiding
     const defaultColumns: ResultsTableColumn[] = [
-      { key: 'rank', header: '#', width: '60px', align: 'center', visible: true },
-      { key: 'name', header: 'Závodník', align: 'left', visible: true },
-      { key: 'club', header: 'Klub', align: 'left', visible: showClub },
-      { key: 'country', header: 'Země', width: '70px', align: 'center', visible: showCountry },
-      { key: 'category', header: 'Kat.', width: '70px', align: 'center', visible: showCategory },
-      { key: 'run1', header: '1. jízda', width: '120px', align: 'right', visible: showRuns },
-      { key: 'run2', header: '2. jízda', width: '120px', align: 'right', visible: showRuns },
-      { key: 'totalTime', header: 'Čas', width: '100px', align: 'right', visible: true },
-      { key: 'timeDiff', header: 'Rozdíl', width: '100px', align: 'right', visible: showTimeDiff },
+      { key: 'rank', header: '#', width: '60px', align: 'center', visible: true, priority: 1 },
+      { key: 'startNumber', header: 'St.č.', width: '50px', align: 'center', visible: showStartNumber, hideAt: 'sm', priority: 6 },
+      { key: 'name', header: 'Závodník', align: 'left', visible: true, priority: 1 },
+      { key: 'club', header: 'Klub', align: 'left', visible: showClub, hideAt: 'md', priority: 4 },
+      { key: 'country', header: 'Země', width: '70px', align: 'center', visible: showCountry, hideAt: 'sm', priority: 5 },
+      { key: 'category', header: 'Kat.', width: '70px', align: 'center', visible: showCategory, hideAt: 'sm', priority: 5 },
+      { key: 'round', header: 'Kolo', width: '60px', align: 'center', visible: showRound, priority: 3 },
+      { key: 'run1', header: '1. jízda', width: '120px', align: 'right', visible: showRuns, hideAt: 'md', priority: 4 },
+      { key: 'run2', header: '2. jízda', width: '120px', align: 'right', visible: showRuns, hideAt: 'md', priority: 4 },
+      { key: 'totalTime', header: 'Čas', width: '100px', align: 'right', visible: true, priority: 1 },
+      { key: 'timeDiff', header: 'Rozdíl', width: '100px', align: 'right', visible: showTimeDiff, hideAt: 'sm', priority: 3 },
+      { key: 'progression', header: '', width: '40px', align: 'center', visible: showProgression, priority: 2 },
     ];
 
     const columns = customColumns || defaultColumns.filter((col) => col.visible !== false);
@@ -319,6 +341,24 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
               {formatTimeDiff(entry.timeDiff)}
             </span>
           );
+        case 'startNumber':
+          return entry.startNumber || '-';
+        case 'round':
+          if (!entry.round) return '-';
+          return (
+            <span className={`csk-results-table__round csk-results-table__round--${entry.round.toLowerCase()}`}>
+              {entry.round}
+            </span>
+          );
+        case 'progression':
+          if (!entry.progressed) return null;
+          return (
+            <span className="csk-results-table__progression" title="Postoupil/a do dalšího kola">
+              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z" />
+              </svg>
+            </span>
+          );
         default:
           return entry.meta?.[columnKey] !== undefined ? String(entry.meta[columnKey]) : '-';
       }
@@ -410,7 +450,10 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
               {columns.map((column) => (
                 <th
                   key={column.key}
-                  className="csk-results-table__th"
+                  className={[
+                    'csk-results-table__th',
+                    column.hideAt && `csk-results-table__col--hide-${column.hideAt}`,
+                  ].filter(Boolean).join(' ')}
                   style={{
                     width: column.width,
                     textAlign: column.align,
@@ -453,7 +496,11 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
                   {columns.map((column) => (
                     <td
                       key={column.key}
-                      className={`csk-results-table__td csk-results-table__td--${column.key}`}
+                      className={[
+                        'csk-results-table__td',
+                        `csk-results-table__td--${column.key}`,
+                        column.hideAt && `csk-results-table__col--hide-${column.hideAt}`,
+                      ].filter(Boolean).join(' ')}
                       style={{ textAlign: column.align }}
                     >
                       {getCellContent(entry, column.key)}

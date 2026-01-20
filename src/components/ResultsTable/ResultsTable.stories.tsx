@@ -15,7 +15,7 @@ const meta: Meta<typeof ResultsTable> = {
     },
     styleVariant: {
       control: 'select',
-      options: ['default', 'gradient', 'glass'],
+      options: ['default', 'gradient', 'glass', 'embed'],
     },
     size: {
       control: 'select',
@@ -798,5 +798,349 @@ export const LiveDemo: Story = {
         />
       </div>
     );
+  },
+};
+
+// =============================================================================
+// EMBED MODE - kanoe.cz Integration
+// =============================================================================
+
+import { KanoeCzContext } from '../KanoeCzContext';
+
+export const EmbedStyle: Story = {
+  name: 'Style: Embed',
+  args: {
+    results: sampleResults.slice(0, 5),
+    styleVariant: 'embed',
+    showPodiumHighlights: true,
+    caption: 'Embed style - for kanoe.cz integration',
+    captionVisible: true,
+  },
+};
+
+export const EmbedInKanoeCz: Story = {
+  name: 'Embed: V kontextu kanoe.cz',
+  render: () => (
+    <KanoeCzContext layout="full" showHeader showSidebar={false}>
+      <h2 style={{ marginBottom: '1rem', fontSize: '1.25rem', fontWeight: 600 }}>
+        Výsledky - K1 muži finále
+      </h2>
+      <ResultsTable
+        results={sampleResults.slice(0, 6)}
+        styleVariant="embed"
+        showPodiumHighlights
+        showRuns
+        caption="K1M Final Results"
+      />
+    </KanoeCzContext>
+  ),
+  parameters: {
+    layout: 'fullscreen',
+  },
+};
+
+export const EmbedWithSidebar: Story = {
+  name: 'Embed: S postranním panelem (úzký)',
+  render: () => (
+    <KanoeCzContext layout="sidebar" showHeader showSidebar>
+      <h2 style={{ marginBottom: '1rem', fontSize: '1.25rem', fontWeight: 600 }}>
+        Výsledky kvalifikace
+      </h2>
+      <ResultsTable
+        results={sampleResults.slice(0, 5)}
+        styleVariant="embed"
+        showPodiumHighlights
+        showRuns={false}
+        showClub
+        caption="Qualification Results"
+      />
+    </KanoeCzContext>
+  ),
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story: 'Tests container query responsiveness - club column should hide when container is narrow.',
+      },
+    },
+  },
+};
+
+// =============================================================================
+// SLALOM-SPECIFIC STORIES
+// =============================================================================
+
+const slalomQualificationResults: ResultEntry[] = [
+  {
+    id: 1,
+    rank: 1,
+    startNumber: 15,
+    name: 'Jiří Prskavec',
+    club: 'USK Praha',
+    country: 'CZE',
+    category: 'K1M',
+    round: 'Q',
+    run1Time: 92.34,
+    run1Penalty: 0,
+    run2Time: 89.12,
+    run2Penalty: 2,
+    totalTime: 91.12,
+    timeDiff: 0,
+    status: 'final',
+    progressed: true,
+  },
+  {
+    id: 2,
+    rank: 2,
+    startNumber: 23,
+    name: 'Giovanni De Gennaro',
+    club: 'Italia',
+    country: 'ITA',
+    category: 'K1M',
+    round: 'Q',
+    run1Time: 93.56,
+    run1Penalty: 0,
+    run2Time: 91.23,
+    run2Penalty: 0,
+    totalTime: 91.23,
+    timeDiff: 0.11,
+    status: 'final',
+    progressed: true,
+  },
+  {
+    id: 3,
+    rank: 3,
+    startNumber: 8,
+    name: 'Peter Kauzer',
+    club: 'KK Ljubljana',
+    country: 'SLO',
+    category: 'K1M',
+    round: 'Q',
+    run1Time: 94.12,
+    run1Penalty: 2,
+    run2Time: 92.45,
+    run2Penalty: 0,
+    totalTime: 92.45,
+    timeDiff: 1.33,
+    status: 'final',
+    progressed: true,
+  },
+  {
+    id: 4,
+    rank: 4,
+    startNumber: 12,
+    name: 'Hannes Aigner',
+    club: 'KC Augsburg',
+    country: 'GER',
+    category: 'K1M',
+    round: 'Q',
+    run1Time: 95.67,
+    run1Penalty: 0,
+    run2Time: 93.12,
+    run2Penalty: 0,
+    totalTime: 93.12,
+    timeDiff: 2.0,
+    status: 'final',
+    progressed: true,
+  },
+  {
+    id: 5,
+    rank: 5,
+    startNumber: 31,
+    name: 'Vít Přindiš',
+    club: 'Dukla Praha',
+    country: 'CZE',
+    category: 'K1M',
+    round: 'Q',
+    run1Time: 94.89,
+    run1Penalty: 2,
+    run2Time: 93.45,
+    run2Penalty: 0,
+    totalTime: 93.45,
+    timeDiff: 2.33,
+    status: 'final',
+    progressed: true,
+  },
+  {
+    id: 6,
+    rank: 6,
+    startNumber: 5,
+    name: 'Lukáš Rohan',
+    club: 'Dukla Praha',
+    country: 'CZE',
+    category: 'C1M',
+    round: 'Q',
+    run1Time: 96.12,
+    run1Penalty: 0,
+    run2Time: 94.78,
+    run2Penalty: 2,
+    totalTime: 96.78,
+    timeDiff: 5.66,
+    status: 'final',
+    progressed: false,
+  },
+  {
+    id: 7,
+    rank: 7,
+    startNumber: 19,
+    name: 'Jan Mašek',
+    club: 'KK Rakovník',
+    country: 'CZE',
+    category: 'K1M',
+    round: 'Q',
+    run1Time: 98.45,
+    run1Penalty: 2,
+    run2Time: 97.12,
+    run2Penalty: 0,
+    totalTime: 97.12,
+    timeDiff: 6.0,
+    status: 'final',
+    progressed: false,
+  },
+];
+
+export const SlalomQualification: Story = {
+  name: 'Slalom: Kvalifikace s postupy',
+  args: {
+    results: slalomQualificationResults,
+    styleVariant: 'default',
+    showPodiumHighlights: false,
+    showRuns: true,
+    showCountry: true,
+    showStartNumber: true,
+    showProgression: true,
+    caption: 'K1M Qualification - Top 5 progress to Semifinal',
+    captionVisible: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Slalom qualification results showing start numbers, both runs, and progression indicators (checkmarks for athletes who qualified for the next round).',
+      },
+    },
+  },
+};
+
+export const SlalomQualificationEmbed: Story = {
+  name: 'Slalom: Kvalifikace (embed v kanoe.cz)',
+  render: () => (
+    <KanoeCzContext layout="full" showHeader>
+      <h2 style={{ marginBottom: '1rem', fontSize: '1.25rem', fontWeight: 600 }}>
+        K1 muži - Kvalifikace
+      </h2>
+      <p style={{ marginBottom: '1rem', color: '#666', fontSize: '0.875rem' }}>
+        Top 5 postupuje do semifinále
+      </p>
+      <ResultsTable
+        results={slalomQualificationResults}
+        styleVariant="embed"
+        showPodiumHighlights={false}
+        showRuns
+        showCountry
+        showStartNumber
+        showProgression
+        caption="K1M Qualification"
+      />
+    </KanoeCzContext>
+  ),
+  parameters: {
+    layout: 'fullscreen',
+  },
+};
+
+const slalomRoundsResults: ResultEntry[] = [
+  { id: 1, rank: 1, name: 'Jiří Prskavec', club: 'USK Praha', round: 'F', totalTime: 89.12, timeDiff: 0, status: 'final' },
+  { id: 2, rank: 2, name: 'Giovanni De Gennaro', club: 'Italia', round: 'F', totalTime: 89.45, timeDiff: 0.33, status: 'final' },
+  { id: 3, rank: 3, name: 'Peter Kauzer', club: 'KK Ljubljana', round: 'F', totalTime: 90.23, timeDiff: 1.11, status: 'final' },
+  { id: 4, rank: 1, name: 'Vít Přindiš', club: 'Dukla Praha', round: 'SF', totalTime: 91.45, timeDiff: 0, status: 'final', progressed: true },
+  { id: 5, rank: 2, name: 'Lukáš Rohan', club: 'Dukla Praha', round: 'SF', totalTime: 92.12, timeDiff: 0.67, status: 'final', progressed: true },
+  { id: 6, rank: 1, name: 'Jan Mašek', club: 'KK Rakovník', round: 'Q', totalTime: 93.45, timeDiff: 0, status: 'final', progressed: true },
+  { id: 7, rank: 2, name: 'Michal Jane', club: 'TJ Bohemians', round: 'Q', totalTime: 94.12, timeDiff: 0.67, status: 'final', progressed: false },
+];
+
+export const SlalomWithRounds: Story = {
+  name: 'Slalom: S označením kol (Q/SF/F)',
+  args: {
+    results: slalomRoundsResults,
+    styleVariant: 'default',
+    showPodiumHighlights: true,
+    showRound: true,
+    showProgression: true,
+    caption: 'Slalom results with round indicators',
+    captionVisible: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Shows round badges (Q = Qualification, SF = Semifinal, F = Final) and progression checkmarks.',
+      },
+    },
+  },
+};
+
+// =============================================================================
+// CONTAINER QUERY DEMO
+// =============================================================================
+
+export const ContainerQueryDemo: Story = {
+  name: 'Container Query: Responsive Columns',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      <div>
+        <h3 style={{ marginBottom: '0.5rem', fontWeight: 600 }}>Full width (~800px+)</h3>
+        <p style={{ marginBottom: '0.5rem', fontSize: '0.875rem', color: '#666' }}>
+          All columns visible
+        </p>
+        <div style={{ width: '100%' }}>
+          <ResultsTable
+            results={slalomQualificationResults.slice(0, 3)}
+            styleVariant="embed"
+            showRuns
+            showCountry
+            showStartNumber
+            showProgression
+          />
+        </div>
+      </div>
+      <div>
+        <h3 style={{ marginBottom: '0.5rem', fontWeight: 600 }}>Medium width (~500px)</h3>
+        <p style={{ marginBottom: '0.5rem', fontSize: '0.875rem', color: '#666' }}>
+          Club and run columns hidden
+        </p>
+        <div style={{ width: '500px', maxWidth: '100%' }}>
+          <ResultsTable
+            results={slalomQualificationResults.slice(0, 3)}
+            styleVariant="embed"
+            showRuns
+            showCountry
+            showStartNumber
+            showProgression
+          />
+        </div>
+      </div>
+      <div>
+        <h3 style={{ marginBottom: '0.5rem', fontWeight: 600 }}>Narrow width (~350px)</h3>
+        <p style={{ marginBottom: '0.5rem', fontSize: '0.875rem', color: '#666' }}>
+          Only essential columns (rank, name, time, progression)
+        </p>
+        <div style={{ width: '350px', maxWidth: '100%' }}>
+          <ResultsTable
+            results={slalomQualificationResults.slice(0, 3)}
+            styleVariant="embed"
+            showRuns
+            showCountry
+            showStartNumber
+            showProgression
+          />
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstrates container query-based responsive column hiding. As the container width decreases, less important columns are automatically hidden.',
+      },
+    },
   },
 };

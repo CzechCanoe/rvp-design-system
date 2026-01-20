@@ -4,7 +4,7 @@
 
 | Fáze | Krok | Status |
 |------|------|--------|
-| **8 - Integrace s kanoe.cz** | 8.2 ResultsTable refaktoring | 🔲 Další |
+| **8 - Integrace s kanoe.cz** | 8.3 Calendar refaktoring | 🔲 Další |
 
 ---
 
@@ -23,11 +23,11 @@
 - [x] Container Queries foundation
 - [x] KanoeCzContext mock + integration stories
 
-### 8.2 ResultsTable refaktoring
-- [ ] Embed varianta (bez stínů, kompaktní padding, border místo shadow)
-- [ ] Container-responsive sloupce (skrývání při úzké šířce)
-- [ ] Slalom-specifické zobrazení (1./2. jízda, Q/SF/F, postupy)
-- [ ] Stories: "V kontextu kanoe.cz", "Slalom kvalifikace"
+### 8.2 ResultsTable refaktoring ✅
+- [x] Embed varianta (bez stínů, kompaktní padding, border místo shadow)
+- [x] Container-responsive sloupce (skrývání při úzké šířce)
+- [x] Slalom-specifické zobrazení (1./2. jízda, Q/SF/F, postupy)
+- [x] Stories: "V kontextu kanoe.cz", "Slalom kvalifikace"
 
 ### 8.3 Calendar refaktoring
 - [ ] List view (chronologický seznam)
