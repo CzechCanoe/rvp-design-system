@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 7 - Hloubkové review a redesign
-**Další krok:** 7.6 Redesign specifických komponent (Tier 3) - StatCard
+**Další krok:** 7.6 Redesign specifických komponent (Tier 3) - Calendar
 
 **Problém:** Současná implementace nedosahuje vizuální úrovně studovaných referencí (World Athletics, FIS, ICF). Komponenty jsou funkční, ale "utilitární" - chybí vizuální polish, branded feel, moderní detaily.
 
@@ -178,7 +178,7 @@
 - [x] **AthleteCard** - hero varianta s gradient overlay
 - [x] **ResultsTable** - highlighting pro pozice, animované změny
 - [x] **LiveIndicator** - dramatičtější pulsování, gradient glow
-- [ ] **StatCard** - trend šipky, sparkline grafy, gradient backgrounds
+- [x] **StatCard** - trend šipky, sparkline grafy, gradient backgrounds
 - [ ] **Calendar** - hover efekty, event preview
 
 ### 7.7 Branded visual elements

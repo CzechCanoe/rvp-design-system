@@ -44,9 +44,16 @@ StatCard komponenta pro zobrazení klíčových metrik na dashboardech.
       control: 'select',
       options: ['default', 'primary', 'success', 'warning', 'error', 'info'],
     },
+    styleVariant: {
+      control: 'select',
+      options: ['default', 'gradient', 'glass', 'gradient-subtle'],
+    },
     trend: {
       control: 'select',
       options: ['up', 'down', 'neutral', undefined],
+    },
+    animateTrend: {
+      control: 'boolean',
     },
   },
 };
@@ -601,6 +608,324 @@ export const PerformanceStats: Story = {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
             <polyline points="17 6 23 6 23 12" />
+          </svg>
+        }
+      />
+    </div>
+  ),
+};
+
+// =============================================================================
+// Style Variants (Phase 7.6)
+// =============================================================================
+
+export const GradientStyle: Story = {
+  name: 'Gradient Style',
+  args: {
+    label: 'Celkem členů',
+    value: '5,847',
+    trend: 'up',
+    trendValue: '+124',
+    styleVariant: 'gradient',
+    color: 'primary',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+    ),
+  },
+};
+
+export const GradientSubtleStyle: Story = {
+  name: 'Gradient Subtle Style',
+  args: {
+    label: 'Aktivní členství',
+    value: '847',
+    trend: 'neutral',
+    styleVariant: 'gradient-subtle',
+    color: 'info',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+    ),
+  },
+};
+
+export const GlassStyle: Story = {
+  name: 'Glass Style',
+  render: () => (
+    <div
+      style={{
+        padding: '40px',
+        background: 'linear-gradient(135deg, #1176a6 0%, #0d5a80 100%)',
+        borderRadius: '12px',
+      }}
+    >
+      <StatCard
+        label="Live závodníci"
+        value="234"
+        trend="up"
+        trendValue="+8"
+        styleVariant="glass"
+        icon={
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+          </svg>
+        }
+      />
+    </div>
+  ),
+};
+
+export const WithSparkline: Story = {
+  name: 'With Sparkline',
+  args: {
+    label: 'Registrace za měsíc',
+    value: '156',
+    trend: 'up',
+    trendValue: '+12%',
+    sparklineData: [45, 52, 38, 65, 72, 58, 80, 95, 110, 125, 140, 156],
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+        <polyline points="17 6 23 6 23 12" />
+      </svg>
+    ),
+  },
+};
+
+export const WithSparklineDown: Story = {
+  name: 'With Sparkline (Down Trend)',
+  args: {
+    label: 'Odhlášení ze závodů',
+    value: '23',
+    trend: 'down',
+    trendValue: '-15%',
+    sparklineData: [85, 78, 92, 65, 58, 72, 45, 38, 32, 28, 25, 23],
+    color: 'warning',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <line x1="22" y1="11" x2="16" y2="11" />
+      </svg>
+    ),
+  },
+};
+
+export const AnimatedTrend: Story = {
+  name: 'Animated Trend',
+  args: {
+    label: 'Nové registrace',
+    value: '156',
+    trend: 'up',
+    trendValue: '+12%',
+    animateTrend: true,
+    variant: 'elevated',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <line x1="19" y1="8" x2="19" y2="14" />
+        <line x1="22" y1="11" x2="16" y2="11" />
+      </svg>
+    ),
+  },
+};
+
+export const GradientStyleGrid: Story = {
+  name: 'Gradient Style Grid',
+  render: () => (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+        gap: '16px',
+      }}
+    >
+      <StatCard
+        label="Celkem členů"
+        value="5,847"
+        trend="up"
+        trendValue="+124"
+        styleVariant="gradient"
+        color="primary"
+        sparklineData={[120, 135, 142, 138, 155, 162, 170, 178, 185, 192, 200, 210]}
+        icon={
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+        }
+      />
+      <StatCard
+        label="Schválené přihlášky"
+        value="89"
+        trend="up"
+        trendValue="+15"
+        styleVariant="gradient"
+        color="success"
+        animateTrend
+        icon={
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
+          </svg>
+        }
+      />
+      <StatCard
+        label="Čekající na kontrolu"
+        value="12"
+        trend="down"
+        trendValue="-3"
+        styleVariant="gradient"
+        color="warning"
+        icon={
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+        }
+      />
+      <StatCard
+        label="Zamítnuté registrace"
+        value="3"
+        styleVariant="gradient"
+        color="error"
+        icon={
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="15" y1="9" x2="9" y2="15" />
+            <line x1="9" y1="9" x2="15" y2="15" />
+          </svg>
+        }
+      />
+    </div>
+  ),
+};
+
+export const GlassStyleDashboard: Story = {
+  name: 'Glass Style Dashboard',
+  render: () => (
+    <div
+      style={{
+        padding: '40px',
+        background: 'linear-gradient(135deg, #1e3a5f 0%, #0f1f35 100%)',
+        borderRadius: '16px',
+      }}
+    >
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: '16px',
+        }}
+      >
+        <StatCard
+          label="Live závodníci"
+          value="234"
+          trend="up"
+          trendValue="+8"
+          styleVariant="glass"
+          animateTrend
+          sparklineData={[180, 195, 210, 205, 218, 225, 230, 234]}
+          icon={
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+            </svg>
+          }
+        />
+        <StatCard
+          label="Probíhající jízdy"
+          value="12"
+          styleVariant="glass"
+          icon={
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+          }
+        />
+        <StatCard
+          label="Dokončeno dnes"
+          value="156"
+          trend="up"
+          trendValue="+24"
+          styleVariant="glass"
+          icon={
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+          }
+        />
+      </div>
+    </div>
+  ),
+};
+
+export const SparklineShowcase: Story = {
+  name: 'Sparkline Showcase',
+  render: () => (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+        gap: '16px',
+      }}
+    >
+      <StatCard
+        label="Registrace za rok"
+        value="2,456"
+        trend="up"
+        trendValue="+18%"
+        variant="elevated"
+        sparklineData={[150, 180, 165, 210, 195, 240, 280, 310, 350, 390, 420, 456]}
+        description="Měsíční přehled"
+        icon={
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+            <polyline points="17 6 23 6 23 12" />
+          </svg>
+        }
+      />
+      <StatCard
+        label="Průměrný čas"
+        value="98.42s"
+        trend="up"
+        trendValue="-2.3s"
+        variant="elevated"
+        color="success"
+        sparklineData={[105, 103, 101, 100, 99, 98.5, 98.8, 98.2, 98.5, 98.3, 98.4, 98.42]}
+        description="Zlepšení oproti minulé sezóně"
+        icon={
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+        }
+      />
+      <StatCard
+        label="Body v žebříčku"
+        value="847"
+        trend="up"
+        trendValue="+156"
+        styleVariant="gradient"
+        color="primary"
+        sparklineData={[520, 545, 580, 610, 650, 690, 720, 760, 790, 815, 835, 847]}
+        icon={
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="8" r="7" />
+            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
           </svg>
         }
       />

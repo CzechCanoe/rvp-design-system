@@ -5,6 +5,10 @@
  * Sizes: sm, md, lg
  * Variants: default, outlined, elevated
  * Colors: default, primary, success, warning, error, info
+ * Style variants: default, gradient, glass, gradient-subtle
+ *
+ * Phase 7.6: Redesigned with gradient backgrounds, sparkline support,
+ * animated trend indicators, and micro-interactions.
  */
 
 /* =============================================================================
@@ -18,7 +22,10 @@
   background-color: var(--color-bg-primary);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: var(--transition-card);
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out),
+    background-color var(--duration-normal) var(--ease-out);
 }
 
 .csk-stat-card__content {
@@ -138,21 +145,15 @@
   color: var(--color-success-400);
 }
 
-@media
-
 [data-theme='dark'] .csk-stat-card__trend--down {
   background-color: rgba(239, 68, 68, 0.15);
   color: var(--color-error-400);
 }
 
-@media
-
 [data-theme='dark'] .csk-stat-card__trend--neutral {
   background-color: var(--color-neutral-800);
   color: var(--color-neutral-400);
 }
-
-@media
 
 /* =============================================================================
    SECONDARY VALUE
@@ -374,41 +375,6 @@
   color: var(--color-info-400);
 }
 
-@media
-
-  :root:not([data-theme='light']) .csk-stat-card--success .csk-stat-card__icon-container {
-    background-color: rgba(34, 197, 94, 0.15);
-  }
-
-  :root:not([data-theme='light']) .csk-stat-card--success .csk-stat-card__icon {
-    color: var(--color-success-400);
-  }
-
-  :root:not([data-theme='light']) .csk-stat-card--warning .csk-stat-card__icon-container {
-    background-color: rgba(245, 158, 11, 0.15);
-  }
-
-  :root:not([data-theme='light']) .csk-stat-card--warning .csk-stat-card__icon {
-    color: var(--color-warning-400);
-  }
-
-  :root:not([data-theme='light']) .csk-stat-card--error .csk-stat-card__icon-container {
-    background-color: rgba(239, 68, 68, 0.15);
-  }
-
-  :root:not([data-theme='light']) .csk-stat-card--error .csk-stat-card__icon {
-    color: var(--color-error-400);
-  }
-
-  :root:not([data-theme='light']) .csk-stat-card--info .csk-stat-card__icon-container {
-    background-color: rgba(59, 130, 246, 0.15);
-  }
-
-  :root:not([data-theme='light']) .csk-stat-card--info .csk-stat-card__icon {
-    color: var(--color-info-400);
-  }
-}
-
 /* =============================================================================
    CLICKABLE STATE
    ============================================================================= */
@@ -464,8 +430,6 @@
   background-color: rgba(10, 10, 10, 0.8);
 }
 
-@media
-
 .csk-stat-card__spinner {
   width: 24px;
   height: 24px;
@@ -487,5 +451,299 @@
     border-top-color: var(--color-border-secondary);
     border-right-color: var(--color-primary-500);
     border-bottom-color: var(--color-primary-500);
+  }
+}
+
+/* =============================================================================
+   STYLE VARIANTS
+   ============================================================================= */
+
+/* Gradient style - bold colored backgrounds */
+.csk-stat-card--style-gradient {
+  border: none;
+  color: white;
+}
+
+.csk-stat-card--style-gradient .csk-stat-card__label,
+.csk-stat-card--style-gradient .csk-stat-card__description,
+.csk-stat-card--style-gradient .csk-stat-card__secondary-label {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.csk-stat-card--style-gradient .csk-stat-card__value,
+.csk-stat-card--style-gradient .csk-stat-card__secondary-value {
+  color: white;
+}
+
+.csk-stat-card--style-gradient .csk-stat-card__icon-container {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.csk-stat-card--style-gradient .csk-stat-card__icon {
+  color: white;
+}
+
+.csk-stat-card--style-gradient .csk-stat-card__footer {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient colors */
+.csk-stat-card--style-gradient.csk-stat-card--default {
+  background: var(--gradient-primary);
+}
+
+.csk-stat-card--style-gradient.csk-stat-card--primary {
+  background: var(--gradient-primary-deep);
+}
+
+.csk-stat-card--style-gradient.csk-stat-card--success {
+  background: var(--gradient-success);
+}
+
+.csk-stat-card--style-gradient.csk-stat-card--warning {
+  background: var(--gradient-warning);
+}
+
+.csk-stat-card--style-gradient.csk-stat-card--warning .csk-stat-card__label,
+.csk-stat-card--style-gradient.csk-stat-card--warning .csk-stat-card__description {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.csk-stat-card--style-gradient.csk-stat-card--warning .csk-stat-card__value {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.csk-stat-card--style-gradient.csk-stat-card--error {
+  background: var(--gradient-error);
+}
+
+.csk-stat-card--style-gradient.csk-stat-card--info {
+  background: var(--gradient-info);
+}
+
+/* Gradient-subtle style - light gradient overlay on white */
+.csk-stat-card--style-gradient-subtle {
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+}
+
+.csk-stat-card--style-gradient-subtle.csk-stat-card--primary {
+  background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-bg-primary) 100%);
+}
+
+.csk-stat-card--style-gradient-subtle.csk-stat-card--success {
+  background: linear-gradient(135deg, var(--color-success-50) 0%, var(--color-bg-primary) 100%);
+}
+
+.csk-stat-card--style-gradient-subtle.csk-stat-card--warning {
+  background: linear-gradient(135deg, var(--color-warning-50) 0%, var(--color-bg-primary) 100%);
+}
+
+.csk-stat-card--style-gradient-subtle.csk-stat-card--error {
+  background: linear-gradient(135deg, var(--color-error-50) 0%, var(--color-bg-primary) 100%);
+}
+
+.csk-stat-card--style-gradient-subtle.csk-stat-card--info {
+  background: linear-gradient(135deg, var(--color-info-50) 0%, var(--color-bg-primary) 100%);
+}
+
+/* Glass style - frosted glass effect */
+.csk-stat-card--style-glass {
+  background: var(--gradient-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.csk-stat-card--style-glass .csk-stat-card__icon-container {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.csk-stat-card--style-glass .csk-stat-card__footer {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark mode glass */
+[data-theme='dark'] .csk-stat-card--style-glass {
+  background: var(--gradient-glass-dark);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .csk-stat-card--style-glass .csk-stat-card__icon-container {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* =============================================================================
+   TREND ANIMATION
+   ============================================================================= */
+
+/* Enhanced trend indicators with animation */
+.csk-stat-card--animate-trend .csk-stat-card__trend {
+  animation: csk-stat-card-trend-pop 0.4s var(--ease-bounce);
+}
+
+.csk-stat-card--animate-trend .csk-stat-card__trend--up .csk-stat-card__trend-icon {
+  animation: csk-stat-card-trend-bounce-up 1.5s ease-in-out infinite;
+}
+
+.csk-stat-card--animate-trend .csk-stat-card__trend--down .csk-stat-card__trend-icon {
+  animation: csk-stat-card-trend-bounce-down 1.5s ease-in-out infinite;
+}
+
+@keyframes csk-stat-card-trend-pop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes csk-stat-card-trend-bounce-up {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes csk-stat-card-trend-bounce-down {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+}
+
+/* Gradient trend badges */
+.csk-stat-card--style-gradient .csk-stat-card__trend--up {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.csk-stat-card--style-gradient .csk-stat-card__trend--down {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.csk-stat-card--style-gradient .csk-stat-card__trend--neutral {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* =============================================================================
+   SPARKLINE
+   ============================================================================= */
+
+.csk-stat-card__sparkline-container {
+  margin-top: var(--spacing-2);
+  height: 24px;
+  width: 100%;
+  max-width: 100px;
+}
+
+.csk-stat-card__sparkline {
+  width: 100%;
+  height: 100%;
+}
+
+.csk-stat-card--sm .csk-stat-card__sparkline-container {
+  height: 20px;
+  max-width: 80px;
+}
+
+.csk-stat-card--lg .csk-stat-card__sparkline-container {
+  height: 32px;
+  max-width: 120px;
+}
+
+/* Gradient style sparkline - white stroke */
+.csk-stat-card--style-gradient .csk-stat-card__sparkline path[stroke] {
+  stroke: rgba(255, 255, 255, 0.9);
+}
+
+.csk-stat-card--style-gradient .csk-stat-card__sparkline path[fill] {
+  fill: rgba(255, 255, 255, 0.15);
+}
+
+/* =============================================================================
+   ENHANCED CLICKABLE STATES
+   ============================================================================= */
+
+.csk-stat-card--clickable:hover {
+  transform: translateY(-2px);
+}
+
+.csk-stat-card--clickable:hover .csk-stat-card__icon-container {
+  transform: scale(1.05);
+}
+
+.csk-stat-card--clickable:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.csk-stat-card--clickable.csk-stat-card--style-gradient:hover {
+  filter: brightness(1.05);
+  box-shadow: var(--shadow-lg);
+}
+
+.csk-stat-card--clickable.csk-stat-card--style-glass:hover {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .csk-stat-card--animate-trend .csk-stat-card__trend,
+  .csk-stat-card--animate-trend .csk-stat-card__trend--up .csk-stat-card__trend-icon,
+  .csk-stat-card--animate-trend .csk-stat-card__trend--down .csk-stat-card__trend-icon {
+    animation: none;
+  }
+
+  .csk-stat-card--clickable:hover {
+    transform: none;
+  }
+
+  .csk-stat-card--clickable:hover .csk-stat-card__icon-container {
+    transform: none;
+  }
+}
+
+/* =============================================================================
+   VALUE COUNT-UP ANIMATION (for when data loads)
+   ============================================================================= */
+
+.csk-stat-card__value {
+  animation: csk-stat-card-value-appear 0.3s var(--ease-out);
+}
+
+@keyframes csk-stat-card-value-appear {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-stat-card__value {
+    animation: none;
   }
 }

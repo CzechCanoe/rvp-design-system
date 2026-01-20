@@ -1,5 +1,48 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.6 / Redesign StatCard komponenty
+
+### Dokončeno
+- [x] Nový `styleVariant` prop: `default`, `gradient`, `glass`, `gradient-subtle`
+- [x] Gradient varianta - bold barevné pozadí s gradient efektem a bílým textem
+- [x] Gradient-subtle varianta - jemný gradient overlay na bílém pozadí
+- [x] Glass varianta - glassmorphism efekt s backdrop-filter blur
+- [x] Nový `sparklineData` prop - pole čísel pro vizualizaci trendu
+- [x] Sparkline SVG komponenta - jednoduchý čárový graf s area fill
+- [x] Nový `animateTrend` prop - animované trend šipky (bounce up/down)
+- [x] Trend badge pop-in animace při načtení
+- [x] Value appear animace - subtle fade-in s translateY
+- [x] Enhanced hover efekty - icon scale, card lift
+- [x] Dark mode podpora pro glass variantu
+- [x] Reduced motion podpora pro všechny animace
+- [x] Oprava legacy prázdných `@media` bloků v CSS
+- [x] 9 nových stories: GradientStyle, GradientSubtleStyle, GlassStyle, WithSparkline, WithSparklineDown, AnimatedTrend, GradientStyleGrid, GlassStyleDashboard, SparklineShowcase
+
+### Změněné soubory
+- `src/components/StatCard/StatCard.tsx` - nové props (styleVariant, sparklineData, animateTrend), Sparkline komponenta
+- `src/components/StatCard/StatCard.css` - style varianty, sparkline styly, trend animace, micro-interactions
+- `src/components/StatCard/StatCard.stories.tsx` - 9 nových stories pro nové varianty
+- `src/components/StatCard/index.ts` - export nového typu StatCardStyleVariant
+
+### Klíčové změny
+1. **Style variants** - nový `styleVariant` prop (default/gradient/glass/gradient-subtle)
+2. **Gradient style** - barevné gradient pozadí podle `color` prop, bílý text
+3. **Gradient-subtle** - jemné barevné gradienty na bílém pozadí
+4. **Glass style** - backdrop-filter blur, semi-transparentní pozadí, border
+5. **Sparkline** - inline SVG čárový graf s area fill a color-coded stroke
+6. **Trend animations** - bouncing šipky pro up/down trendy
+7. **Pop-in effect** - trend badge se objeví s scale animací
+8. **Enhanced clickable** - hover přidává lift a icon scale
+
+### Poznámky
+- StatCard redesign je dokončen
+- Build prošel bez StatCard-specific CSS warninů
+- Sparkline používá inline SVG s dynamickou barvou podle trend/color prop
+- Glass style je nejlepší na barevném pozadí (demo v stories)
+- Další krok: 7.6 Calendar - hover efekty, event preview
+
+---
+
 ## 2026-01-20 - Fáze 7.6 / Redesign LiveIndicator komponenty
 
 ### Dokončeno

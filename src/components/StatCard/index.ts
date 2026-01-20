@@ -5,4 +5,5 @@ export type {
   StatCardSize,
   StatCardColor,
   StatCardTrend,
+  StatCardStyleVariant,
 } from './StatCard';
