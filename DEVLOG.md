@@ -1,5 +1,45 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.6 / Redesign AthleteCard komponenty
+
+### Dokončeno
+- [x] Nový `styleVariant` prop: `default`, `gradient`, `glass`, `hero`
+- [x] Hero varianta s fotografickým overlay - fullbleed background s gradient overlay
+- [x] Nový `backgroundUrl` prop pro hero variantu
+- [x] Gradient varianta s primary gradient pozadím a inverse text colors
+- [x] Glass varianta s glassmorphism efektem (backdrop-blur)
+- [x] Avatar glow efekt pro featured/gradient varianty
+- [x] Avatar image scale (1.05x) při hoveru
+- [x] Ranking badge scale animace při hoveru
+- [x] Badge lift animace (-1px) při hoveru
+- [x] Name color change při hoveru (primary-600)
+- [x] Vylepšený featured styling - gradient top bar, avatar glow, section-specific gradient bars
+- [x] Medal colors pro ranking badge (gold/silver/bronze pro 1-3)
+- [x] Dark mode podpora pro všechny nové varianty
+- [x] Reduced motion podpora
+- [x] 12 nových stories: GradientStyle, GlassStyle, HeroStyle, HeroWithoutAvatar, AllStyleVariants, FeaturedGradient, FeaturedGlass, HoverEffectsDemo, HeroGrid, FeaturedShowcase
+
+### Změněné soubory
+- `src/components/AthleteCard/AthleteCard.tsx` - nové props (styleVariant, backgroundUrl), hero overlay element
+- `src/components/AthleteCard/AthleteCard.css` - kompletní redesign, nové style varianty, micro-interactions
+- `src/components/AthleteCard/AthleteCard.stories.tsx` - 12 nových stories pro nové varianty
+
+### Klíčové změny
+1. **Style variants** - nový `styleVariant` prop oddělen od `variant` (layout) pro flexibilitu
+2. **Hero varianta** - CSS custom property `--athlete-card-bg-image` pro background, gradient overlay
+3. **Gradient varianta** - `--gradient-primary` s inverse text colors a glass badges
+4. **Glass varianta** - `backdrop-filter: blur()` s semi-transparentním pozadím
+5. **Avatar glow** - `box-shadow` kombinující `--shadow-md` a `--glow-primary-*`
+6. **Micro-interactions** - hover efekty na avatar, image, badges, ranking value
+7. **Featured vylepšení** - gradient top bar podle sekce (DV/RY/VT), glow efekty
+
+### Poznámky
+- Fáze 7.6 (Redesign AthleteCard) je dokončena
+- Build prošel bez chyb
+- Další krok: 7.6 ResultsTable - highlighting pro pozice, animované změny
+
+---
+
 ## 2026-01-20 - Fáze 7.5 / Redesign Toast komponenty
 
 ### Dokončeno

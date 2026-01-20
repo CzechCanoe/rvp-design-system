@@ -14,6 +14,10 @@ const meta: Meta<typeof AthleteCard> = {
       control: 'select',
       options: ['sm', 'md', 'lg'],
     },
+    styleVariant: {
+      control: 'select',
+      options: ['default', 'gradient', 'glass', 'hero'],
+    },
     section: {
       control: 'select',
       options: [undefined, 'dv', 'ry', 'vt'],
@@ -95,6 +99,141 @@ export const WithStats: Story = {
 };
 
 // =============================================================================
+// Style Variants
+// =============================================================================
+
+export const GradientStyle: Story = {
+  name: 'Style: Gradient',
+  args: {
+    name: 'Jiří Prskavec',
+    imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=128&h=128&fit=crop&crop=face',
+    club: 'USK Praha',
+    section: 'dv',
+    vtClass: 'm',
+    styleVariant: 'gradient',
+    clickable: true,
+    country: 'CZE',
+  },
+};
+
+export const GlassStyle: Story = {
+  name: 'Style: Glass',
+  args: {
+    name: 'Kateřina Kudějová',
+    imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop&crop=face',
+    club: 'Dukla Praha',
+    section: 'dv',
+    styleVariant: 'glass',
+    clickable: true,
+    country: 'CZE',
+  },
+  decorators: [
+    (Story) => (
+      <div style={{
+        padding: '40px',
+        background: 'linear-gradient(135deg, #1176a6 0%, #0d5a7d 100%)',
+        borderRadius: '12px',
+      }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+export const HeroStyle: Story = {
+  name: 'Style: Hero',
+  args: {
+    name: 'Jiří Prskavec',
+    club: 'USK Praha',
+    section: 'dv',
+    vtClass: 'm',
+    ranking: 1,
+    styleVariant: 'hero',
+    backgroundUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop',
+    clickable: true,
+    country: 'CZE',
+    variant: 'featured',
+  },
+};
+
+export const HeroWithoutAvatar: Story = {
+  name: 'Style: Hero (without avatar)',
+  args: {
+    name: 'Martin Fuksa',
+    club: 'Dukla Praha',
+    section: 'ry',
+    vtClass: 'm',
+    ranking: 1,
+    styleVariant: 'hero',
+    backgroundUrl: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=600&h=400&fit=crop',
+    clickable: true,
+    country: 'CZE',
+    stats: [
+      { label: 'Závody', value: 48 },
+      { label: 'Medaile', value: 32 },
+    ],
+  },
+};
+
+export const AllStyleVariants: Story = {
+  name: 'All Style Variants',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '400px' }}>
+      <div>
+        <div style={{ marginBottom: '8px', fontSize: '12px', color: '#666', fontWeight: 600 }}>DEFAULT</div>
+        <AthleteCard
+          name="Závodník Default"
+          club="USK Praha"
+          section="dv"
+          vtClass="a"
+          clickable
+        />
+      </div>
+      <div>
+        <div style={{ marginBottom: '8px', fontSize: '12px', color: '#666', fontWeight: 600 }}>GRADIENT</div>
+        <AthleteCard
+          name="Závodník Gradient"
+          club="Dukla Praha"
+          section="ry"
+          vtClass="m"
+          styleVariant="gradient"
+          clickable
+        />
+      </div>
+      <div style={{
+        padding: '24px',
+        background: 'linear-gradient(135deg, #1176a6 0%, #0d5a7d 100%)',
+        borderRadius: '12px',
+        marginLeft: '-24px',
+        marginRight: '-24px',
+      }}>
+        <div style={{ marginBottom: '8px', fontSize: '12px', color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>GLASS</div>
+        <AthleteCard
+          name="Závodník Glass"
+          club="SK Slavia Praha"
+          section="vt"
+          vtClass="b"
+          styleVariant="glass"
+          clickable
+        />
+      </div>
+      <div>
+        <div style={{ marginBottom: '8px', fontSize: '12px', color: '#666', fontWeight: 600 }}>HERO</div>
+        <AthleteCard
+          name="Závodník Hero"
+          club="TJ Bohemians"
+          section="dv"
+          ranking={1}
+          styleVariant="hero"
+          backgroundUrl="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop"
+          clickable
+        />
+      </div>
+    </div>
+  ),
+};
+
+// =============================================================================
 // Sizes
 // =============================================================================
 
@@ -158,6 +297,49 @@ export const Featured: Story = {
     birthYear: 1993,
     licenseNumber: 'CZE-1993-0001',
   },
+};
+
+export const FeaturedGradient: Story = {
+  name: 'Featured + Gradient',
+  args: {
+    name: 'Kateřina Kudějová',
+    imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=256&h=256&fit=crop&crop=face',
+    club: 'Dukla Praha',
+    section: 'dv',
+    vtClass: 'm',
+    ranking: 2,
+    variant: 'featured',
+    styleVariant: 'gradient',
+    country: 'CZE',
+    clickable: true,
+  },
+};
+
+export const FeaturedGlass: Story = {
+  name: 'Featured + Glass',
+  args: {
+    name: 'Martin Fuksa',
+    imageUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=256&h=256&fit=crop&crop=face',
+    club: 'Dukla Praha',
+    section: 'ry',
+    vtClass: 'm',
+    ranking: 1,
+    variant: 'featured',
+    styleVariant: 'glass',
+    country: 'CZE',
+    clickable: true,
+  },
+  decorators: [
+    (Story) => (
+      <div style={{
+        padding: '40px',
+        background: 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)',
+        borderRadius: '12px',
+      }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 // =============================================================================
@@ -274,6 +456,48 @@ export const AsLink: Story = {
 };
 
 // =============================================================================
+// Hover Effects Demo
+// =============================================================================
+
+export const HoverEffectsDemo: Story = {
+  name: 'Hover Effects Demo',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
+      <p style={{ fontSize: '13px', color: '#666', margin: 0 }}>
+        Hover over the cards to see micro-interactions: avatar glow, image scale, badge lift, name color change.
+      </p>
+      <AthleteCard
+        name="Hover Demo - Default"
+        imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=128&h=128&fit=crop&crop=face"
+        club="USK Praha"
+        section="dv"
+        vtClass="m"
+        ranking={1}
+        clickable
+      />
+      <AthleteCard
+        name="Hover Demo - Featured"
+        imageUrl="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=256&h=256&fit=crop&crop=face"
+        club="Dukla Praha"
+        section="ry"
+        ranking={2}
+        variant="featured"
+        clickable
+      />
+      <AthleteCard
+        name="Hover Demo - Gradient"
+        imageUrl="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=128&h=128&fit=crop&crop=face"
+        club="SK Slavia"
+        section="vt"
+        vtClass="a"
+        styleVariant="gradient"
+        clickable
+      />
+    </div>
+  ),
+};
+
+// =============================================================================
 // List Examples
 // =============================================================================
 
@@ -379,6 +603,56 @@ export const FeaturedGrid: Story = {
         ranking={1}
         variant="featured"
         clickable
+      />
+    </div>
+  ),
+};
+
+export const HeroGrid: Story = {
+  name: 'Hero Cards Grid',
+  render: () => (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+      <AthleteCard
+        name="Jiří Prskavec"
+        club="USK Praha"
+        section="dv"
+        vtClass="m"
+        ranking={1}
+        styleVariant="hero"
+        backgroundUrl="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop"
+        clickable
+        stats={[
+          { label: 'Závody', value: 156 },
+          { label: 'Medaile', value: 89 },
+        ]}
+      />
+      <AthleteCard
+        name="Martin Fuksa"
+        club="Dukla Praha"
+        section="ry"
+        vtClass="m"
+        ranking={1}
+        styleVariant="hero"
+        backgroundUrl="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=600&h=400&fit=crop"
+        clickable
+        stats={[
+          { label: 'Závody', value: 124 },
+          { label: 'Medaile', value: 67 },
+        ]}
+      />
+      <AthleteCard
+        name="Kateřina Kudějová"
+        club="Dukla Praha"
+        section="dv"
+        vtClass="m"
+        ranking={2}
+        styleVariant="hero"
+        backgroundUrl="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=600&h=400&fit=crop"
+        clickable
+        stats={[
+          { label: 'Závody', value: 98 },
+          { label: 'Medaile', value: 45 },
+        ]}
       />
     </div>
   ),
@@ -588,6 +862,134 @@ export const ClubRoster: Story = {
           size="sm"
           clickable
         />
+      </div>
+    </div>
+  ),
+};
+
+// =============================================================================
+// Featured Showcase
+// =============================================================================
+
+export const FeaturedShowcase: Story = {
+  name: 'Featured Showcase',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+      {/* Hero Section */}
+      <div>
+        <h3 style={{ margin: '0 0 16px', fontSize: '14px', color: '#666', fontWeight: 600 }}>HERO CARDS</h3>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+          <AthleteCard
+            name="Jiří Prskavec"
+            club="USK Praha"
+            section="dv"
+            vtClass="m"
+            ranking={1}
+            styleVariant="hero"
+            backgroundUrl="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop"
+            clickable
+          />
+          <AthleteCard
+            name="Martin Fuksa"
+            club="Dukla Praha"
+            section="ry"
+            ranking={1}
+            styleVariant="hero"
+            backgroundUrl="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=600&h=400&fit=crop"
+            clickable
+          />
+        </div>
+      </div>
+
+      {/* Featured Cards */}
+      <div>
+        <h3 style={{ margin: '0 0 16px', fontSize: '14px', color: '#666', fontWeight: 600 }}>FEATURED CARDS</h3>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
+          <AthleteCard
+            name="Jiří Prskavec"
+            imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=256&h=256&fit=crop&crop=face"
+            club="USK Praha"
+            section="dv"
+            vtClass="m"
+            ranking={1}
+            variant="featured"
+            clickable
+          />
+          <AthleteCard
+            name="Kateřina Kudějová"
+            imageUrl="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=256&h=256&fit=crop&crop=face"
+            club="Dukla Praha"
+            section="dv"
+            variant="featured"
+            styleVariant="gradient"
+            ranking={2}
+            clickable
+          />
+          <AthleteCard
+            name="Martin Fuksa"
+            imageUrl="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=256&h=256&fit=crop&crop=face"
+            club="Dukla Praha"
+            section="ry"
+            ranking={1}
+            variant="featured"
+            clickable
+          />
+        </div>
+      </div>
+
+      {/* Gradient Cards */}
+      <div>
+        <h3 style={{ margin: '0 0 16px', fontSize: '14px', color: '#666', fontWeight: 600 }}>GRADIENT CARDS</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: '400px' }}>
+          <AthleteCard
+            name="Závodník DV"
+            imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=128&h=128&fit=crop&crop=face"
+            club="USK Praha"
+            section="dv"
+            vtClass="m"
+            styleVariant="gradient"
+            clickable
+          />
+          <AthleteCard
+            name="Závodník RY"
+            imageUrl="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop&crop=face"
+            club="Dukla Praha"
+            section="ry"
+            vtClass="a"
+            styleVariant="gradient"
+            clickable
+          />
+        </div>
+      </div>
+
+      {/* Glass Cards on colored background */}
+      <div style={{
+        padding: '32px',
+        background: 'linear-gradient(135deg, #1176a6 0%, #0d5a7d 50%, #16a34a 100%)',
+        borderRadius: '16px',
+        marginLeft: '-16px',
+        marginRight: '-16px',
+      }}>
+        <h3 style={{ margin: '0 0 16px', fontSize: '14px', color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>GLASS CARDS</h3>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+          <AthleteCard
+            name="Glass Card 1"
+            imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=128&h=128&fit=crop&crop=face"
+            club="USK Praha"
+            section="dv"
+            vtClass="m"
+            styleVariant="glass"
+            clickable
+          />
+          <AthleteCard
+            name="Glass Card 2"
+            imageUrl="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop&crop=face"
+            club="Dukla Praha"
+            section="ry"
+            styleVariant="glass"
+            clickable
+          />
+        </div>
       </div>
     </div>
   ),
