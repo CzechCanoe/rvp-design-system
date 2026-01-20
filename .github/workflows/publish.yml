@@ -1,0 +1,67 @@
+name: Publish to GitHub Packages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'package.json'
+      - 'src/**'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@czechcanoe'
+
+      - name: Get package version
+        id: package
+        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Check if version exists
+        id: check
+        run: |
+          if npm view @czechcanoe/rvp-design-system@${{ steps.package.outputs.version }} version 2>/dev/null; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        if: steps.check.outputs.exists == 'false'
+        run: npm ci
+
+      - name: Run lint
+        if: steps.check.outputs.exists == 'false'
+        run: npm run lint
+
+      - name: Run typecheck
+        if: steps.check.outputs.exists == 'false'
+        run: npm run typecheck
+
+      - name: Build
+        if: steps.check.outputs.exists == 'false'
+        run: npm run build
+
+      - name: Publish
+        if: steps.check.outputs.exists == 'false'
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Skip publish (version exists)
+        if: steps.check.outputs.exists == 'true'
+        run: echo "Version ${{ steps.package.outputs.version }} already exists, skipping publish"

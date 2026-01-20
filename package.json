@@ -45,6 +45,9 @@
     "type": "git",
     "url": "https://github.com/CzechCanoe/rvp-design-system.git"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"

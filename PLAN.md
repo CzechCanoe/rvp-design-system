@@ -4,68 +4,136 @@
 
 | Fáze | Krok | Status |
 |------|------|--------|
-| **8 - Integrace s kanoe.cz** | 8.6 Vizuální harmonizace | 🔲 Další |
+| **6 - Publikace** | CI/CD, GH Pages, NPM ✅ | Hotovo |
+| **8 - Integrace s kanoe.cz** | 8.7 Prototypy varianty ✅ | Hotovo |
+| **8 - Integrace s kanoe.cz** | 8.8 Testování integrace | 🔲 Další |
 
 ---
 
 ## Fáze 8: Integrace s kanoe.cz
 
-**Kontext:** Komponenty budou embedovány do Joomla šablony na kanoe.cz (Bootstrap 4, jQuery). Potřebují embed mode, container queries a vizuální kompatibilitu.
+**Kontext:** Komponenty budou embedovány do Joomla šablony na kanoe.cz (Bootstrap 4, jQuery). Potřebují embed mode a vizuální kompatibilitu.
 
-**Strategie - tři vizuální kontexty:**
-1. **Embed** - neutrální moderní, pro komponenty v kanoe.cz
-2. **Standalone** - pro satelitní aplikace (Registr, Přihlášky)
-3. **Expressive** - wow faktor pro veřejné profily
+**Strategie - DVA vizuální kontexty:**
+1. **Embed** - neutrální moderní, komponenty v kanoe.cz (BEZ vlastního headeru)
+2. **Satellite** - standalone aplikace s minimálním headerem (logo + user)
 
-### 8.1 Infrastruktura pro embed režim ✅
+**DŮLEŽITÉ:** Žádné HERO sekce s vlnami. Čistý, integrovaný design.
+
+### 8.1 Infrastruktura ✅
 - [x] Display mode `embed` v ThemeContext
-- [x] CSS pravidla `[data-mode="embed"]`
+- [x] CSS pravidla `[data-mode="embed"]` v mode.css
 - [x] Container Queries foundation
-- [x] KanoeCzContext mock + integration stories
+- [x] KanoeCzContext mock komponenta
 
-### 8.2 ResultsTable refaktoring ✅
-- [x] Embed varianta (bez stínů, kompaktní padding, border místo shadow)
-- [x] Container-responsive sloupce (skrývání při úzké šířce)
-- [x] Slalom-specifické zobrazení (1./2. jízda, Q/SF/F, postupy)
-- [x] Stories: "V kontextu kanoe.cz", "Slalom kvalifikace"
+### 8.2 ResultsTable - základ ✅
+- [x] Embed varianta (bez stínů, kompaktní)
+- [x] Container-responsive sloupce
+- [x] Slalom: 1./2. jízda, Q/SF/F, postupy
 
-### 8.3 Calendar refaktoring ✅
-- [x] List view (chronologický seznam) - CalendarList komponenta
-- [x] Embed mode + container query responzivita
-- [x] Cards view (měsíční karty) - CalendarCards komponenta
+### 8.3 Calendar komponenty ✅
+- [x] CalendarList (chronologický seznam)
+- [x] CalendarCards (měsíční karty)
+- [x] Embed mode
 
-### 8.4 Nové šablony ✅
-- [x] **Event Detail Page** - před/během/po závodu
-- [x] **Athlete Public Profile (EXPRESSIVE)** - celostránkový wow profil
-- [x] **Athlete Card (embed)** - kompaktní verze + embed stories
+### 8.4 Nové prototypy - základ ✅
+- [x] EventDetailPage (před/během/po)
+- [x] AthletePublicProfile (expressive)
+- [x] AthleteCard embed
 
-### 8.5 Header satellite varianta ✅
-- [x] Variant `satellite` - logo + user + kontextové akce
-- [x] Pro standalone aplikace (Registr, Přihlášky, Live výsledky)
+### 8.5 Header satellite ✅
+- [x] Typ `satellite` v HeaderVariant
+- [x] Props: appName, homeLink, homeLinkLabel
+- [x] CSS styly (.csk-header--satellite, home-link, app-name)
+- [x] Stories (Satellite, SatelliteRegistr, SatellitePrihlasky, SatelliteLive)
 
-### 8.6 Vizuální harmonizace
-- [ ] WCAG kontrast na hero gradientech ≥ 4.5:1
-- [ ] Realistická data v prototypech
+---
 
-### 8.7 Testování integrace
+### 8.6 Opravy a refaktoring ✅
+
+#### 8.6.1 ResultsTable opravy ✅
+- [x] **FIX: Přetékání medailových řádků** (odstraněn medal emoji pseudo-element)
+- [x] **Přidat věkové kategorie** (ageCategory prop + showAgeCategory)
+- [x] **Přidat body** (points prop + showPoints)
+
+#### 8.6.2 KanoeCzContext vylepšení ✅
+- [x] Přidat skutečné logo kanoe.cz (SVG paddle + text)
+- [x] Věrnější simulace layoutu (topbar, header, breadcrumb, footer)
+- [x] Více variant layoutu (homepage, subpage, detail)
+- [x] Props: pageVariant, pageTitle, breadcrumbs
+
+#### 8.6.3 Odstranit HERO vlny ze všech prototypů ✅
+- [x] LivePage - odstranit hero sekci s vlnou (nahrazeno čistým headerem)
+- [x] ResultsPage - odstranit hero sekci s vlnou (nahrazeno čistým headerem)
+- [x] CalendarPage - nemá hero s vlnou (nebylo třeba měnit)
+- [x] EventDetailPage - nemá hero s vlnou (nebylo třeba měnit)
+- [x] ProfilePage - nemá hero s vlnou (nebylo třeba měnit)
+- [x] AthletePublicProfile - AthleteCard.hero varianta zachována jako expressive styl
+
+---
+
+### 8.7 Prototypy - DVĚ varianty každého
+
+**Každý prototyp musí existovat ve DVOU variantách:**
+1. **Embed** - v KanoeCzContext mocku, bez vlastního headeru
+2. **Satellite** - standalone s satellite headerem
+
+#### 8.7.1 Live Results ✅
+- [x] Embed varianta (v KanoeCzContext)
+- [x] Satellite varianta (standalone)
+- [x] EmbedWithSidebar varianta (demonstrace container queries)
+
+#### 8.7.2 Results Page ✅
+- [x] Embed varianta (v KanoeCzContext)
+- [x] Satellite varianta (standalone)
+- [x] EmbedWithSidebar varianta (demonstrace container queries)
+- [x] EmbedCompact varianta (pouze tabulka)
+
+#### 8.7.3 Calendar ✅
+- [x] Embed varianta (v KanoeCzContext)
+- [x] Satellite varianta (standalone)
+- [x] EmbedWithSidebar varianta (demonstrace container queries)
+
+#### 8.7.4 Event Detail ✅
+- [x] Embed varianta (v KanoeCzContext)
+- [x] Satellite varianta (standalone)
+- [x] EmbedWithSidebar varianta (demonstrace container queries)
+
+#### 8.7.5 Athlete Public Profile ✅
+- [x] Embed varianta (v KanoeCzContext)
+- [x] Satellite varianta (standalone)
+- [x] EmbedWithSidebar varianta (demonstrace container queries)
+
+---
+
+### 8.8 Testování integrace
 - [ ] Playwright testy pro embed varianty
 - [ ] Container query breakpoint testy
-- [ ] WCAG contrast audit
+- [ ] Overflow/layout testy
 
-**Milestone M8:** Komponenty připravené pro embed do kanoe.cz
-
----
-
-## Backlog (nedokončené z předchozích fází)
-
-### Fáze 6: Publikace
-- [ ] GitHub Actions CI/CD
-- [ ] NPM publikace (@czechcanoe/rvp-design-system)
-- [ ] GitHub Pages pro Storybook
+**Milestone M8:** Prototypy demonstrují reálnou integraci do kanoe.cz
 
 ---
 
-## Dokončené fáze (reference)
+## Fáze 6: Publikace ✅
+
+### 6.1 GitHub Actions CI/CD ✅
+- [x] CI workflow (lint, typecheck, build, test)
+- [x] Storybook deploy workflow (GitHub Pages)
+- [x] GitHub Packages publish workflow (automaticky na push)
+
+### 6.2 Konfigurace ✅
+- [x] `.nvmrc` pro konzistentní Node verzi
+- [x] `README.md` s dokumentací
+- [x] `publishConfig` pro GitHub Packages v package.json
+
+**Po vytvoření repozitáře na GitHubu:**
+1. Nastavit GitHub Pages (Settings → Pages → GitHub Actions)
+2. Publikace funguje automaticky přes `GITHUB_TOKEN` (není třeba secret)
+
+---
+
+## Dokončené fáze
 
 | Fáze | Popis | Milestone |
 |------|-------|-----------|
@@ -74,11 +142,11 @@
 | 2 | Core komponenty (Tier 1) | M2 ✅ |
 | 3 | Pokročilé komponenty (Tier 2) | M3 ✅ |
 | 4 | Specifické komponenty (Tier 3) | M4 ✅ |
-| 5 | Prototypy | M5 ✅ |
-| 6 | Dokumentace (částečně) | - |
+| 5 | Prototypy (původní verze) | M5 ✅ |
+| 6 | Publikace (CI/CD, GH Pages, NPM) | M6 ✅ |
 | 7 | Hloubkové review a redesign | M7 ✅ |
 
-*Detaily dokončených fází viz `PLAN-history.md`*
+*Detaily viz `PLAN-history.md`*
 
 ---
 
@@ -93,7 +161,8 @@
 
 ## Klíčové principy
 
-- **Light mode = primární** (kanoe.cz, veřejné stránky)
-- **Dark mode = sekundární** (live výsledky, volitelné)
-- **Mobile-first** responsive design
+- **Light mode = primární**
+- **Žádné HERO vlny** - čistý design
+- **Embed = bez vlastního headeru**
+- **Satellite = minimální header**
 - **WCAG 2.1 AA** accessibility
