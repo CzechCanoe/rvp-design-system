@@ -7,6 +7,7 @@ import './ResultsTable.css';
 
 export type ResultsTableSize = 'sm' | 'md' | 'lg';
 export type ResultsTableVariant = 'default' | 'striped' | 'compact';
+export type ResultsTableStyleVariant = 'default' | 'gradient' | 'glass';
 export type ResultSection = 'dv' | 'ry' | 'vt';
 export type ResultStatus = 'dns' | 'dnf' | 'dsq' | 'final' | 'provisional' | 'live';
 
@@ -43,6 +44,8 @@ export interface ResultEntry {
   highlighted?: boolean;
   /** Additional custom data */
   meta?: Record<string, unknown>;
+  /** Previous rank for position change animation */
+  previousRank?: number;
 }
 
 export interface ResultsTableColumn {
@@ -63,6 +66,8 @@ export interface ResultsTableProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   results: ResultEntry[];
   /** Visual variant */
   variant?: ResultsTableVariant;
+  /** Style variant for visual appearance */
+  styleVariant?: ResultsTableStyleVariant;
   /** Table size */
   size?: ResultsTableSize;
   /** Section filter (show only specific section) */
@@ -179,6 +184,7 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
     {
       results,
       variant = 'default',
+      styleVariant = 'default',
       size = 'md',
       section,
       showRuns = false,
@@ -233,15 +239,37 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
       }
 
       switch (columnKey) {
-        case 'rank':
+        case 'rank': {
+          const positionChange =
+            entry.previousRank !== undefined && entry.rank !== undefined
+              ? entry.previousRank - entry.rank
+              : 0;
           return (
             <span className="csk-results-table__rank">
               {getRankDisplay(entry.rank, entry.status)}
+              {positionChange !== 0 && (
+                <span
+                  className={`csk-results-table__position-change csk-results-table__position-change--${positionChange > 0 ? 'up' : 'down'}`}
+                  aria-label={positionChange > 0 ? `Up ${positionChange}` : `Down ${Math.abs(positionChange)}`}
+                >
+                  {positionChange > 0 ? (
+                    <svg viewBox="0 0 12 12" aria-hidden="true">
+                      <path d="M6 2L10 7H2L6 2Z" fill="currentColor" />
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 12 12" aria-hidden="true">
+                      <path d="M6 10L2 5H10L6 10Z" fill="currentColor" />
+                    </svg>
+                  )}
+                  <span>{Math.abs(positionChange)}</span>
+                </span>
+              )}
               {entry.status === 'live' && showLiveIndicator && (
                 <span className="csk-results-table__live-indicator" aria-label="Live" />
               )}
             </span>
           );
+        }
         case 'name':
           return (
             <span className="csk-results-table__name">
@@ -323,6 +351,15 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
         classes.push('csk-results-table__tr--highlighted');
       }
 
+      // Position change animation
+      if (entry.previousRank !== undefined && entry.rank !== undefined) {
+        if (entry.rank < entry.previousRank) {
+          classes.push('csk-results-table__tr--moved-up');
+        } else if (entry.rank > entry.previousRank) {
+          classes.push('csk-results-table__tr--moved-down');
+        }
+      }
+
       // Clickable
       if (onRowClick) {
         classes.push('csk-results-table__tr--clickable');
@@ -351,6 +388,7 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
       'csk-results-table',
       `csk-results-table--${variant}`,
       `csk-results-table--${size}`,
+      `csk-results-table--style-${styleVariant}`,
     ]
       .filter(Boolean)
       .join(' ');

@@ -13,6 +13,10 @@ const meta: Meta<typeof ResultsTable> = {
       control: 'select',
       options: ['default', 'striped', 'compact'],
     },
+    styleVariant: {
+      control: 'select',
+      options: ['default', 'gradient', 'glass'],
+    },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
@@ -32,7 +36,7 @@ const sampleResults: ResultEntry[] = [
   {
     id: 1,
     rank: 1,
-    name: 'Jiří Prskavec',
+    name: 'Jiri Prskavec',
     club: 'USK Praha',
     country: 'CZE',
     section: 'dv',
@@ -48,7 +52,7 @@ const sampleResults: ResultEntry[] = [
   {
     id: 2,
     rank: 2,
-    name: 'Lukáš Rohan',
+    name: 'Lukas Rohan',
     club: 'Dukla Praha',
     country: 'CZE',
     section: 'dv',
@@ -64,7 +68,7 @@ const sampleResults: ResultEntry[] = [
   {
     id: 3,
     rank: 3,
-    name: 'Tereza Fišerová',
+    name: 'Tereza Fiserova',
     club: 'Dukla Praha',
     country: 'CZE',
     section: 'dv',
@@ -80,7 +84,7 @@ const sampleResults: ResultEntry[] = [
   {
     id: 4,
     rank: 4,
-    name: 'Vít Přindiš',
+    name: 'Vit Prindis',
     club: 'Dukla Praha',
     country: 'CZE',
     section: 'dv',
@@ -96,8 +100,8 @@ const sampleResults: ResultEntry[] = [
   {
     id: 5,
     rank: 5,
-    name: 'Jan Mašek',
-    club: 'KK Rakovník',
+    name: 'Jan Masek',
+    club: 'KK Rakovnik',
     country: 'CZE',
     section: 'dv',
     category: 'K1M',
@@ -112,7 +116,7 @@ const sampleResults: ResultEntry[] = [
   {
     id: 6,
     rank: 6,
-    name: 'Michal Jáně',
+    name: 'Michal Jane',
     club: 'ASK Slavia Praha',
     country: 'CZE',
     section: 'dv',
@@ -131,7 +135,7 @@ const mixedSectionResults: ResultEntry[] = [
   {
     id: 1,
     rank: 1,
-    name: 'Jiří Prskavec',
+    name: 'Jiri Prskavec',
     club: 'USK Praha',
     section: 'dv',
     totalTime: 89.12,
@@ -151,7 +155,7 @@ const mixedSectionResults: ResultEntry[] = [
   {
     id: 3,
     rank: 3,
-    name: 'Vojtěch Heger',
+    name: 'Vojtech Heger',
     club: 'TJ Bohemians',
     section: 'vt',
     totalTime: 245.67,
@@ -161,7 +165,7 @@ const mixedSectionResults: ResultEntry[] = [
   {
     id: 4,
     rank: 4,
-    name: 'Tereza Fišerová',
+    name: 'Tereza Fiserova',
     club: 'Dukla Praha',
     section: 'dv',
     totalTime: 93.67,
@@ -171,7 +175,7 @@ const mixedSectionResults: ResultEntry[] = [
   {
     id: 5,
     rank: 5,
-    name: 'Josef Dostál',
+    name: 'Josef Dostal',
     club: 'Dukla Praha',
     section: 'ry',
     totalTime: 198.23,
@@ -184,7 +188,7 @@ const liveResults: ResultEntry[] = [
   {
     id: 1,
     rank: 1,
-    name: 'Jiří Prskavec',
+    name: 'Jiri Prskavec',
     club: 'USK Praha',
     section: 'dv',
     totalTime: 89.12,
@@ -194,7 +198,7 @@ const liveResults: ResultEntry[] = [
   {
     id: 2,
     rank: 2,
-    name: 'Lukáš Rohan',
+    name: 'Lukas Rohan',
     club: 'Dukla Praha',
     section: 'dv',
     totalTime: 90.23,
@@ -205,7 +209,7 @@ const liveResults: ResultEntry[] = [
   {
     id: 3,
     rank: undefined,
-    name: 'Tereza Fišerová',
+    name: 'Tereza Fiserova',
     club: 'Dukla Praha',
     section: 'dv',
     run1Time: 45.67,
@@ -215,7 +219,7 @@ const liveResults: ResultEntry[] = [
   {
     id: 4,
     rank: 3,
-    name: 'Vít Přindiš',
+    name: 'Vit Prindis',
     club: 'Dukla Praha',
     section: 'dv',
     totalTime: 94.56,
@@ -228,7 +232,7 @@ const statusResults: ResultEntry[] = [
   {
     id: 1,
     rank: 1,
-    name: 'Jiří Prskavec',
+    name: 'Jiri Prskavec',
     club: 'USK Praha',
     section: 'dv',
     totalTime: 89.12,
@@ -238,7 +242,7 @@ const statusResults: ResultEntry[] = [
   {
     id: 2,
     rank: 2,
-    name: 'Lukáš Rohan',
+    name: 'Lukas Rohan',
     club: 'Dukla Praha',
     section: 'dv',
     totalTime: 90.23,
@@ -248,8 +252,8 @@ const statusResults: ResultEntry[] = [
   {
     id: 3,
     rank: undefined,
-    name: 'Jan Novák',
-    club: 'KK Rakovník',
+    name: 'Jan Novak',
+    club: 'KK Rakovnik',
     section: 'dv',
     status: 'dns',
   },
@@ -265,7 +269,7 @@ const statusResults: ResultEntry[] = [
   {
     id: 5,
     rank: undefined,
-    name: 'Michal Jáně',
+    name: 'Michal Jane',
     club: 'TJ Bohemians',
     section: 'dv',
     run1Time: 87.34,
@@ -273,11 +277,73 @@ const statusResults: ResultEntry[] = [
   },
 ];
 
+// Position change data for live updates
+const positionChangeResults: ResultEntry[] = [
+  {
+    id: 1,
+    rank: 1,
+    previousRank: 2,
+    name: 'Jiri Prskavec',
+    club: 'USK Praha',
+    section: 'dv',
+    totalTime: 89.12,
+    timeDiff: 0,
+    status: 'live',
+    highlighted: true,
+  },
+  {
+    id: 2,
+    rank: 2,
+    previousRank: 1,
+    name: 'Giovanni De Gennaro',
+    club: 'Italia',
+    country: 'ITA',
+    section: 'dv',
+    totalTime: 89.45,
+    timeDiff: 0.33,
+    status: 'live',
+  },
+  {
+    id: 3,
+    rank: 3,
+    previousRank: 5,
+    name: 'Lukas Rohan',
+    club: 'Dukla Praha',
+    section: 'dv',
+    totalTime: 90.23,
+    timeDiff: 1.11,
+    status: 'live',
+    highlighted: true,
+  },
+  {
+    id: 4,
+    rank: 4,
+    previousRank: 3,
+    name: 'Tereza Fiserova',
+    club: 'Dukla Praha',
+    section: 'dv',
+    totalTime: 93.67,
+    timeDiff: 4.55,
+    status: 'final',
+  },
+  {
+    id: 5,
+    rank: 5,
+    previousRank: 4,
+    name: 'Vit Prindis',
+    club: 'Dukla Praha',
+    section: 'dv',
+    totalTime: 94.56,
+    timeDiff: 5.44,
+    status: 'final',
+  },
+];
+
 // Stories
 export const Default: Story = {
   args: {
     results: sampleResults,
-    caption: 'Výsledky závodu - K1 muži semifinále',
+    caption: 'Vysledky zavodu - K1 muzi semifinale',
     showRuns: true,
   },
 };
@@ -287,7 +353,7 @@ export const WithPodiumHighlights: Story = {
     results: sampleResults,
     showPodiumHighlights: true,
     highlightPositions: 3,
-    caption: 'Finále - top 3 zvýrazněno',
+    caption: 'Finale - top 3 zvyrazneno',
   },
 };
 
@@ -295,7 +361,7 @@ export const MixedSections: Story = {
   args: {
     results: mixedSectionResults,
     showPodiumHighlights: true,
-    caption: 'Výsledky napříč disciplínami',
+    caption: 'Vysledky napric disciplinami',
   },
 };
 
@@ -304,14 +370,14 @@ export const LiveResults: Story = {
     results: liveResults,
     showLiveIndicator: true,
     showPodiumHighlights: true,
-    caption: 'Live výsledky - semifinále',
+    caption: 'Live vysledky - semifinale',
   },
 };
 
 export const WithStatuses: Story = {
   args: {
     results: statusResults,
-    caption: 'Výsledky se statusy (DNS, DNF, DSQ)',
+    caption: 'Vysledky se statusy (DNS, DNF, DSQ)',
   },
 };
 
@@ -321,7 +387,7 @@ export const CompactVariant: Story = {
     variant: 'compact',
     size: 'sm',
     showRuns: false,
-    caption: 'Kompaktní zobrazení',
+    caption: 'Kompaktni zobrazeni',
   },
 };
 
@@ -330,7 +396,7 @@ export const StripedVariant: Story = {
     results: sampleResults,
     variant: 'striped',
     showRuns: true,
-    caption: 'Pruhované řádky',
+    caption: 'Pruhovane radky',
   },
 };
 
@@ -340,7 +406,7 @@ export const WithCountryAndCategory: Story = {
     showCountry: true,
     showCategory: true,
     showRuns: false,
-    caption: 'S kódem země a kategorií',
+    caption: 'S kodem zeme a kategorii',
   },
 };
 
@@ -348,7 +414,7 @@ export const FilteredBySection: Story = {
   args: {
     results: mixedSectionResults,
     section: 'dv',
-    caption: 'Pouze divoká voda',
+    caption: 'Pouze divoka voda',
   },
 };
 
@@ -356,7 +422,7 @@ export const Loading: Story = {
   args: {
     results: [],
     loading: true,
-    caption: 'Načítání výsledků...',
+    caption: 'Nacitani vysledku...',
   },
 };
 
@@ -365,13 +431,13 @@ export const Empty: Story = {
     results: [],
     emptyState: (
       <div style={{ padding: '2rem', textAlign: 'center' }}>
-        <p style={{ marginBottom: '0.5rem', fontWeight: 'bold' }}>Zatím žádné výsledky</p>
+        <p style={{ marginBottom: '0.5rem', fontWeight: 'bold' }}>Zatim zadne vysledky</p>
         <p style={{ color: 'var(--color-text-secondary)' }}>
-          Výsledky budou k dispozici po dokončení závodu
+          Vysledky budou k dispozici po dokonceni zavodu
         </p>
       </div>
     ),
-    caption: 'Prázdná tabulka',
+    caption: 'Prazdna tabulka',
   },
 };
 
@@ -380,7 +446,7 @@ export const StickyHeader: Story = {
     results: [...sampleResults, ...sampleResults, ...sampleResults],
     stickyHeader: true,
     showRuns: true,
-    caption: 'Sticky header pro dlouhé tabulky',
+    caption: 'Sticky header pro dlouhe tabulky',
   },
   decorators: [
     (Story) => (
@@ -395,7 +461,7 @@ export const ClickableRows: Story = {
   args: {
     results: sampleResults,
     onRowClick: (entry) => alert(`Clicked on: ${entry.name}`),
-    caption: 'Klikatelné řádky',
+    caption: 'Klikatelne radky',
   },
 };
 
@@ -410,7 +476,7 @@ export const FullFeatures: Story = {
     showCategory: true,
     showPodiumHighlights: true,
     highlightPositions: 3,
-    caption: 'Slalom - K1 muži finále',
+    caption: 'Slalom - K1 muzi finale',
     captionVisible: true,
     stickyHeader: true,
   },
@@ -423,14 +489,90 @@ export const FullFeatures: Story = {
   ],
 };
 
+// =============================================================================
+// NEW: Style Variant Stories
+// =============================================================================
+
+export const StyleDefault: Story = {
+  name: 'Style: Default',
+  args: {
+    results: sampleResults.slice(0, 5),
+    styleVariant: 'default',
+    showPodiumHighlights: true,
+    caption: 'Default style - clean modern look',
+    captionVisible: true,
+  },
+};
+
+export const StyleGradient: Story = {
+  name: 'Style: Gradient',
+  args: {
+    results: sampleResults.slice(0, 5),
+    styleVariant: 'gradient',
+    showPodiumHighlights: true,
+    caption: 'Gradient style - branded header',
+    captionVisible: true,
+  },
+};
+
+export const StyleGlass: Story = {
+  name: 'Style: Glass',
+  args: {
+    results: sampleResults.slice(0, 5),
+    styleVariant: 'glass',
+    showPodiumHighlights: true,
+    caption: 'Glass style - glassmorphism effect',
+    captionVisible: true,
+  },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          padding: '2rem',
+          background: 'linear-gradient(135deg, var(--color-primary-100), var(--color-accent-100))',
+          borderRadius: 'var(--radius-lg)',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+// =============================================================================
+// NEW: Position Change Animation Story
+// =============================================================================
+
+export const PositionChanges: Story = {
+  name: 'Position Changes (Live Updates)',
+  args: {
+    results: positionChangeResults,
+    showPodiumHighlights: true,
+    showLiveIndicator: true,
+    caption: 'Live vysledky s animaci zmeny pozice',
+    captionVisible: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Shows position change indicators when previousRank differs from current rank. Green arrows indicate movement up, red arrows indicate movement down.',
+      },
+    },
+  },
+};
+
+// =============================================================================
 // Real-world example: Slalom World Cup
+// =============================================================================
+
 export const SlalomWorldCup: Story = {
   args: {
     results: [
       {
         id: 1,
         rank: 1,
-        name: 'Jiří Prskavec',
+        name: 'Jiri Prskavec',
         club: 'USK Praha',
         country: 'CZE',
         section: 'dv',
@@ -494,7 +636,7 @@ export const SlalomWorldCup: Story = {
       {
         id: 5,
         rank: 5,
-        name: 'Vít Přindiš',
+        name: 'Vit Prindis',
         club: 'Dukla Praha',
         country: 'CZE',
         section: 'dv',
@@ -509,11 +651,152 @@ export const SlalomWorldCup: Story = {
       },
     ],
     variant: 'default',
+    styleVariant: 'gradient',
     showRuns: true,
     showTimeDiff: true,
     showCountry: true,
     showPodiumHighlights: true,
     caption: 'ICF Canoe Slalom World Cup - K1 Men Final',
     captionVisible: true,
+  },
+};
+
+// =============================================================================
+// All Style Variants Comparison
+// =============================================================================
+
+export const StyleVariantsComparison: Story = {
+  name: 'All Style Variants',
+  render: () => {
+    const shortResults = sampleResults.slice(0, 4);
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <div>
+          <h3 style={{ marginBottom: '0.5rem', fontWeight: 600 }}>Default Style</h3>
+          <ResultsTable
+            results={shortResults}
+            styleVariant="default"
+            showPodiumHighlights
+            caption="Clean modern look with subtle shadow"
+          />
+        </div>
+        <div>
+          <h3 style={{ marginBottom: '0.5rem', fontWeight: 600 }}>Gradient Style</h3>
+          <ResultsTable
+            results={shortResults}
+            styleVariant="gradient"
+            showPodiumHighlights
+            caption="Branded header with gradient"
+          />
+        </div>
+        <div
+          style={{
+            padding: '1.5rem',
+            background: 'linear-gradient(135deg, var(--color-primary-50), var(--color-accent-50))',
+            borderRadius: 'var(--radius-lg)',
+          }}
+        >
+          <h3 style={{ marginBottom: '0.5rem', fontWeight: 600 }}>Glass Style</h3>
+          <ResultsTable
+            results={shortResults}
+            styleVariant="glass"
+            showPodiumHighlights
+            caption="Glassmorphism effect - best on colored backgrounds"
+          />
+        </div>
+      </div>
+    );
+  },
+};
+
+// =============================================================================
+// Live Demo with Position Changes
+// =============================================================================
+
+export const LiveDemo: Story = {
+  name: 'Live Results Demo',
+  render: () => {
+    const liveData: ResultEntry[] = [
+      {
+        id: 1,
+        rank: 1,
+        previousRank: 3,
+        name: 'Jiri Prskavec',
+        club: 'USK Praha',
+        country: 'CZE',
+        section: 'dv',
+        totalTime: 89.12,
+        timeDiff: 0,
+        status: 'live',
+        highlighted: true,
+      },
+      {
+        id: 2,
+        rank: 2,
+        previousRank: 1,
+        name: 'Giovanni De Gennaro',
+        club: 'Italia',
+        country: 'ITA',
+        section: 'dv',
+        totalTime: 89.45,
+        timeDiff: 0.33,
+        status: 'live',
+      },
+      {
+        id: 3,
+        rank: 3,
+        previousRank: 2,
+        name: 'Lukas Rohan',
+        club: 'Dukla Praha',
+        country: 'CZE',
+        section: 'dv',
+        totalTime: 90.23,
+        timeDiff: 1.11,
+        status: 'final',
+      },
+      {
+        id: 4,
+        rank: undefined,
+        name: 'Tereza Fiserova',
+        club: 'Dukla Praha',
+        country: 'CZE',
+        section: 'dv',
+        run1Time: 45.67,
+        totalTime: undefined,
+        status: 'live',
+      },
+      {
+        id: 5,
+        rank: 4,
+        previousRank: 4,
+        name: 'Vit Prindis',
+        club: 'Dukla Praha',
+        country: 'CZE',
+        section: 'dv',
+        totalTime: 94.56,
+        timeDiff: 5.44,
+        status: 'provisional',
+      },
+    ];
+
+    return (
+      <div>
+        <div style={{ marginBottom: '1rem' }}>
+          <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--font-size-sm)' }}>
+            Live results with position change indicators, pulsing live dots, and row animations.
+            Position changes show arrows with the number of positions gained (green) or lost (red).
+          </p>
+        </div>
+        <ResultsTable
+          results={liveData}
+          styleVariant="gradient"
+          showPodiumHighlights
+          showLiveIndicator
+          showCountry
+          caption="ICF World Cup - K1M Semifinal (LIVE)"
+          captionVisible
+        />
+      </div>
+    );
   },
 };

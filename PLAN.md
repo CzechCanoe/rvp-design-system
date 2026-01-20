@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 7 - Hloubkové review a redesign
-**Další krok:** 7.6 Redesign specifických komponent (Tier 3) - ResultsTable
+**Další krok:** 7.6 Redesign specifických komponent (Tier 3) - LiveIndicator
 
 **Problém:** Současná implementace nedosahuje vizuální úrovně studovaných referencí (World Athletics, FIS, ICF). Komponenty jsou funkční, ale "utilitární" - chybí vizuální polish, branded feel, moderní detaily.
 
@@ -176,7 +176,7 @@
 
 ### 7.6 Redesign specifických komponent (Tier 3)
 - [x] **AthleteCard** - hero varianta s gradient overlay
-- [ ] **ResultsTable** - highlighting pro pozice, animované změny
+- [x] **ResultsTable** - highlighting pro pozice, animované změny
 - [ ] **LiveIndicator** - dramatičtější pulsování, gradient glow
 - [ ] **StatCard** - trend šipky, sparkline grafy, gradient backgrounds
 - [ ] **Calendar** - hover efekty, event preview

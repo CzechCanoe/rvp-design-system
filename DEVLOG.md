@@ -1,5 +1,50 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.6 / Redesign ResultsTable komponenty
+
+### Dokončeno
+- [x] Nový `styleVariant` prop: `default`, `gradient`, `glass`
+- [x] Gradient varianta - gradient header s brand colors a white text
+- [x] Glass varianta - glassmorphism efekt s backdrop blur
+- [x] Vylepšené podium highlights s CSS gradienty (gold/silver/bronze)
+- [x] Gradient left border pro medailové pozice
+- [x] Medal emoji (🥇) zobrazení při hoveru na 1. místě
+- [x] Nový `previousRank` prop pro animaci změny pozice
+- [x] Position change indikátory (zelená šipka nahoru, červená dolů)
+- [x] Position pop animace pro indikátory
+- [x] Move up/down row animace při změně pozice
+- [x] Vylepšený live indicator s box-shadow pulse efektem
+- [x] Live row pulsující background animace
+- [x] Clickable row hover efekt s inset box-shadow a translateX
+- [x] Status badges (DNS/DNF/DSQ) s background barvami
+- [x] Vylepšený loading overlay s backdrop blur
+- [x] Dark mode podpora pro všechny nové styly
+- [x] Reduced motion podpora
+- [x] 6 nových stories: StyleDefault, StyleGradient, StyleGlass, PositionChanges, StyleVariantsComparison, LiveDemo
+
+### Změněné soubory
+- `src/components/ResultsTable/ResultsTable.tsx` - nové props (styleVariant, previousRank), position change indicator SVGs
+- `src/components/ResultsTable/ResultsTable.css` - kompletní redesign, nové style varianty, animace, micro-interactions
+- `src/components/ResultsTable/ResultsTable.stories.tsx` - 6 nových stories pro nové varianty
+- `src/components/ResultsTable/index.ts` - export nového typu ResultsTableStyleVariant
+
+### Klíčové změny
+1. **Style variants** - nový `styleVariant` prop pro vizuální stylování (default/gradient/glass)
+2. **Gradient header** - thead s `--gradient-primary` a inverse text
+3. **Glass efekt** - `backdrop-filter: blur()` s semi-transparentním pozadím
+4. **Podium gradients** - linear-gradient pozadí a left border pro 1-3. místo
+5. **Position changes** - `previousRank` prop umožňuje zobrazit změnu pozice s indikátory a animacemi
+6. **Live enhancements** - dramatičtější live indicator s glow, pulsující row background
+7. **Status badges** - DNS/DNF/DSQ jako pills s background barvami místo plain textu
+
+### Poznámky
+- ResultsTable redesign je dokončen
+- Build prošel bez chyb
+- CSS warningy v buildu jsou z jiných komponent (předexistující)
+- Další krok: 7.6 LiveIndicator - dramatičtější pulsování, gradient glow
+
+---
+
 ## 2026-01-20 - Fáze 7.6 / Redesign AthleteCard komponenty
 
 ### Dokončeno
