@@ -10,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Calendar component for displaying events in a grid format. Supports month view with event display, navigation controls, and CSK-specific section colors for disciplines.',
+          'Calendar component for displaying events in a grid format. Supports month view with event display, navigation controls, CSK-specific section colors for disciplines, and multiple style variants with animations.',
       },
     },
   },
@@ -26,6 +26,11 @@ const meta = {
       options: ['sm', 'md', 'lg'],
       description: 'Calendar size',
     },
+    styleVariant: {
+      control: 'select',
+      options: ['default', 'gradient', 'glass', 'bordered'],
+      description: 'Style variant for visual appearance',
+    },
     showNavigation: {
       control: 'boolean',
       description: 'Show navigation controls',
@@ -37,6 +42,14 @@ const meta = {
     highlightToday: {
       control: 'boolean',
       description: 'Highlight current day',
+    },
+    showEventPreview: {
+      control: 'boolean',
+      description: 'Show event preview tooltip on hover',
+    },
+    animated: {
+      control: 'boolean',
+      description: 'Enable animated transitions',
     },
     maxEventsPerDay: {
       control: 'number',
@@ -464,5 +477,168 @@ export const Interactive: Story = {
         </div>
       </div>
     );
+  },
+};
+
+// =============================================================================
+// STYLE VARIANTS (Phase 7.6)
+// =============================================================================
+
+/**
+ * Gradient style with prominent header.
+ */
+export const StyleGradient: Story = {
+  args: {
+    events: cskRaceEvents,
+    styleVariant: 'gradient',
+    size: 'lg',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Gradient varianta s výraznou hlavičkou a lepším vizuálním dojmem pro hero sekce.',
+      },
+    },
+  },
+};
+
+/**
+ * Glass style with frosted glass effect.
+ */
+export const StyleGlass: Story = {
+  args: {
+    events: cskRaceEvents,
+    styleVariant: 'glass',
+  },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          padding: '40px',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          borderRadius: '12px',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Glass varianta s efektem matného skla, ideální pro použití na barevných pozadích.',
+      },
+    },
+  },
+};
+
+/**
+ * Bordered style with emphasized borders.
+ */
+export const StyleBordered: Story = {
+  args: {
+    events: cskRaceEvents,
+    styleVariant: 'bordered',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Bordered varianta se zvýrazněnými okraji a levým border indikátorem na událostech.',
+      },
+    },
+  },
+};
+
+/**
+ * Calendar with event preview tooltips.
+ */
+export const WithEventPreview: Story = {
+  args: {
+    events: cskRaceEvents,
+    size: 'lg',
+    showEventPreview: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Kalendář s tooltipy zobrazujícími náhled událostí při najetí myší. Zobrazuje název, datum a sekci.',
+      },
+    },
+  },
+};
+
+/**
+ * Calendar without animations.
+ */
+export const NoAnimations: Story = {
+  args: {
+    events: allEvents,
+    animated: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Kalendář bez animací pro uživatele preferující redukovaný pohyb.',
+      },
+    },
+  },
+};
+
+/**
+ * Showcase of all style variants.
+ */
+export const StyleVariantsShowcase: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gap: '32px' }}>
+      <div>
+        <h3 style={{ marginBottom: '16px', color: 'var(--color-text-primary)' }}>Default</h3>
+        <Calendar events={cskRaceEvents.slice(0, 4)} />
+      </div>
+      <div>
+        <h3 style={{ marginBottom: '16px', color: 'var(--color-text-primary)' }}>Gradient</h3>
+        <Calendar events={cskRaceEvents.slice(0, 4)} styleVariant="gradient" />
+      </div>
+      <div
+        style={{
+          padding: '24px',
+          background: 'linear-gradient(135deg, #1176a6 0%, #0d5a80 100%)',
+          borderRadius: '12px',
+        }}
+      >
+        <h3 style={{ marginBottom: '16px', color: 'white' }}>Glass</h3>
+        <Calendar events={cskRaceEvents.slice(0, 4)} styleVariant="glass" />
+      </div>
+      <div>
+        <h3 style={{ marginBottom: '16px', color: 'var(--color-text-primary)' }}>Bordered</h3>
+        <Calendar events={cskRaceEvents.slice(0, 4)} styleVariant="bordered" />
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Přehled všech stylových variant kalendáře.',
+      },
+    },
+  },
+};
+
+/**
+ * Gradient calendar with event preview.
+ */
+export const GradientWithPreview: Story = {
+  args: {
+    events: cskRaceEvents,
+    styleVariant: 'gradient',
+    size: 'lg',
+    showEventPreview: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Kombinace gradient stylu a event preview tooltipů pro maximální vizuální efekt.',
+      },
+    },
   },
 };

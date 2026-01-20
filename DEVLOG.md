@@ -1,5 +1,51 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.6 / Redesign Calendar komponenty
+
+### Dokončeno
+- [x] Nový `styleVariant` prop: `default`, `gradient`, `glass`, `bordered`
+- [x] Gradient varianta - gradient header s bílým textem, zvýrazněná hlavička
+- [x] Glass varianta - glassmorphism efekt s backdrop-filter blur
+- [x] Bordered varianta - zdůrazněné okraje, left-border indikátor na událostech
+- [x] Nový `showEventPreview` prop - tooltip s náhledem události při hover
+- [x] Event preview zobrazuje název, datum a sekci (DV/RY/VT badge)
+- [x] Nový `animated` prop - řízení animací (default: true)
+- [x] Nový `onEventHover` callback - pro externí handling hover stavů
+- [x] Enhanced hover efekty na dnech - inset box-shadow, day number scale
+- [x] Enhanced hover efekty na událostech - translateX, shadow, brightness
+- [x] Today pulse animace - subtle pulsující stín na dnešním dni
+- [x] Event appear animace - staggered fade-in při načtení
+- [x] Today button vylepšen - border a hover s primary barvou
+- [x] Dark mode podpora pro všechny varianty
+- [x] Reduced motion podpora pro všechny animace
+- [x] 8 nových stories: StyleGradient, StyleGlass, StyleBordered, WithEventPreview, NoAnimations, StyleVariantsShowcase, GradientWithPreview
+
+### Změněné soubory
+- `src/components/Calendar/Calendar.tsx` - nové props (styleVariant, showEventPreview, animated, onEventHover), event preview rendering
+- `src/components/Calendar/Calendar.css` - kompletní redesign s style variantami, hover efekty, animacemi a tooltipem
+- `src/components/Calendar/Calendar.stories.tsx` - 8 nových stories pro nové varianty a funkce
+
+### Klíčové změny
+1. **Style variants** - nový `styleVariant` prop (default/gradient/glass/bordered)
+2. **Gradient style** - gradient header pozadí, bílý text, zvýrazněný today badge
+3. **Glass style** - backdrop-filter blur, semi-transparentní pozadí
+4. **Bordered style** - zdůrazněné okraje, události s levým barevným border
+5. **Event preview** - CSS-only tooltip při hover na událost
+6. **Day hover** - inset box-shadow zvýraznění a day number scale
+7. **Event hover** - translateX posun, shadow a brightness změna
+8. **Today pulse** - subtle pulsující box-shadow na dnešním dni
+9. **Staggered event animation** - události se objevují postupně
+
+### Poznámky
+- Calendar redesign je dokončen
+- Build prošel bez nových chyb
+- Event preview je CSS-only řešení (display: none/flex na hover)
+- Glass style vyžaduje barevné pozadí pro nejlepší efekt (demo v stories)
+- Sekce 7.6 Tier 3 komponenty jsou kompletní
+- Další krok: 7.7 Branded visual elements
+
+---
+
 ## 2026-01-20 - Fáze 7.6 / Redesign StatCard komponenty
 
 ### Dokončeno

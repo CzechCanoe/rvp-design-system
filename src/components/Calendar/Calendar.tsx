@@ -10,6 +10,7 @@ import './Calendar.css';
 
 export type CalendarView = 'month' | 'week';
 export type CalendarSize = 'sm' | 'md' | 'lg';
+export type CalendarStyleVariant = 'default' | 'gradient' | 'glass' | 'bordered';
 
 export interface CalendarEvent {
   /** Unique identifier for the event */
@@ -39,12 +40,16 @@ export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onS
   view?: CalendarView;
   /** Calendar size */
   size?: CalendarSize;
+  /** Style variant for visual appearance */
+  styleVariant?: CalendarStyleVariant;
   /** Events to display */
   events?: CalendarEvent[];
   /** Callback when an event is clicked */
   onEventClick?: (event: CalendarEvent) => void;
   /** Callback when a day is clicked */
   onDayClick?: (date: Date) => void;
+  /** Callback when hovering over an event */
+  onEventHover?: (event: CalendarEvent | null, element?: HTMLElement) => void;
   /** Locale for date formatting (default: 'cs-CZ') */
   locale?: string;
   /** First day of week (0 = Sunday, 1 = Monday, default: 1) */
@@ -59,6 +64,10 @@ export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onS
   maxEventsPerDay?: number;
   /** Highlight today */
   highlightToday?: boolean;
+  /** Show event preview tooltip on hover */
+  showEventPreview?: boolean;
+  /** Enable animated transitions */
+  animated?: boolean;
 }
 
 // Helper functions
@@ -147,9 +156,11 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       onDateChange,
       view = 'month',
       size = 'md',
+      styleVariant = 'default',
       events = [],
       onEventClick,
       onDayClick,
+      onEventHover,
       locale = 'cs-CZ',
       firstDayOfWeek = 1,
       renderEvent,
@@ -157,6 +168,8 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       showTodayButton = true,
       maxEventsPerDay = 3,
       highlightToday = true,
+      showEventPreview = false,
+      animated = true,
       className,
       ...props
     },
@@ -263,6 +276,18 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       [onEventClick]
     );
 
+    // Handle event hover
+    const handleEventMouseEnter = useCallback(
+      (event: CalendarEvent, e: React.MouseEvent<HTMLButtonElement>) => {
+        onEventHover?.(event, e.currentTarget);
+      },
+      [onEventHover]
+    );
+
+    const handleEventMouseLeave = useCallback(() => {
+      onEventHover?.(null);
+    }, [onEventHover]);
+
     // Handle day click
     const handleDayClick = useCallback(
       (date: Date) => {
@@ -293,6 +318,8 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       'csk-calendar',
       `csk-calendar--${view}`,
       `csk-calendar--${size}`,
+      styleVariant !== 'default' && `csk-calendar--style-${styleVariant}`,
+      animated && 'csk-calendar--animated',
       className,
     ]
       .filter(Boolean)
@@ -435,11 +462,49 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
                         className={[
                           'csk-calendar__event',
                           getEventColorClass(event),
-                        ].join(' ')}
+                          showEventPreview && 'csk-calendar__event--has-preview',
+                        ]
+                          .filter(Boolean)
+                          .join(' ')}
                         onClick={(e) => handleEventClick(event, e)}
+                        onMouseEnter={(e) => handleEventMouseEnter(event, e)}
+                        onMouseLeave={handleEventMouseLeave}
                         aria-label={event.title}
+                        data-event-id={event.id}
+                        title={showEventPreview ? undefined : event.title}
                       >
                         {renderEventItem(event)}
+                        {showEventPreview && (
+                          <span className="csk-calendar__event-preview">
+                            <span className="csk-calendar__event-preview-title">
+                              {event.title}
+                            </span>
+                            <span className="csk-calendar__event-preview-date">
+                              {event.start.toLocaleDateString(locale, {
+                                weekday: 'short',
+                                day: 'numeric',
+                                month: 'short',
+                              })}
+                              {event.end && !isSameDay(event.start, event.end) && (
+                                <>
+                                  {' - '}
+                                  {event.end.toLocaleDateString(locale, {
+                                    weekday: 'short',
+                                    day: 'numeric',
+                                    month: 'short',
+                                  })}
+                                </>
+                              )}
+                            </span>
+                            {event.section && (
+                              <span
+                                className={`csk-calendar__event-preview-badge csk-calendar__event-preview-badge--${event.section}`}
+                              >
+                                {event.section.toUpperCase()}
+                              </span>
+                            )}
+                          </span>
+                        )}
                       </button>
                     ))}
                     {hiddenCount > 0 && (

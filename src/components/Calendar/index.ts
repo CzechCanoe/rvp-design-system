@@ -4,4 +4,5 @@ export type {
   CalendarEvent,
   CalendarView,
   CalendarSize,
+  CalendarStyleVariant,
 } from './Calendar';

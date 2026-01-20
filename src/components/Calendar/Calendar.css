@@ -4,6 +4,10 @@
  * Uses design tokens for consistent styling.
  * Supports views: month, week
  * Supports sizes: sm, md, lg
+ * Style variants: default, gradient, glass, bordered
+ *
+ * Phase 7.6: Redesigned with style variants, hover effects,
+ * event preview tooltips, and micro-interactions.
  */
 
 /* ==========================================================================
@@ -24,6 +28,9 @@
   /* Text */
   color: var(--color-text-primary);
   font-family: var(--font-family);
+
+  /* Transition for theme changes */
+  transition: background-color var(--duration-normal) var(--ease-out);
 }
 
 /* ==========================================================================
@@ -76,12 +83,19 @@
   background-color: transparent;
 
   /* Transition */
-  transition: var(--transition-button);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
 }
 
 .csk-calendar__nav-btn:hover {
   background-color: var(--color-bg-tertiary);
   color: var(--color-text-primary);
+}
+
+.csk-calendar--animated .csk-calendar__nav-btn:active {
+  transform: scale(0.95);
 }
 
 .csk-calendar__nav-btn:focus-visible {
@@ -93,6 +107,13 @@
   padding: var(--spacing-1) var(--spacing-3);
   font-size: var(--text-sm-size);
   font-weight: var(--font-weight-medium);
+  border: 1px solid var(--color-border-default);
+}
+
+.csk-calendar__nav-btn--today:hover {
+  background-color: var(--color-primary-50);
+  border-color: var(--color-primary-200);
+  color: var(--color-primary-700);
 }
 
 /* ==========================================================================
@@ -138,7 +159,9 @@
   min-height: 100px;
   padding: var(--spacing-1);
   background-color: var(--color-bg-primary);
-  transition: background-color var(--duration-fast) var(--ease-out);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .csk-calendar__day--outside {
@@ -159,10 +182,12 @@
 
 .csk-calendar__day--clickable:hover {
   background-color: var(--color-bg-tertiary);
+  box-shadow: inset 0 0 0 2px var(--color-primary-100);
 }
 
 .csk-calendar__day--clickable.csk-calendar__day--today:hover {
   background-color: var(--color-primary-100);
+  box-shadow: inset 0 0 0 2px var(--color-primary-200);
 }
 
 .csk-calendar__day--clickable:focus-visible {
@@ -187,6 +212,10 @@
   font-size: var(--text-sm-size);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
 }
 
 .csk-calendar__day-number--today {
@@ -194,6 +223,10 @@
   color: var(--color-neutral-0);
   border-radius: var(--radius-full);
   font-weight: var(--font-weight-semibold);
+}
+
+.csk-calendar--animated .csk-calendar__day--clickable:hover .csk-calendar__day-number {
+  transform: scale(1.1);
 }
 
 /* Day events */
@@ -219,6 +252,7 @@
   text-align: left;
 
   /* Layout */
+  position: relative;
   display: flex;
   align-items: center;
   width: 100%;
@@ -239,11 +273,28 @@
   overflow: hidden;
 
   /* Transition */
-  transition: var(--transition-button);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    filter var(--duration-fast) var(--ease-out);
 }
 
 .csk-calendar__event:hover {
-  filter: brightness(0.95);
+  filter: brightness(0.92);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.csk-calendar--animated .csk-calendar__event:hover {
+  transform: translateX(2px);
+}
+
+.csk-calendar__event:active {
+  filter: brightness(0.88);
+}
+
+.csk-calendar--animated .csk-calendar__event:active {
+  transform: translateX(2px) scale(0.98);
 }
 
 .csk-calendar__event:focus-visible {
@@ -322,20 +373,121 @@
 
   /* Text */
   font-size: var(--text-xs-size);
+  font-weight: var(--font-weight-medium);
   color: var(--color-text-tertiary);
 
   /* Transition */
-  transition: color var(--duration-fast) var(--ease-out);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+  border-radius: var(--radius-sm);
 }
 
 .csk-calendar__more:hover {
   color: var(--color-text-primary);
+  background-color: var(--color-bg-tertiary);
 }
 
 .csk-calendar__more:focus-visible {
   outline: 2px solid var(--color-border-focus);
   outline-offset: 1px;
   border-radius: var(--radius-sm);
+}
+
+/* ==========================================================================
+   EVENT PREVIEW TOOLTIP
+   ========================================================================== */
+
+.csk-calendar__event--has-preview {
+  position: relative;
+}
+
+.csk-calendar__event-preview {
+  /* Hidden by default */
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  margin-left: var(--spacing-2);
+
+  /* Visual */
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-3);
+  min-width: 180px;
+  max-width: 250px;
+
+  /* Layout */
+  flex-direction: column;
+  gap: var(--spacing-1);
+
+  /* Pointer events */
+  pointer-events: none;
+}
+
+.csk-calendar__event--has-preview:hover .csk-calendar__event-preview {
+  display: flex;
+}
+
+.csk-calendar__event-preview::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-right-color: var(--color-border-default);
+}
+
+.csk-calendar__event-preview::after {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-right-color: var(--color-bg-primary);
+}
+
+.csk-calendar__event-preview-title {
+  font-size: var(--text-sm-size);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+}
+
+.csk-calendar__event-preview-date {
+  font-size: var(--text-xs-size);
+  color: var(--color-text-secondary);
+}
+
+.csk-calendar__event-preview-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: var(--spacing-0-5) var(--spacing-1);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-sm);
+  margin-top: var(--spacing-1);
+}
+
+.csk-calendar__event-preview-badge--dv {
+  background-color: var(--color-section-dv-light);
+  color: var(--color-section-dv);
+}
+
+.csk-calendar__event-preview-badge--ry {
+  background-color: var(--color-section-ry-light);
+  color: var(--color-section-ry);
+}
+
+.csk-calendar__event-preview-badge--vt {
+  background-color: var(--color-section-vt-light);
+  color: var(--color-section-vt);
 }
 
 /* ==========================================================================
@@ -383,6 +535,139 @@
 }
 
 /* ==========================================================================
+   STYLE VARIANTS
+   ========================================================================== */
+
+/* Gradient style - primary gradient header */
+.csk-calendar--style-gradient {
+  border: none;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.csk-calendar--style-gradient .csk-calendar__header {
+  background: var(--gradient-primary);
+  padding: var(--spacing-5) var(--spacing-4);
+  margin: 0;
+}
+
+.csk-calendar--style-gradient .csk-calendar__title {
+  color: white;
+  font-size: var(--text-xl-size);
+}
+
+.csk-calendar--style-gradient .csk-calendar__nav-btn {
+  color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.csk-calendar--style-gradient .csk-calendar__nav-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.csk-calendar--style-gradient .csk-calendar__nav-btn--today {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.csk-calendar--style-gradient .csk-calendar__nav-btn--today:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: white;
+}
+
+.csk-calendar--style-gradient .csk-calendar__weekday {
+  color: var(--color-primary-600);
+  font-weight: var(--font-weight-semibold);
+}
+
+.csk-calendar--style-gradient .csk-calendar__day--today {
+  background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-primary-100) 100%);
+}
+
+.csk-calendar--style-gradient .csk-calendar__day-number--today {
+  background: var(--gradient-primary);
+  box-shadow: 0 2px 8px rgba(17, 118, 166, 0.3);
+}
+
+/* Glass style - frosted glass effect */
+.csk-calendar--style-glass {
+  background: var(--gradient-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.csk-calendar--style-glass .csk-calendar__header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: var(--spacing-3);
+}
+
+.csk-calendar--style-glass .csk-calendar__days {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.csk-calendar--style-glass .csk-calendar__day {
+  background-color: transparent;
+}
+
+.csk-calendar--style-glass .csk-calendar__day--outside {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.csk-calendar--style-glass .csk-calendar__day--today {
+  background-color: rgba(77, 163, 204, 0.1);
+}
+
+.csk-calendar--style-glass .csk-calendar__day--clickable:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.csk-calendar--style-glass .csk-calendar__event {
+  backdrop-filter: blur(4px);
+}
+
+.csk-calendar--style-glass .csk-calendar__event--default {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Bordered style - emphasized borders */
+.csk-calendar--style-bordered {
+  border: 2px solid var(--color-border-secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.csk-calendar--style-bordered .csk-calendar__header {
+  border-bottom: 2px solid var(--color-border-secondary);
+  padding-bottom: var(--spacing-3);
+  margin-bottom: var(--spacing-2);
+}
+
+.csk-calendar--style-bordered .csk-calendar__days {
+  border: 2px solid var(--color-border-secondary);
+  gap: 2px;
+}
+
+.csk-calendar--style-bordered .csk-calendar__day {
+  border-right: 1px solid var(--color-border-primary);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.csk-calendar--style-bordered .csk-calendar__day:nth-child(7n) {
+  border-right: none;
+}
+
+.csk-calendar--style-bordered .csk-calendar__event {
+  border: 1px solid currentColor;
+  border-left-width: 3px;
+}
+
+/* ==========================================================================
    DARK MODE
    ========================================================================== */
 
@@ -392,10 +677,12 @@
 
 [data-theme='dark'] .csk-calendar__day--clickable:hover {
   background-color: var(--color-bg-tertiary);
+  box-shadow: inset 0 0 0 2px rgba(77, 163, 204, 0.2);
 }
 
 [data-theme='dark'] .csk-calendar__day--clickable.csk-calendar__day--today:hover {
   background-color: rgba(77, 163, 204, 0.15);
+  box-shadow: inset 0 0 0 2px rgba(77, 163, 204, 0.3);
 }
 
 [data-theme='dark'] .csk-calendar__event--default {
@@ -428,42 +715,88 @@
   color: var(--color-info-400);
 }
 
-/* Dark mode with system preference */
-@media
+[data-theme='dark'] .csk-calendar__event-preview {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border-secondary);
+}
 
-  :root:not([data-theme='light'])
-    .csk-calendar__day--clickable.csk-calendar__day--today:hover {
-    background-color: rgba(77, 163, 204, 0.15);
+[data-theme='dark'] .csk-calendar__event-preview::before {
+  border-right-color: var(--color-border-secondary);
+}
+
+[data-theme='dark'] .csk-calendar__event-preview::after {
+  border-right-color: var(--color-bg-secondary);
+}
+
+/* Dark mode glass */
+[data-theme='dark'] .csk-calendar--style-glass {
+  background: var(--gradient-glass-dark);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .csk-calendar--style-glass .csk-calendar__day--outside {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .csk-calendar--style-glass .csk-calendar__event--default {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+
+/* Entry animation for calendar */
+.csk-calendar--animated {
+  animation: csk-calendar-fade-in 0.3s var(--ease-out);
+}
+
+@keyframes csk-calendar-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
-
-  :root:not([data-theme='light']) .csk-calendar__event--default {
-    background-color: var(--color-neutral-700);
-    color: var(--color-text-primary);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  :root:not([data-theme='light']) .csk-calendar__event--primary {
-    background-color: rgba(77, 163, 204, 0.2);
-    color: var(--color-primary-400);
+/* Day hover pulse for today */
+.csk-calendar--animated .csk-calendar__day-number--today {
+  animation: csk-calendar-today-pulse 2s ease-in-out infinite;
+}
+
+@keyframes csk-calendar-today-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(77, 163, 204, 0.4);
   }
-
-  :root:not([data-theme='light']) .csk-calendar__event--success {
-    background-color: rgba(34, 197, 94, 0.2);
-    color: var(--color-success-400);
+  50% {
+    box-shadow: 0 0 0 4px rgba(77, 163, 204, 0);
   }
+}
 
-  :root:not([data-theme='light']) .csk-calendar__event--warning {
-    background-color: rgba(245, 158, 11, 0.2);
-    color: var(--color-warning-400);
+/* Event appear animation */
+.csk-calendar--animated .csk-calendar__event {
+  animation: csk-calendar-event-appear 0.2s var(--ease-out) backwards;
+}
+
+.csk-calendar--animated .csk-calendar__day:nth-child(1) .csk-calendar__event { animation-delay: 0ms; }
+.csk-calendar--animated .csk-calendar__day:nth-child(2) .csk-calendar__event { animation-delay: 10ms; }
+.csk-calendar--animated .csk-calendar__day:nth-child(3) .csk-calendar__event { animation-delay: 20ms; }
+.csk-calendar--animated .csk-calendar__day:nth-child(4) .csk-calendar__event { animation-delay: 30ms; }
+.csk-calendar--animated .csk-calendar__day:nth-child(5) .csk-calendar__event { animation-delay: 40ms; }
+.csk-calendar--animated .csk-calendar__day:nth-child(6) .csk-calendar__event { animation-delay: 50ms; }
+.csk-calendar--animated .csk-calendar__day:nth-child(7) .csk-calendar__event { animation-delay: 60ms; }
+
+@keyframes csk-calendar-event-appear {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
   }
-
-  :root:not([data-theme='light']) .csk-calendar__event--error {
-    background-color: rgba(239, 68, 68, 0.2);
-    color: var(--color-error-400);
-  }
-
-  :root:not([data-theme='light']) .csk-calendar__event--info {
-    background-color: rgba(59, 130, 246, 0.2);
-    color: var(--color-info-400);
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -522,6 +855,20 @@
     font-size: 10px;
     padding: var(--spacing-0-5) 0;
   }
+
+  /* Hide preview on mobile */
+  .csk-calendar__event-preview {
+    display: none !important;
+  }
+
+  /* Gradient style mobile adjustments */
+  .csk-calendar--style-gradient .csk-calendar__header {
+    padding: var(--spacing-4);
+  }
+
+  .csk-calendar--style-gradient .csk-calendar__title {
+    font-size: var(--text-lg-size);
+  }
 }
 
 /* ==========================================================================
@@ -529,10 +876,36 @@
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
+  .csk-calendar,
   .csk-calendar__day,
   .csk-calendar__event,
   .csk-calendar__nav-btn,
-  .csk-calendar__more {
+  .csk-calendar__more,
+  .csk-calendar__day-number {
     transition: none;
+  }
+
+  .csk-calendar--animated {
+    animation: none;
+  }
+
+  .csk-calendar--animated .csk-calendar__day-number--today {
+    animation: none;
+  }
+
+  .csk-calendar--animated .csk-calendar__event {
+    animation: none;
+  }
+
+  .csk-calendar--animated .csk-calendar__event:hover {
+    transform: none;
+  }
+
+  .csk-calendar--animated .csk-calendar__nav-btn:active {
+    transform: none;
+  }
+
+  .csk-calendar--animated .csk-calendar__day--clickable:hover .csk-calendar__day-number {
+    transform: none;
   }
 }
