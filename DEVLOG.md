@@ -2525,6 +2525,7 @@ tests/
 - [x] Dokumentace konkrétních vizuálních nedostatků pro klíčové komponenty
 - [x] Identifikace chybějících vizuálních prvků (gradienty, shadows, micro-interactions)
 - [x] Vytvoření dokumentu `docs/review/visual-gap-analysis.md`
+- [x] Screenshot comparison - vytvoření `docs/review/screenshot-comparison.md`
 
 ### Klíčová zjištění
 

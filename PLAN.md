@@ -142,7 +142,7 @@
 ### 7.1 Vizuální audit a analýza mezer
 - [x] Porovnání současných komponent s top referencemi (World Athletics, FIS, UCI)
 - [x] Dokumentace konkrétních vizuálních nedostatků
-- [ ] Screenshot comparison - naše komponenty vs. reference
+- [x] Screenshot comparison - naše komponenty vs. reference
 - [x] Identifikace chybějících vizuálních prvků (gradienty, shadows, micro-interactions)
 - [x] Dokument `docs/review/visual-gap-analysis.md`
 
