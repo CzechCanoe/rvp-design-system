@@ -1,0 +1,188 @@
+/**
+ * Mode Switching - CSK RVP Design System
+ *
+ * CSS variables that change based on display mode (utility vs expressive).
+ * Apply [data-mode="utility"] or [data-mode="expressive"] to containers.
+ *
+ * This file creates semantic aliases that automatically switch
+ * between utility and expressive values based on data-mode attribute.
+ */
+
+/* =============================================================================
+   DEFAULT MODE: UTILITY
+   Compact, efficient - used for backoffice and admin interfaces
+   ============================================================================= */
+
+:root,
+[data-mode="utility"] {
+  /* Typography */
+  --text-h1-size: var(--text-util-h1-size);
+  --text-h1-weight: var(--text-util-h1-weight);
+  --text-h1-line-height: var(--text-util-h1-line-height);
+
+  --text-h2-size: var(--text-util-h2-size);
+  --text-h2-weight: var(--text-util-h2-weight);
+  --text-h2-line-height: var(--text-util-h2-line-height);
+
+  --text-h3-size: var(--text-util-h3-size);
+  --text-h3-weight: var(--text-util-h3-weight);
+  --text-h3-line-height: var(--text-util-h3-line-height);
+
+  --text-body-size: var(--text-util-body-size);
+  --text-body-weight: var(--text-util-body-weight);
+  --text-body-line-height: var(--text-util-body-line-height);
+
+  /* Spacing */
+  --spacing-mode-xs: var(--spacing-util-xs);
+  --spacing-mode-sm: var(--spacing-util-sm);
+  --spacing-mode-md: var(--spacing-util-md);
+  --spacing-mode-lg: var(--spacing-util-lg);
+  --spacing-mode-xl: var(--spacing-util-xl);
+
+  --spacing-section-mode-sm: var(--spacing-util-section-sm);
+  --spacing-section-mode-md: var(--spacing-util-section-md);
+  --spacing-section-mode-lg: var(--spacing-util-section-lg);
+  --spacing-section-mode-xl: var(--spacing-util-section-xl);
+
+  --spacing-card-mode-padding: var(--spacing-util-card-padding);
+  --spacing-card-mode-padding-lg: var(--spacing-util-card-padding-lg);
+  --spacing-card-mode-gap: var(--spacing-util-card-gap);
+
+  /* Transitions */
+  --motion-mode-fast: var(--motion-util-fast);
+  --motion-mode-base: var(--motion-util-base);
+  --motion-mode-slow: var(--motion-util-slow);
+
+  --transition-mode-button: var(--transition-util-button);
+  --transition-mode-card: var(--transition-util-card);
+
+  /* Shadows */
+  --shadow-mode-sm: var(--shadow-util-sm);
+  --shadow-mode-md: var(--shadow-util-md);
+  --shadow-mode-lg: var(--shadow-util-lg);
+
+  /* Borders */
+  --border-mode-width: var(--border-util-width);
+  --border-mode-width-thick: var(--border-util-width-thick);
+
+  /* Component scales */
+  --button-mode-height-sm: var(--button-util-height-sm);
+  --button-mode-height-md: var(--button-util-height-md);
+  --button-mode-height-lg: var(--button-util-height-lg);
+
+  --button-mode-padding-x-sm: var(--button-util-padding-x-sm);
+  --button-mode-padding-x-md: var(--button-util-padding-x-md);
+  --button-mode-padding-x-lg: var(--button-util-padding-x-lg);
+
+  --avatar-mode-size-sm: var(--avatar-util-size-sm);
+  --avatar-mode-size-md: var(--avatar-util-size-md);
+  --avatar-mode-size-lg: var(--avatar-util-size-lg);
+  --avatar-mode-size-xl: var(--avatar-util-size-xl);
+
+  --radius-mode-card: var(--radius-util-card);
+  --radius-mode-card-lg: var(--radius-util-card-lg);
+
+  --badge-mode-height: var(--badge-util-height);
+  --badge-mode-padding-x: var(--badge-util-padding-x);
+}
+
+/* =============================================================================
+   EXPRESSIVE MODE
+   Generous, dramatic - used for public-facing pages
+   ============================================================================= */
+
+[data-mode="expressive"] {
+  /* Typography */
+  --text-h1-size: var(--text-expr-h1-size);
+  --text-h1-weight: var(--text-expr-h1-weight);
+  --text-h1-line-height: var(--text-expr-h1-line-height);
+
+  --text-h2-size: var(--text-expr-h2-size);
+  --text-h2-weight: var(--text-expr-h2-weight);
+  --text-h2-line-height: var(--text-expr-h2-line-height);
+
+  --text-h3-size: var(--text-expr-h3-size);
+  --text-h3-weight: var(--text-expr-h3-weight);
+  --text-h3-line-height: var(--text-expr-h3-line-height);
+
+  --text-body-size: var(--font-size-base);
+  --text-body-weight: var(--font-weight-normal);
+  --text-body-line-height: var(--line-height-normal);
+
+  /* Spacing */
+  --spacing-mode-xs: var(--spacing-expr-xs);
+  --spacing-mode-sm: var(--spacing-expr-sm);
+  --spacing-mode-md: var(--spacing-expr-md);
+  --spacing-mode-lg: var(--spacing-expr-lg);
+  --spacing-mode-xl: var(--spacing-expr-xl);
+
+  --spacing-section-mode-sm: var(--spacing-expr-section-sm);
+  --spacing-section-mode-md: var(--spacing-expr-section-md);
+  --spacing-section-mode-lg: var(--spacing-expr-section-lg);
+  --spacing-section-mode-xl: var(--spacing-expr-section-xl);
+
+  --spacing-card-mode-padding: var(--spacing-expr-card-padding);
+  --spacing-card-mode-padding-lg: var(--spacing-expr-card-padding-lg);
+  --spacing-card-mode-gap: var(--spacing-expr-card-gap);
+
+  /* Transitions */
+  --motion-mode-fast: var(--motion-expr-fast);
+  --motion-mode-base: var(--motion-expr-base);
+  --motion-mode-slow: var(--motion-expr-slow);
+
+  --transition-mode-button: var(--transition-expr-button);
+  --transition-mode-card: var(--transition-expr-card);
+
+  /* Shadows */
+  --shadow-mode-sm: var(--shadow-soft-sm);
+  --shadow-mode-md: var(--shadow-soft-md);
+  --shadow-mode-lg: var(--shadow-expr-featured);
+
+  /* Borders */
+  --border-mode-width: var(--border-expr-width);
+  --border-mode-width-thick: var(--border-expr-width-thick);
+
+  /* Component scales */
+  --button-mode-height-sm: var(--button-expr-height-sm);
+  --button-mode-height-md: var(--button-expr-height-md);
+  --button-mode-height-lg: var(--button-expr-height-lg);
+
+  --button-mode-padding-x-sm: var(--button-expr-padding-x-sm);
+  --button-mode-padding-x-md: var(--button-expr-padding-x-md);
+  --button-mode-padding-x-lg: var(--button-expr-padding-x-lg);
+
+  --avatar-mode-size-sm: var(--avatar-expr-size-sm);
+  --avatar-mode-size-md: var(--avatar-expr-size-md);
+  --avatar-mode-size-lg: var(--avatar-expr-size-lg);
+  --avatar-mode-size-xl: var(--avatar-expr-size-xl);
+
+  --radius-mode-card: var(--radius-expr-card);
+  --radius-mode-card-lg: var(--radius-expr-card-lg);
+
+  --badge-mode-height: var(--badge-expr-height);
+  --badge-mode-padding-x: var(--badge-expr-padding-x);
+}
+
+/* =============================================================================
+   HELPER CLASSES
+   Quick toggle classes for specific sections
+   ============================================================================= */
+
+.mode-utility {
+  /* Inherit all utility mode variables */
+}
+
+.mode-expressive {
+  /* Inherit all expressive mode variables */
+}
+
+/* Apply to specific elements for mode-aware styling */
+[data-mode="utility"] .mode-aware-text {
+  font-size: var(--text-util-body-size);
+  line-height: var(--text-util-body-line-height);
+}
+
+[data-mode="expressive"] .mode-aware-text {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+}

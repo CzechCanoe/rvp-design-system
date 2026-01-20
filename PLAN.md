@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 7 - Hloubkové review a redesign
-**Další krok:** 7.9 Expresivní vs. utilitární režim
+**Další krok:** 7.10 Finální polish
 
 **Problém:** Současná implementace nedosahuje vizuální úrovně studovaných referencí (World Athletics, FIS, ICF). Komponenty jsou funkční, ale "utilitární" - chybí vizuální polish, branded feel, moderní detaily.
 
@@ -197,11 +197,11 @@
 - [x] **DashboardPage** - widget karty, statistiky s grafy
 
 ### 7.9 Expresivní vs. utilitární režim
-- [ ] Implementace dual-mode systému (jak definováno v DESIGN_PRINCIPLES.md)
-- [ ] Expresivní spacing scale
-- [ ] Expresivní animace (delší, dramatičtější)
-- [ ] Context provider pro přepínání režimů
-- [ ] Storybook stories pro oba režimy
+- [x] Implementace dual-mode systému (jak definováno v DESIGN_PRINCIPLES.md)
+- [x] Expresivní spacing scale
+- [x] Expresivní animace (delší, dramatičtější)
+- [x] Context provider pro přepínání režimů
+- [x] Storybook stories pro oba režimy
 
 ### 7.10 Finální polish
 - [ ] Konzistence napříč všemi komponentami

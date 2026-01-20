@@ -1,5 +1,42 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.9 / Expresivní vs. utilitární režim
+
+### Dokončeno
+- [x] Vytvořen `utility.css` s kompaktními tokeny pro backoffice/admin interfaces
+- [x] Vytvořen `mode.css` pro automatické přepínání mezi utility/expressive režimy pomocí `data-mode` atributu
+- [x] Vytvořen `ThemeContext.tsx` - React context provider pro přepínání režimů a témat
+- [x] Exporty v `src/context/index.ts`
+- [x] Aktualizován `src/tokens/index.css` pro import nových token souborů
+- [x] Aktualizován `src/index.ts` pro export context
+- [x] Vytvořeny Storybook stories pro ThemeProvider s interaktivní demo a porovnáním režimů
+
+### Změněné/přidané soubory
+- `src/tokens/utility.css` - utilitární tokeny (kompaktní spacing, rychlé animace, menší komponenty)
+- `src/tokens/mode.css` - CSS proměnné pro automatické přepínání mezi režimy
+- `src/context/ThemeContext.tsx` - React context provider s hook `useTheme`
+- `src/context/index.ts` - exporty pro context
+- `src/context/ThemeContext.stories.tsx` - Storybook stories pro demonstraci dual-mode systému
+- `src/tokens/index.css` - přidány importy pro utility.css a mode.css
+- `src/index.ts` - přidán export pro context
+
+### Klíčové funkce ThemeContext
+- `mode`: aktuální display mode ('utility' | 'expressive')
+- `theme`: color theme preference ('light' | 'dark' | 'system')
+- `resolvedTheme`: skutečné téma po vyhodnocení system preference
+- `setMode()`, `setTheme()`: settery pro změnu
+- `toggleMode()`, `toggleTheme()`: toggle funkce
+- Automatická persistence do localStorage
+- Automatická aplikace `data-mode` a `data-theme` atributů na document element
+
+### Poznámky
+- Expresivní tokeny již existovaly v `expressive.css` a `spacing.css`
+- Animační tokeny již existovaly v `transitions.css`
+- Build a Storybook build prošly úspěšně
+- CSS warningy ve Vite jsou předexistující, netýkají se těchto změn
+
+---
+
 ## 2026-01-20 - Fáze 7.8 / Redesign RegistrationPage prototypu
 
 ### Dokončeno
