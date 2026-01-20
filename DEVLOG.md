@@ -1,5 +1,53 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.10 / Cross-browser testing
+
+### Dokončeno
+- [x] Přidány Firefox a WebKit projekty do Playwright konfigurace
+- [x] Přidány mobile-chrome (Pixel 5) a mobile-safari (iPhone 13) projekty
+- [x] Vytvořen komplexní cross-browser test suite (`tests/cross-browser.spec.ts`)
+- [x] Otestováno 10 klíčových komponent napříč 5 prohlížeči
+- [x] Otestováno 7 CSS features (variables, gradients, flexbox, grid, backdrop-filter, animations, sticky)
+- [x] Otestovány 3 prototype stránky (Calendar, Live, Dashboard)
+- [x] Otestován dark mode a responsive viewports
+- [x] Vytvořeny baseline screenshoty pro všechny kombinace
+- [x] Vytvořena dokumentace `docs/review/cross-browser-testing.md`
+
+### Změněné/přidané soubory
+- `playwright.config.ts` - rozšířena konfigurace o Firefox, WebKit, mobile projekty
+- `tests/cross-browser.spec.ts` - nový test suite pro cross-browser testing
+- `tests/cross-browser.spec.ts-snapshots/` - baseline screenshoty (68 souborů)
+- `docs/review/cross-browser-testing.md` - dokumentace výsledků
+
+### Výsledky testování
+```
+Celkem testů: 125
+Prošlo: 125 (100%)
+Selhalo: 0
+Čas běhu: ~7 minut
+```
+
+**Testované prohlížeče:**
+| Prohlížeč | Engine | Status |
+|-----------|--------|--------|
+| Chrome Desktop | Chromium | ✅ Pass |
+| Firefox Desktop | Gecko 144 | ✅ Pass |
+| Safari Desktop | WebKit 26 | ✅ Pass |
+| Chrome Mobile | Chromium | ✅ Pass |
+| Safari Mobile | WebKit | ✅ Pass |
+
+### Poznámky
+- Všechny CSS features fungují konzistentně napříč prohlížeči
+- Backdrop-filter má plnou podporu (Safari používá -webkit- prefix, CSS to obsahuje)
+- Font rendering se mírně liší, ale v rámci tolerance
+- `prefers-reduced-motion` je respektováno ve všech prohlížečích
+- **Milestone 7.10 DOKONČEN** - design systém je připraven pro produkční nasazení
+
+### Další kroky
+- Fáze 6: Dokumentace a publikace (README.md, API docs, CI/CD, NPM)
+
+---
+
 ## 2026-01-20 - Fáze 7.10 / Micro-interactions audit
 
 ### Dokončeno

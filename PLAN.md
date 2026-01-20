@@ -208,7 +208,7 @@
 - [x] Micro-interactions audit (opraveny hardcoded transitions, přidán reduced motion do Pagination)
 - [x] Reduced motion support (doplněno pro Checkbox, Switch, Radio; opraveno Skeleton, Dropdown)
 - [x] Performance check (CSS bundle size) - 26.51 KB gzipped, opraveny CSS warningy
-- [ ] Cross-browser testing
+- [x] Cross-browser testing - Chrome, Firefox, WebKit (desktop + mobile), 125 testů, 100% pass
 
 **Milestone M7:** Vizuálně atraktivní design systém na úrovni top sportovních federací
 
