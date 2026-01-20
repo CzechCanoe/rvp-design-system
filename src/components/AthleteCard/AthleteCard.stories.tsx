@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { AthleteCard } from './AthleteCard';
+import { KanoeCzContext } from '../KanoeCzContext';
 
 const meta: Meta<typeof AthleteCard> = {
   title: 'Components/AthleteCard',
@@ -992,5 +993,226 @@ export const FeaturedShowcase: Story = {
         </div>
       </div>
     </div>
+  ),
+};
+
+// =============================================================================
+// Embed Mode (kanoe.cz integration)
+// =============================================================================
+
+export const EmbedInKanoeCz: Story = {
+  name: 'Embed: V kontextu kanoe.cz',
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story: 'AthleteCard v embed režimu, zasazená do mock prostředí kanoe.cz. Neutrální styling bez stínů, border místo shadow.',
+      },
+    },
+  },
+  render: () => (
+    <KanoeCzContext layout="sidebar">
+      <h2 style={{ margin: '0 0 16px', fontSize: '18px', fontWeight: 600 }}>Závodníci klubu</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <AthleteCard
+          name="Jiří Prskavec"
+          club="USK Praha"
+          section="dv"
+          vtClass="m"
+          ranking={1}
+          clickable
+        />
+        <AthleteCard
+          name="Vít Přindiš"
+          club="Dukla Praha"
+          section="dv"
+          vtClass="m"
+          ranking={2}
+          clickable
+        />
+        <AthleteCard
+          name="Tereza Fišerová"
+          club="Dukla Praha"
+          section="dv"
+          vtClass="a"
+          clickable
+        />
+      </div>
+    </KanoeCzContext>
+  ),
+};
+
+export const EmbedCompactList: Story = {
+  name: 'Embed: Kompaktní seznam',
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story: 'Kompaktní varianta AthleteCard v embed režimu - ideální pro startovní listiny a výsledkové tabulky.',
+      },
+    },
+  },
+  render: () => (
+    <KanoeCzContext layout="full">
+      <h2 style={{ margin: '0 0 16px', fontSize: '18px', fontWeight: 600 }}>K1 Muži - Startovní listina</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+        {[
+          { start: 1, name: 'Jiří Prskavec', club: 'USK Praha', bib: 101 },
+          { start: 2, name: 'Vít Přindiš', club: 'Dukla Praha', bib: 102 },
+          { start: 3, name: 'Lukáš Rohan', club: 'USK Praha', bib: 103 },
+          { start: 4, name: 'Ondřej Tunka', club: 'SK Slavia', bib: 104 },
+          { start: 5, name: 'Jakub Krejčí', club: 'Dukla Praha', bib: 105 },
+        ].map((athlete, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <span style={{
+              width: '28px',
+              textAlign: 'center',
+              fontSize: '13px',
+              fontWeight: 600,
+              color: '#666'
+            }}>
+              {athlete.start}.
+            </span>
+            <AthleteCard
+              name={athlete.name}
+              club={athlete.club}
+              section="dv"
+              variant="compact"
+              clickable
+              style={{ flex: 1 }}
+            />
+            <span style={{
+              minWidth: '44px',
+              padding: '4px 8px',
+              fontSize: '12px',
+              fontWeight: 600,
+              textAlign: 'center',
+              background: '#f3f4f6',
+              borderRadius: '4px',
+              border: '1px solid #e5e7eb'
+            }}>
+              #{athlete.bib}
+            </span>
+          </div>
+        ))}
+      </div>
+    </KanoeCzContext>
+  ),
+};
+
+export const EmbedSearchResults: Story = {
+  name: 'Embed: Výsledky vyhledávání',
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story: 'AthleteCard jako výsledky vyhledávání v registru závodníků embedovaném na kanoe.cz.',
+      },
+    },
+  },
+  render: () => (
+    <KanoeCzContext layout="narrow">
+      <div style={{
+        padding: '8px 12px',
+        marginBottom: '12px',
+        fontSize: '13px',
+        color: '#666',
+        background: '#f9fafb',
+        borderRadius: '6px',
+        border: '1px solid #e5e7eb'
+      }}>
+        Nalezeno 4 závodníci pro "Novák"
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <AthleteCard
+          name="Jan Novák"
+          club="KK Brandýs"
+          clubId="BRA01"
+          section="vt"
+          vtClass="b"
+          birthYear={2005}
+          licenseNumber="CZE-2005-0234"
+          clickable
+        />
+        <AthleteCard
+          name="Marie Nováková"
+          club="USK Praha"
+          clubId="USK01"
+          section="dv"
+          vtClass="a"
+          birthYear={2003}
+          licenseNumber="CZE-2003-0089"
+          clickable
+        />
+        <AthleteCard
+          name="Petr Novotný"
+          club="Dukla Praha"
+          clubId="DUK01"
+          section="ry"
+          birthYear={2006}
+          licenseNumber="CZE-2006-0156"
+          clickable
+        />
+        <AthleteCard
+          name="Anna Nováčková"
+          club="SK Slavia Praha"
+          clubId="SLA01"
+          section="vt"
+          vtClass="c"
+          birthYear={2008}
+          licenseNumber="CZE-2008-0312"
+          clickable
+        />
+      </div>
+    </KanoeCzContext>
+  ),
+};
+
+export const EmbedFeaturedAthletes: Story = {
+  name: 'Embed: Hvězdy klubu',
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story: 'Featured varianta AthleteCard v embed režimu pro zobrazení hvězd klubu na hlavní stránce.',
+      },
+    },
+  },
+  render: () => (
+    <KanoeCzContext layout="full">
+      <h2 style={{ margin: '0 0 16px', fontSize: '18px', fontWeight: 600 }}>Hvězdy českého kanoistiky</h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
+        <AthleteCard
+          name="Jiří Prskavec"
+          imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=256&h=256&fit=crop&crop=face"
+          club="USK Praha"
+          section="dv"
+          vtClass="m"
+          ranking={1}
+          variant="featured"
+          clickable
+        />
+        <AthleteCard
+          name="Martin Fuksa"
+          imageUrl="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=256&h=256&fit=crop&crop=face"
+          club="Dukla Praha"
+          section="ry"
+          vtClass="m"
+          ranking={1}
+          variant="featured"
+          clickable
+        />
+        <AthleteCard
+          name="Tereza Fišerová"
+          imageUrl="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=256&h=256&fit=crop&crop=face"
+          club="Dukla Praha"
+          section="dv"
+          vtClass="a"
+          ranking={3}
+          variant="featured"
+          clickable
+        />
+      </div>
+    </KanoeCzContext>
   ),
 };

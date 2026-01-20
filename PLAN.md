@@ -4,7 +4,7 @@
 
 | Fáze | Krok | Status |
 |------|------|--------|
-| **8 - Integrace s kanoe.cz** | 8.4 Nové šablony | 🔲 Další |
+| **8 - Integrace s kanoe.cz** | 8.5 Header satellite | 🔲 Další |
 
 ---
 
@@ -34,10 +34,10 @@
 - [x] Embed mode + container query responzivita
 - [x] Cards view (měsíční karty) - CalendarCards komponenta
 
-### 8.4 Nové šablony
+### 8.4 Nové šablony ✅
 - [x] **Event Detail Page** - před/během/po závodu
-- [ ] **Athlete Public Profile (EXPRESSIVE)** - celostránkový wow profil
-- [ ] **Athlete Card (embed)** - kompaktní verze
+- [x] **Athlete Public Profile (EXPRESSIVE)** - celostránkový wow profil
+- [x] **Athlete Card (embed)** - kompaktní verze + embed stories
 
 ### 8.5 Header satellite varianta
 - [ ] Variant `satellite` - logo + user + kontextové akce
