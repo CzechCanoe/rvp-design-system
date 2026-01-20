@@ -455,23 +455,10 @@
    ========================================================================== */
 
 [data-theme='dark'] .csk-athlete-card,
-@media (prefers-color-scheme: dark) {
-  .csk-athlete-card:not([data-theme='light'] *) {
-    background: var(--color-bg-primary);
-    border-color: var(--color-border-primary);
-  }
-}
+@media
 
 [data-theme='dark'] .csk-athlete-card--featured,
-@media (prefers-color-scheme: dark) {
-  .csk-athlete-card--featured:not([data-theme='light'] *) {
-    background: linear-gradient(
-      180deg,
-      var(--color-bg-tertiary) 0%,
-      var(--color-bg-primary) 100%
-    );
-  }
-}
+@media
 
 /* ==========================================================================
    Responsive

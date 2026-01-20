@@ -448,14 +448,7 @@
   border-color: var(--color-error-700);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .csk-timeline__item--clickable:hover {
-    background-color: var(--color-bg-elevated);
-  }
-
-  :root:not([data-theme="light"]) .csk-timeline__item--completed .csk-timeline__icon {
-    color: var(--color-neutral-900);
-  }
+@media
 
   :root:not([data-theme="light"]) .csk-timeline__item--error .csk-timeline__icon {
     color: var(--color-neutral-900);

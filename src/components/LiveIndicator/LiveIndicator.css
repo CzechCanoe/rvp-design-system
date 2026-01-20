@@ -299,14 +299,7 @@
 }
 
 /* System preference detection */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .csk-live-indicator--color-default {
-    color: var(--color-neutral-500);
-  }
-
-  :root:not([data-theme='light']) .csk-live-indicator--color-default .csk-live-indicator__label {
-    color: var(--color-text-secondary);
-  }
+@media
 
   :root:not([data-theme='light']) .csk-live-indicator--color-primary {
     color: var(--color-primary-400);

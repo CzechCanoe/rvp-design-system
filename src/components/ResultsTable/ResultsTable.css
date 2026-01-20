@@ -491,14 +491,7 @@
   background-color: rgba(10, 10, 10, 0.8);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .csk-results-table__tr--gold {
-    background-color: rgba(255, 215, 0, 0.08);
-  }
-
-  :root:not([data-theme='light']) .csk-results-table__tr--gold:hover {
-    background-color: rgba(255, 215, 0, 0.12);
-  }
+@media
 
   :root:not([data-theme='light']) .csk-results-table__tr--gold .csk-results-table__rank {
     color: #ffd700;

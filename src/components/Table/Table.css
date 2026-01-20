@@ -286,14 +286,7 @@
   background-color: rgba(10, 10, 10, 0.8);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .csk-table__tr--selected {
-    background-color: var(--color-primary-900);
-  }
-
-  :root:not([data-theme='light']) .csk-table--hoverable .csk-table__tr--selected:hover {
-    background-color: var(--color-primary-800);
-  }
+@media
 
   :root:not([data-theme='light']) .csk-table__loading-overlay {
     background-color: rgba(10, 10, 10, 0.8);

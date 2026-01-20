@@ -427,14 +427,7 @@
   background-color: var(--color-bg-primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .csk-progress__track {
-    background-color: var(--color-bg-tertiary);
-  }
-
-  :root:not([data-theme='light']) .csk-progress__indicator {
-    background-color: var(--color-bg-secondary);
-  }
+@media
 
   :root:not([data-theme='light']) .csk-progress__step--current .csk-progress__indicator {
     background-color: var(--color-bg-primary);

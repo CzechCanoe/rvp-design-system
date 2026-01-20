@@ -324,15 +324,7 @@
 }
 
 /* System preference detection */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .csk-toast {
-    background-color: var(--color-bg-elevated);
-    box-shadow: var(--shadow-lg);
-  }
-
-  :root:not([data-theme="light"]) .csk-toast__action:hover {
-    background-color: var(--color-primary-900);
-  }
+@media
 
   :root:not([data-theme="light"]) .csk-toast__action:active {
     background-color: var(--color-primary-800);

@@ -429,14 +429,7 @@
 }
 
 /* Dark mode with system preference */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .csk-calendar__day--today {
-    background-color: rgba(77, 163, 204, 0.1);
-  }
-
-  :root:not([data-theme='light']) .csk-calendar__day--clickable:hover {
-    background-color: var(--color-bg-tertiary);
-  }
+@media
 
   :root:not([data-theme='light'])
     .csk-calendar__day--clickable.csk-calendar__day--today:hover {

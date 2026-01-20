@@ -214,14 +214,7 @@
 }
 
 /* System preference detection */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .csk-modal__backdrop {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-
-  :root:not([data-theme="light"]) .csk-modal {
-    background-color: var(--color-bg-elevated);
-  }
+@media
 
   :root:not([data-theme="light"]) .csk-modal__footer {
     background-color: var(--color-bg-primary);

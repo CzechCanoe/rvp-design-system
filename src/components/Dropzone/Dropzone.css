@@ -447,16 +447,7 @@
 }
 
 /* Dark mode with system preference */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .csk-dropzone__area {
-    background-color: var(--color-bg-secondary);
-    border-color: var(--color-border-default);
-  }
-
-  :root:not([data-theme='light']) .csk-dropzone__area:hover {
-    background-color: rgba(77, 163, 204, 0.1);
-    border-color: var(--color-primary-500);
-  }
+@media
 
   :root:not([data-theme='light']) .csk-dropzone--drag-over .csk-dropzone__area {
     background-color: rgba(77, 163, 204, 0.15);

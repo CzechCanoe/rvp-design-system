@@ -313,14 +313,7 @@
 }
 
 /* System preference */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .csk-header__backdrop {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-
-  :root:not([data-theme="light"]) .csk-header--elevated {
-    background-color: var(--color-bg-elevated);
-  }
+@media
 }
 
 /* =============================================================================

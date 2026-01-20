@@ -252,15 +252,7 @@
   background: var(--color-bg-tertiary);
 }
 
-@media (prefers-color-scheme: dark) {
-  .csk-empty-state--card:not([data-theme='light'] *) {
-    background: var(--color-bg-secondary);
-    border-color: var(--color-border-default);
-  }
-
-  .csk-empty-state__icon-container:not([data-theme='light'] *) {
-    background: var(--color-bg-tertiary);
-  }
+@media
 }
 
 /* Responsive

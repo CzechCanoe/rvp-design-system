@@ -284,13 +284,5 @@
   background-color: var(--color-bg-secondary);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .csk-pagination__button {
-    background-color: var(--color-bg-primary);
-    border-color: var(--color-border-default);
-  }
-
-  :root:not([data-theme='light']) .csk-pagination__button:hover:not(:disabled) {
-    background-color: var(--color-bg-secondary);
-  }
+@media
 }

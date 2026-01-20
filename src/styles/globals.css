@@ -17,6 +17,9 @@ html {
 
 body {
   line-height: 1.5;
+  font-family: var(--font-family-sans, Inter, system-ui, sans-serif);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
 }
 
 img,
@@ -45,11 +48,4 @@ h6 {
   overflow-wrap: break-word;
 }
 
-/* CSS custom properties (tokens) will be added in Phase 1.2 */
-:root {
-  /* Placeholder for design tokens */
-}
-
-[data-theme='dark'] {
-  /* Dark theme tokens will be added */
-}
+/* Theme tokens are loaded from src/tokens/index.css */

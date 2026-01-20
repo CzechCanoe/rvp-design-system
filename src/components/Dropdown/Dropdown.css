@@ -354,16 +354,7 @@
 }
 
 /* System preference detection */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .csk-dropdown__menu {
-    background-color: var(--color-bg-elevated);
-    border-color: var(--color-border-default);
-  }
-
-  :root:not([data-theme="light"]) .csk-dropdown__item--danger:hover,
-  :root:not([data-theme="light"]) .csk-dropdown__item--danger.csk-dropdown__item--focused {
-    background-color: rgba(239, 68, 68, 0.15);
-  }
+@media
 }
 
 /* ==========================================================================

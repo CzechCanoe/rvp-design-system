@@ -138,36 +138,21 @@
   color: var(--color-success-400);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .csk-stat-card__trend--up {
-    background-color: rgba(34, 197, 94, 0.15);
-    color: var(--color-success-400);
-  }
-}
+@media
 
 [data-theme='dark'] .csk-stat-card__trend--down {
   background-color: rgba(239, 68, 68, 0.15);
   color: var(--color-error-400);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .csk-stat-card__trend--down {
-    background-color: rgba(239, 68, 68, 0.15);
-    color: var(--color-error-400);
-  }
-}
+@media
 
 [data-theme='dark'] .csk-stat-card__trend--neutral {
   background-color: var(--color-neutral-800);
   color: var(--color-neutral-400);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .csk-stat-card__trend--neutral {
-    background-color: var(--color-neutral-800);
-    color: var(--color-neutral-400);
-  }
-}
+@media
 
 /* =============================================================================
    SECONDARY VALUE
@@ -389,14 +374,7 @@
   color: var(--color-info-400);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .csk-stat-card--primary .csk-stat-card__icon-container {
-    background-color: rgba(17, 118, 166, 0.15);
-  }
-
-  :root:not([data-theme='light']) .csk-stat-card--primary .csk-stat-card__icon {
-    color: var(--color-primary-400);
-  }
+@media
 
   :root:not([data-theme='light']) .csk-stat-card--success .csk-stat-card__icon-container {
     background-color: rgba(34, 197, 94, 0.15);
@@ -486,11 +464,7 @@
   background-color: rgba(10, 10, 10, 0.8);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .csk-stat-card__loading-overlay {
-    background-color: rgba(10, 10, 10, 0.8);
-  }
-}
+@media
 
 .csk-stat-card__spinner {
   width: 24px;
