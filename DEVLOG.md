@@ -1,5 +1,42 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.8 / Redesign RegistrationPage prototypu
+
+### Dokončeno
+- [x] Hero sekce s gradient overlay, wave decoration a discipline theming (DV/RY/VT)
+- [x] Breadcrumb navigace v hero sekci
+- [x] Statistiky v hero (dní do uzávěrky, počet závodníků)
+- [x] Vizuální wizard progress s kroky (icons, connecting lines, active/completed states)
+- [x] Discipline-specific theming (modrá DV, zelená RY, červená VT)
+- [x] Glassmorphism efekty na hero stat kartách
+- [x] Vylepšená sidebar s countdown kartou
+- [x] Step icons pro každý krok wizardu
+- [x] Gradient styly na summary total sekci
+- [x] Dark mode podpora
+- [x] Reduced motion support
+- [x] Responsive design pro všechny breakpointy
+- [x] Nové stories: Rychlostni, VodniTuristika, Compact
+
+### Změněné soubory
+- `src/prototypes/RegistrationPage.stories.tsx` - kompletní redesign s hero sekcí, wizard progress, discipline theming
+- `src/prototypes/RegistrationPage.css` - nové styly pro hero, wizard, sidebar, branded elements
+
+### Klíčová vylepšení
+- Hero sekce odpovídající CalendarPage/ResultsPage/LivePage/ProfilePage stylu pro konzistenci
+- Vizuální wizard progress (místo starého Progress komponent) s custom WizardStep komponenty
+- Disciplínové barevné schéma (section prop: dv/ry/vt) pro hero, wizard, sidebar i summary
+- Countdown karta v sidebaru s dny a hodinami do uzávěrky
+- Glassmorphism stat karty v hero sekci
+- Step icons (FileText, Users, ClipboardCheck) pro lepší orientaci
+
+### Poznámky
+- Prototyp vizuálně odpovídá ostatním redesigned prototypům
+- Odstraněn původní Progress komponent ve prospěch custom wizard designu
+- Build úspěšně proběhl
+- CSS warningy ve vite jsou předexistující, netýkají se těchto změn
+
+---
+
 ## 2026-01-20 - Fáze 7.8 / Redesign ProfilePage prototypu
 
 ### Dokončeno

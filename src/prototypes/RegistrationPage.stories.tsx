@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState, useMemo } from 'react';
 import { Header } from '../components/Header';
-import { MainNav, Breadcrumbs } from '../components/Navigation';
+import { MainNav } from '../components/Navigation';
 import { Card } from '../components/Card';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
@@ -11,7 +11,6 @@ import { Checkbox } from '../components/Checkbox';
 import { Tabs } from '../components/Tabs';
 import { Table } from '../components/Table';
 import { Modal } from '../components/Modal';
-import { Progress } from '../components/Progress';
 import { ToastProvider, useToast } from '../components/Toast';
 import { EmptyState } from '../components/EmptyState';
 import './RegistrationPage.css';
@@ -27,6 +26,10 @@ interface RegistrationPageProps {
   raceId?: string;
   /** Initial step */
   initialStep?: number;
+  /** Section (discipline) */
+  section?: 'dv' | 'ry' | 'vt';
+  /** Show hero section */
+  showHero?: boolean;
 }
 
 interface Athlete {
@@ -102,6 +105,13 @@ const navItems = [
   { id: 'clubs', label: 'Kluby', href: '#' },
 ];
 
+// Section display names
+const sectionNames: Record<string, string> = {
+  dv: 'Divoká voda',
+  ry: 'Rychlostní kanoistika',
+  vt: 'Vodní turistika',
+};
+
 // ============================================================================
 // Icons
 // ============================================================================
@@ -174,6 +184,55 @@ const SendIcon = () => (
   </svg>
 );
 
+const UsersIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+);
+
+const ChevronRightIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="9 18 15 12 9 6" />
+  </svg>
+);
+
+const FileTextIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+    <polyline points="14 2 14 8 20 8" />
+    <line x1="16" y1="13" x2="8" y2="13" />
+    <line x1="16" y1="17" x2="8" y2="17" />
+    <polyline points="10 9 9 9 8 9" />
+  </svg>
+);
+
+const ClipboardCheckIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
+    <rect x="9" y="3" width="6" height="4" rx="2" />
+    <path d="M9 14l2 2 4-4" />
+  </svg>
+);
+
+// Wave decoration component
+const WaveDecoration = ({ className = '' }: { className?: string }) => (
+  <svg
+    className={`registration-page-wave ${className}`}
+    viewBox="0 0 1440 100"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+  >
+    <path
+      d="M0 50C240 20 480 80 720 50C960 20 1200 80 1440 50V100H0V50Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
 // ============================================================================
 // Helper Functions
 // ============================================================================
@@ -201,12 +260,46 @@ function calculateAge(birthYear: number): number {
 }
 
 // ============================================================================
+// Wizard Step Component
+// ============================================================================
+
+interface WizardStepProps {
+  step: number;
+  currentStep: number;
+  label: string;
+  icon: React.ReactNode;
+  isLast?: boolean;
+}
+
+const WizardStep = ({ step, currentStep, label, icon, isLast = false }: WizardStepProps) => {
+  const isActive = step === currentStep;
+  const isCompleted = step < currentStep;
+
+  return (
+    <div className={`registration-wizard-step ${isActive ? 'registration-wizard-step--active' : ''} ${isCompleted ? 'registration-wizard-step--completed' : ''}`}>
+      <div className="registration-wizard-step__indicator">
+        <div className="registration-wizard-step__circle">
+          {isCompleted ? <CheckCircleIcon /> : icon}
+        </div>
+        {!isLast && <div className="registration-wizard-step__line" />}
+      </div>
+      <div className="registration-wizard-step__content">
+        <span className="registration-wizard-step__number">Krok {step + 1}</span>
+        <span className="registration-wizard-step__label">{label}</span>
+      </div>
+    </div>
+  );
+};
+
+// ============================================================================
 // Inner Page Component (needs ToastProvider context)
 // ============================================================================
 
 const RegistrationPageInner = ({
   clubName = 'TJ Bohemians Praha',
   initialStep = 0,
+  section = 'dv',
+  showHero = true,
 }: RegistrationPageProps) => {
   const [currentStep, setCurrentStep] = useState(initialStep);
   const [athletes] = useState<Athlete[]>(generateAthletes);
@@ -287,9 +380,9 @@ const RegistrationPageInner = ({
 
   // Steps configuration
   const steps = [
-    { id: 'header', label: 'Záhlaví přihlášky' },
-    { id: 'athletes', label: 'Výběr závodníků' },
-    { id: 'summary', label: 'Shrnutí a odeslání' },
+    { id: 'header', label: 'Záhlaví přihlášky', icon: <FileTextIcon /> },
+    { id: 'athletes', label: 'Výběr závodníků', icon: <UsersIcon /> },
+    { id: 'summary', label: 'Shrnutí a odeslání', icon: <ClipboardCheckIcon /> },
   ];
 
   // Calculate time to deadline
@@ -298,17 +391,10 @@ const RegistrationPageInner = ({
     const diff = raceData.deadline.getTime() - now.getTime();
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    if (days > 0) return `${days} dní, ${hours} hodin`;
-    if (hours > 0) return `${hours} hodin`;
-    return 'Uzávěrka proběhla';
+    if (days > 0) return { days, hours, text: `${days} dní, ${hours} hodin` };
+    if (hours > 0) return { days: 0, hours, text: `${hours} hodin` };
+    return { days: 0, hours: 0, text: 'Uzávěrka proběhla' };
   }, []);
-
-  // Breadcrumbs
-  const breadcrumbItems = [
-    { id: 'prihlasky', label: 'Přihlášky', href: '#' },
-    { id: 'kalendar', label: 'Kalendář závodů', href: '#' },
-    { id: 'current', label: raceData.name },
-  ];
 
   // Validation for header step
   const isHeaderValid = headerData.teamLeader.trim() !== '' &&
@@ -331,7 +417,7 @@ const RegistrationPageInner = ({
       ageCategory: entry.ageCategory,
       vt: entry.athlete.vt,
       status: (
-        <div className="prototype-registration-page__status-cell">
+        <div className="registration-page__status-cell">
           {entry.athlete.healthCheck !== 'valid' && (
             <Badge variant={healthStatus.variant} size="sm">
               <AlertIcon /> Prohlídka
@@ -371,16 +457,16 @@ const RegistrationPageInner = ({
   }));
 
   return (
-    <div className="prototype-registration-page">
+    <div className={`registration-page registration-page--${section}`}>
       {/* Header */}
       <Header
         variant="default"
         size="md"
         bordered
         brand={
-          <a href="#" className="prototype-registration-page__logo">
-            <span className="prototype-registration-page__logo-text">CSK</span>
-            <span className="prototype-registration-page__logo-subtitle">Český svaz kanoistů</span>
+          <a href="#" className="registration-page__logo">
+            <span className="registration-page__logo-text">CSK</span>
+            <span className="registration-page__logo-subtitle">Český svaz kanoistů</span>
           </a>
         }
         navigation={
@@ -400,8 +486,8 @@ const RegistrationPageInner = ({
           />
         }
         userMenu={
-          <div className="prototype-registration-page__user-info">
-            <span className="prototype-registration-page__club-name">{clubName}</span>
+          <div className="registration-page__user-info">
+            <span className="registration-page__club-name">{clubName}</span>
             <Button variant="ghost" size="sm">
               Odhlásit
             </Button>
@@ -409,60 +495,112 @@ const RegistrationPageInner = ({
         }
       />
 
-      {/* Main content */}
-      <main className="prototype-registration-page__main">
-        <div className="prototype-registration-page__container">
-          {/* Breadcrumbs */}
-          <Breadcrumbs items={breadcrumbItems} />
+      {/* Hero Section */}
+      {showHero && (
+        <section className={`registration-page-hero registration-page-hero--${section}`}>
+          <div className="registration-page-hero__background">
+            <div className="registration-page-hero__gradient" />
+            <div className="registration-page-hero__pattern" />
+          </div>
+          <div className="registration-page-hero__content">
+            {/* Breadcrumb */}
+            <nav className="registration-page-hero__breadcrumb">
+              <a href="#" className="registration-page-hero__breadcrumb-link">Přihlášky</a>
+              <ChevronRightIcon />
+              <a href="#" className="registration-page-hero__breadcrumb-link">Kalendář závodů</a>
+              <ChevronRightIcon />
+              <span className="registration-page-hero__breadcrumb-current">{raceData.name}</span>
+            </nav>
 
-          {/* Race Header */}
-          <div className="prototype-registration-page__race-header">
-            <div className="prototype-registration-page__race-info">
-              <h1 className="prototype-registration-page__title">
-                {raceData.name}
-                <Badge section={raceData.section}>Divoká voda</Badge>
-              </h1>
-              <div className="prototype-registration-page__meta">
-                <span className="prototype-registration-page__meta-item">
-                  <CalendarIcon />
-                  {raceData.date}
-                </span>
-                <span className="prototype-registration-page__meta-item">
-                  <LocationIcon />
-                  {raceData.location}
-                </span>
-                <span className="prototype-registration-page__meta-item prototype-registration-page__meta-item--deadline">
-                  <ClockIcon />
-                  Uzávěrka: {formatDate(raceData.deadline)} ({timeToDeadline})
-                </span>
+            <div className="registration-page-hero__main">
+              <div className="registration-page-hero__text">
+                <div className="registration-page-hero__badges">
+                  <Badge section={section} size="md" glow>
+                    {sectionNames[section]}
+                  </Badge>
+                  <Badge variant="default" size="md" outlined>
+                    Český pohár
+                  </Badge>
+                </div>
+                <h1 className="registration-page-hero__title">{raceData.name}</h1>
+                <div className="registration-page-hero__meta">
+                  <span className="registration-page-hero__meta-item">
+                    <CalendarIcon />
+                    {raceData.date}
+                  </span>
+                  <span className="registration-page-hero__meta-item">
+                    <LocationIcon />
+                    {raceData.location}
+                  </span>
+                </div>
+              </div>
+
+              <div className="registration-page-hero__stats">
+                <div className="registration-page-hero__stat registration-page-hero__stat--deadline">
+                  <div className="registration-page-hero__stat-icon">
+                    <ClockIcon />
+                  </div>
+                  <div className="registration-page-hero__stat-content">
+                    <span className="registration-page-hero__stat-value">{timeToDeadline.days}</span>
+                    <span className="registration-page-hero__stat-label">dní do uzávěrky</span>
+                  </div>
+                </div>
+                <div className="registration-page-hero__stat">
+                  <div className="registration-page-hero__stat-icon">
+                    <UsersIcon />
+                  </div>
+                  <div className="registration-page-hero__stat-content">
+                    <span className="registration-page-hero__stat-value">{athletes.length}</span>
+                    <span className="registration-page-hero__stat-label">závodníků v oddílu</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          <WaveDecoration className="registration-page-hero__wave" />
+        </section>
+      )}
 
-          {/* Progress Steps */}
-          <div className="prototype-registration-page__progress">
-            <Progress
-              variant="steps"
-              steps={steps}
-              currentStep={currentStep}
-              size="md"
-            />
+      {/* Main content */}
+      <main className="registration-page__main">
+        <div className="registration-page__container">
+          {/* Wizard Progress */}
+          <div className="registration-page__wizard">
+            <div className="registration-page__wizard-steps">
+              {steps.map((step, index) => (
+                <WizardStep
+                  key={step.id}
+                  step={index}
+                  currentStep={currentStep}
+                  label={step.label}
+                  icon={step.icon}
+                  isLast={index === steps.length - 1}
+                />
+              ))}
+            </div>
           </div>
 
           {/* Content Grid */}
-          <div className="prototype-registration-page__content">
+          <div className="registration-page__content">
             {/* Main Panel */}
-            <div className="prototype-registration-page__main-panel">
+            <div className="registration-page__main-panel">
               {/* Step 0: Header */}
               {currentStep === 0 && (
-                <Card variant="surface" padding="lg">
-                  <h2 className="prototype-registration-page__section-title">Záhlaví přihlášky</h2>
-                  <p className="prototype-registration-page__section-desc">
-                    Vyplňte kontaktní údaje vedoucího družstva, který bude zodpovědný za přihlášku.
-                  </p>
+                <Card variant="surface" padding="lg" className="registration-page__step-card">
+                  <div className="registration-page__step-header">
+                    <div className="registration-page__step-icon">
+                      <FileTextIcon />
+                    </div>
+                    <div>
+                      <h2 className="registration-page__section-title">Záhlaví přihlášky</h2>
+                      <p className="registration-page__section-desc">
+                        Vyplňte kontaktní údaje vedoucího družstva, který bude zodpovědný za přihlášku.
+                      </p>
+                    </div>
+                  </div>
 
-                  <div className="prototype-registration-page__form">
-                    <div className="prototype-registration-page__form-row">
+                  <div className="registration-page__form">
+                    <div className="registration-page__form-row">
                       <Input
                         label="Vedoucí družstva *"
                         placeholder="Jméno a příjmení"
@@ -471,7 +609,7 @@ const RegistrationPageInner = ({
                         fullWidth
                       />
                     </div>
-                    <div className="prototype-registration-page__form-row prototype-registration-page__form-row--split">
+                    <div className="registration-page__form-row registration-page__form-row--split">
                       <Input
                         label="Telefon *"
                         type="tel"
@@ -489,7 +627,7 @@ const RegistrationPageInner = ({
                         fullWidth
                       />
                     </div>
-                    <div className="prototype-registration-page__form-row">
+                    <div className="registration-page__form-row">
                       <Input
                         label="Přihlašující osoba"
                         placeholder="Pokud se liší od vedoucího"
@@ -498,7 +636,7 @@ const RegistrationPageInner = ({
                         fullWidth
                       />
                     </div>
-                    <div className="prototype-registration-page__form-row">
+                    <div className="registration-page__form-row">
                       <Input
                         label="Poznámky pro pořadatele"
                         placeholder="Případné poznámky k přihlášce..."
@@ -509,7 +647,7 @@ const RegistrationPageInner = ({
                     </div>
                   </div>
 
-                  <div className="prototype-registration-page__form-actions">
+                  <div className="registration-page__form-actions">
                     <Button
                       variant="primary"
                       onClick={() => setCurrentStep(1)}
@@ -524,9 +662,19 @@ const RegistrationPageInner = ({
               {/* Step 1: Athletes */}
               {currentStep === 1 && (
                 <>
-                  <Card variant="surface" padding="lg">
-                    <div className="prototype-registration-page__athletes-header">
-                      <h2 className="prototype-registration-page__section-title">Výběr závodníků</h2>
+                  <Card variant="surface" padding="lg" className="registration-page__step-card">
+                    <div className="registration-page__athletes-header">
+                      <div className="registration-page__step-header">
+                        <div className="registration-page__step-icon">
+                          <UsersIcon />
+                        </div>
+                        <div>
+                          <h2 className="registration-page__section-title">Výběr závodníků</h2>
+                          <p className="registration-page__section-desc">
+                            Přidejte závodníky z vašeho oddílu do přihlášky.
+                          </p>
+                        </div>
+                      </div>
                       <Button
                         variant="primary"
                         iconLeft={<UserPlusIcon />}
@@ -536,7 +684,7 @@ const RegistrationPageInner = ({
                       </Button>
                     </div>
 
-                    <div className="prototype-registration-page__discipline-select">
+                    <div className="registration-page__discipline-select">
                       <Tabs
                         tabs={raceData.disciplines.map((d) => ({
                           id: d.id,
@@ -551,7 +699,7 @@ const RegistrationPageInner = ({
                     </div>
 
                     {entries.length > 0 ? (
-                      <div className="prototype-registration-page__entries-table">
+                      <div className="registration-page__entries-table">
                         <Table
                           columns={[
                             { key: 'name', header: 'Závodník', sortable: true },
@@ -585,7 +733,7 @@ const RegistrationPageInner = ({
                     )}
                   </Card>
 
-                  <div className="prototype-registration-page__step-actions">
+                  <div className="registration-page__step-actions">
                     <Button variant="secondary" onClick={() => setCurrentStep(0)}>
                       Zpět
                     </Button>
@@ -603,35 +751,45 @@ const RegistrationPageInner = ({
               {/* Step 2: Summary */}
               {currentStep === 2 && (
                 <>
-                  <Card variant="surface" padding="lg">
-                    <h2 className="prototype-registration-page__section-title">Shrnutí přihlášky</h2>
+                  <Card variant="surface" padding="lg" className="registration-page__step-card">
+                    <div className="registration-page__step-header">
+                      <div className="registration-page__step-icon registration-page__step-icon--success">
+                        <ClipboardCheckIcon />
+                      </div>
+                      <div>
+                        <h2 className="registration-page__section-title">Shrnutí přihlášky</h2>
+                        <p className="registration-page__section-desc">
+                          Zkontrolujte údaje a odešlete přihlášku.
+                        </p>
+                      </div>
+                    </div>
 
-                    <div className="prototype-registration-page__summary-section">
-                      <h3 className="prototype-registration-page__summary-subtitle">Kontaktní údaje</h3>
-                      <div className="prototype-registration-page__summary-grid">
-                        <div className="prototype-registration-page__summary-item">
-                          <span className="prototype-registration-page__summary-label">Vedoucí družstva</span>
-                          <span className="prototype-registration-page__summary-value">{headerData.teamLeader}</span>
+                    <div className="registration-page__summary-section">
+                      <h3 className="registration-page__summary-subtitle">Kontaktní údaje</h3>
+                      <div className="registration-page__summary-grid">
+                        <div className="registration-page__summary-item">
+                          <span className="registration-page__summary-label">Vedoucí družstva</span>
+                          <span className="registration-page__summary-value">{headerData.teamLeader}</span>
                         </div>
-                        <div className="prototype-registration-page__summary-item">
-                          <span className="prototype-registration-page__summary-label">Telefon</span>
-                          <span className="prototype-registration-page__summary-value">{headerData.teamLeaderPhone}</span>
+                        <div className="registration-page__summary-item">
+                          <span className="registration-page__summary-label">Telefon</span>
+                          <span className="registration-page__summary-value">{headerData.teamLeaderPhone}</span>
                         </div>
-                        <div className="prototype-registration-page__summary-item">
-                          <span className="prototype-registration-page__summary-label">E-mail</span>
-                          <span className="prototype-registration-page__summary-value">{headerData.teamLeaderEmail}</span>
+                        <div className="registration-page__summary-item">
+                          <span className="registration-page__summary-label">E-mail</span>
+                          <span className="registration-page__summary-value">{headerData.teamLeaderEmail}</span>
                         </div>
                         {headerData.submitter && (
-                          <div className="prototype-registration-page__summary-item">
-                            <span className="prototype-registration-page__summary-label">Přihlašující</span>
-                            <span className="prototype-registration-page__summary-value">{headerData.submitter}</span>
+                          <div className="registration-page__summary-item">
+                            <span className="registration-page__summary-label">Přihlašující</span>
+                            <span className="registration-page__summary-value">{headerData.submitter}</span>
                           </div>
                         )}
                       </div>
                     </div>
 
-                    <div className="prototype-registration-page__summary-section">
-                      <h3 className="prototype-registration-page__summary-subtitle">
+                    <div className="registration-page__summary-section">
+                      <h3 className="registration-page__summary-subtitle">
                         Přihlášení závodníci ({entries.length})
                         {entriesWithWarnings > 0 && (
                           <Badge variant="warning" size="sm" style={{ marginLeft: '8px' }}>
@@ -653,13 +811,13 @@ const RegistrationPageInner = ({
                       />
                     </div>
 
-                    <div className="prototype-registration-page__summary-total">
-                      <span className="prototype-registration-page__summary-total-label">Celkem startovné:</span>
-                      <span className="prototype-registration-page__summary-total-value">{totalFees} Kč</span>
+                    <div className="registration-page__summary-total">
+                      <span className="registration-page__summary-total-label">Celkem startovné:</span>
+                      <span className="registration-page__summary-total-value">{totalFees} Kč</span>
                     </div>
 
                     {entriesWithWarnings > 0 && (
-                      <div className="prototype-registration-page__warning-box">
+                      <div className="registration-page__warning-box">
                         <AlertIcon />
                         <div>
                           <strong>Upozornění:</strong> {entriesWithWarnings} závodník(ů) má nevyhovující stav
@@ -669,7 +827,7 @@ const RegistrationPageInner = ({
                       </div>
                     )}
 
-                    <div className="prototype-registration-page__confirmation">
+                    <div className="registration-page__confirmation">
                       <Checkbox
                         label="Potvrzuji správnost údajů a souhlasím s podmínkami závodu"
                         id="confirm"
@@ -677,7 +835,7 @@ const RegistrationPageInner = ({
                     </div>
                   </Card>
 
-                  <div className="prototype-registration-page__step-actions">
+                  <div className="registration-page__step-actions">
                     <Button variant="secondary" onClick={() => setCurrentStep(1)}>
                       Zpět k úpravám
                     </Button>
@@ -698,28 +856,30 @@ const RegistrationPageInner = ({
             </div>
 
             {/* Sidebar */}
-            <aside className="prototype-registration-page__sidebar">
+            <aside className="registration-page__sidebar">
               {/* Registration Summary Card */}
-              <Card variant="surface" padding="md" className="prototype-registration-page__summary-card">
-                <h3 className="prototype-registration-page__card-title">Souhrn přihlášky</h3>
-                <div className="prototype-registration-page__summary-stats">
-                  <div className="prototype-registration-page__stat">
-                    <span className="prototype-registration-page__stat-value">{entries.length}</span>
-                    <span className="prototype-registration-page__stat-label">Závodníků</span>
+              <Card variant="surface" padding="md" className="registration-page__summary-card">
+                <div className="registration-page__card-header">
+                  <h3 className="registration-page__card-title">Souhrn přihlášky</h3>
+                </div>
+                <div className="registration-page__summary-stats">
+                  <div className="registration-page__stat">
+                    <span className="registration-page__stat-value">{entries.length}</span>
+                    <span className="registration-page__stat-label">Závodníků</span>
                   </div>
-                  <div className="prototype-registration-page__stat">
-                    <span className="prototype-registration-page__stat-value">{totalFees}</span>
-                    <span className="prototype-registration-page__stat-label">Kč celkem</span>
+                  <div className="registration-page__stat">
+                    <span className="registration-page__stat-value">{totalFees}</span>
+                    <span className="registration-page__stat-label">Kč celkem</span>
                   </div>
                 </div>
 
                 {entries.length > 0 && (
-                  <div className="prototype-registration-page__entries-by-discipline">
+                  <div className="registration-page__entries-by-discipline">
                     {raceData.disciplines.map((disc) => {
                       const count = entries.filter((e) => e.discipline === disc.id).length;
                       if (count === 0) return null;
                       return (
-                        <div key={disc.id} className="prototype-registration-page__discipline-count">
+                        <div key={disc.id} className="registration-page__discipline-count">
                           <span>{disc.name}</span>
                           <Badge variant="default" size="sm">{count}</Badge>
                         </div>
@@ -729,19 +889,39 @@ const RegistrationPageInner = ({
                 )}
               </Card>
 
+              {/* Deadline Card */}
+              <Card variant="outlined" padding="md" className={`registration-page__deadline-card registration-page__deadline-card--${section}`}>
+                <div className="registration-page__deadline-header">
+                  <ClockIcon />
+                  <h3 className="registration-page__card-title">Uzávěrka přihlášek</h3>
+                </div>
+                <p className="registration-page__deadline-date">{formatDate(raceData.deadline)}</p>
+                <div className="registration-page__deadline-countdown">
+                  <div className="registration-page__countdown-item">
+                    <span className="registration-page__countdown-value">{timeToDeadline.days}</span>
+                    <span className="registration-page__countdown-label">dní</span>
+                  </div>
+                  <span className="registration-page__countdown-separator">:</span>
+                  <div className="registration-page__countdown-item">
+                    <span className="registration-page__countdown-value">{timeToDeadline.hours}</span>
+                    <span className="registration-page__countdown-label">hodin</span>
+                  </div>
+                </div>
+              </Card>
+
               {/* Club Info Card */}
               <Card variant="outlined" padding="md">
-                <h3 className="prototype-registration-page__card-title">Přihlašující oddíl</h3>
-                <p className="prototype-registration-page__club-name-large">{clubName}</p>
-                <p className="prototype-registration-page__club-detail">
+                <h3 className="registration-page__card-title">Přihlašující oddíl</h3>
+                <p className="registration-page__club-name-large">{clubName}</p>
+                <p className="registration-page__club-detail">
                   {athletes.length} registrovaných závodníků
                 </p>
               </Card>
 
               {/* Help Card */}
-              <Card variant="outlined" padding="md">
-                <h3 className="prototype-registration-page__card-title">Potřebujete pomoc?</h3>
-                <p className="prototype-registration-page__help-text">
+              <Card variant="outlined" padding="md" className="registration-page__help-card">
+                <h3 className="registration-page__card-title">Potřebujete pomoc?</h3>
+                <p className="registration-page__help-text">
                   V případě problémů s přihláškou kontaktujte pořadatele závodu nebo sekretariát ČSK.
                 </p>
                 <Button variant="ghost" size="sm" fullWidth>
@@ -754,8 +934,8 @@ const RegistrationPageInner = ({
       </main>
 
       {/* Footer */}
-      <footer className="prototype-registration-page__footer">
-        <div className="prototype-registration-page__footer-content">
+      <footer className="registration-page__footer">
+        <div className="registration-page__footer-content">
           <p>© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
         </div>
       </footer>
@@ -767,8 +947,8 @@ const RegistrationPageInner = ({
         title="Přidat závodníka"
         size="lg"
       >
-        <div className="prototype-registration-page__modal-content">
-          <div className="prototype-registration-page__modal-filters">
+        <div className="registration-page__modal-content">
+          <div className="registration-page__modal-filters">
             <Input
               type="search"
               placeholder="Hledat podle jména nebo RGC..."
@@ -794,7 +974,7 @@ const RegistrationPageInner = ({
             />
           </div>
 
-          <div className="prototype-registration-page__athlete-list">
+          <div className="registration-page__athlete-list">
             {filteredAthletes.length > 0 ? (
               filteredAthletes.map((athlete) => {
                 const healthStatus = getHealthCheckStatus(athlete);
@@ -804,20 +984,20 @@ const RegistrationPageInner = ({
                 return (
                   <div
                     key={athlete.id}
-                    className={`prototype-registration-page__athlete-item ${alreadyAdded ? 'prototype-registration-page__athlete-item--disabled' : ''}`}
+                    className={`registration-page__athlete-item ${alreadyAdded ? 'registration-page__athlete-item--disabled' : ''}`}
                   >
-                    <div className="prototype-registration-page__athlete-info">
-                      <div className="prototype-registration-page__athlete-name">
+                    <div className="registration-page__athlete-info">
+                      <div className="registration-page__athlete-name">
                         {athlete.name}
-                        <span className="prototype-registration-page__athlete-rgc">{athlete.rgc}</span>
+                        <span className="registration-page__athlete-rgc">{athlete.rgc}</span>
                       </div>
-                      <div className="prototype-registration-page__athlete-meta">
+                      <div className="registration-page__athlete-meta">
                         <span>Ročník {athlete.birthYear} ({calculateAge(athlete.birthYear)} let)</span>
                         <span>•</span>
                         <span>VT: {athlete.vt}</span>
                       </div>
                     </div>
-                    <div className="prototype-registration-page__athlete-status">
+                    <div className="registration-page__athlete-status">
                       <Badge variant={healthStatus.variant} size="sm">
                         {athlete.healthCheck === 'valid' ? <CheckCircleIcon /> : <AlertIcon />}
                         {healthStatus.label}
@@ -877,7 +1057,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Prototyp stránky pro oddílové přihlašování na závody. Umožňuje vyplnit záhlaví přihlášky, vybrat závodníky z oddílu a odeslat přihlášku pořadateli.',
+          'Prototyp stránky pro oddílové přihlašování na závody. Umožňuje vyplnit záhlaví přihlášky, vybrat závodníky z oddílu a odeslat přihlášku pořadateli. Redesign s hero sekcí, vizuálním wizard progress a discipline theming.',
       },
     },
   },
@@ -891,6 +1071,15 @@ const meta = {
       control: { type: 'range', min: 0, max: 2, step: 1 },
       description: 'Initial step of the registration process',
     },
+    section: {
+      control: 'select',
+      options: ['dv', 'ry', 'vt'],
+      description: 'Discipline section for theming',
+    },
+    showHero: {
+      control: 'boolean',
+      description: 'Show hero section',
+    },
   },
 } satisfies Meta<typeof RegistrationPage>;
 
@@ -898,12 +1087,14 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /**
- * Výchozí zobrazení - první krok přihlášky (záhlaví).
+ * Výchozí zobrazení - první krok přihlášky (záhlaví) s hero sekcí.
  */
 export const Default: Story = {
   args: {
     clubName: 'TJ Bohemians Praha',
     initialStep: 0,
+    section: 'dv',
+    showHero: true,
   },
 };
 
@@ -914,6 +1105,8 @@ export const VyberZavodniku: Story = {
   args: {
     clubName: 'TJ Bohemians Praha',
     initialStep: 1,
+    section: 'dv',
+    showHero: true,
   },
 };
 
@@ -924,15 +1117,43 @@ export const Shrnuti: Story = {
   args: {
     clubName: 'TJ Bohemians Praha',
     initialStep: 2,
+    section: 'dv',
+    showHero: true,
   },
 };
 
 /**
- * Přihláška pro jiný oddíl.
+ * Rychlostní kanoistika - zelené disciplínové téma.
  */
-export const JinyOddil: Story = {
+export const Rychlostni: Story = {
   args: {
     clubName: 'USK Praha',
     initialStep: 0,
+    section: 'ry',
+    showHero: true,
+  },
+};
+
+/**
+ * Vodní turistika - červené disciplínové téma.
+ */
+export const VodniTuristika: Story = {
+  args: {
+    clubName: 'KVS Hranice',
+    initialStep: 0,
+    section: 'vt',
+    showHero: true,
+  },
+};
+
+/**
+ * Kompaktní zobrazení bez hero sekce.
+ */
+export const Compact: Story = {
+  args: {
+    clubName: 'TJ Bohemians Praha',
+    initialStep: 0,
+    section: 'dv',
+    showHero: false,
   },
 };

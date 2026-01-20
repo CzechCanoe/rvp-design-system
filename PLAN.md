@@ -2,7 +2,7 @@
 
 ## Aktuální stav
 **Fáze:** 7 - Hloubkové review a redesign
-**Další krok:** 7.8 Redesign prototypů - RegistrationPage
+**Další krok:** 7.8 Redesign prototypů - DashboardPage
 
 **Problém:** Současná implementace nedosahuje vizuální úrovně studovaných referencí (World Athletics, FIS, ICF). Komponenty jsou funkční, ale "utilitární" - chybí vizuální polish, branded feel, moderní detaily.
 
@@ -193,7 +193,7 @@
 - [x] **ResultsPage** - dramatický leaderboard, pozice highlighting
 - [x] **LivePage** - immersive experience, real-time feel
 - [x] **ProfilePage** - hero header s fotkou, achievement showcase
-- [ ] **RegistrationPage** - přehledný wizard, progress indication
+- [x] **RegistrationPage** - přehledný wizard, progress indication
 - [ ] **DashboardPage** - widget karty, statistiky s grafy
 
 ### 7.9 Expresivní vs. utilitární režim
