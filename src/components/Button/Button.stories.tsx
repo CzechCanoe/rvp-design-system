@@ -11,7 +11,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'ghost', 'danger'],
+      options: ['primary', 'secondary', 'ghost', 'danger', 'gradient', 'gradient-accent'],
       description: 'Visual variant of the button',
     },
     size: {
@@ -70,6 +70,21 @@ export const Danger: Story = {
   },
 };
 
+// New gradient variants
+export const Gradient: Story = {
+  args: {
+    variant: 'gradient',
+    children: 'Gradient Button',
+  },
+};
+
+export const GradientAccent: Story = {
+  args: {
+    variant: 'gradient-accent',
+    children: 'Get Started',
+  },
+};
+
 // Sizes
 export const Small: Story = {
   args: {
@@ -115,6 +130,14 @@ export const LoadingDanger: Story = {
   },
 };
 
+export const LoadingGradient: Story = {
+  args: {
+    variant: 'gradient',
+    loading: true,
+    children: 'Processing...',
+  },
+};
+
 // Full width
 export const FullWidth: Story = {
   args: {
@@ -142,6 +165,13 @@ const ArrowRightIcon = () => (
 const TrashIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6" />
+  </svg>
+);
+
+const RocketIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09zM12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
   </svg>
 );
 
@@ -175,6 +205,22 @@ export const DangerWithIcon: Story = {
   },
 };
 
+export const GradientWithIcon: Story = {
+  args: {
+    variant: 'gradient',
+    iconRight: <ArrowRightIcon />,
+    children: 'Start Now',
+  },
+};
+
+export const GradientAccentWithIcon: Story = {
+  args: {
+    variant: 'gradient-accent',
+    iconLeft: <RocketIcon />,
+    children: 'Launch',
+  },
+};
+
 // All variants showcase
 export const AllVariants: Story = {
   render: () => (
@@ -183,6 +229,8 @@ export const AllVariants: Story = {
       <Button variant="secondary">Secondary</Button>
       <Button variant="ghost">Ghost</Button>
       <Button variant="danger">Danger</Button>
+      <Button variant="gradient">Gradient</Button>
+      <Button variant="gradient-accent">Accent</Button>
     </div>
   ),
 };
@@ -198,6 +246,17 @@ export const AllSizes: Story = {
   ),
 };
 
+// Gradient sizes showcase
+export const GradientSizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+      <Button variant="gradient" size="sm">Small</Button>
+      <Button variant="gradient" size="md">Medium</Button>
+      <Button variant="gradient" size="lg">Large</Button>
+    </div>
+  ),
+};
+
 // All states showcase
 export const AllStates: Story = {
   render: () => (
@@ -208,6 +267,8 @@ export const AllStates: Story = {
         <Button variant="secondary">Secondary</Button>
         <Button variant="ghost">Ghost</Button>
         <Button variant="danger">Danger</Button>
+        <Button variant="gradient">Gradient</Button>
+        <Button variant="gradient-accent">Accent</Button>
       </div>
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
         <span style={{ width: '80px', fontSize: '12px', color: '#666' }}>Disabled:</span>
@@ -215,6 +276,8 @@ export const AllStates: Story = {
         <Button variant="secondary" disabled>Secondary</Button>
         <Button variant="ghost" disabled>Ghost</Button>
         <Button variant="danger" disabled>Danger</Button>
+        <Button variant="gradient" disabled>Gradient</Button>
+        <Button variant="gradient-accent" disabled>Accent</Button>
       </div>
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
         <span style={{ width: '80px', fontSize: '12px', color: '#666' }}>Loading:</span>
@@ -222,7 +285,29 @@ export const AllStates: Story = {
         <Button variant="secondary" loading>Secondary</Button>
         <Button variant="ghost" loading>Ghost</Button>
         <Button variant="danger" loading>Danger</Button>
+        <Button variant="gradient" loading>Gradient</Button>
+        <Button variant="gradient-accent" loading>Accent</Button>
       </div>
+    </div>
+  ),
+};
+
+// Hero CTA example
+export const HeroCTA: Story = {
+  render: () => (
+    <div style={{
+      display: 'flex',
+      gap: '16px',
+      padding: '48px',
+      background: 'linear-gradient(135deg, #0b4664 0%, #041721 100%)',
+      borderRadius: '12px'
+    }}>
+      <Button variant="gradient-accent" size="lg">
+        Get Started Free
+      </Button>
+      <Button variant="ghost" size="lg" style={{ color: 'white' }}>
+        Learn More
+      </Button>
     </div>
   ),
 };

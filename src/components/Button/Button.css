@@ -1,8 +1,8 @@
 /**
  * Button Component Styles - CSK RVP Design System
  *
- * Uses design tokens for consistent styling.
- * Supports variants: primary, secondary, ghost, danger
+ * Enhanced with gradients, improved hover states, and subtle shadows.
+ * Supports variants: primary, secondary, ghost, danger, gradient, gradient-accent
  * Supports sizes: sm, md, lg
  */
 
@@ -16,6 +16,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-button-gap);
+  position: relative;
 
   /* Typography */
   font-family: var(--font-family-sans);
@@ -36,7 +37,9 @@
   /* Interaction */
   cursor: pointer;
   user-select: none;
-  transition: var(--transition-button);
+  transition: var(--transition-button),
+              box-shadow 0.2s ease-out,
+              transform 0.15s ease-out;
 
   /* Focus visible */
   outline: none;
@@ -51,43 +54,56 @@
 .csk-button[aria-disabled='true'] {
   cursor: not-allowed;
   opacity: 0.5;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 /* ==========================================================================
    VARIANTS
    ========================================================================== */
 
-/* Primary - main call-to-action */
+/* Primary - main call-to-action with subtle shadow */
 .csk-button--primary {
   background-color: var(--color-interactive-default);
   border-color: var(--color-interactive-default);
   color: var(--color-text-inverse);
+  box-shadow: var(--shadow-button);
 }
 
 .csk-button--primary:hover:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--color-interactive-hover);
   border-color: var(--color-interactive-hover);
+  box-shadow: var(--shadow-button-hover);
+  transform: translateY(-1px);
 }
 
 .csk-button--primary:active:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--color-interactive-active);
   border-color: var(--color-interactive-active);
+  box-shadow: var(--shadow-button-active);
+  transform: translateY(0);
 }
 
-/* Secondary - secondary actions */
+/* Secondary - secondary actions with border emphasis */
 .csk-button--secondary {
   background-color: var(--color-bg-primary);
   border-color: var(--color-border-strong);
   color: var(--color-text-primary);
+  box-shadow: var(--shadow-xs);
 }
 
 .csk-button--secondary:hover:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--color-bg-secondary);
-  border-color: var(--color-border-strong);
+  border-color: var(--color-primary-400);
+  color: var(--color-primary-600);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
 }
 
 .csk-button--secondary:active:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--color-bg-tertiary);
+  border-color: var(--color-primary-500);
+  transform: translateY(0);
 }
 
 /* Ghost - minimal visual weight */
@@ -99,31 +115,86 @@
 
 .csk-button--ghost:hover:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--color-bg-secondary);
+  color: var(--color-primary-600);
 }
 
 .csk-button--ghost:active:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--color-bg-tertiary);
 }
 
-/* Danger - destructive actions */
+/* Danger - destructive actions with red shadow */
 .csk-button--danger {
   background-color: var(--color-error-500);
   border-color: var(--color-error-500);
   color: var(--color-text-inverse);
+  box-shadow: var(--shadow-error-sm);
 }
 
 .csk-button--danger:hover:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--color-error-600);
   border-color: var(--color-error-600);
+  box-shadow: var(--shadow-error-md);
+  transform: translateY(-1px);
 }
 
 .csk-button--danger:active:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--color-error-700);
   border-color: var(--color-error-700);
+  box-shadow: var(--shadow-error-sm);
+  transform: translateY(0);
 }
 
 .csk-button--danger:focus-visible {
   outline-color: var(--color-error-500);
+}
+
+/* ==========================================================================
+   GRADIENT VARIANTS - New expressive styles
+   ========================================================================== */
+
+/* Gradient Primary - main CTA with gradient background */
+.csk-button--gradient {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: var(--color-text-inverse);
+  box-shadow: var(--shadow-primary-sm);
+}
+
+.csk-button--gradient:hover:not(:disabled):not([aria-disabled='true']) {
+  background: var(--gradient-primary-hover);
+  box-shadow: var(--shadow-primary-md);
+  transform: translateY(-2px);
+}
+
+.csk-button--gradient:active:not(:disabled):not([aria-disabled='true']) {
+  background: var(--gradient-primary-active);
+  box-shadow: var(--shadow-primary-sm);
+  transform: translateY(0);
+}
+
+/* Gradient Accent - warm accent gradient for special CTAs */
+.csk-button--gradient-accent {
+  background: var(--gradient-accent);
+  border-color: transparent;
+  color: var(--color-neutral-900);
+  box-shadow: var(--shadow-warning-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.csk-button--gradient-accent:hover:not(:disabled):not([aria-disabled='true']) {
+  background: var(--gradient-accent-hover);
+  box-shadow: var(--shadow-warning-md);
+  transform: translateY(-2px);
+}
+
+.csk-button--gradient-accent:active:not(:disabled):not([aria-disabled='true']) {
+  background: var(--gradient-accent);
+  box-shadow: var(--shadow-warning-sm);
+  transform: translateY(0);
+}
+
+.csk-button--gradient-accent:focus-visible {
+  outline-color: var(--color-accent-500);
 }
 
 /* ==========================================================================
@@ -145,6 +216,7 @@
   padding: var(--spacing-button-padding-y-lg) var(--spacing-button-padding-x-lg);
   font-size: var(--font-size-base);
   min-height: 52px;
+  font-weight: var(--font-weight-semibold);
 }
 
 /* ==========================================================================
@@ -181,13 +253,18 @@
 
 /* Restore text color for spinner */
 .csk-button--loading.csk-button--primary .csk-button__spinner,
-.csk-button--loading.csk-button--danger .csk-button__spinner {
+.csk-button--loading.csk-button--danger .csk-button__spinner,
+.csk-button--loading.csk-button--gradient .csk-button__spinner {
   color: var(--color-text-inverse);
 }
 
 .csk-button--loading.csk-button--secondary .csk-button__spinner,
 .csk-button--loading.csk-button--ghost .csk-button__spinner {
   color: var(--color-text-primary);
+}
+
+.csk-button--loading.csk-button--gradient-accent .csk-button__spinner {
+  color: var(--color-neutral-900);
 }
 
 /* ==========================================================================
@@ -224,4 +301,19 @@
 
 .csk-button__label {
   display: inline-block;
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-button {
+    transition: none;
+  }
+
+  .csk-button:hover:not(:disabled):not([aria-disabled='true']),
+  .csk-button:active:not(:disabled):not([aria-disabled='true']) {
+    transform: none;
+  }
 }

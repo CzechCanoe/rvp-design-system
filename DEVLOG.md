@@ -2693,3 +2693,72 @@ tests/
 
 ### Další kroky
 - Fáze 7.4: Redesign core komponent (Button, Card, Badge, Input, Table)
+
+---
+
+## 2026-01-20 - Fáze 7.4: Redesign Button komponenty
+
+### Dokončeno
+- [x] Přidány gradient tokeny do colors.css (light i dark mode)
+- [x] Přidány nové Button varianty: `gradient`, `gradient-accent`
+- [x] Vylepšeny hover states se subtle shadows a transform efekty
+- [x] Přidán reduced motion support
+- [x] Aktualizovány Button stories s novými variantami
+
+### Změny v tokenech (colors.css)
+
+**Nové gradienty:**
+- `--gradient-primary` / `--gradient-primary-hover` / `--gradient-primary-active`
+- `--gradient-primary-vibrant` - dramatičtější verze pro expressive mode
+- `--gradient-accent` / `--gradient-accent-hover` - warm amber gradienty
+- `--gradient-danger` - pro danger buttony
+- `--gradient-hero-primary/dark` - pro hero sekce
+- `--gradient-subtle/subtle-blue` - pro karty a pozadí
+- `--gradient-section-dv/ry/vt` - disciplínové gradienty
+
+**Dark mode gradienty:**
+- Všechny gradienty mají dark mode varianty s lighter shades
+
+### Změny v Button komponentě
+
+**Nové varianty:**
+1. `gradient` - primární gradient s colored shadow
+2. `gradient-accent` - warm amber gradient pro speciální CTA
+
+**Vylepšené hover states:**
+- Všechny varianty mají `translateY(-1px)` nebo `(-2px)` při hoveru
+- Gradient varianty mají dramatičtější pohyb (-2px)
+- Plynulé přechody pomocí `transition` pro shadow a transform
+
+**Vylepšené shadows:**
+- Primary: `--shadow-button` → `--shadow-button-hover`
+- Secondary: `--shadow-xs` → `--shadow-sm` s border color změnou
+- Danger: `--shadow-error-sm` → `--shadow-error-md`
+- Gradient: `--shadow-primary-sm` → `--shadow-primary-md`
+- Gradient-accent: `--shadow-warning-sm` → `--shadow-warning-md`
+
+**Accessibility:**
+- `@media (prefers-reduced-motion: reduce)` - vypíná transform animace
+- Disabled state vynucuje `transform: none !important`
+
+### Nové stories
+- `Gradient` - základní gradient button
+- `GradientAccent` - accent gradient button
+- `LoadingGradient` - loading state pro gradient
+- `GradientWithIcon` - s ikonou
+- `GradientAccentWithIcon` - accent s ikonou
+- `GradientSizes` - showcase všech velikostí
+- `HeroCTA` - příklad použití na dark hero sekci
+
+### Rozhodnutí
+1. **Gradient jako background** - ne jako border, protože border-gradient má komplikovanou podporu
+2. **Subtle transforms** - pouze -1px/-2px, aby efekt nebyl přehnaný
+3. **Colored shadows** - gradient varianty používají colored shadows pro lepší vizuální provázanost
+
+### Poznámky
+- Button je první komponenta s novým expresivním stylem
+- Gradient-accent používá tmavý text (neutral-900) kvůli světlému amber pozadí
+- Build prochází (CSS warningy jsou z jiných komponent)
+
+### Další kroky
+- Fáze 7.4 (pokračování): Card - gradient backgrounds, glassmorphism

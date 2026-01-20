@@ -102,6 +102,41 @@
   --color-accent-900: #78350f;
 
   /* ==========================================================================
+     GRADIENTS
+     For expressive buttons, hero sections, cards
+     ========================================================================== */
+
+  /* Primary gradients */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-600) 100%);
+  --gradient-primary-hover: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-700) 100%);
+  --gradient-primary-active: linear-gradient(135deg, var(--color-primary-700) 0%, var(--color-primary-800) 100%);
+
+  /* Primary vibrant - more dramatic for CTAs */
+  --gradient-primary-vibrant: linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-primary-600) 100%);
+  --gradient-primary-vibrant-hover: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-700) 100%);
+
+  /* Accent gradients */
+  --gradient-accent: linear-gradient(135deg, var(--color-accent-400) 0%, var(--color-accent-600) 100%);
+  --gradient-accent-hover: linear-gradient(135deg, var(--color-accent-500) 0%, var(--color-accent-700) 100%);
+
+  /* Danger gradients */
+  --gradient-danger: linear-gradient(135deg, var(--color-error-500) 0%, var(--color-error-600) 100%);
+  --gradient-danger-hover: linear-gradient(135deg, var(--color-error-600) 0%, var(--color-error-700) 100%);
+
+  /* Hero gradients - for large sections */
+  --gradient-hero-primary: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-700) 50%, var(--color-primary-800) 100%);
+  --gradient-hero-dark: linear-gradient(180deg, var(--color-neutral-800) 0%, var(--color-neutral-950) 100%);
+
+  /* Subtle gradients - for cards, backgrounds */
+  --gradient-subtle: linear-gradient(180deg, var(--color-neutral-0) 0%, var(--color-neutral-50) 100%);
+  --gradient-subtle-blue: linear-gradient(180deg, var(--color-primary-50) 0%, var(--color-neutral-0) 100%);
+
+  /* Discipline section gradients */
+  --gradient-section-dv: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  --gradient-section-ry: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  --gradient-section-vt: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+
+  /* ==========================================================================
      CSK-SPECIFIC COLORS
      ========================================================================== */
 
@@ -287,6 +322,34 @@
   --color-vt-a: #f87171;   /* Class A - lighter red */
   --color-vt-b: #fbbf24;   /* Class B - lighter amber */
   --color-vt-c: #4ade80;   /* Class C - lighter green */
+
+  /* ==========================================================================
+     GRADIENTS - Dark Theme
+     ========================================================================== */
+
+  /* Primary gradients - using lighter shades for dark mode */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-primary-500) 100%);
+  --gradient-primary-hover: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-600) 100%);
+  --gradient-primary-active: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-700) 100%);
+
+  --gradient-primary-vibrant: linear-gradient(135deg, var(--color-primary-300) 0%, var(--color-primary-500) 100%);
+  --gradient-primary-vibrant-hover: linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-primary-600) 100%);
+
+  --gradient-accent: linear-gradient(135deg, var(--color-accent-300) 0%, var(--color-accent-500) 100%);
+  --gradient-accent-hover: linear-gradient(135deg, var(--color-accent-400) 0%, var(--color-accent-600) 100%);
+
+  --gradient-danger: linear-gradient(135deg, var(--color-error-400) 0%, var(--color-error-500) 100%);
+  --gradient-danger-hover: linear-gradient(135deg, var(--color-error-500) 0%, var(--color-error-600) 100%);
+
+  --gradient-hero-primary: linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-primary-600) 50%, var(--color-primary-700) 100%);
+  --gradient-hero-dark: linear-gradient(180deg, var(--color-neutral-100) 0%, var(--color-neutral-0) 100%);
+
+  --gradient-subtle: linear-gradient(180deg, var(--color-neutral-100) 0%, var(--color-neutral-50) 100%);
+  --gradient-subtle-blue: linear-gradient(180deg, rgba(77, 163, 204, 0.1) 0%, var(--color-neutral-0) 100%);
+
+  --gradient-section-dv: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  --gradient-section-ry: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  --gradient-section-vt: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
 
   /* ==========================================================================
      SEMANTIC COLORS - Dark Theme
