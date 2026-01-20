@@ -1,5 +1,27 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 6 / Component API dokumentace
+
+### Dokončeno
+- [x] Vytvoření kompletní API dokumentace všech 27 komponent
+- [x] Dokumentace všech props, typů a rozhraní
+- [x] Příklady použití pro každou komponentu
+- [x] CSK specifické typy (sekce DV/RY/VT, VT třídy)
+- [x] Dokumentace přístupnosti a podpory prohlížečů
+
+### Přidané soubory
+- `docs/COMPONENT_API.md` - kompletní API reference
+
+### Poznámky
+- Dokumentace pokrývá všechny 3 tier úrovně komponent (Core, Pokročilé, Specifické)
+- Každá komponenta má popsány props, exportované typy a ukázky kódu
+- Dokumentace je v češtině s anglickými technickými termíny
+
+### Další kroky
+- Fáze 6: GitHub Actions CI/CD
+
+---
+
 ## 2026-01-20 - Fáze 6 / README.md s quick start
 
 ### Dokončeno

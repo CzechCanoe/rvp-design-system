@@ -128,7 +128,7 @@
 - [x] kompletace a otestování buildů
 - [x] pořízení screenshotů všech prototypů a storybooků s playwright, kontrola proti screenshotům
 - [x] README.md s quick start
-- [ ] Component API dokumentace
+- [x] Component API dokumentace
 - [ ] GitHub Actions CI/CD
 - [ ] NPM publikace (@czechcanoe/rvp-design-system)
 - [ ] GitHub Pages pro Storybook
