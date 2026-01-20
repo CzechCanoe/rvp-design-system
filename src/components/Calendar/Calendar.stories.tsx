@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Calendar, type CalendarEvent } from './Calendar';
 import { useState } from 'react';
+import { KanoeCzContext } from '../KanoeCzContext/KanoeCzContext';
 
 const meta = {
   title: 'Components/Calendar',
@@ -28,7 +29,7 @@ const meta = {
     },
     styleVariant: {
       control: 'select',
-      options: ['default', 'gradient', 'glass', 'bordered'],
+      options: ['default', 'gradient', 'glass', 'bordered', 'embed'],
       description: 'Style variant for visual appearance',
     },
     showNavigation: {
@@ -638,6 +639,106 @@ export const GradientWithPreview: Story = {
     docs: {
       description: {
         story: 'Kombinace gradient stylu a event preview tooltipů pro maximální vizuální efekt.',
+      },
+    },
+  },
+};
+
+// =============================================================================
+// EMBED MODE (Phase 8.3)
+// =============================================================================
+
+/**
+ * Embed style variant for kanoe.cz integration.
+ * Neutral, modern look without dramatic effects.
+ */
+export const StyleEmbed: Story = {
+  args: {
+    events: cskRaceEvents,
+    styleVariant: 'embed',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Embed varianta navržená pro integraci do kanoe.cz. Používá okraje místo stínů, kompaktní padding a minimální animace.',
+      },
+    },
+  },
+};
+
+/**
+ * Calendar embedded in kanoe.cz context.
+ * Demonstrates how the component looks within the Bootstrap 4 layout.
+ */
+export const InKanoeCzContext: Story = {
+  args: {
+    events: cskRaceEvents,
+    styleVariant: 'embed',
+  },
+  render: (args) => (
+    <KanoeCzContext>
+      <Calendar
+        {...args}
+        onEventClick={(event) => console.log('Event clicked:', event)}
+        onDayClick={(date) => console.log('Day clicked:', date)}
+      />
+    </KanoeCzContext>
+  ),
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story:
+          'Kalendář v embed režimu uvnitř kanoe.cz-like Bootstrap 4 layoutu. Ukazuje, jak komponenta vypadá v kontextu existujícího designu webu.',
+      },
+    },
+  },
+};
+
+/**
+ * Narrow container (400px) demonstrating container query responsivity.
+ */
+export const NarrowContainer: Story = {
+  args: {
+    events: cskRaceEvents.slice(0, 4),
+    styleVariant: 'embed',
+    size: 'sm',
+  },
+  render: (args) => (
+    <div style={{ maxWidth: '400px', border: '1px dashed #ccc', padding: '8px' }}>
+      <Calendar {...args} />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Kalendář v úzkém kontejneru (400px) ukazující container query responzivitu. Události se zobrazují pouze jako barevné indikátory.',
+      },
+    },
+  },
+};
+
+/**
+ * Very narrow container (300px) for sidebar use.
+ */
+export const VeryNarrowContainer: Story = {
+  args: {
+    events: cskRaceEvents.slice(0, 3),
+    styleVariant: 'embed',
+    showTodayButton: false,
+  },
+  render: (args) => (
+    <div style={{ maxWidth: '300px', border: '1px dashed #ccc', padding: '8px' }}>
+      <Calendar {...args} />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Kalendář ve velmi úzkém kontejneru (300px) pro použití v sidebaru. Tlačítko "Dnes" je skryté a layout je maximálně kompaktní.',
       },
     },
   },

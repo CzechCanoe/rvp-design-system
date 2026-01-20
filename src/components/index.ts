@@ -120,12 +120,17 @@ export type {
 } from './Dropdown';
 
 // Calendar
-export { Calendar } from './Calendar';
+export { Calendar, CalendarList } from './Calendar';
 export type {
   CalendarProps,
   CalendarEvent,
   CalendarView,
   CalendarSize,
+  CalendarStyleVariant,
+  CalendarListProps,
+  CalendarListVariant,
+  CalendarListStyleVariant,
+  CalendarListGrouping,
 } from './Calendar';
 
 // Dropzone

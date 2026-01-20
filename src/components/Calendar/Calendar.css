@@ -909,3 +909,199 @@
     transform: none;
   }
 }
+
+/* ==========================================================================
+   CONTAINER QUERIES
+   ========================================================================== */
+
+.csk-calendar {
+  container-type: inline-size;
+  container-name: calendar;
+}
+
+/* Narrow container (<500px) - compact layout */
+@container calendar (max-width: 500px) {
+  .csk-calendar__header {
+    flex-direction: column;
+    gap: var(--spacing-2);
+    align-items: stretch;
+  }
+
+  .csk-calendar__nav {
+    justify-content: space-between;
+  }
+
+  .csk-calendar__weekday {
+    font-size: 10px;
+    padding: var(--spacing-1);
+  }
+
+  .csk-calendar__day {
+    min-height: 60px;
+    padding: var(--spacing-0-5);
+  }
+
+  .csk-calendar__day-header {
+    padding: 0;
+  }
+
+  .csk-calendar__day-number {
+    min-width: var(--spacing-5);
+    height: var(--spacing-5);
+    font-size: var(--text-xs-size);
+  }
+
+  .csk-calendar__event {
+    padding: var(--spacing-0-5);
+    font-size: 10px;
+  }
+
+  /* Show only colored indicator in narrow containers */
+  .csk-calendar__event-title {
+    display: none;
+  }
+
+  .csk-calendar__event {
+    height: 4px;
+    padding: 0;
+    border-radius: var(--radius-full);
+  }
+
+  .csk-calendar__more {
+    font-size: 10px;
+    padding: var(--spacing-0-5) 0;
+  }
+
+  .csk-calendar__event-preview {
+    display: none !important;
+  }
+}
+
+/* Very narrow container (<350px) - minimal layout */
+@container calendar (max-width: 350px) {
+  .csk-calendar__day {
+    min-height: 45px;
+  }
+
+  .csk-calendar__day-number {
+    min-width: var(--spacing-4);
+    height: var(--spacing-4);
+    font-size: 10px;
+  }
+
+  .csk-calendar__title {
+    font-size: var(--text-base-size);
+  }
+
+  .csk-calendar__nav-btn--today {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   EMBED STYLE VARIANT
+   Neutral, modern look for kanoe.cz integration
+   ========================================================================== */
+
+.csk-calendar--style-embed {
+  /* No shadows, use borders */
+  box-shadow: none;
+  border: var(--border-embed-card);
+  border-radius: var(--radius-embed-card);
+  padding: var(--spacing-embed-card-padding);
+  gap: var(--spacing-2);
+}
+
+.csk-calendar--style-embed .csk-calendar__header {
+  padding: 0 0 var(--spacing-2) 0;
+}
+
+.csk-calendar--style-embed .csk-calendar__title {
+  font-size: var(--text-embed-h4-size);
+}
+
+.csk-calendar--style-embed .csk-calendar__nav-btn {
+  min-width: var(--spacing-7);
+  min-height: var(--spacing-7);
+  border: var(--border-embed-width) solid var(--color-border);
+}
+
+.csk-calendar--style-embed .csk-calendar__nav-btn--today {
+  padding: var(--spacing-1) var(--spacing-2);
+  font-size: var(--text-embed-small-size);
+}
+
+.csk-calendar--style-embed .csk-calendar__grid {
+  padding: 0;
+}
+
+.csk-calendar--style-embed .csk-calendar__weekday {
+  font-size: var(--text-xs-size);
+  text-transform: none;
+  letter-spacing: normal;
+  padding: var(--spacing-1);
+}
+
+.csk-calendar--style-embed .csk-calendar__days {
+  border: var(--border-embed-width) solid var(--color-border-secondary);
+  border-radius: var(--radius-embed-card);
+}
+
+.csk-calendar--style-embed .csk-calendar__day {
+  min-height: 70px;
+  transition: background-color var(--motion-embed-fast) var(--ease-out);
+}
+
+.csk-calendar--style-embed .csk-calendar__day--clickable:hover {
+  box-shadow: none;
+  background-color: var(--color-bg-secondary);
+}
+
+.csk-calendar--style-embed .csk-calendar__day--today {
+  background-color: var(--color-primary-50);
+}
+
+.csk-calendar--style-embed .csk-calendar__day-number--today {
+  animation: none;
+}
+
+.csk-calendar--style-embed .csk-calendar__event {
+  font-size: var(--text-xs-size);
+  transition: background-color var(--motion-embed-fast) var(--ease-out);
+}
+
+.csk-calendar--style-embed .csk-calendar__event:hover {
+  filter: none;
+  box-shadow: none;
+  opacity: 0.85;
+}
+
+/* Disable animations in embed mode */
+.csk-calendar--style-embed.csk-calendar--animated {
+  animation: none;
+}
+
+.csk-calendar--style-embed.csk-calendar--animated .csk-calendar__event {
+  animation: none;
+}
+
+.csk-calendar--style-embed.csk-calendar--animated .csk-calendar__event:hover {
+  transform: none;
+}
+
+.csk-calendar--style-embed.csk-calendar--animated .csk-calendar__nav-btn:active {
+  transform: none;
+}
+
+/* Dark mode embed */
+[data-theme='dark'] .csk-calendar--style-embed {
+  border-color: var(--color-border-secondary);
+}
+
+[data-theme='dark'] .csk-calendar--style-embed .csk-calendar__days {
+  border-color: var(--color-border-primary);
+}
+
+[data-theme='dark'] .csk-calendar--style-embed .csk-calendar__nav-btn {
+  border-color: var(--color-border-primary);
+}

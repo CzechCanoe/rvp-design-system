@@ -10,7 +10,7 @@ import './Calendar.css';
 
 export type CalendarView = 'month' | 'week';
 export type CalendarSize = 'sm' | 'md' | 'lg';
-export type CalendarStyleVariant = 'default' | 'gradient' | 'glass' | 'bordered';
+export type CalendarStyleVariant = 'default' | 'gradient' | 'glass' | 'bordered' | 'embed';
 
 export interface CalendarEvent {
   /** Unique identifier for the event */

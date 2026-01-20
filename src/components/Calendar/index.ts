@@ -6,3 +6,11 @@ export type {
   CalendarSize,
   CalendarStyleVariant,
 } from './Calendar';
+
+export { CalendarList } from './CalendarList';
+export type {
+  CalendarListProps,
+  CalendarListVariant,
+  CalendarListStyleVariant,
+  CalendarListGrouping,
+} from './CalendarList';

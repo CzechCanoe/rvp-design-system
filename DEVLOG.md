@@ -3906,3 +3906,64 @@ tests/
 
 ### Další kroky
 - Fáze 8.2: ResultsTable refaktoring
+
+---
+
+## 2026-01-20 - Fáze 8.2: ResultsTable refaktoring
+
+### Dokončeno
+- [x] Embed varianta (bez stínů, kompaktní padding, border místo shadow)
+- [x] Container-responsive sloupce (skrývání při úzké šířce pomocí container queries)
+- [x] Slalom-specifické zobrazení (round Q/SF/F, progression checkmark, startNumber)
+- [x] Stories: "V kontextu kanoe.cz", "Slalom kvalifikace", "Container Query Demo"
+
+### Implementované změny
+1. **ResultsTable.tsx:**
+   - Nový `styleVariant: 'embed'`
+   - Nové sloupce: round, progression, startNumber
+   - Nové props: showRound, showProgression, showStartNumber
+   - Container query třídy (`hideAt: 'sm' | 'md' | 'lg'`)
+
+2. **ResultsTable.css:**
+   - Embed style variant (neutrální, bez stínů, kompaktní)
+   - Container query breakpointy (400px/600px/800px)
+   - Round badges (Q/SF/F) s barevným kódováním
+   - Progression checkmark indicator
+
+3. **Stories:**
+   - EmbedStyle, EmbedInKanoeCz, EmbedWithSidebar
+   - SlalomQualification, SlalomQualificationEmbed, SlalomWithRounds
+   - ContainerQueryDemo
+
+### Poznámky
+- Container queries používají vlastní container na wrapper div
+- Embed varianta je určena pro integraci do kanoe.cz (Bootstrap 4 prostředí)
+
+---
+
+## 2026-01-20 - Fáze 8.3: Calendar refaktoring (částečně)
+
+### Dokončeno
+- [x] CalendarList komponenta - chronologický seznam událostí
+- [x] CalendarList.css s embed variantou a container queries
+- [x] Calendar embed styleVariant (`--style-embed`)
+- [x] Container queries pro Calendar (responsivita 500px, 350px)
+- [x] Stories pro CalendarList (default, grouped, embed, narrow container)
+- [x] Stories pro Calendar embed v kanoe.cz kontextu
+
+### Nové soubory
+- `src/components/Calendar/CalendarList.tsx`
+- `src/components/Calendar/CalendarList.css`
+- `src/components/Calendar/CalendarList.stories.tsx`
+
+### Změněné soubory
+- `src/components/Calendar/Calendar.tsx` - přidán embed do CalendarStyleVariant
+- `src/components/Calendar/Calendar.css` - embed styles + container queries
+- `src/components/Calendar/Calendar.stories.tsx` - embed stories
+- `src/components/Calendar/index.ts` - export CalendarList
+- `src/components/index.ts` - export CalendarList
+
+### Poznámky
+- Cards view (měsíční karty) zbývá na další iteraci
+- CalendarList podporuje groupBy: none | day | month
+- Container queries fungují na 500px a 350px breakpoints

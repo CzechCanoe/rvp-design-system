@@ -4,7 +4,7 @@
 
 | Fáze | Krok | Status |
 |------|------|--------|
-| **8 - Integrace s kanoe.cz** | 8.3 Calendar refaktoring | 🔲 Další |
+| **8 - Integrace s kanoe.cz** | 8.3 Calendar refaktoring (částečně) | 🔲 Další |
 
 ---
 
@@ -29,10 +29,10 @@
 - [x] Slalom-specifické zobrazení (1./2. jízda, Q/SF/F, postupy)
 - [x] Stories: "V kontextu kanoe.cz", "Slalom kvalifikace"
 
-### 8.3 Calendar refaktoring
-- [ ] List view (chronologický seznam)
-- [ ] Cards view (měsíční karty)
-- [ ] Embed mode + container query responzivita
+### 8.3 Calendar refaktoring (částečně dokončeno)
+- [x] List view (chronologický seznam) - CalendarList komponenta
+- [x] Embed mode + container query responzivita
+- [ ] Cards view (měsíční karty) - zbývá
 
 ### 8.4 Nové šablony
 - [ ] **Event Detail Page** - před/během/po závodu
