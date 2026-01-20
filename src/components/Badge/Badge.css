@@ -1,10 +1,12 @@
 /**
  * Badge Component Styles - CSK RVP Design System
  *
- * Uses design tokens for consistent styling.
- * Supports variants: default, primary, success, warning, error, info
- * Supports CSK sections: dv, ry, vt
+ * Enhanced with gradients, improved shadows, and modern visual polish.
+ * Supports variants: default, primary, success, warning, error, info,
+ *                   gradient, gradient-accent, gradient-success, gradient-error
+ * Supports CSK sections: dv, ry, vt (with gradient backgrounds)
  * Supports VT classes: m, a, b, c
+ * Supports modifiers: outlined, pill, glow
  */
 
 /* ==========================================================================
@@ -22,13 +24,17 @@
   font-weight: var(--font-weight-medium);
   line-height: 1;
   white-space: nowrap;
+  letter-spacing: 0.01em;
 
   /* Shape */
   border-radius: var(--radius-badge);
   border: 1px solid transparent;
 
-  /* Transition */
-  transition: var(--transition-badge);
+  /* Transition - enhanced for modern feel */
+  transition: background-color 0.2s ease-out,
+              border-color 0.2s ease-out,
+              box-shadow 0.2s ease-out,
+              transform 0.15s ease-out;
 }
 
 /* ==========================================================================
@@ -100,60 +106,105 @@
 }
 
 /* ==========================================================================
-   CSK SECTIONS - FILLED
+   GRADIENT VARIANTS - Expressive visual styles
    ========================================================================== */
 
-/* DV - Divoká voda (Whitewater) - blue */
-.csk-badge--section-dv {
-  background-color: var(--color-section-dv);
+/* Gradient Primary - brand blue gradient */
+.csk-badge--gradient {
+  background: var(--gradient-primary);
+  border-color: transparent;
   color: var(--color-neutral-0);
-  border-color: var(--color-section-dv);
+  box-shadow: var(--shadow-xs);
 }
 
-/* RY - Rychlostní (Sprint) - green */
-.csk-badge--section-ry {
-  background-color: var(--color-section-ry);
-  color: var(--color-neutral-0);
-  border-color: var(--color-section-ry);
+/* Gradient Accent - warm amber gradient */
+.csk-badge--gradient-accent {
+  background: var(--gradient-accent);
+  border-color: transparent;
+  color: var(--color-neutral-900);
+  box-shadow: var(--shadow-xs);
+  font-weight: var(--font-weight-semibold);
 }
 
-/* VT - Vodní turistika (Touring) - red */
-.csk-badge--section-vt {
-  background-color: var(--color-section-vt);
+/* Gradient Success - green gradient */
+.csk-badge--gradient-success {
+  background: var(--gradient-success);
+  border-color: transparent;
   color: var(--color-neutral-0);
-  border-color: var(--color-section-vt);
+  box-shadow: var(--shadow-xs);
+}
+
+/* Gradient Error - red gradient */
+.csk-badge--gradient-error {
+  background: var(--gradient-error);
+  border-color: transparent;
+  color: var(--color-neutral-0);
+  box-shadow: var(--shadow-xs);
 }
 
 /* ==========================================================================
-   VT CLASSES - FILLED
+   CSK SECTIONS - FILLED
    ========================================================================== */
 
-/* M - Mistr (Master) - purple */
+/* DV - Divoká voda (Whitewater) - blue with gradient */
+.csk-badge--section-dv {
+  background: var(--gradient-section-dv);
+  color: var(--color-neutral-0);
+  border-color: transparent;
+  box-shadow: var(--shadow-xs);
+}
+
+/* RY - Rychlostní (Sprint) - green with gradient */
+.csk-badge--section-ry {
+  background: var(--gradient-section-ry);
+  color: var(--color-neutral-0);
+  border-color: transparent;
+  box-shadow: var(--shadow-xs);
+}
+
+/* VT - Vodní turistika (Touring) - red with gradient */
+.csk-badge--section-vt {
+  background: var(--gradient-section-vt);
+  color: var(--color-neutral-0);
+  border-color: transparent;
+  box-shadow: var(--shadow-xs);
+}
+
+/* ==========================================================================
+   VT CLASSES - FILLED WITH SUBTLE GRADIENT
+   ========================================================================== */
+
+/* M - Mistr (Master) - purple with gradient */
 .csk-badge--vt-m {
-  background-color: var(--color-vt-m);
+  background: linear-gradient(135deg, var(--color-vt-m) 0%, #6d28d9 100%);
   color: var(--color-neutral-0);
-  border-color: var(--color-vt-m);
+  border-color: transparent;
+  box-shadow: var(--shadow-xs);
+  font-weight: var(--font-weight-semibold);
 }
 
-/* A - Class A - red */
+/* A - Class A - red with gradient */
 .csk-badge--vt-a {
-  background-color: var(--color-vt-a);
+  background: linear-gradient(135deg, var(--color-vt-a) 0%, #b91c1c 100%);
   color: var(--color-neutral-0);
-  border-color: var(--color-vt-a);
+  border-color: transparent;
+  box-shadow: var(--shadow-xs);
 }
 
-/* B - Class B - amber */
+/* B - Class B - amber with gradient */
 .csk-badge--vt-b {
-  background-color: var(--color-vt-b);
+  background: linear-gradient(135deg, var(--color-vt-b) 0%, #d97706 100%);
   color: var(--color-neutral-900);
-  border-color: var(--color-vt-b);
+  border-color: transparent;
+  box-shadow: var(--shadow-xs);
 }
 
-/* C - Class C - green */
+/* C - Class C - green with gradient */
 .csk-badge--vt-c {
-  background-color: var(--color-vt-c);
+  background: linear-gradient(135deg, var(--color-vt-c) 0%, #15803d 100%);
   color: var(--color-neutral-0);
-  border-color: var(--color-vt-c);
+  border-color: transparent;
+  box-shadow: var(--shadow-xs);
 }
 
 /* ==========================================================================
@@ -286,4 +337,74 @@
 
 .csk-badge__content {
   display: inline-block;
+}
+
+/* ==========================================================================
+   GLOW EFFECT
+   For gradient and section variants - adds subtle colored shadow
+   ========================================================================== */
+
+.csk-badge--glow.csk-badge--gradient {
+  box-shadow: 0 2px 8px -2px rgba(17, 118, 166, 0.4),
+              0 4px 12px -4px rgba(17, 118, 166, 0.25);
+}
+
+.csk-badge--glow.csk-badge--gradient-accent {
+  box-shadow: 0 2px 8px -2px rgba(245, 158, 11, 0.4),
+              0 4px 12px -4px rgba(245, 158, 11, 0.25);
+}
+
+.csk-badge--glow.csk-badge--gradient-success {
+  box-shadow: 0 2px 8px -2px rgba(34, 197, 94, 0.4),
+              0 4px 12px -4px rgba(34, 197, 94, 0.25);
+}
+
+.csk-badge--glow.csk-badge--gradient-error {
+  box-shadow: 0 2px 8px -2px rgba(239, 68, 68, 0.4),
+              0 4px 12px -4px rgba(239, 68, 68, 0.25);
+}
+
+.csk-badge--glow.csk-badge--section-dv {
+  box-shadow: 0 2px 8px -2px rgba(37, 99, 235, 0.4),
+              0 4px 12px -4px rgba(37, 99, 235, 0.25);
+}
+
+.csk-badge--glow.csk-badge--section-ry {
+  box-shadow: 0 2px 8px -2px rgba(22, 163, 74, 0.4),
+              0 4px 12px -4px rgba(22, 163, 74, 0.25);
+}
+
+.csk-badge--glow.csk-badge--section-vt {
+  box-shadow: 0 2px 8px -2px rgba(220, 38, 38, 0.4),
+              0 4px 12px -4px rgba(220, 38, 38, 0.25);
+}
+
+.csk-badge--glow.csk-badge--vt-m {
+  box-shadow: 0 2px 8px -2px rgba(124, 58, 237, 0.4),
+              0 4px 12px -4px rgba(124, 58, 237, 0.25);
+}
+
+.csk-badge--glow.csk-badge--vt-a {
+  box-shadow: 0 2px 8px -2px rgba(220, 38, 38, 0.4),
+              0 4px 12px -4px rgba(220, 38, 38, 0.25);
+}
+
+.csk-badge--glow.csk-badge--vt-b {
+  box-shadow: 0 2px 8px -2px rgba(245, 158, 11, 0.4),
+              0 4px 12px -4px rgba(245, 158, 11, 0.25);
+}
+
+.csk-badge--glow.csk-badge--vt-c {
+  box-shadow: 0 2px 8px -2px rgba(34, 197, 94, 0.4),
+              0 4px 12px -4px rgba(34, 197, 94, 0.25);
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-badge {
+    transition: none;
+  }
 }

@@ -1,5 +1,32 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.4 / Redesign Badge komponenty
+
+### Dokončeno
+- [x] Přidány gradient varianty: `gradient`, `gradient-accent`, `gradient-success`, `gradient-error`
+- [x] CSK sekce (DV/RY/VT) nyní používají gradient backgrounds
+- [x] VT třídy (M/A/B/C) nyní používají gradient backgrounds s enhanced vizuálem
+- [x] Přidán nový prop `glow` pro barevné stíny kolem badge
+- [x] Vylepšené transitions pro moderní feel
+- [x] Nové Storybook stories: Gradient Variants, Featured Showcase
+- [x] Aktualizované stories pro CSK Sections a VT Classes s glow efekty
+
+### Změněné soubory
+- `src/components/Badge/Badge.tsx` - nové varianty a `glow` prop
+- `src/components/Badge/Badge.css` - gradient styly, glow efekty, transitions
+- `src/components/Badge/Badge.stories.tsx` - nové stories
+
+### Poznámky
+- Badge nyní vizuálně odpovídá redesignovaným Button a Card komponentám
+- Glow efekt je volitelný - vhodný pro featured content a expressive režim
+- Gradient backgrounds na CSK sekcích dodávají profesionální "branded" feel
+- Build proběhl úspěšně
+
+### Další kroky
+- 7.4: Redesign Input/Select komponent
+
+---
+
 ## 2026-01-19 - Iterace 0 / Plánování projektu
 
 ### Dokončeno

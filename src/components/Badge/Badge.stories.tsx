@@ -17,7 +17,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'primary', 'success', 'warning', 'error', 'info'],
+      options: ['default', 'primary', 'success', 'warning', 'error', 'info', 'gradient', 'gradient-accent', 'gradient-success', 'gradient-error'],
       description: 'Visual variant of the badge',
     },
     section: {
@@ -42,6 +42,10 @@ const meta = {
     pill: {
       control: 'boolean',
       description: 'Use pill shape (fully rounded)',
+    },
+    glow: {
+      control: 'boolean',
+      description: 'Use glow effect (for gradient and section variants)',
     },
     children: {
       control: 'text',
@@ -109,6 +113,52 @@ export const VariantsOutlined: Story = {
 };
 
 /* ==========================================================================
+   GRADIENT VARIANTS
+   ========================================================================== */
+
+export const GradientVariants: Story = {
+  name: 'Gradient Variants',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Standard</h4>
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <Badge variant="gradient">Gradient Primary</Badge>
+          <Badge variant="gradient-accent">Gradient Accent</Badge>
+          <Badge variant="gradient-success">Gradient Success</Badge>
+          <Badge variant="gradient-error">Gradient Error</Badge>
+        </div>
+      </div>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>With Glow Effect</h4>
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <Badge variant="gradient" glow>Gradient Primary</Badge>
+          <Badge variant="gradient-accent" glow>Gradient Accent</Badge>
+          <Badge variant="gradient-success" glow>Gradient Success</Badge>
+          <Badge variant="gradient-error" glow>Gradient Error</Badge>
+        </div>
+      </div>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Pill with Glow</h4>
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <Badge variant="gradient" pill glow>Primary</Badge>
+          <Badge variant="gradient-accent" pill glow>Accent</Badge>
+          <Badge variant="gradient-success" pill glow>Success</Badge>
+          <Badge variant="gradient-error" pill glow>Error</Badge>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Gradient variants for expressive, modern UI. Use glow effect for extra visual impact.',
+      },
+    },
+  },
+};
+
+/* ==========================================================================
    SIZES
    ========================================================================== */
 
@@ -159,11 +209,19 @@ export const CskSections: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Filled</h4>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Gradient (default)</h4>
         <div style={{ display: 'flex', gap: '8px' }}>
           <Badge section="dv">Divoká voda</Badge>
           <Badge section="ry">Rychlostní</Badge>
           <Badge section="vt">Vodní turistika</Badge>
+        </div>
+      </div>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>With Glow</h4>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <Badge section="dv" glow>DV</Badge>
+          <Badge section="ry" glow>RY</Badge>
+          <Badge section="vt" glow>VT</Badge>
         </div>
       </div>
       <div>
@@ -174,13 +232,21 @@ export const CskSections: Story = {
           <Badge section="vt" outlined>VT</Badge>
         </div>
       </div>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Pill with Glow</h4>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <Badge section="dv" pill glow>Divoká voda</Badge>
+          <Badge section="ry" pill glow>Rychlostní</Badge>
+          <Badge section="vt" pill glow>Vodní turistika</Badge>
+        </div>
+      </div>
     </div>
   ),
   parameters: {
     docs: {
       description: {
         story:
-          'CSK discipline sections: DV (Divoká voda - Whitewater, blue), RY (Rychlostní - Sprint, green), VT (Vodní turistika - Touring, red).',
+          'CSK discipline sections with gradient backgrounds: DV (Divoká voda - Whitewater, blue), RY (Rychlostní - Sprint, green), VT (Vodní turistika - Touring, red).',
       },
     },
   },
@@ -195,12 +261,21 @@ export const VtClasses: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Filled</h4>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Gradient (default)</h4>
         <div style={{ display: 'flex', gap: '8px' }}>
           <Badge vtClass="m">M - Mistr</Badge>
           <Badge vtClass="a">A</Badge>
           <Badge vtClass="b">B</Badge>
           <Badge vtClass="c">C</Badge>
+        </div>
+      </div>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>With Glow</h4>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <Badge vtClass="m" glow>M</Badge>
+          <Badge vtClass="a" glow>A</Badge>
+          <Badge vtClass="b" glow>B</Badge>
+          <Badge vtClass="c" glow>C</Badge>
         </div>
       </div>
       <div>
@@ -212,13 +287,22 @@ export const VtClasses: Story = {
           <Badge vtClass="c" outlined>C</Badge>
         </div>
       </div>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Pill with Glow</h4>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <Badge vtClass="m" pill glow>M</Badge>
+          <Badge vtClass="a" pill glow>A</Badge>
+          <Badge vtClass="b" pill glow>B</Badge>
+          <Badge vtClass="c" pill glow>C</Badge>
+        </div>
+      </div>
     </div>
   ),
   parameters: {
     docs: {
       description: {
         story:
-          'VT (Vodní turistika) performance classes: M (Mistr - Master, purple), A (red), B (amber), C (green).',
+          'VT (Vodní turistika) performance classes with gradient backgrounds: M (Mistr - Master, purple), A (red), B (amber), C (green).',
       },
     },
   },
@@ -404,22 +488,82 @@ export const NotificationBadges: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <Badge variant="error" size="sm" pill>3</Badge>
+        <Badge variant="gradient-error" size="sm" pill glow>3</Badge>
         <span style={{ fontSize: '14px' }}>Nové zprávy</span>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <Badge variant="warning" size="sm" pill>!</Badge>
+        <Badge variant="gradient-accent" size="sm" pill glow>!</Badge>
         <span style={{ fontSize: '14px' }}>Čeká na schválení</span>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <Badge variant="success" size="sm" pill icon={<CheckIcon />}>Dokončeno</Badge>
+        <Badge variant="gradient-success" size="sm" pill glow icon={<CheckIcon />}>Dokončeno</Badge>
       </div>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Pill badges for notification counts and status indicators.',
+        story: 'Gradient pill badges with glow for notification counts and status indicators.',
+      },
+    },
+  },
+};
+
+/* ==========================================================================
+   FEATURED/SHOWCASE
+   ========================================================================== */
+
+export const FeaturedShowcase: Story = {
+  name: 'Featured Showcase',
+  render: () => (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '24px',
+        padding: '32px',
+        background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
+        borderRadius: '16px',
+      }}
+    >
+      <div>
+        <h3 style={{ margin: '0 0 16px 0', fontWeight: 600 }}>Live Event Status</h3>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <Badge variant="gradient-error" size="lg" pill glow icon={
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+              <circle cx="12" cy="12" r="6" />
+            </svg>
+          }>ŽIVĚ</Badge>
+          <Badge variant="gradient" size="lg" pill glow>Semifinále</Badge>
+          <Badge section="dv" size="lg" pill glow>Kajak K1</Badge>
+        </div>
+      </div>
+
+      <div>
+        <h3 style={{ margin: '0 0 16px 0', fontWeight: 600 }}>Athlete Achievements</h3>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+          <Badge vtClass="m" size="lg" pill glow>🏆 Mistr ČR</Badge>
+          <Badge variant="gradient-accent" size="lg" pill glow>Top 10 ICF</Badge>
+          <Badge variant="gradient-success" pill glow icon={<CheckIcon />}>Kvalifikován OH</Badge>
+        </div>
+      </div>
+
+      <div>
+        <h3 style={{ margin: '0 0 16px 0', fontWeight: 600 }}>Race Categories</h3>
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <Badge section="dv" glow>Slalom</Badge>
+          <Badge section="dv" glow>Sjezd</Badge>
+          <Badge section="ry" glow>Sprint</Badge>
+          <Badge section="ry" glow>Maraton</Badge>
+          <Badge section="vt" glow>Turistika</Badge>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Showcase of badges with gradient backgrounds and glow effects for featured content, live events, and achievements.',
       },
     },
   },

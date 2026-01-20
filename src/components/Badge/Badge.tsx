@@ -7,7 +7,11 @@ export type BadgeVariant =
   | 'success'
   | 'warning'
   | 'error'
-  | 'info';
+  | 'info'
+  | 'gradient'
+  | 'gradient-accent'
+  | 'gradient-success'
+  | 'gradient-error';
 
 export type BadgeSection = 'dv' | 'ry' | 'vt';
 export type BadgeVtClass = 'm' | 'a' | 'b' | 'c';
@@ -27,6 +31,8 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   outlined?: boolean;
   /** Use pill shape (fully rounded) */
   pill?: boolean;
+  /** Use glow effect (for gradient and section variants) */
+  glow?: boolean;
   /** Optional icon to display before content */
   icon?: ReactNode;
   /** Badge content */
@@ -48,6 +54,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       size = 'md',
       outlined = false,
       pill = false,
+      glow = false,
       icon,
       className,
       children,
@@ -72,6 +79,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       `csk-badge--${size}`,
       outlined && 'csk-badge--outlined',
       pill && 'csk-badge--pill',
+      glow && 'csk-badge--glow',
       className,
     ]
       .filter(Boolean)
