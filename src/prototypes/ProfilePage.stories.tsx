@@ -24,6 +24,8 @@ interface ProfilePageProps {
   isOwnProfile?: boolean;
   /** Show admin controls */
   isAdmin?: boolean;
+  /** Discipline section for theming */
+  section?: 'dv' | 'ry' | 'vt';
 }
 
 interface AthleteResult {
@@ -86,6 +88,32 @@ const athleteData: AthleteData = {
   podiums: 187,
   wins: 98,
   bestRanking: 1,
+};
+
+const ryAthleteData: AthleteData = {
+  ...athleteData,
+  id: 'CZE-67890',
+  name: 'Martin Fuksa',
+  club: 'Dukla Praha',
+  section: 'ry',
+  vtClass: 'm',
+  ranking: 1,
+  totalRaces: 245,
+  podiums: 156,
+  wins: 89,
+};
+
+const vtAthleteData: AthleteData = {
+  ...athleteData,
+  id: 'CZE-11111',
+  name: 'Petr Novák',
+  club: 'TJ Bohemians',
+  section: 'vt',
+  vtClass: 'a',
+  ranking: 5,
+  totalRaces: 78,
+  podiums: 23,
+  wins: 8,
 };
 
 const recentResults: AthleteResult[] = [
@@ -308,6 +336,38 @@ function DownloadIcon() {
   );
 }
 
+function ChevronRightIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
+  );
+}
+
+function StarIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  );
+}
+
+// Wave decoration component
+const WaveDecoration = ({ className = '' }: { className?: string }) => (
+  <svg
+    className={`profile-page-wave ${className}`}
+    viewBox="0 0 1440 100"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+  >
+    <path
+      d="M0 50C240 20 480 80 720 50C960 20 1200 80 1440 50V100H0V50Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
 // ============================================================================
 // Helper Functions
 // ============================================================================
@@ -351,10 +411,13 @@ function getDaysUntil(dateString: string): number {
 // Profile Page Component
 // ============================================================================
 
-function ProfilePage({ isOwnProfile = false }: ProfilePageProps) {
+function ProfilePage({ isOwnProfile = false, section = 'dv' }: ProfilePageProps) {
   const [activeTab, setActiveTab] = useState('overview');
 
-  const medicalDaysLeft = getDaysUntil(athleteData.medicalExpiry);
+  // Select athlete data based on section
+  const athlete = section === 'ry' ? ryAthleteData : section === 'vt' ? vtAthleteData : athleteData;
+
+  const medicalDaysLeft = getDaysUntil(athlete.medicalExpiry);
   const medicalStatus = medicalDaysLeft > 30 ? 'valid' : medicalDaysLeft > 0 ? 'expiring' : 'expired';
 
   // Table columns for results
@@ -422,83 +485,138 @@ function ProfilePage({ isOwnProfile = false }: ProfilePageProps) {
         bordered
       />
 
+      {/* Hero Section */}
+      <section className={`profile-hero-section profile-hero-section--${section}`}>
+        <div className="profile-hero-section__background">
+          <div className="profile-hero-section__gradient" />
+          <div className="profile-hero-section__pattern" />
+        </div>
+        <div className="profile-hero-section__content">
+          {/* Breadcrumb */}
+          <nav className="profile-breadcrumb">
+            <a href="#" className="profile-breadcrumb__link">Domů</a>
+            <ChevronRightIcon />
+            <a href="#" className="profile-breadcrumb__link">Závodníci</a>
+            <ChevronRightIcon />
+            <span className="profile-breadcrumb__current">{athlete.name}</span>
+          </nav>
+
+          {/* Hero Content */}
+          <div className="profile-hero-content">
+            {/* Avatar */}
+            <div className="profile-hero-avatar">
+              <Avatar
+                name={athlete.name}
+                src={athlete.imageUrl}
+                size="xl"
+              />
+              {athlete.ranking <= 3 && (
+                <div className={`profile-hero-ranking profile-hero-ranking--${athlete.ranking}`}>
+                  #{athlete.ranking}
+                </div>
+              )}
+            </div>
+
+            {/* Info */}
+            <div className="profile-hero-info">
+              <div className="profile-hero-name-row">
+                <h1 className="profile-hero-name">{athlete.name}</h1>
+                <span className="profile-hero-country">{athlete.country}</span>
+              </div>
+              <div className="profile-hero-badges">
+                <Badge section={section} size="lg" glow>
+                  {getSectionName(section)}
+                </Badge>
+                <Badge vtClass={athlete.vtClass} size="lg">
+                  {getVtClassName(athlete.vtClass)}
+                </Badge>
+                <Badge outlined size="lg">{athlete.vtPoints} bodů</Badge>
+              </div>
+              <div className="profile-hero-meta">
+                <div className="profile-hero-meta-item">
+                  <span className="profile-hero-meta-label">Klub</span>
+                  <span className="profile-hero-meta-value">{athlete.club}</span>
+                </div>
+                <div className="profile-hero-meta-item">
+                  <span className="profile-hero-meta-label">Ročník</span>
+                  <span className="profile-hero-meta-value">*{athlete.birthYear}</span>
+                </div>
+                <div className="profile-hero-meta-item">
+                  <span className="profile-hero-meta-label">Registrace</span>
+                  <span className="profile-hero-meta-value">{athlete.licenseNumber}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="profile-hero-actions">
+              {isOwnProfile && (
+                <Button variant="secondary" size="sm">
+                  <EditIcon /> Upravit profil
+                </Button>
+              )}
+              <Button variant="ghost" size="sm">
+                <DownloadIcon /> Export
+              </Button>
+            </div>
+          </div>
+
+          {/* Achievement Showcase */}
+          <div className="profile-achievements">
+            <div className="profile-achievement profile-achievement--gold">
+              <div className="profile-achievement__icon">
+                <TrophyIcon />
+              </div>
+              <div className="profile-achievement__content">
+                <span className="profile-achievement__value">{athlete.wins}</span>
+                <span className="profile-achievement__label">Vítězství</span>
+              </div>
+            </div>
+            <div className="profile-achievement profile-achievement--silver">
+              <div className="profile-achievement__icon">
+                <MedalIcon />
+              </div>
+              <div className="profile-achievement__content">
+                <span className="profile-achievement__value">{athlete.podiums}</span>
+                <span className="profile-achievement__label">Pódia</span>
+              </div>
+            </div>
+            <div className="profile-achievement profile-achievement--bronze">
+              <div className="profile-achievement__icon">
+                <RaceIcon />
+              </div>
+              <div className="profile-achievement__content">
+                <span className="profile-achievement__value">{athlete.totalRaces}</span>
+                <span className="profile-achievement__label">Závodů</span>
+              </div>
+            </div>
+            <div className="profile-achievement profile-achievement--rank">
+              <div className="profile-achievement__icon">
+                <StarIcon />
+              </div>
+              <div className="profile-achievement__content">
+                <span className="profile-achievement__value">#{athlete.ranking}</span>
+                <span className="profile-achievement__label">Žebříček</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <WaveDecoration className="profile-hero-section__wave" />
+      </section>
+
       {/* Main Content */}
       <main className="profile-main">
         <div className="profile-container">
-          {/* Profile Header Card */}
-          <Card className="profile-hero-card">
-            <div className="profile-hero">
-              {/* Avatar Section */}
-              <div className="profile-hero-avatar">
-                <Avatar
-                  name={athleteData.name}
-                  src={athleteData.imageUrl}
-                  size="xl"
-                />
-                {athleteData.ranking <= 3 && (
-                  <div className={`profile-ranking-badge profile-ranking-badge--${athleteData.ranking}`}>
-                    #{athleteData.ranking}
-                  </div>
-                )}
-              </div>
-
-              {/* Info Section */}
-              <div className="profile-hero-info">
-                <div className="profile-hero-header">
-                  <h1 className="profile-hero-name">{athleteData.name}</h1>
-                  <span className="profile-hero-country">{athleteData.country}</span>
-                </div>
-
-                <div className="profile-hero-badges">
-                  <Badge section={athleteData.section}>
-                    {getSectionName(athleteData.section)}
-                  </Badge>
-                  <Badge vtClass={athleteData.vtClass}>
-                    {getVtClassName(athleteData.vtClass)}
-                  </Badge>
-                  <Badge outlined>{athleteData.vtPoints} bodů</Badge>
-                </div>
-
-                <div className="profile-hero-meta">
-                  <div className="profile-meta-item">
-                    <span className="profile-meta-label">Klub</span>
-                    <span className="profile-meta-value">{athleteData.club}</span>
-                  </div>
-                  <div className="profile-meta-item">
-                    <span className="profile-meta-label">Ročník</span>
-                    <span className="profile-meta-value">*{athleteData.birthYear}</span>
-                  </div>
-                  <div className="profile-meta-item">
-                    <span className="profile-meta-label">Registrace</span>
-                    <span className="profile-meta-value">{athleteData.licenseNumber}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="profile-hero-actions">
-                {isOwnProfile && (
-                  <Button variant="secondary" size="sm">
-                    <EditIcon /> Upravit profil
-                  </Button>
-                )}
-                <Button variant="ghost" size="sm">
-                  <DownloadIcon /> Export
-                </Button>
-              </div>
-            </div>
-          </Card>
-
           {/* Status Cards */}
           <div className="profile-status-grid">
-            <Card className={`profile-status-card profile-status-card--${athleteData.rightToStart ? 'valid' : 'invalid'}`}>
+            <Card className={`profile-status-card profile-status-card--${athlete.rightToStart ? 'valid' : 'invalid'}`}>
               <div className="profile-status-icon">
-                {athleteData.rightToStart ? <CheckCircleIcon /> : <AlertCircleIcon />}
+                {athlete.rightToStart ? <CheckCircleIcon /> : <AlertCircleIcon />}
               </div>
               <div className="profile-status-content">
                 <h3 className="profile-status-title">Právo startu</h3>
                 <p className="profile-status-value">
-                  {athleteData.rightToStart ? 'Aktivní' : 'Neaktivní'}
+                  {athlete.rightToStart ? 'Aktivní' : 'Neaktivní'}
                 </p>
               </div>
             </Card>
@@ -512,7 +630,7 @@ function ProfilePage({ isOwnProfile = false }: ProfilePageProps) {
                 <p className="profile-status-value">
                   {medicalStatus === 'expired'
                     ? 'Vypršela'
-                    : `Platná do ${formatDate(athleteData.medicalExpiry)}`}
+                    : `Platná do ${formatDate(athlete.medicalExpiry)}`}
                 </p>
                 {medicalStatus === 'expiring' && (
                   <p className="profile-status-warning">Zbývá {medicalDaysLeft} dní</p>
@@ -520,16 +638,16 @@ function ProfilePage({ isOwnProfile = false }: ProfilePageProps) {
               </div>
             </Card>
 
-            <Card className={`profile-status-card profile-status-card--${athleteData.feesStatus === 'paid' ? 'valid' : 'invalid'}`}>
+            <Card className={`profile-status-card profile-status-card--${athlete.feesStatus === 'paid' ? 'valid' : 'invalid'}`}>
               <div className="profile-status-icon">
-                {athleteData.feesStatus === 'paid' ? <CheckCircleIcon /> : <AlertCircleIcon />}
+                {athlete.feesStatus === 'paid' ? <CheckCircleIcon /> : <AlertCircleIcon />}
               </div>
               <div className="profile-status-content">
                 <h3 className="profile-status-title">Příspěvky 2026</h3>
                 <p className="profile-status-value">
-                  {athleteData.feesStatus === 'paid'
+                  {athlete.feesStatus === 'paid'
                     ? 'Zaplaceno'
-                    : athleteData.feesStatus === 'pending'
+                    : athlete.feesStatus === 'pending'
                       ? 'Čeká na platbu'
                       : 'Nezaplaceno'}
                 </p>
@@ -546,6 +664,7 @@ function ProfilePage({ isOwnProfile = false }: ProfilePageProps) {
             ]}
             activeTab={activeTab}
             onChange={setActiveTab}
+            variant="gradient"
           />
 
           {/* Tab Content */}
@@ -556,29 +675,33 @@ function ProfilePage({ isOwnProfile = false }: ProfilePageProps) {
                 <div className="profile-stats-grid">
                   <StatCard
                     label="Celkem závodů"
-                    value={athleteData.totalRaces}
+                    value={athlete.totalRaces}
                     icon={<RaceIcon />}
                     trend="up"
                     trendValue="+12 tento rok"
+                    styleVariant="gradient"
                   />
                   <StatCard
                     label="Vítězství"
-                    value={athleteData.wins}
+                    value={athlete.wins}
                     icon={<TrophyIcon />}
                     trend="up"
                     trendValue="+4 tento rok"
+                    styleVariant="gradient"
                   />
                   <StatCard
                     label="Pódia"
-                    value={athleteData.podiums}
+                    value={athlete.podiums}
                     icon={<MedalIcon />}
-                    description={`${Math.round((athleteData.podiums / athleteData.totalRaces) * 100)}% úspěšnost`}
+                    description={`${Math.round((athlete.podiums / athlete.totalRaces) * 100)}% úspěšnost`}
+                    styleVariant="gradient"
                   />
                   <StatCard
                     label="Žebříček"
-                    value={`#${athleteData.ranking}`}
+                    value={`#${athlete.ranking}`}
                     icon={<ChartIcon />}
-                    description={`Nejlepší: #${athleteData.bestRanking}`}
+                    description={`Nejlepší: #${athlete.bestRanking}`}
+                    styleVariant="gradient"
                   />
                 </div>
 
@@ -674,16 +797,17 @@ const meta: Meta<typeof ProfilePage> = {
         component: `
 # Profil závodníka
 
-Prototyp stránky profilu závodníka zobrazující:
+Prototyp stránky profilu závodníka s hero sekcí, achievement showcase a disciplínovým themingem.
 
 ## Hlavní sekce
-1. **Hero karta** - foto, jméno, sekce, VT třída, základní údaje
-2. **Status karty** - právo startu, zdravotní prohlídka, příspěvky
-3. **Záložky** - Přehled, Výsledky, Historie
+1. **Hero sekce** - gradient pozadí s fotkou, statistiky, badges
+2. **Achievement showcase** - medaile a klíčové statistiky
+3. **Status karty** - právo startu, zdravotní prohlídka, příspěvky
+4. **Záložky** - Přehled, Výsledky, Historie
 
 ## Přehled (Overview)
-- Statistiky (celkem závodů, vítězství, pódia, žebříček)
-- Poslední výsledky
+- StatCardy s gradient stylem
+- Tabulka posledních výsledků
 - Průběh sezóny
 
 ## Výsledky
@@ -693,6 +817,11 @@ Prototyp stránky profilu závodníka zobrazující:
 ## Historie
 - Timeline životního cyklu závodníka
 - Registrace, přestupy, změny VT třídy
+
+## Discipline Theming
+- DV (Divoká voda) - modrá
+- RY (Rychlostní kanoistika) - zelená
+- VT (Vodní turistika) - červená
 
 ## Use Cases (z business analýzy)
 - UC-1.1: Registrace nového člena
@@ -713,6 +842,7 @@ export const Default: Story = {
   args: {
     isOwnProfile: false,
     isAdmin: false,
+    section: 'dv',
   },
 };
 
@@ -720,6 +850,7 @@ export const OwnProfile: Story = {
   args: {
     isOwnProfile: true,
     isAdmin: false,
+    section: 'dv',
   },
   parameters: {
     docs: {
@@ -730,10 +861,41 @@ export const OwnProfile: Story = {
   },
 };
 
+export const Rychlostni: Story = {
+  args: {
+    isOwnProfile: false,
+    isAdmin: false,
+    section: 'ry',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Profil závodníka sekce Rychlostní kanoistika se zeleným themingem.',
+      },
+    },
+  },
+};
+
+export const VodniTuristika: Story = {
+  args: {
+    isOwnProfile: false,
+    isAdmin: false,
+    section: 'vt',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Profil závodníka sekce Vodní turistika s červeným themingem.',
+      },
+    },
+  },
+};
+
 export const AdminView: Story = {
   args: {
     isOwnProfile: false,
     isAdmin: true,
+    section: 'dv',
   },
   parameters: {
     docs: {

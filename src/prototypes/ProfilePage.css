@@ -1,12 +1,12 @@
 /* ============================================================================
-   Profile Page Styles
+   Profile Page Styles - Redesigned with Hero Section and Discipline Theming
    ============================================================================ */
 
 .profile-page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-surface-secondary);
+  background-color: var(--color-bg-primary);
 }
 
 /* Header Logo */
@@ -16,40 +16,137 @@
   color: var(--color-primary);
 }
 
-.profile-header-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
+/* ============================================================================
+   Hero Section
+   ============================================================================ */
+
+.profile-hero-section {
+  position: relative;
+  padding: var(--spacing-12) var(--spacing-4) var(--spacing-20);
+  overflow: hidden;
+  color: var(--color-text-inverse);
 }
 
-/* Main Content */
-.profile-main {
-  flex: 1;
-  padding: var(--spacing-6) var(--spacing-4);
+.profile-hero-section__background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
-.profile-container {
+.profile-hero-section__gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-700) 0%,
+    var(--color-primary-500) 50%,
+    var(--color-primary-400) 100%
+  );
+}
+
+/* Discipline-specific gradients */
+.profile-hero-section--dv .profile-hero-section__gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-section-dv-dark, #1e3a5f) 0%,
+    var(--color-section-dv, #2563eb) 50%,
+    var(--color-section-dv-light, #60a5fa) 100%
+  );
+}
+
+.profile-hero-section--ry .profile-hero-section__gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-section-ry-dark, #14532d) 0%,
+    var(--color-section-ry, #16a34a) 50%,
+    var(--color-section-ry-light, #4ade80) 100%
+  );
+}
+
+.profile-hero-section--vt .profile-hero-section__gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-section-vt-dark, #7f1d1d) 0%,
+    var(--color-section-vt, #dc2626) 50%,
+    var(--color-section-vt-light, #f87171) 100%
+  );
+}
+
+.profile-hero-section__pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
+  opacity: 1;
+}
+
+.profile-hero-section__content {
+  position: relative;
+  z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-6);
+}
+
+.profile-hero-section__wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  color: var(--color-bg-primary);
+  z-index: 2;
+}
+
+.profile-page-wave {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 /* ============================================================================
-   Hero Card
+   Breadcrumb Navigation
    ============================================================================ */
 
-.profile-hero-card {
-  overflow: visible;
+.profile-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-6);
+  font-size: var(--font-size-sm);
 }
 
-.profile-hero {
+.profile-breadcrumb__link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.profile-breadcrumb__link:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.profile-breadcrumb__current {
+  color: rgba(255, 255, 255, 1);
+  font-weight: var(--font-weight-medium);
+}
+
+.profile-breadcrumb svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.5;
+}
+
+/* ============================================================================
+   Hero Content
+   ============================================================================ */
+
+.profile-hero-content {
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: var(--spacing-6);
   align-items: flex-start;
-  padding: var(--spacing-6);
 }
 
 .profile-hero-avatar {
@@ -57,37 +154,45 @@
 }
 
 .profile-hero-avatar .csk-avatar {
-  width: 120px;
-  height: 120px;
-  font-size: 2.5rem;
+  width: 140px;
+  height: 140px;
+  font-size: 3rem;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-xl);
 }
 
-.profile-ranking-badge {
+.profile-hero-ranking {
   position: absolute;
-  bottom: -4px;
-  right: -4px;
-  width: 36px;
-  height: 36px;
+  bottom: -8px;
+  right: -8px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: white;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   border: 3px solid white;
+  animation: rankingPulse 2s ease-in-out infinite;
 }
 
-.profile-ranking-badge--1 {
+@keyframes rankingPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.profile-hero-ranking--1 {
   background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
 }
 
-.profile-ranking-badge--2 {
+.profile-hero-ranking--2 {
   background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%);
 }
 
-.profile-ranking-badge--3 {
+.profile-hero-ranking--3 {
   background: linear-gradient(135deg, #cd7f32 0%, #a0522d 100%);
 }
 
@@ -98,26 +203,29 @@
   gap: var(--spacing-3);
 }
 
-.profile-hero-header {
+.profile-hero-name-row {
   display: flex;
   align-items: center;
   gap: var(--spacing-3);
 }
 
 .profile-hero-name {
-  font-size: 1.75rem;
-  font-weight: 700;
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
   margin: 0;
-  color: var(--color-text-primary);
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  line-height: 1.2;
 }
 
 .profile-hero-country {
-  padding: var(--spacing-1) var(--spacing-2);
-  background-color: var(--color-surface-secondary);
-  border-radius: var(--radius-sm);
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-text-secondary);
+  padding: var(--spacing-1) var(--spacing-3);
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: white;
 }
 
 .profile-hero-badges {
@@ -133,23 +241,23 @@
   margin-top: var(--spacing-2);
 }
 
-.profile-meta-item {
+.profile-hero-meta-item {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-1);
+  gap: 2px;
 }
 
-.profile-meta-label {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
+.profile-hero-meta-label {
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-.profile-meta-value {
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--color-text-primary);
+.profile-hero-meta-value {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: white;
 }
 
 /* Hero Actions */
@@ -159,10 +267,128 @@
   gap: var(--spacing-2);
 }
 
+.profile-hero-actions .csk-button {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.profile-hero-actions .csk-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
 .profile-hero-actions .csk-button svg {
   width: 16px;
   height: 16px;
   margin-right: var(--spacing-1);
+}
+
+/* ============================================================================
+   Achievement Showcase
+   ============================================================================ */
+
+.profile-achievements {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-8);
+}
+
+.profile-achievement {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all var(--transition-normal);
+}
+
+.profile-achievement:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.profile-achievement__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-achievement__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.profile-achievement--gold .profile-achievement__icon {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+  color: #7a5c00;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+}
+
+.profile-achievement--silver .profile-achievement__icon {
+  background: linear-gradient(135deg, #e8e8e8 0%, #c0c0c0 100%);
+  color: #555555;
+  box-shadow: 0 4px 12px rgba(192, 192, 192, 0.4);
+}
+
+.profile-achievement--bronze .profile-achievement__icon {
+  background: linear-gradient(135deg, #cd7f32 0%, #a0522d 100%);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(205, 127, 50, 0.4);
+}
+
+.profile-achievement--rank .profile-achievement__icon {
+  background: linear-gradient(135deg, var(--color-accent-500) 0%, var(--color-accent-600) 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(var(--color-accent-500-rgb, 245, 158, 11), 0.4);
+}
+
+.profile-achievement__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profile-achievement__value {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: white;
+  line-height: 1;
+  font-family: var(--font-family-mono);
+}
+
+.profile-achievement__label {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================================================
+   Main Content
+   ============================================================================ */
+
+.profile-main {
+  flex: 1;
+  padding: var(--spacing-6) var(--spacing-4);
+  margin-top: calc(var(--spacing-6) * -1);
+  position: relative;
+  z-index: 3;
+}
+
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
 }
 
 /* ============================================================================
@@ -181,6 +407,12 @@
   gap: var(--spacing-3);
   padding: var(--spacing-4);
   border-left: 4px solid transparent;
+  transition: all var(--transition-normal);
+}
+
+.profile-status-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .profile-status-card--valid {
@@ -233,8 +465,8 @@
 }
 
 .profile-status-title {
-  font-size: 0.75rem;
-  font-weight: 500;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
   color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -242,14 +474,14 @@
 }
 
 .profile-status-value {
-  font-size: 0.9375rem;
-  font-weight: 600;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   margin: 0;
 }
 
 .profile-status-warning {
-  font-size: 0.8125rem;
+  font-size: var(--font-size-sm);
   color: var(--color-warning);
   margin: var(--spacing-1) 0 0;
 }
@@ -286,14 +518,14 @@
 }
 
 .profile-section-title {
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
   margin: 0;
   color: var(--color-text-primary);
 }
 
 .profile-section-description {
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   margin: var(--spacing-2) 0 var(--spacing-4);
   padding: 0 var(--spacing-4);
@@ -310,17 +542,20 @@
 }
 
 .profile-result-race-name {
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
 }
 
 .profile-result-race-location {
-  font-size: 0.8125rem;
+  font-size: var(--font-size-sm);
   color: var(--color-text-muted);
 }
 
 .profile-result-rank {
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
 }
 
 .profile-result-rank--gold {
@@ -353,7 +588,7 @@
 }
 
 .profile-season-label {
-  font-size: 0.8125rem;
+  font-size: var(--font-size-sm);
   color: var(--color-text-muted);
 }
 
@@ -364,14 +599,15 @@
 }
 
 .profile-season-value {
-  font-size: 0.8125rem;
+  font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
 }
 
 .profile-season-big-value {
-  font-size: 1.75rem;
-  font-weight: 700;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
+  font-family: var(--font-family-mono);
 }
 
 /* ============================================================================
@@ -387,7 +623,7 @@
 
 .profile-footer p {
   margin: 0;
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   color: var(--color-text-muted);
 }
 
@@ -395,12 +631,25 @@
    Dark Mode
    ============================================================================ */
 
-[data-theme="dark"] .profile-hero-country {
-  background-color: var(--color-surface-tertiary);
+[data-theme="dark"] .profile-hero-section__gradient {
+  opacity: 0.9;
 }
 
-[data-theme="dark"] .profile-ranking-badge {
-  border-color: var(--color-surface-primary);
+[data-theme="dark"] .profile-hero-ranking {
+  border-color: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .profile-achievement {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .profile-achievement:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .profile-hero-country {
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 /* ============================================================================
@@ -411,14 +660,18 @@
   .profile-stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .profile-achievements {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
-  .profile-main {
-    padding: var(--spacing-4) var(--spacing-3);
+  .profile-hero-section {
+    padding: var(--spacing-8) var(--spacing-4) var(--spacing-16);
   }
 
-  .profile-hero {
+  .profile-hero-content {
     grid-template-columns: 1fr;
     text-align: center;
     gap: var(--spacing-4);
@@ -428,9 +681,25 @@
     margin: 0 auto;
   }
 
-  .profile-hero-header {
+  .profile-hero-avatar .csk-avatar {
+    width: 120px;
+    height: 120px;
+    font-size: 2.5rem;
+  }
+
+  .profile-hero-ranking {
+    width: 40px;
+    height: 40px;
+    font-size: 0.875rem;
+  }
+
+  .profile-hero-name-row {
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  .profile-hero-name {
+    font-size: var(--font-size-2xl);
   }
 
   .profile-hero-badges {
@@ -444,6 +713,33 @@
   .profile-hero-actions {
     flex-direction: row;
     justify-content: center;
+  }
+
+  .profile-achievements {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-3);
+  }
+
+  .profile-achievement {
+    padding: var(--spacing-3);
+  }
+
+  .profile-achievement__icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .profile-achievement__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .profile-achievement__value {
+    font-size: var(--font-size-xl);
+  }
+
+  .profile-main {
+    padding: var(--spacing-4) var(--spacing-3);
   }
 
   .profile-status-grid {
@@ -464,17 +760,35 @@
     align-items: flex-start;
     gap: var(--spacing-2);
   }
+
+  .profile-breadcrumb {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 480px) {
   .profile-hero-name {
-    font-size: 1.5rem;
+    font-size: var(--font-size-xl);
   }
 
   .profile-hero-avatar .csk-avatar {
     width: 96px;
     height: 96px;
     font-size: 2rem;
+  }
+
+  .profile-achievements {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .profile-achievement {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--spacing-3);
+  }
+
+  .profile-achievement__icon {
+    margin: 0 auto;
   }
 
   .profile-stats-grid {
@@ -489,5 +803,20 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+}
+
+/* ============================================================================
+   Reduced Motion Support
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-hero-ranking {
+    animation: none;
+  }
+
+  .profile-achievement,
+  .profile-status-card {
+    transition: none;
   }
 }

@@ -1,5 +1,42 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 7.8 / Redesign ProfilePage prototypu
+
+### Dokončeno
+- [x] Hero sekce s gradient overlay, wave decoration a discipline theming (DV/RY/VT)
+- [x] Breadcrumb navigace v hero sekci
+- [x] Achievement showcase s medailemi (gold/silver/bronze styly, gradient backgrounds)
+- [x] Glassmorphism efekty na achievement kartách
+- [x] Větší avatar s border a shadow
+- [x] Ranking badge s animací pro top 3 pozice
+- [x] Discipline-specific hero theming (modrá DV, zelená RY, červená VT)
+- [x] Status karty s hover efekty
+- [x] StatCardy s gradient styleVariant
+- [x] Dark mode podpora
+- [x] Reduced motion support
+- [x] Responsive design pro všechny breakpointy
+- [x] Nové stories: Rychlostni, VodniTuristika
+
+### Změněné soubory
+- `src/prototypes/ProfilePage.stories.tsx` - kompletní redesign s hero sekcí, achievement showcase, discipline theming
+- `src/prototypes/ProfilePage.css` - nové styly pro hero, achievements, breadcrumb, branded elements
+
+### Klíčová vylepšení
+- Hero sekce odpovídající CalendarPage/ResultsPage/LivePage stylu pro konzistenci
+- Achievement showcase s gradient ikonami (trophy gold, medal silver, flag bronze, star rank)
+- Glassmorphism efekty na achievement kartách (backdrop-filter blur)
+- Disciplínové barevné schéma (section prop: dv/ry/vt)
+- Animovaný ranking badge pro top 3 závodníky
+- Breadcrumb navigace pro lepší orientaci
+
+### Poznámky
+- Prototyp vizuálně odpovídá ostatním redesigned prototypům (CalendarPage, ResultsPage, LivePage)
+- Table komponenta nemá styleVariant prop, použita bez něj
+- Build a Storybook úspěšně proběhly
+- CSS warningy ve vite jsou předexistující, netýkají se těchto změn
+
+---
+
 ## 2026-01-20 - Fáze 7.8 / Redesign ResultsPage prototypu
 
 ### Dokončeno
