@@ -127,7 +127,7 @@
 - [x] kontrola, že jsou všechny komponenty správně includované a propojené, že storybook obsahuje vše co má
 - [x] kompletace a otestování buildů
 - [x] pořízení screenshotů všech prototypů a storybooků s playwright, kontrola proti screenshotům
-- [ ] README.md s quick start
+- [x] README.md s quick start
 - [ ] Component API dokumentace
 - [ ] GitHub Actions CI/CD
 - [ ] NPM publikace (@czechcanoe/rvp-design-system)

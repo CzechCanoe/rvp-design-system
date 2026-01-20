@@ -1,5 +1,30 @@
 # DEVLOG.md - CSK RVP Design System
 
+## 2026-01-20 - Fáze 6 / README.md s quick start
+
+### Dokončeno
+- [x] Vytvoření kompletního README.md s quick start sekcí
+- [x] Dokumentace instalace a základního použití
+- [x] Přehled všech komponent (Tier 1, 2, 3)
+- [x] Dokumentace ThemeProvider a režimů zobrazení
+- [x] Informace o design tokenech
+- [x] Sekce o přístupnosti a podpoře prohlížečů
+- [x] Instrukce pro vývoj a Storybook
+
+### Přidané soubory
+- `README.md` - hlavní dokumentace projektu
+
+### Poznámky
+- README obsahuje quick start s ukázkou importu komponent a stylů
+- Dokumentovány oba režimy (utilitární/expresivní) a ThemeProvider
+- Přehled všech 27 komponent rozdělených do tří tier úrovní
+- Struktura odpovídá standardním open-source projektům
+
+### Další kroky
+- Fáze 6: Component API dokumentace
+
+---
+
 ## 2026-01-20 - Fáze 7.10 / Cross-browser testing
 
 ### Dokončeno
