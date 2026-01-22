@@ -596,11 +596,13 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 
 *(Implementace bude provedena v iteracích po skupinách komponent)*
 
-#### 9.4.1 Iterace 1: Tier 3 high-priority (4 komponenty)
-- [ ] AthleteCard: 40 → 15 stories
-- [ ] LiveIndicator: 30 → 10 stories
-- [ ] ResultsTable: 30 → 15 stories
-- [ ] StatCard: 29 → 12 stories
+#### 9.4.1 Iterace 1: Tier 3 high-priority (4 komponenty) ✅
+- [x] AthleteCard: 40 → 15 stories
+- [x] LiveIndicator: 30 → 12 stories
+- [x] ResultsTable: 30 → 16 stories
+- [x] StatCard: 29 → 13 stories
+
+**Celkem Tier 3 high-priority:** 129 → 56 stories (-57%)
 
 #### 9.4.2 Iterace 2: Tier 2 (10 komponent) ✅
 - [x] Tabs: 26 → 10 stories
@@ -631,7 +633,7 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 **Celkem Tier 1:** 203 → 70 stories (-65%)
 
 #### 9.4.4 Finalizace
-- [ ] Ověřit konzistenci API a naming conventions
+- [x] Ověřit konzistenci API a naming conventions
 - [ ] Aktualizovat dokumentaci
 - [ ] Spustit Playwright testy
 
