@@ -6,7 +6,7 @@
 |------|------|--------|
 | **8 - Integrace** | 8.9 Čištění prototypů | ✅ Hotovo |
 | **8 - Integrace** | 8.10 Athletes List | ✅ Hotovo |
-| **8 - Integrace** | 8.11 Rankings Page | 🔲 Čeká |
+| **8 - Integrace** | 8.11 Rankings Page | ✅ Hotovo |
 | **8 - Integrace** | 8.12-8.13 Clubs List + Profile | 🔲 Čeká |
 | **8 - Integrace** | 8.14 ProfilePage rozšíření | 🔲 Čeká |
 | **9 - Audit DS** | 9.1-9.4 Audit a racionalizace | 🔲 Čeká |
@@ -196,26 +196,32 @@
 
 ---
 
-### 8.11 Rankings Page - nový prototyp 🔲
+### 8.11 Rankings Page - nový prototyp ✅
 
 **Účel:** Veřejné žebříčky nahrazující Slalom World. MUST požadavek (FR-ZS-09).
 
 #### Funkcionalita:
-- [ ] **Celkové žebříčky** - per sekce (DV/RY/VT), per disciplína
-- [ ] **Bodové tabulky** - slalom, sjezd, sprint, maratón...
-- [ ] **VT přehled** - výkonnostní třídy závodníků
-- [ ] **Historické žebříčky** - archiv 2011+ (migrovaná data ze SW)
-- [ ] **Filtrace** - sezóna, kategorie, pohlaví, věková kategorie
+- [x] **Celkové žebříčky** - per sekce (DV/RY/VT), per disciplína
+- [x] **Bodové tabulky** - slalom, sjezd, sprint, maratón...
+- [x] **VT přehled** - výkonnostní třídy závodníků (M, A, B, C s počty a limity)
+- [x] **Historické žebříčky** - archiv s upozorněním na migrovaná data ze SW
+- [x] **Filtrace** - sezóna, kategorie, pohlaví, věková kategorie
+- [x] **Top 3 podium** - vizuální zobrazení nejlepších závodníků
 
 #### Varianty:
-- [ ] **Embed** - v KanoeCzContext, bez vlastního headeru
-- [ ] **Satellite** - standalone s satellite headerem
+- [x] **Embed** - v KanoeCzContext, bez vlastního headeru
+- [x] **Satellite** - standalone s satellite headerem
+- [x] **EmbedRychlostni** - rychlostní kanoistika
+- [x] **EmbedVodniTuristika** - VT třídy přehled
+- [x] **EmbedArchive** - archivní data s upozorněním
 
-#### Komponenty k využití:
-- ResultsTable (upravený pro žebříčky)
-- Tabs (disciplíny)
-- Select (sezóna, kategorie)
-- Badge (VT třída, pozice)
+#### Komponenty využité:
+- ResultsTable (s custom renderCell pro body a počet závodů)
+- Tabs (sekce)
+- Select (sezóna, disciplína, kategorie, věková kat.)
+- Badge (VT třída)
+- Card (filtry)
+- Pagination
 
 ---
 
