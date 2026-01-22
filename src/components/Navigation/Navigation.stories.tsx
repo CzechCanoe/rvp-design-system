@@ -69,7 +69,7 @@ export const WithIcons: BreadcrumbsStory = {
   },
 };
 
-// Long path
+// Long path with collapsing
 const longBreadcrumbs: BreadcrumbItem[] = [
   { id: 'home', label: 'Domů', href: '/' },
   { id: 'athletes', label: 'Závodníci', href: '/zavodnici' },
@@ -79,67 +79,10 @@ const longBreadcrumbs: BreadcrumbItem[] = [
   { id: 'current', label: 'Jan Novák' },
 ];
 
-export const LongPath: BreadcrumbsStory = {
-  args: {
-    items: longBreadcrumbs,
-  },
-};
-
 export const CollapsedPath: BreadcrumbsStory = {
   args: {
     items: longBreadcrumbs,
     maxItems: 4,
-  },
-};
-
-// Custom separator
-export const CustomSeparator: BreadcrumbsStory = {
-  args: {
-    items: basicBreadcrumbs,
-    separator: (
-      <span style={{ margin: '0 4px', color: 'var(--color-text-tertiary)' }}>›</span>
-    ),
-  },
-};
-
-// CSK-specific examples
-const resultsBreadcrumbs: BreadcrumbItem[] = [
-  { id: 'home', label: 'Domů', href: '/' },
-  { id: 'results', label: 'Výsledky', href: '/vysledky' },
-  { id: 'year', label: '2024', href: '/vysledky/2024' },
-  { id: 'event', label: 'MČR slalom - Troja', href: '/vysledky/2024/mcr-slalom-troja' },
-  { id: 'current', label: 'K1 Muži' },
-];
-
-export const ResultsPage: BreadcrumbsStory = {
-  args: {
-    items: resultsBreadcrumbs,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Příklad použití drobečkové navigace na stránce výsledků.',
-      },
-    },
-  },
-};
-
-const profileBreadcrumbs: BreadcrumbItem[] = [
-  { id: 'home', label: 'Domů', href: '/' },
-  { id: 'athletes', label: 'Závodníci', href: '/zavodnici' },
-  { id: 'current', label: 'Jan Novák' },
-];
-
-export const AthleteProfile: BreadcrumbsStory = {
-  args: {
-    items: profileBreadcrumbs,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Příklad použití drobečkové navigace na profilu závodníka.',
-      },
-    },
   },
 };
 
@@ -324,269 +267,10 @@ export const WithBrandAndActions: MainNavStory = {
   },
 };
 
-// CSK full example
-const cskNavItems: NavItem[] = [
-  { id: 'home', label: 'Domů', href: '/', active: true },
-  { id: 'calendar', label: 'Kalendář závodů', href: '/kalendar', icon: <CalendarIcon /> },
-  { id: 'results', label: 'Výsledky', href: '/vysledky', icon: <TrophyIcon /> },
-  {
-    id: 'sections',
-    label: 'Sekce',
-    children: [
-      { id: 'dv', label: 'Divoká voda', href: '/sekce/divoka-voda' },
-      { id: 'ry', label: 'Rychlostní kanoistika', href: '/sekce/rychlostni' },
-      { id: 'vt', label: 'Vodní turistika', href: '/sekce/vodni-turistika' },
-    ],
-  },
-  { id: 'athletes', label: 'Závodníci', href: '/zavodnici', icon: <UsersIcon /> },
-  {
-    id: 'info',
-    label: 'Informace',
-    children: [
-      { id: 'about', label: 'O svazu', href: '/o-svazu' },
-      { id: 'contact', label: 'Kontakty', href: '/kontakty' },
-      { id: 'documents', label: 'Dokumenty', href: '/dokumenty' },
-    ],
-  },
-];
-
-export const CSKFullExample: MainNavStory = {
-  args: {
-    items: cskNavItems,
-    variant: 'horizontal',
-    brand: <LogoPlaceholder />,
-    actions: (
-      <>
-        <Button variant="ghost" size="sm">
-          Přihlásit se
-        </Button>
-        <Button variant="primary" size="sm">
-          Registrace
-        </Button>
-      </>
-    ),
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Kompletní příklad hlavní navigace pro web CSK.',
-      },
-    },
-  },
-};
-
-// Sizes comparison
-export const NavSizes: MainNavStory = {
-  render: () => (
-    <div style={{ display: 'grid', gap: '32px' }}>
-      <div>
-        <h3 style={{ margin: '0 0 8px', padding: '16px' }}>Small</h3>
-        <MainNav items={basicNavItems.slice(0, 4)} size="sm" />
-      </div>
-      <div>
-        <h3 style={{ margin: '0 0 8px', padding: '16px' }}>Medium (default)</h3>
-        <MainNav items={basicNavItems.slice(0, 4)} size="md" />
-      </div>
-      <div>
-        <h3 style={{ margin: '0 0 8px', padding: '16px' }}>Large</h3>
-        <MainNav items={basicNavItems.slice(0, 4)} size="lg" />
-      </div>
-    </div>
-  ),
-};
-
-// With disabled items
-const navWithDisabled: NavItem[] = [
-  { id: 'home', label: 'Domů', href: '/', active: true },
-  { id: 'calendar', label: 'Kalendář závodů', href: '/kalendar' },
-  { id: 'results', label: 'Výsledky', href: '/vysledky' },
-  { id: 'live', label: 'Live (brzy)', href: '/live', disabled: true },
-  { id: 'athletes', label: 'Závodníci', href: '/zavodnici' },
-];
-
-export const WithDisabledItem: MainNavStory = {
-  args: {
-    items: navWithDisabled,
-    variant: 'horizontal',
-  },
-};
-
-// Dashboard sidebar example
-const dashboardNavItems: NavItem[] = [
-  { id: 'dashboard', label: 'Přehled', href: '/dashboard', active: true, icon: <HomeIcon /> },
-  { id: 'events', label: 'Moje závody', href: '/dashboard/zavody', icon: <CalendarIcon /> },
-  { id: 'results', label: 'Moje výsledky', href: '/dashboard/vysledky', icon: <TrophyIcon /> },
-  {
-    id: 'profile',
-    label: 'Profil',
-    children: [
-      { id: 'info', label: 'Osobní údaje', href: '/dashboard/profil' },
-      { id: 'licenses', label: 'Licence', href: '/dashboard/licence' },
-      { id: 'settings', label: 'Nastavení', href: '/dashboard/nastaveni' },
-    ],
-  },
-];
-
-export const DashboardSidebar: MainNavStory = {
-  args: {
-    items: dashboardNavItems,
-    variant: 'vertical',
-    brand: <LogoPlaceholder />,
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ height: '500px', display: 'flex' }}>
-        <Story />
-        <div style={{ flex: 1, padding: '24px', background: 'var(--color-bg-secondary)' }}>
-          <h2>Obsah stránky</h2>
-          <p>Zde je hlavní obsah dashboardu.</p>
-        </div>
-      </div>
-    ),
-  ],
-  parameters: {
-    docs: {
-      description: {
-        story: 'Příklad vertikální navigace pro dashboard závodníka.',
-      },
-    },
-  },
-};
-
-// Combined example - page with breadcrumbs and nav
-export const CombinedExample: MainNavStory = {
-  render: () => (
-    <div>
-      <MainNav
-        items={cskNavItems}
-        variant="horizontal"
-        brand={<LogoPlaceholder />}
-        actions={
-          <>
-            <Button variant="ghost" size="sm">
-              Přihlásit se
-            </Button>
-            <Button variant="primary" size="sm">
-              Registrace
-            </Button>
-          </>
-        }
-      />
-      <div style={{ padding: '16px 24px', borderBottom: '1px solid var(--color-border-default)' }}>
-        <Breadcrumbs items={resultsBreadcrumbs} />
-      </div>
-      <div style={{ padding: '24px' }}>
-        <h1>K1 Muži - Výsledky</h1>
-        <p>Obsah stránky s výsledky...</p>
-      </div>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Kombinovaný příklad hlavní navigace s drobečkovou navigací.',
-      },
-    },
-  },
-};
-
 // =============================================================================
-// NEW STYLE VARIANTS (Phase 7.5 Redesign)
+// STYLE VARIANTS SHOWCASE
 // =============================================================================
 
-// Gradient variant - branded look
-export const GradientNav: MainNavStory = {
-  args: {
-    items: basicNavItems,
-    variant: 'horizontal',
-    styleVariant: 'gradient',
-    brand: (
-      <div
-        style={{
-          width: '120px',
-          height: '32px',
-          background: 'rgba(255, 255, 255, 0.2)',
-          borderRadius: 'var(--radius-sm)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'white',
-          fontWeight: 600,
-          fontSize: '14px',
-        }}
-      >
-        CSK
-      </div>
-    ),
-    actions: (
-      <>
-        <Button variant="secondary" size="sm">
-          Přihlásit se
-        </Button>
-      </>
-    ),
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Navigace s gradient pozadím pro branded look. Vhodné pro hlavní stránky a hero sekce.',
-      },
-    },
-  },
-};
-
-// Glass variant - frosted glass effect
-export const GlassNav: MainNavStory = {
-  args: {
-    items: basicNavItems,
-    variant: 'horizontal',
-    styleVariant: 'glass',
-    brand: <LogoPlaceholder />,
-  },
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          background: 'linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-800) 100%)',
-          minHeight: '200px',
-          padding: '0',
-        }}
-      >
-        <Story />
-        <div style={{ padding: '24px', color: 'white' }}>
-          <h2>Obsah za navigací</h2>
-          <p>Glass efekt vytváří frosted glass vzhled nad barevným pozadím.</p>
-        </div>
-      </div>
-    ),
-  ],
-  parameters: {
-    docs: {
-      description: {
-        story: 'Navigace s frosted glass efektem. Skvěle funguje nad barevným nebo obrázkovým pozadím.',
-      },
-    },
-  },
-};
-
-// Pills variant - nav items as pills
-export const PillsNav: MainNavStory = {
-  args: {
-    items: basicNavItems,
-    variant: 'horizontal',
-    styleVariant: 'pills',
-    brand: <LogoPlaceholder />,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Navigace s pill stylem pro aktivní položky. Aktivní stav má gradient pozadí.',
-      },
-    },
-  },
-};
-
-// All style variants showcase
 export const AllStyleVariants: MainNavStory = {
   render: () => (
     <div style={{ display: 'grid', gap: '32px' }}>
@@ -621,66 +305,57 @@ export const AllStyleVariants: MainNavStory = {
   },
 };
 
-// Hover and active states demo
-export const HoverActiveStates: MainNavStory = {
-  args: {
-    items: [
-      { id: 'home', label: 'Domů', href: '/', active: true },
-      { id: 'calendar', label: 'Kalendář závodů', href: '/kalendar' },
-      { id: 'results', label: 'Výsledky', href: '/vysledky' },
-      { id: 'athletes', label: 'Závodníci (hover me)', href: '/zavodnici' },
-      { id: 'disabled', label: 'Disabled', href: '/disabled', disabled: true },
-    ],
-    variant: 'horizontal',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Demonstrace hover a aktivních stavů. Aktivní položka má animovaný gradient underline.',
-      },
-    },
-  },
-};
-
-// Gradient with dropdown
-export const GradientWithDropdown: MainNavStory = {
-  args: {
-    items: navItemsWithDropdown,
-    variant: 'horizontal',
-    styleVariant: 'gradient',
-    brand: (
-      <div
-        style={{
-          width: '120px',
-          height: '32px',
-          background: 'rgba(255, 255, 255, 0.2)',
-          borderRadius: 'var(--radius-sm)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'white',
-          fontWeight: 600,
-          fontSize: '14px',
-        }}
-      >
-        CSK
+// Sizes comparison
+export const AllSizes: MainNavStory = {
+  render: () => (
+    <div style={{ display: 'grid', gap: '32px' }}>
+      <div>
+        <h3 style={{ margin: '0 0 8px', padding: '16px' }}>Small</h3>
+        <MainNav items={basicNavItems.slice(0, 4)} size="sm" />
       </div>
-    ),
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Gradient navigace s dropdown menu. Dropdown má gradient accent linku nahoře.',
-      },
-    },
-  },
+      <div>
+        <h3 style={{ margin: '0 0 8px', padding: '16px' }}>Medium (default)</h3>
+        <MainNav items={basicNavItems.slice(0, 4)} size="md" />
+      </div>
+      <div>
+        <h3 style={{ margin: '0 0 8px', padding: '16px' }}>Large</h3>
+        <MainNav items={basicNavItems.slice(0, 4)} size="lg" />
+      </div>
+    </div>
+  ),
 };
 
-// Featured showcase - CSK branded navigation
-export const FeaturedShowcase: MainNavStory = {
+// =============================================================================
+// CSK FULL EXAMPLE
+// =============================================================================
+
+const cskNavItems: NavItem[] = [
+  { id: 'home', label: 'Domů', href: '/', active: true },
+  { id: 'calendar', label: 'Kalendář závodů', href: '/kalendar', icon: <CalendarIcon /> },
+  { id: 'results', label: 'Výsledky', href: '/vysledky', icon: <TrophyIcon /> },
+  {
+    id: 'sections',
+    label: 'Sekce',
+    children: [
+      { id: 'dv', label: 'Divoká voda', href: '/sekce/divoka-voda' },
+      { id: 'ry', label: 'Rychlostní kanoistika', href: '/sekce/rychlostni' },
+      { id: 'vt', label: 'Vodní turistika', href: '/sekce/vodni-turistika' },
+    ],
+  },
+  { id: 'athletes', label: 'Závodníci', href: '/zavodnici', icon: <UsersIcon /> },
+];
+
+const resultsBreadcrumbs: BreadcrumbItem[] = [
+  { id: 'home', label: 'Domů', href: '/' },
+  { id: 'results', label: 'Výsledky', href: '/vysledky' },
+  { id: 'year', label: '2024', href: '/vysledky/2024' },
+  { id: 'event', label: 'MČR slalom - Troja', href: '/vysledky/2024/mcr-slalom-troja' },
+  { id: 'current', label: 'K1 Muži' },
+];
+
+export const CSKFullExample: MainNavStory = {
   render: () => (
     <div>
-      {/* Hero section with gradient nav */}
       <MainNav
         items={cskNavItems}
         variant="horizontal"
@@ -724,23 +399,14 @@ export const FeaturedShowcase: MainNavStory = {
           </>
         }
       />
-      {/* Content */}
-      <div
-        style={{
-          background: 'linear-gradient(180deg, var(--color-primary-50) 0%, var(--color-bg-primary) 100%)',
-          padding: '48px 24px',
-          minHeight: '300px',
-        }}
-      >
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '16px' }}>Český svaz kanoistů</h1>
-          <p style={{ fontSize: '1.25rem', color: 'var(--color-text-secondary)' }}>
-            Registrační a výsledkový portál pro českou kanoistiku
-          </p>
-          <div style={{ marginTop: '32px' }}>
-            <Breadcrumbs items={basicBreadcrumbs} />
-          </div>
-        </div>
+      <div style={{ padding: '16px 24px', borderBottom: '1px solid var(--color-border-default)' }}>
+        <Breadcrumbs items={resultsBreadcrumbs} />
+      </div>
+      <div style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
+        <h1 style={{ fontSize: '2rem', marginBottom: '16px' }}>K1 Muži - Výsledky</h1>
+        <p style={{ color: 'var(--color-text-secondary)' }}>
+          Kompletní příklad navigace pro web CSK s gradient stylem a breadcrumbs.
+        </p>
       </div>
     </div>
   ),

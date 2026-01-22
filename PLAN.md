@@ -18,7 +18,8 @@
 | **9 - Audit DS** | 9.2 Definice rozsahu DS | ✅ Hotovo |
 | **9 - Audit DS** | 9.3 Plán racionalizace | ✅ Hotovo |
 | **9 - Audit DS** | 9.4.1 Iterace 1 (Tier 3 high-priority) | ✅ Hotovo |
-| **9 - Audit DS** | 9.4.2 Iterace 2 (Tier 2) | 🔲 Další krok |
+| **9 - Audit DS** | 9.4.2 Iterace 2 (Tier 2) | ✅ Hotovo |
+| **9 - Audit DS** | 9.4.3 Iterace 3 (Tier 1) | 🔲 Další krok |
 | **13 - Testování** | Playwright testy integrace | 🔲 Později |
 
 ---
@@ -600,9 +601,19 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 - [ ] ResultsTable: 30 → 15 stories
 - [ ] StatCard: 29 → 12 stories
 
-#### 9.4.2 Iterace 2: Tier 2 (10 komponent)
-- [ ] Tabs, Navigation, Modal, Pagination, EmptyState
-- [ ] Progress, Toast, Table, Timeline, Dropzone
+#### 9.4.2 Iterace 2: Tier 2 (10 komponent) ✅
+- [x] Tabs: 26 → 10 stories
+- [x] Navigation: 25 → 12 stories
+- [x] Modal: 23 → 9 stories
+- [x] Pagination: 23 → 8 stories
+- [x] EmptyState: 22 → 9 stories
+- [x] Progress: 21 → 9 stories
+- [x] Toast: 26 → 6 stories
+- [x] Table: 16 → 7 stories
+- [x] Timeline: 17 → 8 stories
+- [x] Dropzone: 19 → 8 stories
+
+**Celkem Tier 2:** 218 → 86 stories (-60%)
 
 #### 9.4.3 Iterace 3: Tier 1 (10 komponent)
 - [ ] Button, Badge, Card, Input, Select

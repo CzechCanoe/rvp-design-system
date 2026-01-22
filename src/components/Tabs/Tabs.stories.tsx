@@ -11,7 +11,7 @@ const meta: Meta<typeof Tabs> = {
     docs: {
       description: {
         component:
-          'Tabs component for organizing content into switchable panels. Supports two variants (line, pills), three sizes, and full WCAG keyboard navigation.',
+          'Tabs component for organizing content into switchable panels. Supports multiple variants (line, pills, gradient, glass), three sizes, and full WCAG keyboard navigation.',
       },
     },
   },
@@ -95,50 +95,10 @@ export const Pills: Story = {
   },
 };
 
-// =============================================================================
-// SIZES
-// =============================================================================
-
-export const SizeSmall: Story = {
-  args: {
-    tabs: basicTabs,
-    variant: 'line',
-    size: 'sm',
-  },
-};
-
-export const SizeMedium: Story = {
-  args: {
-    tabs: basicTabs,
-    variant: 'line',
-    size: 'md',
-  },
-};
-
-export const SizeLarge: Story = {
-  args: {
-    tabs: basicTabs,
-    variant: 'line',
-    size: 'lg',
-  },
-};
-
-// =============================================================================
-// FULL WIDTH
-// =============================================================================
-
 export const FullWidth: Story = {
   args: {
     tabs: basicTabs,
     variant: 'line',
-    fullWidth: true,
-  },
-};
-
-export const FullWidthPills: Story = {
-  args: {
-    tabs: basicTabs,
-    variant: 'pills',
     fullWidth: true,
   },
 };
@@ -247,13 +207,6 @@ export const WithIcons: Story = {
   },
 };
 
-export const WithIconsPills: Story = {
-  args: {
-    tabs: tabsWithIcons,
-    variant: 'pills',
-  },
-};
-
 // =============================================================================
 // CONTROLLED
 // =============================================================================
@@ -282,216 +235,9 @@ export const Controlled: Story = {
 };
 
 // =============================================================================
-// CSK-SPECIFIC EXAMPLES
+// CSK-SPECIFIC EXAMPLE: Section Filter
 // =============================================================================
 
-// Athlete Profile Tabs
-const athleteProfileTabs: TabItem[] = [
-  {
-    id: 'info',
-    label: 'Informace',
-    content: (
-      <div style={{ display: 'grid', gap: '12px' }}>
-        <div>
-          <strong>Jméno:</strong> Jan Novák
-        </div>
-        <div>
-          <strong>Klub:</strong> USK Praha
-        </div>
-        <div>
-          <strong>Ročník:</strong> 2005
-        </div>
-        <div>
-          <strong>Sekce:</strong> <Badge section="dv">Divoká voda</Badge>
-        </div>
-        <div>
-          <strong>Kategorie:</strong> Junioři
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'results',
-    label: 'Výsledky',
-    content: (
-      <div style={{ display: 'grid', gap: '8px' }}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            padding: '8px 0',
-            borderBottom: '1px solid var(--color-border-default)',
-          }}
-        >
-          <span>MČR slalom 2024</span>
-          <Badge variant="success">1. místo</Badge>
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            padding: '8px 0',
-            borderBottom: '1px solid var(--color-border-default)',
-          }}
-        >
-          <span>Český pohár - Troja</span>
-          <Badge variant="primary">3. místo</Badge>
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            padding: '8px 0',
-            borderBottom: '1px solid var(--color-border-default)',
-          }}
-        >
-          <span>Český pohár - Lipno</span>
-          <Badge variant="default">5. místo</Badge>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'licenses',
-    label: 'Licence',
-    content: (
-      <div style={{ display: 'grid', gap: '12px' }}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: '12px',
-            background: 'var(--color-bg-secondary)',
-            borderRadius: 'var(--radius-md)',
-          }}
-        >
-          <div>
-            <div style={{ fontWeight: 500 }}>Závodní licence 2024</div>
-            <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>
-              Platná do 31. 12. 2024
-            </div>
-          </div>
-          <Badge variant="success">Aktivní</Badge>
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: '12px',
-            background: 'var(--color-bg-secondary)',
-            borderRadius: 'var(--radius-md)',
-          }}
-        >
-          <div>
-            <div style={{ fontWeight: 500 }}>Členství CSK 2024</div>
-            <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>
-              Platné do 31. 12. 2024
-            </div>
-          </div>
-          <Badge variant="success">Aktivní</Badge>
-        </div>
-      </div>
-    ),
-  },
-];
-
-export const AthleteProfile: Story = {
-  args: {
-    tabs: athleteProfileTabs,
-    variant: 'line',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Příklad použití záložek v profilu závodníka.',
-      },
-    },
-  },
-};
-
-// Event Details Tabs
-const eventDetailsTabs: TabItem[] = [
-  {
-    id: 'info',
-    label: 'Informace',
-    content: (
-      <div style={{ display: 'grid', gap: '16px' }}>
-        <h3 style={{ margin: 0 }}>MČR ve vodním slalomu 2024</h3>
-        <div style={{ display: 'grid', gap: '8px' }}>
-          <div>
-            <strong>Datum:</strong> 15. - 16. 6. 2024
-          </div>
-          <div>
-            <strong>Místo:</strong> Vodácký areál Troja, Praha
-          </div>
-          <div>
-            <strong>Pořadatel:</strong> USK Praha
-          </div>
-          <div>
-            <strong>Disciplíny:</strong> K1, C1, C2
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'startlist',
-    label: 'Startovní listina',
-    content: (
-      <div>
-        <p>Startovní listina bude zveřejněna 14. 6. 2024.</p>
-        <Badge variant="warning">Přihlášky do 10. 6. 2024</Badge>
-      </div>
-    ),
-  },
-  {
-    id: 'results',
-    label: 'Výsledky',
-    content: (
-      <div>
-        <p style={{ color: 'var(--color-text-secondary)' }}>
-          Výsledky budou k dispozici po skončení závodu.
-        </p>
-      </div>
-    ),
-    disabled: true,
-  },
-  {
-    id: 'documents',
-    label: 'Dokumenty',
-    content: (
-      <div style={{ display: 'grid', gap: '8px' }}>
-        <a href="#" style={{ color: 'var(--color-text-link)' }}>
-          📄 Rozpis závodu (PDF)
-        </a>
-        <a href="#" style={{ color: 'var(--color-text-link)' }}>
-          📄 Technické informace (PDF)
-        </a>
-        <a href="#" style={{ color: 'var(--color-text-link)' }}>
-          🗺️ Mapa areálu (PDF)
-        </a>
-      </div>
-    ),
-  },
-];
-
-export const EventDetails: Story = {
-  args: {
-    tabs: eventDetailsTabs,
-    variant: 'line',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Příklad použití záložek v detailu závodu.',
-      },
-    },
-  },
-};
-
-// Section Filter Tabs (DV/RY/VT)
 const sectionFilterTabs: TabItem[] = [
   {
     id: 'all',
@@ -551,83 +297,6 @@ export const SectionFilter: Story = {
   },
 };
 
-// Dashboard Tabs
-const dashboardTabs: TabItem[] = [
-  {
-    id: 'upcoming',
-    label: 'Nadcházející',
-    content: (
-      <div style={{ display: 'grid', gap: '12px' }}>
-        <div
-          style={{
-            padding: '12px',
-            background: 'var(--color-bg-secondary)',
-            borderRadius: 'var(--radius-md)',
-            borderLeft: '3px solid var(--color-section-dv)',
-          }}
-        >
-          <div style={{ fontWeight: 500 }}>MČR slalom - Troja</div>
-          <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>15. 6. 2024</div>
-        </div>
-        <div
-          style={{
-            padding: '12px',
-            background: 'var(--color-bg-secondary)',
-            borderRadius: 'var(--radius-md)',
-            borderLeft: '3px solid var(--color-section-ry)',
-          }}
-        >
-          <div style={{ fontWeight: 500 }}>Český pohár sprint - Račice</div>
-          <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>22. 6. 2024</div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'registered',
-    label: 'Moje přihlášky',
-    content: (
-      <div style={{ display: 'grid', gap: '12px' }}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            padding: '12px',
-            background: 'var(--color-bg-secondary)',
-            borderRadius: 'var(--radius-md)',
-          }}
-        >
-          <div>
-            <div style={{ fontWeight: 500 }}>MČR slalom - Troja</div>
-            <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>K1 Junioři</div>
-          </div>
-          <Badge variant="success">Potvrzeno</Badge>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'past',
-    label: 'Historie',
-    content: <p>Seznam minulých závodů a jejich výsledků.</p>,
-  },
-];
-
-export const Dashboard: Story = {
-  args: {
-    tabs: dashboardTabs,
-    variant: 'pills',
-    fullWidth: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Příklad použití záložek v dashboardu závodníka.',
-      },
-    },
-  },
-};
-
 // =============================================================================
 // ALL VARIANTS SHOWCASE
 // =============================================================================
@@ -641,136 +310,6 @@ export const AllVariants: Story = {
       </div>
       <div>
         <h3 style={{ marginBottom: '16px' }}>Pills Variant</h3>
-        <Tabs tabs={basicTabs} variant="pills" />
-      </div>
-      <div>
-        <h3 style={{ marginBottom: '16px' }}>Full Width Line</h3>
-        <Tabs tabs={basicTabs} variant="line" fullWidth />
-      </div>
-      <div>
-        <h3 style={{ marginBottom: '16px' }}>Full Width Pills</h3>
-        <Tabs tabs={basicTabs} variant="pills" fullWidth />
-      </div>
-    </div>
-  ),
-};
-
-export const AllSizes: Story = {
-  render: () => (
-    <div style={{ display: 'grid', gap: '48px' }}>
-      <div>
-        <h3 style={{ marginBottom: '16px' }}>Small</h3>
-        <Tabs tabs={basicTabs} size="sm" />
-      </div>
-      <div>
-        <h3 style={{ marginBottom: '16px' }}>Medium (default)</h3>
-        <Tabs tabs={basicTabs} size="md" />
-      </div>
-      <div>
-        <h3 style={{ marginBottom: '16px' }}>Large</h3>
-        <Tabs tabs={basicTabs} size="lg" />
-      </div>
-    </div>
-  ),
-};
-
-// =============================================================================
-// NEW VARIANTS (Phase 7.5)
-// =============================================================================
-
-export const GradientPills: Story = {
-  args: {
-    tabs: basicTabs,
-    variant: 'gradient',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Gradient pills variant with primary gradient background on active tab.',
-      },
-    },
-  },
-};
-
-export const GradientLine: Story = {
-  args: {
-    tabs: basicTabs,
-    variant: 'gradient-line',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Line variant with gradient underline and thicker indicator.',
-      },
-    },
-  },
-};
-
-export const GlassTabs: Story = {
-  args: {
-    tabs: basicTabs,
-    variant: 'glass',
-  },
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          background: 'var(--gradient-primary-deep)',
-          padding: '32px',
-          borderRadius: 'var(--radius-lg)',
-        }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
-  parameters: {
-    docs: {
-      description: {
-        story: 'Glassmorphism variant for use on gradient or image backgrounds.',
-      },
-    },
-  },
-};
-
-export const GradientWithIcons: Story = {
-  args: {
-    tabs: tabsWithIcons,
-    variant: 'gradient',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Gradient pills with icons - icon scales on hover.',
-      },
-    },
-  },
-};
-
-export const AnimatedUnderline: Story = {
-  args: {
-    tabs: basicTabs,
-    variant: 'line',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Line variant with animated underline. Hover shows a preview underline, active tab has full-width underline.',
-      },
-    },
-  },
-};
-
-export const AllStyleVariants: Story = {
-  render: () => (
-    <div style={{ display: 'grid', gap: '48px' }}>
-      <div>
-        <h3 style={{ marginBottom: '16px' }}>Line (Animated Underline)</h3>
-        <Tabs tabs={basicTabs} variant="line" />
-      </div>
-      <div>
-        <h3 style={{ marginBottom: '16px' }}>Pills</h3>
         <Tabs tabs={basicTabs} variant="pills" />
       </div>
       <div>
@@ -802,73 +341,21 @@ export const AllStyleVariants: Story = {
   },
 };
 
-export const GradientFullWidth: Story = {
-  args: {
-    tabs: basicTabs,
-    variant: 'gradient',
-    fullWidth: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Full width gradient pills.',
-      },
-    },
-  },
-};
-
-export const HoverEffectsDemo: Story = {
+export const AllSizes: Story = {
   render: () => (
-    <div style={{ display: 'grid', gap: '32px' }}>
+    <div style={{ display: 'grid', gap: '48px' }}>
       <div>
-        <p style={{ marginBottom: '12px', color: 'var(--color-text-secondary)' }}>
-          Hover over tabs to see animations: icon scale, translateY, underline preview
-        </p>
-        <Tabs tabs={tabsWithIcons} variant="line" />
+        <h3 style={{ marginBottom: '16px' }}>Small</h3>
+        <Tabs tabs={basicTabs} size="sm" />
       </div>
       <div>
-        <p style={{ marginBottom: '12px', color: 'var(--color-text-secondary)' }}>
-          Gradient line with hover preview
-        </p>
-        <Tabs tabs={tabsWithIcons} variant="gradient-line" />
+        <h3 style={{ marginBottom: '16px' }}>Medium (default)</h3>
+        <Tabs tabs={basicTabs} size="md" />
+      </div>
+      <div>
+        <h3 style={{ marginBottom: '16px' }}>Large</h3>
+        <Tabs tabs={basicTabs} size="lg" />
       </div>
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Demonstration of hover effects and micro-interactions.',
-      },
-    },
-  },
-};
-
-export const FeaturedShowcase: Story = {
-  render: () => (
-    <div
-      style={{
-        background: 'var(--gradient-hero)',
-        padding: '48px 32px',
-        borderRadius: 'var(--radius-xl)',
-      }}
-    >
-      <h2
-        style={{
-          color: 'white',
-          marginBottom: '24px',
-          fontWeight: 'var(--font-weight-bold)',
-        }}
-      >
-        Přehled závodníka
-      </h2>
-      <Tabs tabs={athleteProfileTabs} variant="glass" />
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Featured showcase with glass tabs on hero gradient background.',
-      },
-    },
-  },
 };
