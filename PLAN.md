@@ -8,7 +8,7 @@
 | **8 - Integrace** | 8.10 Athletes List | ✅ Hotovo |
 | **8 - Integrace** | 8.11 Rankings Page | ✅ Hotovo |
 | **8 - Integrace** | 8.12 Clubs List | ✅ Hotovo |
-| **8 - Integrace** | 8.13 Club Public Profile | 🔲 Čeká |
+| **8 - Integrace** | 8.13 Club Public Profile | ✅ Hotovo |
 | **8 - Integrace** | 8.14 ProfilePage rozšíření | 🔲 Čeká |
 | **9 - Audit DS** | 9.1-9.4 Audit a racionalizace | 🔲 Čeká |
 | **13 - Testování** | Playwright testy integrace | 🔲 Později |
@@ -253,27 +253,29 @@
 
 ---
 
-### 8.13 Club Public Profile - nový prototyp 🔲
+### 8.13 Club Public Profile - nový prototyp ✅
 
 **Účel:** Veřejný profil klubu/oddílu. Analogie k Athlete Public Profile.
 
 #### Funkcionalita:
-- [ ] **Header** - logo, název, kontakt, region
-- [ ] **Statistiky** - počet členů, závodníků, trenérů
-- [ ] **Seznam členů** - aktivní závodníci klubu (AthleteCard)
-- [ ] **Historie výsledků** - nejlepší umístění, medaile
-- [ ] **Sekce** - ve kterých sekcích klub působí (DV/RY/VT)
+- [x] **Header** - logo, název, kontakt, region
+- [x] **Statistiky** - počet členů, závodníků, trenérů, juniorů
+- [x] **Seznam členů** - aktivní závodníci klubu s Avatar komponentou
+- [x] **Úspěchy klubu** - historické milníky (jako u závodníků)
+- [x] **Kontakt** - adresa, e-mail, telefon, web
+- [x] **Sekce** - ve kterých sekcích klub působí (DV/RY/VT)
 
 #### Varianty:
-- [ ] **Embed** - v KanoeCzContext, bez vlastního headeru
-- [ ] **Satellite** - standalone s satellite headerem
-- [ ] **Expressive** - standalone s hero sekcí (jako AthletePublicProfile)
+- [x] **Expressive** - standalone s hero sekcí
+- [x] **Embed** - v KanoeCzContext, bez vlastního headeru
+- [x] **Satellite** - standalone s satellite headerem
+- [x] **EmbedWithSidebar** - demonstrace container queries v úzkém sloupci
 
-#### Komponenty k využití:
-- Card (club info)
-- AthleteCard (seznam členů)
+#### Komponenty využité:
+- Avatar (členové klubu)
 - Badge (sekce)
-- Tabs (sekce profilu)
+- Tabs (navigace)
+- Button, Header (satellite)
 
 ---
 

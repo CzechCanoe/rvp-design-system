@@ -4028,3 +4028,88 @@ tests/
 ### Poznámky
 - Varianta je určena pro samostatné aplikace jako Registr závodníků, Přihlášky na závody, Live výsledky
 - Design je minimalistický a neutrální, zapadá do kontextu kanoe.cz
+
+---
+
+## 2026-01-22 - Fáze 8.10: Athletes List Page
+
+### Dokončeno
+- [x] Vytvořen nový prototyp AthletesListPage
+- [x] Featured Athletes sekce s reprezentanty
+- [x] Vyhledávání podle jména, klubu, club ID
+- [x] Filtrace pomocí Tabs (all/DV/RY/VT) a VT třídy
+- [x] Řazení (jméno, žebříček, klub, rok narození)
+- [x] Paginace s 9 položkami na stránku
+- [x] Statistiky (závodníci, reprezentanti, kluby, sekce)
+- [x] Empty state s akcí pro zrušení filtrů
+- [x] Embed, Satellite, EmbedWithSidebar varianty
+- [x] Aktualizován PLAN.md
+
+### Komponenty využité
+- AthleteCard (featured + default varianty)
+- Input (search s clearable)
+- Select (VT třída, řazení)
+- Tabs (sekce)
+- Pagination
+- Card (filtry panel)
+
+### Poznámky
+- Další krok: 8.11 Rankings Page
+
+---
+
+## 2026-01-22 - Fáze 8.11: Rankings Page
+
+### Dokončeno
+- [x] RankingsPage prototyp pro veřejné žebříčky
+- [x] Filtrace podle sekce (DV/RY/VT), disciplíny, sezóny, kategorie
+- [x] VT přehled s třídami M/A/B/C (počty závodníků, bodové limity)
+- [x] Top 3 podium vizualizace (gold/silver/bronze)
+- [x] Archivní mód s upozorněním na migrovaná data ze Slalom World
+- [x] 5 story variant: Embed, Satellite, EmbedRychlostni, EmbedVodniTuristika, EmbedArchive
+
+### Technické poznámky
+- Využit ResultsTable s custom renderCell pro body a počet závodů
+- Žebříček využívá points místo totalTime
+- VT třída zobrazena jako Badge v řádku tabulky
+- Podium karty s gradient pozadím podle umístění
+
+### Další krok
+- 8.12-8.13 Clubs List + Club Public Profile
+
+---
+
+## 2026-01-22 - Fáze 8.12: Clubs List Page
+
+### Dokončeno
+- [x] ClubsListPage.css - styly pro stránku seznamu klubů
+- [x] ClubsListPage.stories.tsx - prototyp s Embed a Satellite variantami
+- [x] ClubCard inline komponenta (logo, lokace, statistiky, sekce)
+- [x] Vyhledávání (název, město), filtry (sekce, kraj), řazení, paginace
+- [x] Statistiky (kluby, členové, závodníci, kraje)
+- [x] PLAN.md aktualizován
+
+### Poznámky
+- ClubCard je implementována přímo v prototypu (inline), není samostatná komponenta
+- 18 sample klubů z různých krajů a sekcí
+- Analogická struktura k AthletesListPage
+
+---
+
+## 2026-01-22 - Fáze 8.13: Club Public Profile
+
+### Dokončeno
+- [x] Vytvořen nový prototyp ClubPublicProfile
+- [x] Hero sekce s logem, názvem klubu, sekcemi a lokalitou
+- [x] Stats banner - členové, závodníci, trenéři, junioři
+- [x] Seznam aktivních závodníků s Avatar komponentou a ranking badgemi
+- [x] Úspěchy klubu - karty s historickými milníky
+- [x] Kontaktní sekce - adresa, e-mail, telefon, web
+- [x] Varianty: Expressive, Embed, Satellite, EmbedWithSidebar
+- [x] CSS s responzivním designem a container queries pro embed mód
+- [x] Dark mode podpora
+
+### Poznámky
+- Struktura analogická k AthletePublicProfile
+- Využívá existující komponenty: Avatar, Badge, Tabs, Button, Header
+- Sample data: USK Praha s 8 členy včetně Jiřího Prskavce
