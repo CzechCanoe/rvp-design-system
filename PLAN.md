@@ -17,7 +17,8 @@
 | **9 - Audit DS** | 9.1.5 Audit embed kompatibility | ✅ Hotovo |
 | **9 - Audit DS** | 9.2 Definice rozsahu DS | ✅ Hotovo |
 | **9 - Audit DS** | 9.3 Plán racionalizace | ✅ Hotovo |
-| **9 - Audit DS** | 9.4 Implementace racionalizace | 🔲 Další krok |
+| **9 - Audit DS** | 9.4.1 Iterace 1 (Tier 3 high-priority) | ✅ Hotovo |
+| **9 - Audit DS** | 9.4.2 Iterace 2 (Tier 2) | 🔲 Další krok |
 | **13 - Testování** | Playwright testy integrace | 🔲 Později |
 
 ---
