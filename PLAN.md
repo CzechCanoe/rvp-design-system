@@ -23,7 +23,9 @@
 | **9 - Audit DS** | 9.4.1-review Revize Tier 3 | ✅ Hotovo |
 | **9 - Audit DS** | 9.4.4 Finalizace | ✅ Hotovo |
 | **13 - Testování** | 13.1 Playwright baseline snapshoty | ✅ Hotovo |
-| **13 - Testování** | 13.1 Container/overflow testy | 🔲 Další krok |
+| **13 - Testování** | 13.1 Container/overflow testy | ✅ Hotovo |
+| **13 - Testování** | 13.2 Cross-browser testování | ✅ Hotovo |
+| **13 - Testování** | 13.3 Accessibility audit | 🔲 Další krok |
 
 ---
 
@@ -660,16 +662,17 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 
 **Kontext:** Finální ověření, že komponenty fungují správně v embed kontextu a splňují požadavky na responzivitu a přístupnost.
 
-### 13.1 Playwright testy
+### 13.1 Playwright testy ✅
 - [x] **Přegenerovat baseline snapshoty** (po racionalizaci stories se změnily)
 - [x] Opravit story ID v testech (stories přejmenovány při racionalizaci)
 - [x] Embed varianty všech prototypů
-- [ ] Container query breakpoint testy
-- [ ] Overflow/layout testy v úzkých kontejnerech
+- [x] Container query breakpoint testy
+- [x] Overflow/layout testy v úzkých kontejnerech
 
-### 13.2 Cross-browser testování
-- [ ] Chrome, Firefox, Safari
-- [ ] Mobilní viewporty
+### 13.2 Cross-browser testování ✅
+- [x] Chrome, Firefox, Safari (WebKit)
+- [x] Mobilní viewporty (Pixel 5, iPhone 13)
+- [x] 125 testů: Component Rendering, CSS Features, Prototype Pages, Dark Mode, Responsive Behavior
 
 ### 13.3 Accessibility audit
 - [ ] WCAG 2.1 AA compliance

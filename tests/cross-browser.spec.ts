@@ -208,7 +208,8 @@ test.describe('Cross-Browser: Prototype Pages', () => {
         timeout: 60000,
       });
       await page.waitForLoadState('networkidle');
-      await page.waitForTimeout(1500);
+      // WebKit needs longer stabilization for complex layouts
+      await page.waitForTimeout(browserName === 'webkit' ? 3000 : 1500);
 
       // Check no JS errors in console
       const errors: string[] = [];
@@ -296,20 +297,27 @@ test.describe('Cross-Browser: Responsive Behavior', () => {
     );
   });
 
-  test('Tablet viewport renders correctly', async ({ page, browserName }) => {
+  test('Tablet viewport renders correctly', async ({ page, browserName }, testInfo) => {
+    // WebKit needs more time for complex Dashboard layouts
+    if (browserName === 'webkit') {
+      testInfo.setTimeout(90000);
+    }
+
     // Set tablet viewport
     await page.setViewportSize({ width: 768, height: 1024 });
 
     await page.goto('/iframe.html?id=prototypes-dashboard-page--satellite&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible', timeout: 60000 });
     await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(1500);
+    // WebKit needs longer stabilization for complex layouts
+    await page.waitForTimeout(browserName === 'webkit' ? 3000 : 1500);
 
     await expect(page.locator('#storybook-root')).toHaveScreenshot(
       `cross-browser/tablet-dashboard-${browserName}.png`,
       {
         maxDiffPixels: 200,
         animations: 'disabled',
+        timeout: 30000,
       }
     );
   });
