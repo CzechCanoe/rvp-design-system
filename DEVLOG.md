@@ -4207,3 +4207,32 @@ tests/
 - Dropdown není v prototypech použit, Select pokrývá většinu use-cases
 - Dropzone připraven pro budoucí funkce uploadu (foto závodníků, dokumenty)
 - Tier 2 komponenty jsou dobře využívané, žádná zbytečná
+
+---
+
+## 2026-01-22 - Fáze 9.1.3: Audit Tier 3 (Specific) komponenty
+
+### Dokončeno
+- [x] Audit 10 Tier 3 komponent: ResultsTable, Calendar, CalendarList, CalendarCards, LiveIndicator, Header, Navigation/MainNav, AthleteCard, StatCard, KanoeCzContext
+- [x] Analýza použití v prototypech
+- [x] Analýza počtu stories
+
+### Výsledky auditu
+
+| Komponenta | Použití | Stories | Hodnocení |
+|------------|---------|---------|-----------|
+| ResultsTable | 4× | 30 | ✅ OK |
+| Calendar | 1× | 24 | ✅ OK |
+| CalendarList | 1× | - | ✅ OK |
+| CalendarCards | 1× | - | ✅ OK |
+| LiveIndicator | 5× | 30 | ⚠️ ZJEDNODUŠIT |
+| Header | 12× | 20 | ✅ OK |
+| Navigation | 9× | 25 | ⚠️ ZJEDNODUŠIT |
+| AthleteCard | 2× | 40 | ⚠️ ZJEDNODUŠIT |
+| StatCard | 2× | 29 | ⚠️ ZJEDNODUŠIT |
+| KanoeCzContext | 9× | 9 | ✅ OK |
+
+### Poznámky
+- Calendar komponenty (Calendar, CalendarList, CalendarCards) nejsou duplicitní - jsou to různé view modes stejné funkcionality
+- 4 komponenty vyžadují zjednodušení stories: LiveIndicator, Navigation, AthleteCard, StatCard
+- Další krok: 9.1.4 Audit Stories (analyzovat co přesně zjednodušit)

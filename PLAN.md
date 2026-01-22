@@ -12,7 +12,8 @@
 | **8 - Integrace** | 8.14 ProfilePage rozšíření | ✅ Hotovo |
 | **9 - Audit DS** | 9.1.1 Audit Tier 1 (Core) | ✅ Hotovo |
 | **9 - Audit DS** | 9.1.2 Audit Tier 2 (Advanced) | ✅ Hotovo |
-| **9 - Audit DS** | 9.1.3-9.4 Zbývající audit | 🔲 Další krok |
+| **9 - Audit DS** | 9.1.3 Audit Tier 3 (Specific) | ✅ Hotovo |
+| **9 - Audit DS** | 9.1.4-9.4 Zbývající audit | 🔲 Další krok |
 | **13 - Testování** | Playwright testy integrace | 🔲 Později |
 
 ---
@@ -351,17 +352,17 @@ Projít všechny komponenty a vyhodnotit:
 - [x] **Table** - 3× v prototypech, 17 stories ✅ OK (general-purpose vs. ResultsTable specialized)
 - [x] **Timeline** - 1× (ProfilePage), 17 stories ✅ OK
 
-#### 9.1.3 Audit Tier 3 (Specific) - 8 komponent
-- [ ] **ResultsTable** - komplexnost, varianty, slalom-specifické featury
-- [ ] **Calendar** - varianty (month view)
-- [ ] **CalendarList** - duplicita s Calendar?
-- [ ] **CalendarCards** - duplicita s Calendar?
-- [ ] **LiveIndicator** - varianty
-- [ ] **Header** - varianty (default, satellite)
-- [ ] **Navigation** - komplexnost
-- [ ] **AthleteCard** - varianty, použití
-- [ ] **StatCard** - potřebnost, duplicita s Card?
-- [ ] **KanoeCzContext** - mock komponenta, zachovat pro Storybook
+#### 9.1.3 Audit Tier 3 (Specific) - 10 komponent ✅
+- [x] **ResultsTable** - 4× v prototypech (Live, Results, Rankings), 30 stories ✅ OK, klíčová pro výsledky, slalom-specifické featury potřebné
+- [x] **Calendar** - 1× (CalendarPage month view), 24 stories ✅ OK
+- [x] **CalendarList** - 1× (CalendarPage list view), v Calendar stories ✅ OK, NE duplicita - jiný view mode
+- [x] **CalendarCards** - 1× (CalendarPage cards view), v Calendar stories ✅ OK, NE duplicita - jiný view mode
+- [x] **LiveIndicator** - 5× v prototypech, 30 stories ⚠️ ZJEDNODUŠIT - příliš mnoho stories pro jednoduchou komponentu
+- [x] **Header** - 12× v prototypech (všechny satellite varianty), 20 stories ✅ OK, klíčová pro satellite layout
+- [x] **Navigation/MainNav** - 9× v prototypech, 25 stories ⚠️ ZJEDNODUŠIT - příliš stories
+- [x] **AthleteCard** - 2× v prototypech (AthletesListPage, AthletePublicProfile), 40 stories ⚠️ ZJEDNODUŠIT - výrazně příliš stories
+- [x] **StatCard** - 2× v prototypech (Dashboard, Profile), 29 stories ⚠️ ZJEDNODUŠIT - příliš stories
+- [x] **KanoeCzContext** - 9× (všechny embed stories), 9 stories ✅ OK, mock pro Storybook
 
 #### 9.1.4 Audit Stories
 - [ ] Kolik stories má každá komponenta?
