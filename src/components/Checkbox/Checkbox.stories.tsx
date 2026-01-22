@@ -53,7 +53,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /* ==========================================================================
-   BASIC EXAMPLES
+   DEFAULT
    ========================================================================== */
 
 export const Default: Story = {
@@ -62,46 +62,11 @@ export const Default: Story = {
   },
 };
 
-export const Checked: Story = {
-  args: {
-    label: 'Newsletter subscription',
-    defaultChecked: true,
-  },
-};
-
-export const WithHelperText: Story = {
-  args: {
-    label: 'Remember me',
-    helperText: 'Keep me signed in on this device',
-  },
-};
-
 /* ==========================================================================
    SIZES
    ========================================================================== */
 
-export const Small: Story = {
-  args: {
-    size: 'sm',
-    label: 'Small checkbox',
-  },
-};
-
-export const Medium: Story = {
-  args: {
-    size: 'md',
-    label: 'Medium checkbox (default)',
-  },
-};
-
-export const Large: Story = {
-  args: {
-    size: 'lg',
-    label: 'Large checkbox',
-  },
-};
-
-export const AllSizes: Story = {
+export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <Checkbox size="sm" label="Small checkbox" />
@@ -109,45 +74,20 @@ export const AllSizes: Story = {
       <Checkbox size="lg" label="Large checkbox" />
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Three sizes: sm (16px), md (20px), lg (24px).',
+      },
+    },
+  },
 };
 
 /* ==========================================================================
    STATES
    ========================================================================== */
 
-export const Disabled: Story = {
-  args: {
-    label: 'Disabled checkbox',
-    disabled: true,
-  },
-};
-
-export const DisabledChecked: Story = {
-  args: {
-    label: 'Disabled checked checkbox',
-    disabled: true,
-    defaultChecked: true,
-  },
-};
-
-export const ErrorState: Story = {
-  args: {
-    label: 'Accept terms and conditions',
-    state: 'error',
-    errorMessage: 'You must accept the terms to continue',
-  },
-};
-
-export const SuccessState: Story = {
-  args: {
-    label: 'Email verified',
-    state: 'success',
-    defaultChecked: true,
-    helperText: 'Your email has been verified',
-  },
-};
-
-export const AllStates: Story = {
+export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <Checkbox label="Default state" defaultChecked />
@@ -157,29 +97,25 @@ export const AllStates: Story = {
       <Checkbox label="Disabled checked" disabled defaultChecked />
     </div>
   ),
-};
-
-/* ==========================================================================
-   INDETERMINATE STATE
-   ========================================================================== */
-
-export const Indeterminate: Story = {
-  args: {
-    label: 'Select all items',
-    indeterminate: true,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Validation states: default, error, success, and disabled.',
+      },
+    },
   },
 };
 
-/**
- * Interactive example showing how indeterminate state works with child checkboxes.
- * The parent checkbox shows indeterminate when some (but not all) children are checked.
- */
-export const IndeterminateExample: Story = {
+/* ==========================================================================
+   INDETERMINATE
+   ========================================================================== */
+
+export const Indeterminate: Story = {
   render: function IndeterminateDemo() {
     const [items, setItems] = useState([
-      { id: 'item1', label: 'Divoká voda (DV)', checked: true },
-      { id: 'item2', label: 'Rychlostní (RY)', checked: false },
-      { id: 'item3', label: 'Vodní turistika (VT)', checked: true },
+      { id: 'dv', label: 'Divoká voda (DV)', checked: true },
+      { id: 'ry', label: 'Rychlostní (RY)', checked: false },
+      { id: 'vt', label: 'Vodní turistika (VT)', checked: true },
     ]);
 
     const allChecked = items.every((item) => item.checked);
@@ -187,8 +123,7 @@ export const IndeterminateExample: Story = {
     const indeterminate = someChecked && !allChecked;
 
     const handleParentChange = () => {
-      const newChecked = !allChecked;
-      setItems(items.map((item) => ({ ...item, checked: newChecked })));
+      setItems(items.map((item) => ({ ...item, checked: !allChecked })));
     };
 
     const handleItemChange = (id: string) => {
@@ -198,7 +133,7 @@ export const IndeterminateExample: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <Checkbox
-          label="Všechny sekce"
+          label="All sections"
           checked={allChecked}
           indeterminate={indeterminate}
           onChange={handleParentChange}
@@ -217,26 +152,21 @@ export const IndeterminateExample: Story = {
       </div>
     );
   },
-};
-
-/* ==========================================================================
-   WITHOUT LABEL
-   ========================================================================== */
-
-export const WithoutLabel: Story = {
-  args: {
-    'aria-label': 'Select this item',
+  parameters: {
+    docs: {
+      description: {
+        story: 'Indeterminate state for parent checkbox when some children are checked.',
+      },
+    },
   },
 };
 
 /* ==========================================================================
-   CSK-SPECIFIC EXAMPLES
+   CSK EXAMPLE: REGISTRATION FORM
    ========================================================================== */
 
-/**
- * Registration form example with typical CSK checkboxes.
- */
 export const RegistrationForm: Story = {
+  name: 'Example: Registration Form',
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
       <Checkbox
@@ -251,122 +181,11 @@ export const RegistrationForm: Story = {
       <Checkbox label="Mám platnou zdravotní prohlídku" state="error" errorMessage="Toto pole je povinné" />
     </div>
   ),
-};
-
-/**
- * Event filter example for race calendar.
- */
-export const EventFilters: Story = {
-  render: function EventFiltersDemo() {
-    const [filters, setFilters] = useState({
-      dv: true,
-      ry: false,
-      vt: true,
-      m: true,
-      a: false,
-      b: false,
-      c: false,
-    });
-
-    const toggleFilter = (key: keyof typeof filters) => {
-      setFilters({ ...filters, [key]: !filters[key] });
-    };
-
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        <div>
-          <p style={{ marginBottom: '8px', fontWeight: 500, fontSize: '14px', color: 'var(--color-text-primary)' }}>
-            Sekce
-          </p>
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <Checkbox label="Divoká voda" checked={filters.dv} onChange={() => toggleFilter('dv')} />
-            <Checkbox label="Rychlostní" checked={filters.ry} onChange={() => toggleFilter('ry')} />
-            <Checkbox label="Vodní turistika" checked={filters.vt} onChange={() => toggleFilter('vt')} />
-          </div>
-        </div>
-        <div>
-          <p style={{ marginBottom: '8px', fontWeight: 500, fontSize: '14px', color: 'var(--color-text-primary)' }}>
-            VT Třída závodu
-          </p>
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <Checkbox label="M" checked={filters.m} onChange={() => toggleFilter('m')} />
-            <Checkbox label="A" checked={filters.a} onChange={() => toggleFilter('a')} />
-            <Checkbox label="B" checked={filters.b} onChange={() => toggleFilter('b')} />
-            <Checkbox label="C" checked={filters.c} onChange={() => toggleFilter('c')} />
-          </div>
-        </div>
-      </div>
-    );
-  },
-};
-
-/**
- * Results table selection example.
- */
-export const TableSelection: Story = {
-  render: function TableSelectionDemo() {
-    const [selected, setSelected] = useState<string[]>(['athlete2']);
-    const athletes = [
-      { id: 'athlete1', name: 'Jan Novák', club: 'USK Praha' },
-      { id: 'athlete2', name: 'Petra Svobodová', club: 'Dukla Praha' },
-      { id: 'athlete3', name: 'Martin Dvořák', club: 'Bohemians' },
-    ];
-
-    const allSelected = selected.length === athletes.length;
-    const someSelected = selected.length > 0 && !allSelected;
-
-    const handleSelectAll = () => {
-      if (allSelected) {
-        setSelected([]);
-      } else {
-        setSelected(athletes.map((a) => a.id));
-      }
-    };
-
-    const handleSelect = (id: string) => {
-      if (selected.includes(id)) {
-        setSelected(selected.filter((s) => s !== id));
-      } else {
-        setSelected([...selected, id]);
-      }
-    };
-
-    return (
-      <table style={{ borderCollapse: 'collapse', width: '400px' }}>
-        <thead>
-          <tr>
-            <th style={{ padding: '8px', borderBottom: '2px solid var(--color-border-default)', textAlign: 'left' }}>
-              <Checkbox
-                checked={allSelected}
-                indeterminate={someSelected}
-                onChange={handleSelectAll}
-                aria-label="Select all athletes"
-              />
-            </th>
-            <th style={{ padding: '8px', borderBottom: '2px solid var(--color-border-default)', textAlign: 'left' }}>
-              Jméno
-            </th>
-            <th style={{ padding: '8px', borderBottom: '2px solid var(--color-border-default)', textAlign: 'left' }}>
-              Klub
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {athletes.map((athlete) => (
-            <tr key={athlete.id}>
-              <td style={{ padding: '8px', borderBottom: '1px solid var(--color-border-default)' }}>
-                <Checkbox
-                  checked={selected.includes(athlete.id)}
-                  onChange={() => handleSelect(athlete.id)}
-                  aria-label={`Select ${athlete.name}`}
-                />
-              </td>
-              <td style={{ padding: '8px', borderBottom: '1px solid var(--color-border-default)' }}>{athlete.name}</td>
-              <td style={{ padding: '8px', borderBottom: '1px solid var(--color-border-default)' }}>{athlete.club}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
+  parameters: {
+    docs: {
+      description: {
+        story: 'Registration form example with CSK-specific checkboxes.',
+      },
+    },
   },
 };

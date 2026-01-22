@@ -19,7 +19,8 @@
 | **9 - Audit DS** | 9.3 Plán racionalizace | ✅ Hotovo |
 | **9 - Audit DS** | 9.4.1 Iterace 1 (Tier 3 high-priority) | ✅ Hotovo |
 | **9 - Audit DS** | 9.4.2 Iterace 2 (Tier 2) | ✅ Hotovo |
-| **9 - Audit DS** | 9.4.3 Iterace 3 (Tier 1) | 🔲 Další krok |
+| **9 - Audit DS** | 9.4.3 Iterace 3 (Tier 1) | ✅ Hotovo |
+| **9 - Audit DS** | 9.4.4 Finalizace | 🔲 Další krok |
 | **13 - Testování** | Playwright testy integrace | 🔲 Později |
 
 ---
@@ -615,9 +616,19 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 
 **Celkem Tier 2:** 218 → 86 stories (-60%)
 
-#### 9.4.3 Iterace 3: Tier 1 (10 komponent)
-- [ ] Button, Badge, Card, Input, Select
-- [ ] Checkbox, Radio, Switch, Avatar, Skeleton
+#### 9.4.3 Iterace 3: Tier 1 (10 komponent) ✅
+- [x] Button: 25 → 6 stories
+- [x] Badge: 14 → OK (ponechány)
+- [x] Card: 24 → 6 stories
+- [x] Input: 24 → 8 stories
+- [x] Select: 21 → 8 stories
+- [x] Checkbox: 18 → 5 stories
+- [x] Radio: 19 → 5 stories
+- [x] Switch: 21 → 5 stories
+- [x] Avatar: 17 → 7 stories
+- [x] Skeleton: 20 → 6 stories
+
+**Celkem Tier 1:** 203 → 70 stories (-65%)
 
 #### 9.4.4 Finalizace
 - [ ] Ověřit konzistenci API a naming conventions

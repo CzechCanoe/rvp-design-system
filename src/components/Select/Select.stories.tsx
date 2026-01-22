@@ -50,7 +50,7 @@ const meta: Meta<typeof Select> = {
 export default meta;
 type Story = StoryObj<typeof Select>;
 
-// Sample options for demos
+// Sample options
 const countryOptions = [
   { value: 'cz', label: 'Česká republika' },
   { value: 'sk', label: 'Slovensko' },
@@ -71,7 +71,6 @@ const categoryOptions = [
   { value: 'c1m', label: 'C1 muži' },
   { value: 'c1w', label: 'C1 ženy' },
   { value: 'c2m', label: 'C2 muži' },
-  { value: 'c2x', label: 'C2 mix' },
 ];
 
 const yearOptions = [
@@ -81,229 +80,56 @@ const yearOptions = [
   { value: '2023', label: '2023' },
 ];
 
-const vtClassOptions = [
-  { value: 'm', label: 'Třída M (Mistr)' },
-  { value: 'a', label: 'Třída A' },
-  { value: 'b', label: 'Třída B' },
-  { value: 'c', label: 'Třída C' },
-];
+/* ==========================================================================
+   DEFAULT
+   ========================================================================== */
 
-// Basic examples
 export const Default: Story = {
   args: {
     options: countryOptions,
-    placeholder: 'Vyberte zemi...',
+    placeholder: 'Select country...',
   },
 };
 
-export const WithLabel: Story = {
-  args: {
-    options: countryOptions,
-    label: 'Země',
-    placeholder: 'Vyberte zemi...',
-  },
-};
+/* ==========================================================================
+   WITH LABEL AND HELPER
+   ========================================================================== */
 
-export const WithHelperText: Story = {
+export const WithLabelAndHelper: Story = {
   args: {
     options: disciplineOptions,
-    label: 'Disciplína',
-    placeholder: 'Vyberte disciplínu...',
-    helperText: 'Vyberte hlavní disciplínu závodníka',
+    label: 'Discipline',
+    placeholder: 'Select discipline...',
+    helperText: 'Choose the main discipline of the athlete',
   },
 };
 
-// Sizes
-export const Small: Story = {
-  args: {
-    options: yearOptions,
-    size: 'sm',
-    placeholder: 'Rok...',
-  },
-};
+/* ==========================================================================
+   SIZES
+   ========================================================================== */
 
-export const Medium: Story = {
-  args: {
-    options: yearOptions,
-    size: 'md',
-    placeholder: 'Rok...',
-  },
-};
-
-export const Large: Story = {
-  args: {
-    options: yearOptions,
-    size: 'lg',
-    placeholder: 'Rok...',
-  },
-};
-
-// States
-export const ErrorState: Story = {
-  args: {
-    options: disciplineOptions,
-    label: 'Disciplína',
-    state: 'error',
-    errorMessage: 'Vyberte prosím disciplínu',
-    placeholder: 'Vyberte disciplínu...',
-  },
-};
-
-export const SuccessState: Story = {
-  args: {
-    options: disciplineOptions,
-    label: 'Disciplína',
-    state: 'success',
-    helperText: 'Disciplína vybrána',
-    defaultValue: 'dv',
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    options: disciplineOptions,
-    label: 'Disciplína',
-    disabled: true,
-    placeholder: 'Nelze změnit',
-  },
-};
-
-// With icons
-const GlobeIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <circle cx="12" cy="12" r="10" />
-    <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
-  </svg>
-);
-
-const CalendarIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-    <path d="M16 2v4M8 2v4M3 10h18" />
-  </svg>
-);
-
-const TrophyIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M6 9H4.5a2.5 2.5 0 010-5H6M18 9h1.5a2.5 2.5 0 000-5H18" />
-    <path d="M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 1012 0V2z" />
-  </svg>
-);
-
-const TagIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82zM7 7h.01" />
-  </svg>
-);
-
-export const WithLeftIcon: Story = {
-  args: {
-    options: countryOptions,
-    iconLeft: <GlobeIcon />,
-    placeholder: 'Vyberte zemi...',
-  },
-};
-
-export const CountrySelect: Story = {
-  args: {
-    options: countryOptions,
-    label: 'Země',
-    iconLeft: <GlobeIcon />,
-    placeholder: 'Vyberte zemi...',
-    helperText: 'Země reprezentace závodníka',
-  },
-};
-
-export const YearSelect: Story = {
-  args: {
-    options: yearOptions,
-    label: 'Sezóna',
-    iconLeft: <CalendarIcon />,
-    placeholder: 'Vyberte rok...',
-  },
-};
-
-// Full width
-export const FullWidth: Story = {
-  args: {
-    options: categoryOptions,
-    fullWidth: true,
-    label: 'Kategorie',
-    placeholder: 'Vyberte kategorii...',
-  },
-  parameters: {
-    layout: 'padded',
-  },
-};
-
-// Controlled select with state
-const ControlledSelectTemplate = () => {
-  const [value, setValue] = useState('');
-
-  return (
-    <div style={{ width: '280px' }}>
-      <Select
-        options={disciplineOptions}
-        label="Disciplína"
-        placeholder="Vyberte disciplínu..."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        helperText={value ? `Vybraná hodnota: ${value}` : 'Zatím nevybráno'}
-      />
-    </div>
-  );
-};
-
-export const Controlled: Story = {
-  render: () => <ControlledSelectTemplate />,
-};
-
-// With disabled options
-const optionsWithDisabled = [
-  { value: 'k1m', label: 'K1 muži' },
-  { value: 'k1w', label: 'K1 ženy' },
-  { value: 'c1m', label: 'C1 muži', disabled: true },
-  { value: 'c1w', label: 'C1 ženy', disabled: true },
-  { value: 'c2m', label: 'C2 muži' },
-];
-
-export const WithDisabledOptions: Story = {
-  args: {
-    options: optionsWithDisabled,
-    label: 'Kategorie',
-    placeholder: 'Vyberte kategorii...',
-    helperText: 'Některé kategorie nejsou dostupné',
-  },
-};
-
-// All sizes showcase
-export const AllSizes: Story = {
+export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '280px' }}>
-      <Select
-        size="sm"
-        options={yearOptions}
-        placeholder="Small"
-        label="Small"
-      />
-      <Select
-        size="md"
-        options={yearOptions}
-        placeholder="Medium"
-        label="Medium"
-      />
-      <Select
-        size="lg"
-        options={yearOptions}
-        placeholder="Large"
-        label="Large"
-      />
+      <Select size="sm" options={yearOptions} placeholder="Small" label="Small" />
+      <Select size="md" options={yearOptions} placeholder="Medium" label="Medium (default)" />
+      <Select size="lg" options={yearOptions} placeholder="Large" label="Large" />
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Three sizes: sm (32px), md (40px), lg (48px).',
+      },
+    },
+  },
 };
 
-// All states showcase
-export const AllStates: Story = {
+/* ==========================================================================
+   STATES
+   ========================================================================== */
+
+export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '280px' }}>
       <Select
@@ -331,100 +157,114 @@ export const AllStates: Story = {
         label="Disabled"
         disabled
         placeholder="Disabled state"
-        helperText="Cannot change this field"
       />
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Validation states: default, error, success, and disabled.',
+      },
+    },
+  },
 };
 
-// Sizes with icons showcase
-export const SizesWithIcons: Story = {
+/* ==========================================================================
+   WITH ICON
+   ========================================================================== */
+
+const GlobeIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+  </svg>
+);
+
+const CalendarIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <path d="M16 2v4M8 2v4M3 10h18" />
+  </svg>
+);
+
+export const WithIcon: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '280px' }}>
       <Select
-        size="sm"
         options={countryOptions}
+        label="Country"
         iconLeft={<GlobeIcon />}
-        placeholder="Small with icon"
+        placeholder="Select country..."
       />
       <Select
-        size="md"
-        options={countryOptions}
-        iconLeft={<GlobeIcon />}
-        placeholder="Medium with icon"
-      />
-      <Select
-        size="lg"
-        options={countryOptions}
-        iconLeft={<GlobeIcon />}
-        placeholder="Large with icon"
-      />
-    </div>
-  ),
-};
-
-// CSK-specific: Registration form example
-export const RegistrationForm: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '320px' }}>
-      <Select
-        options={countryOptions}
-        label="Země"
-        iconLeft={<GlobeIcon />}
-        placeholder="Vyberte zemi..."
-      />
-      <Select
-        options={disciplineOptions}
-        label="Disciplína"
-        iconLeft={<TrophyIcon />}
-        placeholder="Vyberte disciplínu..."
-      />
-      <Select
-        options={categoryOptions}
-        label="Kategorie"
-        iconLeft={<TagIcon />}
-        placeholder="Vyberte kategorii..."
+        options={yearOptions}
+        label="Season"
+        iconLeft={<CalendarIcon />}
+        placeholder="Select year..."
       />
     </div>
   ),
   parameters: {
-    layout: 'padded',
+    docs: {
+      description: {
+        story: 'Selects with left icon.',
+      },
+    },
   },
 };
 
-// CSK-specific: VT class selection
-export const VTClassSelect: Story = {
+/* ==========================================================================
+   WITH DISABLED OPTIONS
+   ========================================================================== */
+
+export const WithDisabledOptions: Story = {
   args: {
-    options: vtClassOptions,
-    label: 'Třída VT',
-    placeholder: 'Vyberte třídu...',
-    helperText: 'Vodácká třída závodníka',
+    options: [
+      { value: 'k1m', label: 'K1 muži' },
+      { value: 'k1w', label: 'K1 ženy' },
+      { value: 'c1m', label: 'C1 muži', disabled: true },
+      { value: 'c1w', label: 'C1 ženy', disabled: true },
+      { value: 'c2m', label: 'C2 muži' },
+    ],
+    label: 'Category',
+    placeholder: 'Select category...',
+    helperText: 'Some categories are unavailable',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Select with some disabled options.',
+      },
+    },
   },
 };
 
-// Filter form example
+/* ==========================================================================
+   CSK EXAMPLE: FILTER FORM
+   ========================================================================== */
+
+const TrophyIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M6 9H4.5a2.5 2.5 0 010-5H6M18 9h1.5a2.5 2.5 0 000-5H18" />
+    <path d="M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 1012 0V2z" />
+  </svg>
+);
+
 export const FilterForm: Story = {
+  name: 'Example: Filter Form',
   render: () => (
     <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-end' }}>
-      <Select
-        size="sm"
-        options={yearOptions}
-        placeholder="Rok"
-        iconLeft={<CalendarIcon />}
-      />
-      <Select
-        size="sm"
-        options={disciplineOptions}
-        placeholder="Disciplína"
-      />
-      <Select
-        size="sm"
-        options={categoryOptions}
-        placeholder="Kategorie"
-      />
+      <Select size="sm" options={yearOptions} placeholder="Year" iconLeft={<CalendarIcon />} />
+      <Select size="sm" options={disciplineOptions} placeholder="Discipline" />
+      <Select size="sm" options={categoryOptions} placeholder="Category" />
     </div>
   ),
   parameters: {
     layout: 'padded',
+    docs: {
+      description: {
+        story: 'Filter form with compact selects.',
+      },
+    },
   },
 };
