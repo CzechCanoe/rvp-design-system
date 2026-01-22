@@ -447,3 +447,107 @@
   box-shadow: none;
   border: 1px solid #dee2e6;
 }
+
+/* Modal - simplified for embed context */
+[data-mode="embed"] .csk-modal__overlay {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+[data-mode="embed"] .csk-modal__content {
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Dropdown - Bootstrap-like */
+[data-mode="embed"] .csk-dropdown__menu {
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #dee2e6;
+}
+
+[data-mode="embed"] .csk-dropdown__item {
+  border-radius: 0;
+}
+
+/* StatCard - simpler, flat */
+[data-mode="embed"] .csk-stat-card {
+  border-radius: 4px;
+  box-shadow: none;
+  border: 1px solid #dee2e6;
+}
+
+/* Toast - simpler appearance */
+[data-mode="embed"] .csk-toast {
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header - no shadow in embed */
+[data-mode="embed"] .csk-header {
+  box-shadow: none;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* AthleteCard - simpler, flat */
+[data-mode="embed"] .csk-athlete-card {
+  border-radius: 4px;
+  box-shadow: none;
+  border: 1px solid #dee2e6;
+}
+
+[data-mode="embed"] .csk-athlete-card--hero {
+  border-radius: 4px;
+}
+
+/* Navigation - simpler */
+[data-mode="embed"] .csk-navigation {
+  border-radius: 4px;
+}
+
+[data-mode="embed"] .csk-navigation__item {
+  border-radius: 4px;
+}
+
+/* Pagination - Bootstrap-like */
+[data-mode="embed"] .csk-pagination__button {
+  border-radius: 4px;
+}
+
+[data-mode="embed"] .csk-pagination__page {
+  border-radius: 4px;
+}
+
+/* Timeline - simpler */
+[data-mode="embed"] .csk-timeline__item {
+  border-radius: 4px;
+}
+
+/* EmptyState - simpler */
+[data-mode="embed"] .csk-empty-state {
+  border-radius: 4px;
+}
+
+/* Checkbox - consistent styling */
+[data-mode="embed"] .csk-checkbox__input {
+  border-radius: 3px;
+}
+
+/* Switch - simpler track */
+[data-mode="embed"] .csk-switch__track {
+  box-shadow: none;
+}
+
+/* Dropzone - simpler */
+[data-mode="embed"] .csk-dropzone {
+  border-radius: 4px;
+}
+
+/* Progress - simpler */
+[data-mode="embed"] .csk-progress {
+  border-radius: 4px;
+}
+
+[data-mode="embed"] .csk-progress__bar {
+  border-radius: 4px;
+}

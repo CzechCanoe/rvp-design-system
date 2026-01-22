@@ -14,7 +14,8 @@
 | **9 - Audit DS** | 9.1.2 Audit Tier 2 (Advanced) | ✅ Hotovo |
 | **9 - Audit DS** | 9.1.3 Audit Tier 3 (Specific) | ✅ Hotovo |
 | **9 - Audit DS** | 9.1.4 Audit Stories | ✅ Hotovo |
-| **9 - Audit DS** | 9.1.5-9.4 Zbývající audit | 🔲 Další krok |
+| **9 - Audit DS** | 9.1.5 Audit embed kompatibility | ✅ Hotovo |
+| **9 - Audit DS** | 9.2-9.4 Definice rozsahu a racionalizace | 🔲 Další krok |
 | **13 - Testování** | Playwright testy integrace | 🔲 Později |
 
 ---
@@ -452,7 +453,7 @@ Projít všechny komponenty a vyhodnotit:
 
 **Cílový počet stories po racionalizaci: ~300-350** (z 672)
 
-#### 9.1.5 Audit kompatibility s kanoe.cz (embed mód)
+#### 9.1.5 Audit kompatibility s kanoe.cz (embed mód) ✅
 
 Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 stylem kanoe.cz:
 
@@ -468,39 +469,40 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 **Kontrolní seznam pro embed (28 komponent):**
 
 *Tier 1 - Core:*
-- [ ] Button - nevypadá "příliš designově" vedle BS4 buttonů?
-- [ ] Badge - velikost a styl odpovídá BS4 badges?
-- [ ] Card - stíny a border-radius nejsou moc výrazné?
-- [ ] Input - ladí s BS4 form-control?
-- [ ] Select - ladí s BS4 custom-select?
-- [ ] Checkbox - ladí s BS4 custom-checkbox?
-- [ ] Radio - ladí s BS4 custom-radio?
-- [ ] Switch - ladí s BS4 custom-switch?
-- [ ] Avatar - neutrální vzhled?
-- [ ] Skeleton - neutrální vzhled?
+- [x] Button - nevypadá "příliš designově" vedle BS4 buttonů?
+- [x] Badge - velikost a styl odpovídá BS4 badges?
+- [x] Card - stíny a border-radius nejsou moc výrazné?
+- [x] Input - ladí s BS4 form-control?
+- [x] Select - ladí s BS4 custom-select?
+- [x] Checkbox - ladí s BS4 custom-checkbox?
+- [x] Radio - ladí s BS4 custom-radio? (OK - border-radius: full je standard)
+- [x] Switch - ladí s BS4 custom-switch?
+- [x] Avatar - neutrální vzhled? (OK - nepoužívá shadow)
+- [x] Skeleton - neutrální vzhled? (OK - nepoužívá shadow)
 
 *Tier 2 - Advanced:*
-- [ ] Tabs - styl odpovídá BS4 nav-tabs?
-- [ ] Modal - styl odpovídá BS4 modal?
-- [ ] Dropdown - styl odpovídá BS4 dropdown?
-- [ ] Pagination - styl odpovídá BS4 pagination?
-- [ ] Toast - styl odpovídá BS4 toast/alert?
-- [ ] Progress - styl odpovídá BS4 progress?
-- [ ] EmptyState - neutrální vzhled?
-- [ ] Dropzone - neutrální vzhled?
-- [ ] Table - styl odpovídá BS4 table?
-- [ ] Timeline - neutrální vzhled?
+- [x] Tabs - styl odpovídá BS4 nav-tabs?
+- [x] Modal - styl odpovídá BS4 modal?
+- [x] Dropdown - styl odpovídá BS4 dropdown?
+- [x] Pagination - styl odpovídá BS4 pagination?
+- [x] Toast - styl odpovídá BS4 toast/alert?
+- [x] Progress - styl odpovídá BS4 progress?
+- [x] EmptyState - neutrální vzhled?
+- [x] Dropzone - neutrální vzhled?
+- [x] Table - styl odpovídá BS4 table?
+- [x] Timeline - neutrální vzhled?
 
 *Tier 3 - Specific:*
-- [ ] ResultsTable - header a řádky ladí s BS4 tables?
-- [ ] Calendar/CalendarList/CalendarCards - neutrální vzhled?
-- [ ] LiveIndicator - není moc výrazný?
-- [ ] Header - satellite varianta je neutrální?
-- [ ] Navigation - ladí s BS4 nav?
-- [ ] AthleteCard - neutrální v embed?
-- [ ] StatCard - neutrální v embed?
+- [x] ResultsTable - header a řádky ladí s BS4 tables?
+- [x] Calendar/CalendarList/CalendarCards - neutrální vzhled?
+- [x] LiveIndicator - není moc výrazný?
+- [x] Header - satellite varianta je neutrální?
+- [x] Navigation - ladí s BS4 nav?
+- [x] AthleteCard - neutrální v embed?
+- [x] StatCard - neutrální v embed?
 
-**Výstup:** Seznam komponent vyžadujících úpravu embed stylů v `mode.css`
+**Výstup:** Přidány embed styly do `mode.css` pro všechny komponenty, které je potřebovaly:
+- Modal, Dropdown, StatCard, Toast, Header, AthleteCard, Navigation, Pagination, Timeline, EmptyState, Checkbox, Switch, Dropzone, Progress
 
 ---
 
