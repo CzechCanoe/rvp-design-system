@@ -630,69 +630,30 @@ Využívá expressive tokeny:
 export default meta;
 type Story = StoryObj<typeof AthletePublicProfile>;
 
+// ============================================================================
+// Integration Variants - Embed/Satellite only (Phase 8.9)
+// Use Storybook Controls to change section (dv/ry/vt) and showBackgroundImage
+// ============================================================================
+
+/**
+ * Expressive standalone varianta - plný "wow" profil s hero sekcí.
+ * Sekce Divoká voda (DV) jako výchozí. Použijte Controls pro změnu sekce.
+ */
 export const DivokaVoda: Story = {
-  name: 'Divoká voda (DV)',
+  name: 'Expressive (DV)',
   args: {
     section: 'dv',
     showBackgroundImage: true,
+    variant: 'standalone',
   },
   parameters: {
     docs: {
       description: {
-        story: 'Profil závodníka sekce Divoká voda s modrým gradientem a fotkou na pozadí.',
+        story: 'Expressive standalone profil závodníka. Použijte Storybook Controls pro změnu sekce (dv/ry/vt) a zobrazení/skrytí fotky.',
       },
     },
   },
 };
-
-export const Rychlostni: Story = {
-  name: 'Rychlostní kanoistika (RY)',
-  args: {
-    section: 'ry',
-    showBackgroundImage: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Profil závodníka sekce Rychlostní kanoistika se zeleným gradientem.',
-      },
-    },
-  },
-};
-
-export const VodniTuristika: Story = {
-  name: 'Vodní turistika (VT)',
-  args: {
-    section: 'vt',
-    showBackgroundImage: false,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Profil závodníka sekce Vodní turistika bez fotky (fallback na iniciály).',
-      },
-    },
-  },
-};
-
-export const BezFotky: Story = {
-  name: 'Bez fotky',
-  args: {
-    section: 'dv',
-    showBackgroundImage: false,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Profil bez fotky závodníka - používá iniciály a abstraktní pozadí.',
-      },
-    },
-  },
-};
-
-// ============================================================================
-// Integration Variants (Phase 8.7.5)
-// ============================================================================
 
 /**
  * Embed varianta pro vložení do kanoe.cz.

@@ -4,8 +4,8 @@
 
 | Fáze | Krok | Status |
 |------|------|--------|
-| **8 - Integrace** | 8.9 Čištění prototypů | 🔲 Další |
-| **8 - Integrace** | 8.10 Athletes List | 🔲 Čeká |
+| **8 - Integrace** | 8.9 Čištění prototypů | ✅ Hotovo |
+| **8 - Integrace** | 8.10 Athletes List | 🔲 Další |
 | **8 - Integrace** | 8.11 Rankings Page | 🔲 Čeká |
 | **8 - Integrace** | 8.12-8.13 Clubs List + Profile | 🔲 Čeká |
 | **8 - Integrace** | 8.14 ProfilePage rozšíření | 🔲 Čeká |
@@ -112,7 +112,7 @@
 
 ---
 
-### 8.9 Čištění prototypů - VYMAZAT CREEPY STORIES 🔲
+### 8.9 Čištění prototypů - VYMAZAT CREEPY STORIES ✅
 
 **Problém:** Prototypy obsahují příliš mnoho stories. Většina jsou "creepy" standalone varianty s hero sekcemi, které nebudou použity. Užitečné jsou pouze Embed a Satellite varianty.
 
@@ -133,22 +133,22 @@
 - [x] DashboardPage → přidat `variant` prop, sloučit admin varianty, přidat Satellite story
 - [x] RegistrationPage → přidat `variant` prop, smazat hero stories, přidat Satellite story
 
-#### 8.9.2 Prototypy k VYČIŠTĚNÍ (mají embed/satellite)
+#### 8.9.2 Prototypy k VYČIŠTĚNÍ (mají embed/satellite) ✅
 
 | Prototyp | Smazat | Nechat |
 |----------|--------|--------|
 | **LivePage** | 7× standalone | Embed, Satellite, EmbedWithSidebar |
 | **EventDetailPage** | 9× standalone | Embed, Satellite, EmbedWithSidebar |
 | **ResultsPage** | 7× standalone | Embed, Satellite, EmbedWithSidebar, EmbedCompact |
-| **CalendarPage** | 6× standalone | Embed, Satellite, EmbedWithSidebar, EmbedListView, EmbedCardsView |
+| **CalendarPage** | 8× standalone | Embed, Satellite, EmbedWithSidebar, EmbedListView, EmbedCardsView |
 | **AthletePublicProfile** | 3× sloučit | DivokaVoda (expressive), Embed, Satellite, EmbedWithSidebar |
 
 **Postup:**
-- [ ] LivePage → smazat: Default, Static, Rychlostni, VodniTuristika, K1Zeny, FastUpdates, SlowUpdates
-- [ ] EventDetailPage → smazat: Upcoming, Registration, Live, Finished, Rychlostni, VodniTuristika, Schedule, Participants, Documents
-- [ ] ResultsPage → smazat: Default, Live, K1Zeny, C1Muzi, Compact, Rychlostni, VodniTuristika
-- [ ] CalendarPage → smazat: Default, DivokáVoda, Rychlostní, VodníTuristika, Compact, BezLive, ListView, CardsView
-- [ ] AthletePublicProfile → sloučit Rychlostni, VodniTuristika, BezFotky do jedné story s args
+- [x] LivePage → smazat: Default, Static, Rychlostni, VodniTuristika, K1Zeny, FastUpdates, SlowUpdates
+- [x] EventDetailPage → smazat: Upcoming, Registration, Live, Finished, Rychlostni, VodniTuristika, Schedule, Participants, Documents
+- [x] ResultsPage → smazat: Default, Live, K1Zeny, C1Muzi, Compact, Rychlostni, VodniTuristika
+- [x] CalendarPage → smazat: Default, DivokáVoda, Rychlostní, VodníTuristika, Compact, BezLive, ListView, CardsView
+- [x] AthletePublicProfile → sloučit Rychlostni, VodniTuristika, BezFotky do jedné story s args
 
 #### 8.9.3 Výsledný počet stories
 

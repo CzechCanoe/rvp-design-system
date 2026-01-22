@@ -817,68 +817,8 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * Výchozí zobrazení kalendáře závodů.
- */
-export const Default: Story = {
-  args: {
-    initialSection: 'all',
-    showLive: true,
-  },
-};
-
-/**
- * Kalendář filtrovaný na sekci Divoká voda (DV).
- */
-export const DivokáVoda: Story = {
-  args: {
-    initialSection: 'dv',
-    showLive: true,
-  },
-};
-
-/**
- * Kalendář filtrovaný na sekci Rychlostní kanoistika (RY).
- */
-export const Rychlostní: Story = {
-  args: {
-    initialSection: 'ry',
-    showLive: true,
-  },
-};
-
-/**
- * Kalendář filtrovaný na sekci Vodní turistika (VT).
- */
-export const VodníTuristika: Story = {
-  args: {
-    initialSection: 'vt',
-    showLive: true,
-  },
-};
-
-/**
- * Kompaktní zobrazení s filtrem na všechny sekce.
- */
-export const Compact: Story = {
-  args: {
-    initialSection: 'all',
-    showLive: true,
-  },
-};
-
-/**
- * Kalendář bez indikátoru živých závodů.
- */
-export const BezLive: Story = {
-  args: {
-    initialSection: 'all',
-    showLive: false,
-  },
-};
-
 // ============================================================================
-// Integration Variants (Phase 8.7.3)
+// Integration Variants - Embed/Satellite only (Phase 8.9)
 // ============================================================================
 
 /**
@@ -947,32 +887,6 @@ export const EmbedWithSidebar: Story = {
       </KanoeCzContext>
     ),
   ],
-};
-
-// ============================================================================
-// View Type Variants
-// ============================================================================
-
-/**
- * Kalendář v pohledu Seznam - chronologický výpis závodů seskupený podle měsíců.
- */
-export const ListView: Story = {
-  args: {
-    initialSection: 'all',
-    showLive: true,
-    initialView: 'list',
-  },
-};
-
-/**
- * Kalendář v pohledu Karty - přehled závodů po měsících v kartách.
- */
-export const CardsView: Story = {
-  args: {
-    initialSection: 'all',
-    showLive: true,
-    initialView: 'cards',
-  },
 };
 
 /**
