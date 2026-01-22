@@ -20,8 +20,8 @@
 | **9 - Audit DS** | 9.4.1 Iterace 1 (Tier 3 high-priority) | ✅ Hotovo |
 | **9 - Audit DS** | 9.4.2 Iterace 2 (Tier 2) | ✅ Hotovo |
 | **9 - Audit DS** | 9.4.3 Iterace 3 (Tier 1) | ✅ Hotovo |
-| **9 - Audit DS** | 9.4.1-review Revize Tier 3 | 🔲 Další krok |
-| **9 - Audit DS** | 9.4.4 Finalizace | 🔲 Později |
+| **9 - Audit DS** | 9.4.1-review Revize Tier 3 | ✅ Hotovo |
+| **9 - Audit DS** | 9.4.4 Finalizace | 🔲 Další krok |
 | **13 - Testování** | Playwright testy integrace | 🔲 Později |
 
 ---
@@ -599,11 +599,11 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 
 #### 9.4.1 Iterace 1: Tier 3 high-priority (4 komponenty) ✅
 - [x] AthleteCard: 40 → 15 stories
-- [x] LiveIndicator: 30 → 12 stories
-- [x] ResultsTable: 30 → 16 stories
-- [x] StatCard: 29 → 13 stories
+- [x] LiveIndicator: 30 → 11 stories
+- [x] ResultsTable: 30 → 13 stories
+- [x] StatCard: 29 → 12 stories
 
-**Celkem Tier 3 high-priority:** 129 → 56 stories (-57%)
+**Celkem Tier 3 high-priority:** 129 → 51 stories (-60%)
 
 #### 9.4.2 Iterace 2: Tier 2 (10 komponent) ✅
 - [x] Tabs: 26 → 10 stories
@@ -633,15 +633,17 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 
 **Celkem Tier 1:** 203 → 70 stories (-65%)
 
-#### 9.4.1-review: Revize Tier 3 high-priority 🔲
+#### 9.4.1-review: Revize Tier 3 high-priority ✅
 **Důvod:** Při 9.4.1 došel kontext a PLAN.md nebyl správně aktualizován. Nutná kontrola kvality provedené práce.
 
-- [ ] AthleteCard: zkontrolovat stories, argTypes, dokumentaci
-- [ ] LiveIndicator: zkontrolovat stories, argTypes, dokumentaci
-- [ ] ResultsTable: zkontrolovat stories, argTypes, dokumentaci
-- [ ] StatCard: zkontrolovat stories, argTypes, dokumentaci
-- [ ] Ověřit, že všechny stories fungují v Storybooku
-- [ ] Zkontrolovat konzistenci s Tier 1/2 přístupem
+- [x] AthleteCard: 15 stories ✅ (argTypes OK, struktura konzistentní)
+- [x] LiveIndicator: 11 stories ✅ (argTypes OK, struktura konzistentní)
+- [x] ResultsTable: 13 stories ✅ (argTypes OK, slalom-specifické featury zachovány)
+- [x] StatCard: 12 stories ✅ (argTypes OK, dashboard example zachován)
+- [x] Build Storybook proběhl bez chyb
+- [x] Konzistence s Tier 1/2 přístupem potvrzena
+
+**Skutečný výsledek:** 129 → 51 stories (-60%)
 
 #### 9.4.4 Finalizace
 - [x] Ověřit konzistenci API a naming conventions
