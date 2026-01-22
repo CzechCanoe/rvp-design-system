@@ -17,6 +17,9 @@ import './ProfilePage.css';
 // Types
 // ============================================================================
 
+/** Display variant for the page */
+type ProfilePageVariant = 'standalone' | 'satellite';
+
 interface ProfilePageProps {
   /** Athlete ID */
   athleteId?: string;
@@ -26,6 +29,8 @@ interface ProfilePageProps {
   isAdmin?: boolean;
   /** Discipline section for theming */
   section?: 'dv' | 'ry' | 'vt';
+  /** Display variant - standalone (full header), satellite (minimal header) */
+  variant?: ProfilePageVariant;
 }
 
 interface AthleteResult {
@@ -394,10 +399,20 @@ function getDaysUntil(dateString: string): number {
 }
 
 // ============================================================================
+// CSK Logo for satellite header
+// ============================================================================
+
+const CSKLogo = () => (
+  <span className="profile-page__logo">
+    <span className="profile-page__logo-text">CSK</span>
+  </span>
+);
+
+// ============================================================================
 // Profile Page Component
 // ============================================================================
 
-function ProfilePage({ isOwnProfile = false, section = 'dv' }: ProfilePageProps) {
+function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellite' }: ProfilePageProps) {
   const [activeTab, setActiveTab] = useState('overview');
 
   // Select athlete data based on section
@@ -459,29 +474,89 @@ function ProfilePage({ isOwnProfile = false, section = 'dv' }: ProfilePageProps)
     },
   ];
 
-  return (
-    <div className="profile-page">
-      {/* Header */}
+  // Header rendering based on variant
+  const renderHeader = () => {
+    if (variant === 'satellite') {
+      return (
+        <Header
+          variant="satellite"
+          size="sm"
+          bordered
+          brand={<CSKLogo />}
+          appName="Můj profil"
+          homeLink="https://kanoe.cz"
+          homeLinkLabel="kanoe.cz"
+          userMenu={
+            <Button variant="ghost" size="sm">
+              {athlete.name}
+            </Button>
+          }
+        />
+      );
+    }
+
+    // Default: standalone with full navigation
+    return (
       <Header
+        variant="default"
+        size="md"
+        bordered
         brand={<span className="profile-header-logo">CSK</span>}
         navigation={<MainNav items={navItems} />}
         userMenu={
           <Button variant="ghost" size="sm">Přihlásit se</Button>
         }
-        bordered
       />
+    );
+  };
 
-      {/* Hero Section */}
-      <section className={`profile-hero-section profile-hero-section--${section}`}>
-        <div className="profile-hero-section__background">
-          <div className="profile-hero-section__gradient" />
-          <div className="profile-hero-section__pattern" />
-        </div>
-        <div className="profile-hero-section__content">
-          {/* Breadcrumb */}
-          <nav className="profile-breadcrumb">
-            <a href="#" className="profile-breadcrumb__link">Domů</a>
-            <ChevronRightIcon />
+  return (
+    <div className={`profile-page ${variant === 'satellite' ? 'profile-page--satellite' : ''}`}>
+      {/* Header */}
+      {renderHeader()}
+
+      {/* Page Header - Clean design for satellite, Hero for standalone */}
+      {variant === 'satellite' ? (
+        <section className="profile-page-header">
+          <div className="profile-page-header__container">
+            <nav className="profile-page-header__breadcrumb">
+              <a href="#">Domů</a>
+              <ChevronRightIcon />
+              <span>Můj profil</span>
+            </nav>
+            <div className="profile-page-header__content">
+              <div className="profile-page-header__avatar">
+                <Avatar name={athlete.name} src={athlete.imageUrl} size="lg" />
+              </div>
+              <div className="profile-page-header__info">
+                <h1 className="profile-page-header__name">{athlete.name}</h1>
+                <div className="profile-page-header__badges">
+                  <Badge section={section}>{getSectionName(section)}</Badge>
+                  <Badge vtClass={athlete.vtClass}>{getVtClassName(athlete.vtClass)}</Badge>
+                  <Badge outlined>{athlete.club}</Badge>
+                </div>
+              </div>
+              {isOwnProfile && (
+                <div className="profile-page-header__actions">
+                  <Button variant="secondary" size="sm">
+                    <EditIcon /> Upravit
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      ) : (
+        <section className={`profile-hero-section profile-hero-section--${section}`}>
+          <div className="profile-hero-section__background">
+            <div className="profile-hero-section__gradient" />
+            <div className="profile-hero-section__pattern" />
+          </div>
+          <div className="profile-hero-section__content">
+            {/* Breadcrumb */}
+            <nav className="profile-breadcrumb">
+              <a href="#" className="profile-breadcrumb__link">Domů</a>
+              <ChevronRightIcon />
             <a href="#" className="profile-breadcrumb__link">Závodníci</a>
             <ChevronRightIcon />
             <span className="profile-breadcrumb__current">{athlete.name}</span>
@@ -589,6 +664,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv' }: ProfilePageProps)
         </div>
         {/* Note: WaveDecoration removed for cleaner design (Phase 8.6.3) */}
       </section>
+      )}
 
       {/* Main Content */}
       <main className="profile-main">
@@ -781,33 +857,18 @@ const meta: Meta<typeof ProfilePage> = {
     docs: {
       description: {
         component: `
-# Profil závodníka
+# Profil závodníka (interní)
 
-Prototyp stránky profilu závodníka s hero sekcí, achievement showcase a disciplínovým themingem.
+Interní stránka profilu závodníka pro přihlášené uživatele.
+Používá se v satellite aplikaci (registrační systém, přihlášky).
 
 ## Hlavní sekce
-1. **Hero sekce** - gradient pozadí s fotkou, statistiky, badges
-2. **Achievement showcase** - medaile a klíčové statistiky
-3. **Status karty** - právo startu, zdravotní prohlídka, příspěvky
-4. **Záložky** - Přehled, Výsledky, Historie
+1. **Page header** - avatar, jméno, badges, akce
+2. **Status karty** - právo startu, zdravotní prohlídka, příspěvky
+3. **Záložky** - Přehled, Výsledky, Historie
 
-## Přehled (Overview)
-- StatCardy s gradient stylem
-- Tabulka posledních výsledků
-- Průběh sezóny
-
-## Výsledky
-- Kompletní tabulka výsledků s řazením
-- Export do CSV
-
-## Historie
-- Timeline životního cyklu závodníka
-- Registrace, přestupy, změny VT třídy
-
-## Discipline Theming
-- DV (Divoká voda) - modrá
-- RY (Rychlostní kanoistika) - zelená
-- VT (Vodní turistika) - červená
+## Varianty
+- **satellite** - pro interní aplikaci s minimálním headerem
 
 ## Use Cases (z business analýzy)
 - UC-1.1: Registrace nového člena
@@ -819,74 +880,43 @@ Prototyp stránky profilu závodníka s hero sekcí, achievement showcase a disc
     },
   },
   tags: ['autodocs'],
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['standalone', 'satellite'],
+      description: 'Display variant',
+    },
+    section: {
+      control: 'select',
+      options: ['dv', 'ry', 'vt'],
+      description: 'Discipline section for theming',
+    },
+    isOwnProfile: {
+      control: 'boolean',
+      description: 'Show edit controls',
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof ProfilePage>;
 
-export const Default: Story = {
-  args: {
-    isOwnProfile: false,
-    isAdmin: false,
-    section: 'dv',
-  },
-};
-
-export const OwnProfile: Story = {
+/**
+ * **SATELLITE varianta** - Interní profil závodníka s minimálním headerem.
+ *
+ * Pro přihlášeného závodníka v interní aplikaci (registrační systém, přihlášky).
+ * Header obsahuje pouze logo CSK, název aplikace a jméno uživatele.
+ */
+export const Satellite: Story = {
   args: {
     isOwnProfile: true,
-    isAdmin: false,
     section: 'dv',
+    variant: 'satellite',
   },
   parameters: {
     docs: {
       description: {
-        story: 'Vlastní profil závodníka s možností úprav.',
-      },
-    },
-  },
-};
-
-export const Rychlostni: Story = {
-  args: {
-    isOwnProfile: false,
-    isAdmin: false,
-    section: 'ry',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Profil závodníka sekce Rychlostní kanoistika se zeleným themingem.',
-      },
-    },
-  },
-};
-
-export const VodniTuristika: Story = {
-  args: {
-    isOwnProfile: false,
-    isAdmin: false,
-    section: 'vt',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Profil závodníka sekce Vodní turistika s červeným themingem.',
-      },
-    },
-  },
-};
-
-export const AdminView: Story = {
-  args: {
-    isOwnProfile: false,
-    isAdmin: true,
-    section: 'dv',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Administrátorský pohled s rozšířenými možnostmi.',
+        story: 'Interní profil závodníka se satellite headerem. Čistý design pro interní aplikace.',
       },
     },
   },

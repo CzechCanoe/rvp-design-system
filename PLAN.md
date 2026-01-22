@@ -129,7 +129,7 @@
 | **RegistrationPage** | 6× standalone s hero | 1× Satellite (wizard přihlášek) |
 
 **Postup:**
-- [ ] ProfilePage → přidat `variant` prop, smazat creepy stories, přidat Satellite story
+- [x] ProfilePage → přidat `variant` prop, smazat creepy stories, přidat Satellite story
 - [ ] DashboardPage → přidat `variant` prop, sloučit admin varianty, přidat Satellite story
 - [ ] RegistrationPage → přidat `variant` prop, smazat hero stories, přidat Satellite story
 

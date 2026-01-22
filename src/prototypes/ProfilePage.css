@@ -648,6 +648,118 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+/* ============================================================================
+   Satellite Variant - Clean internal profile design
+   ============================================================================ */
+
+.profile-page--satellite {
+  background-color: var(--color-bg-secondary, #f8f9fa);
+}
+
+/* Logo for satellite header */
+.profile-page__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.profile-page__logo-text {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-primary);
+}
+
+/* Page Header - Clean design for satellite */
+.profile-page-header {
+  background: var(--color-surface-primary);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-4) var(--spacing-4) var(--spacing-6);
+}
+
+.profile-page-header__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.profile-page-header__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-4);
+}
+
+.profile-page-header__breadcrumb a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.profile-page-header__breadcrumb a:hover {
+  color: var(--color-primary);
+}
+
+.profile-page-header__breadcrumb svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.5;
+}
+
+.profile-page-header__content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.profile-page-header__avatar {
+  flex-shrink: 0;
+}
+
+.profile-page-header__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-page-header__name {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-2);
+}
+
+.profile-page-header__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.profile-page-header__actions {
+  flex-shrink: 0;
+}
+
+/* Satellite - adjust main content background */
+.profile-page--satellite .profile-main {
+  background: var(--color-bg-secondary, #f8f9fa);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .profile-page-header__content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-page-header__actions {
+    width: 100%;
+    margin-top: var(--spacing-3);
+  }
+
+  .profile-page-header__actions button {
+    width: 100%;
+  }
+}
+
 [data-theme="dark"] .profile-hero-country {
   background-color: rgba(255, 255, 255, 0.15);
 }
