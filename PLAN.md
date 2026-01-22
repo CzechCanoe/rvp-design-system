@@ -9,7 +9,7 @@
 | **8 - Integrace** | 8.11 Rankings Page | ✅ Hotovo |
 | **8 - Integrace** | 8.12 Clubs List | ✅ Hotovo |
 | **8 - Integrace** | 8.13 Club Public Profile | ✅ Hotovo |
-| **8 - Integrace** | 8.14 ProfilePage rozšíření | 🔲 Čeká |
+| **8 - Integrace** | 8.14 ProfilePage rozšíření | ✅ Hotovo |
 | **9 - Audit DS** | 9.1-9.4 Audit a racionalizace | 🔲 Čeká |
 | **13 - Testování** | Playwright testy integrace | 🔲 Později |
 
@@ -279,27 +279,27 @@
 
 ---
 
-### 8.14 Profile Page rozšíření - sledování závodů 🔲
+### 8.14 Profile Page rozšíření - sledování závodů ✅
 
 **Účel:** Rozšíření interního profilu závodníka (ProfilePage) o přehled přihlášek a sledované závody.
 
 #### Nová funkcionalita:
-- [ ] **Moje přihlášky** - seznam nadcházejících závodů, na které jsem přihlášen
+- [x] **Moje přihlášky** - seznam nadcházejících závodů, na které jsem přihlášen
   - Stav přihlášky (potvrzeno, čeká na platbu...)
   - Quick actions (odhlásit se, detail závodu)
-- [ ] **Zašpendlené závody** - závody které sleduji, i když nejsem přihlášen
+- [x] **Zašpendlené závody** - závody které sleduji, i když nejsem přihlášen
   - Notifikace při zveřejnění: rozpis, startovka, propozice, výsledky
   - Rychlé přihlášení se
-- [ ] **Historie přihlášek** - archiv minulých přihlášek s výsledky
-- [ ] **Stav prohlídky** - varování před expirací
+- [x] **Historie přihlášek** - archiv minulých přihlášek s výsledky
+- [x] **Stav prohlídky** - varování před expirací (již implementováno dříve)
 
 #### UI prvky:
-- [ ] **Pin/Unpin button** na EventDetailPage a CalendarPage
-- [ ] **Badge s počtem** zašpendlených závodů
-- [ ] **Timeline/Feed** aktualizací sledovaných závodů
+- [x] **Pin/Unpin button** na sledované závody
+- [x] **Badge s počtem** přihlášek a sledovaných závodů v záložkách
+- [x] **Feed** aktualizací sledovaných závodů
 
 #### Varianty:
-- [ ] **Satellite** - pouze satellite (interní aplikace)
+- [x] **Satellite** - pouze satellite (interní aplikace)
 
 ---
 

@@ -919,6 +919,417 @@
 }
 
 /* ============================================================================
+   Registrations Tab
+   ============================================================================ */
+
+.profile-registrations {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.profile-registrations-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-registration-item {
+  display: flex;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color var(--transition-fast);
+}
+
+.profile-registration-item:last-child {
+  border-bottom: none;
+}
+
+.profile-registration-item:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+.profile-registration-item__date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  padding: var(--spacing-2);
+  background: var(--color-primary-subtle);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.profile-registration-item__day {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.profile-registration-item__month {
+  font-size: var(--font-size-xs);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  font-weight: var(--font-weight-medium);
+}
+
+.profile-registration-item__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.profile-registration-item__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+.profile-registration-item__name {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.profile-registration-item__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.profile-registration-item__meta span {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.profile-registration-item__meta svg {
+  width: 14px;
+  height: 14px;
+}
+
+.profile-registration-item__payment {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  background-color: var(--color-warning-subtle);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-warning-dark);
+}
+
+.profile-registration-item__payment svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-warning);
+}
+
+.profile-registration-item__payment .csk-button {
+  margin-left: auto;
+}
+
+.profile-registration-item__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  align-items: flex-end;
+}
+
+.profile-registration-item__actions svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Registration History */
+.profile-registration-history {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-registration-history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.profile-registration-history-item:last-child {
+  border-bottom: none;
+}
+
+.profile-registration-history-item__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profile-registration-history-item__name {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.profile-registration-history-item__date {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.profile-registration-history-item__result {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.profile-registration-history-item__points {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* ============================================================================
+   Pinned Events Tab
+   ============================================================================ */
+
+.profile-pinned {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.profile-pinned-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.profile-pinned-item {
+  padding: var(--spacing-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-primary);
+  transition: all var(--transition-normal);
+}
+
+.profile-pinned-item:hover {
+  border-color: var(--color-primary-300);
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-pinned-item--live {
+  border-color: var(--color-danger);
+  background: linear-gradient(135deg, var(--color-danger-subtle) 0%, var(--color-surface-primary) 100%);
+}
+
+.profile-pinned-item--finished {
+  opacity: 0.8;
+}
+
+.profile-pinned-item__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-3);
+}
+
+.profile-pinned-item__title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.profile-pinned-item__name {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.profile-pinned-item__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-3);
+}
+
+.profile-pinned-item__meta span {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.profile-pinned-item__meta svg {
+  width: 14px;
+  height: 14px;
+}
+
+.profile-pinned-item__deadline {
+  color: var(--color-warning-dark);
+  font-weight: var(--font-weight-medium);
+}
+
+.profile-pinned-item__documents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-3);
+}
+
+.profile-pinned-item__documents span {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.profile-pinned-item__documents .available {
+  color: var(--color-success);
+}
+
+.profile-pinned-item__documents .unavailable {
+  color: var(--color-text-muted);
+}
+
+.profile-pinned-item__updates {
+  padding: var(--spacing-3);
+  background: var(--color-primary-subtle);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-3);
+}
+
+.profile-pinned-item__updates h4 {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--spacing-2);
+}
+
+.profile-pinned-item__update {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-1) 0;
+  font-size: var(--font-size-sm);
+}
+
+.profile-pinned-item__update svg {
+  width: 14px;
+  height: 14px;
+  color: var(--color-primary);
+}
+
+.profile-pinned-item__update-title {
+  color: var(--color-text-primary);
+}
+
+.profile-pinned-item__update-time {
+  color: var(--color-text-muted);
+  margin-left: auto;
+}
+
+.profile-pinned-item__actions {
+  display: flex;
+  gap: var(--spacing-2);
+  justify-content: flex-end;
+}
+
+.profile-pinned-item__actions svg {
+  width: 16px;
+  height: 16px;
+  margin-right: var(--spacing-1);
+}
+
+/* Empty State */
+.profile-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-8);
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.profile-empty-state svg {
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--spacing-3);
+  opacity: 0.5;
+}
+
+.profile-empty-state p {
+  margin: 0 0 var(--spacing-4);
+  font-size: var(--font-size-base);
+}
+
+/* ============================================================================
+   Responsive - Registrations & Pinned
+   ============================================================================ */
+
+@media (max-width: 640px) {
+  .profile-registration-item {
+    flex-direction: column;
+    gap: var(--spacing-3);
+  }
+
+  .profile-registration-item__date {
+    flex-direction: row;
+    gap: var(--spacing-2);
+    min-width: auto;
+    padding: var(--spacing-2) var(--spacing-3);
+  }
+
+  .profile-registration-item__actions {
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .profile-registration-item__payment {
+    flex-wrap: wrap;
+  }
+
+  .profile-pinned-item__header {
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+
+  .profile-pinned-item__meta {
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+
+  .profile-pinned-item__documents {
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+
+  .profile-pinned-item__actions {
+    flex-direction: column;
+  }
+
+  .profile-pinned-item__actions .csk-button {
+    width: 100%;
+  }
+}
+
+/* ============================================================================
    Reduced Motion Support
    ============================================================================ */
 
@@ -928,7 +1339,9 @@
   }
 
   .profile-achievement,
-  .profile-status-card {
+  .profile-status-card,
+  .profile-registration-item,
+  .profile-pinned-item {
     transition: none;
   }
 }

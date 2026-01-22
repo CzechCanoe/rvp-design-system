@@ -4113,3 +4113,28 @@ tests/
 - Struktura analogická k AthletePublicProfile
 - Využívá existující komponenty: Avatar, Badge, Tabs, Button, Header
 - Sample data: USK Praha s 8 členy včetně Jiřího Prskavce
+
+---
+
+## 2026-01-22 - Fáze 8.14: ProfilePage rozšíření
+
+### Dokončeno
+- [x] Přidána záložka "Přihlášky" s přehledem nadcházejících závodů
+- [x] Přidána záložka "Sledované" s pinned závody a notifikacemi
+- [x] Implementován stav přihlášky (potvrzeno, čeká na platbu, náhradník)
+- [x] Přidána historie přihlášek s výsledky
+- [x] Feed aktualizací sledovaných závodů
+- [x] Pin/Unpin akce pro sledované závody
+- [x] Responzivní CSS pro nové sekce
+
+### Nové typy
+- `Registration` - přihláška na závod se stavem
+- `PinnedEvent` - sledovaný závod s dostupnými dokumenty
+- `PinnedEventUpdate` - aktualizace sledovaného závodu
+
+### Nové ikony
+- PinIcon, UnpinIcon, CalendarIcon, ClockIcon, MapPinIcon, BellIcon, ExternalLinkIcon
+
+### Poznámky
+- ProfilePage nyní obsahuje 5 záložek: Přehled, Přihlášky, Sledované, Výsledky, Historie
+- Počty v záložkách dynamicky zobrazují počet přihlášek/sledovaných
