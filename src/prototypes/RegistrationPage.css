@@ -1120,3 +1120,120 @@
     transition: none;
   }
 }
+
+/* ============================================================================
+   Satellite Variant - Clean internal registration design
+   ============================================================================ */
+
+.registration-page--satellite {
+  background-color: var(--color-bg-secondary, #f8f9fa);
+}
+
+.registration-page__satellite-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.registration-page__satellite-logo-text {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-primary);
+}
+
+/* Page Header for Satellite */
+.registration-page-header {
+  background: var(--color-surface-primary);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-4) var(--spacing-4) var(--spacing-5);
+}
+
+.registration-page-header__content {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.registration-page-header__breadcrumb {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-3);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.registration-page-header__breadcrumb-link {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.registration-page-header__breadcrumb-link:hover {
+  text-decoration: underline;
+}
+
+.registration-page-header__breadcrumb-separator {
+  color: var(--color-text-muted);
+}
+
+.registration-page-header__row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+}
+
+.registration-page-header__info {
+  flex: 1;
+}
+
+.registration-page-header__badges {
+  display: flex;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+}
+
+.registration-page-header__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-2) 0;
+  line-height: 1.2;
+}
+
+.registration-page-header__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.registration-page-header__meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.registration-page-header__meta-item svg {
+  opacity: 0.7;
+}
+
+/* Satellite main content adjustments */
+.registration-page--satellite .registration-page__main {
+  margin-top: 0;
+}
+
+/* Satellite responsive */
+@media (max-width: 768px) {
+  .registration-page-header__row {
+    flex-direction: column;
+  }
+
+  .registration-page-header__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+  }
+}

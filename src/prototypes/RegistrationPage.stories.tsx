@@ -19,6 +19,9 @@ import './RegistrationPage.css';
 // Types
 // ============================================================================
 
+/** Display variant for the page */
+type RegistrationPageVariant = 'standalone' | 'satellite';
+
 interface RegistrationPageProps {
   /** Club name */
   clubName?: string;
@@ -28,8 +31,8 @@ interface RegistrationPageProps {
   initialStep?: number;
   /** Section (discipline) */
   section?: 'dv' | 'ry' | 'vt';
-  /** Show hero section */
-  showHero?: boolean;
+  /** Display variant - standalone (full header with hero), satellite (minimal header) */
+  variant?: RegistrationPageVariant;
 }
 
 interface Athlete {
@@ -111,6 +114,16 @@ const sectionNames: Record<string, string> = {
   ry: 'Rychlostní kanoistika',
   vt: 'Vodní turistika',
 };
+
+// ============================================================================
+// CSK Logo Component (for satellite header)
+// ============================================================================
+
+const CSKLogo = () => (
+  <span className="registration-page__satellite-logo">
+    <span className="registration-page__satellite-logo-text">CSK</span>
+  </span>
+);
 
 // ============================================================================
 // Icons
@@ -285,7 +298,7 @@ const RegistrationPageInner = ({
   clubName = 'TJ Bohemians Praha',
   initialStep = 0,
   section = 'dv',
-  showHero = true,
+  variant = 'standalone',
 }: RegistrationPageProps) => {
   const [currentStep, setCurrentStep] = useState(initialStep);
   const [athletes] = useState<Athlete[]>(generateAthletes);
@@ -392,6 +405,176 @@ const RegistrationPageInner = ({
     (e) => e.athlete.healthCheck !== 'valid' || e.athlete.fees === 'unpaid'
   ).length;
 
+  // Render header based on variant
+  const renderHeader = () => {
+    if (variant === 'satellite') {
+      return (
+        <Header
+          variant="satellite"
+          size="sm"
+          bordered
+          brand={<CSKLogo />}
+          appName="Přihlášky"
+          homeLink="https://kanoe.cz"
+          homeLinkLabel="kanoe.cz"
+          userMenu={
+            <div className="registration-page__user-info">
+              <span className="registration-page__club-name">{clubName}</span>
+              <Button variant="ghost" size="sm">
+                Odhlásit
+              </Button>
+            </div>
+          }
+        />
+      );
+    }
+    // Default: standalone with full navigation
+    return (
+      <Header
+        variant="default"
+        size="md"
+        bordered
+        brand={
+          <a href="#" className="registration-page__logo">
+            <span className="registration-page__logo-text">CSK</span>
+            <span className="registration-page__logo-subtitle">Český svaz kanoistů</span>
+          </a>
+        }
+        navigation={
+          <MainNav
+            items={navItems}
+            variant="horizontal"
+            showMobileToggle={false}
+            onItemClick={(item) => console.log('Nav click:', item)}
+          />
+        }
+        search={
+          <Input
+            type="search"
+            placeholder="Hledat..."
+            size="sm"
+            iconLeft={<SearchIcon />}
+          />
+        }
+        userMenu={
+          <div className="registration-page__user-info">
+            <span className="registration-page__club-name">{clubName}</span>
+            <Button variant="ghost" size="sm">
+              Odhlásit
+            </Button>
+          </div>
+        }
+      />
+    );
+  };
+
+  // Render page header based on variant
+  const renderPageHeader = () => {
+    if (variant === 'satellite') {
+      return (
+        <section className="registration-page-header registration-page-header--satellite">
+          <div className="registration-page-header__content">
+            <div className="registration-page-header__breadcrumb">
+              <a href="https://kanoe.cz" className="registration-page-header__breadcrumb-link">Domů</a>
+              <span className="registration-page-header__breadcrumb-separator">/</span>
+              <a href="#" className="registration-page-header__breadcrumb-link">Přihlášky</a>
+              <span className="registration-page-header__breadcrumb-separator">/</span>
+              <span>{raceData.name}</span>
+            </div>
+            <div className="registration-page-header__row">
+              <div className="registration-page-header__info">
+                <div className="registration-page-header__badges">
+                  <Badge section={section} size="sm">
+                    {sectionNames[section]}
+                  </Badge>
+                </div>
+                <h1 className="registration-page-header__title">{raceData.name}</h1>
+                <p className="registration-page-header__meta">
+                  <span className="registration-page-header__meta-item">
+                    <CalendarIcon />
+                    {raceData.date}
+                  </span>
+                  <span className="registration-page-header__meta-item">
+                    <LocationIcon />
+                    {raceData.location}
+                  </span>
+                  <span className="registration-page-header__meta-item">
+                    <ClockIcon />
+                    {timeToDeadline.text} do uzávěrky
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+    // Standalone: hero section
+    return (
+      <section className={`registration-page-hero registration-page-hero--${section}`}>
+        <div className="registration-page-hero__background">
+          <div className="registration-page-hero__gradient" />
+          <div className="registration-page-hero__pattern" />
+        </div>
+        <div className="registration-page-hero__content">
+          {/* Breadcrumb */}
+          <nav className="registration-page-hero__breadcrumb">
+            <a href="#" className="registration-page-hero__breadcrumb-link">Přihlášky</a>
+            <ChevronRightIcon />
+            <a href="#" className="registration-page-hero__breadcrumb-link">Kalendář závodů</a>
+            <ChevronRightIcon />
+            <span className="registration-page-hero__breadcrumb-current">{raceData.name}</span>
+          </nav>
+
+          <div className="registration-page-hero__main">
+            <div className="registration-page-hero__text">
+              <div className="registration-page-hero__badges">
+                <Badge section={section} size="md" glow>
+                  {sectionNames[section]}
+                </Badge>
+                <Badge variant="default" size="md" outlined>
+                  Český pohár
+                </Badge>
+              </div>
+              <h1 className="registration-page-hero__title">{raceData.name}</h1>
+              <div className="registration-page-hero__meta">
+                <span className="registration-page-hero__meta-item">
+                  <CalendarIcon />
+                  {raceData.date}
+                </span>
+                <span className="registration-page-hero__meta-item">
+                  <LocationIcon />
+                  {raceData.location}
+                </span>
+              </div>
+            </div>
+
+            <div className="registration-page-hero__stats">
+              <div className="registration-page-hero__stat registration-page-hero__stat--deadline">
+                <div className="registration-page-hero__stat-icon">
+                  <ClockIcon />
+                </div>
+                <div className="registration-page-hero__stat-content">
+                  <span className="registration-page-hero__stat-value">{timeToDeadline.days}</span>
+                  <span className="registration-page-hero__stat-label">dní do uzávěrky</span>
+                </div>
+              </div>
+              <div className="registration-page-hero__stat">
+                <div className="registration-page-hero__stat-icon">
+                  <UsersIcon />
+                </div>
+                <div className="registration-page-hero__stat-content">
+                  <span className="registration-page-hero__stat-value">{athletes.length}</span>
+                  <span className="registration-page-hero__stat-label">závodníků v oddílu</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  };
+
   // Table data for entries
   const entriesTableData = entries.filter((e) => e.discipline === selectedDiscipline).map((entry) => {
     const healthStatus = getHealthCheckStatus(entry.athlete);
@@ -443,109 +626,12 @@ const RegistrationPageInner = ({
   }));
 
   return (
-    <div className={`registration-page registration-page--${section}`}>
+    <div className={`registration-page registration-page--${section} ${variant === 'satellite' ? 'registration-page--satellite' : ''}`}>
       {/* Header */}
-      <Header
-        variant="default"
-        size="md"
-        bordered
-        brand={
-          <a href="#" className="registration-page__logo">
-            <span className="registration-page__logo-text">CSK</span>
-            <span className="registration-page__logo-subtitle">Český svaz kanoistů</span>
-          </a>
-        }
-        navigation={
-          <MainNav
-            items={navItems}
-            variant="horizontal"
-            showMobileToggle={false}
-            onItemClick={(item) => console.log('Nav click:', item)}
-          />
-        }
-        search={
-          <Input
-            type="search"
-            placeholder="Hledat..."
-            size="sm"
-            iconLeft={<SearchIcon />}
-          />
-        }
-        userMenu={
-          <div className="registration-page__user-info">
-            <span className="registration-page__club-name">{clubName}</span>
-            <Button variant="ghost" size="sm">
-              Odhlásit
-            </Button>
-          </div>
-        }
-      />
+      {renderHeader()}
 
-      {/* Hero Section */}
-      {showHero && (
-        <section className={`registration-page-hero registration-page-hero--${section}`}>
-          <div className="registration-page-hero__background">
-            <div className="registration-page-hero__gradient" />
-            <div className="registration-page-hero__pattern" />
-          </div>
-          <div className="registration-page-hero__content">
-            {/* Breadcrumb */}
-            <nav className="registration-page-hero__breadcrumb">
-              <a href="#" className="registration-page-hero__breadcrumb-link">Přihlášky</a>
-              <ChevronRightIcon />
-              <a href="#" className="registration-page-hero__breadcrumb-link">Kalendář závodů</a>
-              <ChevronRightIcon />
-              <span className="registration-page-hero__breadcrumb-current">{raceData.name}</span>
-            </nav>
-
-            <div className="registration-page-hero__main">
-              <div className="registration-page-hero__text">
-                <div className="registration-page-hero__badges">
-                  <Badge section={section} size="md" glow>
-                    {sectionNames[section]}
-                  </Badge>
-                  <Badge variant="default" size="md" outlined>
-                    Český pohár
-                  </Badge>
-                </div>
-                <h1 className="registration-page-hero__title">{raceData.name}</h1>
-                <div className="registration-page-hero__meta">
-                  <span className="registration-page-hero__meta-item">
-                    <CalendarIcon />
-                    {raceData.date}
-                  </span>
-                  <span className="registration-page-hero__meta-item">
-                    <LocationIcon />
-                    {raceData.location}
-                  </span>
-                </div>
-              </div>
-
-              <div className="registration-page-hero__stats">
-                <div className="registration-page-hero__stat registration-page-hero__stat--deadline">
-                  <div className="registration-page-hero__stat-icon">
-                    <ClockIcon />
-                  </div>
-                  <div className="registration-page-hero__stat-content">
-                    <span className="registration-page-hero__stat-value">{timeToDeadline.days}</span>
-                    <span className="registration-page-hero__stat-label">dní do uzávěrky</span>
-                  </div>
-                </div>
-                <div className="registration-page-hero__stat">
-                  <div className="registration-page-hero__stat-icon">
-                    <UsersIcon />
-                  </div>
-                  <div className="registration-page-hero__stat-content">
-                    <span className="registration-page-hero__stat-value">{athletes.length}</span>
-                    <span className="registration-page-hero__stat-label">závodníků v oddílu</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* Note: WaveDecoration removed for cleaner design (Phase 8.6.3) */}
-        </section>
-      )}
+      {/* Page Header / Hero Section */}
+      {renderPageHeader()}
 
       {/* Main content */}
       <main className="registration-page__main">
@@ -1049,6 +1135,11 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
+    variant: {
+      control: 'select',
+      options: ['standalone', 'satellite'],
+      description: 'Display variant',
+    },
     clubName: {
       control: 'text',
       description: 'Name of the club making the registration',
@@ -1062,10 +1153,6 @@ const meta = {
       options: ['dv', 'ry', 'vt'],
       description: 'Discipline section for theming',
     },
-    showHero: {
-      control: 'boolean',
-      description: 'Show hero section',
-    },
   },
 } satisfies Meta<typeof RegistrationPage>;
 
@@ -1073,73 +1160,34 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /**
- * Výchozí zobrazení - první krok přihlášky (záhlaví) s hero sekcí.
+ * Satellite varianta - přihlášky s minimálním headerem pro interní aplikace.
+ *
+ * Použij args pro přepnutí:
+ * - `initialStep: 0/1/2` - krok wizardu (záhlaví / výběr závodníků / shrnutí)
+ * - `section: 'dv'/'ry'/'vt'` - disciplína (divoká voda / rychlost / vodní turistika)
  */
-export const Default: Story = {
+export const Satellite: Story = {
   args: {
+    variant: 'satellite',
     clubName: 'TJ Bohemians Praha',
     initialStep: 0,
     section: 'dv',
-    showHero: true,
   },
-};
+  parameters: {
+    docs: {
+      description: {
+        story: `Wizard pro oddílové přihlašování na závody se satellite headerem. Čistý design pro interní aplikace.
 
-/**
- * Krok výběru závodníků.
- */
-export const VyberZavodniku: Story = {
-  args: {
-    clubName: 'TJ Bohemians Praha',
-    initialStep: 1,
-    section: 'dv',
-    showHero: true,
-  },
-};
+**Použij args pro přepnutí kroku:**
+- \`initialStep: 0\` - Záhlaví přihlášky (kontaktní údaje)
+- \`initialStep: 1\` - Výběr závodníků
+- \`initialStep: 2\` - Shrnutí a odeslání
 
-/**
- * Shrnutí a odeslání přihlášky.
- */
-export const Shrnuti: Story = {
-  args: {
-    clubName: 'TJ Bohemians Praha',
-    initialStep: 2,
-    section: 'dv',
-    showHero: true,
-  },
-};
-
-/**
- * Rychlostní kanoistika - zelené disciplínové téma.
- */
-export const Rychlostni: Story = {
-  args: {
-    clubName: 'USK Praha',
-    initialStep: 0,
-    section: 'ry',
-    showHero: true,
-  },
-};
-
-/**
- * Vodní turistika - červené disciplínové téma.
- */
-export const VodniTuristika: Story = {
-  args: {
-    clubName: 'KVS Hranice',
-    initialStep: 0,
-    section: 'vt',
-    showHero: true,
-  },
-};
-
-/**
- * Kompaktní zobrazení bez hero sekce.
- */
-export const Compact: Story = {
-  args: {
-    clubName: 'TJ Bohemians Praha',
-    initialStep: 0,
-    section: 'dv',
-    showHero: false,
+**Disciplíny (mění barevné téma):**
+- \`section: 'dv'\` - Divoká voda (modrá)
+- \`section: 'ry'\` - Rychlost (zelená)
+- \`section: 'vt'\` - Vodní turistika (červená)`,
+      },
+    },
   },
 };
