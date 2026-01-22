@@ -20,7 +20,8 @@
 | **9 - Audit DS** | 9.4.1 Iterace 1 (Tier 3 high-priority) | ✅ Hotovo |
 | **9 - Audit DS** | 9.4.2 Iterace 2 (Tier 2) | ✅ Hotovo |
 | **9 - Audit DS** | 9.4.3 Iterace 3 (Tier 1) | ✅ Hotovo |
-| **9 - Audit DS** | 9.4.4 Finalizace | 🔲 Další krok |
+| **9 - Audit DS** | 9.4.1-review Revize Tier 3 | 🔲 Další krok |
+| **9 - Audit DS** | 9.4.4 Finalizace | 🔲 Později |
 | **13 - Testování** | Playwright testy integrace | 🔲 Později |
 
 ---
@@ -631,6 +632,16 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 - [x] Skeleton: 20 → 6 stories
 
 **Celkem Tier 1:** 203 → 70 stories (-65%)
+
+#### 9.4.1-review: Revize Tier 3 high-priority 🔲
+**Důvod:** Při 9.4.1 došel kontext a PLAN.md nebyl správně aktualizován. Nutná kontrola kvality provedené práce.
+
+- [ ] AthleteCard: zkontrolovat stories, argTypes, dokumentaci
+- [ ] LiveIndicator: zkontrolovat stories, argTypes, dokumentaci
+- [ ] ResultsTable: zkontrolovat stories, argTypes, dokumentaci
+- [ ] StatCard: zkontrolovat stories, argTypes, dokumentaci
+- [ ] Ověřit, že všechny stories fungují v Storybooku
+- [ ] Zkontrolovat konzistenci s Tier 1/2 přístupem
 
 #### 9.4.4 Finalizace
 - [x] Ověřit konzistenci API a naming conventions
