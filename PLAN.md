@@ -10,7 +10,8 @@
 | **8 - Integrace** | 8.12 Clubs List | ✅ Hotovo |
 | **8 - Integrace** | 8.13 Club Public Profile | ✅ Hotovo |
 | **8 - Integrace** | 8.14 ProfilePage rozšíření | ✅ Hotovo |
-| **9 - Audit DS** | 9.1-9.4 Audit a racionalizace | 🔲 Čeká |
+| **9 - Audit DS** | 9.1.1 Audit Tier 1 (Core) | ✅ Hotovo |
+| **9 - Audit DS** | 9.1.2-9.4 Zbývající audit | 🔲 Další krok |
 | **13 - Testování** | Playwright testy integrace | 🔲 Později |
 
 ---
@@ -325,17 +326,17 @@ Projít všechny komponenty a vyhodnotit:
 | **Je konzistentní s ostatními?** | Stejné naming conventions, prop patterns, CSS struktura? |
 | **Je kompatibilní s kanoe.cz?** | Jak vypadá v embed módu vedle Bootstrap 4 prvků? Nevyčnívá? |
 
-#### 9.1.1 Audit Tier 1 (Core) - 10 komponent
-- [ ] **Button** - varianty, velikosti, stavy
-- [ ] **Badge** - varianty, section/vtClass speciality
-- [ ] **Card** - varianty (surface, elevated, outlined, gradient, glass, featured)
-- [ ] **Input** - typy, velikosti, stavy
-- [ ] **Select** - komplexnost vs. použití
-- [ ] **Checkbox** - potřebnost, varianty
-- [ ] **Radio** - potřebnost, varianty
-- [ ] **Switch** - potřebnost, varianty
-- [ ] **Avatar** - velikosti, varianty
-- [ ] **Skeleton** - potřebnost
+#### 9.1.1 Audit Tier 1 (Core) - 10 komponent ✅
+- [x] **Button** - 6 variant, 3 velikosti, všechny používané ✅ OK
+- [x] **Badge** - 10 variant + section/vtClass, 66× v prototypech ✅ OK
+- [x] **Card** - 6 variant, používá se hlavně surface (19×), outlined (6×) ✅ OK, zvážit odstranění glass/featured
+- [x] **Input** - 24× v prototypech ✅ OK
+- [x] **Select** - 40× v prototypech ✅ OK
+- [x] **Checkbox** - ⚠️ jen 2× (RegistrationPage), 18 stories → ZJEDNODUŠIT
+- [x] **Radio** - ⚠️ 0× v prototypech, 19 stories → ZVÁŽIT ODSTRANĚNÍ
+- [x] **Switch** - ⚠️ jen 7× (Calendar, Live), 21 stories → ZJEDNODUŠIT
+- [x] **Avatar** - 12× v prototypech ✅ OK
+- [x] **Skeleton** - ⚠️ 0× v prototypech, 20 stories → ZVÁŽIT ODSTRANĚNÍ
 
 #### 9.1.2 Audit Tier 2 (Advanced) - 10 komponent
 - [ ] **Tabs** - varianty (line, pills, underline)

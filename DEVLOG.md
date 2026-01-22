@@ -4138,3 +4138,45 @@ tests/
 ### Poznámky
 - ProfilePage nyní obsahuje 5 záložek: Přehled, Přihlášky, Sledované, Výsledky, Historie
 - Počty v záložkách dynamicky zobrazují počet přihlášek/sledovaných
+
+---
+
+## 2026-01-22 - Fáze 9.1.1: Audit Tier 1 (Core) komponenty
+
+### Dokončeno
+- [x] Audit všech 10 Tier 1 komponent
+- [x] Analýza použití v prototypech
+- [x] Identifikace problematických komponent
+
+### Výsledky auditu
+
+| Komponenta | Použití v prototypech | Stories | Varianty | Status |
+|------------|----------------------|---------|----------|--------|
+| **Button** | 68× (ghost 38×, secondary 15×, primary 13×, gradient 2×) | 24 | 6 | ✅ OK |
+| **Badge** | 66× | 16 | 10 + section/vtClass | ✅ OK |
+| **Card** | 52× (surface 19×, outlined 6×, elevated 1×, gradient 1×) | 24 | 6 | ✅ OK, zvážit glass/featured |
+| **Input** | 24× | 24 | - | ✅ OK |
+| **Select** | 40× | 21 | - | ✅ OK |
+| **Checkbox** | 2× (jen RegistrationPage) | 18 | - | ⚠️ ZJEDNODUŠIT |
+| **Radio** | 0× | 19 | - | ⚠️ ZVÁŽIT ODSTRANĚNÍ |
+| **Switch** | 7× (Calendar, Live) | 21 | - | ⚠️ ZJEDNODUŠIT |
+| **Avatar** | 12× | 17 | 3 | ✅ OK |
+| **Skeleton** | 0× | 20 | - | ⚠️ ZVÁŽIT ODSTRANĚNÍ |
+
+### Identifikované problémy
+
+1. **Radio** - 19 stories, 0× použití v prototypech → kandidát na odstranění
+2. **Skeleton** - 20 stories, 0× použití v prototypech → kandidát na odstranění
+3. **Checkbox** - 18 stories pro 2× použití → přebujelé
+4. **Switch** - 21 stories pro 7× použití → přebujelé
+
+### Doporučení pro 9.3 Racionalizaci
+
+1. **K odstranění:** Radio, Skeleton (nebo redukce na 2-3 stories)
+2. **K zjednodušení:** Checkbox (z 18 na 3-4 stories), Switch (z 21 na 5-6 stories)
+3. **K revizi:** Card - varianty glass a featured se nepoužívají
+
+### Poznámky
+- Button varianta `danger` a `gradient-accent` se nepoužívají v prototypech, ale mají smysl pro budoucí použití
+- Embed styling pro Button je v mode.css (řádek 399-402)
+- Všechny Tier 1 komponenty mají embed mode podporu
