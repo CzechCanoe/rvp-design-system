@@ -15,7 +15,9 @@
 | **9 - Audit DS** | 9.1.3 Audit Tier 3 (Specific) | ✅ Hotovo |
 | **9 - Audit DS** | 9.1.4 Audit Stories | ✅ Hotovo |
 | **9 - Audit DS** | 9.1.5 Audit embed kompatibility | ✅ Hotovo |
-| **9 - Audit DS** | 9.2-9.4 Definice rozsahu a racionalizace | 🔲 Další krok |
+| **9 - Audit DS** | 9.2 Definice rozsahu DS | ✅ Hotovo |
+| **9 - Audit DS** | 9.3 Plán racionalizace | ✅ Hotovo |
+| **9 - Audit DS** | 9.4 Implementace racionalizace | 🔲 Další krok |
 | **13 - Testování** | Playwright testy integrace | 🔲 Později |
 
 ---
@@ -506,60 +508,109 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 
 ---
 
-### 9.2 Definice úrovně rozsahu DS
+### 9.2 Definice úrovně rozsahu DS ✅
 
-**Rozhodnutí k učinění:**
+**Rozhodnutí:**
 
-#### A) Šíře pokrytí
-| Úroveň | Popis |
-|--------|-------|
-| **Minimální** | Pouze komponenty přímo potřebné pro prototypy |
-| **Střední** | Core + komponenty pro běžné UI patterny |
-| **Široká** | Kompletní UI toolkit pro jakoukoliv aplikaci |
+#### A) Šíře pokrytí → **STŘEDNÍ**
+- Komponenty přímo použité v prototypech + běžné UI patterny
+- Zachovat všechny komponenty, ale zjednodušit stories
 
-→ **Doporučení:** Střední úroveň - pokrýt reálné potřeby, ne hypotetické
+#### B) Hloubka variant → **MINIMÁLNÍ**
+- Každá varianta musí mít reálné využití v prototypech
+- Zredukovat počet stories sloučením do argTypes
 
-#### B) Hloubka variant
-| Úroveň | Popis |
-|--------|-------|
-| **Minimální** | 1-2 varianty na komponentu |
-| **Střední** | 3-4 varianty pro klíčové komponenty |
-| **Široká** | 5+ variant, všechny edge cases |
+#### C) Režimy zobrazení → **ZACHOVAT VŠECHNY TŘI**
+| Režim | Použití |
+|-------|---------|
+| **Utility** | Default mód, backoffice aplikace (DashboardPage, ProfilePage, RegistrationPage) |
+| **Expressive** | Hero sekce v AthletePublicProfile, standalone marketing stránky |
+| **Embed** | Hlavní use case - komponenty embedované do kanoe.cz |
 
-→ **Doporučení:** Minimální až střední - každá varianta musí mít reálné využití
-
-#### C) Režimy zobrazení
-| Režim | Zachovat? |
-|-------|-----------|
-| **Utility** | ❓ Používá se vůbec? Nebo jen embed a expressive? |
-| **Expressive** | ✅ Ano - pro AthletePublicProfile a podobné |
-| **Embed** | ✅ Ano - hlavní use case |
+**Zdůvodnění:** Utility mód je default (:root), používá se automaticky pro satellite prototypy. Všechny tři módy mají definované CSS tokeny a jsou aktivně podporované.
 
 ---
 
-### 9.3 Výstup auditu → Plán racionalizace
+### 9.3 Plán racionalizace ✅
 
-Po dokončení 9.1 a 9.2 vznikne konkrétní plán:
+#### 9.3.1 Komponenty k ZACHOVÁNÍ (všechny)
+Žádná komponenta se neodstraňuje - všechny mají potenciální využití nebo jsou připravené pro budoucí funkcionalitu (Dropzone pro upload, Skeleton pro loading states).
 
-- [ ] **9.3.1** Seznam komponent k ODSTRANĚNÍ (nepoužívané)
-- [ ] **9.3.2** Seznam komponent ke ZJEDNODUŠENÍ (příliš mnoho variant)
-- [ ] **9.3.3** Seznam komponent k SJEDNOCENÍ (nekonzistentní API/styling)
-- [ ] **9.3.4** Seznam stories k ODSTRANĚNÍ (duplicitní, neužitečné)
-- [ ] **9.3.5** Aktualizace design tokenů (nepoužívané tokeny)
-- [ ] **9.3.6** Seznam úprav embed stylů pro kompatibilitu s kanoe.cz
+#### 9.3.2 Komponenty ke ZJEDNODUŠENÍ stories
+
+**Vysoká priorita (>25 stories):**
+| Komponenta | Aktuálně | Cíl | Akce |
+|------------|----------|-----|------|
+| AthleteCard | 40 | 15 | Sloučit section/vtClass/size do argTypes |
+| LiveIndicator | 30 | 10 | Sloučit status/style varianty |
+| ResultsTable | 30 | 15 | Sloučit discipline/format varianty |
+| StatCard | 29 | 12 | Sloučit color/style varianty |
+
+**Střední priorita (20-25 stories):**
+| Komponenta | Aktuálně | Cíl | Akce |
+|------------|----------|-----|------|
+| Tabs | 26 | 12 | Sloučit orientation/variant do argTypes |
+| Navigation | 25 | 12 | Sloučit style/orientation varianty |
+| Button | 25 | 12 | Sloučit size/variant do comparison stories |
+| Card | 24 | 10 | Sloučit 6 variant stories do jedné |
+| Input | 24 | 10 | Sloučit state/validation stories |
+| Calendar | 24 | 12 | Sloučit view mode stories |
+| Modal | 23 | 10 | Sloučit size/animation stories |
+| Pagination | 23 | 10 | Sloučit variant/size stories |
+| EmptyState | 22 | 10 | Sloučit variant stories |
+| Progress | 22 | 10 | Sloučit variant/size stories |
+| Toast | 19 | 10 | Sloučit type stories do comparison |
+| Select | 21 | 10 | Sloučit state/validation stories |
+| Switch | 21 | 10 | Sloučit size/state stories |
+| Skeleton | 20 | 8 | Sloučit shape stories |
+| Radio | 19 | 8 | Sloučit state stories |
+| Checkbox | 18 | 8 | Sloučit state stories |
+| Avatar | 17 | 10 | OK, minimální zjednodušení |
+| Table | 16 | 12 | OK |
+| Timeline | 16 | 10 | OK |
+
+#### 9.3.3 Vzory pro sloučení stories
+
+1. **Section varianty** (DV/RY/VT) → argTypes selector místo 3 stories
+2. **VT class varianty** (M/A/B/C) → argTypes selector místo 4 stories
+3. **Size varianty** (sm/md/lg) → jedna "Sizes" comparison story
+4. **Color/variant showcase** → jedna comparison story s grid layoutem
+5. **State varianty** (default/hover/focus/disabled) → jedna "States" story
+
+#### 9.3.4 Cílový počet stories
+
+| Kategorie | Aktuálně | Cíl | Redukce |
+|-----------|----------|-----|---------|
+| Tier 1 (Core) | 203 | ~90 | -55% |
+| Tier 2 (Advanced) | 200 | ~100 | -50% |
+| Tier 3 (Specific) | 233 | ~110 | -53% |
+| Prototypes | 36 | 36 | 0% |
+| **CELKEM** | **672** | **~336** | **-50%** |
 
 ---
 
-### 9.4 Implementace racionalizace
+### 9.4 Implementace racionalizace 🔲
 
-*(Konkrétní kroky doplníme po dokončení auditu)*
+*(Implementace bude provedena v iteracích po skupinách komponent)*
 
-- [ ] Odstranit nepotřebné komponenty
-- [ ] Zjednodušit přebujelé komponenty
-- [ ] Sjednotit API a naming conventions
-- [ ] Vyčistit CSS tokeny
-- [ ] Upravit embed styly pro lepší kompatibilitu s kanoe.cz
+#### 9.4.1 Iterace 1: Tier 3 high-priority (4 komponenty)
+- [ ] AthleteCard: 40 → 15 stories
+- [ ] LiveIndicator: 30 → 10 stories
+- [ ] ResultsTable: 30 → 15 stories
+- [ ] StatCard: 29 → 12 stories
+
+#### 9.4.2 Iterace 2: Tier 2 (10 komponent)
+- [ ] Tabs, Navigation, Modal, Pagination, EmptyState
+- [ ] Progress, Toast, Table, Timeline, Dropzone
+
+#### 9.4.3 Iterace 3: Tier 1 (10 komponent)
+- [ ] Button, Badge, Card, Input, Select
+- [ ] Checkbox, Radio, Switch, Avatar, Skeleton
+
+#### 9.4.4 Finalizace
+- [ ] Ověřit konzistenci API a naming conventions
 - [ ] Aktualizovat dokumentaci
+- [ ] Spustit Playwright testy
 
 **Milestone M9:** DS je racionalizovaný, konzistentní a odpovídá reálným potřebám
 
