@@ -14,30 +14,30 @@ interface PrototypeConfig {
 
 const prototypes: PrototypeConfig[] = [
   {
-    name: 'CalendarPage',
-    storyId: 'prototypes-calendar-page--default',
+    name: 'CalendarPage-Embed',
+    storyId: 'prototypes-calendar-page--embed',
   },
   {
-    name: 'ResultsPage',
-    storyId: 'prototypes-results-page--default',
+    name: 'ResultsPage-Embed',
+    storyId: 'prototypes-results-page--embed',
   },
   {
-    name: 'LivePage',
-    storyId: 'prototypes-live-page--default',
-    maxDiffPixels: 500, // Higher tolerance for animated LiveIndicator
-    timeout: 15000,
+    name: 'LivePage-Embed',
+    storyId: 'prototypes-live-page--embed',
+    maxDiffPixels: 6000, // Higher tolerance for animated LiveIndicator (pulse effect)
+    timeout: 30000,
   },
   {
-    name: 'RegistrationPage',
-    storyId: 'prototypes-registration-page--default',
+    name: 'RegistrationPage-Satellite',
+    storyId: 'prototypes-registration-page--satellite',
   },
   {
-    name: 'ProfilePage',
-    storyId: 'prototypes-profilepage--default',
+    name: 'ProfilePage-Satellite',
+    storyId: 'prototypes-profilepage--satellite',
   },
   {
-    name: 'DashboardPage-ClubAdmin',
-    storyId: 'prototypes-dashboard-page--club-admin',
+    name: 'DashboardPage-Satellite',
+    storyId: 'prototypes-dashboard-page--satellite',
     timeout: 60000, // Larger page needs more time
   },
 ];

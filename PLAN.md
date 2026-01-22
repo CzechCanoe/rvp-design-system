@@ -22,7 +22,8 @@
 | **9 - Audit DS** | 9.4.3 Iterace 3 (Tier 1) | ✅ Hotovo |
 | **9 - Audit DS** | 9.4.1-review Revize Tier 3 | ✅ Hotovo |
 | **9 - Audit DS** | 9.4.4 Finalizace | ✅ Hotovo |
-| **13 - Testování** | Playwright testy integrace | 🔲 Další krok |
+| **13 - Testování** | 13.1 Playwright baseline snapshoty | ✅ Hotovo |
+| **13 - Testování** | 13.1 Container/overflow testy | 🔲 Další krok |
 
 ---
 
@@ -660,8 +661,9 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 **Kontext:** Finální ověření, že komponenty fungují správně v embed kontextu a splňují požadavky na responzivitu a přístupnost.
 
 ### 13.1 Playwright testy
-- [ ] **Přegenerovat baseline snapshoty** (po racionalizaci stories se změnily)
-- [ ] Embed varianty všech prototypů
+- [x] **Přegenerovat baseline snapshoty** (po racionalizaci stories se změnily)
+- [x] Opravit story ID v testech (stories přejmenovány při racionalizaci)
+- [x] Embed varianty všech prototypů
 - [ ] Container query breakpoint testy
 - [ ] Overflow/layout testy v úzkých kontejnerech
 
