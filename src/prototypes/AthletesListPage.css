@@ -1,0 +1,519 @@
+/* ==========================================================================
+   AthletesListPage Prototype Styles
+   ========================================================================== */
+
+.prototype-athletes-list {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+.prototype-athletes-list--embed {
+  min-height: auto;
+  background: transparent;
+}
+
+/* ==========================================================================
+   Logo
+   ========================================================================== */
+
+.prototype-athletes-list__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  text-decoration: none;
+  color: inherit;
+}
+
+.prototype-athletes-list__logo-text {
+  font-size: var(--text-xl-size);
+  font-weight: var(--font-bold);
+  color: var(--color-primary-600);
+}
+
+.prototype-athletes-list__logo-subtitle {
+  font-size: var(--text-xs-size);
+  color: var(--color-text-tertiary);
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .prototype-athletes-list__logo-subtitle {
+    display: block;
+  }
+}
+
+/* ==========================================================================
+   Page Header
+   ========================================================================== */
+
+.athletes-list-header {
+  padding: var(--spacing-6) 0;
+  background: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.athletes-list-header__container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--spacing-4);
+}
+
+.athletes-list-header__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-3);
+  font-size: var(--text-sm-size);
+  color: var(--color-text-tertiary);
+}
+
+.athletes-list-header__breadcrumb a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+.athletes-list-header__breadcrumb a:hover {
+  color: var(--color-primary-600);
+  text-decoration: underline;
+}
+
+.athletes-list-header__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+@media (min-width: 768px) {
+  .athletes-list-header__content {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+.athletes-list-header__title {
+  margin: 0;
+  font-size: var(--text-2xl-size);
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+}
+
+.athletes-list-header__subtitle {
+  margin: var(--spacing-1) 0 0;
+  font-size: var(--text-base-size);
+  color: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   Statistics Bar
+   ========================================================================== */
+
+.athletes-list-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-4);
+}
+
+@media (min-width: 640px) {
+  .athletes-list-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.athletes-list-stats__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-3);
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.athletes-list-stats__value {
+  font-size: var(--text-2xl-size);
+  font-weight: var(--font-bold);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-primary-600);
+}
+
+.athletes-list-stats__label {
+  font-size: var(--text-sm-size);
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-1);
+}
+
+/* ==========================================================================
+   Main Content
+   ========================================================================== */
+
+.prototype-athletes-list__main {
+  flex: 1;
+  padding: var(--spacing-6) 0;
+}
+
+.prototype-athletes-list__container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--spacing-4);
+}
+
+/* ==========================================================================
+   Featured Athletes Section
+   ========================================================================== */
+
+.athletes-list-featured {
+  margin-bottom: var(--spacing-8);
+}
+
+.athletes-list-featured__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-4);
+}
+
+.athletes-list-featured__title {
+  margin: 0;
+  font-size: var(--text-xl-size);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.athletes-list-featured__title svg {
+  color: var(--color-warning-500);
+}
+
+.athletes-list-featured__grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--spacing-4);
+}
+
+@media (min-width: 640px) {
+  .athletes-list-featured__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .athletes-list-featured__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ==========================================================================
+   Search and Filters
+   ========================================================================== */
+
+.athletes-list-filters {
+  margin-bottom: var(--spacing-6);
+  padding: var(--spacing-4);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-primary);
+}
+
+.athletes-list-filters__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+@media (min-width: 768px) {
+  .athletes-list-filters__row {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.athletes-list-filters__search {
+  flex: 1;
+  min-width: 200px;
+}
+
+.athletes-list-filters__selects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+}
+
+.athletes-list-filters__select {
+  min-width: 140px;
+}
+
+.athletes-list-filters__actions {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+/* Filter Tags */
+.athletes-list-filters__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-3);
+  padding-top: var(--spacing-3);
+  border-top: 1px solid var(--color-border-primary);
+}
+
+.athletes-list-filters__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-2);
+  font-size: var(--text-sm-size);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+}
+
+.athletes-list-filters__tag-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin-left: var(--spacing-1);
+  background: none;
+  border: none;
+  border-radius: var(--radius-full);
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.athletes-list-filters__tag-remove:hover {
+  background: var(--color-error-100);
+  color: var(--color-error-600);
+}
+
+.athletes-list-filters__clear {
+  font-size: var(--text-sm-size);
+  color: var(--color-primary-600);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-1) var(--spacing-2);
+}
+
+.athletes-list-filters__clear:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Results Header
+   ========================================================================== */
+
+.athletes-list-results__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+}
+
+@media (min-width: 640px) {
+  .athletes-list-results__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.athletes-list-results__count {
+  font-size: var(--text-base-size);
+  color: var(--color-text-secondary);
+}
+
+.athletes-list-results__count strong {
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.athletes-list-results__sort {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.athletes-list-results__sort-label {
+  font-size: var(--text-sm-size);
+  color: var(--color-text-tertiary);
+}
+
+/* ==========================================================================
+   Athletes Grid
+   ========================================================================== */
+
+.athletes-list-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--spacing-4);
+}
+
+@media (min-width: 640px) {
+  .athletes-list-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .athletes-list-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================================================================
+   Pagination
+   ========================================================================== */
+
+.athletes-list-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-8);
+  padding-top: var(--spacing-6);
+  border-top: 1px solid var(--color-border-primary);
+}
+
+/* ==========================================================================
+   Empty State
+   ========================================================================== */
+
+.athletes-list-empty {
+  padding: var(--spacing-12) var(--spacing-4);
+  text-align: center;
+}
+
+.athletes-list-empty__icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--spacing-4);
+  color: var(--color-text-tertiary);
+}
+
+.athletes-list-empty__title {
+  margin: 0 0 var(--spacing-2);
+  font-size: var(--text-lg-size);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+}
+
+.athletes-list-empty__description {
+  margin: 0;
+  font-size: var(--text-base-size);
+  color: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.prototype-athletes-list__footer {
+  padding: var(--spacing-6) 0;
+  background: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border-primary);
+}
+
+.prototype-athletes-list__footer-content {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--spacing-4);
+  text-align: center;
+  font-size: var(--text-sm-size);
+  color: var(--color-text-tertiary);
+}
+
+/* ==========================================================================
+   Section Tabs
+   ========================================================================== */
+
+.athletes-list-section-tabs {
+  margin-bottom: var(--spacing-4);
+}
+
+/* ==========================================================================
+   Embed Mode Adjustments
+   ========================================================================== */
+
+.prototype-athletes-list--embed .athletes-list-header {
+  padding: var(--spacing-4) 0;
+  background: transparent;
+  border-bottom: none;
+}
+
+.prototype-athletes-list--embed .athletes-list-header__container {
+  padding: 0;
+}
+
+.prototype-athletes-list--embed .prototype-athletes-list__container {
+  padding: 0;
+}
+
+.prototype-athletes-list--embed .athletes-list-filters {
+  background: var(--color-bg-primary);
+}
+
+.prototype-athletes-list--embed .athletes-list-stats__item {
+  background: var(--color-bg-secondary);
+}
+
+/* ==========================================================================
+   Responsive Adjustments for Narrow Containers
+   ========================================================================== */
+
+@container (max-width: 600px) {
+  .athletes-list-featured__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .athletes-list-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .athletes-list-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container (max-width: 400px) {
+  .athletes-list-featured__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .athletes-list-filters__selects {
+    flex-direction: column;
+  }
+
+  .athletes-list-filters__select {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   Dark Mode
+   ========================================================================== */
+
+[data-theme='dark'] .athletes-list-header {
+  background: var(--color-bg-secondary);
+}
+
+[data-theme='dark'] .athletes-list-stats__item {
+  background: var(--color-bg-tertiary);
+}
+
+[data-theme='dark'] .athletes-list-filters {
+  background: var(--color-bg-secondary);
+}
+
+[data-theme='dark'] .athletes-list-filters__tag {
+  background: var(--color-bg-tertiary);
+}

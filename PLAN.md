@@ -5,7 +5,7 @@
 | Fáze | Krok | Status |
 |------|------|--------|
 | **8 - Integrace** | 8.9 Čištění prototypů | ✅ Hotovo |
-| **8 - Integrace** | 8.10 Athletes List | 🔲 Další |
+| **8 - Integrace** | 8.10 Athletes List | ✅ Hotovo |
 | **8 - Integrace** | 8.11 Rankings Page | 🔲 Čeká |
 | **8 - Integrace** | 8.12-8.13 Clubs List + Profile | 🔲 Čeká |
 | **8 - Integrace** | 8.14 ProfilePage rozšíření | 🔲 Čeká |
@@ -168,28 +168,31 @@
 
 ---
 
-### 8.10 Athletes List - nový prototyp 🔲
+### 8.10 Athletes List - nový prototyp ✅
 
 **Účel:** Veřejný seznam závodníků pro kanoe.cz - vyhledávání, filtrování, featured athletes.
 
 #### Funkcionalita:
-- [ ] **Featured Athletes** - sekce s vybranými závodníky (reprezentanti, mistři ČR)
-- [ ] **Vyhledávání** - fulltext search podle jména, klubu
-- [ ] **Filtry** - sekce (DV/RY/VT), VT třída, klub, věková kategorie
-- [ ] **Seznam výsledků** - kompaktní karty s základními info
-- [ ] **Základní statistiky** - počet závodníků, klubů, reprezentantů
+- [x] **Featured Athletes** - sekce s vybranými závodníky (reprezentanti, mistři ČR)
+- [x] **Vyhledávání** - fulltext search podle jména, klubu
+- [x] **Filtry** - sekce (DV/RY/VT), VT třída (pro VT sekci)
+- [x] **Seznam výsledků** - karty s AthleteCard komponentou
+- [x] **Základní statistiky** - počet závodníků, klubů, reprezentantů, sekcí
+- [x] **Řazení** - podle jména, žebříčku, klubu, roku narození
+- [x] **Paginace** - stránkování výsledků
 
 #### Varianty:
-- [ ] **Embed** - v KanoeCzContext, bez vlastního headeru
-- [ ] **Satellite** - standalone s satellite headerem
-- [ ] **EmbedWithSidebar** - demonstrace v úzkém sloupci
+- [x] **Embed** - v KanoeCzContext, bez vlastního headeru
+- [x] **Satellite** - standalone s satellite headerem
+- [x] **EmbedWithSidebar** - demonstrace v úzkém sloupci
 
-#### Komponenty k využití:
-- AthleteCard (již existuje)
+#### Komponenty využité:
+- AthleteCard (featured + default varianty)
 - Input (search)
-- Select/Tabs (filtry)
+- Select (VT třída, řazení)
+- Tabs (sekce)
 - Pagination
-- EmptyState
+- Card (filtry panel)
 
 ---
 
