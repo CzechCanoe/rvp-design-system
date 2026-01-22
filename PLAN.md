@@ -13,7 +13,8 @@
 | **9 - Audit DS** | 9.1.1 Audit Tier 1 (Core) | ✅ Hotovo |
 | **9 - Audit DS** | 9.1.2 Audit Tier 2 (Advanced) | ✅ Hotovo |
 | **9 - Audit DS** | 9.1.3 Audit Tier 3 (Specific) | ✅ Hotovo |
-| **9 - Audit DS** | 9.1.4-9.4 Zbývající audit | 🔲 Další krok |
+| **9 - Audit DS** | 9.1.4 Audit Stories | ✅ Hotovo |
+| **9 - Audit DS** | 9.1.5-9.4 Zbývající audit | 🔲 Další krok |
 | **13 - Testování** | Playwright testy integrace | 🔲 Později |
 
 ---
@@ -364,10 +365,92 @@ Projít všechny komponenty a vyhodnotit:
 - [x] **StatCard** - 2× v prototypech (Dashboard, Profile), 29 stories ⚠️ ZJEDNODUŠIT - příliš stories
 - [x] **KanoeCzContext** - 9× (všechny embed stories), 9 stories ✅ OK, mock pro Storybook
 
-#### 9.1.4 Audit Stories
-- [ ] Kolik stories má každá komponenta?
-- [ ] Jsou stories užitečné pro dokumentaci, nebo jen "pro ukázku"?
-- [ ] Duplicitní stories (section varianty jako samostatné stories vs. args)?
+#### 9.1.4 Audit Stories ✅
+
+**Celkový počet stories: 672**
+
+| Tier | Komponenty | Stories | Průměr |
+|------|------------|---------|--------|
+| Tier 1 (Core) | 10 | 203 | 20.3 |
+| Tier 2 (Advanced) | 10 | 200 | 20.0 |
+| Tier 3 (Specific) | 10 | 233 | 23.3 |
+| Prototypes | 12 | 36 | 3.0 |
+| **CELKEM** | **42** | **672** | **16.0** |
+
+**Detail počtu stories na komponentu:**
+
+*Tier 1 (Core):*
+| Komponenta | Stories | Hodnocení |
+|------------|---------|-----------|
+| Button | 25 | ⚠️ Zjednodušit - varianty jako args |
+| Badge | 14 | ✅ OK |
+| Card | 24 | ⚠️ Zjednodušit - 6 variant stories |
+| Input | 24 | ⚠️ Zjednodušit |
+| Select | 21 | ⚠️ Zjednodušit |
+| Checkbox | 18 | ⚠️ Nepoužívané (2× v prototypech) |
+| Radio | 19 | ❌ ODSTRANIT nebo minimalizovat (0× v prototypech) |
+| Switch | 21 | ⚠️ Zjednodušit (7× v prototypech) |
+| Avatar | 17 | ✅ OK |
+| Skeleton | 20 | ❌ ODSTRANIT nebo minimalizovat (0× v prototypech) |
+
+*Tier 2 (Advanced):*
+| Komponenta | Stories | Hodnocení |
+|------------|---------|-----------|
+| Tabs | 26 | ⚠️ Zjednodušit |
+| Modal | 23 | ⚠️ Zjednodušit |
+| Dropdown | 15 | ❌ ZVÁŽIT ODSTRANĚNÍ (0× v prototypech, Select stačí) |
+| Pagination | 23 | ⚠️ Zjednodušit |
+| Toast | 19 | ✅ OK |
+| Progress | 21 | ⚠️ Zjednodušit |
+| EmptyState | 22 | ⚠️ Zjednodušit |
+| Dropzone | 19 | ✅ ZACHOVAT (budoucí upload) |
+| Table | 16 | ✅ OK |
+| Timeline | 16 | ✅ OK |
+
+*Tier 3 (Specific):*
+| Komponenta | Stories | Hodnocení |
+|------------|---------|-----------|
+| ResultsTable | 30 | ⚠️ Zjednodušit |
+| Calendar | 24 | ⚠️ Zjednodušit |
+| CalendarList | 13 | ✅ OK |
+| CalendarCards | 13 | ✅ OK |
+| LiveIndicator | 30 | ⚠️ VÝRAZNĚ ZJEDNODUŠIT |
+| Header | 20 | ✅ OK |
+| Navigation | 25 | ⚠️ Zjednodušit |
+| AthleteCard | 40 | ❌ VÝRAZNĚ ZJEDNODUŠIT (nejvíce stories) |
+| StatCard | 29 | ⚠️ VÝRAZNĚ ZJEDNODUŠIT |
+| KanoeCzContext | 9 | ✅ OK |
+
+**Identifikované vzory duplicit:**
+
+1. **Section varianty jako samostatné stories** (AthleteCard: SectionDV, SectionRY, SectionVT)
+   → Sloučit do jedné story s argTypes selector
+
+2. **VT class varianty jako samostatné stories** (AthleteCard: VtClassM, VtClassA, VtClassB, VtClassC)
+   → Sloučit do jedné story s argTypes selector
+
+3. **Size varianty jako samostatné stories** (téměř všechny komponenty)
+   → Sloučit do jedné "Sizes" comparison story
+
+4. **Color varianty jako samostatné stories** (StatCard, LiveIndicator, Badge)
+   → Sloučit do jedné "Colors" comparison story
+
+5. **Style varianty jako samostatné stories** (LiveIndicator, StatCard, AthleteCard)
+   → Sloučit do jedné "Style Variants" comparison story
+
+6. **CSK-specific showcase stories** (příliš mnoho "Example:" stories)
+   → Ponechat max 2-3 nejreprezentativnější
+
+**Doporučení pro cílový počet stories:**
+
+| Typ komponenty | Aktuální průměr | Cílový max |
+|----------------|-----------------|------------|
+| Jednoduché (Badge, Avatar) | 15 | 8-10 |
+| Střední (Button, Card) | 24 | 12-15 |
+| Komplexní (ResultsTable, AthleteCard) | 35 | 15-20 |
+| Prototypy | 3 | 3-5 |
+
+**Cílový počet stories po racionalizaci: ~300-350** (z 672)
 
 #### 9.1.5 Audit kompatibility s kanoe.cz (embed mód)
 

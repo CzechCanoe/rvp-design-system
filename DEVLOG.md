@@ -4236,3 +4236,33 @@ tests/
 - Calendar komponenty (Calendar, CalendarList, CalendarCards) nejsou duplicitní - jsou to různé view modes stejné funkcionality
 - 4 komponenty vyžadují zjednodušení stories: LiveIndicator, Navigation, AthleteCard, StatCard
 - Další krok: 9.1.4 Audit Stories (analyzovat co přesně zjednodušit)
+
+---
+
+## 2026-01-22 - Fáze 9.1.4: Audit Stories
+
+### Dokončeno
+- [x] Spočítány stories u všech 42 souborů (30 komponent + 12 prototypů)
+- [x] Identifikovány komponenty s nadměrným počtem stories
+- [x] Identifikovány vzory duplicit (section/vtClass/size/color varianty)
+- [x] Vytvořena doporučení pro cílový počet stories
+
+### Klíčová zjištění
+1. **Celkový počet stories: 672** (průměr 16 na komponentu)
+2. **Nejvíce problematické komponenty:**
+   - AthleteCard: 40 stories (použita pouze 2× v prototypech)
+   - LiveIndicator: 30 stories (použita 5× v prototypech)
+   - StatCard: 29 stories (použita 2× v prototypech)
+3. **Nepoužívané komponenty s mnoha stories:**
+   - Radio: 19 stories, 0× v prototypech
+   - Skeleton: 20 stories, 0× v prototypech
+   - Dropdown: 15 stories, 0× v prototypech
+
+### Doporučení
+- Cílový počet po racionalizaci: **300-350 stories** (z 672)
+- Sloučit variantní stories (section, vtClass, size, color) do jedné story s args
+- Odstranit nebo minimalizovat stories nepoužívaných komponent
+- Max 2-3 CSK-specific showcase stories na komponentu
+
+### Poznámky
+Audit 9.1.4 dokončen. Další krok: 9.1.5 Audit kompatibility s kanoe.cz (embed mód)
