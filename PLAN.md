@@ -7,7 +7,8 @@
 | **8 - Integrace** | 8.9 Čištění prototypů | ✅ Hotovo |
 | **8 - Integrace** | 8.10 Athletes List | ✅ Hotovo |
 | **8 - Integrace** | 8.11 Rankings Page | ✅ Hotovo |
-| **8 - Integrace** | 8.12-8.13 Clubs List + Profile | 🔲 Čeká |
+| **8 - Integrace** | 8.12 Clubs List | ✅ Hotovo |
+| **8 - Integrace** | 8.13 Club Public Profile | 🔲 Čeká |
 | **8 - Integrace** | 8.14 ProfilePage rozšíření | 🔲 Čeká |
 | **9 - Audit DS** | 9.1-9.4 Audit a racionalizace | 🔲 Čeká |
 | **13 - Testování** | Playwright testy integrace | 🔲 Později |
@@ -225,25 +226,30 @@
 
 ---
 
-### 8.12 Clubs List Page - nový prototyp 🔲
+### 8.12 Clubs List Page - nový prototyp ✅
 
 **Účel:** Veřejný seznam klubů/oddílů pro kanoe.cz. Analogie k Athletes List.
 
 #### Funkcionalita:
-- [ ] **Vyhledávání** - fulltext search podle názvu klubu
-- [ ] **Filtry** - sekce (DV/RY/VT), region/kraj
-- [ ] **Seznam klubů** - kompaktní karty s základními info
-- [ ] **Statistiky** - počet klubů, členů, závodníků
+- [x] **Vyhledávání** - fulltext search podle názvu klubu, města
+- [x] **Filtry** - sekce (DV/RY/VT), region/kraj
+- [x] **Seznam klubů** - kompaktní karty s ClubCard komponentou
+- [x] **Statistiky** - počet klubů, členů, závodníků, krajů
+- [x] **Řazení** - podle názvu, počtu členů, závodníků, města
+- [x] **Paginace** - stránkování výsledků
 
 #### Varianty:
-- [ ] **Embed** - v KanoeCzContext, bez vlastního headeru
-- [ ] **Satellite** - standalone s satellite headerem
+- [x] **Embed** - v KanoeCzContext, bez vlastního headeru
+- [x] **Satellite** - standalone s satellite headerem
 
-#### Komponenty k využití:
-- ClubCard (nová komponenta nebo varianta Card)
+#### Komponenty využité:
+- ClubCard (inline komponenta v prototypu)
+- Badge (sekce klubu)
 - Input (search)
 - Select (filtry)
+- Tabs (sekce)
 - Pagination
+- Card (filtry panel)
 
 ---
 
