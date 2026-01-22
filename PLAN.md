@@ -130,7 +130,7 @@
 
 **Postup:**
 - [x] ProfilePage → přidat `variant` prop, smazat creepy stories, přidat Satellite story
-- [ ] DashboardPage → přidat `variant` prop, sloučit admin varianty, přidat Satellite story
+- [x] DashboardPage → přidat `variant` prop, sloučit admin varianty, přidat Satellite story
 - [ ] RegistrationPage → přidat `variant` prop, smazat hero stories, přidat Satellite story
 
 #### 8.9.2 Prototypy k VYČIŠTĚNÍ (mají embed/satellite)

@@ -16,6 +16,9 @@ import './DashboardPage.css';
 // Types
 // ============================================================================
 
+/** Display variant for the page */
+type DashboardPageVariant = 'standalone' | 'satellite';
+
 interface DashboardPageProps {
   /** User role */
   role?: 'club_admin' | 'section_admin' | 'federation_admin';
@@ -23,6 +26,8 @@ interface DashboardPageProps {
   clubName?: string;
   /** Section (for section admin) */
   section?: 'dv' | 'ry' | 'vt';
+  /** Display variant - standalone (full header), satellite (minimal header) */
+  variant?: DashboardPageVariant;
 }
 
 interface AlertItem {
@@ -298,6 +303,16 @@ const getRoleLabel = (role: string): string => {
 // Note: getHeroSectionClass removed - hero section cleaned (Phase 8.6.3)
 
 // ============================================================================
+// CSK Logo Component (for satellite header)
+// ============================================================================
+
+const CSKLogo = () => (
+  <span className="dashboard-page__logo">
+    <span className="dashboard-page__logo-text">CSK</span>
+  </span>
+);
+
+// ============================================================================
 // Icons
 // ============================================================================
 
@@ -442,6 +457,7 @@ const DashboardPage = ({
   role = 'club_admin',
   clubName = 'USK Praha',
   section,
+  variant = 'standalone',
 }: DashboardPageProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -573,9 +589,28 @@ const DashboardPage = ({
   const inactiveAthletesCount = members.filter((m) => !m.rightToStart).length;
   const registrationsThisMonth = 3;
 
-  return (
-    <div className="dashboard-page">
-      {/* Header */}
+  // Render header based on variant
+  const renderHeader = () => {
+    if (variant === 'satellite') {
+      return (
+        <Header
+          variant="satellite"
+          size="sm"
+          bordered
+          brand={<CSKLogo />}
+          appName="Dashboard"
+          homeLink="https://kanoe.cz"
+          homeLinkLabel="kanoe.cz"
+          userMenu={
+            <Button variant="ghost" size="sm">
+              Jan Spravce
+            </Button>
+          }
+        />
+      );
+    }
+    // Default: standalone with full navigation
+    return (
       <Header
         sticky
         brand={<span className="dashboard-header-logo">Kanoe.cz</span>}
@@ -589,8 +624,49 @@ const DashboardPage = ({
           </div>
         }
       />
+    );
+  };
 
-      {/* Page Header - Clean design without hero waves (Phase 8.6.3) */}
+  // Render page header based on variant
+  const renderPageHeader = () => {
+    if (variant === 'satellite') {
+      return (
+        <section className="dashboard-page-header dashboard-page-header--satellite">
+          <div className="dashboard-page-header__content">
+            <div className="dashboard-page-header__breadcrumb">
+              <a href="https://kanoe.cz" className="dashboard-page-header__breadcrumb-link">Domů</a>
+              <span className="dashboard-page-header__breadcrumb-separator">/</span>
+              <span>Dashboard</span>
+            </div>
+            <div className="dashboard-page-header__row">
+              <div className="dashboard-page-header__info">
+                <h1 className="dashboard-page-header__title">{clubName}</h1>
+                <p className="dashboard-page-header__meta">
+                  <span className="dashboard-page-header__badge">
+                    {getRoleLabel(role)}
+                  </span>
+                  {section && (
+                    <Badge section={section} size="sm">
+                      {getSectionLabel(section)}
+                    </Badge>
+                  )}
+                </p>
+              </div>
+              <div className="dashboard-page-header__actions">
+                <Button variant="secondary" size="sm">
+                  Exportovat
+                </Button>
+                <Button variant="primary" size="sm">
+                  + Novy zavodnik
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+    // Default: standalone page header
+    return (
       <section className={`dashboard-page-header dashboard-page-header--${section || 'default'}`}>
         <div className="dashboard-page-header__content">
           <div className="dashboard-page-header__welcome">
@@ -617,6 +693,16 @@ const DashboardPage = ({
           </div>
         </div>
       </section>
+    );
+  };
+
+  return (
+    <div className={`dashboard-page ${variant === 'satellite' ? 'dashboard-page--satellite' : ''}`}>
+      {/* Header */}
+      {renderHeader()}
+
+      {/* Page Header */}
+      {renderPageHeader()}
 
       {/* Stats Grid */}
       <div className="dashboard-stats-section">
@@ -938,6 +1024,11 @@ Prototyp dashboardu pro spravce oddilu nebo sekce. Ciste zobrazeni bez hero vln 
     },
   },
   argTypes: {
+    variant: {
+      control: 'select',
+      options: ['standalone', 'satellite'],
+      description: 'Display variant',
+    },
     role: {
       control: 'select',
       options: ['club_admin', 'section_admin', 'federation_admin'],
@@ -962,45 +1053,22 @@ type Story = StoryObj<typeof DashboardPage>;
 // Stories
 // ============================================================================
 
-export const ClubAdmin: Story = {
-  name: 'Oddilovy spravce',
+export const Satellite: Story = {
   args: {
+    variant: 'satellite',
     role: 'club_admin',
     clubName: 'USK Praha',
   },
-};
+  parameters: {
+    docs: {
+      description: {
+        story: `Dashboard pro správce oddílu/sekce se satellite headerem. Čistý design pro interní aplikace.
 
-export const SectionAdminDV: Story = {
-  name: 'Sekcni spravce - Divoka voda',
-  args: {
-    role: 'section_admin',
-    clubName: 'Sekce Divoka voda',
-    section: 'dv',
-  },
-};
-
-export const SectionAdminRY: Story = {
-  name: 'Sekcni spravce - Rychlost',
-  args: {
-    role: 'section_admin',
-    clubName: 'Sekce Rychlost',
-    section: 'ry',
-  },
-};
-
-export const SectionAdminVT: Story = {
-  name: 'Sekcni spravce - Vodni turistika',
-  args: {
-    role: 'section_admin',
-    clubName: 'Sekce Vodni turistika',
-    section: 'vt',
-  },
-};
-
-export const FederationAdmin: Story = {
-  name: 'Svazovy spravce',
-  args: {
-    role: 'federation_admin',
-    clubName: 'Cesky svaz kanoistu',
+**Použij args pro přepnutí role:**
+- \`role: 'club_admin'\` - Oddílový správce
+- \`role: 'section_admin'\` + \`section: 'dv'/'ry'/'vt'\` - Sekční správce
+- \`role: 'federation_admin'\` - Svazový správce`,
+      },
+    },
   },
 };

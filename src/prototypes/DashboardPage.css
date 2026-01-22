@@ -1000,3 +1000,154 @@
     padding: var(--spacing-3) var(--spacing-4);
   }
 }
+
+/* ============================================================================
+   Page Header - Clean design (Phase 8.6.3)
+   ============================================================================ */
+
+.dashboard-page-header {
+  background: var(--color-surface-primary);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-6) var(--spacing-4);
+}
+
+.dashboard-page-header__content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+}
+
+.dashboard-page-header__welcome {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.dashboard-page-header__greeting {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dashboard-page-header__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.dashboard-page-header__subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin: var(--spacing-1) 0 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.dashboard-page-header__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-2);
+  background: var(--color-surface-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.dashboard-page-header__actions {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+/* ============================================================================
+   Satellite Variant - Clean internal dashboard design
+   ============================================================================ */
+
+.dashboard-page--satellite {
+  background-color: var(--color-bg-secondary, #f8f9fa);
+}
+
+.dashboard-page__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.dashboard-page__logo-text {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-primary);
+}
+
+.dashboard-page-header--satellite {
+  background: var(--color-surface-primary);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-4) var(--spacing-4) var(--spacing-5);
+}
+
+.dashboard-page-header--satellite .dashboard-page-header__content {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.dashboard-page-header__breadcrumb {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-3);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.dashboard-page-header__breadcrumb-link {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.dashboard-page-header__breadcrumb-link:hover {
+  text-decoration: underline;
+}
+
+.dashboard-page-header__breadcrumb-separator {
+  color: var(--color-text-muted);
+}
+
+.dashboard-page-header__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+}
+
+.dashboard-page-header__info {
+  flex: 1;
+}
+
+.dashboard-page-header__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-1);
+}
+
+/* Satellite responsive */
+@media (max-width: 768px) {
+  .dashboard-page-header__row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-page-header__actions {
+    justify-content: flex-start;
+  }
+}
