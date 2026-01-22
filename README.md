@@ -8,6 +8,58 @@ Design system pro registrační a výsledkový portál Českého svazu kanoistů
 
 Interaktivní dokumentace: [czechcanoe.github.io/rvp-design-system](https://czechcanoe.github.io/rvp-design-system)
 
+## Režimy zobrazení
+
+Design system podporuje tři režimy zobrazení:
+
+| Režim | Použití |
+|-------|---------|
+| **Utility** | Default mód, backoffice aplikace (dashboard, profil, registrace) |
+| **Expressive** | Hero sekce, standalone marketing stránky |
+| **Embed** | Komponenty embedované do kanoe.cz (Bootstrap 4 kompatibilní) |
+
+```tsx
+import { ThemeProvider } from '@czechcanoe/rvp-design-system';
+
+// Utility (default)
+<ThemeProvider mode="utility">...</ThemeProvider>
+
+// Embed pro kanoe.cz
+<ThemeProvider mode="embed">...</ThemeProvider>
+```
+
+## Komponenty
+
+### Tier 1 - Core (10 komponent)
+Button, Badge, Card, Input, Select, Checkbox, Radio, Switch, Avatar, Skeleton
+
+### Tier 2 - Advanced (10 komponent)
+Tabs, Modal, Dropdown, Pagination, Toast, Progress, EmptyState, Dropzone, Table, Timeline
+
+### Tier 3 - Specific (10 komponent)
+ResultsTable, Calendar, CalendarList, CalendarCards, LiveIndicator, Header, Navigation, AthleteCard, StatCard, KanoeCzContext
+
+## Prototypy
+
+Každý prototyp existuje ve dvou variantách:
+- **Embed** - v KanoeCzContext mocku, bez vlastního headeru
+- **Satellite** - standalone s minimálním headerem
+
+| Prototyp | Popis |
+|----------|-------|
+| LivePage | Live výsledky závodu |
+| ResultsPage | Historické výsledky |
+| CalendarPage | Kalendář závodů |
+| EventDetailPage | Detail závodu |
+| AthletePublicProfile | Veřejný profil závodníka |
+| ClubPublicProfile | Veřejný profil klubu |
+| AthletesListPage | Seznam závodníků |
+| ClubsListPage | Seznam klubů |
+| RankingsPage | Žebříčky a VT třídy |
+| ProfilePage | Interní profil (satellite only) |
+| DashboardPage | Admin dashboard (satellite only) |
+| RegistrationPage | Přihlášky na závody (satellite only) |
+
 ## Instalace
 
 Balíček je publikován na GitHub Packages. Nejdřív nastav registry v `.npmrc`:

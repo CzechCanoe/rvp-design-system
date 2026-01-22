@@ -7,16 +7,16 @@ import { test, expect } from '@playwright/test';
 
 const components = [
   // Core components (Tier 1)
-  { name: 'Button', storyId: 'components-button--primary' },
-  { name: 'Button-AllVariants', storyId: 'components-button--all-variants' },
+  { name: 'Button', storyId: 'components-button--default' },
+  { name: 'Button-Variants', storyId: 'components-button--variants' },
   { name: 'Input', storyId: 'components-input--default' },
-  { name: 'Input-AllStates', storyId: 'components-input--all-states' },
+  { name: 'Input-States', storyId: 'components-input--states' },
   { name: 'Select', storyId: 'components-select--default' },
   { name: 'Checkbox', storyId: 'components-checkbox--default' },
   { name: 'Radio', storyId: 'components-radio--default' },
   { name: 'Switch', storyId: 'components-switch--default' },
-  { name: 'Card', storyId: 'components-card--surface' },
-  { name: 'Card-AllVariants', storyId: 'components-card--all-variants' },
+  { name: 'Card', storyId: 'components-card--default' },
+  { name: 'Card-Variants', storyId: 'components-card--variants' },
   { name: 'Badge', storyId: 'components-badge--default' },
   { name: 'Badge-CskSections', storyId: 'components-badge--csk-sections' },
   { name: 'Table', storyId: 'components-table--default' },
@@ -24,13 +24,13 @@ const components = [
   // Advanced components (Tier 2)
   { name: 'Modal', storyId: 'components-modal--default' },
   { name: 'Tabs', storyId: 'components-tabs--default' },
-  { name: 'Toast', storyId: 'components-toast--default' },
+  { name: 'Toast', storyId: 'components-toast--variants' },
   { name: 'Breadcrumbs', storyId: 'components-navigation-breadcrumbs--default' },
   { name: 'Pagination', storyId: 'components-pagination--default' },
-  { name: 'ProgressBar', storyId: 'components-progress--bar-default' },
-  { name: 'ProgressSteps', storyId: 'components-progress--steps-default' },
+  { name: 'ProgressBar', storyId: 'components-progress--bar' },
+  { name: 'ProgressSteps', storyId: 'components-progress--steps' },
   { name: 'Header', storyId: 'components-header--default' },
-  { name: 'Avatar', storyId: 'components-avatar--with-image' },
+  { name: 'Avatar', storyId: 'components-avatar--default' },
   { name: 'Dropdown', storyId: 'components-dropdown--default' },
 
   // Specific components (Tier 3)

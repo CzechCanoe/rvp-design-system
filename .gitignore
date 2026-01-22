@@ -27,6 +27,10 @@ resources-private/
 # Storybook
 storybook-static/
 
+# Playwright
+playwright-report/
+test-results/
+
 # IDE
 .idea/
 .vscode/

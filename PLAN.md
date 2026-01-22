@@ -21,8 +21,8 @@
 | **9 - Audit DS** | 9.4.2 Iterace 2 (Tier 2) | ✅ Hotovo |
 | **9 - Audit DS** | 9.4.3 Iterace 3 (Tier 1) | ✅ Hotovo |
 | **9 - Audit DS** | 9.4.1-review Revize Tier 3 | ✅ Hotovo |
-| **9 - Audit DS** | 9.4.4 Finalizace | 🔲 Další krok |
-| **13 - Testování** | Playwright testy integrace | 🔲 Později |
+| **9 - Audit DS** | 9.4.4 Finalizace | ✅ Hotovo |
+| **13 - Testování** | Playwright testy integrace | 🔲 Další krok |
 
 ---
 
@@ -645,10 +645,11 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 
 **Skutečný výsledek:** 129 → 51 stories (-60%)
 
-#### 9.4.4 Finalizace
+#### 9.4.4 Finalizace ✅
 - [x] Ověřit konzistenci API a naming conventions
-- [ ] Aktualizovat dokumentaci
-- [ ] Spustit Playwright testy
+- [x] Aktualizovat dokumentaci (README.md rozšířeno o režimy, komponenty, prototypy)
+- [x] Aktualizovat Playwright testy (opraveny story ID po racionalizaci)
+- [x] Ověřit že testy běží (snapshoty nutno přegenerovat v Fázi 13)
 
 **Milestone M9:** DS je racionalizovaný, konzistentní a odpovídá reálným potřebám
 
@@ -659,6 +660,7 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 **Kontext:** Finální ověření, že komponenty fungují správně v embed kontextu a splňují požadavky na responzivitu a přístupnost.
 
 ### 13.1 Playwright testy
+- [ ] **Přegenerovat baseline snapshoty** (po racionalizaci stories se změnily)
 - [ ] Embed varianty všech prototypů
 - [ ] Container query breakpoint testy
 - [ ] Overflow/layout testy v úzkých kontejnerech
