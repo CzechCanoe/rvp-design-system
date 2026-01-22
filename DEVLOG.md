@@ -4180,3 +4180,30 @@ tests/
 - Button varianta `danger` a `gradient-accent` se nepoužívají v prototypech, ale mají smysl pro budoucí použití
 - Embed styling pro Button je v mode.css (řádek 399-402)
 - Všechny Tier 1 komponenty mají embed mode podporu
+
+---
+
+## 2026-01-22 - Fáze 9.1.2: Audit Tier 2 (Advanced) komponent
+
+### Dokončeno
+- [x] Audit 10 Tier 2 komponent - použití v prototypech a počet stories
+
+### Výsledky auditu
+
+| Komponenta | Použití | Stories | Stav |
+|------------|---------|---------|------|
+| Tabs | 6× | 27 | ✅ OK - klíčová |
+| Modal | 1× | 24 | ✅ OK |
+| Dropdown | 0× | 15 | ⚠️ Nepoužito (Select stačí) |
+| Pagination | 4× | 24 | ✅ OK |
+| Toast | 1× | 22 | ✅ OK |
+| Progress | 1× | 22 | ✅ OK |
+| EmptyState | 2× | 23 | ✅ OK |
+| Dropzone | 0× | 20 | ⚠️ Nepoužito (budoucí upload) |
+| Table | 3× | 17 | ✅ OK |
+| Timeline | 1× | 17 | ✅ OK |
+
+### Poznámky
+- Dropdown není v prototypech použit, Select pokrývá většinu use-cases
+- Dropzone připraven pro budoucí funkce uploadu (foto závodníků, dokumenty)
+- Tier 2 komponenty jsou dobře využívané, žádná zbytečná

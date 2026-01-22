@@ -11,7 +11,8 @@
 | **8 - Integrace** | 8.13 Club Public Profile | ✅ Hotovo |
 | **8 - Integrace** | 8.14 ProfilePage rozšíření | ✅ Hotovo |
 | **9 - Audit DS** | 9.1.1 Audit Tier 1 (Core) | ✅ Hotovo |
-| **9 - Audit DS** | 9.1.2-9.4 Zbývající audit | 🔲 Další krok |
+| **9 - Audit DS** | 9.1.2 Audit Tier 2 (Advanced) | ✅ Hotovo |
+| **9 - Audit DS** | 9.1.3-9.4 Zbývající audit | 🔲 Další krok |
 | **13 - Testování** | Playwright testy integrace | 🔲 Později |
 
 ---
@@ -338,17 +339,17 @@ Projít všechny komponenty a vyhodnotit:
 - [x] **Avatar** - 12× v prototypech ✅ OK
 - [x] **Skeleton** - ⚠️ 0× v prototypech, 20 stories → ZVÁŽIT ODSTRANĚNÍ
 
-#### 9.1.2 Audit Tier 2 (Advanced) - 10 komponent
-- [ ] **Tabs** - varianty (line, pills, underline)
-- [ ] **Modal** - potřebnost, varianty
-- [ ] **Dropdown** - komplexnost
-- [ ] **Pagination** - varianty
-- [ ] **Toast** - potřebnost, varianty
-- [ ] **Progress** - typy (bar, circular), potřebnost
-- [ ] **EmptyState** - varianty, potřebnost
-- [ ] **Dropzone** - potřebnost (použití v prototypech?)
-- [ ] **Table** - duplicita s ResultsTable?
-- [ ] **Timeline** - potřebnost, použití
+#### 9.1.2 Audit Tier 2 (Advanced) - 10 komponent ✅
+- [x] **Tabs** - 6× v prototypech, 27 stories ✅ OK, klíčová komponenta pro navigaci
+- [x] **Modal** - 1× (RegistrationPage), 24 stories ✅ OK, potřebná pro dialogy
+- [x] **Dropdown** - ⚠️ 0× v prototypech, 15 stories → ZVÁŽIT ZJEDNODUŠENÍ (Select stačí)
+- [x] **Pagination** - 4× v prototypech, 24 stories ✅ OK
+- [x] **Toast** - 1× (RegistrationPage), 22 stories ✅ OK
+- [x] **Progress** - 1× (ProfilePage), 22 stories ✅ OK
+- [x] **EmptyState** - 2× v prototypech, 23 stories ✅ OK
+- [x] **Dropzone** - ⚠️ 0× v prototypech, 20 stories → ZACHOVAT (budoucí upload funkcionalita)
+- [x] **Table** - 3× v prototypech, 17 stories ✅ OK (general-purpose vs. ResultsTable specialized)
+- [x] **Timeline** - 1× (ProfilePage), 17 stories ✅ OK
 
 #### 9.1.3 Audit Tier 3 (Specific) - 8 komponent
 - [ ] **ResultsTable** - komplexnost, varianty, slalom-specifické featury
