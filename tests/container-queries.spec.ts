@@ -1,10 +1,13 @@
 import { test, expect } from '@playwright/test';
+import { containerQueryComponents, embedPrototypes, testDefaults } from './config';
 
 /**
  * Container Query and Overflow/Layout Tests
  *
  * Tests that components respond correctly to container size changes
  * and handle narrow/constrained layouts without overflow issues.
+ *
+ * Uses central config from ./config.ts
  *
  * Container breakpoints (from tokens/container-queries.css):
  * - xs: 320px (very narrow - single column)
@@ -23,58 +26,6 @@ const containerSizes = {
   xl: 1024, // Full width
 };
 
-// Components with container queries
-const containerQueryComponents = [
-  {
-    name: 'Calendar',
-    storyId: 'components-calendar--default',
-    breakpoints: [350, 500], // From Calendar.css
-    selector: '.csk-calendar',
-  },
-  {
-    name: 'CalendarList',
-    storyId: 'components-calendarlist--default',
-    breakpoints: [300, 400], // From CalendarList.css
-    selector: '.csk-calendar-list',
-  },
-  {
-    name: 'CalendarCards',
-    storyId: 'components-calendarcards--default',
-    breakpoints: [320, 600, 900], // From CalendarCards.css
-    selector: '.csk-calendar-cards',
-  },
-  {
-    name: 'ResultsTable',
-    storyId: 'components-resultstable--default',
-    breakpoints: [400, 600, 800], // From ResultsTable.css
-    selector: '.csk-results-table-wrapper',
-  },
-];
-
-// Prototypes with embed variants (use container queries)
-const embedPrototypes = [
-  {
-    name: 'CalendarPage-Embed',
-    storyId: 'prototypes-calendar-page--embed',
-  },
-  {
-    name: 'LivePage-Embed',
-    storyId: 'prototypes-live-page--embed',
-  },
-  {
-    name: 'ResultsPage-Embed',
-    storyId: 'prototypes-results-page--embed',
-  },
-  {
-    name: 'AthletesListPage-Embed',
-    storyId: 'prototypes-athletes-list-page--embed',
-  },
-  {
-    name: 'RankingsPage-Embed',
-    storyId: 'prototypes-rankings-page--embed',
-  },
-];
-
 test.describe('Container Query Breakpoints', () => {
   for (const component of containerQueryComponents) {
     test.describe(`${component.name}`, () => {
@@ -86,10 +37,16 @@ test.describe('Container Query Breakpoints', () => {
           await page.goto(`/iframe.html?id=${component.storyId}&viewMode=story`);
           await page.waitForSelector('#storybook-root', { state: 'visible' });
           await page.waitForLoadState('networkidle');
-          await page.waitForTimeout(500);
+          await page.waitForTimeout(testDefaults.settleTime);
 
           const element = page.locator(component.selector).first();
           await expect(element).toBeVisible();
+
+          // Verify component has content at this size
+          const hasContent = await element.evaluate((el) => {
+            return el.textContent?.trim().length ?? 0;
+          });
+          expect(hasContent).toBeGreaterThan(0);
 
           // Take screenshot at this breakpoint
           await expect(element).toHaveScreenshot(
@@ -116,7 +73,7 @@ test.describe('Narrow Container Layout Tests', () => {
       await page.goto('/iframe.html?id=components-calendar--default&viewMode=story');
       await page.waitForSelector('#storybook-root', { state: 'visible' });
       await page.waitForLoadState('networkidle');
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(testDefaults.settleTime);
 
       const calendar = page.locator('.csk-calendar').first();
       await expect(calendar).toBeVisible();
@@ -135,17 +92,17 @@ test.describe('Narrow Container Layout Tests', () => {
       await page.goto('/iframe.html?id=components-resultstable--default&viewMode=story');
       await page.waitForSelector('#storybook-root', { state: 'visible' });
       await page.waitForLoadState('networkidle');
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(testDefaults.settleTime);
 
       const table = page.locator('.csk-results-table').first();
       await expect(table).toBeVisible();
 
       // Table should be visible and have content
-      const hasContent = await table.evaluate((el) => {
-        return el.querySelectorAll('tr').length > 0;
+      const rowCount = await table.evaluate((el) => {
+        return el.querySelectorAll('tr').length;
       });
 
-      expect(hasContent).toBe(true);
+      expect(rowCount).toBeGreaterThan(0);
     });
   }
 });
@@ -165,10 +122,9 @@ test.describe('Embed Prototype Container Responsiveness', () => {
         const root = page.locator('#storybook-root');
         await expect(root).toBeVisible();
 
-        // Check no horizontal scrollbar on page
-        const bodyOverflow = await page.evaluate(() => {
-          return document.body.scrollWidth > document.body.clientWidth;
-        });
+        // Verify content renders at narrow width
+        const contentLength = await root.evaluate((el) => el.textContent?.trim().length ?? 0);
+        expect(contentLength).toBeGreaterThan(50);
 
         // Visual regression at narrow width
         await expect(root).toHaveScreenshot(
@@ -191,6 +147,10 @@ test.describe('Embed Prototype Container Responsiveness', () => {
 
         const root = page.locator('#storybook-root');
         await expect(root).toBeVisible();
+
+        // Verify content renders at medium width
+        const contentLength = await root.evaluate((el) => el.textContent?.trim().length ?? 0);
+        expect(contentLength).toBeGreaterThan(50);
 
         await expect(root).toHaveScreenshot(
           `container-responsive/${prototype.name}-medium.png`,
@@ -221,7 +181,7 @@ test.describe('Overflow Prevention Tests', () => {
       await page.goto(`/iframe.html?id=${component.storyId}&viewMode=story`);
       await page.waitForSelector('#storybook-root', { state: 'visible' });
       await page.waitForLoadState('networkidle');
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(testDefaults.settleTime);
 
       const element = page.locator(component.selector).first();
 
@@ -235,7 +195,7 @@ test.describe('Overflow Prevention Tests', () => {
         return root.scrollWidth > root.clientWidth + 10; // 10px tolerance
       });
 
-      // ASSERT no overflow - this was previously just a warning
+      // ASSERT no overflow
       expect(rootOverflows).toBe(false);
     });
   }
@@ -248,7 +208,7 @@ test.describe('Text Truncation and Ellipsis', () => {
     await page.goto('/iframe.html?id=components-calendar--csk-race-calendar&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
     await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(testDefaults.settleTime);
 
     const eventTitle = page.locator('.csk-calendar__event-title').first();
 
@@ -276,7 +236,7 @@ test.describe('Text Truncation and Ellipsis', () => {
     await page.goto('/iframe.html?id=components-resultstable--default&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
     await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(testDefaults.settleTime);
 
     const table = page.locator('.csk-results-table').first();
     await expect(table).toBeVisible();
@@ -313,6 +273,10 @@ test.describe('KanoeCzContext Embed Widths', () => {
       const root = page.locator('#storybook-root');
       await expect(root).toBeVisible();
 
+      // Verify content at this width
+      const contentLength = await root.evaluate((el) => el.textContent?.trim().length ?? 0);
+      expect(contentLength).toBeGreaterThan(50);
+
       // Take screenshot for visual verification
       await expect(root).toHaveScreenshot(
         `kanoe-embed/calendar-${config.name}.png`,
@@ -329,7 +293,7 @@ test.describe('Container Query CSS Support', () => {
   test('container-type is applied to Calendar', async ({ page }) => {
     await page.goto('/iframe.html?id=components-calendar--default&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(testDefaults.settleTime);
 
     const calendar = page.locator('.csk-calendar').first();
     await expect(calendar).toBeVisible();
@@ -344,7 +308,7 @@ test.describe('Container Query CSS Support', () => {
   test('container-type is applied to ResultsTable wrapper', async ({ page }) => {
     await page.goto('/iframe.html?id=components-resultstable--default&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(testDefaults.settleTime);
 
     const wrapper = page.locator('.csk-results-table-wrapper').first();
     await expect(wrapper).toBeVisible();
@@ -359,7 +323,7 @@ test.describe('Container Query CSS Support', () => {
   test('container-name is correctly set', async ({ page }) => {
     await page.goto('/iframe.html?id=components-calendar--default&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(testDefaults.settleTime);
 
     const calendar = page.locator('.csk-calendar').first();
     await expect(calendar).toBeVisible();

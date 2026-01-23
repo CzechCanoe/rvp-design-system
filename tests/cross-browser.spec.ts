@@ -1,39 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { crossBrowserComponents, crossBrowserPrototypes, testDefaults } from './config';
 
 /**
  * Cross-browser compatibility tests
- * Tests key CSS features and rendering across Chrome, Firefox, and WebKit
+ * Tests CSS features and rendering across Chrome, Firefox, and WebKit
+ *
+ * Uses central config from ./config.ts for story IDs
  */
-
-// Key components to test across all browsers
-const crossBrowserComponents = [
-  // CSS Grid and Flexbox
-  { name: 'Table', storyId: 'components-table--default', features: ['grid', 'sticky-header'] },
-  { name: 'Card-Variants', storyId: 'components-card--variants', features: ['flexbox', 'shadows', 'gradients'] },
-
-  // CSS Variables and Gradients
-  { name: 'Button-Variants', storyId: 'components-button--variants', features: ['gradients', 'transitions'] },
-  { name: 'Badge-CskSections', storyId: 'components-badge--csk-sections', features: ['gradients', 'colors'] },
-
-  // Backdrop-filter (glassmorphism)
-  { name: 'Header-Glass', storyId: 'components-header--glass', features: ['backdrop-filter'] },
-  { name: 'Modal-StyleVariants', storyId: 'components-modal--all-style-variants', features: ['backdrop-filter', 'animations'] },
-
-  // Animations and Transitions
-  { name: 'LiveIndicator', storyId: 'components-liveindicator--default', features: ['animations', 'keyframes'] },
-  { name: 'Skeleton', storyId: 'components-skeleton--default', features: ['animations', 'shimmer'] },
-
-  // Complex layouts
-  { name: 'Calendar', storyId: 'components-calendar--default', features: ['grid', 'responsive'] },
-  { name: 'Tabs', storyId: 'components-tabs--default', features: ['flexbox', 'underline'] },
-];
-
-// Prototypes for full-page cross-browser testing
-const crossBrowserPrototypes = [
-  { name: 'CalendarPage', storyId: 'prototypes-calendar-page--embed', maxDiffPixels: 200 },
-  { name: 'LivePage', storyId: 'prototypes-live-page--embed', maxDiffPixels: 6000 }, // Higher for animations
-  { name: 'DashboardPage', storyId: 'prototypes-dashboard-page--satellite', maxDiffPixels: 200 },
-];
 
 test.describe('Cross-Browser: Component Rendering', () => {
   for (const component of crossBrowserComponents) {
@@ -42,17 +15,20 @@ test.describe('Cross-Browser: Component Rendering', () => {
 
       await page.waitForSelector('#storybook-root', { state: 'visible' });
       await page.waitForLoadState('networkidle');
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(testDefaults.settleTime);
 
-      // Basic visibility check
       const root = page.locator('#storybook-root');
       await expect(root).toBeVisible();
+
+      // Verify component rendered with content
+      const childCount = await root.evaluate((el) => el.children.length);
+      expect(childCount).toBeGreaterThan(0);
 
       // Visual regression per browser
       await expect(root).toHaveScreenshot(
         `cross-browser/${component.name}-${browserName}.png`,
         {
-          maxDiffPixels: 100,
+          maxDiffPixels: component.maxDiffPixels ?? 50,
           animations: 'disabled',
         }
       );
@@ -61,35 +37,33 @@ test.describe('Cross-Browser: Component Rendering', () => {
 });
 
 test.describe('Cross-Browser: CSS Features', () => {
-  test('CSS Variables are applied correctly', async ({ page }) => {
+  test('CSS Variables are resolved to actual values', async ({ page }) => {
     await page.goto('/iframe.html?id=components-button--default&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(testDefaults.settleTime);
 
-    // Find button element within the story root
     const button = page.locator('#storybook-root button').first();
     await expect(button).toBeVisible();
 
-    // Check that CSS custom properties are resolved (background has a color)
+    // CSS custom properties should resolve to actual color values
     const backgroundColor = await button.evaluate((el) => {
       return window.getComputedStyle(el).backgroundColor;
     });
 
-    // Should have a resolved color (not empty)
+    // Should be a resolved color (rgb/rgba format), not empty or 'transparent'
     expect(backgroundColor).toBeTruthy();
-    expect(backgroundColor.length).toBeGreaterThan(0);
+    expect(backgroundColor).toMatch(/^rgb/);
   });
 
-  test('Gradients render correctly', async ({ page }) => {
+  test('Gradients render with actual colors', async ({ page }) => {
     await page.goto('/iframe.html?id=components-button--variants&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(testDefaults.settleTime);
 
-    const button = page.locator('#storybook-root button').first();
-    await expect(button).toBeVisible();
+    // Find a gradient button specifically
+    const gradientButton = page.locator('#storybook-root .csk-btn--gradient, #storybook-root [class*="gradient"]').first();
 
-    // Check that gradient or solid background is applied
-    const styles = await button.evaluate((el) => {
+    const styles = await gradientButton.evaluate((el) => {
       const computed = window.getComputedStyle(el);
       return {
         backgroundImage: computed.backgroundImage,
@@ -97,104 +71,151 @@ test.describe('Cross-Browser: CSS Features', () => {
       };
     });
 
-    // Should have either gradient or solid color
+    // Should have gradient or solid background (not empty)
     const hasBackground =
       (styles.backgroundImage && styles.backgroundImage !== 'none') ||
       (styles.backgroundColor && styles.backgroundColor !== 'rgba(0, 0, 0, 0)');
     expect(hasBackground).toBe(true);
   });
 
-  test('Flexbox layouts work correctly', async ({ page }) => {
+  test('Flexbox layouts position children correctly', async ({ page }) => {
     await page.goto('/iframe.html?id=components-card--variants&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(testDefaults.settleTime);
 
-    // Story root should contain multiple visible elements
     const root = page.locator('#storybook-root');
     await expect(root).toBeVisible();
 
-    // Check there's actual content rendered
-    const childCount = await root.evaluate((el) => el.children.length);
-    expect(childCount).toBeGreaterThan(0);
+    // Verify flex container has properly positioned children
+    const flexInfo = await root.evaluate((el) => {
+      const flexContainers = el.querySelectorAll('[class*="card"]');
+      let validFlexCount = 0;
+
+      for (const container of flexContainers) {
+        const style = window.getComputedStyle(container);
+        if (style.display === 'flex' || style.display === 'inline-flex') {
+          // Check children are positioned (not all at 0,0)
+          const children = container.children;
+          if (children.length > 1) {
+            const firstRect = children[0].getBoundingClientRect();
+            const lastRect = children[children.length - 1].getBoundingClientRect();
+            if (firstRect.top !== lastRect.top || firstRect.left !== lastRect.left) {
+              validFlexCount++;
+            }
+          }
+        }
+      }
+      return validFlexCount;
+    });
+
+    expect(flexInfo).toBeGreaterThan(0);
   });
 
-  test('CSS Grid layouts work correctly', async ({ page }) => {
+  test('CSS Grid creates proper grid structure', async ({ page }) => {
     await page.goto('/iframe.html?id=components-calendar--default&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(testDefaults.settleTime);
 
     const root = page.locator('#storybook-root');
     await expect(root).toBeVisible();
 
-    // Check for grid or flex display somewhere in the component
-    const hasGridOrFlex = await root.evaluate((el) => {
+    // Find grid container and verify grid properties
+    const gridInfo = await root.evaluate((el) => {
       const elements = el.querySelectorAll('*');
       for (const elem of elements) {
         const display = window.getComputedStyle(elem).display;
-        if (display === 'grid' || display === 'flex') return true;
+        if (display === 'grid') {
+          const columns = window.getComputedStyle(elem).gridTemplateColumns;
+          return {
+            hasGrid: true,
+            hasColumns: columns && columns !== 'none',
+          };
+        }
       }
-      return false;
+      return { hasGrid: false, hasColumns: false };
     });
 
-    expect(hasGridOrFlex).toBe(true);
+    expect(gridInfo.hasGrid).toBe(true);
   });
 
-  test('Backdrop-filter works (with fallback check)', async ({ page }) => {
+  test('Backdrop-filter renders or has fallback', async ({ page }) => {
     await page.goto('/iframe.html?id=components-header--glass&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(testDefaults.settleTime);
 
     const root = page.locator('#storybook-root');
     await expect(root).toBeVisible();
 
-    // Check that content is visible (glass effect working or fallback)
-    const hasVisibleContent = await root.evaluate((el) => {
-      return el.textContent && el.textContent.trim().length > 0;
+    // Glass effect should have visible content (either blur works or fallback bg)
+    const hasVisibleHeader = await root.evaluate((el) => {
+      const header = el.querySelector('[class*="header"]');
+      if (!header) return false;
+
+      const style = window.getComputedStyle(header);
+      // Either backdrop-filter is applied, or has fallback background
+      const hasBackdrop = style.backdropFilter && style.backdropFilter !== 'none';
+      const hasBg = style.backgroundColor && style.backgroundColor !== 'rgba(0, 0, 0, 0)';
+
+      return hasBackdrop || hasBg;
     });
 
-    expect(hasVisibleContent).toBe(true);
+    expect(hasVisibleHeader).toBe(true);
   });
 
-  test('Animations are defined', async ({ page }) => {
+  test('Animations are defined and running', async ({ page }) => {
     await page.goto('/iframe.html?id=components-liveindicator--default&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(testDefaults.settleTime);
 
     const root = page.locator('#storybook-root');
     await expect(root).toBeVisible();
 
-    // Check that animation styles exist somewhere
-    const hasAnimation = await root.evaluate((el) => {
+    // Check animation properties are set
+    const animationInfo = await root.evaluate((el) => {
       const elements = el.querySelectorAll('*');
       for (const elem of elements) {
-        const animation = window.getComputedStyle(elem).animation;
-        if (animation && animation !== 'none' && animation.length > 4) return true;
+        const style = window.getComputedStyle(elem);
+        const animation = style.animation || style.animationName;
+        if (animation && animation !== 'none' && animation.length > 4) {
+          return {
+            hasAnimation: true,
+            animationName: style.animationName,
+          };
+        }
       }
-      return false;
+      return { hasAnimation: false, animationName: '' };
     });
 
-    // Animation should be defined
-    expect(hasAnimation).toBe(true);
+    expect(animationInfo.hasAnimation).toBe(true);
   });
 
-  test('Table styles work correctly', async ({ page }) => {
+  test('Table has proper semantic structure', async ({ page }) => {
     await page.goto('/iframe.html?id=components-table--default&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(testDefaults.settleTime);
 
     const root = page.locator('#storybook-root');
     await expect(root).toBeVisible();
 
-    // Check that table element exists with proper structure
-    const hasTable = await root.evaluate((el) => {
+    // Verify table semantic structure
+    const tableStructure = await root.evaluate((el) => {
       const table = el.querySelector('table');
-      if (!table) return false;
-      const thead = table.querySelector('thead');
-      const tbody = table.querySelector('tbody');
-      return !!(thead && tbody);
+      if (!table) return { hasTable: false };
+
+      return {
+        hasTable: true,
+        hasThead: !!table.querySelector('thead'),
+        hasTbody: !!table.querySelector('tbody'),
+        headerCount: table.querySelectorAll('th').length,
+        rowCount: table.querySelectorAll('tbody tr').length,
+      };
     });
 
-    expect(hasTable).toBe(true);
+    expect(tableStructure.hasTable).toBe(true);
+    expect(tableStructure.hasThead).toBe(true);
+    expect(tableStructure.hasTbody).toBe(true);
+    expect(tableStructure.headerCount).toBeGreaterThan(0);
+    expect(tableStructure.rowCount).toBeGreaterThan(0);
   });
 });
 
@@ -208,30 +229,33 @@ test.describe('Cross-Browser: Prototype Pages', () => {
         timeout: 60000,
       });
       await page.waitForLoadState('networkidle');
-      // WebKit needs longer stabilization for complex layouts
-      await page.waitForTimeout(browserName === 'webkit' ? 3000 : 1500);
+      // WebKit needs longer stabilization
+      await page.waitForTimeout(browserName === 'webkit' ? 3000 : testDefaults.prototypeSettleTime);
 
-      // Check no JS errors in console
+      // Collect JS errors
       const errors: string[] = [];
       page.on('pageerror', (err) => errors.push(err.message));
 
-      // Basic structure check
       const root = page.locator('#storybook-root');
       await expect(root).toBeVisible();
+
+      // Verify page has substantial content
+      const contentLength = await root.evaluate((el) => el.textContent?.trim().length ?? 0);
+      expect(contentLength).toBeGreaterThan(100);
 
       // Visual regression per browser
       await expect(root).toHaveScreenshot(
         `cross-browser/prototype-${prototype.name}-${browserName}.png`,
         {
-          maxDiffPixels: prototype.maxDiffPixels ?? 200,
+          maxDiffPixels: prototype.maxDiffPixels ?? 150,
           animations: 'disabled',
           timeout: 30000,
         }
       );
 
-      // No critical JS errors
+      // No critical JS errors (ignore benign ones)
       const criticalErrors = errors.filter(e =>
-        !e.includes('ResizeObserver') && // Ignore benign ResizeObserver errors
+        !e.includes('ResizeObserver') &&
         !e.includes('Script error')
       );
       expect(criticalErrors).toHaveLength(0);
@@ -240,6 +264,7 @@ test.describe('Cross-Browser: Prototype Pages', () => {
 });
 
 test.describe('Cross-Browser: Dark Mode', () => {
+  // Test dark mode on components that use colors heavily
   const darkModeComponents = [
     { name: 'Card-Variants', storyId: 'components-card--variants' },
     { name: 'Button-Variants', storyId: 'components-button--variants' },
@@ -254,23 +279,39 @@ test.describe('Cross-Browser: Dark Mode', () => {
 
       await page.waitForSelector('#storybook-root', { state: 'visible' });
       await page.waitForLoadState('networkidle');
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(testDefaults.settleTime);
 
       const root = page.locator('#storybook-root');
       await expect(root).toBeVisible();
 
-      // Check dark theme is applied
+      // Verify dark theme is applied
       const isDark = await page.evaluate(() => {
         return document.documentElement.getAttribute('data-theme') === 'dark' ||
-               document.body.getAttribute('data-theme') === 'dark';
+               document.body.getAttribute('data-theme') === 'dark' ||
+               document.querySelector('[data-theme="dark"]') !== null;
       });
-
       expect(isDark).toBe(true);
+
+      // Verify dark colors are actually applied (not white background)
+      const hasDarkColors = await root.evaluate((el) => {
+        const style = window.getComputedStyle(el);
+        const bg = style.backgroundColor;
+        // Dark mode should have darker background (not white/transparent)
+        if (bg === 'rgba(0, 0, 0, 0)') return true; // Transparent is OK (inherits)
+        const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+        if (match) {
+          const [, r, g, b] = match.map(Number);
+          // Average RGB < 200 indicates darker colors
+          return (r + g + b) / 3 < 200;
+        }
+        return true;
+      });
+      expect(hasDarkColors).toBe(true);
 
       await expect(root).toHaveScreenshot(
         `cross-browser/${component.name}-dark-${browserName}.png`,
         {
-          maxDiffPixels: 100,
+          maxDiffPixels: 50,
           animations: 'disabled',
         }
       );
@@ -280,7 +321,6 @@ test.describe('Cross-Browser: Dark Mode', () => {
 
 test.describe('Cross-Browser: Responsive Behavior', () => {
   test('Mobile viewport renders correctly', async ({ page, browserName }) => {
-    // Set mobile viewport
     await page.setViewportSize({ width: 375, height: 667 });
 
     await page.goto('/iframe.html?id=prototypes-calendar-page--embed&viewMode=story');
@@ -288,34 +328,49 @@ test.describe('Cross-Browser: Responsive Behavior', () => {
     await page.waitForLoadState('networkidle');
     await page.waitForTimeout(1000);
 
-    await expect(page.locator('#storybook-root')).toHaveScreenshot(
+    const root = page.locator('#storybook-root');
+
+    // Verify content renders at mobile size
+    const hasContent = await root.evaluate((el) => el.textContent?.trim().length ?? 0);
+    expect(hasContent).toBeGreaterThan(50);
+
+    // Verify no horizontal overflow
+    const hasOverflow = await page.evaluate(() => {
+      return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+    });
+    expect(hasOverflow).toBe(false);
+
+    await expect(root).toHaveScreenshot(
       `cross-browser/mobile-calendar-${browserName}.png`,
       {
-        maxDiffPixels: 150,
+        maxDiffPixels: 100,
         animations: 'disabled',
       }
     );
   });
 
   test('Tablet viewport renders correctly', async ({ page, browserName }, testInfo) => {
-    // WebKit needs more time for complex Dashboard layouts
     if (browserName === 'webkit') {
       testInfo.setTimeout(90000);
     }
 
-    // Set tablet viewport
     await page.setViewportSize({ width: 768, height: 1024 });
 
     await page.goto('/iframe.html?id=prototypes-dashboard-page--satellite&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible', timeout: 60000 });
     await page.waitForLoadState('networkidle');
-    // WebKit needs longer stabilization for complex layouts
-    await page.waitForTimeout(browserName === 'webkit' ? 3000 : 1500);
+    await page.waitForTimeout(browserName === 'webkit' ? 3000 : testDefaults.prototypeSettleTime);
 
-    await expect(page.locator('#storybook-root')).toHaveScreenshot(
+    const root = page.locator('#storybook-root');
+
+    // Verify content renders at tablet size
+    const hasContent = await root.evaluate((el) => el.textContent?.trim().length ?? 0);
+    expect(hasContent).toBeGreaterThan(100);
+
+    await expect(root).toHaveScreenshot(
       `cross-browser/tablet-dashboard-${browserName}.png`,
       {
-        maxDiffPixels: 200,
+        maxDiffPixels: 150,
         animations: 'disabled',
         timeout: 30000,
       }

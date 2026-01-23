@@ -1,62 +1,24 @@
 import { test, expect } from '@playwright/test';
+import { allPrototypes, testDefaults } from './config';
 
 /**
  * Visual regression tests for page prototypes
  * Tests all prototype pages in both light and dark modes
+ *
+ * Uses central config from ./config.ts for story IDs
  */
 
-interface PrototypeConfig {
-  name: string;
-  storyId: string;
-  maxDiffPixels?: number;
-  timeout?: number;
-}
-
-const prototypes: PrototypeConfig[] = [
-  {
-    name: 'CalendarPage-Embed',
-    storyId: 'prototypes-calendar-page--embed',
-  },
-  {
-    name: 'ResultsPage-Embed',
-    storyId: 'prototypes-results-page--embed',
-  },
-  {
-    name: 'LivePage-Embed',
-    storyId: 'prototypes-live-page--embed',
-    maxDiffPixels: 6000, // Higher tolerance for animated LiveIndicator (pulse effect)
-    timeout: 30000,
-  },
-  {
-    name: 'RegistrationPage-Satellite',
-    storyId: 'prototypes-registration-page--satellite',
-  },
-  {
-    name: 'ProfilePage-Satellite',
-    storyId: 'prototypes-profilepage--satellite',
-  },
-  {
-    name: 'DashboardPage-Satellite',
-    storyId: 'prototypes-dashboard-page--satellite',
-    timeout: 60000, // Larger page needs more time
-  },
-];
-
 test.describe('Prototype Pages - Light Mode', () => {
-  for (const prototype of prototypes) {
+  for (const prototype of allPrototypes) {
     test(`${prototype.name} - screenshot`, async ({ page }) => {
-      // Use iframe.html for direct story access
       await page.goto(`/iframe.html?id=${prototype.storyId}&viewMode=story`);
 
-      // Wait for the story root to be visible with custom timeout
       await page.waitForSelector('#storybook-root', {
         state: 'visible',
-        timeout: prototype.timeout ?? 30000,
+        timeout: prototype.timeout ?? testDefaults.prototypeTimeout,
       });
       await page.waitForLoadState('networkidle');
-
-      // Additional wait for animations and lazy content
-      await page.waitForTimeout(1500);
+      await page.waitForTimeout(testDefaults.prototypeSettleTime);
 
       const root = page.locator('#storybook-root');
 
@@ -64,16 +26,23 @@ test.describe('Prototype Pages - Light Mode', () => {
       const childCount = await root.evaluate((el) => el.children.length);
       expect(childCount).toBeGreaterThan(0);
 
-      // Verify page has meaningful content
+      // Verify page has meaningful content (prototypes should have substantial text)
       const contentLength = await root.evaluate((el) => el.textContent?.trim().length ?? 0);
-      expect(contentLength).toBeGreaterThan(50); // Prototypes should have substantial content
+      expect(contentLength).toBeGreaterThan(50);
+
+      // Verify page structure - should have multiple sections
+      const sectionCount = await root.evaluate((el) => {
+        const sections = el.querySelectorAll('section, header, main, article, [class*="page"], [class*="section"]');
+        return sections.length;
+      });
+      expect(sectionCount).toBeGreaterThan(0);
 
       await expect(root).toHaveScreenshot(
         `${prototype.name}-light.png`,
         {
-          maxDiffPixels: prototype.maxDiffPixels ?? 80,
+          maxDiffPixels: prototype.maxDiffPixels ?? testDefaults.prototypeMaxDiffPixels,
           animations: 'disabled',
-          timeout: prototype.timeout ?? 10000,
+          timeout: prototype.timeout ?? testDefaults.componentTimeout,
         }
       );
     });
@@ -81,19 +50,18 @@ test.describe('Prototype Pages - Light Mode', () => {
 });
 
 test.describe('Prototype Pages - Dark Mode', () => {
-  for (const prototype of prototypes) {
+  for (const prototype of allPrototypes) {
     test(`${prototype.name} - dark mode screenshot`, async ({ page }) => {
-      // Navigate with dark mode global
       await page.goto(
         `/iframe.html?id=${prototype.storyId}&viewMode=story&globals=theme:dark`
       );
 
       await page.waitForSelector('#storybook-root', {
         state: 'visible',
-        timeout: prototype.timeout ?? 30000,
+        timeout: prototype.timeout ?? testDefaults.prototypeTimeout,
       });
       await page.waitForLoadState('networkidle');
-      await page.waitForTimeout(1500);
+      await page.waitForTimeout(testDefaults.prototypeSettleTime);
 
       const root = page.locator('#storybook-root');
 
@@ -103,14 +71,22 @@ test.describe('Prototype Pages - Dark Mode', () => {
 
       // Verify page has meaningful content
       const contentLength = await root.evaluate((el) => el.textContent?.trim().length ?? 0);
-      expect(contentLength).toBeGreaterThan(50); // Prototypes should have substantial content
+      expect(contentLength).toBeGreaterThan(50);
+
+      // Verify dark theme is applied
+      const isDark = await page.evaluate(() => {
+        return document.documentElement.getAttribute('data-theme') === 'dark' ||
+               document.body.getAttribute('data-theme') === 'dark' ||
+               document.querySelector('[data-theme="dark"]') !== null;
+      });
+      expect(isDark).toBe(true);
 
       await expect(root).toHaveScreenshot(
         `${prototype.name}-dark.png`,
         {
-          maxDiffPixels: prototype.maxDiffPixels ?? 80,
+          maxDiffPixels: prototype.maxDiffPixels ?? testDefaults.prototypeMaxDiffPixels,
           animations: 'disabled',
-          timeout: prototype.timeout ?? 10000,
+          timeout: prototype.timeout ?? testDefaults.componentTimeout,
         }
       );
     });
