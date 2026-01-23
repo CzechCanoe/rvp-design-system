@@ -321,7 +321,7 @@
 
 ---
 
-## Fáze 9: Audit a racionalizace DS 🔲
+## Fáze 9: Audit a racionalizace DS ✅
 
 **Kontext:** Design systém narostl organicky. Je potřeba zhodnotit, co je skutečně potřeba, a nastavit systematickou úroveň rozsahu a podrobnosti.
 
@@ -596,7 +596,7 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 
 ---
 
-### 9.4 Implementace racionalizace 🔲
+### 9.4 Implementace racionalizace ✅
 
 *(Implementace bude provedena v iteracích po skupinách komponent)*
 
@@ -658,7 +658,7 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 
 ---
 
-## Fáze 13: Testování integrace 🔲
+## Fáze 13: Testování integrace ✅
 
 **Kontext:** Finální ověření, že komponenty fungují správně v embed kontextu a splňují požadavky na responzivitu a přístupnost.
 

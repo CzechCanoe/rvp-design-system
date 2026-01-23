@@ -4497,3 +4497,16 @@ Audit 9.1.4 dokončen. Další krok: 9.1.5 Audit kompatibility s kanoe.cz (embed
 - WebKit potřebuje delší stabilizaci pro komplexní layouty (3s vs 1.5s)
 - Všechny CSS featury fungují konzistentně: CSS Variables, Gradients, Flexbox, Grid, Backdrop-filter, Animations
 - Dark mode funguje správně ve všech prohlížečích
+
+---
+
+## 2026-01-23 - Cleanup: Remove test artifacts from git
+
+### Dokončeno
+- [x] Odstraněny playwright-report/ a test-results/ z git tracking
+- [x] Tyto složky byly omylem commitnuty, přestože jsou v .gitignore
+- [x] 284 souborů smazáno z repozitáře (8222 řádků)
+
+### Poznámky
+- Složky zůstávají v .gitignore pro budoucí ignorování
+- Lokální kopie složek zůstávají (nejsou smazány z disku, pouze z gitu)
