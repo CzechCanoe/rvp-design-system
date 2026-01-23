@@ -95,7 +95,7 @@ test.describe('Container Query Breakpoints', () => {
           await expect(element).toHaveScreenshot(
             `container-query/${component.name}-${breakpoint}px.png`,
             {
-              maxDiffPixels: 100,
+              maxDiffPixels: 50,
               animations: 'disabled',
             }
           );
@@ -174,7 +174,7 @@ test.describe('Embed Prototype Container Responsiveness', () => {
         await expect(root).toHaveScreenshot(
           `container-responsive/${prototype.name}-narrow.png`,
           {
-            maxDiffPixels: 200,
+            maxDiffPixels: 100,
             animations: 'disabled',
           }
         );
@@ -195,7 +195,7 @@ test.describe('Embed Prototype Container Responsiveness', () => {
         await expect(root).toHaveScreenshot(
           `container-responsive/${prototype.name}-medium.png`,
           {
-            maxDiffPixels: 200,
+            maxDiffPixels: 100,
             animations: 'disabled',
           }
         );
@@ -225,12 +225,8 @@ test.describe('Overflow Prevention Tests', () => {
 
       const element = page.locator(component.selector).first();
 
-      // Check component is visible
-      const isVisible = await element.isVisible().catch(() => false);
-      if (!isVisible) {
-        // Some components may not render at this size, which is acceptable
-        return;
-      }
+      // Component MUST be visible - fail if not rendered
+      await expect(element).toBeVisible({ timeout: 5000 });
 
       // Check that text doesn't overflow and cause horizontal scroll
       const rootOverflows = await page.evaluate(() => {
@@ -239,10 +235,8 @@ test.describe('Overflow Prevention Tests', () => {
         return root.scrollWidth > root.clientWidth + 10; // 10px tolerance
       });
 
-      // Log overflow status for debugging
-      if (rootOverflows) {
-        console.log(`Warning: ${component.name} may have overflow at 250px width`);
-      }
+      // ASSERT no overflow - this was previously just a warning
+      expect(rootOverflows).toBe(false);
     });
   }
 });
@@ -257,23 +251,23 @@ test.describe('Text Truncation and Ellipsis', () => {
     await page.waitForTimeout(500);
 
     const eventTitle = page.locator('.csk-calendar__event-title').first();
-    const isVisible = await eventTitle.isVisible().catch(() => false);
 
-    if (isVisible) {
-      // Check that overflow is hidden and text-overflow is ellipsis
-      const styles = await eventTitle.evaluate((el) => {
-        const computed = window.getComputedStyle(el);
-        return {
-          overflow: computed.overflow,
-          textOverflow: computed.textOverflow,
-          whiteSpace: computed.whiteSpace,
-        };
-      });
+    // Event title MUST be visible for this test to be meaningful
+    await expect(eventTitle).toBeVisible({ timeout: 5000 });
 
-      expect(styles.overflow).toBe('hidden');
-      expect(styles.textOverflow).toBe('ellipsis');
-      expect(styles.whiteSpace).toBe('nowrap');
-    }
+    // Check that overflow is hidden and text-overflow is ellipsis
+    const styles = await eventTitle.evaluate((el) => {
+      const computed = window.getComputedStyle(el);
+      return {
+        overflow: computed.overflow,
+        textOverflow: computed.textOverflow,
+        whiteSpace: computed.whiteSpace,
+      };
+    });
+
+    expect(styles.overflow).toBe('hidden');
+    expect(styles.textOverflow).toBe('ellipsis');
+    expect(styles.whiteSpace).toBe('nowrap');
   });
 
   test('ResultsTable name column handles long names', async ({ page }) => {
@@ -323,7 +317,7 @@ test.describe('KanoeCzContext Embed Widths', () => {
       await expect(root).toHaveScreenshot(
         `kanoe-embed/calendar-${config.name}.png`,
         {
-          maxDiffPixels: 150,
+          maxDiffPixels: 80,
           animations: 'disabled',
         }
       );

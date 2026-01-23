@@ -58,10 +58,20 @@ test.describe('Prototype Pages - Light Mode', () => {
       // Additional wait for animations and lazy content
       await page.waitForTimeout(1500);
 
-      await expect(page.locator('#storybook-root')).toHaveScreenshot(
+      const root = page.locator('#storybook-root');
+
+      // Verify prototype rendered with content (not empty/broken)
+      const childCount = await root.evaluate((el) => el.children.length);
+      expect(childCount).toBeGreaterThan(0);
+
+      // Verify page has meaningful content
+      const contentLength = await root.evaluate((el) => el.textContent?.trim().length ?? 0);
+      expect(contentLength).toBeGreaterThan(50); // Prototypes should have substantial content
+
+      await expect(root).toHaveScreenshot(
         `${prototype.name}-light.png`,
         {
-          maxDiffPixels: prototype.maxDiffPixels ?? 100,
+          maxDiffPixels: prototype.maxDiffPixels ?? 80,
           animations: 'disabled',
           timeout: prototype.timeout ?? 10000,
         }
@@ -85,10 +95,20 @@ test.describe('Prototype Pages - Dark Mode', () => {
       await page.waitForLoadState('networkidle');
       await page.waitForTimeout(1500);
 
-      await expect(page.locator('#storybook-root')).toHaveScreenshot(
+      const root = page.locator('#storybook-root');
+
+      // Verify prototype rendered with content (not empty/broken)
+      const childCount = await root.evaluate((el) => el.children.length);
+      expect(childCount).toBeGreaterThan(0);
+
+      // Verify page has meaningful content
+      const contentLength = await root.evaluate((el) => el.textContent?.trim().length ?? 0);
+      expect(contentLength).toBeGreaterThan(50); // Prototypes should have substantial content
+
+      await expect(root).toHaveScreenshot(
         `${prototype.name}-dark.png`,
         {
-          maxDiffPixels: prototype.maxDiffPixels ?? 100,
+          maxDiffPixels: prototype.maxDiffPixels ?? 80,
           animations: 'disabled',
           timeout: prototype.timeout ?? 10000,
         }

@@ -700,6 +700,62 @@ Pro každou komponentu v embed módu ověřit vizuální soulad s Bootstrap 4 st
 
 ---
 
+## Fáze 14: Vylepšení test suite (TODO)
+
+**Kontext:** Review test suite odhalil strukturální problémy - testy jsou široké ale mělké. Mnoho testů spoléhá pouze na snapshoty bez behaviorálních asercí.
+
+### 14.1 Odstranění duplicit v testech
+- [ ] Konsolidovat testování komponent - každá komponenta testována jednou per účel
+- [ ] Vytvořit `tests/config.ts` s centrální definicí story IDs
+- [ ] Odstranit redundantní cross-browser testy pro komponenty již pokryté v components.spec.ts
+
+**Aktuální duplicity:**
+- Button, Calendar, Badge, Card, Input, Select, Checkbox, Table testovány 10+ × napříč soubory
+- ~40-50 testů je redundantních
+
+### 14.2 Funkční/interakční testy
+- [ ] **Formulářové komponenty:**
+  - [ ] Input: change event, validation, clear
+  - [ ] Select: open/close, option selection, keyboard nav
+  - [ ] Checkbox: toggle, indeterminate state
+  - [ ] Radio: group selection, keyboard nav
+  - [ ] Switch: toggle animation
+  - [ ] Dropzone: drag & drop, file selection
+
+- [ ] **Interaktivní komponenty:**
+  - [ ] Button: click handler, disabled state prevents click
+  - [ ] Modal: open/close, escape key, click outside, focus trap
+  - [ ] Dropdown: open/close, option selection
+  - [ ] Tabs: tab switching, keyboard nav, disabled tabs
+  - [ ] Toast: auto-dismiss, manual close
+  - [ ] Pagination: page change, boundary behavior
+
+- [ ] **Data komponenty:**
+  - [ ] Table: sorting, row selection (pokud implementováno)
+  - [ ] ResultsTable: column visibility, responsive behavior
+  - [ ] Calendar: date selection, month navigation
+
+### 14.3 Edge case testy
+- [ ] Disabled state pro všechny interaktivní komponenty
+- [ ] Loading/skeleton states
+- [ ] Empty states
+- [ ] Error states (form validation)
+- [ ] Dlouhý text / truncation
+- [ ] Speciální znaky v obsahu
+
+### 14.4 Rozšíření keyboard navigation
+Aktuálně pokryto 7 z 23 interaktivních komponent. Doplnit:
+- [ ] Modal: Escape close
+- [ ] Dropdown: Arrow keys, Escape, Enter
+- [ ] Select: Arrow keys, Type-ahead
+- [ ] Table: Arrow keys (pokud sortable)
+- [ ] Pagination: Arrow keys
+- [ ] Calendar: Arrow keys pro navigaci dnů
+
+**Milestone M14:** Testy mají behaviorální aserce a pokrývají interakce
+
+---
+
 ## Fáze 6: Publikace ✅
 
 ### 6.1 GitHub Actions CI/CD ✅
