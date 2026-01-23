@@ -405,6 +405,19 @@ export const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>(
 
     return (
       <div ref={ref} className={classes} {...props}>
+        {/* Hidden file input - outside of button to avoid nested interactive */}
+        <input
+          ref={inputRef}
+          type="file"
+          className="csk-dropzone__input"
+          accept={accept}
+          multiple={multiple}
+          disabled={disabled}
+          onChange={handleInputChange}
+          aria-hidden="true"
+          tabIndex={-1}
+        />
+
         {/* Drop area */}
         <div
           className="csk-dropzone__area"
@@ -419,19 +432,6 @@ export const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>(
           onDragOver={handleDragOver}
           onDrop={handleDrop}
         >
-          {/* Hidden file input */}
-          <input
-            ref={inputRef}
-            type="file"
-            className="csk-dropzone__input"
-            accept={accept}
-            multiple={multiple}
-            disabled={disabled}
-            onChange={handleInputChange}
-            aria-hidden="true"
-            tabIndex={-1}
-          />
-
           {/* Content */}
           {children || (
             <>

@@ -161,10 +161,10 @@ const TimelineItemComponent = ({
   return (
     <div
       className={itemClasses}
-      role={isClickable ? 'button' : undefined}
+      role="listitem"
       tabIndex={isClickable ? 0 : undefined}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
+      onClick={isClickable ? handleClick : undefined}
+      onKeyDown={isClickable ? handleKeyDown : undefined}
       aria-label={isClickable ? `${item.title}${item.timestamp ? `, ${item.timestamp}` : ''}` : undefined}
     >
       {/* Marker */}

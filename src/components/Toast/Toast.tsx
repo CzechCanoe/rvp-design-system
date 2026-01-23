@@ -174,7 +174,7 @@ const ToastItem = ({ toast, onDismiss, showProgress = true, className, ...props 
 
   return (
     <div
-      role="alert"
+      role="status"
       aria-live={variant === 'error' ? 'assertive' : 'polite'}
       className={classes}
       onMouseEnter={handleMouseEnter}
@@ -408,7 +408,7 @@ export const ToastProvider = ({
     <ToastContext.Provider value={contextValue}>
       {children}
       {createPortal(
-        <div className={containerClasses} aria-label="Oznámení">
+        <div className={containerClasses} role="region" aria-label="Oznámení">
           {toasts.map((toast) => (
             <ToastItem
               key={toast.id}

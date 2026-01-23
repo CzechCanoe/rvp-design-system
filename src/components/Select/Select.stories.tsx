@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Select } from './Select';
 
@@ -88,6 +87,7 @@ export const Default: Story = {
   args: {
     options: countryOptions,
     placeholder: 'Select country...',
+    label: 'Country',
   },
 };
 
@@ -243,20 +243,13 @@ export const WithDisabledOptions: Story = {
    CSK EXAMPLE: FILTER FORM
    ========================================================================== */
 
-const TrophyIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M6 9H4.5a2.5 2.5 0 010-5H6M18 9h1.5a2.5 2.5 0 000-5H18" />
-    <path d="M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 1012 0V2z" />
-  </svg>
-);
-
 export const FilterForm: Story = {
   name: 'Example: Filter Form',
   render: () => (
     <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-end' }}>
-      <Select size="sm" options={yearOptions} placeholder="Year" iconLeft={<CalendarIcon />} />
-      <Select size="sm" options={disciplineOptions} placeholder="Discipline" />
-      <Select size="sm" options={categoryOptions} placeholder="Category" />
+      <Select size="sm" options={yearOptions} aria-label="Year" placeholder="Year" iconLeft={<CalendarIcon />} />
+      <Select size="sm" options={disciplineOptions} aria-label="Discipline" placeholder="Discipline" />
+      <Select size="sm" options={categoryOptions} aria-label="Category" placeholder="Category" />
     </div>
   ),
   parameters: {

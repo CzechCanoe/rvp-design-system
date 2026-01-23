@@ -117,6 +117,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             value={value}
             aria-invalid={state === 'error'}
             aria-describedby={descriptionId}
+            aria-label={!label ? props['aria-label'] || placeholder : undefined}
             {...props}
           >
             {placeholder && (

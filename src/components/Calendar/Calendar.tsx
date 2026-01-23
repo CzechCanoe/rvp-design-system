@@ -395,15 +395,14 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
         )}
 
         {/* Calendar grid */}
-        <div className="csk-calendar__grid" role="grid" aria-label="Kalendář">
+        <div className="csk-calendar__grid" aria-label="Kalendář">
           {/* Day names header */}
-          <div className="csk-calendar__weekdays" role="row">
+          <div className="csk-calendar__weekdays">
             {dayNames.map((name, index) => (
               <div
                 key={index}
                 className="csk-calendar__weekday"
-                role="columnheader"
-                aria-label={name}
+                aria-hidden="true"
               >
                 {name}
               </div>
@@ -427,7 +426,6 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
                   ]
                     .filter(Boolean)
                     .join(' ')}
-                  role="gridcell"
                   tabIndex={onDayClick ? 0 : undefined}
                   onClick={() => onDayClick && handleDayClick(day.date)}
                   onKeyDown={(e) => {
