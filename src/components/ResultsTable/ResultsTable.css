@@ -169,9 +169,11 @@
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-1-5);
+  font-family: var(--font-family-display, var(--font-family-sans));
   font-weight: var(--font-weight-bold);
   font-variant-numeric: tabular-nums;
   font-size: var(--font-size-base);
+  letter-spacing: -0.02em;
 }
 
 /* Position change indicator */
@@ -215,24 +217,24 @@
   }
 }
 
-/* Live indicator - enhanced pulsating dot */
+/* Live indicator - enhanced pulsating dot with energy color */
 .csk-results-table__live-indicator {
   display: inline-block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--color-error-500);
-  box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5);
+  background: var(--color-energy-500, #f97316);
+  box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.5);
   animation: csk-results-live-pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes csk-results-live-pulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5);
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.5);
     transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+    box-shadow: 0 0 0 8px rgba(249, 115, 22, 0);
     transform: scale(1.1);
   }
 }
@@ -414,21 +416,21 @@
    ============================================================================= */
 
 .csk-results-table__tr--live {
-  background: linear-gradient(90deg, rgba(239, 68, 68, 0.08) 0%, transparent 100%);
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0.08) 0%, transparent 100%);
   animation: csk-results-live-row 2s ease-in-out infinite;
 }
 
 @keyframes csk-results-live-row {
   0%, 100% {
-    background: linear-gradient(90deg, rgba(239, 68, 68, 0.08) 0%, transparent 100%);
+    background: linear-gradient(90deg, rgba(249, 115, 22, 0.08) 0%, transparent 100%);
   }
   50% {
-    background: linear-gradient(90deg, rgba(239, 68, 68, 0.12) 0%, transparent 100%);
+    background: linear-gradient(90deg, rgba(249, 115, 22, 0.12) 0%, transparent 100%);
   }
 }
 
 .csk-results-table__tr--live:hover {
-  background: linear-gradient(90deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.05) 100%);
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0.15) 0%, rgba(249, 115, 22, 0.05) 100%);
 }
 
 /* =============================================================================
@@ -655,7 +657,7 @@
 }
 
 [data-theme='dark'] .csk-results-table__tr--live {
-  background: linear-gradient(90deg, rgba(239, 68, 68, 0.12) 0%, transparent 100%);
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0.12) 0%, transparent 100%);
 }
 
 [data-theme='dark'] .csk-results-table__loading-overlay {
@@ -972,4 +974,88 @@
 
 [data-theme='dark'] .csk-results-table__points {
   color: var(--color-primary-400);
+}
+
+/* =============================================================================
+   AESTHETIC ENHANCEMENTS - Dynamic Sport
+   ============================================================================= */
+
+/* Podium rank numbers - larger display font */
+.csk-results-table__tr--gold .csk-results-table__rank,
+.csk-results-table__tr--silver .csk-results-table__rank,
+.csk-results-table__tr--bronze .csk-results-table__rank {
+  font-size: var(--font-size-xl);
+  font-weight: 800;
+}
+
+/* Featured/highlighted row with border-accent */
+.csk-results-table__tr--featured {
+  border-left: var(--border-accent-width, 4px) solid;
+  border-image: var(--border-accent-gradient, linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-energy-500, #f97316) 100%)) 1;
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0.05) 0%, transparent 100%);
+}
+
+.csk-results-table__tr--featured:hover {
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0.1) 0%, rgba(249, 115, 22, 0.02) 100%);
+}
+
+/* Live row with energy glow effect */
+.csk-results-table__tr--live {
+  border-left: 4px solid var(--color-energy-500, #f97316);
+}
+
+.csk-results-table__tr--live .csk-results-table__rank {
+  color: var(--color-energy-600, #ea580c);
+}
+
+/* Energy-styled live badge for use in cells */
+.csk-results-table__live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-0-5) var(--spacing-2);
+  background: var(--gradient-energy, linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%));
+  color: white;
+  font-family: var(--font-family-display, var(--font-family-sans));
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px -2px rgba(249, 115, 22, 0.4);
+}
+
+.csk-results-table__live-badge .csk-results-table__live-indicator {
+  width: 6px;
+  height: 6px;
+  background: white;
+  box-shadow: none;
+}
+
+/* Wrapper aesthetic variant - with mesh background */
+.csk-results-table-wrapper--aesthetic {
+  background: var(--bg-mesh-card, radial-gradient(ellipse at 0% 0%, rgba(17, 118, 166, 0.08) 0%, transparent 50%));
+  padding: var(--spacing-1);
+  border-radius: var(--radius-xl);
+}
+
+.csk-results-table-wrapper--aesthetic .csk-results-table {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Dark mode aesthetic enhancements */
+[data-theme='dark'] .csk-results-table__tr--featured {
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0.08) 0%, transparent 100%);
+}
+
+[data-theme='dark'] .csk-results-table__tr--featured:hover {
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0.12) 0%, rgba(249, 115, 22, 0.04) 100%);
+}
+
+[data-theme='dark'] .csk-results-table__tr--live .csk-results-table__rank {
+  color: var(--color-energy-400, #fb923c);
+}
+
+[data-theme='dark'] .csk-results-table-wrapper--aesthetic {
+  background: var(--bg-mesh-card);
 }

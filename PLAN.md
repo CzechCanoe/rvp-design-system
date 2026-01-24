@@ -63,12 +63,13 @@
 - [x] Glow efekt pro `glow` prop s energy barvou
 - [x] Update Badge.stories.tsx
 
-**ResultsTable:**
-- [ ] Display font pro rank čísla (`.csk-results-table__rank`)
-- [ ] Energy color pro live indikátor místo red
-- [ ] Border-accent pro highlighted/featured řádky
-- [ ] Mesh background varianta pro wrapper
-- [ ] Update ResultsTable.stories.tsx
+**ResultsTable (HOTOVO):**
+- [x] Display font pro rank čísla (`.csk-results-table__rank`)
+- [x] Energy color pro live indikátor místo red
+- [x] Border-accent pro featured řádky (`.csk-results-table__tr--featured`)
+- [x] Větší rank čísla pro podium (gold/silver/bronze)
+- [x] Live badge component (`.csk-results-table__live-badge`)
+- [x] Mesh background wrapper varianta (`.csk-results-table-wrapper--aesthetic`)
 
 **Avatar:**
 - [ ] Energy glow varianta (`--glow-energy-md`)
