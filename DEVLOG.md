@@ -4575,3 +4575,25 @@ Audit 9.1.4 dokončen. Další krok: 9.1.5 Audit kompatibility s kanoe.cz (embed
 - Prototypy: LivePage, AthletePublicPage, EventDetailPage, CalendarPage
 - Cleanup: Card glass/featured sloučení
 - P0-P3: LivePage, Results, rozbité věci, design vylepšení, nové koncepty
+
+---
+
+## 2026-01-24 - Fáze 15.0: Card Cleanup + Aesthetic Guidelines
+
+### Dokončeno
+- [x] Odstranění `glass` varianty z Card (nepoužívaná)
+- [x] Odstranění `featured` varianty (duplicita s `aesthetic`)
+- [x] Aktualizace Card.tsx, Card.css, Card.stories.tsx
+- [x] Aktualizace CLAUDE.md quick reference (Card, Badge, Button typy)
+- [x] Aesthetic Guidelines story - komplexní pravidla pro použití:
+  - Display vs Body typography
+  - Energy vs Primary color
+  - Mesh background contexts
+  - Animation guidelines
+
+### Finální Card varianty
+`surface | elevated | outlined | gradient | aesthetic`
+
+### Poznámky
+- Build prošel bez chyb
+- Aesthetic Guidelines poskytuje kompletní reference pro konzistentní použití Dynamic Sport estetiky

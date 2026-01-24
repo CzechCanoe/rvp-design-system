@@ -628,6 +628,290 @@ export const HeroExample: StoryObj = {
    COMPARISON: BEFORE/AFTER
    ========================================================================== */
 
+/* ==========================================================================
+   USAGE GUIDELINES
+   ========================================================================== */
+
+export const Guidelines: StoryObj = {
+  render: () => (
+    <div style={{ padding: '48px', background: 'var(--color-bg-primary)', maxWidth: '900px' }}>
+      <h1
+        className="csk-display"
+        style={{ fontSize: 'var(--font-size-4xl)', marginBottom: '8px' }}
+      >
+        Aesthetic Guidelines
+      </h1>
+      <p style={{ color: 'var(--color-text-secondary)', marginBottom: '48px' }}>
+        Pravidla pro konzistentní použití Dynamic Sport estetiky.
+      </p>
+
+      {/* Display vs Body Typography */}
+      <section style={{ marginBottom: '48px' }}>
+        <h2
+          style={{
+            fontSize: 'var(--font-size-xl)',
+            fontWeight: 700,
+            marginBottom: '16px',
+            borderBottom: '2px solid var(--color-energy-500)',
+            paddingBottom: '8px',
+          }}
+        >
+          Display vs Body Typography
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+          <div
+            style={{
+              padding: '20px',
+              background: 'var(--color-success-100)',
+              borderRadius: '8px',
+              border: '1px solid var(--color-success-300)',
+            }}
+          >
+            <h3
+              style={{
+                fontSize: '14px',
+                fontWeight: 600,
+                color: 'var(--color-success-700)',
+                marginBottom: '12px',
+              }}
+            >
+              Použij Display Font
+            </h3>
+            <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: 1.6 }}>
+              <li>Hero headlines, page titles</li>
+              <li>Card titles (h2, h3)</li>
+              <li>Rank čísla v ResultsTable</li>
+              <li>Header brand/app title</li>
+              <li>Large badges (size="lg")</li>
+              <li>Large buttons (size="lg")</li>
+              <li>Čísla a metriky (časy, pořadí)</li>
+            </ul>
+          </div>
+          <div
+            style={{
+              padding: '20px',
+              background: 'var(--color-bg-secondary)',
+              borderRadius: '8px',
+              border: '1px solid var(--color-border-default)',
+            }}
+          >
+            <h3
+              style={{
+                fontSize: '14px',
+                fontWeight: 600,
+                color: 'var(--color-text-secondary)',
+                marginBottom: '12px',
+              }}
+            >
+              Ponech Body Font (Inter)
+            </h3>
+            <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: 1.6 }}>
+              <li>Odstavcový text, popisy</li>
+              <li>Form labels a inputs</li>
+              <li>Tabulkový obsah (kromě rank)</li>
+              <li>Navigace a menu</li>
+              <li>Small badges a tags</li>
+              <li>Tooltips, error messages</li>
+              <li>Footer text</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Energy vs Primary */}
+      <section style={{ marginBottom: '48px' }}>
+        <h2
+          style={{
+            fontSize: 'var(--font-size-xl)',
+            fontWeight: 700,
+            marginBottom: '16px',
+            borderBottom: '2px solid var(--color-energy-500)',
+            paddingBottom: '8px',
+          }}
+        >
+          Energy vs Primary Color
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+          <div
+            style={{
+              padding: '20px',
+              background: 'var(--color-energy-50)',
+              borderRadius: '8px',
+              borderLeft: '4px solid var(--color-energy-500)',
+            }}
+          >
+            <h3
+              style={{
+                fontSize: '14px',
+                fontWeight: 600,
+                color: 'var(--color-energy-700)',
+                marginBottom: '12px',
+              }}
+            >
+              Energy (Coral-Orange)
+            </h3>
+            <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: 1.6 }}>
+              <li>LIVE indikátory, pulsující stavy</li>
+              <li>Primary CTA ("Sledovat live")</li>
+              <li>Highlights, urgentní akce</li>
+              <li>Notifikace, aktivní závodníci</li>
+              <li>Hover glow efekty</li>
+              <li>Featured content accent</li>
+            </ul>
+          </div>
+          <div
+            style={{
+              padding: '20px',
+              background: 'var(--color-primary-50)',
+              borderRadius: '8px',
+              borderLeft: '4px solid var(--color-primary-500)',
+            }}
+          >
+            <h3
+              style={{
+                fontSize: '14px',
+                fontWeight: 600,
+                color: 'var(--color-primary-700)',
+                marginBottom: '12px',
+              }}
+            >
+              Primary (Blue)
+            </h3>
+            <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: 1.6 }}>
+              <li>Brand identity, header</li>
+              <li>Sekundární CTA ("Detail", "Výsledky")</li>
+              <li>Links, interactive elements</li>
+              <li>Section backgrounds</li>
+              <li>Border-accent gradient (blue → orange)</li>
+              <li>Většina UI prvků</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Mesh Background Contexts */}
+      <section style={{ marginBottom: '48px' }}>
+        <h2
+          style={{
+            fontSize: 'var(--font-size-xl)',
+            fontWeight: 700,
+            marginBottom: '16px',
+            borderBottom: '2px solid var(--color-energy-500)',
+            paddingBottom: '8px',
+          }}
+        >
+          Mesh Background Contexts
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+          <div
+            style={{
+              padding: '20px',
+              background: 'var(--bg-mesh-hero)',
+              backgroundColor: 'var(--color-bg-primary)',
+              borderRadius: '8px',
+              border: '1px solid var(--color-border-default)',
+            }}
+          >
+            <h3 style={{ fontSize: '14px', fontWeight: 600, marginBottom: '8px' }}>
+              --bg-mesh-hero
+            </h3>
+            <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', margin: 0 }}>
+              Full-page hero sekce, landing pages
+            </p>
+          </div>
+          <div
+            style={{
+              padding: '20px',
+              background: 'var(--bg-mesh-card)',
+              backgroundColor: 'var(--color-bg-primary)',
+              borderRadius: '8px',
+              border: '1px solid var(--color-border-default)',
+            }}
+          >
+            <h3 style={{ fontSize: '14px', fontWeight: 600, marginBottom: '8px' }}>
+              --bg-mesh-card
+            </h3>
+            <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', margin: 0 }}>
+              Aesthetic cards, featured items
+            </p>
+          </div>
+          <div
+            style={{
+              padding: '20px',
+              background: 'var(--bg-mesh-primary)',
+              backgroundColor: 'var(--color-bg-primary)',
+              borderRadius: '8px',
+              border: '1px solid var(--color-border-default)',
+            }}
+          >
+            <h3 style={{ fontSize: '14px', fontWeight: 600, marginBottom: '8px' }}>
+              --bg-mesh-primary
+            </h3>
+            <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', margin: 0 }}>
+              Sekundární sekce, widgety
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Animation Guidelines */}
+      <section>
+        <h2
+          style={{
+            fontSize: 'var(--font-size-xl)',
+            fontWeight: 700,
+            marginBottom: '16px',
+            borderBottom: '2px solid var(--color-energy-500)',
+            paddingBottom: '8px',
+          }}
+        >
+          Animation Guidelines
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+          <div>
+            <h3 style={{ fontSize: '14px', fontWeight: 600, marginBottom: '12px' }}>
+              Staggered Reveal (.csk-reveal)
+            </h3>
+            <p style={{ fontSize: '14px', color: 'var(--color-text-secondary)', marginBottom: '12px' }}>
+              Pro hero sekce, seznamy karet. Použij <code>.csk-reveal-1</code> až <code>.csk-reveal-6</code> pro postupné odhalení.
+            </p>
+            <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: 1.6 }}>
+              <li>Max 6 prvků se staggerem</li>
+              <li>50ms delay mezi prvky</li>
+              <li>Respektuje prefers-reduced-motion</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style={{ fontSize: '14px', fontWeight: 600, marginBottom: '12px' }}>
+              Sport Easing
+            </h3>
+            <p style={{ fontSize: '14px', color: 'var(--color-text-secondary)', marginBottom: '12px' }}>
+              Dynamické easing funkce pro sportovní pocit.
+            </p>
+            <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: 1.6 }}>
+              <li><code>--ease-snap</code>: Rychlý start, ostrý konec</li>
+              <li><code>--ease-sport</code>: Dynamický, energický</li>
+              <li>Hover glow: <code>--glow-energy-sm/md/lg</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Kompletní přehled pravidel pro konzistentní používání Dynamic Sport estetiky napříč celým design systémem.',
+      },
+    },
+  },
+};
+
+/* ==========================================================================
+   COMPARISON: BEFORE/AFTER
+   ========================================================================== */
+
 export const Comparison: StoryObj = {
   render: () => (
     <div style={{ display: 'flex' }}>

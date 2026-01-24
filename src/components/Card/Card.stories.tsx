@@ -12,7 +12,7 @@ const meta: Meta<typeof Card> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['surface', 'elevated', 'outlined', 'gradient', 'glass', 'featured', 'aesthetic'],
+      options: ['surface', 'elevated', 'outlined', 'gradient', 'aesthetic'],
       description: 'Visual variant of the card',
     },
     meshBg: {
@@ -103,23 +103,12 @@ export const Variants: Story = {
           <p style={{ margin: '8px 0 0', fontSize: '14px' }}>Brand gradient</p>
         </Card>
       </div>
-      <div
-        style={{
-          width: '200px',
-          padding: '16px',
-          background: 'linear-gradient(135deg, #1176a6 0%, #0d5a80 100%)',
-          borderRadius: '8px',
-        }}
-      >
-        <Card variant="glass">
-          <strong>Glass</strong>
-          <p style={{ margin: '8px 0 0', fontSize: '14px' }}>Glassmorphism</p>
-        </Card>
-      </div>
       <div style={{ width: '200px' }}>
-        <Card variant="featured">
-          <strong>Featured</strong>
-          <p style={{ margin: '8px 0 0', fontSize: '14px' }}>Gradient border</p>
+        <Card variant="aesthetic">
+          <h3 className="csk-card__title" style={{ margin: '0 0 8px', fontWeight: 600 }}>
+            Aesthetic
+          </h3>
+          <p style={{ margin: 0, fontSize: '14px' }}>Dynamic sport style</p>
         </Card>
       </div>
     </div>
@@ -127,7 +116,7 @@ export const Variants: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All available card variants: surface, elevated, outlined, gradient, glass, and featured.',
+        story: 'All available card variants: surface, elevated, outlined, gradient, and aesthetic.',
       },
     },
   },

@@ -125,9 +125,10 @@
 - [x] Finální varianty: default, primary, success, warning, error, info, gradient, energy
 - [x] Section varianty: dv, ry, vt + vtClass (beze změny)
 
-**Card:** *(1 iterace)*
-- [ ] Odstranit `glass` variantu (není use case)
-- [ ] Sloučit `featured` → `aesthetic` (duplicita)
+**Card (HOTOVO):**
+- [x] Odstranit `glass` variantu (není use case)
+- [x] Sloučit `featured` → `aesthetic` (duplicita)
+- [x] Finální varianty: surface, elevated, outlined, gradient, aesthetic
 
 **Header:**
 - [x] Odstranit `transparent` a `glass` varianty
@@ -137,9 +138,9 @@
 - [x] Odstranit `glass` style
 - [x] Finální style varianty: default, gradient, embed
 
-#### Dokumentace *(1 iterace)*
-- [ ] DESIGN_PRINCIPLES.md: "Dynamic Sport Aesthetic" sekce (energy color, display font)
-- [ ] Aesthetic Guidelines story: display font vs body, energy vs primary, mesh contexts, animations
+#### Dokumentace *(HOTOVO)*
+- [x] DESIGN_PRINCIPLES.md: "Dynamic Sport Aesthetic" sekce (energy color, display font)
+- [x] Aesthetic Guidelines story: display font vs body, energy vs primary, mesh contexts, animations
 
 ---
 
@@ -202,13 +203,13 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 |-------|---------|
 | 15.0 Komponenty (Avatar, Forms, Tabs, Alert) | 4 |
 | 15.0 Prototypy | 4 |
-| 15.0 Cleanup + Dokumentace | 2 |
+| ~~15.0 Cleanup + Dokumentace~~ | ~~2~~ ✅ |
 | 15.1 LivePage (P0) | 3 |
 | 15.2 Results (P1) | 2 |
 | 15.3 Rozbité věci (P2) | 2 |
 | 15.4 Design vylepšení (P3) | 2 |
 | 15.5 Nové koncepty | 2 |
-| **Celkem** | **~21** |
+| **Celkem** | **~19** |
 
 ---
 

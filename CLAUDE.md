@@ -30,16 +30,16 @@ src/
 ```typescript
 // Badge
 type BadgeVariant = 'default' | 'primary' | 'success' | 'warning' | 'error' | 'info'
-                  | 'gradient' | 'gradient-accent' | 'gradient-success' | 'gradient-error';
+                  | 'gradient' | 'energy';
 type BadgeSection = 'dv' | 'ry' | 'vt';
 type BadgeVtClass = 'm' | 'a' | 'b' | 'c';  // LOWERCASE!
 
 // Card
-type CardVariant = 'surface' | 'elevated' | 'outlined' | 'gradient' | 'glass' | 'featured';
+type CardVariant = 'surface' | 'elevated' | 'outlined' | 'gradient' | 'aesthetic';
 
 // Button
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger'
-                   | 'gradient' | 'gradient-accent' | 'gradient-success';
+                   | 'gradient' | 'gradient-energy';
 
 // Display modes
 type DisplayMode = 'utility' | 'expressive' | 'embed';
