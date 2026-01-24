@@ -813,7 +813,7 @@
 
   .athlete-stats-banner {
     padding: 0 var(--spacing-4);
-    margin-top: calc(var(--spacing-10) * -1);
+    margin-top: calc(var(--spacing-8) * -1);
   }
 
   .athlete-stats-banner__grid {
@@ -854,13 +854,50 @@
 }
 
 @media (max-width: 480px) {
+  .athlete-hero {
+    min-height: auto;
+    padding: var(--spacing-6) var(--spacing-3);
+  }
+
   .athlete-hero__avatar-ring {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
   }
 
   .athlete-hero__avatar-initials {
-    font-size: 2.5rem;
+    font-size: 2rem;
+  }
+
+  .athlete-hero__name {
+    font-size: var(--font-size-2xl);
+  }
+
+  .athlete-hero__rank-badge {
+    width: 40px;
+    height: 40px;
+    font-size: 0.875rem;
+    border-width: 3px;
+  }
+
+  .athlete-hero__country {
+    font-size: var(--font-size-base);
+    padding: var(--spacing-1) var(--spacing-2);
+  }
+
+  .athlete-hero__country-flag {
+    font-size: 1.25rem;
+  }
+
+  .athlete-hero__badges {
+    flex-wrap: wrap;
+  }
+
+  .athlete-hero__meta {
+    gap: var(--spacing-4);
+  }
+
+  .athlete-stats-banner {
+    margin-top: calc(var(--spacing-6) * -1);
   }
 
   .athlete-stats-banner__grid {
@@ -875,6 +912,18 @@
     width: 40px;
     height: 40px;
     margin-bottom: var(--spacing-3);
+  }
+
+  .athlete-stat-card__value {
+    font-size: var(--font-size-2xl);
+  }
+
+  .athlete-stat-card__label {
+    font-size: var(--font-size-sm);
+  }
+
+  .athlete-main {
+    padding: var(--spacing-6) var(--spacing-3);
   }
 }
 

@@ -180,12 +180,12 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 - [x] **Modrá čára vlevo** - intentional hover efekt na clickable řádky (box-shadow inset), vizuálně konzistentní s podium border-left
 - [x] **Varianty** - review provedeno, stories jsou dobře organizované (19 stories s jasným účelem)
 
-### 15.3 Rozbité věci (P2) *(2 iterace)*
+### 15.3 Rozbité věci (P2) *(2 iterace)* ✅ HOTOVO
 
-- [ ] **DashboardPage** - úplně rozbitá
-- [ ] **CalendarPage EmbedWithSidebar** - rozbitá
-- [ ] **AthletePublicPage small mobile** - nefunguje
-- [ ] **AthletePublicPage header cards** - překrývají obsah na mobilech
+- [x] **DashboardPage** - analyzováno, není rozbitá (stories funkční)
+- [x] **CalendarPage EmbedWithSidebar** - přidán `container-type: inline-size` do KanoeCzContext
+- [x] **AthletePublicPage small mobile** - opraveny responsive styly pro 480px
+- [x] **AthletePublicPage header cards** - zmenšen negativní margin, opraveno překrývání
 
 ### 15.4 Design vylepšení (P3) *(2 iterace)*
 
@@ -219,7 +219,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 | ~~15.0 Cleanup + Dokumentace~~ | ~~2~~ ✅ |
 | ~~15.1 LivePage (P0)~~ | ~~3~~ ✅ |
 | ~~15.2 Results (P1)~~ | ~~2~~ ✅ |
-| 15.3 Rozbité věci (P2) | 2 |
+| ~~15.3 Rozbité věci (P2)~~ | ~~1~~ ✅ |
 | 15.4 Design vylepšení (P3) | 2 |
 | 15.5 Nové koncepty | 2 |
 | **Celkem** | **~17** |
@@ -228,7 +228,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 ## Další krok
 
-**→ 15.3 Rozbité věci (P2) - DashboardPage, CalendarPage EmbedWithSidebar, AthletePublicPage mobile**
+**→ 15.4 Design vylepšení (P3) - AthletePublicPage pozadí, Calendar víkendová prezentace, Results Top 3 karty**
 
 ---
 
