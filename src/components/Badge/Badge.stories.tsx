@@ -167,7 +167,44 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Three sizes available: sm (20px), md (24px), lg (32px).',
+        story: 'Three sizes available: sm (20px), md (24px), lg (32px). Large size uses Plus Jakarta Sans display font for more prominent presentation.',
+      },
+    },
+  },
+};
+
+/* ==========================================================================
+   DISPLAY FONT SHOWCASE
+   ========================================================================== */
+
+export const DisplayFontShowcase: Story = {
+  name: 'Display Font (Large)',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Large badges with display font</h4>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+          <Badge variant="energy" size="lg" pill glow>ŽIVĚ</Badge>
+          <Badge variant="gradient" size="lg" pill glow>Semifinále</Badge>
+          <Badge section="dv" size="lg" pill>Kajak K1</Badge>
+          <Badge vtClass="m" size="lg" pill glow>Mistr ČR</Badge>
+        </div>
+      </div>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Compare with medium (body font)</h4>
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
+          <Badge variant="energy" size="md" pill>ŽIVĚ</Badge>
+          <Badge variant="gradient" size="md" pill>Semifinále</Badge>
+          <Badge section="dv" size="md" pill>Kajak K1</Badge>
+          <Badge vtClass="m" size="md" pill>Mistr ČR</Badge>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Large badges use Plus Jakarta Sans display font with tighter letter-spacing for prominent, sporty feel.',
       },
     },
   },

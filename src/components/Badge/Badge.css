@@ -54,6 +54,9 @@
   font-size: var(--font-size-base);
   padding: var(--spacing-1-5) var(--spacing-3);
   min-height: 32px;
+  font-family: var(--font-family-display, var(--font-family-sans));
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--text-headline-tracking, -0.02em);
 }
 
 /* ==========================================================================

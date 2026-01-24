@@ -58,11 +58,11 @@
 - [ ] Nová varianta `gradient-energy` pro header background
 - [ ] Update Header.stories.tsx
 
-**Badge:**
-- [ ] Nová varianta `energy` (coral-orange)
-- [ ] Display font pro `size="lg"`
-- [ ] Glow efekt pro `glow` prop s energy barvou
-- [ ] Update Badge.stories.tsx
+**Badge (HOTOVO):**
+- [x] Nová varianta `energy` (coral-orange)
+- [x] Display font pro `size="lg"`
+- [x] Glow efekt pro `glow` prop s energy barvou
+- [x] Update Badge.stories.tsx
 
 **ResultsTable:**
 - [ ] Display font pro rank čísla (`.csk-results-table__rank`)
