@@ -1,12 +1,22 @@
 /* ============================================================================
    Club Public Profile - EXPRESSIVE Mode Prototype
    Public club/organization profile with hero, stats, and member listing
+
+   Phase 15.0: Aesthetic Refresh - Dynamic Sport aesthetic applied
+   - Mesh backgrounds, display typography, energy accents
+   - Staggered reveal animations, border accents
    ============================================================================ */
 
 .club-public-profile {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--color-bg-primary);
+}
+
+/* Aesthetic variant with mesh background */
+.club-public-profile--aesthetic {
+  background: var(--bg-mesh-primary);
   background-color: var(--color-bg-primary);
 }
 
@@ -125,6 +135,13 @@
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* Aesthetic variant - display font for club name */
+.club-public-profile--aesthetic .club-hero__name {
+  font-family: var(--font-family-display);
+  font-weight: var(--text-display-weight);
+  letter-spacing: var(--text-display-tracking);
+}
+
 .club-hero__fullname {
   font-size: var(--font-size-lg);
   color: rgba(255, 255, 255, 0.8);
@@ -218,6 +235,16 @@
   box-shadow: var(--shadow-expr-float, var(--shadow-xl));
 }
 
+/* Aesthetic variant - energy glow on hover, border-accent */
+.club-public-profile--aesthetic .club-stat-card {
+  border-left: var(--border-accent-width) solid transparent;
+  border-image: var(--border-accent-gradient) 1;
+}
+
+.club-public-profile--aesthetic .club-stat-card:hover {
+  box-shadow: var(--shadow-expr-float, var(--shadow-xl)), var(--glow-energy-sm);
+}
+
 /* Stat card decorative accent */
 .club-stat-card::before {
   content: '';
@@ -291,6 +318,11 @@
   margin-top: var(--spacing-1);
 }
 
+/* Aesthetic stat card value - display font */
+.club-public-profile--aesthetic .club-stat-card__value {
+  font-family: var(--font-family-display);
+}
+
 /* ============================================================================
    MAIN CONTENT
    ============================================================================ */
@@ -335,6 +367,13 @@
   color: var(--color-text-primary);
 }
 
+/* Aesthetic section titles - display font */
+.club-public-profile--aesthetic .club-section__title {
+  font-family: var(--font-family-display);
+  font-weight: var(--text-headline-weight);
+  letter-spacing: var(--text-headline-tracking);
+}
+
 .club-section__subtitle {
   font-size: var(--font-size-lg);
   color: var(--color-text-secondary);
@@ -367,6 +406,23 @@
 .club-member-card:hover {
   border-color: var(--color-primary-300);
   box-shadow: var(--shadow-md);
+}
+
+/* Aesthetic member cards - staggered reveal, energy hover */
+.club-public-profile--aesthetic .club-member-card {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+}
+
+.club-public-profile--aesthetic .club-member-card:nth-child(1) { animation-delay: var(--stagger-1); }
+.club-public-profile--aesthetic .club-member-card:nth-child(2) { animation-delay: var(--stagger-2); }
+.club-public-profile--aesthetic .club-member-card:nth-child(3) { animation-delay: var(--stagger-3); }
+.club-public-profile--aesthetic .club-member-card:nth-child(4) { animation-delay: var(--stagger-4); }
+.club-public-profile--aesthetic .club-member-card:nth-child(5) { animation-delay: var(--stagger-5); }
+.club-public-profile--aesthetic .club-member-card:nth-child(6) { animation-delay: var(--stagger-6); }
+.club-public-profile--aesthetic .club-member-card:nth-child(n+7) { animation-delay: calc(var(--stagger-6) + 50ms); }
+
+.club-public-profile--aesthetic .club-member-card:hover {
+  box-shadow: var(--shadow-md), var(--glow-energy-sm);
 }
 
 .club-member-card__avatar {
@@ -459,6 +515,21 @@
   box-shadow: var(--shadow-md);
 }
 
+/* Aesthetic highlight cards - border-accent, staggered reveal, energy glow */
+.club-public-profile--aesthetic .club-highlight-card {
+  border-left: var(--border-accent-width) solid transparent;
+  border-image: var(--border-accent-gradient) 1;
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+}
+
+.club-public-profile--aesthetic .club-highlight-card:nth-child(1) { animation-delay: var(--stagger-1); }
+.club-public-profile--aesthetic .club-highlight-card:nth-child(2) { animation-delay: var(--stagger-2); }
+.club-public-profile--aesthetic .club-highlight-card:nth-child(3) { animation-delay: var(--stagger-3); }
+
+.club-public-profile--aesthetic .club-highlight-card:hover {
+  box-shadow: var(--shadow-md), var(--glow-energy-sm);
+}
+
 .club-highlight-card__year {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
@@ -473,6 +544,12 @@
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   margin: 0 0 var(--spacing-2);
+}
+
+/* Aesthetic highlight title - display font */
+.club-public-profile--aesthetic .club-highlight-card__title {
+  font-family: var(--font-family-display);
+  font-weight: var(--text-headline-weight);
 }
 
 .club-highlight-card__description {

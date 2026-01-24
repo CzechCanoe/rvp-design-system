@@ -20,6 +20,8 @@ interface AthletePublicProfileProps {
   showBackgroundImage?: boolean;
   /** Display variant */
   variant?: AthletePublicProfileVariant;
+  /** Aesthetic mode - display fonts, energy accents, mesh backgrounds */
+  aesthetic?: boolean;
 }
 
 // ============================================================================
@@ -289,11 +291,19 @@ function AthletePublicProfile({
   section = 'dv',
   showBackgroundImage = true,
   variant = 'standalone',
+  aesthetic = false,
 }: AthletePublicProfileProps) {
   // Helper to check if we're in embed mode
   const isEmbed = variant === 'embed';
   // Select data based on section
   const athlete = section === 'ry' ? ryAthleteData : section === 'vt' ? vtAthleteData : athleteData;
+
+  // Build class names
+  const rootClasses = [
+    'athlete-public-profile',
+    isEmbed && 'athlete-public-profile--embed',
+    aesthetic && 'athlete-public-profile--aesthetic',
+  ].filter(Boolean).join(' ');
 
   const heroBackgroundStyle = showBackgroundImage && athlete.imageUrl
     ? { backgroundImage: `url(${athlete.imageUrl})` }
@@ -353,7 +363,7 @@ function AthletePublicProfile({
   };
 
   return (
-    <div className={`athlete-public-profile ${isEmbed ? 'athlete-public-profile--embed' : ''}`} data-mode="expressive">
+    <div className={rootClasses} data-mode="expressive">
       {/* Header */}
       {renderHeader()}
 
@@ -624,6 +634,10 @@ Využívá expressive tokeny:
       options: ['standalone', 'satellite', 'embed'],
       description: 'Display variant for different integration contexts',
     },
+    aesthetic: {
+      control: 'boolean',
+      description: 'Enable aesthetic mode with display fonts, energy accents, mesh backgrounds',
+    },
   },
 };
 
@@ -645,11 +659,40 @@ export const DivokaVoda: Story = {
     section: 'dv',
     showBackgroundImage: true,
     variant: 'standalone',
+    aesthetic: false,
   },
   parameters: {
     docs: {
       description: {
         story: 'Expressive standalone profil závodníka. Použijte Storybook Controls pro změnu sekce (dv/ry/vt) a zobrazení/skrytí fotky.',
+      },
+    },
+  },
+};
+
+/**
+ * Aesthetic varianta s "Dynamic Sport" stylem.
+ * Display fonts, energy accents, mesh backgrounds, staggered animations.
+ */
+export const Aesthetic: Story = {
+  name: 'Aesthetic (Dynamic Sport)',
+  args: {
+    section: 'dv',
+    showBackgroundImage: true,
+    variant: 'standalone',
+    aesthetic: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+**Aesthetic mode** aktivuje "Dynamic Sport" vizuální styl:
+- Plus Jakarta Sans display font pro nadpisy
+- Mesh gradient pozadí
+- Energy (coral-orange) akcenty a glow efekty
+- Border-accent na stats a highlight kartách
+- Staggered reveal animace pro career highlights
+        `,
       },
     },
   },

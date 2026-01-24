@@ -19,6 +19,8 @@ interface ClubPublicProfileProps {
   variant?: ClubPublicProfileVariant;
   /** Club ID to display */
   clubId?: string;
+  /** Aesthetic mode - display fonts, energy accents, mesh backgrounds */
+  aesthetic?: boolean;
 }
 
 interface ClubMember {
@@ -219,10 +221,18 @@ const CSKLogo = () => (
 
 function ClubPublicProfile({
   variant = 'standalone',
+  aesthetic = false,
 }: ClubPublicProfileProps) {
   const isEmbed = variant === 'embed';
   const club = clubData;
   const members = clubMembers;
+
+  // Build class names
+  const rootClasses = [
+    'club-public-profile',
+    isEmbed && 'club-public-profile--embed',
+    aesthetic && 'club-public-profile--aesthetic',
+  ].filter(Boolean).join(' ');
 
   // Tab content
   const tabs = [
@@ -278,7 +288,7 @@ function ClubPublicProfile({
   };
 
   return (
-    <div className={`club-public-profile ${isEmbed ? 'club-public-profile--embed' : ''}`}>
+    <div className={rootClasses}>
       {/* Header */}
       {renderHeader()}
 
@@ -573,6 +583,10 @@ Využívá expressive tokeny jako AthletePublicProfile.
       options: ['standalone', 'satellite', 'embed'],
       description: 'Display variant for different integration contexts',
     },
+    aesthetic: {
+      control: 'boolean',
+      description: 'Enable aesthetic mode with display fonts, energy accents, mesh backgrounds',
+    },
   },
 };
 
@@ -590,11 +604,38 @@ export const Expressive: Story = {
   name: 'Expressive',
   args: {
     variant: 'standalone',
+    aesthetic: false,
   },
   parameters: {
     docs: {
       description: {
         story: 'Expressive standalone profil klubu s plnou hero sekcí.',
+      },
+    },
+  },
+};
+
+/**
+ * Aesthetic varianta s "Dynamic Sport" stylem.
+ * Display fonts, energy accents, mesh backgrounds, staggered animations.
+ */
+export const Aesthetic: Story = {
+  name: 'Aesthetic (Dynamic Sport)',
+  args: {
+    variant: 'standalone',
+    aesthetic: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+**Aesthetic mode** aktivuje "Dynamic Sport" vizuální styl:
+- Plus Jakarta Sans display font pro nadpisy
+- Mesh gradient pozadí
+- Energy (coral-orange) akcenty a glow efekty
+- Border-accent na stats a highlight kartách
+- Staggered reveal animace pro členy a úspěchy
+        `,
       },
     },
   },

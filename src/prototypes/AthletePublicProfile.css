@@ -1,12 +1,22 @@
 /* ============================================================================
    Athlete Public Profile - EXPRESSIVE Mode Prototype
    Wow-factor public profile with dramatic hero, animated stats, and rich visuals
+
+   Phase 15.0: Aesthetic Refresh - Dynamic Sport aesthetic applied
+   - Mesh backgrounds, display typography, energy accents
+   - Staggered reveal animations, border accents
    ============================================================================ */
 
 .athlete-public-profile {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--color-bg-primary);
+}
+
+/* Aesthetic variant with mesh background */
+.athlete-public-profile--aesthetic {
+  background: var(--bg-mesh-primary);
   background-color: var(--color-bg-primary);
 }
 
@@ -205,6 +215,13 @@
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* Aesthetic variant - display font for hero name */
+.athlete-public-profile--aesthetic .athlete-hero__name {
+  font-family: var(--font-family-display);
+  font-weight: var(--text-display-weight);
+  letter-spacing: var(--text-display-tracking);
+}
+
 .athlete-hero__subtitle {
   display: flex;
   align-items: center;
@@ -319,6 +336,11 @@
   box-shadow: var(--shadow-expr-float);
 }
 
+/* Aesthetic variant - energy glow on hover */
+.athlete-public-profile--aesthetic .athlete-stat-card:hover {
+  box-shadow: var(--shadow-expr-float), var(--glow-energy-sm);
+}
+
 /* Stat card decorative accent */
 .athlete-stat-card::before {
   content: '';
@@ -393,6 +415,16 @@
   margin-top: var(--spacing-2);
 }
 
+/* Aesthetic stat card - display font for value, border-accent */
+.athlete-public-profile--aesthetic .athlete-stat-card {
+  border-left: var(--border-accent-width) solid transparent;
+  border-image: var(--border-accent-gradient) 1;
+}
+
+.athlete-public-profile--aesthetic .athlete-stat-card__value {
+  font-family: var(--font-family-display);
+}
+
 .athlete-stat-card__trend {
   display: inline-flex;
   align-items: center;
@@ -453,6 +485,13 @@
   color: var(--color-text-primary);
 }
 
+/* Aesthetic section titles - display font */
+.athlete-public-profile--aesthetic .athlete-section__title {
+  font-family: var(--font-family-display);
+  font-weight: var(--text-headline-weight);
+  letter-spacing: var(--text-headline-tracking);
+}
+
 .athlete-section__subtitle {
   font-size: var(--font-size-lg);
   color: var(--color-text-secondary);
@@ -484,6 +523,24 @@
   box-shadow: var(--shadow-md);
 }
 
+/* Aesthetic highlight cards - border-accent, energy hover glow */
+.athlete-public-profile--aesthetic .athlete-highlight-card {
+  border-left: var(--border-accent-width) solid transparent;
+  border-image: var(--border-accent-gradient) 1;
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+}
+
+.athlete-public-profile--aesthetic .athlete-highlight-card:nth-child(1) { animation-delay: var(--stagger-1); }
+.athlete-public-profile--aesthetic .athlete-highlight-card:nth-child(2) { animation-delay: var(--stagger-2); }
+.athlete-public-profile--aesthetic .athlete-highlight-card:nth-child(3) { animation-delay: var(--stagger-3); }
+.athlete-public-profile--aesthetic .athlete-highlight-card:nth-child(4) { animation-delay: var(--stagger-4); }
+.athlete-public-profile--aesthetic .athlete-highlight-card:nth-child(5) { animation-delay: var(--stagger-5); }
+.athlete-public-profile--aesthetic .athlete-highlight-card:nth-child(6) { animation-delay: var(--stagger-6); }
+
+.athlete-public-profile--aesthetic .athlete-highlight-card:hover {
+  box-shadow: var(--shadow-md), var(--glow-energy-sm);
+}
+
 .athlete-highlight-card__year {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
@@ -498,6 +555,12 @@
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   margin: 0 0 var(--spacing-2);
+}
+
+/* Aesthetic highlight title - display font */
+.athlete-public-profile--aesthetic .athlete-highlight-card__title {
+  font-family: var(--font-family-display);
+  font-weight: var(--text-headline-weight);
 }
 
 .athlete-highlight-card__description {
@@ -554,6 +617,11 @@
 .athlete-result-card__rank--1 {
   background: linear-gradient(135deg, #fff9e6, #fff3cc);
   color: #b8860b;
+}
+
+/* Aesthetic rank display font */
+.athlete-public-profile--aesthetic .athlete-result-card__rank {
+  font-family: var(--font-family-display);
 }
 
 .athlete-result-card__rank--2 {

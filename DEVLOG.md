@@ -4671,3 +4671,26 @@ Aesthetic refresh aplikován na LivePage jako první prototyp. Změny:
 - Výsledková tabulka je v mesh-card wrapperu
 - Current-run karta má border-accent gradient (energy→primary)
 - Všechny "živé" indikátory používají energy color místo error red
+
+---
+
+## 2026-01-24 - Fáze 15.0: Aesthetic Refresh - AthletePublicProfile & ClubPublicProfile
+
+### Dokončeno
+- [x] AthletePublicProfile: aesthetic prop a CSS varianta
+- [x] AthletePublicProfile: mesh background, display fonts, energy glow
+- [x] AthletePublicProfile: border-accent na stats a highlight kartách
+- [x] AthletePublicProfile: staggered reveal animace
+- [x] ClubPublicProfile: aesthetic prop a CSS varianta
+- [x] ClubPublicProfile: mesh background, display fonts, energy glow
+- [x] ClubPublicProfile: border-accent na stats a highlight kartách
+- [x] ClubPublicProfile: staggered reveal animace pro členy a úspěchy
+
+### Technické detaily
+- Nové CSS třídy: `.athlete-public-profile--aesthetic`, `.club-public-profile--aesthetic`
+- Využity tokeny z `aesthetic.css`: `--bg-mesh-primary`, `--font-family-display`, `--glow-energy-sm`, `--border-accent-gradient`
+- Staggered animace: `csk-reveal` s `--stagger-1` až `--stagger-6`
+- Nové Stories: `Aesthetic (Dynamic Sport)` pro obě stránky
+
+### Poznámky
+- Zbývají prototypy: EventDetailPage, CalendarPage, RegistrationPage

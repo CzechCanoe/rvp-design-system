@@ -96,12 +96,16 @@
 - [x] Results: ResultsTable aesthetic wrapper, energy live indicators
 - [x] Oncourse: border-accent pro aktivní závodníky (current-card)
 
-**AthletePublicPage:** *(1 iterace)*
-- [ ] Hero s mesh background + display typography
-- [ ] Stats cards s border-accent + energy highlights
+**AthletePublicPage:** *(HOTOVO)*
+- [x] Hero s mesh background + display typography
+- [x] Stats cards s border-accent + energy highlights
+- [x] Career highlights s staggered reveal + energy glow
+- [x] Display font pro section titles a rank čísla
 
-**ClubPublicProfile:** *(společně s Athlete)*
-- [ ] Obdobně jako AthletePublicPage
+**ClubPublicProfile:** *(HOTOVO)*
+- [x] Obdobně jako AthletePublicPage
+- [x] Mesh background, display fonts, border-accent
+- [x] Staggered reveal pro členy a úspěchy klubu
 
 **EventDetailPage:** *(1 iterace)*
 - [ ] Header s energy CTA ("Sledovat live")
@@ -203,20 +207,21 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 | Sekce | Iterace |
 |-------|---------|
 | ~~15.0 Komponenty (Avatar, Forms, Tabs, Toast)~~ | ~~2~~ ✅ |
-| 15.0 Prototypy | 4 |
+| ~~15.0 Prototypy (AthletePublicPage, ClubPublicProfile)~~ | ~~2~~ ✅ |
+| 15.0 Prototypy (EventDetailPage, CalendarPage, RegistrationPage) | 2 |
 | ~~15.0 Cleanup + Dokumentace~~ | ~~2~~ ✅ |
 | 15.1 LivePage (P0) | 3 |
 | 15.2 Results (P1) | 2 |
 | 15.3 Rozbité věci (P2) | 2 |
 | 15.4 Design vylepšení (P3) | 2 |
 | 15.5 Nové koncepty | 2 |
-| **Celkem** | **~19** |
+| **Celkem** | **~17** |
 
 ---
 
 ## Další krok
 
-**→ 15.0 Prototypy (AthletePublicPage, ClubPublicProfile) → 15.1 LivePage improvements**
+**→ 15.0 Prototypy (EventDetailPage, CalendarPage, RegistrationPage) → 15.1 LivePage improvements**
 
 ---
 
