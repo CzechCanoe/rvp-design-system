@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState, useCallback } from 'react';
 import { ResultsTable, type ResultEntry } from './ResultsTable';
+import { RunDetailModal, type AthleteRunDetail, type GatePenalty, type RunDetail } from './RunDetailModal';
 import { KanoeCzContext } from '../KanoeCzContext';
 
 const meta: Meta<typeof ResultsTable> = {
@@ -629,5 +631,233 @@ export const CompactWithAvatars: Story = {
     showClub: false,
     showTimeDiff: false,
     caption: 'Compact mobile view',
+  },
+};
+
+// =============================================================================
+// RUN DETAIL MODAL - Interactive row click
+// =============================================================================
+
+/** Generate sample gate data for a run */
+const generateGateData = (numGates: number, hasPenalties: boolean): GatePenalty[] => {
+  const gates: GatePenalty[] = [];
+  let cumulativeTime = 0;
+
+  for (let i = 1; i <= numGates; i++) {
+    // Approx 3-5 seconds per gate
+    cumulativeTime += 3 + Math.random() * 2;
+
+    // Random penalties if hasPenalties
+    let penalty: 0 | 2 | 50 = 0;
+    if (hasPenalties) {
+      const rnd = Math.random();
+      if (rnd < 0.08) penalty = 2; // 8% chance of 2s touch
+      if (rnd < 0.02) penalty = 50; // 2% chance of miss
+    }
+
+    gates.push({
+      gateNumber: i,
+      penalty,
+      direction: i % 4 === 0 ? 'up' : 'down',
+      color: i % 3 === 0 ? 'red' : 'green',
+      splitTime: cumulativeTime,
+      diff: (Math.random() - 0.5) * 2, // -1 to +1 second diff
+    });
+  }
+
+  return gates;
+};
+
+/** Generate sample run detail data */
+const generateRunDetail = (runNumber: 1 | 2, hasPenalties: boolean = true): RunDetail => {
+  const gates = generateGateData(24, hasPenalties);
+  const totalPenalty = gates.reduce((sum, g) => sum + g.penalty, 0);
+  const rawTime = 88 + Math.random() * 10; // 88-98 seconds
+
+  return {
+    runNumber,
+    rawTime,
+    totalPenalty,
+    finalTime: rawTime + totalPenalty,
+    status: 'finished',
+    gates,
+    runRank: Math.floor(Math.random() * 10) + 1,
+    runDiff: Math.random() * 5,
+  };
+};
+
+/** Interactive story with row click to show run detail modal */
+const InteractiveResultsTable = () => {
+  const [selectedAthlete, setSelectedAthlete] = useState<AthleteRunDetail | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleRowClick = useCallback((entry: ResultEntry) => {
+    // Generate athlete detail from result entry
+    const athleteDetail: AthleteRunDetail = {
+      id: entry.id,
+      name: entry.name,
+      club: entry.club || '',
+      category: entry.category || '',
+      bib: Math.floor(Math.random() * 50) + 1,
+      country: entry.country,
+      avatarUrl: entry.avatarUrl,
+      run1: generateRunDetail(1, true),
+      run2: entry.status === 'final' ? generateRunDetail(2, false) : undefined,
+      overallRank: entry.rank,
+      overallDiff: entry.timeDiff,
+    };
+    setSelectedAthlete(athleteDetail);
+    setModalOpen(true);
+  }, []);
+
+  return (
+    <div>
+      <p style={{ marginBottom: '1rem', color: 'var(--color-text-secondary)', fontSize: 'var(--font-size-sm)' }}>
+        Klikněte na řádek pro zobrazení detailu jízdy s penalizacemi na branách.
+      </p>
+      <ResultsTable
+        results={sampleResults}
+        showPodiumHighlights
+        showRuns
+        showCountry
+        onRowClick={handleRowClick}
+        caption="Klikněte na řádek pro detail"
+      />
+      <RunDetailModal
+        athlete={selectedAthlete}
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        section="dv"
+      />
+    </div>
+  );
+};
+
+export const WithRunDetailModal: Story = {
+  name: 'Interactive: Row Click Detail',
+  render: () => <InteractiveResultsTable />,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Kliknutí na řádek otevře modální okno s detailem jízdy včetně penalizací na jednotlivých branách.',
+      },
+    },
+  },
+};
+
+// =============================================================================
+// RUN DETAIL MODAL - Standalone
+// =============================================================================
+
+const sampleAthleteDetail: AthleteRunDetail = {
+  id: 1,
+  name: 'Jiří Prskavec',
+  club: 'USK Praha',
+  category: 'K1M',
+  bib: 7,
+  country: 'CZE',
+  avatarUrl: 'https://i.pravatar.cc/150?u=prskavec',
+  run1: {
+    runNumber: 1,
+    rawTime: 90.45,
+    totalPenalty: 4,
+    finalTime: 94.45,
+    status: 'finished',
+    gates: [
+      { gateNumber: 1, penalty: 0, direction: 'down', color: 'green', splitTime: 4.23, diff: -0.12 },
+      { gateNumber: 2, penalty: 0, direction: 'down', color: 'green', splitTime: 8.56, diff: 0.08 },
+      { gateNumber: 3, penalty: 2, direction: 'down', color: 'red', splitTime: 13.21, diff: 0.45 },
+      { gateNumber: 4, penalty: 0, direction: 'up', color: 'green', splitTime: 18.34, diff: -0.22 },
+      { gateNumber: 5, penalty: 0, direction: 'down', color: 'green', splitTime: 22.67, diff: -0.15 },
+      { gateNumber: 6, penalty: 0, direction: 'down', color: 'red', splitTime: 27.89, diff: 0.03 },
+      { gateNumber: 7, penalty: 0, direction: 'down', color: 'green', splitTime: 32.12, diff: -0.28 },
+      { gateNumber: 8, penalty: 0, direction: 'up', color: 'green', splitTime: 37.45, diff: 0.11 },
+      { gateNumber: 9, penalty: 0, direction: 'down', color: 'red', splitTime: 42.78, diff: -0.19 },
+      { gateNumber: 10, penalty: 2, direction: 'down', color: 'green', splitTime: 48.01, diff: 0.67 },
+      { gateNumber: 11, penalty: 0, direction: 'down', color: 'green', splitTime: 52.34, diff: 0.23 },
+      { gateNumber: 12, penalty: 0, direction: 'up', color: 'green', splitTime: 57.67, diff: -0.34 },
+      { gateNumber: 13, penalty: 0, direction: 'down', color: 'red', splitTime: 62.00, diff: 0.12 },
+      { gateNumber: 14, penalty: 0, direction: 'down', color: 'green', splitTime: 66.33, diff: -0.45 },
+      { gateNumber: 15, penalty: 0, direction: 'down', color: 'green', splitTime: 70.66, diff: 0.08 },
+      { gateNumber: 16, penalty: 0, direction: 'up', color: 'green', splitTime: 75.89, diff: -0.21 },
+      { gateNumber: 17, penalty: 0, direction: 'down', color: 'red', splitTime: 80.12, diff: 0.15 },
+      { gateNumber: 18, penalty: 0, direction: 'down', color: 'green', splitTime: 84.45, diff: -0.33 },
+      { gateNumber: 19, penalty: 0, direction: 'down', color: 'green', splitTime: 88.78, diff: 0.22 },
+      { gateNumber: 20, penalty: 0, direction: 'up', color: 'green', splitTime: 93.01, diff: -0.18 },
+    ],
+    runRank: 3,
+    runDiff: 2.11,
+  },
+  run2: {
+    runNumber: 2,
+    rawTime: 89.12,
+    totalPenalty: 0,
+    finalTime: 89.12,
+    status: 'finished',
+    gates: [
+      { gateNumber: 1, penalty: 0, direction: 'down', color: 'green', splitTime: 4.01, diff: -0.34 },
+      { gateNumber: 2, penalty: 0, direction: 'down', color: 'green', splitTime: 8.23, diff: -0.25 },
+      { gateNumber: 3, penalty: 0, direction: 'down', color: 'red', splitTime: 12.56, diff: -0.18 },
+      { gateNumber: 4, penalty: 0, direction: 'up', color: 'green', splitTime: 17.89, diff: -0.45 },
+      { gateNumber: 5, penalty: 0, direction: 'down', color: 'green', splitTime: 22.12, diff: -0.23 },
+      { gateNumber: 6, penalty: 0, direction: 'down', color: 'red', splitTime: 26.45, diff: -0.31 },
+      { gateNumber: 7, penalty: 0, direction: 'down', color: 'green', splitTime: 30.78, diff: -0.42 },
+      { gateNumber: 8, penalty: 0, direction: 'up', color: 'green', splitTime: 35.01, diff: -0.56 },
+      { gateNumber: 9, penalty: 0, direction: 'down', color: 'red', splitTime: 39.34, diff: -0.38 },
+      { gateNumber: 10, penalty: 0, direction: 'down', color: 'green', splitTime: 43.67, diff: -0.29 },
+      { gateNumber: 11, penalty: 0, direction: 'down', color: 'green', splitTime: 48.00, diff: -0.45 },
+      { gateNumber: 12, penalty: 0, direction: 'up', color: 'green', splitTime: 52.33, diff: -0.52 },
+      { gateNumber: 13, penalty: 0, direction: 'down', color: 'red', splitTime: 56.66, diff: -0.33 },
+      { gateNumber: 14, penalty: 0, direction: 'down', color: 'green', splitTime: 60.99, diff: -0.47 },
+      { gateNumber: 15, penalty: 0, direction: 'down', color: 'green', splitTime: 65.32, diff: -0.28 },
+      { gateNumber: 16, penalty: 0, direction: 'up', color: 'green', splitTime: 69.65, diff: -0.61 },
+      { gateNumber: 17, penalty: 0, direction: 'down', color: 'red', splitTime: 73.98, diff: -0.39 },
+      { gateNumber: 18, penalty: 0, direction: 'down', color: 'green', splitTime: 78.31, diff: -0.55 },
+      { gateNumber: 19, penalty: 0, direction: 'down', color: 'green', splitTime: 82.64, diff: -0.42 },
+      { gateNumber: 20, penalty: 0, direction: 'up', color: 'green', splitTime: 86.97, diff: -0.67 },
+    ],
+    runRank: 1,
+    runDiff: 0,
+  },
+  overallRank: 1,
+  overallDiff: 0,
+};
+
+const RunDetailModalDemo = () => {
+  const [open, setOpen] = useState(true);
+  return (
+    <div>
+      <button
+        onClick={() => setOpen(true)}
+        style={{
+          padding: '0.5rem 1rem',
+          background: 'var(--color-primary)',
+          color: 'white',
+          border: 'none',
+          borderRadius: 'var(--radius-md)',
+          cursor: 'pointer',
+        }}
+      >
+        Otevřít detail jízdy
+      </button>
+      <RunDetailModal
+        athlete={sampleAthleteDetail}
+        open={open}
+        onClose={() => setOpen(false)}
+        section="dv"
+      />
+    </div>
+  );
+};
+
+export const RunDetailModalStory: Story = {
+  name: 'RunDetailModal: Standalone',
+  render: () => <RunDetailModalDemo />,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Modální okno s detailem jízdy zobrazuje čistý čas, penalizace a grid branek s vizuálním rozlišením čisté/dotyk/vynechání.',
+      },
+    },
   },
 };

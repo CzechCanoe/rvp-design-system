@@ -4852,3 +4852,34 @@ Aesthetic refresh aplikován na LivePage jako první prototyp. Změny:
 - Medal ikony jsou SVG s číslem pozice uvnitř
 - Avatary mají fallback na iniciály při chybě načtení obrázku
 - Odstraněno `glass` z styleVariant options (již neexistuje)
+
+---
+
+## 2026-01-25 - Fáze 15.2: Results komponenta - RunDetailModal
+
+### Dokončeno
+- [x] Extrakce `RunDetailModal` z LivePage do standalone komponenty
+- [x] Vytvoření `RunDetailModal.tsx` s kompletní funkcionalitou:
+  - Gate-by-gate grid s vizuálním rozlišením (clean/touch/miss)
+  - Přepínání mezi 1. a 2. jízdou
+  - Souhrn času: čistý čas, penalizace, celkem
+  - Section theming (dv/ry/vt)
+  - Responsive design pro mobile
+- [x] Vytvoření `RunDetailModal.css` se všemi styly
+- [x] Přidání stories:
+  - `WithRunDetailModal` - interaktivní rozklik z ResultsTable
+  - `RunDetailModalStory` - standalone demo
+- [x] Export typů: `AthleteRunDetail`, `RunDetail`, `GatePenalty`
+- [x] Review "modré čáry" - intentional hover efekt na clickable řádky
+- [x] Review variant - 19 stories, dobře organizované
+
+### Soubory
+- `src/components/ResultsTable/RunDetailModal.tsx` (nový)
+- `src/components/ResultsTable/RunDetailModal.css` (nový)
+- `src/components/ResultsTable/index.ts` (aktualizován)
+- `src/components/ResultsTable/ResultsTable.stories.tsx` (aktualizován)
+
+### Poznámky
+- RunDetailModal je nyní reusable komponenta použitelná v LivePage i samostatně
+- "Modrá čára vpravo" je ve skutečnosti levý inset box-shadow pro hover stav clickable řádků
+- Varianty ResultsTable jsou rozumně organizované, není potřeba redukce

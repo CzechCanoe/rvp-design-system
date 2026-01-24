@@ -9,3 +9,11 @@ export {
   type ResultSection,
   type ResultStatus,
 } from './ResultsTable';
+
+export {
+  RunDetailModal,
+  type RunDetailModalProps,
+  type AthleteRunDetail,
+  type RunDetail,
+  type GatePenalty,
+} from './RunDetailModal';

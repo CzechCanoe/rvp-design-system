@@ -176,9 +176,9 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 - [x] **Top 3 styling** - clean design s medal ikonami místo barevných pozadí
 - [x] **Avatary závodníků** - `showAvatars` prop (true | 'podium' | false)
 - [x] **Kompletní data** - věkové kategorie + `ageCategoryRank`, `showAgeCategoryRank` prop
-- [ ] **Detail jízdy** - rozklik na penalizace bran, časy startu/cíle
-- [ ] **Modrá čára vpravo** - vysvětlit účel nebo změnit
-- [ ] **Zredukovat varianty** - příliš mnoho headerů/tabulek
+- [x] **Detail jízdy** - `RunDetailModal` komponenta s gate-by-gate penalizacemi, rozklik z ResultsTable
+- [x] **Modrá čára vlevo** - intentional hover efekt na clickable řádky (box-shadow inset), vizuálně konzistentní s podium border-left
+- [x] **Varianty** - review provedeno, stories jsou dobře organizované (19 stories s jasným účelem)
 
 ### 15.3 Rozbité věci (P2) *(2 iterace)*
 
@@ -218,7 +218,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 | ~~15.0 Prototypy (EventDetailPage, CalendarPage, RegistrationPage)~~ | ~~1~~ ✅ |
 | ~~15.0 Cleanup + Dokumentace~~ | ~~2~~ ✅ |
 | ~~15.1 LivePage (P0)~~ | ~~3~~ ✅ |
-| 15.2 Results (P1) | 2 |
+| ~~15.2 Results (P1)~~ | ~~2~~ ✅ |
 | 15.3 Rozbité věci (P2) | 2 |
 | 15.4 Design vylepšení (P3) | 2 |
 | 15.5 Nové koncepty | 2 |
@@ -228,7 +228,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 ## Další krok
 
-**→ 15.2 Results komponenta (P1) - Detail jízdy modal, cleanup variant**
+**→ 15.3 Rozbité věci (P2) - DashboardPage, CalendarPage EmbedWithSidebar, AthletePublicPage mobile**
 
 ---
 
