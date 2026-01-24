@@ -1,7 +1,7 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import './Card.css';
 
-export type CardVariant = 'surface' | 'elevated' | 'outlined' | 'gradient' | 'glass' | 'featured';
+export type CardVariant = 'surface' | 'elevated' | 'outlined' | 'gradient' | 'glass' | 'featured' | 'aesthetic';
 export type CardPadding = 'none' | 'sm' | 'md' | 'lg';
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
@@ -21,6 +21,10 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   header?: ReactNode;
   /** Footer content */
   footer?: ReactNode;
+  /** Add mesh background effect */
+  meshBg?: boolean;
+  /** Add border-accent on left side */
+  borderAccent?: boolean;
   /** Children content */
   children?: ReactNode;
 }
@@ -43,6 +47,8 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       rel,
       header,
       footer,
+      meshBg = false,
+      borderAccent = false,
       className,
       children,
       onClick,
@@ -59,6 +65,8 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       `csk-card--${variant}`,
       `csk-card--padding-${padding}`,
       isClickable && 'csk-card--clickable',
+      meshBg && 'csk-card--mesh-bg',
+      borderAccent && 'csk-card--border-accent',
       className,
     ]
       .filter(Boolean)

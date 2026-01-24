@@ -43,14 +43,14 @@
 - [x] Display font pro large size (`font-family: var(--font-family-display)`)
 - [x] Hover glow efekt - `glow` prop pro energy glow on hover
 
-**Card:**
-- [ ] Nová varianta `aesthetic` nebo `featured-aesthetic`:
+**Card (HOTOVO):**
+- [x] Nová varianta `aesthetic`:
   - Mesh background (`--bg-mesh-card`)
   - Border-accent left side
-  - Display font pro title
-  - Optional grain overlay
-- [ ] Props: `meshBg?: boolean`, `borderAccent?: boolean`
-- [ ] Update Card.stories.tsx
+  - Display font pro title (`.csk-card__title`)
+  - Energy glow on hover
+- [x] Props: `meshBg?: boolean`, `borderAccent?: boolean`
+- [x] Update Card.stories.tsx (Aesthetic, Modifiers, AestheticLiveEvent)
 
 **Header (HOTOVO):**
 - [x] Display font pro brand/title text (`csk-header__brand-title`, `csk-header__app-title`)

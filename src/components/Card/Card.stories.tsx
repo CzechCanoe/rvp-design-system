@@ -12,8 +12,16 @@ const meta: Meta<typeof Card> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['surface', 'elevated', 'outlined', 'gradient', 'glass', 'featured'],
+      options: ['surface', 'elevated', 'outlined', 'gradient', 'glass', 'featured', 'aesthetic'],
       description: 'Visual variant of the card',
+    },
+    meshBg: {
+      control: 'boolean',
+      description: 'Add mesh background effect',
+    },
+    borderAccent: {
+      control: 'boolean',
+      description: 'Add border-accent on left side',
     },
     padding: {
       control: 'select',
@@ -307,6 +315,168 @@ export const EventCard: Story = {
     docs: {
       description: {
         story: 'Event card example with discipline badge, dates, and action buttons.',
+      },
+    },
+  },
+};
+
+/* ==========================================================================
+   AESTHETIC VARIANT - Dynamic Sport
+   ========================================================================== */
+
+export const Aesthetic: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+      <div style={{ width: '280px' }}>
+        <Card variant="aesthetic">
+          <h3 className="csk-card__title" style={{ margin: '0 0 8px', fontSize: '18px' }}>
+            Aesthetic Card
+          </h3>
+          <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+            Mesh background with border-accent gradient. Perfect for featured content.
+          </p>
+        </Card>
+      </div>
+      <div style={{ width: '280px' }}>
+        <Card variant="aesthetic" clickable>
+          <h3 className="csk-card__title" style={{ margin: '0 0 8px', fontSize: '18px' }}>
+            Clickable Aesthetic
+          </h3>
+          <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+            Hover for energy glow effect.
+          </p>
+        </Card>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Aesthetic variant with mesh background, border-accent gradient, and display font titles.',
+      },
+    },
+  },
+};
+
+/* ==========================================================================
+   MODIFIERS - Mesh Background & Border Accent
+   ========================================================================== */
+
+export const Modifiers: Story = {
+  name: 'Modifiers (meshBg, borderAccent)',
+  render: () => (
+    <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+      <div style={{ width: '240px' }}>
+        <Card variant="elevated" meshBg>
+          <strong>Mesh Background</strong>
+          <p style={{ margin: '8px 0 0', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+            Elevated + meshBg modifier
+          </p>
+        </Card>
+      </div>
+      <div style={{ width: '240px' }}>
+        <Card variant="surface" borderAccent>
+          <strong>Border Accent</strong>
+          <p style={{ margin: '8px 0 0', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+            Surface + borderAccent modifier
+          </p>
+        </Card>
+      </div>
+      <div style={{ width: '240px' }}>
+        <Card variant="elevated" meshBg borderAccent>
+          <strong>Both Modifiers</strong>
+          <p style={{ margin: '8px 0 0', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+            Elevated + meshBg + borderAccent
+          </p>
+        </Card>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Modifiers can be combined with any variant to add mesh background or border-accent.',
+      },
+    },
+  },
+};
+
+/* ==========================================================================
+   AESTHETIC EXAMPLE: LIVE EVENT
+   ========================================================================== */
+
+export const AestheticLiveEvent: Story = {
+  name: 'Example: Aesthetic Live Event',
+  render: () => (
+    <div style={{ width: '360px' }}>
+      <Card
+        variant="aesthetic"
+        clickable
+        header={
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '4px 10px',
+                borderRadius: '999px',
+                background: 'linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%)',
+                color: 'white',
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase',
+              }}
+            >
+              <span
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  background: 'white',
+                  animation: 'pulse 1.5s ease-in-out infinite',
+                }}
+              />
+              ŽIVĚ
+            </span>
+            <span style={{ fontSize: '13px', color: 'var(--color-text-secondary)' }}>
+              Semifinále K1M
+            </span>
+          </div>
+        }
+        footer={
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <Button variant="secondary" size="sm" fullWidth>
+              Výsledky
+            </Button>
+            <Button variant="gradient-energy" size="sm" fullWidth glow>
+              Sledovat live
+            </Button>
+          </div>
+        }
+      >
+        <div style={{ padding: '4px 0' }}>
+          <h3
+            className="csk-card__title"
+            style={{
+              margin: '0 0 6px',
+              fontSize: '20px',
+            }}
+          >
+            Český pohár #3
+          </h3>
+          <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+            Praha Troja • 24. ledna 2026
+          </p>
+        </div>
+      </Card>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Live event card using aesthetic variant with energy badge and CTA button.',
       },
     },
   },

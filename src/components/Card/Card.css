@@ -281,14 +281,107 @@
   .csk-card--clickable.csk-card--elevated:hover,
   .csk-card--clickable.csk-card--gradient:hover,
   .csk-card--clickable.csk-card--glass:hover,
-  .csk-card--clickable.csk-card--featured:hover {
+  .csk-card--clickable.csk-card--featured:hover,
+  .csk-card--clickable.csk-card--aesthetic:hover {
     transform: none;
   }
 
   .csk-card--clickable.csk-card--elevated:active,
   .csk-card--clickable.csk-card--gradient:active,
   .csk-card--clickable.csk-card--glass:active,
-  .csk-card--clickable.csk-card--featured:active {
+  .csk-card--clickable.csk-card--featured:active,
+  .csk-card--clickable.csk-card--aesthetic:active {
     transform: none;
   }
+}
+
+/* ==========================================================================
+   AESTHETIC VARIANT - Dynamic Sport
+   Mesh background, border-accent, display font titles
+   ========================================================================== */
+
+.csk-card--aesthetic {
+  position: relative;
+  background: var(--bg-mesh-card,
+    radial-gradient(ellipse at 0% 0%, rgba(17, 118, 166, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(249, 115, 22, 0.05) 0%, transparent 50%));
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-default);
+  border-left: var(--border-accent-width, 4px) solid;
+  border-image: var(--border-accent-gradient, linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-energy-500, #f97316) 100%)) 1;
+  box-shadow: var(--shadow-md);
+  overflow: visible;
+}
+
+.csk-card--aesthetic .csk-card__header {
+  border-bottom-color: rgba(17, 118, 166, 0.15);
+}
+
+.csk-card--aesthetic .csk-card__footer {
+  border-top-color: rgba(17, 118, 166, 0.15);
+}
+
+/* Aesthetic card title styling */
+.csk-card--aesthetic .csk-card__title {
+  font-family: var(--font-family-display, var(--font-family-sans));
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--text-headline-tracking, -0.02em);
+}
+
+/* Clickable aesthetic */
+.csk-card--clickable.csk-card--aesthetic:hover {
+  box-shadow: var(--shadow-lg), var(--glow-energy-sm, 0 0 8px rgba(249, 115, 22, 0.4));
+  transform: translateY(-2px);
+}
+
+.csk-card--clickable.csk-card--aesthetic:active {
+  box-shadow: var(--shadow-md);
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   MODIFIERS - Can be combined with any variant
+   ========================================================================== */
+
+/* Mesh background modifier */
+.csk-card--mesh-bg {
+  background: var(--bg-mesh-card,
+    radial-gradient(ellipse at 0% 0%, rgba(17, 118, 166, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(249, 115, 22, 0.05) 0%, transparent 50%)),
+    var(--color-bg-primary);
+}
+
+/* Border accent modifier */
+.csk-card--border-accent {
+  border-left: var(--border-accent-width, 4px) solid;
+  border-image: var(--border-accent-gradient, linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-energy-500, #f97316) 100%)) 1;
+}
+
+/* ==========================================================================
+   DARK MODE - AESTHETIC
+   ========================================================================== */
+
+[data-theme="dark"] .csk-card--aesthetic {
+  background: var(--bg-mesh-card,
+    radial-gradient(ellipse at 0% 0%, rgba(77, 163, 204, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(251, 146, 60, 0.04) 0%, transparent 50%));
+  background-color: var(--color-bg-primary);
+  border-color: var(--color-border-secondary);
+}
+
+[data-theme="dark"] .csk-card--aesthetic .csk-card__header {
+  border-bottom-color: rgba(77, 163, 204, 0.15);
+}
+
+[data-theme="dark"] .csk-card--aesthetic .csk-card__footer {
+  border-top-color: rgba(77, 163, 204, 0.15);
+}
+
+[data-theme="dark"] .csk-card--clickable.csk-card--aesthetic:hover {
+  box-shadow: var(--shadow-lg), var(--glow-energy-sm, 0 0 8px rgba(251, 146, 60, 0.5));
+}
+
+[data-theme="dark"] .csk-card--mesh-bg {
+  background: var(--bg-mesh-card),
+    var(--color-bg-primary);
 }
