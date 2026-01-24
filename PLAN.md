@@ -71,10 +71,10 @@
 - [x] Live badge component (`.csk-results-table__live-badge`)
 - [x] Mesh background wrapper varianta (`.csk-results-table-wrapper--aesthetic`)
 
-**Avatar:** *(1 iterace)*
-- [ ] Energy glow varianta (`glow` prop s `--glow-energy-md`)
-- [ ] Border-accent ring option (`borderAccent` prop)
-- [ ] Update Avatar.stories.tsx
+**Avatar (HOTOVO):**
+- [x] Energy glow varianta (`glow` prop s `--glow-energy-md`)
+- [x] Border-accent ring option (`borderAccent` prop)
+- [x] Update Avatar.stories.tsx
 
 **Input/Select/Textarea (forms):** *(1 iterace)*
 - [ ] Energy focus ring varianta (CSS `:focus` s energy color)
@@ -201,7 +201,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 | Sekce | Iterace |
 |-------|---------|
-| 15.0 Komponenty (Avatar, Forms, Tabs, Alert) | 4 |
+| 15.0 Komponenty (~~Avatar~~, Forms, Tabs, Alert) | 3 |
 | 15.0 Prototypy | 4 |
 | ~~15.0 Cleanup + Dokumentace~~ | ~~2~~ ✅ |
 | 15.1 LivePage (P0) | 3 |
@@ -215,7 +215,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 ## Další krok
 
-**→ 15.0 Dokumentace → Komponenty → Prototypy → 15.1 LivePage**
+**→ 15.0 Komponenty (Forms, Tabs, Alert) → Prototypy → 15.1 LivePage**
 
 ---
 

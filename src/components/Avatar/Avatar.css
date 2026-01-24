@@ -131,6 +131,55 @@
 }
 
 /* ==========================================================================
+   Aesthetic Enhancements
+   ========================================================================== */
+
+/* Energy glow on hover */
+.csk-avatar--glow {
+  transition: box-shadow 200ms var(--ease-sport, ease-out),
+              transform 200ms var(--ease-sport, ease-out);
+}
+
+.csk-avatar--glow:hover {
+  box-shadow: var(--glow-energy-md);
+  transform: scale(1.05);
+}
+
+/* Border accent ring - gradient from primary to energy */
+.csk-avatar--border-accent {
+  box-shadow: 0 0 0 3px var(--color-bg-primary),
+              0 0 0 5px var(--color-primary-500);
+  background-image: var(--border-accent-gradient, linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-energy-500) 100%));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+/* Use pseudo-element for gradient ring to avoid affecting image */
+.csk-avatar--border-accent::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  padding: 3px;
+  background: var(--border-accent-gradient, linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-energy-500) 100%));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Combine glow and border accent */
+.csk-avatar--glow.csk-avatar--border-accent:hover {
+  box-shadow: var(--glow-energy-md);
+}
+
+.csk-avatar--glow.csk-avatar--border-accent:hover::before {
+  box-shadow: var(--glow-energy-sm);
+}
+
+/* ==========================================================================
    Image
    ========================================================================== */
 
@@ -339,6 +388,11 @@
   border-color: var(--color-bg-primary);
 }
 
+/* Dark mode - glow is brighter */
+[data-theme='dark'] .csk-avatar--glow:hover {
+  box-shadow: var(--glow-energy-lg);
+}
+
 /* ==========================================================================
    Reduced Motion
    ========================================================================== */
@@ -349,6 +403,14 @@
   }
 
   .csk-avatar-group > .csk-avatar:hover {
+    transform: none;
+  }
+
+  .csk-avatar--glow {
+    transition: none;
+  }
+
+  .csk-avatar--glow:hover {
     transform: none;
   }
 }

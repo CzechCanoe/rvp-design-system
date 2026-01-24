@@ -4597,3 +4597,17 @@ Audit 9.1.4 dokončen. Další krok: 9.1.5 Audit kompatibility s kanoe.cz (embed
 ### Poznámky
 - Build prošel bez chyb
 - Aesthetic Guidelines poskytuje kompletní reference pro konzistentní použití Dynamic Sport estetiky
+
+---
+
+## 2026-01-24 - Fáze 15.0: Avatar Aesthetic
+
+### Dokončeno
+- [x] Avatar `glow` prop - energy glow on hover
+- [x] Avatar `borderAccent` prop - gradient ring from primary to energy
+- [x] CSS styles with dark mode and reduced motion support
+- [x] AestheticEnhancements story
+- [x] Updated AthleteProfile story with aesthetic props
+
+### Poznámky
+Použit gradient ring via CSS mask pro čistý efekt bez ovlivnění obrázku.
