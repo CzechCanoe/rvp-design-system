@@ -4510,3 +4510,36 @@ Audit 9.1.4 dokončen. Další krok: 9.1.5 Audit kompatibility s kanoe.cz (embed
 ### Poznámky
 - Složky zůstávají v .gitignore pro budoucí ignorování
 - Lokální kopie složek zůstávají (nejsou smazány z disku, pouze z gitu)
+
+---
+
+## 2026-01-24 - Fáze 15.0: Aesthetic Refresh "Dynamic Sport"
+
+### Dokončeno
+- [x] Foundation: Plus Jakarta Sans display font
+- [x] Foundation: Energy accent color (coral-orange #f97316)
+- [x] Foundation: Mesh backgrounds, grain textures, diagonal patterns
+- [x] Foundation: Staggered reveal animations, sport easings
+- [x] Button: gradient-energy varianta
+- [x] Badge: energy varianta
+- [x] Aesthetic.stories.tsx showcase
+- [x] Cleanup: Odstranění gradient-accent z Button
+- [x] Cleanup: Odstranění gradient-accent/success/error z Badge
+- [x] Cleanup: Odstranění transparent a glass z Header
+- [x] Cleanup: Odstranění glass z ResultsTable
+
+### Změny velikostí
+- CSS: 240.64 KB → 237.78 KB (-1.2%)
+
+### Finální varianty
+| Komponenta | Varianty |
+|------------|----------|
+| Button | primary, secondary, ghost, danger, gradient, gradient-energy |
+| Badge | default, primary, success, warning, error, info, gradient, energy + sections |
+| Header | default, elevated, gradient, satellite |
+| ResultsTable | default, gradient, embed |
+
+### Poznámky
+- frontend-design skill od Anthropic použit pro návrh estetického směru
+- Uživatel preferuje "Dynamic Sport" estetiku nad dřívějším "canoe/water" pokusem
+- Card cleanup odložen - glass varianta zatím ponechána k dalšímu zhodnocení

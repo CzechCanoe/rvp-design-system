@@ -128,36 +128,29 @@
 - [ ] Energy CTA pro hlavní akci
 - [ ] Form inputs s energy focus
 
-#### Cleanup - Odstranit nepotřebné varianty
+#### Cleanup - Odstranit nepotřebné varianty (HOTOVO)
 
 **Button:**
-- [ ] Odstranit `gradient-accent` (nahrazeno `gradient-energy`)
-- [ ] Ponechat: primary, secondary, ghost, danger, gradient, gradient-energy
+- [x] Odstranit `gradient-accent` (nahrazeno `gradient-energy`)
+- [x] Finální varianty: primary, secondary, ghost, danger, gradient, gradient-energy
 
 **Badge:**
-- [ ] Odstranit `gradient-accent` (přebytečné)
-- [ ] Odstranit `gradient-success`, `gradient-error` (přebytečné, stačí solid varianty)
-- [ ] Ponechat: default, primary, success, warning, error, info, gradient, energy (nové)
-- [ ] Ponechat section varianty: dv, ry, vt + vtClass
+- [x] Odstranit `gradient-accent`, `gradient-success`, `gradient-error`
+- [x] Přidat `energy` variantu (vibrant coral-orange)
+- [x] Finální varianty: default, primary, success, warning, error, info, gradient, energy
+- [x] Section varianty: dv, ry, vt + vtClass (beze změny)
 
 **Card:**
 - [ ] Zhodnotit `glass` variantu - ponechat pouze pokud má jasný use case
 - [ ] Zhodnotit `featured` vs nová aesthetic varianta - možná sloučit
-- [ ] Ponechat: surface, elevated, outlined, gradient, (glass?), aesthetic (nové)
 
 **Header:**
-- [ ] Odstranit `transparent` pokud není konkrétní use case
-- [ ] Zhodnotit počet variant - cíl max 4-5
-- [ ] Aktuální: default, bordered, elevated, gradient, glass, satellite
-- [ ] Návrh: default, elevated, gradient, satellite (4 varianty)
+- [x] Odstranit `transparent` a `glass` varianty
+- [x] Finální varianty: default, elevated, gradient, satellite (4 varianty)
 
 **ResultsTable:**
-- [ ] Odstranit `glass` style pokud nemá use case
-- [ ] Ponechat: default, gradient, embed, aesthetic (nové)
-
-**Obecně:**
-- [ ] Odstranit všechny `gradient-accent` gradienty z colors.css (nahrazeno energy)
-- [ ] Audit všech komponent pro nepoužívané varianty
+- [x] Odstranit `glass` style
+- [x] Finální style varianty: default, gradient, embed
 
 #### Dokumentace
 - [ ] Aktualizovat DESIGN_PRINCIPLES.md:
