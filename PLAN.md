@@ -203,7 +203,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 ### 15.5 Nové koncepty *(2 iterace)*
 
-- [ ] **Sdílená hledací komponenta** - fulltext + chipy pro rychlé filtry
+- [x] **Sdílená hledací komponenta** - `SearchInput` komponenta s fulltext + chipy pro rychlé filtry
 - [ ] **Registration UX** - přidávání jezdců, vícečlenné posádky
 - [ ] **Event indikace live** - že závod běží a má live results
 

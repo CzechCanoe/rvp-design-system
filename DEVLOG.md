@@ -4952,3 +4952,27 @@ Zbývá v 15.4: Calendar víkendová prezentace, Results Top 3 karty přehodnoce
 ### Poznámky
 - Podium design je nyní konzistentnější s ostatními list-view komponentami
 - Víkendové zvýraznění pomáhá rychle identifikovat dny kdy probíhají závody
+
+---
+
+## 2026-01-25 - Fáze 15.5: SearchInput komponenta
+
+### Dokončeno
+- [x] Nová komponenta `SearchInput` s filter chipy
+- [x] Debounced search s konfigurovatelným delay
+- [x] Loading state se spinnerem
+- [x] Energy focus variant pro Dynamic Sport aesthetic
+- [x] Keyboard support (Enter = search, Escape = clear)
+- [x] Results count display + helper text
+- [x] Barevné varianty chipů (primary, dv, ry, vt, energy)
+- [x] Dark mode podpora
+- [x] 12 stories pokrývajících různé use cases
+
+### Technické detaily
+- Komponenta: `src/components/SearchInput/`
+- Props: `chips`, `activeChips`, `onChipToggle`, `debounceMs`, `energyFocus`, `loading`, `resultsCount`
+- Export přidán do `src/components/index.ts`
+
+### Poznámky
+- Komponenta je připravena pro použití v CalendarPage, AthletesListPage, RegistrationPage
+- Další krok: Registration UX nebo Event live indikace

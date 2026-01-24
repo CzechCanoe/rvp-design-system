@@ -1,0 +1,481 @@
+/**
+ * SearchInput Component Styles - CSK RVP Design System
+ *
+ * Search input with filter chips for quick filtering.
+ * Supports sizes: sm, md, lg
+ * Uses Dynamic Sport aesthetic with energy accents.
+ */
+
+/* ==========================================================================
+   WRAPPER
+   ========================================================================== */
+
+.csk-search-input {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.csk-search-input--full-width {
+  display: flex;
+  width: 100%;
+}
+
+/* ==========================================================================
+   FIELD CONTAINER
+   ========================================================================== */
+
+.csk-search-input__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* ==========================================================================
+   INPUT
+   ========================================================================== */
+
+.csk-search-input__input {
+  /* Layout */
+  display: block;
+  width: 100%;
+
+  /* Typography */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+
+  /* Default size (md) */
+  padding: var(--spacing-2-5) var(--spacing-3);
+  padding-left: calc(var(--spacing-3) * 2 + 1.25em);
+  padding-right: calc(var(--spacing-3) * 2 + 1em);
+  min-height: var(--spacing-touch-target);
+
+  /* Shape */
+  background-color: var(--color-bg-primary);
+  border: 1.5px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+
+  /* Subtle inner shadow for depth */
+  box-shadow: var(--shadow-inner);
+
+  /* Interaction */
+  transition:
+    border-color var(--duration-moderate) var(--ease-out),
+    box-shadow var(--duration-moderate) var(--ease-out),
+    background-color var(--duration-moderate) var(--ease-out);
+  outline: none;
+}
+
+.csk-search-input__input::placeholder {
+  color: var(--color-text-muted);
+  transition: color var(--duration-moderate) var(--ease-out);
+}
+
+/* Hide native search clear button */
+.csk-search-input__input::-webkit-search-cancel-button {
+  display: none;
+}
+
+/* ==========================================================================
+   FOCUS STATES
+   ========================================================================== */
+
+.csk-search-input__input:focus {
+  border-color: var(--color-primary-500);
+  box-shadow:
+    var(--shadow-inner),
+    0 0 0 3px rgba(17, 118, 166, 0.15),
+    0 0 0 1px rgba(17, 118, 166, 0.3);
+  background-color: var(--color-bg-primary);
+}
+
+/* Energy focus - vibrant coral-orange glow */
+.csk-search-input--energy .csk-search-input__input:focus {
+  border-color: var(--color-energy-500);
+  box-shadow:
+    var(--shadow-inner),
+    0 0 0 3px rgba(249, 115, 22, 0.15),
+    0 0 0 1px rgba(249, 115, 22, 0.3),
+    0 0 12px rgba(249, 115, 22, 0.2);
+}
+
+.csk-search-input__input:focus::placeholder {
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   HOVER STATES
+   ========================================================================== */
+
+.csk-search-input__input:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-primary-300);
+  box-shadow:
+    var(--shadow-inner),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.csk-search-input--energy .csk-search-input__input:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-energy-300);
+}
+
+/* ==========================================================================
+   DISABLED STATE
+   ========================================================================== */
+
+.csk-search-input--disabled .csk-search-input__input {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background-color: var(--color-bg-secondary);
+  box-shadow: none;
+  border-color: var(--color-border-muted);
+}
+
+/* ==========================================================================
+   ICONS
+   ========================================================================== */
+
+.csk-search-input__icon {
+  position: absolute;
+  left: var(--spacing-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transition: color var(--duration-moderate) var(--ease-out);
+}
+
+.csk-search-input__icon svg {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* Focus state icon color */
+.csk-search-input__field:focus-within .csk-search-input__icon {
+  color: var(--color-primary-500);
+}
+
+.csk-search-input--energy .csk-search-input__field:focus-within .csk-search-input__icon {
+  color: var(--color-energy-500);
+}
+
+/* Loading spinner animation */
+.csk-search-input__spinner {
+  animation: csk-search-spin 1s linear infinite;
+}
+
+@keyframes csk-search-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   CLEAR BUTTON
+   ========================================================================== */
+
+.csk-search-input__clear {
+  position: absolute;
+  right: var(--spacing-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.csk-search-input__clear:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-neutral-100);
+  transform: scale(1.1);
+}
+
+.csk-search-input__clear:active {
+  transform: scale(0.95);
+}
+
+.csk-search-input__clear svg {
+  width: 1em;
+  height: 1em;
+}
+
+/* ==========================================================================
+   SIZES
+   ========================================================================== */
+
+/* Small */
+.csk-search-input--sm .csk-search-input__input {
+  padding: var(--spacing-1-5) var(--spacing-2-5);
+  padding-left: calc(var(--spacing-2-5) * 2 + 1em);
+  padding-right: calc(var(--spacing-2-5) * 2 + 0.75em);
+  font-size: var(--font-size-xs);
+  min-height: 34px;
+  border-radius: var(--radius-md);
+  border-width: 1px;
+}
+
+.csk-search-input--sm .csk-search-input__icon {
+  left: var(--spacing-2-5);
+}
+
+.csk-search-input--sm .csk-search-input__icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.csk-search-input--sm .csk-search-input__clear {
+  right: var(--spacing-2);
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.csk-search-input--sm .csk-search-input__clear svg {
+  width: 0.75em;
+  height: 0.75em;
+}
+
+/* Large */
+.csk-search-input--lg .csk-search-input__input {
+  padding: var(--spacing-3) var(--spacing-4);
+  padding-left: calc(var(--spacing-4) * 2 + 1.5em);
+  padding-right: calc(var(--spacing-4) * 2 + 1.25em);
+  font-size: var(--font-size-base);
+  min-height: 52px;
+  border-radius: var(--radius-xl);
+  border-width: 2px;
+}
+
+.csk-search-input--lg .csk-search-input__icon {
+  left: var(--spacing-4);
+}
+
+.csk-search-input--lg .csk-search-input__icon svg {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.csk-search-input--lg .csk-search-input__clear {
+  right: var(--spacing-4);
+  width: 1.75em;
+  height: 1.75em;
+}
+
+.csk-search-input--lg .csk-search-input__clear svg {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* ==========================================================================
+   CHIPS
+   ========================================================================== */
+
+.csk-search-input__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1-5);
+}
+
+.csk-search-input__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-2-5);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+  user-select: none;
+}
+
+.csk-search-input__chip:hover:not(:disabled) {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-strong);
+}
+
+.csk-search-input__chip:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.csk-search-input__chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Active state */
+.csk-search-input__chip--active {
+  color: var(--color-primary-700);
+  background-color: var(--color-primary-50);
+  border-color: var(--color-primary-300);
+}
+
+.csk-search-input__chip--active:hover:not(:disabled) {
+  background-color: var(--color-primary-100);
+  border-color: var(--color-primary-400);
+}
+
+/* Color variants */
+.csk-search-input__chip--primary.csk-search-input__chip--active {
+  color: var(--color-primary-700);
+  background-color: var(--color-primary-50);
+  border-color: var(--color-primary-300);
+}
+
+.csk-search-input__chip--energy.csk-search-input__chip--active {
+  color: var(--color-energy-700);
+  background-color: var(--color-energy-50);
+  border-color: var(--color-energy-300);
+}
+
+.csk-search-input__chip--dv.csk-search-input__chip--active {
+  color: var(--color-section-dv-700, #0369a1);
+  background-color: var(--color-section-dv-50, #f0f9ff);
+  border-color: var(--color-section-dv-300, #7dd3fc);
+}
+
+.csk-search-input__chip--ry.csk-search-input__chip--active {
+  color: var(--color-section-ry-700, #047857);
+  background-color: var(--color-section-ry-50, #ecfdf5);
+  border-color: var(--color-section-ry-300, #6ee7b7);
+}
+
+.csk-search-input__chip--vt.csk-search-input__chip--active {
+  color: var(--color-section-vt-700, #7c2d12);
+  background-color: var(--color-section-vt-50, #fff7ed);
+  border-color: var(--color-section-vt-300, #fdba74);
+}
+
+/* Chip icon */
+.csk-search-input__chip-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.csk-search-input__chip-icon svg {
+  width: 0.875em;
+  height: 0.875em;
+}
+
+/* ==========================================================================
+   FOOTER (helper text + results count)
+   ========================================================================== */
+
+.csk-search-input__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-normal);
+}
+
+.csk-search-input__helper {
+  color: var(--color-text-secondary);
+}
+
+.csk-search-input__results {
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ==========================================================================
+   DARK MODE
+   ========================================================================== */
+
+[data-theme='dark'] .csk-search-input__input {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border-default);
+}
+
+[data-theme='dark'] .csk-search-input__input:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-primary-400);
+  box-shadow:
+    var(--shadow-inner),
+    0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] .csk-search-input__input:focus {
+  border-color: var(--color-primary-400);
+  box-shadow:
+    var(--shadow-inner),
+    0 0 0 3px rgba(77, 163, 204, 0.2),
+    0 0 0 1px rgba(77, 163, 204, 0.4);
+}
+
+[data-theme='dark'] .csk-search-input--energy .csk-search-input__input:focus {
+  border-color: var(--color-energy-400);
+  box-shadow:
+    var(--shadow-inner),
+    0 0 0 3px rgba(251, 146, 60, 0.2),
+    0 0 0 1px rgba(251, 146, 60, 0.4),
+    0 0 12px rgba(251, 146, 60, 0.25);
+}
+
+[data-theme='dark'] .csk-search-input__clear:hover {
+  background-color: var(--color-neutral-700);
+}
+
+[data-theme='dark'] .csk-search-input__chip {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-muted);
+}
+
+[data-theme='dark'] .csk-search-input__chip:hover:not(:disabled) {
+  background-color: var(--color-neutral-700);
+}
+
+[data-theme='dark'] .csk-search-input__chip--active {
+  background-color: rgba(17, 118, 166, 0.2);
+  border-color: var(--color-primary-500);
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-search-input__input,
+  .csk-search-input__icon,
+  .csk-search-input__clear,
+  .csk-search-input__chip {
+    transition: none;
+  }
+
+  .csk-search-input__clear:hover,
+  .csk-search-input__clear:active,
+  .csk-search-input__chip:active {
+    transform: none;
+  }
+
+  .csk-search-input__spinner {
+    animation: none;
+  }
+}
