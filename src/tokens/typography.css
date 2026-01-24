@@ -78,33 +78,38 @@
 
   /* Display - hero sections, athlete names */
   --text-display-size: var(--font-size-6xl);
-  --text-display-weight: var(--font-weight-bold);
-  --text-display-line-height: 1.1;
-  --text-display-tracking: var(--letter-spacing-tighter);
+  --text-display-weight: var(--font-weight-extrabold);
+  --text-display-line-height: 1.05;
+  --text-display-tracking: -0.025em;
+  --text-display-font: var(--font-family-display, var(--font-family-sans));
 
   /* Heading 1 - page titles */
   --text-h1-size: var(--font-size-5xl);
   --text-h1-weight: var(--font-weight-bold);
-  --text-h1-line-height: 1.2;
-  --text-h1-tracking: var(--letter-spacing-tight);
+  --text-h1-line-height: 1.1;
+  --text-h1-tracking: -0.02em;
+  --text-h1-font: var(--font-family-display, var(--font-family-sans));
 
   /* Heading 2 - section titles */
   --text-h2-size: var(--font-size-4xl);
-  --text-h2-weight: var(--font-weight-semibold);
-  --text-h2-line-height: 1.25;
-  --text-h2-tracking: var(--letter-spacing-normal);
+  --text-h2-weight: var(--font-weight-bold);
+  --text-h2-line-height: 1.15;
+  --text-h2-tracking: -0.015em;
+  --text-h2-font: var(--font-family-display, var(--font-family-sans));
 
   /* Heading 3 - subsection titles */
   --text-h3-size: var(--font-size-3xl);
   --text-h3-weight: var(--font-weight-semibold);
-  --text-h3-line-height: 1.3;
-  --text-h3-tracking: var(--letter-spacing-normal);
+  --text-h3-line-height: 1.2;
+  --text-h3-tracking: -0.01em;
+  --text-h3-font: var(--font-family-display, var(--font-family-sans));
 
   /* Heading 4 - card titles */
   --text-h4-size: var(--font-size-2xl);
   --text-h4-weight: var(--font-weight-semibold);
-  --text-h4-line-height: 1.35;
-  --text-h4-tracking: var(--letter-spacing-normal);
+  --text-h4-line-height: 1.25;
+  --text-h4-tracking: -0.01em;
+  --text-h4-font: var(--font-family-display, var(--font-family-sans));
 
   /* Heading 5 - small titles */
   --text-h5-size: var(--font-size-xl);

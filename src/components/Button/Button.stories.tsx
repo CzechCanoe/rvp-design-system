@@ -11,7 +11,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'ghost', 'danger', 'gradient', 'gradient-accent'],
+      options: ['primary', 'secondary', 'ghost', 'danger', 'gradient', 'gradient-accent', 'gradient-energy'],
       description: 'Visual variant of the button',
     },
     size: {
@@ -65,12 +65,13 @@ export const Variants: Story = {
       <Button variant="danger">Danger</Button>
       <Button variant="gradient">Gradient</Button>
       <Button variant="gradient-accent">Accent</Button>
+      <Button variant="gradient-energy">Energy</Button>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'All available button variants.',
+        story: 'All available button variants. Energy variant uses the new vibrant coral-orange accent.',
       },
     },
   },
@@ -104,29 +105,32 @@ export const Sizes: Story = {
 export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
         <span style={{ width: '80px', fontSize: '12px', color: '#666' }}>Default:</span>
         <Button variant="primary">Primary</Button>
         <Button variant="secondary">Secondary</Button>
         <Button variant="ghost">Ghost</Button>
         <Button variant="danger">Danger</Button>
         <Button variant="gradient">Gradient</Button>
+        <Button variant="gradient-energy">Energy</Button>
       </div>
-      <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
         <span style={{ width: '80px', fontSize: '12px', color: '#666' }}>Disabled:</span>
         <Button variant="primary" disabled>Primary</Button>
         <Button variant="secondary" disabled>Secondary</Button>
         <Button variant="ghost" disabled>Ghost</Button>
         <Button variant="danger" disabled>Danger</Button>
         <Button variant="gradient" disabled>Gradient</Button>
+        <Button variant="gradient-energy" disabled>Energy</Button>
       </div>
-      <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
         <span style={{ width: '80px', fontSize: '12px', color: '#666' }}>Loading:</span>
         <Button variant="primary" loading>Primary</Button>
         <Button variant="secondary" loading>Secondary</Button>
         <Button variant="ghost" loading>Ghost</Button>
         <Button variant="danger" loading>Danger</Button>
         <Button variant="gradient" loading>Gradient</Button>
+        <Button variant="gradient-energy" loading>Energy</Button>
       </div>
     </div>
   ),

@@ -1,0 +1,301 @@
+/**
+ * Aesthetic Enhancement Tokens - CSK RVP Design System
+ *
+ * Distinctive visual elements that elevate the design beyond generic.
+ * Includes: display typography, energy accent, textures, dynamic shapes.
+ *
+ * Philosophy: "Dynamic Sport" - energetic, bold, memorable
+ */
+
+:root {
+  /* ==========================================================================
+     DISPLAY TYPOGRAPHY
+     Plus Jakarta Sans - geometric, modern, sporty character
+     ========================================================================== */
+
+  --font-family-display: 'Plus Jakarta Sans', var(--font-family-sans);
+
+  /* Display presets - for headlines, hero text, athlete names */
+  --text-display-font: var(--font-family-display);
+  --text-display-weight: 800;
+  --text-display-tracking: -0.025em;
+
+  /* Hero mega text */
+  --text-hero-font: var(--font-family-display);
+  --text-hero-weight: 800;
+  --text-hero-tracking: -0.03em;
+  --text-hero-line-height: 0.95;
+
+  /* Section headlines */
+  --text-headline-font: var(--font-family-display);
+  --text-headline-weight: 700;
+  --text-headline-tracking: -0.02em;
+
+  /* ==========================================================================
+     ENERGY ACCENT COLOR
+     Vibrant coral-orange - high energy contrast to cool primary blue
+     ========================================================================== */
+
+  /* Energy accent scale */
+  --color-energy-50: #fff7ed;
+  --color-energy-100: #ffedd5;
+  --color-energy-200: #fed7aa;
+  --color-energy-300: #fdba74;
+  --color-energy-400: #fb923c;
+  --color-energy-500: #f97316;  /* Main energy accent */
+  --color-energy-600: #ea580c;
+  --color-energy-700: #c2410c;
+  --color-energy-800: #9a3412;
+  --color-energy-900: #7c2d12;
+
+  /* Energy gradients */
+  --gradient-energy: linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%);
+  --gradient-energy-vibrant: linear-gradient(135deg, #fbbf24 0%, #f97316 50%, #ef4444 100%);
+  --gradient-energy-subtle: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(249, 115, 22, 0.05) 100%);
+
+  /* Energy glow */
+  --glow-energy-sm: 0 0 8px rgba(249, 115, 22, 0.4);
+  --glow-energy-md: 0 0 16px rgba(249, 115, 22, 0.5);
+  --glow-energy-lg: 0 0 24px rgba(249, 115, 22, 0.6);
+
+  /* ==========================================================================
+     TEXTURES & ATMOSPHERE
+     Subtle visual interest without overwhelming content
+     ========================================================================== */
+
+  /* Grain overlay - use with ::after pseudo-element */
+  --texture-grain-opacity: 0.03;
+  --texture-grain-size: 100px;
+  --texture-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+
+  /* Gradient mesh backgrounds */
+  --bg-mesh-primary:
+    radial-gradient(ellipse at 20% 0%, rgba(17, 118, 166, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(249, 115, 22, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(17, 118, 166, 0.05) 0%, transparent 70%);
+
+  --bg-mesh-hero:
+    radial-gradient(ellipse at 0% 0%, rgba(17, 118, 166, 0.2) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 0%, rgba(249, 115, 22, 0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 100%, rgba(17, 118, 166, 0.1) 0%, transparent 50%);
+
+  --bg-mesh-card:
+    radial-gradient(ellipse at 0% 0%, rgba(17, 118, 166, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(249, 115, 22, 0.05) 0%, transparent 50%);
+
+  /* ==========================================================================
+     DYNAMIC SHAPES & ANGLES
+     Diagonal cuts, angular elements for sporty feel
+     ========================================================================== */
+
+  /* Clip paths for angular elements */
+  --clip-angle-sm: polygon(0 0, 100% 0, 100% calc(100% - 8px), 0 100%);
+  --clip-angle-md: polygon(0 0, 100% 0, 100% calc(100% - 16px), 0 100%);
+  --clip-angle-lg: polygon(0 0, 100% 0, 100% calc(100% - 32px), 0 100%);
+  --clip-angle-reverse: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 16px));
+
+  /* Diagonal stripe pattern */
+  --pattern-diagonal: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 4px,
+    rgba(17, 118, 166, 0.03) 4px,
+    rgba(17, 118, 166, 0.03) 8px
+  );
+
+  /* Border accent - left side highlight */
+  --border-accent-width: 4px;
+  --border-accent-gradient: linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-energy-500) 100%);
+
+  /* ==========================================================================
+     MOTION ENHANCEMENTS
+     Snappy, sporty animations
+     ========================================================================== */
+
+  /* Stagger delays for sequential reveals */
+  --stagger-1: 0ms;
+  --stagger-2: 50ms;
+  --stagger-3: 100ms;
+  --stagger-4: 150ms;
+  --stagger-5: 200ms;
+  --stagger-6: 250ms;
+
+  /* Spring-like easing for energetic feel */
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-sport: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Reveal animation duration */
+  --duration-reveal: 400ms;
+  --duration-reveal-slow: 600ms;
+
+  /* ==========================================================================
+     COMPONENT AESTHETIC OVERRIDES
+     ========================================================================== */
+
+  /* Featured/highlight states using energy color */
+  --color-highlight-bg: var(--color-energy-50);
+  --color-highlight-border: var(--color-energy-300);
+  --color-highlight-text: var(--color-energy-700);
+
+  /* CTA buttons can use energy gradient */
+  --gradient-cta: var(--gradient-energy);
+  --gradient-cta-hover: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #c2410c 100%);
+
+  /* Live indicator uses energy color for urgency */
+  --color-live: var(--color-energy-500);
+  --glow-live-energy: 0 0 12px rgba(249, 115, 22, 0.6);
+}
+
+/* =============================================================================
+   DARK MODE AESTHETIC
+   ============================================================================= */
+
+[data-theme="dark"] {
+  /* Energy colors - brighter for dark backgrounds */
+  --color-energy-500: #fb923c;
+  --color-energy-600: #f97316;
+
+  /* Gradient mesh - adjusted for dark */
+  --bg-mesh-primary:
+    radial-gradient(ellipse at 20% 0%, rgba(77, 163, 204, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(251, 146, 60, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(77, 163, 204, 0.04) 0%, transparent 70%);
+
+  --bg-mesh-hero:
+    radial-gradient(ellipse at 0% 0%, rgba(77, 163, 204, 0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 0%, rgba(251, 146, 60, 0.12) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 100%, rgba(77, 163, 204, 0.08) 0%, transparent 50%);
+
+  --bg-mesh-card:
+    radial-gradient(ellipse at 0% 0%, rgba(77, 163, 204, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(251, 146, 60, 0.04) 0%, transparent 50%);
+
+  /* Texture grain - subtle on dark */
+  --texture-grain-opacity: 0.02;
+
+  /* Glows - more vibrant */
+  --glow-energy-sm: 0 0 8px rgba(251, 146, 60, 0.5);
+  --glow-energy-md: 0 0 16px rgba(251, 146, 60, 0.6);
+  --glow-energy-lg: 0 0 24px rgba(251, 146, 60, 0.7);
+
+  /* Highlight */
+  --color-highlight-bg: rgba(251, 146, 60, 0.15);
+  --color-highlight-border: var(--color-energy-500);
+  --color-highlight-text: var(--color-energy-400);
+
+  /* Diagonal pattern - lighter for dark mode */
+  --pattern-diagonal: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 4px,
+    rgba(77, 163, 204, 0.05) 4px,
+    rgba(77, 163, 204, 0.05) 8px
+  );
+}
+
+/* =============================================================================
+   UTILITY CLASSES FOR AESTHETIC ELEMENTS
+   ============================================================================= */
+
+/* Grain overlay mixin - apply to container */
+.csk-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--texture-grain);
+  opacity: var(--texture-grain-opacity);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Mesh background */
+.csk-mesh-bg {
+  background: var(--bg-mesh-primary);
+}
+
+.csk-mesh-bg--hero {
+  background: var(--bg-mesh-hero);
+}
+
+/* Angular clip */
+.csk-angle {
+  clip-path: var(--clip-angle-md);
+}
+
+.csk-angle--sm {
+  clip-path: var(--clip-angle-sm);
+}
+
+.csk-angle--lg {
+  clip-path: var(--clip-angle-lg);
+}
+
+/* Diagonal pattern overlay */
+.csk-diagonal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--pattern-diagonal);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Display text class */
+.csk-display {
+  font-family: var(--text-display-font);
+  font-weight: var(--text-display-weight);
+  letter-spacing: var(--text-display-tracking);
+}
+
+.csk-headline {
+  font-family: var(--text-headline-font);
+  font-weight: var(--text-headline-weight);
+  letter-spacing: var(--text-headline-tracking);
+}
+
+/* Energy accent border */
+.csk-border-accent {
+  border-left: var(--border-accent-width) solid;
+  border-image: var(--border-accent-gradient) 1;
+}
+
+/* Staggered reveal animation */
+@keyframes csk-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.csk-reveal {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+}
+
+.csk-reveal-1 { animation-delay: var(--stagger-1); }
+.csk-reveal-2 { animation-delay: var(--stagger-2); }
+.csk-reveal-3 { animation-delay: var(--stagger-3); }
+.csk-reveal-4 { animation-delay: var(--stagger-4); }
+.csk-reveal-5 { animation-delay: var(--stagger-5); }
+.csk-reveal-6 { animation-delay: var(--stagger-6); }
+
+/* Hover energy glow */
+.csk-hover-glow:hover {
+  box-shadow: var(--glow-energy-sm);
+  transition: box-shadow 200ms var(--ease-sport);
+}
+
+/* =============================================================================
+   REDUCED MOTION
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

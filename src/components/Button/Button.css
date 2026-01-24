@@ -197,6 +197,36 @@
   outline-color: var(--color-accent-500);
 }
 
+/* Gradient Energy - high-energy CTA with vibrant coral-orange */
+.csk-button--gradient-energy {
+  background: var(--gradient-energy);
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-family-display, var(--font-family-sans));
+}
+
+.csk-button--gradient-energy:hover:not(:disabled):not([aria-disabled='true']) {
+  background: var(--gradient-cta-hover);
+  box-shadow: var(--glow-energy-md);
+  transform: translateY(-2px);
+}
+
+.csk-button--gradient-energy:active:not(:disabled):not([aria-disabled='true']) {
+  background: var(--gradient-energy);
+  box-shadow: var(--glow-energy-sm);
+  transform: translateY(0);
+}
+
+.csk-button--gradient-energy:focus-visible {
+  outline-color: var(--color-energy-500);
+}
+
+.csk-button--loading.csk-button--gradient-energy .csk-button__spinner {
+  color: white;
+}
+
 /* ==========================================================================
    SIZES
    ========================================================================== */
