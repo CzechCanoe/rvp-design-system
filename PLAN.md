@@ -162,8 +162,8 @@
 
 - [x] **Oncourse redesign** - více závodníků na trati současně
 - [x] **Detail jízdy** - rozklik s penalizacemi na branách, časy (RunDetailModal)
-- [ ] **Mobile fullscreen** - využít celou obrazovku, schovat menu
-- [ ] **Výběr "svých jezdců"** - sledování + notifikace kdy jedou
+- [x] **Mobile fullscreen** - využít celou obrazovku, schovat menu
+- [x] **Výběr "svých jezdců"** - sledování + notifikace kdy jedou
 - [ ] **Detailní schedule** - pouč se z Canoe123 XML
 - [ ] **Odstranit neužitečné** - "Další na startu", "Aktuální pořadí" → sekundárně
 
@@ -228,7 +228,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 ## Další krok
 
-**→ 15.1 LivePage improvements (mobile fullscreen, výběr sledovaných jezdců)**
+**→ 15.1 LivePage improvements (detailní schedule, odstranění neužitečných prvků)**
 
 ---
 

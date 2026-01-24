@@ -1833,3 +1833,299 @@
     animation: none;
   }
 }
+
+/* ============================================================================
+   Fullscreen Mode - Maximize screen real estate on mobile
+   ============================================================================ */
+
+.live-page-fullscreen-toggle {
+  position: fixed;
+  bottom: var(--spacing-4);
+  right: var(--spacing-4);
+  z-index: 100;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-fast);
+}
+
+.live-page-fullscreen-toggle:hover {
+  transform: scale(1.1);
+  background: var(--color-primary-600);
+}
+
+.live-page-fullscreen-toggle--active {
+  background: var(--color-energy-500, #f97316);
+}
+
+.live-page-fullscreen-toggle--active:hover {
+  background: var(--color-energy-600, #ea580c);
+}
+
+/* Fullscreen mode - page adjustments */
+.prototype-live-page--fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: auto;
+  background: var(--color-bg-primary);
+}
+
+.prototype-live-page--fullscreen .prototype-live-page__main {
+  padding: var(--spacing-3);
+}
+
+.prototype-live-page--fullscreen .prototype-live-page__container {
+  max-width: none;
+}
+
+/* Fullscreen: simplified layout - only results and oncourse */
+.prototype-live-page--fullscreen .prototype-live-page__content {
+  grid-template-columns: 1fr;
+  gap: var(--spacing-4);
+}
+
+/* Hide sidebar and extra elements in fullscreen */
+.prototype-live-page--fullscreen .prototype-live-page__sidebar {
+  display: none;
+}
+
+/* Fullscreen: oncourse panel as horizontal strip */
+.prototype-live-page--fullscreen .prototype-live-page__current-run {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-default);
+}
+
+.prototype-live-page--fullscreen .live-page-oncourse {
+  flex: 1;
+  min-width: 280px;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.prototype-live-page--fullscreen .live-page-current-card {
+  flex: 1;
+  min-width: 280px;
+  max-width: 400px;
+}
+
+.prototype-live-page--fullscreen .prototype-live-page__next-card {
+  display: none;
+}
+
+/* Fullscreen: compact page header */
+.prototype-live-page--fullscreen .live-page-header {
+  padding: var(--spacing-3);
+}
+
+.prototype-live-page--fullscreen .live-page-header--aesthetic {
+  padding: var(--spacing-4);
+}
+
+.prototype-live-page--fullscreen .live-page-header__title {
+  font-size: var(--font-size-lg);
+}
+
+.prototype-live-page--fullscreen .live-page-header--aesthetic .live-page-header__title {
+  font-size: var(--font-size-xl);
+}
+
+.prototype-live-page--fullscreen .live-page-header__breadcrumb {
+  display: none;
+}
+
+/* Fullscreen: footer hidden */
+.prototype-live-page--fullscreen .prototype-live-page__footer {
+  display: none;
+}
+
+/* Fullscreen: filters more compact */
+.prototype-live-page--fullscreen .prototype-live-page__filters {
+  padding-bottom: var(--spacing-3);
+  margin-bottom: var(--spacing-3);
+}
+
+/* Fullscreen: results header compact */
+.prototype-live-page--fullscreen .prototype-live-page__results-header {
+  margin-bottom: var(--spacing-3);
+}
+
+/* ============================================================================
+   Favorites Feature - Track your athletes
+   ============================================================================ */
+
+.live-page-favorites-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1-5);
+  padding: var(--spacing-2) var(--spacing-3);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-primary);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.live-page-favorites-toggle:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.live-page-favorites-toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.live-page-favorites-toggle--active {
+  background: var(--color-energy-500, #f97316);
+  border-color: var(--color-energy-500, #f97316);
+  color: white;
+}
+
+.live-page-favorites-toggle--active:hover:not(:disabled) {
+  background: var(--color-energy-600, #ea580c);
+  border-color: var(--color-energy-600, #ea580c);
+  color: white;
+}
+
+.live-page-favorites-toggle__count {
+  background: rgba(0, 0, 0, 0.15);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-semibold);
+  min-width: 20px;
+  text-align: center;
+}
+
+.live-page-favorites-toggle--active .live-page-favorites-toggle__count {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Favorite star button in results */
+.live-page-favorite-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.live-page-favorite-btn:hover {
+  background: var(--color-bg-tertiary);
+  color: var(--color-energy-500, #f97316);
+}
+
+.live-page-favorite-btn--active {
+  color: var(--color-energy-500, #f97316);
+}
+
+.live-page-favorite-btn--active:hover {
+  color: var(--color-energy-600, #ea580c);
+}
+
+/* Results row with favorite */
+.live-page-results-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.live-page-results-row__name {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Notification badge for favorite on course */
+.live-page-favorite-notification {
+  position: fixed;
+  top: var(--spacing-4);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--color-energy-500, #f97316);
+  color: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  font-weight: var(--font-weight-semibold);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  animation: notification-slide-in 0.3s ease-out;
+}
+
+@keyframes notification-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.live-page-favorite-notification__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  margin-left: var(--spacing-2);
+}
+
+.live-page-favorite-notification__close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile fullscreen adjustments */
+@media (max-width: 768px) {
+  .live-page-fullscreen-toggle {
+    bottom: var(--spacing-3);
+    right: var(--spacing-3);
+    width: 44px;
+    height: 44px;
+  }
+
+  .prototype-live-page--fullscreen .prototype-live-page__current-run {
+    flex-direction: column;
+  }
+
+  .prototype-live-page--fullscreen .live-page-current-card {
+    max-width: none;
+  }
+}
+
+/* Hide fullscreen toggle in embed mode - not needed */
+.prototype-live-page--embed .live-page-fullscreen-toggle {
+  display: none;
+}

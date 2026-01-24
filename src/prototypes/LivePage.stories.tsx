@@ -31,6 +31,8 @@ interface LivePageProps {
   section?: 'dv' | 'ry' | 'vt';
   /** Display variant - standalone (full), satellite (minimal header), embed (no chrome) */
   variant?: LivePageVariant;
+  /** Enable fullscreen mode toggle (primarily for mobile) */
+  enableFullscreen?: boolean;
 }
 
 interface FeedItem {
@@ -309,6 +311,26 @@ const RefreshIcon = () => (
   </svg>
 );
 
+// Fullscreen icons
+const FullscreenIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+  </svg>
+);
+
+const ExitFullscreenIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" />
+  </svg>
+);
+
+// Star icons for favorites
+const StarIcon = ({ filled = false }: { filled?: boolean }) => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+  </svg>
+);
+
 const ActivityIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
@@ -573,6 +595,7 @@ const LivePage = ({
   updateInterval = 3000,
   section = 'dv',
   variant = 'standalone',
+  enableFullscreen = true,
 }: LivePageProps) => {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [searchQuery, setSearchQuery] = useState('');
@@ -582,6 +605,9 @@ const LivePage = ({
   const [featuredBib, setFeaturedBib] = useState<number>(14);
   const [runDetailOpen, setRunDetailOpen] = useState(false);
   const [selectedAthlete, setSelectedAthlete] = useState<AthleteRunDetail | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [favoriteAthletes, setFavoriteAthletes] = useState<Set<number>>(new Set());
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
   // Handle row click to open run detail modal
   const handleRowClick = useCallback((entry: ResultEntry) => {
@@ -600,6 +626,27 @@ const LivePage = ({
     };
     setSelectedAthlete(athleteDetail);
     setRunDetailOpen(true);
+  }, []);
+
+  // Toggle favorite athlete
+  const toggleFavorite = useCallback((athleteId: number, event?: React.MouseEvent) => {
+    if (event) {
+      event.stopPropagation();
+    }
+    setFavoriteAthletes(prev => {
+      const next = new Set(prev);
+      if (next.has(athleteId)) {
+        next.delete(athleteId);
+      } else {
+        next.add(athleteId);
+      }
+      return next;
+    });
+  }, []);
+
+  // Toggle fullscreen mode
+  const toggleFullscreen = useCallback(() => {
+    setIsFullscreen(prev => !prev);
   }, []);
 
   // Section names for display
@@ -724,8 +771,13 @@ const LivePage = ({
       );
     }
 
+    // Filter by favorites if enabled
+    if (showFavoritesOnly && favoriteAthletes.size > 0) {
+      data = data.filter((r) => favoriteAthletes.has(r.id as number));
+    }
+
     return data;
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, showFavoritesOnly, favoriteAthletes]);
 
   // Category tabs
   const categoryTabs = categories.map((cat) => ({
@@ -822,10 +874,30 @@ const LivePage = ({
     );
   };
 
+  // Build class names
+  const pageClassNames = [
+    'prototype-live-page',
+    `prototype-live-page--${section}`,
+    variant === 'embed' ? 'prototype-live-page--embed' : '',
+    isFullscreen ? 'prototype-live-page--fullscreen' : '',
+  ].filter(Boolean).join(' ');
+
   return (
-    <div className={`prototype-live-page prototype-live-page--${section} ${variant === 'embed' ? 'prototype-live-page--embed' : ''}`}>
-      {/* Header */}
-      {renderHeader()}
+    <div className={pageClassNames}>
+      {/* Fullscreen toggle button - floating */}
+      {enableFullscreen && (
+        <button
+          className={`live-page-fullscreen-toggle ${isFullscreen ? 'live-page-fullscreen-toggle--active' : ''}`}
+          onClick={toggleFullscreen}
+          aria-label={isFullscreen ? 'Ukončit fullscreen' : 'Fullscreen režim'}
+          title={isFullscreen ? 'Ukončit fullscreen' : 'Fullscreen režim'}
+        >
+          {isFullscreen ? <ExitFullscreenIcon /> : <FullscreenIcon />}
+        </button>
+      )}
+
+      {/* Header - hidden in fullscreen */}
+      {!isFullscreen && renderHeader()}
 
       {/* Page Header - Aesthetic design with mesh background */}
       <section className={`live-page-header live-page-header--${section} live-page-header--aesthetic csk-grain`}>
@@ -1020,6 +1092,18 @@ const LivePage = ({
                   />
                 </div>
                 <div className="prototype-live-page__filters-right">
+                  {/* Favorites toggle */}
+                  <button
+                    className={`live-page-favorites-toggle ${showFavoritesOnly ? 'live-page-favorites-toggle--active' : ''}`}
+                    onClick={() => setShowFavoritesOnly(prev => !prev)}
+                    title={showFavoritesOnly ? 'Zobrazit všechny' : 'Zobrazit pouze sledované'}
+                    disabled={favoriteAthletes.size === 0}
+                  >
+                    <StarIcon filled={showFavoritesOnly} />
+                    <span className="live-page-favorites-toggle__count">
+                      {favoriteAthletes.size}
+                    </span>
+                  </button>
                   <Input
                     type="search"
                     placeholder="Hledat závodníka..."
@@ -1070,6 +1154,32 @@ const LivePage = ({
                   showLiveIndicator={true}
                   stickyHeader
                   onRowClick={handleRowClick}
+                  renderCell={(entry, columnKey) => {
+                    if (columnKey === 'name') {
+                      const isFavorite = favoriteAthletes.has(entry.id as number);
+                      return (
+                        <div className="live-page-results-row">
+                          <button
+                            className={`live-page-favorite-btn ${isFavorite ? 'live-page-favorite-btn--active' : ''}`}
+                            onClick={(e) => toggleFavorite(entry.id as number, e)}
+                            title={isFavorite ? 'Odebrat ze sledovaných' : 'Přidat ke sledovaným'}
+                            aria-label={isFavorite ? 'Odebrat ze sledovaných' : 'Přidat ke sledovaným'}
+                          >
+                            <StarIcon filled={isFavorite} />
+                          </button>
+                          <span className="live-page-results-row__name">
+                            {entry.name}
+                            {entry.section && (
+                              <span className={`csk-results-table__section csk-results-table__section--${entry.section}`}>
+                                {entry.section.toUpperCase()}
+                              </span>
+                            )}
+                          </span>
+                        </div>
+                      );
+                    }
+                    return undefined; // Use default rendering
+                  }}
                 />
               </div>
             </div>
@@ -1254,6 +1364,10 @@ const meta = {
       options: ['standalone', 'satellite', 'embed'],
       description: 'Display variant - standalone (full header), satellite (minimal), embed (no chrome)',
     },
+    enableFullscreen: {
+      control: 'boolean',
+      description: 'Enable fullscreen mode toggle button',
+    },
   },
 } satisfies Meta<typeof LivePage>;
 
@@ -1363,6 +1477,71 @@ export const EmbedWithSidebar: Story = {
     docs: {
       description: {
         story: 'Live výsledky v layoutu se sidebarem. Demonstrace container queries a responzivity v úzkém prostoru.',
+      },
+    },
+  },
+};
+
+// ============================================================================
+// Interactive Features - Fullscreen & Favorites (Phase 15.1)
+// ============================================================================
+
+/**
+ * **Mobile Fullscreen Mode** - Maximized view for mobile devices.
+ *
+ * Features:
+ * - Floating fullscreen toggle button (bottom-right)
+ * - In fullscreen: hides header, footer, sidebar
+ * - Oncourse panel becomes horizontal strip
+ * - Optimized for small screens
+ *
+ * Click the fullscreen button in bottom-right to toggle.
+ */
+export const MobileFullscreen: Story = {
+  args: {
+    initialCategory: 'K1M',
+    simulateLive: true,
+    updateInterval: 3000,
+    section: 'dv',
+    variant: 'standalone',
+    enableFullscreen: true,
+  },
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile2',
+    },
+    docs: {
+      description: {
+        story: 'Fullscreen režim optimalizovaný pro mobilní zařízení. Klikněte na tlačítko v pravém dolním rohu pro přepnutí do fullscreen režimu, který schová navigaci a sidebar pro maximální využití obrazovky.',
+      },
+    },
+  },
+};
+
+/**
+ * **Favorite Athletes** - Track your athletes during the race.
+ *
+ * Features:
+ * - Star icon next to each athlete name to add/remove favorites
+ * - Favorites toggle button in filter bar
+ * - Filter to show only favorite athletes
+ *
+ * Try clicking the star icon next to athlete names to favorite them,
+ * then use the star filter button to show only favorites.
+ */
+export const FavoriteAthletes: Story = {
+  args: {
+    initialCategory: 'K1M',
+    simulateLive: true,
+    updateInterval: 3000,
+    section: 'dv',
+    variant: 'standalone',
+    enableFullscreen: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Funkce sledování oblíbených závodníků. Klikněte na hvězdičku u jména závodníka pro přidání do sledovaných. Pomocí tlačítka s hvězdičkou ve filtru můžete zobrazit pouze sledované závodníky.',
       },
     },
   },

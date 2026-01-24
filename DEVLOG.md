@@ -4778,3 +4778,29 @@ Aesthetic refresh aplikován na LivePage jako první prototyp. Změny:
 - RunDetailModal je zatím součástí LivePage.stories.tsx (ne samostatná komponenta)
 - Generování demo dat pro brány pomocí generateGateData()
 - Animace: backdrop blur + slide-in modal
+
+---
+
+## 2026-01-25 - Fáze 15.1: LivePage Mobile & Favorites
+
+### Dokončeno
+- [x] Mobile fullscreen mode - floating toggle button (bottom-right)
+- [x] Fullscreen layout - hide header/footer/sidebar, horizontal oncourse strip
+- [x] Favorite athletes - star icons in results table
+- [x] Favorites filter - toggle to show only tracked athletes
+- [x] New Storybook stories: MobileFullscreen, FavoriteAthletes
+
+### Technické detaily
+1. **Fullscreen mode:**
+   - CSS class `.prototype-live-page--fullscreen` s fixed positioning
+   - Simplified 1-column layout, compact header
+   - Oncourse panel jako flex row wrap
+
+2. **Favorites feature:**
+   - State: `favoriteAthletes: Set<number>`, `showFavoritesOnly: boolean`
+   - Toggle pomocí `toggleFavorite()` callback
+   - Custom `renderCell` pro name column s star button
+   - Filter button s počtem sledovaných
+
+### Poznámky
+- Zbývající úkoly v 15.1: detailní schedule, odstranění neužitečných prvků
