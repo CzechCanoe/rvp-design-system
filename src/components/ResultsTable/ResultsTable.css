@@ -165,15 +165,33 @@
    Rank & Position Column
    ============================================================================= */
 
-.csk-results-table__rank {
+.csk-results-table__rank-cell {
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-1-5);
+}
+
+.csk-results-table__rank {
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-family-display, var(--font-family-sans));
   font-weight: var(--font-weight-bold);
   font-variant-numeric: tabular-nums;
   font-size: var(--font-size-base);
   letter-spacing: -0.02em;
+  min-width: 1.5em;
+}
+
+.csk-results-table__rank--podium {
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+}
+
+/* Medal icon */
+.csk-results-table__medal-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 /* Position change indicator */
@@ -248,6 +266,64 @@
   align-items: center;
   gap: var(--spacing-2);
   font-weight: var(--font-weight-medium);
+}
+
+.csk-results-table__name-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* Inline avatar for results table */
+.csk-results-table__avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--color-bg-tertiary);
+  border: 2px solid var(--color-border);
+}
+
+.csk-results-table__avatar--xs {
+  width: 20px;
+  height: 20px;
+}
+
+.csk-results-table__avatar--sm {
+  width: 28px;
+  height: 28px;
+}
+
+.csk-results-table__avatar--md {
+  width: 36px;
+  height: 36px;
+}
+
+.csk-results-table__avatar--initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}
+
+/* Podium avatars with medal-colored borders */
+.csk-results-table__tr--gold .csk-results-table__avatar {
+  border-color: #FFD700;
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3);
+}
+
+.csk-results-table__tr--silver .csk-results-table__avatar {
+  border-color: #C0C0C0;
+  box-shadow: 0 0 0 2px rgba(192, 192, 192, 0.3);
+}
+
+.csk-results-table__tr--bronze .csk-results-table__avatar {
+  border-color: #CD7F32;
+  box-shadow: 0 0 0 2px rgba(205, 127, 50, 0.3);
 }
 
 .csk-results-table__section {
@@ -330,56 +406,67 @@
 }
 
 /* =============================================================================
-   Podium Highlights - Enhanced with Gradients
+   Podium Highlights - Clean, Modern Design
    ============================================================================= */
 
 /* Gold - 1st place */
 .csk-results-table__tr--gold {
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%);
-  border-left-color: #ffd700;
+  background: transparent;
+  border-left: 4px solid #FFD700;
 }
 
 .csk-results-table__tr--gold:hover {
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.22) 0%, rgba(255, 215, 0, 0.08) 100%);
+  background: rgba(255, 215, 0, 0.06);
 }
 
 .csk-results-table__tr--gold .csk-results-table__rank {
-  color: #b8860b;
+  color: #B8860B;
+}
+
+.csk-results-table__tr--gold .csk-results-table__name {
+  font-weight: var(--font-weight-semibold);
 }
 
 /* Silver - 2nd place */
 .csk-results-table__tr--silver {
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.15) 0%, rgba(192, 192, 192, 0.05) 100%);
-  border-left-color: #c0c0c0;
+  background: transparent;
+  border-left: 4px solid #C0C0C0;
 }
 
 .csk-results-table__tr--silver:hover {
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.22) 0%, rgba(192, 192, 192, 0.08) 100%);
+  background: rgba(192, 192, 192, 0.08);
 }
 
 .csk-results-table__tr--silver .csk-results-table__rank {
-  color: #6b7280;
+  color: #6B7280;
+}
+
+.csk-results-table__tr--silver .csk-results-table__name {
+  font-weight: var(--font-weight-semibold);
 }
 
 /* Bronze - 3rd place */
 .csk-results-table__tr--bronze {
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.15) 0%, rgba(205, 127, 50, 0.05) 100%);
-  border-left-color: #cd7f32;
+  background: transparent;
+  border-left: 4px solid #CD7F32;
 }
 
 .csk-results-table__tr--bronze:hover {
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.22) 0%, rgba(205, 127, 50, 0.08) 100%);
+  background: rgba(205, 127, 50, 0.08);
 }
 
 .csk-results-table__tr--bronze .csk-results-table__rank {
-  color: #8b4513;
+  color: #8B4513;
 }
 
-/* Generic highlight positions 4-5 */
+.csk-results-table__tr--bronze .csk-results-table__name {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Generic highlight positions 4-5 (subtle) */
 .csk-results-table__tr--rank-4,
 .csk-results-table__tr--rank-5 {
-  border-left: 4px solid var(--color-primary-200);
-  background: linear-gradient(90deg, rgba(var(--color-primary-rgb, 59, 130, 246), 0.05) 0%, transparent 100%);
+  border-left: 4px solid var(--color-border-secondary);
 }
 
 /* =============================================================================
@@ -621,39 +708,49 @@
 }
 
 [data-theme='dark'] .csk-results-table__tr--gold {
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.12) 0%, rgba(255, 215, 0, 0.04) 100%);
+  background: transparent;
 }
 
 [data-theme='dark'] .csk-results-table__tr--gold:hover {
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.18) 0%, rgba(255, 215, 0, 0.06) 100%);
+  background: rgba(255, 215, 0, 0.08);
 }
 
 [data-theme='dark'] .csk-results-table__tr--gold .csk-results-table__rank {
-  color: #ffd700;
+  color: #FFD700;
 }
 
 [data-theme='dark'] .csk-results-table__tr--silver {
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.12) 0%, rgba(192, 192, 192, 0.04) 100%);
+  background: transparent;
 }
 
 [data-theme='dark'] .csk-results-table__tr--silver:hover {
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.18) 0%, rgba(192, 192, 192, 0.06) 100%);
+  background: rgba(192, 192, 192, 0.1);
 }
 
 [data-theme='dark'] .csk-results-table__tr--silver .csk-results-table__rank {
-  color: #c0c0c0;
+  color: #D4D4D4;
 }
 
 [data-theme='dark'] .csk-results-table__tr--bronze {
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.12) 0%, rgba(205, 127, 50, 0.04) 100%);
+  background: transparent;
 }
 
 [data-theme='dark'] .csk-results-table__tr--bronze:hover {
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.18) 0%, rgba(205, 127, 50, 0.06) 100%);
+  background: rgba(205, 127, 50, 0.1);
 }
 
 [data-theme='dark'] .csk-results-table__tr--bronze .csk-results-table__rank {
-  color: #cd7f32;
+  color: #E8A860;
+}
+
+/* Dark mode avatar borders */
+[data-theme='dark'] .csk-results-table__avatar {
+  border-color: var(--color-border-secondary);
+  background: var(--color-bg-tertiary);
+}
+
+[data-theme='dark'] .csk-results-table__avatar--initials {
+  color: var(--color-text-tertiary);
 }
 
 [data-theme='dark'] .csk-results-table__tr--live {
@@ -950,6 +1047,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: var(--spacing-1);
   min-width: 36px;
   padding: var(--spacing-0-5) var(--spacing-1-5);
   font-size: var(--font-size-xs);
@@ -959,9 +1057,18 @@
   color: var(--color-text-secondary);
 }
 
+.csk-results-table__age-category-rank {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
 [data-theme='dark'] .csk-results-table__age-category {
   background: var(--color-gray-800);
   color: var(--color-text-secondary);
+}
+
+[data-theme='dark'] .csk-results-table__age-category-rank {
+  color: var(--color-text-primary);
 }
 
 /* Points display */
@@ -980,13 +1087,7 @@
    AESTHETIC ENHANCEMENTS - Dynamic Sport
    ============================================================================= */
 
-/* Podium rank numbers - larger display font */
-.csk-results-table__tr--gold .csk-results-table__rank,
-.csk-results-table__tr--silver .csk-results-table__rank,
-.csk-results-table__tr--bronze .csk-results-table__rank {
-  font-size: var(--font-size-xl);
-  font-weight: 800;
-}
+/* Podium rank numbers - enhanced styling handled via --podium class */
 
 /* Featured/highlighted row with border-accent */
 .csk-results-table__tr--featured {

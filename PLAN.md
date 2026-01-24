@@ -173,9 +173,9 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 **Cíl:** Results je klíčová komponenta, musí být super vymazlená.
 
-- [ ] **Top 3 styling** - přehodnotit barevné pozadí (vypadá jako Excel fail)
-- [ ] **Avatary závodníků** - alespoň pro top pozice
-- [ ] **Kompletní data** - věkové kategorie, pořadí ve věk. kat., 2 jízdy, penalizace, body
+- [x] **Top 3 styling** - clean design s medal ikonami místo barevných pozadí
+- [x] **Avatary závodníků** - `showAvatars` prop (true | 'podium' | false)
+- [x] **Kompletní data** - věkové kategorie + `ageCategoryRank`, `showAgeCategoryRank` prop
 - [ ] **Detail jízdy** - rozklik na penalizace bran, časy startu/cíle
 - [ ] **Modrá čára vpravo** - vysvětlit účel nebo změnit
 - [ ] **Zredukovat varianty** - příliš mnoho headerů/tabulek
@@ -228,7 +228,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 ## Další krok
 
-**→ 15.2 Results komponenta (P1) - Top 3 styling, avatary, kompletní data**
+**→ 15.2 Results komponenta (P1) - Detail jízdy modal, cleanup variant**
 
 ---
 

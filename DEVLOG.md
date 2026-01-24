@@ -4804,3 +4804,51 @@ Aesthetic refresh aplikován na LivePage jako první prototyp. Změny:
 
 ### Poznámky
 - Zbývající úkoly v 15.1: detailní schedule, odstranění neužitečných prvků
+
+---
+
+## 2026-01-25 - Fáze 15.1: LivePage Schedule & Layout Reorganization
+
+### Dokončeno
+- [x] SchedulePanel komponenta založená na C123 XML formátu
+  - Zobrazuje závody s fázemi BR1, BR2, TSR, QUA, SEM, FIN
+  - Aktuální závod, nadcházející a dokončené závody
+  - Collapsible panel s section-specific themingem
+  - Vizuální indikátory stavu závodu (live, completed, scheduled)
+- [x] Reorganizace sidebar layoutu pro lepší UX:
+  - Schedule panel je nyní primární prvek v sidebaru
+  - "Další na startu" a "Aktuální pořadí" jsou collapsible
+- [x] Přidány ikony (Clock, ChevronDown/Up, CheckCircle, PlayCircle)
+- [x] CSS styly pro SchedulePanel a collapsible elementy
+
+### Poznámky
+- C123 XML format dokumentován v `/workspace/timing/c123-protocol-docs/c123-xml-format.md`
+- Schedule využívá RaceStatus enum (1-12) pro stavy závodů
+- Fáze 15.1 LivePage kompletně dokončena
+
+---
+
+## 2026-01-25 - Fáze 15.2: Results Component Redesign (Part 1)
+
+### Dokončeno
+- [x] Top 3 podium styling - clean design s medal SVG ikonami místo Excel-like barevných pozadí
+- [x] Inline avatary - `showAvatars` prop (true | 'podium' | false) s fallback na iniciály
+- [x] Age category rank - `ageCategoryRank` field + `showAgeCategoryRank` prop
+- [x] Nové stories: PodiumWithMedals, PodiumWithAvatars, AllAvatars, CompleteDataView, CompactWithAvatars
+
+### Změny v komponentách
+1. **ResultsTable.tsx:**
+   - Přidány fieldy `ageCategoryRank`, `avatarUrl` do `ResultEntry`
+   - Nové props: `showAgeCategoryRank`, `showAvatars`
+   - `MedalIcon` komponenta pro gold/silver/bronze
+   - `InlineAvatar` komponenta s initials fallback
+
+2. **ResultsTable.css:**
+   - Čistý podium design (transparent background, colored border-left)
+   - Avatar styly včetně podium-colored borders
+   - Age category rank styling
+
+### Poznámky
+- Medal ikony jsou SVG s číslem pozice uvnitř
+- Avatary mají fallback na iniciály při chybě načtení obrázku
+- Odstraněno `glass` z styleVariant options (již neexistuje)

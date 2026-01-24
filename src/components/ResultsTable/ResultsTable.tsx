@@ -28,6 +28,8 @@ export interface ResultEntry {
   category?: string;
   /** Age category (e.g., U23, Junior, Senior, Master) */
   ageCategory?: string;
+  /** Rank within age category */
+  ageCategoryRank?: number;
   /** Points scored in this race */
   points?: number;
   /** Run 1 time in seconds */
@@ -56,6 +58,8 @@ export interface ResultEntry {
   progressed?: boolean;
   /** Starting position in current round */
   startNumber?: number;
+  /** Avatar image URL */
+  avatarUrl?: string;
 }
 
 export interface ResultsTableColumn {
@@ -98,6 +102,8 @@ export interface ResultsTableProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   showCategory?: boolean;
   /** Show age category column (U23, Junior, Senior, etc.) */
   showAgeCategory?: boolean;
+  /** Show rank within age category */
+  showAgeCategoryRank?: boolean;
   /** Show points column */
   showPoints?: boolean;
   /** Enable podium highlights (gold, silver, bronze) */
@@ -112,6 +118,8 @@ export interface ResultsTableProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   showProgression?: boolean;
   /** Show start number column */
   showStartNumber?: boolean;
+  /** Show athlete avatars (for top positions or all) */
+  showAvatars?: boolean | 'podium';
   /** Custom columns override */
   columns?: ResultsTableColumn[];
   /** Custom cell renderer */
@@ -199,6 +207,90 @@ function getRankDisplay(rank: number | undefined, status: ResultStatus | undefin
   return rank.toString();
 }
 
+/**
+ * Medal icon SVG for podium positions
+ */
+function MedalIcon({ position }: { position: 1 | 2 | 3 }) {
+  const colors = {
+    1: { primary: '#FFD700', secondary: '#FFA500', accent: '#B8860B' },
+    2: { primary: '#C0C0C0', secondary: '#A8A8A8', accent: '#6B7280' },
+    3: { primary: '#CD7F32', secondary: '#B8733D', accent: '#8B4513' },
+  };
+  const { primary, secondary, accent } = colors[position];
+
+  return (
+    <svg
+      className="csk-results-table__medal-icon"
+      viewBox="0 0 20 20"
+      fill="none"
+      aria-hidden="true"
+    >
+      {/* Ribbon */}
+      <path d="M7 0L10 6L13 0" stroke={accent} strokeWidth="2" fill="none" />
+      {/* Medal circle */}
+      <circle cx="10" cy="12" r="6" fill={primary} stroke={secondary} strokeWidth="1.5" />
+      {/* Inner circle */}
+      <circle cx="10" cy="12" r="3.5" fill={secondary} />
+      {/* Number */}
+      <text
+        x="10"
+        y="13.5"
+        textAnchor="middle"
+        fontSize="5"
+        fontWeight="bold"
+        fill={accent}
+      >
+        {position}
+      </text>
+    </svg>
+  );
+}
+
+/**
+ * Simple avatar component for inline use in table
+ */
+function InlineAvatar({
+  src,
+  name,
+  size = 'sm'
+}: {
+  src?: string;
+  name: string;
+  size?: 'xs' | 'sm' | 'md';
+}) {
+  const initials = name
+    .split(/\s+/)
+    .map(w => w[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase();
+
+  const sizeClass = `csk-results-table__avatar--${size}`;
+
+  if (src) {
+    return (
+      <img
+        src={src}
+        alt=""
+        className={`csk-results-table__avatar ${sizeClass}`}
+        onError={(e) => {
+          // Replace with initials on error
+          const target = e.currentTarget;
+          target.style.display = 'none';
+          const fallback = target.nextElementSibling as HTMLElement;
+          if (fallback) fallback.style.display = 'flex';
+        }}
+      />
+    );
+  }
+
+  return (
+    <span className={`csk-results-table__avatar csk-results-table__avatar--initials ${sizeClass}`}>
+      {initials}
+    </span>
+  );
+}
+
 // ============================================================================
 // ResultsTable Component
 // ============================================================================
@@ -217,6 +309,7 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
       showClub = true,
       showCategory = false,
       showAgeCategory = false,
+      showAgeCategoryRank = false,
       showPoints = false,
       showPodiumHighlights = true,
       highlightPositions = 3,
@@ -224,6 +317,7 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
       showRound = false,
       showProgression = false,
       showStartNumber = false,
+      showAvatars = false,
       columns: customColumns,
       renderCell,
       onRowClick,
@@ -278,9 +372,15 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
             entry.previousRank !== undefined && entry.rank !== undefined
               ? entry.previousRank - entry.rank
               : 0;
+          const isPodium = entry.rank && entry.rank >= 1 && entry.rank <= 3 && showPodiumHighlights;
           return (
-            <span className="csk-results-table__rank">
-              {getRankDisplay(entry.rank, entry.status)}
+            <span className="csk-results-table__rank-cell">
+              {isPodium && (
+                <MedalIcon position={entry.rank as 1 | 2 | 3} />
+              )}
+              <span className={`csk-results-table__rank ${isPodium ? 'csk-results-table__rank--podium' : ''}`}>
+                {getRankDisplay(entry.rank, entry.status)}
+              </span>
               {positionChange !== 0 && (
                 <span
                   className={`csk-results-table__position-change csk-results-table__position-change--${positionChange > 0 ? 'up' : 'down'}`}
@@ -304,17 +404,25 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
             </span>
           );
         }
-        case 'name':
+        case 'name': {
+          const shouldShowAvatar = showAvatars === true ||
+            (showAvatars === 'podium' && entry.rank && entry.rank <= 3);
           return (
             <span className="csk-results-table__name">
-              {entry.name}
-              {entry.section && (
-                <span className={`csk-results-table__section csk-results-table__section--${entry.section}`}>
-                  {entry.section.toUpperCase()}
-                </span>
+              {shouldShowAvatar && (
+                <InlineAvatar src={entry.avatarUrl} name={entry.name} size="sm" />
               )}
+              <span className="csk-results-table__name-text">
+                {entry.name}
+                {entry.section && (
+                  <span className={`csk-results-table__section csk-results-table__section--${entry.section}`}>
+                    {entry.section.toUpperCase()}
+                  </span>
+                )}
+              </span>
             </span>
           );
+        }
         case 'club':
           return entry.club || '-';
         case 'country':
@@ -323,7 +431,14 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
           return entry.category || '-';
         case 'ageCategory':
           return entry.ageCategory ? (
-            <span className="csk-results-table__age-category">{entry.ageCategory}</span>
+            <span className="csk-results-table__age-category">
+              {entry.ageCategory}
+              {showAgeCategoryRank && entry.ageCategoryRank && (
+                <span className="csk-results-table__age-category-rank">
+                  ({entry.ageCategoryRank}.)
+                </span>
+              )}
+            </span>
           ) : '-';
         case 'points':
           return entry.points !== undefined ? (
