@@ -156,7 +156,7 @@
 
 ---
 
-### 15.1 Kritické - LivePage (P0) *(3 iterace)*
+### 15.1 Kritické - LivePage (P0) *(3 iterace)* ✅ HOTOVO
 
 **Cíl:** LivePage musí být vymazlená namax - první nasazení.
 
@@ -164,8 +164,8 @@
 - [x] **Detail jízdy** - rozklik s penalizacemi na branách, časy (RunDetailModal)
 - [x] **Mobile fullscreen** - využít celou obrazovku, schovat menu
 - [x] **Výběr "svých jezdců"** - sledování + notifikace kdy jedou
-- [ ] **Detailní schedule** - pouč se z Canoe123 XML
-- [ ] **Odstranit neužitečné** - "Další na startu", "Aktuální pořadí" → sekundárně
+- [x] **Detailní schedule** - SchedulePanel s daty z C123 XML formátu (BR1, BR2, TSR, atd.)
+- [x] **Reorganizace layoutu** - "Další na startu" a "Aktuální pořadí" collapsible, sekundární
 
 Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
@@ -217,7 +217,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 | ~~15.0 Prototypy (AthletePublicPage, ClubPublicProfile)~~ | ~~2~~ ✅ |
 | ~~15.0 Prototypy (EventDetailPage, CalendarPage, RegistrationPage)~~ | ~~1~~ ✅ |
 | ~~15.0 Cleanup + Dokumentace~~ | ~~2~~ ✅ |
-| 15.1 LivePage (P0) | 3 |
+| ~~15.1 LivePage (P0)~~ | ~~3~~ ✅ |
 | 15.2 Results (P1) | 2 |
 | 15.3 Rozbité věci (P2) | 2 |
 | 15.4 Design vylepšení (P3) | 2 |
@@ -228,7 +228,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 ## Další krok
 
-**→ 15.1 LivePage improvements (detailní schedule, odstranění neužitečných prvků)**
+**→ 15.2 Results komponenta (P1) - Top 3 styling, avatary, kompletní data**
 
 ---
 

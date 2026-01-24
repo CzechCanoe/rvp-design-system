@@ -45,6 +45,31 @@ interface FeedItem {
   isNew?: boolean;
 }
 
+/** Race status from C123 XML */
+type RaceStatus = 'scheduled' | 'entered' | 'startListOK' | 'comingUp' | 'delayed' | 'canceled' | 'postponed' | 'inProgress' | 'completed' | 'final';
+
+/** Schedule entry from C123 XML format */
+interface ScheduleEntry {
+  /** Race ID e.g. "K1M-ZS_BR1_25" */
+  raceId: string;
+  /** Class/Category ID */
+  classId: string;
+  /** Discipline ID: BR1, BR2, TSR, QUA, SEM, FIN */
+  disId: 'BR1' | 'BR2' | 'TSR' | 'QUA' | 'SEM' | 'FIN';
+  /** Display name */
+  displayName: string;
+  /** Start time */
+  startTime: Date;
+  /** Status */
+  status: RaceStatus;
+  /** Number of athletes */
+  athleteCount: number;
+  /** Number finished */
+  finishedCount: number;
+  /** Start interval in seconds */
+  startInterval: number;
+}
+
 /** Gate penalty detail for run detail modal */
 interface GatePenalty {
   gateNumber: number;
@@ -203,6 +228,105 @@ const initialFeedItems: FeedItem[] = [
   { id: 7, type: 'dsq', timestamp: new Date(Date.now() - 300000), athleteName: 'Štěpán Král', content: 'diskvalifikován - vynechaná branka 12', result: undefined },
 ];
 
+/** Sample schedule data - based on C123 XML format */
+const generateScheduleData = (): ScheduleEntry[] => {
+  const now = new Date();
+  const baseTime = new Date(now);
+  baseTime.setHours(9, 0, 0, 0);
+
+  return [
+    {
+      raceId: 'K1M-ZS_BR1_03',
+      classId: 'K1M',
+      disId: 'BR1',
+      displayName: 'K1 Muži - 1. jízda',
+      startTime: new Date(baseTime.getTime()),
+      status: 'completed',
+      athleteCount: 24,
+      finishedCount: 24,
+      startInterval: 60,
+    },
+    {
+      raceId: 'K1W-ZS_BR1_03',
+      classId: 'K1W',
+      disId: 'BR1',
+      displayName: 'K1 Ženy - 1. jízda',
+      startTime: new Date(baseTime.getTime() + 30 * 60000),
+      status: 'completed',
+      athleteCount: 16,
+      finishedCount: 16,
+      startInterval: 60,
+    },
+    {
+      raceId: 'C1M-ZS_BR1_03',
+      classId: 'C1M',
+      disId: 'BR1',
+      displayName: 'C1 Muži - 1. jízda',
+      startTime: new Date(baseTime.getTime() + 50 * 60000),
+      status: 'completed',
+      athleteCount: 18,
+      finishedCount: 18,
+      startInterval: 60,
+    },
+    {
+      raceId: 'C1W-ZS_BR1_03',
+      classId: 'C1W',
+      disId: 'BR1',
+      displayName: 'C1 Ženy - 1. jízda',
+      startTime: new Date(baseTime.getTime() + 70 * 60000),
+      status: 'completed',
+      athleteCount: 12,
+      finishedCount: 12,
+      startInterval: 60,
+    },
+    // Lunch break
+    {
+      raceId: 'K1M-ZS_BR2_03',
+      classId: 'K1M',
+      disId: 'BR2',
+      displayName: 'K1 Muži - 2. jízda',
+      startTime: new Date(baseTime.getTime() + 180 * 60000),
+      status: 'inProgress',
+      athleteCount: 24,
+      finishedCount: 8,
+      startInterval: 60,
+    },
+    {
+      raceId: 'K1W-ZS_BR2_03',
+      classId: 'K1W',
+      disId: 'BR2',
+      displayName: 'K1 Ženy - 2. jízda',
+      startTime: new Date(baseTime.getTime() + 210 * 60000),
+      status: 'scheduled',
+      athleteCount: 16,
+      finishedCount: 0,
+      startInterval: 60,
+    },
+    {
+      raceId: 'C1M-ZS_BR2_03',
+      classId: 'C1M',
+      disId: 'BR2',
+      displayName: 'C1 Muži - 2. jízda',
+      startTime: new Date(baseTime.getTime() + 230 * 60000),
+      status: 'scheduled',
+      athleteCount: 18,
+      finishedCount: 0,
+      startInterval: 60,
+    },
+    {
+      raceId: 'C1W-ZS_BR2_03',
+      classId: 'C1W',
+      disId: 'BR2',
+      displayName: 'C1 Ženy - 2. jízda',
+      startTime: new Date(baseTime.getTime() + 250 * 60000),
+      status: 'scheduled',
+      athleteCount: 12,
+      finishedCount: 0,
+      startInterval: 60,
+    },
+  ];
+};
+
 /** Generate sample gate data for a run */
 const generateGateData = (numGates: number, hasPenalties: boolean): GatePenalty[] => {
   const gates: GatePenalty[] = [];
@@ -337,6 +461,39 @@ const ActivityIcon = () => (
   </svg>
 );
 
+const ClockIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+
+const ChevronDownIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="6 9 12 15 18 9" />
+  </svg>
+);
+
+const ChevronUpIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="18 15 12 9 6 15" />
+  </svg>
+);
+
+const CheckCircleIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+    <polyline points="22 4 12 14.01 9 11.01" />
+  </svg>
+);
+
+const PlayCircleIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polygon points="10 8 16 12 10 16 10 8" />
+  </svg>
+);
+
 // Trophy icon for podium
 const TrophyIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -358,6 +515,182 @@ const CloseIcon = () => (
     <line x1="6" y1="6" x2="18" y2="18" />
   </svg>
 );
+
+// ============================================================================
+// SchedulePanel Component - Detailed race schedule based on C123 XML
+// ============================================================================
+
+interface SchedulePanelProps {
+  schedule: ScheduleEntry[];
+  currentRaceId?: string;
+  onRaceSelect?: (entry: ScheduleEntry) => void;
+  section?: 'dv' | 'ry' | 'vt';
+  collapsed?: boolean;
+  onToggleCollapse?: () => void;
+}
+
+const SchedulePanel = ({
+  schedule,
+  currentRaceId,
+  onRaceSelect,
+  section = 'dv',
+  collapsed = false,
+  onToggleCollapse,
+}: SchedulePanelProps) => {
+  // Format time for display
+  const formatScheduleTime = (date: Date): string => {
+    return date.toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' });
+  };
+
+  // Get status badge variant and text
+  const getStatusInfo = (status: RaceStatus): { variant: 'default' | 'success' | 'warning' | 'energy' | 'info'; text: string } => {
+    switch (status) {
+      case 'completed':
+      case 'final':
+        return { variant: 'success', text: 'Dokončeno' };
+      case 'inProgress':
+        return { variant: 'energy', text: 'Probíhá' };
+      case 'comingUp':
+        return { variant: 'warning', text: 'Brzy' };
+      case 'delayed':
+        return { variant: 'warning', text: 'Zpožděno' };
+      case 'canceled':
+        return { variant: 'default', text: 'Zrušeno' };
+      case 'postponed':
+        return { variant: 'info', text: 'Odloženo' };
+      default:
+        return { variant: 'default', text: 'Naplánováno' };
+    }
+  };
+
+  // Find current race (inProgress)
+  const currentRace = schedule.find(s => s.status === 'inProgress');
+
+  // Split into completed and upcoming
+  const completedRaces = schedule.filter(s => s.status === 'completed' || s.status === 'final');
+  const upcomingRaces = schedule.filter(s => s.status !== 'completed' && s.status !== 'final' && s.status !== 'inProgress');
+
+  return (
+    <div className={`live-page-schedule live-page-schedule--${section}`}>
+      <div className="live-page-schedule__header">
+        <div className="live-page-schedule__header-left">
+          <ClockIcon />
+          <h3 className="live-page-schedule__title">Časový program</h3>
+        </div>
+        {onToggleCollapse && (
+          <button
+            className="live-page-schedule__toggle"
+            onClick={onToggleCollapse}
+            aria-expanded={!collapsed}
+            aria-label={collapsed ? 'Rozbalit program' : 'Sbalit program'}
+          >
+            {collapsed ? <ChevronDownIcon /> : <ChevronUpIcon />}
+          </button>
+        )}
+      </div>
+
+      {!collapsed && (
+        <div className="live-page-schedule__content">
+          {/* Current Race - Highlighted */}
+          {currentRace && (
+            <div className="live-page-schedule__current">
+              <div className="live-page-schedule__current-label">
+                <PlayCircleIcon />
+                <span>Právě probíhá</span>
+              </div>
+              <button
+                className={`live-page-schedule__item live-page-schedule__item--current ${currentRace.raceId === currentRaceId ? 'live-page-schedule__item--selected' : ''}`}
+                onClick={() => onRaceSelect?.(currentRace)}
+                type="button"
+              >
+                <div className="live-page-schedule__item-time">
+                  {formatScheduleTime(currentRace.startTime)}
+                </div>
+                <div className="live-page-schedule__item-info">
+                  <span className="live-page-schedule__item-name">{currentRace.displayName}</span>
+                  <span className="live-page-schedule__item-progress">
+                    {currentRace.finishedCount}/{currentRace.athleteCount} závodníků
+                  </span>
+                </div>
+                <div className="live-page-schedule__item-status">
+                  <Badge variant="energy" size="sm" glow>
+                    <span className="live-page-schedule__live-dot" />
+                    LIVE
+                  </Badge>
+                </div>
+              </button>
+            </div>
+          )}
+
+          {/* Upcoming Races */}
+          {upcomingRaces.length > 0 && (
+            <div className="live-page-schedule__section">
+              <div className="live-page-schedule__section-label">Nadcházející</div>
+              <div className="live-page-schedule__list">
+                {upcomingRaces.map((entry) => {
+                  const statusInfo = getStatusInfo(entry.status);
+                  return (
+                    <button
+                      key={entry.raceId}
+                      className={`live-page-schedule__item ${entry.raceId === currentRaceId ? 'live-page-schedule__item--selected' : ''}`}
+                      onClick={() => onRaceSelect?.(entry)}
+                      type="button"
+                    >
+                      <div className="live-page-schedule__item-time">
+                        {formatScheduleTime(entry.startTime)}
+                      </div>
+                      <div className="live-page-schedule__item-info">
+                        <span className="live-page-schedule__item-name">{entry.displayName}</span>
+                        <span className="live-page-schedule__item-meta">
+                          {entry.athleteCount} závodníků • interval {entry.startInterval}s
+                        </span>
+                      </div>
+                      {entry.status !== 'scheduled' && (
+                        <Badge variant={statusInfo.variant} size="sm">
+                          {statusInfo.text}
+                        </Badge>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Completed Races - Collapsible */}
+          {completedRaces.length > 0 && (
+            <div className="live-page-schedule__section live-page-schedule__section--completed">
+              <div className="live-page-schedule__section-label">
+                <CheckCircleIcon />
+                Dokončené ({completedRaces.length})
+              </div>
+              <div className="live-page-schedule__list live-page-schedule__list--completed">
+                {completedRaces.map((entry) => (
+                  <button
+                    key={entry.raceId}
+                    className={`live-page-schedule__item live-page-schedule__item--completed ${entry.raceId === currentRaceId ? 'live-page-schedule__item--selected' : ''}`}
+                    onClick={() => onRaceSelect?.(entry)}
+                    type="button"
+                  >
+                    <div className="live-page-schedule__item-time">
+                      {formatScheduleTime(entry.startTime)}
+                    </div>
+                    <div className="live-page-schedule__item-info">
+                      <span className="live-page-schedule__item-name">{entry.displayName}</span>
+                    </div>
+                    <Badge variant="success" size="sm">
+                      <CheckCircleIcon />
+                    </Badge>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
 
 // ============================================================================
 // RunDetailModal Component
@@ -608,6 +941,11 @@ const LivePage = ({
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [favoriteAthletes, setFavoriteAthletes] = useState<Set<number>>(new Set());
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const [scheduleData] = useState<ScheduleEntry[]>(() => generateScheduleData());
+  const [selectedRaceId, setSelectedRaceId] = useState<string>('K1M-ZS_BR2_03');
+  const [scheduleCollapsed, setScheduleCollapsed] = useState(false);
+  const [nextUpCollapsed, setNextUpCollapsed] = useState(false);
+  const [podiumCollapsed, setPodiumCollapsed] = useState(false);
 
   // Handle row click to open run detail modal
   const handleRowClick = useCallback((entry: ResultEntry) => {
@@ -647,6 +985,15 @@ const LivePage = ({
   // Toggle fullscreen mode
   const toggleFullscreen = useCallback(() => {
     setIsFullscreen(prev => !prev);
+  }, []);
+
+  // Handle schedule race selection
+  const handleRaceSelect = useCallback((entry: ScheduleEntry) => {
+    setSelectedRaceId(entry.raceId);
+    // Could also update selectedCategory based on classId
+    if (['K1M', 'K1W', 'C1M', 'C1W'].includes(entry.classId)) {
+      setSelectedCategory(entry.classId);
+    }
   }, []);
 
   // Section names for display
@@ -1061,21 +1408,33 @@ const LivePage = ({
                 </div>
               )}
 
-              {/* Next Up Card */}
-              <Card variant="surface" className="prototype-live-page__next-card">
-                <h3 className="prototype-live-page__next-title">Další na startu</h3>
-                <div className="prototype-live-page__next-list">
-                  {nextAthletes.map((athlete, index) => (
-                    <div key={athlete.bib} className="prototype-live-page__next-item">
-                      <div className="prototype-live-page__next-number">{index + 1}</div>
-                      <div className="prototype-live-page__next-info">
-                        <p className="prototype-live-page__next-name">#{athlete.bib} {athlete.name}</p>
-                        <p className="prototype-live-page__next-club">{athlete.club}</p>
-                      </div>
-                    </div>
-                  ))}
+              {/* Next Up Card - Collapsible (secondary importance) */}
+              <div className={`prototype-live-page__next-card ${nextUpCollapsed ? 'prototype-live-page__next-card--collapsed' : ''}`}>
+                <div className="prototype-live-page__next-header">
+                  <h3 className="prototype-live-page__next-title">Další na startu</h3>
+                  <button
+                    className="prototype-live-page__next-toggle"
+                    onClick={() => setNextUpCollapsed(prev => !prev)}
+                    aria-expanded={!nextUpCollapsed}
+                    aria-label={nextUpCollapsed ? 'Rozbalit' : 'Sbalit'}
+                  >
+                    {nextUpCollapsed ? <ChevronDownIcon /> : <ChevronUpIcon />}
+                  </button>
                 </div>
-              </Card>
+                {!nextUpCollapsed && (
+                  <div className="prototype-live-page__next-list">
+                    {nextAthletes.map((athlete, index) => (
+                      <div key={athlete.bib} className="prototype-live-page__next-item">
+                        <div className="prototype-live-page__next-number">{index + 1}</div>
+                        <div className="prototype-live-page__next-info">
+                          <p className="prototype-live-page__next-name">#{athlete.bib} {athlete.name}</p>
+                          <p className="prototype-live-page__next-club">{athlete.club}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Center - Results */}
@@ -1184,28 +1543,48 @@ const LivePage = ({
               </div>
             </div>
 
-            {/* Right Sidebar - Activity Feed */}
+            {/* Right Sidebar - Schedule + Activity Feed */}
             <aside className="prototype-live-page__sidebar">
-              {/* Mini Podium - Top 3 */}
-              <div className={`live-page-podium live-page-podium--${section}`}>
+              {/* Schedule Panel - Primary element */}
+              <SchedulePanel
+                schedule={scheduleData}
+                currentRaceId={selectedRaceId}
+                onRaceSelect={handleRaceSelect}
+                section={section}
+                collapsed={scheduleCollapsed}
+                onToggleCollapse={() => setScheduleCollapsed(prev => !prev)}
+              />
+
+              {/* Mini Podium - Top 3 (Collapsible, secondary) */}
+              <div className={`live-page-podium live-page-podium--${section} ${podiumCollapsed ? 'live-page-podium--collapsed' : ''}`}>
                 <div className="live-page-podium__header">
                   <TrophyIcon />
                   <h3 className="live-page-podium__title">Aktuální pořadí</h3>
+                  <button
+                    className="live-page-podium__toggle"
+                    onClick={() => setPodiumCollapsed(prev => !prev)}
+                    aria-expanded={!podiumCollapsed}
+                    aria-label={podiumCollapsed ? 'Rozbalit pořadí' : 'Sbalit pořadí'}
+                  >
+                    {podiumCollapsed ? <ChevronDownIcon /> : <ChevronUpIcon />}
+                  </button>
                 </div>
-                <div className="live-page-podium__list">
-                  {results.slice(0, 3).map((athlete, index) => (
-                    <div key={athlete.id} className={`live-page-podium__item live-page-podium__item--${index + 1}`}>
-                      <div className="live-page-podium__rank">{index + 1}</div>
-                      <div className="live-page-podium__info">
-                        <span className="live-page-podium__name">{athlete.name}</span>
-                        <span className="live-page-podium__time">{formatTime(athlete.totalTime)}</span>
+                {!podiumCollapsed && (
+                  <div className="live-page-podium__list">
+                    {results.slice(0, 3).map((athlete, index) => (
+                      <div key={athlete.id} className={`live-page-podium__item live-page-podium__item--${index + 1}`}>
+                        <div className="live-page-podium__rank">{index + 1}</div>
+                        <div className="live-page-podium__info">
+                          <span className="live-page-podium__name">{athlete.name}</span>
+                          <span className="live-page-podium__time">{formatTime(athlete.totalTime)}</span>
+                        </div>
+                        {index === 0 && <span className="live-page-podium__medal">🥇</span>}
+                        {index === 1 && <span className="live-page-podium__medal">🥈</span>}
+                        {index === 2 && <span className="live-page-podium__medal">🥉</span>}
                       </div>
-                      {index === 0 && <span className="live-page-podium__medal">🥇</span>}
-                      {index === 1 && <span className="live-page-podium__medal">🥈</span>}
-                      {index === 2 && <span className="live-page-podium__medal">🥉</span>}
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Activity Feed */}
