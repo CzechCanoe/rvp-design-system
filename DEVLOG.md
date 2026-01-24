@@ -4543,3 +4543,35 @@ Audit 9.1.4 dokončen. Další krok: 9.1.5 Audit kompatibility s kanoe.cz (embed
 - frontend-design skill od Anthropic použit pro návrh estetického směru
 - Uživatel preferuje "Dynamic Sport" estetiku nad dřívějším "canoe/water" pokusem
 - Card cleanup odložen - glass varianta zatím ponechána k dalšímu zhodnocení
+
+---
+
+## 2026-01-24 - Fáze 15.0: Aesthetic aplikace na komponenty (pokračování)
+
+### Dokončeno
+- [x] Button: display font pro large size, `glow` prop pro energy glow on hover
+- [x] Badge: display font pro size="lg"
+- [x] Header: `csk-header__brand-title`, `csk-header__app-title` s display fontem
+- [x] ResultsTable: display font pro rank, energy live indicator, featured rows, live badge
+- [x] Card: `aesthetic` varianta, `meshBg` a `borderAccent` props
+- [x] DESIGN_PRINCIPLES.md vytvořen s Dynamic Sport Aesthetic guidelines
+
+### Nové CSS třídy
+- `.csk-card__title` - display font pro card titulky
+- `.csk-header__brand-title` - display font pro brand text
+- `.csk-results-table__tr--featured` - border-accent pro featured řádky
+- `.csk-results-table__live-badge` - energy gradient live badge
+- `.csk-results-table-wrapper--aesthetic` - mesh background wrapper
+
+### Nové props
+| Komponenta | Prop | Popis |
+|------------|------|-------|
+| Button | `glow` | Energy glow efekt on hover |
+| Card | `meshBg` | Mesh background modifier |
+| Card | `borderAccent` | Border-accent gradient left |
+
+### Zbývá (odhad ~20 iterací)
+- Komponenty: Avatar, Forms, Tabs, Alert
+- Prototypy: LivePage, AthletePublicPage, EventDetailPage, CalendarPage
+- Cleanup: Card glass/featured sloučení
+- P0-P3: LivePage, Results, rozbité věci, design vylepšení, nové koncepty
