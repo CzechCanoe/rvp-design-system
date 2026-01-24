@@ -43,6 +43,58 @@ interface FeedItem {
   isNew?: boolean;
 }
 
+/** Gate penalty detail for run detail modal */
+interface GatePenalty {
+  gateNumber: number;
+  /** Penalty type: 2s touch, 50s miss, etc. */
+  penalty: 0 | 2 | 50;
+  /** Gate direction: up or down */
+  direction: 'up' | 'down';
+  /** Gate color */
+  color: 'green' | 'red';
+  /** Split time at this gate (cumulative) */
+  splitTime?: number;
+  /** Diff to leader at this gate */
+  diff?: number;
+}
+
+/** Run detail for the modal */
+interface RunDetail {
+  runNumber: 1 | 2;
+  /** Raw time without penalties */
+  rawTime: number;
+  /** Total penalty seconds */
+  totalPenalty: number;
+  /** Final time (raw + penalty) */
+  finalTime: number;
+  /** Status */
+  status: 'finished' | 'live' | 'dns' | 'dnf' | 'dsq';
+  /** Gate penalties */
+  gates: GatePenalty[];
+  /** Rank in this run */
+  runRank?: number;
+  /** Diff to leader in this run */
+  runDiff?: number;
+}
+
+/** Athlete detail for the modal */
+interface AthleteRunDetail {
+  id: number;
+  name: string;
+  club: string;
+  category: string;
+  bib: number;
+  country?: string;
+  /** Run 1 detail */
+  run1?: RunDetail;
+  /** Run 2 detail */
+  run2?: RunDetail;
+  /** Overall rank */
+  overallRank?: number;
+  /** Overall time diff */
+  overallDiff?: number;
+}
+
 /** Athlete currently on course */
 interface OncourseAthlete {
   bib: number;
@@ -149,6 +201,61 @@ const initialFeedItems: FeedItem[] = [
   { id: 7, type: 'dsq', timestamp: new Date(Date.now() - 300000), athleteName: 'Štěpán Král', content: 'diskvalifikován - vynechaná branka 12', result: undefined },
 ];
 
+/** Generate sample gate data for a run */
+const generateGateData = (numGates: number, hasPenalties: boolean): GatePenalty[] => {
+  const gates: GatePenalty[] = [];
+  let cumulativeTime = 0;
+
+  for (let i = 1; i <= numGates; i++) {
+    // Approx 3-5 seconds per gate
+    cumulativeTime += 3 + Math.random() * 2;
+
+    // Random penalties if hasPenalties
+    let penalty: 0 | 2 | 50 = 0;
+    if (hasPenalties) {
+      const rnd = Math.random();
+      if (rnd < 0.08) penalty = 2; // 8% chance of 2s touch
+      if (rnd < 0.02) penalty = 50; // 2% chance of miss
+    }
+
+    gates.push({
+      gateNumber: i,
+      penalty,
+      direction: i % 4 === 0 ? 'up' : 'down',
+      color: i % 3 === 0 ? 'red' : 'green',
+      splitTime: cumulativeTime,
+      diff: (Math.random() - 0.5) * 2, // -1 to +1 second diff
+    });
+  }
+
+  return gates;
+};
+
+/** Generate sample run detail data */
+const generateRunDetail = (runNumber: 1 | 2, hasPenalties: boolean = true): RunDetail => {
+  const gates = generateGateData(24, hasPenalties);
+  const totalPenalty = gates.reduce((sum, g) => sum + g.penalty, 0);
+  const rawTime = 88 + Math.random() * 10; // 88-98 seconds
+
+  return {
+    runNumber,
+    rawTime,
+    totalPenalty,
+    finalTime: rawTime + totalPenalty,
+    status: 'finished',
+    gates,
+    runRank: Math.floor(Math.random() * 10) + 1,
+    runDiff: Math.random() * 5,
+  };
+};
+
+// Note: sampleAthleteDetail available for stories if needed
+// const sampleAthleteDetail: AthleteRunDetail = {
+//   id: 1, name: 'Jiří Prskavec', club: 'USK Praha', category: 'K1M',
+//   bib: 7, country: 'CZE', run1: generateRunDetail(1, true),
+//   run2: generateRunDetail(2, false), overallRank: 1, overallDiff: 0,
+// };
+
 // Navigation items
 const navItems = [
   { id: 'home', label: 'Domů', href: '#' },
@@ -222,6 +329,196 @@ const TrophyIcon = () => (
 
 // Note: Wave decoration and pulse rings removed for cleaner design (Phase 8.6.3)
 
+// Close icon
+const CloseIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+);
+
+// ============================================================================
+// RunDetailModal Component
+// ============================================================================
+
+interface RunDetailModalProps {
+  athlete: AthleteRunDetail | null;
+  open: boolean;
+  onClose: () => void;
+  section?: 'dv' | 'ry' | 'vt';
+}
+
+const RunDetailModal = ({ athlete, open, onClose, section = 'dv' }: RunDetailModalProps) => {
+  const [activeRun, setActiveRun] = useState<1 | 2>(1);
+
+  if (!open || !athlete) return null;
+
+  const currentRun = activeRun === 1 ? athlete.run1 : athlete.run2;
+
+  // Format time helper
+  const fmtTime = (seconds: number | undefined): string => {
+    if (seconds === undefined) return '-';
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toFixed(2).padStart(5, '0')}`;
+  };
+
+  // Format diff helper
+  const fmtDiff = (diff: number | undefined): string => {
+    if (diff === undefined || diff === 0) return '-';
+    const sign = diff > 0 ? '+' : '';
+    return `${sign}${diff.toFixed(2)}`;
+  };
+
+  // Get penalty badge color
+  const getPenaltyClass = (penalty: number): string => {
+    if (penalty === 0) return 'run-detail__gate--clean';
+    if (penalty === 2) return 'run-detail__gate--touch';
+    return 'run-detail__gate--miss';
+  };
+
+  return (
+    <div className="run-detail__backdrop" onClick={onClose}>
+      <div
+        className={`run-detail__modal run-detail__modal--${section}`}
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="run-detail-title"
+      >
+        {/* Header */}
+        <div className="run-detail__header">
+          <div className="run-detail__header-left">
+            <div className="run-detail__athlete-info">
+              <div className="run-detail__avatar">
+                {getInitials(athlete.name)}
+              </div>
+              <div>
+                <h2 id="run-detail-title" className="run-detail__name csk-display">
+                  #{athlete.bib} {athlete.name}
+                </h2>
+                <p className="run-detail__club">{athlete.club} • {athlete.category}</p>
+              </div>
+            </div>
+            {athlete.overallRank && (
+              <div className="run-detail__overall">
+                <span className="run-detail__overall-rank csk-display">
+                  {athlete.overallRank}.
+                </span>
+                <span className="run-detail__overall-label">celkově</span>
+              </div>
+            )}
+          </div>
+          <button className="run-detail__close" onClick={onClose} aria-label="Zavřít">
+            <CloseIcon />
+          </button>
+        </div>
+
+        {/* Run Tabs */}
+        <div className="run-detail__tabs">
+          <button
+            className={`run-detail__tab ${activeRun === 1 ? 'run-detail__tab--active' : ''}`}
+            onClick={() => setActiveRun(1)}
+          >
+            <span>1. jízda</span>
+            {athlete.run1 && (
+              <span className="run-detail__tab-time">{fmtTime(athlete.run1.finalTime)}</span>
+            )}
+          </button>
+          <button
+            className={`run-detail__tab ${activeRun === 2 ? 'run-detail__tab--active' : ''}`}
+            onClick={() => setActiveRun(2)}
+          >
+            <span>2. jízda</span>
+            {athlete.run2 && (
+              <span className="run-detail__tab-time">{fmtTime(athlete.run2.finalTime)}</span>
+            )}
+          </button>
+        </div>
+
+        {/* Run Summary */}
+        {currentRun && (
+          <div className="run-detail__summary">
+            <div className="run-detail__summary-item">
+              <span className="run-detail__summary-label">Čistý čas</span>
+              <span className="run-detail__summary-value">{fmtTime(currentRun.rawTime)}</span>
+            </div>
+            <div className="run-detail__summary-item">
+              <span className="run-detail__summary-label">Penalizace</span>
+              <span className={`run-detail__summary-value ${currentRun.totalPenalty > 0 ? 'run-detail__summary-value--penalty' : ''}`}>
+                {currentRun.totalPenalty > 0 ? `+${currentRun.totalPenalty}s` : '0s'}
+              </span>
+            </div>
+            <div className="run-detail__summary-item run-detail__summary-item--total">
+              <span className="run-detail__summary-label">Celkem</span>
+              <span className="run-detail__summary-value csk-display">{fmtTime(currentRun.finalTime)}</span>
+            </div>
+            {currentRun.runRank && (
+              <div className="run-detail__summary-item">
+                <span className="run-detail__summary-label">Pořadí v jízdě</span>
+                <span className="run-detail__summary-value">{currentRun.runRank}.</span>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Gate Grid */}
+        {currentRun && (
+          <div className="run-detail__gates">
+            <h3 className="run-detail__gates-title">Brány ({currentRun.gates.length})</h3>
+            <div className="run-detail__gates-legend">
+              <span className="run-detail__legend-item run-detail__legend-item--clean">
+                <span className="run-detail__legend-dot" />
+                Čistá
+              </span>
+              <span className="run-detail__legend-item run-detail__legend-item--touch">
+                <span className="run-detail__legend-dot" />
+                Dotyk (+2s)
+              </span>
+              <span className="run-detail__legend-item run-detail__legend-item--miss">
+                <span className="run-detail__legend-dot" />
+                Vynechání (+50s)
+              </span>
+            </div>
+            <div className="run-detail__gates-grid">
+              {currentRun.gates.map((gate) => (
+                <div
+                  key={gate.gateNumber}
+                  className={`run-detail__gate ${getPenaltyClass(gate.penalty)}`}
+                  title={`Brána ${gate.gateNumber}: ${gate.penalty === 0 ? 'čistá' : gate.penalty === 2 ? 'dotyk 2s' : 'vynechání 50s'}`}
+                >
+                  <span className={`run-detail__gate-number ${gate.color === 'red' ? 'run-detail__gate-number--red' : ''}`}>
+                    {gate.gateNumber}
+                    {gate.direction === 'up' && <span className="run-detail__gate-arrow">↑</span>}
+                  </span>
+                  {gate.penalty > 0 && (
+                    <span className="run-detail__gate-penalty">+{gate.penalty}</span>
+                  )}
+                  {gate.splitTime && (
+                    <span className="run-detail__gate-split">{fmtTime(gate.splitTime)}</span>
+                  )}
+                  {gate.diff !== undefined && (
+                    <span className={`run-detail__gate-diff ${gate.diff < 0 ? 'run-detail__gate-diff--faster' : 'run-detail__gate-diff--slower'}`}>
+                      {fmtDiff(gate.diff)}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* No run data fallback */}
+        {!currentRun && (
+          <div className="run-detail__empty">
+            <p>Data pro tuto jízdu nejsou k dispozici.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 // ============================================================================
 // Helper Functions
 // ============================================================================
@@ -283,6 +580,27 @@ const LivePage = ({
   const [feedItems, setFeedItems] = useState<FeedItem[]>(initialFeedItems);
   const [oncourseAthletes, setOncourseAthletes] = useState<OncourseAthlete[]>(initialOncourseAthletes);
   const [featuredBib, setFeaturedBib] = useState<number>(14);
+  const [runDetailOpen, setRunDetailOpen] = useState(false);
+  const [selectedAthlete, setSelectedAthlete] = useState<AthleteRunDetail | null>(null);
+
+  // Handle row click to open run detail modal
+  const handleRowClick = useCallback((entry: ResultEntry) => {
+    // Generate athlete detail from result entry
+    const athleteDetail: AthleteRunDetail = {
+      id: entry.id as number,
+      name: entry.name,
+      club: entry.club || '',
+      category: entry.category || '',
+      bib: Math.floor(Math.random() * 50) + 1,
+      country: 'CZE',
+      run1: generateRunDetail(1, true),
+      run2: entry.status === 'final' ? generateRunDetail(2, false) : undefined,
+      overallRank: entry.rank,
+      overallDiff: entry.timeDiff,
+    };
+    setSelectedAthlete(athleteDetail);
+    setRunDetailOpen(true);
+  }, []);
 
   // Section names for display
   const sectionNames: Record<string, string> = {
@@ -293,6 +611,24 @@ const LivePage = ({
 
   // Get featured athlete for detailed view
   const featuredAthlete = oncourseAthletes.find(a => a.bib === featuredBib) || oncourseAthletes[0];
+
+  // Handle featured athlete card click - must be after featuredAthlete definition
+  const handleFeaturedClick = useCallback(() => {
+    if (!featuredAthlete) return;
+    const athleteDetail: AthleteRunDetail = {
+      id: featuredAthlete.bib,
+      name: featuredAthlete.name,
+      club: featuredAthlete.club,
+      category: featuredAthlete.category,
+      bib: featuredAthlete.bib,
+      country: 'CZE',
+      run1: generateRunDetail(1, true),
+      overallRank: undefined,
+      overallDiff: undefined,
+    };
+    setSelectedAthlete(athleteDetail);
+    setRunDetailOpen(true);
+  }, [featuredAthlete]);
 
   // Current run splits for featured athlete (detailed view)
   const currentRunSplits = useMemo(() => {
@@ -585,9 +921,16 @@ const LivePage = ({
                 </div>
               </div>
 
-              {/* Featured Athlete Card - Detailed view */}
+              {/* Featured Athlete Card - Detailed view (click for full detail) */}
               {featuredAthlete && (
-                <div className={`live-page-current-card live-page-current-card--${section} live-page-current-card--aesthetic csk-border-accent`}>
+                <div
+                  className={`live-page-current-card live-page-current-card--${section} live-page-current-card--aesthetic csk-border-accent`}
+                  onClick={handleFeaturedClick}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleFeaturedClick(); }}
+                  style={{ cursor: 'pointer' }}
+                >
                   <div className="live-page-current-card__glow" />
                   <div className="live-page-current-card__content">
                     <div className="live-page-current-card__header">
@@ -726,7 +1069,7 @@ const LivePage = ({
                   showPodiumHighlights={true}
                   showLiveIndicator={true}
                   stickyHeader
-                  onRowClick={(entry) => console.log('Row clicked:', entry)}
+                  onRowClick={handleRowClick}
                 />
               </div>
             </div>
@@ -858,6 +1201,14 @@ const LivePage = ({
 
       {/* Footer */}
       {renderFooter()}
+
+      {/* Run Detail Modal */}
+      <RunDetailModal
+        athlete={selectedAthlete}
+        open={runDetailOpen}
+        onClose={() => setRunDetailOpen(false)}
+        section={section}
+      />
     </div>
   );
 };

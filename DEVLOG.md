@@ -4732,3 +4732,49 @@ Aesthetic refresh aplikován na LivePage jako první prototyp. Změny:
 - Fáze 15.0 (Aesthetic Refresh) kompletně dokončena
 - Všechny prototypy mají konzistentní aesthetic variantu s Dynamic Sport designem
 - Další: Fáze 15.1 LivePage improvements
+
+---
+
+## 2026-01-24 - Fáze 15.1: Oncourse redesign
+
+### Dokončeno
+- [x] Multi-athlete oncourse panel - zobrazení více závodníků na trati současně
+- [x] OncourseAthlete interface s pozicí, časem a diff
+- [x] Klikatelné athlete lanes pro výběr featured závodníka
+- [x] Detail card pro vybraného závodníka s live splits
+- [x] CSS pro oncourse lanes s section-specific themingem
+
+### Technické poznámky
+1. **Data model:** Nahrazeno `CurrentRun` novým `OncourseAthlete[]` stavem
+2. **Real-time update:** Všechny oncourse časy se aktualizují každých 10ms
+3. **Featured selection:** Klik na lane vybere závodníka pro detail view
+
+### Další kroky
+- Detail jízdy s penalizacemi na branách
+- Mobile fullscreen optimalizace
+
+---
+
+## 2026-01-24 - Fáze 15.1: LivePage - Run Detail Modal
+
+### Dokončeno
+- [x] RunDetailModal - detail jízdy s penalizacemi na branách
+  - Modal s header (avatar, jméno, klub, celkové pořadí)
+  - Tab přepínání mezi 1. a 2. jízdou
+  - Summary sekce (čistý čas, penalizace, celkem, pořadí v jízdě)
+  - Gate grid - vizuální mřížka všech branek s barevným označením:
+    - Zelená = čistá brána
+    - Žlutá = dotyk (+2s)
+    - Červená = vynechání (+50s)
+  - Split časy a diff na každé bráně
+  - Responzivní design (bottom sheet na mobile)
+  - Section theming (dv/ry/vt barvy)
+- [x] Integrace do LivePage:
+  - Klik na řádek v ResultsTable otevře detail
+  - Klik na featured athlete card otevře detail
+  - Keyboard navigace (Enter/Space)
+
+### Technické poznámky
+- RunDetailModal je zatím součástí LivePage.stories.tsx (ne samostatná komponenta)
+- Generování demo dat pro brány pomocí generateGateData()
+- Animace: backdrop blur + slide-in modal
