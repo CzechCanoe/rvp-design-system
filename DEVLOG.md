@@ -4927,3 +4927,28 @@ Aesthetic refresh aplikován na LivePage jako první prototyp. Změny:
 
 ### Poznámky
 Zbývá v 15.4: Calendar víkendová prezentace, Results Top 3 karty přehodnocení
+
+---
+
+## 2026-01-25 - Fáze 15.4: Design vylepšení (P3)
+
+### Dokončeno
+- [x] Calendar: vizuální zvýraznění víkendů (`.csk-calendar__day--weekend`)
+  - Jemné pozadí pro So-Ne dny
+  - Dark mode podpora
+- [x] Results Page: redesign Top 3 podium karet
+  - Horizontální layout místo vertikálního
+  - Kompaktnější design s důrazem na čas a jméno
+  - Staggered animace zleva
+  - Hover efekt s arrow indikátorem
+  - Dark mode a embed mode podpora
+
+### Technické změny
+1. `Calendar.tsx`: přidána `isWeekend()` funkce a weekend flag do DayCell
+2. `Calendar.css`: nové styly pro `.csk-calendar__day--weekend`
+3. `ResultsPage.css`: kompletní redesign `.results-page-podium__*` stylů
+4. `ResultsPage.stories.tsx`: nová HTML struktura podium s `.results-page-podium__info` a `.results-page-podium__result`
+
+### Poznámky
+- Podium design je nyní konzistentnější s ostatními list-view komponentami
+- Víkendové zvýraznění pomáhá rychle identifikovat dny kdy probíhají závody

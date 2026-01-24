@@ -187,7 +187,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 - [x] **AthletePublicPage small mobile** - opraveny responsive styly pro 480px
 - [x] **AthletePublicPage header cards** - zmenšen negativní margin, opraveno překrývání
 
-### 15.4 Design vylepšení (P3) *(2 iterace)*
+### 15.4 Design vylepšení (P3) *(2 iterace)* ✅ HOTOVO
 
 **AthletePublicPage / ClubPublicProfile:**
 - [x] Pozadí headeru - akční fotka místo tváře (actionImageUrl oddělené od avataru)
@@ -196,10 +196,10 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 - [x] Export button - odstraněn (pouze Sdílet zůstává)
 
 **Calendar:**
-- [ ] Většina závodů o víkendu - přizpůsobit prezentaci
+- [x] Víkendové dny - vizuální zvýraznění (`.csk-calendar__day--weekend`)
 
 **Results Page:**
-- [ ] Top 3 karty nejsou zajímavé - přehodnotit
+- [x] Top 3 karty redesign - horizontální layout, kompaktnější, dynamic sport aesthetic
 
 ### 15.5 Nové koncepty *(2 iterace)*
 
@@ -220,7 +220,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 | ~~15.1 LivePage (P0)~~ | ~~3~~ ✅ |
 | ~~15.2 Results (P1)~~ | ~~2~~ ✅ |
 | ~~15.3 Rozbité věci (P2)~~ | ~~1~~ ✅ |
-| 15.4 Design vylepšení (P3) | 2 |
+| ~~15.4 Design vylepšení (P3)~~ | ~~2~~ ✅ |
 | 15.5 Nové koncepty | 2 |
 | **Celkem** | **~17** |
 
@@ -228,7 +228,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 ## Další krok
 
-**→ 15.4 Design vylepšení (P3) - Calendar víkendová prezentace, Results Top 3 karty**
+**→ 15.5 Nové koncepty - Sdílená hledací komponenta, Registration UX, Event indikace live**
 
 ---
 

@@ -119,6 +119,11 @@ function isToday(date: Date): boolean {
   return isSameDay(date, new Date());
 }
 
+function isWeekend(date: Date): boolean {
+  const day = date.getDay();
+  return day === 0 || day === 6; // Sunday = 0, Saturday = 6
+}
+
 function isEventOnDay(event: CalendarEvent, day: Date): boolean {
   const eventStart = new Date(event.start);
   eventStart.setHours(0, 0, 0, 0);
@@ -139,6 +144,7 @@ interface DayCell {
   date: Date;
   isCurrentMonth: boolean;
   isToday: boolean;
+  isWeekend: boolean;
   events: CalendarEvent[];
 }
 
@@ -250,6 +256,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
           date: new Date(day),
           isCurrentMonth: isSameMonth(day, currentDate),
           isToday: isToday(day),
+          isWeekend: isWeekend(day),
           events: dayEvents,
         });
 
@@ -422,6 +429,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
                     'csk-calendar__day',
                     !day.isCurrentMonth && 'csk-calendar__day--outside',
                     highlightToday && day.isToday && 'csk-calendar__day--today',
+                    day.isWeekend && 'csk-calendar__day--weekend',
                     onDayClick && 'csk-calendar__day--clickable',
                   ]
                     .filter(Boolean)

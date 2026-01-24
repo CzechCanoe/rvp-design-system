@@ -184,15 +184,7 @@ const TrophyIcon = () => (
   </svg>
 );
 
-const MedalIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="15" r="6" />
-    <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" />
-    <path d="M15.29 8.71A6 6 0 1 0 8.71 8.71" />
-  </svg>
-);
-
-// Note: Wave decoration removed for cleaner design (Phase 8.6.3)
+// Note: Wave decoration and MedalIcon removed for cleaner design (Phase 8.6.3, 15.4)
 
 // ============================================================================
 // Helper Functions
@@ -422,7 +414,7 @@ const ResultsPage = ({
         </section>
       )}
 
-      {/* Podium Section */}
+      {/* Podium Section - Redesigned horizontal layout */}
       {showHero && showPodium && podium.length >= 3 && !searchQuery && (
         <section className="results-page-podium">
           <div className="results-page-podium__container">
@@ -431,47 +423,55 @@ const ResultsPage = ({
               <h2 className="results-page-podium__title">Stupně vítězů – {categories.find(c => c.id === selectedCategory)?.name}</h2>
             </div>
             <div className="results-page-podium__grid">
-              {/* Silver - 2nd place */}
-              <button
-                type="button"
-                className="results-page-podium__card results-page-podium__card--silver"
-                onClick={() => console.log('Clicked:', podium[1].name)}
-              >
-                <span className="results-page-podium__trophy">
-                  <MedalIcon />
-                </span>
-                <div className="results-page-podium__rank">2</div>
-                <div className="results-page-podium__avatar">
-                  {getInitials(podium[1].name)}
-                </div>
-                <div className="results-page-podium__name">{podium[1].name}</div>
-                <div className="results-page-podium__club">{podium[1].club}</div>
-                <div className="results-page-podium__time">
-                  {formatTime(podium[1].totalTime)}
-                </div>
-                <div className="results-page-podium__diff">
-                  {formatTimeDiff(podium[1].timeDiff)}
-                </div>
-              </button>
-
               {/* Gold - 1st place */}
               <button
                 type="button"
                 className="results-page-podium__card results-page-podium__card--gold"
                 onClick={() => console.log('Clicked:', podium[0].name)}
               >
-                <span className="results-page-podium__trophy">
-                  <MedalIcon />
-                </span>
                 <div className="results-page-podium__rank">1</div>
                 <div className="results-page-podium__avatar">
                   {getInitials(podium[0].name)}
                 </div>
-                <div className="results-page-podium__name">{podium[0].name}</div>
-                <div className="results-page-podium__club">{podium[0].club}</div>
-                <div className="results-page-podium__time">
-                  {formatTime(podium[0].totalTime)}
+                <div className="results-page-podium__info">
+                  <div className="results-page-podium__name">{podium[0].name}</div>
+                  <div className="results-page-podium__club">{podium[0].club}</div>
                 </div>
+                <div className="results-page-podium__result">
+                  <div className="results-page-podium__time">
+                    {formatTime(podium[0].totalTime)}
+                  </div>
+                </div>
+                <span className="results-page-podium__arrow">
+                  <ChevronRightIcon />
+                </span>
+              </button>
+
+              {/* Silver - 2nd place */}
+              <button
+                type="button"
+                className="results-page-podium__card results-page-podium__card--silver"
+                onClick={() => console.log('Clicked:', podium[1].name)}
+              >
+                <div className="results-page-podium__rank">2</div>
+                <div className="results-page-podium__avatar">
+                  {getInitials(podium[1].name)}
+                </div>
+                <div className="results-page-podium__info">
+                  <div className="results-page-podium__name">{podium[1].name}</div>
+                  <div className="results-page-podium__club">{podium[1].club}</div>
+                </div>
+                <div className="results-page-podium__result">
+                  <div className="results-page-podium__time">
+                    {formatTime(podium[1].totalTime)}
+                  </div>
+                  <div className="results-page-podium__diff">
+                    {formatTimeDiff(podium[1].timeDiff)}
+                  </div>
+                </div>
+                <span className="results-page-podium__arrow">
+                  <ChevronRightIcon />
+                </span>
               </button>
 
               {/* Bronze - 3rd place */}
@@ -480,21 +480,25 @@ const ResultsPage = ({
                 className="results-page-podium__card results-page-podium__card--bronze"
                 onClick={() => console.log('Clicked:', podium[2].name)}
               >
-                <span className="results-page-podium__trophy">
-                  <MedalIcon />
-                </span>
                 <div className="results-page-podium__rank">3</div>
                 <div className="results-page-podium__avatar">
                   {getInitials(podium[2].name)}
                 </div>
-                <div className="results-page-podium__name">{podium[2].name}</div>
-                <div className="results-page-podium__club">{podium[2].club}</div>
-                <div className="results-page-podium__time">
-                  {formatTime(podium[2].totalTime)}
+                <div className="results-page-podium__info">
+                  <div className="results-page-podium__name">{podium[2].name}</div>
+                  <div className="results-page-podium__club">{podium[2].club}</div>
                 </div>
-                <div className="results-page-podium__diff">
-                  {formatTimeDiff(podium[2].timeDiff)}
+                <div className="results-page-podium__result">
+                  <div className="results-page-podium__time">
+                    {formatTime(podium[2].totalTime)}
+                  </div>
+                  <div className="results-page-podium__diff">
+                    {formatTimeDiff(podium[2].timeDiff)}
+                  </div>
                 </div>
+                <span className="results-page-podium__arrow">
+                  <ChevronRightIcon />
+                </span>
               </button>
             </div>
           </div>
