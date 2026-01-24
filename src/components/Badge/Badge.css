@@ -114,29 +114,13 @@
   box-shadow: var(--shadow-xs);
 }
 
-/* Gradient Accent - warm amber gradient */
-.csk-badge--gradient-accent {
-  background: var(--gradient-accent);
+/* Energy - vibrant coral-orange for highlights and CTAs */
+.csk-badge--energy {
+  background: var(--gradient-energy);
   border-color: transparent;
-  color: var(--color-neutral-900);
-  box-shadow: var(--shadow-xs);
+  color: white;
+  box-shadow: 0 2px 8px -2px rgba(249, 115, 22, 0.4);
   font-weight: var(--font-weight-semibold);
-}
-
-/* Gradient Success - green gradient */
-.csk-badge--gradient-success {
-  background: var(--gradient-success);
-  border-color: transparent;
-  color: var(--color-neutral-0);
-  box-shadow: var(--shadow-xs);
-}
-
-/* Gradient Error - red gradient */
-.csk-badge--gradient-error {
-  background: var(--gradient-error);
-  border-color: transparent;
-  color: var(--color-neutral-0);
-  box-shadow: var(--shadow-xs);
 }
 
 /* ==========================================================================
@@ -346,19 +330,8 @@
               0 4px 12px -4px rgba(17, 118, 166, 0.25);
 }
 
-.csk-badge--glow.csk-badge--gradient-accent {
-  box-shadow: 0 2px 8px -2px rgba(245, 158, 11, 0.4),
-              0 4px 12px -4px rgba(245, 158, 11, 0.25);
-}
-
-.csk-badge--glow.csk-badge--gradient-success {
-  box-shadow: 0 2px 8px -2px rgba(34, 197, 94, 0.4),
-              0 4px 12px -4px rgba(34, 197, 94, 0.25);
-}
-
-.csk-badge--glow.csk-badge--gradient-error {
-  box-shadow: 0 2px 8px -2px rgba(239, 68, 68, 0.4),
-              0 4px 12px -4px rgba(239, 68, 68, 0.25);
+.csk-badge--glow.csk-badge--energy {
+  box-shadow: var(--glow-energy-md);
 }
 
 .csk-badge--glow.csk-badge--section-dv {

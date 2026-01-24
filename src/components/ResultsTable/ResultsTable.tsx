@@ -7,7 +7,7 @@ import './ResultsTable.css';
 
 export type ResultsTableSize = 'sm' | 'md' | 'lg';
 export type ResultsTableVariant = 'default' | 'striped' | 'compact';
-export type ResultsTableStyleVariant = 'default' | 'gradient' | 'glass' | 'embed';
+export type ResultsTableStyleVariant = 'default' | 'gradient' | 'embed';
 export type ResultSection = 'dv' | 'ry' | 'vt';
 export type ResultStatus = 'dns' | 'dnf' | 'dsq' | 'final' | 'provisional' | 'live';
 

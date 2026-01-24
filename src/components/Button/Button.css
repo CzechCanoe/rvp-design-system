@@ -172,31 +172,6 @@
   transform: translateY(0);
 }
 
-/* Gradient Accent - warm accent gradient for special CTAs */
-.csk-button--gradient-accent {
-  background: var(--gradient-accent);
-  border-color: transparent;
-  color: var(--color-neutral-900);
-  box-shadow: var(--shadow-warning-sm);
-  font-weight: var(--font-weight-semibold);
-}
-
-.csk-button--gradient-accent:hover:not(:disabled):not([aria-disabled='true']) {
-  background: var(--gradient-accent-hover);
-  box-shadow: var(--shadow-warning-md);
-  transform: translateY(-2px);
-}
-
-.csk-button--gradient-accent:active:not(:disabled):not([aria-disabled='true']) {
-  background: var(--gradient-accent);
-  box-shadow: var(--shadow-warning-sm);
-  transform: translateY(0);
-}
-
-.csk-button--gradient-accent:focus-visible {
-  outline-color: var(--color-accent-500);
-}
-
 /* Gradient Energy - high-energy CTA with vibrant coral-orange */
 .csk-button--gradient-energy {
   background: var(--gradient-energy);
@@ -293,9 +268,6 @@
   color: var(--color-text-primary);
 }
 
-.csk-button--loading.csk-button--gradient-accent .csk-button__spinner {
-  color: var(--color-neutral-900);
-}
 
 /* ==========================================================================
    ICON STYLES

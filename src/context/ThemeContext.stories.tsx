@@ -450,7 +450,7 @@ export const SideBySideComparison: Story = {
             </div>
             <div style={{ display: 'flex', gap: 'var(--spacing-3)' }}>
               <Badge size="lg" variant="gradient" pill glow>Champion</Badge>
-              <Badge size="lg" variant="gradient-success" pill glow>Active</Badge>
+              <Badge size="lg" variant="success" pill>Active</Badge>
               <Badge size="lg" section="dv" pill glow>DV</Badge>
             </div>
           </div>

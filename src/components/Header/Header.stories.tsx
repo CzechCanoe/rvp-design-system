@@ -31,7 +31,7 @@ import { Header } from '@czechcanoe/rvp-design-system';
 
 - **Responzivní** - automaticky se přepíná na mobilní menu
 - **Sticky** - volitelné sticky pozicování
-- **Varianty** - default, transparent, elevated
+- **Varianty** - default, elevated, gradient, satellite
 - **Flexibilní sloty** - brand, navigation, search, actions, userMenu
 - **Mobile drawer** - vysouvací menu pro mobilní zařízení
 - **WCAG 2.1 AA** - přístupná klávesová navigace
@@ -47,7 +47,7 @@ import { Header } from '@czechcanoe/rvp-design-system';
     },
     variant: {
       control: 'select',
-      options: ['default', 'transparent', 'elevated', 'gradient', 'glass', 'satellite'],
+      options: ['default', 'elevated', 'gradient', 'satellite'],
     },
     appName: {
       control: 'text',
@@ -281,65 +281,6 @@ export const Elevated: Story = {
     ),
     userMenu: <UserAvatar />,
     variant: 'elevated',
-    bordered: false,
-    mobileMenuContent: <MobileNavLinks />,
-  },
-};
-
-/**
- * Transparentní varianta pro použití nad obrázkem/videem.
- */
-export const Transparent: Story = {
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          background: 'linear-gradient(135deg, var(--color-primary-600), var(--color-primary-800))',
-          minHeight: '300px',
-        }}
-      >
-        <Story />
-        <div style={{ padding: '48px 24px', color: 'white' }}>
-          <h1 style={{ margin: 0, fontSize: '2.5rem', fontWeight: 700 }}>
-            Kalendář závodů 2026
-          </h1>
-          <p style={{ marginTop: '16px', opacity: 0.9 }}>
-            Přehled všech závodů ve vodním slalomu, rychlostní kanoistice a vodní turistice.
-          </p>
-        </div>
-      </div>
-    ),
-  ],
-  args: {
-    brand: (
-      <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'white' }}>
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="32" height="32" rx="8" fill="rgba(255,255,255,0.2)"/>
-          <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
-        </svg>
-        <span style={{ fontWeight: 600, fontSize: '1.125rem' }}>Kanoistika</span>
-      </a>
-    ),
-    navigation: (
-      <div style={{ display: 'flex', gap: '4px' }}>
-        {['Závody', 'Výsledky', 'Závodníci', 'Kluby'].map((item) => (
-          <a
-            key={item}
-            href="#"
-            style={{
-              padding: '8px 16px',
-              borderRadius: '8px',
-              textDecoration: 'none',
-              color: 'rgba(255,255,255,0.9)',
-              fontWeight: 500,
-            }}
-          >
-            {item}
-          </a>
-        ))}
-      </div>
-    ),
-    variant: 'transparent',
     bordered: false,
     mobileMenuContent: <MobileNavLinks />,
   },
@@ -676,49 +617,6 @@ export const Gradient: Story = {
 };
 
 /**
- * Glass varianta s blur efektem.
- */
-export const Glass: Story = {
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          background: 'linear-gradient(135deg, var(--color-primary-100), var(--color-accent-100))',
-          minHeight: '300px',
-        }}
-      >
-        <Story />
-        <div style={{ padding: '48px 24px' }}>
-          <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>
-            Kalendář závodů 2026
-          </h1>
-          <p style={{ marginTop: '16px', color: 'var(--color-text-secondary)' }}>
-            Glass efekt vytváří moderní, vzdušný vzhled.
-          </p>
-        </div>
-      </div>
-    ),
-  ],
-  args: {
-    brand: <Logo />,
-    navigation: <NavLinks />,
-    search: (
-      <Input
-        type="search"
-        placeholder="Hledat..."
-        size="sm"
-        iconLeft={<SearchIcon />}
-        style={{ width: '200px' }}
-      />
-    ),
-    userMenu: <UserAvatar />,
-    variant: 'glass',
-    bordered: false,
-    mobileMenuContent: <MobileNavLinks />,
-  },
-};
-
-/**
  * Sticky header s blur efektem při scrollu.
  */
 export const StickyWithBlur: Story = {
@@ -920,18 +818,6 @@ export const AllVariants: Story = {
               JB
             </button>
           }
-        />
-      </div>
-      <div style={{ background: 'linear-gradient(135deg, var(--color-primary-100), var(--color-accent-100))', padding: '0 0 24px' }}>
-        <p style={{ margin: '0 0 8px', padding: '8px 0 0 8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
-          Variant: glass (na barevném pozadí)
-        </p>
-        <Header
-          variant="glass"
-          bordered={false}
-          brand={<Logo />}
-          navigation={<NavLinks />}
-          userMenu={<UserAvatar />}
         />
       </div>
       <div>

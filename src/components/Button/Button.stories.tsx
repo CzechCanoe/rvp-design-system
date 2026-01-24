@@ -11,7 +11,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'ghost', 'danger', 'gradient', 'gradient-accent', 'gradient-energy'],
+      options: ['primary', 'secondary', 'ghost', 'danger', 'gradient', 'gradient-energy'],
       description: 'Visual variant of the button',
     },
     size: {
@@ -64,14 +64,13 @@ export const Variants: Story = {
       <Button variant="ghost">Ghost</Button>
       <Button variant="danger">Danger</Button>
       <Button variant="gradient">Gradient</Button>
-      <Button variant="gradient-accent">Accent</Button>
       <Button variant="gradient-energy">Energy</Button>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'All available button variants. Energy variant uses the new vibrant coral-orange accent.',
+        story: 'All available button variants. Energy variant uses the vibrant coral-orange accent for CTAs.',
       },
     },
   },
@@ -176,7 +175,7 @@ export const WithIcons: Story = {
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
         <Button variant="danger" iconLeft={<TrashIcon />}>Delete</Button>
         <Button variant="gradient" iconRight={<ArrowRightIcon />}>Get Started</Button>
-        <Button variant="gradient-accent" iconLeft={<PlusIcon />}>Launch</Button>
+        <Button variant="gradient-energy" iconLeft={<PlusIcon />}>Launch</Button>
       </div>
     </div>
   ),

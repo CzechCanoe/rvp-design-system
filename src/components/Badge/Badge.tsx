@@ -9,9 +9,7 @@ export type BadgeVariant =
   | 'error'
   | 'info'
   | 'gradient'
-  | 'gradient-accent'
-  | 'gradient-success'
-  | 'gradient-error';
+  | 'energy';
 
 export type BadgeSection = 'dv' | 'ry' | 'vt';
 export type BadgeVtClass = 'm' | 'a' | 'b' | 'c';

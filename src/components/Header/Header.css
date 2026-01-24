@@ -33,11 +33,6 @@
    VARIANTS
    ============================================================================= */
 
-.csk-header--transparent {
-  background-color: transparent;
-  border-bottom-color: transparent;
-}
-
 .csk-header--elevated {
   background-color: var(--color-bg-primary);
   box-shadow: var(--shadow-md);
@@ -61,14 +56,6 @@
 
 .csk-header--gradient .csk-header__toggle:focus-visible {
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3), 0 0 0 4px rgba(255, 255, 255, 0.5);
-}
-
-/* Glass variant - frosted glass effect */
-.csk-header--glass {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Scrolled state - adds blur effect when sticky header has scrolled */
@@ -378,21 +365,12 @@
   background-color: var(--color-bg-primary);
 }
 
-[data-theme="dark"] .csk-header--transparent {
-  background-color: transparent;
-}
-
 [data-theme="dark"] .csk-header--elevated {
   background-color: var(--color-bg-elevated);
 }
 
 [data-theme="dark"] .csk-header--gradient {
   background: var(--gradient-primary-deep);
-}
-
-[data-theme="dark"] .csk-header--glass {
-  background: rgba(0, 0, 0, 0.7);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 [data-theme="dark"] .csk-header--scrolled {

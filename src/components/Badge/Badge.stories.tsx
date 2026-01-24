@@ -17,7 +17,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'primary', 'success', 'warning', 'error', 'info', 'gradient', 'gradient-accent', 'gradient-success', 'gradient-error'],
+      options: ['default', 'primary', 'success', 'warning', 'error', 'info', 'gradient', 'energy'],
       description: 'Visual variant of the badge',
     },
     section: {
@@ -117,34 +117,28 @@ export const VariantsOutlined: Story = {
    ========================================================================== */
 
 export const GradientVariants: Story = {
-  name: 'Gradient Variants',
+  name: 'Gradient & Energy Variants',
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div>
         <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Standard</h4>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <Badge variant="gradient">Gradient Primary</Badge>
-          <Badge variant="gradient-accent">Gradient Accent</Badge>
-          <Badge variant="gradient-success">Gradient Success</Badge>
-          <Badge variant="gradient-error">Gradient Error</Badge>
+          <Badge variant="energy">Energy</Badge>
         </div>
       </div>
       <div>
         <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>With Glow Effect</h4>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <Badge variant="gradient" glow>Gradient Primary</Badge>
-          <Badge variant="gradient-accent" glow>Gradient Accent</Badge>
-          <Badge variant="gradient-success" glow>Gradient Success</Badge>
-          <Badge variant="gradient-error" glow>Gradient Error</Badge>
+          <Badge variant="energy" glow>Energy</Badge>
         </div>
       </div>
       <div>
         <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Pill with Glow</h4>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <Badge variant="gradient" pill glow>Primary</Badge>
-          <Badge variant="gradient-accent" pill glow>Accent</Badge>
-          <Badge variant="gradient-success" pill glow>Success</Badge>
-          <Badge variant="gradient-error" pill glow>Error</Badge>
+          <Badge variant="energy" pill glow>Energy</Badge>
         </div>
       </div>
     </div>
@@ -152,7 +146,7 @@ export const GradientVariants: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Gradient variants for expressive, modern UI. Use glow effect for extra visual impact.',
+        story: 'Gradient and energy variants for expressive, modern UI. Energy uses vibrant coral-orange accent.',
       },
     },
   },
@@ -488,22 +482,22 @@ export const NotificationBadges: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <Badge variant="gradient-error" size="sm" pill glow>3</Badge>
+        <Badge variant="error" size="sm" pill>3</Badge>
         <span style={{ fontSize: '14px' }}>Nové zprávy</span>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <Badge variant="gradient-accent" size="sm" pill glow>!</Badge>
+        <Badge variant="energy" size="sm" pill glow>!</Badge>
         <span style={{ fontSize: '14px' }}>Čeká na schválení</span>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <Badge variant="gradient-success" size="sm" pill glow icon={<CheckIcon />}>Dokončeno</Badge>
+        <Badge variant="success" size="sm" pill icon={<CheckIcon />}>Dokončeno</Badge>
       </div>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Gradient pill badges with glow for notification counts and status indicators.',
+        story: 'Pill badges for notification counts and status indicators. Energy variant for attention.',
       },
     },
   },
@@ -529,7 +523,7 @@ export const FeaturedShowcase: Story = {
       <div>
         <h3 style={{ margin: '0 0 16px 0', fontWeight: 600 }}>Live Event Status</h3>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <Badge variant="gradient-error" size="lg" pill glow icon={
+          <Badge variant="energy" size="lg" pill glow icon={
             <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
               <circle cx="12" cy="12" r="6" />
             </svg>
@@ -542,9 +536,9 @@ export const FeaturedShowcase: Story = {
       <div>
         <h3 style={{ margin: '0 0 16px 0', fontWeight: 600 }}>Athlete Achievements</h3>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
-          <Badge vtClass="m" size="lg" pill glow>🏆 Mistr ČR</Badge>
-          <Badge variant="gradient-accent" size="lg" pill glow>Top 10 ICF</Badge>
-          <Badge variant="gradient-success" pill glow icon={<CheckIcon />}>Kvalifikován OH</Badge>
+          <Badge vtClass="m" size="lg" pill glow>Mistr ČR</Badge>
+          <Badge variant="energy" size="lg" pill glow>Top 10 ICF</Badge>
+          <Badge variant="success" pill icon={<CheckIcon />}>Kvalifikován OH</Badge>
         </div>
       </div>
 

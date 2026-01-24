@@ -11,7 +11,7 @@ import {
 import './Header.css';
 
 export type HeaderSize = 'sm' | 'md' | 'lg';
-export type HeaderVariant = 'default' | 'transparent' | 'elevated' | 'gradient' | 'glass' | 'satellite';
+export type HeaderVariant = 'default' | 'elevated' | 'gradient' | 'satellite';
 
 export interface HeaderProps extends HTMLAttributes<HTMLElement> {
   /** Logo or brand element */

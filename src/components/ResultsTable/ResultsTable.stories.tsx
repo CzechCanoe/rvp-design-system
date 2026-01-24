@@ -294,16 +294,6 @@ export const StyleVariantsComparison: Story = {
           <h3 style={{ marginBottom: '0.5rem', fontWeight: 600 }}>Embed Style</h3>
           <ResultsTable results={shortResults} styleVariant="embed" showPodiumHighlights />
         </div>
-        <div
-          style={{
-            padding: '1.5rem',
-            background: 'linear-gradient(135deg, var(--color-primary-50), var(--color-accent-50))',
-            borderRadius: 'var(--radius-lg)',
-          }}
-        >
-          <h3 style={{ marginBottom: '0.5rem', fontWeight: 600 }}>Glass Style</h3>
-          <ResultsTable results={shortResults} styleVariant="glass" showPodiumHighlights />
-        </div>
       </div>
     );
   },

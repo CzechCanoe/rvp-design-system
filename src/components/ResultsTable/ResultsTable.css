@@ -95,32 +95,6 @@
   border-left-width: 5px;
 }
 
-/* Glass - glassmorphism effect */
-.csk-results-table--style-glass {
-  background: var(--glass-light-bg);
-  backdrop-filter: var(--glass-light-blur);
-  -webkit-backdrop-filter: var(--glass-light-blur);
-  border: 1px solid var(--glass-light-border);
-  box-shadow: var(--shadow-sm);
-}
-
-.csk-results-table--style-glass .csk-results-table__thead {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(8px);
-}
-
-.csk-results-table--style-glass .csk-results-table__th {
-  border-bottom-color: var(--glass-light-border);
-}
-
-.csk-results-table--style-glass .csk-results-table__td {
-  border-bottom-color: rgba(255, 255, 255, 0.2);
-}
-
-.csk-results-table--style-glass .csk-results-table__tr:hover:not(.csk-results-table__tr--empty):not(.csk-results-table__tr--header) {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
 /* =============================================================================
    Table Header
    ============================================================================= */
@@ -642,23 +616,6 @@
 
 [data-theme='dark'] .csk-results-table--style-default {
   border-color: var(--color-border-secondary);
-}
-
-[data-theme='dark'] .csk-results-table--style-glass {
-  background: var(--glass-dark-bg);
-  border-color: var(--glass-dark-border);
-}
-
-[data-theme='dark'] .csk-results-table--style-glass .csk-results-table__thead {
-  background: rgba(0, 0, 0, 0.4);
-}
-
-[data-theme='dark'] .csk-results-table--style-glass .csk-results-table__td {
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme='dark'] .csk-results-table--style-glass .csk-results-table__tr:hover:not(.csk-results-table__tr--empty):not(.csk-results-table__tr--header) {
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
 [data-theme='dark'] .csk-results-table__tr--gold {
