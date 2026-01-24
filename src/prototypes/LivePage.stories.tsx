@@ -43,17 +43,20 @@ interface FeedItem {
   isNew?: boolean;
 }
 
-interface CurrentRun {
+/** Athlete currently on course */
+interface OncourseAthlete {
   bib: number;
   name: string;
   club: string;
   category: string;
-  startTime: number;
-  splits: {
-    label: string;
-    time?: number;
-    diff?: number;
-  }[];
+  /** Current running time in seconds */
+  runningTime: number;
+  /** Position on course: 'start' | 'split1' | 'split2' | 'split3' | 'finish-zone' */
+  position: 'start' | 'split1' | 'split2' | 'split3' | 'finish-zone';
+  /** Last split time if available */
+  lastSplit?: { time: number; diff?: number };
+  /** Is this the featured athlete (expanded view) */
+  featured?: boolean;
 }
 
 // ============================================================================
@@ -103,6 +106,37 @@ const nextAthletes = [
   { bib: 15, name: 'Jan Horák', club: 'KK Brandýs' },
   { bib: 16, name: 'Lukáš Dvořák', club: 'SK Trnávka' },
   { bib: 17, name: 'Marek Procházka', club: 'Bohemians Praha' },
+];
+
+/** Initial oncourse athletes - multiple athletes on course simultaneously */
+const initialOncourseAthletes: OncourseAthlete[] = [
+  {
+    bib: 14,
+    name: 'David Novák',
+    club: 'USK Praha',
+    category: 'K1M',
+    runningTime: 45.67,
+    position: 'split2',
+    lastSplit: { time: 31.45, diff: 0.12 },
+    featured: true,
+  },
+  {
+    bib: 13,
+    name: 'Petr Svoboda',
+    club: 'Dukla Praha',
+    category: 'K1M',
+    runningTime: 78.34,
+    position: 'finish-zone',
+    lastSplit: { time: 68.92, diff: -0.87 },
+  },
+  {
+    bib: 12,
+    name: 'Martin Dvořák',
+    club: 'SK Trnávka',
+    category: 'K1M',
+    runningTime: 12.45,
+    position: 'start',
+  },
 ];
 
 const initialFeedItems: FeedItem[] = [
@@ -247,7 +281,8 @@ const LivePage = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [autoUpdate, setAutoUpdate] = useState(true);
   const [feedItems, setFeedItems] = useState<FeedItem[]>(initialFeedItems);
-  const [runningTime, setRunningTime] = useState(45.67);
+  const [oncourseAthletes, setOncourseAthletes] = useState<OncourseAthlete[]>(initialOncourseAthletes);
+  const [featuredBib, setFeaturedBib] = useState<number>(14);
 
   // Section names for display
   const sectionNames: Record<string, string> = {
@@ -256,27 +291,33 @@ const LivePage = ({
     vt: 'Vodní turistika',
   };
 
-  // Current run data
-  const currentRun: CurrentRun = {
-    bib: 14,
-    name: 'David Novák',
-    club: 'USK Praha',
-    category: 'K1M',
-    startTime: Date.now() - 45670,
-    splits: [
-      { label: 'Split 1', time: 15.23, diff: -0.34 },
-      { label: 'Split 2', time: 31.45, diff: 0.12 },
-      { label: 'Split 3', time: undefined },
-      { label: 'Cíl', time: undefined },
-    ],
-  };
+  // Get featured athlete for detailed view
+  const featuredAthlete = oncourseAthletes.find(a => a.bib === featuredBib) || oncourseAthletes[0];
 
-  // Simulate running timer
+  // Current run splits for featured athlete (detailed view)
+  const currentRunSplits = useMemo(() => {
+    if (!featuredAthlete) return [];
+    const positions = ['start', 'split1', 'split2', 'split3', 'finish-zone'];
+    const posIndex = positions.indexOf(featuredAthlete.position);
+    return [
+      { label: 'Split 1', time: posIndex >= 1 ? 15.23 : undefined, diff: posIndex >= 1 ? -0.34 : undefined },
+      { label: 'Split 2', time: posIndex >= 2 ? 31.45 : undefined, diff: posIndex >= 2 ? 0.12 : undefined },
+      { label: 'Split 3', time: posIndex >= 3 ? 52.18 : undefined, diff: posIndex >= 3 ? -0.56 : undefined },
+      { label: 'Cíl', time: undefined },
+    ];
+  }, [featuredAthlete]);
+
+  // Simulate running timers for all oncourse athletes
   useEffect(() => {
     if (!simulateLive || !autoUpdate) return;
 
     const timer = setInterval(() => {
-      setRunningTime((prev) => prev + 0.01);
+      setOncourseAthletes((prev) =>
+        prev.map(athlete => ({
+          ...athlete,
+          runningTime: athlete.runningTime + 0.01,
+        }))
+      );
     }, 10);
 
     return () => clearInterval(timer);
@@ -497,67 +538,113 @@ const LivePage = ({
 
           {/* Content - Three Column Layout */}
           <div className="prototype-live-page__content">
-            {/* Left Sidebar - Current Run */}
+            {/* Left Sidebar - Oncourse Athletes */}
             <div className="prototype-live-page__current-run">
-              {/* Current Athlete Card - Enhanced with glow and border-accent */}
-              <div className={`live-page-current-card live-page-current-card--${section} live-page-current-card--aesthetic csk-border-accent`}>
-                <div className="live-page-current-card__glow" />
-                <div className="live-page-current-card__content">
-                  <div className="live-page-current-card__header">
-                    <span className="live-page-current-card__label">Na trati</span>
-                    <LiveIndicator variant="live" size="sm" glow />
-                  </div>
+              {/* Oncourse Overview - All athletes on course */}
+              <div className={`live-page-oncourse live-page-oncourse--${section}`}>
+                <div className="live-page-oncourse__header">
+                  <span className="live-page-oncourse__label">Na trati</span>
+                  <LiveIndicator variant="live" size="sm" glow />
+                  <Badge variant="default" size="sm">{oncourseAthletes.length}</Badge>
+                </div>
 
-                  <div className="live-page-current-card__athlete">
-                    <div className="live-page-current-card__avatar">
-                      <div className="live-page-current-card__avatar-ring" />
-                      <span className="live-page-current-card__avatar-text">
-                        {getInitials(currentRun.name)}
-                      </span>
-                    </div>
-                    <h4 className="live-page-current-card__name">{currentRun.name}</h4>
-                    <p className="live-page-current-card__club">{currentRun.club}</p>
-                    <div className="live-page-current-card__badges">
-                      <Badge variant="default" size="sm">#{currentRun.bib}</Badge>
-                      <Badge section={section} size="sm">{currentRun.category}</Badge>
-                    </div>
-                  </div>
-
-                  <div className="live-page-current-card__timer-container">
-                    <div className="live-page-current-card__timer-label">Aktuální čas</div>
-                    <div className={`live-page-current-card__timer ${autoUpdate ? 'live-page-current-card__timer--running' : ''}`}>
-                      {formatRunningTime(runningTime)}
-                    </div>
-                  </div>
-
-                  <div className="live-page-current-card__splits">
-                    {currentRun.splits.map((split, index) => (
-                      <div key={index} className={`live-page-current-card__split ${split.time !== undefined ? 'live-page-current-card__split--completed' : ''}`}>
-                        <div className="live-page-current-card__split-indicator">
-                          {split.time !== undefined ? (
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                            </svg>
-                          ) : (
-                            <span className="live-page-current-card__split-dot" />
-                          )}
-                        </div>
-                        <div className="live-page-current-card__split-content">
-                          <span className="live-page-current-card__split-label">{split.label}</span>
-                          <span className="live-page-current-card__split-time">
-                            {split.time !== undefined ? formatTime(split.time) : '—'}
-                          </span>
-                        </div>
-                        {split.diff !== undefined && (
-                          <span className={`live-page-current-card__split-diff ${split.diff < 0 ? 'live-page-current-card__split-diff--faster' : 'live-page-current-card__split-diff--slower'}`}>
-                            {split.diff < 0 ? '' : '+'}{split.diff.toFixed(2)}s
-                          </span>
-                        )}
+                {/* Oncourse lanes - compact view of all athletes */}
+                <div className="live-page-oncourse__lanes">
+                  {oncourseAthletes.map((athlete) => (
+                    <button
+                      key={athlete.bib}
+                      className={`live-page-oncourse__lane ${athlete.bib === featuredBib ? 'live-page-oncourse__lane--featured' : ''}`}
+                      onClick={() => setFeaturedBib(athlete.bib)}
+                      type="button"
+                    >
+                      <div className="live-page-oncourse__lane-avatar">
+                        <span>{getInitials(athlete.name)}</span>
                       </div>
-                    ))}
-                  </div>
+                      <div className="live-page-oncourse__lane-info">
+                        <span className="live-page-oncourse__lane-name">
+                          #{athlete.bib} {athlete.name}
+                        </span>
+                        <span className="live-page-oncourse__lane-position">
+                          {athlete.position === 'start' && 'Start'}
+                          {athlete.position === 'split1' && 'Split 1'}
+                          {athlete.position === 'split2' && 'Split 2'}
+                          {athlete.position === 'split3' && 'Split 3'}
+                          {athlete.position === 'finish-zone' && 'Cílová zóna'}
+                        </span>
+                      </div>
+                      <div className={`live-page-oncourse__lane-time ${autoUpdate ? 'live-page-oncourse__lane-time--running' : ''}`}>
+                        {formatRunningTime(athlete.runningTime)}
+                      </div>
+                      {athlete.lastSplit?.diff !== undefined && (
+                        <span className={`live-page-oncourse__lane-diff ${athlete.lastSplit.diff < 0 ? 'live-page-oncourse__lane-diff--faster' : 'live-page-oncourse__lane-diff--slower'}`}>
+                          {athlete.lastSplit.diff < 0 ? '' : '+'}{athlete.lastSplit.diff.toFixed(2)}
+                        </span>
+                      )}
+                    </button>
+                  ))}
                 </div>
               </div>
+
+              {/* Featured Athlete Card - Detailed view */}
+              {featuredAthlete && (
+                <div className={`live-page-current-card live-page-current-card--${section} live-page-current-card--aesthetic csk-border-accent`}>
+                  <div className="live-page-current-card__glow" />
+                  <div className="live-page-current-card__content">
+                    <div className="live-page-current-card__header">
+                      <span className="live-page-current-card__label">Detail jízdy</span>
+                    </div>
+
+                    <div className="live-page-current-card__athlete">
+                      <div className="live-page-current-card__avatar">
+                        <div className="live-page-current-card__avatar-ring" />
+                        <span className="live-page-current-card__avatar-text">
+                          {getInitials(featuredAthlete.name)}
+                        </span>
+                      </div>
+                      <h4 className="live-page-current-card__name">{featuredAthlete.name}</h4>
+                      <p className="live-page-current-card__club">{featuredAthlete.club}</p>
+                      <div className="live-page-current-card__badges">
+                        <Badge variant="default" size="sm">#{featuredAthlete.bib}</Badge>
+                        <Badge section={section} size="sm">{featuredAthlete.category}</Badge>
+                      </div>
+                    </div>
+
+                    <div className="live-page-current-card__timer-container">
+                      <div className="live-page-current-card__timer-label">Aktuální čas</div>
+                      <div className={`live-page-current-card__timer ${autoUpdate ? 'live-page-current-card__timer--running' : ''}`}>
+                        {formatRunningTime(featuredAthlete.runningTime)}
+                      </div>
+                    </div>
+
+                    <div className="live-page-current-card__splits">
+                      {currentRunSplits.map((split, index) => (
+                        <div key={index} className={`live-page-current-card__split ${split.time !== undefined ? 'live-page-current-card__split--completed' : ''}`}>
+                          <div className="live-page-current-card__split-indicator">
+                            {split.time !== undefined ? (
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                              </svg>
+                            ) : (
+                              <span className="live-page-current-card__split-dot" />
+                            )}
+                          </div>
+                          <div className="live-page-current-card__split-content">
+                            <span className="live-page-current-card__split-label">{split.label}</span>
+                            <span className="live-page-current-card__split-time">
+                              {split.time !== undefined ? formatTime(split.time) : '—'}
+                            </span>
+                          </div>
+                          {split.diff !== undefined && (
+                            <span className={`live-page-current-card__split-diff ${split.diff < 0 ? 'live-page-current-card__split-diff--faster' : 'live-page-current-card__split-diff--slower'}`}>
+                              {split.diff < 0 ? '' : '+'}{split.diff.toFixed(2)}s
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Next Up Card */}
               <Card variant="surface" className="prototype-live-page__next-card">

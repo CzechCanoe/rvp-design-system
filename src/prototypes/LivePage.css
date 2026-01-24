@@ -159,6 +159,150 @@
 }
 
 /* ============================================================================
+   Oncourse Panel - Multiple Athletes on Course
+   ============================================================================ */
+
+.live-page-oncourse {
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-4);
+  border: 1px solid var(--color-border-default);
+  box-shadow: var(--shadow-md);
+}
+
+.live-page-oncourse__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+}
+
+.live-page-oncourse__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-energy-500, #f97316);
+  flex: 1;
+}
+
+.live-page-oncourse--dv .live-page-oncourse__label {
+  color: var(--color-section-dv);
+}
+
+.live-page-oncourse--ry .live-page-oncourse__label {
+  color: var(--color-section-ry);
+}
+
+.live-page-oncourse--vt .live-page-oncourse__label {
+  color: var(--color-section-vt);
+}
+
+.live-page-oncourse__lanes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.live-page-oncourse__lane {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-secondary);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+}
+
+.live-page-oncourse__lane:hover {
+  background: var(--color-bg-tertiary);
+  border-color: var(--color-border-default);
+}
+
+.live-page-oncourse__lane--featured {
+  background: var(--color-primary-bg);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 17, 118, 166), 0.15);
+}
+
+.live-page-oncourse__lane-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.live-page-oncourse__lane--featured .live-page-oncourse__lane-avatar {
+  background: var(--color-primary);
+  color: white;
+}
+
+.live-page-oncourse__lane-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.live-page-oncourse__lane-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.live-page-oncourse__lane-position {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.live-page-oncourse__lane-time {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+  flex-shrink: 0;
+}
+
+.live-page-oncourse__lane-time--running {
+  color: var(--color-energy-500, #f97316);
+}
+
+.live-page-oncourse__lane-diff {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--spacing-1) var(--spacing-1-5);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.live-page-oncourse__lane-diff--faster {
+  color: var(--color-success);
+  background: rgba(34, 197, 94, 0.15);
+}
+
+.live-page-oncourse__lane-diff--slower {
+  color: var(--color-error);
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* ============================================================================
    Current Run Card - Enhanced with Glow
    ============================================================================ */
 

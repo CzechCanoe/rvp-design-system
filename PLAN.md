@@ -160,7 +160,7 @@
 
 **Cíl:** LivePage musí být vymazlená namax - první nasazení.
 
-- [ ] **Oncourse redesign** - více závodníků na trati současně
+- [x] **Oncourse redesign** - více závodníků na trati současně
 - [ ] **Detail jízdy** - rozklik s penalizacemi na branách, časy
 - [ ] **Mobile fullscreen** - využít celou obrazovku, schovat menu
 - [ ] **Výběr "svých jezdců"** - sledování + notifikace kdy jedou
