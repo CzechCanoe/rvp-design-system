@@ -91,10 +91,10 @@
 
 #### Prototypy - Detailní plán *(4 iterace celkem)*
 
-**LivePage:** *(1 iterace)*
-- [ ] Hero: mesh background, grain, display typography, energy LIVE badge, staggered reveal
-- [ ] Results: ResultsTable aesthetic, energy live indicators
-- [ ] Oncourse: border-accent pro aktivní závodníky
+**LivePage:** *(HOTOVO)*
+- [x] Hero: mesh background, grain, display typography, energy LIVE badge, staggered reveal
+- [x] Results: ResultsTable aesthetic wrapper, energy live indicators
+- [x] Oncourse: border-accent pro aktivní závodníky (current-card)
 
 **AthletePublicPage:** *(1 iterace)*
 - [ ] Hero s mesh background + display typography
@@ -216,7 +216,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 ## Další krok
 
-**→ 15.0 Prototypy (LivePage, AthletePublicPage, ...) → 15.1 LivePage**
+**→ 15.0 Prototypy (AthletePublicPage, ClubPublicProfile) → 15.1 LivePage improvements**
 
 ---
 

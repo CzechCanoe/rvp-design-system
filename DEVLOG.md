@@ -4632,3 +4632,42 @@ Použit gradient ring via CSS mask pro čistý efekt bez ovlivnění obrázku.
 ### Poznámky
 - Textarea komponenta neexistuje - forms jsou Input a Select
 - Další na řadě: Tabs a Alert aesthetic enhancement
+
+---
+
+## 2026-01-24 - Fáze 15.0: Tabs & Toast Aesthetic
+
+### Dokončeno
+- [x] Tabs: energy variant s coral-orange gradient underline + glow
+- [x] Tabs: display font (Plus Jakarta Sans) pro large size
+- [x] Toast: energy variant s coral-orange accent
+- [x] Toast: displayTitle prop pro display font na title
+- [x] Toast: energy() helper metoda v kontextu
+- [x] Dark mode podpora pro obě komponenty
+- [x] Nové stories: Energy, EnergyLarge, EnergyVariant, DisplayTitle
+
+### Poznámky
+- 15.0 komponenty jsou hotové (Avatar, Forms, Tabs, Toast)
+- Další krok: prototypy (LivePage aesthetic update)
+
+---
+
+## 2026-01-24 - Fáze 15.0: LivePage Aesthetic Refresh
+
+### Dokončeno
+- [x] Hero sekce s mesh background a grain texturou
+- [x] Display typography (Plus Jakarta Sans) pro hlavní nadpis
+- [x] Energy LIVE badge místo červeného LiveIndicator
+- [x] Staggered reveal animace pro breadcrumb, title a meta
+- [x] ResultsTable aesthetic wrapper s mesh card background
+- [x] Border-accent styling pro current-run card (aktivní závodník)
+- [x] Energy color pro timer, avatar ring a label (místo error red)
+- [x] Display font pro jméno závodníka a timer
+
+### Poznámky
+Aesthetic refresh aplikován na LivePage jako první prototyp. Změny:
+- Header sekce má nyní mesh-hero background s grain overlay
+- LIVE indikátor používá energy Badge s glow
+- Výsledková tabulka je v mesh-card wrapperu
+- Current-run karta má border-accent gradient (energy→primary)
+- Všechny "živé" indikátory používají energy color místo error red

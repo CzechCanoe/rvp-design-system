@@ -19,6 +19,17 @@
   padding: var(--spacing-6) var(--spacing-4);
 }
 
+/* Aesthetic header variant with mesh background */
+.live-page-header--aesthetic {
+  background: var(--bg-mesh-hero);
+  background-color: var(--color-bg-secondary);
+  position: relative;
+  overflow: hidden;
+  padding: var(--spacing-10) var(--spacing-4);
+  border-bottom: 2px solid transparent;
+  border-image: var(--border-accent-gradient) 1;
+}
+
 .live-page-header__container {
   max-width: 1400px;
   margin: 0 auto;
@@ -68,6 +79,33 @@
   line-height: 1.2;
   margin: 0;
   color: var(--color-text-primary);
+}
+
+/* Aesthetic title with display font */
+.live-page-header--aesthetic .live-page-header__title {
+  font-size: var(--font-size-4xl);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+/* Live dot animation in badge */
+.live-page-header__live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: currentColor;
+  animation: live-dot-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes live-dot-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
 }
 
 .live-page-header__meta {
@@ -132,10 +170,22 @@
   border: 2px solid var(--color-error);
 }
 
+/* Aesthetic variant with border-accent */
+.live-page-current-card--aesthetic {
+  border: none;
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+  box-shadow: var(--shadow-lg);
+}
+
+.live-page-current-card--aesthetic.csk-border-accent {
+  border-left: 4px solid;
+  border-image: linear-gradient(180deg, var(--color-energy-500) 0%, var(--color-primary-500) 100%) 1;
+}
+
 .live-page-current-card__glow {
   position: absolute;
   inset: -2px;
-  background: linear-gradient(135deg, var(--color-error) 0%, #ff6b6b 50%, var(--color-error) 100%);
+  background: linear-gradient(135deg, var(--color-energy-500, #f97316) 0%, var(--color-energy-400, #fb923c) 50%, var(--color-energy-500, #f97316) 100%);
   border-radius: inherit;
   z-index: -1;
   opacity: 0.3;
@@ -197,7 +247,7 @@
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--color-error);
+  color: var(--color-energy-500, #f97316);
 }
 
 .live-page-current-card--dv .live-page-current-card__label {
@@ -228,7 +278,7 @@
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  border: 3px solid var(--color-error);
+  border: 3px solid var(--color-energy-500, #f97316);
   animation: avatarRingPulse 2s ease-in-out infinite;
 }
 
@@ -273,6 +323,8 @@
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
   margin: 0 0 var(--spacing-1) 0;
+  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
+  letter-spacing: -0.02em;
 }
 
 .live-page-current-card__club {
@@ -305,14 +357,15 @@
 
 .live-page-current-card__timer {
   font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
+  font-weight: 800;
   color: var(--color-text-primary);
-  font-family: var(--font-family-mono, monospace);
+  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
   font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }
 
 .live-page-current-card__timer--running {
-  color: var(--color-error);
+  color: var(--color-energy-500, #f97316);
   animation: timerPulse 1s ease-in-out infinite;
 }
 
@@ -941,6 +994,23 @@
   color: var(--color-text-primary);
   font-weight: var(--font-weight-medium);
   text-align: right;
+}
+
+/* ============================================================================
+   Aesthetic Results Table Wrapper
+   ============================================================================ */
+
+.csk-results-table-wrapper--aesthetic {
+  background: var(--bg-mesh-card);
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-default);
+  overflow: hidden;
+}
+
+.csk-results-table-wrapper--aesthetic .csk-results-table {
+  border: none;
+  border-radius: 0;
 }
 
 /* ============================================================================

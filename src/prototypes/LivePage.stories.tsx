@@ -450,10 +450,10 @@ const LivePage = ({
       {/* Header */}
       {renderHeader()}
 
-      {/* Page Header - Clean design without waves */}
-      <section className={`live-page-header live-page-header--${section}`}>
+      {/* Page Header - Aesthetic design with mesh background */}
+      <section className={`live-page-header live-page-header--${section} live-page-header--aesthetic csk-grain`}>
         <div className="live-page-header__container">
-          <div className="live-page-header__breadcrumb">
+          <div className="live-page-header__breadcrumb csk-reveal csk-reveal-1">
             <a href="#">Výsledky</a>
             <span>/</span>
             <a href="#">2026</a>
@@ -462,11 +462,14 @@ const LivePage = ({
           </div>
           <div className="live-page-header__content">
             <div className="live-page-header__left">
-              <div className="live-page-header__title-row">
-                <h1 className="live-page-header__title">MČR ve slalomu 2026</h1>
-                <LiveIndicator variant="live" size="lg" label="LIVE" />
+              <div className="live-page-header__title-row csk-reveal csk-reveal-2">
+                <h1 className="live-page-header__title csk-display">MČR ve slalomu 2026</h1>
+                <Badge variant="energy" size="lg" glow>
+                  <span className="live-page-header__live-dot" />
+                  LIVE
+                </Badge>
               </div>
-              <div className="live-page-header__meta">
+              <div className="live-page-header__meta csk-reveal csk-reveal-3">
                 <span className="live-page-header__meta-item">
                   <CalendarIcon />
                   3. května 2026 • 14:32
@@ -496,8 +499,8 @@ const LivePage = ({
           <div className="prototype-live-page__content">
             {/* Left Sidebar - Current Run */}
             <div className="prototype-live-page__current-run">
-              {/* Current Athlete Card - Enhanced with glow */}
-              <div className={`live-page-current-card live-page-current-card--${section}`}>
+              {/* Current Athlete Card - Enhanced with glow and border-accent */}
+              <div className={`live-page-current-card live-page-current-card--${section} live-page-current-card--aesthetic csk-border-accent`}>
                 <div className="live-page-current-card__glow" />
                 <div className="live-page-current-card__content">
                   <div className="live-page-current-card__header">
@@ -624,19 +627,21 @@ const LivePage = ({
                 </div>
               </div>
 
-              {/* Results Table */}
-              <ResultsTable
-                results={results}
-                variant="striped"
-                size="md"
-                showRuns={false}
-                showTimeDiff={true}
-                showClub={true}
-                showPodiumHighlights={true}
-                showLiveIndicator={true}
-                stickyHeader
-                onRowClick={(entry) => console.log('Row clicked:', entry)}
-              />
+              {/* Results Table - Aesthetic wrapper */}
+              <div className="csk-results-table-wrapper--aesthetic">
+                <ResultsTable
+                  results={results}
+                  variant="striped"
+                  size="md"
+                  showRuns={false}
+                  showTimeDiff={true}
+                  showClub={true}
+                  showPodiumHighlights={true}
+                  showLiveIndicator={true}
+                  stickyHeader
+                  onRowClick={(entry) => console.log('Row clicked:', entry)}
+                />
+              </div>
             </div>
 
             {/* Right Sidebar - Activity Feed */}
