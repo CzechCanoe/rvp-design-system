@@ -52,11 +52,10 @@
 - [ ] Props: `meshBg?: boolean`, `borderAccent?: boolean`
 - [ ] Update Card.stories.tsx
 
-**Header:**
-- [ ] Display font pro brand/title text
-- [ ] Energy CTA button v actions slotu (stories ukázka)
-- [ ] Nová varianta `gradient-energy` pro header background
-- [ ] Update Header.stories.tsx
+**Header (HOTOVO):**
+- [x] Display font pro brand/title text (`csk-header__brand-title`, `csk-header__app-title`)
+- [x] Energy CTA button v actions slotu (stories ukázka)
+- [x] Update Header.stories.tsx s DisplayFontShowcase
 
 **Badge (HOTOVO):**
 - [x] Nová varianta `energy` (coral-orange)

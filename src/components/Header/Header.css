@@ -148,6 +148,14 @@
   color: inherit;
 }
 
+/* Brand title text - use display font for prominent brand names */
+.csk-header__brand-title {
+  font-family: var(--font-family-display, var(--font-family-sans));
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--text-headline-tracking, -0.02em);
+  line-height: 1.1;
+}
+
 .csk-header__brand img {
   display: block;
   height: auto;
@@ -471,9 +479,11 @@
 }
 
 .csk-header__app-title {
+  font-family: var(--font-family-display, var(--font-family-sans));
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   font-size: var(--font-size-sm);
+  letter-spacing: var(--text-headline-tracking, -0.02em);
 }
 
 /* Satellite brand adjustments */

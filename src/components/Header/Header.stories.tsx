@@ -86,14 +86,14 @@ import { Header } from '@czechcanoe/rvp-design-system';
 export default meta;
 type Story = StoryObj<typeof Header>;
 
-// Mock logo
+// Mock logo with display font
 const Logo = () => (
   <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="32" height="32" rx="8" fill="var(--color-primary-500)"/>
       <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
     </svg>
-    <span style={{ fontWeight: 600, fontSize: '1.125rem' }}>Kanoistika</span>
+    <span className="csk-header__brand-title" style={{ fontSize: '1.125rem' }}>Kanoistika</span>
   </a>
 );
 
@@ -991,5 +991,103 @@ export const SatelliteCustomHomeLink: Story = {
     homeLinkLabel: 'Členství',
     brand: <Logo />,
     userMenu: <UserAvatar />,
+  },
+};
+
+// =============================================================================
+// AESTHETIC - DISPLAY FONT SHOWCASE
+// =============================================================================
+
+/**
+ * Display font showcase - brand title a app name používají Plus Jakarta Sans.
+ */
+export const DisplayFontShowcase: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--color-text-tertiary)' }}>
+          Brand title with display font (csk-header__brand-title class)
+        </p>
+        <Header
+          variant="default"
+          brand={
+            <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit' }}>
+              <svg width="36" height="36" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="8" fill="var(--color-primary-500)"/>
+                <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
+              </svg>
+              <span className="csk-header__brand-title" style={{ fontSize: '1.25rem' }}>Kanoistika</span>
+            </a>
+          }
+          navigation={<NavLinks />}
+          userMenu={<UserAvatar />}
+        />
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--color-text-tertiary)' }}>
+          Satellite app name with display font (automatic)
+        </p>
+        <Header
+          variant="satellite"
+          appName="Live výsledky"
+          brand={
+            <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="8" fill="var(--color-primary-500)"/>
+                <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
+              </svg>
+            </a>
+          }
+          actions={
+            <Badge variant="energy" size="lg" pill glow>ŽIVĚ</Badge>
+          }
+        />
+      </div>
+      <div>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--color-text-tertiary)' }}>
+          Gradient variant with display font brand
+        </p>
+        <Header
+          variant="gradient"
+          bordered={false}
+          brand={
+            <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'white' }}>
+              <svg width="36" height="36" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="8" fill="rgba(255,255,255,0.2)"/>
+                <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
+              </svg>
+              <span className="csk-header__brand-title" style={{ fontSize: '1.25rem' }}>Český svaz kanoistů</span>
+            </a>
+          }
+          actions={
+            <Button variant="gradient-energy" size="sm" glow>Sledovat live</Button>
+          }
+          userMenu={
+            <button
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                border: '2px solid rgba(255,255,255,0.5)',
+                backgroundColor: 'rgba(255,255,255,0.2)',
+                color: 'white',
+                fontWeight: 600,
+                fontSize: '14px',
+                cursor: 'pointer',
+              }}
+            >
+              JB
+            </button>
+          }
+        />
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Header with display font (Plus Jakarta Sans) for brand titles and app names. Use `csk-header__brand-title` class for brand text.',
+      },
+    },
   },
 };
