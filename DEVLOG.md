@@ -4611,3 +4611,24 @@ Audit 9.1.4 dokončen. Další krok: 9.1.5 Audit kompatibility s kanoe.cz (embed
 
 ### Poznámky
 Použit gradient ring via CSS mask pro čistý efekt bez ovlivnění obrázku.
+
+---
+
+## 2026-01-24 - Fáze 15.0: Forms Aesthetic Enhancement
+
+### Dokončeno
+- [x] Input: `energyFocus` prop - coral-orange focus ring
+- [x] Input: `displayLabel` prop - Plus Jakarta Sans for labels
+- [x] Select: `energyFocus` prop - coral-orange focus ring
+- [x] Select: `displayLabel` prop - Plus Jakarta Sans for labels
+- [x] Stories: EnergyFocus, DisplayLabel, AestheticForm pro Input i Select
+
+### Technické detaily
+- Energy focus používá `--color-energy-*` barvy z aesthetic.css
+- Focus ring: `0 0 0 3px rgba(249, 115, 22, 0.15), 0 0 12px rgba(249, 115, 22, 0.2)`
+- Dark mode: používá světlejší variantu `rgba(251, 146, 60, *)`
+- Display label: `font-family: var(--font-family-display)` + semibold weight
+
+### Poznámky
+- Textarea komponenta neexistuje - forms jsou Input a Select
+- Další na řadě: Tabs a Alert aesthetic enhancement

@@ -76,9 +76,10 @@
 - [x] Border-accent ring option (`borderAccent` prop)
 - [x] Update Avatar.stories.tsx
 
-**Input/Select/Textarea (forms):** *(1 iterace)*
-- [ ] Energy focus ring varianta (CSS `:focus` s energy color)
-- [ ] Display font pro labels (`displayLabel` prop)
+**Input/Select (forms):** *(HOTOVO)*
+- [x] Energy focus ring varianta (`energyFocus` prop s coral-orange glow)
+- [x] Display font pro labels (`displayLabel` prop)
+- [x] Update stories (EnergyFocus, DisplayLabel, AestheticForm)
 
 **Tabs:** *(1 iterace)*
 - [ ] Energy underline varianta (`variant="energy"`)
@@ -201,7 +202,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 | Sekce | Iterace |
 |-------|---------|
-| 15.0 Komponenty (~~Avatar~~, Forms, Tabs, Alert) | 3 |
+| 15.0 Komponenty (~~Avatar~~, ~~Forms~~, Tabs, Alert) | 2 |
 | 15.0 Prototypy | 4 |
 | ~~15.0 Cleanup + Dokumentace~~ | ~~2~~ ✅ |
 | 15.1 LivePage (P0) | 3 |
@@ -215,7 +216,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 ## Další krok
 
-**→ 15.0 Komponenty (Forms, Tabs, Alert) → Prototypy → 15.1 LivePage**
+**→ 15.0 Komponenty (Tabs, Alert) → Prototypy → 15.1 LivePage**
 
 ---
 

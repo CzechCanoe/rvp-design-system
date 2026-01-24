@@ -291,3 +291,124 @@ export const FormExample: Story = {
     },
   },
 };
+
+/* ==========================================================================
+   AESTHETIC ENHANCEMENTS
+   ========================================================================== */
+
+export const EnergyFocus: Story = {
+  name: 'Aesthetic: Energy Focus',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '320px' }}>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Primary Focus (default)</h4>
+        <Input
+          label="Email"
+          type="email"
+          placeholder="you@example.com"
+        />
+      </div>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Energy Focus (coral-orange)</h4>
+        <Input
+          label="Email"
+          type="email"
+          placeholder="you@example.com"
+          energyFocus
+        />
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Energy focus ring uses vibrant coral-orange glow instead of primary blue. Perfect for CTAs and forms that need to stand out.',
+      },
+    },
+  },
+};
+
+export const DisplayLabel: Story = {
+  name: 'Aesthetic: Display Label',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '320px' }}>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Standard Label</h4>
+        <Input
+          label="Jméno závodníka"
+          placeholder="Jan Novák"
+        />
+      </div>
+      <div>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Display Label (Plus Jakarta Sans)</h4>
+        <Input
+          label="Jméno závodníka"
+          placeholder="Jan Novák"
+          displayLabel
+        />
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Display label uses Plus Jakarta Sans font for aesthetic emphasis. Use for hero forms and prominent inputs.',
+      },
+    },
+  },
+};
+
+export const AestheticForm: Story = {
+  name: 'Aesthetic: Hero Registration Form',
+  render: () => (
+    <div
+      style={{
+        padding: '32px',
+        background: 'var(--bg-mesh-primary, linear-gradient(135deg, rgba(17, 118, 166, 0.1) 0%, rgba(249, 115, 22, 0.05) 100%))',
+        borderRadius: '16px',
+        maxWidth: '400px',
+      }}
+    >
+      <h2 style={{ margin: '0 0 24px 0', fontFamily: 'Plus Jakarta Sans, sans-serif', fontWeight: 700 }}>
+        Registrace závodníka
+      </h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <Input
+          label="Jméno a příjmení"
+          iconLeft={<UserIcon />}
+          placeholder="Jan Novák"
+          displayLabel
+          energyFocus
+          size="lg"
+        />
+        <Input
+          type="email"
+          label="Email"
+          iconLeft={<MailIcon />}
+          placeholder="jan.novak@example.com"
+          displayLabel
+          energyFocus
+          size="lg"
+        />
+        <Input
+          type="password"
+          label="Heslo"
+          iconLeft={<LockIcon />}
+          placeholder="••••••••"
+          helperText="Minimálně 8 znaků"
+          displayLabel
+          energyFocus
+          size="lg"
+        />
+      </div>
+    </div>
+  ),
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        story: 'Hero registration form combining display labels, energy focus, and large size for maximum visual impact.',
+      },
+    },
+  },
+};
