@@ -569,11 +569,52 @@
   margin: 0;
 }
 
-.athlete-highlight-card__medal {
+/* Highlight icons - professional SVG styling */
+.athlete-highlight-card__icon {
   position: absolute;
   top: var(--spacing-4);
   right: var(--spacing-4);
-  font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.athlete-highlight-card__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Icon variants */
+.highlight-icon--olympic {
+  /* Olympic medal icons are self-colored */
+}
+
+.highlight-icon--world {
+  color: var(--color-primary);
+}
+
+.highlight-icon--cup {
+  color: #DAA520; /* Gold trophy */
+}
+
+.highlight-icon--national {
+  color: var(--color-primary);
+}
+
+.highlight-icon--promotion {
+  color: var(--color-success);
+}
+
+/* Aesthetic mode - larger icons with energy accent */
+.athlete-public-profile--aesthetic .athlete-highlight-card__icon {
+  width: 48px;
+  height: 48px;
+}
+
+.athlete-public-profile--aesthetic .highlight-icon--cup {
+  color: var(--color-energy-500);
 }
 
 /* ============================================================================

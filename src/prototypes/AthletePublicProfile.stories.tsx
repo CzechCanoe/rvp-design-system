@@ -40,6 +40,8 @@ const athleteData = {
   vtPoints: 1250,
   ranking: 1,
   imageUrl: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&h=400&fit=crop&crop=faces',
+  // Action photo for hero background (different from portrait)
+  actionImageUrl: 'https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?w=1920&h=1080&fit=crop',
   stats: {
     wins: 98,
     podiums: 187,
@@ -51,19 +53,19 @@ const athleteData = {
       year: '2021',
       title: 'Olympijské zlato',
       description: 'Tokio 2020 - K1 muži',
-      medal: '🥇',
+      iconType: 'olympic-gold' as HighlightType,
     },
     {
       year: '2023',
       title: 'Mistr světa',
       description: 'Lee Valley, Velká Británie - K1',
-      medal: '🥇',
+      iconType: 'world' as HighlightType,
     },
     {
       year: '2024',
       title: 'Celkový vítěz SP',
       description: 'Světový pohár - K1 muži',
-      medal: '🏆',
+      iconType: 'cup' as HighlightType,
     },
   ],
   recentResults: [
@@ -83,6 +85,7 @@ const ryAthleteData = {
   club: 'Dukla Praha',
   section: 'ry' as const,
   imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces',
+  actionImageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920&h=1080&fit=crop',
   stats: {
     wins: 89,
     podiums: 156,
@@ -94,19 +97,19 @@ const ryAthleteData = {
       year: '2023',
       title: 'Mistr světa',
       description: 'Duisburg, Německo - C1 1000m',
-      medal: '🥇',
+      iconType: 'world' as HighlightType,
     },
     {
       year: '2022',
       title: 'Mistr Evropy',
       description: 'Mnichov, Německo - C1 1000m',
-      medal: '🥇',
+      iconType: 'world' as HighlightType,
     },
     {
       year: '2024',
       title: 'Celkový vítěz SP',
       description: 'Světový pohár - C1 muži',
-      medal: '🏆',
+      iconType: 'cup' as HighlightType,
     },
   ],
 };
@@ -121,6 +124,7 @@ const vtAthleteData = {
   vtPoints: 890,
   ranking: 5,
   imageUrl: undefined,
+  actionImageUrl: 'https://images.unsplash.com/photo-1472745942893-4b9f730c7668?w=1920&h=1080&fit=crop',
   stats: {
     wins: 12,
     podiums: 34,
@@ -132,13 +136,13 @@ const vtAthleteData = {
       year: '2025',
       title: 'Mistr ČR',
       description: 'VT třída A - sjezd',
-      medal: '🥇',
+      iconType: 'national' as HighlightType,
     },
     {
       year: '2024',
       title: 'Postup do třídy A',
       description: 'Na základě výsledků sezóny 2024',
-      medal: '📈',
+      iconType: 'promotion' as HighlightType,
     },
   ],
 };
@@ -213,16 +217,6 @@ function ShareIcon() {
   );
 }
 
-function DownloadIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="7 10 12 15 17 10" />
-      <line x1="12" y1="15" x2="12" y2="3" />
-    </svg>
-  );
-}
-
 function TrendUpIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -230,6 +224,94 @@ function TrendUpIcon() {
       <polyline points="17 6 23 6 23 12" />
     </svg>
   );
+}
+
+// Career highlight icons - professional SVG variants
+function OlympicMedalIcon({ variant = 'gold' }: { variant?: 'gold' | 'silver' | 'bronze' }) {
+  const colors = {
+    gold: { primary: '#FFD700', secondary: '#DAA520' },
+    silver: { primary: '#C0C0C0', secondary: '#A8A8A8' },
+    bronze: { primary: '#CD7F32', secondary: '#A0522D' },
+  };
+  const { primary, secondary } = colors[variant];
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="highlight-icon highlight-icon--olympic">
+      <circle cx="12" cy="14" r="7" fill={primary} stroke={secondary} strokeWidth="1.5" />
+      <path d="M9 2L12 8L15 2" stroke={secondary} strokeWidth="1.5" fill="none" />
+      <path d="M6 3L12 8L18 3" stroke={primary} strokeWidth="1" fill="none" />
+      <circle cx="12" cy="14" r="4" fill={secondary} opacity="0.3" />
+      <path d="M10 14L11.5 15.5L14 12" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function WorldChampionIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="highlight-icon highlight-icon--world">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+      <ellipse cx="12" cy="12" rx="4" ry="9" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M3 12h18" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M5 7h14" stroke="currentColor" strokeWidth="1" opacity="0.6" />
+      <path d="M5 17h14" stroke="currentColor" strokeWidth="1" opacity="0.6" />
+    </svg>
+  );
+}
+
+function CupIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="highlight-icon highlight-icon--cup">
+      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+      <path d="M4 22h16" />
+      <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+      <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+      <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" fill="currentColor" opacity="0.15" />
+      <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+    </svg>
+  );
+}
+
+function NationalChampionIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="highlight-icon highlight-icon--national">
+      <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9" fill="currentColor" opacity="0.15" />
+      <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9" />
+    </svg>
+  );
+}
+
+function PromotionIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="highlight-icon highlight-icon--promotion">
+      <path d="M12 20V4" />
+      <path d="M5 11l7-7 7 7" />
+      <path d="M5 18h14" strokeDasharray="2 2" />
+    </svg>
+  );
+}
+
+// Map highlight types to icons
+type HighlightType = 'olympic-gold' | 'olympic-silver' | 'olympic-bronze' | 'world' | 'cup' | 'national' | 'promotion';
+
+function getHighlightIcon(type: HighlightType) {
+  switch (type) {
+    case 'olympic-gold':
+      return <OlympicMedalIcon variant="gold" />;
+    case 'olympic-silver':
+      return <OlympicMedalIcon variant="silver" />;
+    case 'olympic-bronze':
+      return <OlympicMedalIcon variant="bronze" />;
+    case 'world':
+      return <WorldChampionIcon />;
+    case 'cup':
+      return <CupIcon />;
+    case 'national':
+      return <NationalChampionIcon />;
+    case 'promotion':
+      return <PromotionIcon />;
+    default:
+      return <TrophyIcon />;
+  }
 }
 
 // ============================================================================
@@ -305,8 +387,10 @@ function AthletePublicProfile({
     aesthetic && 'athlete-public-profile--aesthetic',
   ].filter(Boolean).join(' ');
 
-  const heroBackgroundStyle = showBackgroundImage && athlete.imageUrl
-    ? { backgroundImage: `url(${athlete.imageUrl})` }
+  // Use action photo for hero background, fall back to portrait if not available
+  const heroBackgroundUrl = athlete.actionImageUrl || athlete.imageUrl;
+  const heroBackgroundStyle = showBackgroundImage && heroBackgroundUrl
+    ? { backgroundImage: `url(${heroBackgroundUrl})` }
     : { background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)' };
 
   // Render header based on variant
@@ -405,9 +489,8 @@ function AthletePublicProfile({
           <div className="athlete-hero__info">
             <h1 className="athlete-hero__name">{athlete.name}</h1>
             <div className="athlete-hero__subtitle">
-              <span className="athlete-hero__country">
+              <span className="athlete-hero__country" title={athlete.country}>
                 <span className="athlete-hero__country-flag">{athlete.countryFlag}</span>
-                {athlete.country}
               </span>
               <div className="athlete-hero__badges">
                 <Badge section={section} size="lg" glow>
@@ -439,9 +522,6 @@ function AthletePublicProfile({
           <div className="athlete-hero__actions">
             <Button variant="secondary" size="md">
               <ShareIcon /> Sdílet
-            </Button>
-            <Button variant="ghost" size="md">
-              <DownloadIcon /> Export
             </Button>
           </div>
         </div>
@@ -508,7 +588,9 @@ function AthletePublicProfile({
                   <span className="athlete-highlight-card__year">{highlight.year}</span>
                   <h3 className="athlete-highlight-card__title">{highlight.title}</h3>
                   <p className="athlete-highlight-card__description">{highlight.description}</p>
-                  <span className="athlete-highlight-card__medal">{highlight.medal}</span>
+                  <span className="athlete-highlight-card__icon">
+                    {getHighlightIcon(highlight.iconType)}
+                  </span>
                 </article>
               ))}
             </div>

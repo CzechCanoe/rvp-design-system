@@ -4883,3 +4883,47 @@ Aesthetic refresh aplikován na LivePage jako první prototyp. Změny:
 - RunDetailModal je nyní reusable komponenta použitelná v LivePage i samostatně
 - "Modrá čára vpravo" je ve skutečnosti levý inset box-shadow pro hover stav clickable řádků
 - Varianty ResultsTable jsou rozumně organizované, není potřeba redukce
+
+---
+
+## 2026-01-25 - Fáze 15.3: Rozbité věci (P2)
+
+### Dokončeno
+- [x] Analyzována DashboardPage - není rozbitá, stories funkční
+- [x] Přidán `container-type: inline-size` do KanoeCzContext pro embed container queries
+- [x] Opraveny responsive styly AthletePublicProfile pro 480px breakpoint
+- [x] Zmenšen negativní margin na stats banner pro prevenci překrývání
+
+### Problémy a řešení
+1. **Problém:** CalendarPage EmbedWithSidebar nereagovala na container queries
+   **Řešení:** Přidán `container-type: inline-size` do `.kanoe-embed` v KanoeCzContext.css
+
+2. **Problém:** AthletePublicProfile na malých mobilech (pod 480px) měla příliš velké prvky
+   **Řešení:** Rozšířeny responsive styly pro 480px breakpoint - hero, avatar, badges, stats cards
+
+### Poznámky
+- DashboardPage byla v plánu jako "úplně rozbitá", ale po analýze je funkční
+- Fáze dokončena v 1 iteraci místo plánovaných 2
+
+---
+
+## 2026-01-25 - Fáze 15.4: AthletePublicProfile Design vylepšení
+
+### Dokončeno
+- [x] Hero pozadí odděleno od avataru - nová `actionImageUrl` property pro akční fotky
+- [x] Duplicita (CZ CZE) opravena - pouze emoji vlajka, country code jako title tooltip
+- [x] Kariérní úspěchy - emoji nahrazeny profesionálními SVG ikonami:
+  - OlympicMedalIcon (gold/silver/bronze varianty)
+  - WorldChampionIcon (globe)
+  - CupIcon (trophy)
+  - NationalChampionIcon (star)
+  - PromotionIcon (arrow up)
+- [x] Export button odstraněn (zbytečný, pouze Sdílet zůstává)
+
+### Technické změny
+- Přidány nové SVG icon komponenty pro highlight typy
+- CSS styling pro `.athlete-highlight-card__icon` s variantami pro aesthetic mode
+- Build a Storybook build ověřeny jako funkční
+
+### Poznámky
+Zbývá v 15.4: Calendar víkendová prezentace, Results Top 3 karty přehodnocení

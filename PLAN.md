@@ -190,10 +190,10 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 ### 15.4 Design vylepšení (P3) *(2 iterace)*
 
 **AthletePublicPage / ClubPublicProfile:**
-- [ ] Pozadí headeru - akční fotka místo tváře (2x stejná tvář)
-- [ ] (CZ CZE) chip - odstranit duplicitu
-- [ ] Ikony kariérních úspěchů - méně dětinské
-- [ ] Export button - k čemu? Zvážit odstranění
+- [x] Pozadí headeru - akční fotka místo tváře (actionImageUrl oddělené od avataru)
+- [x] (CZ CZE) chip - pouze vlajka (country code jako title)
+- [x] Ikony kariérních úspěchů - profesionální SVG ikony (olympic medal, world, cup, national, promotion)
+- [x] Export button - odstraněn (pouze Sdílet zůstává)
 
 **Calendar:**
 - [ ] Většina závodů o víkendu - přizpůsobit prezentaci
@@ -228,7 +228,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 ## Další krok
 
-**→ 15.4 Design vylepšení (P3) - AthletePublicPage pozadí, Calendar víkendová prezentace, Results Top 3 karty**
+**→ 15.4 Design vylepšení (P3) - Calendar víkendová prezentace, Results Top 3 karty**
 
 ---
 
