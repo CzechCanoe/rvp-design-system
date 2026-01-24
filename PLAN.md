@@ -71,62 +71,47 @@
 - [x] Live badge component (`.csk-results-table__live-badge`)
 - [x] Mesh background wrapper varianta (`.csk-results-table-wrapper--aesthetic`)
 
-**Avatar:**
-- [ ] Energy glow varianta (`--glow-energy-md`)
-- [ ] Border-accent ring option
+**Avatar:** *(1 iterace)*
+- [ ] Energy glow varianta (`glow` prop s `--glow-energy-md`)
+- [ ] Border-accent ring option (`borderAccent` prop)
 - [ ] Update Avatar.stories.tsx
 
-**Input/Select/Textarea (forms):**
-- [ ] Energy focus ring varianta
-- [ ] Display font pro labels (optional prop)
+**Input/Select/Textarea (forms):** *(1 iterace)*
+- [ ] Energy focus ring varianta (CSS `:focus` s energy color)
+- [ ] Display font pro labels (`displayLabel` prop)
 
-**Tabs:**
-- [ ] Energy underline varianta
+**Tabs:** *(1 iterace)*
+- [ ] Energy underline varianta (`variant="energy"`)
 - [ ] Display font pro tab labels
 
-**Alert/Toast:**
-- [ ] Energy varianta pro info/highlight
+**Alert/Toast:** *(1 iterace)*
+- [ ] Energy varianta pro info/highlight (`variant="energy"`)
 - [ ] Display font pro title
 
-#### Prototypy - Detailní plán
+#### Prototypy - Detailní plán *(4 iterace celkem)*
 
-**LivePage (priorita #1):**
-- [ ] Hero sekce:
-  - Mesh background (`--bg-mesh-hero`)
-  - Grain overlay
-  - Display typography pro název závodu
-  - Energy badge pro "LIVE" indikátor
-  - Staggered reveal animace
-- [ ] Results sekce:
-  - ResultsTable s aesthetic variantou
-  - Energy live indicators
-  - Display font pro rank
-- [ ] Oncourse sekce:
-  - Border-accent pro aktivní závodníky
-  - Energy highlights
+**LivePage:** *(1 iterace)*
+- [ ] Hero: mesh background, grain, display typography, energy LIVE badge, staggered reveal
+- [ ] Results: ResultsTable aesthetic, energy live indicators
+- [ ] Oncourse: border-accent pro aktivní závodníky
 
-**AthletePublicPage:**
-- [ ] Hero s mesh background
-- [ ] Display typography pro jméno
-- [ ] Stats cards s border-accent
-- [ ] Energy accenty pro highlights (medaile, rekordy)
+**AthletePublicPage:** *(1 iterace)*
+- [ ] Hero s mesh background + display typography
+- [ ] Stats cards s border-accent + energy highlights
 
-**ClubPublicProfile:**
+**ClubPublicProfile:** *(společně s Athlete)*
 - [ ] Obdobně jako AthletePublicPage
 
-**EventDetailPage:**
+**EventDetailPage:** *(1 iterace)*
 - [ ] Header s energy CTA ("Sledovat live")
-- [ ] Display typography pro název
-- [ ] Schedule s border-accent pro aktuální položku
+- [ ] Display typography + schedule border-accent
 
-**CalendarPage:**
-- [ ] Featured events s border-accent
-- [ ] Energy badge pro live závody
-- [ ] Mesh background pro hero/filter sekci
+**CalendarPage:** *(1 iterace)*
+- [ ] Featured events s border-accent + energy badge pro live
+- [ ] Mesh background hero
 
-**RegistrationPage:**
-- [ ] Energy CTA pro hlavní akci
-- [ ] Form inputs s energy focus
+**RegistrationPage:** *(společně s Calendar)*
+- [ ] Energy CTA + form inputs s energy focus
 
 #### Cleanup - Odstranit nepotřebné varianty (HOTOVO)
 
@@ -140,9 +125,9 @@
 - [x] Finální varianty: default, primary, success, warning, error, info, gradient, energy
 - [x] Section varianty: dv, ry, vt + vtClass (beze změny)
 
-**Card:**
-- [ ] Zhodnotit `glass` variantu - ponechat pouze pokud má jasný use case
-- [ ] Zhodnotit `featured` vs nová aesthetic varianta - možná sloučit
+**Card:** *(1 iterace)*
+- [ ] Odstranit `glass` variantu (není use case)
+- [ ] Sloučit `featured` → `aesthetic` (duplicita)
 
 **Header:**
 - [x] Odstranit `transparent` a `glass` varianty
@@ -152,20 +137,13 @@
 - [x] Odstranit `glass` style
 - [x] Finální style varianty: default, gradient, embed
 
-#### Dokumentace
-- [ ] Aktualizovat DESIGN_PRINCIPLES.md:
-  - Přidat sekci "Dynamic Sport Aesthetic"
-  - Dokumentovat energy color usage
-  - Display font guidelines
-- [ ] Aesthetic Guidelines story:
-  - Kdy použít display font vs body font
-  - Energy vs primary color usage
-  - Mesh backgrounds appropriate contexts
-  - Animation guidelines
+#### Dokumentace *(1 iterace)*
+- [ ] DESIGN_PRINCIPLES.md: "Dynamic Sport Aesthetic" sekce (energy color, display font)
+- [ ] Aesthetic Guidelines story: display font vs body, energy vs primary, mesh contexts, animations
 
 ---
 
-### 15.1 Kritické - LivePage (P0)
+### 15.1 Kritické - LivePage (P0) *(3 iterace)*
 
 **Cíl:** LivePage musí být vymazlená namax - první nasazení.
 
@@ -178,7 +156,7 @@
 
 Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
-### 15.2 Kritické - Results komponenta (P1)
+### 15.2 Kritické - Results komponenta (P1) *(2 iterace)*
 
 **Cíl:** Results je klíčová komponenta, musí být super vymazlená.
 
@@ -189,14 +167,14 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 - [ ] **Modrá čára vpravo** - vysvětlit účel nebo změnit
 - [ ] **Zredukovat varianty** - příliš mnoho headerů/tabulek
 
-### 15.3 Rozbitév věci (P2)
+### 15.3 Rozbité věci (P2) *(2 iterace)*
 
 - [ ] **DashboardPage** - úplně rozbitá
 - [ ] **CalendarPage EmbedWithSidebar** - rozbitá
 - [ ] **AthletePublicPage small mobile** - nefunguje
 - [ ] **AthletePublicPage header cards** - překrývají obsah na mobilech
 
-### 15.4 Design vylepšení (P3)
+### 15.4 Design vylepšení (P3) *(2 iterace)*
 
 **AthletePublicPage / ClubPublicProfile:**
 - [ ] Pozadí headeru - akční fotka místo tváře (2x stejná tvář)
@@ -206,35 +184,37 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 **Calendar:**
 - [ ] Většina závodů o víkendu - přizpůsobit prezentaci
-- [ ] Reference: https://jakubbican.github.io/pages/terminovka
 
 **Results Page:**
 - [ ] Top 3 karty nejsou zajímavé - přehodnotit
 
-### 15.5 Nové koncepty
+### 15.5 Nové koncepty *(2 iterace)*
 
 - [ ] **Sdílená hledací komponenta** - fulltext + chipy pro rychlé filtry
 - [ ] **Registration UX** - přidávání jezdců, vícečlenné posádky
 - [ ] **Event indikace live** - že závod běží a má live results
 
-### 15.6 Rozhodnutí k diskuzi
+---
 
-| Téma | Otázka |
-|------|--------|
-| **Glass varianty** | Mají smysl? Udělat demo s reálným kontextem |
-| **Header varianty** | Příliš mnoho - zredukovat? |
-| **Hutný header bez fotky** | Jak v kontextu kanoe.cz? |
+## Odhad iterací
+
+| Sekce | Iterace |
+|-------|---------|
+| 15.0 Komponenty (Avatar, Forms, Tabs, Alert) | 4 |
+| 15.0 Prototypy | 4 |
+| 15.0 Cleanup + Dokumentace | 2 |
+| 15.1 LivePage (P0) | 3 |
+| 15.2 Results (P1) | 2 |
+| 15.3 Rozbité věci (P2) | 2 |
+| 15.4 Design vylepšení (P3) | 2 |
+| 15.5 Nové koncepty | 2 |
+| **Celkem** | **~21** |
 
 ---
 
 ## Další krok
 
-**→ 15.0 Aesthetic aplikace na komponenty → 15.1 LivePage**
-
-Pořadí:
-1. Aplikovat aesthetic na Card, Header, Badge, ResultsTable
-2. Opravit rozbité věci (15.3) paralelně
-3. LivePage s plnou aesthetic integrací
+**→ 15.0 Dokumentace → Komponenty → Prototypy → 15.1 LivePage**
 
 ---
 
