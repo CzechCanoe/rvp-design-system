@@ -216,12 +216,14 @@
 
 /* Medium (default) - defined in base */
 
-/* Large */
+/* Large - with display font for prominent CTAs */
 .csk-button--lg {
   padding: var(--spacing-button-padding-y-lg) var(--spacing-button-padding-x-lg);
   font-size: var(--font-size-base);
   min-height: 52px;
   font-weight: var(--font-weight-semibold);
+  font-family: var(--font-family-display, var(--font-family-sans));
+  letter-spacing: var(--text-headline-tracking, -0.02em);
 }
 
 /* ==========================================================================
@@ -231,6 +233,19 @@
 /* Full width */
 .csk-button--full-width {
   width: 100%;
+}
+
+/* Glow effect on hover - for high-energy CTAs */
+.csk-button--glow:hover:not(:disabled):not([aria-disabled='true']) {
+  box-shadow: var(--glow-energy-md);
+}
+
+.csk-button--glow.csk-button--primary:hover:not(:disabled):not([aria-disabled='true']) {
+  box-shadow: var(--shadow-primary-md), var(--glow-energy-sm);
+}
+
+.csk-button--glow.csk-button--gradient:hover:not(:disabled):not([aria-disabled='true']) {
+  box-shadow: var(--shadow-primary-md), var(--glow-energy-md);
 }
 
 /* Loading state */

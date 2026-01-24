@@ -38,10 +38,10 @@
 
 #### Komponenty - Detailní plán
 
-**Button (částečně hotovo):**
+**Button (HOTOVO):**
 - [x] `gradient-energy` varianta
-- [ ] Display font pro large size (`font-family: var(--font-family-display)`)
-- [ ] Hover glow efekt utility class
+- [x] Display font pro large size (`font-family: var(--font-family-display)`)
+- [x] Hover glow efekt - `glow` prop pro energy glow on hover
 
 **Card:**
 - [ ] Nová varianta `aesthetic` nebo `featured-aesthetic`:

@@ -31,6 +31,10 @@ const meta: Meta<typeof Button> = {
       control: 'boolean',
       description: 'Disables the button',
     },
+    glow: {
+      control: 'boolean',
+      description: 'Adds energy glow effect on hover',
+    },
     children: {
       control: 'text',
       description: 'Button label',
@@ -91,7 +95,7 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Three sizes: sm (32px), md (40px), lg (48px).',
+        story: 'Three sizes: sm (32px), md (40px), lg (52px). Large size uses display font (Plus Jakarta Sans) for prominent CTAs.',
       },
     },
   },
@@ -199,5 +203,58 @@ export const FullWidth: Story = {
   },
   parameters: {
     layout: 'padded',
+  },
+};
+
+/* ==========================================================================
+   GLOW EFFECT
+   ========================================================================== */
+
+export const GlowEffect: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+      <Button glow>Primary with Glow</Button>
+      <Button variant="gradient" glow>Gradient with Glow</Button>
+      <Button variant="gradient-energy" glow>Energy with Glow</Button>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'The `glow` prop adds an energy glow effect on hover. Works with any variant, most impactful on gradient buttons.',
+      },
+    },
+  },
+};
+
+/* ==========================================================================
+   AESTHETIC SHOWCASE - Large CTAs
+   ========================================================================== */
+
+export const AestheticCTA: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <Button variant="gradient-energy" size="lg" glow>
+          Sledovat live
+        </Button>
+        <Button variant="gradient" size="lg" glow>
+          Registrovat závod
+        </Button>
+        <Button variant="primary" size="lg">
+          Zobrazit výsledky
+        </Button>
+      </div>
+      <div style={{ fontSize: '12px', color: '#666' }}>
+        Large buttons use Plus Jakarta Sans display font with tighter letter-spacing for prominent CTAs.
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Recommended combination for hero CTAs: large size + gradient-energy/gradient variant + glow effect.',
+      },
+    },
   },
 };
