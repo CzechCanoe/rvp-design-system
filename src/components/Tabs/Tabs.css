@@ -280,6 +280,70 @@
 }
 
 /* =============================================================================
+   VARIANT: ENERGY (Dynamic Sport - coral-orange accent)
+   ============================================================================= */
+
+.csk-tabs--energy .csk-tabs__list {
+  border-bottom: 1px solid var(--color-border-default);
+  gap: 0;
+}
+
+.csk-tabs--energy .csk-tabs__tab {
+  position: relative;
+  margin-bottom: -1px;
+  border-radius: 0;
+}
+
+/* Energy gradient underline */
+.csk-tabs--energy .csk-tabs__tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: var(--gradient-energy);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  transition:
+    width 0.3s var(--ease-sport),
+    left 0.3s var(--ease-sport),
+    box-shadow 0.3s var(--ease-sport);
+}
+
+.csk-tabs--energy .csk-tabs__tab--active {
+  color: var(--color-energy-600);
+  font-weight: var(--font-weight-semibold);
+}
+
+.csk-tabs--energy .csk-tabs__tab--active::after {
+  width: 100%;
+  left: 0;
+  box-shadow: var(--glow-energy-sm);
+}
+
+/* Hover preview with energy hint */
+.csk-tabs--energy .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active)::after {
+  width: 60%;
+  left: 20%;
+  background: var(--gradient-energy);
+  opacity: 0.5;
+}
+
+/* Hover translateY effect */
+.csk-tabs--energy .csk-tabs__tab:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+/* Dark mode energy */
+[data-theme="dark"] .csk-tabs--energy .csk-tabs__tab--active {
+  color: var(--color-energy-400);
+}
+
+[data-theme="dark"] .csk-tabs--energy .csk-tabs__tab--active::after {
+  box-shadow: var(--glow-energy-md);
+}
+
+/* =============================================================================
    VARIANT: GLASS (Glassmorphism pills)
    ============================================================================= */
 
@@ -364,10 +428,12 @@
   padding-top: var(--spacing-4);
 }
 
-/* Large */
+/* Large - uses display font for aesthetic emphasis */
 .csk-tabs--lg .csk-tabs__tab {
   padding: var(--spacing-3) var(--spacing-6);
   font-size: var(--font-size-lg);
+  font-family: var(--font-family-display);
+  letter-spacing: var(--text-display-tracking);
   min-height: 52px;
 }
 

@@ -356,6 +356,13 @@
   margin-bottom: var(--spacing-1);
 }
 
+/* Display font for title (aesthetic enhancement) */
+.csk-toast--display-title .csk-toast__title {
+  font-family: var(--font-family-display);
+  font-weight: var(--text-display-weight);
+  letter-spacing: var(--text-display-tracking);
+}
+
 .csk-toast__message {
   font-size: var(--text-sm-size);
   line-height: var(--line-height-normal);
@@ -532,6 +539,40 @@
   filter: drop-shadow(0 0 6px var(--color-info-400));
 }
 
+/* Energy variant (Dynamic Sport - coral-orange accent) */
+.csk-toast--energy {
+  border-left: 4px solid transparent;
+  border-image: var(--gradient-energy) 1;
+  background:
+    linear-gradient(var(--color-bg-elevated), var(--color-bg-elevated)) padding-box,
+    var(--gradient-energy) border-box;
+}
+
+.csk-toast--energy .csk-toast__icon {
+  color: var(--color-energy-500);
+}
+
+.csk-toast--energy:not(.csk-toast--exiting) .csk-toast__icon {
+  filter: drop-shadow(0 0 6px var(--color-energy-400));
+}
+
+.csk-toast--energy .csk-toast__progress-bar {
+  background: var(--gradient-energy);
+}
+
+.csk-toast--energy .csk-toast__action {
+  background-color: var(--color-energy-50);
+  color: var(--color-energy-600);
+}
+
+.csk-toast--energy .csk-toast__action:hover {
+  background-color: var(--color-energy-100);
+}
+
+.csk-toast--energy .csk-toast__action:active {
+  background-color: var(--color-energy-200);
+}
+
 /* ==========================================================================
  * STYLE VARIANTS - Gradient, Glass
  * ========================================================================== */
@@ -620,6 +661,10 @@
   background: linear-gradient(135deg, var(--color-info-500), var(--color-info-600));
 }
 
+.csk-toast--style-gradient.csk-toast--energy {
+  background: var(--gradient-energy);
+}
+
 /* ==========================================================================
  * DARK MODE
  * ========================================================================== */
@@ -658,6 +703,24 @@
 
 [data-theme="dark"] .csk-toast__progress {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark mode energy variant */
+[data-theme="dark"] .csk-toast--energy .csk-toast__icon {
+  color: var(--color-energy-400);
+}
+
+[data-theme="dark"] .csk-toast--energy:not(.csk-toast--exiting) .csk-toast__icon {
+  filter: drop-shadow(0 0 8px var(--color-energy-400));
+}
+
+[data-theme="dark"] .csk-toast--energy .csk-toast__action {
+  background-color: rgba(249, 115, 22, 0.2);
+  color: var(--color-energy-400);
+}
+
+[data-theme="dark"] .csk-toast--energy .csk-toast__action:hover {
+  background-color: rgba(249, 115, 22, 0.3);
 }
 
 /* Dark mode glass variant */

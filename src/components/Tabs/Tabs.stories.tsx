@@ -19,7 +19,7 @@ const meta: Meta<typeof Tabs> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['line', 'pills', 'gradient', 'gradient-line', 'glass'],
+      options: ['line', 'pills', 'gradient', 'gradient-line', 'energy', 'glass'],
       description: 'Visual variant of the tabs',
     },
     size: {
@@ -100,6 +100,41 @@ export const FullWidth: Story = {
     tabs: basicTabs,
     variant: 'line',
     fullWidth: true,
+  },
+};
+
+// =============================================================================
+// ENERGY VARIANT (Dynamic Sport Aesthetic)
+// =============================================================================
+
+export const Energy: Story = {
+  args: {
+    tabs: basicTabs,
+    variant: 'energy',
+    size: 'md',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Energy variant with coral-orange underline glow. Part of the Dynamic Sport aesthetic.',
+      },
+    },
+  },
+};
+
+export const EnergyLarge: Story = {
+  args: {
+    tabs: basicTabs,
+    variant: 'energy',
+    size: 'lg',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Energy variant in large size uses display font (Plus Jakarta Sans) for emphasis.',
+      },
+    },
   },
 };
 
@@ -319,6 +354,10 @@ export const AllVariants: Story = {
       <div>
         <h3 style={{ marginBottom: '16px' }}>Gradient Line</h3>
         <Tabs tabs={basicTabs} variant="gradient-line" />
+      </div>
+      <div>
+        <h3 style={{ marginBottom: '16px' }}>Energy (Dynamic Sport)</h3>
+        <Tabs tabs={basicTabs} variant="energy" />
       </div>
       <div
         style={{

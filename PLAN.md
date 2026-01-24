@@ -81,13 +81,13 @@
 - [x] Display font pro labels (`displayLabel` prop)
 - [x] Update stories (EnergyFocus, DisplayLabel, AestheticForm)
 
-**Tabs:** *(1 iterace)*
-- [ ] Energy underline varianta (`variant="energy"`)
-- [ ] Display font pro tab labels
+**Tabs:** *(HOTOVO)*
+- [x] Energy underline varianta (`variant="energy"`)
+- [x] Display font pro large size tab labels
 
-**Alert/Toast:** *(1 iterace)*
-- [ ] Energy varianta pro info/highlight (`variant="energy"`)
-- [ ] Display font pro title
+**Toast:** *(HOTOVO)*
+- [x] Energy varianta pro info/highlight (`variant="energy"`)
+- [x] Display font pro title (`displayTitle` prop)
 
 #### Prototypy - Detailní plán *(4 iterace celkem)*
 
@@ -202,7 +202,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 | Sekce | Iterace |
 |-------|---------|
-| 15.0 Komponenty (~~Avatar~~, ~~Forms~~, Tabs, Alert) | 2 |
+| ~~15.0 Komponenty (Avatar, Forms, Tabs, Toast)~~ | ~~2~~ ✅ |
 | 15.0 Prototypy | 4 |
 | ~~15.0 Cleanup + Dokumentace~~ | ~~2~~ ✅ |
 | 15.1 LivePage (P0) | 3 |
@@ -216,7 +216,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 ## Další krok
 
-**→ 15.0 Komponenty (Tabs, Alert) → Prototypy → 15.1 LivePage**
+**→ 15.0 Prototypy (LivePage, AthletePublicPage, ...) → 15.1 LivePage**
 
 ---
 

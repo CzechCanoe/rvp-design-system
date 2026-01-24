@@ -15,7 +15,7 @@ import './Toast.css';
 // TYPES
 // =============================================================================
 
-export type ToastVariant = 'default' | 'success' | 'warning' | 'error' | 'info';
+export type ToastVariant = 'default' | 'success' | 'warning' | 'error' | 'info' | 'energy';
 export type ToastPosition =
   | 'top-left'
   | 'top-center'
@@ -46,6 +46,8 @@ export interface Toast {
   onDismiss?: () => void;
   /** Custom icon (overrides variant icon) */
   icon?: ReactNode;
+  /** Use display font for title (aesthetic enhancement) */
+  displayTitle?: boolean;
   /** Action button */
   action?: {
     label: string;
@@ -66,6 +68,8 @@ export interface ToastContextValue {
   error: (message: ReactNode, options?: ToastOptions) => string;
   /** Add an info toast */
   info: (message: ReactNode, options?: ToastOptions) => string;
+  /** Add an energy toast (highlight/CTA) */
+  energy: (message: ReactNode, options?: ToastOptions) => string;
   /** Dismiss a specific toast */
   dismiss: (id: string) => void;
   /** Dismiss all toasts */
@@ -165,6 +169,7 @@ const ToastItem = ({ toast, onDismiss, showProgress = true, className, ...props 
     'csk-toast',
     `csk-toast--${variant}`,
     styleVariant !== 'default' && `csk-toast--style-${styleVariant}`,
+    toast.displayTitle && 'csk-toast--display-title',
     isExiting && 'csk-toast--exiting',
     isPaused && 'csk-toast--paused',
     className,
@@ -307,6 +312,19 @@ const VariantIcon = ({ variant }: { variant: ToastVariant }) => {
           <line x1="12" y1="8" x2="12.01" y2="8" />
         </svg>
       );
+    case 'energy':
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+        </svg>
+      );
     default:
       return (
         <svg
@@ -398,6 +416,7 @@ export const ToastProvider = ({
     warning: (message, options) => addToast(message, { ...options, variant: 'warning' }),
     error: (message, options) => addToast(message, { ...options, variant: 'error' }),
     info: (message, options) => addToast(message, { ...options, variant: 'info' }),
+    energy: (message, options) => addToast(message, { ...options, variant: 'energy' }),
     dismiss,
     dismissAll,
   };
