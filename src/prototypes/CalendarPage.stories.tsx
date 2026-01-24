@@ -26,6 +26,9 @@ type CalendarPageVariant = 'standalone' | 'satellite' | 'embed';
 /** Calendar view type */
 type CalendarViewType = 'month' | 'list' | 'cards';
 
+/** Visual style variant */
+type CalendarPageStyle = 'default' | 'aesthetic';
+
 interface CalendarPageProps {
   /** Initial section filter */
   initialSection?: 'all' | 'dv' | 'ry' | 'vt';
@@ -37,6 +40,8 @@ interface CalendarPageProps {
   initialView?: CalendarViewType;
   /** Show view switcher */
   showViewSwitcher?: boolean;
+  /** Visual style - default or aesthetic (Dynamic Sport) */
+  style?: CalendarPageStyle;
 }
 
 // Sample race data
@@ -359,6 +364,7 @@ const CalendarPage = ({
   variant = 'standalone',
   initialView = 'month',
   showViewSwitcher = true,
+  style = 'default',
 }: CalendarPageProps) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedSection, setSelectedSection] = useState<string>(initialSection);
@@ -504,8 +510,16 @@ const CalendarPage = ({
     );
   };
 
+  // Build page class names
+  const isAesthetic = style === 'aesthetic';
+  const pageClasses = [
+    'prototype-calendar-page',
+    variant === 'embed' && 'prototype-calendar-page--embed',
+    isAesthetic && 'prototype-calendar-page--aesthetic',
+  ].filter(Boolean).join(' ');
+
   return (
-    <div className={`prototype-calendar-page ${variant === 'embed' ? 'prototype-calendar-page--embed' : ''}`}>
+    <div className={pageClasses}>
       {/* Header */}
       {renderHeader()}
 
@@ -811,6 +825,11 @@ const meta = {
       control: 'boolean',
       description: 'Show view type switcher buttons',
     },
+    style: {
+      control: 'select',
+      options: ['default', 'aesthetic'],
+      description: 'Visual style - default or aesthetic (Dynamic Sport)',
+    },
   },
 } satisfies Meta<typeof CalendarPage>;
 
@@ -938,4 +957,51 @@ export const EmbedCardsView: Story = {
       </KanoeCzContext>
     ),
   ],
+};
+
+// ============================================================================
+// Aesthetic Variants - Dynamic Sport visual style (Phase 15.0)
+// ============================================================================
+
+/**
+ * Aesthetic varianta - plný kalendář s mesh background a display typography.
+ * Staggered reveals, energy accents na live badge.
+ */
+export const Aesthetic: Story = {
+  args: {
+    initialSection: 'all',
+    showLive: true,
+    variant: 'standalone',
+    initialView: 'month',
+    showViewSwitcher: true,
+    style: 'aesthetic',
+  },
+};
+
+/**
+ * Aesthetic varianta s pohledem Seznam.
+ */
+export const AestheticListView: Story = {
+  args: {
+    initialSection: 'all',
+    showLive: true,
+    variant: 'standalone',
+    initialView: 'list',
+    showViewSwitcher: true,
+    style: 'aesthetic',
+  },
+};
+
+/**
+ * Aesthetic varianta s filtrovanou sekcí DV.
+ */
+export const AestheticDivokaVoda: Story = {
+  args: {
+    initialSection: 'dv',
+    showLive: true,
+    variant: 'standalone',
+    initialView: 'month',
+    showViewSwitcher: true,
+    style: 'aesthetic',
+  },
 };

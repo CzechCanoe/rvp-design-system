@@ -1,11 +1,20 @@
 /* ============================================================================
    Registration Page Prototype - Redesigned Styles
+   Phase 15.0: Aesthetic Refresh - Dynamic Sport aesthetic applied
+   - Mesh backgrounds, display typography, energy accents
+   - Energy focus for form inputs, staggered reveal animations
    ============================================================================ */
 
 .registration-page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--color-bg-primary);
+}
+
+/* Aesthetic variant with mesh background */
+.registration-page--aesthetic {
+  background: var(--bg-mesh-primary);
   background-color: var(--color-bg-primary);
 }
 
@@ -160,6 +169,14 @@
   margin: 0 0 var(--spacing-3) 0;
   line-height: 1.2;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Aesthetic title with display font */
+.registration-page--aesthetic .registration-page-hero__title {
+  font-family: var(--font-family-display);
+  font-weight: var(--text-display-weight);
+  letter-spacing: var(--text-display-tracking);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 @media (min-width: 768px) {
@@ -503,6 +520,13 @@
   margin: 0 0 var(--spacing-1) 0;
 }
 
+/* Aesthetic section title with display font */
+.registration-page--aesthetic .registration-page__section-title {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
 .registration-page__section-desc {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
@@ -738,6 +762,13 @@
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   margin: 0;
+}
+
+/* Aesthetic card title with display font */
+.registration-page--aesthetic .registration-page__card-title {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .registration-page__summary-stats {
@@ -1235,5 +1266,133 @@
     flex-direction: column;
     align-items: flex-start;
     gap: var(--spacing-2);
+  }
+}
+
+/* ============================================================================
+   Aesthetic Mode - Dynamic Sport Enhancements (Phase 15.0)
+   ============================================================================ */
+
+/* Hero with mesh overlay */
+.registration-page--aesthetic .registration-page-hero__gradient {
+  background:
+    var(--bg-mesh-hero),
+    linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+}
+
+.registration-page--aesthetic.registration-page--dv .registration-page-hero__gradient {
+  background:
+    var(--bg-mesh-hero),
+    linear-gradient(135deg, #0369a1 0%, #075985 50%, #0c4a6e 100%);
+}
+
+.registration-page--aesthetic.registration-page--ry .registration-page-hero__gradient {
+  background:
+    var(--bg-mesh-hero),
+    linear-gradient(135deg, #059669 0%, #047857 50%, #065f46 100%);
+}
+
+.registration-page--aesthetic.registration-page--vt .registration-page-hero__gradient {
+  background:
+    var(--bg-mesh-hero),
+    linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%);
+}
+
+/* Wizard with staggered reveal */
+.registration-page--aesthetic .registration-page__wizard {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+}
+
+/* Step cards with reveal animation */
+.registration-page--aesthetic .registration-page__step-card {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+  animation-delay: var(--stagger-2);
+}
+
+/* Sidebar cards with staggered reveal */
+.registration-page--aesthetic .registration-page__sidebar > *:nth-child(1) {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+  animation-delay: var(--stagger-2);
+}
+
+.registration-page--aesthetic .registration-page__sidebar > *:nth-child(2) {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+  animation-delay: var(--stagger-3);
+}
+
+.registration-page--aesthetic .registration-page__sidebar > *:nth-child(3) {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+  animation-delay: var(--stagger-4);
+}
+
+.registration-page--aesthetic .registration-page__sidebar > *:nth-child(4) {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+  animation-delay: var(--stagger-5);
+}
+
+/* Step icon with energy gradient */
+.registration-page--aesthetic .registration-page__step-icon {
+  background: var(--gradient-energy-subtle);
+  color: var(--color-energy-600);
+}
+
+/* Active wizard step with energy glow */
+.registration-page--aesthetic .registration-wizard-step--active .registration-wizard-step__circle {
+  box-shadow: var(--glow-energy-sm);
+}
+
+/* Summary card with border-accent */
+.registration-page--aesthetic .registration-page__summary-card {
+  border-left: var(--border-accent-width) solid;
+  border-image: var(--border-accent-gradient) 1;
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+}
+
+/* Deadline countdown with energy colors */
+.registration-page--aesthetic .registration-page__countdown-value {
+  font-family: var(--font-family-display);
+  color: var(--color-energy-600);
+}
+
+/* Stats with display font */
+.registration-page--aesthetic .registration-page__stat-value,
+.registration-page--aesthetic .registration-page-hero__stat-value {
+  font-family: var(--font-family-display);
+}
+
+/* Summary total with energy gradient */
+.registration-page--aesthetic .registration-page__summary-total {
+  background: var(--gradient-energy-subtle);
+  border-color: var(--color-energy-200);
+}
+
+.registration-page--aesthetic .registration-page__summary-total-value {
+  color: var(--color-energy-600);
+  font-family: var(--font-family-display);
+}
+
+/* Athlete item hover with glow */
+.registration-page--aesthetic .registration-page__athlete-item {
+  transition: box-shadow 200ms var(--ease-sport), background-color var(--transition-fast);
+}
+
+.registration-page--aesthetic .registration-page__athlete-item:hover {
+  box-shadow: var(--glow-energy-sm);
+}
+
+/* Hero stats with energy accent */
+.registration-page--aesthetic .registration-page-hero__stat--deadline {
+  background: var(--gradient-energy-subtle);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .registration-page--aesthetic .registration-page__wizard,
+  .registration-page--aesthetic .registration-page__step-card,
+  .registration-page--aesthetic .registration-page__sidebar > * {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }

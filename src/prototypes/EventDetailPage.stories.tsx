@@ -21,6 +21,9 @@ type EventStatus = 'upcoming' | 'registration' | 'live' | 'finished';
 /** Display variant for the page */
 type EventDetailPageVariant = 'standalone' | 'satellite' | 'embed';
 
+/** Visual style variant */
+type EventDetailPageStyle = 'default' | 'aesthetic';
+
 interface EventDetailPageProps {
   /** Event status determines the page layout and available sections */
   status?: EventStatus;
@@ -32,6 +35,8 @@ interface EventDetailPageProps {
   initialTab?: string;
   /** Display variant */
   variant?: EventDetailPageVariant;
+  /** Visual style - default or aesthetic (Dynamic Sport) */
+  style?: EventDetailPageStyle;
 }
 
 // ============================================================================
@@ -258,9 +263,11 @@ const EventDetailPage = ({
   showHero = true,
   initialTab = 'info',
   variant = 'standalone',
+  style = 'default',
 }: EventDetailPageProps) => {
   // Helper to check if we're in embed mode
   const isEmbed = variant === 'embed';
+  const isAesthetic = style === 'aesthetic';
   const [activeTab, setActiveTab] = useState(initialTab);
   const [selectedCategory, setSelectedCategory] = useState('K1M');
 
@@ -555,8 +562,15 @@ const EventDetailPage = ({
     );
   };
 
+  // Build page class names
+  const pageClasses = [
+    'event-detail-page',
+    isEmbed && 'event-detail-page--embed',
+    isAesthetic && 'event-detail-page--aesthetic',
+  ].filter(Boolean).join(' ');
+
   const content = (
-    <div className={`event-detail-page ${isEmbed ? 'event-detail-page--embed' : ''}`}>
+    <div className={pageClasses}>
       {/* Header */}
       {renderHeader()}
 
@@ -608,7 +622,7 @@ const EventDetailPage = ({
             {/* Status-specific CTA */}
             {status === 'registration' && !isEmbed && (
               <div className="event-detail-hero__cta">
-                <Button variant="gradient" size="lg">
+                <Button variant={isAesthetic ? 'gradient-energy' : 'gradient'} size="lg" glow={isAesthetic}>
                   Přihlásit se na závod
                 </Button>
                 <span className="event-detail-hero__deadline">
@@ -620,7 +634,7 @@ const EventDetailPage = ({
 
             {status === 'live' && !isEmbed && (
               <div className="event-detail-hero__cta">
-                <Button variant="gradient" size="lg">
+                <Button variant={isAesthetic ? 'gradient-energy' : 'gradient'} size="lg" glow={isAesthetic}>
                   Sledovat LIVE výsledky
                 </Button>
               </div>
@@ -803,6 +817,11 @@ const meta = {
       options: ['standalone', 'satellite', 'embed'],
       description: 'Display variant for different integration contexts',
     },
+    style: {
+      control: 'select',
+      options: ['default', 'aesthetic'],
+      description: 'Visual style - default or aesthetic (Dynamic Sport)',
+    },
   },
 } satisfies Meta<typeof EventDetailPage>;
 
@@ -885,4 +904,68 @@ export const EmbedWithSidebar: Story = {
       </KanoeCzContext>
     ),
   ],
+};
+
+// ============================================================================
+// Aesthetic Variants - Dynamic Sport visual style (Phase 15.0)
+// ============================================================================
+
+/**
+ * Aesthetic varianta s registrací otevřenou.
+ * Mesh backgrounds, display typography, energy CTA, staggered reveals.
+ */
+export const AestheticRegistration: Story = {
+  args: {
+    status: 'registration',
+    section: 'dv',
+    showHero: true,
+    initialTab: 'info',
+    variant: 'standalone',
+    style: 'aesthetic',
+  },
+};
+
+/**
+ * Aesthetic varianta s live závodem.
+ * Energy LIVE badge, gradient-energy CTA.
+ */
+export const AestheticLive: Story = {
+  args: {
+    status: 'live',
+    section: 'dv',
+    showHero: true,
+    initialTab: 'results',
+    variant: 'standalone',
+    style: 'aesthetic',
+  },
+};
+
+/**
+ * Aesthetic varianta - záložka Program.
+ * Border-accent na schedule items, staggered reveal.
+ */
+export const AestheticSchedule: Story = {
+  args: {
+    status: 'upcoming',
+    section: 'dv',
+    showHero: true,
+    initialTab: 'schedule',
+    variant: 'standalone',
+    style: 'aesthetic',
+  },
+};
+
+/**
+ * Aesthetic varianta - záložka Dokumenty.
+ * Hover glow efekty, energy icon colors.
+ */
+export const AestheticDocuments: Story = {
+  args: {
+    status: 'finished',
+    section: 'dv',
+    showHero: true,
+    initialTab: 'documents',
+    variant: 'standalone',
+    style: 'aesthetic',
+  },
 };

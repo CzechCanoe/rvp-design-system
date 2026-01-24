@@ -22,6 +22,9 @@ import './RegistrationPage.css';
 /** Display variant for the page */
 type RegistrationPageVariant = 'standalone' | 'satellite';
 
+/** Visual style variant */
+type RegistrationPageStyle = 'default' | 'aesthetic';
+
 interface RegistrationPageProps {
   /** Club name */
   clubName?: string;
@@ -33,6 +36,8 @@ interface RegistrationPageProps {
   section?: 'dv' | 'ry' | 'vt';
   /** Display variant - standalone (full header with hero), satellite (minimal header) */
   variant?: RegistrationPageVariant;
+  /** Visual style - default or aesthetic (Dynamic Sport) */
+  style?: RegistrationPageStyle;
 }
 
 interface Athlete {
@@ -299,6 +304,7 @@ const RegistrationPageInner = ({
   initialStep = 0,
   section = 'dv',
   variant = 'standalone',
+  style = 'default',
 }: RegistrationPageProps) => {
   const [currentStep, setCurrentStep] = useState(initialStep);
   const [athletes] = useState<Athlete[]>(generateAthletes);
@@ -625,8 +631,17 @@ const RegistrationPageInner = ({
     fee: `${entry.boatCategory.startsWith('C2') ? raceData.fees.team : raceData.fees.individual} Kč`,
   }));
 
+  // Build page class names
+  const isAesthetic = style === 'aesthetic';
+  const pageClasses = [
+    'registration-page',
+    `registration-page--${section}`,
+    variant === 'satellite' && 'registration-page--satellite',
+    isAesthetic && 'registration-page--aesthetic',
+  ].filter(Boolean).join(' ');
+
   return (
-    <div className={`registration-page registration-page--${section} ${variant === 'satellite' ? 'registration-page--satellite' : ''}`}>
+    <div className={pageClasses}>
       {/* Header */}
       {renderHeader()}
 
@@ -1153,6 +1168,11 @@ const meta = {
       options: ['dv', 'ry', 'vt'],
       description: 'Discipline section for theming',
     },
+    style: {
+      control: 'select',
+      options: ['default', 'aesthetic'],
+      description: 'Visual style - default or aesthetic (Dynamic Sport)',
+    },
   },
 } satisfies Meta<typeof RegistrationPage>;
 
@@ -1189,5 +1209,65 @@ export const Satellite: Story = {
 - \`section: 'vt'\` - Vodní turistika (červená)`,
       },
     },
+  },
+};
+
+// ============================================================================
+// Aesthetic Variants - Dynamic Sport visual style (Phase 15.0)
+// ============================================================================
+
+/**
+ * Aesthetic varianta - Záhlaví přihlášky (krok 1).
+ * Mesh backgrounds, display typography, energy accents.
+ */
+export const AestheticHeader: Story = {
+  args: {
+    variant: 'standalone',
+    clubName: 'TJ Bohemians Praha',
+    initialStep: 0,
+    section: 'dv',
+    style: 'aesthetic',
+  },
+};
+
+/**
+ * Aesthetic varianta - Výběr závodníků (krok 2).
+ * Staggered reveals, hover glow effects.
+ */
+export const AestheticAthletes: Story = {
+  args: {
+    variant: 'standalone',
+    clubName: 'TJ Bohemians Praha',
+    initialStep: 1,
+    section: 'dv',
+    style: 'aesthetic',
+  },
+};
+
+/**
+ * Aesthetic varianta - Shrnutí a odeslání (krok 3).
+ * Energy CTA, border accents on summary cards.
+ */
+export const AestheticSummary: Story = {
+  args: {
+    variant: 'standalone',
+    clubName: 'TJ Bohemians Praha',
+    initialStep: 2,
+    section: 'dv',
+    style: 'aesthetic',
+  },
+};
+
+/**
+ * Aesthetic varianta - Rychlostní kanoistika.
+ * Zelené barevné schéma s aesthetic efekty.
+ */
+export const AestheticRychlost: Story = {
+  args: {
+    variant: 'standalone',
+    clubName: 'SK Slavia Praha',
+    initialStep: 0,
+    section: 'ry',
+    style: 'aesthetic',
   },
 };

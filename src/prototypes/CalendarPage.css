@@ -1,11 +1,20 @@
 /* ============================================================================
    Calendar Page Prototype - Styles
+   Phase 15.0: Aesthetic Refresh - Dynamic Sport aesthetic applied
+   - Mesh backgrounds, display typography, energy accents
+   - Staggered reveal animations, border accents for featured events
    ============================================================================ */
 
 .prototype-calendar-page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--color-bg-primary);
+}
+
+/* Aesthetic variant with mesh background */
+.prototype-calendar-page--aesthetic {
+  background: var(--bg-mesh-primary);
   background-color: var(--color-bg-primary);
 }
 
@@ -327,6 +336,13 @@
   margin: 0 0 var(--spacing-2) 0;
 }
 
+/* Aesthetic title with display font */
+.prototype-calendar-page--aesthetic .prototype-calendar-page__title {
+  font-family: var(--font-family-display);
+  font-weight: var(--text-display-weight);
+  letter-spacing: var(--text-display-tracking);
+}
+
 .prototype-calendar-page__subtitle {
   font-size: var(--font-size-md);
   color: var(--color-text-secondary);
@@ -442,6 +458,14 @@
   background-color: var(--color-error-bg);
 }
 
+/* Aesthetic live card with energy colors */
+.prototype-calendar-page--aesthetic .prototype-calendar-page__live-card {
+  border-color: var(--color-energy-500);
+  background: var(--gradient-energy-subtle);
+  border-left: var(--border-accent-width) solid;
+  border-image: var(--border-accent-gradient) 1;
+}
+
 .prototype-calendar-page__live-header {
   display: flex;
   align-items: center;
@@ -449,6 +473,11 @@
   font-weight: var(--font-weight-semibold);
   color: var(--color-error);
   margin-bottom: var(--spacing-4);
+}
+
+/* Aesthetic live header with energy color */
+.prototype-calendar-page--aesthetic .prototype-calendar-page__live-header {
+  color: var(--color-energy-600);
 }
 
 .prototype-calendar-page__live-race {
@@ -484,6 +513,13 @@
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   margin: 0;
+}
+
+/* Aesthetic upcoming title with display font */
+.prototype-calendar-page--aesthetic .prototype-calendar-page__upcoming-title {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .prototype-calendar-page__upcoming-list {
@@ -584,6 +620,13 @@
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   margin: 0;
+}
+
+/* Aesthetic detail title with display font */
+.prototype-calendar-page--aesthetic .prototype-calendar-page__detail-title {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .prototype-calendar-page__detail-info {
@@ -790,5 +833,90 @@
 
   .prototype-calendar-page--embed .prototype-calendar-page__upcoming-date {
     min-width: auto;
+  }
+}
+
+/* ============================================================================
+   Aesthetic Mode - Dynamic Sport Enhancements (Phase 15.0)
+   ============================================================================ */
+
+/* Header with staggered reveal */
+.prototype-calendar-page--aesthetic .prototype-calendar-page__header {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+}
+
+/* Filters reveal */
+.prototype-calendar-page--aesthetic .prototype-calendar-page__filters {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+  animation-delay: var(--stagger-2);
+}
+
+/* Calendar content reveal */
+.prototype-calendar-page--aesthetic .prototype-calendar-page__calendar {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+  animation-delay: var(--stagger-3);
+}
+
+/* Sidebar items with staggered reveal */
+.prototype-calendar-page--aesthetic .prototype-calendar-page__sidebar > *:nth-child(1) {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+  animation-delay: var(--stagger-2);
+}
+
+.prototype-calendar-page--aesthetic .prototype-calendar-page__sidebar > *:nth-child(2) {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+  animation-delay: var(--stagger-3);
+}
+
+.prototype-calendar-page--aesthetic .prototype-calendar-page__sidebar > *:nth-child(3) {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+  animation-delay: var(--stagger-4);
+}
+
+/* Upcoming item hover with glow */
+.prototype-calendar-page--aesthetic .prototype-calendar-page__upcoming-item {
+  transition: box-shadow 200ms var(--ease-sport), background-color var(--transition-fast);
+}
+
+.prototype-calendar-page--aesthetic .prototype-calendar-page__upcoming-item:hover {
+  box-shadow: var(--glow-energy-sm);
+}
+
+/* Selected upcoming item with border accent */
+.prototype-calendar-page--aesthetic .prototype-calendar-page__upcoming-item--selected {
+  background-color: var(--gradient-energy-subtle);
+  border-left: var(--border-accent-width) solid var(--color-energy-500);
+}
+
+/* Detail card with aesthetic styling */
+.prototype-calendar-page--aesthetic .prototype-calendar-page__detail-card {
+  border-left: var(--border-accent-width) solid;
+  border-image: var(--border-accent-gradient) 1;
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+
+/* Featured card aesthetic accent */
+.prototype-calendar-page--aesthetic .calendar-page-featured__card {
+  transition: box-shadow 200ms var(--ease-sport), transform var(--transition-normal);
+}
+
+.prototype-calendar-page--aesthetic .calendar-page-featured__card:hover {
+  box-shadow: var(--glow-energy-sm);
+}
+
+/* View switcher active button with energy color */
+.prototype-calendar-page--aesthetic .prototype-calendar-page__view-btn--active {
+  color: var(--color-energy-600);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .prototype-calendar-page--aesthetic .prototype-calendar-page__header,
+  .prototype-calendar-page--aesthetic .prototype-calendar-page__filters,
+  .prototype-calendar-page--aesthetic .prototype-calendar-page__calendar,
+  .prototype-calendar-page--aesthetic .prototype-calendar-page__sidebar > * {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }

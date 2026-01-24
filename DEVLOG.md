@@ -4694,3 +4694,41 @@ Aesthetic refresh aplikován na LivePage jako první prototyp. Změny:
 
 ### Poznámky
 - Zbývají prototypy: EventDetailPage, CalendarPage, RegistrationPage
+
+---
+
+## 2026-01-24 - Fáze 15.0: Aesthetic Refresh - Final Prototypes
+
+### Dokončeno
+- [x] EventDetailPage aesthetic refresh
+  - Mesh background hero with mesh-hero overlay
+  - Display typography for titles (--font-family-display)
+  - Border-accent for schedule day titles and events
+  - Energy glow on hover for schedule events
+  - Staggered reveal animations for days, info sections, sidebar cards
+  - Energy CTA buttons (gradient-energy) for registration and live
+  - New Aesthetic stories: AestheticRegistration, AestheticLive, AestheticSchedule, AestheticDocuments
+
+- [x] CalendarPage aesthetic refresh
+  - Mesh background with aesthetic variant
+  - Display typography for titles (page title, upcoming, detail)
+  - Staggered reveal for header, filters, calendar, sidebar items
+  - Energy colors for live card and selected items
+  - Hover glow on upcoming items
+  - Border-accent for detail card
+  - New Aesthetic stories: Aesthetic, AestheticListView, AestheticDivokaVoda
+
+- [x] RegistrationPage aesthetic refresh
+  - Mesh background hero with mesh-hero overlay
+  - Display typography for hero title, section titles, card titles
+  - Energy glow on active wizard step
+  - Border-accent for summary card sidebar
+  - Staggered reveal for wizard, step cards, sidebar cards
+  - Energy gradient for summary total
+  - Hover glow on athlete items
+  - New Aesthetic stories: AestheticHeader, AestheticAthletes, AestheticSummary, AestheticRychlost
+
+### Poznámky
+- Fáze 15.0 (Aesthetic Refresh) kompletně dokončena
+- Všechny prototypy mají konzistentní aesthetic variantu s Dynamic Sport designem
+- Další: Fáze 15.1 LivePage improvements

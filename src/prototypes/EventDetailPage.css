@@ -1,11 +1,20 @@
 /* ============================================================================
    Event Detail Page Prototype - Styles (Phase 8.4)
+   Phase 15.0: Aesthetic Refresh - Dynamic Sport aesthetic applied
+   - Mesh backgrounds, display typography, energy accents
+   - Staggered reveal animations, border accents
    ============================================================================ */
 
 .event-detail-page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--color-bg-primary);
+}
+
+/* Aesthetic variant with mesh background */
+.event-detail-page--aesthetic {
+  background: var(--bg-mesh-primary);
   background-color: var(--color-bg-primary);
 }
 
@@ -69,6 +78,18 @@
     var(--color-primary-500) 50%,
     var(--color-primary-400) 100%
   );
+}
+
+/* Aesthetic hero variant with mesh overlay */
+.event-detail-page--aesthetic .event-detail-hero__gradient {
+  background:
+    var(--bg-mesh-hero),
+    linear-gradient(
+      135deg,
+      var(--color-primary-700) 0%,
+      var(--color-primary-500) 50%,
+      var(--color-primary-400) 100%
+    );
 }
 
 /* Dynamic water-inspired pattern */
@@ -163,6 +184,14 @@
   letter-spacing: var(--letter-spacing-tight);
   margin: 0 0 var(--spacing-2);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Aesthetic title with display font */
+.event-detail-page--aesthetic .event-detail-hero__title {
+  font-family: var(--font-family-display);
+  font-weight: var(--text-display-weight);
+  letter-spacing: var(--text-display-tracking);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .event-detail-page--embed .event-detail-hero__title {
@@ -266,6 +295,13 @@
   line-height: 1;
 }
 
+/* Aesthetic stats with display font */
+.event-detail-page--aesthetic .event-detail-stats__value {
+  font-family: var(--font-family-display);
+  font-weight: 800;
+  color: var(--color-energy-600);
+}
+
 .event-detail-stats__label {
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
@@ -350,6 +386,13 @@
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   margin: 0 0 var(--spacing-3);
+}
+
+/* Aesthetic info title with display font */
+.event-detail-page--aesthetic .event-detail-info__title {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .event-detail-info__text {
@@ -464,6 +507,15 @@
   border-bottom: 2px solid var(--color-primary-500);
 }
 
+/* Aesthetic day title with display font and border-accent */
+.event-detail-page--aesthetic .event-detail-schedule__day-title {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  border-bottom-color: transparent;
+  border-image: var(--border-accent-gradient) 1;
+}
+
 .event-detail-schedule__events {
   display: flex;
   flex-direction: column;
@@ -478,6 +530,18 @@
   background: var(--color-bg-elevated);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border-subtle);
+}
+
+/* Aesthetic schedule event with border-accent and hover glow */
+.event-detail-page--aesthetic .event-detail-schedule__event {
+  border-left: var(--border-accent-width) solid;
+  border-image: var(--border-accent-gradient) 1;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  transition: box-shadow 200ms var(--ease-sport);
+}
+
+.event-detail-page--aesthetic .event-detail-schedule__event:hover {
+  box-shadow: var(--glow-energy-sm);
 }
 
 .event-detail-schedule__time {
@@ -664,6 +728,13 @@
   margin: 0 0 var(--spacing-4);
 }
 
+/* Aesthetic sidebar title with display font */
+.event-detail-page--aesthetic .event-detail-sidebar__title {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
 .event-detail-sidebar__text {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
@@ -833,4 +904,121 @@
 
 .event-detail-page--embed .event-detail-schedule__event {
   padding: var(--spacing-2) var(--spacing-3);
+}
+
+/* ============================================================================
+   Aesthetic Mode - Dynamic Sport Enhancements
+   ============================================================================ */
+
+/* Hero CTA with energy glow */
+.event-detail-page--aesthetic .event-detail-hero__cta {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+  animation-delay: var(--stagger-3);
+}
+
+/* Staggered reveal for schedule days */
+.event-detail-page--aesthetic .event-detail-schedule__day {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+}
+
+.event-detail-page--aesthetic .event-detail-schedule__day:nth-child(1) {
+  animation-delay: var(--stagger-1);
+}
+
+.event-detail-page--aesthetic .event-detail-schedule__day:nth-child(2) {
+  animation-delay: var(--stagger-2);
+}
+
+.event-detail-page--aesthetic .event-detail-schedule__day:nth-child(3) {
+  animation-delay: var(--stagger-3);
+}
+
+/* Staggered reveal for info sections */
+.event-detail-page--aesthetic .event-detail-info__section {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+}
+
+.event-detail-page--aesthetic .event-detail-info__section:nth-child(1) {
+  animation-delay: var(--stagger-1);
+}
+
+.event-detail-page--aesthetic .event-detail-info__section:nth-child(2) {
+  animation-delay: var(--stagger-2);
+}
+
+.event-detail-page--aesthetic .event-detail-info__section:nth-child(3) {
+  animation-delay: var(--stagger-3);
+}
+
+.event-detail-page--aesthetic .event-detail-info__section:nth-child(4) {
+  animation-delay: var(--stagger-4);
+}
+
+/* Sidebar cards with reveal */
+.event-detail-page--aesthetic .event-detail-sidebar__card {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+}
+
+.event-detail-page--aesthetic .event-detail-sidebar__card:nth-child(1) {
+  animation-delay: var(--stagger-2);
+}
+
+.event-detail-page--aesthetic .event-detail-sidebar__card:nth-child(2) {
+  animation-delay: var(--stagger-3);
+}
+
+.event-detail-page--aesthetic .event-detail-sidebar__card:nth-child(3) {
+  animation-delay: var(--stagger-4);
+}
+
+.event-detail-page--aesthetic .event-detail-sidebar__card:nth-child(4) {
+  animation-delay: var(--stagger-5);
+}
+
+/* Highlight card with energy border */
+.event-detail-page--aesthetic .event-detail-sidebar__card--cta {
+  background: var(--gradient-energy);
+  border: none;
+}
+
+/* Registration deadline highlight with energy color */
+.event-detail-page--aesthetic .event-detail-sidebar__item--highlight {
+  background: var(--gradient-energy-subtle);
+  border-left: var(--border-accent-width) solid var(--color-energy-500);
+}
+
+.event-detail-page--aesthetic .event-detail-sidebar__item--highlight .event-detail-sidebar__value {
+  color: var(--color-energy-600);
+}
+
+/* Documents hover glow */
+.event-detail-page--aesthetic .event-detail-documents__item {
+  transition: box-shadow 200ms var(--ease-sport), transform 200ms var(--ease-sport);
+}
+
+.event-detail-page--aesthetic .event-detail-documents__item:hover {
+  box-shadow: var(--glow-energy-sm);
+  transform: translateX(4px);
+}
+
+/* Document icon with energy accent */
+.event-detail-page--aesthetic .event-detail-documents__icon {
+  background: var(--gradient-energy-subtle);
+  color: var(--color-energy-600);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .event-detail-page--aesthetic .event-detail-hero__cta,
+  .event-detail-page--aesthetic .event-detail-schedule__day,
+  .event-detail-page--aesthetic .event-detail-info__section,
+  .event-detail-page--aesthetic .event-detail-sidebar__card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .event-detail-page--aesthetic .event-detail-documents__item:hover {
+    transform: none;
+  }
 }

@@ -107,16 +107,23 @@
 - [x] Mesh background, display fonts, border-accent
 - [x] Staggered reveal pro členy a úspěchy klubu
 
-**EventDetailPage:** *(1 iterace)*
-- [ ] Header s energy CTA ("Sledovat live")
-- [ ] Display typography + schedule border-accent
+**EventDetailPage:** *(HOTOVO)*
+- [x] Header s energy CTA ("Sledovat live")
+- [x] Display typography + schedule border-accent
+- [x] Mesh background hero + staggered reveals
+- [x] Aesthetic stories (AestheticRegistration, AestheticLive, AestheticSchedule, AestheticDocuments)
 
-**CalendarPage:** *(1 iterace)*
-- [ ] Featured events s border-accent + energy badge pro live
-- [ ] Mesh background hero
+**CalendarPage:** *(HOTOVO)*
+- [x] Featured events s border-accent + energy badge pro live
+- [x] Mesh background hero + display typography
+- [x] Staggered reveal pro sidebar + upcoming items
+- [x] Aesthetic stories (Aesthetic, AestheticListView, AestheticDivokaVoda)
 
-**RegistrationPage:** *(společně s Calendar)*
-- [ ] Energy CTA + form inputs s energy focus
+**RegistrationPage:** *(HOTOVO)*
+- [x] Energy CTA + mesh background hero
+- [x] Display typography pro titles a stats
+- [x] Border-accent sidebar cards + staggered reveal
+- [x] Aesthetic stories (AestheticHeader, AestheticAthletes, AestheticSummary, AestheticRychlost)
 
 #### Cleanup - Odstranit nepotřebné varianty (HOTOVO)
 
@@ -208,7 +215,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 |-------|---------|
 | ~~15.0 Komponenty (Avatar, Forms, Tabs, Toast)~~ | ~~2~~ ✅ |
 | ~~15.0 Prototypy (AthletePublicPage, ClubPublicProfile)~~ | ~~2~~ ✅ |
-| 15.0 Prototypy (EventDetailPage, CalendarPage, RegistrationPage) | 2 |
+| ~~15.0 Prototypy (EventDetailPage, CalendarPage, RegistrationPage)~~ | ~~1~~ ✅ |
 | ~~15.0 Cleanup + Dokumentace~~ | ~~2~~ ✅ |
 | 15.1 LivePage (P0) | 3 |
 | 15.2 Results (P1) | 2 |
@@ -221,7 +228,7 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 ## Další krok
 
-**→ 15.0 Prototypy (EventDetailPage, CalendarPage, RegistrationPage) → 15.1 LivePage improvements**
+**→ 15.1 LivePage improvements (Oncourse redesign, mobile fullscreen, detail jízdy)**
 
 ---
 
