@@ -19,6 +19,159 @@
 
 **Kontext:** Souhrnné připomínky po procházení Storybooku. Live bude první nasazená věc.
 
+### 15.0 Aesthetic Refresh - "Dynamic Sport" (P0)
+
+**Cíl:** Aplikovat novou vizuální identitu na celý DS pro osobitější vzhled.
+
+#### Foundation (HOTOVO)
+- [x] Plus Jakarta Sans display font (`--font-family-display`)
+- [x] Energy accent color (coral-orange #f97316, škála 50-900)
+- [x] Mesh backgrounds (`--bg-mesh-hero`, `--bg-mesh-card`, `--bg-mesh-primary`)
+- [x] Grain texture (`--texture-grain`, `.csk-grain`)
+- [x] Diagonal patterns (`--pattern-diagonal`, `.csk-diagonal`)
+- [x] Angular clip-paths (`--clip-angle-sm/md/lg`, `.csk-angle`)
+- [x] Border accent (`--border-accent-gradient`, `.csk-border-accent`)
+- [x] Staggered reveals (`.csk-reveal`, `.csk-reveal-1` až `-6`)
+- [x] Sport easings (`--ease-snap`, `--ease-sport`)
+- [x] `gradient-energy` Button variant
+- [x] Aesthetic.stories.tsx showcase
+
+#### Komponenty - Detailní plán
+
+**Button (částečně hotovo):**
+- [x] `gradient-energy` varianta
+- [ ] Display font pro large size (`font-family: var(--font-family-display)`)
+- [ ] Hover glow efekt utility class
+
+**Card:**
+- [ ] Nová varianta `aesthetic` nebo `featured-aesthetic`:
+  - Mesh background (`--bg-mesh-card`)
+  - Border-accent left side
+  - Display font pro title
+  - Optional grain overlay
+- [ ] Props: `meshBg?: boolean`, `borderAccent?: boolean`
+- [ ] Update Card.stories.tsx
+
+**Header:**
+- [ ] Display font pro brand/title text
+- [ ] Energy CTA button v actions slotu (stories ukázka)
+- [ ] Nová varianta `gradient-energy` pro header background
+- [ ] Update Header.stories.tsx
+
+**Badge:**
+- [ ] Nová varianta `energy` (coral-orange)
+- [ ] Display font pro `size="lg"`
+- [ ] Glow efekt pro `glow` prop s energy barvou
+- [ ] Update Badge.stories.tsx
+
+**ResultsTable:**
+- [ ] Display font pro rank čísla (`.csk-results-table__rank`)
+- [ ] Energy color pro live indikátor místo red
+- [ ] Border-accent pro highlighted/featured řádky
+- [ ] Mesh background varianta pro wrapper
+- [ ] Update ResultsTable.stories.tsx
+
+**Avatar:**
+- [ ] Energy glow varianta (`--glow-energy-md`)
+- [ ] Border-accent ring option
+- [ ] Update Avatar.stories.tsx
+
+**Input/Select/Textarea (forms):**
+- [ ] Energy focus ring varianta
+- [ ] Display font pro labels (optional prop)
+
+**Tabs:**
+- [ ] Energy underline varianta
+- [ ] Display font pro tab labels
+
+**Alert/Toast:**
+- [ ] Energy varianta pro info/highlight
+- [ ] Display font pro title
+
+#### Prototypy - Detailní plán
+
+**LivePage (priorita #1):**
+- [ ] Hero sekce:
+  - Mesh background (`--bg-mesh-hero`)
+  - Grain overlay
+  - Display typography pro název závodu
+  - Energy badge pro "LIVE" indikátor
+  - Staggered reveal animace
+- [ ] Results sekce:
+  - ResultsTable s aesthetic variantou
+  - Energy live indicators
+  - Display font pro rank
+- [ ] Oncourse sekce:
+  - Border-accent pro aktivní závodníky
+  - Energy highlights
+
+**AthletePublicPage:**
+- [ ] Hero s mesh background
+- [ ] Display typography pro jméno
+- [ ] Stats cards s border-accent
+- [ ] Energy accenty pro highlights (medaile, rekordy)
+
+**ClubPublicProfile:**
+- [ ] Obdobně jako AthletePublicPage
+
+**EventDetailPage:**
+- [ ] Header s energy CTA ("Sledovat live")
+- [ ] Display typography pro název
+- [ ] Schedule s border-accent pro aktuální položku
+
+**CalendarPage:**
+- [ ] Featured events s border-accent
+- [ ] Energy badge pro live závody
+- [ ] Mesh background pro hero/filter sekci
+
+**RegistrationPage:**
+- [ ] Energy CTA pro hlavní akci
+- [ ] Form inputs s energy focus
+
+#### Cleanup - Odstranit nepotřebné varianty
+
+**Button:**
+- [ ] Odstranit `gradient-accent` (nahrazeno `gradient-energy`)
+- [ ] Ponechat: primary, secondary, ghost, danger, gradient, gradient-energy
+
+**Badge:**
+- [ ] Odstranit `gradient-accent` (přebytečné)
+- [ ] Odstranit `gradient-success`, `gradient-error` (přebytečné, stačí solid varianty)
+- [ ] Ponechat: default, primary, success, warning, error, info, gradient, energy (nové)
+- [ ] Ponechat section varianty: dv, ry, vt + vtClass
+
+**Card:**
+- [ ] Zhodnotit `glass` variantu - ponechat pouze pokud má jasný use case
+- [ ] Zhodnotit `featured` vs nová aesthetic varianta - možná sloučit
+- [ ] Ponechat: surface, elevated, outlined, gradient, (glass?), aesthetic (nové)
+
+**Header:**
+- [ ] Odstranit `transparent` pokud není konkrétní use case
+- [ ] Zhodnotit počet variant - cíl max 4-5
+- [ ] Aktuální: default, bordered, elevated, gradient, glass, satellite
+- [ ] Návrh: default, elevated, gradient, satellite (4 varianty)
+
+**ResultsTable:**
+- [ ] Odstranit `glass` style pokud nemá use case
+- [ ] Ponechat: default, gradient, embed, aesthetic (nové)
+
+**Obecně:**
+- [ ] Odstranit všechny `gradient-accent` gradienty z colors.css (nahrazeno energy)
+- [ ] Audit všech komponent pro nepoužívané varianty
+
+#### Dokumentace
+- [ ] Aktualizovat DESIGN_PRINCIPLES.md:
+  - Přidat sekci "Dynamic Sport Aesthetic"
+  - Dokumentovat energy color usage
+  - Display font guidelines
+- [ ] Aesthetic Guidelines story:
+  - Kdy použít display font vs body font
+  - Energy vs primary color usage
+  - Mesh backgrounds appropriate contexts
+  - Animation guidelines
+
+---
+
 ### 15.1 Kritické - LivePage (P0)
 
 **Cíl:** LivePage musí být vymazlená namax - první nasazení.
@@ -83,9 +236,12 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 
 ## Další krok
 
-**→ Začít s 15.3 (rozbitév věci) a pak 15.1 (LivePage)**
+**→ 15.0 Aesthetic aplikace na komponenty → 15.1 LivePage**
 
-Důvod: Opravit rozbitév věci je rychlé a uklidí cestu pro práci na Live.
+Pořadí:
+1. Aplikovat aesthetic na Card, Header, Badge, ResultsTable
+2. Opravit rozbité věci (15.3) paralelně
+3. LivePage s plnou aesthetic integrací
 
 ---
 
