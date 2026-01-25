@@ -6260,3 +6260,26 @@ CSS strukturováno do dvou hlavních částí:
 2. PART 2: VISUAL - veškeré colors, backgrounds, borders, shadows, typography, transitions, animations
 
 Zůstává RegistrationPage jako poslední prototyp k reorganizaci.
+
+---
+
+## 2026-01-25 - Iterace 28: CSS reorganizace RegistrationPage
+
+### Dokončeno
+- [x] Analyzováno CSS - identifikace layout vs vizuální styly
+- [x] Reorganizováno CSS - oddělení LAYOUT a VISUAL sekcí (1557 → 1757 řádků)
+- [x] Build validace OK
+
+### Struktura CSS
+1. **LAYOUT** - Grid, flex, positioning, dimensions
+2. **VISUAL** - Colors, backgrounds, typography, effects  
+3. **VARIANTS** - Satellite, aesthetic mode
+4. **RESPONSIVE** - Mobile adjustments
+5. **ACCESSIBILITY** - Reduced motion, dark mode
+
+### Poznámky
+- RegistrationPage byl poslední prototyp bez reorganizované struktury CSS
+- Obsahuje discipline-specific (dv/ry/vt) gradienty pro hero, wizard, summary sekce
+- Crew selection UX pro C2 kategorie
+- Aesthetic mode s reveal animacemi, energy gradienty, border-accent
+- Všechny prototypy nyní mají konzistentní CSS strukturu

@@ -1,26 +1,28 @@
 /* ============================================================================
-   Registration Page Prototype - Redesigned Styles
-   Phase 15.0: Aesthetic Refresh - Dynamic Sport aesthetic applied
-   - Mesh backgrounds, display typography, energy accents
-   - Energy focus for form inputs, staggered reveal animations
+   Registration Page Prototype
+
+   STRUCTURE:
+   1. LAYOUT - Grid, flex, positioning, dimensions
+   2. VISUAL - Colors, backgrounds, typography, effects
+   3. VARIANTS - Satellite, aesthetic mode
+   4. RESPONSIVE - Mobile adjustments
+   5. ACCESSIBILITY - Reduced motion, dark mode
    ============================================================================ */
+
+/* ============================================================================
+   1. LAYOUT STYLES
+   Structure, positioning, dimensions - no visual styling
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   1.1 Page Structure
+   ---------------------------------------------------------------------------- */
 
 .registration-page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-bg-primary);
 }
-
-/* Aesthetic variant with mesh background */
-.registration-page--aesthetic {
-  background: var(--bg-mesh-primary);
-  background-color: var(--color-bg-primary);
-}
-
-/* ============================================================================
-   Logo
-   ============================================================================ */
 
 .registration-page__logo {
   display: flex;
@@ -30,36 +32,15 @@
   color: inherit;
 }
 
-.registration-page__logo-text {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
-}
-
-.registration-page__logo-subtitle {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-}
-
-/* ============================================================================
-   User Info
-   ============================================================================ */
-
 .registration-page__user-info {
   display: flex;
   align-items: center;
   gap: var(--spacing-3);
 }
 
-.registration-page__club-name {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-primary);
-}
-
-/* ============================================================================
-   Hero Section
-   ============================================================================ */
+/* ----------------------------------------------------------------------------
+   1.2 Hero Layout
+   ---------------------------------------------------------------------------- */
 
 .registration-page-hero {
   position: relative;
@@ -76,28 +57,11 @@
 .registration-page-hero__gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-}
-
-/* Discipline-specific hero gradients */
-.registration-page-hero--dv .registration-page-hero__gradient {
-  background: linear-gradient(135deg, #0369a1 0%, #075985 50%, #0c4a6e 100%);
-}
-
-.registration-page-hero--ry .registration-page-hero__gradient {
-  background: linear-gradient(135deg, #059669 0%, #047857 50%, #065f46 100%);
-}
-
-.registration-page-hero--vt .registration-page-hero__gradient {
-  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%);
 }
 
 .registration-page-hero__pattern {
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
 }
 
 .registration-page-hero__content {
@@ -107,37 +71,18 @@
   margin: 0 auto;
 }
 
-/* Breadcrumb */
 .registration-page-hero__breadcrumb {
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
   margin-bottom: var(--spacing-6);
-  font-size: var(--font-size-sm);
 }
 
 .registration-page-hero__breadcrumb svg {
-  color: rgba(255, 255, 255, 0.5);
   width: 14px;
   height: 14px;
 }
 
-.registration-page-hero__breadcrumb-link {
-  color: rgba(255, 255, 255, 0.7);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-.registration-page-hero__breadcrumb-link:hover {
-  color: rgba(255, 255, 255, 1);
-}
-
-.registration-page-hero__breadcrumb-current {
-  color: white;
-  font-weight: var(--font-weight-medium);
-}
-
-/* Hero Main */
 .registration-page-hero__main {
   display: flex;
   flex-direction: column;
@@ -163,20 +108,8 @@
 }
 
 .registration-page-hero__title {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-bold);
-  color: white;
   margin: 0 0 var(--spacing-3) 0;
   line-height: 1.2;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* Aesthetic title with display font */
-.registration-page--aesthetic .registration-page-hero__title {
-  font-family: var(--font-family-display);
-  font-weight: var(--text-display-weight);
-  letter-spacing: var(--text-display-tracking);
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 @media (min-width: 768px) {
@@ -195,15 +128,9 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  font-size: var(--font-size-md);
-  color: rgba(255, 255, 255, 0.9);
 }
 
-.registration-page-hero__meta-item svg {
-  opacity: 0.8;
-}
-
-/* Hero Stats */
+/* Hero Stats Layout */
 .registration-page-hero__stats {
   display: flex;
   gap: var(--spacing-4);
@@ -214,15 +141,7 @@
   align-items: center;
   gap: var(--spacing-3);
   padding: var(--spacing-4);
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.2);
   min-width: 140px;
-}
-
-.registration-page-hero__stat--deadline {
-  background: rgba(255, 255, 255, 0.2);
 }
 
 .registration-page-hero__stat-icon {
@@ -231,9 +150,6 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-md);
-  color: white;
 }
 
 .registration-page-hero__stat-icon svg {
@@ -246,27 +162,17 @@
   flex-direction: column;
 }
 
-.registration-page-hero__stat-value {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  color: white;
-  line-height: 1;
-}
-
 .registration-page-hero__stat-label {
-  font-size: var(--font-size-xs);
-  color: rgba(255, 255, 255, 0.8);
   margin-top: var(--spacing-1);
 }
 
-/* Wave Decoration */
+/* Wave Layout */
 .registration-page-wave {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 50px;
-  color: var(--color-bg-primary);
 }
 
 @media (min-width: 768px) {
@@ -275,9 +181,9 @@
   }
 }
 
-/* ============================================================================
-   Main Content
-   ============================================================================ */
+/* ----------------------------------------------------------------------------
+   1.3 Main Content Layout
+   ---------------------------------------------------------------------------- */
 
 .registration-page__main {
   flex: 1;
@@ -292,16 +198,63 @@
   margin: 0 auto;
 }
 
-/* ============================================================================
-   Wizard Progress
-   ============================================================================ */
+/* Content Grid */
+.registration-page__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-6);
+}
+
+@media (min-width: 1024px) {
+  .registration-page__content {
+    grid-template-columns: 1fr 320px;
+  }
+}
+
+/* Main Panel */
+.registration-page__main-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+/* Step Header */
+.registration-page__step-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+}
+
+.registration-page__step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.registration-page__step-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.registration-page__section-title {
+  margin: 0 0 var(--spacing-1) 0;
+}
+
+.registration-page__section-desc {
+  margin: 0;
+}
+
+/* ----------------------------------------------------------------------------
+   1.4 Wizard Layout
+   ---------------------------------------------------------------------------- */
 
 .registration-page__wizard {
   margin-bottom: var(--spacing-8);
   padding: var(--spacing-6);
-  background: var(--color-bg-secondary);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-sm);
 }
 
 .registration-page__wizard-steps {
@@ -310,7 +263,6 @@
   position: relative;
 }
 
-/* Wizard Step */
 .registration-wizard-step {
   display: flex;
   flex-direction: column;
@@ -332,11 +284,6 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  border-radius: 50%;
-  background: var(--color-bg-tertiary);
-  border: 2px solid var(--color-border-secondary);
-  color: var(--color-text-tertiary);
-  transition: all var(--transition-normal);
   flex-shrink: 0;
   z-index: 1;
 }
@@ -349,9 +296,7 @@
 .registration-wizard-step__line {
   flex: 1;
   height: 3px;
-  background: var(--color-border-secondary);
   margin: 0 var(--spacing-2);
-  transition: background-color var(--transition-normal);
 }
 
 .registration-wizard-step__content {
@@ -362,63 +307,7 @@
 }
 
 .registration-wizard-step__number {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
   margin-bottom: var(--spacing-1);
-}
-
-.registration-wizard-step__label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
-}
-
-/* Active step */
-.registration-wizard-step--active .registration-wizard-step__circle {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  color: white;
-  box-shadow: 0 0 0 4px var(--color-primary-bg), 0 4px 12px rgba(var(--color-primary-rgb), 0.3);
-}
-
-.registration-page--dv .registration-wizard-step--active .registration-wizard-step__circle {
-  background: #0369a1;
-  border-color: #0369a1;
-  box-shadow: 0 0 0 4px rgba(3, 105, 161, 0.1), 0 4px 12px rgba(3, 105, 161, 0.3);
-}
-
-.registration-page--ry .registration-wizard-step--active .registration-wizard-step__circle {
-  background: #059669;
-  border-color: #059669;
-  box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1), 0 4px 12px rgba(5, 150, 105, 0.3);
-}
-
-.registration-page--vt .registration-wizard-step--active .registration-wizard-step__circle {
-  background: #dc2626;
-  border-color: #dc2626;
-  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1), 0 4px 12px rgba(220, 38, 38, 0.3);
-}
-
-.registration-wizard-step--active .registration-wizard-step__label {
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-semibold);
-}
-
-/* Completed step */
-.registration-wizard-step--completed .registration-wizard-step__circle {
-  background: var(--color-success);
-  border-color: var(--color-success);
-  color: white;
-}
-
-.registration-wizard-step--completed .registration-wizard-step__line {
-  background: var(--color-success);
-}
-
-.registration-wizard-step--completed .registration-wizard-step__label {
-  color: var(--color-success);
 }
 
 /* Mobile wizard */
@@ -438,104 +327,9 @@
   }
 }
 
-/* ============================================================================
-   Content Grid
-   ============================================================================ */
-
-.registration-page__content {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-6);
-}
-
-@media (min-width: 1024px) {
-  .registration-page__content {
-    grid-template-columns: 1fr 320px;
-  }
-}
-
-/* ============================================================================
-   Main Panel
-   ============================================================================ */
-
-.registration-page__main-panel {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
-}
-
-.registration-page__step-card {
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-md);
-}
-
-.registration-page__step-header {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-4);
-  margin-bottom: var(--spacing-6);
-}
-
-.registration-page__step-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-lg);
-  background: var(--color-primary-bg);
-  color: var(--color-primary);
-  flex-shrink: 0;
-}
-
-.registration-page--dv .registration-page__step-icon {
-  background: rgba(3, 105, 161, 0.1);
-  color: #0369a1;
-}
-
-.registration-page--ry .registration-page__step-icon {
-  background: rgba(5, 150, 105, 0.1);
-  color: #059669;
-}
-
-.registration-page--vt .registration-page__step-icon {
-  background: rgba(220, 38, 38, 0.1);
-  color: #dc2626;
-}
-
-.registration-page__step-icon--success {
-  background: var(--color-success-bg);
-  color: var(--color-success);
-}
-
-.registration-page__step-icon svg {
-  width: 24px;
-  height: 24px;
-}
-
-.registration-page__section-title {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-  margin: 0 0 var(--spacing-1) 0;
-}
-
-/* Aesthetic section title with display font */
-.registration-page--aesthetic .registration-page__section-title {
-  font-family: var(--font-family-display);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.registration-page__section-desc {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  margin: 0;
-}
-
-/* ============================================================================
-   Form Styles
-   ============================================================================ */
+/* ----------------------------------------------------------------------------
+   1.5 Form Layout
+   ---------------------------------------------------------------------------- */
 
 .registration-page__form {
   display: flex;
@@ -566,13 +360,9 @@
   justify-content: flex-end;
   margin-top: var(--spacing-6);
   padding-top: var(--spacing-6);
-  border-top: 1px solid var(--color-border-primary);
 }
 
-/* ============================================================================
-   Athletes Section
-   ============================================================================ */
-
+/* Athletes Section Layout */
 .registration-page__athletes-header {
   display: flex;
   justify-content: space-between;
@@ -594,36 +384,27 @@
   gap: var(--spacing-1);
 }
 
-/* ============================================================================
-   Step Actions
-   ============================================================================ */
-
+/* Step Actions */
 .registration-page__step-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: var(--spacing-4);
   padding: var(--spacing-4);
-  background: var(--color-bg-secondary);
-  border-radius: var(--radius-lg);
 }
 
-/* ============================================================================
-   Summary Section
-   ============================================================================ */
+/* ----------------------------------------------------------------------------
+   1.6 Summary Section Layout
+   ---------------------------------------------------------------------------- */
 
 .registration-page__summary-section {
   margin-bottom: var(--spacing-6);
   padding-bottom: var(--spacing-4);
-  border-bottom: 1px solid var(--color-border-primary);
 }
 
 .registration-page__summary-subtitle {
   display: flex;
   align-items: center;
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
   margin: 0 0 var(--spacing-3) 0;
 }
 
@@ -638,6 +419,637 @@
   flex-direction: column;
   gap: var(--spacing-1);
   padding: var(--spacing-3);
+}
+
+.registration-page__summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-4);
+  margin-top: var(--spacing-4);
+}
+
+/* Warning Box Layout */
+.registration-page__warning-box {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  margin-top: var(--spacing-4);
+}
+
+.registration-page__warning-box svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Confirmation */
+.registration-page__confirmation {
+  margin-top: var(--spacing-4);
+  padding-top: var(--spacing-4);
+}
+
+/* ----------------------------------------------------------------------------
+   1.7 Sidebar Layout
+   ---------------------------------------------------------------------------- */
+
+.registration-page__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.registration-page__summary-card {
+  position: sticky;
+  top: var(--spacing-4);
+}
+
+.registration-page__card-header {
+  margin-bottom: var(--spacing-4);
+}
+
+.registration-page__card-title {
+  margin: 0;
+}
+
+.registration-page__summary-stats {
+  display: flex;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+}
+
+.registration-page__stat {
+  flex: 1;
+  text-align: center;
+  padding: var(--spacing-4);
+}
+
+.registration-page__stat-label {
+  display: block;
+  margin-top: var(--spacing-1);
+}
+
+.registration-page__entries-by-discipline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding-top: var(--spacing-3);
+}
+
+.registration-page__discipline-count {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Deadline Card Layout */
+.registration-page__deadline-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-3);
+}
+
+.registration-page__deadline-header svg {
+  width: 18px;
+  height: 18px;
+}
+
+.registration-page__deadline-date {
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+.registration-page__countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registration-page__countdown-label {
+  margin-top: var(--spacing-1);
+}
+
+.registration-page__deadline-countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+}
+
+/* Help Card Layout */
+.registration-page__help-text {
+  margin: 0 0 var(--spacing-3) 0;
+}
+
+/* ----------------------------------------------------------------------------
+   1.8 Modal Layout
+   ---------------------------------------------------------------------------- */
+
+.registration-page__modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.registration-page__modal-filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+@media (min-width: 640px) {
+  .registration-page__modal-filters {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .registration-page__modal-filters > *:first-child {
+    flex: 1;
+  }
+}
+
+.registration-page__athlete-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: var(--spacing-2);
+}
+
+.registration-page__athlete-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+}
+
+.registration-page__athlete-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.registration-page__athlete-name {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.registration-page__athlete-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-1);
+}
+
+.registration-page__athlete-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1);
+}
+
+/* Modal Footer */
+.registration-page__modal-footer {
+  padding-top: var(--spacing-4);
+  margin-top: var(--spacing-2);
+}
+
+/* ----------------------------------------------------------------------------
+   1.9 Crew Selection Layout
+   ---------------------------------------------------------------------------- */
+
+.registration-page__pending-crew {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+}
+
+.registration-page__pending-crew-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.registration-page__pending-crew-info svg {
+  flex-shrink: 0;
+}
+
+.registration-page__crew-names {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.registration-page__crew-rgc {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.registration-page__category-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.registration-page__category-cell svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ----------------------------------------------------------------------------
+   1.10 Footer Layout
+   ---------------------------------------------------------------------------- */
+
+.registration-page__footer {
+  padding: var(--spacing-6) var(--spacing-4);
+}
+
+.registration-page__footer-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.registration-page__footer-content p {
+  margin: 0;
+}
+
+/* ----------------------------------------------------------------------------
+   1.11 Satellite Header Layout
+   ---------------------------------------------------------------------------- */
+
+.registration-page__satellite-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.registration-page-header {
+  padding: var(--spacing-4) var(--spacing-4) var(--spacing-5);
+}
+
+.registration-page-header__content {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.registration-page-header__breadcrumb {
+  margin-bottom: var(--spacing-3);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.registration-page-header__row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+}
+
+.registration-page-header__info {
+  flex: 1;
+}
+
+.registration-page-header__badges {
+  display: flex;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+}
+
+.registration-page-header__title {
+  margin: 0 0 var(--spacing-2) 0;
+  line-height: 1.2;
+}
+
+.registration-page-header__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin: 0;
+}
+
+.registration-page-header__meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+/* ============================================================================
+   2. VISUAL STYLES
+   Colors, backgrounds, typography, effects
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   2.1 Page Visual
+   ---------------------------------------------------------------------------- */
+
+.registration-page {
+  background-color: var(--color-bg-primary);
+}
+
+.registration-page--aesthetic {
+  background: var(--bg-mesh-primary);
+  background-color: var(--color-bg-primary);
+}
+
+/* ----------------------------------------------------------------------------
+   2.2 Logo Visual
+   ---------------------------------------------------------------------------- */
+
+.registration-page__logo-text {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.registration-page__logo-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.registration-page__club-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+/* ----------------------------------------------------------------------------
+   2.3 Hero Visual
+   ---------------------------------------------------------------------------- */
+
+.registration-page-hero__gradient {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+}
+
+/* Discipline-specific hero gradients */
+.registration-page-hero--dv .registration-page-hero__gradient {
+  background: linear-gradient(135deg, #0369a1 0%, #075985 50%, #0c4a6e 100%);
+}
+
+.registration-page-hero--ry .registration-page-hero__gradient {
+  background: linear-gradient(135deg, #059669 0%, #047857 50%, #065f46 100%);
+}
+
+.registration-page-hero--vt .registration-page-hero__gradient {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%);
+}
+
+.registration-page-hero__pattern {
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
+}
+
+/* Breadcrumb Visual */
+.registration-page-hero__breadcrumb {
+  font-size: var(--font-size-sm);
+}
+
+.registration-page-hero__breadcrumb svg {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.registration-page-hero__breadcrumb-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.registration-page-hero__breadcrumb-link:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.registration-page-hero__breadcrumb-current {
+  color: white;
+  font-weight: var(--font-weight-medium);
+}
+
+/* Hero Title Visual */
+.registration-page-hero__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.registration-page--aesthetic .registration-page-hero__title {
+  font-family: var(--font-family-display);
+  font-weight: var(--text-display-weight);
+  letter-spacing: var(--text-display-tracking);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Hero Meta Visual */
+.registration-page-hero__meta-item {
+  font-size: var(--font-size-md);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.registration-page-hero__meta-item svg {
+  opacity: 0.8;
+}
+
+/* Hero Stats Visual */
+.registration-page-hero__stat {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.registration-page-hero__stat--deadline {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.registration-page-hero__stat-icon {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+  color: white;
+}
+
+.registration-page-hero__stat-value {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: white;
+  line-height: 1;
+}
+
+.registration-page-hero__stat-label {
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Wave Visual */
+.registration-page-wave {
+  color: var(--color-bg-primary);
+}
+
+/* ----------------------------------------------------------------------------
+   2.4 Wizard Visual
+   ---------------------------------------------------------------------------- */
+
+.registration-page__wizard {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.registration-wizard-step__circle {
+  border-radius: 50%;
+  background: var(--color-bg-tertiary);
+  border: 2px solid var(--color-border-secondary);
+  color: var(--color-text-tertiary);
+  transition: all var(--transition-normal);
+}
+
+.registration-wizard-step__line {
+  background: var(--color-border-secondary);
+  transition: background-color var(--transition-normal);
+}
+
+.registration-wizard-step__number {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.registration-wizard-step__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+/* Active Step Visual */
+.registration-wizard-step--active .registration-wizard-step__circle {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+  box-shadow: 0 0 0 4px var(--color-primary-bg), 0 4px 12px rgba(var(--color-primary-rgb), 0.3);
+}
+
+.registration-page--dv .registration-wizard-step--active .registration-wizard-step__circle {
+  background: #0369a1;
+  border-color: #0369a1;
+  box-shadow: 0 0 0 4px rgba(3, 105, 161, 0.1), 0 4px 12px rgba(3, 105, 161, 0.3);
+}
+
+.registration-page--ry .registration-wizard-step--active .registration-wizard-step__circle {
+  background: #059669;
+  border-color: #059669;
+  box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1), 0 4px 12px rgba(5, 150, 105, 0.3);
+}
+
+.registration-page--vt .registration-wizard-step--active .registration-wizard-step__circle {
+  background: #dc2626;
+  border-color: #dc2626;
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1), 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.registration-wizard-step--active .registration-wizard-step__label {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Completed Step Visual */
+.registration-wizard-step--completed .registration-wizard-step__circle {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: white;
+}
+
+.registration-wizard-step--completed .registration-wizard-step__line {
+  background: var(--color-success);
+}
+
+.registration-wizard-step--completed .registration-wizard-step__label {
+  color: var(--color-success);
+}
+
+/* ----------------------------------------------------------------------------
+   2.5 Step Card Visual
+   ---------------------------------------------------------------------------- */
+
+.registration-page__step-card {
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.registration-page__step-icon {
+  border-radius: var(--radius-lg);
+  background: var(--color-primary-bg);
+  color: var(--color-primary);
+}
+
+.registration-page--dv .registration-page__step-icon {
+  background: rgba(3, 105, 161, 0.1);
+  color: #0369a1;
+}
+
+.registration-page--ry .registration-page__step-icon {
+  background: rgba(5, 150, 105, 0.1);
+  color: #059669;
+}
+
+.registration-page--vt .registration-page__step-icon {
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+}
+
+.registration-page__step-icon--success {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.registration-page__section-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.registration-page--aesthetic .registration-page__section-title {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.registration-page__section-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Form Actions Visual */
+.registration-page__form-actions {
+  border-top: 1px solid var(--color-border-primary);
+}
+
+/* Step Actions Visual */
+.registration-page__step-actions {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+}
+
+/* ----------------------------------------------------------------------------
+   2.6 Summary Visual
+   ---------------------------------------------------------------------------- */
+
+.registration-page__summary-section {
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.registration-page__summary-subtitle {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.registration-page__summary-item {
   background: var(--color-bg-secondary);
   border-radius: var(--radius-md);
 }
@@ -656,13 +1068,8 @@
 }
 
 .registration-page__summary-total {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--spacing-4);
   background: linear-gradient(135deg, var(--color-primary-bg) 0%, var(--color-bg-secondary) 100%);
   border-radius: var(--radius-lg);
-  margin-top: var(--spacing-4);
   border: 1px solid var(--color-primary-light);
 }
 
@@ -705,82 +1112,41 @@
   color: #dc2626;
 }
 
-/* ============================================================================
-   Warning Box
-   ============================================================================ */
-
+/* Warning Box Visual */
 .registration-page__warning-box {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-3);
-  padding: var(--spacing-4);
   background-color: var(--color-warning-bg);
   border: 1px solid var(--color-warning);
   border-radius: var(--radius-lg);
-  margin-top: var(--spacing-4);
   color: var(--color-warning);
 }
 
-.registration-page__warning-box svg {
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-/* ============================================================================
-   Confirmation
-   ============================================================================ */
-
+/* Confirmation Visual */
 .registration-page__confirmation {
-  margin-top: var(--spacing-4);
-  padding-top: var(--spacing-4);
   border-top: 1px solid var(--color-border-primary);
 }
 
-/* ============================================================================
-   Sidebar
-   ============================================================================ */
-
-.registration-page__sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
-}
+/* ----------------------------------------------------------------------------
+   2.7 Sidebar Visual
+   ---------------------------------------------------------------------------- */
 
 .registration-page__summary-card {
-  position: sticky;
-  top: var(--spacing-4);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-md);
-}
-
-.registration-page__card-header {
-  margin-bottom: var(--spacing-4);
 }
 
 .registration-page__card-title {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
-  margin: 0;
 }
 
-/* Aesthetic card title with display font */
 .registration-page--aesthetic .registration-page__card-title {
   font-family: var(--font-family-display);
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
-.registration-page__summary-stats {
-  display: flex;
-  gap: var(--spacing-3);
-  margin-bottom: var(--spacing-4);
-}
-
 .registration-page__stat {
-  flex: 1;
-  text-align: center;
-  padding: var(--spacing-4);
   background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%);
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border-secondary);
@@ -807,29 +1173,20 @@
 }
 
 .registration-page__stat-label {
-  display: block;
   font-size: var(--font-size-xs);
   color: var(--color-text-tertiary);
-  margin-top: var(--spacing-1);
 }
 
 .registration-page__entries-by-discipline {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-  padding-top: var(--spacing-3);
   border-top: 1px solid var(--color-border-primary);
 }
 
 .registration-page__discipline-count {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
 }
 
-/* Deadline Card */
+/* Deadline Card Visual */
 .registration-page__deadline-card {
   border-radius: var(--radius-xl);
   background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
@@ -848,38 +1205,17 @@
 }
 
 .registration-page__deadline-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  margin-bottom: var(--spacing-3);
   color: var(--color-text-secondary);
-}
-
-.registration-page__deadline-header svg {
-  width: 18px;
-  height: 18px;
 }
 
 .registration-page__deadline-date {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
-  margin: 0 0 var(--spacing-4) 0;
 }
 
 .registration-page__deadline-countdown {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--spacing-4);
-  padding: var(--spacing-4);
   background: var(--color-bg-tertiary);
   border-radius: var(--radius-lg);
-}
-
-.registration-page__countdown-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .registration-page__countdown-value {
@@ -905,7 +1241,6 @@
   font-size: var(--font-size-xs);
   color: var(--color-text-tertiary);
   text-transform: uppercase;
-  margin-top: var(--spacing-1);
 }
 
 .registration-page__countdown-separator {
@@ -914,7 +1249,7 @@
   color: var(--color-text-tertiary);
 }
 
-/* Club and Help Cards */
+/* Club and Help Cards Visual */
 .registration-page__club-name-large {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
@@ -935,72 +1270,13 @@
 .registration-page__help-text {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
-  margin: 0 0 var(--spacing-3) 0;
 }
 
-/* ============================================================================
-   Footer
-   ============================================================================ */
-
-.registration-page__footer {
-  padding: var(--spacing-6) var(--spacing-4);
-  border-top: 1px solid var(--color-border-primary);
-  background-color: var(--color-bg-secondary);
-}
-
-.registration-page__footer-content {
-  max-width: 1280px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.registration-page__footer-content p {
-  margin: 0;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-tertiary);
-}
-
-/* ============================================================================
-   Modal Content
-   ============================================================================ */
-
-.registration-page__modal-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
-}
-
-.registration-page__modal-filters {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-3);
-}
-
-@media (min-width: 640px) {
-  .registration-page__modal-filters {
-    flex-direction: row;
-    align-items: flex-end;
-  }
-
-  .registration-page__modal-filters > *:first-child {
-    flex: 1;
-  }
-}
-
-.registration-page__athlete-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-  max-height: 400px;
-  overflow-y: auto;
-  padding-right: var(--spacing-2);
-}
+/* ----------------------------------------------------------------------------
+   2.8 Modal Content Visual
+   ---------------------------------------------------------------------------- */
 
 .registration-page__athlete-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-  padding: var(--spacing-3);
   background-color: var(--color-bg-secondary);
   border-radius: var(--radius-lg);
   transition: all var(--transition-fast);
@@ -1016,15 +1292,7 @@
   opacity: 0.6;
 }
 
-.registration-page__athlete-info {
-  flex: 1;
-  min-width: 0;
-}
-
 .registration-page__athlete-name {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
@@ -1037,133 +1305,106 @@
 }
 
 .registration-page__athlete-meta {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
   font-size: var(--font-size-xs);
   color: var(--color-text-tertiary);
-  margin-top: var(--spacing-1);
 }
 
-.registration-page__athlete-status {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-1);
+/* Modal Footer Visual */
+.registration-page__modal-footer {
+  border-top: 1px solid var(--color-border-secondary);
 }
 
-/* ============================================================================
-   Responsive Adjustments
-   ============================================================================ */
+/* ----------------------------------------------------------------------------
+   2.9 Crew Selection Visual
+   ---------------------------------------------------------------------------- */
 
-@media (max-width: 768px) {
-  .registration-page__main {
-    padding: var(--spacing-4) var(--spacing-3);
-  }
-
-  .registration-page-hero {
-    padding: var(--spacing-8) var(--spacing-4) var(--spacing-12);
-  }
-
-  .registration-page-hero__title {
-    font-size: var(--font-size-2xl);
-  }
-
-  .registration-page-hero__stats {
-    flex-direction: column;
-    gap: var(--spacing-3);
-  }
-
-  .registration-page-hero__stat {
-    min-width: auto;
-    flex: 1;
-  }
-
-  .registration-page__athletes-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: var(--spacing-4);
-  }
-
-  .registration-page__step-actions {
-    flex-direction: column-reverse;
-    gap: var(--spacing-2);
-  }
-
-  .registration-page__step-actions > * {
-    width: 100%;
-  }
-
-  .registration-page__summary-card {
-    position: static;
-  }
-
-  .registration-page__summary-stats {
-    flex-direction: column;
-  }
-
-  .registration-page__athlete-item {
-    flex-wrap: wrap;
-  }
-
-  .registration-page__athlete-status {
-    width: 100%;
-    margin-top: var(--spacing-2);
-  }
+.registration-page__pending-crew {
+  background: var(--color-primary-bg);
+  border: 1px solid var(--color-primary-border);
+  border-radius: var(--radius-lg);
 }
 
-/* ============================================================================
-   Dark Mode Overrides
-   ============================================================================ */
-
-[data-theme="dark"] .registration-page__warning-box {
-  background-color: rgba(245, 158, 11, 0.1);
+.registration-page__pending-crew-info {
+  font-size: var(--font-size-sm);
 }
 
-[data-theme="dark"] .registration-page__athlete-item {
-  background-color: var(--color-bg-tertiary);
+.registration-page__pending-crew-info svg {
+  color: var(--color-primary);
 }
 
-[data-theme="dark"] .registration-page__athlete-item:hover {
+.registration-page__pending-crew-label {
+  color: var(--color-text-secondary);
+}
+
+.registration-page__pending-crew-name {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.registration-page__pending-crew-plus {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.registration-page__pending-crew-waiting {
+  color: var(--color-primary);
+  font-style: italic;
+}
+
+.registration-page__athlete-item--selected {
+  background-color: var(--color-primary-bg);
+  border-color: var(--color-primary-border);
+}
+
+.registration-page__athlete-item--selected:hover {
+  background-color: var(--color-primary-bg);
+}
+
+.registration-page__crew-primary {
+  font-weight: var(--font-weight-medium);
+}
+
+.registration-page__crew-separator {
+  color: var(--color-text-tertiary);
+  font-weight: var(--font-weight-bold);
+}
+
+.registration-page__crew-partner {
+  color: var(--color-text-secondary);
+}
+
+.registration-page__crew-rgc {
+  font-size: var(--font-size-xs);
+}
+
+.registration-page__crew-rgc-separator {
+  color: var(--color-text-tertiary);
+}
+
+.registration-page__category-cell svg {
+  color: var(--color-primary);
+}
+
+/* ----------------------------------------------------------------------------
+   2.10 Footer Visual
+   ---------------------------------------------------------------------------- */
+
+.registration-page__footer {
+  border-top: 1px solid var(--color-border-primary);
   background-color: var(--color-bg-secondary);
 }
 
-[data-theme="dark"] .registration-page-hero__stat {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.15);
+.registration-page__footer-content p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
 }
 
-[data-theme="dark"] .registration-page__wizard {
-  background: var(--color-bg-tertiary);
-}
-
-[data-theme="dark"] .registration-page__stat {
-  background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%);
-}
-
-/* ============================================================================
-   Reduced Motion
-   ============================================================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  .registration-wizard-step__circle,
-  .registration-wizard-step__line,
-  .registration-page__athlete-item {
-    transition: none;
-  }
-}
-
-/* ============================================================================
-   Satellite Variant - Clean internal registration design
-   ============================================================================ */
+/* ----------------------------------------------------------------------------
+   2.11 Satellite Header Visual
+   ---------------------------------------------------------------------------- */
 
 .registration-page--satellite {
   background-color: var(--color-bg-secondary, #f8f9fa);
-}
-
-.registration-page__satellite-logo {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
 }
 
 .registration-page__satellite-logo-text {
@@ -1172,25 +1413,14 @@
   color: var(--color-primary);
 }
 
-/* Page Header for Satellite */
 .registration-page-header {
   background: var(--color-surface-primary);
   border-bottom: 1px solid var(--color-border);
-  padding: var(--spacing-4) var(--spacing-4) var(--spacing-5);
-}
-
-.registration-page-header__content {
-  max-width: 1280px;
-  margin: 0 auto;
 }
 
 .registration-page-header__breadcrumb {
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
-  margin-bottom: var(--spacing-3);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
 }
 
 .registration-page-header__breadcrumb-link {
@@ -1206,45 +1436,15 @@
   color: var(--color-text-muted);
 }
 
-.registration-page-header__row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--spacing-4);
-}
-
-.registration-page-header__info {
-  flex: 1;
-}
-
-.registration-page-header__badges {
-  display: flex;
-  gap: var(--spacing-2);
-  margin-bottom: var(--spacing-2);
-}
-
 .registration-page-header__title {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
-  margin: 0 0 var(--spacing-2) 0;
-  line-height: 1.2;
 }
 
 .registration-page-header__meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--spacing-4);
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
-  margin: 0;
-}
-
-.registration-page-header__meta-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-1);
 }
 
 .registration-page-header__meta-item svg {
@@ -1256,22 +1456,14 @@
   margin-top: 0;
 }
 
-/* Satellite responsive */
-@media (max-width: 768px) {
-  .registration-page-header__row {
-    flex-direction: column;
-  }
-
-  .registration-page-header__meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-2);
-  }
-}
-
 /* ============================================================================
-   Aesthetic Mode - Dynamic Sport Enhancements (Phase 15.0)
+   3. VARIANTS
+   Aesthetic mode enhancements
    ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   3.1 Aesthetic Mode
+   ---------------------------------------------------------------------------- */
 
 /* Hero with mesh overlay */
 .registration-page--aesthetic .registration-page-hero__gradient {
@@ -1386,127 +1578,10 @@
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .registration-page--aesthetic .registration-page__wizard,
-  .registration-page--aesthetic .registration-page__step-card,
-  .registration-page--aesthetic .registration-page__sidebar > * {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-}
+/* ----------------------------------------------------------------------------
+   3.2 Aesthetic Crew Styles
+   ---------------------------------------------------------------------------- */
 
-/* ============================================================================
-   Crew (C2) Selection UX - Multi-athlete registration
-   ============================================================================ */
-
-/* Pending crew indicator */
-.registration-page__pending-crew {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-3);
-  padding: var(--spacing-3) var(--spacing-4);
-  background: var(--color-primary-bg);
-  border: 1px solid var(--color-primary-border);
-  border-radius: var(--radius-lg);
-}
-
-.registration-page__pending-crew-info {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  font-size: var(--font-size-sm);
-}
-
-.registration-page__pending-crew-info svg {
-  color: var(--color-primary);
-  flex-shrink: 0;
-}
-
-.registration-page__pending-crew-label {
-  color: var(--color-text-secondary);
-}
-
-.registration-page__pending-crew-name {
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-}
-
-.registration-page__pending-crew-plus {
-  color: var(--color-primary);
-  font-weight: var(--font-weight-bold);
-}
-
-.registration-page__pending-crew-waiting {
-  color: var(--color-primary);
-  font-style: italic;
-}
-
-/* Selected athlete highlight in partner mode */
-.registration-page__athlete-item--selected {
-  background-color: var(--color-primary-bg);
-  border-color: var(--color-primary-border);
-}
-
-.registration-page__athlete-item--selected:hover {
-  background-color: var(--color-primary-bg);
-}
-
-/* Modal footer with keep-open checkbox */
-.registration-page__modal-footer {
-  padding-top: var(--spacing-4);
-  border-top: 1px solid var(--color-border-secondary);
-  margin-top: var(--spacing-2);
-}
-
-/* Crew names display in table */
-.registration-page__crew-names {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-}
-
-.registration-page__crew-primary {
-  font-weight: var(--font-weight-medium);
-}
-
-.registration-page__crew-separator {
-  color: var(--color-text-tertiary);
-  font-weight: var(--font-weight-bold);
-}
-
-.registration-page__crew-partner {
-  color: var(--color-text-secondary);
-}
-
-/* Crew RGC display */
-.registration-page__crew-rgc {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-1);
-  font-size: var(--font-size-xs);
-}
-
-.registration-page__crew-rgc-separator {
-  color: var(--color-text-tertiary);
-}
-
-/* Category cell with team icon */
-.registration-page__category-cell {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-1);
-}
-
-.registration-page__category-cell svg {
-  color: var(--color-primary);
-  width: 14px;
-  height: 14px;
-}
-
-/* Aesthetic variant crew styles */
 .registration-page--aesthetic .registration-page__pending-crew {
   background: var(--gradient-energy-subtle);
   border-color: var(--color-energy-200);
@@ -1527,7 +1602,78 @@
   color: var(--color-energy-600);
 }
 
-/* Responsive adjustments for crew UX */
+/* ============================================================================
+   4. RESPONSIVE
+   Mobile adjustments
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .registration-page__main {
+    padding: var(--spacing-4) var(--spacing-3);
+  }
+
+  .registration-page-hero {
+    padding: var(--spacing-8) var(--spacing-4) var(--spacing-12);
+  }
+
+  .registration-page-hero__title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .registration-page-hero__stats {
+    flex-direction: column;
+    gap: var(--spacing-3);
+  }
+
+  .registration-page-hero__stat {
+    min-width: auto;
+    flex: 1;
+  }
+
+  .registration-page__athletes-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-4);
+  }
+
+  .registration-page__step-actions {
+    flex-direction: column-reverse;
+    gap: var(--spacing-2);
+  }
+
+  .registration-page__step-actions > * {
+    width: 100%;
+  }
+
+  .registration-page__summary-card {
+    position: static;
+  }
+
+  .registration-page__summary-stats {
+    flex-direction: column;
+  }
+
+  .registration-page__athlete-item {
+    flex-wrap: wrap;
+  }
+
+  .registration-page__athlete-status {
+    width: 100%;
+    margin-top: var(--spacing-2);
+  }
+
+  /* Satellite responsive */
+  .registration-page-header__row {
+    flex-direction: column;
+  }
+
+  .registration-page-header__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+  }
+}
+
 @media (max-width: 640px) {
   .registration-page__pending-crew {
     flex-direction: column;
@@ -1553,5 +1699,59 @@
     content: "+ ";
     color: var(--color-text-tertiary);
     font-weight: var(--font-weight-bold);
+  }
+}
+
+/* ============================================================================
+   5. ACCESSIBILITY
+   Reduced motion, dark mode overrides
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   5.1 Dark Mode
+   ---------------------------------------------------------------------------- */
+
+[data-theme="dark"] .registration-page__warning-box {
+  background-color: rgba(245, 158, 11, 0.1);
+}
+
+[data-theme="dark"] .registration-page__athlete-item {
+  background-color: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .registration-page__athlete-item:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .registration-page-hero__stat {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .registration-page__wizard {
+  background: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .registration-page__stat {
+  background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%);
+}
+
+/* ----------------------------------------------------------------------------
+   5.2 Reduced Motion
+   ---------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .registration-wizard-step__circle,
+  .registration-wizard-step__line,
+  .registration-page__athlete-item {
+    transition: none;
+  }
+
+  .registration-page--aesthetic .registration-page__wizard,
+  .registration-page--aesthetic .registration-page__step-card,
+  .registration-page--aesthetic .registration-page__sidebar > * {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }

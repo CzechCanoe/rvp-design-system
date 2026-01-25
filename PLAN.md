@@ -325,6 +325,12 @@
 - [x] Poznámka: Obsahuje discipline-specific gradienty, pulse animace, oncourse/podium/schedule panely, fullscreen mode
 - [x] Build validace OK
 
+### Iterace 28: CSS reorganizace RegistrationPage ✅
+- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
+- [x] Reorganizovat CSS - oddělení LAYOUT a VISUAL sekcí (1557 → 1757 řádků)
+- [x] Poznámka: Obsahuje discipline-specific hero/wizard/summary gradienty, countdown, crew selection, aesthetic mode
+- [x] Build validace OK
+
 ---
 
 ## Metriky úspěchu
@@ -332,7 +338,7 @@
 | Metrika | Před | Aktuální | Cíl |
 |---------|------|----------|-----|
 | Component CSS | ~7,800 řádků | 16,046 řádků* | ~10,000 řádků |
-| Prototype CSS | ~4,500 řádků | 11,326 řádků | ~600 řádků |
+| Prototype CSS | ~4,500 řádků | 11,867 řádků | ~600 řádků |
 | Inline styles | 28 | **0** ✅ | 0 |
 | Custom icons | 80+ | **0** ✅ | 0 (vše přes Icon) |
 
