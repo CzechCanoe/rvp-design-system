@@ -6148,3 +6148,31 @@ CSS cleanup komponent je dokončen. Zbývá refaktoring CSS prototypů na čist�
 ### Poznámky
 - Celkové prototype CSS: 11,613 řádků (pokles z 12,592)
 - Zbývající velké prototypy na redukci: ResultsPage (1199), DashboardPage (1215), ProfilePage (1550), RegistrationPage (1557), LivePage (2433)
+
+---
+
+## 2026-01-25 - Fáze 17.23: CSS redukce ResultsPage
+
+### Dokončeno
+- [x] CSS redukce z 1199 → 489 řádků (59% redukce)
+- [x] Odstranění legacy podium CSS (používá PodiumCard komponentu)
+- [x] Aktualizace TSX pro utility třídy (csk-display, csk-headline, csk-reveal)
+- [x] Page header nyní používá Card variant="surface"
+- [x] Build validace OK
+
+### Změny
+1. **CSS cleanup:**
+   - Odstraněny všechny vizuální styly (barvy, fonty, stíny, borders, animace)
+   - Zachovány pouze layout vlastnosti (display, flex, grid, gap, padding, margin)
+   - Odstraněny dark mode a embed vizuální overrides
+   - Odstraněny staré podium card styly (nahrazeny PodiumCard komponentou)
+
+2. **TSX aktualizace:**
+   - Header sekce: `Card variant="surface"` pro konzistentní styling
+   - Titulky: `csk-display` pro display typografii
+   - Stats: `csk-reveal` animace se stagger efektem
+   - Podium sekce: `csk-headline` pro nadpis
+
+### Poznámky
+- ResultsPage už používal PodiumCard komponentu, takže většina podium CSS byla nepoužívaná
+- Celkový Prototype CSS: 10,903 řádků (z 11,613)

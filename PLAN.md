@@ -294,6 +294,13 @@
 - [x] Aktualizovat TSX - highlight cards, result cards, chart placeholder → Card komponenta
 - [x] Build validace OK
 
+### Iterace 23: CSS redukce ResultsPage ✅
+- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
+- [x] Přepsat CSS na layout-only (1199 → 489 řádků, 59% redukce)
+- [x] Odstranit legacy podium CSS (používá PodiumCard komponentu)
+- [x] Aktualizovat TSX - Card pro header, csk-display/headline pro typografii
+- [x] Build validace OK
+
 ---
 
 ## Metriky úspěchu
@@ -301,7 +308,7 @@
 | Metrika | Před | Aktuální | Cíl |
 |---------|------|----------|-----|
 | Component CSS | ~7,800 řádků | 16,046 řádků* | ~10,000 řádků |
-| Prototype CSS | ~4,500 řádků | 11,613 řádků | ~600 řádků |
+| Prototype CSS | ~4,500 řádků | 10,903 řádků | ~600 řádků |
 | Inline styles | 28 | **0** ✅ | 0 |
 | Custom icons | 80+ | **0** ✅ | 0 (vše přes Icon) |
 
