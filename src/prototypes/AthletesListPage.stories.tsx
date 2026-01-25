@@ -575,8 +575,31 @@ const meta = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component:
-          'Prototyp stránky seznamu závodníků CSK s Aesthetic designem. Zobrazuje registrované závodníky s vyhledáváním, filtrováním podle sekcí a VT tříd, a featured sekci s reprezentanty. Varianty: Embed (pro kanoe.cz), Satellite (standalone).',
+        component: `
+# Seznam závodníků - AESTHETIC Design
+
+Prototyp stránky seznamu závodníků CSK s plným Aesthetic designem.
+
+## Vizuální prvky (Phase 16.5)
+
+- **Hero sekce** - Mesh gradient pozadí, display fonty, diagonální stripe
+- **Stat karty** - Animované hover efekty, energy accent border
+- **Featured sekce** - Staggered reveal animace, gradient border
+- **Filtrování** - Pill-style tagy, aesthetic search bar
+- **Grid karet** - Hover lift efekty, konzistentní spacing
+
+## Varianty
+
+| Varianta | Popis |
+|----------|-------|
+| **Embed** | Pro vložení do kanoe.cz (bez headeru/footeru) |
+| **Satellite** | Standalone s minimálním headerem |
+
+## Props
+
+- \`showFeatured: false\` - skryje sekci reprezentantů
+- \`initialSection\` - přednastavená sekce (all, dv, ry, vt)
+        `,
       },
     },
   },
@@ -612,6 +635,13 @@ type Story = StoryObj<typeof meta>;
  * Komponenta bez vlastního headeru a footeru, určená pro embedding
  * do existujícího webu kanoe.cz (Joomla + Bootstrap 4).
  *
+ * **Aesthetic prvky:**
+ * - Display fonty pro nadpisy
+ * - Stat karty s hover efekty a energy accent
+ * - Featured sekce se staggered reveal animací
+ * - Pill-style filtrační tagy
+ * - Hover lift efekty pro karty
+ *
  * **Features dostupné přes props:**
  * - `showFeatured: false` - skryje sekci reprezentantů
  * - `initialSection` - přednastavenou sekci (dv, ry, vt)
@@ -641,7 +671,7 @@ export const Embed: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Aesthetic embed seznamu závodníků v kontextu kanoe.cz. Pro úsporné zobrazení použijte `showFeatured: false`.',
+        story: 'Aesthetic embed seznamu závodníků v kontextu kanoe.cz. Obsahuje mesh pozadí, display fonty, stat karty s hover efekty a staggered reveal animace pro featured sekci.',
       },
     },
   },
@@ -652,6 +682,14 @@ export const Embed: Story = {
  *
  * Samostatná aplikace registru závodníků s odkazem zpět na kanoe.cz.
  * Plný Aesthetic design s featured sekcí reprezentantů.
+ *
+ * **Aesthetic prvky:**
+ * - Hero sekce s mesh gradient pozadím a diagonálním stripe
+ * - Display fonty pro velké nadpisy
+ * - Stat karty s energy accent a hover efekty
+ * - Featured sekce se staggered reveal animací
+ * - Pill-style filtrační tagy
+ * - Hover lift efekty pro karty závodníků
  *
  * **Features dostupné přes props:**
  * - `showFeatured: false` - skryje sekci reprezentantů
@@ -666,7 +704,7 @@ export const Satellite: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Aesthetic standalone seznamu závodníků se satellite headerem. Pro úsporné zobrazení použijte `showFeatured: false`.',
+        story: 'Aesthetic standalone seznamu závodníků se satellite headerem. Obsahuje plný hero s mesh pozadím, stat karty s energy accenty a staggered reveal animace.',
       },
     },
   },

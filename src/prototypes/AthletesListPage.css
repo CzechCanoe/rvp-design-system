@@ -1,12 +1,20 @@
 /* ==========================================================================
-   AthletesListPage Prototype Styles
+   AthletesListPage Prototype Styles - AESTHETIC VERSION
+
+   Phase 16.5: Aesthetic refresh with Dynamic Sport visual identity
+   - Mesh backgrounds and grain textures
+   - Display typography for headlines
+   - Energy accent colors
+   - Staggered reveal animations
+   - Card-based layout with hover effects
    ========================================================================== */
 
 .prototype-athletes-list {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--color-bg-primary);
+  background: var(--bg-mesh-primary);
+  background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
 }
 
@@ -46,16 +54,44 @@
 }
 
 /* ==========================================================================
-   Page Header
+   Page Header - AESTHETIC HERO
    ========================================================================== */
 
 .athletes-list-header {
-  padding: var(--spacing-6) 0;
-  background: var(--color-bg-secondary);
-  border-bottom: 1px solid var(--color-border-primary);
+  position: relative;
+  padding: var(--spacing-12) 0 var(--spacing-8);
+  background: var(--bg-mesh-hero);
+  background-color: var(--color-bg-primary);
+  border-bottom: none;
+  overflow: hidden;
+}
+
+/* Decorative diagonal stripe */
+.athletes-list-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -10%;
+  width: 35%;
+  height: 100%;
+  background: var(--gradient-energy-subtle, linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(255, 107, 53, 0.02)));
+  transform: skewX(-12deg);
+  pointer-events: none;
+}
+
+/* Grain texture overlay */
+.athletes-list-header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
 }
 
 .athletes-list-header__container {
+  position: relative;
+  z-index: 1;
   max-width: var(--container-xl);
   margin: 0 auto;
   padding: 0 var(--spacing-4);
@@ -65,7 +101,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  margin-bottom: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
   font-size: var(--text-sm-size);
   color: var(--color-text-tertiary);
 }
@@ -73,11 +109,11 @@
 .athletes-list-header__breadcrumb a {
   color: var(--color-text-secondary);
   text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .athletes-list-header__breadcrumb a:hover {
-  color: var(--color-primary-600);
-  text-decoration: underline;
+  color: var(--color-energy-500, var(--color-primary-600));
 }
 
 .athletes-list-header__content {
@@ -96,26 +132,30 @@
 
 .athletes-list-header__title {
   margin: 0;
-  font-size: var(--text-2xl-size);
-  font-weight: var(--font-bold);
+  font-family: var(--font-family-display, var(--font-family-base));
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: var(--font-black, 800);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
   color: var(--color-text-primary);
 }
 
 .athletes-list-header__subtitle {
-  margin: var(--spacing-1) 0 0;
-  font-size: var(--text-base-size);
+  margin: var(--spacing-2) 0 0;
+  font-size: var(--text-lg-size);
   color: var(--color-text-secondary);
+  max-width: 500px;
 }
 
 /* ==========================================================================
-   Statistics Bar
+   Statistics Bar - AESTHETIC STAT CARDS
    ========================================================================== */
 
 .athletes-list-stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-3);
-  margin-top: var(--spacing-4);
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-6);
 }
 
 @media (min-width: 640px) {
@@ -125,26 +165,72 @@
 }
 
 .athletes-list-stats__item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--spacing-3);
+  padding: var(--spacing-5) var(--spacing-4);
   background: var(--color-bg-primary);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   text-align: center;
+  border: 1px solid var(--color-border-primary);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+  overflow: hidden;
+}
+
+/* Energy accent border on hover */
+.athletes-list-stats__item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary, linear-gradient(90deg, var(--color-primary-500), var(--color-primary-400)));
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.athletes-list-stats__item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.athletes-list-stats__item:hover::before {
+  opacity: 1;
+}
+
+/* Specific accent colors for each stat */
+.athletes-list-stats__item:nth-child(1)::before {
+  background: var(--gradient-energy, linear-gradient(90deg, var(--color-energy-500, #ff6b35), var(--color-energy-400, #ff8c5a)));
+}
+
+.athletes-list-stats__item:nth-child(2)::before {
+  background: linear-gradient(90deg, var(--color-success-500), var(--color-success-400));
+}
+
+.athletes-list-stats__item:nth-child(3)::before {
+  background: linear-gradient(90deg, var(--color-info-500), var(--color-info-400));
 }
 
 .athletes-list-stats__value {
-  font-size: var(--text-2xl-size);
-  font-weight: var(--font-bold);
+  font-family: var(--font-family-display, var(--font-family-base));
+  font-size: var(--text-3xl-size, 1.875rem);
+  font-weight: var(--font-black, 800);
   font-variant-numeric: tabular-nums;
-  color: var(--color-primary-600);
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
 }
 
 .athletes-list-stats__label {
   font-size: var(--text-sm-size);
   color: var(--color-text-secondary);
   margin-top: var(--spacing-1);
+  font-weight: var(--font-medium, 500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 /* ==========================================================================
@@ -163,38 +249,61 @@
 }
 
 /* ==========================================================================
-   Featured Athletes Section
+   Featured Athletes Section - AESTHETIC FEATURED GRID
    ========================================================================== */
 
 .athletes-list-featured {
-  margin-bottom: var(--spacing-8);
+  position: relative;
+  margin-bottom: var(--spacing-10);
+  padding: var(--spacing-8);
+  background: var(--bg-mesh-card, var(--color-bg-secondary));
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border-primary);
+}
+
+/* Decorative border accent */
+.athletes-list-featured::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-energy, linear-gradient(90deg, var(--color-energy-500, #ff6b35), var(--color-energy-400, #ff8c5a)));
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 
 .athletes-list-featured__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
 }
 
 .athletes-list-featured__title {
   margin: 0;
-  font-size: var(--text-xl-size);
-  font-weight: var(--font-semibold);
+  font-family: var(--font-family-display, var(--font-family-base));
+  font-size: var(--text-2xl-size);
+  font-weight: var(--font-bold, 700);
   color: var(--color-text-primary);
   display: flex;
   align-items: center;
-  gap: var(--spacing-2);
+  gap: var(--spacing-3);
+  letter-spacing: -0.01em;
 }
 
 .athletes-list-featured__title svg {
-  color: var(--color-warning-500);
+  width: 28px;
+  height: 28px;
+  color: var(--color-energy-500, var(--color-warning-500));
+  filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.3));
 }
 
 .athletes-list-featured__grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: var(--spacing-4);
+  gap: var(--spacing-5);
 }
 
 @media (min-width: 640px) {
@@ -209,22 +318,50 @@
   }
 }
 
+/* Staggered reveal animation for featured cards */
+.athletes-list-featured__grid > * {
+  animation: featuredReveal 0.5s ease-out backwards;
+}
+
+.athletes-list-featured__grid > *:nth-child(1) { animation-delay: 0ms; }
+.athletes-list-featured__grid > *:nth-child(2) { animation-delay: 75ms; }
+.athletes-list-featured__grid > *:nth-child(3) { animation-delay: 150ms; }
+.athletes-list-featured__grid > *:nth-child(4) { animation-delay: 225ms; }
+
+@keyframes featuredReveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .athletes-list-featured__grid > * {
+    animation: none;
+  }
+}
+
 /* ==========================================================================
-   Search and Filters
+   Search and Filters - AESTHETIC FILTER BAR
    ========================================================================== */
 
 .athletes-list-filters {
   margin-bottom: var(--spacing-6);
-  padding: var(--spacing-4);
-  background: var(--color-bg-secondary);
-  border-radius: var(--radius-lg);
+  padding: var(--spacing-5);
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-xl);
   border: 1px solid var(--color-border-primary);
+  box-shadow: var(--shadow-sm);
 }
 
 .athletes-list-filters__row {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-3);
+  gap: var(--spacing-4);
 }
 
 @media (min-width: 768px) {
@@ -254,71 +391,84 @@
   gap: var(--spacing-2);
 }
 
-/* Filter Tags */
+/* Filter Tags - AESTHETIC PILLS */
 .athletes-list-filters__tags {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-2);
-  margin-top: var(--spacing-3);
-  padding-top: var(--spacing-3);
+  margin-top: var(--spacing-4);
+  padding-top: var(--spacing-4);
   border-top: 1px solid var(--color-border-primary);
 }
 
 .athletes-list-filters__tag {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-1);
-  padding: var(--spacing-1) var(--spacing-2);
+  gap: var(--spacing-2);
+  padding: var(--spacing-1) var(--spacing-3) var(--spacing-1) var(--spacing-3);
   font-size: var(--text-sm-size);
-  background: var(--color-bg-primary);
-  border: 1px solid var(--color-border-primary);
+  font-weight: var(--font-medium, 500);
+  background: linear-gradient(135deg, var(--color-primary-50), var(--color-primary-100));
+  border: 1px solid var(--color-primary-200);
   border-radius: var(--radius-full);
-  color: var(--color-text-secondary);
+  color: var(--color-primary-700);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.athletes-list-filters__tag:hover {
+  background: linear-gradient(135deg, var(--color-primary-100), var(--color-primary-200));
+  border-color: var(--color-primary-300);
 }
 
 .athletes-list-filters__tag-remove {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   padding: 0;
   margin-left: var(--spacing-1);
-  background: none;
+  background: var(--color-primary-200);
   border: none;
   border-radius: var(--radius-full);
-  color: var(--color-text-tertiary);
+  color: var(--color-primary-700);
   cursor: pointer;
-  transition: background-color var(--duration-fast) var(--ease-out);
+  transition: all var(--duration-fast) var(--ease-out);
 }
 
 .athletes-list-filters__tag-remove:hover {
-  background: var(--color-error-100);
-  color: var(--color-error-600);
+  background: var(--color-error-500);
+  color: white;
+  transform: scale(1.1);
 }
 
 .athletes-list-filters__clear {
   font-size: var(--text-sm-size);
-  color: var(--color-primary-600);
+  font-weight: var(--font-medium, 500);
+  color: var(--color-energy-600, var(--color-primary-600));
   background: none;
   border: none;
   cursor: pointer;
-  padding: var(--spacing-1) var(--spacing-2);
+  padding: var(--spacing-1) var(--spacing-3);
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .athletes-list-filters__clear:hover {
+  color: var(--color-energy-700, var(--color-primary-700));
   text-decoration: underline;
 }
 
 /* ==========================================================================
-   Results Header
+   Results Header - AESTHETIC
    ========================================================================== */
 
 .athletes-list-results__header {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
-  margin-bottom: var(--spacing-4);
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-5);
+  padding-bottom: var(--spacing-4);
+  border-bottom: 1px solid var(--color-border-primary);
 }
 
 @media (min-width: 640px) {
@@ -335,6 +485,8 @@
 }
 
 .athletes-list-results__count strong {
+  font-family: var(--font-family-display, var(--font-family-base));
+  font-weight: var(--font-bold, 700);
   color: var(--color-text-primary);
   font-variant-numeric: tabular-nums;
 }
@@ -342,22 +494,23 @@
 .athletes-list-results__sort {
   display: flex;
   align-items: center;
-  gap: var(--spacing-2);
+  gap: var(--spacing-3);
 }
 
 .athletes-list-results__sort-label {
   font-size: var(--text-sm-size);
   color: var(--color-text-tertiary);
+  font-weight: var(--font-medium, 500);
 }
 
 /* ==========================================================================
-   Athletes Grid
+   Athletes Grid - AESTHETIC CARD GRID
    ========================================================================== */
 
 .athletes-list-grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: var(--spacing-4);
+  gap: var(--spacing-5);
 }
 
 @media (min-width: 640px) {
@@ -370,6 +523,17 @@
   .athletes-list-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+/* Card hover effects */
+.athletes-list-grid > * {
+  transition: transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.athletes-list-grid > *:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
 /* ==========================================================================
@@ -385,25 +549,37 @@
 }
 
 /* ==========================================================================
-   Empty State
+   Empty State - AESTHETIC
    ========================================================================== */
 
 .athletes-list-empty {
-  padding: var(--spacing-12) var(--spacing-4);
+  padding: var(--spacing-16) var(--spacing-4);
   text-align: center;
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  border: 2px dashed var(--color-border-primary);
 }
 
 .athletes-list-empty__icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto var(--spacing-4);
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--spacing-5);
+  padding: var(--spacing-4);
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-full);
   color: var(--color-text-tertiary);
+}
+
+.athletes-list-empty__icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 .athletes-list-empty__title {
   margin: 0 0 var(--spacing-2);
-  font-size: var(--text-lg-size);
-  font-weight: var(--font-semibold);
+  font-family: var(--font-family-display, var(--font-family-base));
+  font-size: var(--text-xl-size);
+  font-weight: var(--font-bold, 700);
   color: var(--color-text-primary);
 }
 
@@ -411,6 +587,9 @@
   margin: 0;
   font-size: var(--text-base-size);
   color: var(--color-text-secondary);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ==========================================================================
@@ -433,11 +612,15 @@
 }
 
 /* ==========================================================================
-   Section Tabs
+   Section Tabs - AESTHETIC PILL TABS
    ========================================================================== */
 
 .athletes-list-section-tabs {
-  margin-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+  padding: var(--spacing-3);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border-primary);
 }
 
 /* ==========================================================================
@@ -445,9 +628,13 @@
    ========================================================================== */
 
 .prototype-athletes-list--embed .athletes-list-header {
-  padding: var(--spacing-4) 0;
+  padding: var(--spacing-6) 0 var(--spacing-4);
   background: transparent;
-  border-bottom: none;
+}
+
+.prototype-athletes-list--embed .athletes-list-header::before,
+.prototype-athletes-list--embed .athletes-list-header::after {
+  display: none;
 }
 
 .prototype-athletes-list--embed .athletes-list-header__container {
@@ -464,6 +651,16 @@
 
 .prototype-athletes-list--embed .athletes-list-stats__item {
   background: var(--color-bg-secondary);
+}
+
+.prototype-athletes-list--embed .athletes-list-featured {
+  padding: var(--spacing-6);
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.prototype-athletes-list--embed .athletes-list-section-tabs {
+  background: var(--color-bg-primary);
 }
 
 /* ==========================================================================
@@ -503,17 +700,53 @@
    ========================================================================== */
 
 [data-theme='dark'] .athletes-list-header {
-  background: var(--color-bg-secondary);
+  background: var(--bg-mesh-hero);
+  background-color: var(--color-bg-secondary);
 }
 
 [data-theme='dark'] .athletes-list-stats__item {
   background: var(--color-bg-tertiary);
+  border-color: var(--color-border-secondary);
 }
 
 [data-theme='dark'] .athletes-list-filters {
   background: var(--color-bg-secondary);
+  border-color: var(--color-border-secondary);
 }
 
 [data-theme='dark'] .athletes-list-filters__tag {
+  background: linear-gradient(135deg, var(--color-primary-900), var(--color-primary-800));
+  border-color: var(--color-primary-700);
+  color: var(--color-primary-200);
+}
+
+[data-theme='dark'] .athletes-list-featured {
   background: var(--color-bg-tertiary);
+  border-color: var(--color-border-secondary);
+}
+
+[data-theme='dark'] .athletes-list-section-tabs {
+  background: var(--color-bg-tertiary);
+  border-color: var(--color-border-secondary);
+}
+
+[data-theme='dark'] .athletes-list-empty {
+  background: var(--color-bg-tertiary);
+  border-color: var(--color-border-secondary);
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .athletes-list-stats__item,
+  .athletes-list-grid > * {
+    transition: none;
+  }
+
+  .athletes-list-stats__item:hover,
+  .athletes-list-grid > *:hover {
+    transform: none;
+  }
 }
