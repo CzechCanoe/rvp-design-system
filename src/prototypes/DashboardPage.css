@@ -1,20 +1,21 @@
 /* ============================================================================
-   Dashboard Page Styles - Redesigned with Hero Section and Widget Cards
-   Phase 7.8: Modern dashboard with gradient hero, discipline theming, and stats
+   Dashboard Page Styles
+   Phase 17.25: Reorganized into LAYOUT vs VISUAL sections
    ============================================================================ */
+
+/* ============================================================================
+   PART 1: LAYOUT
+   Pure structural styles - flexbox, grid, positioning, spacing
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   Page Structure
+   ---------------------------------------------------------------------------- */
 
 .dashboard-page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-bg-primary);
-}
-
-/* Header */
-.dashboard-header-logo {
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: var(--color-primary);
 }
 
 .dashboard-header-actions {
@@ -23,15 +24,14 @@
   gap: var(--spacing-2);
 }
 
-/* ============================================================================
-   Hero Section
-   ============================================================================ */
+/* ----------------------------------------------------------------------------
+   Hero Section Layout
+   ---------------------------------------------------------------------------- */
 
 .dashboard-hero-section {
   position: relative;
   padding: var(--spacing-10) var(--spacing-4) var(--spacing-16);
   overflow: hidden;
-  color: var(--color-text-inverse);
 }
 
 .dashboard-hero-section__background {
@@ -43,6 +43,692 @@
 .dashboard-hero-section__gradient {
   position: absolute;
   inset: 0;
+}
+
+.dashboard-hero-section__pattern {
+  position: absolute;
+  inset: 0;
+}
+
+.dashboard-hero-section__pulse-rings {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 300px;
+  pointer-events: none;
+}
+
+.dashboard-pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.dashboard-hero-section__content {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-hero-section__wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 2;
+}
+
+.dashboard-page-wave {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ----------------------------------------------------------------------------
+   Hero Content Layout
+   ---------------------------------------------------------------------------- */
+
+.dashboard-hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-6);
+}
+
+.dashboard-hero-welcome {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.dashboard-hero-subtitle {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin: var(--spacing-2) 0 0;
+}
+
+.dashboard-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-3);
+  border-radius: var(--radius-full);
+}
+
+.dashboard-hero-actions {
+  display: flex;
+  gap: var(--spacing-3);
+}
+
+/* ----------------------------------------------------------------------------
+   Stats Section Layout
+   ---------------------------------------------------------------------------- */
+
+.dashboard-stats-section {
+  margin-top: calc(var(--spacing-8) * -1);
+  padding: 0 var(--spacing-4);
+  position: relative;
+  z-index: 3;
+}
+
+.dashboard-stats-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-4);
+}
+
+/* ----------------------------------------------------------------------------
+   Main Content Layout
+   ---------------------------------------------------------------------------- */
+
+.dashboard-main {
+  flex: 1;
+  padding: var(--spacing-8) var(--spacing-4);
+}
+
+.dashboard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.dashboard-content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-6);
+}
+
+/* ----------------------------------------------------------------------------
+   Section Card Layout
+   ---------------------------------------------------------------------------- */
+
+.dashboard-section-card {
+  overflow: hidden;
+}
+
+.dashboard-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-4) var(--spacing-5);
+}
+
+.dashboard-section-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.dashboard-section-badge {
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-full);
+}
+
+.dashboard-section-body {
+  padding: 0;
+}
+
+/* ----------------------------------------------------------------------------
+   Alerts Layout
+   ---------------------------------------------------------------------------- */
+
+.dashboard-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.dashboard-alert-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-alert-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4) var(--spacing-5);
+}
+
+.dashboard-alert-item:last-child {
+  border-bottom: none;
+}
+
+.dashboard-alert-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-alert-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.dashboard-alert-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.dashboard-alert-title {
+  margin: 0;
+}
+
+.dashboard-alert-description {
+  margin: var(--spacing-1) 0 0;
+}
+
+.dashboard-alert-action {
+  flex-shrink: 0;
+}
+
+/* ----------------------------------------------------------------------------
+   Races Layout
+   ---------------------------------------------------------------------------- */
+
+.dashboard-races {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.dashboard-race-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-race-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4) var(--spacing-5);
+}
+
+.dashboard-race-item:last-child {
+  border-bottom: none;
+}
+
+.dashboard-race-date {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-race-date-month {
+  margin-top: 2px;
+}
+
+.dashboard-race-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.dashboard-race-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.dashboard-race-title {
+  margin: 0;
+}
+
+.dashboard-race-location {
+  margin: var(--spacing-1) 0 0;
+}
+
+.dashboard-race-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-2);
+}
+
+.dashboard-race-meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.dashboard-race-meta-item svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ----------------------------------------------------------------------------
+   Quick Actions Layout
+   ---------------------------------------------------------------------------- */
+
+.dashboard-quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+}
+
+.dashboard-quick-action {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+}
+
+.dashboard-quick-action-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-quick-action-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.dashboard-quick-action-text {
+  flex: 1;
+}
+
+.dashboard-quick-action-title {
+  margin: 0;
+}
+
+.dashboard-quick-action-description {
+  margin: var(--spacing-1) 0 0;
+}
+
+.dashboard-quick-action-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ----------------------------------------------------------------------------
+   Activity Layout
+   ---------------------------------------------------------------------------- */
+
+.dashboard-activity {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-activity-item {
+  display: flex;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-5);
+}
+
+.dashboard-activity-item:last-child {
+  border-bottom: none;
+}
+
+.dashboard-activity-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-activity-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.dashboard-activity-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.dashboard-activity-text {
+  margin: 0;
+}
+
+.dashboard-activity-time {
+  margin: var(--spacing-1) 0 0;
+}
+
+/* ----------------------------------------------------------------------------
+   Members Table Layout
+   ---------------------------------------------------------------------------- */
+
+.dashboard-members-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4) var(--spacing-5);
+}
+
+.dashboard-members-search {
+  flex: 1;
+  max-width: 300px;
+}
+
+.dashboard-members-filters {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+.dashboard-member-name {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.dashboard-member-info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----------------------------------------------------------------------------
+   Footer Layout
+   ---------------------------------------------------------------------------- */
+
+.dashboard-footer {
+  padding: var(--spacing-8) var(--spacing-4);
+  text-align: center;
+}
+
+.dashboard-footer p {
+  margin: 0;
+}
+
+/* ----------------------------------------------------------------------------
+   Page Header Layout
+   ---------------------------------------------------------------------------- */
+
+.dashboard-page-header {
+  padding: var(--spacing-6) var(--spacing-4);
+}
+
+.dashboard-page-header__content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+}
+
+.dashboard-page-header__welcome {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.dashboard-page-header__subtitle {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin: var(--spacing-1) 0 0;
+}
+
+.dashboard-page-header__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+}
+
+.dashboard-page-header__actions {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+/* Satellite Page Header Layout */
+.dashboard-page-header--satellite .dashboard-page-header__content {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.dashboard-page-header__breadcrumb {
+  margin-bottom: var(--spacing-3);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.dashboard-page-header__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+}
+
+.dashboard-page-header__info {
+  flex: 1;
+}
+
+.dashboard-page-header__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-1);
+}
+
+/* Logo Layout */
+.dashboard-page__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* Embed Page Header Layout */
+.dashboard-page-header--embed {
+  padding: 0 0 var(--spacing-4);
+}
+
+.dashboard-page-header--embed .dashboard-page-header__content {
+  max-width: none;
+  padding: 0;
+}
+
+/* ----------------------------------------------------------------------------
+   Sparkline Layout
+   ---------------------------------------------------------------------------- */
+
+.dashboard-stat-sparkline {
+  height: 40px;
+  margin-top: var(--spacing-2);
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.dashboard-stat-sparkline__bar {
+  flex: 1;
+  border-radius: 2px;
+}
+
+/* ----------------------------------------------------------------------------
+   Responsive Layout
+   ---------------------------------------------------------------------------- */
+
+@media (max-width: 1200px) {
+  .dashboard-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-hero-section__pulse-rings {
+    right: 5%;
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-hero-section {
+    padding: var(--spacing-8) var(--spacing-4) var(--spacing-12);
+  }
+
+  .dashboard-hero-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-hero-actions {
+    width: 100%;
+  }
+
+  .dashboard-hero-actions .csk-button {
+    flex: 1;
+  }
+
+  .dashboard-stats-section {
+    margin-top: calc(var(--spacing-6) * -1);
+  }
+
+  .dashboard-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-3);
+  }
+
+  .dashboard-main {
+    padding: var(--spacing-6) var(--spacing-3);
+  }
+
+  .dashboard-members-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-members-search {
+    max-width: none;
+  }
+
+  .dashboard-members-filters {
+    flex-wrap: wrap;
+  }
+
+  .dashboard-hero-section__pulse-rings {
+    display: none;
+  }
+
+  .dashboard-page-header__row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-page-header__actions {
+    justify-content: flex-start;
+  }
+
+  .dashboard-page--embed .dashboard-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-page-header--embed .dashboard-page-header__row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-3);
+  }
+
+  .dashboard-page-header--embed .dashboard-page-header__actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-hero-actions {
+    flex-direction: column;
+  }
+
+  .dashboard-quick-action {
+    padding: var(--spacing-3);
+  }
+
+  .dashboard-quick-action-description {
+    display: none;
+  }
+
+  .dashboard-alert-item,
+  .dashboard-race-item,
+  .dashboard-activity-item {
+    padding: var(--spacing-3) var(--spacing-4);
+  }
+}
+
+/* ============================================================================
+   PART 2: VISUAL STYLES
+   Colors, typography, borders, shadows, backgrounds, animations
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   Page Visual
+   ---------------------------------------------------------------------------- */
+
+.dashboard-page {
+  background-color: var(--color-bg-primary);
+}
+
+.dashboard-header-logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+/* ----------------------------------------------------------------------------
+   Hero Section Visual
+   ---------------------------------------------------------------------------- */
+
+.dashboard-hero-section {
+  color: var(--color-text-inverse);
+}
+
+.dashboard-hero-section__gradient {
   background: linear-gradient(
     135deg,
     var(--color-primary-700) 0%,
@@ -92,8 +778,6 @@
 }
 
 .dashboard-hero-section__pattern {
-  position: absolute;
-  inset: 0;
   background-image:
     radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
@@ -102,35 +786,14 @@
 }
 
 /* Animated pulse rings */
-.dashboard-hero-section__pulse-rings {
-  position: absolute;
-  top: 50%;
-  right: 10%;
-  transform: translateY(-50%);
-  width: 300px;
-  height: 300px;
-  pointer-events: none;
-}
-
 .dashboard-pulse-ring {
-  position: absolute;
-  inset: 0;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
   animation: dashboard-pulse 4s ease-out infinite;
 }
 
-.dashboard-pulse-ring:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.dashboard-pulse-ring:nth-child(2) {
-  animation-delay: 1s;
-}
-
-.dashboard-pulse-ring:nth-child(3) {
-  animation-delay: 2s;
-}
+.dashboard-pulse-ring:nth-child(1) { animation-delay: 0s; }
+.dashboard-pulse-ring:nth-child(2) { animation-delay: 1s; }
+.dashboard-pulse-ring:nth-child(3) { animation-delay: 2s; }
 
 @keyframes dashboard-pulse {
   0% {
@@ -143,45 +806,13 @@
   }
 }
 
-.dashboard-hero-section__content {
-  position: relative;
-  z-index: 1;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
 .dashboard-hero-section__wave {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
   color: var(--color-bg-primary);
-  z-index: 2;
 }
 
-.dashboard-page-wave {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* ============================================================================
-   Hero Welcome Content
-   ============================================================================ */
-
-.dashboard-hero-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-6);
-}
-
-.dashboard-hero-welcome {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1);
-}
+/* ----------------------------------------------------------------------------
+   Hero Content Visual
+   ---------------------------------------------------------------------------- */
 
 .dashboard-hero-greeting {
   font-size: var(--font-size-sm);
@@ -202,27 +833,13 @@
 .dashboard-hero-subtitle {
   font-size: var(--font-size-lg);
   color: rgba(255, 255, 255, 0.85);
-  margin: var(--spacing-2) 0 0;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
 }
 
 .dashboard-hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-1);
-  padding: var(--spacing-1) var(--spacing-3);
   background: rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-full);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   backdrop-filter: blur(4px);
-}
-
-.dashboard-hero-actions {
-  display: flex;
-  gap: var(--spacing-3);
 }
 
 .dashboard-hero-actions .csk-button--secondary {
@@ -237,26 +854,10 @@
   border-color: rgba(255, 255, 255, 0.5);
 }
 
-/* ============================================================================
-   Stats Grid - Gradient Widget Cards
-   ============================================================================ */
+/* ----------------------------------------------------------------------------
+   Stats Visual
+   ---------------------------------------------------------------------------- */
 
-.dashboard-stats-section {
-  margin-top: calc(var(--spacing-8) * -1);
-  padding: 0 var(--spacing-4);
-  position: relative;
-  z-index: 3;
-}
-
-.dashboard-stats-grid {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-4);
-}
-
-/* Enhanced StatCard styles */
 .dashboard-stats-grid .csk-stat-card {
   background: var(--color-surface-primary);
   border: 1px solid var(--color-border);
@@ -318,19 +919,8 @@
   color: #fff !important;
 }
 
-/* Sparkline placeholder */
-.dashboard-stat-sparkline {
-  height: 40px;
-  margin-top: var(--spacing-2);
-  display: flex;
-  align-items: flex-end;
-  gap: 2px;
-}
-
 .dashboard-stat-sparkline__bar {
-  flex: 1;
   background: rgba(255, 255, 255, 0.3);
-  border-radius: 2px;
   transition: height var(--transition-normal);
 }
 
@@ -338,50 +928,18 @@
   background: var(--color-primary-200);
 }
 
-/* ============================================================================
-   Main Content
-   ============================================================================ */
-
-.dashboard-main {
-  flex: 1;
-  padding: var(--spacing-8) var(--spacing-4);
-}
-
-.dashboard-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-6);
-}
-
-/* ============================================================================
-   Content Grid (2 columns)
-   ============================================================================ */
-
-.dashboard-content-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: var(--spacing-6);
-}
-
-/* ============================================================================
-   Section Cards
-   ============================================================================ */
+/* ----------------------------------------------------------------------------
+   Section Card Visual
+   ---------------------------------------------------------------------------- */
 
 .dashboard-section-card {
   background: var(--color-surface-primary);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
-  overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
 
 .dashboard-section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-4) var(--spacing-5);
   border-bottom: 1px solid var(--color-border);
   background: var(--color-surface-secondary);
 }
@@ -389,77 +947,33 @@
 .dashboard-section-title {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
-  margin: 0;
   color: var(--color-text-primary);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
 }
 
 .dashboard-section-badge {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
-  padding: var(--spacing-1) var(--spacing-2);
-  border-radius: var(--radius-full);
   background: linear-gradient(135deg, var(--color-danger-500) 0%, var(--color-danger-400) 100%);
   color: #fff;
   animation: dashboard-badge-pulse 2s ease-in-out infinite;
 }
 
 @keyframes dashboard-badge-pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
-.dashboard-section-body {
-  padding: 0;
-}
-
-/* ============================================================================
-   Alerts Section
-   ============================================================================ */
-
-.dashboard-alerts {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
-}
-
-/* Alert List */
-.dashboard-alert-list {
-  display: flex;
-  flex-direction: column;
-}
+/* ----------------------------------------------------------------------------
+   Alerts Visual
+   ---------------------------------------------------------------------------- */
 
 .dashboard-alert-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-  padding: var(--spacing-4) var(--spacing-5);
   border-bottom: 1px solid var(--color-border);
   transition: background-color var(--transition-fast);
 }
 
-.dashboard-alert-item:last-child {
-  border-bottom: none;
-}
-
 .dashboard-alert-item:hover {
   background-color: var(--color-surface-secondary);
-}
-
-.dashboard-alert-icon {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .dashboard-alert-icon--warning {
@@ -477,59 +991,24 @@
   color: var(--color-info-600);
 }
 
-.dashboard-alert-icon svg {
-  width: 20px;
-  height: 20px;
-}
-
-.dashboard-alert-content {
-  flex: 1;
-  min-width: 0;
-}
-
 .dashboard-alert-title {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
-  margin: 0;
 }
 
 .dashboard-alert-description {
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
-  margin: var(--spacing-1) 0 0;
 }
 
-.dashboard-alert-action {
-  flex-shrink: 0;
-}
-
-/* ============================================================================
-   Upcoming Races
-   ============================================================================ */
-
-.dashboard-races {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
-}
-
-.dashboard-race-list {
-  display: flex;
-  flex-direction: column;
-}
+/* ----------------------------------------------------------------------------
+   Races Visual
+   ---------------------------------------------------------------------------- */
 
 .dashboard-race-item {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-4);
-  padding: var(--spacing-4) var(--spacing-5);
   border-bottom: 1px solid var(--color-border);
   transition: background-color var(--transition-fast);
-}
-
-.dashboard-race-item:last-child {
-  border-bottom: none;
 }
 
 .dashboard-race-item:hover {
@@ -537,14 +1016,6 @@
 }
 
 .dashboard-race-date {
-  flex-shrink: 0;
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radius-lg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background: linear-gradient(135deg, var(--color-primary-100) 0%, var(--color-primary-50) 100%);
   border: 1px solid var(--color-primary-200);
 }
@@ -577,74 +1048,35 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-text-muted);
   text-transform: uppercase;
-  margin-top: 2px;
-}
-
-.dashboard-race-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.dashboard-race-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
 }
 
 .dashboard-race-title {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
-  margin: 0;
 }
 
 .dashboard-race-location {
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
-  margin: var(--spacing-1) 0 0;
-}
-
-.dashboard-race-meta {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-  margin-top: var(--spacing-2);
 }
 
 .dashboard-race-meta-item {
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-1);
 }
 
 .dashboard-race-meta-item svg {
-  width: 14px;
-  height: 14px;
   opacity: 0.7;
 }
 
-/* ============================================================================
-   Quick Actions - Glass Cards
-   ============================================================================ */
-
-.dashboard-quick-actions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-3);
-  padding: var(--spacing-4);
-}
+/* ----------------------------------------------------------------------------
+   Quick Actions Visual
+   ---------------------------------------------------------------------------- */
 
 .dashboard-quick-action {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
-  padding: var(--spacing-4);
-  border-radius: var(--radius-xl);
   background: linear-gradient(135deg, var(--color-surface-secondary) 0%, var(--color-surface-primary) 100%);
   border: 1px solid var(--color-border);
-  cursor: pointer;
   transition: all var(--transition-normal);
 }
 
@@ -656,37 +1088,20 @@
 }
 
 .dashboard-quick-action-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-lg);
   background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-400) 100%);
   color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: var(--shadow-sm);
-}
-
-.dashboard-quick-action-icon svg {
-  width: 24px;
-  height: 24px;
-}
-
-.dashboard-quick-action-text {
-  flex: 1;
 }
 
 .dashboard-quick-action-title {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
-  margin: 0;
 }
 
 .dashboard-quick-action-description {
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
-  margin: var(--spacing-1) 0 0;
 }
 
 .dashboard-quick-action-arrow {
@@ -699,30 +1114,13 @@
   color: var(--color-primary);
 }
 
-.dashboard-quick-action-arrow svg {
-  width: 20px;
-  height: 20px;
-}
-
-/* ============================================================================
-   Recent Activity
-   ============================================================================ */
-
-.dashboard-activity {
-  display: flex;
-  flex-direction: column;
-}
+/* ----------------------------------------------------------------------------
+   Activity Visual
+   ---------------------------------------------------------------------------- */
 
 .dashboard-activity-item {
-  display: flex;
-  gap: var(--spacing-3);
-  padding: var(--spacing-3) var(--spacing-5);
   border-bottom: 1px solid var(--color-border);
   transition: background-color var(--transition-fast);
-}
-
-.dashboard-activity-item:last-child {
-  border-bottom: none;
 }
 
 .dashboard-activity-item:hover {
@@ -730,20 +1128,8 @@
 }
 
 .dashboard-activity-icon {
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
   background: linear-gradient(135deg, var(--color-surface-tertiary) 0%, var(--color-surface-secondary) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: var(--color-text-muted);
-}
-
-.dashboard-activity-icon svg {
-  width: 16px;
-  height: 16px;
 }
 
 /* Activity type colors */
@@ -772,15 +1158,9 @@
   color: var(--color-neutral-600);
 }
 
-.dashboard-activity-content {
-  flex: 1;
-  min-width: 0;
-}
-
 .dashboard-activity-text {
   font-size: var(--font-size-sm);
   color: var(--color-text-primary);
-  margin: 0;
 }
 
 .dashboard-activity-text strong {
@@ -790,41 +1170,15 @@
 .dashboard-activity-time {
   font-size: var(--font-size-xs);
   color: var(--color-text-muted);
-  margin: var(--spacing-1) 0 0;
 }
 
-/* ============================================================================
-   Members Table
-   ============================================================================ */
+/* ----------------------------------------------------------------------------
+   Members Visual
+   ---------------------------------------------------------------------------- */
 
 .dashboard-members-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-  padding: var(--spacing-4) var(--spacing-5);
   background: var(--color-surface-primary);
   border-bottom: 1px solid var(--color-border);
-}
-
-.dashboard-members-search {
-  flex: 1;
-  max-width: 300px;
-}
-
-.dashboard-members-filters {
-  display: flex;
-  gap: var(--spacing-2);
-}
-
-.dashboard-member-name {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-}
-
-.dashboard-member-info {
-  display: flex;
-  flex-direction: column;
 }
 
 .dashboard-member-fullname {
@@ -837,193 +1191,27 @@
   color: var(--color-text-muted);
 }
 
-/* ============================================================================
-   Footer
-   ============================================================================ */
+/* ----------------------------------------------------------------------------
+   Footer Visual
+   ---------------------------------------------------------------------------- */
 
 .dashboard-footer {
   background: linear-gradient(180deg, var(--color-surface-secondary) 0%, var(--color-surface-primary) 100%);
   border-top: 1px solid var(--color-border);
-  padding: var(--spacing-8) var(--spacing-4);
-  text-align: center;
 }
 
 .dashboard-footer p {
-  margin: 0;
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
 }
 
-/* ============================================================================
-   Dark Mode
-   ============================================================================ */
-
-[data-theme="dark"] .dashboard-hero-section__gradient {
-  opacity: 0.9;
-}
-
-[data-theme="dark"] .dashboard-section-card {
-  background: var(--color-surface-secondary);
-  border-color: var(--color-border);
-}
-
-[data-theme="dark"] .dashboard-section-header {
-  background: var(--color-surface-tertiary);
-}
-
-[data-theme="dark"] .dashboard-quick-action {
-  background: linear-gradient(135deg, var(--color-surface-tertiary) 0%, var(--color-surface-secondary) 100%);
-}
-
-[data-theme="dark"] .dashboard-quick-action:hover {
-  background: linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-surface-secondary) 100%);
-}
-
-[data-theme="dark"] .dashboard-race-date {
-  background: var(--color-surface-tertiary);
-  border-color: var(--color-border);
-}
-
-/* ============================================================================
-   Reduced Motion
-   ============================================================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  .dashboard-pulse-ring {
-    animation: none;
-    opacity: 0.3;
-  }
-
-  .dashboard-section-badge {
-    animation: none;
-  }
-
-  .dashboard-quick-action,
-  .dashboard-stats-grid .csk-stat-card {
-    transition: none;
-  }
-}
-
-/* ============================================================================
-   Responsive Design
-   ============================================================================ */
-
-@media (max-width: 1200px) {
-  .dashboard-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .dashboard-content-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .dashboard-hero-section__pulse-rings {
-    right: 5%;
-    width: 200px;
-    height: 200px;
-  }
-}
-
-@media (max-width: 768px) {
-  .dashboard-hero-section {
-    padding: var(--spacing-8) var(--spacing-4) var(--spacing-12);
-  }
-
-  .dashboard-hero-title {
-    font-size: var(--font-size-2xl);
-  }
-
-  .dashboard-hero-content {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .dashboard-hero-actions {
-    width: 100%;
-  }
-
-  .dashboard-hero-actions .csk-button {
-    flex: 1;
-  }
-
-  .dashboard-stats-section {
-    margin-top: calc(var(--spacing-6) * -1);
-  }
-
-  .dashboard-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-3);
-  }
-
-  .dashboard-main {
-    padding: var(--spacing-6) var(--spacing-3);
-  }
-
-  .dashboard-members-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .dashboard-members-search {
-    max-width: none;
-  }
-
-  .dashboard-members-filters {
-    flex-wrap: wrap;
-  }
-
-  .dashboard-hero-section__pulse-rings {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .dashboard-stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .dashboard-hero-actions {
-    flex-direction: column;
-  }
-
-  .dashboard-quick-action {
-    padding: var(--spacing-3);
-  }
-
-  .dashboard-quick-action-description {
-    display: none;
-  }
-
-  .dashboard-alert-item,
-  .dashboard-race-item,
-  .dashboard-activity-item {
-    padding: var(--spacing-3) var(--spacing-4);
-  }
-}
-
-/* ============================================================================
-   Page Header - Clean design (Phase 8.6.3)
-   ============================================================================ */
+/* ----------------------------------------------------------------------------
+   Page Header Visual
+   ---------------------------------------------------------------------------- */
 
 .dashboard-page-header {
   background: var(--color-surface-primary);
   border-bottom: 1px solid var(--color-border);
-  padding: var(--spacing-6) var(--spacing-4);
-}
-
-.dashboard-page-header__content {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-4);
-}
-
-.dashboard-page-header__welcome {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1);
 }
 
 .dashboard-page-header__greeting {
@@ -1045,68 +1233,26 @@
 .dashboard-page-header__subtitle {
   font-size: var(--font-size-base);
   color: var(--color-text-secondary);
-  margin: var(--spacing-1) 0 0;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
 }
 
 .dashboard-page-header__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-1);
-  padding: var(--spacing-1) var(--spacing-2);
   background: var(--color-surface-secondary);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
 }
 
-.dashboard-page-header__actions {
-  display: flex;
-  gap: var(--spacing-2);
-}
-
-/* ============================================================================
-   Satellite Variant - Clean internal dashboard design
-   ============================================================================ */
-
-.dashboard-page--satellite {
-  background-color: var(--color-bg-secondary, #f8f9fa);
-}
-
-.dashboard-page__logo {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-}
-
-.dashboard-page__logo-text {
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: var(--color-primary);
-}
-
+/* Satellite Header Visual */
 .dashboard-page-header--satellite {
   background: var(--color-surface-primary);
   border-bottom: 1px solid var(--color-border);
   padding: var(--spacing-4) var(--spacing-4) var(--spacing-5);
 }
 
-.dashboard-page-header--satellite .dashboard-page-header__content {
-  flex-direction: column;
-  align-items: stretch;
-}
-
 .dashboard-page-header__breadcrumb {
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
-  margin-bottom: var(--spacing-3);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
 }
 
 .dashboard-page-header__breadcrumb-link {
@@ -1122,39 +1268,30 @@
   color: var(--color-text-muted);
 }
 
-.dashboard-page-header__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-4);
+/* Logo Visual */
+.dashboard-page__logo-text {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-primary);
 }
 
-.dashboard-page-header__info {
-  flex: 1;
+/* Embed Header Visual */
+.dashboard-page-header--embed {
+  background: transparent;
+  border-bottom: none;
 }
 
-.dashboard-page-header__meta {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  margin-top: var(--spacing-1);
+.dashboard-page-header--embed .dashboard-page-header__title {
+  font-size: var(--font-size-xl);
 }
 
-/* Satellite responsive */
-@media (max-width: 768px) {
-  .dashboard-page-header__row {
-    flex-direction: column;
-    align-items: stretch;
-  }
+/* ----------------------------------------------------------------------------
+   Variant Visual
+   ---------------------------------------------------------------------------- */
 
-  .dashboard-page-header__actions {
-    justify-content: flex-start;
-  }
+.dashboard-page--satellite {
+  background-color: var(--color-bg-secondary, #f8f9fa);
 }
-
-/* ============================================================================
-   Embed Variant - Dashboard embedded in kanoe.cz layout
-   ============================================================================ */
 
 .dashboard-page--embed {
   min-height: auto;
@@ -1182,34 +1319,52 @@
   display: none;
 }
 
-.dashboard-page-header--embed {
-  background: transparent;
-  border-bottom: none;
-  padding: 0 0 var(--spacing-4);
+/* ----------------------------------------------------------------------------
+   Dark Mode
+   ---------------------------------------------------------------------------- */
+
+[data-theme="dark"] .dashboard-hero-section__gradient {
+  opacity: 0.9;
 }
 
-.dashboard-page-header--embed .dashboard-page-header__content {
-  max-width: none;
-  padding: 0;
+[data-theme="dark"] .dashboard-section-card {
+  background: var(--color-surface-secondary);
+  border-color: var(--color-border);
 }
 
-.dashboard-page-header--embed .dashboard-page-header__title {
-  font-size: var(--font-size-xl);
+[data-theme="dark"] .dashboard-section-header {
+  background: var(--color-surface-tertiary);
 }
 
-/* Embed responsive */
-@media (max-width: 768px) {
-  .dashboard-page--embed .dashboard-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+[data-theme="dark"] .dashboard-quick-action {
+  background: linear-gradient(135deg, var(--color-surface-tertiary) 0%, var(--color-surface-secondary) 100%);
+}
+
+[data-theme="dark"] .dashboard-quick-action:hover {
+  background: linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-surface-secondary) 100%);
+}
+
+[data-theme="dark"] .dashboard-race-date {
+  background: var(--color-surface-tertiary);
+  border-color: var(--color-border);
+}
+
+/* ----------------------------------------------------------------------------
+   Reduced Motion
+   ---------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-pulse-ring {
+    animation: none;
+    opacity: 0.3;
   }
 
-  .dashboard-page-header--embed .dashboard-page-header__row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: var(--spacing-3);
+  .dashboard-section-badge {
+    animation: none;
   }
 
-  .dashboard-page-header--embed .dashboard-page-header__actions {
-    justify-content: flex-start;
+  .dashboard-quick-action,
+  .dashboard-stats-grid .csk-stat-card {
+    transition: none;
   }
 }

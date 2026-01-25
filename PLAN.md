@@ -307,6 +307,12 @@
 - [x] Poznámka: Hero vyžaduje custom gradienty pro dv/ry/vt sekce, nelze extrahovat
 - [x] Build validace OK
 
+### Iterace 25: CSS reorganizace DashboardPage ✅
+- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
+- [x] Reorganizovat CSS - oddělení LAYOUT a VISUAL sekcí (1215 → 1370 řádků)
+- [x] Poznámka: Obsahuje discipline-specific hero gradienty, gradient stat cards, pulse rings animace
+- [x] Build validace OK
+
 ---
 
 ## Metriky úspěchu
@@ -314,7 +320,7 @@
 | Metrika | Před | Aktuální | Cíl |
 |---------|------|----------|-----|
 | Component CSS | ~7,800 řádků | 16,046 řádků* | ~10,000 řádků |
-| Prototype CSS | ~4,500 řádků | 10,972 řádků | ~600 řádků |
+| Prototype CSS | ~4,500 řádků | 11,127 řádků | ~600 řádků |
 | Inline styles | 28 | **0** ✅ | 0 |
 | Custom icons | 80+ | **0** ✅ | 0 (vše přes Icon) |
 
