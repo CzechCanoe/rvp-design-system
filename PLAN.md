@@ -110,13 +110,13 @@
 **Priorita extrakce (podle dopadu):**
 
 1. **Vysoká priorita (eliminuje nejvíce custom kódu):**
-   - [ ] `<Icon />` komponenta nebo lucide-react integrace
-   - [ ] `<PageLayout />` pro embed/satellite strukturu
+   - [x] `<Icon />` komponenta nebo lucide-react integrace
+   - [x] `<PageLayout />` pro embed/satellite strukturu
    - [ ] `<HeroSection />` pro profilové stránky
-   - [ ] `<StatsBar />` pro floating stats
+   - [x] `<StatsBar />` pro floating stats
 
 2. **Střední priorita:**
-   - [ ] `<SectionHeader />` s title a optional action
+   - [x] `<SectionHeader />` s title a optional action
    - [ ] `<FilterPills />` pro filtry
    - [ ] `<CSKLogo />` pro konzistentní branding
 
@@ -204,10 +204,10 @@
 - [x] Implementovat icon komponentu → `<Icon name="..." />` wrapper
 - [x] Vytvořit icon katalog → 45 ikon v kategorických stories
 
-### Iterace 2: Layout komponenty
-- [ ] `<PageLayout variant="embed|satellite" />`
-- [ ] `<SectionHeader />`
-- [ ] `<StatsBar />`
+### Iterace 2: Layout komponenty ✅
+- [x] `<PageLayout variant="embed|satellite" />` - page structure with header/footer/content
+- [x] `<SectionHeader />` - section titles with optional badge and action
+- [x] `<StatsBar />` - row of statistics with icons (inline/cards/compact variants)
 
 ### Iterace 3: Hero komponenta
 - [ ] `<HeroSection variant="athlete|club|event|generic" />`

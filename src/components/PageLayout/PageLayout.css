@@ -1,0 +1,83 @@
+/* PageLayout - Page structure component */
+
+.csk-page-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: var(--csk-color-surface);
+  color: var(--csk-color-on-surface);
+}
+
+/* Header */
+.csk-page-layout__header {
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: var(--csk-z-sticky, 100);
+}
+
+/* Main content area */
+.csk-page-layout__main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container with max-width */
+.csk-page-layout__container {
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* Max width variants */
+.csk-page-layout--max-sm .csk-page-layout__container {
+  max-width: 640px;
+}
+
+.csk-page-layout--max-md .csk-page-layout__container {
+  max-width: 768px;
+}
+
+.csk-page-layout--max-lg .csk-page-layout__container {
+  max-width: 1024px;
+}
+
+.csk-page-layout--max-xl .csk-page-layout__container {
+  max-width: 1280px;
+}
+
+.csk-page-layout--max-full .csk-page-layout__container {
+  max-width: none;
+}
+
+/* Padding */
+.csk-page-layout--padded .csk-page-layout__container {
+  padding-inline: var(--csk-space-4);
+}
+
+@media (min-width: 768px) {
+  .csk-page-layout--padded .csk-page-layout__container {
+    padding-inline: var(--csk-space-6);
+  }
+}
+
+/* Footer */
+.csk-page-layout__footer {
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+/* Embed variant - minimal styling */
+.csk-page-layout--embed {
+  background: transparent;
+  min-height: auto;
+}
+
+.csk-page-layout--embed .csk-page-layout__main {
+  flex: none;
+}
+
+/* Satellite variant - slightly different background */
+.csk-page-layout--satellite {
+  background: var(--csk-color-surface-dim);
+}

@@ -1,0 +1,167 @@
+/* StatsBar - Row of statistics */
+
+.csk-stats-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--csk-space-4);
+}
+
+.csk-stats-bar--centered {
+  justify-content: center;
+}
+
+/* Individual stat item */
+.csk-stats-bar__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--csk-space-1);
+}
+
+.csk-stats-bar--centered .csk-stats-bar__item {
+  align-items: center;
+  text-align: center;
+}
+
+/* Icon */
+.csk-stats-bar__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--csk-color-primary);
+}
+
+/* Value */
+.csk-stats-bar__value {
+  font-weight: var(--csk-font-weight-bold);
+  color: var(--csk-color-on-surface);
+}
+
+/* Label */
+.csk-stats-bar__label {
+  font-size: var(--csk-font-size-sm);
+  color: var(--csk-color-on-surface-muted);
+}
+
+/* Size variants */
+.csk-stats-bar--sm .csk-stats-bar__value {
+  font-size: var(--csk-font-size-base);
+}
+
+.csk-stats-bar--sm .csk-stats-bar__label {
+  font-size: var(--csk-font-size-xs);
+}
+
+.csk-stats-bar--sm .csk-stats-bar__icon {
+  font-size: var(--csk-font-size-sm);
+}
+
+.csk-stats-bar--md .csk-stats-bar__value {
+  font-size: var(--csk-font-size-lg);
+}
+
+.csk-stats-bar--lg .csk-stats-bar__value {
+  font-size: var(--csk-font-size-xl);
+}
+
+.csk-stats-bar--lg .csk-stats-bar__label {
+  font-size: var(--csk-font-size-base);
+}
+
+.csk-stats-bar--lg .csk-stats-bar__icon {
+  font-size: var(--csk-font-size-lg);
+}
+
+/* Inline variant - horizontal layout */
+.csk-stats-bar--inline .csk-stats-bar__item {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--csk-space-2);
+}
+
+.csk-stats-bar--inline .csk-stats-bar__value {
+  order: 1;
+}
+
+.csk-stats-bar--inline .csk-stats-bar__label {
+  order: 2;
+}
+
+.csk-stats-bar--inline .csk-stats-bar__icon {
+  order: 0;
+}
+
+/* Dividers (inline only) */
+.csk-stats-bar--dividers .csk-stats-bar__item:not(:last-child)::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 1.5em;
+  background: var(--csk-color-border);
+  margin-left: var(--csk-space-4);
+}
+
+/* Cards variant */
+.csk-stats-bar--cards .csk-stats-bar__item {
+  background: var(--csk-color-surface-container);
+  border-radius: var(--csk-radius-md);
+  padding: var(--csk-space-3) var(--csk-space-4);
+  min-width: 120px;
+}
+
+.csk-stats-bar--cards.csk-stats-bar--sm .csk-stats-bar__item {
+  padding: var(--csk-space-2) var(--csk-space-3);
+  min-width: 100px;
+}
+
+.csk-stats-bar--cards.csk-stats-bar--lg .csk-stats-bar__item {
+  padding: var(--csk-space-4) var(--csk-space-5);
+  min-width: 140px;
+}
+
+/* Compact variant - minimal, inline icon+value */
+.csk-stats-bar--compact {
+  gap: var(--csk-space-6);
+}
+
+.csk-stats-bar--compact .csk-stats-bar__item {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--csk-space-1);
+}
+
+.csk-stats-bar--compact .csk-stats-bar__icon {
+  font-size: 0.875em;
+}
+
+.csk-stats-bar--compact .csk-stats-bar__label {
+  display: none;
+}
+
+/* Show label on hover for compact */
+@media (hover: hover) {
+  .csk-stats-bar--compact .csk-stats-bar__item {
+    position: relative;
+  }
+
+  .csk-stats-bar--compact .csk-stats-bar__label {
+    display: block;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: var(--csk-space-1) var(--csk-space-2);
+    background: var(--csk-color-surface-inverse);
+    color: var(--csk-color-on-surface-inverse);
+    border-radius: var(--csk-radius-sm);
+    font-size: var(--csk-font-size-xs);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .csk-stats-bar--compact .csk-stats-bar__item:hover .csk-stats-bar__label {
+    opacity: 1;
+  }
+}

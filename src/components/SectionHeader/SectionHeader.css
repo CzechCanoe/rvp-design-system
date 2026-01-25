@@ -1,0 +1,75 @@
+/* SectionHeader - Section title with optional action */
+
+.csk-section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--csk-space-4);
+}
+
+/* Content area (title + description) */
+.csk-section-header__content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Title */
+.csk-section-header__title {
+  display: flex;
+  align-items: center;
+  gap: var(--csk-space-2);
+  margin: 0;
+  font-weight: var(--csk-font-weight-semibold);
+  color: var(--csk-color-on-surface);
+}
+
+/* Badge next to title */
+.csk-section-header__badge {
+  flex-shrink: 0;
+}
+
+/* Description */
+.csk-section-header__description {
+  margin: var(--csk-space-1) 0 0;
+  font-size: var(--csk-font-size-sm);
+  color: var(--csk-color-on-surface-muted);
+}
+
+/* Action area */
+.csk-section-header__action {
+  flex-shrink: 0;
+}
+
+/* Size variants */
+.csk-section-header--sm {
+  gap: var(--csk-space-3);
+}
+
+.csk-section-header--sm .csk-section-header__title {
+  font-size: var(--csk-font-size-sm);
+}
+
+.csk-section-header--md .csk-section-header__title {
+  font-size: var(--csk-font-size-base);
+}
+
+.csk-section-header--lg .csk-section-header__title {
+  font-size: var(--csk-font-size-lg);
+}
+
+/* Bordered variant */
+.csk-section-header--bordered {
+  padding-bottom: var(--csk-space-3);
+  border-bottom: 1px solid var(--csk-color-border);
+  margin-bottom: var(--csk-space-4);
+}
+
+.csk-section-header--sm.csk-section-header--bordered {
+  padding-bottom: var(--csk-space-2);
+  margin-bottom: var(--csk-space-3);
+}
+
+.csk-section-header--lg.csk-section-header--bordered {
+  padding-bottom: var(--csk-space-4);
+  margin-bottom: var(--csk-space-5);
+}

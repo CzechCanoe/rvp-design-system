@@ -229,3 +229,20 @@ export type {
   SkeletonCardProps,
   SkeletonTableProps,
 } from './Skeleton';
+
+// PageLayout
+export { PageLayout } from './PageLayout';
+export type { PageLayoutProps, PageLayoutVariant } from './PageLayout';
+
+// SectionHeader
+export { SectionHeader } from './SectionHeader';
+export type { SectionHeaderProps, SectionHeaderSize } from './SectionHeader';
+
+// StatsBar
+export { StatsBar } from './StatsBar';
+export type {
+  StatsBarProps,
+  StatsBarItem,
+  StatsBarVariant,
+  StatsBarSize,
+} from './StatsBar';
