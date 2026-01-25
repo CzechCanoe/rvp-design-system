@@ -289,6 +289,297 @@
 }
 
 /* =============================================================================
+   HERO GRADIENT UTILITIES
+   Section-specific gradient backgrounds for hero sections
+   ============================================================================= */
+
+/* Section-specific hero gradients */
+.csk-hero-gradient--dv {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #3b82f6 100%);
+}
+
+.csk-hero-gradient--ry {
+  background: linear-gradient(135deg, #14532d 0%, #16a34a 50%, #22c55e 100%);
+}
+
+.csk-hero-gradient--vt {
+  background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 50%, #dc2626 100%);
+}
+
+.csk-hero-gradient--generic {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-700) 0%,
+    var(--color-primary-600) 50%,
+    var(--color-primary-500) 100%
+  );
+}
+
+/* Mesh variants with radial gradients */
+.csk-hero-gradient--dv.csk-hero-gradient--mesh {
+  background:
+    linear-gradient(135deg, #1e3a5f 0%, #2563eb 40%, #60a5fa 100%),
+    radial-gradient(ellipse 80% 60% at 20% 100%, rgba(96, 165, 250, 0.4), transparent),
+    radial-gradient(ellipse 60% 80% at 90% 20%, rgba(37, 99, 235, 0.3), transparent);
+}
+
+.csk-hero-gradient--ry.csk-hero-gradient--mesh {
+  background:
+    linear-gradient(135deg, #14532d 0%, #16a34a 40%, #4ade80 100%),
+    radial-gradient(ellipse 80% 60% at 20% 100%, rgba(74, 222, 128, 0.4), transparent),
+    radial-gradient(ellipse 60% 80% at 90% 20%, rgba(22, 163, 74, 0.3), transparent);
+}
+
+.csk-hero-gradient--vt.csk-hero-gradient--mesh {
+  background:
+    linear-gradient(135deg, #7f1d1d 0%, #b91c1c 40%, #f87171 100%),
+    radial-gradient(ellipse 80% 60% at 20% 100%, rgba(248, 113, 113, 0.4), transparent),
+    radial-gradient(ellipse 60% 80% at 90% 20%, rgba(185, 28, 28, 0.3), transparent);
+}
+
+/* =============================================================================
+   MESH BACKGROUND VARIANTS
+   Subtle gradient backgrounds for sections and cards
+   ============================================================================= */
+
+.csk-mesh-bg--card {
+  background: var(--bg-mesh-card);
+}
+
+.csk-mesh-bg--subtle {
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(17, 118, 166, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(249, 115, 22, 0.03) 0%, transparent 50%);
+}
+
+.csk-mesh-bg--section {
+  background:
+    radial-gradient(ellipse at 0% 50%, rgba(17, 118, 166, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 50%, rgba(249, 115, 22, 0.05) 0%, transparent 40%);
+}
+
+/* =============================================================================
+   ANIMATION UTILITIES
+   Pulse, glow, and attention-grabbing animations
+   ============================================================================= */
+
+/* Pulse animation */
+@keyframes csk-pulse-animation {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.csk-pulse {
+  animation: csk-pulse-animation 2s ease-in-out infinite;
+}
+
+.csk-pulse--fast {
+  animation: csk-pulse-animation 1s ease-in-out infinite;
+}
+
+.csk-pulse--slow {
+  animation: csk-pulse-animation 3s ease-in-out infinite;
+}
+
+/* Static glow effects */
+.csk-glow {
+  box-shadow: var(--glow-energy-md);
+}
+
+.csk-glow--sm {
+  box-shadow: var(--glow-energy-sm);
+}
+
+.csk-glow--lg {
+  box-shadow: var(--glow-energy-lg);
+}
+
+/* Combined pulse + glow animation */
+@keyframes csk-pulse-glow {
+  0%, 100% { box-shadow: var(--glow-energy-sm); }
+  50% { box-shadow: var(--glow-energy-lg); }
+}
+
+.csk-pulse-glow {
+  animation: csk-pulse-glow 2s ease-in-out infinite;
+}
+
+.csk-pulse-glow--fast {
+  animation: csk-pulse-glow 1s ease-in-out infinite;
+}
+
+/* =============================================================================
+   RING UTILITIES
+   Subtle rings for avatars and circular elements
+   ============================================================================= */
+
+.csk-ring {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+.csk-ring--white {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.csk-ring--primary {
+  box-shadow: 0 0 0 4px var(--color-primary-200);
+}
+
+.csk-ring--energy {
+  box-shadow: 0 0 0 4px var(--color-energy-300);
+}
+
+/* =============================================================================
+   TEXT SHADOW UTILITIES
+   For hero text on gradient backgrounds
+   ============================================================================= */
+
+.csk-text-shadow {
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.csk-text-shadow--strong {
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.csk-text-shadow--subtle {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* =============================================================================
+   BACKDROP BLUR UTILITIES
+   For glass-like effects
+   ============================================================================= */
+
+.csk-backdrop-blur {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.csk-backdrop-blur--sm {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.csk-backdrop-blur--strong {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* =============================================================================
+   PATTERN OVERLAY UTILITIES
+   Decorative patterns for visual interest
+   ============================================================================= */
+
+.csk-pattern-overlay {
+  position: relative;
+}
+
+.csk-pattern-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--pattern-diagonal);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* =============================================================================
+   ENERGY COLOR UTILITIES
+   Coral-orange accent for CTAs, highlights, and live elements
+   ============================================================================= */
+
+/* Energy text */
+.csk-energy-text {
+  color: var(--color-energy-500);
+}
+
+/* Energy backgrounds */
+.csk-energy-bg {
+  background: var(--gradient-energy);
+}
+
+.csk-energy-bg--subtle {
+  background: linear-gradient(135deg,
+    rgba(249, 115, 22, 0.1) 0%,
+    rgba(234, 88, 12, 0.05) 100%
+  );
+}
+
+.csk-energy-bg--solid {
+  background: var(--color-energy-500);
+}
+
+/* Energy borders */
+.csk-energy-border {
+  border-color: var(--color-energy-400);
+}
+
+/* Energy glows */
+.csk-energy-glow {
+  box-shadow: var(--glow-energy-md);
+}
+
+.csk-energy-glow--sm {
+  box-shadow: var(--glow-energy-sm);
+}
+
+.csk-energy-glow--lg {
+  box-shadow: var(--glow-energy-lg);
+}
+
+/* Energy focus ring */
+.csk-energy-focus:focus-visible {
+  outline: 2px solid var(--color-energy-400);
+  outline-offset: 2px;
+}
+
+/* Energy hover glow */
+.csk-energy-hover:hover {
+  box-shadow: var(--glow-energy-md);
+  transition: box-shadow 200ms var(--ease-sport);
+}
+
+/* =============================================================================
+   DARK MODE - ADDITIONAL UTILITY ADJUSTMENTS
+   ============================================================================= */
+
+[data-theme="dark"] .csk-mesh-bg--subtle {
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(77, 163, 204, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(251, 146, 60, 0.025) 0%, transparent 50%);
+}
+
+[data-theme="dark"] .csk-mesh-bg--section {
+  background:
+    radial-gradient(ellipse at 0% 50%, rgba(77, 163, 204, 0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 50%, rgba(251, 146, 60, 0.04) 0%, transparent 40%);
+}
+
+[data-theme="dark"] .csk-ring {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .csk-ring--primary {
+  box-shadow: 0 0 0 4px var(--color-primary-700);
+}
+
+[data-theme="dark"] .csk-ring--energy {
+  box-shadow: 0 0 0 4px var(--color-energy-600);
+}
+
+[data-theme="dark"] .csk-energy-text {
+  color: var(--color-energy-400);
+}
+
+[data-theme="dark"] .csk-energy-bg--subtle {
+  background: linear-gradient(135deg,
+    rgba(251, 146, 60, 0.12) 0%,
+    rgba(234, 88, 12, 0.06) 100%
+  );
+}
+
+/* =============================================================================
    REDUCED MOTION
    ============================================================================= */
 

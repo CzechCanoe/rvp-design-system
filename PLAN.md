@@ -7,342 +7,927 @@
 | 0-14 (Založení až Test suite) | ✅ Hotovo |
 | 15 (User feedback) | ✅ Hotovo |
 | 16 (Konsolidace prototypů) | ✅ Hotovo |
-| **17 (DS Cleanup - Aesthetic Focus)** | 🔄 Aktivní |
+| 17 (DS Cleanup - Aesthetic Focus) | ✅ Hotovo |
+| **18 (Visual Polish)** | 🔄 Aktivní |
+| 19 (Optimization) | ⏳ Plánováno |
 
 *Tag v0.5.0-cleanup-wip: Mezistav před čištěním*
 
 ---
 
-## Fáze 17: DS Cleanup - Aesthetic Focus
+## Fáze 17: DS Cleanup - Aesthetic Focus ✅
 
-**Cíl:** Zeštíhlit design systém zaměřením na Aesthetic styl. Odstranit experimentální varianty, sjednotit styling, eliminovat "přestylování" v prototypech.
+**Shrnutí dokončených prací:**
 
-**Princip:** Prototypy mají používat VÝHRADNĚ komponenty. Žádné custom CSS, inline styly ani ad-hoc classNames.
+### 17.1 Odstranění experimentálních variant ✅
+- Button: odstraněny `gradient`, `gradient-energy` varianty
+- Input/Select/SearchInput: odstraněn `energyFocus` prop
+- Card/StatCard/Modal: odstraněny `gradient`, `glass` varianty
+- Tabs: sloučeno do `line/pills/aesthetic`
+- Toast/LiveIndicator/Badge: odstraněny `energy`, `gradient`, `glass`, `glow`
+- AthleteCard/Avatar: odstraněny `glow`, `borderAccent` props
+
+### 17.2 Nové komponenty ✅
+- `<Icon />` wrapper nad lucide-react (45 ikon)
+- `<PageLayout />` pro embed/satellite strukturu
+- `<HeroSection />` pro profilové stránky
+- `<StatsBar />` s variantami inline/cards/compact/floating
+- `<SectionHeader />`, `<FilterPills />`, `<CSKLogo />`, `<PodiumCard />`
+
+### 17.3-17.4 CSS Cleanup ✅
+- Všech 12 prototypů refaktorováno: Icon komponenta, inline styles odstraněny
+- CSS prototypů reorganizováno na LAYOUT + VISUAL sekce
+- CSS komponent vyčištěno od experimentálních variant
+
+**Problém:** CSS redukce byla příliš agresivní - některé vizuální styly byly odstraněny bez náhrady.
 
 ---
 
-### 17.1 Komponenty - Odstranění experimentálních variant
+## Fáze 18: Visual Polish 🔄
 
-#### 17.1.1 Tlačítka a vstupy
+**Cíl:** Opravit vizuální problémy vzniklé při CSS cleanup, systematicky doplnit chybějící aesthetic styly.
 
-| Komponenta | Současné varianty | Zachovat | Odstranit |
-|------------|-------------------|----------|-----------|
-| **Button** | primary, secondary, ghost, danger, gradient, gradient-energy | primary, secondary, ghost, danger | gradient, gradient-energy |
-| **Input** | + energyFocus | default, error, success | energyFocus |
-| **Select** | + energyFocus, displayLabel | default, error, success | energyFocus |
-| **SearchInput** | + energyFocus, chips | default + chips | energyFocus |
+**Princip:** Vizuální styly patří do:
+1. **Utility třídy** (`aesthetic.css`) - opakující se vzory použitelné napříč prototypy
+2. **VISUAL STYLES sekce** v CSS prototypu - specifické styly pro daný prototyp
+3. **Komponenty** - styling zapouzdřený v komponentě (Card, Badge, PodiumCard...)
+
+**NIKDY** inline styly v TSX!
+
+---
+
+### 18.1 Rozšíření utility tříd v aesthetic.css
+
+**Soubor:** `src/tokens/aesthetic.css`
+
+**Proč:** Mnoho prototypů potřebuje stejné vizuální vzory (hero gradienty, mesh backgrounds, animace). Místo kopírování CSS vytvoříme znovupoužitelné utility třídy.
+
+#### 18.1.1 Hero gradient utility třídy
+
+**Kde použít:** AthletePublicProfile, ClubPublicProfile, EventDetailPage, ResultsPage (custom hero sekce)
+
+```css
+/* Hero gradient backgrounds pro sekce */
+.csk-hero-gradient--dv {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #3b82f6 100%);
+}
+
+.csk-hero-gradient--ry {
+  background: linear-gradient(135deg, #14532d 0%, #16a34a 50%, #22c55e 100%);
+}
+
+.csk-hero-gradient--vt {
+  background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 50%, #dc2626 100%);
+}
+
+.csk-hero-gradient--generic {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-700) 0%,
+    var(--color-primary-600) 50%,
+    var(--color-primary-500) 100%
+  );
+}
+
+/* Mesh varianty s radial gradienty */
+.csk-hero-gradient--dv.csk-hero-gradient--mesh {
+  background:
+    linear-gradient(135deg, #1e3a5f 0%, #2563eb 40%, #60a5fa 100%),
+    radial-gradient(ellipse 80% 60% at 20% 100%, rgba(96, 165, 250, 0.4), transparent),
+    radial-gradient(ellipse 60% 80% at 90% 20%, rgba(37, 99, 235, 0.3), transparent);
+}
+
+/* Analogicky pro ry a vt... */
+```
+
+#### 18.1.2 Mesh background varianty
+
+**Kde použít:** Sekce stránek, karty, subtle backgrounds
+
+```css
+/* Existuje: .csk-mesh-bg, .csk-mesh-bg--hero */
+/* Přidat: */
+
+.csk-mesh-bg--card {
+  background: var(--bg-mesh-card);
+}
+
+.csk-mesh-bg--subtle {
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(17, 118, 166, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(249, 115, 22, 0.03) 0%, transparent 50%);
+}
+
+.csk-mesh-bg--section {
+  background:
+    radial-gradient(ellipse at 0% 50%, rgba(17, 118, 166, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 50%, rgba(249, 115, 22, 0.05) 0%, transparent 40%);
+}
+```
+
+#### 18.1.3 Animační utility
+
+**Kde použít:** Live indikátory, CTA prvky, attention-grabbing elementy
+
+```css
+/* Pulse animace */
+@keyframes csk-pulse-animation {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.csk-pulse {
+  animation: csk-pulse-animation 2s ease-in-out infinite;
+}
+
+.csk-pulse--fast {
+  animation: csk-pulse-animation 1s ease-in-out infinite;
+}
+
+/* Glow efekty */
+.csk-glow {
+  box-shadow: var(--glow-energy-md);
+}
+
+.csk-glow--sm {
+  box-shadow: var(--glow-energy-sm);
+}
+
+.csk-glow--lg {
+  box-shadow: var(--glow-energy-lg);
+}
+
+/* Kombinovaný pulse + glow */
+@keyframes csk-pulse-glow {
+  0%, 100% { box-shadow: var(--glow-energy-sm); }
+  50% { box-shadow: var(--glow-energy-lg); }
+}
+
+.csk-pulse-glow {
+  animation: csk-pulse-glow 2s ease-in-out infinite;
+}
+```
+
+#### 18.1.4 Doplňující utility
+
+```css
+/* Ring pro avatary (bílý/světlý okraj) */
+.csk-ring {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+.csk-ring--white {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.csk-ring--primary {
+  box-shadow: 0 0 0 4px var(--color-primary-200);
+}
+
+/* Text shadow pro hero texty */
+.csk-text-shadow {
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.csk-text-shadow--strong {
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Backdrop blur */
+.csk-backdrop-blur {
+  backdrop-filter: blur(8px);
+}
+
+.csk-backdrop-blur--strong {
+  backdrop-filter: blur(16px);
+}
+
+/* Pattern overlay (diagonální pruhy) */
+.csk-pattern-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--pattern-diagonal);
+  pointer-events: none;
+  z-index: 0;
+}
+```
+
+#### 18.1.5 Dark mode varianty
+
+Všechny utility musí mít dark mode verze v `[data-theme="dark"]` selektoru.
 
 **Úkoly:**
-- [x] Button: Odstranit `gradient`, `gradient-energy` varianty (CSS + stories + type)
-- [x] Input: Odstranit `energyFocus` prop a CSS
-- [x] Select: Odstranit `energyFocus` prop a CSS
-- [x] SearchInput: Odstranit `energyFocus` prop a CSS
+- [x] Přidat hero gradient utility do aesthetic.css
+- [x] Přidat mesh background varianty
+- [x] Přidat pulse/glow animace
+- [x] Přidat ring/shadow/blur utility
+- [x] Přidat dark mode varianty
+- [ ] Vytvořit AestheticGuidelines.stories.mdx s příklady použití
+- [x] Build validace
 
-#### 17.1.2 Karty a kontejnery
+---
 
-| Komponenta | Současné varianty | Zachovat | Odstranit |
-|------------|-------------------|----------|-----------|
-| **Card** | surface, elevated, outlined, gradient, aesthetic | surface, elevated, outlined, aesthetic | gradient (sloučit do aesthetic) |
-| **StatCard** | default, outlined, elevated + gradient, glass, gradient-subtle | default, outlined, elevated, aesthetic | gradient, glass, gradient-subtle, sparkline |
-| **Modal** | default, gradient, glass, danger | default, danger | gradient, glass |
+### 18.2 Fix AthletePublicProfile
+
+**Soubory:**
+- `src/prototypes/AthletePublicProfile.css`
+- `src/prototypes/AthletePublicProfile.stories.tsx`
+
+**Aktuální stav:** CSS obsahuje pouze LAYOUT (pozicování, grid, flex, spacing). Chybí VISUAL STYLES.
+
+#### Co přidat do CSS (VISUAL STYLES sekce):
+
+```css
+/* ==========================================================================
+   VISUAL STYLES - AthletePublicProfile
+   ========================================================================== */
+
+/* Hero background gradients per section */
+.athlete-hero--dv .athlete-hero__gradient {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #3b82f6 100%);
+}
+
+.athlete-hero--ry .athlete-hero__gradient {
+  background: linear-gradient(135deg, #14532d 0%, #16a34a 50%, #22c55e 100%);
+}
+
+.athlete-hero--vt .athlete-hero__gradient {
+  background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 50%, #dc2626 100%);
+}
+
+/* Hero image overlay */
+.athlete-hero__image {
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.4;
+}
+
+/* Hero pattern */
+.athlete-hero__pattern {
+  opacity: 0.15;
+  background-image:
+    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 80% at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+}
+
+/* Avatar ring */
+.athlete-hero__avatar-ring {
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3), var(--shadow-lg);
+}
+
+.athlete-hero__avatar-img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.athlete-hero__avatar-initials {
+  border-radius: 50%;
+  background: var(--color-primary-600);
+  color: white;
+  font-family: var(--font-family-display);
+  font-weight: 800;
+  font-size: var(--font-size-4xl);
+}
+
+/* Rank badge */
+.athlete-hero__rank-badge {
+  border-radius: 50%;
+  font-family: var(--font-family-display);
+  font-weight: 800;
+  font-size: var(--font-size-lg);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.athlete-hero__rank-badge--1 {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.5);
+}
+
+.athlete-hero__rank-badge--2 {
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  box-shadow: 0 0 8px rgba(156, 163, 175, 0.4);
+}
+
+.athlete-hero__rank-badge--3 {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  box-shadow: 0 0 8px rgba(217, 119, 6, 0.4);
+}
+
+/* Hero name */
+.athlete-hero__name {
+  font-family: var(--font-family-display);
+  font-size: var(--text-expr-mega-size, var(--font-size-6xl));
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Country flag background */
+.athlete-hero__country {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+}
+
+/* Meta styling */
+.athlete-hero__meta-label {
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.athlete-hero__meta-value {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: white;
+}
+
+/* Highlight cards */
+.athlete-highlight-card {
+  border-left: 4px solid;
+  border-image: var(--border-accent-gradient) 1;
+  transition: transform var(--motion-normal), box-shadow var(--motion-normal);
+}
+
+.athlete-highlight-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.athlete-highlight-card__year {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-500);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.athlete-highlight-card__title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--csk-color-on-surface);
+}
+
+.athlete-highlight-card__description {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted);
+}
+
+.athlete-highlight-card__icon {
+  color: var(--color-energy-400);
+  opacity: 0.6;
+}
+
+/* Result card rank colors */
+.athlete-result-card__rank {
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-display);
+  font-weight: 800;
+  font-size: var(--font-size-xl);
+}
+
+.athlete-result-card__rank--1 {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%);
+  color: #b45309;
+}
+
+.athlete-result-card__rank--2 {
+  background: linear-gradient(135deg, rgba(156, 163, 175, 0.2) 0%, rgba(107, 114, 128, 0.1) 100%);
+  color: #4b5563;
+}
+
+.athlete-result-card__rank--3 {
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.2) 0%, rgba(180, 83, 9, 0.1) 100%);
+  color: #92400e;
+}
+
+.athlete-result-card__rank--other {
+  background: var(--csk-color-surface-container);
+  color: var(--csk-color-on-surface-muted);
+}
+
+.athlete-result-card__race {
+  font-weight: var(--font-weight-semibold);
+  color: var(--csk-color-on-surface);
+}
+
+.athlete-result-card__meta {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted);
+}
+
+.athlete-result-card__time {
+  font-family: var(--font-family-mono, monospace);
+  font-weight: var(--font-weight-bold);
+  color: var(--csk-color-on-surface);
+}
+
+/* Section headers */
+.athlete-section__title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--csk-color-on-surface);
+}
+
+.athlete-section__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted);
+}
+
+/* Chart placeholder */
+.athlete-chart-placeholder {
+  background: var(--csk-color-surface-container);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-lg);
+  color: var(--csk-color-on-surface-muted);
+}
+
+/* Footer */
+.athlete-footer {
+  background: var(--csk-color-surface-container);
+  border-top: 1px solid var(--csk-color-border);
+}
+
+.athlete-footer__text {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted);
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .athlete-result-card__rank--1 {
+  color: #fbbf24;
+}
+
+[data-theme="dark"] .athlete-result-card__rank--2 {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .athlete-result-card__rank--3 {
+  color: #d97706;
+}
+```
 
 **Úkoly:**
-- [x] Card: Odstranit `gradient` variantu, `meshBg` a `borderAccent` props (přesunout do aesthetic)
-- [x] StatCard: Zredukovat `styleVariant` na default/aesthetic, odstranit sparkline
-- [x] Modal: Odstranit `gradient`, `glass` varianty
+- [ ] Přidat VISUAL STYLES sekci do AthletePublicProfile.css
+- [ ] Ověřit všechny CSS třídy jsou použity v TSX
+- [ ] Build validace
+- [ ] Vizuální kontrola v Storybook (Embed, Satellite, ExpressiveEmbed)
 
-#### 17.1.3 Navigace a tabs
+---
 
-| Komponenta | Současné varianty | Zachovat | Odstranit |
-|------------|-------------------|----------|-----------|
-| **Tabs** | line, pills, gradient, gradient-line, energy, glass | line, pills, aesthetic | gradient, gradient-line, energy, glass |
-| **MainNav** | default, gradient, glass, pills | default, pills | gradient, glass |
-| **Header** | default, elevated, gradient, satellite | default, elevated, satellite | gradient, blurOnScroll |
+### 18.3 Fix ClubPublicProfile
+
+**Soubory:**
+- `src/prototypes/ClubPublicProfile.css`
+- `src/prototypes/ClubPublicProfile.stories.tsx`
+
+**Struktura VISUAL STYLES sekce** (analogicky k AthletePublicProfile):
+
+1. **Hero gradient** (generic - klub nemá sekci jako athlete)
+2. **Logo ring** styling
+3. **Hero name/fullname** typography
+4. **Hero meta** styling
+5. **Member card rank badges** (gold/silver/bronze pro #1/#2/#3)
+6. **Highlight cards** s border-accent a medal styling
+7. **Contact icons** background a color
+8. **Section headers** typography
+9. **Footer** styling
+10. **Dark mode** adjustments
 
 **Úkoly:**
-- [x] Tabs: Sloučit varianty do line/pills/aesthetic, odstranit ostatní
-- [x] MainNav: N/A (komponenta neexistuje)
-- [x] Header: N/A (komponenta neexistuje)
+- [ ] Přidat VISUAL STYLES sekci do ClubPublicProfile.css
+- [ ] Ověřit všechny CSS třídy jsou použity v TSX
+- [ ] Build validace
+- [ ] Vizuální kontrola v Storybook
 
-#### 17.1.4 Feedback a indikátory
+---
 
-| Komponenta | Současné varianty | Zachovat | Odstranit |
-|------------|-------------------|----------|-----------|
-| **Toast** | default, success, warning, error, info, energy + gradient, glass | default, success, warning, error, info | energy, gradient, glass |
-| **LiveIndicator** | default, live, recording, offline, connecting + gradient, glass | default, live, recording, offline, connecting | gradient, glass, glow intensity |
-| **Badge** | default, primary, success, warning, error, info, gradient, energy | default, primary, success, warning, error, info, section badges | gradient, energy, glow |
+### 18.4 Fix RankingsPage Top 3
+
+**Soubory:**
+- `src/components/PodiumCard/PodiumCard.css`
+- `src/prototypes/RankingsPage.css`
+
+**Postup:**
+1. Zkontrolovat PodiumCard.css - má všechny vizuální styly?
+2. Pokud ano, problém je v kontextu použití (wrapper div, sizing)
+3. Případně přidat wrapper styling do RankingsPage.css
+
+**Co kontrolovat v PodiumCard.css:**
+- Gold/silver/bronze barvy pro `.csk-podium-card--1/2/3`
+- Avatar/image styling
+- Name typography
+- Value/label styling
+- Hover efekty
 
 **Úkoly:**
-- [x] Toast: Odstranit `energy` variantu, `gradient`/`glass` styleVariants
-- [x] LiveIndicator: Odstranit `gradient`/`glass` styleVariants, `intensity` prop
-- [x] Badge: Odstranit `gradient`, `energy` varianty, `glow` efekt
+- [ ] Audit PodiumCard.css - má kompletní visual styles?
+- [ ] Pokud chybí, doplnit
+- [ ] Zkontrolovat použití v RankingsPage - správné props?
+- [ ] Případně přidat wrapper styling
+- [ ] Build validace
+- [ ] Vizuální kontrola
 
-#### 17.1.5 Specializované komponenty
+---
 
-| Komponenta | Současné varianty | Zachovat | Odstranit |
-|------------|-------------------|----------|-----------|
-| **AthleteCard** | default, compact, featured + gradient, glass, hero | default, compact, featured, aesthetic | gradient, glass, hero |
-| **Avatar** | + glow, borderAccent | size/variant/color/status | glow, borderAccent |
+### 18.5 Fix EventDetailPage Hero
+
+**Soubory:**
+- `src/prototypes/EventDetailPage.css`
+
+**Aktuální stav:** CSS má VISUAL STYLES sekci, ale možná chybí mesh/pattern efekty.
+
+**Co zkontrolovat:**
+1. Hero gradient pro dv/ry/vt sekce
+2. Mesh background overlay
+3. Pattern overlay
+4. Stats floating cards styling
+5. Text shadows
 
 **Úkoly:**
-- [x] AthleteCard: Sloučit `gradient`/`glass`/`hero` do `aesthetic`, odstranit ostatní
-- [x] Avatar: Odstranit `glow`, `borderAccent` props
+- [ ] Audit VISUAL STYLES sekce v CSS
+- [ ] Doplnit chybějící efekty
+- [ ] Build validace
+- [ ] Vizuální kontrola
 
 ---
 
-### 17.2 Komponenty - Nové/Extrakce z prototypů
+### 18.6 Fix ResultsPage Hero
 
-**Problém:** Prototypy definují mnoho opakujících se prvků, které by měly být komponenty.
+**Soubory:**
+- `src/prototypes/ResultsPage.css`
 
-#### Kandidáti na extrakci:
+**Postup:** Stejný jako EventDetailPage.
 
-| Prvek | Výskyt | Nová komponenta |
-|-------|--------|-----------------|
-| CSK Logo | 12/12 prototypů | `<CSKLogo />` |
-| SVG ikony | 12/12 prototypů (80+ ikon) | `<Icon name="..." />` nebo import z knihovny |
-| Hero sekce | Athlete, Club, Event, Profile | `<HeroSection variant="athlete\|club\|event" />` |
-| Stats bar | Athlete, Club, Event, Rankings, Dashboard | `<StatsBar items={[]} />` |
-| Section header | Všude | `<SectionHeader title="..." action={...} />` |
-| Podium cards | Results, Rankings | `<PodiumCard position={1\|2\|3} />` |
-| Filter pills | Athletes, Clubs, Rankings, Calendar | `<FilterPills items={[]} />` |
-| Page layout | Všechny | `<PageLayout variant="embed\|satellite">` |
-
-**Priorita extrakce (podle dopadu):**
-
-1. **Vysoká priorita (eliminuje nejvíce custom kódu):**
-   - [x] `<Icon />` komponenta nebo lucide-react integrace
-   - [x] `<PageLayout />` pro embed/satellite strukturu
-   - [x] `<HeroSection />` pro profilové stránky
-   - [x] `<StatsBar />` pro floating stats
-
-2. **Střední priorita:**
-   - [x] `<SectionHeader />` s title a optional action
-   - [x] `<FilterPills />` pro filtry
-   - [x] `<CSKLogo />` pro konzistentní branding
-
-3. **Nízká priorita:**
-   - [x] `<PodiumCard />` (ResultsPage, RankingsPage)
+**Úkoly:**
+- [ ] Audit VISUAL STYLES sekce v CSS
+- [ ] Doplnit chybějící efekty
+- [ ] Build validace
+- [ ] Vizuální kontrola
 
 ---
 
-### 17.3 Prototypy - Eliminace custom stylingu
+### 18.7 Fix Header Alignment (Embed varianty)
 
-**Cíl:** Každý prototyp má mít MAX 50 řádků CSS (pouze layout grid/flex, žádné barvy/fonty/efekty).
+**Problém:** V embed variantách je header content "nalepený" doleva místo správného paddingu.
 
-#### Aktuální stav:
+**Soubory k kontrole:**
+- `src/prototypes/ClubsListPage.css`
+- `src/components/KanoeCzContext/KanoeCzContext.css`
+- Případně další embed prototypy
 
-| Prototyp | CSS soubor | Řádky | Custom icons | Inline styles |
-|----------|------------|-------|--------------|---------------|
-| AthletePublicProfile | ✗ | ~400 | 10 | 3 |
-| AthletesListPage | ✗ | ~300 | 6 | 2 |
-| CalendarPage | ✗ | ~350 | 7 | 0 |
-| ClubPublicProfile | ✗ | ~350 | 10 | 0 |
-| ClubsListPage | ✗ | ~300 | 4 | 2 |
-| DashboardPage | ✗ | ~450 | 14 | 3 |
-| EventDetailPage | ✗ | ~400 | 9 | 1 |
-| LivePage | ✗ | ~500 | 15 | 2 |
-| ProfilePage | ✗ | ~400 | 15 | 0 |
-| RankingsPage | ✗ | ~350 | 3 | 3 |
-| RegistrationPage | ✗ | ~450 | 11 | 4 |
-| ResultsPage | ✗ | ~350 | 8 | 4 |
+**Co hledat:**
+1. Padding na `.kanoe-cz-context` nebo podobném wrapperu
+2. Max-width + margin: auto na content containeru
+3. Embed mode specifické styly
 
-**Postup pro každý prototyp:**
-1. Nahradit SVG ikony za `<Icon />` komponentu
-2. Nahradit custom hero za `<HeroSection />`
-3. Nahradit custom stats za `<StatsBar />`
-4. Nahradit layout wrappery za `<PageLayout />`
-5. Odstranit inline styles (použít komponenty s props)
-6. Zredukovat CSS na čistý layout
-
-**Pořadí podle složitosti:**
-1. [x] ClubsListPage (nejjednodušší) - refaktorováno: Icon, StatsBar
-2. [x] AthletesListPage - refaktorováno: Icon, StatsBar
-3. [x] RankingsPage - refaktorováno: Icon, StatsBar
-4. [x] ClubPublicProfile - refaktorováno: Icon, StatsBar
-5. [x] AthletePublicProfile - refaktorováno: Icon, StatsBar
-6. [x] ResultsPage - refaktorováno: Icon, inline styles → CSS classes
-7. [x] CalendarPage - refaktorováno: Icon (7 SVG → Icon component)
-8. [x] EventDetailPage - refaktorováno: Icon (9 SVG → Icon component)
-9. [x] ProfilePage - refaktorováno: Icon (15 SVG → Icon component)
-10. [x] RegistrationPage - refaktorováno: Icon (16 SVG → Icon component)
-11. [x] DashboardPage - refaktorováno: Icon (14 SVG → Icon component)
-12. [x] LivePage - refaktorováno: Icon (16 SVG → Icon component)
+**Úkoly:**
+- [ ] Analyzovat ClubsListPage Embed v Storybook
+- [ ] Najít kde se ztrácí padding
+- [ ] Opravit CSS
+- [ ] Zkontrolovat další embed varianty (AthletesListPage, RankingsPage...)
+- [ ] Build validace
 
 ---
 
-### 17.4 CSS Cleanup ✅
+### 18.9 Energy Colors Integration
 
-**Cíl:** Odstranit nepoužívané styly z komponentových CSS souborů.
+**Problém:** Při Phase 17 cleanup byly odstraněny Energy colors (coral-orange akcenty) jako "experimentální". Ale Energy je klíčová součást Dynamic Sport aesthetic stylu - dodává "šťávu" a vizuální energii.
 
-**Stav:** CSS souborů komponent bylo vyčištěno - odstraněny všechny experimentální varianty (gradient, glass, energy, glow).
+**Princip:** Energy colors NEJSOU samostatné varianty (jako bylo `gradient-energy`). Jsou součástí `aesthetic` varianty a utility tříd.
 
-| Soubor | Aktuální | Poznámka |
-|--------|----------|----------|
-| Button.css | 265 | ✅ Vyčištěno |
-| Card.css | 249 | ✅ Vyčištěno |
-| StatCard.css | 542 | ✅ Vyčištěno |
-| Modal.css | 322 | ✅ Vyčištěno |
-| Tabs.css | 359 | ✅ Vyčištěno |
-| Toast.css | 649 | ✅ Vyčištěno |
-| LiveIndicator.css | 448 | ✅ Vyčištěno |
-| Badge.css | 311 | ✅ Vyčištěno |
+#### 18.9.1 Kde Energy colors patří
 
-**Poznámka:** Celkový počet řádků CSS komponent (16,046) je vyšší než původní cíl, protože přibyly nové komponenty (HeroSection, PageLayout, StatsBar, SectionHeader, Icon).
+| Kontext | Použití Energy | Příklad |
+|---------|----------------|---------|
+| **CTA tlačítka** | Hlavní akce, registrace | "Registrovat se", "Přihlásit" |
+| **Highlights** | Důležité informace, deadlines | Deadline registrace, dnešní den |
+| **Live prvky** | Pulsující indikátory | LIVE badge, countdown |
+| **Podium/medaile** | Gold accent, best time | 1. místo glow |
+| **Focus states** | Interaktivní prvky | Input focus ring |
+| **Border accents** | Featured karty | Highlight cards |
+| **Trend indikátory** | Pozitivní změny | +5 míst v žebříčku |
 
----
+#### 18.9.2 Komponenty k rozšíření
 
-## Plán realizace
+**Button - přidat `accent` prop:**
+```tsx
+// Místo samostatné gradient-energy varianty
+<Button variant="primary" accent="energy">Registrovat</Button>
 
-### Iterace 1: Icon systém ✅
-- [x] Rozhodnout: vlastní `<Icon />` vs lucide-react → **lucide-react** (už bylo nainstalováno)
-- [x] Implementovat icon komponentu → `<Icon name="..." />` wrapper
-- [x] Vytvořit icon katalog → 45 ikon v kategorických stories
+// CSS: .csk-button--primary.csk-button--accent-energy
+```
 
-### Iterace 2: Layout komponenty ✅
-- [x] `<PageLayout variant="embed|satellite" />` - page structure with header/footer/content
-- [x] `<SectionHeader />` - section titles with optional badge and action
-- [x] `<StatsBar />` - row of statistics with icons (inline/cards/compact variants)
+Změny v Button.tsx/css:
+- [ ] Přidat `accent?: 'energy' | 'none'` prop
+- [ ] CSS pro `.csk-button--accent-energy` - energy glow na hover
+- [ ] Stories s příklady použití
 
-### Iterace 3: Hero komponenta ✅
-- [x] `<HeroSection variant="full|compact|minimal" section="dv|ry|vt|generic" />`
-- [x] Mesh background, pattern overlay, section-specific gradients
-- [x] Avatar/logo s bílým ringem, badges, metadata, actions
-- [x] Floating content slot pro stats bar
-- [x] Breadcrumbs (hidden in embed mode)
+**Badge - přidat `energy` variantu zpět:**
+```tsx
+<Badge variant="energy">LIVE</Badge>
+<Badge variant="energy" glow>DEADLINE</Badge>
+```
 
-### Iterace 4: Cleanup - Tlačítka a vstupy ✅
-- [x] Button: Odstranit `gradient`, `gradient-energy` varianty, `glow` prop
-- [x] Input: Odstranit `energyFocus` prop a CSS
-- [x] Select: Odstranit `energyFocus` prop a CSS
-- [x] SearchInput: Odstranit `energyFocus` prop a CSS
+Změny v Badge.tsx/css:
+- [ ] Přidat `energy` zpět do BadgeVariant
+- [ ] Přidat `glow` prop zpět
+- [ ] CSS pro energy + glow kombinaci
 
-### Iterace 5-6: Cleanup komponent (Cards → Toast) ✅
-- [x] Všechny experimentální varianty odstraněny z komponent
-- [x] CSS vyčištěno od gradient/glass/energy/glow stylů
-- [x] Komentáře v CSS aktualizovány
+**Tabs - energy accent pro aktivní tab:**
+```tsx
+<Tabs variant="aesthetic" energyAccent>...</Tabs>
+```
 
-### Iterace 7-12: Refactor prototypů ✅
-- [x] Icon refactoring dokončen (všech 12 prototypů)
-- [x] Inline styles odstraněny (0 výskytů)
-- [ ] CSS redukce prototypů na layout-only (zbývá)
+Změny v Tabs.tsx/css:
+- [ ] Přidat `energyAccent?: boolean` prop
+- [ ] CSS pro energy underline/indicator
 
-### Iterace 13: Finální audit
-- [x] Ověřit všechny stories fungují (Storybook build OK)
-- [x] Zkontrolovat CSS velikost (Component: 16,046, Prototype: 14,654)
-- [x] Spustit testy (build validace OK, a11y testy vyžadují dev server)
-- [ ] Refaktoring CSS prototypů na čistý layout (~50 řádků/prototyp)
+**Input/Select - energy focus ring:**
+```tsx
+<Input energyFocus />
+```
 
-### Iterace 14: EmptyState refaktoring ✅
-- [x] AthletesListPage: custom empty state → EmptyState komponenta
-- [x] ClubsListPage: custom empty state → EmptyState komponenta
-- [x] Odstraněno ~106 řádků duplicitního CSS
+Změny v Input/Select.tsx/css:
+- [ ] Vrátit `energyFocus` prop
+- [ ] CSS pro coral-orange focus ring
 
-### Iterace 15: FilterPills komponenta ✅
-- [x] Vytvořit `<FilterPills />` komponentu (FilterPills.tsx, FilterPills.css)
-- [x] Vytvořit stories s variantami (default, subtle, sizes)
-- [x] Refaktorovat AthletesListPage: nahrazeno ~30 řádků custom JSX
-- [x] Refaktorovat ClubsListPage: nahrazeno ~30 řádků custom JSX
-- [x] Odstraněno ~130 řádků duplicitního CSS z prototypů
+**ResultsTable - energy highlights:**
+- [ ] Přidat `energyHighlights?: boolean` prop
+- [ ] CSS pro podium rows s energy glow
+- [ ] Best time highlight
 
-### Iterace 16: PodiumCard komponenta ✅
-- [x] Vytvořit `<PodiumCard />` komponentu (PodiumCard.tsx, PodiumCard.css)
-- [x] Vytvořit stories s variantami (gold/silver/bronze, sizes, layouts)
-- [x] Refaktorovat ResultsPage: nahrazeno ~80 řádků custom JSX
-- [x] Refaktorovat RankingsPage: nahrazeno lokální komponenta a ~20 řádků
-- [x] Export do components/index.ts
+**Calendar (v prototypu) - energy pro:**
+- Dnešní den (energy ring)
+- Deadline registrace (energy background)
+- Vybraný den (energy accent)
 
-### Iterace 17: CSS redukce AthletesListPage ✅
-- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
-- [x] Přepsat CSS na layout-only (539 → 304 řádků, 52 pravidel)
-- [x] Aktualizovat TSX pro použití utility tříd (csk-mesh-bg, csk-grain, csk-display, csk-reveal)
-- [x] Nahradit custom sekce Card komponentou s variant="aesthetic"
-- [x] Build validace OK
+**LiveIndicator - energy glow:**
+- [ ] Přidat `energyGlow?: boolean` prop
+- [ ] Pulsující energy glow pro live status
 
-### Iterace 18: CSS redukce ClubsListPage ✅
-- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
-- [x] Přepsat CSS na layout-only (687 → 338 řádků, 51% redukce)
-- [x] Aktualizovat TSX pro použití utility tříd (csk-mesh-bg--hero, csk-grain, csk-display)
-- [x] Nahradit custom club-card za Card komponentu s variant="aesthetic"
-- [x] Build validace OK
+#### 18.9.3 Utility třídy pro Energy
 
-### Iterace 19: CSS redukce RankingsPage ✅
-- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
-- [x] Přepsat CSS na layout-only (988 → 333 řádků, 66% redukce)
-- [x] Aktualizovat TSX pro použití utility tříd (csk-mesh-bg--hero, csk-grain, csk-display, csk-headline)
-- [x] Nahradit custom sections za Card komponenty (section-tabs, rankings-top)
-- [x] Nahradit custom VT class badges za Badge komponenty s vtClass prop
-- [x] Přidat csk-reveal animace pro podium karty
-- [x] Build validace OK
+Přidat do `aesthetic.css`:
 
-### Iterace 20: CSS redukce CalendarPage ✅
-- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
-- [x] Přepsat CSS na layout-only (922 → 347 řádků, 62% redukce)
-- [x] Aktualizovat TSX pro použití utility tříd (csk-display, csk-reveal, csk-border-*, csk-interactive)
-- [x] View switcher: csk-surface-elevated, csk-rounded, csk-shadow-sm
-- [x] Detail card: Card variant="aesthetic" s csk-border-accent
-- [x] Build validace OK
+```css
+/* Energy accent colors */
+.csk-energy-text {
+  color: var(--color-energy-500);
+}
 
-### Iterace 21: CSS redukce ClubPublicProfile ✅
-- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
-- [x] Přepsat CSS na layout-only (1012 → 543 řádků, 46% redukce)
-- [x] Aktualizovat TSX - member cards, highlight cards, contact card → Card komponenta
-- [x] Build validace OK
+.csk-energy-bg {
+  background: var(--gradient-energy);
+}
 
-### Iterace 22: CSS redukce AthletePublicProfile ✅
-- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
-- [x] Přepsat CSS na layout-only (1154 → 644 řádků, 44% redukce)
-- [x] Aktualizovat TSX - highlight cards, result cards, chart placeholder → Card komponenta
-- [x] Build validace OK
+.csk-energy-bg--subtle {
+  background: linear-gradient(135deg,
+    rgba(249, 115, 22, 0.1) 0%,
+    rgba(234, 88, 12, 0.05) 100%
+  );
+}
 
-### Iterace 23: CSS redukce ResultsPage ✅
-- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
-- [x] Přepsat CSS na layout-only (1199 → 489 řádků, 59% redukce)
-- [x] Odstranit legacy podium CSS (používá PodiumCard komponentu)
-- [x] Aktualizovat TSX - Card pro header, csk-display/headline pro typografii
-- [x] Build validace OK
+.csk-energy-border {
+  border-color: var(--color-energy-400);
+}
 
-### Iterace 24: CSS reorganizace EventDetailPage ✅
-- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
-- [x] Reorganizovat CSS - oddělení layout a visual sekcí (1150 → 1219 řádků)
-- [x] Poznámka: Hero vyžaduje custom gradienty pro dv/ry/vt sekce, nelze extrahovat
-- [x] Build validace OK
+.csk-energy-glow {
+  box-shadow: var(--glow-energy-md);
+}
 
-### Iterace 25: CSS reorganizace DashboardPage ✅
-- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
-- [x] Reorganizovat CSS - oddělení LAYOUT a VISUAL sekcí (1215 → 1370 řádků)
-- [x] Poznámka: Obsahuje discipline-specific hero gradienty, gradient stat cards, pulse rings animace
-- [x] Build validace OK
+.csk-energy-glow--sm {
+  box-shadow: var(--glow-energy-sm);
+}
 
-### Iterace 26: CSS reorganizace ProfilePage ✅
-- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
-- [x] Reorganizovat CSS - oddělení LAYOUT a VISUAL sekcí (1550 → 1749 řádků)
-- [x] Poznámka: Obsahuje discipline-specific hero gradienty, aesthetic mode, registrations/pinned tabs
-- [x] Build validace OK
+.csk-energy-glow--lg {
+  box-shadow: var(--glow-energy-lg);
+}
 
-### Iterace 27: CSS reorganizace LivePage ✅
-- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
-- [x] Reorganizovat CSS - oddělení LAYOUT a VISUAL sekcí (2434 → 2775 řádků)
-- [x] Poznámka: Obsahuje discipline-specific gradienty, pulse animace, oncourse/podium/schedule panely, fullscreen mode
-- [x] Build validace OK
+/* Energy focus ring */
+.csk-energy-focus:focus-visible {
+  outline: 2px solid var(--color-energy-400);
+  outline-offset: 2px;
+}
 
-### Iterace 28: CSS reorganizace RegistrationPage ✅
-- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
-- [x] Reorganizovat CSS - oddělení LAYOUT a VISUAL sekcí (1557 → 1757 řádků)
-- [x] Poznámka: Obsahuje discipline-specific hero/wizard/summary gradienty, countdown, crew selection, aesthetic mode
-- [x] Build validace OK
+/* Energy hover glow */
+.csk-energy-hover:hover {
+  box-shadow: var(--glow-energy-md);
+}
+```
+
+#### 18.9.4 Prototypy k aktualizaci
+
+| Prototyp | Kde přidat Energy | Priorita |
+|----------|-------------------|----------|
+| **CalendarPage** | Dnešní den, deadline, vybraný event | Vysoká |
+| **RegistrationPage** | CTA "Registrovat", deadline countdown | Vysoká |
+| **LivePage** | LIVE badge, current race indicator | Vysoká |
+| **ResultsPage** | Podium highlights, best time | Střední |
+| **EventDetailPage** | CTA registrace, countdown | Střední |
+| **DashboardPage** | Upcoming deadlines, trends | Střední |
+| **RankingsPage** | Top 3 glow, rank changes | Nízká |
+| **ProfilePage** | CTA editace, notifications | Nízká |
+
+**Úkoly:**
+- [ ] Přidat energy utility třídy do aesthetic.css
+- [ ] Rozšířit Button o `accent` prop
+- [ ] Vrátit `energy` variantu do Badge
+- [ ] Přidat `energyFocus` do Input/Select
+- [ ] Přidat `energyAccent` do Tabs
+- [ ] Rozšířit ResultsTable o energy highlights
+- [ ] Rozšířit LiveIndicator o energy glow
+- [ ] Aktualizovat CalendarPage - energy pro dnešek/deadline
+- [ ] Aktualizovat RegistrationPage - energy CTA
+- [ ] Aktualizovat LivePage - energy LIVE badge
+- [ ] Aktualizovat ResultsPage - podium energy
+- [ ] Stories pro všechny energy varianty
+- [ ] Build validace
 
 ---
 
-## Metriky úspěchu
+### 18.10 Vizuální QA
 
-| Metrika | Před | Aktuální | Cíl |
-|---------|------|----------|-----|
-| Component CSS | ~7,800 řádků | 16,046 řádků* | ~10,000 řádků |
-| Prototype CSS | ~4,500 řádků | 11,867 řádků | ~600 řádků |
-| Inline styles | 28 | **0** ✅ | 0 |
-| Custom icons | 80+ | **0** ✅ | 0 (vše přes Icon) |
+**Kompletní kontrola všech prototypů po opravách.**
+
+**Checklist pro každý prototyp:**
+
+| Prototyp | Light ✓ | Dark ✓ | Embed ✓ | Satellite ✓ | Mobile ✓ |
+|----------|---------|--------|---------|-------------|----------|
+| AthletePublicProfile | | | | | |
+| AthletesListPage | | | | | |
+| CalendarPage | | | | | |
+| ClubPublicProfile | | | | | |
+| ClubsListPage | | | | | |
+| DashboardPage | | | | | |
+| EventDetailPage | | | | | |
+| LivePage | | | | | |
+| ProfilePage | | | | | |
+| RankingsPage | | | | | |
+| RegistrationPage | | | | | |
+| ResultsPage | | | | | |
+
+**Úkoly:**
+- [ ] Projít všechny prototypy v light mode
+- [ ] Projít všechny prototypy v dark mode
+- [ ] Zkontrolovat embed varianty
+- [ ] Zkontrolovat satellite varianty
+- [ ] Zkontrolovat responsivní chování (zmenšit viewport)
+- [ ] Aktualizovat screenshot testy (pokud existují)
+
+---
+
+## Fáze 19: Optimization ⏳
+
+**Cíl:** Vyčistit codebase, odstranit mrtvý kód, konsolidovat použití komponent.
+
+### 19.1 Dead CSS Audit
+
+**Dopad:** Střední - může být 10-20% mrtvého kódu
+
+**Nástroje:**
+- `purgecss` - automatická detekce nepoužívaných tříd
+- Manuální grep: `grep -r "className.*třída" src/`
+
+**Postup:**
+1. Nainstalovat purgecss jako dev dependency
+2. Vytvořit konfiguraci pro Storybook build
+3. Spustit analýzu
+4. Projít výstup a ověřit false positives (dynamické třídy)
+5. Odstranit skutečně nepoužívané třídy
+6. Build validace
+
+**Rizika:**
+- Dynamicky generované třídy (např. `csk-reveal-${idx}`) mohou být označeny jako nepoužívané
+- CSS pro hover/focus stavy může být false positive
+
+**Úkoly:**
+- [ ] Nainstalovat/nastavit purgecss nebo podobný nástroj
+- [ ] Vytvořit whitelist pro dynamické třídy
+- [ ] Audit komponentových CSS souborů
+- [ ] Audit prototypových CSS souborů
+- [ ] Odstranit mrtvý kód
+- [ ] Build validace
+- [ ] Aktualizovat metriky
+
+### 19.2 Konsolidace Card použití
+
+**Dopad:** Nízký, ale čistší kód
+
+**Problém:** Některé prototypy stále používají custom `<div className="...">` místo `<Card>` komponenty.
+
+**Jak najít:**
+```bash
+grep -r "className=.*card" src/prototypes/ | grep -v "Card\|csk-"
+```
+
+**Postup:**
+1. Projít každý prototyp
+2. Najít div elementy s card-like třídami
+3. Ověřit, že `<Card variant="...">` by bylo vhodné
+4. Nahradit a případně přidat className pro specifické styly
+5. Odstranit duplicitní CSS (pokud Card má již stejné styly)
+
+**Úkoly:**
+- [ ] Audit prototypů - najít custom div s card-like styly
+- [ ] Nahradit za `<Card variant="...">` kde to dává smysl
+- [ ] Odstranit duplicitní CSS
+- [ ] Build validace
+
+### 19.3 Stories Cleanup
+
+**Dopad:** Nízký, ale přehlednější dokumentace
+
+**Problém:** Některé stories jsou redundantní nebo mají příliš mnoho variant.
+
+**Příklady redundance:**
+- Samostatná story pro každou size variantu místo jedné s controls
+- Duplicate stories s minimálními rozdíly
+- Zastaralé stories pro odstraněné varianty
+
+**Postup:**
+1. Projít stories jednotlivých komponent
+2. Identifikovat redundantní (mohou být sloučeny do jedné s controls)
+3. Identifikovat zastaralé (odkazují na neexistující varianty)
+4. Sloučit/odstranit
+5. Aktualizovat autodocs
+
+**Úkoly:**
+- [ ] Audit stories - identifikovat redundantní
+- [ ] Sloučit podobné stories do jedné s controls
+- [ ] Odstranit nepoužívané/zastaralé stories
+- [ ] Aktualizovat autodocs
+- [ ] Build validace
+
+### 19.4 Bundle Size Audit
+
+**Postup:**
+1. Spustit `npm run build`
+2. Analyzovat výstup (dist/assets/)
+3. Použít `source-map-explorer` nebo podobný nástroj
+4. Identifikovat velké chunks
+5. Zvážit lazy loading pro velké komponenty
+6. Ověřit tree-shaking funguje (neimportují se celé knihovny)
+
+**Úkoly:**
+- [ ] Analyzovat bundle size (npm run build)
+- [ ] Nainstalovat source-map-explorer
+- [ ] Identifikovat velké závislosti
+- [ ] Zvážit optimalizace
+- [ ] Dokumentovat výsledky
+
+---
+
+## Metriky
+
+| Metrika | Před Ph17 | Po Ph17 | Cíl Ph18 | Cíl Ph19 |
+|---------|-----------|---------|----------|----------|
+| Component CSS | ~7,800 | 16,046* | 16,500 | ~14,000 |
+| Prototype CSS | ~4,500 | 11,867 | 13,000 | ~11,000 |
+| Inline styles | 28 | **0** ✅ | 0 | 0 |
+| Custom icons | 80+ | **0** ✅ | 0 | 0 |
+| Dead CSS | ? | ? | ? | <5% |
 
 *Nárůst způsoben novými komponentami (HeroSection, PageLayout, StatsBar, SectionHeader, Icon)
+
+---
+
+## Vizuální problémy k opravě (Phase 18)
+
+### Chybějící vizuální styly (18.1-18.7)
+
+| Prototyp | Problém | Priorita | Stav |
+|----------|---------|----------|------|
+| AthletePublicProfile | Hero, avatar, rank badges, highlight cards | Vysoká | ⏳ |
+| ClubPublicProfile | Hero, logo ring, member ranks, contacts | Vysoká | ⏳ |
+| RankingsPage | Top 3 nečitelné | Vysoká | ⏳ |
+| EventDetailPage | Hero chudé | Střední | ⏳ |
+| ResultsPage | Hero chudé | Střední | ⏳ |
+| ClubsListPage Embed | Header nalepený doleva | Střední | ⏳ |
+
+### Chybějící Energy colors (18.9)
+
+| Komponenta/Prototyp | Kde chybí Energy | Priorita | Stav |
+|---------------------|------------------|----------|------|
+| **Button** | CTA akce - accent glow | Vysoká | ⏳ |
+| **Badge** | LIVE, deadline, highlights | Vysoká | ⏳ |
+| **Input/Select** | Focus ring | Střední | ⏳ |
+| **Tabs** | Aktivní tab accent | Střední | ⏳ |
+| **ResultsTable** | Podium highlights, best time | Střední | ⏳ |
+| **LiveIndicator** | Pulsující glow | Střední | ⏳ |
+| CalendarPage | Dnešní den, deadline, vybraný event | Vysoká | ⏳ |
+| RegistrationPage | CTA "Registrovat", countdown | Vysoká | ⏳ |
+| LivePage | LIVE badge, current race | Vysoká | ⏳ |
+| ResultsPage | Podium energy glow | Střední | ⏳ |
+| EventDetailPage | CTA registrace | Střední | ⏳ |
+| DashboardPage | Deadlines, trends | Nízká | ⏳ |
 
 ---
 
@@ -352,6 +937,7 @@
 - **Vite** pro build
 - **Storybook 8** pro dokumentaci
 - **CSS custom properties** + režimy (utility/expressive/embed)
+- **lucide-react** pro ikony
 
 ## Příkazy
 
@@ -360,3 +946,79 @@ npm run dev          # Storybook dev server
 npm run build        # Production build
 npm run test         # Playwright testy
 ```
+
+---
+
+## Fáze 20: Publikace
+
+### 20.1 Pre-release Checklist
+
+- [ ] Všechny Phase 18 úkoly dokončeny
+- [ ] Build projde bez chyb (`npm run build`)
+- [ ] Žádné TypeScript errory
+- [ ] Storybook renderuje všechny stories
+- [ ] Dark mode funguje všude
+- [ ] Embed varianty fungují
+
+### 20.2 Git Tag & Push
+
+```bash
+# Finální commit
+git add -A
+git commit -m "feat: Phase 18 Visual Polish complete
+
+- Restore visual styles to prototypes
+- Add Energy colors integration
+- Fix header alignment in embed variants
+- Add utility classes to aesthetic.css
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>"
+
+# Tag pro release
+git tag -a v0.6.0 -m "Phase 18: Visual Polish"
+
+# Push
+git push origin main
+git push origin v0.6.0
+```
+
+### 20.3 Storybook Deploy (optional)
+
+```bash
+npm run build-storybook
+# Deploy to GitHub Pages / Vercel / Netlify
+```
+
+---
+
+## Odhad iterací
+
+| Iterace | Obsah | Složitost |
+|---------|-------|-----------|
+| **1** | 18.1 Utility třídy (aesthetic.css) | Střední |
+| **2** | 18.2 AthletePublicProfile VISUAL STYLES | Střední |
+| **3** | 18.3 ClubPublicProfile VISUAL STYLES | Střední |
+| **4** | 18.4-18.6 Rankings/Event/Results fix (menší) | Lehká |
+| **5** | 18.7 Header alignment + 18.9a Energy utility | Střední |
+| **6** | 18.9b Energy komponenty (Button, Badge, Input) | Střední |
+| **7** | 18.9c Energy komponenty (Tabs, ResultsTable, LiveIndicator) | Střední |
+| **8** | 18.9d Energy v prototypech (Calendar, Registration, Live) | Střední |
+| **9** | 18.10 Vizuální QA + fixes | Střední |
+| **10** | 20.1-20.3 Publikace | Lehká |
+
+**Celkem: ~10 iterací**
+
+*Phase 19 (Optimization) lze udělat po publikaci jako samostatný sprint.*
+
+### Možné sloučení pro rychlejší postup
+
+| Iterace | Alternativní sloučení |
+|---------|----------------------|
+| **1** | 18.1 Utility + 18.9a Energy utility |
+| **2** | 18.2 Athlete + 18.3 Club (podobné) |
+| **3** | 18.4-18.7 Všechny menší fixy |
+| **4** | 18.9b+c Energy komponenty |
+| **5** | 18.9d Energy prototypy |
+| **6** | 18.10 QA + 20 Publikace |
+
+**Optimisticky: 6 iterací**
