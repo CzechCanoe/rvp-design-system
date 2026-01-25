@@ -569,7 +569,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Prototyp stránky seznamu klubů CSK. Zobrazuje registrované kluby a oddíly s vyhledáváním, filtrováním podle sekcí a krajů.',
+          'Prototyp stránky seznamu klubů CSK s Aesthetic designem. Zobrazuje registrované kluby a oddíly s vyhledáváním, filtrováním podle sekcí a krajů. Varianty: Embed (pro kanoe.cz), Satellite (standalone).',
       },
     },
   },
@@ -592,14 +592,17 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // ============================================================================
-// Integration Variants - Embed/Satellite only (Phase 8.12)
+// Integration Variants - Aesthetic (Phase 16.4)
 // ============================================================================
 
 /**
- * **EMBED varianta** - Seznam klubů vložený do kanoe.cz layoutu.
+ * **EMBED varianta** - Aesthetic seznam klubů v kontextu kanoe.cz
  *
  * Komponenta bez vlastního headeru a footeru, určená pro embedding
  * do existujícího webu kanoe.cz (Joomla + Bootstrap 4).
+ *
+ * **Features dostupné přes props:**
+ * - `initialSection` - přednastavenou sekci (dv, ry, vt)
  */
 export const Embed: Story = {
   args: {
@@ -625,16 +628,20 @@ export const Embed: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Seznam klubů embedovaný v kontextu kanoe.cz. Bez vlastního headeru/footeru.',
+        story: 'Aesthetic embed seznamu klubů v kontextu kanoe.cz. Filtrování podle sekcí a krajů.',
       },
     },
   },
 };
 
 /**
- * **SATELLITE varianta** - Standalone seznam klubů s minimálním headerem.
+ * **SATELLITE varianta** - Aesthetic standalone s minimálním headerem
  *
- * Pro samostatnou aplikaci registru klubů s odkazem zpět na kanoe.cz.
+ * Samostatná aplikace registru klubů s odkazem zpět na kanoe.cz.
+ * Plný Aesthetic design s filtrováním podle sekcí a krajů.
+ *
+ * **Features dostupné přes props:**
+ * - `initialSection` - přednastavenou sekci (dv, ry, vt)
  */
 export const Satellite: Story = {
   args: {
@@ -644,7 +651,7 @@ export const Satellite: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Standalone aplikace registru klubů s minimálním satellite headerem.',
+        story: 'Aesthetic standalone seznamu klubů se satellite headerem. Filtrování podle sekcí a krajů.',
       },
     },
   },

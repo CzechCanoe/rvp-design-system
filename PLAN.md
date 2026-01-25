@@ -96,9 +96,9 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 - [x] Satellite - přepracovat na Aesthetic
 - [x] Odstranit: EmbedWithSidebar
 
-**ClubsListPage** (2 → 2)
-- [ ] Embed - přepracovat na Aesthetic
-- [ ] Satellite - přepracovat na Aesthetic
+**ClubsListPage** (2 → 2) ✅
+- [x] Embed - přepracovat na Aesthetic
+- [x] Satellite - přepracovat na Aesthetic
 
 **RankingsPage** (5 → 2)
 - [ ] Embed - přepracovat na Aesthetic (s section switcher)
@@ -141,7 +141,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.4 Vedlejší prototypy** - ClubsListPage.
+Pokračovat s **16.4 Vedlejší prototypy** - RankingsPage.
 
 ---
 

@@ -5162,3 +5162,17 @@ Dashboard je interní správa, proto nemá Expressive variantu (pouze Embed a Sa
 
 ### Další krok
 AthletesListPage - konsolidace na 2 aesthetic varianty
+
+---
+
+## 2026-01-25 - Fáze 16.4: ClubsListPage konsolidace
+
+### Dokončeno
+- [x] ClubsListPage Embed - ověřen Aesthetic styl
+- [x] ClubsListPage Satellite - ověřen Aesthetic styl
+- [x] Aktualizovány docstrings pro konzistenci s fází 16.4
+
+### Poznámky
+ClubsListPage již měl správnou strukturu a CSS odpovídající Aesthetic stylu.
+Hlavní změna byla aktualizace komentářů ve stories pro konzistenci s ostatními
+přepracovanými prototypy. Další na řadě: RankingsPage (5 → 2 varianty).
