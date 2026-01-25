@@ -83,9 +83,9 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ### 16.4 Vedlejší prototypy
 
-**DashboardPage** (1 → 2)
-- [ ] Embed - nová varianta (Aesthetic)
-- [ ] Satellite - přepracovat na Aesthetic
+**DashboardPage** (1 → 2) ✅
+- [x] Embed - nová varianta (Aesthetic)
+- [x] Satellite - přepracovat na Aesthetic
 
 **ProfilePage** (1 → 2)
 - [ ] Embed - nová varianta (Aesthetic)
@@ -141,7 +141,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.4 Vedlejší prototypy** - DashboardPage.
+Pokračovat s **16.4 Vedlejší prototypy** - ProfilePage.
 
 ---
 

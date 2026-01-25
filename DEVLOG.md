@@ -5123,3 +5123,23 @@ EventDetailPage (7 → 3 varianty)
 - renderHeader: embed vrací null (používá host layout)
 - renderPageHeader: embed/satellite sdílí compact header (bez breadcrumbs pro embed)
 - Footer: podmíněné renderování (ne v embed)
+
+---
+
+## 2026-01-25 - Fáze 16.4: DashboardPage konsolidace
+
+### Dokončeno
+- [x] DashboardPage - Embed varianta (Aesthetic) s KanoeCzContext
+- [x] DashboardPage - Satellite varianta (Aesthetic) s CSK headerem
+- [x] CSS styly pro embed variantu (transparent background, no footer)
+- [x] Aktualizace PLAN.md
+
+### Změny
+- Přidán import KanoeCzContext
+- Rozšířen typ DashboardPageVariant o 'embed'
+- Upraveny renderHeader() a renderPageHeader() pro embed variantu
+- Přidány CSS styly pro `.dashboard-page--embed` a `.dashboard-page-header--embed`
+- Přepsány stories na 2 varianty: Embed a Satellite
+
+### Poznámky
+Dashboard je interní správa, proto nemá Expressive variantu (pouze Embed a Satellite).

@@ -10,6 +10,7 @@ import { StatCard } from '../components/StatCard';
 import { Table, type ColumnDef } from '../components/Table';
 import { Avatar } from '../components/Avatar';
 import { LiveIndicator } from '../components/LiveIndicator';
+import { KanoeCzContext } from '../components/KanoeCzContext';
 import './DashboardPage.css';
 
 // ============================================================================
@@ -17,7 +18,7 @@ import './DashboardPage.css';
 // ============================================================================
 
 /** Display variant for the page */
-type DashboardPageVariant = 'standalone' | 'satellite';
+type DashboardPageVariant = 'standalone' | 'satellite' | 'embed';
 
 interface DashboardPageProps {
   /** User role */
@@ -591,6 +592,10 @@ const DashboardPage = ({
 
   // Render header based on variant
   const renderHeader = () => {
+    // Embed variant: no header (uses host page layout)
+    if (variant === 'embed') {
+      return null;
+    }
     if (variant === 'satellite') {
       return (
         <Header
@@ -629,6 +634,38 @@ const DashboardPage = ({
 
   // Render page header based on variant
   const renderPageHeader = () => {
+    // Embed variant: compact header integrated with content
+    if (variant === 'embed') {
+      return (
+        <section className="dashboard-page-header dashboard-page-header--embed">
+          <div className="dashboard-page-header__content">
+            <div className="dashboard-page-header__row">
+              <div className="dashboard-page-header__info">
+                <h2 className="dashboard-page-header__title">{clubName}</h2>
+                <p className="dashboard-page-header__meta">
+                  <span className="dashboard-page-header__badge">
+                    {getRoleLabel(role)}
+                  </span>
+                  {section && (
+                    <Badge section={section} size="sm">
+                      {getSectionLabel(section)}
+                    </Badge>
+                  )}
+                </p>
+              </div>
+              <div className="dashboard-page-header__actions">
+                <Button variant="secondary" size="sm">
+                  Exportovat
+                </Button>
+                <Button variant="primary" size="sm">
+                  + Novy zavodnik
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
     if (variant === 'satellite') {
       return (
         <section className="dashboard-page-header dashboard-page-header--satellite">
@@ -696,8 +733,14 @@ const DashboardPage = ({
     );
   };
 
+  const pageClassName = [
+    'dashboard-page',
+    variant === 'satellite' && 'dashboard-page--satellite',
+    variant === 'embed' && 'dashboard-page--embed',
+  ].filter(Boolean).join(' ');
+
   return (
-    <div className={`dashboard-page ${variant === 'satellite' ? 'dashboard-page--satellite' : ''}`}>
+    <div className={pageClassName}>
       {/* Header */}
       {renderHeader()}
 
@@ -995,30 +1038,25 @@ const meta: Meta<typeof DashboardPage> = {
     docs: {
       description: {
         component: `
-# Dashboard spravce
+# Dashboard správce
 
-Prototyp dashboardu pro spravce oddilu nebo sekce. Ciste zobrazeni bez hero vln (Phase 8.6.3).
+Aesthetic prototyp dashboardu pro správce oddílu nebo sekce. Dvě varianty:
+- **Embed** - vložený do kanoe.cz layoutu
+- **Satellite** - standalone s minimálním headerem
 
-## Klicove prvky
-- **Page header** - personalizovany pozdrav a rychle akce
-- **Statistiky** - karty s klicovymi metrikami
-- **Upozorneni** - urgentni polozky
-- **Tabulka zavodniku** - s filtrovanim a vyhledavanim
-- **Nadchazejici zavody** - s discipline-specific barvami
-- **Rychle akce** - hover animace
-- **Posledni aktivita** - feed zmen
+## Klíčové prvky
+- **Page header** - personalizovaný pozdrav a rychlé akce
+- **Statistiky** - gradient karty s klíčovými metrikami
+- **Upozornění** - urgentní položky s akcemi
+- **Tabulka závodníků** - s filtrováním a vyhledáváním
+- **Nadcházející závody** - s discipline-specific barvami
+- **Rychlé akce** - hover animace
+- **Poslední aktivita** - feed změn
 
-## Role uzivatelu
-- **Oddilovy spravce** - sprava clenu oddilu
-- **Sekcni spravce** - sprava sekce (DV/RY/VT)
-- **Svazovy spravce** - celkovy prehled
-
-## Funkce
-- Filtrovani zavodniku dle stavu a sekce
-- Vyhledavani zavodniku
-- Barevne indikatory stavu
-- Responsive layout
-- Dark mode podpora
+## Role uživatelů
+- \`club_admin\` - Oddílový správce
+- \`section_admin\` - Sekční správce (DV/RY/VT)
+- \`federation_admin\` - Svazový správce
         `,
       },
     },
@@ -1026,33 +1064,94 @@ Prototyp dashboardu pro spravce oddilu nebo sekce. Ciste zobrazeni bez hero vln 
   argTypes: {
     variant: {
       control: 'select',
-      options: ['standalone', 'satellite'],
+      options: ['embed', 'satellite'],
       description: 'Display variant',
     },
     role: {
       control: 'select',
       options: ['club_admin', 'section_admin', 'federation_admin'],
-      description: 'Role uzivatele',
+      description: 'Role uživatele',
     },
     clubName: {
       control: 'text',
-      description: 'Nazev oddilu',
+      description: 'Název oddílu',
     },
     section: {
       control: 'select',
       options: ['dv', 'ry', 'vt'],
-      description: 'Sekce (pro sekcniho spravce)',
+      description: 'Sekce (pro sekčního správce)',
+    },
+  },
+} satisfies Meta<typeof DashboardPage>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+// ============================================================================
+// Story Variants (2 aesthetic variants: Embed, Satellite)
+// ============================================================================
+
+/**
+ * **EMBED varianta** - Dashboard vložený do kanoe.cz layoutu.
+ *
+ * Aesthetic design pro interní správu:
+ * - Gradient stat karty s metrikami
+ * - Upozornění a urgentní položky
+ * - Tabulka závodníků s filtrováním
+ * - Nadcházející závody s discipline barvami
+ * - Rychlé akce a aktivita feed
+ *
+ * Bez vlastního headeru/footeru - používá layout hostitelské stránky.
+ *
+ * **Role:** `role` = club_admin / section_admin / federation_admin
+ * **Sekce:** `section` = dv (modrá) / ry (zelená) / vt (červená)
+ */
+export const Embed: Story = {
+  args: {
+    variant: 'embed',
+    role: 'club_admin',
+    clubName: 'USK Praha',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="full"
+        pageVariant="detail"
+        pageTitle="Dashboard - USK Praha"
+        breadcrumbs={[
+          { label: 'Úvod', href: '#' },
+          { label: 'Správa', href: '#' },
+          { label: 'Dashboard' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Dashboard embedovaný v kontextu kanoe.cz. Bez vlastního headeru/footeru - používá layout hostitelské stránky.',
+      },
     },
   },
 };
 
-export default meta;
-type Story = StoryObj<typeof DashboardPage>;
-
-// ============================================================================
-// Stories
-// ============================================================================
-
+/**
+ * **SATELLITE varianta** - Standalone dashboard s minimálním headerem.
+ *
+ * Aesthetic design pro interní správu:
+ * - Satellite header s CSK brandingem
+ * - Breadcrumb navigace zpět na kanoe.cz
+ * - Gradient stat karty s metrikami
+ * - Upozornění a urgentní položky
+ * - Tabulka závodníků s filtrováním
+ *
+ * Standalone aplikace s odkazem zpět na kanoe.cz.
+ *
+ * **Role:** `role` = club_admin / section_admin / federation_admin
+ * **Sekce:** `section` = dv (modrá) / ry (zelená) / vt (červená)
+ */
 export const Satellite: Story = {
   args: {
     variant: 'satellite',
@@ -1062,12 +1161,7 @@ export const Satellite: Story = {
   parameters: {
     docs: {
       description: {
-        story: `Dashboard pro správce oddílu/sekce se satellite headerem. Čistý design pro interní aplikace.
-
-**Použij args pro přepnutí role:**
-- \`role: 'club_admin'\` - Oddílový správce
-- \`role: 'section_admin'\` + \`section: 'dv'/'ry'/'vt'\` - Sekční správce
-- \`role: 'federation_admin'\` - Svazový správce`,
+        story: 'Standalone dashboard s Aesthetic designem. Obsahuje satellite header s odkazem na kanoe.cz.',
       },
     },
   },
