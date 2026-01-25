@@ -5813,3 +5813,24 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 ### Poznámky
 - EventDetailPage was already well-structured with CSS classes, no inline styles needed conversion
 - 9 SVG icons replaced, continuing with ProfilePage next
+
+---
+
+## 2026-01-25 - Fáze 17.11: ProfilePage cleanup
+
+### Dokončeno
+- [x] ProfilePage: Nahrazeno 15 inline SVG ikon za Icon komponentu
+  - TrophyIcon, MedalIcon, RaceIcon, ChartIcon → `<Icon name="trophy|medal|race|chart" />`
+  - CheckCircleIcon, AlertCircleIcon → `<Icon name="check-circle|alert-circle" />`
+  - EditIcon, DownloadIcon → `<Icon name="edit|download" />`
+  - ChevronRightIcon → `<Icon name="chevron-right" />`
+  - PinIcon, UnpinIcon → `<Icon name="pin|unpin" />`
+  - CalendarIcon, ClockIcon, MapPinIcon → `<Icon name="calendar|clock|map-pin" />`
+  - BellIcon, ExternalLinkIcon → `<Icon name="bell|external-link" />`
+
+### Změny v souborech
+- `src/prototypes/ProfilePage.stories.tsx`: Import Icon, odstranění 15 inline SVG definic, náhrada použití
+
+### Metriky
+- Řádky kódu: ~1329 → ~1170 (redukce ~159 řádků)
+- Inline SVG ikony: 15 → 0

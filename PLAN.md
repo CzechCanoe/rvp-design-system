@@ -163,7 +163,7 @@
 6. [x] ResultsPage - refaktorováno: Icon, inline styles → CSS classes
 7. [x] CalendarPage - refaktorováno: Icon (7 SVG → Icon component)
 8. [x] EventDetailPage - refaktorováno: Icon (9 SVG → Icon component)
-9. [ ] ProfilePage
+9. [x] ProfilePage - refaktorováno: Icon (15 SVG → Icon component)
 10. [ ] RegistrationPage
 11. [ ] DashboardPage
 12. [ ] LivePage (nejsložitější)

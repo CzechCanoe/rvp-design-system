@@ -11,6 +11,7 @@ import { Timeline, type TimelineItem } from '../components/Timeline';
 import { Table, type ColumnDef } from '../components/Table';
 import { Progress } from '../components/Progress';
 import { KanoeCzContext } from '../components/KanoeCzContext';
+import { Icon } from '../components/Icon';
 import './ProfilePage.css';
 
 // ============================================================================
@@ -410,170 +411,7 @@ const timelineEvents: TimelineItem[] = [
   },
 ];
 
-// ============================================================================
-// Icons
-// ============================================================================
-
-function TrophyIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
-      <path d="M4 22h16" />
-      <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
-      <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
-      <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
-    </svg>
-  );
-}
-
-function MedalIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15" />
-      <path d="M11 12 5.12 2.2" />
-      <path d="m13 12 5.88-9.8" />
-      <path d="M8 7h8" />
-      <circle cx="12" cy="17" r="5" />
-      <path d="M12 18v-2h-.5" />
-    </svg>
-  );
-}
-
-function RaceIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
-      <line x1="4" y1="22" x2="4" y2="15" />
-    </svg>
-  );
-}
-
-function ChartIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="12" y1="20" x2="12" y2="10" />
-      <line x1="18" y1="20" x2="18" y2="4" />
-      <line x1="6" y1="20" x2="6" y2="16" />
-    </svg>
-  );
-}
-
-function CheckCircleIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-      <polyline points="22,4 12,14.01 9,11.01" />
-    </svg>
-  );
-}
-
-function AlertCircleIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <line x1="12" y1="8" x2="12" y2="12" />
-      <line x1="12" y1="16" x2="12.01" y2="16" />
-    </svg>
-  );
-}
-
-function EditIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-    </svg>
-  );
-}
-
-function DownloadIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="7 10 12 15 17 10" />
-      <line x1="12" y1="15" x2="12" y2="3" />
-    </svg>
-  );
-}
-
-function ChevronRightIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="9 18 15 12 9 6" />
-    </svg>
-  );
-}
-
-function PinIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="12" y1="17" x2="12" y2="22" />
-      <path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.89A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.89A2 2 0 0 0 5 15.24Z" />
-    </svg>
-  );
-}
-
-function CalendarIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-      <line x1="16" y1="2" x2="16" y2="6" />
-      <line x1="8" y1="2" x2="8" y2="6" />
-      <line x1="3" y1="10" x2="21" y2="10" />
-    </svg>
-  );
-}
-
-function ClockIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12 6 12 12 16 14" />
-    </svg>
-  );
-}
-
-function MapPinIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-      <circle cx="12" cy="10" r="3" />
-    </svg>
-  );
-}
-
-function BellIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-      <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-    </svg>
-  );
-}
-
-function UnpinIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="2" y1="2" x2="22" y2="22" />
-      <line x1="12" y1="17" x2="12" y2="22" />
-      <path d="M9 9v1.76a2 2 0 0 1-1.11 1.79l-1.78.89A2 2 0 0 0 5 15.24V17h12" />
-      <path d="M15 9.34V6h1a2 2 0 0 0 0-4H7.89" />
-    </svg>
-  );
-}
-
-function ExternalLinkIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-      <polyline points="15 3 21 3 21 9" />
-      <line x1="10" y1="14" x2="21" y2="3" />
-    </svg>
-  );
-}
-
-// Note: WaveDecoration removed for cleaner design (Phase 8.6.3)
+// Note: Icons migrated to Icon component (Phase 17.11)
 
 // ============================================================================
 // Helper Functions
@@ -786,7 +624,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
           <div className="profile-page-header__container">
             <nav className="profile-page-header__breadcrumb">
               <a href="#">Domů</a>
-              <ChevronRightIcon />
+              <Icon name="chevron-right" size="sm" />
               <span>Můj profil</span>
             </nav>
             <div className="profile-page-header__content">
@@ -804,7 +642,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
               {isOwnProfile && (
                 <div className="profile-page-header__actions">
                   <Button variant="secondary" size="sm">
-                    <EditIcon /> Upravit
+                    <Icon name="edit" size="sm" /> Upravit
                   </Button>
                 </div>
               )}
@@ -820,7 +658,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
           <div className="profile-status-grid">
             <Card className={`profile-status-card profile-status-card--${athlete.rightToStart ? 'valid' : 'invalid'}`}>
               <div className="profile-status-icon">
-                {athlete.rightToStart ? <CheckCircleIcon /> : <AlertCircleIcon />}
+                {athlete.rightToStart ? <Icon name="check-circle" /> : <Icon name="alert-circle" />}
               </div>
               <div className="profile-status-content">
                 <h3 className="profile-status-title">Právo startu</h3>
@@ -832,7 +670,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
 
             <Card className={`profile-status-card profile-status-card--${medicalStatus}`}>
               <div className="profile-status-icon">
-                {medicalStatus === 'valid' ? <CheckCircleIcon /> : <AlertCircleIcon />}
+                {medicalStatus === 'valid' ? <Icon name="check-circle" /> : <Icon name="alert-circle" />}
               </div>
               <div className="profile-status-content">
                 <h3 className="profile-status-title">Zdravotní prohlídka</h3>
@@ -849,7 +687,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
 
             <Card className={`profile-status-card profile-status-card--${athlete.feesStatus === 'paid' ? 'valid' : 'invalid'}`}>
               <div className="profile-status-icon">
-                {athlete.feesStatus === 'paid' ? <CheckCircleIcon /> : <AlertCircleIcon />}
+                {athlete.feesStatus === 'paid' ? <Icon name="check-circle" /> : <Icon name="alert-circle" />}
               </div>
               <div className="profile-status-content">
                 <h3 className="profile-status-title">Příspěvky 2026</h3>
@@ -887,7 +725,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
                   <StatCard
                     label="Celkem závodů"
                     value={athlete.totalRaces}
-                    icon={<RaceIcon />}
+                    icon={<Icon name="race" />}
                     trend="up"
                     trendValue="+12 tento rok"
                     styleVariant="aesthetic"
@@ -895,7 +733,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
                   <StatCard
                     label="Vítězství"
                     value={athlete.wins}
-                    icon={<TrophyIcon />}
+                    icon={<Icon name="trophy" />}
                     trend="up"
                     trendValue="+4 tento rok"
                     styleVariant="aesthetic"
@@ -903,14 +741,14 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
                   <StatCard
                     label="Pódia"
                     value={athlete.podiums}
-                    icon={<MedalIcon />}
+                    icon={<Icon name="medal" />}
                     description={`${Math.round((athlete.podiums / athlete.totalRaces) * 100)}% úspěšnost`}
                     styleVariant="aesthetic"
                   />
                   <StatCard
                     label="Žebříček"
                     value={`#${athlete.ranking}`}
-                    icon={<ChartIcon />}
+                    icon={<Icon name="chart" />}
                     description={`Nejlepší: #${athlete.bestRanking}`}
                     styleVariant="aesthetic"
                   />
@@ -962,7 +800,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
                   <div className="profile-section-header">
                     <h2 className="profile-section-title">Moje přihlášky</h2>
                     <Button variant="primary" size="sm">
-                      <CalendarIcon /> Nová přihláška
+                      <Icon name="calendar" /> Nová přihláška
                     </Button>
                   </div>
                   <p className="profile-section-description">
@@ -971,7 +809,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
 
                   {myRegistrations.length === 0 ? (
                     <div className="profile-empty-state">
-                      <CalendarIcon />
+                      <Icon name="calendar" />
                       <p>Zatím nemáte žádné přihlášky</p>
                       <Button variant="primary" size="sm">Prohlédnout kalendář</Button>
                     </div>
@@ -995,15 +833,15 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
                               </Badge>
                             </div>
                             <div className="profile-registration-item__meta">
-                              <span><MapPinIcon /> {reg.location}</span>
-                              <span><RaceIcon /> {reg.category}</span>
+                              <span><Icon name="map-pin" size="sm" /> {reg.location}</span>
+                              <span><Icon name="race" size="sm" /> {reg.category}</span>
                               {reg.disciplines && (
                                 <span>{reg.disciplines.join(', ')}</span>
                               )}
                             </div>
                             {reg.status === 'pending_payment' && reg.price && (
                               <div className="profile-registration-item__payment">
-                                <AlertCircleIcon />
+                                <Icon name="alert-circle" size="sm" />
                                 <span>K úhradě: {reg.price} Kč</span>
                                 <Button variant="primary" size="sm">Zaplatit</Button>
                               </div>
@@ -1011,7 +849,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
                           </div>
                           <div className="profile-registration-item__actions">
                             <Button variant="ghost" size="sm" title="Detail závodu">
-                              <ExternalLinkIcon />
+                              <Icon name="external-link" size="sm" />
                             </Button>
                             {reg.status !== 'cancelled' && (
                               <Button variant="ghost" size="sm" title="Odhlásit se">
@@ -1062,7 +900,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
                   <div className="profile-section-header">
                     <h2 className="profile-section-title">Sledované závody</h2>
                     <Badge variant="info">
-                      <BellIcon /> Notifikace zapnuty
+                      <Icon name="bell" size="sm" /> Notifikace zapnuty
                     </Badge>
                   </div>
                   <p className="profile-section-description">
@@ -1071,7 +909,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
 
                   {pinnedEvents.length === 0 ? (
                     <div className="profile-empty-state">
-                      <PinIcon />
+                      <Icon name="pin" />
                       <p>Zatím nesledujete žádné závody</p>
                       <Button variant="primary" size="sm">Prohlédnout kalendář</Button>
                     </div>
@@ -1087,16 +925,16 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
                               </Badge>
                             </div>
                             <Button variant="ghost" size="sm" title="Přestat sledovat">
-                              <UnpinIcon />
+                              <Icon name="unpin" size="sm" />
                             </Button>
                           </div>
 
                           <div className="profile-pinned-item__meta">
-                            <span><CalendarIcon /> {formatDate(event.date)}</span>
-                            <span><MapPinIcon /> {event.location}</span>
+                            <span><Icon name="calendar" /> {formatDate(event.date)}</span>
+                            <span><Icon name="map-pin" size="sm" /> {event.location}</span>
                             {event.registrationDeadline && event.status === 'registration_open' && (
                               <span className="profile-pinned-item__deadline">
-                                <ClockIcon /> Přihlášky do {formatDate(event.registrationDeadline)}
+                                <Icon name="clock" size="sm" /> Přihlášky do {formatDate(event.registrationDeadline)}
                               </span>
                             )}
                           </div>
@@ -1121,7 +959,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
                               <h4>Poslední aktualizace</h4>
                               {event.updates.slice(0, 2).map((update) => (
                                 <div key={update.id} className="profile-pinned-item__update">
-                                  <BellIcon />
+                                  <Icon name="bell" size="sm" />
                                   <span className="profile-pinned-item__update-title">{update.title}</span>
                                   <span className="profile-pinned-item__update-time">
                                     {formatRelativeTime(update.timestamp)}
@@ -1133,7 +971,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
 
                           <div className="profile-pinned-item__actions">
                             <Button variant="ghost" size="sm">
-                              <ExternalLinkIcon /> Detail závodu
+                              <Icon name="external-link" size="sm" /> Detail závodu
                             </Button>
                             {event.status === 'registration_open' && (
                               <Button variant="primary" size="sm">
@@ -1154,7 +992,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
                 <div className="profile-section-header">
                   <h2 className="profile-section-title">Všechny výsledky</h2>
                   <Button variant="ghost" size="sm">
-                    <DownloadIcon /> Export CSV
+                    <Icon name="download" size="sm" /> Export CSV
                   </Button>
                 </div>
                 <Table
