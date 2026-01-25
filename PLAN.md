@@ -200,20 +200,22 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ---
 
-#### Priorita 5: EventDetail vylepšení
+#### Priorita 5: EventDetail vylepšení ✅
 
 **Problém:** EventDetailPage Embed a ExpressiveEmbed varianty jsou chudobné oproti Satellite variantě. Satellite má dramatický hero, stats bar, sidebar - Embed/ExpressiveEmbed jsou plain.
 
-**Cíl:** Přenést "wow" prvky ze Satellite do Embed/ExpressiveEmbed variant (v rámci embed kontextu):
-- Kompaktní ale dramatický hero (menší výška, ale stále vizuálně zajímavý)
-- Stats bar pod hero
-- Lepší vizuální hierarchie
-
-**Úkoly:**
-- [ ] Porovnat Satellite vs Embed screenshoty
-- [ ] Identifikovat klíčové "wow" prvky v Satellite
-- [ ] Přenést/adaptovat pro Embed (respektovat kanoe.cz kontext)
-- [ ] Přenést/adaptovat pro ExpressiveEmbed (může být víc "wow")
+**Řešení:** Přeneseny "wow" prvky ze Satellite do Embed/ExpressiveEmbed variant:
+- [x] Přidány volitelné `showEmbedStats` a `showEmbedCta` props
+- [x] Embed zachován kompaktní (bez stats a CTA jako default)
+- [x] ExpressiveEmbed dostává:
+  - Kompaktní stats bar s border-accent a energy glow
+  - CTA tlačítko v hero
+  - Diagonal stripe animace
+  - Grain texture overlay
+  - Větší hero padding
+  - Energy glow efekty na title a hover stavy
+- [x] Nový `expressive` prop pro aktivaci "wow" dekorací
+- [x] CSS pro embed stats bar, kompaktní CTA, expressive dekorace
 
 ---
 
@@ -273,7 +275,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.5 Polish a opravy** - Priorita 5: EventDetail vylepšení (přenést "wow" prvky do Embed/ExpressiveEmbed).
+Pokračovat s **16.5 Polish a opravy** - Priorita 6: ProfilePage konzistence (sjednotit vizuální styl s ostatními prototypy).
 
 ---
 

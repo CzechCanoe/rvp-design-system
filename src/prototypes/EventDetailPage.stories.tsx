@@ -37,6 +37,12 @@ interface EventDetailPageProps {
   variant?: EventDetailPageVariant;
   /** Visual style - default or aesthetic (Dynamic Sport) */
   style?: EventDetailPageStyle;
+  /** Show stats bar in embed mode (default: false for embed, true for satellite) */
+  showEmbedStats?: boolean;
+  /** Show CTA button in embed hero (default: false for embed, true for satellite) */
+  showEmbedCta?: boolean;
+  /** Enable expressive "wow" decorations (diagonal stripe, energy glow) */
+  expressive?: boolean;
 }
 
 // ============================================================================
@@ -264,10 +270,16 @@ const EventDetailPage = ({
   initialTab = 'info',
   variant = 'standalone',
   style = 'default',
+  showEmbedStats = false,
+  showEmbedCta = false,
+  expressive = false,
 }: EventDetailPageProps) => {
   // Helper to check if we're in embed mode
   const isEmbed = variant === 'embed';
   const isAesthetic = style === 'aesthetic';
+  // For embed mode, allow optional stats bar and CTA
+  const showStats = !isEmbed || showEmbedStats;
+  const showCta = !isEmbed || showEmbedCta;
   const [activeTab, setActiveTab] = useState(initialTab);
   const [selectedCategory, setSelectedCategory] = useState('K1M');
 
@@ -567,6 +579,7 @@ const EventDetailPage = ({
     'event-detail-page',
     isEmbed && 'event-detail-page--embed',
     isAesthetic && 'event-detail-page--aesthetic',
+    expressive && 'event-detail-page--expressive',
   ].filter(Boolean).join(' ');
 
   const content = (
@@ -580,6 +593,12 @@ const EventDetailPage = ({
           <div className="event-detail-hero__background">
             <div className="event-detail-hero__gradient" />
             <div className="event-detail-hero__pattern" />
+            {expressive && (
+              <>
+                <div className="event-detail-hero__diagonal-stripe" />
+                <div className="event-detail-hero__grain" />
+              </>
+            )}
           </div>
           <div className="event-detail-hero__content">
             {!isEmbed && (
@@ -620,9 +639,9 @@ const EventDetailPage = ({
             </div>
 
             {/* Status-specific CTA */}
-            {status === 'registration' && !isEmbed && (
-              <div className="event-detail-hero__cta">
-                <Button variant={isAesthetic ? 'gradient-energy' : 'gradient'} size="lg" glow={isAesthetic}>
+            {status === 'registration' && showCta && (
+              <div className={`event-detail-hero__cta ${isEmbed ? 'event-detail-hero__cta--compact' : ''}`}>
+                <Button variant={isAesthetic ? 'gradient-energy' : 'gradient'} size={isEmbed ? 'md' : 'lg'} glow={isAesthetic}>
                   Přihlásit se na závod
                 </Button>
                 <span className="event-detail-hero__deadline">
@@ -632,9 +651,9 @@ const EventDetailPage = ({
               </div>
             )}
 
-            {status === 'live' && !isEmbed && (
-              <div className="event-detail-hero__cta">
-                <Button variant={isAesthetic ? 'gradient-energy' : 'gradient'} size="lg" glow={isAesthetic}>
+            {status === 'live' && showCta && (
+              <div className={`event-detail-hero__cta ${isEmbed ? 'event-detail-hero__cta--compact' : ''}`}>
+                <Button variant={isAesthetic ? 'gradient-energy' : 'gradient'} size={isEmbed ? 'md' : 'lg'} glow={isAesthetic}>
                   Sledovat LIVE výsledky
                 </Button>
               </div>
@@ -645,8 +664,8 @@ const EventDetailPage = ({
       )}
 
       {/* Stats Bar */}
-      {!isEmbed && (
-        <section className="event-detail-stats">
+      {showStats && (
+        <section className={`event-detail-stats ${isEmbed ? 'event-detail-stats--embed' : ''}`}>
           <div className="event-detail-stats__container">
             <div className="event-detail-stats__item">
               <span className="event-detail-stats__value">{eventData.stats.entries}</span>
@@ -822,6 +841,18 @@ const meta = {
       options: ['default', 'aesthetic'],
       description: 'Visual style - default or aesthetic (Dynamic Sport)',
     },
+    showEmbedStats: {
+      control: 'boolean',
+      description: 'Show stats bar in embed mode',
+    },
+    showEmbedCta: {
+      control: 'boolean',
+      description: 'Show CTA button in embed hero',
+    },
+    expressive: {
+      control: 'boolean',
+      description: 'Enable expressive "wow" decorations (diagonal stripe, grain texture)',
+    },
   },
 } satisfies Meta<typeof EventDetailPage>;
 
@@ -846,6 +877,8 @@ export const Embed: Story = {
     initialTab: 'results',
     variant: 'embed',
     style: 'aesthetic',
+    showEmbedStats: false,
+    showEmbedCta: false,
   },
   decorators: [
     (Story) => (
@@ -920,6 +953,9 @@ export const ExpressiveEmbed: Story = {
     initialTab: 'info',
     variant: 'embed',
     style: 'aesthetic',
+    showEmbedStats: true,
+    showEmbedCta: true,
+    expressive: true,
   },
   decorators: [
     (Story) => (

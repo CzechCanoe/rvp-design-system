@@ -5364,3 +5364,65 @@ přepracovanými prototypy. Další na řadě: RankingsPage (5 → 2 varianty).
 
 ### Poznámky
 Priorita 3 byla označena jako hotová, protože implementace již existuje z předchozích fází (Phase 15.0 Aesthetic Refresh). Plán byl vytvořen před implementací a nebyl aktualizován.
+
+---
+
+## 2026-01-25 - Fáze 16.5: Calendar Weekend-Focused Layout
+
+### Dokončeno
+- [x] Analýza problému s Calendar grid layoutem - většina závodů o víkendech
+- [x] Implementace `weekendFocused` prop pro Calendar komponentu
+- [x] CSS styly s optimalizovanou grid distribucí (So/Ne 1.8fr, Po-Pá 1fr)
+- [x] Container query responsivita pro úzké kontejnery
+- [x] Storybook stories pro dokumentaci a porovnání
+- [x] Aplikace v CalendarPage aesthetic variantách
+
+### Technické detaily
+1. **Nová prop `weekendFocused`:**
+   - Rozšiřuje víkendové sloupce (Sobota, Neděle) na 1.8fr
+   - Všední dny (Po-Pá) zůstávají na 1fr
+   - Výsledek: víkend získává ~52% vizuálního prostoru
+
+2. **CSS implementace:**
+   - Modifikuje `grid-template-columns` pro `.csk-calendar__weekdays` a `.csk-calendar__days`
+   - Vizuální odlišení: víkendové dny světlejší, všední dny jemně ztmavené
+   - Container queries pro progressive ratio na úzkých obrazovkách
+
+3. **Integrace s CalendarPage:**
+   - Automaticky aktivní v aesthetic variantách
+   - ListView a Cards pohledy neovlivněny (nepoužívají grid)
+
+### Poznámky
+- Reference jakubbican.github.io/pages/terminovka používá tabulkový formát, ne grid
+- Weekend-focused layout je vhodnější pro měsíční grid pohled
+- Build ověřen, žádné TypeScript chyby
+
+---
+
+## 2026-01-25 - Fáze 16.5: EventDetail Embed/ExpressiveEmbed vylepšení
+
+### Dokončeno
+- [x] Analýza rozdílů mezi Satellite a Embed variantami
+- [x] Přidány nové props: `showEmbedStats`, `showEmbedCta`, `expressive`
+- [x] Embed varianta: zachována kompaktní (bez stats/CTA jako default)
+- [x] ExpressiveEmbed varianta: plný "wow" efekt
+  - Stats bar s border-accent a energy glow
+  - CTA tlačítko v hero
+  - Diagonal stripe animace (20s loop)
+  - Grain texture overlay
+  - Větší hero padding
+  - Energy glow na title a hover stavy
+- [x] CSS: embed stats bar, kompaktní CTA, expressive dekorace
+- [x] Aktualizovány story args pro obě varianty
+- [x] Build OK
+
+### Technické detaily
+- `showEmbedStats`: zobrazí kompaktní stats bar v embed módu
+- `showEmbedCta`: zobrazí CTA tlačítko v hero (registration/live)
+- `expressive`: aktivuje diagonal stripe, grain, energy glow efekty
+- Reduced motion: všechny animace respektují prefers-reduced-motion
+
+### Poznámky
+- Embed zůstává konzervativní pro běžné použití v kanoe.cz
+- ExpressiveEmbed je pro "wow" prezentace (registrace, live eventy)
+- Priorita 5 dokončena, další je Priorita 6: ProfilePage konzistence

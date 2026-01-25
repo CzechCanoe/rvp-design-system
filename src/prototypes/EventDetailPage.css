@@ -246,6 +246,16 @@
   opacity: 0.9;
 }
 
+/* Compact CTA for embed mode */
+.event-detail-hero__cta--compact {
+  margin-top: var(--spacing-4);
+  gap: var(--spacing-3);
+}
+
+.event-detail-hero__cta--compact .event-detail-hero__deadline {
+  font-size: var(--font-size-xs);
+}
+
 .event-detail-hero__wave {
   position: absolute;
   bottom: 0;
@@ -309,6 +319,35 @@
   letter-spacing: var(--letter-spacing-wide);
 }
 
+/* Embed mode: compact inline stats */
+.event-detail-stats--embed {
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-lg);
+  margin: calc(-1 * var(--spacing-2)) 0 var(--spacing-4);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.event-detail-stats--embed .event-detail-stats__container {
+  gap: var(--spacing-6);
+}
+
+.event-detail-stats--embed .event-detail-stats__value {
+  font-size: var(--font-size-lg);
+}
+
+.event-detail-stats--embed .event-detail-stats__label {
+  font-size: 0.65rem;
+}
+
+/* Aesthetic embed stats with border-accent */
+.event-detail-page--aesthetic .event-detail-stats--embed {
+  border-left: var(--border-accent-width) solid;
+  border-image: var(--border-accent-gradient) 1;
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+  animation-delay: var(--stagger-1);
+}
+
 @media (max-width: 640px) {
   .event-detail-stats__container {
     gap: var(--spacing-6);
@@ -317,6 +356,10 @@
 
   .event-detail-stats__value {
     font-size: var(--font-size-xl);
+  }
+
+  .event-detail-stats--embed .event-detail-stats__value {
+    font-size: var(--font-size-md);
   }
 }
 
@@ -1007,6 +1050,81 @@
   color: var(--color-energy-600);
 }
 
+/* ============================================================================
+   Expressive Mode - Extra "wow" decorations
+   ============================================================================ */
+
+/* Diagonal stripe decoration */
+.event-detail-hero__diagonal-stripe {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    -45deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(255, 255, 255, 0.03) 40%,
+    rgba(255, 255, 255, 0.03) 42%,
+    transparent 42%,
+    transparent 100%
+  );
+  pointer-events: none;
+  animation: diagonal-slide 20s linear infinite;
+}
+
+@keyframes diagonal-slide {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+/* Grain texture overlay */
+.event-detail-hero__grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Expressive mode: larger hero padding */
+.event-detail-page--expressive.event-detail-page--embed .event-detail-hero {
+  padding: var(--spacing-8) var(--spacing-4) var(--spacing-10);
+}
+
+/* Expressive mode: energy glow on hero content */
+.event-detail-page--expressive .event-detail-hero__header {
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+}
+
+.event-detail-page--expressive .event-detail-hero__title {
+  text-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(var(--color-energy-rgb, 255, 204, 0), 0.15);
+}
+
+/* Expressive stats bar with enhanced styling */
+.event-detail-page--expressive .event-detail-stats--embed {
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-elevated) 0%,
+    rgba(var(--color-energy-rgb, 255, 204, 0), 0.05) 100%
+  );
+  box-shadow: var(--glow-energy-sm);
+}
+
+/* Expressive mode: tab content cards with subtle energy glow on hover */
+.event-detail-page--expressive .event-detail-info__location-card:hover,
+.event-detail-page--expressive .event-detail-documents__item:hover {
+  box-shadow: var(--glow-energy-md);
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .event-detail-page--aesthetic .event-detail-hero__cta,
@@ -1020,5 +1138,13 @@
 
   .event-detail-page--aesthetic .event-detail-documents__item:hover {
     transform: none;
+  }
+
+  .event-detail-hero__diagonal-stripe {
+    animation: none;
+  }
+
+  .event-detail-page--expressive .event-detail-hero__header {
+    animation: none;
   }
 }
