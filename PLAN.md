@@ -155,7 +155,7 @@
 6. Zredukovat CSS na čistý layout
 
 **Pořadí podle složitosti:**
-1. [ ] ClubsListPage (nejjednodušší)
+1. [x] ClubsListPage (nejjednodušší) - refaktorováno: Icon, StatsBar
 2. [ ] AthletesListPage
 3. [ ] RankingsPage
 4. [ ] ClubPublicProfile

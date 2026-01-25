@@ -8,6 +8,8 @@ import { Select } from '../components/Select';
 import { Tabs } from '../components/Tabs';
 import { Pagination } from '../components/Pagination';
 import { Badge } from '../components/Badge';
+import { Icon } from '../components/Icon';
+import { StatsBar } from '../components/StatsBar';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import './ClubsListPage.css';
 
@@ -87,41 +89,6 @@ const sortOptions = [
   { value: 'city', label: 'Město' },
 ];
 
-// ============================================================================
-// Icons
-// ============================================================================
-
-const SearchIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="8" />
-    <path d="M21 21l-4.35-4.35" />
-  </svg>
-);
-
-const MapPinIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-    <circle cx="12" cy="10" r="3" />
-  </svg>
-);
-
-const CloseIcon = () => (
-  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 6L6 18M6 6l12 12" />
-  </svg>
-);
-
-const BuildingIcon = () => (
-  <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" />
-    <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" />
-    <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" />
-    <path d="M10 6h4" />
-    <path d="M10 10h4" />
-    <path d="M10 14h4" />
-    <path d="M10 18h4" />
-  </svg>
-);
 
 // ============================================================================
 // Club Card Component
@@ -164,7 +131,7 @@ const ClubCard = ({ club, onClick }: ClubCardProps) => {
           <h3 className="club-card__name">{club.name}</h3>
           <span className="club-card__code">{club.code}</span>
           <div className="club-card__location">
-            <MapPinIcon />
+            <Icon name="map-pin" size="sm" />
             <span>{club.city}, {club.region}</span>
           </div>
         </div>
@@ -384,24 +351,17 @@ const ClubsListPage = ({
           </div>
 
           {/* Statistics */}
-          <div className="clubs-list-stats">
-            <div className="clubs-list-stats__item">
-              <span className="clubs-list-stats__value">{stats.total}</span>
-              <span className="clubs-list-stats__label">Klubů</span>
-            </div>
-            <div className="clubs-list-stats__item">
-              <span className="clubs-list-stats__value">{stats.totalMembers.toLocaleString('cs')}</span>
-              <span className="clubs-list-stats__label">Členů</span>
-            </div>
-            <div className="clubs-list-stats__item">
-              <span className="clubs-list-stats__value">{stats.totalAthletes.toLocaleString('cs')}</span>
-              <span className="clubs-list-stats__label">Závodníků</span>
-            </div>
-            <div className="clubs-list-stats__item">
-              <span className="clubs-list-stats__value">{stats.regions}</span>
-              <span className="clubs-list-stats__label">Krajů</span>
-            </div>
-          </div>
+          <StatsBar
+            variant="cards"
+            size="lg"
+            className="clubs-list-stats"
+            items={[
+              { key: 'clubs', value: stats.total, label: 'Klubů' },
+              { key: 'members', value: stats.totalMembers.toLocaleString('cs'), label: 'Členů' },
+              { key: 'athletes', value: stats.totalAthletes.toLocaleString('cs'), label: 'Závodníků' },
+              { key: 'regions', value: stats.regions, label: 'Krajů' },
+            ]}
+          />
         </div>
       </section>
 
@@ -431,7 +391,7 @@ const ClubsListPage = ({
                   type="search"
                   placeholder="Hledat klub, město..."
                   size="md"
-                  iconLeft={<SearchIcon />}
+                  iconLeft={<Icon name="search" />}
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
@@ -467,7 +427,7 @@ const ClubsListPage = ({
                       onClick={() => setSearchQuery('')}
                       aria-label="Zrušit hledání"
                     >
-                      <CloseIcon />
+                      <Icon name="close" size={12} />
                     </button>
                   </span>
                 )}
@@ -479,7 +439,7 @@ const ClubsListPage = ({
                       onClick={() => clearFilter(filter.key)}
                       aria-label={`Zrušit filtr ${filter.label}`}
                     >
-                      <CloseIcon />
+                      <Icon name="close" size={12} />
                     </button>
                   </span>
                 ))}
@@ -538,13 +498,13 @@ const ClubsListPage = ({
           ) : (
             <div className="clubs-list-empty">
               <div className="clubs-list-empty__icon">
-                <BuildingIcon />
+                <Icon name="building" size={64} />
               </div>
               <h3 className="clubs-list-empty__title">Žádné kluby nenalezeny</h3>
               <p className="clubs-list-empty__description">
                 Zkuste změnit vyhledávací kritéria nebo zrušit některé filtry.
               </p>
-              <Button variant="secondary" size="md" onClick={clearAllFilters} style={{ marginTop: '16px' }}>
+              <Button variant="secondary" size="md" onClick={clearAllFilters} className="clubs-list-empty__button">
                 Zrušit filtry
               </Button>
             </div>

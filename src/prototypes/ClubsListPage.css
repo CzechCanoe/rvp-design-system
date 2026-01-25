@@ -136,10 +136,10 @@
 }
 
 /* ==========================================================================
-   Statistics Bar - AESTHETIC STAT CARDS
+   Statistics Bar - StatsBar override for AESTHETIC styling
    ========================================================================== */
 
-.clubs-list-stats {
+.clubs-list-stats.csk-stats-bar {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-4);
@@ -147,12 +147,12 @@
 }
 
 @media (min-width: 640px) {
-  .clubs-list-stats {
+  .clubs-list-stats.csk-stats-bar {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-.clubs-list-stats__item {
+.clubs-list-stats .csk-stats-bar__item {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -169,7 +169,7 @@
 }
 
 /* Energy accent border on hover */
-.clubs-list-stats__item::before {
+.clubs-list-stats .csk-stats-bar__item::before {
   content: '';
   position: absolute;
   top: 0;
@@ -181,33 +181,33 @@
   transition: opacity var(--duration-fast) var(--ease-out);
 }
 
-.clubs-list-stats__item:hover {
+.clubs-list-stats .csk-stats-bar__item:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
-.clubs-list-stats__item:hover::before {
+.clubs-list-stats .csk-stats-bar__item:hover::before {
   opacity: 1;
 }
 
 /* Specific accent colors for each stat */
-.clubs-list-stats__item:nth-child(1)::before {
+.clubs-list-stats .csk-stats-bar__item:nth-child(1)::before {
   background: var(--gradient-energy, linear-gradient(90deg, var(--color-energy-500, #ff6b35), var(--color-energy-400, #ff8c5a)));
 }
 
-.clubs-list-stats__item:nth-child(2)::before {
+.clubs-list-stats .csk-stats-bar__item:nth-child(2)::before {
   background: linear-gradient(90deg, var(--color-success-500), var(--color-success-400));
 }
 
-.clubs-list-stats__item:nth-child(3)::before {
+.clubs-list-stats .csk-stats-bar__item:nth-child(3)::before {
   background: linear-gradient(90deg, var(--color-info-500), var(--color-info-400));
 }
 
-.clubs-list-stats__item:nth-child(4)::before {
+.clubs-list-stats .csk-stats-bar__item:nth-child(4)::before {
   background: linear-gradient(90deg, var(--color-warning-500), var(--color-warning-400));
 }
 
-.clubs-list-stats__value {
+.clubs-list-stats .csk-stats-bar__value {
   font-family: var(--font-family-display, var(--font-family-base));
   font-size: var(--text-3xl-size, 1.875rem);
   font-weight: var(--font-black, 800);
@@ -216,7 +216,7 @@
   letter-spacing: -0.02em;
 }
 
-.clubs-list-stats__label {
+.clubs-list-stats .csk-stats-bar__label {
   font-size: var(--text-sm-size);
   color: var(--color-text-secondary);
   margin-top: var(--spacing-1);
@@ -648,6 +648,10 @@
   margin-right: auto;
 }
 
+.clubs-list-empty__button {
+  margin-top: var(--spacing-4);
+}
+
 /* ==========================================================================
    Footer
    ========================================================================== */
@@ -693,7 +697,7 @@
   background: var(--color-bg-primary);
 }
 
-.prototype-clubs-list--embed .clubs-list-stats__item {
+.prototype-clubs-list--embed .clubs-list-stats .csk-stats-bar__item {
   background: var(--color-bg-secondary);
 }
 
@@ -710,7 +714,7 @@
     grid-template-columns: 1fr;
   }
 
-  .clubs-list-stats {
+  .clubs-list-stats.csk-stats-bar {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -743,7 +747,7 @@
   background-color: var(--color-bg-secondary);
 }
 
-[data-theme='dark'] .clubs-list-stats__item {
+[data-theme='dark'] .clubs-list-stats .csk-stats-bar__item {
   background: var(--color-bg-tertiary);
   border-color: var(--color-border-secondary);
 }
@@ -793,13 +797,13 @@
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  .clubs-list-stats__item,
+  .clubs-list-stats .csk-stats-bar__item,
   .club-card,
   .club-card__logo {
     transition: none;
   }
 
-  .clubs-list-stats__item:hover,
+  .clubs-list-stats .csk-stats-bar__item:hover,
   .club-card--clickable:hover,
   .club-card--clickable:hover .club-card__logo {
     transform: none;

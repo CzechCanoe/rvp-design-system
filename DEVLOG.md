@@ -5673,3 +5673,21 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 - Avatar zůstává pouze se základními props: size, variant, color, status
 - Build prošel bez chyb
 - Fáze 17.1 (Komponenty - Odstranění experimentálních variant) je nyní kompletní
+
+---
+
+## 2026-01-25 - Fáze 17.3.1: ClubsListPage refaktor
+
+### Dokončeno
+- [x] Nahrazeny 4 inline SVG ikony (SearchIcon, MapPinIcon, CloseIcon, BuildingIcon) za Icon komponentu
+- [x] Nahrazena custom stats sekce (`.clubs-list-stats__item`) za StatsBar komponentu s variant="cards"
+- [x] Odstraněn inline style na Button (nahrazen CSS třídou `.clubs-list-empty__button`)
+- [x] Aktualizováno CSS pro nové selektory `.csk-stats-bar__item` (včetně embed, dark mode, reduced motion)
+
+### Změny
+- **stories**: -35 řádků (odstraněny inline SVG definice), +2 importy (Icon, StatsBar)
+- **CSS**: Beze změny v počtu řádků, pouze update selektorů pro StatsBar
+
+### Poznámky
+- StatsBar komponenta používá jiný naming convention (`csk-` prefix), proto je potřeba override CSS
+- ClubCard komponenta zůstává jako lokální, protože je specifická pro tento prototyp
