@@ -6122,3 +6122,29 @@ CSS cleanup komponent je dokončen. Zbývá refaktoring CSS prototypů na čist�
 - Card komponenta řeší padding, border, background, hover efekty
 - Prototyp nyní závisí na designových tokenech pro vizuální styling
 - Zbývající prototypy k redukci: AthletePublicProfile (1154), EventDetailPage (1150), ResultsPage (1199), DashboardPage (1215), ProfilePage (1550), RegistrationPage (1557), LivePage (2433)
+
+---
+
+## 2026-01-25 - Fáze 17.22: CSS redukce AthletePublicProfile
+
+### Dokončeno
+- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
+- [x] Přepsat CSS na layout-only (1154 → 644 řádků, 44% redukce)
+- [x] Aktualizovat TSX - highlight cards, result cards, chart placeholder → Card komponenta
+- [x] Build validace OK
+
+### Změny
+1. **AthletePublicProfile.css** - odstraněny vizuální styly:
+   - Barvy, gradienty (hero gradient overlays, stat card colors)
+   - Typografie (font-family, font-weight, letter-spacing, text-shadow)
+   - Stíny, animace, efekty (rankPulse, transitions)
+   - Dark mode overrides
+
+2. **AthletePublicProfile.stories.tsx** - nahrazeny custom elementy:
+   - Highlight cards: `<article>` → `<Card variant="outlined">`
+   - Result cards: `<article>` → `<Card variant="outlined">`
+   - Chart placeholder: `<div>` → `<Card variant="outlined">`
+
+### Poznámky
+- Celkové prototype CSS: 11,613 řádků (pokles z 12,592)
+- Zbývající velké prototypy na redukci: ResultsPage (1199), DashboardPage (1215), ProfilePage (1550), RegistrationPage (1557), LivePage (2433)

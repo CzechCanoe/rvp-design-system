@@ -1,35 +1,30 @@
-/* ============================================================================
-   Athlete Public Profile - EXPRESSIVE Mode Prototype
-   Wow-factor public profile with dramatic hero, animated stats, and rich visuals
+/* ==========================================================================
+   AthletePublicProfile Prototype Styles - LAYOUT ONLY
 
-   Phase 15.0: Aesthetic Refresh - Dynamic Sport aesthetic applied
-   - Mesh backgrounds, display typography, energy accents
-   - Staggered reveal animations, border accents
-   ============================================================================ */
+   Phase 17.22: CSS reduction to layout-only
+   Visual styles handled by design tokens (aesthetic.css) and components.
 
+   Guidelines:
+   - Only layout properties: display, flex, grid, gap, padding, margin
+   - Only sizing: max-width, width, height, min-width
+   - Only positioning: position, z-index (for stacking)
+   - NO colors, fonts, shadows, borders, animations, effects
+   ========================================================================== */
+
+/* Page container - flex column for header/main/footer */
 .athlete-public-profile {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-bg-primary);
 }
 
-/* Aesthetic variant with mesh background */
-.athlete-public-profile--aesthetic {
-  background: var(--bg-mesh-primary);
-  background-color: var(--color-bg-primary);
+.athlete-public-profile--embed {
+  min-height: auto;
 }
 
-/* Logo */
-.athlete-public-profile__logo {
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: var(--color-primary);
-}
-
-/* ============================================================================
-   HERO SECTION - Full-screen dramatic hero
-   ============================================================================ */
+/* ==========================================================================
+   Hero Section Layout
+   ========================================================================== */
 
 .athlete-hero {
   position: relative;
@@ -38,81 +33,31 @@
   align-items: flex-end;
   padding: var(--spacing-expr-hero-padding-y) var(--spacing-expr-hero-padding-x);
   overflow: hidden;
-  color: white;
 }
 
+/* Background layers - absolute positioning */
 .athlete-hero__background {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 
-/* Background image with parallax-ready positioning */
 .athlete-hero__image {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center 30%;
-  transform: scale(1.05);
-  transition: transform 0.5s ease-out;
 }
 
-.athlete-hero:hover .athlete-hero__image {
-  transform: scale(1);
-}
-
-/* Gradient overlays for text readability */
 .athlete-hero__gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.85) 0%,
-    rgba(0, 0, 0, 0.6) 30%,
-    rgba(0, 0, 0, 0.3) 60%,
-    rgba(0, 0, 0, 0.1) 100%
-  );
 }
 
-/* Discipline-specific color overlay */
-.athlete-hero--dv .athlete-hero__gradient {
-  background: linear-gradient(
-    to top,
-    rgba(30, 58, 95, 0.9) 0%,
-    rgba(37, 99, 235, 0.4) 50%,
-    transparent 100%
-  );
-}
-
-.athlete-hero--ry .athlete-hero__gradient {
-  background: linear-gradient(
-    to top,
-    rgba(20, 83, 45, 0.9) 0%,
-    rgba(22, 163, 74, 0.4) 50%,
-    transparent 100%
-  );
-}
-
-.athlete-hero--vt .athlete-hero__gradient {
-  background: linear-gradient(
-    to top,
-    rgba(127, 29, 29, 0.9) 0%,
-    rgba(220, 38, 38, 0.4) 50%,
-    transparent 100%
-  );
-}
-
-/* Decorative pattern overlay */
 .athlete-hero__pattern {
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 40%);
-  opacity: 1;
 }
 
-/* Hero content */
+/* Hero content - grid layout */
 .athlete-hero__content {
   position: relative;
   z-index: 1;
@@ -125,7 +70,7 @@
   align-items: end;
 }
 
-/* Large avatar with ring */
+/* Avatar layout */
 .athlete-hero__avatar {
   position: relative;
 }
@@ -133,93 +78,43 @@
 .athlete-hero__avatar-ring {
   width: var(--avatar-expr-size-hero);
   height: var(--avatar-expr-size-hero);
-  border-radius: 50%;
   padding: 4px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
-  box-shadow: var(--shadow-expr-avatar), 0 0 60px rgba(255, 255, 255, 0.2);
 }
 
 .athlete-hero__avatar-img {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  background-color: var(--color-surface-secondary);
 }
 
 .athlete-hero__avatar-initials {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-800));
-  font-size: 4rem;
-  font-weight: var(--font-weight-bold);
-  color: white;
 }
 
-/* Ranking badge on avatar */
+/* Rank badge layout */
 .athlete-hero__rank-badge {
   position: absolute;
   bottom: 0;
   right: 0;
   width: 64px;
   height: 64px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
-  font-weight: var(--font-weight-black);
-  color: white;
-  border: 4px solid white;
-  box-shadow: var(--shadow-lg);
-  animation: rankPulse 3s ease-in-out infinite;
 }
 
-@keyframes rankPulse {
-  0%, 100% { transform: scale(1); box-shadow: var(--shadow-lg); }
-  50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 215, 0, 0.5); }
-}
-
-.athlete-hero__rank-badge--1 {
-  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
-  color: #7a5c00;
-}
-
-.athlete-hero__rank-badge--2 {
-  background: linear-gradient(135deg, #e8e8e8 0%, #a0a0a0 100%);
-  color: #333;
-}
-
-.athlete-hero__rank-badge--3 {
-  background: linear-gradient(135deg, #cd7f32 0%, #a0522d 100%);
-}
-
-/* Hero info section */
+/* Hero info layout */
 .athlete-hero__info {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4);
 }
 
-/* Mega name with expressive typography */
 .athlete-hero__name {
-  font-size: var(--text-expr-mega-size);
-  font-weight: var(--text-expr-mega-weight);
-  line-height: var(--text-expr-mega-line-height);
-  letter-spacing: var(--text-expr-mega-tracking);
   margin: 0;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Aesthetic variant - display font for hero name */
-.athlete-public-profile--aesthetic .athlete-hero__name {
-  font-family: var(--font-family-display);
-  font-weight: var(--text-display-weight);
-  letter-spacing: var(--text-display-tracking);
 }
 
 .athlete-hero__subtitle {
@@ -234,15 +129,6 @@
   align-items: center;
   gap: var(--spacing-2);
   padding: var(--spacing-2) var(--spacing-4);
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-}
-
-.athlete-hero__country-flag {
-  font-size: 1.5rem;
 }
 
 .athlete-hero__badges {
@@ -256,8 +142,6 @@
   flex-wrap: wrap;
   gap: var(--spacing-6);
   margin-top: var(--spacing-2);
-  font-size: var(--font-size-lg);
-  color: rgba(255, 255, 255, 0.9);
 }
 
 .athlete-hero__meta-item {
@@ -266,18 +150,7 @@
   gap: 2px;
 }
 
-.athlete-hero__meta-label {
-  font-size: var(--font-size-sm);
-  color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.athlete-hero__meta-value {
-  font-weight: var(--font-weight-semibold);
-}
-
-/* Hero actions */
+/* Hero actions layout */
 .athlete-hero__actions {
   display: flex;
   flex-direction: column;
@@ -285,22 +158,9 @@
   align-self: end;
 }
 
-.athlete-hero__actions .csk-button {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  border-color: rgba(255, 255, 255, 0.3);
-  color: white;
-  min-width: 160px;
-}
-
-.athlete-hero__actions .csk-button:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
-/* ============================================================================
-   STATS BANNER - Floating achievement cards
-   ============================================================================ */
+/* ==========================================================================
+   Stats Banner Layout
+   ========================================================================== */
 
 .athlete-stats-banner {
   position: relative;
@@ -320,52 +180,12 @@
   gap: var(--spacing-6);
 }
 
+/* Stat card layout */
 .athlete-stat-card {
   position: relative;
   padding: var(--spacing-8);
-  background: var(--color-surface-primary);
-  border-radius: var(--radius-expr-card-lg);
-  box-shadow: var(--shadow-expr-featured);
   text-align: center;
   overflow: hidden;
-  transition: var(--transition-expr-card);
-}
-
-.athlete-stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-expr-float);
-}
-
-/* Aesthetic variant - energy glow on hover */
-.athlete-public-profile--aesthetic .athlete-stat-card:hover {
-  box-shadow: var(--shadow-expr-float), var(--glow-energy-sm);
-}
-
-/* Stat card decorative accent */
-.athlete-stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--stat-accent, var(--color-primary));
-}
-
-.athlete-stat-card--gold::before {
-  background: linear-gradient(90deg, #ffd700, #ffb300);
-}
-
-.athlete-stat-card--silver::before {
-  background: linear-gradient(90deg, #e8e8e8, #a0a0a0);
-}
-
-.athlete-stat-card--bronze::before {
-  background: linear-gradient(90deg, #cd7f32, #a0522d);
-}
-
-.athlete-stat-card--primary::before {
-  background: linear-gradient(90deg, var(--color-primary-500), var(--color-primary-600));
 }
 
 .athlete-stat-card__icon {
@@ -375,49 +195,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background: var(--stat-bg, var(--color-primary-100));
-  color: var(--stat-color, var(--color-primary-600));
-}
-
-.athlete-stat-card--gold .athlete-stat-card__icon {
-  background: linear-gradient(135deg, #fff9e6, #fff3cc);
-  color: #b8860b;
-}
-
-.athlete-stat-card--silver .athlete-stat-card__icon {
-  background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-  color: #666;
-}
-
-.athlete-stat-card--bronze .athlete-stat-card__icon {
-  background: linear-gradient(135deg, #fef3e6, #fde4cc);
-  color: #a0522d;
 }
 
 .athlete-stat-card__icon svg {
   width: 28px;
   height: 28px;
-}
-
-.athlete-stat-card__value {
-  font-size: var(--text-expr-stat-size);
-  font-weight: var(--text-expr-stat-weight);
-  line-height: var(--text-expr-stat-line-height);
-  letter-spacing: var(--text-expr-stat-tracking);
-  color: var(--color-text-primary);
-  font-family: var(--font-family-mono);
-}
-
-.athlete-stat-card__label {
-  font-size: var(--font-size-base);
-  color: var(--color-text-secondary);
-  margin-top: var(--spacing-2);
-}
-
-/* Aesthetic stat card - display font for value (top accent already via ::before) */
-.athlete-public-profile--aesthetic .athlete-stat-card__value {
-  font-family: var(--font-family-display);
 }
 
 .athlete-stat-card__trend {
@@ -426,24 +208,11 @@
   gap: var(--spacing-1);
   margin-top: var(--spacing-2);
   padding: var(--spacing-1) var(--spacing-2);
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
 }
 
-.athlete-stat-card__trend--up {
-  background: var(--color-success-subtle);
-  color: var(--color-success);
-}
-
-.athlete-stat-card__trend--down {
-  background: var(--color-danger-subtle);
-  color: var(--color-danger);
-}
-
-/* ============================================================================
-   MAIN CONTENT
-   ============================================================================ */
+/* ==========================================================================
+   Main Content Layout
+   ========================================================================== */
 
 .athlete-main {
   flex: 1;
@@ -458,7 +227,7 @@
   gap: var(--spacing-expr-section-sm);
 }
 
-/* Section titles */
+/* Section layout */
 .athlete-section {
   display: flex;
   flex-direction: column;
@@ -473,29 +242,16 @@
 }
 
 .athlete-section__title {
-  font-size: var(--text-expr-h2-size);
-  font-weight: var(--text-expr-h2-weight);
-  line-height: var(--text-expr-h2-line-height);
   margin: 0;
-  color: var(--color-text-primary);
-}
-
-/* Aesthetic section titles - display font */
-.athlete-public-profile--aesthetic .athlete-section__title {
-  font-family: var(--font-family-display);
-  font-weight: var(--text-headline-weight);
-  letter-spacing: var(--text-headline-tracking);
 }
 
 .athlete-section__subtitle {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-secondary);
   margin: var(--spacing-2) 0 0;
 }
 
-/* ============================================================================
-   CAREER HIGHLIGHTS - Visual timeline/milestones
-   ============================================================================ */
+/* ==========================================================================
+   Career Highlights Layout
+   ========================================================================== */
 
 .athlete-highlights {
   display: grid;
@@ -503,85 +259,25 @@
   gap: var(--spacing-6);
 }
 
+/* Highlight card layout */
 .athlete-highlight-card {
   position: relative;
   padding: var(--spacing-6);
-  background: var(--color-surface-primary);
-  border-radius: var(--radius-expr-card);
-  border: 1px solid var(--color-border);
   overflow: hidden;
-  transition: var(--transition-expr-card);
-}
-
-.athlete-highlight-card:hover {
-  border-color: var(--color-primary-300);
-  box-shadow: var(--shadow-md);
-}
-
-/* Aesthetic highlight cards - top accent on hover, energy glow */
-.athlete-public-profile--aesthetic .athlete-highlight-card {
-  border: 1px solid var(--color-border);
-  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
-}
-
-/* Top accent bar - appears on hover */
-.athlete-public-profile--aesthetic .athlete-highlight-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--gradient-primary, linear-gradient(90deg, var(--color-primary-500), var(--color-energy-500, #fb923c)));
-  opacity: 0;
-  transition: opacity var(--duration-fast, 150ms) var(--ease-out, ease-out);
-}
-
-.athlete-public-profile--aesthetic .athlete-highlight-card:hover::after {
-  opacity: 1;
-}
-
-.athlete-public-profile--aesthetic .athlete-highlight-card:nth-child(1) { animation-delay: var(--stagger-1); }
-.athlete-public-profile--aesthetic .athlete-highlight-card:nth-child(2) { animation-delay: var(--stagger-2); }
-.athlete-public-profile--aesthetic .athlete-highlight-card:nth-child(3) { animation-delay: var(--stagger-3); }
-.athlete-public-profile--aesthetic .athlete-highlight-card:nth-child(4) { animation-delay: var(--stagger-4); }
-.athlete-public-profile--aesthetic .athlete-highlight-card:nth-child(5) { animation-delay: var(--stagger-5); }
-.athlete-public-profile--aesthetic .athlete-highlight-card:nth-child(6) { animation-delay: var(--stagger-6); }
-
-.athlete-public-profile--aesthetic .athlete-highlight-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md), var(--glow-energy-sm);
 }
 
 .athlete-highlight-card__year {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
   margin-bottom: var(--spacing-2);
 }
 
 .athlete-highlight-card__title {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
   margin: 0 0 var(--spacing-2);
 }
 
-/* Aesthetic highlight title - display font */
-.athlete-public-profile--aesthetic .athlete-highlight-card__title {
-  font-family: var(--font-family-display);
-  font-weight: var(--text-headline-weight);
-}
-
 .athlete-highlight-card__description {
-  font-size: var(--font-size-base);
-  color: var(--color-text-secondary);
   margin: 0;
 }
 
-/* Highlight icons - professional SVG styling */
 .athlete-highlight-card__icon {
   position: absolute;
   top: var(--spacing-4);
@@ -598,40 +294,9 @@
   height: 100%;
 }
 
-/* Icon variants */
-.highlight-icon--olympic {
-  /* Olympic medal icons are self-colored */
-}
-
-.highlight-icon--world {
-  color: var(--color-primary);
-}
-
-.highlight-icon--cup {
-  color: #DAA520; /* Gold trophy */
-}
-
-.highlight-icon--national {
-  color: var(--color-primary);
-}
-
-.highlight-icon--promotion {
-  color: var(--color-success);
-}
-
-/* Aesthetic mode - larger icons with energy accent */
-.athlete-public-profile--aesthetic .athlete-highlight-card__icon {
-  width: 48px;
-  height: 48px;
-}
-
-.athlete-public-profile--aesthetic .highlight-icon--cup {
-  color: var(--color-energy-500);
-}
-
-/* ============================================================================
-   RECENT RESULTS
-   ============================================================================ */
+/* ==========================================================================
+   Recent Results Layout
+   ========================================================================== */
 
 .athlete-results-grid {
   display: grid;
@@ -639,57 +304,21 @@
   gap: var(--spacing-4);
 }
 
+/* Result card layout */
 .athlete-result-card {
   display: flex;
   align-items: center;
   gap: var(--spacing-4);
   padding: var(--spacing-4) var(--spacing-5);
-  background: var(--color-surface-primary);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
-  transition: var(--transition-normal);
-}
-
-.athlete-result-card:hover {
-  border-color: var(--color-primary-300);
-  box-shadow: var(--shadow-sm);
 }
 
 .athlete-result-card__rank {
   width: 48px;
   height: 48px;
-  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
   flex-shrink: 0;
-}
-
-.athlete-result-card__rank--1 {
-  background: linear-gradient(135deg, #fff9e6, #fff3cc);
-  color: #b8860b;
-}
-
-/* Aesthetic rank display font */
-.athlete-public-profile--aesthetic .athlete-result-card__rank {
-  font-family: var(--font-family-display);
-}
-
-.athlete-result-card__rank--2 {
-  background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-  color: #666;
-}
-
-.athlete-result-card__rank--3 {
-  background: linear-gradient(135deg, #fef3e6, #fde4cc);
-  color: #a0522d;
-}
-
-.athlete-result-card__rank--other {
-  background: var(--color-surface-secondary);
-  color: var(--color-text-secondary);
 }
 
 .athlete-result-card__info {
@@ -698,8 +327,6 @@
 }
 
 .athlete-result-card__race {
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
   margin: 0 0 var(--spacing-1);
   white-space: nowrap;
   overflow: hidden;
@@ -709,40 +336,28 @@
 .athlete-result-card__meta {
   display: flex;
   gap: var(--spacing-3);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
 }
 
 .athlete-result-card__time {
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
   white-space: nowrap;
 }
 
-/* ============================================================================
-   SEASON CHART PLACEHOLDER
-   ============================================================================ */
+/* ==========================================================================
+   Chart Placeholder Layout
+   ========================================================================== */
 
 .athlete-chart-placeholder {
   height: 300px;
-  background: linear-gradient(135deg, var(--color-surface-secondary), var(--color-surface-primary));
-  border-radius: var(--radius-expr-card);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-muted);
-  font-size: var(--font-size-lg);
-  border: 2px dashed var(--color-border);
 }
 
-/* ============================================================================
-   FOOTER
-   ============================================================================ */
+/* ==========================================================================
+   Footer Layout
+   ========================================================================== */
 
 .athlete-footer {
-  background: var(--color-surface-secondary);
-  border-top: 1px solid var(--color-border);
   padding: var(--spacing-8) var(--spacing-8);
   text-align: center;
 }
@@ -754,41 +369,11 @@
 
 .athlete-footer__text {
   margin: 0;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
 }
 
-/* ============================================================================
-   DARK MODE
-   ============================================================================ */
-
-[data-theme="dark"] .athlete-stat-card {
-  background: var(--color-surface-elevated);
-}
-
-[data-theme="dark"] .athlete-highlight-card {
-  background: var(--color-surface-elevated);
-}
-
-[data-theme="dark"] .athlete-result-card {
-  background: var(--color-surface-elevated);
-}
-
-[data-theme="dark"] .athlete-stat-card--gold .athlete-stat-card__icon {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 179, 0, 0.1));
-}
-
-[data-theme="dark"] .athlete-stat-card--silver .athlete-stat-card__icon {
-  background: linear-gradient(135deg, rgba(200, 200, 200, 0.2), rgba(160, 160, 160, 0.1));
-}
-
-[data-theme="dark"] .athlete-stat-card--bronze .athlete-stat-card__icon {
-  background: linear-gradient(135deg, rgba(205, 127, 50, 0.2), rgba(160, 82, 45, 0.1));
-}
-
-/* ============================================================================
-   RESPONSIVE DESIGN
-   ============================================================================ */
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
 
 @media (max-width: 1200px) {
   .athlete-stats-banner__grid {
@@ -838,14 +423,9 @@
     height: 140px;
   }
 
-  .athlete-hero__avatar-initials {
-    font-size: 3rem;
-  }
-
   .athlete-hero__rank-badge {
     width: 48px;
     height: 48px;
-    font-size: 1rem;
   }
 
   .athlete-hero__subtitle {
@@ -917,36 +497,9 @@
     height: 100px;
   }
 
-  .athlete-hero__avatar-initials {
-    font-size: 2rem;
-  }
-
-  .athlete-hero__name {
-    font-size: var(--font-size-2xl);
-  }
-
   .athlete-hero__rank-badge {
     width: 40px;
     height: 40px;
-    font-size: 0.875rem;
-    border-width: 3px;
-  }
-
-  .athlete-hero__country {
-    font-size: var(--font-size-base);
-    padding: var(--spacing-1) var(--spacing-2);
-  }
-
-  .athlete-hero__country-flag {
-    font-size: 1.25rem;
-  }
-
-  .athlete-hero__badges {
-    flex-wrap: wrap;
-  }
-
-  .athlete-hero__meta {
-    gap: var(--spacing-4);
   }
 
   .athlete-stats-banner {
@@ -967,59 +520,18 @@
     margin-bottom: var(--spacing-3);
   }
 
-  .athlete-stat-card__value {
-    font-size: var(--font-size-2xl);
-  }
-
-  .athlete-stat-card__label {
-    font-size: var(--font-size-sm);
-  }
-
   .athlete-main {
     padding: var(--spacing-6) var(--spacing-3);
   }
 }
 
-/* ============================================================================
-   REDUCED MOTION
-   ============================================================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  .athlete-hero__image {
-    transform: none;
-    transition: none;
-  }
-
-  .athlete-hero:hover .athlete-hero__image {
-    transform: none;
-  }
-
-  .athlete-hero__rank-badge {
-    animation: none;
-  }
-
-  .athlete-stat-card,
-  .athlete-highlight-card,
-  .athlete-result-card {
-    transition: none;
-  }
-}
-
-/* ============================================================================
-   Embed Mode - For integration into kanoe.cz (Phase 8.7.5)
-   Phase 16.5: Fixed spacing - removed side padding since kanoe-embed provides it
-   ============================================================================ */
-
-.athlete-public-profile--embed {
-  min-height: auto;
-  background-color: transparent;
-}
+/* ==========================================================================
+   Embed Mode Layout Adjustments
+   ========================================================================== */
 
 .athlete-public-profile--embed .athlete-hero {
   min-height: 35vh;
-  /* Remove horizontal padding - kanoe-embed container provides it */
   padding: var(--spacing-6) 0;
-  /* Negative margin to extend hero full width within embed container */
   margin-left: -16px;
   margin-right: -16px;
   padding-left: 16px;
@@ -1028,13 +540,10 @@
 
 .athlete-public-profile--embed .athlete-hero__content {
   gap: var(--spacing-4);
-  /* In embed mode, use relative positioning for better control */
   position: relative;
 }
 
-/* Share button positioning in embed mode */
 .athlete-public-profile--embed .athlete-hero__actions {
-  /* Position absolutely to avoid collision with content */
   position: absolute;
   top: var(--spacing-4);
   right: var(--spacing-4);
@@ -1042,24 +551,13 @@
   z-index: 5;
 }
 
-.athlete-public-profile--embed .athlete-hero__actions .csk-button {
-  min-width: auto;
-  padding: var(--spacing-2) var(--spacing-3);
-  font-size: var(--font-size-sm);
-}
-
 .athlete-public-profile--embed .athlete-hero__avatar-ring {
   width: 100px;
   height: 100px;
 }
 
-.athlete-public-profile--embed .athlete-hero__name {
-  font-size: var(--font-size-2xl);
-}
-
 .athlete-public-profile--embed .athlete-stats-banner {
   margin-top: calc(var(--spacing-6) * -1);
-  /* No horizontal padding - inherits from embed container */
   padding: 0;
 }
 
@@ -1072,16 +570,13 @@
 }
 
 .athlete-public-profile--embed .athlete-main {
-  /* Reduced vertical padding, no horizontal padding */
   padding: var(--spacing-6) 0;
 }
 
-/* Section cards in embed mode - remove side margins */
-.athlete-public-profile--embed .athlete-section {
-  /* Cards already have their own padding */
-}
+/* ==========================================================================
+   Container Queries for Embed Mode
+   ========================================================================== */
 
-/* Container queries for narrow containers */
 @container (max-width: 900px) {
   .athlete-public-profile--embed .athlete-hero__content {
     grid-template-columns: 1fr;
@@ -1124,7 +619,6 @@
 @container (max-width: 600px) {
   .athlete-public-profile--embed .athlete-hero {
     min-height: auto;
-    /* Preserve negative margin breakout but reduce padding */
     padding: var(--spacing-5) 12px;
     margin-left: -16px;
     margin-right: -16px;
@@ -1133,10 +627,6 @@
   .athlete-public-profile--embed .athlete-hero__avatar-ring {
     width: 80px;
     height: 80px;
-  }
-
-  .athlete-public-profile--embed .athlete-hero__name {
-    font-size: var(--font-size-xl);
   }
 
   .athlete-public-profile--embed .athlete-stat-card {

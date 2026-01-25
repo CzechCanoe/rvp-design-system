@@ -3,6 +3,7 @@ import { Header } from '../components/Header';
 import { MainNav } from '../components/Navigation';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
+import { Card } from '../components/Card';
 import { Icon } from '../components/Icon';
 import { StatsBar, type StatsBarItem } from '../components/StatsBar';
 import { CSKLogo } from '../components/CSKLogo';
@@ -422,14 +423,19 @@ function AthletePublicProfile({
             </div>
             <div className="athlete-highlights">
               {athlete.highlights.map((highlight, index) => (
-                <article key={index} className="athlete-highlight-card">
+                <Card
+                  key={index}
+                  variant="outlined"
+                  className="athlete-highlight-card"
+                  clickable
+                >
                   <span className="athlete-highlight-card__year">{highlight.year}</span>
                   <h3 className="athlete-highlight-card__title">{highlight.title}</h3>
                   <p className="athlete-highlight-card__description">{highlight.description}</p>
                   <span className="athlete-highlight-card__icon">
                     <Icon name={getHighlightIconName(highlight.iconType)} size="xl" />
                   </span>
-                </article>
+                </Card>
               ))}
             </div>
           </section>
@@ -445,7 +451,12 @@ function AthletePublicProfile({
             </div>
             <div className="athlete-results-grid">
               {athlete.recentResults.map((result) => (
-                <article key={result.id} className="athlete-result-card">
+                <Card
+                  key={result.id}
+                  variant="outlined"
+                  className="athlete-result-card"
+                  clickable
+                >
                   <div className={`athlete-result-card__rank ${getRankClass(result.rank)}`}>
                     {result.rank}.
                   </div>
@@ -458,7 +469,7 @@ function AthletePublicProfile({
                     </div>
                   </div>
                   <div className="athlete-result-card__time">{result.time}</div>
-                </article>
+                </Card>
               ))}
             </div>
           </section>
@@ -471,9 +482,9 @@ function AthletePublicProfile({
                 <p className="athlete-section__subtitle">Průběh aktuální sezóny</p>
               </div>
             </div>
-            <div className="athlete-chart-placeholder">
+            <Card variant="outlined" className="athlete-chart-placeholder">
               📊 Graf výkonnosti - připravuje se
-            </div>
+            </Card>
           </section>
         </div>
       </main>

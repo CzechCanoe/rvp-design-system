@@ -288,6 +288,12 @@
 - [x] Aktualizovat TSX - member cards, highlight cards, contact card → Card komponenta
 - [x] Build validace OK
 
+### Iterace 22: CSS redukce AthletePublicProfile ✅
+- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
+- [x] Přepsat CSS na layout-only (1154 → 644 řádků, 44% redukce)
+- [x] Aktualizovat TSX - highlight cards, result cards, chart placeholder → Card komponenta
+- [x] Build validace OK
+
 ---
 
 ## Metriky úspěchu
@@ -295,7 +301,7 @@
 | Metrika | Před | Aktuální | Cíl |
 |---------|------|----------|-----|
 | Component CSS | ~7,800 řádků | 16,046 řádků* | ~10,000 řádků |
-| Prototype CSS | ~4,500 řádků | 12,592 řádků | ~600 řádků |
+| Prototype CSS | ~4,500 řádků | 11,613 řádků | ~600 řádků |
 | Inline styles | 28 | **0** ✅ | 0 |
 | Custom icons | 80+ | **0** ✅ | 0 (vše přes Icon) |
 
