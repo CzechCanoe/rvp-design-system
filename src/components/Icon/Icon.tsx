@@ -14,6 +14,7 @@ import {
   ChevronUp,
   ClipboardCheck,
   Clock,
+  CreditCard,
   Download,
   Edit,
   ExternalLink,
@@ -38,6 +39,7 @@ import {
   Plus,
   Printer,
   RefreshCw,
+  Repeat,
   Search,
   Send,
   Share2,
@@ -50,6 +52,7 @@ import {
   UserSearch,
   Users,
   X,
+  XCircle,
   type LucideIcon,
   type LucideProps,
 } from 'lucide-react';
@@ -82,6 +85,10 @@ const iconMap = {
   // Status & Feedback
   alert: AlertTriangle,
   'alert-circle': AlertCircle,
+  'alert-triangle': AlertTriangle,
+  warning: AlertTriangle,
+  danger: XCircle,
+  'x-circle': XCircle,
   'check-circle': CheckCircle,
   check: Check,
   info: Info,
@@ -125,6 +132,10 @@ const iconMap = {
   users: Users,
   'users-team': Users,
 
+  // Finance
+  'credit-card': CreditCard,
+  payment: CreditCard,
+
   // Misc
   chart: ChartBar,
   'clipboard-check': ClipboardCheck,
@@ -133,6 +144,8 @@ const iconMap = {
   pin: Pin,
   unpin: PinOff,
   promotion: TrendingUp,
+  transfer: Repeat,
+  medical: Activity,
 } as const;
 
 export type IconName = keyof typeof iconMap;
