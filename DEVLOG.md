@@ -6516,3 +6516,28 @@ Všech 12 prototypových CSS souborů má kompletní strukturu:
 - Všechny vizuální styly jsou na místě
 - Energy accent je integrovaný do všech klíčových komponent a prototypů
 - Manuální vizuální kontrola v Storybook je úkolem pro uživatele
+
+---
+
+## 2026-01-25 - Fáze 19.1: Dead CSS Audit
+
+### Dokončeno
+- [x] Vytvořeny audit skripty (`scripts/dead-css-audit.sh`, `scripts/detailed-css-audit.sh`)
+- [x] Auditovány komponenty CSS (1029 tříd, 907 s prefixem csk-)
+- [x] Auditovány prototypy CSS (1044 tříd, 751 prototype-specifických)
+- [x] Auditovány tokeny CSS (123 tříd)
+- [x] Build validace úspěšná
+
+### Výsledky
+**Žádný mrtvý CSS kód nenalezen.** Phase 17 cleanup byl důkladný.
+
+### Statistiky
+- CSS bundle: 268.82 kB (gzip: 32.74 kB)
+- JS bundle: 338.94 kB (gzip: 54.35 kB)
+
+### Poznámky pro budoucí optimalizace
+1. **LivePage keyframes:** 8 keyframes v prototypu, některé (`live-dot-pulse`) by mohly být nahrazeny LiveIndicator komponentou
+2. **Konsolidace Card:** Některé prototypy používají custom divy místo Card komponenty
+
+### Další krok
+Pokračovat na Phase 19.2 (Konsolidace Card použití) nebo 19.3 (Stories cleanup)
