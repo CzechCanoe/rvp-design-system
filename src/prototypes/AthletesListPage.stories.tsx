@@ -8,6 +8,8 @@ import { Select } from '../components/Select';
 import { Tabs } from '../components/Tabs';
 import { Pagination } from '../components/Pagination';
 import { AthleteCard } from '../components/AthleteCard';
+import { Icon } from '../components/Icon';
+import { StatsBar } from '../components/StatsBar';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import './AthletesListPage.css';
 
@@ -97,46 +99,6 @@ const sortOptions = [
   { value: 'birthYear', label: 'Rok narození' },
 ];
 
-// ============================================================================
-// Icons
-// ============================================================================
-
-const SearchIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="8" />
-    <path d="M21 21l-4.35-4.35" />
-  </svg>
-);
-
-const StarIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-  </svg>
-);
-
-const UsersIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-    <circle cx="9" cy="7" r="4" />
-    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-  </svg>
-);
-
-const CloseIcon = () => (
-  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 6L6 18M6 6l12 12" />
-  </svg>
-);
-
-const UserSearchIcon = () => (
-  <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="10" cy="7" r="4" />
-    <path d="M10.3 15H7a4 4 0 0 0-4 4v2" />
-    <circle cx="17" cy="17" r="3" />
-    <path d="M21 21l-1.9-1.9" />
-  </svg>
-);
 
 // ============================================================================
 // Page Component
@@ -336,24 +298,17 @@ const AthletesListPage = ({
           </div>
 
           {/* Statistics */}
-          <div className="athletes-list-stats">
-            <div className="athletes-list-stats__item">
-              <span className="athletes-list-stats__value">{stats.total}</span>
-              <span className="athletes-list-stats__label">Závodníků</span>
-            </div>
-            <div className="athletes-list-stats__item">
-              <span className="athletes-list-stats__value">{stats.representatives}</span>
-              <span className="athletes-list-stats__label">Reprezentantů</span>
-            </div>
-            <div className="athletes-list-stats__item">
-              <span className="athletes-list-stats__value">{stats.clubs}</span>
-              <span className="athletes-list-stats__label">Klubů</span>
-            </div>
-            <div className="athletes-list-stats__item">
-              <span className="athletes-list-stats__value">3</span>
-              <span className="athletes-list-stats__label">Sekcí</span>
-            </div>
-          </div>
+          <StatsBar
+            variant="cards"
+            size="md"
+            className="athletes-list-stats"
+            items={[
+              { key: 'total', value: stats.total, label: 'Závodníků', icon: 'users' },
+              { key: 'representatives', value: stats.representatives, label: 'Reprezentantů', icon: 'medal' },
+              { key: 'clubs', value: stats.clubs, label: 'Klubů', icon: 'building' },
+              { key: 'sections', value: 3, label: 'Sekcí', icon: 'grid' },
+            ]}
+          />
         </div>
       </section>
 
@@ -366,7 +321,7 @@ const AthletesListPage = ({
             <section className="athletes-list-featured">
               <div className="athletes-list-featured__header">
                 <h2 className="athletes-list-featured__title">
-                  <StarIcon />
+                  <Icon name="star" size="lg" />
                   Reprezentanti a mistři
                 </h2>
               </div>
@@ -415,7 +370,7 @@ const AthletesListPage = ({
                   type="search"
                   placeholder="Hledat závodníka, klub..."
                   size="md"
-                  iconLeft={<SearchIcon />}
+                  iconLeft={<Icon name="search" />}
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
@@ -444,7 +399,7 @@ const AthletesListPage = ({
                 <Button
                   variant="secondary"
                   size="md"
-                  iconLeft={<UsersIcon />}
+                  iconLeft={<Icon name="download" />}
                 >
                   Exportovat
                 </Button>
@@ -462,7 +417,7 @@ const AthletesListPage = ({
                       onClick={() => setSearchQuery('')}
                       aria-label="Zrušit hledání"
                     >
-                      <CloseIcon />
+                      <Icon name="close" size="sm" />
                     </button>
                   </span>
                 )}
@@ -474,7 +429,7 @@ const AthletesListPage = ({
                       onClick={() => clearFilter(filter.key)}
                       aria-label={`Zrušit filtr ${filter.label}`}
                     >
-                      <CloseIcon />
+                      <Icon name="close" size="sm" />
                     </button>
                   </span>
                 ))}
@@ -545,13 +500,13 @@ const AthletesListPage = ({
           ) : (
             <div className="athletes-list-empty">
               <div className="athletes-list-empty__icon">
-                <UserSearchIcon />
+                <Icon name="user-search" size={64} />
               </div>
               <h3 className="athletes-list-empty__title">Žádní závodníci nenalezeni</h3>
               <p className="athletes-list-empty__description">
                 Zkuste změnit vyhledávací kritéria nebo zrušit některé filtry.
               </p>
-              <Button variant="secondary" size="md" onClick={clearAllFilters} style={{ marginTop: '16px' }}>
+              <Button variant="secondary" size="md" onClick={clearAllFilters} className="athletes-list-empty__button">
                 Zrušit filtry
               </Button>
             </div>

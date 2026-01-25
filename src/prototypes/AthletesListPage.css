@@ -148,89 +148,11 @@
 }
 
 /* ==========================================================================
-   Statistics Bar - AESTHETIC STAT CARDS
+   Statistics Bar - Using StatsBar component
    ========================================================================== */
 
 .athletes-list-stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-4);
   margin-top: var(--spacing-6);
-}
-
-@media (min-width: 640px) {
-  .athletes-list-stats {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.athletes-list-stats__item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: var(--spacing-5) var(--spacing-4);
-  background: var(--color-bg-primary);
-  border-radius: var(--radius-lg);
-  text-align: center;
-  border: 1px solid var(--color-border-primary);
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--duration-fast) var(--ease-out),
-              box-shadow var(--duration-fast) var(--ease-out);
-  overflow: hidden;
-}
-
-/* Energy accent border on hover */
-.athletes-list-stats__item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--gradient-primary, linear-gradient(90deg, var(--color-primary-500), var(--color-primary-400)));
-  opacity: 0;
-  transition: opacity var(--duration-fast) var(--ease-out);
-}
-
-.athletes-list-stats__item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.athletes-list-stats__item:hover::before {
-  opacity: 1;
-}
-
-/* Specific accent colors for each stat */
-.athletes-list-stats__item:nth-child(1)::before {
-  background: var(--gradient-energy, linear-gradient(90deg, var(--color-energy-500, #ff6b35), var(--color-energy-400, #ff8c5a)));
-}
-
-.athletes-list-stats__item:nth-child(2)::before {
-  background: linear-gradient(90deg, var(--color-success-500), var(--color-success-400));
-}
-
-.athletes-list-stats__item:nth-child(3)::before {
-  background: linear-gradient(90deg, var(--color-info-500), var(--color-info-400));
-}
-
-.athletes-list-stats__value {
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-3xl-size, 1.875rem);
-  font-weight: var(--font-black, 800);
-  font-variant-numeric: tabular-nums;
-  color: var(--color-text-primary);
-  letter-spacing: -0.02em;
-}
-
-.athletes-list-stats__label {
-  font-size: var(--text-sm-size);
-  color: var(--color-text-secondary);
-  margin-top: var(--spacing-1);
-  font-weight: var(--font-medium, 500);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 /* ==========================================================================
@@ -592,6 +514,10 @@
   margin-right: auto;
 }
 
+.athletes-list-empty__button {
+  margin-top: var(--spacing-4);
+}
+
 /* ==========================================================================
    Footer
    ========================================================================== */
@@ -649,10 +575,6 @@
   background: var(--color-bg-primary);
 }
 
-.prototype-athletes-list--embed .athletes-list-stats__item {
-  background: var(--color-bg-secondary);
-}
-
 .prototype-athletes-list--embed .athletes-list-featured {
   padding: var(--spacing-6);
   margin-left: 0;
@@ -674,10 +596,6 @@
 
   .athletes-list-grid {
     grid-template-columns: 1fr;
-  }
-
-  .athletes-list-stats {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -702,11 +620,6 @@
 [data-theme='dark'] .athletes-list-header {
   background: var(--bg-mesh-hero);
   background-color: var(--color-bg-secondary);
-}
-
-[data-theme='dark'] .athletes-list-stats__item {
-  background: var(--color-bg-tertiary);
-  border-color: var(--color-border-secondary);
 }
 
 [data-theme='dark'] .athletes-list-filters {
@@ -740,12 +653,10 @@
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  .athletes-list-stats__item,
   .athletes-list-grid > * {
     transition: none;
   }
 
-  .athletes-list-stats__item:hover,
   .athletes-list-grid > *:hover {
     transform: none;
   }
