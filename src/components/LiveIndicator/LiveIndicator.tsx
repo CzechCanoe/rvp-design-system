@@ -25,6 +25,8 @@ export interface LiveIndicatorProps extends HTMLAttributes<HTMLSpanElement> {
   inline?: boolean;
   /** Show glow effect around the dot */
   glow?: boolean;
+  /** Use energy (coral-orange) color with dramatic glow effect */
+  energyGlow?: boolean;
 }
 
 /**
@@ -50,6 +52,7 @@ export const LiveIndicator = forwardRef<HTMLSpanElement, LiveIndicatorProps>(
       labelPosition = 'right',
       inline = false,
       glow = false,
+      energyGlow = false,
       className,
       ...props
     },
@@ -80,10 +83,11 @@ export const LiveIndicator = forwardRef<HTMLSpanElement, LiveIndicatorProps>(
       `csk-live-indicator--${size}`,
       `csk-live-indicator--${variant}`,
       `csk-live-indicator--style-${styleVariant}`,
-      getColorClass(),
+      energyGlow ? 'csk-live-indicator--color-energy' : getColorClass(),
       shouldPulse && 'csk-live-indicator--pulse',
       inline && 'csk-live-indicator--inline',
       glow && 'csk-live-indicator--glow',
+      energyGlow && 'csk-live-indicator--energy-glow',
       `csk-live-indicator--label-${labelPosition}`,
       className,
     ]

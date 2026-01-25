@@ -43,6 +43,8 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   fullWidth?: boolean;
   /** Orientation - currently only horizontal is supported */
   orientation?: 'horizontal';
+  /** Use energy (coral-orange) accent color for active tab underline */
+  energyAccent?: boolean;
 }
 
 /**
@@ -68,6 +70,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       size = 'md',
       fullWidth = false,
       orientation = 'horizontal',
+      energyAccent = false,
       className,
       ...props
     },
@@ -152,6 +155,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       `csk-tabs--${variant}`,
       `csk-tabs--${size}`,
       fullWidth && 'csk-tabs--full-width',
+      energyAccent && 'csk-tabs--energy-accent',
       className,
     ]
       .filter(Boolean)

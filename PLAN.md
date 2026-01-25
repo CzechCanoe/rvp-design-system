@@ -646,8 +646,8 @@ Změny v Badge.tsx/css:
 ```
 
 Změny v Tabs.tsx/css:
-- [ ] Přidat `energyAccent?: boolean` prop
-- [ ] CSS pro energy underline/indicator
+- [x] Přidat `energyAccent?: boolean` prop
+- [x] CSS pro energy underline/indicator
 
 **Input/Select - energy focus ring:**
 ```tsx
@@ -659,9 +659,9 @@ Změny v Input/Select.tsx/css:
 - [x] CSS pro coral-orange focus ring
 
 **ResultsTable - energy highlights:**
-- [ ] Přidat `energyHighlights?: boolean` prop
-- [ ] CSS pro podium rows s energy glow
-- [ ] Best time highlight
+- [x] Přidat `energyHighlights?: boolean` prop
+- [x] CSS pro podium rows s energy glow
+- [x] Best time highlight
 
 **Calendar (v prototypu) - energy pro:**
 - Dnešní den (energy ring)
@@ -669,8 +669,8 @@ Změny v Input/Select.tsx/css:
 - Vybraný den (energy accent)
 
 **LiveIndicator - energy glow:**
-- [ ] Přidat `energyGlow?: boolean` prop
-- [ ] Pulsující energy glow pro live status
+- [x] Přidat `energyGlow?: boolean` prop
+- [x] Pulsující energy glow pro live status
 
 #### 18.9.3 Utility třídy pro Energy
 
@@ -739,9 +739,9 @@ Přidat do `aesthetic.css`:
 - [x] Rozšířit Button o `accent` prop
 - [x] Vrátit `energy` variantu do Badge
 - [x] Přidat `energyFocus` do Input/Select
-- [ ] Přidat `energyAccent` do Tabs
-- [ ] Rozšířit ResultsTable o energy highlights
-- [ ] Rozšířit LiveIndicator o energy glow
+- [x] Přidat `energyAccent` do Tabs
+- [x] Rozšířit ResultsTable o energy highlights
+- [x] Rozšířit LiveIndicator o energy glow
 - [ ] Aktualizovat CalendarPage - energy pro dnešek/deadline
 - [ ] Aktualizovat RegistrationPage - energy CTA
 - [ ] Aktualizovat LivePage - energy LIVE badge
@@ -917,9 +917,9 @@ grep -r "className=.*card" src/prototypes/ | grep -v "Card\|csk-"
 | **Button** | CTA akce - accent glow | Vysoká | ✅ |
 | **Badge** | LIVE, deadline, highlights | Vysoká | ✅ |
 | **Input/Select** | Focus ring | Střední | ✅ |
-| **Tabs** | Aktivní tab accent | Střední | ⏳ |
-| **ResultsTable** | Podium highlights, best time | Střední | ⏳ |
-| **LiveIndicator** | Pulsující glow | Střední | ⏳ |
+| **Tabs** | Aktivní tab accent | Střední | ✅ |
+| **ResultsTable** | Podium highlights, best time | Střední | ✅ |
+| **LiveIndicator** | Pulsující glow | Střední | ✅ |
 | CalendarPage | Dnešní den, deadline, vybraný event | Vysoká | ⏳ |
 | RegistrationPage | CTA "Registrovat", countdown | Vysoká | ⏳ |
 | LivePage | LIVE badge, current race | Vysoká | ⏳ |

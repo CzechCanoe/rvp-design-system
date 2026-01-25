@@ -126,6 +126,8 @@ export interface ResultsTableProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   renderCell?: (entry: ResultEntry, columnKey: string) => ReactNode;
   /** Click handler for row */
   onRowClick?: (entry: ResultEntry) => void;
+  /** Enable energy (coral-orange) glow effects for podium positions and best times */
+  energyHighlights?: boolean;
   /** Caption for accessibility */
   caption?: string;
   /** Show caption visually */
@@ -321,6 +323,7 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
       columns: customColumns,
       renderCell,
       onRowClick,
+      energyHighlights = false,
       caption,
       captionVisible = false,
       loading = false,
@@ -564,6 +567,7 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
       `csk-results-table--${variant}`,
       `csk-results-table--${size}`,
       `csk-results-table--style-${styleVariant}`,
+      energyHighlights && 'csk-results-table--energy-highlights',
     ]
       .filter(Boolean)
       .join(' ');

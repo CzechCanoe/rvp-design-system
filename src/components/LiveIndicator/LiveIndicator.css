@@ -294,6 +294,49 @@
 }
 
 /* ==========================================================================
+ * ENERGY COLOR & GLOW
+ * Coral-orange energy color with dramatic pulsing glow
+ * ========================================================================== */
+
+/* Energy color */
+.csk-live-indicator--color-energy {
+  color: var(--color-energy-500, #f97316);
+}
+
+.csk-live-indicator--color-energy .csk-live-indicator__label {
+  color: var(--color-energy-700, #c2410c);
+}
+
+/* Energy glow effect - dramatic pulsing orange glow */
+.csk-live-indicator--energy-glow .csk-live-indicator__dot {
+  background: var(--gradient-energy, linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%));
+  box-shadow:
+    0 0 8px rgba(249, 115, 22, 0.6),
+    0 0 16px rgba(249, 115, 22, 0.4),
+    0 0 24px rgba(249, 115, 22, 0.2);
+}
+
+.csk-live-indicator--energy-glow.csk-live-indicator--pulse .csk-live-indicator__dot {
+  animation: live-indicator-energy-glow 2s ease-in-out infinite;
+}
+
+.csk-live-indicator--energy-glow .csk-live-indicator__pulse-ring {
+  background: var(--color-energy-400, #fb923c);
+}
+
+/* Energy badge style */
+.csk-live-indicator--style-badge.csk-live-indicator--energy-glow,
+.csk-live-indicator--style-badge.csk-live-indicator--color-energy {
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.15) 0%, rgba(249, 115, 22, 0.1) 100%);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.csk-live-indicator--style-badge.csk-live-indicator--energy-glow:hover {
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.2) 0%, rgba(249, 115, 22, 0.15) 100%);
+  box-shadow: 0 4px 12px -2px rgba(249, 115, 22, 0.3);
+}
+
+/* ==========================================================================
  * KEYFRAME ANIMATIONS
  * ========================================================================== */
 
@@ -327,6 +370,24 @@
   }
   50% {
     box-shadow: 0 0 12px currentColor, 0 0 24px currentColor, 0 0 36px currentColor;
+  }
+}
+
+@keyframes live-indicator-energy-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 8px rgba(249, 115, 22, 0.6),
+      0 0 16px rgba(249, 115, 22, 0.4),
+      0 0 24px rgba(249, 115, 22, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow:
+      0 0 12px rgba(249, 115, 22, 0.8),
+      0 0 24px rgba(249, 115, 22, 0.5),
+      0 0 36px rgba(249, 115, 22, 0.3),
+      0 0 48px rgba(249, 115, 22, 0.1);
+    transform: scale(1.1);
   }
 }
 
@@ -421,6 +482,22 @@
   border-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Dark mode energy color */
+[data-theme='dark'] .csk-live-indicator--color-energy {
+  color: var(--color-energy-400, #fb923c);
+}
+
+[data-theme='dark'] .csk-live-indicator--color-energy .csk-live-indicator__label {
+  color: var(--color-energy-300, #fdba74);
+}
+
+/* Dark mode energy badge */
+[data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--energy-glow,
+[data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-energy {
+  background: rgba(249, 115, 22, 0.15);
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
 /* ==========================================================================
  * REDUCED MOTION
  * ========================================================================== */
@@ -433,7 +510,8 @@
 
   .csk-live-indicator__pulse-ring,
   .csk-live-indicator--connecting .csk-live-indicator__dot,
-  .csk-live-indicator--glow.csk-live-indicator--pulse .csk-live-indicator__dot {
+  .csk-live-indicator--glow.csk-live-indicator--pulse .csk-live-indicator__dot,
+  .csk-live-indicator--energy-glow.csk-live-indicator--pulse .csk-live-indicator__dot {
     animation: none;
   }
 

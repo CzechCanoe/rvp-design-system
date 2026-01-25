@@ -1160,3 +1160,73 @@
 [data-theme='dark'] .csk-results-table-wrapper--aesthetic {
   background: var(--bg-mesh-card);
 }
+
+/* =============================================================================
+   ENERGY HIGHLIGHTS
+   Coral-orange energy glow for podium positions and special states
+   ============================================================================= */
+
+/* Gold row with energy glow */
+.csk-results-table--energy-highlights .csk-results-table__tr--gold {
+  box-shadow: inset 0 0 0 1px rgba(255, 215, 0, 0.3);
+}
+
+.csk-results-table--energy-highlights .csk-results-table__tr--gold:hover {
+  box-shadow: inset 0 0 0 1px rgba(255, 215, 0, 0.5),
+              0 4px 12px -4px rgba(255, 215, 0, 0.3);
+}
+
+/* Energy glow on gold rank badge */
+.csk-results-table--energy-highlights .csk-results-table__tr--gold .csk-results-table__rank {
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+/* Energy border accent on podium */
+.csk-results-table--energy-highlights .csk-results-table__tr--gold {
+  border-image: linear-gradient(180deg, #FFD700 0%, var(--color-energy-500, #f97316) 100%) 1;
+}
+
+/* Best time highlight (first place total time) */
+.csk-results-table--energy-highlights .csk-results-table__tr--gold .csk-results-table__time--total {
+  color: var(--color-energy-600, #ea580c);
+  font-weight: 800;
+}
+
+/* Live row enhanced energy glow */
+.csk-results-table--energy-highlights .csk-results-table__tr--live {
+  box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.3);
+}
+
+.csk-results-table--energy-highlights .csk-results-table__tr--live:hover {
+  box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.5),
+              0 4px 12px -4px rgba(249, 115, 22, 0.3);
+}
+
+/* Enhanced live indicator with energy */
+.csk-results-table--energy-highlights .csk-results-table__live-indicator {
+  box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.5),
+              0 0 8px rgba(249, 115, 22, 0.4);
+}
+
+/* Dark mode energy highlights */
+[data-theme='dark'] .csk-results-table--energy-highlights .csk-results-table__tr--gold {
+  box-shadow: inset 0 0 0 1px rgba(255, 215, 0, 0.2);
+}
+
+[data-theme='dark'] .csk-results-table--energy-highlights .csk-results-table__tr--gold:hover {
+  box-shadow: inset 0 0 0 1px rgba(255, 215, 0, 0.4),
+              0 4px 16px -4px rgba(255, 215, 0, 0.2);
+}
+
+[data-theme='dark'] .csk-results-table--energy-highlights .csk-results-table__tr--gold .csk-results-table__time--total {
+  color: var(--color-energy-400, #fb923c);
+}
+
+[data-theme='dark'] .csk-results-table--energy-highlights .csk-results-table__tr--live {
+  box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.2);
+}
+
+[data-theme='dark'] .csk-results-table--energy-highlights .csk-results-table__tr--live:hover {
+  box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.4),
+              0 4px 16px -4px rgba(249, 115, 22, 0.2);
+}

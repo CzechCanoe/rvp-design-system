@@ -6414,3 +6414,37 @@ EventDetailPage.css mělo již kompletní vizuální styly (hero gradienty, patt
 ### Poznámky
 - Fáze 18.1-18.7 jsou nyní kompletní
 - Další krok: 18.9 Energy Colors Integration nebo 18.10 Vizuální QA
+
+---
+
+## 2026-01-25 - Phase 18.9: Energy Colors Integration (partial)
+
+### Dokončeno
+- [x] Button: přidán `accent` prop s hodnotou 'energy' pro energy glow na hover
+- [x] Badge: obnovena `energy` varianta + přidán `glow` prop pro pulsující efekt
+- [x] Input: přidán `energyFocus` prop pro coral-orange focus ring
+- [x] Select: přidán `energyFocus` prop pro coral-orange focus ring
+- [x] Přidány stories pro všechny nové energy features
+- [x] Build validace prošla
+
+### Poznámky
+- Energy utility třídy již existovaly v aesthetic.css z předchozí iterace
+- Zbývající úkoly z 18.9: Tabs energyAccent, ResultsTable highlights, LiveIndicator glow
+- Prototypy s energy (Calendar, Registration, Live, Results) budou v další iteraci
+
+---
+
+## 2026-01-25 - Fáze 18.9: Energy Components (Tabs, ResultsTable, LiveIndicator)
+
+### Dokončeno
+- [x] Tabs: přidán `energyAccent` prop pro coral-orange podtržení aktivního tabu
+- [x] ResultsTable: přidán `energyHighlights` prop pro energy glow na podium pozicích
+- [x] LiveIndicator: přidán `energyGlow` prop pro dramatický pulsující orange glow
+- [x] CSS pro všechny varianty včetně dark mode a reduced motion
+- [x] Build validace
+
+### Poznámky
+- Tabs energy accent funguje pro všechny varianty (line, pills, aesthetic)
+- ResultsTable energy highlights přidává glow efekt na gold row a zvýrazňuje best time
+- LiveIndicator energy glow má vlastní keyframe animaci s dramatickým pulsujícím efektem
+- Zbývá dokončit energy v prototypech (CalendarPage, RegistrationPage, LivePage)
