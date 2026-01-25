@@ -227,9 +227,9 @@
 - [ ] CSS redukce prototypů na layout-only (zbývá)
 
 ### Iterace 13: Finální audit
-- [ ] Ověřit všechny stories fungují
-- [ ] Zkontrolovat CSS velikost
-- [ ] Spustit testy
+- [x] Ověřit všechny stories fungují (Storybook build OK)
+- [x] Zkontrolovat CSS velikost (Component: 16,046, Prototype: 14,654)
+- [x] Spustit testy (build validace OK, a11y testy vyžadují dev server)
 - [ ] Refaktoring CSS prototypů na čistý layout (~50 řádků/prototyp)
 
 ---

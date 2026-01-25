@@ -5922,3 +5922,28 @@ All 12 prototypes now use the unified Icon component. Section 17.3 (Prototype Ic
 
 ### Poznámky
 CSS cleanup komponent je dokončen. Zbývá refaktoring CSS prototypů na čistý layout (~50 řádků/prototyp), což je rozsáhlý úkol pro další iterace.
+
+---
+
+## 2026-01-25 - Fáze 17.13: Finální audit - částečný
+
+### Dokončeno
+- [x] Storybook build - všechny stories kompilují bez chyb
+- [x] CSS audit - aktuální metriky: Component CSS 16,046 řádků, Prototype CSS 14,654 řádků
+- [x] PLAN.md aktualizován
+
+### Výsledky auditu
+
+| Metrika | Hodnota | Poznámka |
+|---------|---------|----------|
+| Storybook build | ✅ OK | 55s build time |
+| Stories count | ~100+ | Všechny komponenty + prototypy |
+| Component CSS | 16,046 | Nárůst z nových komponent (HeroSection, PageLayout, StatsBar, etc.) |
+| Prototype CSS | 14,654 | Vyžaduje další refaktoring |
+| Inline styles | 0 | ✅ Cíl splněn |
+| Custom icons | 0 | ✅ Cíl splněn (vše přes Icon) |
+
+### Poznámky
+- Accessibility testy vyžadují živý Storybook dev server (ne statický build přes serve)
+- CSS prototypů zůstává vysoký - další iterace by měla extrahovat společné layouty do komponent
+- Priorita pro další práci: FilterPills komponenta + CSS redukce
