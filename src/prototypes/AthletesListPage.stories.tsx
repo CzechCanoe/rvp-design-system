@@ -11,6 +11,7 @@ import { AthleteCard } from '../components/AthleteCard';
 import { Icon } from '../components/Icon';
 import { StatsBar } from '../components/StatsBar';
 import { CSKLogo } from '../components/CSKLogo';
+import { EmptyState } from '../components/EmptyState';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import './AthletesListPage.css';
 
@@ -493,18 +494,18 @@ const AthletesListPage = ({
               )}
             </>
           ) : (
-            <div className="athletes-list-empty">
-              <div className="athletes-list-empty__icon">
-                <Icon name="user-search" size={64} />
-              </div>
-              <h3 className="athletes-list-empty__title">Žádní závodníci nenalezeni</h3>
-              <p className="athletes-list-empty__description">
-                Zkuste změnit vyhledávací kritéria nebo zrušit některé filtry.
-              </p>
-              <Button variant="secondary" size="md" onClick={clearAllFilters} className="athletes-list-empty__button">
-                Zrušit filtry
-              </Button>
-            </div>
+            <EmptyState
+              variant="card"
+              size="lg"
+              icon={<Icon name="user-search" size={64} />}
+              title="Žádní závodníci nenalezeni"
+              description="Zkuste změnit vyhledávací kritéria nebo zrušit některé filtry."
+              action={
+                <Button variant="secondary" size="md" onClick={clearAllFilters}>
+                  Zrušit filtry
+                </Button>
+              }
+            />
           )}
         </div>
       </main>

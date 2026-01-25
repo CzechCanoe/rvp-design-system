@@ -11,6 +11,7 @@ import { Badge } from '../components/Badge';
 import { Icon } from '../components/Icon';
 import { StatsBar } from '../components/StatsBar';
 import { CSKLogo } from '../components/CSKLogo';
+import { EmptyState } from '../components/EmptyState';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import './ClubsListPage.css';
 
@@ -491,18 +492,18 @@ const ClubsListPage = ({
               )}
             </>
           ) : (
-            <div className="clubs-list-empty">
-              <div className="clubs-list-empty__icon">
-                <Icon name="building" size={64} />
-              </div>
-              <h3 className="clubs-list-empty__title">Žádné kluby nenalezeny</h3>
-              <p className="clubs-list-empty__description">
-                Zkuste změnit vyhledávací kritéria nebo zrušit některé filtry.
-              </p>
-              <Button variant="secondary" size="md" onClick={clearAllFilters} className="clubs-list-empty__button">
-                Zrušit filtry
-              </Button>
-            </div>
+            <EmptyState
+              variant="card"
+              size="lg"
+              icon={<Icon name="building" size={64} />}
+              title="Žádné kluby nenalezeny"
+              description="Zkuste změnit vyhledávací kritéria nebo zrušit některé filtry."
+              action={
+                <Button variant="secondary" size="md" onClick={clearAllFilters}>
+                  Zrušit filtry
+                </Button>
+              }
+            />
           )}
         </div>
       </main>

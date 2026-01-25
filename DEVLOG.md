@@ -5947,3 +5947,29 @@ CSS cleanup komponent je dokončen. Zbývá refaktoring CSS prototypů na čist�
 - Accessibility testy vyžadují živý Storybook dev server (ne statický build přes serve)
 - CSS prototypů zůstává vysoký - další iterace by měla extrahovat společné layouty do komponent
 - Priorita pro další práci: FilterPills komponenta + CSS redukce
+
+---
+
+## 2026-01-25 - Fáze 17.14: EmptyState refaktoring
+
+### Dokončeno
+- [x] AthletesListPage: custom empty state → EmptyState komponenta
+- [x] ClubsListPage: custom empty state → EmptyState komponenta
+- [x] Odstraněno ~106 řádků duplicitního CSS z prototypů
+
+### Změny
+1. **AthletesListPage**
+   - Import EmptyState komponenty
+   - Nahrazení custom `<div className="athletes-list-empty">` za `<EmptyState variant="card" size="lg" />`
+   - Odstranění `.athletes-list-empty*` CSS (44 řádků)
+   - Odstranění dark mode override (4 řádky)
+
+2. **ClubsListPage**
+   - Import EmptyState komponenty
+   - Nahrazení custom empty state za `<EmptyState variant="card" size="lg" />`
+   - Odstranění `.clubs-list-empty*` CSS (48 řádků)
+   - Odstranění dark mode override (4 řádky)
+
+### Metriky
+- Prototype CSS: 14,654 → 14,548 řádků (-106)
+- Build: OK
