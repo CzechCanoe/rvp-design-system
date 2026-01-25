@@ -159,7 +159,7 @@
 2. [x] AthletesListPage - refaktorováno: Icon, StatsBar
 3. [x] RankingsPage - refaktorováno: Icon, StatsBar
 4. [x] ClubPublicProfile - refaktorováno: Icon, StatsBar
-5. [ ] AthletePublicProfile
+5. [x] AthletePublicProfile - refaktorováno: Icon, StatsBar
 6. [ ] ResultsPage
 7. [ ] CalendarPage
 8. [ ] EventDetailPage

@@ -5742,3 +5742,26 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 - Odstraněno ~125 řádků kódu (10 SVG komponent)
 - StatsBar cards varianta pokrývá potřeby club stats banneru
 - Další na řadě: AthletePublicProfile (obdobná struktura)
+
+---
+
+## 2026-01-25 - Phase 17.8: AthletePublicProfile cleanup
+
+### Dokončeno
+- [x] Replaced 10+ inline SVG icons with Icon component
+- [x] Replaced custom stats banner with StatsBar component (cards variant, lg size)
+- [x] Replaced highlight card icons with Icon component via getHighlightIconName helper
+- [x] Build verification passed
+
+### Změny
+- **AthletePublicProfile.stories.tsx**:
+  - Removed inline SVG definitions: TrophyIcon, MedalIcon, RaceIcon, GlobeIcon, ShareIcon, TrendUpIcon
+  - Removed specialized highlight icons: OlympicMedalIcon, WorldChampionIcon, CupIcon, NationalChampionIcon, PromotionIcon
+  - Added imports: Icon, StatsBar, StatsBarItem
+  - Replaced getHighlightIcon function with getHighlightIconName returning IconName
+  - Stats banner now uses StatsBar component with 4 items (wins, podiums, races, world ranking)
+  - Highlight cards use Icon component with xl size
+
+### Poznámky
+- Icon mapping for highlights: olympic → medal, world → globe, cup → cup, national → star, promotion → promotion
+- StatsBar cards variant provides consistent styling across prototypes
