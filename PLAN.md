@@ -100,10 +100,10 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 - [x] Embed - přepracovat na Aesthetic
 - [x] Satellite - přepracovat na Aesthetic
 
-**RankingsPage** (5 → 2)
-- [ ] Embed - přepracovat na Aesthetic (s section switcher)
-- [ ] Satellite - přepracovat na Aesthetic
-- [ ] Odstranit: EmbedRychlostni, EmbedVodniTuristika, EmbedArchive (jako props/tabs)
+**RankingsPage** (5 → 2) ✅
+- [x] Embed - přepracovat na Aesthetic (s section switcher)
+- [x] Satellite - přepracovat na Aesthetic
+- [x] Odstranit: EmbedRychlostni, EmbedVodniTuristika, EmbedArchive (jako props/tabs)
 
 ---
 
@@ -141,7 +141,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.4 Vedlejší prototypy** - RankingsPage.
+**Fáze 16 dokončena!** Všechny prototypy jsou konsolidované na Aesthetic styl s variantami Embed/Satellite.
 
 ---
 

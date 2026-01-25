@@ -608,7 +608,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Prototyp stránky žebříčků CSK. Zobrazuje celkové žebříčky závodníků s filtrováním podle sekcí, disciplín a kategorií. Nahrazuje funkcionalitu Slalom World.',
+          'Prototyp stránky žebříčků CSK s Aesthetic designem. Zobrazuje celkové žebříčky závodníků s přepínáním sekcí (DV, RY, VT) a filtrováním podle disciplín a kategorií. Nahrazuje funkcionalitu Slalom World. Varianty: Embed (pro kanoe.cz), Satellite (standalone).',
       },
     },
   },
@@ -617,12 +617,12 @@ const meta = {
     variant: {
       control: 'select',
       options: ['standalone', 'satellite', 'embed'],
-      description: 'Display variant',
+      description: 'Display variant - standalone (full header), satellite (minimal), embed (no chrome)',
     },
     initialSection: {
       control: 'select',
       options: ['dv', 'ry', 'vt'],
-      description: 'Initial section filter',
+      description: 'Initial section filter (tabs)',
     },
     initialSeason: {
       control: 'select',
@@ -644,14 +644,20 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // ============================================================================
-// Integration Variants - Embed/Satellite only (Phase 8.11)
+// Integration Variants - Aesthetic (Phase 16.4)
 // ============================================================================
 
 /**
- * **EMBED varianta** - Žebříčky vložené do kanoe.cz layoutu.
+ * **EMBED varianta** - Aesthetic žebříčky v kontextu kanoe.cz
  *
  * Komponenta bez vlastního headeru a footeru, určená pro embedding
  * do existujícího webu kanoe.cz (Joomla + Bootstrap 4).
+ *
+ * **Features dostupné přes props:**
+ * - `initialSection` - přednastavenou sekci (dv, ry, vt)
+ * - `isArchive` - zobrazení archivního upozornění
+ * - `showPodium` - zobrazení top 3 závodníků
+ * - `initialSeason` - výběr sezóny
  */
 export const Embed: Story = {
   args: {
@@ -679,16 +685,23 @@ export const Embed: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Žebříčky embedované v kontextu kanoe.cz. Bez vlastního headeru/footeru.',
+        story: 'Aesthetic embed žebříčků v kontextu kanoe.cz. Přepínání sekcí (DV, RY, VT) pomocí tabs, filtry pro disciplíny a kategorie. Pro VT sekci zobrazuje přehled výkonnostních tříd (M, A, B, C).',
       },
     },
   },
 };
 
 /**
- * **SATELLITE varianta** - Standalone žebříčky s minimálním headerem.
+ * **SATELLITE varianta** - Aesthetic standalone s minimálním headerem
  *
- * Pro samostatnou aplikaci žebříčků s odkazem zpět na kanoe.cz.
+ * Samostatná aplikace žebříčků s odkazem zpět na kanoe.cz.
+ * Plný Aesthetic design s přepínáním sekcí a filtrováním.
+ *
+ * **Features dostupné přes props:**
+ * - `initialSection` - přednastavenou sekci (dv, ry, vt)
+ * - `isArchive` - zobrazení archivního upozornění
+ * - `showPodium` - zobrazení top 3 závodníků
+ * - `initialSeason` - výběr sezóny
  */
 export const Satellite: Story = {
   args: {
@@ -700,114 +713,7 @@ export const Satellite: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Standalone aplikace žebříčků s minimálním satellite headerem.',
-      },
-    },
-  },
-};
-
-/**
- * **EMBED + Rychlostní kanoistika** - Žebříčky rychlostní kanoistiky.
- */
-export const EmbedRychlostni: Story = {
-  args: {
-    variant: 'embed',
-    initialSection: 'ry',
-    showPodium: true,
-    isArchive: false,
-  },
-  decorators: [
-    (Story) => (
-      <KanoeCzContext
-        layout="full"
-        pageVariant="subpage"
-        pageTitle="Žebříčky - Rychlostní kanoistika"
-        breadcrumbs={[
-          { label: 'Úvod', href: '#' },
-          { label: 'Rychlostní', href: '#' },
-          { label: 'Žebříčky' },
-        ]}
-      >
-        <Story />
-      </KanoeCzContext>
-    ),
-  ],
-  parameters: {
-    docs: {
-      description: {
-        story: 'Žebříčky rychlostní kanoistiky s podiem.',
-      },
-    },
-  },
-};
-
-/**
- * **EMBED + Vodní turistika** - Žebříčky vodní turistiky s VT třídami.
- */
-export const EmbedVodniTuristika: Story = {
-  args: {
-    variant: 'embed',
-    initialSection: 'vt',
-    showPodium: false,
-    isArchive: false,
-  },
-  decorators: [
-    (Story) => (
-      <KanoeCzContext
-        layout="full"
-        pageVariant="subpage"
-        pageTitle="Žebříčky - Vodní turistika"
-        breadcrumbs={[
-          { label: 'Úvod', href: '#' },
-          { label: 'Vodní turistika', href: '#' },
-          { label: 'Výkonnostní třídy' },
-        ]}
-      >
-        <Story />
-      </KanoeCzContext>
-    ),
-  ],
-  parameters: {
-    docs: {
-      description: {
-        story: 'Přehled výkonnostních tříd vodní turistiky. Zobrazuje VT třídy (M, A, B, C) s počty závodníků a bodovými limity.',
-      },
-    },
-  },
-};
-
-/**
- * **EMBED + Archivní data** - Historické žebříčky z dřívějších sezón.
- */
-export const EmbedArchive: Story = {
-  args: {
-    variant: 'embed',
-    initialSection: 'dv',
-    initialSeason: '2023',
-    showPodium: true,
-    isArchive: true,
-  },
-  decorators: [
-    (Story) => (
-      <KanoeCzContext
-        layout="full"
-        pageVariant="subpage"
-        pageTitle="Archiv žebříčků"
-        breadcrumbs={[
-          { label: 'Úvod', href: '#' },
-          { label: 'Výsledky', href: '#' },
-          { label: 'Archiv', href: '#' },
-          { label: 'Žebříčky 2023' },
-        ]}
-      >
-        <Story />
-      </KanoeCzContext>
-    ),
-  ],
-  parameters: {
-    docs: {
-      description: {
-        story: 'Archivní žebříčky z předchozích sezón. Zobrazuje upozornění o archivních datech migrovaných ze Slalom World.',
+        story: 'Aesthetic standalone žebříčků se satellite headerem. Přepínání sekcí (DV, RY, VT) pomocí tabs, filtry pro disciplíny a kategorie.',
       },
     },
   },
