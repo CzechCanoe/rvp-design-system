@@ -256,3 +256,7 @@ export type {
   HeroSectionMetaItem,
   HeroActionButtonProps,
 } from './HeroSection';
+
+// CSKLogo
+export { CSKLogo } from './CSKLogo';
+export type { CSKLogoProps, CSKLogoSize } from './CSKLogo';

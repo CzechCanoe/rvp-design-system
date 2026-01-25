@@ -6,6 +6,7 @@ import { Tabs } from '../components/Tabs';
 import { Avatar } from '../components/Avatar';
 import { Icon } from '../components/Icon';
 import { StatsBar } from '../components/StatsBar';
+import { CSKLogo } from '../components/CSKLogo';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import './ClubPublicProfile.css';
 
@@ -111,11 +112,6 @@ function getSectionName(section: 'dv' | 'ry' | 'vt'): string {
 // ============================================================================
 // ClubPublicProfile Component
 // ============================================================================
-
-// CSK Logo component for satellite header
-const CSKLogo = () => (
-  <span className="club-public-profile__logo">CSK</span>
-);
 
 function ClubPublicProfile({
   variant = 'standalone',

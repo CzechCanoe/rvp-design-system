@@ -10,6 +10,7 @@ import { Pagination } from '../components/Pagination';
 import { AthleteCard } from '../components/AthleteCard';
 import { Icon } from '../components/Icon';
 import { StatsBar } from '../components/StatsBar';
+import { CSKLogo } from '../components/CSKLogo';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import './AthletesListPage.css';
 
@@ -103,12 +104,6 @@ const sortOptions = [
 // ============================================================================
 // Page Component
 // ============================================================================
-
-const CSKLogo = () => (
-  <span className="prototype-athletes-list__logo">
-    <span className="prototype-athletes-list__logo-text">CSK</span>
-  </span>
-);
 
 const AthletesListPage = ({
   variant = 'standalone',

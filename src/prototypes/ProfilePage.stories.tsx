@@ -12,6 +12,7 @@ import { Table, type ColumnDef } from '../components/Table';
 import { Progress } from '../components/Progress';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import { Icon } from '../components/Icon';
+import { CSKLogo } from '../components/CSKLogo';
 import './ProfilePage.css';
 
 // ============================================================================
@@ -510,14 +511,6 @@ function formatRelativeTime(timestamp: string): string {
 
 // ============================================================================
 // CSK Logo for satellite header
-// ============================================================================
-
-const CSKLogo = () => (
-  <span className="profile-page__logo">
-    <span className="profile-page__logo-text">CSK</span>
-  </span>
-);
-
 // ============================================================================
 // Profile Page Component
 // ============================================================================

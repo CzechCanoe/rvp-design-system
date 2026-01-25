@@ -11,6 +11,7 @@ import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import { Icon } from '../components/Icon';
 import { StatsBar, type StatsBarItem } from '../components/StatsBar';
+import { CSKLogo } from '../components/CSKLogo';
 import './RankingsPage.css';
 
 // ============================================================================
@@ -129,12 +130,6 @@ const ageCategoryOptions = [
 // ============================================================================
 // Page Component
 // ============================================================================
-
-const CSKLogo = () => (
-  <span className="prototype-rankings__logo">
-    <span className="prototype-rankings__logo-text">CSK</span>
-  </span>
-);
 
 const RankingsPage = ({
   variant = 'standalone',

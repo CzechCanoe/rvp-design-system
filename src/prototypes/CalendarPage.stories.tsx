@@ -15,6 +15,7 @@ import { LiveIndicator } from '../components/LiveIndicator';
 import { EmptyState } from '../components/EmptyState';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import { Icon } from '../components/Icon';
+import { CSKLogo } from '../components/CSKLogo';
 import './CalendarPage.css';
 
 // ============================================================================
@@ -204,13 +205,6 @@ const navItems = [
 ];
 
 // Note: Inline SVG icons replaced with Icon component (Phase 17.9)
-
-// CSK Logo component for satellite header
-const CSKLogo = () => (
-  <span className="prototype-calendar-page__logo">
-    <span className="prototype-calendar-page__logo-text">CSK</span>
-  </span>
-);
 
 const CalendarPage = ({
   initialSection = 'all',

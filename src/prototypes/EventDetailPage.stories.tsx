@@ -10,6 +10,7 @@ import { Input } from '../components/Input';
 import { Tabs } from '../components/Tabs';
 import { LiveIndicator } from '../components/LiveIndicator';
 import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
+import { CSKLogo } from '../components/CSKLogo';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import './EventDetailPage.css';
 
@@ -180,13 +181,6 @@ function getDaysUntil(date: Date): number {
 // ============================================================================
 // Page Component
 // ============================================================================
-
-// CSK Logo component for satellite header
-const CSKLogo = () => (
-  <span className="event-detail-page__logo">
-    <span className="event-detail-page__logo-text">CSK</span>
-  </span>
-);
 
 const EventDetailPage = ({
   status = 'upcoming',

@@ -1,0 +1,59 @@
+/* ==========================================================================
+   CSKLogo Component
+   ========================================================================== */
+
+.csk-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  text-decoration: none;
+  color: inherit;
+}
+
+.csk-logo__text {
+  font-weight: var(--font-bold);
+  color: var(--color-primary-600);
+  line-height: 1;
+}
+
+.csk-logo__subtitle {
+  color: var(--color-text-tertiary);
+  display: none;
+}
+
+/* Size variants */
+.csk-logo--sm .csk-logo__text {
+  font-size: var(--text-base-size);
+}
+
+.csk-logo--sm .csk-logo__subtitle {
+  font-size: var(--text-2xs-size, 0.625rem);
+}
+
+.csk-logo--md .csk-logo__text {
+  font-size: var(--text-xl-size);
+}
+
+.csk-logo--md .csk-logo__subtitle {
+  font-size: var(--text-xs-size);
+}
+
+.csk-logo--lg .csk-logo__text {
+  font-size: var(--text-2xl-size);
+}
+
+.csk-logo--lg .csk-logo__subtitle {
+  font-size: var(--text-sm-size);
+}
+
+/* Show subtitle on larger screens */
+@media (min-width: 768px) {
+  .csk-logo__subtitle {
+    display: block;
+  }
+}
+
+/* Dark mode */
+[data-theme='dark'] .csk-logo__text {
+  color: var(--color-primary-400);
+}

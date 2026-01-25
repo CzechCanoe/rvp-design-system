@@ -10,6 +10,7 @@ import { Pagination } from '../components/Pagination';
 import { Badge } from '../components/Badge';
 import { Icon } from '../components/Icon';
 import { StatsBar } from '../components/StatsBar';
+import { CSKLogo } from '../components/CSKLogo';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import './ClubsListPage.css';
 
@@ -166,12 +167,6 @@ const ClubCard = ({ club, onClick }: ClubCardProps) => {
 // ============================================================================
 // Page Component
 // ============================================================================
-
-const CSKLogo = () => (
-  <span className="prototype-clubs-list__logo">
-    <span className="prototype-clubs-list__logo-text">CSK</span>
-  </span>
-);
 
 const ClubsListPage = ({
   variant = 'standalone',

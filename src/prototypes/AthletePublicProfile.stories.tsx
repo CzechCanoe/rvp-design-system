@@ -5,6 +5,7 @@ import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
 import { Icon } from '../components/Icon';
 import { StatsBar, type StatsBarItem } from '../components/StatsBar';
+import { CSKLogo } from '../components/CSKLogo';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import './AthletePublicProfile.css';
 
@@ -233,11 +234,6 @@ function getRankClass(rank: number): string {
 // ============================================================================
 // AthletePublicProfile Component
 // ============================================================================
-
-// CSK Logo component for satellite header
-const CSKLogo = () => (
-  <span className="athlete-public-profile__logo">CSK</span>
-);
 
 function AthletePublicProfile({
   section = 'dv',

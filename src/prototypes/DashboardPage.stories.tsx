@@ -11,6 +11,7 @@ import { StatCard } from '../components/StatCard';
 import { Table, type ColumnDef } from '../components/Table';
 import { Avatar } from '../components/Avatar';
 import { LiveIndicator } from '../components/LiveIndicator';
+import { CSKLogo } from '../components/CSKLogo';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import './DashboardPage.css';
 
@@ -307,12 +308,6 @@ const getRoleLabel = (role: string): string => {
 // ============================================================================
 // CSK Logo Component (for satellite header)
 // ============================================================================
-
-const CSKLogo = () => (
-  <span className="dashboard-page__logo">
-    <span className="dashboard-page__logo-text">CSK</span>
-  </span>
-);
 
 // Note: Icons migrated to Icon component (Phase 17.11)
 // Note: WaveSVG and pulse rings removed for cleaner design (Phase 8.6.3)

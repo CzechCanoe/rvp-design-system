@@ -13,6 +13,7 @@ import { Pagination } from '../components/Pagination';
 import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import { Icon } from '../components/Icon';
+import { CSKLogo } from '../components/CSKLogo';
 import './ResultsPage.css';
 
 // ============================================================================
@@ -136,13 +137,6 @@ function getInitials(name: string): string {
 // ============================================================================
 // Page Component
 // ============================================================================
-
-// CSK Logo for satellite header
-const CSKLogo = () => (
-  <span className="prototype-results-page__logo">
-    <span className="prototype-results-page__logo-text">CSK</span>
-  </span>
-);
 
 const ResultsPage = ({
   initialCategory = 'K1M',

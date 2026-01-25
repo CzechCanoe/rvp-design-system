@@ -118,7 +118,7 @@
 2. **Střední priorita:**
    - [x] `<SectionHeader />` s title a optional action
    - [ ] `<FilterPills />` pro filtry
-   - [ ] `<CSKLogo />` pro konzistentní branding
+   - [x] `<CSKLogo />` pro konzistentní branding
 
 3. **Nízká priorita:**
    - [ ] `<PodiumCard />` (pouze 2 použití)

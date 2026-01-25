@@ -5877,3 +5877,24 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 
 ### Notes
 All 12 prototypes now use the unified Icon component. Section 17.3 (Prototype Icon Cleanup) is complete.
+
+---
+
+## 2026-01-25 - Phase 17.12: CSKLogo Component Extraction
+
+### Completed
+- [x] Created `<CSKLogo />` component with size variants (sm/md/lg)
+- [x] Added optional subtitle prop (responsive - hidden on mobile)
+- [x] Link support via href prop
+- [x] Refactored all 12 prototypes to use shared CSKLogo component
+- [x] Removed local CSKLogo definitions from prototypes
+
+### Technical Details
+- Component: `src/components/CSKLogo/`
+- Files: CSKLogo.tsx, CSKLogo.css, CSKLogo.stories.tsx, index.ts
+- Export added to `src/components/index.ts`
+
+### Impact
+- Eliminated 12 duplicate CSKLogo implementations
+- Consistent branding across all prototypes
+- Smaller prototype files (removed ~60 lines total)

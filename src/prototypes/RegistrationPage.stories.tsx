@@ -15,6 +15,7 @@ import { ToastProvider, useToast } from '../components/Toast';
 import { EmptyState } from '../components/EmptyState';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import { Icon } from '../components/Icon';
+import { CSKLogo } from '../components/CSKLogo';
 import './RegistrationPage.css';
 
 // ============================================================================
@@ -123,12 +124,6 @@ const sectionNames: Record<string, string> = {
 // ============================================================================
 // CSK Logo Component (for satellite header)
 // ============================================================================
-
-const CSKLogo = () => (
-  <span className="registration-page__satellite-logo">
-    <span className="registration-page__satellite-logo-text">CSK</span>
-  </span>
-);
 
 // Note: All icons now use the Icon component from the design system
 
