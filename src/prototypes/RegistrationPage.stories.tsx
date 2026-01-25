@@ -14,6 +14,7 @@ import { Modal } from '../components/Modal';
 import { ToastProvider, useToast } from '../components/Toast';
 import { EmptyState } from '../components/EmptyState';
 import { KanoeCzContext } from '../components/KanoeCzContext';
+import { Icon } from '../components/Icon';
 import './RegistrationPage.css';
 
 // ============================================================================
@@ -129,135 +130,7 @@ const CSKLogo = () => (
   </span>
 );
 
-// ============================================================================
-// Icons
-// ============================================================================
-
-const SearchIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="8" />
-    <path d="M21 21l-4.35-4.35" />
-  </svg>
-);
-
-const LocationIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-    <circle cx="12" cy="10" r="3" />
-  </svg>
-);
-
-const CalendarIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-    <line x1="16" y1="2" x2="16" y2="6" />
-    <line x1="8" y1="2" x2="8" y2="6" />
-    <line x1="3" y1="10" x2="21" y2="10" />
-  </svg>
-);
-
-const ClockIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" />
-    <polyline points="12 6 12 12 16 14" />
-  </svg>
-);
-
-const UserPlusIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-    <circle cx="8.5" cy="7" r="4" />
-    <line x1="20" y1="8" x2="20" y2="14" />
-    <line x1="23" y1="11" x2="17" y2="11" />
-  </svg>
-);
-
-const TrashIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="3 6 5 6 21 6" />
-    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-  </svg>
-);
-
-const AlertIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" />
-    <line x1="12" y1="8" x2="12" y2="12" />
-    <line x1="12" y1="16" x2="12.01" y2="16" />
-  </svg>
-);
-
-const CheckCircleIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-    <polyline points="22 4 12 14.01 9 11.01" />
-  </svg>
-);
-
-const SendIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="22" y1="2" x2="11" y2="13" />
-    <polygon points="22 2 15 22 11 13 2 9 22 2" />
-  </svg>
-);
-
-const UsersIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-    <circle cx="9" cy="7" r="4" />
-    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-  </svg>
-);
-
-const UsersTeamIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-    <circle cx="9" cy="7" r="4" />
-    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-  </svg>
-);
-
-const XIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="18" y1="6" x2="6" y2="18" />
-    <line x1="6" y1="6" x2="18" y2="18" />
-  </svg>
-);
-
-const PlusIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="12" y1="5" x2="12" y2="19" />
-    <line x1="5" y1="12" x2="19" y2="12" />
-  </svg>
-);
-
-const ChevronRightIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="9 18 15 12 9 6" />
-  </svg>
-);
-
-const FileTextIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-    <polyline points="14 2 14 8 20 8" />
-    <line x1="16" y1="13" x2="8" y2="13" />
-    <line x1="16" y1="17" x2="8" y2="17" />
-    <polyline points="10 9 9 9 8 9" />
-  </svg>
-);
-
-const ClipboardCheckIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
-    <rect x="9" y="3" width="6" height="4" rx="2" />
-    <path d="M9 14l2 2 4-4" />
-  </svg>
-);
-
-// Note: WaveDecoration removed for cleaner design (Phase 8.6.3)
+// Note: All icons now use the Icon component from the design system
 
 // ============================================================================
 // Helper Functions
@@ -309,7 +182,7 @@ const WizardStep = ({ step, currentStep, label, icon, isLast = false }: WizardSt
     <div className={`registration-wizard-step ${isActive ? 'registration-wizard-step--active' : ''} ${isCompleted ? 'registration-wizard-step--completed' : ''}`}>
       <div className="registration-wizard-step__indicator">
         <div className="registration-wizard-step__circle">
-          {isCompleted ? <CheckCircleIcon /> : icon}
+          {isCompleted ? <Icon name="check-circle" size="sm" /> : icon}
         </div>
         {!isLast && <div className="registration-wizard-step__line" />}
       </div>
@@ -479,9 +352,9 @@ const RegistrationPageInner = ({
 
   // Steps configuration
   const steps = [
-    { id: 'header', label: 'Záhlaví přihlášky', icon: <FileTextIcon /> },
-    { id: 'athletes', label: 'Výběr závodníků', icon: <UsersIcon /> },
-    { id: 'summary', label: 'Shrnutí a odeslání', icon: <ClipboardCheckIcon /> },
+    { id: 'header', label: 'Záhlaví přihlášky', icon: <Icon name="file-text" size="md" /> },
+    { id: 'athletes', label: 'Výběr závodníků', icon: <Icon name="users" size="sm" /> },
+    { id: 'summary', label: 'Shrnutí a odeslání', icon: <Icon name="clipboard-check" size="md" /> },
   ];
 
   // Calculate time to deadline
@@ -556,7 +429,7 @@ const RegistrationPageInner = ({
             type="search"
             placeholder="Hledat..."
             size="sm"
-            iconLeft={<SearchIcon />}
+            iconLeft={<Icon name="search" size="md" />}
           />
         }
         userMenu={
@@ -597,15 +470,15 @@ const RegistrationPageInner = ({
                 <h1 className="registration-page-header__title">{raceData.name}</h1>
                 <p className="registration-page-header__meta">
                   <span className="registration-page-header__meta-item">
-                    <CalendarIcon />
+                    <Icon name="calendar" size="sm" />
                     {raceData.date}
                   </span>
                   <span className="registration-page-header__meta-item">
-                    <LocationIcon />
+                    <Icon name="location" size="sm" />
                     {raceData.location}
                   </span>
                   <span className="registration-page-header__meta-item">
-                    <ClockIcon />
+                    <Icon name="clock" size="sm" />
                     {timeToDeadline.text} do uzávěrky
                   </span>
                 </p>
@@ -626,9 +499,9 @@ const RegistrationPageInner = ({
           {/* Breadcrumb */}
           <nav className="registration-page-hero__breadcrumb">
             <a href="#" className="registration-page-hero__breadcrumb-link">Přihlášky</a>
-            <ChevronRightIcon />
+            <Icon name="chevron-right" size="sm" />
             <a href="#" className="registration-page-hero__breadcrumb-link">Kalendář závodů</a>
-            <ChevronRightIcon />
+            <Icon name="chevron-right" size="sm" />
             <span className="registration-page-hero__breadcrumb-current">{raceData.name}</span>
           </nav>
 
@@ -645,11 +518,11 @@ const RegistrationPageInner = ({
               <h1 className="registration-page-hero__title">{raceData.name}</h1>
               <div className="registration-page-hero__meta">
                 <span className="registration-page-hero__meta-item">
-                  <CalendarIcon />
+                  <Icon name="calendar" size="sm" />
                   {raceData.date}
                 </span>
                 <span className="registration-page-hero__meta-item">
-                  <LocationIcon />
+                  <Icon name="location" size="sm" />
                   {raceData.location}
                 </span>
               </div>
@@ -658,7 +531,7 @@ const RegistrationPageInner = ({
             <div className="registration-page-hero__stats">
               <div className="registration-page-hero__stat registration-page-hero__stat--deadline">
                 <div className="registration-page-hero__stat-icon">
-                  <ClockIcon />
+                  <Icon name="clock" size="sm" />
                 </div>
                 <div className="registration-page-hero__stat-content">
                   <span className="registration-page-hero__stat-value">{timeToDeadline.days}</span>
@@ -667,7 +540,7 @@ const RegistrationPageInner = ({
               </div>
               <div className="registration-page-hero__stat">
                 <div className="registration-page-hero__stat-icon">
-                  <UsersIcon />
+                  <Icon name="users" size="sm" />
                 </div>
                 <div className="registration-page-hero__stat-content">
                   <span className="registration-page-hero__stat-value">{athletes.length}</span>
@@ -717,7 +590,7 @@ const RegistrationPageInner = ({
       rgc: rgcDisplay,
       category: (
         <div className="registration-page__category-cell">
-          {isCrew && <UsersTeamIcon />}
+          {isCrew && <Icon name="users-team" size="sm" />}
           <span>{entry.boatCategory}</span>
         </div>
       ),
@@ -729,17 +602,17 @@ const RegistrationPageInner = ({
         <div className="registration-page__status-cell">
           {hasHealthIssue && (
             <Badge variant={healthStatus.variant === 'error' || partnerHealthStatus?.variant === 'error' ? 'error' : 'warning'} size="sm">
-              <AlertIcon /> Prohlídka
+              <Icon name="alert-circle" size="sm" /> Prohlídka
             </Badge>
           )}
           {hasFeeIssue && (
             <Badge variant="warning" size="sm">
-              <AlertIcon /> Příspěvky
+              <Icon name="alert-circle" size="sm" /> Příspěvky
             </Badge>
           )}
           {!hasHealthIssue && !hasFeeIssue && (
             <Badge variant="success" size="sm">
-              <CheckCircleIcon /> OK
+              <Icon name="check-circle" size="sm" /> OK
             </Badge>
           )}
         </div>
@@ -748,7 +621,7 @@ const RegistrationPageInner = ({
         <Button
           variant="ghost"
           size="sm"
-          iconLeft={<TrashIcon />}
+          iconLeft={<Icon name="trash" size="sm" />}
           onClick={() => removeEntry(entry.id)}
           aria-label="Odebrat závodníka"
         />
@@ -810,7 +683,7 @@ const RegistrationPageInner = ({
                 <Card variant="surface" padding="lg" className="registration-page__step-card">
                   <div className="registration-page__step-header">
                     <div className="registration-page__step-icon">
-                      <FileTextIcon />
+                      <Icon name="file-text" size="md" />
                     </div>
                     <div>
                       <h2 className="registration-page__section-title">Záhlaví přihlášky</h2>
@@ -887,7 +760,7 @@ const RegistrationPageInner = ({
                     <div className="registration-page__athletes-header">
                       <div className="registration-page__step-header">
                         <div className="registration-page__step-icon">
-                          <UsersIcon />
+                          <Icon name="users" size="sm" />
                         </div>
                         <div>
                           <h2 className="registration-page__section-title">Výběr závodníků</h2>
@@ -898,7 +771,7 @@ const RegistrationPageInner = ({
                       </div>
                       <Button
                         variant="primary"
-                        iconLeft={<UserPlusIcon />}
+                        iconLeft={<Icon name="user-plus" size="md" />}
                         onClick={openAthleteModal}
                       >
                         Přidat závodníka
@@ -944,7 +817,7 @@ const RegistrationPageInner = ({
                         action={
                           <Button
                             variant="primary"
-                            iconLeft={<UserPlusIcon />}
+                            iconLeft={<Icon name="user-plus" size="md" />}
                             onClick={openAthleteModal}
                           >
                             Přidat závodníka
@@ -975,7 +848,7 @@ const RegistrationPageInner = ({
                   <Card variant="surface" padding="lg" className="registration-page__step-card">
                     <div className="registration-page__step-header">
                       <div className="registration-page__step-icon registration-page__step-icon--success">
-                        <ClipboardCheckIcon />
+                        <Icon name="clipboard-check" size="md" />
                       </div>
                       <div>
                         <h2 className="registration-page__section-title">Shrnutí přihlášky</h2>
@@ -1039,7 +912,7 @@ const RegistrationPageInner = ({
 
                     {entriesWithWarnings > 0 && (
                       <div className="registration-page__warning-box">
-                        <AlertIcon />
+                        <Icon name="alert-circle" size="sm" />
                         <div>
                           <strong>Upozornění:</strong> {entriesWithWarnings} závodník(ů) má nevyhovující stav
                           (propadlá prohlídka nebo nezaplacené příspěvky). Přihlášku lze odeslat,
@@ -1062,7 +935,7 @@ const RegistrationPageInner = ({
                     </Button>
                     <Button
                       variant="primary"
-                      iconLeft={<SendIcon />}
+                      iconLeft={<Icon name="send" size="sm" />}
                       onClick={() => {
                         toast.success('Vaše přihláška byla úspěšně odeslána. Potvrzení obdržíte e-mailem.', {
                           title: 'Přihláška odeslána',
@@ -1113,7 +986,7 @@ const RegistrationPageInner = ({
               {/* Deadline Card */}
               <Card variant="outlined" padding="md" className={`registration-page__deadline-card registration-page__deadline-card--${section}`}>
                 <div className="registration-page__deadline-header">
-                  <ClockIcon />
+                  <Icon name="clock" size="sm" />
                   <h3 className="registration-page__card-title">Uzávěrka přihlášek</h3>
                 </div>
                 <p className="registration-page__deadline-date">{formatDate(raceData.deadline)}</p>
@@ -1175,7 +1048,7 @@ const RegistrationPageInner = ({
           {pendingCrewEntry && selectionMode === 'partner' && (
             <div className="registration-page__pending-crew">
               <div className="registration-page__pending-crew-info">
-                <UsersTeamIcon />
+                <Icon name="users-team" size="sm" />
                 <span className="registration-page__pending-crew-label">Posádka {pendingCrewEntry.boatCategory}:</span>
                 <span className="registration-page__pending-crew-name">{pendingCrewEntry.athlete.name}</span>
                 <span className="registration-page__pending-crew-plus">+</span>
@@ -1184,7 +1057,7 @@ const RegistrationPageInner = ({
               <Button
                 variant="ghost"
                 size="sm"
-                iconLeft={<XIcon />}
+                iconLeft={<Icon name="x" size="sm" />}
                 onClick={cancelCrewSelection}
               >
                 Zrušit
@@ -1196,7 +1069,7 @@ const RegistrationPageInner = ({
             <Input
               type="search"
               placeholder="Hledat podle jména nebo RGC..."
-              iconLeft={<SearchIcon />}
+              iconLeft={<Icon name="search" size="md" />}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               clearable
@@ -1255,12 +1128,12 @@ const RegistrationPageInner = ({
                     </div>
                     <div className="registration-page__athlete-status">
                       <Badge variant={healthStatus.variant} size="sm">
-                        {athlete.healthCheck === 'valid' ? <CheckCircleIcon /> : <AlertIcon />}
+                        {athlete.healthCheck === 'valid' ? <Icon name="check-circle" size="sm" /> : <Icon name="alert-circle" size="sm" />}
                         {healthStatus.label}
                       </Badge>
                       {athlete.fees === 'unpaid' && (
                         <Badge variant="warning" size="sm">
-                          <AlertIcon /> Nezaplaceno
+                          <Icon name="alert-circle" size="sm" /> Nezaplaceno
                         </Badge>
                       )}
                     </div>
@@ -1269,7 +1142,7 @@ const RegistrationPageInner = ({
                       size="sm"
                       onClick={() => addAthleteToEntry(athlete)}
                       disabled={isDisabled}
-                      iconLeft={selectionMode === 'partner' && !isDisabled ? <PlusIcon /> : undefined}
+                      iconLeft={selectionMode === 'partner' && !isDisabled ? <Icon name="plus" size="sm" /> : undefined}
                     >
                       {isFirstAthlete ? 'Vybrán' : alreadyAdded ? 'Přidáno' : selectionMode === 'partner' ? 'Přidat partnera' : 'Přidat'}
                     </Button>

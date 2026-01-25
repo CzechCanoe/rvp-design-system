@@ -5834,3 +5834,18 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 ### Metriky
 - Řádky kódu: ~1329 → ~1170 (redukce ~159 řádků)
 - Inline SVG ikony: 15 → 0
+
+---
+
+## 2026-01-25 - Fáze 17.11: RegistrationPage cleanup
+
+### Dokončeno
+- [x] Nahrazeno 16 inline SVG ikon za Icon komponentu
+- [x] Odstraněny definice: SearchIcon, LocationIcon, CalendarIcon, ClockIcon, UserPlusIcon, TrashIcon, AlertIcon, CheckCircleIcon, SendIcon, UsersIcon, UsersTeamIcon, XIcon, PlusIcon, ChevronRightIcon, FileTextIcon, ClipboardCheckIcon
+- [x] Build ověřen
+
+### Změny
+- `RegistrationPage.stories.tsx`: -115 řádků (odstranění inline SVG definic)
+
+### Poznámky
+- Použity správné velikosti ikon: md (20px) pro hlavní akce, sm (16px) pro indikátory a metadata
