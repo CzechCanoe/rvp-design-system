@@ -1177,3 +1177,23 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================================
+   Phase 17.8: Helper classes for inline style replacement
+   ============================================================================ */
+
+.prototype-results-page__tab-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.prototype-results-page__search-input {
+  width: 200px;
+}
+
+.prototype-results-page__pagination {
+  margin-top: var(--spacing-4);
+  display: flex;
+  justify-content: center;
+}

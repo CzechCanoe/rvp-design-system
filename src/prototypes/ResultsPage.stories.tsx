@@ -12,6 +12,7 @@ import { LiveIndicator } from '../components/LiveIndicator';
 import { Pagination } from '../components/Pagination';
 import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
 import { KanoeCzContext } from '../components/KanoeCzContext';
+import { Icon } from '../components/Icon';
 import './ResultsPage.css';
 
 // ============================================================================
@@ -105,86 +106,7 @@ const navItems = [
   { id: 'clubs', label: 'Kluby', href: '#' },
 ];
 
-// ============================================================================
-// Icons
-// ============================================================================
-
-const SearchIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="8" />
-    <path d="M21 21l-4.35-4.35" />
-  </svg>
-);
-
-const LocationIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-    <circle cx="12" cy="10" r="3" />
-  </svg>
-);
-
-const CalendarIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-    <line x1="16" y1="2" x2="16" y2="6" />
-    <line x1="8" y1="2" x2="8" y2="6" />
-    <line x1="3" y1="10" x2="21" y2="10" />
-  </svg>
-);
-
-const UsersIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-    <circle cx="9" cy="7" r="4" />
-    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-  </svg>
-);
-
-const DownloadIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-    <polyline points="7 10 12 15 17 10" />
-    <line x1="12" y1="15" x2="12" y2="3" />
-  </svg>
-);
-
-const PrintIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="6 9 6 2 18 2 18 9" />
-    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-    <rect x="6" y="14" width="12" height="8" />
-  </svg>
-);
-
-const ShareIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="18" cy="5" r="3" />
-    <circle cx="6" cy="12" r="3" />
-    <circle cx="18" cy="19" r="3" />
-    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-  </svg>
-);
-
-const ChevronRightIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="9 18 15 12 9 6" />
-  </svg>
-);
-
-const TrophyIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
-    <path d="M4 22h16" />
-    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
-    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
-    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
-  </svg>
-);
-
-// Note: Wave decoration and MedalIcon removed for cleaner design (Phase 8.6.3, 15.4)
+// Note: Inline SVG icons replaced with Icon component (Phase 17.8)
 
 // ============================================================================
 // Helper Functions
@@ -262,7 +184,7 @@ const ResultsPage = ({
   const categoryTabs = categories.map((cat) => ({
     id: cat.id,
     label: (
-      <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <span className="prototype-results-page__tab-label">
         {cat.name}
         <Badge variant="default" size="sm">
           {cat.count}
@@ -330,7 +252,7 @@ const ResultsPage = ({
             type="search"
             placeholder="Hledat..."
             size="sm"
-            iconLeft={<SearchIcon />}
+            iconLeft={<Icon name="search" size="md" />}
           />
         }
         userMenu={
@@ -382,15 +304,15 @@ const ResultsPage = ({
                 </div>
                 <div className="results-page-header__meta">
                   <span className="results-page-header__meta-item">
-                    <CalendarIcon />
+                    <Icon name="calendar" size="sm" />
                     3.–5. května 2026
                   </span>
                   <span className="results-page-header__meta-item">
-                    <LocationIcon />
+                    <Icon name="location" size="sm" />
                     Praha – Troja
                   </span>
                   <span className="results-page-header__meta-item">
-                    <UsersIcon />
+                    <Icon name="users" size="sm" />
                     156 závodníků
                   </span>
                 </div>
@@ -419,7 +341,7 @@ const ResultsPage = ({
         <section className="results-page-podium">
           <div className="results-page-podium__container">
             <div className="results-page-podium__header">
-              <TrophyIcon />
+              <Icon name="trophy" size="md" />
               <h2 className="results-page-podium__title">Stupně vítězů – {categories.find(c => c.id === selectedCategory)?.name}</h2>
             </div>
             <div className="results-page-podium__grid">
@@ -443,7 +365,7 @@ const ResultsPage = ({
                   </div>
                 </div>
                 <span className="results-page-podium__arrow">
-                  <ChevronRightIcon />
+                  <Icon name="chevron-right" size="sm" />
                 </span>
               </button>
 
@@ -470,7 +392,7 @@ const ResultsPage = ({
                   </div>
                 </div>
                 <span className="results-page-podium__arrow">
-                  <ChevronRightIcon />
+                  <Icon name="chevron-right" size="sm" />
                 </span>
               </button>
 
@@ -497,7 +419,7 @@ const ResultsPage = ({
                   </div>
                 </div>
                 <span className="results-page-podium__arrow">
-                  <ChevronRightIcon />
+                  <Icon name="chevron-right" size="sm" />
                 </span>
               </button>
             </div>
@@ -531,7 +453,7 @@ const ResultsPage = ({
                     type="search"
                     placeholder="Hledat závodníka..."
                     size="sm"
-                    iconLeft={<SearchIcon />}
+                    iconLeft={<Icon name="search" size="md" />}
                     value={searchQuery}
                     onChange={(e) => {
                       setSearchQuery(e.target.value);
@@ -539,7 +461,7 @@ const ResultsPage = ({
                     }}
                     clearable
                     onClear={() => setSearchQuery('')}
-                    style={{ width: '200px' }}
+                    className="prototype-results-page__search-input"
                   />
                   <Select
                     options={[
@@ -562,10 +484,10 @@ const ResultsPage = ({
                   </span>
                 </h2>
                 <div className="prototype-results-page__results-actions">
-                  <Button variant="ghost" size="sm" iconLeft={<PrintIcon />}>
+                  <Button variant="ghost" size="sm" iconLeft={<Icon name="print" size="sm" />}>
                     Tisk
                   </Button>
-                  <Button variant="ghost" size="sm" iconLeft={<ShareIcon />}>
+                  <Button variant="ghost" size="sm" iconLeft={<Icon name="share" size="sm" />}>
                     Sdílet
                   </Button>
                 </div>
@@ -587,7 +509,7 @@ const ResultsPage = ({
 
               {/* Pagination */}
               {totalPages > 1 && (
-                <div style={{ marginTop: 'var(--spacing-4)', display: 'flex', justifyContent: 'center' }}>
+                <div className="prototype-results-page__pagination">
                   <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
@@ -653,7 +575,7 @@ const ResultsPage = ({
                       <span className="prototype-results-page__category-name">{cat.name}</span>
                       <span className="prototype-results-page__category-count">
                         {cat.count}
-                        <ChevronRightIcon />
+                        <Icon name="chevron-right" size="sm" />
                       </span>
                     </button>
                   ))}
@@ -664,13 +586,13 @@ const ResultsPage = ({
               <Card variant="surface" className="prototype-results-page__downloads">
                 <h3 className="prototype-results-page__downloads-title">Ke stažení</h3>
                 <div className="prototype-results-page__downloads-list">
-                  <Button variant="secondary" size="sm" fullWidth iconLeft={<DownloadIcon />}>
+                  <Button variant="secondary" size="sm" fullWidth iconLeft={<Icon name="download" size="sm" />}>
                     Výsledky PDF
                   </Button>
-                  <Button variant="secondary" size="sm" fullWidth iconLeft={<DownloadIcon />}>
+                  <Button variant="secondary" size="sm" fullWidth iconLeft={<Icon name="download" size="sm" />}>
                     Výsledky Excel
                   </Button>
-                  <Button variant="secondary" size="sm" fullWidth iconLeft={<DownloadIcon />}>
+                  <Button variant="secondary" size="sm" fullWidth iconLeft={<Icon name="download" size="sm" />}>
                     Startovní listina
                   </Button>
                 </div>

@@ -160,7 +160,7 @@
 3. [x] RankingsPage - refaktorováno: Icon, StatsBar
 4. [x] ClubPublicProfile - refaktorováno: Icon, StatsBar
 5. [x] AthletePublicProfile - refaktorováno: Icon, StatsBar
-6. [ ] ResultsPage
+6. [x] ResultsPage - refaktorováno: Icon, inline styles → CSS classes
 7. [ ] CalendarPage
 8. [ ] EventDetailPage
 9. [ ] ProfilePage
