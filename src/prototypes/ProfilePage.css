@@ -649,6 +649,19 @@
 }
 
 /* ============================================================================
+   Embed Variant - Profile embedded in kanoe.cz context
+   ============================================================================ */
+
+.profile-page--embed {
+  background-color: transparent;
+}
+
+/* Embed: no margin-top on main (no hero to overlap) */
+.profile-page--embed .profile-main {
+  margin-top: 0;
+}
+
+/* ============================================================================
    Satellite Variant - Clean internal profile design
    ============================================================================ */
 

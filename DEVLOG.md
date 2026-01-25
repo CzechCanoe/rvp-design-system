@@ -5143,3 +5143,22 @@ EventDetailPage (7 → 3 varianty)
 
 ### Poznámky
 Dashboard je interní správa, proto nemá Expressive variantu (pouze Embed a Satellite).
+
+---
+
+## 2026-01-25 - Fáze 16.4: ProfilePage konsolidace
+
+### Dokončeno
+- [x] ProfilePage: konsolidováno z 1 na 2 aesthetic varianty (Embed, Satellite)
+- [x] Přidán import KanoeCzContext pro embed variantu
+- [x] Odstraněna nevyužívaná standalone hero sekce
+- [x] Přidány CSS styly pro embed variantu
+- [x] Vyčištěny nepoužívané importy (MainNav, navItems, StarIcon)
+
+### Technické poznámky
+- Embed varianta: bez vlastního headeru, používá KanoeCzContext wrapper
+- Satellite varianta: zachován minimální header s CSK brandingem
+- Obě varianty používají sjednocený page header design (avatar, jméno, badges)
+
+### Další krok
+AthletesListPage - konsolidace na 2 aesthetic varianty

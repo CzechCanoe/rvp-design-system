@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { Header } from '../components/Header';
-import { MainNav } from '../components/Navigation';
 import { Card } from '../components/Card';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
@@ -11,6 +10,7 @@ import { StatCard } from '../components/StatCard';
 import { Timeline, type TimelineItem } from '../components/Timeline';
 import { Table, type ColumnDef } from '../components/Table';
 import { Progress } from '../components/Progress';
+import { KanoeCzContext } from '../components/KanoeCzContext';
 import './ProfilePage.css';
 
 // ============================================================================
@@ -18,7 +18,7 @@ import './ProfilePage.css';
 // ============================================================================
 
 /** Display variant for the page */
-type ProfilePageVariant = 'standalone' | 'satellite';
+type ProfilePageVariant = 'embed' | 'satellite';
 
 interface ProfilePageProps {
   /** Athlete ID */
@@ -29,7 +29,7 @@ interface ProfilePageProps {
   isAdmin?: boolean;
   /** Discipline section for theming */
   section?: 'dv' | 'ry' | 'vt';
-  /** Display variant - standalone (full header), satellite (minimal header) */
+  /** Display variant - embed (no header, in kanoe.cz context), satellite (minimal header) */
   variant?: ProfilePageVariant;
 }
 
@@ -408,15 +408,6 @@ const timelineEvents: TimelineItem[] = [
   },
 ];
 
-// Navigation items
-const navItems = [
-  { id: 'home', label: 'Domů', href: '#' },
-  { id: 'calendar', label: 'Kalendář', href: '#' },
-  { id: 'results', label: 'Výsledky', href: '#' },
-  { id: 'athletes', label: 'Závodníci', href: '#', active: true },
-  { id: 'clubs', label: 'Kluby', href: '#' },
-];
-
 // ============================================================================
 // Icons
 // ============================================================================
@@ -508,14 +499,6 @@ function ChevronRightIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="9 18 15 12 9 6" />
-    </svg>
-  );
-}
-
-function StarIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2">
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
     </svg>
   );
 }
@@ -763,47 +746,40 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
 
   // Header rendering based on variant
   const renderHeader = () => {
-    if (variant === 'satellite') {
-      return (
-        <Header
-          variant="satellite"
-          size="sm"
-          bordered
-          brand={<CSKLogo />}
-          appName="Můj profil"
-          homeLink="https://kanoe.cz"
-          homeLinkLabel="kanoe.cz"
-          userMenu={
-            <Button variant="ghost" size="sm">
-              {athlete.name}
-            </Button>
-          }
-        />
-      );
+    // Embed variant: no header (provided by host page)
+    if (variant === 'embed') {
+      return null;
     }
 
-    // Default: standalone with full navigation
+    // Satellite variant: minimal header with CSK branding
     return (
       <Header
-        variant="default"
-        size="md"
+        variant="satellite"
+        size="sm"
         bordered
-        brand={<span className="profile-header-logo">CSK</span>}
-        navigation={<MainNav items={navItems} />}
+        brand={<CSKLogo />}
+        appName="Můj profil"
+        homeLink="https://kanoe.cz"
+        homeLinkLabel="kanoe.cz"
         userMenu={
-          <Button variant="ghost" size="sm">Přihlásit se</Button>
+          <Button variant="ghost" size="sm">
+            {athlete.name}
+          </Button>
         }
       />
     );
   };
 
+  // Get CSS class based on variant
+  const pageClassName = `profile-page ${variant === 'embed' ? 'profile-page--embed' : 'profile-page--satellite'}`;
+
   return (
-    <div className={`profile-page ${variant === 'satellite' ? 'profile-page--satellite' : ''}`}>
-      {/* Header */}
+    <div className={pageClassName}>
+      {/* Header (only for satellite) */}
       {renderHeader()}
 
-      {/* Page Header - Clean design for satellite, Hero for standalone */}
-      {variant === 'satellite' ? (
+      {/* Page Header - Clean design for both variants */}
+      {(variant === 'satellite' || variant === 'embed') && (
         <section className="profile-page-header">
           <div className="profile-page-header__container">
             <nav className="profile-page-header__breadcrumb">
@@ -833,124 +809,6 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
             </div>
           </div>
         </section>
-      ) : (
-        <section className={`profile-hero-section profile-hero-section--${section}`}>
-          <div className="profile-hero-section__background">
-            <div className="profile-hero-section__gradient" />
-            <div className="profile-hero-section__pattern" />
-          </div>
-          <div className="profile-hero-section__content">
-            {/* Breadcrumb */}
-            <nav className="profile-breadcrumb">
-              <a href="#" className="profile-breadcrumb__link">Domů</a>
-              <ChevronRightIcon />
-            <a href="#" className="profile-breadcrumb__link">Závodníci</a>
-            <ChevronRightIcon />
-            <span className="profile-breadcrumb__current">{athlete.name}</span>
-          </nav>
-
-          {/* Hero Content */}
-          <div className="profile-hero-content">
-            {/* Avatar */}
-            <div className="profile-hero-avatar">
-              <Avatar
-                name={athlete.name}
-                src={athlete.imageUrl}
-                size="xl"
-              />
-              {athlete.ranking <= 3 && (
-                <div className={`profile-hero-ranking profile-hero-ranking--${athlete.ranking}`}>
-                  #{athlete.ranking}
-                </div>
-              )}
-            </div>
-
-            {/* Info */}
-            <div className="profile-hero-info">
-              <div className="profile-hero-name-row">
-                <h1 className="profile-hero-name">{athlete.name}</h1>
-                <span className="profile-hero-country">{athlete.country}</span>
-              </div>
-              <div className="profile-hero-badges">
-                <Badge section={section} size="lg" glow>
-                  {getSectionName(section)}
-                </Badge>
-                <Badge vtClass={athlete.vtClass} size="lg">
-                  {getVtClassName(athlete.vtClass)}
-                </Badge>
-                <Badge outlined size="lg">{athlete.vtPoints} bodů</Badge>
-              </div>
-              <div className="profile-hero-meta">
-                <div className="profile-hero-meta-item">
-                  <span className="profile-hero-meta-label">Klub</span>
-                  <span className="profile-hero-meta-value">{athlete.club}</span>
-                </div>
-                <div className="profile-hero-meta-item">
-                  <span className="profile-hero-meta-label">Ročník</span>
-                  <span className="profile-hero-meta-value">*{athlete.birthYear}</span>
-                </div>
-                <div className="profile-hero-meta-item">
-                  <span className="profile-hero-meta-label">Registrace</span>
-                  <span className="profile-hero-meta-value">{athlete.licenseNumber}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Actions */}
-            <div className="profile-hero-actions">
-              {isOwnProfile && (
-                <Button variant="secondary" size="sm">
-                  <EditIcon /> Upravit profil
-                </Button>
-              )}
-              <Button variant="ghost" size="sm">
-                <DownloadIcon /> Export
-              </Button>
-            </div>
-          </div>
-
-          {/* Achievement Showcase */}
-          <div className="profile-achievements">
-            <div className="profile-achievement profile-achievement--gold">
-              <div className="profile-achievement__icon">
-                <TrophyIcon />
-              </div>
-              <div className="profile-achievement__content">
-                <span className="profile-achievement__value">{athlete.wins}</span>
-                <span className="profile-achievement__label">Vítězství</span>
-              </div>
-            </div>
-            <div className="profile-achievement profile-achievement--silver">
-              <div className="profile-achievement__icon">
-                <MedalIcon />
-              </div>
-              <div className="profile-achievement__content">
-                <span className="profile-achievement__value">{athlete.podiums}</span>
-                <span className="profile-achievement__label">Pódia</span>
-              </div>
-            </div>
-            <div className="profile-achievement profile-achievement--bronze">
-              <div className="profile-achievement__icon">
-                <RaceIcon />
-              </div>
-              <div className="profile-achievement__content">
-                <span className="profile-achievement__value">{athlete.totalRaces}</span>
-                <span className="profile-achievement__label">Závodů</span>
-              </div>
-            </div>
-            <div className="profile-achievement profile-achievement--rank">
-              <div className="profile-achievement__icon">
-                <StarIcon />
-              </div>
-              <div className="profile-achievement__content">
-                <span className="profile-achievement__value">#{athlete.ranking}</span>
-                <span className="profile-achievement__label">Žebříček</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Note: WaveDecoration removed for cleaner design (Phase 8.6.3) */}
-      </section>
       )}
 
       {/* Main Content */}
@@ -1342,16 +1200,17 @@ const meta: Meta<typeof ProfilePage> = {
         component: `
 # Profil závodníka (interní)
 
-Interní stránka profilu závodníka pro přihlášené uživatele.
-Používá se v satellite aplikaci (registrační systém, přihlášky).
+Aesthetic prototyp interní stránky profilu závodníka pro přihlášené uživatele.
+Dvě varianty: Embed (v kanoe.cz kontextu) a Satellite (standalone s minimálním headerem).
 
 ## Hlavní sekce
-1. **Page header** - avatar, jméno, badges, akce
+1. **Page header** - avatar, jméno, discipline badges, akce
 2. **Status karty** - právo startu, zdravotní prohlídka, příspěvky
-3. **Záložky** - Přehled, Výsledky, Historie
+3. **Záložky** - Přehled, Přihlášky, Sledované, Výsledky, Historie
 
 ## Varianty
-- **satellite** - pro interní aplikaci s minimálním headerem
+- **Embed** - vložený do kanoe.cz layoutu
+- **Satellite** - standalone s minimálním headerem
 
 ## Use Cases (z business analýzy)
 - UC-1.1: Registrace nového člena
@@ -1366,7 +1225,7 @@ Používá se v satellite aplikaci (registrační systém, přihlášky).
   argTypes: {
     variant: {
       control: 'select',
-      options: ['standalone', 'satellite'],
+      options: ['embed', 'satellite'],
       description: 'Display variant',
     },
     section: {
@@ -1384,11 +1243,66 @@ Používá se v satellite aplikaci (registrační systém, přihlášky).
 export default meta;
 type Story = StoryObj<typeof ProfilePage>;
 
+// ============================================================================
+// Story Variants (2 aesthetic variants: Embed, Satellite)
+// ============================================================================
+
 /**
- * **SATELLITE varianta** - Interní profil závodníka s minimálním headerem.
+ * **EMBED varianta** - Profil vložený do kanoe.cz layoutu.
  *
- * Pro přihlášeného závodníka v interní aplikaci (registrační systém, přihlášky).
- * Header obsahuje pouze logo CSK, název aplikace a jméno uživatele.
+ * Aesthetic design pro interní profil závodníka:
+ * - Page header s avatar, jméno, discipline badges
+ * - Status karty (právo startu, zdravotní prohlídka, příspěvky)
+ * - Záložky: Přehled, Přihlášky, Sledované, Výsledky, Historie
+ * - Statistiky sezóny a posledních výsledků
+ *
+ * Bez vlastního headeru/footeru - používá layout hostitelské stránky.
+ *
+ * **Sekce:** `section` = dv (modrá) / ry (zelená) / vt (červená)
+ */
+export const Embed: Story = {
+  args: {
+    isOwnProfile: true,
+    section: 'dv',
+    variant: 'embed',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="full"
+        pageVariant="detail"
+        pageTitle="Můj profil"
+        breadcrumbs={[
+          { label: 'Úvod', href: '#' },
+          { label: 'Závodníci', href: '#' },
+          { label: 'Jiří Prskavec' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Profil závodníka embedovaný v kontextu kanoe.cz. Bez vlastního headeru/footeru - používá layout hostitelské stránky.',
+      },
+    },
+  },
+};
+
+/**
+ * **SATELLITE varianta** - Standalone profil s minimálním headerem.
+ *
+ * Aesthetic design pro interní profil závodníka:
+ * - Satellite header s CSK brandingem a odkazem na kanoe.cz
+ * - Page header s avatar, jméno, discipline badges
+ * - Status karty (právo startu, zdravotní prohlídka, příspěvky)
+ * - Záložky: Přehled, Přihlášky, Sledované, Výsledky, Historie
+ *
+ * Standalone aplikace s odkazem zpět na kanoe.cz.
+ *
+ * **Sekce:** `section` = dv (modrá) / ry (zelená) / vt (červená)
  */
 export const Satellite: Story = {
   args: {
@@ -1399,7 +1313,7 @@ export const Satellite: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Interní profil závodníka se satellite headerem. Čistý design pro interní aplikace.',
+        story: 'Standalone profil závodníka s Aesthetic designem. Obsahuje satellite header s odkazem na kanoe.cz.',
       },
     },
   },
