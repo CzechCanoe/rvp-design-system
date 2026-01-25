@@ -121,7 +121,7 @@
    - [x] `<CSKLogo />` pro konzistentní branding
 
 3. **Nízká priorita:**
-   - [ ] `<PodiumCard />` (pouze 2 použití)
+   - [x] `<PodiumCard />` (ResultsPage, RankingsPage)
 
 ---
 
@@ -243,6 +243,13 @@
 - [x] Refaktorovat AthletesListPage: nahrazeno ~30 řádků custom JSX
 - [x] Refaktorovat ClubsListPage: nahrazeno ~30 řádků custom JSX
 - [x] Odstraněno ~130 řádků duplicitního CSS z prototypů
+
+### Iterace 16: PodiumCard komponenta ✅
+- [x] Vytvořit `<PodiumCard />` komponentu (PodiumCard.tsx, PodiumCard.css)
+- [x] Vytvořit stories s variantami (gold/silver/bronze, sizes, layouts)
+- [x] Refaktorovat ResultsPage: nahrazeno ~80 řádků custom JSX
+- [x] Refaktorovat RankingsPage: nahrazeno lokální komponenta a ~20 řádků
+- [x] Export do components/index.ts
 
 ---
 

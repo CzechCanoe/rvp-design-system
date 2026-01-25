@@ -14,6 +14,7 @@ import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import { Icon } from '../components/Icon';
 import { CSKLogo } from '../components/CSKLogo';
+import { PodiumCard } from '../components/PodiumCard';
 import './ResultsPage.css';
 
 // ============================================================================
@@ -123,15 +124,6 @@ function formatTime(seconds: number | undefined): string {
 function formatTimeDiff(seconds: number | undefined): string {
   if (seconds === undefined || seconds === null || seconds === 0) return '';
   return `+${formatTime(seconds)}`;
-}
-
-function getInitials(name: string): string {
-  return name
-    .split(' ')
-    .map((n) => n[0])
-    .join('')
-    .toUpperCase()
-    .slice(0, 2);
 }
 
 // ============================================================================
@@ -330,7 +322,7 @@ const ResultsPage = ({
         </section>
       )}
 
-      {/* Podium Section - Redesigned horizontal layout */}
+      {/* Podium Section - Using PodiumCard component */}
       {showHero && showPodium && podium.length >= 3 && !searchQuery && (
         <section className="results-page-podium">
           <div className="results-page-podium__container">
@@ -339,83 +331,32 @@ const ResultsPage = ({
               <h2 className="results-page-podium__title">Stupně vítězů – {categories.find(c => c.id === selectedCategory)?.name}</h2>
             </div>
             <div className="results-page-podium__grid">
-              {/* Gold - 1st place */}
-              <button
-                type="button"
-                className="results-page-podium__card results-page-podium__card--gold"
+              <PodiumCard
+                position={1}
+                name={podium[0].name}
+                club={podium[0].club}
+                primaryValue={formatTime(podium[0].totalTime)}
                 onClick={() => console.log('Clicked:', podium[0].name)}
-              >
-                <div className="results-page-podium__rank">1</div>
-                <div className="results-page-podium__avatar">
-                  {getInitials(podium[0].name)}
-                </div>
-                <div className="results-page-podium__info">
-                  <div className="results-page-podium__name">{podium[0].name}</div>
-                  <div className="results-page-podium__club">{podium[0].club}</div>
-                </div>
-                <div className="results-page-podium__result">
-                  <div className="results-page-podium__time">
-                    {formatTime(podium[0].totalTime)}
-                  </div>
-                </div>
-                <span className="results-page-podium__arrow">
-                  <Icon name="chevron-right" size="sm" />
-                </span>
-              </button>
-
-              {/* Silver - 2nd place */}
-              <button
-                type="button"
-                className="results-page-podium__card results-page-podium__card--silver"
+                showArrow
+              />
+              <PodiumCard
+                position={2}
+                name={podium[1].name}
+                club={podium[1].club}
+                primaryValue={formatTime(podium[1].totalTime)}
+                secondaryValue={formatTimeDiff(podium[1].timeDiff)}
                 onClick={() => console.log('Clicked:', podium[1].name)}
-              >
-                <div className="results-page-podium__rank">2</div>
-                <div className="results-page-podium__avatar">
-                  {getInitials(podium[1].name)}
-                </div>
-                <div className="results-page-podium__info">
-                  <div className="results-page-podium__name">{podium[1].name}</div>
-                  <div className="results-page-podium__club">{podium[1].club}</div>
-                </div>
-                <div className="results-page-podium__result">
-                  <div className="results-page-podium__time">
-                    {formatTime(podium[1].totalTime)}
-                  </div>
-                  <div className="results-page-podium__diff">
-                    {formatTimeDiff(podium[1].timeDiff)}
-                  </div>
-                </div>
-                <span className="results-page-podium__arrow">
-                  <Icon name="chevron-right" size="sm" />
-                </span>
-              </button>
-
-              {/* Bronze - 3rd place */}
-              <button
-                type="button"
-                className="results-page-podium__card results-page-podium__card--bronze"
+                showArrow
+              />
+              <PodiumCard
+                position={3}
+                name={podium[2].name}
+                club={podium[2].club}
+                primaryValue={formatTime(podium[2].totalTime)}
+                secondaryValue={formatTimeDiff(podium[2].timeDiff)}
                 onClick={() => console.log('Clicked:', podium[2].name)}
-              >
-                <div className="results-page-podium__rank">3</div>
-                <div className="results-page-podium__avatar">
-                  {getInitials(podium[2].name)}
-                </div>
-                <div className="results-page-podium__info">
-                  <div className="results-page-podium__name">{podium[2].name}</div>
-                  <div className="results-page-podium__club">{podium[2].club}</div>
-                </div>
-                <div className="results-page-podium__result">
-                  <div className="results-page-podium__time">
-                    {formatTime(podium[2].totalTime)}
-                  </div>
-                  <div className="results-page-podium__diff">
-                    {formatTimeDiff(podium[2].timeDiff)}
-                  </div>
-                </div>
-                <span className="results-page-podium__arrow">
-                  <Icon name="chevron-right" size="sm" />
-                </span>
-              </button>
+                showArrow
+              />
             </div>
           </div>
         </section>

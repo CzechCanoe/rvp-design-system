@@ -12,6 +12,7 @@ import { KanoeCzContext } from '../components/KanoeCzContext';
 import { Icon } from '../components/Icon';
 import { StatsBar, type StatsBarItem } from '../components/StatsBar';
 import { CSKLogo } from '../components/CSKLogo';
+import { PodiumCard } from '../components/PodiumCard';
 import './RankingsPage.css';
 
 // ============================================================================
@@ -277,33 +278,6 @@ const RankingsPage = ({
     );
   };
 
-  // Get initials for avatar placeholder
-  const getInitials = (name: string) => {
-    return name.split(' ').map(n => n[0]).join('').slice(0, 2);
-  };
-
-  // Podium card component
-  const PodiumCard = ({ athlete, position }: { athlete: RankingEntry; position: 1 | 2 | 3 }) => {
-    const positionClass = position === 1 ? 'gold' : position === 2 ? 'silver' : 'bronze';
-    return (
-      <div className={`rankings-podium-card rankings-podium-card--${positionClass}`}>
-        <span className="rankings-podium-card__rank">{position}</span>
-        <div className="rankings-podium-card__avatar">
-          {athlete.imageUrl ? (
-            <img src={athlete.imageUrl} alt={athlete.name} />
-          ) : (
-            <span className="rankings-podium-card__avatar-placeholder">
-              {getInitials(athlete.name)}
-            </span>
-          )}
-        </div>
-        <h3 className="rankings-podium-card__name">{athlete.name}</h3>
-        <p className="rankings-podium-card__club">{athlete.club}</p>
-        <span className="rankings-podium-card__points">{athlete.points} bodů</span>
-      </div>
-    );
-  };
-
   return (
     <div className={`prototype-rankings ${variant === 'embed' ? 'prototype-rankings--embed' : ''}`}>
       {renderHeader()}
@@ -386,8 +360,12 @@ const RankingsPage = ({
                 {topThree.map((athlete, idx) => (
                   <PodiumCard
                     key={athlete.id}
-                    athlete={athlete}
                     position={(idx + 1) as 1 | 2 | 3}
+                    name={athlete.name}
+                    club={athlete.club}
+                    imageUrl={athlete.imageUrl}
+                    primaryValue={athlete.points.toLocaleString()}
+                    primaryLabel="bodů"
                   />
                 ))}
               </div>

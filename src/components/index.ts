@@ -269,3 +269,7 @@ export type {
   FilterPillsSize,
   FilterPillsVariant,
 } from './FilterPills';
+
+// PodiumCard
+export { PodiumCard } from './PodiumCard';
+export type { PodiumCardProps, PodiumPosition } from './PodiumCard';
