@@ -246,3 +246,13 @@ export type {
   StatsBarVariant,
   StatsBarSize,
 } from './StatsBar';
+
+// HeroSection
+export { HeroSection, HeroActionButton } from './HeroSection';
+export type {
+  HeroSectionProps,
+  HeroSectionVariant,
+  HeroSectionSection,
+  HeroSectionMetaItem,
+  HeroActionButtonProps,
+} from './HeroSection';

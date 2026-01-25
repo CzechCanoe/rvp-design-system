@@ -5520,3 +5520,34 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 - StatsBar používá Icon komponentu z předchozí iterace
 - Všechny komponenty používají design tokens (--csk-*)
 - Build prošel bez chyb
+
+---
+
+## 2026-01-25 - Fáze 17.3: HeroSection komponenta
+
+### Dokončeno
+- [x] Analýza hero sekcí v prototypech (Athlete, Club, Event, Profile)
+- [x] Implementace HeroSection komponenty s variantami (full/compact/minimal)
+- [x] Section-specific color theming (DV modrá, RY zelená, VT červená)
+- [x] Mesh gradient backgrounds s pattern overlay
+- [x] Avatar/logo s bílým ringem a shadow
+- [x] Metadata row (icon + label + value)
+- [x] Glass-morphism action buttons (HeroActionButton)
+- [x] Floating content slot pro stats bar
+- [x] Breadcrumbs (hidden in embed mode)
+- [x] Stories pro všechny varianty a use cases
+
+### Klíčová rozhodnutí
+1. **Composable přístup:** HeroSection jako base komponenta s props, ne separátní AthleteHero/ClubHero/EventHero
+2. **Section theming:** Použití `section` prop místo manuálních barev - automatické gradienty
+3. **Floating content:** Generic slot pro flexibilitu (StatsBar, Card, custom content)
+
+### Soubory
+- `src/components/HeroSection/HeroSection.tsx` - komponenta + HeroActionButton
+- `src/components/HeroSection/HeroSection.css` - styly včetně responsive
+- `src/components/HeroSection/HeroSection.stories.tsx` - 14 stories
+- `src/components/HeroSection/index.ts` - exporty
+- `src/components/index.ts` - přidán export
+
+### Další kroky
+- Iterace 4-6: Cleanup komponent (Button → Toast) - odstranění experimentálních variant

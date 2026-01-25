@@ -112,7 +112,7 @@
 1. **Vysoká priorita (eliminuje nejvíce custom kódu):**
    - [x] `<Icon />` komponenta nebo lucide-react integrace
    - [x] `<PageLayout />` pro embed/satellite strukturu
-   - [ ] `<HeroSection />` pro profilové stránky
+   - [x] `<HeroSection />` pro profilové stránky
    - [x] `<StatsBar />` pro floating stats
 
 2. **Střední priorita:**
@@ -209,9 +209,12 @@
 - [x] `<SectionHeader />` - section titles with optional badge and action
 - [x] `<StatsBar />` - row of statistics with icons (inline/cards/compact variants)
 
-### Iterace 3: Hero komponenta
-- [ ] `<HeroSection variant="athlete|club|event|generic" />`
-- [ ] Zahrnout mesh background, stats bar, action tlačítka
+### Iterace 3: Hero komponenta ✅
+- [x] `<HeroSection variant="full|compact|minimal" section="dv|ry|vt|generic" />`
+- [x] Mesh background, pattern overlay, section-specific gradients
+- [x] Avatar/logo s bílým ringem, badges, metadata, actions
+- [x] Floating content slot pro stats bar
+- [x] Breadcrumbs (hidden in embed mode)
 
 ### Iterace 4-6: Cleanup komponent (Button → Toast)
 - Podle 17.1.1 - 17.1.5 odstraňovat experimentální varianty
