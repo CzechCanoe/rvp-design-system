@@ -13,6 +13,7 @@ import { Table } from '../components/Table';
 import { Modal } from '../components/Modal';
 import { ToastProvider, useToast } from '../components/Toast';
 import { EmptyState } from '../components/EmptyState';
+import { KanoeCzContext } from '../components/KanoeCzContext';
 import './RegistrationPage.css';
 
 // ============================================================================
@@ -20,10 +21,7 @@ import './RegistrationPage.css';
 // ============================================================================
 
 /** Display variant for the page */
-type RegistrationPageVariant = 'standalone' | 'satellite';
-
-/** Visual style variant */
-type RegistrationPageStyle = 'default' | 'aesthetic';
+type RegistrationPageVariant = 'standalone' | 'satellite' | 'embed';
 
 interface RegistrationPageProps {
   /** Club name */
@@ -34,10 +32,8 @@ interface RegistrationPageProps {
   initialStep?: number;
   /** Section (discipline) */
   section?: 'dv' | 'ry' | 'vt';
-  /** Display variant - standalone (full header with hero), satellite (minimal header) */
+  /** Display variant - standalone (full), satellite (minimal header), embed (no chrome) */
   variant?: RegistrationPageVariant;
-  /** Visual style - default or aesthetic (Dynamic Sport) */
-  style?: RegistrationPageStyle;
 }
 
 interface Athlete {
@@ -334,7 +330,6 @@ const RegistrationPageInner = ({
   initialStep = 0,
   section = 'dv',
   variant = 'standalone',
-  style = 'default',
 }: RegistrationPageProps) => {
   const [currentStep, setCurrentStep] = useState(initialStep);
   const [athletes] = useState<Athlete[]>(generateAthletes);
@@ -510,8 +505,11 @@ const RegistrationPageInner = ({
     (e) => e.athlete.healthCheck !== 'valid' || e.athlete.fees === 'unpaid'
   ).length;
 
-  // Render header based on variant
+  // Render header based on variant (embed has no header - uses host layout)
   const renderHeader = () => {
+    if (variant === 'embed') {
+      return null;
+    }
     if (variant === 'satellite') {
       return (
         <Header
@@ -575,17 +573,20 @@ const RegistrationPageInner = ({
 
   // Render page header based on variant
   const renderPageHeader = () => {
-    if (variant === 'satellite') {
+    // Both embed and satellite use compact header
+    if (variant === 'embed' || variant === 'satellite') {
       return (
         <section className="registration-page-header registration-page-header--satellite">
           <div className="registration-page-header__content">
-            <div className="registration-page-header__breadcrumb">
-              <a href="https://kanoe.cz" className="registration-page-header__breadcrumb-link">Domů</a>
-              <span className="registration-page-header__breadcrumb-separator">/</span>
-              <a href="#" className="registration-page-header__breadcrumb-link">Přihlášky</a>
-              <span className="registration-page-header__breadcrumb-separator">/</span>
-              <span>{raceData.name}</span>
-            </div>
+            {variant === 'satellite' && (
+              <div className="registration-page-header__breadcrumb">
+                <a href="https://kanoe.cz" className="registration-page-header__breadcrumb-link">Domů</a>
+                <span className="registration-page-header__breadcrumb-separator">/</span>
+                <a href="#" className="registration-page-header__breadcrumb-link">Přihlášky</a>
+                <span className="registration-page-header__breadcrumb-separator">/</span>
+                <span>{raceData.name}</span>
+              </div>
+            )}
             <div className="registration-page-header__row">
               <div className="registration-page-header__info">
                 <div className="registration-page-header__badges">
@@ -764,13 +765,13 @@ const RegistrationPageInner = ({
     fee: `${entry.boatCategory.startsWith('C2') ? raceData.fees.team : raceData.fees.individual} Kč`,
   }));
 
-  // Build page class names
-  const isAesthetic = style === 'aesthetic';
+  // Build page class names - all variants use aesthetic design
   const pageClasses = [
     'registration-page',
     `registration-page--${section}`,
+    'registration-page--aesthetic',
     variant === 'satellite' && 'registration-page--satellite',
-    isAesthetic && 'registration-page--aesthetic',
+    variant === 'embed' && 'registration-page--embed',
   ].filter(Boolean).join(' ');
 
   return (
@@ -1153,12 +1154,14 @@ const RegistrationPageInner = ({
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="registration-page__footer">
-        <div className="registration-page__footer-content">
-          <p>© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
-        </div>
-      </footer>
+      {/* Footer (not rendered in embed mode) */}
+      {variant !== 'embed' && (
+        <footer className="registration-page__footer">
+          <div className="registration-page__footer-content">
+            <p>© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
+          </div>
+        </footer>
+      )}
 
       {/* Athlete Selection Modal */}
       <Modal
@@ -1323,7 +1326,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Prototyp stránky pro oddílové přihlašování na závody. Umožňuje vyplnit záhlaví přihlášky, vybrat závodníky z oddílu a odeslat přihlášku pořadateli. Redesign s hero sekcí, vizuálním wizard progress a discipline theming.',
+          'Prototyp stránky pro oddílové přihlašování na závody. Aesthetic design s 3-krokovým wizard procesem, podporou C2 posádek a discipline theming.',
       },
     },
   },
@@ -1331,8 +1334,8 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['standalone', 'satellite'],
-      description: 'Display variant',
+      options: ['embed', 'satellite', 'standalone'],
+      description: 'Display variant - embed (in kanoe.cz), satellite (minimal header), standalone (full)',
     },
     clubName: {
       control: 'text',
@@ -1340,17 +1343,12 @@ const meta = {
     },
     initialStep: {
       control: { type: 'range', min: 0, max: 2, step: 1 },
-      description: 'Initial step of the registration process',
+      description: 'Initial step of the registration process (0: header, 1: athletes, 2: summary)',
     },
     section: {
       control: 'select',
       options: ['dv', 'ry', 'vt'],
       description: 'Discipline section for theming',
-    },
-    style: {
-      control: 'select',
-      options: ['default', 'aesthetic'],
-      description: 'Visual style - default or aesthetic (Dynamic Sport)',
     },
   },
 } satisfies Meta<typeof RegistrationPage>;
@@ -1358,12 +1356,69 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+// ============================================================================
+// Story Variants (2 aesthetic variants: Embed, Satellite)
+// ============================================================================
+
 /**
- * Satellite varianta - přihlášky s minimálním headerem pro interní aplikace.
+ * **EMBED varianta** - Přihlášky vložené do kanoe.cz layoutu.
  *
- * Použij args pro přepnutí:
- * - `initialStep: 0/1/2` - krok wizardu (záhlaví / výběr závodníků / shrnutí)
- * - `section: 'dv'/'ry'/'vt'` - disciplína (divoká voda / rychlost / vodní turistika)
+ * Aesthetic design s plnou funkcionalitou:
+ * - 3-krokový wizard (záhlaví → závodníci → shrnutí)
+ * - Podpora C2 posádek (vícečlenné přihlášky)
+ * - Discipline theming (dv/ry/vt)
+ * - Validace zdravotních prohlídek a příspěvků
+ *
+ * Bez vlastního headeru/footeru - používá layout hostitelské stránky.
+ *
+ * **Přepínání kroků:** Použij `initialStep` (0/1/2)
+ * **C2 registrace:** V kroku 1, vyber kategorii C2M/C2X a přidej dva závodníky
+ */
+export const Embed: Story = {
+  args: {
+    variant: 'embed',
+    clubName: 'TJ Bohemians Praha',
+    initialStep: 0,
+    section: 'dv',
+  },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="full"
+        pageVariant="detail"
+        pageTitle="Přihláška - Český pohár #2 ve slalomu"
+        breadcrumbs={[
+          { label: 'Úvod', href: '#' },
+          { label: 'Přihlášky', href: '#' },
+          { label: 'Český pohár #2' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Přihlášky embedované v kontextu kanoe.cz. Bez vlastního headeru/footeru - používá layout hostitelské stránky.',
+      },
+    },
+  },
+};
+
+/**
+ * **SATELLITE varianta** - Standalone přihlášky s minimálním headerem.
+ *
+ * Aesthetic design s plnou funkcionalitou:
+ * - Satellite header with CSK branding
+ * - 3-krokový wizard (záhlaví → závodníci → shrnutí)
+ * - Podpora C2 posádek (vícečlenné přihlášky)
+ * - Discipline theming (dv/ry/vt)
+ *
+ * Standalone aplikace s odkazem zpět na kanoe.cz.
+ *
+ * **Přepínání kroků:** Použij `initialStep` (0/1/2)
+ * **Disciplíny:** `section` = dv (modrá) / ry (zelená) / vt (červená)
  */
 export const Satellite: Story = {
   args: {
@@ -1375,127 +1430,7 @@ export const Satellite: Story = {
   parameters: {
     docs: {
       description: {
-        story: `Wizard pro oddílové přihlašování na závody se satellite headerem. Čistý design pro interní aplikace.
-
-**Použij args pro přepnutí kroku:**
-- \`initialStep: 0\` - Záhlaví přihlášky (kontaktní údaje)
-- \`initialStep: 1\` - Výběr závodníků
-- \`initialStep: 2\` - Shrnutí a odeslání
-
-**Disciplíny (mění barevné téma):**
-- \`section: 'dv'\` - Divoká voda (modrá)
-- \`section: 'ry'\` - Rychlost (zelená)
-- \`section: 'vt'\` - Vodní turistika (červená)`,
-      },
-    },
-  },
-};
-
-// ============================================================================
-// Aesthetic Variants - Dynamic Sport visual style (Phase 15.0)
-// ============================================================================
-
-/**
- * Aesthetic varianta - Záhlaví přihlášky (krok 1).
- * Mesh backgrounds, display typography, energy accents.
- */
-export const AestheticHeader: Story = {
-  args: {
-    variant: 'standalone',
-    clubName: 'TJ Bohemians Praha',
-    initialStep: 0,
-    section: 'dv',
-    style: 'aesthetic',
-  },
-};
-
-/**
- * Aesthetic varianta - Výběr závodníků (krok 2).
- * Staggered reveals, hover glow effects.
- */
-export const AestheticAthletes: Story = {
-  args: {
-    variant: 'standalone',
-    clubName: 'TJ Bohemians Praha',
-    initialStep: 1,
-    section: 'dv',
-    style: 'aesthetic',
-  },
-};
-
-/**
- * Aesthetic varianta - Shrnutí a odeslání (krok 3).
- * Energy CTA, border accents on summary cards.
- */
-export const AestheticSummary: Story = {
-  args: {
-    variant: 'standalone',
-    clubName: 'TJ Bohemians Praha',
-    initialStep: 2,
-    section: 'dv',
-    style: 'aesthetic',
-  },
-};
-
-/**
- * Aesthetic varianta - Rychlostní kanoistika.
- * Zelené barevné schéma s aesthetic efekty.
- */
-export const AestheticRychlost: Story = {
-  args: {
-    variant: 'standalone',
-    clubName: 'SK Slavia Praha',
-    initialStep: 0,
-    section: 'ry',
-    style: 'aesthetic',
-  },
-};
-
-// ============================================================================
-// Crew Registration Stories - C2 multi-athlete selection
-// ============================================================================
-
-/**
- * C2 Crew Registration - Vícečlenné posádky.
- * Demonstrace UX pro registraci C2 kategorií (dva závodníci v lodi).
- *
- * **Workflow:**
- * 1. Vyber kategorii C2M nebo C2X
- * 2. Klikni na "Přidat závodníka"
- * 3. Vyber prvního závodníka - zobrazí se indikátor "čeká na partnera"
- * 4. Vyber druhého závodníka (partnera)
- * 5. Posádka je přidána do přihlášky
- *
- * **Tipy:**
- * - Checkbox "Přidat další závodníky" ponechá dialog otevřený
- * - Kategorie je zamčena během výběru partnera
- * - Zrušení výběru vrátí do normálního režimu
- */
-export const CrewRegistration: Story = {
-  args: {
-    variant: 'standalone',
-    clubName: 'USK Praha',
-    initialStep: 1,
-    section: 'dv',
-    style: 'aesthetic',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: `Demonstrace registrace vícečlenných posádek (C2).
-
-**Jak to funguje:**
-1. V dialogu "Přidat závodníka" vyberte kategorii C2M nebo C2X
-2. Klikněte na prvního člena posádky
-3. Zobrazí se indikátor s vybraným závodníkem a výzva k výběru partnera
-4. Kategorie je zamčena - nelze měnit během výběru
-5. Vyberte partnera - posádka se vytvoří
-
-**V tabulce se zobrazí:**
-- Oba členové posádky (jméno + partner)
-- Oba RGC kódy
-- Kombinovaný VT rating
-- Stav obou závodníků`,
+        story: 'Standalone aplikace přihlášek s Aesthetic designem. Obsahuje satellite header s odkazem na kanoe.cz.',
       },
     },
   },

@@ -75,11 +75,11 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 - [x] MobileFullscreen, FavoriteAthletes jako features v hlavních variantách
 - [x] Odstranit: EmbedWithSidebar
 
-**RegistrationPage** (6 → 2)
-- [ ] Embed - nová varianta (Aesthetic)
-- [ ] Satellite - sloučit všechny Aesthetic* sekce
-- [ ] CrewRegistration jako feature
-- [ ] Odstranit: jednotlivé Aesthetic* stories
+**RegistrationPage** (6 → 2) ✅
+- [x] Embed - nová varianta (Aesthetic)
+- [x] Satellite - sloučit všechny Aesthetic* sekce
+- [x] CrewRegistration jako feature (dokumentováno v docstrings)
+- [x] Odstranit: jednotlivé Aesthetic* stories
 
 ### 16.4 Vedlejší prototypy
 
@@ -141,7 +141,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.3 LivePage + Registration** - RegistrationPage.
+Pokračovat s **16.4 Vedlejší prototypy** - DashboardPage.
 
 ---
 

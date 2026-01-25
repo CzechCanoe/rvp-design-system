@@ -5091,3 +5091,35 @@ EventDetailPage (7 → 3 varianty)
 ### Poznámky
 - ResultsPage již měl Aesthetic styl implementovaný, pouze bylo potřeba odstranit nadbytečné story varianty
 - showHero a showPodium props slouží pro kompaktní zobrazení (místo samostatné EmbedCompact story)
+
+---
+
+## 2026-01-25 - Fáze 16.3a: LivePage konsolidace
+
+### Dokončeno
+- [x] Ověřen plný Aesthetic styl pro Embed i Satellite varianty
+- [x] Odstraněny: EmbedWithSidebar, MobileFullscreen, FavoriteAthletes stories
+- [x] Fullscreen a favorites nyní dostupné jako props ve všech variantách
+- [x] 5 → 2 varianty (Embed, Satellite)
+
+### Poznámky
+- CSS již obsahoval aesthetic styling (mesh hero, grain, border-accent)
+- enableFullscreen prop nyní explicitně povolen v obou variantách
+
+---
+
+## 2026-01-25 - Fáze 16.3: RegistrationPage konsolidace
+
+### Dokončeno
+- [x] RegistrationPage: konsolidace z 6 na 2 varianty (Embed, Satellite)
+- [x] Přidán variant `'embed'` s KanoeCzContext wrapper
+- [x] Odstraněny: AestheticHeader, AestheticAthletes, AestheticSummary, AestheticRychlost, CrewRegistration (jako samostatné stories)
+- [x] CrewRegistration funkce dokumentována v docstrings obou variant
+- [x] Všechny varianty nyní používají Aesthetic design automaticky
+
+### Změny
+- `RegistrationPageVariant` rozšířen o `'embed'`
+- Odstraněn `style` prop (vše je aesthetic)
+- renderHeader: embed vrací null (používá host layout)
+- renderPageHeader: embed/satellite sdílí compact header (bez breadcrumbs pro embed)
+- Footer: podmíněné renderování (ne v embed)
