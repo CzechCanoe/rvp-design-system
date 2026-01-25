@@ -5240,3 +5240,51 @@ přepracovanými prototypy. Další na řadě: RankingsPage (5 → 2 varianty).
 ### Poznámky
 - Build prošel úspěšně
 - Další krok: Priorita 2 - Aesthetic styl pro seznamy
+
+---
+
+## 2026-01-25 - Fáze 16.5: AthletesListPage Aesthetic
+
+### Dokončeno
+- [x] AthletesListPage přepracována na plný Aesthetic styl
+
+### Implementované změny
+1. **Hero sekce**
+   - Mesh gradient pozadí (`--bg-mesh-hero`)
+   - Diagonální stripe s energy gradient
+   - Grain texture overlay
+   - Display fonty pro nadpisy
+
+2. **Stats bar**
+   - Energy accent borders při hover
+   - Transform/shadow animace
+   - Specifické barvy pro každý stat (energy, success, info)
+   - Uppercase labels s letter-spacing
+
+3. **Featured sekce**
+   - Gradient border accent (energy)
+   - Container s mesh background
+   - Staggered reveal animace pro karty (75ms delay)
+   - Respektuje prefers-reduced-motion
+
+4. **Filtry**
+   - Pill-style tagy s primary gradient
+   - Animované remove buttony
+   - Energy accent pro clear button
+
+5. **Grid karet**
+   - Hover lift efekty (translateY, shadow)
+   - Konzistentní spacing
+
+6. **Empty state**
+   - Dashed border, rounded icon container
+   - Display font pro title
+
+7. **Podpora**
+   - Dark mode styling
+   - Reduced motion support
+   - Embed mode adjustments
+
+### Poznámky
+- Build i Storybook build prošly bez chyb
+- Další: ClubsListPage, RankingsPage
