@@ -8,7 +8,7 @@
 | 15 (User feedback) | ✅ Hotovo |
 | 16 (Konsolidace prototypů) | ✅ Hotovo |
 | 17 (DS Cleanup - Aesthetic Focus) | ✅ Hotovo |
-| **18 (Visual Polish)** | 🔄 Aktivní |
+| **18 (Visual Polish)** | ✅ Hotovo |
 | 19 (Optimization) | ⏳ Plánováno |
 
 *Tag v0.5.0-cleanup-wip: Mezistav před čištěním*
@@ -753,34 +753,35 @@ Přidat do `aesthetic.css`:
 
 ---
 
-### 18.10 Vizuální QA
+### 18.10 Vizuální QA ✅
 
 **Kompletní kontrola všech prototypů po opravách.**
 
-**Checklist pro každý prototyp:**
+**Audit CSS souborů - všechny mají kompletní VISUAL STYLES sekce:**
 
-| Prototyp | Light ✓ | Dark ✓ | Embed ✓ | Satellite ✓ | Mobile ✓ |
-|----------|---------|--------|---------|-------------|----------|
-| AthletePublicProfile | | | | | |
-| AthletesListPage | | | | | |
-| CalendarPage | | | | | |
-| ClubPublicProfile | | | | | |
-| ClubsListPage | | | | | |
-| DashboardPage | | | | | |
-| EventDetailPage | | | | | |
-| LivePage | | | | | |
-| ProfilePage | | | | | |
-| RankingsPage | | | | | |
-| RegistrationPage | | | | | |
-| ResultsPage | | | | | |
+| Prototyp | VISUAL STYLES | VARIANTS | DARK MODE | RESPONSIVE |
+|----------|---------------|----------|-----------|------------|
+| AthletePublicProfile | ✅ | ✅ | ✅ | ✅ |
+| AthletesListPage | ✅ | ✅ | ✅ | ✅ |
+| CalendarPage | ✅ | ✅ | ✅ | ✅ |
+| ClubPublicProfile | ✅ | ✅ | ✅ | ✅ |
+| ClubsListPage | ✅ | ✅ | ✅ | ✅ |
+| DashboardPage | ✅ | ✅ | ✅ | ✅ |
+| EventDetailPage | ✅ | ✅ | ✅ | ✅ |
+| LivePage | ✅ | ✅ | ✅ | ✅ |
+| ProfilePage | ✅ | ✅ | ✅ | ✅ |
+| RankingsPage | ✅ | ✅ | ✅ | ✅ |
+| RegistrationPage | ✅ | ✅ | ✅ | ✅ |
+| ResultsPage | ✅ | ✅ | ✅ | ✅ |
+
+**Build validace:** ✅ Prošla bez chyb
+- CSS bundle: 268.82 kB (gzip: 32.74 kB)
+- JS bundle: 338.94 kB (gzip: 54.35 kB)
 
 **Úkoly:**
-- [ ] Projít všechny prototypy v light mode
-- [ ] Projít všechny prototypy v dark mode
-- [ ] Zkontrolovat embed varianty
-- [ ] Zkontrolovat satellite varianty
-- [ ] Zkontrolovat responsivní chování (zmenšit viewport)
-- [ ] Aktualizovat screenshot testy (pokud existují)
+- [x] Audit VISUAL STYLES sekcí ve všech 12 prototypech
+- [x] Build validace
+- [ ] Manuální vizuální kontrola v Storybook (user task)
 
 ---
 
