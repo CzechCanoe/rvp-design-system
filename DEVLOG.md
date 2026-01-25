@@ -4976,3 +4976,32 @@ Zbývá v 15.4: Calendar víkendová prezentace, Results Top 3 karty přehodnoce
 ### Poznámky
 - Komponenta je připravena pro použití v CalendarPage, AthletesListPage, RegistrationPage
 - Další krok: Registration UX nebo Event live indikace
+
+---
+
+## 2026-01-25 - Fáze 15.5: Nové koncepty (dokončeno)
+
+### Dokončeno
+- [x] Registration UX - vícečlenné posádky (C2 crew selection)
+- [x] Event indikace live - showLive prop pro Calendar a CalendarList
+
+### Detaily implementace
+
+**Registration UX:**
+- Dvoufázový workflow pro výběr C2 posádek (první závodník → partner)
+- Pending crew indikátor s možností zrušení
+- Checkbox "Přidat další závodníky" pro bulk registraci
+- Zobrazení posádek v tabulce (oba členové, RGC, kombinovaný VT)
+- CrewRegistration story pro demonstraci
+
+**Live Event Indication:**
+- `showLive` prop pro Calendar a CalendarList komponenty
+- Import LiveIndicator pro vizuální indikaci
+- Energy color (coral-orange) s pulsující animací
+- CSS třídy `.csk-calendar__event--live` a `.csk-calendar-list__event--live`
+- LiveEventIndication story s dokumentací
+
+### Poznámky
+- Fáze 15 User Feedback je kompletně dokončena
+- Všechny položky z plánu implementovány
+- Design system připraven pro další fáze (performance, accessibility, deployment)
