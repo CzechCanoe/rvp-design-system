@@ -5022,3 +5022,22 @@ Zbývá v 15.4: Calendar víkendová prezentace, Results Top 3 karty přehodnoce
 - Embed varianta zachovává KanoeCzContext wrapper
 - Expressive varianta je standalone s plnou navigací
 - Build a Storybook build prošly bez chyb
+
+---
+
+## 2026-01-25 - Fáze 16.1: ClubPublicProfile konsolidace
+
+### Dokončeno
+- [x] Konsolidace ClubPublicProfile z 5 na 3 varianty
+- [x] Embed - aesthetic styl, pro kanoe.cz kontext
+- [x] Satellite - aesthetic styl, minimální header
+- [x] Expressive - aesthetic styl, standalone aplikace
+- [x] Odstranění: EmbedWithSidebar, Aesthetic (sloučeno do všech variant)
+
+### Změny
+- Stories přepsány podle vzoru AthletePublicProfile
+- Všechny varianty nyní mají `aesthetic: true` jako výchozí
+- Aktualizována dokumentace komponent
+
+### Další krok
+EventDetailPage (7 → 3 varianty)

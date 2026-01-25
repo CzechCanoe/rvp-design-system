@@ -37,12 +37,12 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 - [x] Expressive - nová varianta (Aesthetic standalone)
 - [x] Odstranit: DivokaVoda, EmbedWithSidebar
 
-**ClubPublicProfile** (5 → 3)
-- [ ] Sloučit Aesthetic do Embed/Satellite
-- [ ] Embed - přepracovat na Aesthetic
-- [ ] Satellite - přepracovat na Aesthetic
-- [ ] Expressive - ponechat, ověřit Aesthetic
-- [ ] Odstranit: EmbedWithSidebar
+**ClubPublicProfile** (5 → 3) ✅
+- [x] Sloučit Aesthetic do Embed/Satellite
+- [x] Embed - přepracovat na Aesthetic
+- [x] Satellite - přepracovat na Aesthetic
+- [x] Expressive - ponechat, ověřit Aesthetic
+- [x] Odstranit: EmbedWithSidebar
 
 **EventDetailPage** (7 → 3)
 - [ ] Sloučit AestheticRegistration/Live/Schedule/Documents do hlavních variant
@@ -141,7 +141,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.1 Veřejné profily** - ClubPublicProfile.
+Pokračovat s **16.1 Veřejné profily** - EventDetailPage.
 
 ---
 

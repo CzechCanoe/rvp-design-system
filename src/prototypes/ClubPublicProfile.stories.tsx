@@ -547,9 +547,9 @@ const meta: Meta<typeof ClubPublicProfile> = {
     docs: {
       description: {
         component: `
-# Veřejný profil klubu - EXPRESSIVE Mode
+# Veřejný profil klubu - Aesthetic Mode
 
-Celostránkový profil klubu/oddílu s dramatickým vizuálním stylem pro veřejné zobrazení.
+Celostránkový profil klubu/oddílu s "Dynamic Sport" vizuálním stylem pro veřejné zobrazení.
 
 ## Použití
 
@@ -563,15 +563,22 @@ Analogie k AthletePublicProfile, ale pro kluby a oddíly ČSK.
 4. **Úspěchy klubu** - Historické milníky
 5. **Kontakt** - Adresa, e-mail, telefon, web
 
-## Varianty
+## Varianty (Phase 16.1)
 
-- **Standalone** - Plný profil s hero sekcí
-- **Satellite** - S minimálním headerem pro standalone aplikace
-- **Embed** - Pro vložení do kanoe.cz
+| Varianta | Popis |
+|----------|-------|
+| **Embed** | Aesthetic styl, vložené do kanoe.cz kontextu |
+| **Satellite** | Aesthetic styl, minimální header s odkazem na kanoe.cz |
+| **Expressive** | Aesthetic styl, kompletní standalone aplikace |
 
-## Design Tokens
+## Aesthetic Design
 
-Využívá expressive tokeny jako AthletePublicProfile.
+Všechny varianty využívají "Dynamic Sport" vizuální styl:
+- Plus Jakarta Sans display font pro nadpisy
+- Mesh gradient pozadí
+- Energy (coral-orange) akcenty a glow efekty
+- Border-accent na stats a highlight kartách
+- Staggered reveal animace pro členy a úspěchy
         `,
       },
     },
@@ -594,61 +601,18 @@ export default meta;
 type Story = StoryObj<typeof ClubPublicProfile>;
 
 // ============================================================================
-// Integration Variants - Embed/Satellite only (Phase 8.13)
+// Phase 16.1: Consolidated Variants - Embed/Satellite/Expressive (all Aesthetic)
 // ============================================================================
 
 /**
- * Expressive standalone varianta - plný profil klubu s hero sekcí.
- */
-export const Expressive: Story = {
-  name: 'Expressive',
-  args: {
-    variant: 'standalone',
-    aesthetic: false,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Expressive standalone profil klubu s plnou hero sekcí.',
-      },
-    },
-  },
-};
-
-/**
- * Aesthetic varianta s "Dynamic Sport" stylem.
- * Display fonts, energy accents, mesh backgrounds, staggered animations.
- */
-export const Aesthetic: Story = {
-  name: 'Aesthetic (Dynamic Sport)',
-  args: {
-    variant: 'standalone',
-    aesthetic: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: `
-**Aesthetic mode** aktivuje "Dynamic Sport" vizuální styl:
-- Plus Jakarta Sans display font pro nadpisy
-- Mesh gradient pozadí
-- Energy (coral-orange) akcenty a glow efekty
-- Border-accent na stats a highlight kartách
-- Staggered reveal animace pro členy a úspěchy
-        `,
-      },
-    },
-  },
-};
-
-/**
  * Embed varianta pro vložení do kanoe.cz.
- * Bez vlastního headeru a footeru, kompaktní styl.
+ * Aesthetic styl, bez vlastního headeru a footeru.
  */
 export const Embed: Story = {
-  name: 'Embed (kanoe.cz)',
+  name: 'Embed',
   args: {
     variant: 'embed',
+    aesthetic: true,
   },
   decorators: [
     (Story) => (
@@ -669,7 +633,13 @@ export const Embed: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Embed varianta pro vložení do kanoe.cz - bez vlastního headeru a footeru.',
+        story: `
+**Embed varianta** pro vložení do kanoe.cz kontextu:
+- Aesthetic styl (display fonts, energy accents, mesh backgrounds)
+- Bez vlastního headeru a footeru
+- Kompaktní layout optimalizovaný pro vložení
+- Container queries pro responsivní chování
+        `,
       },
     },
   },
@@ -677,51 +647,49 @@ export const Embed: Story = {
 
 /**
  * Satellite varianta pro standalone aplikace.
- * Minimální header s odkazem na kanoe.cz.
+ * Aesthetic styl, minimální header s odkazem na kanoe.cz.
  */
 export const Satellite: Story = {
   name: 'Satellite',
   args: {
     variant: 'satellite',
+    aesthetic: true,
   },
   parameters: {
     docs: {
       description: {
-        story: 'Satellite varianta pro standalone aplikace s minimálním headerem.',
+        story: `
+**Satellite varianta** pro standalone aplikace:
+- Aesthetic styl (display fonts, energy accents, mesh backgrounds)
+- Minimální header s odkazem zpět na kanoe.cz
+- Vlastní footer
+- Plný profil klubu s dramatickým hero
+        `,
       },
     },
   },
 };
 
 /**
- * Embed varianta se sidebarem v kanoe.cz layoutu.
- * Demonstrace container queries v úzkém sloupci.
+ * Expressive varianta - plný profil klubu bez kanoe.cz kontextu.
+ * Aesthetic styl, kompletní standalone aplikace.
  */
-export const EmbedWithSidebar: Story = {
-  name: 'Embed se sidebarem',
+export const Expressive: Story = {
+  name: 'Expressive',
   args: {
-    variant: 'embed',
+    variant: 'standalone',
+    aesthetic: true,
   },
-  decorators: [
-    (Story) => (
-      <KanoeCzContext
-        layout="sidebar"
-        pageVariant="detail"
-        pageTitle="USK Praha - Profil klubu"
-        breadcrumbs={[
-          { label: 'Domů', href: '#' },
-          { label: 'Kluby', href: '#' },
-          { label: 'USK Praha' },
-        ]}
-      >
-        <Story />
-      </KanoeCzContext>
-    ),
-  ],
   parameters: {
     docs: {
       description: {
-        story: 'Embed varianta v úzkém sloupci - demonstrace container queries.',
+        story: `
+**Expressive varianta** - plný "wow" profil klubu:
+- Aesthetic styl (display fonts, energy accents, mesh backgrounds)
+- Kompletní header s navigací (pokud bude implementován)
+- Dramatický fullscreen hero
+- Staggered reveal animace pro členy a úspěchy
+        `,
       },
     },
   },
