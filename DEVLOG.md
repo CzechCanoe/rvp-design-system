@@ -5488,3 +5488,35 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 - Obsahuje 45 ikon mapovaných na sémantická jména
 - Stories rozděleny do kategorií: Navigation, Actions, Status, Content, Time/Activity, Achievements, Users/Organizations, Misc
 - Připraveno pro náhradu inline SVG v prototypech
+
+---
+
+## 2026-01-25 - Fáze 17.2: Layout komponenty
+
+### Dokončeno
+- [x] PageLayout - page structure wrapper (standalone/satellite/embed varianty)
+- [x] SectionHeader - section titles s optional badge a action button
+- [x] StatsBar - row of statistics s icons (inline/cards/compact varianty)
+- [x] Stories pro všechny nové komponenty
+- [x] Export v hlavním index.ts
+
+### Nové komponenty
+
+**PageLayout** (`src/components/PageLayout/`)
+- Varianty: standalone, satellite, embed
+- Props: header, footer, maxWidth (sm/md/lg/xl/full), padded
+- Embed varianta skrývá header/footer pro embedding do kanoe.cz
+
+**SectionHeader** (`src/components/SectionHeader/`)
+- Props: title, badge, description, action, size (sm/md/lg), bordered
+- Flexbox layout s title vlevo a action vpravo
+
+**StatsBar** (`src/components/StatsBar/`)
+- Varianty: inline, cards, compact
+- Props: items[], size (sm/md/lg), dividers, centered
+- StatsBarItem: key, value, label, icon (IconName)
+
+### Poznámky
+- StatsBar používá Icon komponentu z předchozí iterace
+- Všechny komponenty používají design tokens (--csk-*)
+- Build prošel bez chyb
