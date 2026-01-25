@@ -5864,3 +5864,16 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 - DashboardPage používal 14 inline SVG ikon (warning, danger, info, users, calendar, clock, userPlus, fileText, creditCard, arrowRight, trophy, medical, transfer, trendUp)
 - Některé ikony nebyly v Icon komponentě, přidány: CreditCard, Repeat (pro transfer), XCircle (pro danger)
 - Zbývá pouze LivePage (nejsložitější prototyp)
+
+---
+
+## 2026-01-25 - Phase 17.12: LivePage Icon Cleanup
+
+### Completed
+- [x] Replaced 16 inline SVG icons with Icon component in LivePage.stories.tsx
+- [x] Icons replaced: Search, Location, Calendar, Users, Refresh, Fullscreen, ExitFullscreen, Star (with fill prop), Activity, Clock, ChevronDown, ChevronUp, CheckCircle, PlayCircle, Trophy, Close
+- [x] Removed ~120 lines of inline SVG icon definitions
+- [x] Updated PLAN.md to mark LivePage as completed
+
+### Notes
+All 12 prototypes now use the unified Icon component. Section 17.3 (Prototype Icon Cleanup) is complete.

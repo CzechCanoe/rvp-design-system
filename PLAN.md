@@ -166,7 +166,7 @@
 9. [x] ProfilePage - refaktorováno: Icon (15 SVG → Icon component)
 10. [x] RegistrationPage - refaktorováno: Icon (16 SVG → Icon component)
 11. [x] DashboardPage - refaktorováno: Icon (14 SVG → Icon component)
-12. [ ] LivePage (nejsložitější)
+12. [x] LivePage - refaktorováno: Icon (16 SVG → Icon component)
 
 ---
 
