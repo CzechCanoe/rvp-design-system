@@ -6043,3 +6043,46 @@ CSS cleanup komponent je dokončen. Zbývá refaktoring CSS prototypů na čist�
 - Cíl ~50 řádků/prototyp není realistický - i čistý layout vyžaduje více pravidel
 - Nový cíl: ~50 CSS pravidel (ne řádků) - což odpovídá aktuálním 52 pravidlům
 - Utility třídy z aesthetic.css eliminují potřebu duplicitních vizuálních stylů
+
+---
+
+## 2026-01-25 - Fáze 17.18: CSS redukce ClubsListPage
+
+### Dokončeno
+- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
+- [x] Přepsat CSS na layout-only (687 → 338 řádků, 51% redukce)
+- [x] Aktualizovat TSX pro utility třídy (csk-mesh-bg--hero, csk-grain, csk-display)
+- [x] Nahradit custom club-card za Card komponentu (variant="aesthetic")
+- [x] Build validace OK
+- [x] Commit: refactor(ClubsListPage): reduce CSS to layout-only
+
+### Změny
+1. **ClubsListPage.css:** Redukce z 687 na 338 řádků
+   - Odstraněny všechny vizuální styly (barvy, fonty, stíny, borders, animace)
+   - Zachovány pouze layout vlastnosti (display, flex, grid, gap, padding, margin)
+   - Odstraněny dark mode styly, hover efekty, ::before/::after dekorace
+
+2. **ClubsListPage.stories.tsx:**
+   - Header sekce: přidány třídy `csk-mesh-bg--hero csk-grain`
+   - Nadpis: přidána třída `csk-display`
+   - ClubCard: nahrazen div za Card komponentu s `variant="aesthetic"`
+
+### Metriky
+- Prototype CSS celkem: 14,171 → 13,822 řádků (-349)
+- Zbývá 10 prototypů k refaktoringu
+
+---
+
+## 2026-01-25 - Fáze 17.19: CSS redukce RankingsPage
+
+### Dokončeno
+- [x] CSS redukce z 988 na 333 řádků (66% redukce)
+- [x] Nahrazeny vizuální styly utility třídami (csk-mesh-bg--hero, csk-grain, csk-display, csk-headline)
+- [x] Section-tabs a rankings-top nyní používají Card komponentu
+- [x] VT class overview nyní používá Badge komponenty s vtClass prop
+- [x] Přidány csk-reveal animace pro staggered podium reveal
+- [x] Build validace OK
+
+### Poznámky
+- Celkové Prototype CSS: 13,167 řádků (z 13,822)
+- Další kandidáti: CalendarPage (922), ClubPublicProfile (1,012)

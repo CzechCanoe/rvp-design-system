@@ -265,6 +265,15 @@
 - [x] Nahradit custom club-card za Card komponentu s variant="aesthetic"
 - [x] Build validace OK
 
+### Iterace 19: CSS redukce RankingsPage ✅
+- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
+- [x] Přepsat CSS na layout-only (988 → 333 řádků, 66% redukce)
+- [x] Aktualizovat TSX pro použití utility tříd (csk-mesh-bg--hero, csk-grain, csk-display, csk-headline)
+- [x] Nahradit custom sections za Card komponenty (section-tabs, rankings-top)
+- [x] Nahradit custom VT class badges za Badge komponenty s vtClass prop
+- [x] Přidat csk-reveal animace pro podium karty
+- [x] Build validace OK
+
 ---
 
 ## Metriky úspěchu
@@ -272,7 +281,7 @@
 | Metrika | Před | Aktuální | Cíl |
 |---------|------|----------|-----|
 | Component CSS | ~7,800 řádků | 16,046 řádků* | ~10,000 řádků |
-| Prototype CSS | ~4,500 řádků | 13,822 řádků | ~600 řádků |
+| Prototype CSS | ~4,500 řádků | 13,167 řádků | ~600 řádků |
 | Inline styles | 28 | **0** ✅ | 0 |
 | Custom icons | 80+ | **0** ✅ | 0 (vše přes Icon) |
 
