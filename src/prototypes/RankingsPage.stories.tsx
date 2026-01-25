@@ -9,6 +9,8 @@ import { Pagination } from '../components/Pagination';
 import { Badge } from '../components/Badge';
 import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
 import { KanoeCzContext } from '../components/KanoeCzContext';
+import { Icon } from '../components/Icon';
+import { StatsBar, type StatsBarItem } from '../components/StatsBar';
 import './RankingsPage.css';
 
 // ============================================================================
@@ -123,31 +125,6 @@ const ageCategoryOptions = [
   { value: 'Master', label: 'Masters' },
 ];
 
-// ============================================================================
-// Icons
-// ============================================================================
-
-const MedalIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-  </svg>
-);
-
-const DownloadIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-    <polyline points="7 10 12 15 17 10" />
-    <line x1="12" y1="15" x2="12" y2="3" />
-  </svg>
-);
-
-const InfoIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" />
-    <path d="M12 16v-4" />
-    <path d="M12 8h.01" />
-  </svg>
-);
 
 // ============================================================================
 // Page Component
@@ -235,14 +212,19 @@ const RankingsPage = ({
     },
   }));
 
-  // Statistics
-  const stats = useMemo(() => {
+  // Statistics for StatsBar
+  const statsBarItems: StatsBarItem[] = useMemo(() => {
     const sectionRankings = sampleRankings.filter(r => r.section === sectionFilter);
     const total = sectionRankings.length;
     const clubs = new Set(sectionRankings.map(r => r.clubId)).size;
     const topPoints = Math.max(...sectionRankings.map(r => r.points));
     const avgPoints = Math.round(sectionRankings.reduce((sum, r) => sum + r.points, 0) / total);
-    return { total, clubs, topPoints, avgPoints };
+    return [
+      { key: 'athletes', value: total, label: 'Závodníků', icon: 'users' },
+      { key: 'clubs', value: clubs, label: 'Klubů', icon: 'building' },
+      { key: 'topPoints', value: topPoints, label: 'Max. bodů', icon: 'trophy' },
+      { key: 'avgPoints', value: avgPoints, label: 'Průměr bodů', icon: 'chart' },
+    ];
   }, [sectionFilter]);
 
   // VT class statistics
@@ -351,24 +333,12 @@ const RankingsPage = ({
           </div>
 
           {/* Statistics */}
-          <div className="rankings-stats">
-            <div className="rankings-stats__item">
-              <span className="rankings-stats__value">{stats.total}</span>
-              <span className="rankings-stats__label">Závodníků</span>
-            </div>
-            <div className="rankings-stats__item">
-              <span className="rankings-stats__value">{stats.clubs}</span>
-              <span className="rankings-stats__label">Klubů</span>
-            </div>
-            <div className="rankings-stats__item">
-              <span className="rankings-stats__value">{stats.topPoints}</span>
-              <span className="rankings-stats__label">Max. bodů</span>
-            </div>
-            <div className="rankings-stats__item">
-              <span className="rankings-stats__value">{stats.avgPoints}</span>
-              <span className="rankings-stats__label">Průměr bodů</span>
-            </div>
-          </div>
+          <StatsBar
+            items={statsBarItems}
+            variant="cards"
+            size="md"
+            className="rankings-stats"
+          />
         </div>
       </section>
 
@@ -380,7 +350,7 @@ const RankingsPage = ({
           {isArchive && (
             <div className="rankings-archive-notice">
               <div className="rankings-archive-notice__icon">
-                <InfoIcon />
+                <Icon name="info" size="lg" />
               </div>
               <div className="rankings-archive-notice__content">
                 <h3 className="rankings-archive-notice__title">Archivní žebříček</h3>
@@ -413,7 +383,7 @@ const RankingsPage = ({
             <section className="rankings-top">
               <div className="rankings-top__header">
                 <h2 className="rankings-top__title">
-                  <MedalIcon />
+                  <Icon name="medal" />
                   Top 3 závodníci
                 </h2>
               </div>
@@ -515,7 +485,7 @@ const RankingsPage = ({
                 <Button
                   variant="secondary"
                   size="md"
-                  iconLeft={<DownloadIcon />}
+                  iconLeft={<Icon name="download" />}
                 >
                   Export PDF
                 </Button>

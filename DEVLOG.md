@@ -5709,3 +5709,22 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 ### Poznámky
 - StatsBar komponenta s variant="cards" plně nahrazuje custom stat cards
 - Icon komponenta mapuje: search, star, download, close, user-search
+
+---
+
+## 2026-01-25 - Phase 17.7: RankingsPage cleanup
+
+### Completed
+- [x] Replaced 3 inline SVG icons (MedalIcon, DownloadIcon, InfoIcon) with `<Icon />` component
+- [x] Replaced custom stats section with `<StatsBar variant="cards" />` component
+
+### Changes
+- `src/prototypes/RankingsPage.stories.tsx`:
+  - Added Icon and StatsBar imports
+  - Removed inline SVG icon components
+  - Converted stats object to StatsBarItem[] array with icons (users, building, trophy, chart)
+  - Replaced custom `.rankings-stats` div with StatsBar component
+
+### Notes
+- Build verified successful
+- Pattern consistent with ClubsListPage and AthletesListPage refactoring

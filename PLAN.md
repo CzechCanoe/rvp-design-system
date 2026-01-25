@@ -157,7 +157,7 @@
 **Pořadí podle složitosti:**
 1. [x] ClubsListPage (nejjednodušší) - refaktorováno: Icon, StatsBar
 2. [x] AthletesListPage - refaktorováno: Icon, StatsBar
-3. [ ] RankingsPage
+3. [x] RankingsPage - refaktorováno: Icon, StatsBar
 4. [ ] ClubPublicProfile
 5. [ ] AthletePublicProfile
 6. [ ] ResultsPage
