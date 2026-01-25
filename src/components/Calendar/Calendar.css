@@ -4,10 +4,10 @@
  * Uses design tokens for consistent styling.
  * Supports views: month, week
  * Supports sizes: sm, md, lg
- * Style variants: default, gradient, glass, bordered
+ * Style variants: default, embed
  *
- * Phase 7.6: Redesigned with style variants, hover effects,
- * event preview tooltips, and micro-interactions.
+ * Recommended layout: weekendShowcase - optimized for sports calendars
+ * where most events occur on weekends.
  */
 
 /* ==========================================================================
@@ -588,138 +588,7 @@
   font-size: var(--text-sm-size);
 }
 
-/* ==========================================================================
-   STYLE VARIANTS
-   ========================================================================== */
-
-/* Gradient style - primary gradient header */
-.csk-calendar--style-gradient {
-  border: none;
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
-}
-
-.csk-calendar--style-gradient .csk-calendar__header {
-  background: var(--gradient-primary);
-  padding: var(--spacing-5) var(--spacing-4);
-  margin: 0;
-}
-
-.csk-calendar--style-gradient .csk-calendar__title {
-  color: white;
-  font-size: var(--text-xl-size);
-}
-
-.csk-calendar--style-gradient .csk-calendar__nav-btn {
-  color: rgba(255, 255, 255, 0.9);
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.csk-calendar--style-gradient .csk-calendar__nav-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: white;
-}
-
-.csk-calendar--style-gradient .csk-calendar__nav-btn--today {
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-.csk-calendar--style-gradient .csk-calendar__nav-btn--today:hover {
-  background-color: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.4);
-  color: white;
-}
-
-.csk-calendar--style-gradient .csk-calendar__weekday {
-  color: var(--color-primary-600);
-  font-weight: var(--font-weight-semibold);
-}
-
-.csk-calendar--style-gradient .csk-calendar__day--today {
-  background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-primary-100) 100%);
-}
-
-.csk-calendar--style-gradient .csk-calendar__day-number--today {
-  background: var(--gradient-primary);
-  box-shadow: 0 2px 8px rgba(17, 118, 166, 0.3);
-}
-
-/* Glass style - frosted glass effect */
-.csk-calendar--style-glass {
-  background: var(--gradient-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow:
-    0 4px 30px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.csk-calendar--style-glass .csk-calendar__header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: var(--spacing-3);
-}
-
-.csk-calendar--style-glass .csk-calendar__days {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-.csk-calendar--style-glass .csk-calendar__day {
-  background-color: transparent;
-}
-
-.csk-calendar--style-glass .csk-calendar__day--outside {
-  background-color: rgba(0, 0, 0, 0.02);
-}
-
-.csk-calendar--style-glass .csk-calendar__day--today {
-  background-color: rgba(77, 163, 204, 0.1);
-}
-
-.csk-calendar--style-glass .csk-calendar__day--clickable:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-}
-
-.csk-calendar--style-glass .csk-calendar__event {
-  backdrop-filter: blur(4px);
-}
-
-.csk-calendar--style-glass .csk-calendar__event--default {
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-/* Bordered style - emphasized borders */
-.csk-calendar--style-bordered {
-  border: 2px solid var(--color-border-secondary);
-  box-shadow: var(--shadow-sm);
-}
-
-.csk-calendar--style-bordered .csk-calendar__header {
-  border-bottom: 2px solid var(--color-border-secondary);
-  padding-bottom: var(--spacing-3);
-  margin-bottom: var(--spacing-2);
-}
-
-.csk-calendar--style-bordered .csk-calendar__days {
-  border: 2px solid var(--color-border-secondary);
-  gap: 2px;
-}
-
-.csk-calendar--style-bordered .csk-calendar__day {
-  border-right: 1px solid var(--color-border-primary);
-  border-bottom: 1px solid var(--color-border-primary);
-}
-
-.csk-calendar--style-bordered .csk-calendar__day:nth-child(7n) {
-  border-right: none;
-}
-
-.csk-calendar--style-bordered .csk-calendar__event {
-  border: 1px solid currentColor;
-  border-left-width: 3px;
-}
+/* Note: Style variants gradient, glass, bordered removed. Only 'embed' variant remains. */
 
 /* ==========================================================================
    DARK MODE
@@ -790,19 +659,6 @@
   border-right-color: var(--color-bg-secondary);
 }
 
-/* Dark mode glass */
-[data-theme='dark'] .csk-calendar--style-glass {
-  background: var(--gradient-glass-dark);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-[data-theme='dark'] .csk-calendar--style-glass .csk-calendar__day--outside {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-[data-theme='dark'] .csk-calendar--style-glass .csk-calendar__event--default {
-  background-color: rgba(255, 255, 255, 0.08);
-}
 
 /* ==========================================================================
    ANIMATIONS
@@ -921,15 +777,6 @@
   /* Hide preview on mobile */
   .csk-calendar__event-preview {
     display: none !important;
-  }
-
-  /* Gradient style mobile adjustments */
-  .csk-calendar--style-gradient .csk-calendar__header {
-    padding: var(--spacing-4);
-  }
-
-  .csk-calendar--style-gradient .csk-calendar__title {
-    font-size: var(--text-lg-size);
   }
 }
 
@@ -1166,101 +1013,6 @@
 
 [data-theme='dark'] .csk-calendar--style-embed .csk-calendar__nav-btn {
   border-color: var(--color-border-primary);
-}
-
-/* ==========================================================================
-   WEEKEND-FOCUSED LAYOUT
-   Optimized for sports calendars where most events occur on weekends.
-   Gives more visual space to Sat/Sun columns.
-   ========================================================================== */
-
-/**
- * Weekend-focused grid layout
- * Standard week: Po Út St Čt Pá So Ne (Mon-Fri weekdays, Sat-Sun weekend)
- * Column widths: 1fr for weekdays, 1.8fr for weekend days
- * This gives weekend ~26% each vs weekday ~9.6% each (total 100%)
- */
-.csk-calendar--weekend-focused .csk-calendar__weekdays {
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1.8fr 1.8fr;
-}
-
-.csk-calendar--weekend-focused .csk-calendar__days {
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1.8fr 1.8fr;
-}
-
-/* Weekend column visual emphasis */
-.csk-calendar--weekend-focused .csk-calendar__weekday:nth-child(6),
-.csk-calendar--weekend-focused .csk-calendar__weekday:nth-child(7) {
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-secondary);
-}
-
-/* Weekend day cells get slightly different background to emphasize importance */
-.csk-calendar--weekend-focused .csk-calendar__day--weekend {
-  background-color: var(--color-bg-primary);
-}
-
-.csk-calendar--weekend-focused .csk-calendar__day--weekend.csk-calendar__day--outside {
-  background-color: var(--color-bg-secondary);
-}
-
-/* Weekday cells are slightly muted */
-.csk-calendar--weekend-focused .csk-calendar__day:not(.csk-calendar__day--weekend) {
-  background-color: var(--color-bg-secondary);
-}
-
-.csk-calendar--weekend-focused .csk-calendar__day:not(.csk-calendar__day--weekend).csk-calendar__day--outside {
-  background-color: var(--color-neutral-100);
-}
-
-.csk-calendar--weekend-focused .csk-calendar__day:not(.csk-calendar__day--weekend).csk-calendar__day--today {
-  background-color: var(--color-primary-50);
-}
-
-/* Weekend events get more space - show full titles */
-.csk-calendar--weekend-focused .csk-calendar__day--weekend .csk-calendar__event {
-  padding: var(--spacing-1) var(--spacing-2);
-}
-
-/* Dark mode adjustments */
-[data-theme='dark'] .csk-calendar--weekend-focused .csk-calendar__day--weekend {
-  background-color: var(--color-bg-primary);
-}
-
-[data-theme='dark'] .csk-calendar--weekend-focused .csk-calendar__day:not(.csk-calendar__day--weekend) {
-  background-color: var(--color-neutral-850);
-}
-
-[data-theme='dark'] .csk-calendar--weekend-focused .csk-calendar__day:not(.csk-calendar__day--weekend).csk-calendar__day--outside {
-  background-color: var(--color-neutral-900);
-}
-
-/* Container query adjustments for weekend-focused */
-@container calendar (max-width: 600px) {
-  /* More aggressive ratio on narrow screens */
-  .csk-calendar--weekend-focused .csk-calendar__weekdays {
-    grid-template-columns: 0.7fr 0.7fr 0.7fr 0.7fr 0.7fr 1.75fr 1.75fr;
-  }
-
-  .csk-calendar--weekend-focused .csk-calendar__days {
-    grid-template-columns: 0.7fr 0.7fr 0.7fr 0.7fr 0.7fr 1.75fr 1.75fr;
-  }
-}
-
-@container calendar (max-width: 400px) {
-  /* Extreme narrow: collapse weekdays further */
-  .csk-calendar--weekend-focused .csk-calendar__weekdays {
-    grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr 1.75fr 1.75fr;
-  }
-
-  .csk-calendar--weekend-focused .csk-calendar__days {
-    grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr 1.75fr 1.75fr;
-  }
-
-  /* Hide weekday numbers on very narrow screens */
-  .csk-calendar--weekend-focused .csk-calendar__day:not(.csk-calendar__day--weekend) .csk-calendar__day-number {
-    font-size: 9px;
-  }
 }
 
 /* ==========================================================================

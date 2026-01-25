@@ -2,8 +2,7 @@
  * CalendarList Component Styles - CSK RVP Design System
  *
  * Chronological list view for calendar events.
- * Supports style variants: default, gradient, embed
- * Container query responsive for embed contexts.
+ * Style variants: default, embed
  */
 
 /* ==========================================================================
@@ -369,47 +368,8 @@
 }
 
 /* ==========================================================================
-   STYLE VARIANTS
+   EMBED STYLE VARIANT
    ========================================================================== */
-
-/* Gradient style - brand header */
-.csk-calendar-list--style-gradient {
-  border: none;
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
-  padding: 0;
-}
-
-.csk-calendar-list--style-gradient .csk-calendar-list__header {
-  background: var(--gradient-primary);
-  padding: var(--spacing-4);
-  color: white;
-}
-
-.csk-calendar-list--style-gradient .csk-calendar-list__title {
-  color: white;
-}
-
-.csk-calendar-list--style-gradient .csk-calendar-list__view-all {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.csk-calendar-list--style-gradient .csk-calendar-list__view-all:hover {
-  color: white;
-}
-
-.csk-calendar-list--style-gradient .csk-calendar-list__content {
-  padding: var(--spacing-4);
-}
-
-.csk-calendar-list--style-gradient .csk-calendar-list__empty {
-  padding: var(--spacing-4) var(--spacing-8);
-}
-
-.csk-calendar-list--style-gradient .csk-calendar-list__footer {
-  padding: var(--spacing-3) var(--spacing-4);
-  border-top-color: var(--color-border-secondary);
-}
 
 /* Embed style - neutral, modern, for kanoe.cz integration */
 .csk-calendar-list--style-embed {

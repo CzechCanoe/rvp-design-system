@@ -2,8 +2,7 @@
  * CalendarCards Component Styles - CSK RVP Design System
  *
  * Month-based card view for calendar events.
- * Supports style variants: default, gradient, embed
- * Container query responsive for embed contexts.
+ * Style variants: default, embed
  */
 
 /* ==========================================================================
@@ -304,31 +303,8 @@
 }
 
 /* ==========================================================================
-   STYLE VARIANTS
+   EMBED STYLE VARIANT
    ========================================================================== */
-
-/* Gradient style - brand card headers */
-.csk-calendar-cards--style-gradient .csk-calendar-cards__card {
-  border: none;
-  box-shadow: var(--shadow-sm);
-}
-
-.csk-calendar-cards--style-gradient .csk-calendar-cards__card:hover {
-  box-shadow: var(--shadow-lg);
-}
-
-.csk-calendar-cards--style-gradient .csk-calendar-cards__card-header {
-  background: var(--gradient-primary);
-  border-bottom: none;
-}
-
-.csk-calendar-cards--style-gradient .csk-calendar-cards__month-name {
-  color: white;
-}
-
-.csk-calendar-cards--style-gradient .csk-calendar-cards__event-count {
-  color: rgba(255, 255, 255, 0.8);
-}
 
 /* Embed style - neutral, modern, for kanoe.cz integration */
 .csk-calendar-cards--style-embed .csk-calendar-cards__title {

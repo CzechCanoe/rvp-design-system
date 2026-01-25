@@ -11,7 +11,7 @@ import './Calendar.css';
 
 export type CalendarView = 'month' | 'week';
 export type CalendarSize = 'sm' | 'md' | 'lg';
-export type CalendarStyleVariant = 'default' | 'gradient' | 'glass' | 'bordered' | 'embed';
+export type CalendarStyleVariant = 'default' | 'embed';
 
 export interface CalendarEvent {
   /** Unique identifier for the event */
@@ -72,16 +72,11 @@ export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onS
   /** Show live indicator for events with data.isLive */
   showLive?: boolean;
   /**
-   * Weekend-focused layout for sports calendars.
-   * Gives more width to weekend columns (Sat/Sun) where most events occur,
-   * and less width to weekday columns (Mon-Fri).
-   */
-  weekendFocused?: boolean;
-  /**
-   * Weekend showcase layout - completely different approach.
-   * Weekdays appear as a compact ribbon at top (just numbers + dots).
-   * Weekend days (Sat/Sun) appear as large cards below with full event details.
-   * Ideal for sports calendars where 90% of events are on weekends.
+   * Weekend showcase layout - the recommended layout for sports calendars.
+   * Weekdays are minimized (compact columns with event dots).
+   * Weekend days are prominent (large cards with full event details).
+   * Ideal for canoe racing calendars where 90% of events are on weekends.
+   * @default false
    */
   weekendShowcase?: boolean;
 }
@@ -193,7 +188,6 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       showEventPreview = false,
       animated = true,
       showLive = false,
-      weekendFocused = false,
       weekendShowcase = false,
       className,
       ...props
@@ -361,7 +355,6 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       `csk-calendar--${size}`,
       styleVariant !== 'default' && `csk-calendar--style-${styleVariant}`,
       animated && 'csk-calendar--animated',
-      weekendFocused && 'csk-calendar--weekend-focused',
       weekendShowcase && 'csk-calendar--weekend-showcase',
       className,
     ]

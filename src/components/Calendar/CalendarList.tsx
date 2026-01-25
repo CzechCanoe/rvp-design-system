@@ -9,7 +9,7 @@ import { LiveIndicator } from '../LiveIndicator';
 import './CalendarList.css';
 
 export type CalendarListVariant = 'default' | 'compact';
-export type CalendarListStyleVariant = 'default' | 'gradient' | 'embed';
+export type CalendarListStyleVariant = 'default' | 'embed';
 export type CalendarListGrouping = 'none' | 'day' | 'month';
 
 export interface CalendarListProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {

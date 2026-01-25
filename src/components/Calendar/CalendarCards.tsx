@@ -7,7 +7,7 @@ import {
 import type { CalendarEvent } from './Calendar';
 import './CalendarCards.css';
 
-export type CalendarCardsStyleVariant = 'default' | 'gradient' | 'embed';
+export type CalendarCardsStyleVariant = 'default' | 'embed';
 
 export interface CalendarCardsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** Events to display in month cards */
