@@ -742,10 +742,12 @@ Přidat do `aesthetic.css`:
 - [x] Přidat `energyAccent` do Tabs
 - [x] Rozšířit ResultsTable o energy highlights
 - [x] Rozšířit LiveIndicator o energy glow
-- [ ] Aktualizovat CalendarPage - energy pro dnešek/deadline
-- [ ] Aktualizovat RegistrationPage - energy CTA
-- [ ] Aktualizovat LivePage - energy LIVE badge
-- [ ] Aktualizovat ResultsPage - podium energy
+- [x] Aktualizovat CalendarPage - energy pro dnešek/deadline
+- [x] Aktualizovat RegistrationPage - energy CTA
+- [x] Aktualizovat LivePage - energy LIVE badge
+- [x] Aktualizovat ResultsPage - podium energy
+- [x] Aktualizovat EventDetailPage - energy CTA registrace
+- [x] Aktualizovat DashboardPage - energy deadlines/trends
 - [x] Stories pro všechny energy varianty
 - [x] Build validace
 

@@ -6448,3 +6448,24 @@ EventDetailPage.css mělo již kompletní vizuální styly (hero gradienty, patt
 - ResultsTable energy highlights přidává glow efekt na gold row a zvýrazňuje best time
 - LiveIndicator energy glow má vlastní keyframe animaci s dramatickým pulsujícím efektem
 - Zbývá dokončit energy v prototypech (CalendarPage, RegistrationPage, LivePage)
+
+---
+
+## 2026-01-25 - Fáze 18.9: Energy Colors in Prototypes
+
+### Dokončeno
+- [x] CalendarPage - energy glow na LIVE card, energyGlow na LiveIndicator, deadline pulse animation
+- [x] RegistrationPage - energy accent na CTA "Odeslat přihlášku", energy glow na deadline card
+- [x] LivePage - energy badge variant pro LIVE, energyGlow na oncourse LiveIndicator
+- [x] ResultsPage - energy glow na official badge, energy gradient na podium section
+- [x] EventDetailPage - energy accent na registration CTA, energyGlow na LIVE, energy text na deadline
+- [x] DashboardPage - energyGlow na LiveIndicator, energy pulse animation na danger alerts
+
+### Technické poznámky
+1. **Calendar deadline events:** Přidán `data-deadline` atribut pro CSS targeting
+2. **Badge glow prop:** Použito pro subtle glow effect bez plného energy variant
+3. **Energy pulse CSS:** Nové keyframe animace pro deadline a alert urgency
+
+### Build
+- ✅ TypeScript kompilace bez chyb
+- ✅ Vite build úspěšný (21.28s)
