@@ -276,7 +276,7 @@ const AthletesListPage = ({
       {renderHeader()}
 
       {/* Page Header */}
-      <section className="athletes-list-header">
+      <section className="athletes-list-header csk-mesh-bg--hero csk-grain">
         <div className="athletes-list-header__container">
           {variant !== 'embed' && (
             <div className="athletes-list-header__breadcrumb">
@@ -287,7 +287,7 @@ const AthletesListPage = ({
           )}
           <div className="athletes-list-header__content">
             <div>
-              <h1 className="athletes-list-header__title">Registr závodníků</h1>
+              <h1 className="athletes-list-header__title csk-display">Registr závodníků</h1>
               <p className="athletes-list-header__subtitle">
                 Kompletní seznam registrovaných závodníků Českého svazu kanoistů
               </p>
@@ -315,37 +315,38 @@ const AthletesListPage = ({
 
           {/* Featured Athletes */}
           {showFeatured && featuredAthletes.length > 0 && (
-            <section className="athletes-list-featured">
+            <Card variant="aesthetic" className="athletes-list-featured csk-border-accent">
               <div className="athletes-list-featured__header">
-                <h2 className="athletes-list-featured__title">
+                <h2 className="athletes-list-featured__title csk-headline">
                   <Icon name="star" size="lg" />
                   Reprezentanti a mistři
                 </h2>
               </div>
               <div className="athletes-list-featured__grid">
-                {featuredAthletes.map(athlete => (
-                  <AthleteCard
-                    key={athlete.id}
-                    name={athlete.name}
-                    imageUrl={athlete.imageUrl}
-                    club={athlete.club}
-                    clubId={athlete.clubId}
-                    section={athlete.section}
-                    ranking={athlete.ranking}
-                    birthYear={athlete.birthYear}
-                    country={athlete.country}
-                    variant="featured"
-                    size="md"
-                    clickable
-                    href={`#athlete-${athlete.id}`}
-                  />
+                {featuredAthletes.map((athlete, index) => (
+                  <div key={athlete.id} className={`csk-reveal csk-reveal-${index + 1}`}>
+                    <AthleteCard
+                      name={athlete.name}
+                      imageUrl={athlete.imageUrl}
+                      club={athlete.club}
+                      clubId={athlete.clubId}
+                      section={athlete.section}
+                      ranking={athlete.ranking}
+                      birthYear={athlete.birthYear}
+                      country={athlete.country}
+                      variant="featured"
+                      size="md"
+                      clickable
+                      href={`#athlete-${athlete.id}`}
+                    />
+                  </div>
                 ))}
               </div>
-            </section>
+            </Card>
           )}
 
           {/* Section Tabs */}
-          <div className="athletes-list-section-tabs">
+          <Card variant="surface" className="athletes-list-section-tabs">
             <Tabs
               tabs={sectionTabs}
               activeTab={sectionFilter}
@@ -357,7 +358,7 @@ const AthletesListPage = ({
               variant="pills"
               size="md"
             />
-          </div>
+          </Card>
 
           {/* Search and Filters */}
           <Card variant="surface" className="athletes-list-filters">

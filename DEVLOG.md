@@ -5973,3 +5973,73 @@ CSS cleanup komponent je dokončen. Zbývá refaktoring CSS prototypů na čist�
 ### Metriky
 - Prototype CSS: 14,654 → 14,548 řádků (-106)
 - Build: OK
+
+---
+
+## 2026-01-25 - Iterace 15: FilterPills komponenta
+
+### Dokončeno
+- [x] Vytvořena `<FilterPills />` komponenta pro zobrazení aktivních filtrů
+- [x] Implementovány varianty: size (sm/md/lg), visual (default/subtle)
+- [x] Přidány stories s interaktivními příklady
+- [x] Refaktorován AthletesListPage - nahrazeno ~30 řádků custom JSX
+- [x] Refaktorován ClubsListPage - nahrazeno ~30 řádků custom JSX
+- [x] Odstraněno ~130 řádků duplicitního CSS z prototypů
+
+### Technické detaily
+- Komponenta podporuje: filters array, searchQuery, onRemove, onClearSearch, onClearAll
+- Ikony přes Icon komponentu (search, x)
+- Plná podpora dark mode
+- Přístupnost: aria-labels pro tlačítka odstranění
+
+### Poznámky
+- FilterPills je nyní střední priorita v 17.2 označena jako dokončená
+- Zbývá PodiumCard (nízká priorita, pouze 2 použití)
+
+---
+
+## 2026-01-25 - Fáze 17.16: PodiumCard komponenta
+
+### Dokončeno
+- [x] Vytvořena `<PodiumCard />` komponenta (PodiumCard.tsx, PodiumCard.css)
+- [x] Gold/silver/bronze pozice s odlišným stylingem
+- [x] Podpora pro čas (ResultsPage) i body (RankingsPage)
+- [x] Size varianty (sm, md, lg), minimal styl
+- [x] Klikatelné s arrow indikátorem
+- [x] Dark mode a reduced motion support
+- [x] Refaktorován ResultsPage (~80 řádků JSX zredukováno)
+- [x] Refaktorován RankingsPage (odstraněna lokální komponenta)
+- [x] Stories s různými use cases (AllPositions, RankingsStyle, HorizontalGrid)
+
+### Poznámky
+- Všechny komponenty z 17.2 jsou nyní dokončeny
+- Zbývá pouze CSS redukce prototypů na ~50 řádků (layout-only)
+
+---
+
+## 2026-01-25 - Fáze 17.17: CSS redukce AthletesListPage
+
+### Dokončeno
+- [x] Analýza AthletesListPage.css - identifikace layout vs vizuální styly
+- [x] Přepsání CSS na layout-only (539 → 304 řádků, 52 pravidel)
+- [x] Aktualizace TSX pro použití utility tříd z aesthetic.css
+- [x] Nahrazení custom sekcí Card komponentou
+
+### Změny v AthletesListPage
+
+**CSS redukce:**
+- Odstraněny všechny vizuální styly (barvy, fonty, shadows, animace)
+- Ponechány pouze layout pravidla (flex, grid, spacing, positioning)
+- Využití existujících tokenů z `aesthetic.css`
+
+**TSX změny:**
+- Hero sekce: přidány třídy `csk-mesh-bg--hero csk-grain`
+- Nadpis: přidána třída `csk-display`
+- Featured sekce: `<section>` → `<Card variant="aesthetic">` + `csk-border-accent`
+- Featured cards: přidán wrapper s `csk-reveal csk-reveal-{n}` pro staggered animace
+- Section tabs: `<div>` → `<Card variant="surface">`
+
+### Poznámky
+- Cíl ~50 řádků/prototyp není realistický - i čistý layout vyžaduje více pravidel
+- Nový cíl: ~50 CSS pravidel (ne řádků) - což odpovídá aktuálním 52 pravidlům
+- Utility třídy z aesthetic.css eliminují potřebu duplicitních vizuálních stylů
