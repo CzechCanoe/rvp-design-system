@@ -272,7 +272,7 @@ const ResultsPage = ({
 
       {/* Page Header - Clean design without waves */}
       {showHero && (
-        <section className={`results-page-header results-page-header--${section}`}>
+        <Card variant="surface" className={`results-page-header results-page-header--${section}`}>
           <div className="results-page-header__container">
             <div className="results-page-header__breadcrumb">
               <a href="#">Výsledky</a>
@@ -284,7 +284,7 @@ const ResultsPage = ({
             <div className="results-page-header__content">
               <div className="results-page-header__left">
                 <div className="results-page-header__title-row">
-                  <h1 className="results-page-header__title">MČR ve slalomu 2026</h1>
+                  <h1 className="results-page-header__title csk-display">MČR ve slalomu 2026</h1>
                   {isLive && <LiveIndicator variant="live" size="md" label="LIVE" />}
                   {!isLive && <Badge variant="success">Oficiální výsledky</Badge>}
                 </div>
@@ -304,31 +304,31 @@ const ResultsPage = ({
                 </div>
               </div>
               <div className="results-page-header__stats">
-                <div className="results-page-header__stat">
-                  <span className="results-page-header__stat-value">4</span>
+                <div className="results-page-header__stat csk-reveal csk-reveal-1">
+                  <span className="results-page-header__stat-value csk-display">4</span>
                   <span className="results-page-header__stat-label">kategorie</span>
                 </div>
-                <div className="results-page-header__stat">
-                  <span className="results-page-header__stat-value">156</span>
+                <div className="results-page-header__stat csk-reveal csk-reveal-2">
+                  <span className="results-page-header__stat-value csk-display">156</span>
                   <span className="results-page-header__stat-label">závodníků</span>
                 </div>
-                <div className="results-page-header__stat">
-                  <span className="results-page-header__stat-value">24</span>
+                <div className="results-page-header__stat csk-reveal csk-reveal-3">
+                  <span className="results-page-header__stat-value csk-display">24</span>
                   <span className="results-page-header__stat-label">branek</span>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </Card>
       )}
 
       {/* Podium Section - Using PodiumCard component */}
       {showHero && showPodium && podium.length >= 3 && !searchQuery && (
-        <section className="results-page-podium">
+        <section className="results-page-podium csk-reveal">
           <div className="results-page-podium__container">
             <div className="results-page-podium__header">
               <Icon name="trophy" size="md" />
-              <h2 className="results-page-podium__title">Stupně vítězů – {categories.find(c => c.id === selectedCategory)?.name}</h2>
+              <h2 className="results-page-podium__title csk-headline">Stupně vítězů – {categories.find(c => c.id === selectedCategory)?.name}</h2>
             </div>
             <div className="results-page-podium__grid">
               <PodiumCard
@@ -412,7 +412,7 @@ const ResultsPage = ({
 
               {/* Results Header */}
               <div className="prototype-results-page__results-header">
-                <h2 className="prototype-results-page__results-title">
+                <h2 className="prototype-results-page__results-title csk-headline">
                   Výsledky
                   <span className="prototype-results-page__results-count">
                     ({results.length} závodníků)

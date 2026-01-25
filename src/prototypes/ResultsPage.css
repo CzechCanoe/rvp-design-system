@@ -1,26 +1,48 @@
-/* ============================================================================
-   Results Page Prototype - Styles (Redesigned Phase 7.8)
-   ============================================================================ */
+/* ==========================================================================
+   ResultsPage Prototype Styles - LAYOUT ONLY
 
+   Phase 17.23: CSS reduction to layout-only
+   Visual styles handled by design tokens (aesthetic.css) and components.
+
+   Guidelines:
+   - Only layout properties: display, flex, grid, gap, padding, margin
+   - Only sizing: max-width, width, height, min-width
+   - Only positioning: position, z-index (for stacking)
+   - NO colors, fonts, shadows, borders, animations, effects
+   ========================================================================== */
+
+/* Page container - flex column for header/main/footer */
 .prototype-results-page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-bg-primary);
 }
 
-/* ============================================================================
-   Page Header - Clean design without waves (Phase 8.6.3)
-   ============================================================================ */
+.prototype-results-page--embed {
+  min-height: auto;
+}
+
+/* ==========================================================================
+   Logo Layout
+   ========================================================================== */
+
+.prototype-results-page__logo {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-2);
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Page Header Layout
+   ========================================================================== */
 
 .results-page-header {
-  background-color: var(--color-bg-secondary);
-  border-bottom: 1px solid var(--color-border-default);
   padding: var(--spacing-6) var(--spacing-4);
 }
 
 .results-page-header__container {
-  max-width: 1280px;
+  max-width: var(--container-xl);
   margin: 0 auto;
 }
 
@@ -28,19 +50,11 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  font-size: var(--font-size-sm);
   margin-bottom: var(--spacing-4);
-  color: var(--color-text-secondary);
 }
 
 .results-page-header__breadcrumb a {
-  color: var(--color-primary);
   text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-.results-page-header__breadcrumb a:hover {
-  text-decoration: underline;
 }
 
 .results-page-header__content {
@@ -65,11 +79,7 @@
 }
 
 .results-page-header__title {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
   margin: 0;
-  color: var(--color-text-primary);
 }
 
 .results-page-header__meta {
@@ -77,8 +87,6 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--spacing-4);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
 }
 
 .results-page-header__meta-item {
@@ -99,39 +107,15 @@
 
 .results-page-header__stat-value {
   display: block;
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
 }
 
 .results-page-header__stat-label {
   display: block;
-  font-size: var(--font-size-xs);
-  color: var(--color-text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* Section-specific accent colors for header */
-.results-page-header--dv {
-  border-bottom-color: var(--color-section-dv);
-}
-
-.results-page-header--ry {
-  border-bottom-color: var(--color-section-ry);
-}
-
-.results-page-header--vt {
-  border-bottom-color: var(--color-section-vt);
 }
 
 @media (max-width: 768px) {
   .results-page-header {
     padding: var(--spacing-4) var(--spacing-3);
-  }
-
-  .results-page-header__title {
-    font-size: var(--font-size-xl);
   }
 
   .results-page-header__content {
@@ -142,76 +126,22 @@
     width: 100%;
     justify-content: space-around;
     padding-top: var(--spacing-4);
-    border-top: 1px solid var(--color-border-default);
     margin-top: var(--spacing-4);
   }
 }
 
-/* LEGACY: Old hero meta-item (kept for compatibility, will be cleaned later) */
-.results-page-hero__meta-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-}
-
-.results-page-hero__meta-item svg {
-  opacity: 0.8;
-}
-
-.results-page-hero__stats {
-  display: flex;
-  gap: var(--spacing-8);
-}
-
-.results-page-hero__stat {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1);
-}
-
-.results-page-hero__stat-value {
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
-  font-family: var(--font-family-mono);
-  line-height: 1;
-}
-
-.results-page-hero__stat-label {
-  font-size: var(--font-size-sm);
-  opacity: 0.8;
-  text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-wide);
-}
-
-.results-page-hero__wave {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  color: var(--color-bg-primary);
-  z-index: 2;
-}
-
-.results-page-wave {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* ============================================================================
-   Podium Section (Featured) - Redesigned Phase 15.4
-   Horizontal layout emphasizing results, dynamic sport aesthetic
-   ============================================================================ */
+/* ==========================================================================
+   Podium Section Layout
+   Note: Actual podium cards use PodiumCard component - this is just the container
+   ========================================================================== */
 
 .results-page-podium {
-  background: var(--color-bg-primary);
   padding: var(--spacing-6) var(--spacing-4);
   position: relative;
 }
 
 .results-page-podium__container {
-  max-width: 1280px;
+  max-width: var(--container-xl);
   margin: 0 auto;
 }
 
@@ -220,18 +150,9 @@
   align-items: center;
   gap: var(--spacing-3);
   margin-bottom: var(--spacing-5);
-  color: var(--color-text-primary);
-}
-
-.results-page-podium__header svg {
-  color: var(--color-energy-500);
 }
 
 .results-page-podium__title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  font-family: var(--font-family-display);
-  letter-spacing: -0.01em;
   margin: 0;
 }
 
@@ -241,311 +162,15 @@
   gap: var(--spacing-2);
 }
 
-/* Podium Card - Horizontal row design */
-.results-page-podium__card {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
-  padding: var(--spacing-4) var(--spacing-5);
-  background: var(--color-bg-elevated);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border-default);
-  text-align: left;
-  transition: all 200ms var(--ease-sport);
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.results-page-podium__card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 4px;
-}
-
-.results-page-podium__card:hover {
-  transform: translateX(4px);
-  box-shadow: var(--shadow-md);
-}
-
-/* Gold - 1st place */
-.results-page-podium__card--gold {
-  border-color: #fbbf24;
-  background: linear-gradient(90deg, rgba(251, 191, 36, 0.08) 0%, var(--color-bg-elevated) 30%);
-  order: 1;
-}
-
-.results-page-podium__card--gold::before {
-  background: linear-gradient(180deg, #f59e0b, #fbbf24);
-}
-
-.results-page-podium__card--gold .results-page-podium__rank {
-  background: linear-gradient(135deg, #f59e0b, #fbbf24);
-  color: #92400e;
-}
-
-/* Silver - 2nd place */
-.results-page-podium__card--silver {
-  border-color: #d1d5db;
-  background: linear-gradient(90deg, rgba(156, 163, 175, 0.06) 0%, var(--color-bg-elevated) 30%);
-  order: 2;
-}
-
-.results-page-podium__card--silver::before {
-  background: linear-gradient(180deg, #9ca3af, #d1d5db);
-}
-
-.results-page-podium__card--silver .results-page-podium__rank {
-  background: linear-gradient(135deg, #6b7280, #9ca3af);
-  color: white;
-}
-
-/* Bronze - 3rd place */
-.results-page-podium__card--bronze {
-  border-color: #d97706;
-  background: linear-gradient(90deg, rgba(217, 119, 6, 0.06) 0%, var(--color-bg-elevated) 30%);
-  order: 3;
-}
-
-.results-page-podium__card--bronze::before {
-  background: linear-gradient(180deg, #b45309, #d97706);
-}
-
-.results-page-podium__card--bronze .results-page-podium__rank {
-  background: linear-gradient(135deg, #92400e, #d97706);
-  color: white;
-}
-
-.results-page-podium__rank {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-lg);
-  font-family: var(--font-family-display);
-  flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.results-page-podium__card--gold .results-page-podium__rank {
-  width: 48px;
-  height: 48px;
-  font-size: var(--font-size-xl);
-}
-
-.results-page-podium__avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--color-bg-tertiary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-secondary);
-  overflow: hidden;
-  flex-shrink: 0;
-  border: 2px solid var(--color-border-default);
-}
-
-.results-page-podium__card--gold .results-page-podium__avatar {
-  border-color: #fbbf24;
-  width: 56px;
-  height: 56px;
-  font-size: var(--font-size-lg);
-}
-
-.results-page-podium__card--silver .results-page-podium__avatar {
-  border-color: #9ca3af;
-}
-
-.results-page-podium__card--bronze .results-page-podium__avatar {
-  border-color: #d97706;
-}
-
-.results-page-podium__avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Info section - name and club */
-.results-page-podium__info {
-  flex: 1;
-  min-width: 0;
-}
-
-.results-page-podium__name {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-0-5);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.results-page-podium__card--gold .results-page-podium__name {
-  font-size: var(--font-size-lg);
-  font-family: var(--font-family-display);
-}
-
-.results-page-podium__club {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Time section - right aligned */
-.results-page-podium__result {
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.results-page-podium__time {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
-  font-variant-numeric: tabular-nums;
-  font-family: var(--font-family-mono);
-  line-height: 1.2;
-}
-
-.results-page-podium__card--gold .results-page-podium__time {
-  font-size: var(--font-size-2xl);
-  color: var(--color-energy-600);
-}
-
-.results-page-podium__diff {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-tertiary);
-  font-variant-numeric: tabular-nums;
-  font-family: var(--font-family-mono);
-}
-
-/* Trophy decoration - now on right */
-.results-page-podium__trophy {
-  position: absolute;
-  top: 50%;
-  right: var(--spacing-4);
-  transform: translateY(-50%);
-  color: var(--color-energy-500);
-  opacity: 0.15;
-  transition: opacity var(--transition-fast);
-  display: none; /* Hidden by default, shown on hover */
-}
-
-.results-page-podium__card:hover .results-page-podium__trophy {
-  opacity: 0.25;
-  display: block;
-}
-
-/* Arrow indicator on hover */
-.results-page-podium__arrow {
-  position: absolute;
-  right: var(--spacing-3);
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--color-text-tertiary);
-  opacity: 0;
-  transition: all 200ms var(--ease-sport);
-}
-
-.results-page-podium__card:hover .results-page-podium__arrow {
-  opacity: 1;
-  transform: translateY(-50%) translateX(4px);
-}
-
-/* Responsive - stack on mobile */
 @media (max-width: 768px) {
   .results-page-podium {
     padding: var(--spacing-4) var(--spacing-3);
   }
-
-  .results-page-podium__card {
-    padding: var(--spacing-3) var(--spacing-4);
-    gap: var(--spacing-3);
-  }
-
-  .results-page-podium__rank {
-    width: 36px;
-    height: 36px;
-    font-size: var(--font-size-md);
-  }
-
-  .results-page-podium__card--gold .results-page-podium__rank {
-    width: 40px;
-    height: 40px;
-    font-size: var(--font-size-lg);
-  }
-
-  .results-page-podium__avatar {
-    width: 40px;
-    height: 40px;
-    font-size: var(--font-size-sm);
-  }
-
-  .results-page-podium__card--gold .results-page-podium__avatar {
-    width: 44px;
-    height: 44px;
-  }
-
-  .results-page-podium__name {
-    font-size: var(--font-size-sm);
-  }
-
-  .results-page-podium__card--gold .results-page-podium__name {
-    font-size: var(--font-size-md);
-  }
-
-  .results-page-podium__club {
-    font-size: var(--font-size-xs);
-  }
-
-  .results-page-podium__time {
-    font-size: var(--font-size-lg);
-  }
-
-  .results-page-podium__card--gold .results-page-podium__time {
-    font-size: var(--font-size-xl);
-  }
 }
 
-/* ============================================================================
-   Logo
-   ============================================================================ */
-
-.prototype-results-page__logo {
-  display: flex;
-  align-items: baseline;
-  gap: var(--spacing-2);
-  text-decoration: none;
-  color: inherit;
-}
-
-.prototype-results-page__logo-text {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
-}
-
-.prototype-results-page__logo-subtitle {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-}
-
-/* ============================================================================
-   Main Content
-   ============================================================================ */
+/* ==========================================================================
+   Main Content Layout
+   ========================================================================== */
 
 .prototype-results-page__main {
   flex: 1;
@@ -553,13 +178,13 @@
 }
 
 .prototype-results-page__container {
-  max-width: 1280px;
+  max-width: var(--container-xl);
   margin: 0 auto;
 }
 
-/* ============================================================================
-   Content Layout
-   ============================================================================ */
+/* ==========================================================================
+   Content Grid Layout
+   ========================================================================== */
 
 .prototype-results-page__content {
   display: grid;
@@ -573,9 +198,9 @@
   }
 }
 
-/* ============================================================================
-   Results Section
-   ============================================================================ */
+/* ==========================================================================
+   Results Section Layout
+   ========================================================================== */
 
 .prototype-results-page__results {
   min-width: 0;
@@ -589,7 +214,6 @@
   gap: var(--spacing-4);
   margin-bottom: var(--spacing-4);
   padding-bottom: var(--spacing-4);
-  border-bottom: 1px solid var(--color-border-primary);
 }
 
 .prototype-results-page__filters-left {
@@ -613,19 +237,10 @@
 }
 
 .prototype-results-page__results-title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
   margin: 0;
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-}
-
-.prototype-results-page__results-count {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-normal);
-  color: var(--color-text-tertiary);
 }
 
 .prototype-results-page__results-actions {
@@ -634,9 +249,27 @@
   gap: var(--spacing-2);
 }
 
-/* ============================================================================
-   Sidebar
-   ============================================================================ */
+@media (max-width: 768px) {
+  .prototype-results-page__filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .prototype-results-page__filters-left,
+  .prototype-results-page__filters-right {
+    justify-content: flex-start;
+  }
+
+  .prototype-results-page__results-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+  }
+}
+
+/* ==========================================================================
+   Sidebar Layout
+   ========================================================================== */
 
 .prototype-results-page__sidebar {
   display: flex;
@@ -644,27 +277,14 @@
   gap: var(--spacing-4);
 }
 
-/* Race Info Card */
+/* Race Info Card Layout */
 .prototype-results-page__race-info {
   padding: var(--spacing-4);
   position: relative;
   overflow: hidden;
 }
 
-.prototype-results-page__race-info::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--gradient-primary);
-}
-
 .prototype-results-page__race-info-title {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
   margin: 0 0 var(--spacing-4) 0;
 }
 
@@ -682,19 +302,14 @@
 }
 
 .prototype-results-page__race-info-label {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-tertiary);
   flex-shrink: 0;
 }
 
 .prototype-results-page__race-info-value {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-medium);
   text-align: right;
 }
 
-/* Categories Card */
+/* Categories Card Layout */
 .prototype-results-page__categories {
   padding: 0;
   overflow: hidden;
@@ -702,14 +317,9 @@
 
 .prototype-results-page__categories-header {
   padding: var(--spacing-4);
-  border-bottom: 1px solid var(--color-border-primary);
-  background: var(--color-bg-secondary);
 }
 
 .prototype-results-page__categories-title {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
   margin: 0;
 }
 
@@ -724,57 +334,24 @@
   justify-content: space-between;
   padding: var(--spacing-3) var(--spacing-4);
   border: none;
-  border-bottom: 1px solid var(--color-border-primary);
   background: transparent;
   cursor: pointer;
   text-align: left;
   width: 100%;
-  transition: all var(--transition-fast);
-}
-
-.prototype-results-page__category-item:hover {
-  background-color: var(--color-bg-secondary);
-}
-
-.prototype-results-page__category-item--active {
-  background-color: var(--color-primary-bg);
-  border-left: 3px solid var(--color-primary-500);
-}
-
-.prototype-results-page__category-item:last-child {
-  border-bottom: none;
-}
-
-.prototype-results-page__category-name {
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-primary);
 }
 
 .prototype-results-page__category-count {
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-tertiary);
 }
 
-.prototype-results-page__category-count svg {
-  transition: transform var(--transition-fast);
-}
-
-.prototype-results-page__category-item:hover .prototype-results-page__category-count svg {
-  transform: translateX(2px);
-}
-
-/* Downloads Card */
+/* Downloads Card Layout */
 .prototype-results-page__downloads {
   padding: var(--spacing-4);
 }
 
 .prototype-results-page__downloads-title {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
   margin: 0 0 var(--spacing-3) 0;
 }
 
@@ -784,195 +361,59 @@
   gap: var(--spacing-2);
 }
 
-/* ============================================================================
-   Footer
-   ============================================================================ */
+/* ==========================================================================
+   Footer Layout
+   ========================================================================== */
 
 .prototype-results-page__footer {
   padding: var(--spacing-6) var(--spacing-4);
-  border-top: 1px solid var(--color-border-primary);
-  background-color: var(--color-bg-secondary);
 }
 
 .prototype-results-page__footer-content {
-  max-width: 1280px;
+  max-width: var(--container-xl);
   margin: 0 auto;
   text-align: center;
 }
 
 .prototype-results-page__footer-content p {
   margin: 0;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-tertiary);
 }
 
-/* ============================================================================
+/* ==========================================================================
+   Helper Classes Layout
+   ========================================================================== */
+
+.prototype-results-page__tab-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.prototype-results-page__search-input {
+  width: 200px;
+}
+
+.prototype-results-page__pagination {
+  margin-top: var(--spacing-4);
+  display: flex;
+  justify-content: center;
+}
+
+/* ==========================================================================
    Responsive Adjustments
-   ============================================================================ */
+   ========================================================================== */
 
 @media (max-width: 768px) {
   .prototype-results-page__main {
     padding: var(--spacing-4) var(--spacing-3);
   }
-
-  .prototype-results-page__filters {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .prototype-results-page__filters-left,
-  .prototype-results-page__filters-right {
-    justify-content: flex-start;
-  }
-
-  .prototype-results-page__results-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-3);
-  }
-
-  /* Hero responsive */
-  .results-page-hero {
-    padding: var(--spacing-10) var(--spacing-4) var(--spacing-16);
-  }
-
-  .results-page-hero__title {
-    font-size: var(--font-size-3xl);
-  }
-
-  .results-page-hero__stats {
-    gap: var(--spacing-6);
-  }
-
-  .results-page-hero__stat-value {
-    font-size: var(--font-size-2xl);
-  }
-
-  .results-page-hero__stat-label {
-    font-size: var(--font-size-xs);
-  }
-
-  .results-page-hero__meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-2);
-  }
-
-  /* Podium responsive */
-  .results-page-podium__card--gold {
-    order: 1;
-  }
-
-  .results-page-podium__card--silver {
-    order: 2;
-  }
-
-  .results-page-podium__card--bronze {
-    order: 3;
-  }
 }
 
-/* ============================================================================
-   Dark Mode Overrides
-   ============================================================================ */
+/* ==========================================================================
+   Embed Mode Layout Adjustments
+   ========================================================================== */
 
-[data-theme="dark"] .results-page-hero__gradient {
-  background: linear-gradient(
-    135deg,
-    var(--color-primary-300) 0%,
-    var(--color-primary-400) 50%,
-    var(--color-primary-500) 100%
-  );
-}
-
-[data-theme="dark"] .results-page-hero--dv .results-page-hero__gradient {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
-}
-
-[data-theme="dark"] .results-page-hero--ry .results-page-hero__gradient {
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
-}
-
-[data-theme="dark"] .results-page-hero--vt .results-page-hero__gradient {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%);
-}
-
-[data-theme="dark"] .results-page-podium__card {
-  background: var(--color-bg-secondary);
-}
-
-[data-theme="dark"] .results-page-podium__card--gold {
-  background: linear-gradient(90deg, rgba(251, 191, 36, 0.12) 0%, var(--color-bg-secondary) 30%);
-}
-
-[data-theme="dark"] .results-page-podium__card--silver {
-  background: linear-gradient(90deg, rgba(156, 163, 175, 0.1) 0%, var(--color-bg-secondary) 30%);
-}
-
-[data-theme="dark"] .results-page-podium__card--bronze {
-  background: linear-gradient(90deg, rgba(217, 119, 6, 0.1) 0%, var(--color-bg-secondary) 30%);
-}
-
-/* ============================================================================
-   Animations
-   ============================================================================ */
-
-@keyframes podiumEnter {
-  0% {
-    opacity: 0;
-    transform: translateX(-12px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.results-page-podium__card {
-  animation: podiumEnter 0.4s var(--ease-sport, ease-out) both;
-}
-
-.results-page-podium__card--gold {
-  animation-delay: 0s;
-}
-
-.results-page-podium__card--silver {
-  animation-delay: 0.08s;
-}
-
-.results-page-podium__card--bronze {
-  animation-delay: 0.16s;
-}
-
-/* ============================================================================
-   Reduced Motion Support
-   ============================================================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  .results-page-podium__card {
-    animation: none;
-  }
-
-  .results-page-podium__card,
-  .prototype-results-page__category-item,
-  .prototype-results-page__category-count svg {
-    transition: none;
-  }
-}
-
-/* ============================================================================
-   Embed Mode - For integration into kanoe.cz (Phase 8.7.2)
-   ============================================================================ */
-
-.prototype-results-page--embed {
-  min-height: auto;
-  background-color: transparent;
-}
-
-/* Simpler page header in embed mode */
 .prototype-results-page--embed .results-page-header {
-  background-color: var(--color-bg-primary);
-  border-bottom: 1px solid var(--color-border-default);
   padding: var(--spacing-4) 0;
   margin-bottom: var(--spacing-4);
 }
@@ -982,14 +423,9 @@
 }
 
 .prototype-results-page--embed .results-page-header__breadcrumb {
-  display: none; /* KanoeCzContext provides breadcrumb */
+  display: none;
 }
 
-.prototype-results-page--embed .results-page-header__title {
-  font-size: var(--font-size-xl);
-}
-
-/* Simpler podium in embed mode - horizontal layout maintained */
 .prototype-results-page--embed .results-page-podium {
   padding: var(--spacing-4) 0;
 }
@@ -1002,110 +438,6 @@
   margin-bottom: var(--spacing-3);
 }
 
-.prototype-results-page--embed .results-page-podium__title {
-  font-size: var(--font-size-md);
-  font-family: inherit;
-}
-
-.prototype-results-page--embed .results-page-podium__card {
-  box-shadow: none;
-  border-radius: 4px;
-  border: 1px solid #dee2e6;
-  padding: var(--spacing-3) var(--spacing-4);
-  gap: var(--spacing-3);
-}
-
-.prototype-results-page--embed .results-page-podium__card::before {
-  width: 3px;
-}
-
-.prototype-results-page--embed .results-page-podium__card--gold::before {
-  background: #ffc107;
-}
-
-.prototype-results-page--embed .results-page-podium__card--silver::before {
-  background: #adb5bd;
-}
-
-.prototype-results-page--embed .results-page-podium__card--bronze::before {
-  background: #cd7f32;
-}
-
-.prototype-results-page--embed .results-page-podium__card--gold {
-  background: linear-gradient(90deg, rgba(255, 193, 7, 0.06) 0%, transparent 30%);
-}
-
-.prototype-results-page--embed .results-page-podium__card--silver {
-  background: linear-gradient(90deg, rgba(173, 181, 189, 0.06) 0%, transparent 30%);
-}
-
-.prototype-results-page--embed .results-page-podium__card--bronze {
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.06) 0%, transparent 30%);
-}
-
-.prototype-results-page--embed .results-page-podium__rank {
-  width: 32px;
-  height: 32px;
-  font-size: var(--font-size-sm);
-}
-
-.prototype-results-page--embed .results-page-podium__card--gold .results-page-podium__rank {
-  width: 36px;
-  height: 36px;
-  font-size: var(--font-size-md);
-}
-
-.prototype-results-page--embed .results-page-podium__avatar {
-  width: 36px;
-  height: 36px;
-  font-size: var(--font-size-xs);
-  border-width: 2px;
-}
-
-.prototype-results-page--embed .results-page-podium__card--gold .results-page-podium__avatar {
-  width: 40px;
-  height: 40px;
-  font-size: var(--font-size-sm);
-}
-
-.prototype-results-page--embed .results-page-podium__name {
-  font-size: var(--font-size-sm);
-}
-
-.prototype-results-page--embed .results-page-podium__card--gold .results-page-podium__name {
-  font-size: var(--font-size-md);
-  font-family: inherit;
-}
-
-.prototype-results-page--embed .results-page-podium__club {
-  font-size: var(--font-size-xs);
-}
-
-.prototype-results-page--embed .results-page-podium__time {
-  font-size: var(--font-size-lg);
-}
-
-.prototype-results-page--embed .results-page-podium__card--gold .results-page-podium__time {
-  font-size: var(--font-size-xl);
-  color: inherit;
-}
-
-.prototype-results-page--embed .results-page-podium__arrow,
-.prototype-results-page--embed .results-page-podium__trophy {
-  display: none;
-}
-
-/* Disable animations in embed mode */
-.prototype-results-page--embed .results-page-podium__card {
-  animation: none;
-}
-
-/* Stats values in embed - use text color instead of primary */
-.prototype-results-page--embed .results-page-header__stat-value {
-  color: #212529;
-}
-
-/* Simpler main content in embed mode */
 .prototype-results-page--embed .prototype-results-page__main {
   padding: 0;
 }
@@ -1113,14 +445,6 @@
 .prototype-results-page--embed .prototype-results-page__container {
   max-width: none;
   padding: 0;
-}
-
-/* Reduce shadows in embed mode */
-.prototype-results-page--embed .prototype-results-page__race-info,
-.prototype-results-page--embed .prototype-results-page__categories,
-.prototype-results-page--embed .prototype-results-page__downloads {
-  box-shadow: none;
-  border: 1px solid var(--color-border-default);
 }
 
 /* Responsive adjustments for embed in narrow containers */
@@ -1146,54 +470,20 @@
     justify-content: flex-start;
   }
 
-  .prototype-results-page--embed .results-page-podium__card {
-    padding: var(--spacing-2) var(--spacing-3);
-    gap: var(--spacing-2);
-  }
-
-  .prototype-results-page--embed .results-page-podium__rank {
-    width: 28px;
-    height: 28px;
-    font-size: var(--font-size-xs);
-  }
-
-  .prototype-results-page--embed .results-page-podium__card--gold .results-page-podium__rank {
-    width: 32px;
-    height: 32px;
-    font-size: var(--font-size-sm);
-  }
-
-  .prototype-results-page--embed .results-page-podium__avatar {
-    width: 32px;
-    height: 32px;
-  }
-
-  .prototype-results-page--embed .results-page-podium__card--gold .results-page-podium__avatar {
-    width: 36px;
-    height: 36px;
-  }
-
   .prototype-results-page--embed .prototype-results-page__sidebar {
     grid-template-columns: 1fr;
   }
 }
 
-/* ============================================================================
-   Phase 17.8: Helper classes for inline style replacement
-   ============================================================================ */
+/* ==========================================================================
+   Reduced Motion Support
+   ========================================================================== */
 
-.prototype-results-page__tab-label {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-}
-
-.prototype-results-page__search-input {
-  width: 200px;
-}
-
-.prototype-results-page__pagination {
-  margin-top: var(--spacing-4);
-  display: flex;
-  justify-content: center;
+@media (prefers-reduced-motion: reduce) {
+  .prototype-results-page *,
+  .prototype-results-page *::before,
+  .prototype-results-page *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
