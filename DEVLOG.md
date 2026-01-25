@@ -6176,3 +6176,23 @@ CSS cleanup komponent je dokončen. Zbývá refaktoring CSS prototypů na čist�
 ### Poznámky
 - ResultsPage už používal PodiumCard komponentu, takže většina podium CSS byla nepoužívaná
 - Celkový Prototype CSS: 10,903 řádků (z 11,613)
+
+---
+
+## 2026-01-25 - Iterace 24: CSS reorganizace EventDetailPage
+
+### Dokončeno
+- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
+- [x] Reorganizovat CSS - oddělení layout a visual sekcí
+- [x] Build validace OK
+
+### Poznámky
+EventDetailPage používá vlastní hero sekci s discipline-specific gradienty (dv/ry/vt),
+které nelze extrahovat do utility tříd nebo HeroSection komponenty bez ztráty flexibility.
+CSS bylo reorganizováno pro lepší čitelnost, ale velikost zůstala podobná (1150 → 1219 řádků).
+
+Zbývající velké prototypy pro budoucí optimalizaci:
+- LivePage: 2433 řádků
+- RegistrationPage: 1557 řádků  
+- ProfilePage: 1550 řádků
+- DashboardPage: 1215 řádků

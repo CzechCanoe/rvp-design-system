@@ -1,62 +1,44 @@
-/* ============================================================================
-   Event Detail Page Prototype - Styles (Phase 8.4)
-   Phase 15.0: Aesthetic Refresh - Dynamic Sport aesthetic applied
-   - Mesh backgrounds, display typography, energy accents
-   - Staggered reveal animations, border accents
-   ============================================================================ */
+/* ==========================================================================
+   EventDetailPage Prototype Styles
 
+   Phase 17.24: CSS reorganization
+   - Layout section: flex/grid, padding, margins, positioning
+   - Visual section: colors, fonts, borders, shadows, animations
+
+   Note: Hero section requires custom gradients per discipline (dv/ry/vt),
+   which cannot be moved to utility classes. Other visual styles use
+   design tokens consistently.
+   ========================================================================== */
+
+/* Page container - flex column for header/main/footer */
 .event-detail-page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-bg-primary);
 }
 
-/* Aesthetic variant with mesh background */
-.event-detail-page--aesthetic {
-  background: var(--bg-mesh-primary);
-  background-color: var(--color-bg-primary);
-}
-
-/* Embed mode adjustments */
 .event-detail-page--embed {
   min-height: auto;
-  background: transparent;
 }
 
-/* ============================================================================
-   Logo
-   ============================================================================ */
+/* ==========================================================================
+   Logo Layout
+   ========================================================================== */
 
 .event-detail-page__logo {
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  color: inherit;
 }
 
-.event-detail-page__logo-text {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary-600);
-  line-height: 1;
-}
-
-.event-detail-page__logo-subtitle {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
-  line-height: 1.2;
-}
-
-/* ============================================================================
-   Hero Section
-   ============================================================================ */
+/* ==========================================================================
+   Hero Section Layout
+   ========================================================================== */
 
 .event-detail-hero {
   position: relative;
   padding: var(--spacing-16) var(--spacing-4) var(--spacing-20);
   overflow: hidden;
-  color: var(--color-text-inverse);
 }
 
 .event-detail-page--embed .event-detail-hero {
@@ -72,66 +54,11 @@
 .event-detail-hero__gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary-700) 0%,
-    var(--color-primary-500) 50%,
-    var(--color-primary-400) 100%
-  );
 }
 
-/* Aesthetic hero variant with mesh overlay */
-.event-detail-page--aesthetic .event-detail-hero__gradient {
-  background:
-    var(--bg-mesh-hero),
-    linear-gradient(
-      135deg,
-      var(--color-primary-700) 0%,
-      var(--color-primary-500) 50%,
-      var(--color-primary-400) 100%
-    );
-}
-
-/* Dynamic water-inspired pattern */
 .event-detail-hero__pattern {
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
-  opacity: 1;
-}
-
-/* Discipline-specific hero variants */
-.event-detail-hero--dv .event-detail-hero__gradient {
-  background: linear-gradient(
-    135deg,
-    #1e40af 0%,
-    #2563eb 30%,
-    #3b82f6 60%,
-    #60a5fa 100%
-  );
-}
-
-.event-detail-hero--ry .event-detail-hero__gradient {
-  background: linear-gradient(
-    135deg,
-    #14532d 0%,
-    #166534 30%,
-    #22c55e 70%,
-    #4ade80 100%
-  );
-}
-
-.event-detail-hero--vt .event-detail-hero__gradient {
-  background: linear-gradient(
-    135deg,
-    #7f1d1d 0%,
-    #b91c1c 30%,
-    #ef4444 70%,
-    #f87171 100%
-  );
 }
 
 .event-detail-hero__content {
@@ -145,24 +72,11 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  font-size: var(--font-size-sm);
   margin-bottom: var(--spacing-4);
-  opacity: 0.8;
 }
 
 .event-detail-hero__breadcrumb a {
-  color: inherit;
   text-decoration: none;
-  transition: opacity var(--transition-fast);
-}
-
-.event-detail-hero__breadcrumb a:hover {
-  opacity: 1;
-  text-decoration: underline;
-}
-
-.event-detail-hero__breadcrumb-separator {
-  opacity: 0.5;
 }
 
 .event-detail-hero__header {
@@ -178,29 +92,10 @@
 }
 
 .event-detail-hero__title {
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.1;
-  letter-spacing: var(--letter-spacing-tight);
   margin: 0 0 var(--spacing-2);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Aesthetic title with display font */
-.event-detail-page--aesthetic .event-detail-hero__title {
-  font-family: var(--font-family-display);
-  font-weight: var(--text-display-weight);
-  letter-spacing: var(--text-display-tracking);
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.event-detail-page--embed .event-detail-hero__title {
-  font-size: var(--font-size-2xl);
 }
 
 .event-detail-hero__subtitle {
-  font-size: var(--font-size-lg);
-  opacity: 0.9;
   margin: 0;
 }
 
@@ -210,24 +105,17 @@
   align-items: center;
   gap: var(--spacing-6);
   margin-bottom: var(--spacing-6);
-  font-size: var(--font-size-md);
-  opacity: 0.9;
 }
 
 .event-detail-page--embed .event-detail-hero__meta {
   margin-bottom: 0;
   gap: var(--spacing-4);
-  font-size: var(--font-size-sm);
 }
 
 .event-detail-hero__meta-item {
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-}
-
-.event-detail-hero__meta-item svg {
-  opacity: 0.8;
 }
 
 .event-detail-hero__cta {
@@ -238,22 +126,15 @@
   margin-top: var(--spacing-6);
 }
 
-.event-detail-hero__deadline {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  font-size: var(--font-size-sm);
-  opacity: 0.9;
-}
-
-/* Compact CTA for embed mode */
 .event-detail-hero__cta--compact {
   margin-top: var(--spacing-4);
   gap: var(--spacing-3);
 }
 
-.event-detail-hero__cta--compact .event-detail-hero__deadline {
-  font-size: var(--font-size-xs);
+.event-detail-hero__deadline {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
 }
 
 .event-detail-hero__wave {
@@ -262,7 +143,6 @@
   left: 0;
   right: 0;
   height: 60px;
-  color: var(--color-bg-primary);
   z-index: 2;
 }
 
@@ -272,13 +152,11 @@
   display: block;
 }
 
-/* ============================================================================
-   Stats Bar
-   ============================================================================ */
+/* ==========================================================================
+   Stats Bar Layout
+   ========================================================================== */
 
 .event-detail-stats {
-  background: var(--color-bg-elevated);
-  border-bottom: 1px solid var(--color-border-subtle);
   padding: var(--spacing-4) var(--spacing-4);
 }
 
@@ -297,55 +175,13 @@
   gap: var(--spacing-1);
 }
 
-.event-detail-stats__value {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  font-family: var(--font-family-mono);
-  color: var(--color-primary-600);
-  line-height: 1;
-}
-
-/* Aesthetic stats with display font */
-.event-detail-page--aesthetic .event-detail-stats__value {
-  font-family: var(--font-family-display);
-  font-weight: 800;
-  color: var(--color-energy-600);
-}
-
-.event-detail-stats__label {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-wide);
-}
-
-/* Embed mode: compact inline stats */
 .event-detail-stats--embed {
   padding: var(--spacing-3) var(--spacing-4);
-  border-radius: var(--radius-lg);
   margin: calc(-1 * var(--spacing-2)) 0 var(--spacing-4);
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border-subtle);
 }
 
 .event-detail-stats--embed .event-detail-stats__container {
   gap: var(--spacing-6);
-}
-
-.event-detail-stats--embed .event-detail-stats__value {
-  font-size: var(--font-size-lg);
-}
-
-.event-detail-stats--embed .event-detail-stats__label {
-  font-size: 0.65rem;
-}
-
-/* Aesthetic embed stats with border-accent */
-.event-detail-page--aesthetic .event-detail-stats--embed {
-  border-left: var(--border-accent-width) solid;
-  border-image: var(--border-accent-gradient) 1;
-  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
-  animation-delay: var(--stagger-1);
 }
 
 @media (max-width: 640px) {
@@ -353,19 +189,11 @@
     gap: var(--spacing-6);
     flex-wrap: wrap;
   }
-
-  .event-detail-stats__value {
-    font-size: var(--font-size-xl);
-  }
-
-  .event-detail-stats--embed .event-detail-stats__value {
-    font-size: var(--font-size-md);
-  }
 }
 
-/* ============================================================================
-   Main Content
-   ============================================================================ */
+/* ==========================================================================
+   Main Content Layout
+   ========================================================================== */
 
 .event-detail-page__main {
   flex: 1;
@@ -400,7 +228,6 @@
 
 .event-detail-page__tabs {
   margin-bottom: var(--spacing-6);
-  border-bottom: 1px solid var(--color-border-subtle);
   padding-bottom: var(--spacing-1);
 }
 
@@ -412,9 +239,9 @@
   min-height: 300px;
 }
 
-/* ============================================================================
-   Info Tab
-   ============================================================================ */
+/* ==========================================================================
+   Info Tab Layout
+   ========================================================================== */
 
 .event-detail-info__section {
   margin-bottom: var(--spacing-8);
@@ -425,23 +252,10 @@
 }
 
 .event-detail-info__title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
   margin: 0 0 var(--spacing-3);
 }
 
-/* Aesthetic info title with display font */
-.event-detail-page--aesthetic .event-detail-info__title {
-  font-family: var(--font-family-display);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
 .event-detail-info__text {
-  font-size: var(--font-size-md);
-  color: var(--color-text-secondary);
-  line-height: var(--line-height-relaxed);
   margin: 0;
 }
 
@@ -467,15 +281,494 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-primary-50);
-  color: var(--color-primary-600);
-  border-radius: var(--radius-lg);
 }
 
 .event-detail-info__location-details {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-1);
+}
+
+.event-detail-info__location-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  text-decoration: none;
+  margin-top: var(--spacing-1);
+}
+
+.event-detail-info__organizer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.event-detail-info__organizer-contact a {
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Schedule Tab Layout
+   ========================================================================== */
+
+.event-detail-schedule__days {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.event-detail-schedule__day-title {
+  margin: 0 0 var(--spacing-4);
+  padding-bottom: var(--spacing-2);
+}
+
+.event-detail-schedule__events {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.event-detail-schedule__event {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-3) var(--spacing-4);
+}
+
+.event-detail-schedule__time {
+  min-width: 60px;
+}
+
+.event-detail-schedule__name {
+  flex: 1;
+}
+
+/* ==========================================================================
+   Participants Tab Layout
+   ========================================================================== */
+
+.event-detail-participants__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-4);
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.event-detail-participants__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.event-detail-participants__table th,
+.event-detail-participants__table td {
+  padding: var(--spacing-3) var(--spacing-4);
+  text-align: left;
+}
+
+.event-detail-participants__seed {
+  text-align: center;
+}
+
+/* ==========================================================================
+   Results Tab Layout
+   ========================================================================== */
+
+.event-detail-results__header {
+  margin-bottom: var(--spacing-4);
+}
+
+/* ==========================================================================
+   Documents Tab Layout
+   ========================================================================== */
+
+.event-detail-documents__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.event-detail-documents__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.event-detail-documents__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.event-detail-documents__info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ==========================================================================
+   Sidebar Layout
+   ========================================================================== */
+
+.event-detail-page__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+@media (max-width: 1024px) {
+  .event-detail-page__sidebar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+.event-detail-sidebar__card {
+  padding: var(--spacing-5);
+}
+
+.event-detail-sidebar__title {
+  margin: 0 0 var(--spacing-4);
+}
+
+.event-detail-sidebar__text {
+  margin: 0 0 var(--spacing-4);
+}
+
+.event-detail-sidebar__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.event-detail-sidebar__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-detail-sidebar__item--highlight {
+  padding: var(--spacing-3);
+  margin-top: var(--spacing-2);
+}
+
+.event-detail-sidebar__location {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.event-detail-sidebar__contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.event-detail-sidebar__contact-link {
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Footer Layout
+   ========================================================================== */
+
+.event-detail-page__footer {
+  padding: var(--spacing-6) var(--spacing-4);
+  margin-top: auto;
+}
+
+.event-detail-page__footer-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.event-detail-page__footer-content p {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Responsive Layout Adjustments
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .event-detail-hero {
+    padding: var(--spacing-12) var(--spacing-4) var(--spacing-16);
+  }
+
+  .event-detail-hero__meta {
+    gap: var(--spacing-4);
+  }
+
+  .event-detail-hero__cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .event-detail-schedule__event {
+    flex-wrap: wrap;
+  }
+
+  .event-detail-schedule__time {
+    min-width: auto;
+  }
+
+  .event-detail-participants__table th,
+  .event-detail-participants__table td {
+    padding: var(--spacing-2) var(--spacing-3);
+  }
+}
+
+/* ==========================================================================
+   Embed Mode Layout Overrides
+   ========================================================================== */
+
+.event-detail-page--embed .event-detail-info__section {
+  margin-bottom: var(--spacing-4);
+}
+
+.event-detail-page--embed .event-detail-schedule__event {
+  padding: var(--spacing-2) var(--spacing-3);
+}
+
+/* ==========================================================================
+   Hero Visual Styles
+   Note: These are essential for visual differentiation, not layout-only
+   ========================================================================== */
+
+/* Base hero visual styling */
+.event-detail-hero {
+  color: var(--color-text-inverse);
+}
+
+.event-detail-hero__gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-700) 0%,
+    var(--color-primary-500) 50%,
+    var(--color-primary-400) 100%
+  );
+}
+
+/* Aesthetic mesh overlay */
+.event-detail-page--aesthetic .event-detail-hero__gradient {
+  background:
+    var(--bg-mesh-hero),
+    linear-gradient(
+      135deg,
+      var(--color-primary-700) 0%,
+      var(--color-primary-500) 50%,
+      var(--color-primary-400) 100%
+    );
+}
+
+/* Water-inspired pattern */
+.event-detail-hero__pattern {
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
+}
+
+/* Section-specific gradients */
+.event-detail-hero--dv .event-detail-hero__gradient {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 30%, #3b82f6 60%, #60a5fa 100%);
+}
+
+.event-detail-hero--ry .event-detail-hero__gradient {
+  background: linear-gradient(135deg, #14532d 0%, #166534 30%, #22c55e 70%, #4ade80 100%);
+}
+
+.event-detail-hero--vt .event-detail-hero__gradient {
+  background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 30%, #ef4444 70%, #f87171 100%);
+}
+
+/* Embed mode rounded hero */
+.event-detail-page--embed .event-detail-hero {
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-4);
+}
+
+.event-detail-page--embed .event-detail-hero__gradient {
+  border-radius: var(--radius-lg);
+}
+
+/* ==========================================================================
+   Typography & Text Styles
+   ========================================================================== */
+
+.event-detail-page__logo-text {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-600);
+  line-height: 1;
+}
+
+.event-detail-page__logo-subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.2;
+}
+
+.event-detail-hero__breadcrumb {
+  font-size: var(--font-size-sm);
+  opacity: 0.8;
+}
+
+.event-detail-hero__breadcrumb a {
+  color: inherit;
+  transition: opacity var(--transition-fast);
+}
+
+.event-detail-hero__breadcrumb a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.event-detail-hero__breadcrumb-separator {
+  opacity: 0.5;
+}
+
+.event-detail-hero__title {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  letter-spacing: var(--letter-spacing-tight);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.event-detail-page--aesthetic .event-detail-hero__title {
+  font-family: var(--font-family-display);
+  font-weight: var(--text-display-weight);
+  letter-spacing: var(--text-display-tracking);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.event-detail-page--embed .event-detail-hero__title {
+  font-size: var(--font-size-2xl);
+}
+
+.event-detail-hero__subtitle {
+  font-size: var(--font-size-lg);
+  opacity: 0.9;
+}
+
+.event-detail-hero__meta {
+  font-size: var(--font-size-md);
+  opacity: 0.9;
+}
+
+.event-detail-page--embed .event-detail-hero__meta {
+  font-size: var(--font-size-sm);
+}
+
+.event-detail-hero__meta-item svg {
+  opacity: 0.8;
+}
+
+.event-detail-hero__deadline {
+  font-size: var(--font-size-sm);
+  opacity: 0.9;
+}
+
+.event-detail-hero__cta--compact .event-detail-hero__deadline {
+  font-size: var(--font-size-xs);
+}
+
+/* ==========================================================================
+   Stats Bar Styles
+   ========================================================================== */
+
+.event-detail-stats {
+  background: var(--color-bg-elevated);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.event-detail-stats__value {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-mono);
+  color: var(--color-primary-600);
+  line-height: 1;
+}
+
+.event-detail-page--aesthetic .event-detail-stats__value {
+  font-family: var(--font-family-display);
+  font-weight: 800;
+  color: var(--color-energy-600);
+}
+
+.event-detail-stats__label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.event-detail-stats--embed {
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.event-detail-page--aesthetic .event-detail-stats--embed {
+  border-left: var(--border-accent-width) solid;
+  border-image: var(--border-accent-gradient) 1;
+  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+  animation-delay: var(--stagger-1);
+}
+
+.event-detail-stats--embed .event-detail-stats__value {
+  font-size: var(--font-size-lg);
+}
+
+.event-detail-stats--embed .event-detail-stats__label {
+  font-size: 0.65rem;
+}
+
+@media (max-width: 640px) {
+  .event-detail-stats__value {
+    font-size: var(--font-size-xl);
+  }
+
+  .event-detail-stats--embed .event-detail-stats__value {
+    font-size: var(--font-size-md);
+  }
+}
+
+/* ==========================================================================
+   Content Text Styles
+   ========================================================================== */
+
+.event-detail-page__tabs {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.event-detail-info__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.event-detail-page--aesthetic .event-detail-info__title {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.event-detail-info__text {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.event-detail-info__location-icon {
+  background: var(--color-primary-50);
+  color: var(--color-primary-600);
+  border-radius: var(--radius-lg);
 }
 
 .event-detail-info__location-name {
@@ -489,23 +782,12 @@
 }
 
 .event-detail-info__location-link {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-1);
   font-size: var(--font-size-sm);
   color: var(--color-primary-600);
-  text-decoration: none;
-  margin-top: var(--spacing-1);
 }
 
 .event-detail-info__location-link:hover {
   text-decoration: underline;
-}
-
-.event-detail-info__organizer {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1);
 }
 
 .event-detail-info__organizer-name {
@@ -520,37 +802,23 @@
 
 .event-detail-info__organizer-contact a {
   color: var(--color-primary-600);
-  text-decoration: none;
 }
 
 .event-detail-info__organizer-contact a:hover {
   text-decoration: underline;
 }
 
-/* ============================================================================
-   Schedule Tab
-   ============================================================================ */
-
-.event-detail-schedule__days {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-8);
-}
-
-.event-detail-schedule__day {
-  /* Day section */
-}
+/* ==========================================================================
+   Schedule Styles
+   ========================================================================== */
 
 .event-detail-schedule__day-title {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
-  margin: 0 0 var(--spacing-4);
-  padding-bottom: var(--spacing-2);
   border-bottom: 2px solid var(--color-primary-500);
 }
 
-/* Aesthetic day title with display font and border-accent */
 .event-detail-page--aesthetic .event-detail-schedule__day-title {
   font-family: var(--font-family-display);
   font-weight: 700;
@@ -559,23 +827,12 @@
   border-image: var(--border-accent-gradient) 1;
 }
 
-.event-detail-schedule__events {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
-
 .event-detail-schedule__event {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
-  padding: var(--spacing-3) var(--spacing-4);
   background: var(--color-bg-elevated);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border-subtle);
 }
 
-/* Aesthetic schedule event with border-accent and hover glow */
 .event-detail-page--aesthetic .event-detail-schedule__event {
   border-left: var(--border-accent-width) solid;
   border-image: var(--border-accent-gradient) 1;
@@ -592,27 +849,16 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--color-primary-600);
-  min-width: 60px;
 }
 
 .event-detail-schedule__name {
-  flex: 1;
   font-size: var(--font-size-md);
   color: var(--color-text-primary);
 }
 
-/* ============================================================================
-   Participants Tab
-   ============================================================================ */
-
-.event-detail-participants__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--spacing-4);
-  gap: var(--spacing-4);
-  flex-wrap: wrap;
-}
+/* ==========================================================================
+   Participants Table Styles
+   ========================================================================== */
 
 .event-detail-participants__count {
   font-size: var(--font-size-sm);
@@ -632,14 +878,7 @@
   color: var(--color-text-primary);
 }
 
-.event-detail-participants__table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
 .event-detail-participants__table th {
-  padding: var(--spacing-3) var(--spacing-4);
-  text-align: left;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
@@ -650,7 +889,6 @@
 }
 
 .event-detail-participants__table td {
-  padding: var(--spacing-3) var(--spacing-4);
   font-size: var(--font-size-sm);
   color: var(--color-text-primary);
   border-bottom: 1px solid var(--color-border-subtle);
@@ -676,48 +914,21 @@
 
 .event-detail-participants__seed {
   font-family: var(--font-family-mono);
-  text-align: center;
 }
 
-/* ============================================================================
-   Results Tab
-   ============================================================================ */
-
-.event-detail-results__header {
-  margin-bottom: var(--spacing-4);
-}
-
-/* ============================================================================
-   Documents Tab
-   ============================================================================ */
-
-.event-detail-documents__list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-3);
-}
-
-.event-detail-documents__item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
-}
+/* ==========================================================================
+   Documents Styles
+   ========================================================================== */
 
 .event-detail-documents__icon {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: var(--color-primary-50);
   color: var(--color-primary-600);
   border-radius: var(--radius-lg);
 }
 
-.event-detail-documents__info {
-  flex: 1;
-  min-width: 0;
+.event-detail-page--aesthetic .event-detail-documents__icon {
+  background: var(--gradient-energy-subtle);
+  color: var(--color-energy-600);
 }
 
 .event-detail-documents__name {
@@ -730,25 +941,34 @@
   color: var(--color-text-tertiary);
 }
 
-/* ============================================================================
-   Sidebar
-   ============================================================================ */
-
-.event-detail-page__sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
+.event-detail-page--aesthetic .event-detail-documents__item {
+  transition: box-shadow 200ms var(--ease-sport), transform 200ms var(--ease-sport);
 }
 
-@media (max-width: 1024px) {
-  .event-detail-page__sidebar {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  }
+.event-detail-page--aesthetic .event-detail-documents__item:hover {
+  box-shadow: var(--glow-energy-sm);
+  transform: translateX(4px);
 }
 
-.event-detail-sidebar__card {
-  padding: var(--spacing-5);
+/* ==========================================================================
+   Sidebar Styles
+   ========================================================================== */
+
+.event-detail-sidebar__title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.event-detail-page--aesthetic .event-detail-sidebar__title {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.event-detail-sidebar__text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
 }
 
 .event-detail-sidebar__card--cta {
@@ -764,50 +984,13 @@
   opacity: 0.9;
 }
 
-.event-detail-sidebar__title {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-  margin: 0 0 var(--spacing-4);
-}
-
-/* Aesthetic sidebar title with display font */
-.event-detail-page--aesthetic .event-detail-sidebar__title {
-  font-family: var(--font-family-display);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.event-detail-sidebar__text {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  margin: 0 0 var(--spacing-4);
-}
-
-.event-detail-sidebar__list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-3);
+.event-detail-page--aesthetic .event-detail-sidebar__card--cta {
+  background: var(--gradient-energy);
+  border: none;
 }
 
 .event-detail-sidebar__item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   font-size: var(--font-size-sm);
-}
-
-.event-detail-sidebar__item--highlight {
-  padding: var(--spacing-3);
-  background: var(--color-primary-50);
-  border-radius: var(--radius-md);
-  margin-top: var(--spacing-2);
-}
-
-.event-detail-sidebar__item--highlight .event-detail-sidebar__value {
-  color: var(--color-primary-600);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-lg);
 }
 
 .event-detail-sidebar__label {
@@ -819,10 +1002,24 @@
   font-weight: var(--font-weight-medium);
 }
 
-.event-detail-sidebar__location {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
+.event-detail-sidebar__item--highlight {
+  background: var(--color-primary-50);
+  border-radius: var(--radius-md);
+}
+
+.event-detail-page--aesthetic .event-detail-sidebar__item--highlight {
+  background: var(--gradient-energy-subtle);
+  border-left: var(--border-accent-width) solid var(--color-energy-500);
+}
+
+.event-detail-sidebar__item--highlight .event-detail-sidebar__value {
+  color: var(--color-primary-600);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+}
+
+.event-detail-page--aesthetic .event-detail-sidebar__item--highlight .event-detail-sidebar__value {
+  color: var(--color-energy-600);
 }
 
 .event-detail-sidebar__location-name {
@@ -835,12 +1032,6 @@
   color: var(--color-text-secondary);
 }
 
-.event-detail-sidebar__contact {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1);
-}
-
 .event-detail-sidebar__contact-name {
   font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
@@ -849,93 +1040,29 @@
 .event-detail-sidebar__contact-link {
   font-size: var(--font-size-sm);
   color: var(--color-primary-600);
-  text-decoration: none;
 }
 
 .event-detail-sidebar__contact-link:hover {
   text-decoration: underline;
 }
 
-/* ============================================================================
-   Footer
-   ============================================================================ */
+/* ==========================================================================
+   Footer Styles
+   ========================================================================== */
 
 .event-detail-page__footer {
   background: var(--color-bg-secondary);
   border-top: 1px solid var(--color-border-subtle);
-  padding: var(--spacing-6) var(--spacing-4);
-  margin-top: auto;
-}
-
-.event-detail-page__footer-content {
-  max-width: 1280px;
-  margin: 0 auto;
-  text-align: center;
 }
 
 .event-detail-page__footer-content p {
-  margin: 0;
   font-size: var(--font-size-sm);
   color: var(--color-text-tertiary);
 }
 
-/* ============================================================================
-   Responsive Adjustments
-   ============================================================================ */
-
-@media (max-width: 768px) {
-  .event-detail-hero {
-    padding: var(--spacing-12) var(--spacing-4) var(--spacing-16);
-  }
-
-  .event-detail-hero__title {
-    font-size: var(--font-size-2xl);
-  }
-
-  .event-detail-hero__subtitle {
-    font-size: var(--font-size-md);
-  }
-
-  .event-detail-hero__meta {
-    gap: var(--spacing-4);
-    font-size: var(--font-size-sm);
-  }
-
-  .event-detail-hero__cta {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .event-detail-schedule__event {
-    flex-wrap: wrap;
-  }
-
-  .event-detail-schedule__time {
-    min-width: auto;
-  }
-
-  .event-detail-participants__table th,
-  .event-detail-participants__table td {
-    padding: var(--spacing-2) var(--spacing-3);
-  }
-}
-
-/* ============================================================================
-   Embed Mode Overrides
-   ============================================================================ */
-
-.event-detail-page--embed .event-detail-hero {
-  border-radius: var(--radius-lg);
-  margin-bottom: var(--spacing-4);
-}
-
-.event-detail-page--embed .event-detail-hero__gradient {
-  border-radius: var(--radius-lg);
-}
-
-.event-detail-page--embed .event-detail-info__section {
-  margin-bottom: var(--spacing-4);
-}
+/* ==========================================================================
+   Embed Mode Style Overrides
+   ========================================================================== */
 
 .event-detail-page--embed .event-detail-info__title {
   font-size: var(--font-size-md);
@@ -945,116 +1072,45 @@
   font-size: var(--font-size-md);
 }
 
-.event-detail-page--embed .event-detail-schedule__event {
-  padding: var(--spacing-2) var(--spacing-3);
-}
+/* ==========================================================================
+   Aesthetic Animations
+   ========================================================================== */
 
-/* ============================================================================
-   Aesthetic Mode - Dynamic Sport Enhancements
-   ============================================================================ */
-
-/* Hero CTA with energy glow */
 .event-detail-page--aesthetic .event-detail-hero__cta {
   animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
   animation-delay: var(--stagger-3);
 }
 
-/* Staggered reveal for schedule days */
 .event-detail-page--aesthetic .event-detail-schedule__day {
   animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
 }
 
-.event-detail-page--aesthetic .event-detail-schedule__day:nth-child(1) {
-  animation-delay: var(--stagger-1);
-}
+.event-detail-page--aesthetic .event-detail-schedule__day:nth-child(1) { animation-delay: var(--stagger-1); }
+.event-detail-page--aesthetic .event-detail-schedule__day:nth-child(2) { animation-delay: var(--stagger-2); }
+.event-detail-page--aesthetic .event-detail-schedule__day:nth-child(3) { animation-delay: var(--stagger-3); }
 
-.event-detail-page--aesthetic .event-detail-schedule__day:nth-child(2) {
-  animation-delay: var(--stagger-2);
-}
-
-.event-detail-page--aesthetic .event-detail-schedule__day:nth-child(3) {
-  animation-delay: var(--stagger-3);
-}
-
-/* Staggered reveal for info sections */
 .event-detail-page--aesthetic .event-detail-info__section {
   animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
 }
 
-.event-detail-page--aesthetic .event-detail-info__section:nth-child(1) {
-  animation-delay: var(--stagger-1);
-}
+.event-detail-page--aesthetic .event-detail-info__section:nth-child(1) { animation-delay: var(--stagger-1); }
+.event-detail-page--aesthetic .event-detail-info__section:nth-child(2) { animation-delay: var(--stagger-2); }
+.event-detail-page--aesthetic .event-detail-info__section:nth-child(3) { animation-delay: var(--stagger-3); }
+.event-detail-page--aesthetic .event-detail-info__section:nth-child(4) { animation-delay: var(--stagger-4); }
 
-.event-detail-page--aesthetic .event-detail-info__section:nth-child(2) {
-  animation-delay: var(--stagger-2);
-}
-
-.event-detail-page--aesthetic .event-detail-info__section:nth-child(3) {
-  animation-delay: var(--stagger-3);
-}
-
-.event-detail-page--aesthetic .event-detail-info__section:nth-child(4) {
-  animation-delay: var(--stagger-4);
-}
-
-/* Sidebar cards with reveal */
 .event-detail-page--aesthetic .event-detail-sidebar__card {
   animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
 }
 
-.event-detail-page--aesthetic .event-detail-sidebar__card:nth-child(1) {
-  animation-delay: var(--stagger-2);
-}
+.event-detail-page--aesthetic .event-detail-sidebar__card:nth-child(1) { animation-delay: var(--stagger-2); }
+.event-detail-page--aesthetic .event-detail-sidebar__card:nth-child(2) { animation-delay: var(--stagger-3); }
+.event-detail-page--aesthetic .event-detail-sidebar__card:nth-child(3) { animation-delay: var(--stagger-4); }
+.event-detail-page--aesthetic .event-detail-sidebar__card:nth-child(4) { animation-delay: var(--stagger-5); }
 
-.event-detail-page--aesthetic .event-detail-sidebar__card:nth-child(2) {
-  animation-delay: var(--stagger-3);
-}
+/* ==========================================================================
+   Expressive Mode Layout & Effects
+   ========================================================================== */
 
-.event-detail-page--aesthetic .event-detail-sidebar__card:nth-child(3) {
-  animation-delay: var(--stagger-4);
-}
-
-.event-detail-page--aesthetic .event-detail-sidebar__card:nth-child(4) {
-  animation-delay: var(--stagger-5);
-}
-
-/* Highlight card with energy border */
-.event-detail-page--aesthetic .event-detail-sidebar__card--cta {
-  background: var(--gradient-energy);
-  border: none;
-}
-
-/* Registration deadline highlight with energy color */
-.event-detail-page--aesthetic .event-detail-sidebar__item--highlight {
-  background: var(--gradient-energy-subtle);
-  border-left: var(--border-accent-width) solid var(--color-energy-500);
-}
-
-.event-detail-page--aesthetic .event-detail-sidebar__item--highlight .event-detail-sidebar__value {
-  color: var(--color-energy-600);
-}
-
-/* Documents hover glow */
-.event-detail-page--aesthetic .event-detail-documents__item {
-  transition: box-shadow 200ms var(--ease-sport), transform 200ms var(--ease-sport);
-}
-
-.event-detail-page--aesthetic .event-detail-documents__item:hover {
-  box-shadow: var(--glow-energy-sm);
-  transform: translateX(4px);
-}
-
-/* Document icon with energy accent */
-.event-detail-page--aesthetic .event-detail-documents__icon {
-  background: var(--gradient-energy-subtle);
-  color: var(--color-energy-600);
-}
-
-/* ============================================================================
-   Expressive Mode - Extra "wow" decorations
-   ============================================================================ */
-
-/* Diagonal stripe decoration */
 .event-detail-hero__diagonal-stripe {
   position: absolute;
   top: 0;
@@ -1075,15 +1131,10 @@
 }
 
 @keyframes diagonal-slide {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(0%);
-  }
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
 }
 
-/* Grain texture overlay */
 .event-detail-hero__grain {
   position: absolute;
   inset: 0;
@@ -1093,12 +1144,10 @@
   mix-blend-mode: overlay;
 }
 
-/* Expressive mode: larger hero padding */
 .event-detail-page--expressive.event-detail-page--embed .event-detail-hero {
   padding: var(--spacing-8) var(--spacing-4) var(--spacing-10);
 }
 
-/* Expressive mode: energy glow on hero content */
 .event-detail-page--expressive .event-detail-hero__header {
   animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
 }
@@ -1109,7 +1158,6 @@
     0 0 40px rgba(var(--color-energy-rgb, 255, 204, 0), 0.15);
 }
 
-/* Expressive stats bar with enhanced styling */
 .event-detail-page--expressive .event-detail-stats--embed {
   background: linear-gradient(
     135deg,
@@ -1119,18 +1167,39 @@
   box-shadow: var(--glow-energy-sm);
 }
 
-/* Expressive mode: tab content cards with subtle energy glow on hover */
 .event-detail-page--expressive .event-detail-info__location-card:hover,
 .event-detail-page--expressive .event-detail-documents__item:hover {
   box-shadow: var(--glow-energy-md);
 }
 
-/* Reduced motion */
+/* ==========================================================================
+   Responsive Style Adjustments
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .event-detail-hero__title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .event-detail-hero__subtitle {
+    font-size: var(--font-size-md);
+  }
+
+  .event-detail-hero__meta {
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
 @media (prefers-reduced-motion: reduce) {
   .event-detail-page--aesthetic .event-detail-hero__cta,
   .event-detail-page--aesthetic .event-detail-schedule__day,
   .event-detail-page--aesthetic .event-detail-info__section,
-  .event-detail-page--aesthetic .event-detail-sidebar__card {
+  .event-detail-page--aesthetic .event-detail-sidebar__card,
+  .event-detail-page--aesthetic .event-detail-stats--embed {
     animation: none;
     opacity: 1;
     transform: none;
