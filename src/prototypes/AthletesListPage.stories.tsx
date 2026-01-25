@@ -576,7 +576,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Prototyp stránky seznamu závodníků CSK. Zobrazuje registrované závodníky s vyhledáváním, filtrováním podle sekcí a VT tříd, a featured sekci s reprezentanty.',
+          'Prototyp stránky seznamu závodníků CSK s Aesthetic designem. Zobrazuje registrované závodníky s vyhledáváním, filtrováním podle sekcí a VT tříd, a featured sekci s reprezentanty. Varianty: Embed (pro kanoe.cz), Satellite (standalone).',
       },
     },
   },
@@ -603,14 +603,18 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // ============================================================================
-// Integration Variants - Embed/Satellite only (Phase 8.10)
+// Integration Variants - Aesthetic (Phase 16.4)
 // ============================================================================
 
 /**
- * **EMBED varianta** - Seznam závodníků vložený do kanoe.cz layoutu.
+ * **EMBED varianta** - Aesthetic seznam závodníků v kontextu kanoe.cz
  *
  * Komponenta bez vlastního headeru a footeru, určená pro embedding
  * do existujícího webu kanoe.cz (Joomla + Bootstrap 4).
+ *
+ * **Features dostupné přes props:**
+ * - `showFeatured: false` - skryje sekci reprezentantů
+ * - `initialSection` - přednastavenou sekci (dv, ry, vt)
  */
 export const Embed: Story = {
   args: {
@@ -637,16 +641,21 @@ export const Embed: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Seznam závodníků embedovaný v kontextu kanoe.cz. Bez vlastního headeru/footeru.',
+        story: 'Aesthetic embed seznamu závodníků v kontextu kanoe.cz. Pro úsporné zobrazení použijte `showFeatured: false`.',
       },
     },
   },
 };
 
 /**
- * **SATELLITE varianta** - Standalone seznam závodníků s minimálním headerem.
+ * **SATELLITE varianta** - Aesthetic standalone s minimálním headerem
  *
- * Pro samostatnou aplikaci registru závodníků s odkazem zpět na kanoe.cz.
+ * Samostatná aplikace registru závodníků s odkazem zpět na kanoe.cz.
+ * Plný Aesthetic design s featured sekcí reprezentantů.
+ *
+ * **Features dostupné přes props:**
+ * - `showFeatured: false` - skryje sekci reprezentantů
+ * - `initialSection` - přednastavenou sekci (dv, ry, vt)
  */
 export const Satellite: Story = {
   args: {
@@ -657,43 +666,7 @@ export const Satellite: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Standalone aplikace registru závodníků s minimálním satellite headerem.',
-      },
-    },
-  },
-};
-
-/**
- * **EMBED + Sidebar** - Seznam závodníků v úzkém sloupci.
- *
- * Demonstrace responzivity v omezeném prostoru.
- */
-export const EmbedWithSidebar: Story = {
-  args: {
-    variant: 'embed',
-    initialSection: 'all',
-    showFeatured: false, // Hide featured in narrow layout
-  },
-  decorators: [
-    (Story) => (
-      <KanoeCzContext
-        layout="sidebar"
-        showSidebar={true}
-        pageVariant="subpage"
-        pageTitle="Závodníci"
-        breadcrumbs={[
-          { label: 'Úvod', href: '#' },
-          { label: 'Závodníci' },
-        ]}
-      >
-        <Story />
-      </KanoeCzContext>
-    ),
-  ],
-  parameters: {
-    docs: {
-      description: {
-        story: 'Seznam závodníků v layoutu se sidebarem. Featured sekce je skryta pro úsporu místa.',
+        story: 'Aesthetic standalone seznamu závodníků se satellite headerem. Pro úsporné zobrazení použijte `showFeatured: false`.',
       },
     },
   },

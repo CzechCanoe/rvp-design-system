@@ -91,10 +91,10 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 - [x] Embed - nová varianta (Aesthetic)
 - [x] Satellite - přepracovat na Aesthetic
 
-**AthletesListPage** (3 → 2)
-- [ ] Embed - přepracovat na Aesthetic
-- [ ] Satellite - přepracovat na Aesthetic
-- [ ] Odstranit: EmbedWithSidebar
+**AthletesListPage** (3 → 2) ✅
+- [x] Embed - přepracovat na Aesthetic
+- [x] Satellite - přepracovat na Aesthetic
+- [x] Odstranit: EmbedWithSidebar
 
 **ClubsListPage** (2 → 2)
 - [ ] Embed - přepracovat na Aesthetic
@@ -141,7 +141,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.4 Vedlejší prototypy** - AthletesListPage.
+Pokračovat s **16.4 Vedlejší prototypy** - ClubsListPage.
 
 ---
 
