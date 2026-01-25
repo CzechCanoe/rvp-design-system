@@ -5471,3 +5471,20 @@ Priorita 3 byla označena jako hotová, protože implementace již existuje z p�
 ### Poznámky
 Původní `weekendFocused` prop zachován pro méně dramatický efekt (jen šířka sloupců).
 Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměřením na víkendy.
+
+---
+
+## 2026-01-25 - Fáze 17.1: Icon systém
+
+### Dokončeno
+- [x] Analýza existující Icon komponenty (lucide-react již nainstalován)
+- [x] Vytvoření Icon.stories.tsx s kategorizovaným katalogem ikon
+- [x] Export Icon z hlavního indexu komponent
+- [x] Oprava TypeScript chyby (nepoužitý import)
+- [x] Ověření buildu a Storybook smoke testu
+
+### Poznámky
+- Icon komponenta již existovala v `src/components/Icon/Icon.tsx`
+- Obsahuje 45 ikon mapovaných na sémantická jména
+- Stories rozděleny do kategorií: Navigation, Actions, Status, Content, Time/Activity, Achievements, Users/Organizations, Misc
+- Připraveno pro náhradu inline SVG v prototypech
