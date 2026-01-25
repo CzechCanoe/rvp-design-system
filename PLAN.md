@@ -105,6 +105,124 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 - [x] Satellite - přepracovat na Aesthetic
 - [x] Odstranit: EmbedRychlostni, EmbedVodniTuristika, EmbedArchive (jako props/tabs)
 
+### 16.5 Polish a opravy 🔄
+
+#### Priorita 1: Cards layout fix
+
+**Problém:** V AthletePublicProfile a ClubPublicProfile mají Cards (např. Results, Achievements) divné okraje nahoře i po stranách. Také dochází ke kolizi obsahu se Share tlačítkem v headeru.
+
+**Řešení:**
+- [ ] Screenshotnout všechny 3 varianty AthletePublicProfile (Embed, Satellite, ExpressiveEmbed)
+- [ ] Screenshotnout ClubPublicProfile varianty
+- [ ] Opravit CSS spacing pro Cards - odstranit nadbytečné okraje
+- [ ] Vyřešit kolizi se Share tlačítkem (z-index nebo layout adjustment)
+- [ ] Ověřit konzistenci napříč variantami
+
+---
+
+#### Priorita 2: Aesthetic styl pro seznamy
+
+**Problém:** AthletesListPage, ClubsListPage a RankingsPage vůbec nevypadají jako Aesthetic styl. Jsou to "plain" seznamy bez vizuální identity.
+
+**Cíl:** Přepracovat na Aesthetic styl konzistentní s ostatními prototypy:
+- Display fonty pro nadpisy (font-family: var(--font-display))
+- Gradient/mesh pozadí nebo subtle patterns
+- Energy accenty pro interaktivní prvky
+- Card-based layout místo plain tabulek (nebo aesthetic tabulky)
+- Micro-animace při hover/focus
+
+**Úkoly:**
+- [ ] AthletesListPage - přepracovat na Aesthetic
+  - Hero sekce s vyhledáváním
+  - Grid/list karet závodníků místo plain seznamu
+  - Filtry stylované jako pills/chips
+- [ ] ClubsListPage - přepracovat na Aesthetic
+  - Podobný přístup jako AthletesListPage
+  - Karty klubů s logem, počtem členů, sekcí
+- [ ] RankingsPage - přepracovat na Aesthetic
+  - Tabulky s aesthetic stylingem (zebra, hover efekty)
+  - Top 3 vizuálně odlišené (podium styl)
+  - Section switcher (DV/RY/VT) jako stylované tabs
+
+---
+
+#### Priorita 3: Hero/Header vylepšení
+
+**Problém:** AthletePublicProfile a ClubPublicProfile nemají aesthetic hero/header. Header je příliš jednoduchý.
+
+**Cíl:** Dramatický hero jako v EventDetailPage Satellite variantě:
+- Fullwidth hero s background image (action photo / club photo)
+- Gradient overlay pro čitelnost textu
+- Velké display fonty pro jméno
+- Stats bar pod hero (wins, podiums, ranking)
+- Animované entry efekty
+
+**Úkoly:**
+- [ ] AthletePublicProfile - přidat aesthetic hero
+  - Background: action photo závodníka (actionImageUrl)
+  - Overlay: gradient s section barvou
+  - Content: jméno, klub, vlajka, ranking badge
+  - Stats bar: wins, podiums, world ranking
+- [ ] ClubPublicProfile - přidat aesthetic hero
+  - Background: klubové foto nebo pattern
+  - Content: název klubu, logo, počet členů, sekce
+- [ ] Review dalších kandidátů na hero (EventDetail Embed/ExpressiveEmbed?)
+
+---
+
+#### Priorita 4: Calendar komponenta
+
+**Problém:** Kalendářní mřížka má špatné zarovnání. Většina závodů je o víkendu, takže jsou namačkané vpravo. Dny pondělí-čtvrtek jsou často prázdné.
+
+**Reference:** https://jakubbican.github.io/pages/terminovka (správné zarovnání)
+
+**Řešení:**
+- [ ] Analyzovat aktuální Calendar grid implementaci
+- [ ] Navrhnout lepší layout:
+  - Option A: Začínat týden od pondělí (standard EU)
+  - Option B: Kompaktní víkendový pohled
+  - Option C: Smart collapsing prázdných dnů
+- [ ] Implementovat vybranou variantu
+- [ ] Ověřit ListView a Cards varianty (ty jsou OK)
+
+---
+
+#### Priorita 5: EventDetail vylepšení
+
+**Problém:** EventDetailPage Embed a ExpressiveEmbed varianty jsou chudobné oproti Satellite variantě. Satellite má dramatický hero, stats bar, sidebar - Embed/ExpressiveEmbed jsou plain.
+
+**Cíl:** Přenést "wow" prvky ze Satellite do Embed/ExpressiveEmbed variant (v rámci embed kontextu):
+- Kompaktní ale dramatický hero (menší výška, ale stále vizuálně zajímavý)
+- Stats bar pod hero
+- Lepší vizuální hierarchie
+
+**Úkoly:**
+- [ ] Porovnat Satellite vs Embed screenshoty
+- [ ] Identifikovat klíčové "wow" prvky v Satellite
+- [ ] Přenést/adaptovat pro Embed (respektovat kanoe.cz kontext)
+- [ ] Přenést/adaptovat pro ExpressiveEmbed (může být víc "wow")
+
+---
+
+#### Priorita 6: ProfilePage konzistence
+
+**Problém:** ProfilePage (přihlášený uživatel) vypadá jinak od zbytku design systému.
+
+**Cíl:** Sjednotit vizuální styl s ostatními prototypy:
+- Aesthetic header/hero
+- Konzistentní Card styling
+- Stejné spacing a typography
+
+**Úkoly:**
+- [ ] Screenshotnout ProfilePage Embed a Satellite
+- [ ] Porovnat s AthletePublicProfile (veřejný profil)
+- [ ] Sjednotit vizuální prvky
+- [ ] Zachovat funkční rozdíly (edit tlačítka, dashboard prvky)
+
+---
+
+**Celkový odhad:** ~6-8 iterací
+
 ---
 
 ## Shrnutí změn
@@ -129,19 +247,20 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Odhad iterací
 
-| Sekce | Prototypy | Iterace |
-|-------|-----------|---------|
-| 16.1 Veřejné profily | Athlete, Club, Event | 3 |
-| 16.2 Calendar + Results | Calendar, Results | 2 |
-| 16.3 LivePage + Registration | Live, Registration | 1 |
-| 16.4 Vedlejší prototypy | Dashboard, Profile, AthletesList, ClubsList, Rankings | 3 |
-| **Celkem** | **12 prototypů** | **~9** |
+| Sekce | Popis | Iterace |
+|-------|-------|---------|
+| 16.1 Veřejné profily | ✅ Athlete, Club, Event | 3 |
+| 16.2 Calendar + Results | ✅ Calendar, Results | 2 |
+| 16.3 LivePage + Registration | ✅ Live, Registration | 1 |
+| 16.4 Vedlejší prototypy | ✅ Dashboard, Profile, AthletesList, ClubsList, Rankings | 3 |
+| **16.5 Polish a opravy** | Cards fix, Aesthetic seznamy, Hero, Calendar, EventDetail, Profile | **6-8** |
+| **Celkem** | | **~15-17** |
 
 ---
 
 ## Další krok
 
-**Fáze 16 dokončena!** Všechny prototypy jsou konsolidované na Aesthetic styl s variantami Embed/Satellite.
+Začít s **16.5 Polish a opravy** - Priorita 1: Cards layout fix (AthletePublicProfile, ClubPublicProfile).
 
 ---
 
