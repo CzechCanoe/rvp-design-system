@@ -6196,3 +6196,67 @@ Zbývající velké prototypy pro budoucí optimalizaci:
 - RegistrationPage: 1557 řádků  
 - ProfilePage: 1550 řádků
 - DashboardPage: 1215 řádků
+
+---
+
+## 2026-01-25 - Fáze 17.25: CSS reorganizace DashboardPage
+
+### Dokončeno
+- [x] Analyzovat DashboardPage.css - identifikovat layout vs vizuální styly
+- [x] Reorganizovat CSS - oddělení LAYOUT a VISUAL sekcí (1215 → 1370 řádků)
+- [x] Build validace OK
+
+### Poznámky
+Dashboard obsahuje komplexní prvky, které nelze snadno abstrahovat:
+- Discipline-specific hero gradienty (dv/ry/vt/federation)
+- Pulse rings animace
+- Gradient stat cards (primary/success/warning/info)
+- Alert/activity icon s gradient backgrounds
+
+CSS bylo reorganizováno, ale kvůli komplexním vizuálním stylům nelze redukovat na ~50 řádků.
+
+---
+
+## 2026-01-25 - Fáze 17.26: CSS reorganizace ProfilePage
+
+### Dokončeno
+- [x] Reorganizace ProfilePage.css - oddělení LAYOUT a VISUAL sekcí
+- [x] Struktura: 1. LAYOUT, 2. VISUAL, 3. VARIANTS, 4. RESPONSIVE, 5. ACCESSIBILITY
+- [x] Zachovány discipline-specific gradienty (dv/ry/vt)
+- [x] Zachován aesthetic mode (energy glow, reveal animations, display fonts)
+- [x] Build validace OK
+
+### Metriky
+- ProfilePage.css: 1550 → 1749 řádků (nárůst kvůli lepší organizaci)
+- Celkem prototype CSS: 11,326 řádků
+
+### Poznámky
+Zbývající prototypy pro reorganizaci:
+- RegistrationPage (1557 řádků)
+- LivePage (2433 řádků)
+
+---
+
+## 2026-01-25 - Fáze 17.27: CSS reorganizace LivePage
+
+### Dokončeno
+- [x] Analýza LivePage.css - identifikace layout vs visual stylů
+- [x] Reorganizace CSS do LAYOUT a VISUAL sekcí (2434 → 2775 řádků)
+- [x] Build validace OK
+
+### Poznámky
+LivePage je komplexní prototyp s mnoha sub-panely:
+- Oncourse panel s disciplínou-specifickými gradienty (dv/ry/vt)
+- Current run card s pulse animacemi
+- Podium cards pro top 3
+- Next up, schedule, activity feed panely
+- Run detail modal
+- Fullscreen mode
+- Favorites feature
+- Embed mode pro kanoe.cz
+
+CSS strukturováno do dvou hlavních částí:
+1. PART 1: LAYOUT - veškeré display, flex, grid, gap, padding, margin, position
+2. PART 2: VISUAL - veškeré colors, backgrounds, borders, shadows, typography, transitions, animations
+
+Zůstává RegistrationPage jako poslední prototyp k reorganizaci.

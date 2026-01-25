@@ -319,6 +319,12 @@
 - [x] Poznámka: Obsahuje discipline-specific hero gradienty, aesthetic mode, registrations/pinned tabs
 - [x] Build validace OK
 
+### Iterace 27: CSS reorganizace LivePage ✅
+- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
+- [x] Reorganizovat CSS - oddělení LAYOUT a VISUAL sekcí (2434 → 2775 řádků)
+- [x] Poznámka: Obsahuje discipline-specific gradienty, pulse animace, oncourse/podium/schedule panely, fullscreen mode
+- [x] Build validace OK
+
 ---
 
 ## Metriky úspěchu
