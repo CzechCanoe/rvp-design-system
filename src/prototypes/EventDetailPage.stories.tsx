@@ -742,7 +742,7 @@ const EventDetailPage = ({
 
               {/* Registration CTA */}
               {status === 'registration' && (
-                <Card variant="gradient" className="event-detail-sidebar__card event-detail-sidebar__card--cta">
+                <Card variant="aesthetic" className="event-detail-sidebar__card event-detail-sidebar__card--cta">
                   <h3 className="event-detail-sidebar__title">Přihlášky</h3>
                   <p className="event-detail-sidebar__text">
                     Registrace je otevřena do {formatDate(eventData.dates.registrationDeadline)}

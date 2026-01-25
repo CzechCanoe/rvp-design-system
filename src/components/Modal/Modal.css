@@ -8,12 +8,12 @@
  * - Shadows: shadow-modal, shadow-modal-backdrop
  * - Transitions: transition-modal, transition-modal-backdrop
  *
- * Phase 7.5 enhancements:
- * - Backdrop blur effect for frosted glass feel
+ * Features:
+ * - Backdrop blur effect
  * - Slide-in animation from bottom
- * - Gradient header variant with accent line
+ * - Accent line on header
  * - Close button micro-animations
- * - Enhanced dark mode support
+ * - Dark mode support
  */
 
 /* ==========================================================================
@@ -167,57 +167,9 @@
  * STYLE VARIANTS
  * ========================================================================== */
 
-/* Gradient header variant */
-.csk-modal--gradient .csk-modal__header {
-  background: var(--gradient-primary);
-  border-bottom: none;
-}
-
-.csk-modal--gradient .csk-modal__header::before {
-  display: none;
-}
-
-.csk-modal--gradient .csk-modal__title {
-  color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.csk-modal--gradient .csk-modal__description {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.csk-modal--gradient .csk-modal__close {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.csk-modal--gradient .csk-modal__close:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  color: white;
-}
-
-.csk-modal--gradient .csk-modal__close:active {
-  background-color: rgba(255, 255, 255, 0.25);
-}
-
-/* Glass variant */
-.csk-modal--glass {
-  background-color: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.csk-modal--glass .csk-modal__header {
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.csk-modal--glass .csk-modal__footer {
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
 /* Danger variant for destructive actions */
 .csk-modal--danger .csk-modal__header::before {
-  background: var(--gradient-danger, linear-gradient(135deg, var(--color-danger) 0%, var(--color-danger-dark, #c0392b) 100%));
+  background: var(--gradient-danger, linear-gradient(135deg, var(--color-error-500) 0%, var(--color-error-700) 100%));
 }
 
 /* ==========================================================================
@@ -325,20 +277,6 @@
 
 [data-theme="dark"] .csk-modal__footer {
   background-color: var(--color-bg-primary);
-}
-
-/* Dark mode glass variant */
-[data-theme="dark"] .csk-modal--glass {
-  background-color: rgba(30, 30, 30, 0.85);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .csk-modal--glass .csk-modal__header {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-[data-theme="dark"] .csk-modal--glass .csk-modal__footer {
-  background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* ==========================================================================

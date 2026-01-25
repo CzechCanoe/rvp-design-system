@@ -12,7 +12,7 @@ export type StatCardColor =
   | 'info';
 
 export type StatCardTrend = 'up' | 'down' | 'neutral';
-export type StatCardStyleVariant = 'default' | 'gradient' | 'glass' | 'gradient-subtle';
+export type StatCardStyleVariant = 'default' | 'aesthetic';
 
 export interface StatCardProps extends HTMLAttributes<HTMLDivElement> {
   /** Main statistic value to display */
@@ -45,10 +45,6 @@ export interface StatCardProps extends HTMLAttributes<HTMLDivElement> {
   clickable?: boolean;
   /** Loading state */
   loading?: boolean;
-  /** Data points for sparkline visualization (array of numbers) */
-  sparklineData?: number[];
-  /** Animate trend indicator */
-  animateTrend?: boolean;
 }
 
 /**
@@ -57,50 +53,6 @@ export interface StatCardProps extends HTMLAttributes<HTMLDivElement> {
  * Features value, label, optional trend indicator, icon, and footer.
  * Commonly used for: total athletes, active memberships, upcoming events, etc.
  */
-/**
- * Simple Sparkline SVG component for trend visualization
- */
-const Sparkline = ({ data, color = 'currentColor' }: { data: number[]; color?: string }) => {
-  if (!data || data.length < 2) return null;
-
-  const min = Math.min(...data);
-  const max = Math.max(...data);
-  const range = max - min || 1;
-
-  const width = 80;
-  const height = 24;
-  const padding = 2;
-
-  const points = data.map((value, index) => {
-    const x = padding + (index / (data.length - 1)) * (width - padding * 2);
-    const y = height - padding - ((value - min) / range) * (height - padding * 2);
-    return `${x},${y}`;
-  });
-
-  const pathD = `M ${points.join(' L ')}`;
-
-  // Create area path for gradient fill
-  const areaD = `${pathD} L ${width - padding},${height - padding} L ${padding},${height - padding} Z`;
-
-  return (
-    <svg
-      className="csk-stat-card__sparkline"
-      viewBox={`0 0 ${width} ${height}`}
-      preserveAspectRatio="none"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient id="sparkline-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor={color} stopOpacity="0.3" />
-          <stop offset="100%" stopColor={color} stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d={areaD} fill="url(#sparkline-gradient)" />
-      <path d={pathD} fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-};
-
 export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
   (
     {
@@ -119,8 +71,6 @@ export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
       footer,
       clickable = false,
       loading = false,
-      sparklineData,
-      animateTrend = false,
       className,
       onClick,
       ...props
@@ -137,7 +87,6 @@ export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
       `csk-stat-card--style-${styleVariant}`,
       isClickable && 'csk-stat-card--clickable',
       loading && 'csk-stat-card--loading',
-      animateTrend && trend && 'csk-stat-card--animate-trend',
       className,
     ]
       .filter(Boolean)
@@ -194,18 +143,6 @@ export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
           <path d="M6 9l6 6 6-6" />
         </svg>
       );
-    };
-
-    // Get sparkline color based on trend or color prop
-    const getSparklineColor = () => {
-      if (trend === 'up') return 'var(--color-success-500)';
-      if (trend === 'down') return 'var(--color-error-500)';
-      if (color === 'primary') return 'var(--color-primary-500)';
-      if (color === 'success') return 'var(--color-success-500)';
-      if (color === 'warning') return 'var(--color-warning-500)';
-      if (color === 'error') return 'var(--color-error-500)';
-      if (color === 'info') return 'var(--color-info-500)';
-      return 'var(--color-primary-500)';
     };
 
     return (
@@ -266,12 +203,6 @@ export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
                     {secondaryLabel}
                   </span>
                 )}
-              </div>
-            )}
-
-            {sparklineData && sparklineData.length >= 2 && (
-              <div className="csk-stat-card__sparkline-container">
-                <Sparkline data={sparklineData} color={getSparklineColor()} />
               </div>
             )}
           </div>

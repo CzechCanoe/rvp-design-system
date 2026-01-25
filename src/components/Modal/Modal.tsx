@@ -11,7 +11,7 @@ import { createPortal } from 'react-dom';
 import './Modal.css';
 
 export type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
-export type ModalStyleVariant = 'default' | 'gradient' | 'glass' | 'danger';
+export type ModalStyleVariant = 'default' | 'danger';
 
 export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Whether the modal is open */
@@ -49,7 +49,7 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
  *
  * Features:
  * - Multiple sizes (sm, md, lg, xl, full)
- * - Style variants (default, gradient, glass, danger)
+ * - Style variants (default, danger)
  * - Backdrop blur effect
  * - Slide-in animation
  * - Focus trap for accessibility

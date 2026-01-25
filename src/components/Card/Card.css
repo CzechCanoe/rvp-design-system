@@ -53,23 +53,6 @@
   border: 1px solid var(--color-border-strong);
 }
 
-/* Gradient - card with gradient background */
-.csk-card--gradient {
-  background: var(--gradient-primary);
-  border: 1px solid transparent;
-  color: var(--color-text-inverse);
-  box-shadow: var(--shadow-md);
-}
-
-.csk-card--gradient .csk-card__header {
-  border-bottom-color: rgba(255, 255, 255, 0.2);
-}
-
-.csk-card--gradient .csk-card__footer {
-  border-top-color: rgba(255, 255, 255, 0.2);
-}
-
-
 /* ==========================================================================
    PADDING
    ========================================================================== */
@@ -166,13 +149,6 @@
   border-color: var(--color-interactive-default);
 }
 
-.csk-card--clickable.csk-card--gradient:hover {
-  background: var(--gradient-primary-hover);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-3px);
-}
-
-
 /* Active states for clickable cards */
 .csk-card--clickable.csk-card--surface:active {
   background-color: var(--color-bg-tertiary);
@@ -187,27 +163,17 @@
   background-color: var(--color-bg-tertiary);
 }
 
-.csk-card--clickable.csk-card--gradient:active {
-  background: var(--gradient-primary-active);
-  box-shadow: var(--shadow-md);
-  transform: translateY(0);
-}
-
-
-
 /* ==========================================================================
    REDUCED MOTION
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   .csk-card--clickable.csk-card--elevated:hover,
-  .csk-card--clickable.csk-card--gradient:hover,
   .csk-card--clickable.csk-card--aesthetic:hover {
     transform: none;
   }
 
   .csk-card--clickable.csk-card--elevated:active,
-  .csk-card--clickable.csk-card--gradient:active,
   .csk-card--clickable.csk-card--aesthetic:active {
     transform: none;
   }
@@ -258,24 +224,6 @@
 }
 
 /* ==========================================================================
-   MODIFIERS - Can be combined with any variant
-   ========================================================================== */
-
-/* Mesh background modifier */
-.csk-card--mesh-bg {
-  background: var(--bg-mesh-card,
-    radial-gradient(ellipse at 0% 0%, rgba(17, 118, 166, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 100% 100%, rgba(249, 115, 22, 0.05) 0%, transparent 50%)),
-    var(--color-bg-primary);
-}
-
-/* Border accent modifier */
-.csk-card--border-accent {
-  border-left: var(--border-accent-width, 4px) solid;
-  border-image: var(--border-accent-gradient, linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-energy-500, #f97316) 100%)) 1;
-}
-
-/* ==========================================================================
    DARK MODE - AESTHETIC
    ========================================================================== */
 
@@ -297,9 +245,4 @@
 
 [data-theme="dark"] .csk-card--clickable.csk-card--aesthetic:hover {
   box-shadow: var(--shadow-lg), var(--glow-energy-sm, 0 0 8px rgba(251, 146, 60, 0.5));
-}
-
-[data-theme="dark"] .csk-card--mesh-bg {
-  background: var(--bg-mesh-card),
-    var(--color-bg-primary);
 }

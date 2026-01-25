@@ -12,16 +12,8 @@ const meta: Meta<typeof Card> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['surface', 'elevated', 'outlined', 'gradient', 'aesthetic'],
+      options: ['surface', 'elevated', 'outlined', 'aesthetic'],
       description: 'Visual variant of the card',
-    },
-    meshBg: {
-      control: 'boolean',
-      description: 'Add mesh background effect',
-    },
-    borderAccent: {
-      control: 'boolean',
-      description: 'Add border-accent on left side',
     },
     padding: {
       control: 'select',
@@ -98,12 +90,6 @@ export const Variants: Story = {
         </Card>
       </div>
       <div style={{ width: '200px' }}>
-        <Card variant="gradient">
-          <strong>Gradient</strong>
-          <p style={{ margin: '8px 0 0', fontSize: '14px' }}>Brand gradient</p>
-        </Card>
-      </div>
-      <div style={{ width: '200px' }}>
         <Card variant="aesthetic">
           <h3 className="csk-card__title" style={{ margin: '0 0 8px', fontWeight: 600 }}>
             Aesthetic
@@ -116,7 +102,7 @@ export const Variants: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All available card variants: surface, elevated, outlined, gradient, and aesthetic.',
+        story: 'All available card variants: surface, elevated, outlined, and aesthetic.',
       },
     },
   },
@@ -342,49 +328,6 @@ export const Aesthetic: Story = {
     docs: {
       description: {
         story: 'Aesthetic variant with mesh background, border-accent gradient, and display font titles.',
-      },
-    },
-  },
-};
-
-/* ==========================================================================
-   MODIFIERS - Mesh Background & Border Accent
-   ========================================================================== */
-
-export const Modifiers: Story = {
-  name: 'Modifiers (meshBg, borderAccent)',
-  render: () => (
-    <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-      <div style={{ width: '240px' }}>
-        <Card variant="elevated" meshBg>
-          <strong>Mesh Background</strong>
-          <p style={{ margin: '8px 0 0', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
-            Elevated + meshBg modifier
-          </p>
-        </Card>
-      </div>
-      <div style={{ width: '240px' }}>
-        <Card variant="surface" borderAccent>
-          <strong>Border Accent</strong>
-          <p style={{ margin: '8px 0 0', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
-            Surface + borderAccent modifier
-          </p>
-        </Card>
-      </div>
-      <div style={{ width: '240px' }}>
-        <Card variant="elevated" meshBg borderAccent>
-          <strong>Both Modifiers</strong>
-          <p style={{ margin: '8px 0 0', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
-            Elevated + meshBg + borderAccent
-          </p>
-        </Card>
-      </div>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Modifiers can be combined with any variant to add mesh background or border-accent.',
       },
     },
   },

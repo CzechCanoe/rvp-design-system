@@ -47,9 +47,9 @@
 | **Modal** | default, gradient, glass, danger | default, danger | gradient, glass |
 
 **Úkoly:**
-- [ ] Card: Odstranit `gradient` variantu, `meshBg` a `borderAccent` props (přesunout do aesthetic)
-- [ ] StatCard: Zredukovat `styleVariant` na default/aesthetic, odstranit sparkline
-- [ ] Modal: Odstranit `gradient`, `glass` varianty
+- [x] Card: Odstranit `gradient` variantu, `meshBg` a `borderAccent` props (přesunout do aesthetic)
+- [x] StatCard: Zredukovat `styleVariant` na default/aesthetic, odstranit sparkline
+- [x] Modal: Odstranit `gradient`, `glass` varianty
 
 #### 17.1.3 Navigace a tabs
 

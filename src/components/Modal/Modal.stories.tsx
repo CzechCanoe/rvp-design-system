@@ -17,7 +17,7 @@ Modal component for dialogs, confirmations, and overlays.
 
 ## Features
 - Multiple sizes (sm, md, lg, xl, full)
-- Style variants (default, gradient, glass, danger)
+- Style variants (default, danger)
 - Focus trap for accessibility
 - Keyboard navigation (Escape to close)
 - Backdrop click to close (optional)
@@ -34,7 +34,7 @@ Modal component for dialogs, confirmations, and overlays.
     },
     styleVariant: {
       control: 'select',
-      options: ['default', 'gradient', 'glass', 'danger'],
+      options: ['default', 'danger'],
     },
     open: {
       control: 'boolean',
@@ -168,7 +168,6 @@ export const AllStyleVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
       <ModalDemo title="Default Style" />
-      <ModalDemo styleVariant="gradient" title="Gradient Header" />
       <ModalDemo styleVariant="danger" title="Danger Style" />
     </div>
   ),
@@ -225,7 +224,6 @@ export const AthleteRegistration: Story = {
           open={open}
           onClose={() => setOpen(false)}
           size="lg"
-          styleVariant="gradient"
           title="Registrace závodníka"
           description="Vyplňte údaje nového závodníka"
           footer={

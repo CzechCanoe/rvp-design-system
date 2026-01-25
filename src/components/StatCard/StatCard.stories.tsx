@@ -16,7 +16,6 @@ StatCard komponenta pro zobrazení klíčových metrik na dashboardech.
 - Trend indikátory (nahoru/dolů/neutrální)
 - Ikona pro vizuální rozlišení
 - Sekundární hodnota pro srovnání
-- Sparkline mini-graf
 - Footer pro akce nebo odkazy
         `,
       },
@@ -38,14 +37,11 @@ StatCard komponenta pro zobrazení klíčových metrik na dashboardech.
     },
     styleVariant: {
       control: 'select',
-      options: ['default', 'gradient', 'glass', 'gradient-subtle'],
+      options: ['default', 'aesthetic'],
     },
     trend: {
       control: 'select',
       options: ['up', 'down', 'neutral', undefined],
-    },
-    animateTrend: {
-      control: 'boolean',
     },
   },
 };
@@ -86,13 +82,6 @@ const CheckIcon = (
   </svg>
 );
 
-const ChartIcon = (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
-    <polyline points="17 6 23 6 23 12" />
-  </svg>
-);
-
 // =============================================================================
 // Basic Examples
 // =============================================================================
@@ -125,17 +114,6 @@ export const WithSecondaryValue: Story = {
     trend: 'up',
     trendValue: '-3.6%',
     icon: ClockIcon,
-  },
-};
-
-export const WithSparkline: Story = {
-  args: {
-    label: 'Registrace za měsíc',
-    value: '156',
-    trend: 'up',
-    trendValue: '+12%',
-    sparklineData: [45, 52, 38, 65, 72, 58, 80, 95, 110, 125, 140, 156],
-    icon: ChartIcon,
   },
 };
 
@@ -178,7 +156,7 @@ export const AllColors: Story = {
       <StatCard label="Success" value="300" color="success" trend="up" trendValue="+15" icon={CheckIcon} />
       <StatCard label="Warning" value="12" color="warning" trend="down" trendValue="-3" icon={ClockIcon} />
       <StatCard label="Error" value="3" color="error" icon={UsersIcon} />
-      <StatCard label="Info" value="500" color="info" icon={ChartIcon} />
+      <StatCard label="Info" value="500" color="info" icon={UsersIcon} />
     </div>
   ),
 };
@@ -190,49 +168,24 @@ export const AllColors: Story = {
 export const StyleVariants: Story = {
   name: 'Style Variants',
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
-        <StatCard
-          label="Default Style"
-          value="1,234"
-          styleVariant="default"
-          trend="up"
-          trendValue="+12%"
-          icon={UsersIcon}
-        />
-        <StatCard
-          label="Gradient Subtle"
-          value="847"
-          styleVariant="gradient-subtle"
-          color="info"
-          icon={UsersIcon}
-        />
-        <StatCard
-          label="Gradient"
-          value="5,847"
-          styleVariant="gradient"
-          color="primary"
-          trend="up"
-          trendValue="+124"
-          icon={UsersIcon}
-        />
-      </div>
-      <div
-        style={{
-          padding: '32px',
-          background: 'linear-gradient(135deg, #1176a6 0%, #0d5a80 100%)',
-          borderRadius: '12px',
-        }}
-      >
-        <StatCard
-          label="Glass Style"
-          value="234"
-          styleVariant="glass"
-          trend="up"
-          trendValue="+8"
-          icon={UsersIcon}
-        />
-      </div>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
+      <StatCard
+        label="Default Style"
+        value="1,234"
+        styleVariant="default"
+        trend="up"
+        trendValue="+12%"
+        icon={UsersIcon}
+      />
+      <StatCard
+        label="Aesthetic Style"
+        value="5,847"
+        styleVariant="aesthetic"
+        color="primary"
+        trend="up"
+        trendValue="+124"
+        icon={UsersIcon}
+      />
     </div>
   ),
 };

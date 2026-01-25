@@ -890,7 +890,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
                     icon={<RaceIcon />}
                     trend="up"
                     trendValue="+12 tento rok"
-                    styleVariant="gradient"
+                    styleVariant="aesthetic"
                   />
                   <StatCard
                     label="Vítězství"
@@ -898,21 +898,21 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
                     icon={<TrophyIcon />}
                     trend="up"
                     trendValue="+4 tento rok"
-                    styleVariant="gradient"
+                    styleVariant="aesthetic"
                   />
                   <StatCard
                     label="Pódia"
                     value={athlete.podiums}
                     icon={<MedalIcon />}
                     description={`${Math.round((athlete.podiums / athlete.totalRaces) * 100)}% úspěšnost`}
-                    styleVariant="gradient"
+                    styleVariant="aesthetic"
                   />
                   <StatCard
                     label="Žebříček"
                     value={`#${athlete.ranking}`}
                     icon={<ChartIcon />}
                     description={`Nejlepší: #${athlete.bestRanking}`}
-                    styleVariant="gradient"
+                    styleVariant="aesthetic"
                   />
                 </div>
 
