@@ -713,7 +713,7 @@ const DashboardPage = ({
                 </div>
                 <div className="dashboard-alert-list">
                   {alerts.map((alert) => (
-                    <div key={alert.id} className="dashboard-alert-item">
+                    <div key={alert.id} className={`dashboard-alert-item ${alert.type === 'danger' ? 'dashboard-alert-item--energy' : ''}`}>
                       <div
                         className={`dashboard-alert-icon dashboard-alert-icon--${alert.type}`}
                       >
@@ -808,7 +808,7 @@ const DashboardPage = ({
                       <div className="dashboard-race-content">
                         <div className="dashboard-race-header">
                           <h3 className="dashboard-race-title">{race.title}</h3>
-                          {race.isLive && <LiveIndicator size="sm" />}
+                          {race.isLive && <LiveIndicator size="sm" energyGlow />}
                         </div>
                         <p className="dashboard-race-location">{race.location}</p>
                         <div className="dashboard-race-meta">

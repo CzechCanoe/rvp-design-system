@@ -164,9 +164,9 @@ function getStatusBadge(status: EventStatus) {
     case 'upcoming':
       return <Badge variant="info">Nadcházející</Badge>;
     case 'registration':
-      return <Badge variant="warning">Registrace otevřena</Badge>;
+      return <Badge variant="warning" glow>Registrace otevřena</Badge>;
     case 'live':
-      return <LiveIndicator variant="live" size="md" label="LIVE" styleVariant="badge" />;
+      return <LiveIndicator variant="live" size="md" label="LIVE" styleVariant="badge" energyGlow />;
     case 'finished':
       return <Badge variant="success">Dokončeno</Badge>;
   }
@@ -557,13 +557,13 @@ const EventDetailPage = ({
               </span>
             </div>
 
-            {/* Status-specific CTA */}
+            {/* Status-specific CTA - with energy accent for urgency */}
             {status === 'registration' && showCta && (
               <div className={`event-detail-hero__cta ${isEmbed ? 'event-detail-hero__cta--compact' : ''}`}>
-                <Button variant="primary" size={isEmbed ? 'md' : 'lg'}>
+                <Button variant="primary" accent="energy" size={isEmbed ? 'md' : 'lg'}>
                   Přihlásit se na závod
                 </Button>
-                <span className="event-detail-hero__deadline">
+                <span className="event-detail-hero__deadline csk-text-energy">
                   <Icon name="clock" size="sm" />
                   Deadline: {formatDate(eventData.dates.registrationDeadline)}
                 </span>
@@ -572,7 +572,7 @@ const EventDetailPage = ({
 
             {status === 'live' && showCta && (
               <div className={`event-detail-hero__cta ${isEmbed ? 'event-detail-hero__cta--compact' : ''}`}>
-                <Button variant="primary" size={isEmbed ? 'md' : 'lg'}>
+                <Button variant="primary" accent="energy" size={isEmbed ? 'md' : 'lg'}>
                   Sledovat LIVE výsledky
                 </Button>
               </div>

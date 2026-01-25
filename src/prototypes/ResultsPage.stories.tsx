@@ -285,8 +285,8 @@ const ResultsPage = ({
               <div className="results-page-header__left">
                 <div className="results-page-header__title-row">
                   <h1 className="results-page-header__title csk-display">MČR ve slalomu 2026</h1>
-                  {isLive && <LiveIndicator variant="live" size="md" label="LIVE" />}
-                  {!isLive && <Badge variant="success">Oficiální výsledky</Badge>}
+                  {isLive && <LiveIndicator variant="live" size="md" label="LIVE" energyGlow />}
+                  {!isLive && <Badge variant="success" glow>Oficiální výsledky</Badge>}
                 </div>
                 <div className="results-page-header__meta">
                   <span className="results-page-header__meta-item">
@@ -322,9 +322,9 @@ const ResultsPage = ({
         </Card>
       )}
 
-      {/* Podium Section - Using PodiumCard component */}
+      {/* Podium Section - Using PodiumCard component with energy glow */}
       {showHero && showPodium && podium.length >= 3 && !searchQuery && (
-        <section className="results-page-podium csk-reveal">
+        <section className="results-page-podium results-page-podium--energy csk-reveal">
           <div className="results-page-podium__container">
             <div className="results-page-podium__header">
               <Icon name="trophy" size="md" />

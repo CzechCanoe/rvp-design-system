@@ -783,3 +783,28 @@
 [data-theme="dark"] .results-page-header__stat-value {
   color: var(--color-energy-400);
 }
+
+/* ==========================================================================
+   Energy Accent for Podium Section (Phase 18.9)
+   ========================================================================== */
+
+.results-page-podium--energy {
+  background: linear-gradient(
+    135deg,
+    var(--csk-color-surface-container) 0%,
+    rgba(249, 115, 22, 0.05) 100%
+  );
+}
+
+.results-page-podium--energy .results-page-podium__header svg {
+  color: var(--color-energy-500);
+  filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.4));
+}
+
+[data-theme="dark"] .results-page-podium--energy {
+  background: linear-gradient(
+    135deg,
+    var(--csk-color-surface-container) 0%,
+    rgba(249, 115, 22, 0.1) 100%
+  );
+}

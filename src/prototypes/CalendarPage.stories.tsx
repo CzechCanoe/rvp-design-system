@@ -168,6 +168,7 @@ const generateRaces = (year: number, month: number): CalendarEvent[] => {
       variant: 'warning',
       data: {
         type: 'deadline',
+        isDeadline: true,
       },
     },
     {
@@ -486,9 +487,9 @@ const CalendarPage = ({
             <aside className="prototype-calendar-page__sidebar">
               {/* Live races */}
               {showLive && upcomingRaces.some((race) => race.data?.isLive) && (
-                <Card variant="outlined" padding="md" className={`prototype-calendar-page__live-card csk-border-energy ${isAesthetic ? 'csk-reveal csk-reveal-2' : ''}`}>
+                <Card variant="outlined" padding="md" className={`prototype-calendar-page__live-card csk-border-energy ${isAesthetic ? 'csk-reveal csk-reveal-2 csk-energy-glow--sm' : ''}`}>
                   <div className="prototype-calendar-page__live-header csk-text-energy">
-                    <LiveIndicator variant="live" size="md" label="LIVE" />
+                    <LiveIndicator variant="live" size="md" label="LIVE" energyGlow={isAesthetic} />
                     <span className="csk-font-semibold">Právě probíhá</span>
                   </div>
                   {upcomingRaces
@@ -500,7 +501,7 @@ const CalendarPage = ({
                           <Icon name="location" size="sm" />
                           <span>{String(race.data?.location || '')}</span>
                         </div>
-                        <Button variant="primary" size="sm" fullWidth>
+                        <Button variant="primary" size="sm" accent={isAesthetic ? 'energy' : undefined} fullWidth>
                           Sledovat živě
                         </Button>
                       </div>

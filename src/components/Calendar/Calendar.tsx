@@ -507,6 +507,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
                         onMouseLeave={handleEventMouseLeave}
                         aria-label={event.title}
                         data-event-id={event.id}
+                        data-deadline={event.data?.isDeadline ? 'true' : undefined}
                         title={showEventPreview ? undefined : event.title}
                       >
                         {renderEventItem(event)}

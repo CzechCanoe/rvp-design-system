@@ -930,6 +930,7 @@ const RegistrationPageInner = ({
                     </Button>
                     <Button
                       variant="primary"
+                      accent="energy"
                       iconLeft={<Icon name="send" size="sm" />}
                       onClick={() => {
                         toast.success('Vaše přihláška byla úspěšně odeslána. Potvrzení obdržíte e-mailem.', {
@@ -978,8 +979,8 @@ const RegistrationPageInner = ({
                 )}
               </Card>
 
-              {/* Deadline Card */}
-              <Card variant="outlined" padding="md" className={`registration-page__deadline-card registration-page__deadline-card--${section}`}>
+              {/* Deadline Card - with energy glow for urgency */}
+              <Card variant="outlined" padding="md" className={`registration-page__deadline-card registration-page__deadline-card--${section} csk-energy-glow--sm`}>
                 <div className="registration-page__deadline-header">
                   <Icon name="clock" size="sm" />
                   <h3 className="registration-page__card-title">Uzávěrka přihlášek</h3>

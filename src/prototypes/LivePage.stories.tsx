@@ -490,7 +490,7 @@ const SchedulePanel = ({
                   </span>
                 </div>
                 <div className="live-page-schedule__item-status">
-                  <Badge variant="error" size="sm">
+                  <Badge variant="energy" size="sm" glow>
                     <span className="live-page-schedule__live-dot" />
                     LIVE
                   </Badge>
@@ -1130,7 +1130,7 @@ const LivePage = ({
             <div className="live-page-header__left">
               <div className="live-page-header__title-row csk-reveal csk-reveal-2">
                 <h1 className="live-page-header__title csk-display">MČR ve slalomu 2026</h1>
-                <Badge variant="error" size="lg">
+                <Badge variant="energy" size="lg" glow>
                   <span className="live-page-header__live-dot" />
                   LIVE
                 </Badge>
@@ -1169,7 +1169,7 @@ const LivePage = ({
               <div className={`live-page-oncourse live-page-oncourse--${section}`}>
                 <div className="live-page-oncourse__header">
                   <span className="live-page-oncourse__label">Na trati</span>
-                  <LiveIndicator variant="live" size="sm" glow />
+                  <LiveIndicator variant="live" size="sm" energyGlow />
                   <Badge variant="default" size="sm">{oncourseAthletes.length}</Badge>
                 </div>
 
