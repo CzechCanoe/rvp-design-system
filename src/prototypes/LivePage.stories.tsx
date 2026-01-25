@@ -543,13 +543,13 @@ const SchedulePanel = ({
   };
 
   // Get status badge variant and text
-  const getStatusInfo = (status: RaceStatus): { variant: 'default' | 'success' | 'warning' | 'energy' | 'info'; text: string } => {
+  const getStatusInfo = (status: RaceStatus): { variant: 'default' | 'success' | 'warning' | 'error' | 'info'; text: string } => {
     switch (status) {
       case 'completed':
       case 'final':
         return { variant: 'success', text: 'Dokončeno' };
       case 'inProgress':
-        return { variant: 'energy', text: 'Probíhá' };
+        return { variant: 'error', text: 'Probíhá' };
       case 'comingUp':
         return { variant: 'warning', text: 'Brzy' };
       case 'delayed':
@@ -613,7 +613,7 @@ const SchedulePanel = ({
                   </span>
                 </div>
                 <div className="live-page-schedule__item-status">
-                  <Badge variant="energy" size="sm" glow>
+                  <Badge variant="error" size="sm">
                     <span className="live-page-schedule__live-dot" />
                     LIVE
                   </Badge>
@@ -1260,7 +1260,7 @@ const LivePage = ({
             <div className="live-page-header__left">
               <div className="live-page-header__title-row csk-reveal csk-reveal-2">
                 <h1 className="live-page-header__title csk-display">MČR ve slalomu 2026</h1>
-                <Badge variant="energy" size="lg" glow>
+                <Badge variant="error" size="lg">
                   <span className="live-page-header__live-dot" />
                   LIVE
                 </Badge>

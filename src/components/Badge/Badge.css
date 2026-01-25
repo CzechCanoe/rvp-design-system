@@ -1,12 +1,10 @@
 /**
  * Badge Component Styles - CSK RVP Design System
  *
- * Enhanced with gradients, improved shadows, and modern visual polish.
- * Supports variants: default, primary, success, warning, error, info,
- *                   gradient, gradient-accent, gradient-success, gradient-error
- * Supports CSK sections: dv, ry, vt (with gradient backgrounds)
+ * Supports variants: default, primary, success, warning, error, info
+ * Supports CSK sections: dv, ry, vt
  * Supports VT classes: m, a, b, c
- * Supports modifiers: outlined, pill, glow
+ * Supports modifiers: outlined, pill
  */
 
 /* ==========================================================================
@@ -103,27 +101,6 @@
   background-color: var(--color-feedback-info);
   color: var(--color-neutral-0);
   border-color: var(--color-feedback-info);
-}
-
-/* ==========================================================================
-   GRADIENT VARIANTS - Expressive visual styles
-   ========================================================================== */
-
-/* Gradient Primary - brand blue gradient */
-.csk-badge--gradient {
-  background: var(--gradient-primary);
-  border-color: transparent;
-  color: var(--color-neutral-0);
-  box-shadow: var(--shadow-xs);
-}
-
-/* Energy - vibrant coral-orange for highlights and CTAs */
-.csk-badge--energy {
-  background: var(--gradient-energy);
-  border-color: transparent;
-  color: white;
-  box-shadow: 0 2px 8px -2px rgba(249, 115, 22, 0.4);
-  font-weight: var(--font-weight-semibold);
 }
 
 /* ==========================================================================
@@ -321,55 +298,6 @@
 
 .csk-badge__content {
   display: inline-block;
-}
-
-/* ==========================================================================
-   GLOW EFFECT
-   For gradient and section variants - adds subtle colored shadow
-   ========================================================================== */
-
-.csk-badge--glow.csk-badge--gradient {
-  box-shadow: 0 2px 8px -2px rgba(17, 118, 166, 0.4),
-              0 4px 12px -4px rgba(17, 118, 166, 0.25);
-}
-
-.csk-badge--glow.csk-badge--energy {
-  box-shadow: var(--glow-energy-md);
-}
-
-.csk-badge--glow.csk-badge--section-dv {
-  box-shadow: 0 2px 8px -2px rgba(37, 99, 235, 0.4),
-              0 4px 12px -4px rgba(37, 99, 235, 0.25);
-}
-
-.csk-badge--glow.csk-badge--section-ry {
-  box-shadow: 0 2px 8px -2px rgba(22, 163, 74, 0.4),
-              0 4px 12px -4px rgba(22, 163, 74, 0.25);
-}
-
-.csk-badge--glow.csk-badge--section-vt {
-  box-shadow: 0 2px 8px -2px rgba(220, 38, 38, 0.4),
-              0 4px 12px -4px rgba(220, 38, 38, 0.25);
-}
-
-.csk-badge--glow.csk-badge--vt-m {
-  box-shadow: 0 2px 8px -2px rgba(124, 58, 237, 0.4),
-              0 4px 12px -4px rgba(124, 58, 237, 0.25);
-}
-
-.csk-badge--glow.csk-badge--vt-a {
-  box-shadow: 0 2px 8px -2px rgba(220, 38, 38, 0.4),
-              0 4px 12px -4px rgba(220, 38, 38, 0.25);
-}
-
-.csk-badge--glow.csk-badge--vt-b {
-  box-shadow: 0 2px 8px -2px rgba(245, 158, 11, 0.4),
-              0 4px 12px -4px rgba(245, 158, 11, 0.25);
-}
-
-.csk-badge--glow.csk-badge--vt-c {
-  box-shadow: 0 2px 8px -2px rgba(34, 197, 94, 0.4),
-              0 4px 12px -4px rgba(34, 197, 94, 0.25);
 }
 
 /* ==========================================================================

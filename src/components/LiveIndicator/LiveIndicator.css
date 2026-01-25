@@ -192,52 +192,6 @@
   /* Base styles only */
 }
 
-/* Gradient style - gradient background on dot with enhanced glow */
-.csk-live-indicator--style-gradient .csk-live-indicator__dot {
-  background: var(--gradient-danger);
-}
-
-.csk-live-indicator--style-gradient.csk-live-indicator--color-primary .csk-live-indicator__dot {
-  background: var(--gradient-primary);
-}
-
-.csk-live-indicator--style-gradient.csk-live-indicator--color-success .csk-live-indicator__dot {
-  background: linear-gradient(135deg, var(--color-success-400) 0%, var(--color-success-600) 100%);
-}
-
-.csk-live-indicator--style-gradient.csk-live-indicator--color-warning .csk-live-indicator__dot {
-  background: linear-gradient(135deg, var(--color-warning-400) 0%, var(--color-warning-600) 100%);
-}
-
-.csk-live-indicator--style-gradient.csk-live-indicator--color-error .csk-live-indicator__dot,
-.csk-live-indicator--style-gradient.csk-live-indicator--live .csk-live-indicator__dot,
-.csk-live-indicator--style-gradient.csk-live-indicator--recording .csk-live-indicator__dot {
-  background: linear-gradient(135deg, var(--color-error-400) 0%, var(--color-error-600) 100%);
-}
-
-.csk-live-indicator--style-gradient.csk-live-indicator--color-info .csk-live-indicator__dot {
-  background: linear-gradient(135deg, var(--color-info-400) 0%, var(--color-info-600) 100%);
-}
-
-/* Glass style - frosted glass effect with backdrop blur */
-.csk-live-indicator--style-glass {
-  padding: var(--spacing-1) var(--spacing-2);
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: var(--radius-full);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.csk-live-indicator--style-glass .csk-live-indicator__dot {
-  box-shadow: 0 0 8px currentColor;
-}
-
-.csk-live-indicator--style-glass .csk-live-indicator__label {
-  color: var(--color-text-primary);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
 /* Badge style - pill-shaped container with background */
 .csk-live-indicator--style-badge {
   padding: var(--spacing-1) var(--spacing-3);
@@ -285,39 +239,6 @@
 }
 
 /* ==========================================================================
- * INTENSITY LEVELS
- * ========================================================================== */
-
-/* Subtle intensity - gentler animations */
-.csk-live-indicator--intensity-subtle .csk-live-indicator__pulse-ring {
-  animation-duration: 3s;
-}
-
-.csk-live-indicator--intensity-subtle.csk-live-indicator--glow .csk-live-indicator__dot {
-  box-shadow: 0 0 4px currentColor, 0 0 8px currentColor;
-}
-
-/* Normal intensity - default */
-.csk-live-indicator--intensity-normal .csk-live-indicator__pulse-ring {
-  animation-duration: 2s;
-}
-
-/* Dramatic intensity - more aggressive animations */
-.csk-live-indicator--intensity-dramatic .csk-live-indicator__pulse-ring {
-  animation-duration: 1.5s;
-  animation-name: live-indicator-pulse-dramatic;
-}
-
-.csk-live-indicator--intensity-dramatic .csk-live-indicator__pulse-ring--secondary {
-  animation-name: live-indicator-pulse-dramatic-secondary;
-  animation-delay: 0.4s;
-}
-
-.csk-live-indicator--intensity-dramatic.csk-live-indicator--glow .csk-live-indicator__dot {
-  animation: live-indicator-glow-dramatic 1.5s ease-in-out infinite;
-}
-
-/* ==========================================================================
  * VARIANTS
  * ========================================================================== */
 
@@ -348,11 +269,6 @@
   animation: live-indicator-blink 1s ease-in-out infinite;
 }
 
-/* Connecting with dramatic intensity - faster blink */
-.csk-live-indicator--connecting.csk-live-indicator--intensity-dramatic .csk-live-indicator__dot {
-  animation-duration: 0.6s;
-}
-
 /* ==========================================================================
  * PULSE ANIMATION
  * ========================================================================== */
@@ -377,44 +293,6 @@
   animation: live-indicator-glow 2s ease-in-out infinite;
 }
 
-/* Color-specific glow effects for gradient variant */
-.csk-live-indicator--style-gradient.csk-live-indicator--glow.csk-live-indicator--color-error .csk-live-indicator__dot,
-.csk-live-indicator--style-gradient.csk-live-indicator--glow.csk-live-indicator--live .csk-live-indicator__dot,
-.csk-live-indicator--style-gradient.csk-live-indicator--glow.csk-live-indicator--recording .csk-live-indicator__dot {
-  box-shadow:
-    0 0 8px var(--color-error-500),
-    0 0 16px var(--color-error-400),
-    0 0 24px rgba(239, 68, 68, 0.4);
-}
-
-.csk-live-indicator--style-gradient.csk-live-indicator--glow.csk-live-indicator--color-success .csk-live-indicator__dot {
-  box-shadow:
-    0 0 8px var(--color-success-500),
-    0 0 16px var(--color-success-400),
-    0 0 24px rgba(34, 197, 94, 0.4);
-}
-
-.csk-live-indicator--style-gradient.csk-live-indicator--glow.csk-live-indicator--color-primary .csk-live-indicator__dot {
-  box-shadow:
-    0 0 8px var(--color-primary-500),
-    0 0 16px var(--color-primary-400),
-    0 0 24px rgba(17, 118, 166, 0.4);
-}
-
-.csk-live-indicator--style-gradient.csk-live-indicator--glow.csk-live-indicator--color-warning .csk-live-indicator__dot {
-  box-shadow:
-    0 0 8px var(--color-warning-500),
-    0 0 16px var(--color-warning-400),
-    0 0 24px rgba(245, 158, 11, 0.4);
-}
-
-.csk-live-indicator--style-gradient.csk-live-indicator--glow.csk-live-indicator--color-info .csk-live-indicator__dot {
-  box-shadow:
-    0 0 8px var(--color-info-500),
-    0 0 16px var(--color-info-400),
-    0 0 24px rgba(59, 130, 246, 0.4);
-}
-
 /* ==========================================================================
  * KEYFRAME ANIMATIONS
  * ========================================================================== */
@@ -426,61 +304,6 @@
   }
   50% {
     transform: scale(2);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0;
-  }
-}
-
-/* Secondary pulse for layered effect */
-@keyframes live-indicator-pulse-secondary {
-  0% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: scale(2.5);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0;
-  }
-}
-
-/* Dramatic pulse - larger, faster */
-@keyframes live-indicator-pulse-dramatic {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  25% {
-    transform: scale(1.5);
-    opacity: 0.6;
-  }
-  50% {
-    transform: scale(2.5);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0;
-  }
-}
-
-@keyframes live-indicator-pulse-dramatic-secondary {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  25% {
-    transform: scale(2);
-    opacity: 0.4;
-  }
-  50% {
-    transform: scale(3);
     opacity: 0;
   }
   100% {
@@ -504,26 +327,6 @@
   }
   50% {
     box-shadow: 0 0 12px currentColor, 0 0 24px currentColor, 0 0 36px currentColor;
-  }
-}
-
-/* Dramatic glow animation */
-@keyframes live-indicator-glow-dramatic {
-  0%, 100% {
-    box-shadow: 0 0 8px currentColor, 0 0 16px currentColor;
-    transform: scale(1);
-  }
-  25% {
-    box-shadow: 0 0 12px currentColor, 0 0 24px currentColor, 0 0 32px currentColor;
-    transform: scale(1.05);
-  }
-  50% {
-    box-shadow: 0 0 16px currentColor, 0 0 32px currentColor, 0 0 48px currentColor;
-    transform: scale(1.1);
-  }
-  75% {
-    box-shadow: 0 0 12px currentColor, 0 0 24px currentColor, 0 0 32px currentColor;
-    transform: scale(1.05);
   }
 }
 
@@ -583,16 +386,6 @@
   color: var(--color-text-tertiary);
 }
 
-/* Dark mode glass style */
-[data-theme='dark'] .csk-live-indicator--style-glass {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme='dark'] .csk-live-indicator--style-glass .csk-live-indicator__label {
-  color: rgba(255, 255, 255, 0.87);
-}
-
 /* Dark mode badge style */
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-error,
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--live,
@@ -639,10 +432,8 @@
   }
 
   .csk-live-indicator__pulse-ring,
-  .csk-live-indicator__pulse-ring--secondary,
   .csk-live-indicator--connecting .csk-live-indicator__dot,
-  .csk-live-indicator--glow.csk-live-indicator--pulse .csk-live-indicator__dot,
-  .csk-live-indicator--intensity-dramatic.csk-live-indicator--glow .csk-live-indicator__dot {
+  .csk-live-indicator--glow.csk-live-indicator--pulse .csk-live-indicator__dot {
     animation: none;
   }
 

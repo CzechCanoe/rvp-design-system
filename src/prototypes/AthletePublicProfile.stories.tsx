@@ -493,7 +493,7 @@ function AthletePublicProfile({
                 <span className="athlete-hero__country-flag">{athlete.countryFlag}</span>
               </span>
               <div className="athlete-hero__badges">
-                <Badge section={section} size="lg" glow>
+                <Badge section={section} size="lg">
                   {getSectionName(section)}
                 </Badge>
                 <Badge vtClass={athlete.vtClass} size="lg">

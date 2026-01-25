@@ -4,8 +4,7 @@ import './LiveIndicator.css';
 export type LiveIndicatorVariant = 'default' | 'live' | 'recording' | 'offline' | 'connecting';
 export type LiveIndicatorSize = 'sm' | 'md' | 'lg' | 'xl';
 export type LiveIndicatorColor = 'default' | 'primary' | 'success' | 'warning' | 'error' | 'info';
-export type LiveIndicatorStyleVariant = 'default' | 'gradient' | 'glass' | 'badge';
-export type LiveIndicatorIntensity = 'subtle' | 'normal' | 'dramatic';
+export type LiveIndicatorStyleVariant = 'default' | 'badge';
 
 export interface LiveIndicatorProps extends HTMLAttributes<HTMLSpanElement> {
   /** Visual variant of the indicator */
@@ -16,8 +15,6 @@ export interface LiveIndicatorProps extends HTMLAttributes<HTMLSpanElement> {
   color?: LiveIndicatorColor;
   /** Style variant for different visual treatments */
   styleVariant?: LiveIndicatorStyleVariant;
-  /** Animation intensity level */
-  intensity?: LiveIndicatorIntensity;
   /** Enable pulse animation */
   pulse?: boolean;
   /** Show text label next to indicator */
@@ -48,7 +45,6 @@ export const LiveIndicator = forwardRef<HTMLSpanElement, LiveIndicatorProps>(
       size = 'md',
       color = 'default',
       styleVariant = 'default',
-      intensity = 'normal',
       pulse = true,
       label,
       labelPosition = 'right',
@@ -84,7 +80,6 @@ export const LiveIndicator = forwardRef<HTMLSpanElement, LiveIndicatorProps>(
       `csk-live-indicator--${size}`,
       `csk-live-indicator--${variant}`,
       `csk-live-indicator--style-${styleVariant}`,
-      `csk-live-indicator--intensity-${intensity}`,
       getColorClass(),
       shouldPulse && 'csk-live-indicator--pulse',
       inline && 'csk-live-indicator--inline',
@@ -98,14 +93,7 @@ export const LiveIndicator = forwardRef<HTMLSpanElement, LiveIndicatorProps>(
     return (
       <span ref={ref} className={classes} {...props}>
         <span className="csk-live-indicator__dot" aria-hidden="true">
-          {shouldPulse && (
-            <>
-              <span className="csk-live-indicator__pulse-ring" />
-              {intensity === 'dramatic' && (
-                <span className="csk-live-indicator__pulse-ring csk-live-indicator__pulse-ring--secondary" />
-              )}
-            </>
-          )}
+          {shouldPulse && <span className="csk-live-indicator__pulse-ring" />}
         </span>
         {label && <span className="csk-live-indicator__label">{label}</span>}
       </span>

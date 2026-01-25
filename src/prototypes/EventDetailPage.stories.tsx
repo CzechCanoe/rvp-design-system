@@ -238,9 +238,9 @@ function getStatusBadge(status: EventStatus) {
     case 'upcoming':
       return <Badge variant="info">Nadcházející</Badge>;
     case 'registration':
-      return <Badge variant="warning" glow>Registrace otevřena</Badge>;
+      return <Badge variant="warning">Registrace otevřena</Badge>;
     case 'live':
-      return <LiveIndicator variant="live" size="md" label="LIVE" styleVariant="glass" />;
+      return <LiveIndicator variant="live" size="md" label="LIVE" styleVariant="badge" />;
     case 'finished':
       return <Badge variant="success">Dokončeno</Badge>;
   }

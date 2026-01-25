@@ -635,7 +635,7 @@ const RegistrationPageInner = ({
           <div className="registration-page-hero__main">
             <div className="registration-page-hero__text">
               <div className="registration-page-hero__badges">
-                <Badge section={section} size="md" glow>
+                <Badge section={section} size="md">
                   {sectionNames[section]}
                 </Badge>
                 <Badge variant="default" size="md" outlined>

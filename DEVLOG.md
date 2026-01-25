@@ -5621,3 +5621,36 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 ### Poznámky
 - MainNav a Header komponenty nejsou implementovány - budou potřeba v budoucnu
 - Aesthetic varianta Tabs zachovává gradient underline efekt z původní gradient-line varianty
+
+---
+
+## 2026-01-25 - Fáze 17.1.4: Feedback a indikátory cleanup
+
+### Dokončeno
+- [x] Toast: Odstranění `energy` varianty a `gradient`/`glass` styleVariants
+- [x] LiveIndicator: Odstranění `gradient`/`glass` styleVariants a `intensity` prop
+- [x] Badge: Odstranění `gradient`, `energy` variant a `glow` efektu
+- [x] Oprava souvisejících stories a prototypů používajících odstraněné varianty
+
+### Změny
+
+**Toast:**
+- `ToastVariant` nyní: `default | success | warning | error | info`
+- `ToastStyleVariant` nyní: `default` (pouze)
+- Odstraněn `energy()` helper z `useToast` hooku
+- Odstraněny CSS styly pro energy, gradient a glass varianty
+
+**LiveIndicator:**
+- `LiveIndicatorStyleVariant` nyní: `default | badge`
+- Odstraněn `intensity` prop a všechny intensity CSS třídy
+- Odstraněny CSS animace pro dramatic a secondary pulse
+
+**Badge:**
+- `BadgeVariant` nyní: `default | primary | success | warning | error | info`
+- Odstraněn `glow` prop
+- Odstraněny CSS styly pro gradient, energy a glow efekty
+- Section badges (dv, ry, vt) zachovány s gradient pozadím
+
+### Poznámky
+- Energy/gradient/glow varianty nahrazeny standardními sémantickými variantami (error pro LIVE/urgent, primary/warning pro ostatní)
+- Prototypy aktualizovány pro kompatibilitu s novým API

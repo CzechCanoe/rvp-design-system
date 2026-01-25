@@ -15,7 +15,7 @@ import './Toast.css';
 // TYPES
 // =============================================================================
 
-export type ToastVariant = 'default' | 'success' | 'warning' | 'error' | 'info' | 'energy';
+export type ToastVariant = 'default' | 'success' | 'warning' | 'error' | 'info';
 export type ToastPosition =
   | 'top-left'
   | 'top-center'
@@ -23,7 +23,7 @@ export type ToastPosition =
   | 'bottom-left'
   | 'bottom-center'
   | 'bottom-right';
-export type ToastStyleVariant = 'default' | 'gradient' | 'glass';
+export type ToastStyleVariant = 'default';
 
 export interface Toast {
   /** Unique identifier for the toast */
@@ -68,8 +68,6 @@ export interface ToastContextValue {
   error: (message: ReactNode, options?: ToastOptions) => string;
   /** Add an info toast */
   info: (message: ReactNode, options?: ToastOptions) => string;
-  /** Add an energy toast (highlight/CTA) */
-  energy: (message: ReactNode, options?: ToastOptions) => string;
   /** Dismiss a specific toast */
   dismiss: (id: string) => void;
   /** Dismiss all toasts */
@@ -312,19 +310,6 @@ const VariantIcon = ({ variant }: { variant: ToastVariant }) => {
           <line x1="12" y1="8" x2="12.01" y2="8" />
         </svg>
       );
-    case 'energy':
-      return (
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-        </svg>
-      );
     default:
       return (
         <svg
@@ -355,7 +340,6 @@ const generateId = () => `toast-${++toastCounter}`;
  *
  * Features:
  * - Multiple variants (default, success, warning, error, info)
- * - Style variants (default, gradient, glass)
  * - Configurable position (6 positions)
  * - Auto-dismiss with configurable duration
  * - Progress bar visualization
@@ -416,7 +400,6 @@ export const ToastProvider = ({
     warning: (message, options) => addToast(message, { ...options, variant: 'warning' }),
     error: (message, options) => addToast(message, { ...options, variant: 'error' }),
     info: (message, options) => addToast(message, { ...options, variant: 'info' }),
-    energy: (message, options) => addToast(message, { ...options, variant: 'energy' }),
     dismiss,
     dismissAll,
   };
@@ -464,12 +447,6 @@ export const ToastProvider = ({
  * toast('Závodník byl smazán', {
  *   action: { label: 'Zpět', onClick: handleUndo }
  * });
- *
- * // Show gradient style toast
- * success('Registrace dokončena', { styleVariant: 'gradient' });
- *
- * // Show glass style toast
- * info('Nová verze k dispozici', { styleVariant: 'glass' });
  * ```
  */
 export const useToast = (): ToastContextValue => {

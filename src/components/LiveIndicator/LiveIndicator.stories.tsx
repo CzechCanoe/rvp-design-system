@@ -32,13 +32,8 @@ const meta: Meta<typeof LiveIndicator> = {
     },
     styleVariant: {
       control: 'select',
-      options: ['default', 'gradient', 'glass', 'badge'],
+      options: ['default', 'badge'],
       description: 'Style variant for different visual treatments',
-    },
-    intensity: {
-      control: 'select',
-      options: ['subtle', 'normal', 'dramatic'],
-      description: 'Animation intensity level',
     },
     pulse: {
       control: 'boolean',
@@ -145,60 +140,12 @@ export const StyleVariantsComparison: Story = {
         </div>
       </div>
       <div>
-        <div style={{ fontSize: '12px', color: '#666', marginBottom: '8px', textTransform: 'uppercase' }}>Gradient</div>
-        <div style={{ display: 'flex', gap: '24px' }}>
-          <LiveIndicator variant="live" label="LIVE" styleVariant="gradient" glow />
-          <LiveIndicator color="success" label="Online" styleVariant="gradient" glow />
-          <LiveIndicator color="info" label="Info" styleVariant="gradient" glow />
-        </div>
-      </div>
-      <div>
         <div style={{ fontSize: '12px', color: '#666', marginBottom: '8px', textTransform: 'uppercase' }}>Badge</div>
         <div style={{ display: 'flex', gap: '24px' }}>
           <LiveIndicator variant="live" label="LIVE" styleVariant="badge" />
           <LiveIndicator color="success" label="Online" styleVariant="badge" />
           <LiveIndicator color="info" label="Info" styleVariant="badge" />
         </div>
-      </div>
-      <div
-        style={{
-          padding: '16px',
-          background: 'linear-gradient(135deg, #1176a6 0%, #0b4664 100%)',
-          borderRadius: '8px',
-        }}
-      >
-        <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', marginBottom: '8px', textTransform: 'uppercase' }}>
-          Glass (on colored background)
-        </div>
-        <div style={{ display: 'flex', gap: '24px' }}>
-          <LiveIndicator variant="live" label="LIVE" styleVariant="glass" />
-          <LiveIndicator color="success" label="Online" styleVariant="glass" />
-          <LiveIndicator color="info" label="Info" styleVariant="glass" />
-        </div>
-      </div>
-    </div>
-  ),
-};
-
-// =============================================================================
-// INTENSITY LEVELS
-// =============================================================================
-
-export const IntensityComparison: Story = {
-  name: 'Intensity Levels',
-  render: () => (
-    <div style={{ display: 'flex', gap: '48px', padding: '24px' }}>
-      <div style={{ textAlign: 'center' }}>
-        <LiveIndicator variant="live" label="LIVE" intensity="subtle" glow size="lg" />
-        <div style={{ fontSize: '12px', color: '#666', marginTop: '12px' }}>Subtle</div>
-      </div>
-      <div style={{ textAlign: 'center' }}>
-        <LiveIndicator variant="live" label="LIVE" intensity="normal" glow size="lg" />
-        <div style={{ fontSize: '12px', color: '#666', marginTop: '12px' }}>Normal</div>
-      </div>
-      <div style={{ textAlign: 'center' }}>
-        <LiveIndicator variant="live" label="LIVE" intensity="dramatic" glow size="lg" />
-        <div style={{ fontSize: '12px', color: '#666', marginTop: '12px' }}>Dramatic</div>
       </div>
     </div>
   ),
@@ -244,7 +191,7 @@ export const LiveResultsHeader: Story = {
         borderRadius: '8px',
       }}
     >
-      <LiveIndicator variant="live" label="LIVE" size="lg" glow styleVariant="gradient" intensity="dramatic" />
+      <LiveIndicator variant="live" label="LIVE" size="lg" glow />
       <div>
         <div style={{ fontWeight: 600, fontSize: '18px' }}>Mistrovství ČR ve vodním slalomu 2026</div>
         <div style={{ fontSize: '14px', color: '#666' }}>Semifinále C1M</div>

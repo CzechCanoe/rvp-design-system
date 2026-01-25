@@ -17,7 +17,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'primary', 'success', 'warning', 'error', 'info', 'gradient', 'energy'],
+      options: ['default', 'primary', 'success', 'warning', 'error', 'info'],
       description: 'Visual variant of the badge',
     },
     section: {
@@ -42,10 +42,6 @@ const meta = {
     pill: {
       control: 'boolean',
       description: 'Use pill shape (fully rounded)',
-    },
-    glow: {
-      control: 'boolean',
-      description: 'Use glow effect (for gradient and section variants)',
     },
     children: {
       control: 'text',
@@ -113,46 +109,6 @@ export const VariantsOutlined: Story = {
 };
 
 /* ==========================================================================
-   GRADIENT VARIANTS
-   ========================================================================== */
-
-export const GradientVariants: Story = {
-  name: 'Gradient & Energy Variants',
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Standard</h4>
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-          <Badge variant="gradient">Gradient Primary</Badge>
-          <Badge variant="energy">Energy</Badge>
-        </div>
-      </div>
-      <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>With Glow Effect</h4>
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-          <Badge variant="gradient" glow>Gradient Primary</Badge>
-          <Badge variant="energy" glow>Energy</Badge>
-        </div>
-      </div>
-      <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Pill with Glow</h4>
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-          <Badge variant="gradient" pill glow>Primary</Badge>
-          <Badge variant="energy" pill glow>Energy</Badge>
-        </div>
-      </div>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Gradient and energy variants for expressive, modern UI. Energy uses vibrant coral-orange accent.',
-      },
-    },
-  },
-};
-
-/* ==========================================================================
    SIZES
    ========================================================================== */
 
@@ -184,17 +140,17 @@ export const DisplayFontShowcase: Story = {
       <div>
         <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Large badges with display font</h4>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
-          <Badge variant="energy" size="lg" pill glow>ŽIVĚ</Badge>
-          <Badge variant="gradient" size="lg" pill glow>Semifinále</Badge>
+          <Badge variant="error" size="lg" pill>ŽIVĚ</Badge>
+          <Badge variant="primary" size="lg" pill>Semifinále</Badge>
           <Badge section="dv" size="lg" pill>Kajak K1</Badge>
-          <Badge vtClass="m" size="lg" pill glow>Mistr ČR</Badge>
+          <Badge vtClass="m" size="lg" pill>Mistr ČR</Badge>
         </div>
       </div>
       <div>
         <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Compare with medium (body font)</h4>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-          <Badge variant="energy" size="md" pill>ŽIVĚ</Badge>
-          <Badge variant="gradient" size="md" pill>Semifinále</Badge>
+          <Badge variant="error" size="md" pill>ŽIVĚ</Badge>
+          <Badge variant="primary" size="md" pill>Semifinále</Badge>
           <Badge section="dv" size="md" pill>Kajak K1</Badge>
           <Badge vtClass="m" size="md" pill>Mistr ČR</Badge>
         </div>
@@ -240,19 +196,11 @@ export const CskSections: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Gradient (default)</h4>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Filled (default)</h4>
         <div style={{ display: 'flex', gap: '8px' }}>
           <Badge section="dv">Divoká voda</Badge>
           <Badge section="ry">Rychlostní</Badge>
           <Badge section="vt">Vodní turistika</Badge>
-        </div>
-      </div>
-      <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>With Glow</h4>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <Badge section="dv" glow>DV</Badge>
-          <Badge section="ry" glow>RY</Badge>
-          <Badge section="vt" glow>VT</Badge>
         </div>
       </div>
       <div>
@@ -264,11 +212,11 @@ export const CskSections: Story = {
         </div>
       </div>
       <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Pill with Glow</h4>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Pill</h4>
         <div style={{ display: 'flex', gap: '8px' }}>
-          <Badge section="dv" pill glow>Divoká voda</Badge>
-          <Badge section="ry" pill glow>Rychlostní</Badge>
-          <Badge section="vt" pill glow>Vodní turistika</Badge>
+          <Badge section="dv" pill>Divoká voda</Badge>
+          <Badge section="ry" pill>Rychlostní</Badge>
+          <Badge section="vt" pill>Vodní turistika</Badge>
         </div>
       </div>
     </div>
@@ -277,7 +225,7 @@ export const CskSections: Story = {
     docs: {
       description: {
         story:
-          'CSK discipline sections with gradient backgrounds: DV (Divoká voda - Whitewater, blue), RY (Rychlostní - Sprint, green), VT (Vodní turistika - Touring, red).',
+          'CSK discipline sections: DV (Divoká voda - Whitewater, blue), RY (Rychlostní - Sprint, green), VT (Vodní turistika - Touring, red).',
       },
     },
   },
@@ -292,21 +240,12 @@ export const VtClasses: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Gradient (default)</h4>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Filled (default)</h4>
         <div style={{ display: 'flex', gap: '8px' }}>
           <Badge vtClass="m">M - Mistr</Badge>
           <Badge vtClass="a">A</Badge>
           <Badge vtClass="b">B</Badge>
           <Badge vtClass="c">C</Badge>
-        </div>
-      </div>
-      <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>With Glow</h4>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <Badge vtClass="m" glow>M</Badge>
-          <Badge vtClass="a" glow>A</Badge>
-          <Badge vtClass="b" glow>B</Badge>
-          <Badge vtClass="c" glow>C</Badge>
         </div>
       </div>
       <div>
@@ -319,12 +258,12 @@ export const VtClasses: Story = {
         </div>
       </div>
       <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Pill with Glow</h4>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Pill</h4>
         <div style={{ display: 'flex', gap: '8px' }}>
-          <Badge vtClass="m" pill glow>M</Badge>
-          <Badge vtClass="a" pill glow>A</Badge>
-          <Badge vtClass="b" pill glow>B</Badge>
-          <Badge vtClass="c" pill glow>C</Badge>
+          <Badge vtClass="m" pill>M</Badge>
+          <Badge vtClass="a" pill>A</Badge>
+          <Badge vtClass="b" pill>B</Badge>
+          <Badge vtClass="c" pill>C</Badge>
         </div>
       </div>
     </div>
@@ -333,7 +272,7 @@ export const VtClasses: Story = {
     docs: {
       description: {
         story:
-          'VT (Vodní turistika) performance classes with gradient backgrounds: M (Mistr - Master, purple), A (red), B (amber), C (green).',
+          'VT (Vodní turistika) performance classes: M (Mistr - Master, purple), A (red), B (amber), C (green).',
       },
     },
   },
@@ -523,7 +462,7 @@ export const NotificationBadges: Story = {
         <span style={{ fontSize: '14px' }}>Nové zprávy</span>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <Badge variant="energy" size="sm" pill glow>!</Badge>
+        <Badge variant="warning" size="sm" pill>!</Badge>
         <span style={{ fontSize: '14px' }}>Čeká na schválení</span>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -534,7 +473,7 @@ export const NotificationBadges: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Pill badges for notification counts and status indicators. Energy variant for attention.',
+        story: 'Pill badges for notification counts and status indicators.',
       },
     },
   },
@@ -560,21 +499,21 @@ export const FeaturedShowcase: Story = {
       <div>
         <h3 style={{ margin: '0 0 16px 0', fontWeight: 600 }}>Live Event Status</h3>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <Badge variant="energy" size="lg" pill glow icon={
+          <Badge variant="error" size="lg" pill icon={
             <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
               <circle cx="12" cy="12" r="6" />
             </svg>
           }>ŽIVĚ</Badge>
-          <Badge variant="gradient" size="lg" pill glow>Semifinále</Badge>
-          <Badge section="dv" size="lg" pill glow>Kajak K1</Badge>
+          <Badge variant="primary" size="lg" pill>Semifinále</Badge>
+          <Badge section="dv" size="lg" pill>Kajak K1</Badge>
         </div>
       </div>
 
       <div>
         <h3 style={{ margin: '0 0 16px 0', fontWeight: 600 }}>Athlete Achievements</h3>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
-          <Badge vtClass="m" size="lg" pill glow>Mistr ČR</Badge>
-          <Badge variant="energy" size="lg" pill glow>Top 10 ICF</Badge>
+          <Badge vtClass="m" size="lg" pill>Mistr ČR</Badge>
+          <Badge variant="success" size="lg" pill>Top 10 ICF</Badge>
           <Badge variant="success" pill icon={<CheckIcon />}>Kvalifikován OH</Badge>
         </div>
       </div>
@@ -582,11 +521,11 @@ export const FeaturedShowcase: Story = {
       <div>
         <h3 style={{ margin: '0 0 16px 0', fontWeight: 600 }}>Race Categories</h3>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-          <Badge section="dv" glow>Slalom</Badge>
-          <Badge section="dv" glow>Sjezd</Badge>
-          <Badge section="ry" glow>Sprint</Badge>
-          <Badge section="ry" glow>Maraton</Badge>
-          <Badge section="vt" glow>Turistika</Badge>
+          <Badge section="dv">Slalom</Badge>
+          <Badge section="dv">Sjezd</Badge>
+          <Badge section="ry">Sprint</Badge>
+          <Badge section="ry">Maraton</Badge>
+          <Badge section="vt">Turistika</Badge>
         </div>
       </div>
     </div>
@@ -594,7 +533,7 @@ export const FeaturedShowcase: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Showcase of badges with gradient backgrounds and glow effects for featured content, live events, and achievements.',
+        story: 'Showcase of badges for featured content, live events, and achievements.',
       },
     },
   },

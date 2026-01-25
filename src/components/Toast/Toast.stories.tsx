@@ -13,8 +13,7 @@ const meta: Meta<typeof ToastProvider> = {
 Toast component for displaying temporary notifications.
 
 ## Features
-- Multiple variants (default, success, warning, error, info, energy)
-- Style variants (default, gradient, glass)
+- Multiple variants (default, success, warning, error, info)
 - Configurable position (6 positions)
 - Auto-dismiss with progress bar
 - Action buttons for undo/retry patterns
@@ -35,10 +34,6 @@ Toast component for displaying temporary notifications.
     maxToasts: {
       control: { type: 'number', min: 1, max: 10 },
     },
-    styleVariant: {
-      control: 'select',
-      options: ['default', 'gradient', 'glass'],
-    },
   },
 };
 
@@ -50,7 +45,7 @@ type Story = StoryObj<typeof ToastProvider>;
 // =============================================================================
 
 const ToastDemo = () => {
-  const { toast, success, warning, error, info, energy, dismissAll } = useToast();
+  const { toast, success, warning, error, info, dismissAll } = useToast();
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}>
@@ -66,12 +61,6 @@ const ToastDemo = () => {
       </Button>
       <Button variant="ghost" onClick={() => info('Nová verze aplikace je k dispozici')}>
         Info Toast
-      </Button>
-      <Button
-        variant="primary"
-        onClick={() => energy('Závodník právě startuje!', { title: 'Live' })}
-      >
-        Energy Toast
       </Button>
       <hr style={{ margin: '8px 0', border: 'none', borderTop: '1px solid var(--color-border-secondary)' }} />
       <Button variant="ghost" onClick={dismissAll}>Zavřít všechny</Button>
@@ -114,38 +103,6 @@ const ToastWithActionDemo = () => {
   );
 };
 
-const AllStyleVariantsDemo = () => {
-  const { success } = useToast();
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}>
-      <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 600 }}>Všechny styly</h4>
-      <Button
-        onClick={() =>
-          success('Default style - klasický vzhled', { styleVariant: 'default', title: 'Default' })
-        }
-      >
-        Default Style
-      </Button>
-      <Button
-        variant="secondary"
-        onClick={() =>
-          success('Gradient style - výrazný branded vzhled', { styleVariant: 'gradient', title: 'Gradient' })
-        }
-      >
-        Gradient Style
-      </Button>
-      <Button
-        variant="ghost"
-        onClick={() =>
-          success('Glass style - frosted glass efekt', { styleVariant: 'glass', title: 'Glass' })
-        }
-      >
-        Glass Style
-      </Button>
-    </div>
-  );
-};
 
 // =============================================================================
 // STORIES
@@ -172,17 +129,6 @@ export const WithAction: Story = {
   render: (args) => (
     <ToastProvider {...args}>
       <ToastWithActionDemo />
-    </ToastProvider>
-  ),
-};
-
-export const AllStyleVariants: Story = {
-  args: {
-    position: 'bottom-right',
-  },
-  render: (args) => (
-    <ToastProvider {...args}>
-      <AllStyleVariantsDemo />
     </ToastProvider>
   ),
 };
@@ -223,7 +169,6 @@ const CSKLiveResultsDemo = () => {
         onClick={() =>
           success('Jan Novák (KC Praha) - 98.45s - 1. místo!', {
             title: 'Nový nejlepší čas',
-            styleVariant: 'gradient',
             duration: 8000,
           })
         }
@@ -270,137 +215,6 @@ export const CSKLiveResults: Story = {
     docs: {
       description: {
         story: 'Toast notifications for live results during competitions.',
-      },
-    },
-  },
-};
-
-// =============================================================================
-// ENERGY & AESTHETIC STORIES
-// =============================================================================
-
-const EnergyDemo = () => {
-  const { energy } = useToast();
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}>
-      <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 600 }}>Energy Variant (Dynamic Sport)</h4>
-      <Button
-        variant="primary"
-        onClick={() =>
-          energy('Jan Novák právě startuje na trati!', {
-            title: 'LIVE',
-            displayTitle: true,
-          })
-        }
-      >
-        Energy with Display Title
-      </Button>
-      <Button
-        variant="secondary"
-        onClick={() =>
-          energy('Přidejte si závodníka do oblíbených pro sledování.', {
-            action: {
-              label: 'Přidat',
-              onClick: () => {},
-            },
-          })
-        }
-      >
-        Energy with Action
-      </Button>
-      <Button
-        variant="ghost"
-        onClick={() =>
-          energy('Nová funkce: sledování závodníků je nyní dostupné!', {
-            styleVariant: 'gradient',
-            title: 'Novinka',
-            displayTitle: true,
-          })
-        }
-      >
-        Energy Gradient Style
-      </Button>
-    </div>
-  );
-};
-
-export const EnergyVariant: Story = {
-  args: {
-    position: 'bottom-right',
-    duration: 6000,
-  },
-  render: (args) => (
-    <ToastProvider {...args}>
-      <EnergyDemo />
-    </ToastProvider>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Energy variant with coral-orange accent. Part of the Dynamic Sport aesthetic. Great for highlights and CTAs.',
-      },
-    },
-  },
-};
-
-const DisplayTitleDemo = () => {
-  const { success, info, energy } = useToast();
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}>
-      <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 600 }}>Display Font Title</h4>
-      <Button
-        onClick={() =>
-          success('Registrace byla úspěšně dokončena.', {
-            title: 'Registrace dokončena',
-            displayTitle: true,
-          })
-        }
-      >
-        Success with Display Title
-      </Button>
-      <Button
-        variant="secondary"
-        onClick={() =>
-          info('Klikněte pro více informací o závodě.', {
-            title: 'Mistrovství ČR 2024',
-            displayTitle: true,
-          })
-        }
-      >
-        Info with Display Title
-      </Button>
-      <Button
-        variant="primary"
-        onClick={() =>
-          energy('Závodník je na trati, sledujte živě!', {
-            title: 'ŽIVĚ',
-            displayTitle: true,
-          })
-        }
-      >
-        Energy + Display Title
-      </Button>
-    </div>
-  );
-};
-
-export const DisplayTitle: Story = {
-  args: {
-    position: 'top-right',
-  },
-  render: (args) => (
-    <ToastProvider {...args}>
-      <DisplayTitleDemo />
-    </ToastProvider>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Display font (Plus Jakarta Sans) for toast titles adds emphasis and aligns with the Dynamic Sport aesthetic.',
       },
     },
   },

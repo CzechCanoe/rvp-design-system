@@ -449,9 +449,9 @@ export const SideBySideComparison: Story = {
               <Button size="lg" variant="secondary">Message</Button>
             </div>
             <div style={{ display: 'flex', gap: 'var(--spacing-3)' }}>
-              <Badge size="lg" variant="gradient" pill glow>Champion</Badge>
+              <Badge size="lg" variant="primary" pill>Champion</Badge>
               <Badge size="lg" variant="success" pill>Active</Badge>
-              <Badge size="lg" section="dv" pill glow>DV</Badge>
+              <Badge size="lg" section="dv" pill>DV</Badge>
             </div>
           </div>
         </ModeContainer>

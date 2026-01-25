@@ -100,7 +100,7 @@ export const FullVariant: Story = {
     ],
     badges: (
       <>
-        <Badge section="dv" size="sm" glow>
+        <Badge section="dv" size="sm" >
           DV
         </Badge>
         <Badge variant="primary" size="sm">
@@ -253,7 +253,7 @@ export const WithFloatingStats: Story = {
     avatarAlt: 'Vavřinec Hradilek',
     badges: (
       <>
-        <Badge section="dv" size="sm" glow>
+        <Badge section="dv" size="sm" >
           DV
         </Badge>
         <Badge variant="warning" size="sm">

@@ -323,7 +323,7 @@ function ClubPublicProfile({
             <p className="club-hero__fullname">{club.name}</p>
             <div className="club-hero__badges">
               {club.sections.map(section => (
-                <Badge key={section} section={section} size="lg" glow>
+                <Badge key={section} section={section} size="lg">
                   {getSectionName(section)}
                 </Badge>
               ))}

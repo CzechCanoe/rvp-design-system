@@ -73,9 +73,9 @@
 | **Badge** | default, primary, success, warning, error, info, gradient, energy | default, primary, success, warning, error, info, section badges | gradient, energy, glow |
 
 **Úkoly:**
-- [ ] Toast: Odstranit `energy` variantu, `gradient`/`glass` styleVariants
-- [ ] LiveIndicator: Odstranit `gradient`/`glass` styleVariants, `intensity` prop
-- [ ] Badge: Odstranit `gradient`, `energy` varianty, `glow` efekt
+- [x] Toast: Odstranit `energy` variantu, `gradient`/`glass` styleVariants
+- [x] LiveIndicator: Odstranit `gradient`/`glass` styleVariants, `intensity` prop
+- [x] Badge: Odstranit `gradient`, `energy` varianty, `glow` efekt
 
 #### 17.1.5 Specializované komponenty
 
