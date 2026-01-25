@@ -604,6 +604,7 @@ const CalendarPage = ({
                   onEventClick={handleEventClick}
                   onDayClick={(date) => console.log('Day clicked:', date)}
                   showLive={showLive}
+                  weekendFocused={isAesthetic}
                 />
               )}
 

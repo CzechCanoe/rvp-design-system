@@ -180,20 +180,23 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ---
 
-#### Priorita 4: Calendar komponenta
+#### Priorita 4: Calendar komponenta ✅
 
 **Problém:** Kalendářní mřížka má špatné zarovnání. Většina závodů je o víkendu, takže jsou namačkané vpravo. Dny pondělí-čtvrtek jsou často prázdné.
 
-**Reference:** https://jakubbican.github.io/pages/terminovka (správné zarovnání)
+**Reference:** https://jakubbican.github.io/pages/terminovka (tabulkový/listový formát)
 
-**Řešení:**
-- [ ] Analyzovat aktuální Calendar grid implementaci
-- [ ] Navrhnout lepší layout:
-  - Option A: Začínat týden od pondělí (standard EU)
-  - Option B: Kompaktní víkendový pohled
-  - Option C: Smart collapsing prázdných dnů
-- [ ] Implementovat vybranou variantu
-- [ ] Ověřit ListView a Cards varianty (ty jsou OK)
+**Řešení:** Weekend-focused layout
+- [x] Analyzovat aktuální Calendar grid implementaci
+- [x] Navrhnout lepší layout - vybrán Option C: Weekend-focused layout
+  - Víkendové sloupce (So/Ne) mají šířku 1.8fr
+  - Všední dny (Po-Pá) mají šířku 1fr
+  - Výsledek: víkend dostává ~52% prostoru, všední dny ~48%
+- [x] Implementovat `weekendFocused` prop do Calendar komponenty
+- [x] Přidat CSS styly s container query responsivitou
+- [x] Přidat stories pro dokumentaci nové vlastnosti
+- [x] Aplikovat v CalendarPage aesthetic variantách
+- [x] ListView a Cards varianty - potvrzeno OK (nepoužívají grid)
 
 ---
 
@@ -270,7 +273,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.5 Polish a opravy** - Priorita 4: Calendar komponenta (zarovnání grid mřížky).
+Pokračovat s **16.5 Polish a opravy** - Priorita 5: EventDetail vylepšení (přenést "wow" prvky do Embed/ExpressiveEmbed).
 
 ---
 

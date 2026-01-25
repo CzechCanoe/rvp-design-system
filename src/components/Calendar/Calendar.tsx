@@ -71,6 +71,12 @@ export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onS
   animated?: boolean;
   /** Show live indicator for events with data.isLive */
   showLive?: boolean;
+  /**
+   * Weekend-focused layout for sports calendars.
+   * Gives more width to weekend columns (Sat/Sun) where most events occur,
+   * and less width to weekday columns (Mon-Fri).
+   */
+  weekendFocused?: boolean;
 }
 
 // Helper functions
@@ -180,6 +186,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       showEventPreview = false,
       animated = true,
       showLive = false,
+      weekendFocused = false,
       className,
       ...props
     },
@@ -346,6 +353,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       `csk-calendar--${size}`,
       styleVariant !== 'default' && `csk-calendar--style-${styleVariant}`,
       animated && 'csk-calendar--animated',
+      weekendFocused && 'csk-calendar--weekend-focused',
       className,
     ]
       .filter(Boolean)

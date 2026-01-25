@@ -65,6 +65,10 @@ const meta = {
       control: 'text',
       description: 'Locale for date formatting',
     },
+    weekendFocused: {
+      control: 'boolean',
+      description: 'Weekend-focused layout - gives more width to weekend columns where most sports events occur',
+    },
   },
 } satisfies Meta<typeof Calendar>;
 
@@ -739,6 +743,90 @@ export const VeryNarrowContainer: Story = {
       description: {
         story:
           'Kalendář ve velmi úzkém kontejneru (300px) pro použití v sidebaru. Tlačítko "Dnes" je skryté a layout je maximálně kompaktní.',
+      },
+    },
+  },
+};
+
+// =============================================================================
+// WEEKEND-FOCUSED LAYOUT (Phase 16.5)
+// =============================================================================
+
+/**
+ * Weekend-focused layout optimized for sports calendars.
+ * Gives more visual space to Saturday and Sunday columns where most events occur.
+ */
+export const WeekendFocused: Story = {
+  args: {
+    events: cskRaceEvents,
+    weekendFocused: true,
+    size: 'lg',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Layout optimalizovaný pro sportovní kalendáře, kde se většina závodů koná o víkendu. Sobota a neděle mají širší sloupce, všední dny užší.',
+      },
+    },
+  },
+};
+
+/**
+ * Weekend-focused layout with embed style.
+ * Ideal for embedding in kanoe.cz where most races are on weekends.
+ */
+export const WeekendFocusedEmbed: Story = {
+  args: {
+    events: cskRaceEvents,
+    weekendFocused: true,
+    styleVariant: 'embed',
+  },
+  render: (args) => (
+    <KanoeCzContext>
+      <Calendar
+        {...args}
+        onEventClick={(event) => console.log('Event clicked:', event)}
+        onDayClick={(date) => console.log('Day clicked:', date)}
+      />
+    </KanoeCzContext>
+  ),
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story:
+          'Weekend-focused layout v embed módu pro kanoe.cz. Optimální zobrazení pro kanoistický kalendář závodů.',
+      },
+    },
+  },
+};
+
+/**
+ * Comparison: standard vs weekend-focused layout.
+ */
+export const WeekendFocusedComparison: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gap: '32px' }}>
+      <div>
+        <h3 style={{ marginBottom: '16px', color: 'var(--color-text-primary)' }}>
+          Standard layout (7 equal columns)
+        </h3>
+        <Calendar events={cskRaceEvents} />
+      </div>
+      <div>
+        <h3 style={{ marginBottom: '16px', color: 'var(--color-text-primary)' }}>
+          Weekend-focused layout (wider Sat/Sun)
+        </h3>
+        <Calendar events={cskRaceEvents} weekendFocused />
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Porovnání standardního layoutu se 7 stejně širokými sloupci a weekend-focused layoutu s rozšířenými víkendovými sloupci.',
       },
     },
   },
