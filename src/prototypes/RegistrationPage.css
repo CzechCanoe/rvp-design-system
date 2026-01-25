@@ -1396,3 +1396,162 @@
     transform: none;
   }
 }
+
+/* ============================================================================
+   Crew (C2) Selection UX - Multi-athlete registration
+   ============================================================================ */
+
+/* Pending crew indicator */
+.registration-page__pending-crew {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--color-primary-bg);
+  border: 1px solid var(--color-primary-border);
+  border-radius: var(--radius-lg);
+}
+
+.registration-page__pending-crew-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+}
+
+.registration-page__pending-crew-info svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.registration-page__pending-crew-label {
+  color: var(--color-text-secondary);
+}
+
+.registration-page__pending-crew-name {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.registration-page__pending-crew-plus {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.registration-page__pending-crew-waiting {
+  color: var(--color-primary);
+  font-style: italic;
+}
+
+/* Selected athlete highlight in partner mode */
+.registration-page__athlete-item--selected {
+  background-color: var(--color-primary-bg);
+  border-color: var(--color-primary-border);
+}
+
+.registration-page__athlete-item--selected:hover {
+  background-color: var(--color-primary-bg);
+}
+
+/* Modal footer with keep-open checkbox */
+.registration-page__modal-footer {
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--color-border-secondary);
+  margin-top: var(--spacing-2);
+}
+
+/* Crew names display in table */
+.registration-page__crew-names {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.registration-page__crew-primary {
+  font-weight: var(--font-weight-medium);
+}
+
+.registration-page__crew-separator {
+  color: var(--color-text-tertiary);
+  font-weight: var(--font-weight-bold);
+}
+
+.registration-page__crew-partner {
+  color: var(--color-text-secondary);
+}
+
+/* Crew RGC display */
+.registration-page__crew-rgc {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-size: var(--font-size-xs);
+}
+
+.registration-page__crew-rgc-separator {
+  color: var(--color-text-tertiary);
+}
+
+/* Category cell with team icon */
+.registration-page__category-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.registration-page__category-cell svg {
+  color: var(--color-primary);
+  width: 14px;
+  height: 14px;
+}
+
+/* Aesthetic variant crew styles */
+.registration-page--aesthetic .registration-page__pending-crew {
+  background: var(--gradient-energy-subtle);
+  border-color: var(--color-energy-200);
+}
+
+.registration-page--aesthetic .registration-page__pending-crew-info svg,
+.registration-page--aesthetic .registration-page__pending-crew-plus,
+.registration-page--aesthetic .registration-page__pending-crew-waiting {
+  color: var(--color-energy-600);
+}
+
+.registration-page--aesthetic .registration-page__athlete-item--selected {
+  background-color: rgba(249, 115, 22, 0.08);
+  border-color: var(--color-energy-200);
+}
+
+.registration-page--aesthetic .registration-page__category-cell svg {
+  color: var(--color-energy-600);
+}
+
+/* Responsive adjustments for crew UX */
+@media (max-width: 640px) {
+  .registration-page__pending-crew {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+  }
+
+  .registration-page__pending-crew-info {
+    flex-wrap: wrap;
+  }
+
+  .registration-page__crew-names {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .registration-page__crew-separator {
+    display: none;
+  }
+
+  .registration-page__crew-partner::before {
+    content: "+ ";
+    color: var(--color-text-tertiary);
+    font-weight: var(--font-weight-bold);
+  }
+}

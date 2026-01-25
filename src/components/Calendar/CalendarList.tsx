@@ -5,6 +5,7 @@ import {
   type ReactNode,
 } from 'react';
 import type { CalendarEvent } from './Calendar';
+import { LiveIndicator } from '../LiveIndicator';
 import './CalendarList.css';
 
 export type CalendarListVariant = 'default' | 'compact';
@@ -40,6 +41,8 @@ export interface CalendarListProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   showViewAll?: boolean;
   /** Callback for "View all" click */
   onViewAllClick?: () => void;
+  /** Show live indicator for events with data.isLive */
+  showLive?: boolean;
 }
 
 interface EventGroup {
@@ -150,6 +153,7 @@ export const CalendarList = forwardRef<HTMLDivElement, CalendarListProps>(
       title,
       showViewAll = false,
       onViewAllClick,
+      showLive = false,
       className,
       ...props
     },
@@ -197,16 +201,28 @@ export const CalendarList = forwardRef<HTMLDivElement, CalendarListProps>(
       return '';
     };
 
+    // Check if event is live
+    const isEventLive = (event: CalendarEvent): boolean => {
+      return Boolean(showLive && event.data?.isLive);
+    };
+
     // Render a single event
     const renderEventItem = (event: CalendarEvent): ReactNode => {
       if (renderEvent) {
         return renderEvent(event);
       }
 
+      const eventIsLive = isEventLive(event);
+
       return (
         <>
           <div className="csk-calendar-list__event-content">
-            <span className="csk-calendar-list__event-title">{event.title}</span>
+            <div className="csk-calendar-list__event-title-row">
+              <span className="csk-calendar-list__event-title">{event.title}</span>
+              {eventIsLive && (
+                <LiveIndicator variant="live" size="sm" />
+              )}
+            </div>
             <span className="csk-calendar-list__event-date">
               {formatDateRange(event.start, event.end, locale, showEndDate)}
             </span>
@@ -270,6 +286,7 @@ export const CalendarList = forwardRef<HTMLDivElement, CalendarListProps>(
                           'csk-calendar-list__event',
                           getSectionClass(event),
                           onEventClick && 'csk-calendar-list__event--clickable',
+                          isEventLive(event) && 'csk-calendar-list__event--live',
                         ]
                           .filter(Boolean)
                           .join(' ')}

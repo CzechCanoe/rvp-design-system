@@ -6,6 +6,7 @@ import {
   type HTMLAttributes,
   type ReactNode,
 } from 'react';
+import { LiveIndicator } from '../LiveIndicator';
 import './Calendar.css';
 
 export type CalendarView = 'month' | 'week';
@@ -68,6 +69,8 @@ export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onS
   showEventPreview?: boolean;
   /** Enable animated transitions */
   animated?: boolean;
+  /** Show live indicator for events with data.isLive */
+  showLive?: boolean;
 }
 
 // Helper functions
@@ -176,6 +179,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       highlightToday = true,
       showEventPreview = false,
       animated = true,
+      showLive = false,
       className,
       ...props
     },
@@ -311,13 +315,28 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       return `csk-calendar__event--${event.variant || 'default'}`;
     };
 
+    // Check if event is live
+    const isEventLive = (event: CalendarEvent): boolean => {
+      return Boolean(showLive && event.data?.isLive);
+    };
+
     // Render event
     const renderEventItem = (event: CalendarEvent): ReactNode => {
       if (renderEvent) {
         return renderEvent(event);
       }
+
+      const eventIsLive = isEventLive(event);
+
       return (
-        <span className="csk-calendar__event-title">{event.title}</span>
+        <>
+          <span className="csk-calendar__event-title">{event.title}</span>
+          {eventIsLive && (
+            <span className="csk-calendar__event-live">
+              <LiveIndicator variant="live" size="sm" />
+            </span>
+          )}
+        </>
       );
     };
 
@@ -469,6 +488,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
                           'csk-calendar__event',
                           getEventColorClass(event),
                           showEventPreview && 'csk-calendar__event--has-preview',
+                          isEventLive(event) && 'csk-calendar__event--live',
                         ]
                           .filter(Boolean)
                           .join(' ')}

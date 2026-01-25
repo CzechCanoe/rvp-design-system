@@ -380,6 +380,36 @@
   color: var(--color-section-vt);
 }
 
+/* ==========================================================================
+   LIVE EVENT INDICATOR
+   ========================================================================== */
+
+.csk-calendar__event--live {
+  background-color: rgba(249, 115, 22, 0.15);
+  color: var(--color-energy-600, #ea580c);
+  border-left: 2px solid var(--color-energy-500, #f97316);
+  animation: csk-calendar-event-live-pulse 2s ease-in-out infinite;
+}
+
+.csk-calendar__event--live:hover {
+  background-color: rgba(249, 115, 22, 0.25);
+}
+
+.csk-calendar__event-live {
+  display: inline-flex;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+@keyframes csk-calendar-event-live-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+  }
+  50% {
+    box-shadow: inset 0 0 4px rgba(249, 115, 22, 0.3);
+  }
+}
+
 /* More events indicator */
 .csk-calendar__more {
   /* Reset */

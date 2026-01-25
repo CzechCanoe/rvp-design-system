@@ -59,8 +59,11 @@ interface RegistrationEntry {
   boatCategory: string;
   ageCategory: string;
   discipline: string;
-  partner?: Athlete;
+  partner?: Athlete; // For C2 categories
 }
+
+/** Mode for athlete selection modal */
+type AthleteSelectionMode = 'single' | 'partner';
 
 // ============================================================================
 // Sample Data
@@ -211,6 +214,29 @@ const UsersIcon = () => (
   </svg>
 );
 
+const UsersTeamIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+);
+
+const XIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+);
+
+const PlusIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="12" y1="5" x2="12" y2="19" />
+    <line x1="5" y1="12" x2="19" y2="12" />
+  </svg>
+);
+
 const ChevronRightIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="9 18 15 12 9 6" />
@@ -263,6 +289,10 @@ function calculateAge(birthYear: number): number {
   return new Date().getFullYear() - birthYear;
 }
 
+function isCrewCategory(category: string): boolean {
+  return category.startsWith('C2');
+}
+
 // ============================================================================
 // Wizard Step Component
 // ============================================================================
@@ -313,6 +343,14 @@ const RegistrationPageInner = ({
   const [selectedDiscipline, setSelectedDiscipline] = useState(raceData.disciplines[0].id);
   const [selectedBoatCategory, setSelectedBoatCategory] = useState('K1M');
   const [showAthleteModal, setShowAthleteModal] = useState(false);
+  const [selectionMode, setSelectionMode] = useState<AthleteSelectionMode>('single');
+  const [pendingCrewEntry, setPendingCrewEntry] = useState<{
+    athlete: Athlete;
+    boatCategory: string;
+    ageCategory: string;
+    discipline: string;
+  } | null>(null);
+  const [keepModalOpen, setKeepModalOpen] = useState(false);
   const [headerData, setHeaderData] = useState({
     teamLeader: '',
     teamLeaderPhone: '',
@@ -355,18 +393,79 @@ const RegistrationPageInner = ({
     return 'Dospělí';
   };
 
-  // Add athlete to entries
+  // Add athlete to entries (handles both single and crew categories)
   const addAthleteToEntry = (athlete: Athlete) => {
-    const newEntry: RegistrationEntry = {
-      id: Date.now(),
-      athlete,
-      boatCategory: selectedBoatCategory,
-      ageCategory: getAgeCategoryForAthlete(athlete),
-      discipline: selectedDiscipline,
-    };
-    setEntries([...entries, newEntry]);
+    // Check if this is a crew category (C2)
+    if (isCrewCategory(selectedBoatCategory)) {
+      if (selectionMode === 'single') {
+        // First athlete selected for C2 - store and ask for partner
+        setPendingCrewEntry({
+          athlete,
+          boatCategory: selectedBoatCategory,
+          ageCategory: getAgeCategoryForAthlete(athlete),
+          discipline: selectedDiscipline,
+        });
+        setSelectionMode('partner');
+        toast.info(`Nyní vyberte partnera pro ${athlete.name}.`, { title: 'Vyberte partnera' });
+      } else {
+        // Second athlete (partner) selected
+        if (pendingCrewEntry) {
+          const newEntry: RegistrationEntry = {
+            id: Date.now(),
+            athlete: pendingCrewEntry.athlete,
+            boatCategory: pendingCrewEntry.boatCategory,
+            ageCategory: pendingCrewEntry.ageCategory,
+            discipline: pendingCrewEntry.discipline,
+            partner: athlete,
+          };
+          setEntries([...entries, newEntry]);
+          toast.success(
+            `Posádka ${pendingCrewEntry.athlete.name} + ${athlete.name} byla přidána.`,
+            { title: 'Posádka přidána' }
+          );
+          // Reset crew selection state
+          setPendingCrewEntry(null);
+          setSelectionMode('single');
+          if (!keepModalOpen) {
+            setShowAthleteModal(false);
+          }
+        }
+      }
+    } else {
+      // Single boat category (K1, C1)
+      const newEntry: RegistrationEntry = {
+        id: Date.now(),
+        athlete,
+        boatCategory: selectedBoatCategory,
+        ageCategory: getAgeCategoryForAthlete(athlete),
+        discipline: selectedDiscipline,
+      };
+      setEntries([...entries, newEntry]);
+      if (!keepModalOpen) {
+        setShowAthleteModal(false);
+      }
+      toast.success(`${athlete.name} byl přidán do přihlášky.`, { title: 'Závodník přidán' });
+    }
+  };
+
+  // Cancel crew selection and go back to single mode
+  const cancelCrewSelection = () => {
+    setPendingCrewEntry(null);
+    setSelectionMode('single');
+  };
+
+  // Open modal with reset state
+  const openAthleteModal = () => {
+    setSelectionMode('single');
+    setPendingCrewEntry(null);
+    setShowAthleteModal(true);
+  };
+
+  // Close modal with cleanup
+  const closeAthleteModal = () => {
     setShowAthleteModal(false);
-    toast.success(`${athlete.name} byl přidán do přihlášky.`, { title: 'Závodník přidán' });
+    setSelectionMode('single');
+    setPendingCrewEntry(null);
   };
 
   // Remove entry
@@ -584,26 +683,60 @@ const RegistrationPageInner = ({
   // Table data for entries
   const entriesTableData = entries.filter((e) => e.discipline === selectedDiscipline).map((entry) => {
     const healthStatus = getHealthCheckStatus(entry.athlete);
+    const isCrew = isCrewCategory(entry.boatCategory);
+    const partnerHealthStatus = entry.partner ? getHealthCheckStatus(entry.partner) : null;
+
+    // Build name display with partner for C2 categories
+    const nameDisplay = isCrew && entry.partner ? (
+      <div className="registration-page__crew-names">
+        <span className="registration-page__crew-primary">{entry.athlete.name}</span>
+        <span className="registration-page__crew-separator">+</span>
+        <span className="registration-page__crew-partner">{entry.partner.name}</span>
+      </div>
+    ) : entry.athlete.name;
+
+    // Build RGC display
+    const rgcDisplay = isCrew && entry.partner ? (
+      <div className="registration-page__crew-rgc">
+        <span>{entry.athlete.rgc}</span>
+        <span className="registration-page__crew-rgc-separator">/</span>
+        <span>{entry.partner.rgc}</span>
+      </div>
+    ) : entry.athlete.rgc;
+
+    // Build status display (check both athletes for C2)
+    const hasHealthIssue = entry.athlete.healthCheck !== 'valid' ||
+      (entry.partner && entry.partner.healthCheck !== 'valid');
+    const hasFeeIssue = entry.athlete.fees === 'unpaid' ||
+      (entry.partner && entry.partner.fees === 'unpaid');
+
     return {
       id: entry.id,
-      name: entry.athlete.name,
-      rgc: entry.athlete.rgc,
-      category: entry.boatCategory,
+      name: nameDisplay,
+      rgc: rgcDisplay,
+      category: (
+        <div className="registration-page__category-cell">
+          {isCrew && <UsersTeamIcon />}
+          <span>{entry.boatCategory}</span>
+        </div>
+      ),
       ageCategory: entry.ageCategory,
-      vt: entry.athlete.vt,
+      vt: isCrew && entry.partner
+        ? `${entry.athlete.vt}/${entry.partner.vt}`
+        : entry.athlete.vt,
       status: (
         <div className="registration-page__status-cell">
-          {entry.athlete.healthCheck !== 'valid' && (
-            <Badge variant={healthStatus.variant} size="sm">
+          {hasHealthIssue && (
+            <Badge variant={healthStatus.variant === 'error' || partnerHealthStatus?.variant === 'error' ? 'error' : 'warning'} size="sm">
               <AlertIcon /> Prohlídka
             </Badge>
           )}
-          {entry.athlete.fees === 'unpaid' && (
+          {hasFeeIssue && (
             <Badge variant="warning" size="sm">
               <AlertIcon /> Příspěvky
             </Badge>
           )}
-          {entry.athlete.healthCheck === 'valid' && entry.athlete.fees === 'paid' && (
+          {!hasHealthIssue && !hasFeeIssue && (
             <Badge variant="success" size="sm">
               <CheckCircleIcon /> OK
             </Badge>
@@ -765,7 +898,7 @@ const RegistrationPageInner = ({
                       <Button
                         variant="primary"
                         iconLeft={<UserPlusIcon />}
-                        onClick={() => setShowAthleteModal(true)}
+                        onClick={openAthleteModal}
                       >
                         Přidat závodníka
                       </Button>
@@ -811,7 +944,7 @@ const RegistrationPageInner = ({
                           <Button
                             variant="primary"
                             iconLeft={<UserPlusIcon />}
-                            onClick={() => setShowAthleteModal(true)}
+                            onClick={openAthleteModal}
                           >
                             Přidat závodníka
                           </Button>
@@ -1030,11 +1163,32 @@ const RegistrationPageInner = ({
       {/* Athlete Selection Modal */}
       <Modal
         open={showAthleteModal}
-        onClose={() => setShowAthleteModal(false)}
-        title="Přidat závodníka"
+        onClose={closeAthleteModal}
+        title={selectionMode === 'partner' ? 'Vyberte partnera pro posádku' : 'Přidat závodníka'}
         size="lg"
       >
         <div className="registration-page__modal-content">
+          {/* Pending crew indicator */}
+          {pendingCrewEntry && selectionMode === 'partner' && (
+            <div className="registration-page__pending-crew">
+              <div className="registration-page__pending-crew-info">
+                <UsersTeamIcon />
+                <span className="registration-page__pending-crew-label">Posádka {pendingCrewEntry.boatCategory}:</span>
+                <span className="registration-page__pending-crew-name">{pendingCrewEntry.athlete.name}</span>
+                <span className="registration-page__pending-crew-plus">+</span>
+                <span className="registration-page__pending-crew-waiting">čeká na partnera...</span>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                iconLeft={<XIcon />}
+                onClick={cancelCrewSelection}
+              >
+                Zrušit
+              </Button>
+            </div>
+          )}
+
           <div className="registration-page__modal-filters">
             <Input
               type="search"
@@ -1057,7 +1211,14 @@ const RegistrationPageInner = ({
                 { value: 'C2X', label: 'C2 Mix' },
               ]}
               value={selectedBoatCategory}
-              onChange={(e) => setSelectedBoatCategory(e.target.value)}
+              onChange={(e) => {
+                setSelectedBoatCategory(e.target.value);
+                // Reset crew selection when changing category
+                if (pendingCrewEntry) {
+                  cancelCrewSelection();
+                }
+              }}
+              disabled={selectionMode === 'partner'} // Lock category when selecting partner
             />
           </div>
 
@@ -1065,13 +1226,18 @@ const RegistrationPageInner = ({
             {filteredAthletes.length > 0 ? (
               filteredAthletes.map((athlete) => {
                 const healthStatus = getHealthCheckStatus(athlete);
+                // Check if athlete is already added to entries for this discipline
                 const alreadyAdded = entries.some(
-                  (e) => e.athlete.id === athlete.id && e.discipline === selectedDiscipline
+                  (e) => (e.athlete.id === athlete.id || e.partner?.id === athlete.id) && e.discipline === selectedDiscipline
                 );
+                // In partner mode, also exclude the first selected athlete
+                const isFirstAthlete = pendingCrewEntry?.athlete.id === athlete.id;
+                const isDisabled = alreadyAdded || isFirstAthlete;
+
                 return (
                   <div
                     key={athlete.id}
-                    className={`registration-page__athlete-item ${alreadyAdded ? 'registration-page__athlete-item--disabled' : ''}`}
+                    className={`registration-page__athlete-item ${isDisabled ? 'registration-page__athlete-item--disabled' : ''} ${isFirstAthlete ? 'registration-page__athlete-item--selected' : ''}`}
                   >
                     <div className="registration-page__athlete-info">
                       <div className="registration-page__athlete-name">
@@ -1096,12 +1262,13 @@ const RegistrationPageInner = ({
                       )}
                     </div>
                     <Button
-                      variant="secondary"
+                      variant={selectionMode === 'partner' && !isDisabled ? 'primary' : 'secondary'}
                       size="sm"
                       onClick={() => addAthleteToEntry(athlete)}
-                      disabled={alreadyAdded}
+                      disabled={isDisabled}
+                      iconLeft={selectionMode === 'partner' && !isDisabled ? <PlusIcon /> : undefined}
                     >
-                      {alreadyAdded ? 'Přidáno' : 'Přidat'}
+                      {isFirstAthlete ? 'Vybrán' : alreadyAdded ? 'Přidáno' : selectionMode === 'partner' ? 'Přidat partnera' : 'Přidat'}
                     </Button>
                   </div>
                 );
@@ -1114,6 +1281,18 @@ const RegistrationPageInner = ({
               />
             )}
           </div>
+
+          {/* Keep modal open checkbox - only show for single athletes */}
+          {selectionMode === 'single' && (
+            <div className="registration-page__modal-footer">
+              <Checkbox
+                label="Přidat další závodníky (nezavírat dialog)"
+                id="keep-modal-open"
+                checked={keepModalOpen}
+                onChange={(e) => setKeepModalOpen(e.target.checked)}
+              />
+            </div>
+          )}
         </div>
       </Modal>
     </div>
@@ -1269,5 +1448,55 @@ export const AestheticRychlost: Story = {
     initialStep: 0,
     section: 'ry',
     style: 'aesthetic',
+  },
+};
+
+// ============================================================================
+// Crew Registration Stories - C2 multi-athlete selection
+// ============================================================================
+
+/**
+ * C2 Crew Registration - Vícečlenné posádky.
+ * Demonstrace UX pro registraci C2 kategorií (dva závodníci v lodi).
+ *
+ * **Workflow:**
+ * 1. Vyber kategorii C2M nebo C2X
+ * 2. Klikni na "Přidat závodníka"
+ * 3. Vyber prvního závodníka - zobrazí se indikátor "čeká na partnera"
+ * 4. Vyber druhého závodníka (partnera)
+ * 5. Posádka je přidána do přihlášky
+ *
+ * **Tipy:**
+ * - Checkbox "Přidat další závodníky" ponechá dialog otevřený
+ * - Kategorie je zamčena během výběru partnera
+ * - Zrušení výběru vrátí do normálního režimu
+ */
+export const CrewRegistration: Story = {
+  args: {
+    variant: 'standalone',
+    clubName: 'USK Praha',
+    initialStep: 1,
+    section: 'dv',
+    style: 'aesthetic',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `Demonstrace registrace vícečlenných posádek (C2).
+
+**Jak to funguje:**
+1. V dialogu "Přidat závodníka" vyberte kategorii C2M nebo C2X
+2. Klikněte na prvního člena posádky
+3. Zobrazí se indikátor s vybraným závodníkem a výzva k výběru partnera
+4. Kategorie je zamčena - nelze měnit během výběru
+5. Vyberte partnera - posádka se vytvoří
+
+**V tabulce se zobrazí:**
+- Oba členové posádky (jméno + partner)
+- Oba RGC kódy
+- Kombinovaný VT rating
+- Stav obou závodníků`,
+      },
+    },
   },
 };

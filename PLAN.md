@@ -201,11 +201,11 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 **Results Page:**
 - [x] Top 3 karty redesign - horizontální layout, kompaktnější, dynamic sport aesthetic
 
-### 15.5 Nové koncepty *(2 iterace)*
+### 15.5 Nové koncepty *(2 iterace)* ✅ HOTOVO
 
 - [x] **Sdílená hledací komponenta** - `SearchInput` komponenta s fulltext + chipy pro rychlé filtry
-- [ ] **Registration UX** - přidávání jezdců, vícečlenné posádky
-- [ ] **Event indikace live** - že závod běží a má live results
+- [x] **Registration UX** - přidávání jezdců, vícečlenné posádky (C2 crew selection)
+- [x] **Event indikace live** - že závod běží a má live results (Calendar + CalendarList)
 
 ---
 
@@ -221,14 +221,19 @@ Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
 | ~~15.2 Results (P1)~~ | ~~2~~ ✅ |
 | ~~15.3 Rozbité věci (P2)~~ | ~~1~~ ✅ |
 | ~~15.4 Design vylepšení (P3)~~ | ~~2~~ ✅ |
-| 15.5 Nové koncepty | 2 |
-| **Celkem** | **~17** |
+| ~~15.5 Nové koncepty~~ | ~~2~~ ✅ |
+| **Celkem** | **~17** ✅ |
 
 ---
 
 ## Další krok
 
-**→ 15.5 Nové koncepty - Sdílená hledací komponenta, Registration UX, Event indikace live**
+**Fáze 15 User Feedback dokončena!**
+
+Možné další kroky:
+- Fáze 16: Performance optimalizace (bundle size, lazy loading)
+- Fáze 17: Accessibility audit (WCAG 2.1 AA)
+- Fáze 18: Documentation site (public Storybook deploy)
 
 ---
 

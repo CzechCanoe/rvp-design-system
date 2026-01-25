@@ -73,6 +73,7 @@ const generateRaces = (year: number, month: number): CalendarEvent[] => {
         discipline: 'Slalom',
         level: 'ČP',
         entries: 98,
+        isLive: true, // Always show as live for demo purposes
       },
     },
     {
@@ -602,6 +603,7 @@ const CalendarPage = ({
                   size="lg"
                   onEventClick={handleEventClick}
                   onDayClick={(date) => console.log('Day clicked:', date)}
+                  showLive={showLive}
                 />
               )}
 
@@ -613,6 +615,7 @@ const CalendarPage = ({
                   showEndDate
                   onEventClick={handleEventClick}
                   styleVariant={variant === 'embed' ? 'embed' : 'default'}
+                  showLive={showLive}
                 />
               )}
 
@@ -1003,5 +1006,59 @@ export const AestheticDivokaVoda: Story = {
     initialView: 'month',
     showViewSwitcher: true,
     style: 'aesthetic',
+  },
+};
+
+/**
+ * Live Event Indication Demo.
+ *
+ * Demonstrace vizuálního zvýraznění živých závodů v kalendáři:
+ * - LIVE badge v calendar cell (month view)
+ * - LIVE indikátor v seznamu (list view)
+ * - Pulsující animace
+ * - Energy color (coral-orange) pro okamžitou viditelnost
+ *
+ * **Jak funguje:**
+ * - Eventy s `data.isLive: true` jsou zvýrazněny
+ * - V month view se zobrazí LiveIndicator vedle názvu
+ * - V list view pulzující rámeček + badge
+ * - Sidebar zobrazuje sekci "Právě probíhá"
+ */
+export const LiveEventIndication: Story = {
+  args: {
+    initialSection: 'dv',
+    showLive: true,
+    variant: 'standalone',
+    initialView: 'month',
+    showViewSwitcher: true,
+    style: 'aesthetic',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `Demonstrace live indikace pro závody, které právě probíhají.
+
+**Vlastnosti:**
+- Energy color (coral-orange) pro okamžitou viditelnost
+- Pulsující animace upoutává pozornost
+- LiveIndicator kompatibilní se všemi pohledy (month, list, cards)
+- Sidebar sekce "Právě probíhá" s quick links
+
+**Použití v kódu:**
+\`\`\`tsx
+// Event s live flag
+const event = {
+  id: 'race-1',
+  title: 'MČR ve slalomu',
+  start: new Date(),
+  data: { isLive: true }
+};
+
+// Calendar s showLive prop
+<Calendar events={[event]} showLive={true} />
+<CalendarList events={[event]} showLive={true} />
+\`\`\``,
+      },
+    },
   },
 };
