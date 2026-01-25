@@ -35,14 +35,6 @@ const meta: Meta<typeof Avatar> = {
       options: [undefined, 'online', 'offline', 'busy', 'away'],
       description: 'Status indicator',
     },
-    glow: {
-      control: 'boolean',
-      description: 'Enable energy glow effect on hover',
-    },
-    borderAccent: {
-      control: 'boolean',
-      description: 'Show accent gradient ring around avatar',
-    },
   },
 };
 
@@ -224,69 +216,6 @@ export const Group: Story = {
 };
 
 /* ==========================================================================
-   AESTHETIC ENHANCEMENTS
-   ========================================================================== */
-
-export const AestheticEnhancements: Story = {
-  name: 'Aesthetic Enhancements',
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-      <div>
-        <p style={{ marginBottom: '12px', fontSize: '14px', color: '#666' }}>
-          Energy Glow (hover to see effect)
-        </p>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <Avatar src="https://i.pravatar.cc/150?u=glow1" size="lg" glow alt="With glow" />
-          <Avatar src="https://i.pravatar.cc/150?u=glow2" size="xl" glow alt="XL with glow" />
-          <Avatar initials="JN" color="primary" size="lg" glow />
-          <Avatar initials="MK" color="success" size="lg" glow />
-        </div>
-      </div>
-      <div>
-        <p style={{ marginBottom: '12px', fontSize: '14px', color: '#666' }}>
-          Border Accent (gradient ring from primary to energy)
-        </p>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <Avatar src="https://i.pravatar.cc/150?u=accent1" size="lg" borderAccent alt="With accent" />
-          <Avatar src="https://i.pravatar.cc/150?u=accent2" size="xl" borderAccent alt="XL with accent" />
-          <Avatar src="https://i.pravatar.cc/150?u=accent3" size="2xl" borderAccent alt="2XL with accent" />
-        </div>
-      </div>
-      <div>
-        <p style={{ marginBottom: '12px', fontSize: '14px', color: '#666' }}>
-          Combined: Glow + Border Accent
-        </p>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <Avatar
-            src="https://i.pravatar.cc/150?u=combined1"
-            size="xl"
-            glow
-            borderAccent
-            alt="Glow and accent"
-          />
-          <Avatar
-            src="https://i.pravatar.cc/150?u=combined2"
-            size="2xl"
-            glow
-            borderAccent
-            status="online"
-            alt="Full featured"
-          />
-        </div>
-      </div>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Aesthetic enhancements: `glow` adds energy glow on hover, `borderAccent` adds a gradient ring from primary to energy color.',
-      },
-    },
-  },
-};
-
-/* ==========================================================================
    CSK EXAMPLE: ATHLETE PROFILE
    ========================================================================== */
 
@@ -299,8 +228,6 @@ export const AthleteProfile: Story = {
         size="2xl"
         variant="circular"
         status="online"
-        glow
-        borderAccent
         alt="Jiří Prskavec"
       />
       <div>

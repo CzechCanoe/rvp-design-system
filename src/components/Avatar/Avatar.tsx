@@ -33,10 +33,6 @@ export interface AvatarProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, '
   icon?: ReactNode;
   /** Status indicator (online, offline, busy, away) */
   status?: 'online' | 'offline' | 'busy' | 'away';
-  /** Enable energy glow effect on hover */
-  glow?: boolean;
-  /** Show accent gradient ring around avatar */
-  borderAccent?: boolean;
   /** Additional CSS class */
   className?: string;
 }
@@ -94,8 +90,6 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       color = 'default',
       icon,
       status,
-      glow,
-      borderAccent,
       className,
       ...props
     },
@@ -114,8 +108,6 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       `csk-avatar--${size}`,
       `csk-avatar--${variant}`,
       !hasImage && `csk-avatar--${color}`,
-      glow && 'csk-avatar--glow',
-      borderAccent && 'csk-avatar--border-accent',
       className,
     ]
       .filter(Boolean)

@@ -17,7 +17,7 @@ const meta: Meta<typeof AthleteCard> = {
     },
     styleVariant: {
       control: 'select',
-      options: ['default', 'gradient', 'glass', 'hero'],
+      options: ['default', 'aesthetic'],
     },
     section: {
       control: 'select',
@@ -163,42 +163,13 @@ export const AllStyleVariants: Story = {
         />
       </div>
       <div>
-        <div style={{ marginBottom: '8px', fontSize: '12px', color: '#666', fontWeight: 600 }}>GRADIENT</div>
+        <div style={{ marginBottom: '8px', fontSize: '12px', color: '#666', fontWeight: 600 }}>AESTHETIC</div>
         <AthleteCard
-          name="Závodník Gradient"
+          name="Závodník Aesthetic"
           club="Dukla Praha"
           section="ry"
           vtClass="m"
-          styleVariant="gradient"
-          clickable
-        />
-      </div>
-      <div style={{
-        padding: '24px',
-        background: 'linear-gradient(135deg, #1176a6 0%, #0d5a7d 100%)',
-        borderRadius: '12px',
-        marginLeft: '-24px',
-        marginRight: '-24px',
-      }}>
-        <div style={{ marginBottom: '8px', fontSize: '12px', color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>GLASS</div>
-        <AthleteCard
-          name="Závodník Glass"
-          club="SK Slavia Praha"
-          section="vt"
-          vtClass="b"
-          styleVariant="glass"
-          clickable
-        />
-      </div>
-      <div>
-        <div style={{ marginBottom: '8px', fontSize: '12px', color: '#666', fontWeight: 600 }}>HERO</div>
-        <AthleteCard
-          name="Závodník Hero"
-          club="TJ Bohemians"
-          section="dv"
-          ranking={1}
-          styleVariant="hero"
-          backgroundUrl="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop"
+          styleVariant="aesthetic"
           clickable
         />
       </div>

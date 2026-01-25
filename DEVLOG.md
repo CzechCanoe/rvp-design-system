@@ -5654,3 +5654,22 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 ### Poznámky
 - Energy/gradient/glow varianty nahrazeny standardními sémantickými variantami (error pro LIVE/urgent, primary/warning pro ostatní)
 - Prototypy aktualizovány pro kompatibilitu s novým API
+
+---
+
+## 2026-01-25 - Fáze 17.6: AthleteCard & Avatar Cleanup
+
+### Dokončeno
+- [x] AthleteCard: Odstraněny `gradient`, `glass`, `hero` styleVariants
+- [x] AthleteCard: Přidána nová `aesthetic` varianta (jednoduchý gradient-card styl)
+- [x] AthleteCard: Odstraněn `backgroundUrl` prop (specifický pro hero)
+- [x] AthleteCard: Vyčištěn CSS (~700 řádků → ~500 řádků)
+- [x] Avatar: Odstraněny `glow` a `borderAccent` props
+- [x] Avatar: Odstraněn AestheticEnhancements story
+- [x] Avatar: Vyčištěn CSS (~415 řádků → ~350 řádků)
+
+### Poznámky
+- AthleteCard styleVariant: `'default' | 'aesthetic'` (dříve `'default' | 'gradient' | 'glass' | 'hero'`)
+- Avatar zůstává pouze se základními props: size, variant, color, status
+- Build prošel bez chyb
+- Fáze 17.1 (Komponenty - Odstranění experimentálních variant) je nyní kompletní

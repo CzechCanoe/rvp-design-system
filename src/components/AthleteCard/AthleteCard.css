@@ -43,148 +43,11 @@
   /* Base styles already applied */
 }
 
-/* Gradient - gradient background with brand colors */
-.csk-athlete-card--style-gradient {
-  background: var(--gradient-primary);
+/* Aesthetic - subtle gradient background with enhanced visuals */
+.csk-athlete-card--style-aesthetic {
+  background: var(--gradient-card);
   border: none;
-  color: var(--color-text-inverse);
   box-shadow: var(--shadow-md);
-}
-
-.csk-athlete-card--style-gradient .csk-athlete-card__name,
-.csk-athlete-card--style-gradient .csk-athlete-card__country,
-.csk-athlete-card--style-gradient .csk-athlete-card__club,
-.csk-athlete-card--style-gradient .csk-athlete-card__club-name,
-.csk-athlete-card--style-gradient .csk-athlete-card__club-id,
-.csk-athlete-card--style-gradient .csk-athlete-card__meta,
-.csk-athlete-card--style-gradient .csk-athlete-card__birth-year,
-.csk-athlete-card--style-gradient .csk-athlete-card__license,
-.csk-athlete-card--style-gradient .csk-athlete-card__stat-value,
-.csk-athlete-card--style-gradient .csk-athlete-card__stat-label,
-.csk-athlete-card--style-gradient .csk-athlete-card__ranking-label,
-.csk-athlete-card--style-gradient .csk-athlete-card__ranking-value {
-  color: var(--color-text-inverse);
-}
-
-.csk-athlete-card--style-gradient .csk-athlete-card__initials {
-  background: rgba(255, 255, 255, 0.2);
-  color: var(--color-text-inverse);
-}
-
-.csk-athlete-card--style-gradient .csk-athlete-card__initials svg {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.csk-athlete-card--style-gradient .csk-athlete-card__stats {
-  border-top-color: rgba(255, 255, 255, 0.2);
-}
-
-.csk-athlete-card--style-gradient .csk-athlete-card__badge {
-  background: rgba(255, 255, 255, 0.2);
-  color: var(--color-text-inverse);
-}
-
-.csk-athlete-card--style-gradient .csk-athlete-card__ranking {
-  border-top-color: rgba(255, 255, 255, 0.2);
-}
-
-.csk-athlete-card--style-gradient.csk-athlete-card--section-dv,
-.csk-athlete-card--style-gradient.csk-athlete-card--section-ry,
-.csk-athlete-card--style-gradient.csk-athlete-card--section-vt {
-  border-left: none;
-}
-
-/* Glass - glassmorphism effect */
-.csk-athlete-card--style-glass {
-  background: var(--glass-light-bg);
-  backdrop-filter: var(--glass-light-blur);
-  -webkit-backdrop-filter: var(--glass-light-blur);
-  border: 1px solid var(--glass-light-border);
-  box-shadow: var(--shadow-sm);
-}
-
-.csk-athlete-card--style-glass .csk-athlete-card__stats {
-  border-top-color: var(--glass-light-border);
-}
-
-.csk-athlete-card--style-glass .csk-athlete-card__ranking {
-  border-top-color: var(--glass-light-border);
-}
-
-/* Hero - full background image with overlay */
-.csk-athlete-card--style-hero {
-  background-image: var(--athlete-card-bg-image);
-  background-size: cover;
-  background-position: center;
-  border: none;
-  min-height: 200px;
-  color: var(--color-text-inverse);
-  box-shadow: var(--shadow-lg);
-}
-
-.csk-athlete-card__hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: var(--gradient-overlay-bottom);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.csk-athlete-card--style-hero .csk-athlete-card__avatar,
-.csk-athlete-card--style-hero .csk-athlete-card__info,
-.csk-athlete-card--style-hero .csk-athlete-card__actions {
-  position: relative;
-  z-index: 1;
-}
-
-.csk-athlete-card--style-hero .csk-athlete-card__name,
-.csk-athlete-card--style-hero .csk-athlete-card__country,
-.csk-athlete-card--style-hero .csk-athlete-card__club,
-.csk-athlete-card--style-hero .csk-athlete-card__club-name,
-.csk-athlete-card--style-hero .csk-athlete-card__club-id,
-.csk-athlete-card--style-hero .csk-athlete-card__meta,
-.csk-athlete-card--style-hero .csk-athlete-card__birth-year,
-.csk-athlete-card--style-hero .csk-athlete-card__license,
-.csk-athlete-card--style-hero .csk-athlete-card__stat-value,
-.csk-athlete-card--style-hero .csk-athlete-card__stat-label,
-.csk-athlete-card--style-hero .csk-athlete-card__ranking-label {
-  color: var(--color-text-inverse);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.csk-athlete-card--style-hero .csk-athlete-card__ranking-value {
-  color: var(--color-accent-400);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-}
-
-.csk-athlete-card--style-hero .csk-athlete-card__initials {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
-  color: var(--color-text-inverse);
-}
-
-.csk-athlete-card--style-hero .csk-athlete-card__initials svg {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.csk-athlete-card--style-hero .csk-athlete-card__stats {
-  border-top-color: rgba(255, 255, 255, 0.2);
-}
-
-.csk-athlete-card--style-hero .csk-athlete-card__badge {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
-  color: var(--color-text-inverse);
-}
-
-.csk-athlete-card--style-hero .csk-athlete-card__ranking {
-  border-top-color: rgba(255, 255, 255, 0.2);
-}
-
-.csk-athlete-card--style-hero.csk-athlete-card--section-dv,
-.csk-athlete-card--style-hero.csk-athlete-card--section-ry,
-.csk-athlete-card--style-hero.csk-athlete-card--section-vt {
-  border-left: none;
 }
 
 /* ==========================================================================
@@ -328,20 +191,6 @@
   background: var(--gradient-section-vt);
 }
 
-/* Featured + Style variants combinations */
-.csk-athlete-card--featured.csk-athlete-card--style-gradient {
-  background: var(--gradient-primary-deep);
-}
-
-.csk-athlete-card--featured.csk-athlete-card--style-gradient::before {
-  background: linear-gradient(90deg, var(--color-accent-400), var(--color-accent-500));
-}
-
-.csk-athlete-card--featured.csk-athlete-card--style-glass {
-  background: var(--glass-light-bg);
-  backdrop-filter: var(--glass-light-blur);
-  -webkit-backdrop-filter: var(--glass-light-blur);
-}
 
 /* ==========================================================================
    Clickable state
@@ -369,46 +218,13 @@
 }
 
 /* Clickable + Style variant hovers */
-.csk-athlete-card--clickable.csk-athlete-card--style-gradient:hover {
-  background: var(--gradient-primary-hover);
-  box-shadow: var(--shadow-lg), var(--glow-primary-sm);
+.csk-athlete-card--clickable.csk-athlete-card--style-aesthetic:hover {
+  box-shadow: var(--shadow-lg);
   transform: translateY(-3px);
 }
 
-.csk-athlete-card--clickable.csk-athlete-card--style-gradient:active {
-  background: var(--gradient-primary-active);
+.csk-athlete-card--clickable.csk-athlete-card--style-aesthetic:active {
   box-shadow: var(--shadow-md);
-  transform: translateY(0);
-}
-
-.csk-athlete-card--clickable.csk-athlete-card--style-glass:hover {
-  background: var(--glass-subtle-bg);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-}
-
-.csk-athlete-card--clickable.csk-athlete-card--style-glass:active {
-  background: var(--glass-light-bg);
-  box-shadow: var(--shadow-sm);
-  transform: translateY(0);
-}
-
-.csk-athlete-card--clickable.csk-athlete-card--style-hero:hover {
-  box-shadow: var(--shadow-xl);
-  transform: translateY(-4px);
-}
-
-.csk-athlete-card--clickable.csk-athlete-card--style-hero:hover .csk-athlete-card__hero-overlay {
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.85) 0%,
-    rgba(0, 0, 0, 0.5) 40%,
-    transparent 100%
-  );
-}
-
-.csk-athlete-card--clickable.csk-athlete-card--style-hero:active {
-  box-shadow: var(--shadow-lg);
   transform: translateY(0);
 }
 
@@ -438,14 +254,14 @@
   transition: box-shadow var(--duration-base) var(--ease-out);
 }
 
-/* Avatar glow effect for featured/gradient variants */
+/* Avatar glow effect for featured/aesthetic variants */
 .csk-athlete-card--featured .csk-athlete-card__avatar,
-.csk-athlete-card--style-gradient .csk-athlete-card__avatar {
-  box-shadow: var(--shadow-md), var(--glow-primary-xs);
+.csk-athlete-card--style-aesthetic .csk-athlete-card__avatar {
+  box-shadow: var(--shadow-md);
 }
 
 .csk-athlete-card--clickable:hover .csk-athlete-card__avatar {
-  box-shadow: var(--shadow-lg), var(--glow-primary-sm);
+  box-shadow: var(--shadow-lg);
 }
 
 .csk-athlete-card__image {
@@ -547,11 +363,6 @@
 
 .csk-athlete-card--clickable:hover .csk-athlete-card__name {
   color: var(--color-primary-600);
-}
-
-.csk-athlete-card--style-gradient.csk-athlete-card--clickable:hover .csk-athlete-card__name,
-.csk-athlete-card--style-hero.csk-athlete-card--clickable:hover .csk-athlete-card__name {
-  color: var(--color-text-inverse);
 }
 
 .csk-athlete-card__country {
@@ -754,34 +565,12 @@
    Dark mode
    ========================================================================== */
 
-[data-theme='dark'] .csk-athlete-card--style-glass {
-  background: var(--glass-dark-bg);
-  border-color: var(--glass-dark-border);
-}
-
-[data-theme='dark'] .csk-athlete-card--style-glass .csk-athlete-card__stats {
-  border-top-color: var(--glass-dark-border);
-}
-
-[data-theme='dark'] .csk-athlete-card--style-glass .csk-athlete-card__ranking {
-  border-top-color: var(--glass-dark-border);
-}
-
-[data-theme='dark'] .csk-athlete-card--clickable.csk-athlete-card--style-glass:hover {
-  background: var(--glass-subtle-bg);
-}
-
 [data-theme='dark'] .csk-athlete-card--featured {
   background: var(--gradient-surface);
 }
 
 [data-theme='dark'] .csk-athlete-card--clickable:hover .csk-athlete-card__name {
   color: var(--color-primary-400);
-}
-
-[data-theme='dark'] .csk-athlete-card--style-gradient.csk-athlete-card--clickable:hover .csk-athlete-card__name,
-[data-theme='dark'] .csk-athlete-card--style-hero.csk-athlete-card--clickable:hover .csk-athlete-card__name {
-  color: var(--color-text-inverse);
 }
 
 /* ==========================================================================
@@ -816,10 +605,6 @@
   .csk-athlete-card--featured .csk-athlete-card__avatar {
     width: 80px;
     height: 80px;
-  }
-
-  .csk-athlete-card--style-hero {
-    min-height: 160px;
   }
 }
 

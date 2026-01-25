@@ -5,7 +5,7 @@ export type AthleteCardVariant = 'default' | 'compact' | 'featured';
 export type AthleteCardSize = 'sm' | 'md' | 'lg';
 export type AthleteSection = 'dv' | 'ry' | 'vt';
 export type AthleteVtClass = 'm' | 'a' | 'b' | 'c';
-export type AthleteCardStyleVariant = 'default' | 'gradient' | 'glass' | 'hero';
+export type AthleteCardStyleVariant = 'default' | 'aesthetic';
 
 export interface AthleteCardProps extends HTMLAttributes<HTMLDivElement> {
   /** Athlete's full name */
@@ -36,8 +36,6 @@ export interface AthleteCardProps extends HTMLAttributes<HTMLDivElement> {
   size?: AthleteCardSize;
   /** Style variant for visual appearance */
   styleVariant?: AthleteCardStyleVariant;
-  /** Background image URL for hero variant */
-  backgroundUrl?: string;
   /** Makes the card clickable */
   clickable?: boolean;
   /** Link URL (makes card an anchor) */
@@ -141,7 +139,6 @@ export const AthleteCard = forwardRef<HTMLDivElement, AthleteCardProps>(
       variant = 'default',
       size = 'md',
       styleVariant = 'default',
-      backgroundUrl,
       clickable = false,
       href,
       target,
@@ -157,7 +154,6 @@ export const AthleteCard = forwardRef<HTMLDivElement, AthleteCardProps>(
   ) => {
     const isLink = Boolean(href);
     const isClickable = clickable || isLink || Boolean(onClick);
-    const isHero = styleVariant === 'hero';
 
     const classes = [
       'csk-athlete-card',
@@ -171,10 +167,7 @@ export const AthleteCard = forwardRef<HTMLDivElement, AthleteCardProps>(
       .filter(Boolean)
       .join(' ');
 
-    const cardStyle = {
-      ...style,
-      ...(isHero && backgroundUrl ? { '--athlete-card-bg-image': `url(${backgroundUrl})` } as React.CSSProperties : {}),
-    };
+    const cardStyle = style;
 
     const interactiveProps =
       isClickable && !isLink
@@ -295,7 +288,6 @@ export const AthleteCard = forwardRef<HTMLDivElement, AthleteCardProps>(
           onClick={onClick as unknown as React.MouseEventHandler<HTMLAnchorElement>}
           style={cardStyle}
         >
-          {isHero && <div className="csk-athlete-card__hero-overlay" />}
           {content}
         </a>
       );
@@ -310,7 +302,6 @@ export const AthleteCard = forwardRef<HTMLDivElement, AthleteCardProps>(
         {...interactiveProps}
         {...props}
       >
-        {isHero && <div className="csk-athlete-card__hero-overlay" />}
         {content}
       </div>
     );

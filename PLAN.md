@@ -85,8 +85,8 @@
 | **Avatar** | + glow, borderAccent | size/variant/color/status | glow, borderAccent |
 
 **Úkoly:**
-- [ ] AthleteCard: Sloučit `gradient`/`glass`/`hero` do `aesthetic`, odstranit ostatní
-- [ ] Avatar: Odstranit `glow`, `borderAccent` props
+- [x] AthleteCard: Sloučit `gradient`/`glass`/`hero` do `aesthetic`, odstranit ostatní
+- [x] Avatar: Odstranit `glow`, `borderAccent` props
 
 ---
 
