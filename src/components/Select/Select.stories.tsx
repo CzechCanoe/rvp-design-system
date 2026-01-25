@@ -266,38 +266,6 @@ export const FilterForm: Story = {
    AESTHETIC ENHANCEMENTS
    ========================================================================== */
 
-export const EnergyFocus: Story = {
-  name: 'Aesthetic: Energy Focus',
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '280px' }}>
-      <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Primary Focus (default)</h4>
-        <Select
-          options={disciplineOptions}
-          label="Disciplína"
-          placeholder="Vyberte disciplínu..."
-        />
-      </div>
-      <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Energy Focus (coral-orange)</h4>
-        <Select
-          options={disciplineOptions}
-          label="Disciplína"
-          placeholder="Vyberte disciplínu..."
-          energyFocus
-        />
-      </div>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Energy focus ring uses vibrant coral-orange glow instead of primary blue. Perfect for CTAs and forms that need to stand out.',
-      },
-    },
-  },
-};
-
 export const DisplayLabel: Story = {
   name: 'Aesthetic: Display Label',
   render: () => (
@@ -350,7 +318,6 @@ export const AestheticForm: Story = {
           label="Disciplína"
           placeholder="Vyberte disciplínu..."
           displayLabel
-          energyFocus
           size="lg"
         />
         <Select
@@ -358,7 +325,6 @@ export const AestheticForm: Story = {
           label="Kategorie"
           placeholder="Vyberte kategorii..."
           displayLabel
-          energyFocus
           size="lg"
         />
         <Select
@@ -367,7 +333,6 @@ export const AestheticForm: Story = {
           placeholder="Vyberte zemi..."
           iconLeft={<GlobeIcon />}
           displayLabel
-          energyFocus
           size="lg"
         />
       </div>
@@ -377,7 +342,7 @@ export const AestheticForm: Story = {
     layout: 'centered',
     docs: {
       description: {
-        story: 'Hero registration form combining display labels, energy focus, and large size for maximum visual impact.',
+        story: 'Hero registration form combining display labels and large size for visual impact.',
       },
     },
   },

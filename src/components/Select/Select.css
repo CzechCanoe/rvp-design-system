@@ -47,10 +47,6 @@
   color: var(--color-primary-600);
 }
 
-.csk-select-wrapper:has(.csk-select-container--energy):focus-within .csk-select-label {
-  color: var(--color-energy-600);
-}
-
 .csk-select-wrapper:has(.csk-select-container--error) .csk-select-label {
   color: var(--color-error-600);
 }
@@ -125,15 +121,6 @@
   background-color: var(--color-bg-primary);
 }
 
-/* Energy focus - vibrant coral-orange glow */
-.csk-select-container--energy .csk-select:focus {
-  border-color: var(--color-energy-500);
-  box-shadow: var(--shadow-inner),
-              0 0 0 3px rgba(249, 115, 22, 0.15),
-              0 0 0 1px rgba(249, 115, 22, 0.3),
-              0 0 12px rgba(249, 115, 22, 0.2);
-}
-
 .csk-select-container--error .csk-select:focus {
   border-color: var(--color-error-500);
   box-shadow: var(--shadow-inner),
@@ -158,12 +145,6 @@
   border-color: var(--color-primary-300);
   box-shadow: var(--shadow-inner),
               0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.csk-select-container--energy .csk-select:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-energy-300);
-  box-shadow: var(--shadow-inner),
-              0 1px 3px rgba(249, 115, 22, 0.1);
 }
 
 .csk-select-container--error .csk-select:hover:not(:disabled):not(:focus) {
@@ -264,10 +245,6 @@
 .csk-select:focus + .csk-select-chevron {
   color: var(--color-primary-500);
   transform: translateY(1px);
-}
-
-.csk-select-container--energy .csk-select:focus + .csk-select-chevron {
-  color: var(--color-energy-500);
 }
 
 /* Chevron hover state */
@@ -393,14 +370,6 @@
   box-shadow: var(--shadow-inner),
               0 0 0 3px rgba(77, 163, 204, 0.2),
               0 0 0 1px rgba(77, 163, 204, 0.4);
-}
-
-[data-theme="dark"] .csk-select-container--energy .csk-select:focus {
-  border-color: var(--color-energy-400);
-  box-shadow: var(--shadow-inner),
-              0 0 0 3px rgba(251, 146, 60, 0.2),
-              0 0 0 1px rgba(251, 146, 60, 0.4),
-              0 0 12px rgba(251, 146, 60, 0.25);
 }
 
 [data-theme="dark"] .csk-select-container--error .csk-select {

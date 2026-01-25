@@ -43,8 +43,6 @@ export interface SearchInputProps
   activeChips?: string[];
   /** Callback when chip is toggled */
   onChipToggle?: (chipId: string, active: boolean) => void;
-  /** Use energy (coral-orange) focus ring */
-  energyFocus?: boolean;
   /** Show loading indicator */
   loading?: boolean;
   /** Debounce delay for onChange in ms (0 to disable) */
@@ -118,7 +116,6 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       chips = [],
       activeChips = [],
       onChipToggle,
-      energyFocus = false,
       loading = false,
       debounceMs = 300,
       icon,
@@ -227,7 +224,6 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       'csk-search-input',
       `csk-search-input--${size}`,
       fullWidth && 'csk-search-input--full-width',
-      energyFocus && 'csk-search-input--energy',
       loading && 'csk-search-input--loading',
       disabled && 'csk-search-input--disabled',
       className,

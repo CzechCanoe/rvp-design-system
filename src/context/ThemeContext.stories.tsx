@@ -221,7 +221,7 @@ function ThemeDemo() {
             <Button variant="primary" size="sm">Small</Button>
             <Button variant="primary" size="md">Medium</Button>
             <Button variant="primary" size="lg">Large</Button>
-            <Button variant="gradient">Gradient</Button>
+            <Button variant="ghost">Ghost</Button>
             <Button variant="secondary">Secondary</Button>
           </div>
         </div>
@@ -334,7 +334,7 @@ export const ExpressiveMode: Story = {
           results pages, and marketing content.
         </p>
         <div style={{ display: 'flex', gap: 'var(--spacing-4)' }}>
-          <Button size="lg" variant="gradient">Get Started</Button>
+          <Button size="lg" variant="primary">Get Started</Button>
           <Button size="lg" variant="secondary">Learn More</Button>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--spacing-6)' }}>
@@ -445,7 +445,7 @@ export const SideBySideComparison: Story = {
               Dramatic presentation for public-facing pages.
             </p>
             <div style={{ display: 'flex', gap: 'var(--spacing-4)' }}>
-              <Button size="lg" variant="gradient">Follow</Button>
+              <Button size="lg" variant="primary">Follow</Button>
               <Button size="lg" variant="secondary">Message</Button>
             </div>
             <div style={{ display: 'flex', gap: 'var(--spacing-3)' }}>
@@ -503,7 +503,7 @@ export const DarkModeVariants: Story = {
               Immersive dark experience for live event viewing.
             </p>
             <div style={{ display: 'flex', gap: 'var(--spacing-4)' }}>
-              <Button size="lg" variant="gradient">Watch Live</Button>
+              <Button size="lg" variant="primary">Watch Live</Button>
               <Button size="lg" variant="secondary">Results</Button>
             </div>
           </div>

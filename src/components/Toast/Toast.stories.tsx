@@ -68,7 +68,7 @@ const ToastDemo = () => {
         Info Toast
       </Button>
       <Button
-        variant="gradient-energy"
+        variant="primary"
         onClick={() => energy('Závodník právě startuje!', { title: 'Live' })}
       >
         Energy Toast
@@ -286,7 +286,7 @@ const EnergyDemo = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '300px' }}>
       <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 600 }}>Energy Variant (Dynamic Sport)</h4>
       <Button
-        variant="gradient-energy"
+        variant="primary"
         onClick={() =>
           energy('Jan Novák právě startuje na trati!', {
             title: 'LIVE',
@@ -373,16 +373,15 @@ const DisplayTitleDemo = () => {
         Info with Display Title
       </Button>
       <Button
-        variant="gradient-energy"
+        variant="primary"
         onClick={() =>
           energy('Závodník je na trati, sledujte živě!', {
             title: 'ŽIVĚ',
             displayTitle: true,
-            styleVariant: 'gradient',
           })
         }
       >
-        Energy Gradient + Display Title
+        Energy + Display Title
       </Button>
     </div>
   );

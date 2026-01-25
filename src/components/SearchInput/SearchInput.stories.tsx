@@ -40,10 +40,6 @@ SearchInput component combines a search field with optional filter chips for qui
       control: 'boolean',
       description: 'Full width input',
     },
-    energyFocus: {
-      control: 'boolean',
-      description: 'Use energy (coral-orange) focus ring',
-    },
     loading: {
       control: 'boolean',
       description: 'Show loading indicator',
@@ -65,7 +61,6 @@ SearchInput component combines a search field with optional filter chips for qui
     placeholder: 'Hledat závody, závodníky...',
     size: 'md',
     fullWidth: false,
-    energyFocus: false,
     loading: false,
     disabled: false,
     debounceMs: 300,
@@ -131,20 +126,6 @@ export const Disabled: Story = {
   args: {
     disabled: true,
     value: 'Disabled search',
-  },
-};
-
-export const EnergyFocus: Story = {
-  args: {
-    energyFocus: true,
-    placeholder: 'Klikni pro energy focus efekt...',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Dynamic Sport aesthetic with coral-orange energy focus ring.',
-      },
-    },
   },
 };
 
@@ -307,7 +288,6 @@ export const Interactive: Story = {
           resultsCount={results}
           helperText="Stiskni Enter pro okamžité vyhledání"
           fullWidth
-          energyFocus
         />
       </div>
     );
@@ -354,7 +334,6 @@ export const CalendarSearch: Story = {
           onChipToggle={handleChipToggle}
           size="lg"
           fullWidth
-          energyFocus
         />
       </div>
     );
@@ -447,7 +426,6 @@ export const DarkMode: Story = {
           onChipToggle={handleChipToggle}
           resultsCount={24}
           fullWidth
-          energyFocus
         />
       </div>
     );
@@ -456,7 +434,7 @@ export const DarkMode: Story = {
     backgrounds: { default: 'dark' },
     docs: {
       description: {
-        story: 'SearchInput in dark mode with energy focus.',
+        story: 'SearchInput in dark mode.',
       },
     },
   },

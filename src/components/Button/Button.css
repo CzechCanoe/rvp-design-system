@@ -149,60 +149,6 @@
 }
 
 /* ==========================================================================
-   GRADIENT VARIANTS - New expressive styles
-   ========================================================================== */
-
-/* Gradient Primary - main CTA with gradient background */
-.csk-button--gradient {
-  background: var(--gradient-primary);
-  border-color: transparent;
-  color: var(--color-text-inverse);
-  box-shadow: var(--shadow-primary-sm);
-}
-
-.csk-button--gradient:hover:not(:disabled):not([aria-disabled='true']) {
-  background: var(--gradient-primary-hover);
-  box-shadow: var(--shadow-primary-md);
-  transform: translateY(-2px);
-}
-
-.csk-button--gradient:active:not(:disabled):not([aria-disabled='true']) {
-  background: var(--gradient-primary-active);
-  box-shadow: var(--shadow-primary-sm);
-  transform: translateY(0);
-}
-
-/* Gradient Energy - high-energy CTA with vibrant coral-orange */
-.csk-button--gradient-energy {
-  background: var(--gradient-energy);
-  border-color: transparent;
-  color: white;
-  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
-  font-weight: var(--font-weight-semibold);
-  font-family: var(--font-family-display, var(--font-family-sans));
-}
-
-.csk-button--gradient-energy:hover:not(:disabled):not([aria-disabled='true']) {
-  background: var(--gradient-cta-hover);
-  box-shadow: var(--glow-energy-md);
-  transform: translateY(-2px);
-}
-
-.csk-button--gradient-energy:active:not(:disabled):not([aria-disabled='true']) {
-  background: var(--gradient-energy);
-  box-shadow: var(--glow-energy-sm);
-  transform: translateY(0);
-}
-
-.csk-button--gradient-energy:focus-visible {
-  outline-color: var(--color-energy-500);
-}
-
-.csk-button--loading.csk-button--gradient-energy .csk-button__spinner {
-  color: white;
-}
-
-/* ==========================================================================
    SIZES
    ========================================================================== */
 
@@ -235,19 +181,6 @@
   width: 100%;
 }
 
-/* Glow effect on hover - for high-energy CTAs */
-.csk-button--glow:hover:not(:disabled):not([aria-disabled='true']) {
-  box-shadow: var(--glow-energy-md);
-}
-
-.csk-button--glow.csk-button--primary:hover:not(:disabled):not([aria-disabled='true']) {
-  box-shadow: var(--shadow-primary-md), var(--glow-energy-sm);
-}
-
-.csk-button--glow.csk-button--gradient:hover:not(:disabled):not([aria-disabled='true']) {
-  box-shadow: var(--shadow-primary-md), var(--glow-energy-md);
-}
-
 /* Loading state */
 .csk-button--loading {
   position: relative;
@@ -273,8 +206,7 @@
 
 /* Restore text color for spinner */
 .csk-button--loading.csk-button--primary .csk-button__spinner,
-.csk-button--loading.csk-button--danger .csk-button__spinner,
-.csk-button--loading.csk-button--gradient .csk-button__spinner {
+.csk-button--loading.csk-button--danger .csk-button__spinner {
   color: var(--color-text-inverse);
 }
 

@@ -46,10 +46,6 @@
   color: var(--color-primary-600);
 }
 
-.csk-input-wrapper:has(.csk-input-container--energy):focus-within .csk-input-label {
-  color: var(--color-energy-600);
-}
-
 .csk-input-wrapper:has(.csk-input-container--error) .csk-input-label {
   color: var(--color-error-600);
 }
@@ -119,15 +115,6 @@
   background-color: var(--color-bg-primary);
 }
 
-/* Energy focus - vibrant coral-orange glow */
-.csk-input-container--energy .csk-input:focus {
-  border-color: var(--color-energy-500);
-  box-shadow: var(--shadow-inner),
-              0 0 0 3px rgba(249, 115, 22, 0.15),
-              0 0 0 1px rgba(249, 115, 22, 0.3),
-              0 0 12px rgba(249, 115, 22, 0.2);
-}
-
 .csk-input:focus::placeholder {
   color: var(--color-text-muted);
   opacity: 0.7;
@@ -157,12 +144,6 @@
   border-color: var(--color-primary-300);
   box-shadow: var(--shadow-inner),
               0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.csk-input-container--energy .csk-input:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-energy-300);
-  box-shadow: var(--shadow-inner),
-              0 1px 3px rgba(249, 115, 22, 0.1);
 }
 
 .csk-input-container--error .csk-input:hover:not(:disabled):not(:focus) {
@@ -441,14 +422,6 @@
   box-shadow: var(--shadow-inner),
               0 0 0 3px rgba(77, 163, 204, 0.2),
               0 0 0 1px rgba(77, 163, 204, 0.4);
-}
-
-[data-theme="dark"] .csk-input-container--energy .csk-input:focus {
-  border-color: var(--color-energy-400);
-  box-shadow: var(--shadow-inner),
-              0 0 0 3px rgba(251, 146, 60, 0.2),
-              0 0 0 1px rgba(251, 146, 60, 0.4),
-              0 0 12px rgba(251, 146, 60, 0.25);
 }
 
 [data-theme="dark"] .csk-input-container--error .csk-input {

@@ -1,7 +1,7 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import './Button.css';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'gradient' | 'gradient-energy';
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -17,8 +17,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconRight?: ReactNode;
   /** Loading state */
   loading?: boolean;
-  /** Add energy glow effect on hover */
-  glow?: boolean;
   /** Children content */
   children?: ReactNode;
 }
@@ -38,7 +36,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       iconLeft,
       iconRight,
       loading = false,
-      glow = false,
       disabled,
       className,
       children,
@@ -54,7 +51,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       `csk-button--${size}`,
       fullWidth && 'csk-button--full-width',
       loading && 'csk-button--loading',
-      glow && 'csk-button--glow',
       className,
     ]
       .filter(Boolean)

@@ -33,10 +33,10 @@
 | **SearchInput** | + energyFocus, chips | default + chips | energyFocus |
 
 **Úkoly:**
-- [ ] Button: Odstranit `gradient`, `gradient-energy` varianty (CSS + stories + type)
-- [ ] Input: Odstranit `energyFocus` prop a CSS
-- [ ] Select: Odstranit `energyFocus` prop a CSS
-- [ ] SearchInput: Odstranit `energyFocus` prop a CSS
+- [x] Button: Odstranit `gradient`, `gradient-energy` varianty (CSS + stories + type)
+- [x] Input: Odstranit `energyFocus` prop a CSS
+- [x] Select: Odstranit `energyFocus` prop a CSS
+- [x] SearchInput: Odstranit `energyFocus` prop a CSS
 
 #### 17.1.2 Karty a kontejnery
 
@@ -216,8 +216,14 @@
 - [x] Floating content slot pro stats bar
 - [x] Breadcrumbs (hidden in embed mode)
 
-### Iterace 4-6: Cleanup komponent (Button → Toast)
-- Podle 17.1.1 - 17.1.5 odstraňovat experimentální varianty
+### Iterace 4: Cleanup - Tlačítka a vstupy ✅
+- [x] Button: Odstranit `gradient`, `gradient-energy` varianty, `glow` prop
+- [x] Input: Odstranit `energyFocus` prop a CSS
+- [x] Select: Odstranit `energyFocus` prop a CSS
+- [x] SearchInput: Odstranit `energyFocus` prop a CSS
+
+### Iterace 5-6: Cleanup komponent (Cards → Toast)
+- Podle 17.1.2 - 17.1.5 odstraňovat experimentální varianty
 
 ### Iterace 7-12: Refactor prototypů
 - Podle 17.3 postupně přepisovat prototypy na komponenty

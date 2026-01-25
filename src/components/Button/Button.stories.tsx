@@ -11,7 +11,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'ghost', 'danger', 'gradient', 'gradient-energy'],
+      options: ['primary', 'secondary', 'ghost', 'danger'],
       description: 'Visual variant of the button',
     },
     size: {
@@ -30,10 +30,6 @@ const meta: Meta<typeof Button> = {
     disabled: {
       control: 'boolean',
       description: 'Disables the button',
-    },
-    glow: {
-      control: 'boolean',
-      description: 'Adds energy glow effect on hover',
     },
     children: {
       control: 'text',
@@ -67,14 +63,12 @@ export const Variants: Story = {
       <Button variant="secondary">Secondary</Button>
       <Button variant="ghost">Ghost</Button>
       <Button variant="danger">Danger</Button>
-      <Button variant="gradient">Gradient</Button>
-      <Button variant="gradient-energy">Energy</Button>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'All available button variants. Energy variant uses the vibrant coral-orange accent for CTAs.',
+        story: 'All available button variants: primary for main CTAs, secondary for alternative actions, ghost for minimal emphasis, danger for destructive actions.',
       },
     },
   },
@@ -114,8 +108,6 @@ export const States: Story = {
         <Button variant="secondary">Secondary</Button>
         <Button variant="ghost">Ghost</Button>
         <Button variant="danger">Danger</Button>
-        <Button variant="gradient">Gradient</Button>
-        <Button variant="gradient-energy">Energy</Button>
       </div>
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
         <span style={{ width: '80px', fontSize: '12px', color: '#666' }}>Disabled:</span>
@@ -123,8 +115,6 @@ export const States: Story = {
         <Button variant="secondary" disabled>Secondary</Button>
         <Button variant="ghost" disabled>Ghost</Button>
         <Button variant="danger" disabled>Danger</Button>
-        <Button variant="gradient" disabled>Gradient</Button>
-        <Button variant="gradient-energy" disabled>Energy</Button>
       </div>
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
         <span style={{ width: '80px', fontSize: '12px', color: '#666' }}>Loading:</span>
@@ -132,8 +122,6 @@ export const States: Story = {
         <Button variant="secondary" loading>Secondary</Button>
         <Button variant="ghost" loading>Ghost</Button>
         <Button variant="danger" loading>Danger</Button>
-        <Button variant="gradient" loading>Gradient</Button>
-        <Button variant="gradient-energy" loading>Energy</Button>
       </div>
     </div>
   ),
@@ -178,8 +166,7 @@ export const WithIcons: Story = {
       </div>
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
         <Button variant="danger" iconLeft={<TrashIcon />}>Delete</Button>
-        <Button variant="gradient" iconRight={<ArrowRightIcon />}>Get Started</Button>
-        <Button variant="gradient-energy" iconLeft={<PlusIcon />}>Launch</Button>
+        <Button variant="secondary" iconRight={<ArrowRightIcon />}>Get Started</Button>
       </div>
     </div>
   ),
@@ -207,42 +194,21 @@ export const FullWidth: Story = {
 };
 
 /* ==========================================================================
-   GLOW EFFECT
+   LARGE CTA BUTTONS
    ========================================================================== */
 
-export const GlowEffect: Story = {
-  render: () => (
-    <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
-      <Button glow>Primary with Glow</Button>
-      <Button variant="gradient" glow>Gradient with Glow</Button>
-      <Button variant="gradient-energy" glow>Energy with Glow</Button>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'The `glow` prop adds an energy glow effect on hover. Works with any variant, most impactful on gradient buttons.',
-      },
-    },
-  },
-};
-
-/* ==========================================================================
-   AESTHETIC SHOWCASE - Large CTAs
-   ========================================================================== */
-
-export const AestheticCTA: Story = {
+export const LargeCTA: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
-        <Button variant="gradient-energy" size="lg" glow>
+        <Button variant="primary" size="lg">
           Sledovat live
         </Button>
-        <Button variant="gradient" size="lg" glow>
+        <Button variant="secondary" size="lg">
           Registrovat závod
         </Button>
-        <Button variant="primary" size="lg">
-          Zobrazit výsledky
+        <Button variant="danger" size="lg">
+          Zrušit registraci
         </Button>
       </div>
       <div style={{ fontSize: '12px', color: '#666' }}>
@@ -253,7 +219,7 @@ export const AestheticCTA: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Recommended combination for hero CTAs: large size + gradient-energy/gradient variant + glow effect.',
+        story: 'Large buttons for hero CTAs and prominent actions.',
       },
     },
   },

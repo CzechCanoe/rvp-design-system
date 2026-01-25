@@ -1060,7 +1060,7 @@ export const DisplayFontShowcase: Story = {
             </a>
           }
           actions={
-            <Button variant="gradient-energy" size="sm" glow>Sledovat live</Button>
+            <Button variant="primary" size="sm">Sledovat live</Button>
           }
           userMenu={
             <button

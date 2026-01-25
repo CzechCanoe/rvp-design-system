@@ -28,8 +28,6 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   clearable?: boolean;
   /** Callback when clear button is clicked */
   onClear?: () => void;
-  /** Use energy (coral-orange) focus ring instead of primary */
-  energyFocus?: boolean;
   /** Use display font for label (aesthetic emphasis) */
   displayLabel?: boolean;
 }
@@ -54,7 +52,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       iconRight,
       clearable = false,
       onClear,
-      energyFocus = false,
       displayLabel = false,
       disabled,
       className,
@@ -96,7 +93,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       disabled && 'csk-input-container--disabled',
       iconLeft && 'csk-input-container--has-icon-left',
       (iconRight || showClearButton) && 'csk-input-container--has-icon-right',
-      energyFocus && 'csk-input-container--energy',
     ]
       .filter(Boolean)
       .join(' ');

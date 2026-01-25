@@ -439,7 +439,7 @@ export const AestheticLiveEvent: Story = {
             <Button variant="secondary" size="sm" fullWidth>
               Výsledky
             </Button>
-            <Button variant="gradient-energy" size="sm" fullWidth glow>
+            <Button variant="primary" size="sm" fullWidth>
               Sledovat live
             </Button>
           </div>

@@ -641,7 +641,7 @@ const EventDetailPage = ({
             {/* Status-specific CTA */}
             {status === 'registration' && showCta && (
               <div className={`event-detail-hero__cta ${isEmbed ? 'event-detail-hero__cta--compact' : ''}`}>
-                <Button variant={isAesthetic ? 'gradient-energy' : 'gradient'} size={isEmbed ? 'md' : 'lg'} glow={isAesthetic}>
+                <Button variant="primary" size={isEmbed ? 'md' : 'lg'}>
                   Přihlásit se na závod
                 </Button>
                 <span className="event-detail-hero__deadline">
@@ -653,7 +653,7 @@ const EventDetailPage = ({
 
             {status === 'live' && showCta && (
               <div className={`event-detail-hero__cta ${isEmbed ? 'event-detail-hero__cta--compact' : ''}`}>
-                <Button variant={isAesthetic ? 'gradient-energy' : 'gradient'} size={isEmbed ? 'md' : 'lg'} glow={isAesthetic}>
+                <Button variant="primary" size={isEmbed ? 'md' : 'lg'}>
                   Sledovat LIVE výsledky
                 </Button>
               </div>
