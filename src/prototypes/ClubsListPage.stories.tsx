@@ -568,8 +568,30 @@ const meta = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component:
-          'Prototyp stránky seznamu klubů CSK s Aesthetic designem. Zobrazuje registrované kluby a oddíly s vyhledáváním, filtrováním podle sekcí a krajů. Varianty: Embed (pro kanoe.cz), Satellite (standalone).',
+        component: `
+# Seznam klubů - AESTHETIC Design
+
+Prototyp stránky seznamu klubů CSK s plným Aesthetic designem.
+
+## Vizuální prvky (Phase 16.5)
+
+- **Hero sekce** - Mesh gradient pozadí, display fonty, diagonální stripe
+- **Stat karty** - Animované hover efekty, energy accent border (různé barvy)
+- **Karty klubů** - Gradient logo pozadí, hover lift efekty, accent border
+- **Filtrování** - Aesthetic pill tabs, gradient tagy
+- **Empty state** - Dashed border, kulaté ikony
+
+## Varianty
+
+| Varianta | Popis |
+|----------|-------|
+| **Embed** | Pro vložení do kanoe.cz (bez headeru/footeru) |
+| **Satellite** | Standalone s minimálním headerem |
+
+## Props
+
+- \`initialSection\` - přednastavená sekce (all, dv, ry, vt)
+        `,
       },
     },
   },
@@ -601,6 +623,13 @@ type Story = StoryObj<typeof meta>;
  * Komponenta bez vlastního headeru a footeru, určená pro embedding
  * do existujícího webu kanoe.cz (Joomla + Bootstrap 4).
  *
+ * **Aesthetic prvky:**
+ * - Display fonty pro nadpisy
+ * - Stat karty s hover efekty a energy accent
+ * - Karty klubů s gradient logo pozadím
+ * - Pill-style filtrační tagy
+ * - Hover lift efekty pro karty
+ *
  * **Features dostupné přes props:**
  * - `initialSection` - přednastavenou sekci (dv, ry, vt)
  */
@@ -628,7 +657,7 @@ export const Embed: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Aesthetic embed seznamu klubů v kontextu kanoe.cz. Filtrování podle sekcí a krajů.',
+        story: 'Aesthetic embed seznamu klubů v kontextu kanoe.cz. Obsahuje display fonty, stat karty s hover efekty a gradient logo pozadí pro karty klubů.',
       },
     },
   },
@@ -639,6 +668,13 @@ export const Embed: Story = {
  *
  * Samostatná aplikace registru klubů s odkazem zpět na kanoe.cz.
  * Plný Aesthetic design s filtrováním podle sekcí a krajů.
+ *
+ * **Aesthetic prvky:**
+ * - Hero sekce s mesh gradient pozadím a diagonálním stripe
+ * - Display fonty pro velké nadpisy
+ * - Stat karty s energy accent a hover efekty (různé barvy)
+ * - Karty klubů s gradient logo pozadím a hover lift
+ * - Pill-style filtrační tagy
  *
  * **Features dostupné přes props:**
  * - `initialSection` - přednastavenou sekci (dv, ry, vt)
@@ -651,7 +687,7 @@ export const Satellite: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Aesthetic standalone seznamu klubů se satellite headerem. Filtrování podle sekcí a krajů.',
+        story: 'Aesthetic standalone seznamu klubů se satellite headerem. Obsahuje plný hero s mesh pozadím, stat karty s energy accenty a karty klubů s hover efekty.',
       },
     },
   },

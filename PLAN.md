@@ -141,9 +141,12 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
   - Featured sekce se staggered reveal animacemi
   - Filtry stylované jako pills/chips s primary gradient
   - Grid karet s hover lift efekty
-- [ ] ClubsListPage - přepracovat na Aesthetic
-  - Podobný přístup jako AthletesListPage
-  - Karty klubů s logem, počtem členů, sekcí
+- [x] ClubsListPage - přepracovat na Aesthetic ✅
+  - Hero sekce s mesh gradient, diagonal stripe, grain texture
+  - Stats bar s různými energy accent barvami a hover efekty
+  - Karty klubů s gradient logo pozadím, hover lift, accent border
+  - Filtry stylované jako aesthetic pills s primary gradient
+  - Empty state s aesthetic stylem (dashed border, kulatá ikona)
 - [ ] RankingsPage - přepracovat na Aesthetic
   - Tabulky s aesthetic stylingem (zebra, hover efekty)
   - Top 3 vizuálně odlišené (podium styl)
@@ -265,7 +268,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.5 Polish a opravy** - Priorita 2: Aesthetic styl pro seznamy - ClubsListPage (AthletesListPage ✅ hotovo).
+Pokračovat s **16.5 Polish a opravy** - Priorita 2: Aesthetic styl pro seznamy - RankingsPage (AthletesListPage ✅, ClubsListPage ✅ hotovo).
 
 ---
 

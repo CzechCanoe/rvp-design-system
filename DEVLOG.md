@@ -5288,3 +5288,27 @@ přepracovanými prototypy. Další na řadě: RankingsPage (5 → 2 varianty).
 ### Poznámky
 - Build i Storybook build prošly bez chyb
 - Další: ClubsListPage, RankingsPage
+
+---
+
+## 2026-01-25 - Fáze 16.5: ClubsListPage Aesthetic
+
+### Dokončeno
+- [x] Přepracování ClubsListPage na plný Aesthetic styl
+  - Hero sekce s mesh gradient pozadím, diagonal stripe, grain texture
+  - Stats bar s různými energy accent barvami pro každou statistiku a hover efekty
+  - Karty klubů s gradient logo pozadím, hover lift efekty, accent border na hover
+  - Aesthetic filter pills s primary gradient
+  - Section tabs s aesthetic stylem
+  - Empty state s dashed border a kulatou ikonou
+  - Dark mode podpora
+  - Reduced motion respektování
+
+### Změny
+- `ClubsListPage.css`: Kompletně přepsáno na Aesthetic styl (cca 800 řádků)
+- `ClubsListPage.stories.tsx`: Aktualizovaná dokumentace s popisem Aesthetic prvků
+
+### Poznámky
+- Použit stejný přístup jako u AthletesListPage
+- Hlavní rozdíly: ClubsListPage nemá "featured" sekci, místo toho má karty klubů s logem
+- Stats bar má 4 různé accent barvy (energy, success, info, warning)
