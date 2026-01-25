@@ -274,6 +274,14 @@
 - [x] Přidat csk-reveal animace pro podium karty
 - [x] Build validace OK
 
+### Iterace 20: CSS redukce CalendarPage ✅
+- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
+- [x] Přepsat CSS na layout-only (922 → 347 řádků, 62% redukce)
+- [x] Aktualizovat TSX pro použití utility tříd (csk-display, csk-reveal, csk-border-*, csk-interactive)
+- [x] View switcher: csk-surface-elevated, csk-rounded, csk-shadow-sm
+- [x] Detail card: Card variant="aesthetic" s csk-border-accent
+- [x] Build validace OK
+
 ---
 
 ## Metriky úspěchu
@@ -281,7 +289,7 @@
 | Metrika | Před | Aktuální | Cíl |
 |---------|------|----------|-----|
 | Component CSS | ~7,800 řádků | 16,046 řádků* | ~10,000 řádků |
-| Prototype CSS | ~4,500 řádků | 13,167 řádků | ~600 řádků |
+| Prototype CSS | ~4,500 řádků | 12,592 řádků | ~600 řádků |
 | Inline styles | 28 | **0** ✅ | 0 |
 | Custom icons | 80+ | **0** ✅ | 0 (vše přes Icon) |
 

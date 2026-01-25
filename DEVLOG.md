@@ -6086,3 +6086,21 @@ CSS cleanup komponent je dokončen. Zbývá refaktoring CSS prototypů na čist�
 ### Poznámky
 - Celkové Prototype CSS: 13,167 řádků (z 13,822)
 - Další kandidáti: CalendarPage (922), ClubPublicProfile (1,012)
+
+---
+
+## 2026-01-25 - Iterace 20: CSS redukce CalendarPage
+
+### Dokončeno
+- [x] CSS redukce z 922 na 347 řádků (62% redukce)
+- [x] Přesun vizuálních stylů do utility tříd v TSX
+- [x] View switcher: csk-surface-elevated, csk-rounded, csk-interactive
+- [x] Detail card: Card variant="aesthetic" s csk-border-accent
+- [x] Reveal animace pro aesthetic mode (csk-reveal, csk-reveal-2, csk-reveal-3)
+- [x] Build validace OK
+
+### Poznámky
+- CalendarPage měl jednodušší strukturu než předchozí prototypy (bez hero sekce s mesh background)
+- Většina vizuálních stylů byla již v komponentách (Calendar, Card, Tabs)
+- Odstraněno 575 řádků CSS celkem (13167 → 12592)
+- Další na řadě: ClubPublicProfile (1012 řádků)
