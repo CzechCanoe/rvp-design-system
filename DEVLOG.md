@@ -5691,3 +5691,21 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 ### Poznámky
 - StatsBar komponenta používá jiný naming convention (`csk-` prefix), proto je potřeba override CSS
 - ClubCard komponenta zůstává jako lokální, protože je specifická pro tento prototyp
+
+---
+
+## 2026-01-25 - Fáze 17.6: AthletesListPage cleanup
+
+### Dokončeno
+- [x] Nahrazení 5 inline SVG ikon za `<Icon />` komponentu
+- [x] Nahrazení custom stats sekce za `<StatsBar variant="cards" />`
+- [x] Odstranění ~70 řádků custom CSS pro stats
+- [x] Odstranění inline style na empty state button
+
+### Změny
+- **AthletesListPage.stories.tsx:** -85 řádků (z ~710 na ~625)
+- **AthletesListPage.css:** -99 řádků (z ~750 na ~650)
+
+### Poznámky
+- StatsBar komponenta s variant="cards" plně nahrazuje custom stat cards
+- Icon komponenta mapuje: search, star, download, close, user-search
