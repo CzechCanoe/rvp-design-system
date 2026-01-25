@@ -22,7 +22,7 @@
 |----------|-------|
 | **Embed** | Aesthetic styl, vložené do kanoe.cz kontextu |
 | **Satellite** | Aesthetic styl, samostatná hlavička |
-| **Expressive** | Aesthetic styl, bez kanoe.cz kontextu (pouze Athlete, Club, Event) |
+| **ExpressiveEmbed** | Aesthetic styl s "wow" efekty, v kanoe.cz kontextu (pouze Athlete, Club, Event) |
 
 Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
@@ -34,21 +34,21 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 - [x] Sloučit Aesthetic do Embed/Satellite
 - [x] Embed - přepracovat na Aesthetic
 - [x] Satellite - přepracovat na Aesthetic
-- [x] Expressive - nová varianta (Aesthetic standalone)
+- [x] ExpressiveEmbed - "wow" varianta v kanoe.cz kontextu
 - [x] Odstranit: DivokaVoda, EmbedWithSidebar
 
 **ClubPublicProfile** (5 → 3) ✅
 - [x] Sloučit Aesthetic do Embed/Satellite
 - [x] Embed - přepracovat na Aesthetic
 - [x] Satellite - přepracovat na Aesthetic
-- [x] Expressive - ponechat, ověřit Aesthetic
+- [x] ExpressiveEmbed - "wow" varianta v kanoe.cz kontextu
 - [x] Odstranit: EmbedWithSidebar
 
 **EventDetailPage** (7 → 3) ✅
 - [x] Sloučit AestheticRegistration/Live/Schedule/Documents do hlavních variant
 - [x] Embed - přepracovat na Aesthetic
 - [x] Satellite - přepracovat na Aesthetic
-- [x] Expressive - nová varianta (Aesthetic bez kanoe.cz)
+- [x] ExpressiveEmbed - "wow" varianta v kanoe.cz kontextu
 - [x] Odstranit: EmbedWithSidebar
 
 ### 16.2 Calendar + Results
@@ -111,9 +111,9 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 | Prototyp | Před | Po | Varianty |
 |----------|------|-----|----------|
-| AthletePublicProfile | 5 | 3 | Embed, Satellite, Expressive |
-| ClubPublicProfile | 5 | 3 | Embed, Satellite, Expressive |
-| EventDetailPage | 7 | 3 | Embed, Satellite, Expressive |
+| AthletePublicProfile | 5 | 3 | Embed, Satellite, ExpressiveEmbed |
+| ClubPublicProfile | 5 | 3 | Embed, Satellite, ExpressiveEmbed |
+| EventDetailPage | 7 | 3 | Embed, Satellite, ExpressiveEmbed |
 | CalendarPage | 9 | 4 | Embed, EmbedListView, Satellite, SatelliteListView |
 | ResultsPage | 4 | 2 | Embed, Satellite |
 | LivePage | 5 | 2 | Embed, Satellite |

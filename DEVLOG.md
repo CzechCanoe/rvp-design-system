@@ -5191,3 +5191,21 @@ přepracovanými prototypy. Další na řadě: RankingsPage (5 → 2 varianty).
 - Všechny sekce (DV, RY, VT) jsou dostupné přes `initialSection` prop
 - Archivní data přes `isArchive` a `initialSeason` props
 - VT třídy (M, A, B, C) se automaticky zobrazí při výběru VT sekce
+
+---
+
+## 2026-01-25 - Fáze 16: Oprava ExpressiveEmbed variant
+
+### Dokončeno
+- [x] Přejmenování Expressive → ExpressiveEmbed
+- [x] Přidání KanoeCzContext wrapperu pro všechny ExpressiveEmbed varianty
+- [x] Aktualizace AthletePublicProfile, ClubPublicProfile, EventDetailPage
+
+### Problém a řešení
+**Problém:** Expressive varianty byly implementovány jako `variant: 'standalone'` bez kanoe.cz kontextu.
+**Řešení:** Přejmenováno na ExpressiveEmbed, změněno na `variant: 'embed'` a zabaleno do KanoeCzContext.
+
+### Poznámky
+- ExpressiveEmbed = "wow" efekty (dramatický hero, animace) + kanoe.cz kontext
+- Embed = standardní Aesthetic v kanoe.cz kontextu
+- Satellite = Aesthetic se standalone headerem
