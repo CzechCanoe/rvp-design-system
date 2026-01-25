@@ -1,81 +1,35 @@
 /* ==========================================================================
-   RankingsPage Prototype Styles - AESTHETIC VERSION
+   RankingsPage Prototype Styles - LAYOUT ONLY
 
-   Phase 16.5: Aesthetic refresh with Dynamic Sport visual identity
-   - Mesh backgrounds and grain textures
-   - Display typography for headlines
-   - Energy accent colors
-   - Top 3 podium with dramatic styling
-   - Table with aesthetic styling and hover effects
-   - Section switcher as styled pill tabs
+   Phase 17.19: CSS reduction to layout-only
+   Visual styles handled by design tokens (aesthetic.css) and components.
+
+   Guidelines:
+   - Only layout properties: display, flex, grid, gap, padding, margin
+   - Only sizing: max-width, width, height, min-width
+   - Only positioning: position, z-index (for stacking)
+   - NO colors, fonts, shadows, borders, animations, effects
    ========================================================================== */
 
+/* Page container - flex column for header/main/footer */
 .prototype-rankings {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--bg-mesh-primary);
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
 }
 
 .prototype-rankings--embed {
   min-height: auto;
-  background: transparent;
 }
 
 /* ==========================================================================
-   Logo
-   ========================================================================== */
-
-.prototype-rankings__logo {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  text-decoration: none;
-  color: inherit;
-}
-
-.prototype-rankings__logo-text {
-  font-size: var(--text-xl-size);
-  font-weight: var(--font-bold);
-  color: var(--color-primary-600);
-}
-
-/* ==========================================================================
-   Page Header - AESTHETIC HERO
+   Page Header Layout
    ========================================================================== */
 
 .rankings-header {
   position: relative;
   padding: var(--spacing-12) 0 var(--spacing-8);
-  background: var(--bg-mesh-hero);
-  background-color: var(--color-bg-primary);
-  border-bottom: none;
   overflow: hidden;
-}
-
-/* Decorative diagonal stripe */
-.rankings-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: -10%;
-  width: 35%;
-  height: 100%;
-  background: var(--gradient-energy-subtle, linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(255, 107, 53, 0.02)));
-  transform: skewX(-12deg);
-  pointer-events: none;
-}
-
-/* Grain texture overlay */
-.rankings-header::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
 }
 
 .rankings-header__container {
@@ -91,18 +45,6 @@
   align-items: center;
   gap: var(--spacing-2);
   margin-bottom: var(--spacing-4);
-  font-size: var(--text-sm-size);
-  color: var(--color-text-tertiary);
-}
-
-.rankings-header__breadcrumb a {
-  color: var(--color-text-secondary);
-  text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-out);
-}
-
-.rankings-header__breadcrumb a:hover {
-  color: var(--color-energy-500, var(--color-primary-600));
 }
 
 .rankings-header__content {
@@ -119,115 +61,18 @@
   }
 }
 
-.rankings-header__title {
-  margin: 0;
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: var(--font-black, 800);
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  color: var(--color-text-primary);
-}
-
 .rankings-header__subtitle {
   margin: var(--spacing-2) 0 0;
-  font-size: var(--text-lg-size);
-  color: var(--color-text-secondary);
   max-width: 500px;
 }
 
-/* ==========================================================================
-   Stats Summary - AESTHETIC STAT CARDS
-   ========================================================================== */
-
+/* Statistics positioning */
 .rankings-stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-4);
   margin-top: var(--spacing-6);
 }
 
-@media (min-width: 640px) {
-  .rankings-stats {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.rankings-stats__item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: var(--spacing-5) var(--spacing-4);
-  background: var(--color-bg-primary);
-  border-radius: var(--radius-lg);
-  text-align: center;
-  border: 1px solid var(--color-border-primary);
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--duration-fast) var(--ease-out),
-              box-shadow var(--duration-fast) var(--ease-out);
-  overflow: hidden;
-}
-
-/* Energy accent border on hover */
-.rankings-stats__item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--gradient-primary, linear-gradient(90deg, var(--color-primary-500), var(--color-primary-400)));
-  opacity: 0;
-  transition: opacity var(--duration-fast) var(--ease-out);
-}
-
-.rankings-stats__item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.rankings-stats__item:hover::before {
-  opacity: 1;
-}
-
-/* Specific accent colors for each stat */
-.rankings-stats__item:nth-child(1)::before {
-  background: var(--gradient-energy, linear-gradient(90deg, var(--color-energy-500, #ff6b35), var(--color-energy-400, #ff8c5a)));
-}
-
-.rankings-stats__item:nth-child(2)::before {
-  background: linear-gradient(90deg, var(--color-success-500), var(--color-success-400));
-}
-
-.rankings-stats__item:nth-child(3)::before {
-  background: linear-gradient(90deg, var(--color-warning-500), var(--color-warning-400));
-}
-
-.rankings-stats__item:nth-child(4)::before {
-  background: linear-gradient(90deg, var(--color-info-500), var(--color-info-400));
-}
-
-.rankings-stats__value {
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-3xl-size, 1.875rem);
-  font-weight: var(--font-black, 800);
-  font-variant-numeric: tabular-nums;
-  color: var(--color-text-primary);
-  letter-spacing: -0.02em;
-}
-
-.rankings-stats__label {
-  font-size: var(--text-sm-size);
-  color: var(--color-text-secondary);
-  margin-top: var(--spacing-1);
-  font-weight: var(--font-medium, 500);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
 /* ==========================================================================
-   Main Content
+   Main Content Layout
    ========================================================================== */
 
 .prototype-rankings__main {
@@ -242,41 +87,22 @@
 }
 
 /* ==========================================================================
-   Section Tabs - AESTHETIC PILL TABS
+   Section Tabs Layout
    ========================================================================== */
 
 .rankings-section-tabs {
   margin-bottom: var(--spacing-6);
   padding: var(--spacing-3);
-  background: var(--color-bg-secondary);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border-primary);
 }
 
 /* ==========================================================================
-   Top Athletes Section - AESTHETIC PODIUM
+   Top Athletes Section Layout
    ========================================================================== */
 
 .rankings-top {
   position: relative;
   margin-bottom: var(--spacing-10);
   padding: var(--spacing-8);
-  background: var(--bg-mesh-card, var(--color-bg-secondary));
-  background-color: var(--color-bg-secondary);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border-primary);
-}
-
-/* Decorative border accent */
-.rankings-top::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--gradient-energy, linear-gradient(90deg, var(--color-energy-500, #ff6b35), var(--color-energy-400, #ff8c5a)));
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 
 .rankings-top__header {
@@ -288,26 +114,14 @@
 
 .rankings-top__title {
   margin: 0;
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-2xl-size);
-  font-weight: var(--font-bold, 700);
-  color: var(--color-text-primary);
   display: flex;
   align-items: center;
   gap: var(--spacing-3);
-  letter-spacing: -0.01em;
-}
-
-.rankings-top__title svg {
-  width: 28px;
-  height: 28px;
-  color: var(--color-warning-500);
-  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.4));
 }
 
 .rankings-top__podium {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--spacing-5);
 }
 
@@ -317,234 +131,8 @@
   }
 }
 
-/* Staggered reveal animation */
-.rankings-top__podium > * {
-  animation: podiumReveal 0.5s ease-out backwards;
-}
-
-.rankings-top__podium > *:nth-child(1) { animation-delay: 100ms; }
-.rankings-top__podium > *:nth-child(2) { animation-delay: 0ms; }
-.rankings-top__podium > *:nth-child(3) { animation-delay: 200ms; }
-
-@keyframes podiumReveal {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .rankings-top__podium > * {
-    animation: none;
-  }
-}
-
 /* ==========================================================================
-   Podium Card - AESTHETIC
-   ========================================================================== */
-
-.rankings-podium-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: var(--spacing-6) var(--spacing-5);
-  background: var(--color-bg-primary);
-  border-radius: var(--radius-xl);
-  border: 2px solid var(--color-border-primary);
-  text-align: center;
-  transition: transform var(--duration-fast) var(--ease-out),
-              box-shadow var(--duration-fast) var(--ease-out),
-              border-color var(--duration-fast) var(--ease-out);
-  overflow: hidden;
-}
-
-.rankings-podium-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-
-/* Gold - 1st place */
-.rankings-podium-card--gold {
-  border-color: var(--color-warning-400);
-  background: linear-gradient(180deg,
-    rgba(251, 191, 36, 0.15) 0%,
-    rgba(251, 191, 36, 0.05) 30%,
-    var(--color-bg-primary) 100%);
-}
-
-.rankings-podium-card--gold::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #fbbf24, #f59e0b, #fbbf24);
-}
-
-.rankings-podium-card--gold:hover {
-  border-color: var(--color-warning-500);
-  box-shadow: 0 8px 32px rgba(251, 191, 36, 0.25);
-}
-
-/* Silver - 2nd place */
-.rankings-podium-card--silver {
-  border-color: var(--color-neutral-400);
-  background: linear-gradient(180deg,
-    rgba(156, 163, 175, 0.15) 0%,
-    rgba(156, 163, 175, 0.05) 30%,
-    var(--color-bg-primary) 100%);
-}
-
-.rankings-podium-card--silver::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #9ca3af, #6b7280, #9ca3af);
-}
-
-.rankings-podium-card--silver:hover {
-  border-color: var(--color-neutral-500);
-  box-shadow: 0 8px 32px rgba(156, 163, 175, 0.25);
-}
-
-/* Bronze - 3rd place */
-.rankings-podium-card--bronze {
-  border-color: rgba(205, 127, 50, 0.6);
-  background: linear-gradient(180deg,
-    rgba(205, 127, 50, 0.12) 0%,
-    rgba(205, 127, 50, 0.04) 30%,
-    var(--color-bg-primary) 100%);
-}
-
-.rankings-podium-card--bronze::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #cd7f32, #a0522d, #cd7f32);
-}
-
-.rankings-podium-card--bronze:hover {
-  border-color: rgb(205, 127, 50);
-  box-shadow: 0 8px 32px rgba(205, 127, 50, 0.25);
-}
-
-/* Rank badge - AESTHETIC */
-.rankings-podium-card__rank {
-  position: absolute;
-  top: var(--spacing-4);
-  left: var(--spacing-4);
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-xl-size);
-  font-weight: var(--font-black, 800);
-  border-radius: var(--radius-full);
-  box-shadow: var(--shadow-sm);
-}
-
-.rankings-podium-card--gold .rankings-podium-card__rank {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.rankings-podium-card--silver .rankings-podium-card__rank {
-  background: linear-gradient(135deg, #9ca3af, #6b7280);
-  color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.rankings-podium-card--bronze .rankings-podium-card__rank {
-  background: linear-gradient(135deg, #cd7f32, #a0522d);
-  color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-/* Avatar */
-.rankings-podium-card__avatar {
-  width: 96px;
-  height: 96px;
-  margin-top: var(--spacing-2);
-  margin-bottom: var(--spacing-4);
-  border-radius: var(--radius-full);
-  background: var(--color-bg-tertiary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 3px solid var(--color-border-primary);
-  box-shadow: var(--shadow-md);
-}
-
-.rankings-podium-card--gold .rankings-podium-card__avatar {
-  border-color: var(--color-warning-400);
-}
-
-.rankings-podium-card--silver .rankings-podium-card__avatar {
-  border-color: var(--color-neutral-400);
-}
-
-.rankings-podium-card--bronze .rankings-podium-card__avatar {
-  border-color: rgba(205, 127, 50, 0.6);
-}
-
-.rankings-podium-card__avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.rankings-podium-card__avatar-placeholder {
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-2xl-size);
-  font-weight: var(--font-bold, 700);
-  color: var(--color-text-tertiary);
-}
-
-.rankings-podium-card__name {
-  margin: 0;
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-lg-size);
-  font-weight: var(--font-bold, 700);
-  color: var(--color-text-primary);
-  letter-spacing: -0.01em;
-}
-
-.rankings-podium-card__club {
-  margin: var(--spacing-1) 0 0;
-  font-size: var(--text-sm-size);
-  color: var(--color-text-secondary);
-}
-
-.rankings-podium-card__points {
-  margin-top: var(--spacing-4);
-  padding: var(--spacing-2) var(--spacing-4);
-  background: linear-gradient(135deg, var(--color-primary-50), var(--color-primary-100));
-  border: 1px solid var(--color-primary-200);
-  border-radius: var(--radius-full);
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-bold, 700);
-  color: var(--color-primary-700);
-}
-
-/* ==========================================================================
-   VT Class Overview - AESTHETIC
+   VT Class Overview Layout
    ========================================================================== */
 
 .rankings-vt-overview {
@@ -563,49 +151,8 @@
 .rankings-vt-class {
   position: relative;
   padding: var(--spacing-5);
-  background: var(--color-bg-primary);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border-primary);
   text-align: center;
-  transition: transform var(--duration-fast) var(--ease-out),
-              box-shadow var(--duration-fast) var(--ease-out);
   overflow: hidden;
-}
-
-.rankings-vt-class::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  opacity: 0;
-  transition: opacity var(--duration-fast) var(--ease-out);
-}
-
-.rankings-vt-class:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.rankings-vt-class:hover::before {
-  opacity: 1;
-}
-
-.rankings-vt-class--m::before {
-  background: linear-gradient(90deg, var(--color-primary-500), var(--color-primary-400));
-}
-
-.rankings-vt-class--a::before {
-  background: linear-gradient(90deg, var(--color-success-500), var(--color-success-400));
-}
-
-.rankings-vt-class--b::before {
-  background: linear-gradient(90deg, var(--color-warning-500), var(--color-warning-400));
-}
-
-.rankings-vt-class--c::before {
-  background: linear-gradient(90deg, var(--color-neutral-400), var(--color-neutral-300));
 }
 
 .rankings-vt-class__badge {
@@ -615,64 +162,23 @@
   width: 48px;
   height: 48px;
   margin-bottom: var(--spacing-3);
-  border-radius: var(--radius-full);
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-xl-size);
-  font-weight: var(--font-black, 800);
-  box-shadow: var(--shadow-sm);
-}
-
-.rankings-vt-class--m .rankings-vt-class__badge {
-  background: linear-gradient(135deg, var(--color-primary-100), var(--color-primary-200));
-  color: var(--color-primary-700);
-}
-
-.rankings-vt-class--a .rankings-vt-class__badge {
-  background: linear-gradient(135deg, var(--color-success-100), var(--color-success-200));
-  color: var(--color-success-700);
-}
-
-.rankings-vt-class--b .rankings-vt-class__badge {
-  background: linear-gradient(135deg, var(--color-warning-100), var(--color-warning-200));
-  color: var(--color-warning-700);
-}
-
-.rankings-vt-class--c .rankings-vt-class__badge {
-  background: linear-gradient(135deg, var(--color-neutral-100), var(--color-neutral-200));
-  color: var(--color-neutral-700);
 }
 
 .rankings-vt-class__label {
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-base-size);
-  font-weight: var(--font-bold, 700);
-  color: var(--color-text-primary);
   margin-bottom: var(--spacing-1);
 }
 
-.rankings-vt-class__count {
-  font-size: var(--text-sm-size);
-  color: var(--color-text-secondary);
-  font-variant-numeric: tabular-nums;
-}
-
 .rankings-vt-class__points {
-  font-size: var(--text-xs-size);
-  color: var(--color-text-tertiary);
   margin-top: var(--spacing-1);
 }
 
 /* ==========================================================================
-   Filters - AESTHETIC FILTER CARD
+   Filters Layout
    ========================================================================== */
 
 .rankings-filters {
   margin-bottom: var(--spacing-6);
   padding: var(--spacing-5);
-  background: var(--color-bg-primary);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border-primary);
-  box-shadow: var(--shadow-sm);
 }
 
 .rankings-filters__row {
@@ -696,14 +202,6 @@
   min-width: 160px;
 }
 
-.rankings-filters__label {
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-medium, 500);
-  color: var(--color-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-
 .rankings-filters__actions {
   display: flex;
   gap: var(--spacing-2);
@@ -711,7 +209,7 @@
 }
 
 /* ==========================================================================
-   Rankings Table Header - AESTHETIC
+   Rankings Table Header Layout
    ========================================================================== */
 
 .rankings-table-header {
@@ -720,7 +218,6 @@
   gap: var(--spacing-3);
   margin-bottom: var(--spacing-5);
   padding-bottom: var(--spacing-4);
-  border-bottom: 1px solid var(--color-border-primary);
 }
 
 @media (min-width: 640px) {
@@ -731,29 +228,8 @@
   }
 }
 
-.rankings-table-title {
-  margin: 0;
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-xl-size);
-  font-weight: var(--font-bold, 700);
-  color: var(--color-text-primary);
-  letter-spacing: -0.01em;
-}
-
-.rankings-table-info {
-  font-size: var(--text-sm-size);
-  color: var(--color-text-secondary);
-}
-
-.rankings-table-info strong {
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-weight: var(--font-bold, 700);
-  color: var(--color-text-primary);
-  font-variant-numeric: tabular-nums;
-}
-
 /* ==========================================================================
-   Archive Notice - AESTHETIC
+   Archive Notice Layout
    ========================================================================== */
 
 .rankings-archive-notice {
@@ -762,17 +238,12 @@
   gap: var(--spacing-4);
   padding: var(--spacing-5);
   margin-bottom: var(--spacing-6);
-  background: linear-gradient(135deg, var(--color-info-50), var(--color-info-100));
-  border: 1px solid var(--color-info-200);
-  border-radius: var(--radius-xl);
-  border-left: 4px solid var(--color-info-500);
 }
 
 .rankings-archive-notice__icon {
   flex-shrink: 0;
   width: 28px;
   height: 28px;
-  color: var(--color-info-600);
 }
 
 .rankings-archive-notice__content {
@@ -781,20 +252,14 @@
 
 .rankings-archive-notice__title {
   margin: 0 0 var(--spacing-1);
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-base-size);
-  font-weight: var(--font-bold, 700);
-  color: var(--color-info-800);
 }
 
 .rankings-archive-notice__text {
   margin: 0;
-  font-size: var(--text-sm-size);
-  color: var(--color-info-700);
 }
 
 /* ==========================================================================
-   Pagination
+   Pagination Layout
    ========================================================================== */
 
 .rankings-pagination {
@@ -802,17 +267,14 @@
   justify-content: center;
   margin-top: var(--spacing-8);
   padding-top: var(--spacing-6);
-  border-top: 1px solid var(--color-border-primary);
 }
 
 /* ==========================================================================
-   Footer
+   Footer Layout
    ========================================================================== */
 
 .prototype-rankings__footer {
   padding: var(--spacing-6) 0;
-  background: var(--color-bg-secondary);
-  border-top: 1px solid var(--color-border-primary);
 }
 
 .prototype-rankings__footer-content {
@@ -820,22 +282,14 @@
   margin: 0 auto;
   padding: 0 var(--spacing-4);
   text-align: center;
-  font-size: var(--text-sm-size);
-  color: var(--color-text-tertiary);
 }
 
 /* ==========================================================================
-   Embed Mode Adjustments
+   Embed Mode Layout Adjustments
    ========================================================================== */
 
 .prototype-rankings--embed .rankings-header {
   padding: var(--spacing-6) 0 var(--spacing-4);
-  background: transparent;
-}
-
-.prototype-rankings--embed .rankings-header::before,
-.prototype-rankings--embed .rankings-header::after {
-  display: none;
 }
 
 .prototype-rankings--embed .rankings-header__container {
@@ -846,43 +300,19 @@
   padding: 0;
 }
 
-.prototype-rankings--embed .rankings-stats__item {
-  background: var(--color-bg-secondary);
-}
-
-.prototype-rankings--embed .rankings-filters {
-  background: var(--color-bg-secondary);
-}
-
 .prototype-rankings--embed .rankings-top {
   padding: var(--spacing-6);
   margin-left: 0;
   margin-right: 0;
 }
 
-.prototype-rankings--embed .rankings-section-tabs {
-  background: var(--color-bg-primary);
-}
-
-.prototype-rankings--embed .rankings-podium-card {
-  background: var(--color-bg-primary);
-}
-
-.prototype-rankings--embed .rankings-vt-class {
-  background: var(--color-bg-secondary);
-}
-
 /* ==========================================================================
-   Responsive Adjustments for Narrow Containers
+   Container Query Adjustments
    ========================================================================== */
 
 @container (max-width: 600px) {
   .rankings-top__podium {
     grid-template-columns: 1fr;
-  }
-
-  .rankings-stats {
-    grid-template-columns: repeat(2, 1fr);
   }
 
   .rankings-vt-overview {
@@ -899,90 +329,5 @@
     width: 100%;
     margin-left: 0;
     margin-top: var(--spacing-2);
-  }
-
-  .rankings-filters__actions button {
-    flex: 1;
-  }
-}
-
-/* ==========================================================================
-   Dark Mode
-   ========================================================================== */
-
-[data-theme='dark'] .rankings-header {
-  background: var(--bg-mesh-hero);
-  background-color: var(--color-bg-secondary);
-}
-
-[data-theme='dark'] .rankings-stats__item {
-  background: var(--color-bg-tertiary);
-  border-color: var(--color-border-secondary);
-}
-
-[data-theme='dark'] .rankings-filters {
-  background: var(--color-bg-secondary);
-  border-color: var(--color-border-secondary);
-}
-
-[data-theme='dark'] .rankings-section-tabs {
-  background: var(--color-bg-tertiary);
-  border-color: var(--color-border-secondary);
-}
-
-[data-theme='dark'] .rankings-top {
-  background: var(--color-bg-tertiary);
-  border-color: var(--color-border-secondary);
-}
-
-[data-theme='dark'] .rankings-podium-card {
-  background: var(--color-bg-secondary);
-  border-color: var(--color-border-secondary);
-}
-
-[data-theme='dark'] .rankings-podium-card--gold {
-  background: linear-gradient(180deg, rgba(251, 191, 36, 0.1) 0%, var(--color-bg-secondary) 100%);
-  border-color: rgba(251, 191, 36, 0.4);
-}
-
-[data-theme='dark'] .rankings-podium-card--silver {
-  background: linear-gradient(180deg, rgba(156, 163, 175, 0.1) 0%, var(--color-bg-secondary) 100%);
-  border-color: rgba(156, 163, 175, 0.4);
-}
-
-[data-theme='dark'] .rankings-podium-card--bronze {
-  background: linear-gradient(180deg, rgba(205, 127, 50, 0.1) 0%, var(--color-bg-secondary) 100%);
-  border-color: rgba(205, 127, 50, 0.4);
-}
-
-[data-theme='dark'] .rankings-vt-class {
-  background: var(--color-bg-secondary);
-  border-color: var(--color-border-secondary);
-}
-
-[data-theme='dark'] .rankings-archive-notice {
-  background: linear-gradient(135deg, var(--color-info-950), var(--color-info-900));
-  border-color: var(--color-info-800);
-}
-
-/* ==========================================================================
-   Reduced Motion
-   ========================================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  .rankings-stats__item,
-  .rankings-podium-card,
-  .rankings-vt-class {
-    transition: none;
-  }
-
-  .rankings-stats__item:hover,
-  .rankings-podium-card:hover,
-  .rankings-vt-class:hover {
-    transform: none;
-  }
-
-  .rankings-top__podium > * {
-    animation: none;
   }
 }

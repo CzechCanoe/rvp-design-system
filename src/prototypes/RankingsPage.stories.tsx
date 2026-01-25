@@ -283,7 +283,7 @@ const RankingsPage = ({
       {renderHeader()}
 
       {/* Page Header */}
-      <section className="rankings-header">
+      <section className="rankings-header csk-mesh-bg--hero csk-grain">
         <div className="rankings-header__container">
           {variant !== 'embed' && (
             <div className="rankings-header__breadcrumb">
@@ -294,7 +294,7 @@ const RankingsPage = ({
           )}
           <div className="rankings-header__content">
             <div>
-              <h1 className="rankings-header__title">Žebříčky závodníků</h1>
+              <h1 className="rankings-header__title csk-display">Žebříčky závodníků</h1>
               <p className="rankings-header__subtitle">
                 Celkové žebříčky a bodové přehledy České kanoistiky
               </p>
@@ -331,7 +331,7 @@ const RankingsPage = ({
           )}
 
           {/* Section Tabs */}
-          <div className="rankings-section-tabs">
+          <Card variant="surface" className="rankings-section-tabs">
             <Tabs
               tabs={sectionTabs}
               activeTab={sectionFilter}
@@ -345,60 +345,61 @@ const RankingsPage = ({
               variant="pills"
               size="md"
             />
-          </div>
+          </Card>
 
           {/* Top 3 Podium */}
           {showPodium && topThree.length >= 3 && (
-            <section className="rankings-top">
+            <Card variant="aesthetic" className="rankings-top csk-border-accent">
               <div className="rankings-top__header">
-                <h2 className="rankings-top__title">
+                <h2 className="rankings-top__title csk-headline">
                   <Icon name="medal" />
                   Top 3 závodníci
                 </h2>
               </div>
               <div className="rankings-top__podium">
                 {topThree.map((athlete, idx) => (
-                  <PodiumCard
-                    key={athlete.id}
-                    position={(idx + 1) as 1 | 2 | 3}
-                    name={athlete.name}
-                    club={athlete.club}
-                    imageUrl={athlete.imageUrl}
-                    primaryValue={athlete.points.toLocaleString()}
-                    primaryLabel="bodů"
-                  />
+                  <div key={athlete.id} className={`csk-reveal csk-reveal-${idx + 1}`}>
+                    <PodiumCard
+                      position={(idx + 1) as 1 | 2 | 3}
+                      name={athlete.name}
+                      club={athlete.club}
+                      imageUrl={athlete.imageUrl}
+                      primaryValue={athlete.points.toLocaleString()}
+                      primaryLabel="bodů"
+                    />
+                  </div>
                 ))}
               </div>
-            </section>
+            </Card>
           )}
 
           {/* VT Class Overview */}
           {sectionFilter === 'vt' && vtStats && (
             <div className="rankings-vt-overview">
-              <div className="rankings-vt-class rankings-vt-class--m">
-                <div className="rankings-vt-class__badge">M</div>
+              <Card variant="surface" className="rankings-vt-class">
+                <Badge vtClass="m" size="lg" />
                 <div className="rankings-vt-class__label">Třída M</div>
                 <div className="rankings-vt-class__count">{vtStats.m.count} závodníků</div>
                 <div className="rankings-vt-class__points">od {vtStats.m.minPoints} bodů</div>
-              </div>
-              <div className="rankings-vt-class rankings-vt-class--a">
-                <div className="rankings-vt-class__badge">A</div>
+              </Card>
+              <Card variant="surface" className="rankings-vt-class">
+                <Badge vtClass="a" size="lg" />
                 <div className="rankings-vt-class__label">Třída A</div>
                 <div className="rankings-vt-class__count">{vtStats.a.count} závodníků</div>
                 <div className="rankings-vt-class__points">od {vtStats.a.minPoints} bodů</div>
-              </div>
-              <div className="rankings-vt-class rankings-vt-class--b">
-                <div className="rankings-vt-class__badge">B</div>
+              </Card>
+              <Card variant="surface" className="rankings-vt-class">
+                <Badge vtClass="b" size="lg" />
                 <div className="rankings-vt-class__label">Třída B</div>
                 <div className="rankings-vt-class__count">{vtStats.b.count} závodníků</div>
                 <div className="rankings-vt-class__points">od {vtStats.b.minPoints} bodů</div>
-              </div>
-              <div className="rankings-vt-class rankings-vt-class--c">
-                <div className="rankings-vt-class__badge">C</div>
+              </Card>
+              <Card variant="surface" className="rankings-vt-class">
+                <Badge vtClass="c" size="lg" />
                 <div className="rankings-vt-class__label">Třída C</div>
                 <div className="rankings-vt-class__count">{vtStats.c.count} závodníků</div>
                 <div className="rankings-vt-class__points">začátečníci</div>
-              </div>
+              </Card>
             </div>
           )}
 
