@@ -6283,3 +6283,48 @@ Zůstává RegistrationPage jako poslední prototyp k reorganizaci.
 - Crew selection UX pro C2 kategorie
 - Aesthetic mode s reveal animacemi, energy gradienty, border-accent
 - Všechny prototypy nyní mají konzistentní CSS strukturu
+
+---
+
+## 2026-01-25 - Fáze 18.1: Aesthetic Utility Classes
+
+### Dokončeno
+- [x] Hero gradient utility třídy (dv/ry/vt/generic + mesh varianty)
+- [x] Mesh background varianty (card/subtle/section)
+- [x] Animation utilities (pulse, glow, pulse-glow)
+- [x] Ring utilities pro avatary (white/primary/energy)
+- [x] Text shadow utilities pro hero text
+- [x] Backdrop blur utilities
+- [x] Pattern overlay utility
+- [x] Energy color utilities (text/bg/border/glow/focus/hover)
+- [x] Dark mode varianty pro všechny nové utility
+- [x] Build validace úspěšná
+
+### Poznámky
+- CSS bundle vzrostl na 259.63 kB (gzip: 31.68 kB) - očekávaný nárůst
+- Utility třídy jsou připravené k použití v prototypech pro Phase 18.2+
+- Zbývá: AestheticGuidelines.stories.mdx (dokumentace) - nízká priorita
+
+---
+
+## 2026-01-25 - Fáze 18.2: AthletePublicProfile VISUAL STYLES
+
+### Dokončeno
+- [x] 18.1 - Potvrzena existence AestheticGuidelines (Aesthetic.stories.tsx obsahuje "Guidelines" story)
+- [x] 18.2 - Přidána VISUAL STYLES sekce do AthletePublicProfile.css (~320 řádků)
+  - Hero gradienty pro DV/RY/VT sekce
+  - Avatar ring a initials styling
+  - Rank badge s gold/silver/bronze gradienty a glow
+  - Hero name typography (mega size, display font)
+  - Meta labels a values styling
+  - Stat cards (floating banner)
+  - Highlight cards s border-accent
+  - Result cards s rank colors
+  - Section headers typography
+  - Footer styling
+  - Dark mode adjustments
+- [x] Build validace úspěšná
+
+### Poznámky
+- CSS prototypu nyní má jasné rozdělení: LAYOUT ONLY (positioning, flexbox, grid) + VISUAL STYLES (colors, typography, shadows)
+- Zbývá vizuální kontrola v Storybook pro dokončení 18.2

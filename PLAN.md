@@ -223,7 +223,7 @@ Všechny utility musí mít dark mode verze v `[data-theme="dark"]` selektoru.
 - [x] Přidat pulse/glow animace
 - [x] Přidat ring/shadow/blur utility
 - [x] Přidat dark mode varianty
-- [ ] Vytvořit AestheticGuidelines.stories.mdx s příklady použití
+- [x] Vytvořit AestheticGuidelines.stories.mdx s příklady použití (již existuje v Aesthetic.stories.tsx jako "Guidelines" story)
 - [x] Build validace
 
 ---
@@ -476,9 +476,9 @@ Všechny utility musí mít dark mode verze v `[data-theme="dark"]` selektoru.
 ```
 
 **Úkoly:**
-- [ ] Přidat VISUAL STYLES sekci do AthletePublicProfile.css
-- [ ] Ověřit všechny CSS třídy jsou použity v TSX
-- [ ] Build validace
+- [x] Přidat VISUAL STYLES sekci do AthletePublicProfile.css
+- [x] Ověřit všechny CSS třídy jsou použity v TSX
+- [x] Build validace
 - [ ] Vizuální kontrola v Storybook (Embed, Satellite, ExpressiveEmbed)
 
 ---
