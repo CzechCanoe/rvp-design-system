@@ -608,7 +608,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Prototyp stránky žebříčků CSK s Aesthetic designem. Zobrazuje celkové žebříčky závodníků s přepínáním sekcí (DV, RY, VT) a filtrováním podle disciplín a kategorií. Nahrazuje funkcionalitu Slalom World. Varianty: Embed (pro kanoe.cz), Satellite (standalone).',
+          'Prototyp stránky žebříčků CSK s plným Aesthetic designem. Phase 16.5 upgrade: mesh backgrounds, display typography, energy accents, dramatický podium s animacemi, hover efekty. Zobrazuje celkové žebříčky závodníků s přepínáním sekcí (DV, RY, VT) a filtrováním podle disciplín a kategorií. Pro VT sekci zobrazuje přehled výkonnostních tříd (M, A, B, C). Nahrazuje funkcionalitu Slalom World. Varianty: Embed (pro kanoe.cz), Satellite (standalone).',
       },
     },
   },
@@ -644,7 +644,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // ============================================================================
-// Integration Variants - Aesthetic (Phase 16.4)
+// Integration Variants - Aesthetic (Phase 16.5)
 // ============================================================================
 
 /**
@@ -685,7 +685,7 @@ export const Embed: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Aesthetic embed žebříčků v kontextu kanoe.cz. Přepínání sekcí (DV, RY, VT) pomocí tabs, filtry pro disciplíny a kategorie. Pro VT sekci zobrazuje přehled výkonnostních tříd (M, A, B, C).',
+        story: 'Plný Aesthetic embed žebříčků v kontextu kanoe.cz. Hero s display typography, stats bar s energy accents, dramatický podium pro top 3 s animacemi, aesthetic filtry. Přepínání sekcí (DV, RY, VT) pomocí pill tabs. Pro VT sekci zobrazuje přehled výkonnostních tříd (M, A, B, C) s hover efekty.',
       },
     },
   },
@@ -713,7 +713,7 @@ export const Satellite: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Aesthetic standalone žebříčků se satellite headerem. Přepínání sekcí (DV, RY, VT) pomocí tabs, filtry pro disciplíny a kategorie.',
+        story: 'Plný Aesthetic standalone žebříčků se satellite headerem. Hero s mesh gradient, diagonal stripe a grain texture. Stats bar s různými energy accent barvami. Dramatický podium pro top 3 se staggered reveal animacemi. Přepínání sekcí (DV, RY, VT) pomocí aesthetic pill tabs.',
       },
     },
   },

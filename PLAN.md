@@ -147,10 +147,14 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
   - Karty klubů s gradient logo pozadím, hover lift, accent border
   - Filtry stylované jako aesthetic pills s primary gradient
   - Empty state s aesthetic stylem (dashed border, kulatá ikona)
-- [ ] RankingsPage - přepracovat na Aesthetic
-  - Tabulky s aesthetic stylingem (zebra, hover efekty)
-  - Top 3 vizuálně odlišené (podium styl)
-  - Section switcher (DV/RY/VT) jako stylované tabs
+- [x] RankingsPage - přepracovat na Aesthetic ✅
+  - Hero sekce s mesh gradient, diagonal stripe, grain texture
+  - Stats bar s energy accent borders a hover efekty (4 barvy)
+  - Dramatický podium pro top 3 se staggered reveal animacemi
+  - Podium karty s gradient pozadím, colored borders, hover shadows
+  - VT class overview s hover efekty a gradient badges
+  - Section switcher (DV/RY/VT) jako aesthetic pill tabs
+  - Filtry s uppercase labels a aesthetic styling
 
 ---
 
@@ -268,7 +272,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.5 Polish a opravy** - Priorita 2: Aesthetic styl pro seznamy - RankingsPage (AthletesListPage ✅, ClubsListPage ✅ hotovo).
+Pokračovat s **16.5 Polish a opravy** - Priorita 3: Hero/Header vylepšení (AthletesListPage ✅, ClubsListPage ✅, RankingsPage ✅ hotovo).
 
 ---
 
