@@ -6,284 +6,235 @@
 |------|--------|
 | 0-14 (Založení až Test suite) | ✅ Hotovo |
 | 15 (User feedback) | ✅ Hotovo |
-| **16 (Konsolidace prototypů)** | 🔄 Aktivní |
+| 16 (Konsolidace prototypů) | ✅ Hotovo |
+| **17 (DS Cleanup - Aesthetic Focus)** | 🔄 Aktivní |
 
-*Detaily dokončených fází viz `PLAN-history.md`*
-
----
-
-## Fáze 16: Konsolidace prototypů
-
-**Cíl:** Sjednotit všechny prototypy na Aesthetic styl s konzistentními variantami.
-
-### Cílové varianty pro každý prototyp
-
-| Varianta | Popis |
-|----------|-------|
-| **Embed** | Aesthetic styl, vložené do kanoe.cz kontextu |
-| **Satellite** | Aesthetic styl, samostatná hlavička |
-| **ExpressiveEmbed** | Aesthetic styl s "wow" efekty, v kanoe.cz kontextu (pouze Athlete, Club, Event) |
-
-Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
+*Tag v0.5.0-cleanup-wip: Mezistav před čištěním*
 
 ---
 
-### 16.1 Veřejné profily (Athlete, Club, Event)
+## Fáze 17: DS Cleanup - Aesthetic Focus
 
-**AthletePublicProfile** (5 → 3) ✅
-- [x] Sloučit Aesthetic do Embed/Satellite
-- [x] Embed - přepracovat na Aesthetic
-- [x] Satellite - přepracovat na Aesthetic
-- [x] ExpressiveEmbed - "wow" varianta v kanoe.cz kontextu
-- [x] Odstranit: DivokaVoda, EmbedWithSidebar
+**Cíl:** Zeštíhlit design systém zaměřením na Aesthetic styl. Odstranit experimentální varianty, sjednotit styling, eliminovat "přestylování" v prototypech.
 
-**ClubPublicProfile** (5 → 3) ✅
-- [x] Sloučit Aesthetic do Embed/Satellite
-- [x] Embed - přepracovat na Aesthetic
-- [x] Satellite - přepracovat na Aesthetic
-- [x] ExpressiveEmbed - "wow" varianta v kanoe.cz kontextu
-- [x] Odstranit: EmbedWithSidebar
-
-**EventDetailPage** (7 → 3) ✅
-- [x] Sloučit AestheticRegistration/Live/Schedule/Documents do hlavních variant
-- [x] Embed - přepracovat na Aesthetic
-- [x] Satellite - přepracovat na Aesthetic
-- [x] ExpressiveEmbed - "wow" varianta v kanoe.cz kontextu
-- [x] Odstranit: EmbedWithSidebar
-
-### 16.2 Calendar + Results
-
-**CalendarPage** (9 → 4) ✅
-- [x] Embed - Aesthetic grid view
-- [x] EmbedListView - Aesthetic list view
-- [x] Satellite - Aesthetic (grid default)
-- [x] SatelliteListView - Aesthetic list view
-- [x] Sloučit: Aesthetic*, LiveEventIndication jako features
-- [x] Odstranit: EmbedWithSidebar, EmbedCardsView, původní varianty
-
-**ResultsPage** (4 → 2) ✅
-- [x] Embed - přepracovat na Aesthetic
-- [x] Satellite - přepracovat na Aesthetic
-- [x] Compact jako feature/prop (ne samostatná story)
-- [x] Odstranit: EmbedWithSidebar, EmbedCompact
-
-### 16.3 LivePage + Registration
-
-**LivePage** (5 → 2) ✅
-- [x] Embed - ověřit plný Aesthetic
-- [x] Satellite - ověřit plný Aesthetic
-- [x] MobileFullscreen, FavoriteAthletes jako features v hlavních variantách
-- [x] Odstranit: EmbedWithSidebar
-
-**RegistrationPage** (6 → 2) ✅
-- [x] Embed - nová varianta (Aesthetic)
-- [x] Satellite - sloučit všechny Aesthetic* sekce
-- [x] CrewRegistration jako feature (dokumentováno v docstrings)
-- [x] Odstranit: jednotlivé Aesthetic* stories
-
-### 16.4 Vedlejší prototypy
-
-**DashboardPage** (1 → 2) ✅
-- [x] Embed - nová varianta (Aesthetic)
-- [x] Satellite - přepracovat na Aesthetic
-
-**ProfilePage** (1 → 2) ✅
-- [x] Embed - nová varianta (Aesthetic)
-- [x] Satellite - přepracovat na Aesthetic
-
-**AthletesListPage** (3 → 2) ✅
-- [x] Embed - přepracovat na Aesthetic
-- [x] Satellite - přepracovat na Aesthetic
-- [x] Odstranit: EmbedWithSidebar
-
-**ClubsListPage** (2 → 2) ✅
-- [x] Embed - přepracovat na Aesthetic
-- [x] Satellite - přepracovat na Aesthetic
-
-**RankingsPage** (5 → 2) ✅
-- [x] Embed - přepracovat na Aesthetic (s section switcher)
-- [x] Satellite - přepracovat na Aesthetic
-- [x] Odstranit: EmbedRychlostni, EmbedVodniTuristika, EmbedArchive (jako props/tabs)
-
-### 16.5 Polish a opravy 🔄
-
-#### Priorita 1: Cards layout fix ✅
-
-**Problém:** V AthletePublicProfile a ClubPublicProfile mají Cards (např. Results, Achievements) divné okraje nahoře i po stranách. Také dochází ke kolizi obsahu se Share tlačítkem v headeru.
-
-**Řešení:**
-- [x] Opravit CSS spacing pro Cards - odstranit nadbytečné okraje
-  - Embed mód: odstraněn horizontální padding (kanoe-embed container ho poskytuje)
-  - Hero: negative margin breakout pro full-width efekt v embed kontextu
-  - Main content: snížen vertikální padding, odstraněn horizontální
-- [x] Vyřešit kolizi se Share tlačítkem (z-index nebo layout adjustment)
-  - Embed mód: Share tlačítko absolutně pozicionované v pravém horním rohu
-  - Kompaktnější styl tlačítka v embed módu
-- [x] Ověřit konzistenci napříč variantami - build prošel
+**Princip:** Prototypy mají používat VÝHRADNĚ komponenty. Žádné custom CSS, inline styly ani ad-hoc classNames.
 
 ---
 
-#### Priorita 2: Aesthetic styl pro seznamy
+### 17.1 Komponenty - Odstranění experimentálních variant
 
-**Problém:** AthletesListPage, ClubsListPage a RankingsPage vůbec nevypadají jako Aesthetic styl. Jsou to "plain" seznamy bez vizuální identity.
+#### 17.1.1 Tlačítka a vstupy
 
-**Cíl:** Přepracovat na Aesthetic styl konzistentní s ostatními prototypy:
-- Display fonty pro nadpisy (font-family: var(--font-display))
-- Gradient/mesh pozadí nebo subtle patterns
-- Energy accenty pro interaktivní prvky
-- Card-based layout místo plain tabulek (nebo aesthetic tabulky)
-- Micro-animace při hover/focus
+| Komponenta | Současné varianty | Zachovat | Odstranit |
+|------------|-------------------|----------|-----------|
+| **Button** | primary, secondary, ghost, danger, gradient, gradient-energy | primary, secondary, ghost, danger | gradient, gradient-energy |
+| **Input** | + energyFocus | default, error, success | energyFocus |
+| **Select** | + energyFocus, displayLabel | default, error, success | energyFocus |
+| **SearchInput** | + energyFocus, chips | default + chips | energyFocus |
 
 **Úkoly:**
-- [x] AthletesListPage - přepracovat na Aesthetic ✅
-  - Hero sekce s mesh gradient, diagonal stripe, grain texture
-  - Stats bar s energy accent borders a hover efekty
-  - Featured sekce se staggered reveal animacemi
-  - Filtry stylované jako pills/chips s primary gradient
-  - Grid karet s hover lift efekty
-- [x] ClubsListPage - přepracovat na Aesthetic ✅
-  - Hero sekce s mesh gradient, diagonal stripe, grain texture
-  - Stats bar s různými energy accent barvami a hover efekty
-  - Karty klubů s gradient logo pozadím, hover lift, accent border
-  - Filtry stylované jako aesthetic pills s primary gradient
-  - Empty state s aesthetic stylem (dashed border, kulatá ikona)
-- [x] RankingsPage - přepracovat na Aesthetic ✅
-  - Hero sekce s mesh gradient, diagonal stripe, grain texture
-  - Stats bar s energy accent borders a hover efekty (4 barvy)
-  - Dramatický podium pro top 3 se staggered reveal animacemi
-  - Podium karty s gradient pozadím, colored borders, hover shadows
-  - VT class overview s hover efekty a gradient badges
-  - Section switcher (DV/RY/VT) jako aesthetic pill tabs
-  - Filtry s uppercase labels a aesthetic styling
+- [ ] Button: Odstranit `gradient`, `gradient-energy` varianty (CSS + stories + type)
+- [ ] Input: Odstranit `energyFocus` prop a CSS
+- [ ] Select: Odstranit `energyFocus` prop a CSS
+- [ ] SearchInput: Odstranit `energyFocus` prop a CSS
+
+#### 17.1.2 Karty a kontejnery
+
+| Komponenta | Současné varianty | Zachovat | Odstranit |
+|------------|-------------------|----------|-----------|
+| **Card** | surface, elevated, outlined, gradient, aesthetic | surface, elevated, outlined, aesthetic | gradient (sloučit do aesthetic) |
+| **StatCard** | default, outlined, elevated + gradient, glass, gradient-subtle | default, outlined, elevated, aesthetic | gradient, glass, gradient-subtle, sparkline |
+| **Modal** | default, gradient, glass, danger | default, danger | gradient, glass |
+
+**Úkoly:**
+- [ ] Card: Odstranit `gradient` variantu, `meshBg` a `borderAccent` props (přesunout do aesthetic)
+- [ ] StatCard: Zredukovat `styleVariant` na default/aesthetic, odstranit sparkline
+- [ ] Modal: Odstranit `gradient`, `glass` varianty
+
+#### 17.1.3 Navigace a tabs
+
+| Komponenta | Současné varianty | Zachovat | Odstranit |
+|------------|-------------------|----------|-----------|
+| **Tabs** | line, pills, gradient, gradient-line, energy, glass | line, pills, aesthetic | gradient, gradient-line, energy, glass |
+| **MainNav** | default, gradient, glass, pills | default, pills | gradient, glass |
+| **Header** | default, elevated, gradient, satellite | default, elevated, satellite | gradient, blurOnScroll |
+
+**Úkoly:**
+- [ ] Tabs: Sloučit varianty do line/pills/aesthetic, odstranit ostatní
+- [ ] MainNav: Odstranit `gradient`, `glass` varianty
+- [ ] Header: Odstranit `gradient` variantu, `blurOnScroll` prop
+
+#### 17.1.4 Feedback a indikátory
+
+| Komponenta | Současné varianty | Zachovat | Odstranit |
+|------------|-------------------|----------|-----------|
+| **Toast** | default, success, warning, error, info, energy + gradient, glass | default, success, warning, error, info | energy, gradient, glass |
+| **LiveIndicator** | default, live, recording, offline, connecting + gradient, glass | default, live, recording, offline, connecting | gradient, glass, glow intensity |
+| **Badge** | default, primary, success, warning, error, info, gradient, energy | default, primary, success, warning, error, info, section badges | gradient, energy, glow |
+
+**Úkoly:**
+- [ ] Toast: Odstranit `energy` variantu, `gradient`/`glass` styleVariants
+- [ ] LiveIndicator: Odstranit `gradient`/`glass` styleVariants, `intensity` prop
+- [ ] Badge: Odstranit `gradient`, `energy` varianty, `glow` efekt
+
+#### 17.1.5 Specializované komponenty
+
+| Komponenta | Současné varianty | Zachovat | Odstranit |
+|------------|-------------------|----------|-----------|
+| **AthleteCard** | default, compact, featured + gradient, glass, hero | default, compact, featured, aesthetic | gradient, glass, hero |
+| **Avatar** | + glow, borderAccent | size/variant/color/status | glow, borderAccent |
+
+**Úkoly:**
+- [ ] AthleteCard: Sloučit `gradient`/`glass`/`hero` do `aesthetic`, odstranit ostatní
+- [ ] Avatar: Odstranit `glow`, `borderAccent` props
 
 ---
 
-#### Priorita 3: Hero/Header vylepšení ✅
+### 17.2 Komponenty - Nové/Extrakce z prototypů
 
-**Stav:** Po analýze zjištěno, že aesthetic hero je již implementován.
+**Problém:** Prototypy definují mnoho opakujících se prvků, které by měly být komponenty.
 
-**AthletePublicProfile** již má:
-- [x] Background: action photo závodníka (actionImageUrl) s fallback na portrait
-- [x] Overlay: gradient s section barvou (DV modrý, RY zelený, VT červený)
-- [x] Content: jméno (display font), klub, vlajka, ranking badge s animací
-- [x] Stats bar: wins, podiums, závody, world ranking (floating cards)
-- [x] Hover efekty na background image (parallax-like scale)
-- [x] Aesthetic mode: mesh background, energy glow, border-accent
+#### Kandidáti na extrakci:
 
-**ClubPublicProfile** již má:
-- [x] Background: gradient pattern (solid, bez foto)
-- [x] Content: název klubu (display font), logo/initials, sekce badges
-- [x] Stats bar: členové, závodníci, trenéři, junioři (floating cards)
-- [x] Aesthetic mode: mesh background, energy glow, border-accent, staggered reveal
+| Prvek | Výskyt | Nová komponenta |
+|-------|--------|-----------------|
+| CSK Logo | 12/12 prototypů | `<CSKLogo />` |
+| SVG ikony | 12/12 prototypů (80+ ikon) | `<Icon name="..." />` nebo import z knihovny |
+| Hero sekce | Athlete, Club, Event, Profile | `<HeroSection variant="athlete\|club\|event" />` |
+| Stats bar | Athlete, Club, Event, Rankings, Dashboard | `<StatsBar items={[]} />` |
+| Section header | Všude | `<SectionHeader title="..." action={...} />` |
+| Podium cards | Results, Rankings | `<PodiumCard position={1\|2\|3} />` |
+| Filter pills | Athletes, Clubs, Rankings, Calendar | `<FilterPills items={[]} />` |
+| Page layout | Všechny | `<PageLayout variant="embed\|satellite">` |
 
-**Poznámka:** ClubPublicProfile nemá background image, protože kluby typicky nemají "action photo". Gradient pozadí je vhodné řešení.
+**Priorita extrakce (podle dopadu):**
 
----
+1. **Vysoká priorita (eliminuje nejvíce custom kódu):**
+   - [ ] `<Icon />` komponenta nebo lucide-react integrace
+   - [ ] `<PageLayout />` pro embed/satellite strukturu
+   - [ ] `<HeroSection />` pro profilové stránky
+   - [ ] `<StatsBar />` pro floating stats
 
-#### Priorita 4: Calendar komponenta ✅
+2. **Střední priorita:**
+   - [ ] `<SectionHeader />` s title a optional action
+   - [ ] `<FilterPills />` pro filtry
+   - [ ] `<CSKLogo />` pro konzistentní branding
 
-**Problém:** Kalendářní mřížka má špatné zarovnání. Většina závodů je o víkendu, takže jsou namačkané vpravo. Dny pondělí-čtvrtek jsou často prázdné.
-
-**Reference:** https://jakubbican.github.io/pages/terminovka (tabulkový/listový formát)
-
-**Řešení 1:** Weekend-focused layout (`weekendFocused` prop)
-- [x] Víkendové sloupce (So/Ne) mají šířku 1.8fr
-- [x] Všední dny (Po-Pá) mají šířku 1fr
-- [x] Výsledek: víkend dostává ~52% prostoru, všední dny ~48%
-
-**Řešení 2 (Out-of-the-box):** Weekend Showcase layout (`weekendShowcase` prop)
-- [x] Dramaticky odlišný vizuální přístup
-- [x] Všední dny (Po-Pá): ultra-kompaktní, 0.6fr šířka, malé event tečky
-- [x] Víkendy (So/Ne): dominantní, 2fr šířka, velké karty s plnými detaily
-- [x] Víkend zabírá ~57% horizontálního prostoru
-- [x] Víkendové buňky 2.5x vyšší než všední dny
-- [x] Gradient badge pro víkendová čísla, left-border accent pro eventy
-- [x] Container query responsivita (600px, 400px breakpointy)
-- [x] Aplikováno v CalendarPage aesthetic variantách
-
-**Stories:**
-- [x] `WeekendShowcase` - základní showcase layout
-- [x] `WeekendShowcaseEmbed` - v kanoe.cz kontextu
-- [x] `LayoutComparison` - porovnání všech tří přístupů
+3. **Nízká priorita:**
+   - [ ] `<PodiumCard />` (pouze 2 použití)
 
 ---
 
-#### Priorita 5: EventDetail vylepšení ✅
+### 17.3 Prototypy - Eliminace custom stylingu
 
-**Problém:** EventDetailPage Embed a ExpressiveEmbed varianty jsou chudobné oproti Satellite variantě. Satellite má dramatický hero, stats bar, sidebar - Embed/ExpressiveEmbed jsou plain.
+**Cíl:** Každý prototyp má mít MAX 50 řádků CSS (pouze layout grid/flex, žádné barvy/fonty/efekty).
 
-**Řešení:** Přeneseny "wow" prvky ze Satellite do Embed/ExpressiveEmbed variant:
-- [x] Přidány volitelné `showEmbedStats` a `showEmbedCta` props
-- [x] Embed zachován kompaktní (bez stats a CTA jako default)
-- [x] ExpressiveEmbed dostává:
-  - Kompaktní stats bar s border-accent a energy glow
-  - CTA tlačítko v hero
-  - Diagonal stripe animace
-  - Grain texture overlay
-  - Větší hero padding
-  - Energy glow efekty na title a hover stavy
-- [x] Nový `expressive` prop pro aktivaci "wow" dekorací
-- [x] CSS pro embed stats bar, kompaktní CTA, expressive dekorace
+#### Aktuální stav:
 
----
+| Prototyp | CSS soubor | Řádky | Custom icons | Inline styles |
+|----------|------------|-------|--------------|---------------|
+| AthletePublicProfile | ✗ | ~400 | 10 | 3 |
+| AthletesListPage | ✗ | ~300 | 6 | 2 |
+| CalendarPage | ✗ | ~350 | 7 | 0 |
+| ClubPublicProfile | ✗ | ~350 | 10 | 0 |
+| ClubsListPage | ✗ | ~300 | 4 | 2 |
+| DashboardPage | ✗ | ~450 | 14 | 3 |
+| EventDetailPage | ✗ | ~400 | 9 | 1 |
+| LivePage | ✗ | ~500 | 15 | 2 |
+| ProfilePage | ✗ | ~400 | 15 | 0 |
+| RankingsPage | ✗ | ~350 | 3 | 3 |
+| RegistrationPage | ✗ | ~450 | 11 | 4 |
+| ResultsPage | ✗ | ~350 | 8 | 4 |
 
-#### Priorita 6: ProfilePage konzistence ✅
+**Postup pro každý prototyp:**
+1. Nahradit SVG ikony za `<Icon />` komponentu
+2. Nahradit custom hero za `<HeroSection />`
+3. Nahradit custom stats za `<StatsBar />`
+4. Nahradit layout wrappery za `<PageLayout />`
+5. Odstranit inline styles (použít komponenty s props)
+6. Zredukovat CSS na čistý layout
 
-**Problém:** ProfilePage (přihlášený uživatel) vypadá jinak od zbytku design systému.
-
-**Řešení:** Přidán aesthetic mode konzistentní s AthletePublicProfile:
-- [x] Přidán `aesthetic` prop do ProfilePageProps
-- [x] Mesh background pro aesthetic variantu
-- [x] Diagonal stripe a grain texture dekorace v hero
-- [x] Display font pro jméno (font-family: var(--font-display))
-- [x] Energy glow efekty na avatar a ranking badge
-- [x] Floating stats cards s border-accent (4 barvy)
-- [x] Staggered reveal animace pro cards
-- [x] Zachovány funkční rozdíly (edit tlačítka, status karty)
-- [x] Reduced motion support
-
----
-
-**Celkový odhad:** ~6-8 iterací
-
----
-
-## Shrnutí změn
-
-| Prototyp | Před | Po | Varianty |
-|----------|------|-----|----------|
-| AthletePublicProfile | 5 | 3 | Embed, Satellite, ExpressiveEmbed |
-| ClubPublicProfile | 5 | 3 | Embed, Satellite, ExpressiveEmbed |
-| EventDetailPage | 7 | 3 | Embed, Satellite, ExpressiveEmbed |
-| CalendarPage | 9 | 4 | Embed, EmbedListView, Satellite, SatelliteListView |
-| ResultsPage | 4 | 2 | Embed, Satellite |
-| LivePage | 5 | 2 | Embed, Satellite |
-| RegistrationPage | 6 | 2 | Embed, Satellite |
-| DashboardPage | 1 | 2 | Embed, Satellite |
-| ProfilePage | 1 | 2 | Embed, Satellite |
-| AthletesListPage | 3 | 2 | Embed, Satellite |
-| ClubsListPage | 2 | 2 | Embed, Satellite |
-| RankingsPage | 5 | 2 | Embed, Satellite |
-| **Celkem** | **53** | **29** | |
+**Pořadí podle složitosti:**
+1. [ ] ClubsListPage (nejjednodušší)
+2. [ ] AthletesListPage
+3. [ ] RankingsPage
+4. [ ] ClubPublicProfile
+5. [ ] AthletePublicProfile
+6. [ ] ResultsPage
+7. [ ] CalendarPage
+8. [ ] EventDetailPage
+9. [ ] ProfilePage
+10. [ ] RegistrationPage
+11. [ ] DashboardPage
+12. [ ] LivePage (nejsložitější)
 
 ---
 
-## Odhad iterací
+### 17.4 CSS Cleanup
 
-| Sekce | Popis | Iterace |
-|-------|-------|---------|
-| 16.1 Veřejné profily | ✅ Athlete, Club, Event | 3 |
-| 16.2 Calendar + Results | ✅ Calendar, Results | 2 |
-| 16.3 LivePage + Registration | ✅ Live, Registration | 1 |
-| 16.4 Vedlejší prototypy | ✅ Dashboard, Profile, AthletesList, ClubsList, Rankings | 3 |
-| **16.5 Polish a opravy** | Cards fix, Aesthetic seznamy, Hero, Calendar, EventDetail, Profile | **6-8** |
-| **Celkem** | | **~15-17** |
+**Cíl:** Odstranit nepoužívané styly z komponentových CSS souborů.
+
+| Soubor | Před | Očekávaný po |
+|--------|------|--------------|
+| Button.css | 336 | ~200 |
+| Card.css | 305 | ~200 |
+| StatCard.css | 749 | ~300 |
+| Modal.css | 383 | ~250 |
+| Tabs.css | 524 | ~250 |
+| MainNav.css | 748 | ~400 |
+| Header.css | 543 | ~350 |
+| Toast.css | 813 | ~400 |
+| LiveIndicator.css | 657 | ~350 |
+| Badge.css | 383 | ~250 |
+| AthleteCard.css | 854 | ~400 |
+| Input.css | 482 | ~350 |
+| SearchInput.css | 481 | ~350 |
+| Select.css | 425 | ~300 |
+| Avatar.css | 416 | ~300 |
+| **Celkem** | ~7,799 | ~4,650 |
+
+**Očekávaná redukce:** ~40% CSS
 
 ---
 
-## Další krok
+## Plán realizace
 
-**Fáze 16.5 dokončena!** Všechny priority (1-6) jsou hotové. Design system je konzistentní s Aesthetic stylem.
+### Iterace 1: Icon systém
+- [ ] Rozhodnout: vlastní `<Icon />` vs lucide-react
+- [ ] Implementovat icon komponentu
+- [ ] Vytvořit icon katalog (všechny použité ikony z prototypů)
+
+### Iterace 2: Layout komponenty
+- [ ] `<PageLayout variant="embed|satellite" />`
+- [ ] `<SectionHeader />`
+- [ ] `<StatsBar />`
+
+### Iterace 3: Hero komponenta
+- [ ] `<HeroSection variant="athlete|club|event|generic" />`
+- [ ] Zahrnout mesh background, stats bar, action tlačítka
+
+### Iterace 4-6: Cleanup komponent (Button → Toast)
+- Podle 17.1.1 - 17.1.5 odstraňovat experimentální varianty
+
+### Iterace 7-12: Refactor prototypů
+- Podle 17.3 postupně přepisovat prototypy na komponenty
+
+### Iterace 13: Finální audit
+- [ ] Ověřit všechny stories fungují
+- [ ] Zkontrolovat CSS velikost
+- [ ] Spustit testy
+
+---
+
+## Metriky úspěchu
+
+| Metrika | Před | Cíl |
+|---------|------|-----|
+| CSS celkem | ~16,600 řádků | ~10,000 řádků |
+| Prototype CSS | ~4,500 řádků | ~600 řádků |
+| Inline styles | 28 | 0 |
+| Custom icons | 80+ | 0 (vše přes Icon) |
+| Story počet | 318 | ~200 |
 
 ---
 
