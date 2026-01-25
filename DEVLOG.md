@@ -5765,3 +5765,21 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 ### Poznámky
 - Icon mapping for highlights: olympic → medal, world → globe, cup → cup, national → star, promotion → promotion
 - StatsBar cards variant provides consistent styling across prototypes
+
+---
+
+## 2026-01-25 - Phase 17.8: ResultsPage Cleanup
+
+### Completed
+- [x] Replaced 9 inline SVG icons with Icon component (search, calendar, location, users, trophy, chevron-right, print, share, download)
+- [x] Replaced 3 inline styles with CSS classes (tab-label, search-input, pagination)
+- [x] Added helper CSS classes for layout styling
+
+### Changes
+- **ResultsPage.stories.tsx**: -79 lines (SVG definitions removed), +Icon import
+- **ResultsPage.css**: +20 lines (helper classes)
+
+### Notes
+- ResultsPage prototyp nyní používá konzistentně Icon komponentu
+- Všechny inline styly nahrazeny CSS třídami
+- Build projde bez chyb
