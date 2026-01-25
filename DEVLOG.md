@@ -5055,3 +5055,39 @@ EventDetailPage (7 → 3 varianty)
 ### Poznámky
 - Fáze 16.1 Veřejné profily dokončena (Athlete ✅, Club ✅, Event ✅)
 - Další krok: 16.2 Calendar + Results
+
+---
+
+## 2026-01-25 - Fáze 16.2: Konsolidace CalendarPage
+
+### Dokončeno
+- [x] CalendarPage konsolidováno z 9 na 4 varianty
+- [x] Embed - Aesthetic grid view v kanoe.cz kontextu
+- [x] EmbedListView - Aesthetic list view v sidebar layoutu
+- [x] Satellite - Aesthetic standalone s minimálním headerem
+- [x] SatelliteListView - Aesthetic standalone list view
+
+### Odstraněno
+- EmbedWithSidebar (sloučeno do EmbedListView)
+- EmbedCardsView (cards view dostupný přes view switcher)
+- Aesthetic/AestheticListView/AestheticDivokaVoda (konsolidováno)
+- LiveEventIndication (live je feature, ne samostatná story)
+
+### Poznámky
+- Všechny varianty nyní používají Aesthetic styl
+- View switcher umožňuje přepínání mezi grid/list/cards
+- Live event indication je integrována jako feature do všech variant
+
+---
+
+## 2026-01-25 - Fáze 16.2: ResultsPage konsolidace
+
+### Dokončeno
+- [x] ResultsPage konsolidace z 4 → 2 varianty
+- [x] Odstraněny: EmbedWithSidebar, EmbedCompact
+- [x] Aktualizovány docstringy pro Aesthetic styl
+- [x] Compact režim dokumentován jako feature (showHero, showPodium props)
+
+### Poznámky
+- ResultsPage již měl Aesthetic styl implementovaný, pouze bylo potřeba odstranit nadbytečné story varianty
+- showHero a showPodium props slouží pro kompaktní zobrazení (místo samostatné EmbedCompact story)

@@ -61,11 +61,11 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 - [x] Sloučit: Aesthetic*, LiveEventIndication jako features
 - [x] Odstranit: EmbedWithSidebar, EmbedCardsView, původní varianty
 
-**ResultsPage** (4 → 2)
-- [ ] Embed - přepracovat na Aesthetic
-- [ ] Satellite - přepracovat na Aesthetic
-- [ ] Compact jako feature/prop (ne samostatná story)
-- [ ] Odstranit: EmbedWithSidebar, EmbedCompact
+**ResultsPage** (4 → 2) ✅
+- [x] Embed - přepracovat na Aesthetic
+- [x] Satellite - přepracovat na Aesthetic
+- [x] Compact jako feature/prop (ne samostatná story)
+- [x] Odstranit: EmbedWithSidebar, EmbedCompact
 
 ### 16.3 LivePage + Registration
 
@@ -141,7 +141,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.2 Calendar + Results** - ResultsPage.
+Pokračovat s **16.3 LivePage + Registration** - LivePage.
 
 ---
 

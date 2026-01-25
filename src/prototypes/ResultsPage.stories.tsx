@@ -738,16 +738,19 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // ============================================================================
-// Integration Variants - Embed/Satellite only (Phase 8.9)
+// Aesthetic Variants - Embed/Satellite (Phase 16.2)
 // ============================================================================
 
 /**
- * **EMBED varianta** - Výsledky vložené do kanoe.cz layoutu.
+ * **EMBED varianta** - Aesthetic styl pro vložení do kanoe.cz
  *
- * Komponenta bez vlastního headeru a footeru, určená pro embedding
- * do existujícího webu kanoe.cz (Joomla + Bootstrap 4).
+ * Výsledky v plném Aesthetic designu bez vlastního headeru/footeru.
+ * Určeno pro embedding do existujícího webu kanoe.cz (Joomla + Bootstrap 4).
  *
- * Používá data-mode="embed" pro neutrální styling.
+ * **Features dostupné přes props:**
+ * - `showHero: false` - kompaktní režim bez hero sekce
+ * - `showPodium: false` - skryje sekci stupňů vítězů
+ * - `isLive: true` - live indikátor
  */
 export const Embed: Story = {
   args: {
@@ -777,17 +780,22 @@ export const Embed: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Výsledky embedované v kontextu kanoe.cz. Bez vlastního headeru/footeru - používá layout hostitelské stránky.',
+        story: 'Aesthetic embed výsledků v kontextu kanoe.cz. Pro kompaktní zobrazení použijte `showHero: false, showPodium: false`.',
       },
     },
   },
 };
 
 /**
- * **SATELLITE varianta** - Standalone výsledky s minimálním headerem.
+ * **SATELLITE varianta** - Aesthetic standalone s minimálním headerem
  *
- * Pro samostatnou aplikaci výsledků s odkazem zpět na kanoe.cz.
- * Header obsahuje pouze logo CSK, název aplikace a přihlášení.
+ * Samostatná aplikace výsledků s odkazem zpět na kanoe.cz.
+ * Plný Aesthetic design s gradient hero sekcí a interaktivním pódiem.
+ *
+ * **Features dostupné přes props:**
+ * - `showHero: false` - kompaktní režim bez hero sekce
+ * - `showPodium: false` - skryje sekci stupňů vítězů
+ * - `isLive: true` - live indikátor
  */
 export const Satellite: Story = {
   args: {
@@ -801,84 +809,9 @@ export const Satellite: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Standalone aplikace výsledků s minimálním satellite headerem. Obsahuje odkaz zpět na kanoe.cz.',
+        story: 'Aesthetic standalone výsledků se satellite headerem. Pro kompaktní zobrazení použijte `showHero: false, showPodium: false`.',
       },
     },
   },
 };
 
-/**
- * **EMBED + Sidebar** - Výsledky v úzkém sloupci s postranním panelem.
- *
- * Demonstrace responzivity v omezeném prostoru typickém pro
- * Joomla šablony s postranním panelem.
- */
-export const EmbedWithSidebar: Story = {
-  args: {
-    initialCategory: 'K1M',
-    isLive: false,
-    showHero: false,
-    showPodium: false,
-    section: 'dv',
-    variant: 'embed',
-  },
-  decorators: [
-    (Story) => (
-      <KanoeCzContext
-        layout="sidebar"
-        showSidebar={true}
-        pageVariant="detail"
-        pageTitle="Výsledky závodu"
-        breadcrumbs={[
-          { label: 'Úvod', href: '#' },
-          { label: 'Divoká voda', href: '#' },
-          { label: 'Výsledky' },
-        ]}
-      >
-        <Story />
-      </KanoeCzContext>
-    ),
-  ],
-  parameters: {
-    docs: {
-      description: {
-        story: 'Výsledky v layoutu se sidebarem. Kompaktní zobrazení bez hero sekce a pódia.',
-      },
-    },
-  },
-};
-
-/**
- * **EMBED kompaktní** - Minimální výsledková tabulka pro embed.
- *
- * Bez hero sekce a pódia - pouze výsledková tabulka.
- * Ideální pro vložení do omezených prostorů.
- */
-export const EmbedCompact: Story = {
-  args: {
-    initialCategory: 'K1M',
-    isLive: false,
-    showHero: false,
-    showPodium: false,
-    section: 'dv',
-    variant: 'embed',
-  },
-  decorators: [
-    (Story) => (
-      <KanoeCzContext
-        layout="full"
-        pageVariant="subpage"
-        pageTitle="Výsledky - K1 Muži"
-      >
-        <Story />
-      </KanoeCzContext>
-    ),
-  ],
-  parameters: {
-    docs: {
-      description: {
-        story: 'Kompaktní embed výsledků - pouze tabulka bez hero sekce a pódia.',
-      },
-    },
-  },
-};
