@@ -571,26 +571,28 @@ Všechny utility musí mít dark mode verze v `[data-theme="dark"]` selektoru.
 
 ---
 
-### 18.7 Fix Header Alignment (Embed varianty)
+### 18.7 Fix Header Alignment (Embed varianty) ✅
 
-**Problém:** V embed variantách je header content "nalepený" doleva místo správného paddingu.
+**Problém:** V embed variantách byl header content "nalepený" doleva - způsobeno agresivním `padding: 0` resetem v embed modu.
 
-**Soubory k kontrole:**
+**Řešení:** Odstraněny pravidla která resetovaly padding na 0 v embed modu. Wrapper `.kanoe-embed` poskytuje vnější padding (16px), vnitřní kontejnery zachovávají svůj standardní padding pro správné zarovnání obsahu.
+
+**Opravené soubory:**
 - `src/prototypes/ClubsListPage.css`
-- `src/components/KanoeCzContext/KanoeCzContext.css`
-- Případně další embed prototypy
-
-**Co hledat:**
-1. Padding na `.kanoe-cz-context` nebo podobném wrapperu
-2. Max-width + margin: auto na content containeru
-3. Embed mode specifické styly
+- `src/prototypes/AthletesListPage.css`
+- `src/prototypes/RankingsPage.css`
+- `src/prototypes/ResultsPage.css`
+- `src/prototypes/LivePage.css`
+- `src/prototypes/DashboardPage.css`
+- `src/prototypes/AthletePublicProfile.css`
+- `src/prototypes/ClubPublicProfile.css`
 
 **Úkoly:**
-- [ ] Analyzovat ClubsListPage Embed v Storybook
-- [ ] Najít kde se ztrácí padding
-- [ ] Opravit CSS
-- [ ] Zkontrolovat další embed varianty (AthletesListPage, RankingsPage...)
-- [ ] Build validace
+- [x] Analyzovat ClubsListPage Embed
+- [x] Najít kde se ztrácí padding (embed `padding: 0` pravidla)
+- [x] Opravit CSS - odstranit agresivní padding reset
+- [x] Zkontrolovat další embed varianty
+- [x] Build validace
 
 ---
 
@@ -901,12 +903,12 @@ grep -r "className=.*card" src/prototypes/ | grep -v "Card\|csk-"
 
 | Prototyp | Problém | Priorita | Stav |
 |----------|---------|----------|------|
-| AthletePublicProfile | Hero, avatar, rank badges, highlight cards | Vysoká | ⏳ |
-| ClubPublicProfile | Hero, logo ring, member ranks, contacts | Vysoká | ⏳ |
+| AthletePublicProfile | Hero, avatar, rank badges, highlight cards | Vysoká | ✅ |
+| ClubPublicProfile | Hero, logo ring, member ranks, contacts | Vysoká | ✅ |
 | RankingsPage | Top 3 nečitelné | Vysoká | ✅ |
-| EventDetailPage | Hero chudé | Střední | ⏳ |
-| ResultsPage | Hero chudé | Střední | ⏳ |
-| ClubsListPage Embed | Header nalepený doleva | Střední | ⏳ |
+| EventDetailPage | Hero chudé | Střední | ✅ |
+| ResultsPage | Hero chudé | Střední | ✅ |
+| Embed varianty | Header padding v embed modu | Střední | ✅ |
 
 ### Chybějící Energy colors (18.9)
 

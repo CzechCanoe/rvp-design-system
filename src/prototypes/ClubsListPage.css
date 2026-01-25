@@ -300,13 +300,8 @@
   padding: var(--spacing-6) 0 var(--spacing-4);
 }
 
-.prototype-clubs-list--embed .clubs-list-header__container {
-  padding: 0;
-}
-
-.prototype-clubs-list--embed .prototype-clubs-list__container {
-  padding: 0;
-}
+/* Note: In embed mode, the .kanoe-embed wrapper provides outer padding (16px).
+   Inner containers maintain their standard padding for proper content alignment. */
 
 /* ==========================================================================
    Container Query Adjustments

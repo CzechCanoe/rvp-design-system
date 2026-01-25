@@ -297,19 +297,14 @@
   padding: var(--spacing-6) 0 var(--spacing-4);
 }
 
-.prototype-rankings--embed .rankings-header__container {
-  padding: 0;
-}
-
-.prototype-rankings--embed .prototype-rankings__container {
-  padding: 0;
-}
-
 .prototype-rankings--embed .rankings-top {
   padding: var(--spacing-6);
   margin-left: 0;
   margin-right: 0;
 }
+
+/* Note: In embed mode, the .kanoe-embed wrapper provides outer padding (16px).
+   Inner containers maintain their standard padding for proper content alignment. */
 
 /* ==========================================================================
    Container Query Adjustments

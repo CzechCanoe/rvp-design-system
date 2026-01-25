@@ -565,8 +565,10 @@
 
 .dashboard-page-header--embed .dashboard-page-header__content {
   max-width: none;
-  padding: 0;
 }
+
+/* Note: In embed mode, the .kanoe-embed wrapper provides outer padding (16px).
+   Inner containers maintain their standard padding for proper content alignment. */
 
 /* ----------------------------------------------------------------------------
    Sparkline Layout
@@ -1300,7 +1302,6 @@
 
 .dashboard-page--embed .dashboard-stats-section {
   margin-top: 0;
-  padding: 0;
 }
 
 .dashboard-page--embed .dashboard-stats-grid {

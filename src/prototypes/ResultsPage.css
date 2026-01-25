@@ -438,14 +438,12 @@
   margin-bottom: var(--spacing-3);
 }
 
-.prototype-results-page--embed .prototype-results-page__main {
-  padding: 0;
-}
-
 .prototype-results-page--embed .prototype-results-page__container {
   max-width: none;
-  padding: 0;
 }
+
+/* Note: In embed mode, the .kanoe-embed wrapper provides outer padding (16px).
+   Inner containers maintain their standard padding for proper content alignment. */
 
 /* Responsive adjustments for embed in narrow containers */
 @container (max-width: 900px) {

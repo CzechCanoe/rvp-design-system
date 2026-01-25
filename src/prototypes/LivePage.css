@@ -1117,14 +1117,12 @@
   display: none;
 }
 
-.prototype-live-page--embed .prototype-live-page__main {
-  padding: 0;
-}
-
 .prototype-live-page--embed .prototype-live-page__container {
   max-width: none;
-  padding: 0;
 }
+
+/* Note: In embed mode, the .kanoe-embed wrapper provides outer padding (16px).
+   Inner containers maintain their standard padding for proper content alignment. */
 
 /* Container query adjustments for embed */
 @container (max-width: 900px) {

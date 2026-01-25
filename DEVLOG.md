@@ -6369,3 +6369,48 @@ Zůstává RegistrationPage jako poslední prototyp k reorganizaci.
 - PodiumCard komponenta již obsahovala kompletní vizuální styly pro gold/silver/bronze pozice
 - Problém "Top 3 nečitelné" z PLAN.md byl způsoben chybějícími wrapper styly v RankingsPage.css
 - RankingsPage.css nyní obsahuje LAYOUT + VISUAL STYLES sekce dle konvencí Phase 17
+
+---
+
+## 2026-01-25 - Fáze 18.5-18.6: Visual Polish - EventDetail a ResultsPage
+
+### Dokončeno
+- [x] Audit EventDetailPage.css - kompletní VISUAL STYLES sekce (nepotřebovala doplnění)
+- [x] Doplnění VISUAL STYLES sekce do ResultsPage.css
+- [x] Header styling s section-specific gradient backgrounds (dv/ry/vt)
+- [x] Typography styles pro titulky, meta info a statistiky
+- [x] Podium section visual styling
+- [x] Sidebar card a category list styles
+- [x] Dark mode adjustments
+- [x] Build validace
+
+### Poznámky
+EventDetailPage.css mělo již kompletní vizuální styly (hero gradienty, pattern overlay, typography, aesthetic animace, expressive mode efekty). ResultsPage.css obsahovalo pouze LAYOUT sekci bez vizuálních stylů - doplněno ~300 řádků CSS.
+
+---
+
+## 2026-01-25 - Fáze 18.7: Fix Header Alignment (Embed varianty)
+
+### Dokončeno
+- [x] Oprava embed padding problému v 8 prototypech
+- [x] Odstranění agresivních `padding: 0` pravidel z embed modu
+- [x] Build validace
+
+### Problémy a řešení
+1. **Problém:** V embed variantách byl obsah "nalepený" doleva bez správného paddingu
+   **Příčina:** CSS pravidla v embed modu explicitně nastavovala `padding: 0` na vnitřní kontejnery
+   **Řešení:** Odstraněna tato pravidla - wrapper `.kanoe-embed` poskytuje vnější padding (16px), vnitřní kontejnery nyní zachovávají svůj standardní padding
+
+### Opravené soubory
+- ClubsListPage.css
+- AthletesListPage.css
+- RankingsPage.css
+- ResultsPage.css
+- LivePage.css
+- DashboardPage.css
+- AthletePublicProfile.css
+- ClubPublicProfile.css
+
+### Poznámky
+- Fáze 18.1-18.7 jsou nyní kompletní
+- Další krok: 18.9 Energy Colors Integration nebo 18.10 Vizuální QA
