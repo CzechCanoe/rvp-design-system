@@ -5849,3 +5849,18 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 
 ### Poznámky
 - Použity správné velikosti ikon: md (20px) pro hlavní akce, sm (16px) pro indikátory a metadata
+
+---
+
+## 2026-01-25 - Fáze 17.11: DashboardPage cleanup
+
+### Dokončeno
+- [x] Migrace 14 inline SVG ikon na Icon komponentu
+- [x] Přidání nových ikon: CreditCard, Repeat, XCircle
+- [x] Přidání aliasů: warning, danger, credit-card, payment, transfer, medical
+- [x] Odstranění Icons objektu z DashboardPage
+
+### Poznámky
+- DashboardPage používal 14 inline SVG ikon (warning, danger, info, users, calendar, clock, userPlus, fileText, creditCard, arrowRight, trophy, medical, transfer, trendUp)
+- Některé ikony nebyly v Icon komponentě, přidány: CreditCard, Repeat (pro transfer), XCircle (pro danger)
+- Zbývá pouze LivePage (nejsložitější prototyp)
