@@ -7,7 +7,8 @@ export type BadgeVariant =
   | 'success'
   | 'warning'
   | 'error'
-  | 'info';
+  | 'info'
+  | 'energy';
 
 export type BadgeSection = 'dv' | 'ry' | 'vt';
 export type BadgeVtClass = 'm' | 'a' | 'b' | 'c';
@@ -27,6 +28,8 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   outlined?: boolean;
   /** Use pill shape (fully rounded) */
   pill?: boolean;
+  /** Add pulsing glow effect (use with energy variant for live/urgent indicators) */
+  glow?: boolean;
   /** Optional icon to display before content */
   icon?: ReactNode;
   /** Badge content */
@@ -48,6 +51,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       size = 'md',
       outlined = false,
       pill = false,
+      glow = false,
       icon,
       className,
       children,
@@ -72,6 +76,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       `csk-badge--${size}`,
       outlined && 'csk-badge--outlined',
       pill && 'csk-badge--pill',
+      glow && 'csk-badge--glow',
       className,
     ]
       .filter(Boolean)

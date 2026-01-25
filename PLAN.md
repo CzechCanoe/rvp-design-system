@@ -625,9 +625,9 @@ Všechny utility musí mít dark mode verze v `[data-theme="dark"]` selektoru.
 ```
 
 Změny v Button.tsx/css:
-- [ ] Přidat `accent?: 'energy' | 'none'` prop
-- [ ] CSS pro `.csk-button--accent-energy` - energy glow na hover
-- [ ] Stories s příklady použití
+- [x] Přidat `accent?: 'energy' | 'none'` prop
+- [x] CSS pro `.csk-button--accent-energy` - energy glow na hover
+- [x] Stories s příklady použití
 
 **Badge - přidat `energy` variantu zpět:**
 ```tsx
@@ -636,9 +636,9 @@ Změny v Button.tsx/css:
 ```
 
 Změny v Badge.tsx/css:
-- [ ] Přidat `energy` zpět do BadgeVariant
-- [ ] Přidat `glow` prop zpět
-- [ ] CSS pro energy + glow kombinaci
+- [x] Přidat `energy` zpět do BadgeVariant
+- [x] Přidat `glow` prop zpět
+- [x] CSS pro energy + glow kombinaci
 
 **Tabs - energy accent pro aktivní tab:**
 ```tsx
@@ -655,8 +655,8 @@ Změny v Tabs.tsx/css:
 ```
 
 Změny v Input/Select.tsx/css:
-- [ ] Vrátit `energyFocus` prop
-- [ ] CSS pro coral-orange focus ring
+- [x] Vrátit `energyFocus` prop
+- [x] CSS pro coral-orange focus ring
 
 **ResultsTable - energy highlights:**
 - [ ] Přidat `energyHighlights?: boolean` prop
@@ -735,10 +735,10 @@ Přidat do `aesthetic.css`:
 | **ProfilePage** | CTA editace, notifications | Nízká |
 
 **Úkoly:**
-- [ ] Přidat energy utility třídy do aesthetic.css
-- [ ] Rozšířit Button o `accent` prop
-- [ ] Vrátit `energy` variantu do Badge
-- [ ] Přidat `energyFocus` do Input/Select
+- [x] Přidat energy utility třídy do aesthetic.css
+- [x] Rozšířit Button o `accent` prop
+- [x] Vrátit `energy` variantu do Badge
+- [x] Přidat `energyFocus` do Input/Select
 - [ ] Přidat `energyAccent` do Tabs
 - [ ] Rozšířit ResultsTable o energy highlights
 - [ ] Rozšířit LiveIndicator o energy glow
@@ -746,8 +746,8 @@ Přidat do `aesthetic.css`:
 - [ ] Aktualizovat RegistrationPage - energy CTA
 - [ ] Aktualizovat LivePage - energy LIVE badge
 - [ ] Aktualizovat ResultsPage - podium energy
-- [ ] Stories pro všechny energy varianty
-- [ ] Build validace
+- [x] Stories pro všechny energy varianty
+- [x] Build validace
 
 ---
 
@@ -914,9 +914,9 @@ grep -r "className=.*card" src/prototypes/ | grep -v "Card\|csk-"
 
 | Komponenta/Prototyp | Kde chybí Energy | Priorita | Stav |
 |---------------------|------------------|----------|------|
-| **Button** | CTA akce - accent glow | Vysoká | ⏳ |
-| **Badge** | LIVE, deadline, highlights | Vysoká | ⏳ |
-| **Input/Select** | Focus ring | Střední | ⏳ |
+| **Button** | CTA akce - accent glow | Vysoká | ✅ |
+| **Badge** | LIVE, deadline, highlights | Vysoká | ✅ |
+| **Input/Select** | Focus ring | Střední | ✅ |
 | **Tabs** | Aktivní tab accent | Střední | ⏳ |
 | **ResultsTable** | Podium highlights, best time | Střední | ⏳ |
 | **LiveIndicator** | Pulsující glow | Střední | ⏳ |

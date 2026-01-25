@@ -103,6 +103,14 @@
   border-color: var(--color-feedback-info);
 }
 
+/* Energy - coral-orange for live/urgent indicators */
+.csk-badge--energy {
+  background: var(--gradient-energy, linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%));
+  color: var(--color-neutral-0);
+  border-color: transparent;
+  box-shadow: var(--shadow-xs);
+}
+
 /* ==========================================================================
    CSK SECTIONS - FILLED
    ========================================================================== */
@@ -206,6 +214,11 @@
   border-color: var(--color-feedback-info);
 }
 
+.csk-badge--outlined.csk-badge--energy {
+  color: var(--color-energy-500, #f97316);
+  border-color: var(--color-energy-400, #fb923c);
+}
+
 /* CSK Sections - Outlined */
 .csk-badge--outlined.csk-badge--section-dv {
   color: var(--color-section-dv);
@@ -249,6 +262,55 @@
 
 .csk-badge--pill {
   border-radius: var(--radius-full);
+}
+
+/* ==========================================================================
+   GLOW EFFECT
+   Pulsing glow for live/urgent indicators
+   ========================================================================== */
+
+@keyframes csk-badge-glow-pulse {
+  0%, 100% {
+    box-shadow: var(--glow-energy-sm, 0 0 8px rgba(249, 115, 22, 0.4));
+  }
+  50% {
+    box-shadow: var(--glow-energy-lg, 0 0 24px rgba(249, 115, 22, 0.6));
+  }
+}
+
+.csk-badge--glow {
+  animation: csk-badge-glow-pulse 2s ease-in-out infinite;
+}
+
+.csk-badge--glow.csk-badge--energy {
+  box-shadow: var(--glow-energy-md, 0 0 16px rgba(249, 115, 22, 0.5));
+}
+
+/* Glow for other variants - use their respective colors */
+.csk-badge--glow.csk-badge--success {
+  animation-name: csk-badge-glow-pulse-success;
+}
+
+@keyframes csk-badge-glow-pulse-success {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(34, 197, 94, 0.6);
+  }
+}
+
+.csk-badge--glow.csk-badge--error {
+  animation-name: csk-badge-glow-pulse-error;
+}
+
+@keyframes csk-badge-glow-pulse-error {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(239, 68, 68, 0.6);
+  }
 }
 
 /* ==========================================================================
@@ -307,5 +369,9 @@
 @media (prefers-reduced-motion: reduce) {
   .csk-badge {
     transition: none;
+  }
+
+  .csk-badge--glow {
+    animation: none;
   }
 }

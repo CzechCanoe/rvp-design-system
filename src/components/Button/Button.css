@@ -252,6 +252,38 @@
 }
 
 /* ==========================================================================
+   ACCENT - ENERGY
+   Adds coral-orange glow for prominent CTAs
+   ========================================================================== */
+
+/* Energy accent on primary button */
+.csk-button--primary.csk-button--accent-energy:hover:not(:disabled):not([aria-disabled='true']) {
+  box-shadow: var(--glow-energy-md, 0 0 16px rgba(249, 115, 22, 0.5));
+}
+
+.csk-button--primary.csk-button--accent-energy:active:not(:disabled):not([aria-disabled='true']) {
+  box-shadow: var(--glow-energy-sm, 0 0 8px rgba(249, 115, 22, 0.4));
+}
+
+/* Energy accent on secondary button */
+.csk-button--secondary.csk-button--accent-energy:hover:not(:disabled):not([aria-disabled='true']) {
+  border-color: var(--color-energy-400, #fb923c);
+  color: var(--color-energy-600, #ea580c);
+  box-shadow: var(--glow-energy-sm, 0 0 8px rgba(249, 115, 22, 0.4));
+}
+
+/* Energy accent on ghost button */
+.csk-button--ghost.csk-button--accent-energy:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-energy-50, #fff7ed);
+  color: var(--color-energy-600, #ea580c);
+}
+
+/* Energy focus ring override */
+.csk-button--accent-energy:focus-visible {
+  outline-color: var(--color-energy-400, #fb923c);
+}
+
+/* ==========================================================================
    REDUCED MOTION
    ========================================================================== */
 

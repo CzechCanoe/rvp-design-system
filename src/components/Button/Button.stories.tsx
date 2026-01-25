@@ -19,6 +19,11 @@ const meta: Meta<typeof Button> = {
       options: ['sm', 'md', 'lg'],
       description: 'Size of the button',
     },
+    accent: {
+      control: 'select',
+      options: ['none', 'energy'],
+      description: 'Accent style for CTA emphasis (adds energy glow on hover)',
+    },
     fullWidth: {
       control: 'boolean',
       description: 'Makes the button take full width',
@@ -220,6 +225,43 @@ export const LargeCTA: Story = {
     docs: {
       description: {
         story: 'Large buttons for hero CTAs and prominent actions.',
+      },
+    },
+  },
+};
+
+/* ==========================================================================
+   ENERGY ACCENT
+   ========================================================================== */
+
+export const EnergyAccent: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <Button variant="primary" accent="energy">
+          Registrovat se
+        </Button>
+        <Button variant="primary" accent="energy" size="lg">
+          Sledovat live
+        </Button>
+      </div>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <Button variant="secondary" accent="energy">
+          Přihlásit
+        </Button>
+        <Button variant="ghost" accent="energy">
+          Více info
+        </Button>
+      </div>
+      <div style={{ fontSize: '12px', color: '#666' }}>
+        Energy accent adds coral-orange glow on hover for prominent CTAs. Use sparingly for key actions like registration, live tracking, or deadlines.
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Energy accent adds a vibrant coral-orange glow effect on hover. Use for prominent CTAs that need extra visual emphasis.',
       },
     },
   },

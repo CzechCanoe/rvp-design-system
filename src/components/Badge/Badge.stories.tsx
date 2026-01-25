@@ -17,7 +17,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'primary', 'success', 'warning', 'error', 'info'],
+      options: ['default', 'primary', 'success', 'warning', 'error', 'info', 'energy'],
       description: 'Visual variant of the badge',
     },
     section: {
@@ -42,6 +42,10 @@ const meta = {
     pill: {
       control: 'boolean',
       description: 'Use pill shape (fully rounded)',
+    },
+    glow: {
+      control: 'boolean',
+      description: 'Add pulsing glow effect (use with energy variant)',
     },
     children: {
       control: 'text',
@@ -76,12 +80,13 @@ export const Variants: Story = {
       <Badge variant="warning">Warning</Badge>
       <Badge variant="error">Error</Badge>
       <Badge variant="info">Info</Badge>
+      <Badge variant="energy">Energy</Badge>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Available semantic variants for different contexts.',
+        story: 'Available semantic variants for different contexts. Energy variant is for live/urgent indicators.',
       },
     },
   },
@@ -97,12 +102,52 @@ export const VariantsOutlined: Story = {
       <Badge variant="warning" outlined>Warning</Badge>
       <Badge variant="error" outlined>Error</Badge>
       <Badge variant="info" outlined>Info</Badge>
+      <Badge variant="energy" outlined>Energy</Badge>
     </div>
   ),
   parameters: {
     docs: {
       description: {
         story: 'Outlined variants for subtle appearance.',
+      },
+    },
+  },
+};
+
+/* ==========================================================================
+   ENERGY & GLOW
+   ========================================================================== */
+
+export const EnergyAndGlow: Story = {
+  name: 'Energy & Glow',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div>
+        <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', color: '#666' }}>Energy variant</h4>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+          <Badge variant="energy">Deadline</Badge>
+          <Badge variant="energy" pill>Hot</Badge>
+          <Badge variant="energy" size="lg" pill>LIVE</Badge>
+          <Badge variant="energy" outlined>Urgent</Badge>
+        </div>
+      </div>
+      <div>
+        <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', color: '#666' }}>With pulsing glow</h4>
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+          <Badge variant="energy" glow pill>LIVE</Badge>
+          <Badge variant="error" glow pill>Recording</Badge>
+          <Badge variant="success" glow pill>Online</Badge>
+        </div>
+      </div>
+      <div style={{ fontSize: '12px', color: '#666' }}>
+        Energy variant with coral-orange gradient. Glow prop adds pulsing animation for live/urgent indicators. Use sparingly.
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Energy variant with coral-orange gradient for live/urgent indicators. The glow prop adds a pulsing animation effect.',
       },
     },
   },

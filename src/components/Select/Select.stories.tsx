@@ -43,6 +43,10 @@ const meta: Meta<typeof Select> = {
       control: 'text',
       description: 'Placeholder text (first disabled option)',
     },
+    energyFocus: {
+      control: 'boolean',
+      description: 'Use energy (coral-orange) focus ring',
+    },
   },
 };
 
@@ -343,6 +347,45 @@ export const AestheticForm: Story = {
     docs: {
       description: {
         story: 'Hero registration form combining display labels and large size for visual impact.',
+      },
+    },
+  },
+};
+
+/* ==========================================================================
+   ENERGY FOCUS
+   ========================================================================== */
+
+export const EnergyFocus: Story = {
+  name: 'Aesthetic: Energy Focus',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '280px' }}>
+      <div>
+        <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', color: '#666' }}>Standard focus (blue)</h4>
+        <Select
+          options={categoryOptions}
+          label="Standardní"
+          placeholder="Click to focus..."
+        />
+      </div>
+      <div>
+        <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', color: '#666' }}>Energy focus (coral-orange)</h4>
+        <Select
+          options={categoryOptions}
+          label="S energy focus"
+          placeholder="Click to focus..."
+          energyFocus
+        />
+      </div>
+      <div style={{ fontSize: '12px', color: '#666' }}>
+        Energy focus uses coral-orange accent for prominent selects like registration deadlines or CTA forms.
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Energy focus uses coral-orange accent for prominent selects. Use for CTAs, deadlines, and live features.',
       },
     },
   },

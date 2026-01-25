@@ -136,6 +136,26 @@
               0 0 12px rgba(34, 197, 94, 0.15);
 }
 
+/* Energy focus - coral-orange accent for prominent inputs */
+.csk-input-container--energy-focus .csk-input:focus {
+  border-color: var(--color-energy-400, #fb923c);
+  box-shadow: var(--shadow-inner),
+              0 0 0 3px rgba(249, 115, 22, 0.15),
+              0 0 0 1px rgba(249, 115, 22, 0.35),
+              0 0 12px rgba(249, 115, 22, 0.2);
+}
+
+.csk-input-container--energy-focus .csk-input:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-energy-300, #fdba74);
+  box-shadow: var(--shadow-inner),
+              0 1px 3px rgba(249, 115, 22, 0.1);
+}
+
+/* Energy focus label color */
+.csk-input-wrapper:focus-within:has(.csk-input-container--energy-focus) .csk-input-label {
+  color: var(--color-energy-600, #ea580c);
+}
+
 /* ==========================================================================
    HOVER STATES - Subtle lift and border enhancement
    ========================================================================== */
@@ -434,6 +454,19 @@
 
 [data-theme="dark"] .csk-input-clear:hover {
   background-color: var(--color-neutral-700);
+}
+
+[data-theme="dark"] .csk-input-container--energy-focus .csk-input:focus {
+  border-color: var(--color-energy-400, #fb923c);
+  box-shadow: var(--shadow-inner),
+              0 0 0 3px rgba(251, 146, 60, 0.2),
+              0 0 0 1px rgba(251, 146, 60, 0.45);
+}
+
+[data-theme="dark"] .csk-input-container--energy-focus .csk-input:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-energy-400, #fb923c);
+  box-shadow: var(--shadow-inner),
+              0 1px 3px rgba(251, 146, 60, 0.15);
 }
 
 /* ==========================================================================
