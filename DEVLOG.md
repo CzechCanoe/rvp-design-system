@@ -5176,3 +5176,18 @@ AthletesListPage - konsolidace na 2 aesthetic varianty
 ClubsListPage již měl správnou strukturu a CSS odpovídající Aesthetic stylu.
 Hlavní změna byla aktualizace komentářů ve stories pro konzistenci s ostatními
 přepracovanými prototypy. Další na řadě: RankingsPage (5 → 2 varianty).
+
+---
+
+## 2026-01-25 - Fáze 16.4: RankingsPage konsolidace (DOKONČENÍ FÁZE 16)
+
+### Dokončeno
+- [x] RankingsPage konsolidace (5 → 2 varianty)
+- [x] Odstranění EmbedRychlostni, EmbedVodniTuristika, EmbedArchive
+- [x] Aktualizace dokumentace s features přes props
+- [x] **Fáze 16 kompletně dokončena** (53 → 29 stories celkem)
+
+### Poznámky
+- Všechny sekce (DV, RY, VT) jsou dostupné přes `initialSection` prop
+- Archivní data přes `isArchive` a `initialSeason` props
+- VT třídy (M, A, B, C) se automaticky zobrazí při výběru VT sekce
