@@ -5005,3 +5005,20 @@ Zbývá v 15.4: Calendar víkendová prezentace, Results Top 3 karty přehodnoce
 - Fáze 15 User Feedback je kompletně dokončena
 - Všechny položky z plánu implementovány
 - Design system připraven pro další fáze (performance, accessibility, deployment)
+
+---
+
+## 2026-01-25 - Fáze 16.1: Konsolidace AthletePublicProfile
+
+### Dokončeno
+- [x] Konsolidace AthletePublicProfile z 5 variant na 3
+- [x] Embed - přepracováno na Aesthetic styl
+- [x] Satellite - přepracováno na Aesthetic styl
+- [x] Expressive - nová varianta (Aesthetic standalone, nahrazuje DivokaVoda a Aesthetic)
+- [x] Odstranění zastaralých variant: DivokaVoda, EmbedWithSidebar
+
+### Poznámky
+- Všechny tři varianty nyní používají `aesthetic: true` jako výchozí
+- Embed varianta zachovává KanoeCzContext wrapper
+- Expressive varianta je standalone s plnou navigací
+- Build a Storybook build prošly bez chyb

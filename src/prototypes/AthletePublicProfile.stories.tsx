@@ -727,69 +727,21 @@ export default meta;
 type Story = StoryObj<typeof AthletePublicProfile>;
 
 // ============================================================================
-// Integration Variants - Embed/Satellite only (Phase 8.9)
+// Phase 16.1: Consolidated Variants - Embed/Satellite/Expressive (all Aesthetic)
 // Use Storybook Controls to change section (dv/ry/vt) and showBackgroundImage
 // ============================================================================
 
 /**
- * Expressive standalone varianta - plný "wow" profil s hero sekcí.
- * Sekce Divoká voda (DV) jako výchozí. Použijte Controls pro změnu sekce.
- */
-export const DivokaVoda: Story = {
-  name: 'Expressive (DV)',
-  args: {
-    section: 'dv',
-    showBackgroundImage: true,
-    variant: 'standalone',
-    aesthetic: false,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Expressive standalone profil závodníka. Použijte Storybook Controls pro změnu sekce (dv/ry/vt) a zobrazení/skrytí fotky.',
-      },
-    },
-  },
-};
-
-/**
- * Aesthetic varianta s "Dynamic Sport" stylem.
- * Display fonts, energy accents, mesh backgrounds, staggered animations.
- */
-export const Aesthetic: Story = {
-  name: 'Aesthetic (Dynamic Sport)',
-  args: {
-    section: 'dv',
-    showBackgroundImage: true,
-    variant: 'standalone',
-    aesthetic: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: `
-**Aesthetic mode** aktivuje "Dynamic Sport" vizuální styl:
-- Plus Jakarta Sans display font pro nadpisy
-- Mesh gradient pozadí
-- Energy (coral-orange) akcenty a glow efekty
-- Border-accent na stats a highlight kartách
-- Staggered reveal animace pro career highlights
-        `,
-      },
-    },
-  },
-};
-
-/**
  * Embed varianta pro vložení do kanoe.cz.
- * Bez vlastního headeru a footeru, kompaktní styl.
+ * Aesthetic styl, bez vlastního headeru a footeru.
  */
 export const Embed: Story = {
-  name: 'Embed (kanoe.cz)',
+  name: 'Embed',
   args: {
     section: 'dv',
     showBackgroundImage: true,
     variant: 'embed',
+    aesthetic: true,
   },
   decorators: [
     (Story) => (
@@ -810,7 +762,13 @@ export const Embed: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Embed varianta pro vložení do kanoe.cz - bez vlastního headeru a footeru.',
+        story: `
+**Embed varianta** pro vložení do kanoe.cz kontextu:
+- Aesthetic styl (display fonts, energy accents, mesh backgrounds)
+- Bez vlastního headeru a footeru
+- Kompaktní layout optimalizovaný pro vložení
+- Container queries pro responsivní chování
+        `,
       },
     },
   },
@@ -818,7 +776,7 @@ export const Embed: Story = {
 
 /**
  * Satellite varianta pro standalone aplikace.
- * Minimální header s odkazem na kanoe.cz.
+ * Aesthetic styl, minimální header s odkazem na kanoe.cz.
  */
 export const Satellite: Story = {
   name: 'Satellite',
@@ -826,47 +784,46 @@ export const Satellite: Story = {
     section: 'dv',
     showBackgroundImage: true,
     variant: 'satellite',
+    aesthetic: true,
   },
   parameters: {
     docs: {
       description: {
-        story: 'Satellite varianta pro standalone aplikace s minimálním headerem.',
+        story: `
+**Satellite varianta** pro standalone aplikace:
+- Aesthetic styl (display fonts, energy accents, mesh backgrounds)
+- Minimální header s odkazem zpět na kanoe.cz
+- Vlastní footer
+- Plný "wow" profil s dramatickým hero
+        `,
       },
     },
   },
 };
 
 /**
- * Embed varianta se sidebarem v kanoe.cz layoutu.
- * Demonstrace container queries v úzkém sloupci.
+ * Expressive varianta - plný "wow" profil bez kanoe.cz kontextu.
+ * Aesthetic styl, kompletní standalone aplikace.
  */
-export const EmbedWithSidebar: Story = {
-  name: 'Embed se sidebarem',
+export const Expressive: Story = {
+  name: 'Expressive',
   args: {
-    section: 'ry',
-    showBackgroundImage: false,
-    variant: 'embed',
+    section: 'dv',
+    showBackgroundImage: true,
+    variant: 'standalone',
+    aesthetic: true,
   },
-  decorators: [
-    (Story) => (
-      <KanoeCzContext
-        layout="sidebar"
-        pageVariant="detail"
-        pageTitle="Martin Fuksa - Profil závodníka"
-        breadcrumbs={[
-          { label: 'Domů', href: '#' },
-          { label: 'Závodníci', href: '#' },
-          { label: 'Martin Fuksa' },
-        ]}
-      >
-        <Story />
-      </KanoeCzContext>
-    ),
-  ],
   parameters: {
     docs: {
       description: {
-        story: 'Embed varianta v úzkém sloupci - demonstrace container queries.',
+        story: `
+**Expressive varianta** - plný "wow" profil:
+- Aesthetic styl (display fonts, energy accents, mesh backgrounds)
+- Kompletní header s navigací
+- Dramatický fullscreen hero
+- Staggered reveal animace pro career highlights
+- Použijte Controls pro změnu sekce (dv/ry/vt)
+        `,
       },
     },
   },

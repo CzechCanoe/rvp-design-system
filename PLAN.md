@@ -4,236 +4,144 @@
 
 | Fáze | Status |
 |------|--------|
-| 0-7 (Založení) | ✅ Hotovo |
-| 8 (Integrace kanoe.cz) | ✅ Hotovo |
-| 9 (Audit DS) | ✅ Hotovo |
-| 13 (Testování) | ✅ Hotovo |
-| 14 (Test suite) | ✅ Částečně |
-| **15 (User feedback)** | 🔄 Aktivní |
+| 0-14 (Založení až Test suite) | ✅ Hotovo |
+| 15 (User feedback) | ✅ Hotovo |
+| **16 (Konsolidace prototypů)** | 🔄 Aktivní |
 
 *Detaily dokončených fází viz `PLAN-history.md`*
 
 ---
 
-## Fáze 15: User Feedback Review
+## Fáze 16: Konsolidace prototypů
 
-**Kontext:** Souhrnné připomínky po procházení Storybooku. Live bude první nasazená věc.
+**Cíl:** Sjednotit všechny prototypy na Aesthetic styl s konzistentními variantami.
 
-### 15.0 Aesthetic Refresh - "Dynamic Sport" (P0)
+### Cílové varianty pro každý prototyp
 
-**Cíl:** Aplikovat novou vizuální identitu na celý DS pro osobitější vzhled.
+| Varianta | Popis |
+|----------|-------|
+| **Embed** | Aesthetic styl, vložené do kanoe.cz kontextu |
+| **Satellite** | Aesthetic styl, samostatná hlavička |
+| **Expressive** | Aesthetic styl, bez kanoe.cz kontextu (pouze Athlete, Club, Event) |
 
-#### Foundation (HOTOVO)
-- [x] Plus Jakarta Sans display font (`--font-family-display`)
-- [x] Energy accent color (coral-orange #f97316, škála 50-900)
-- [x] Mesh backgrounds (`--bg-mesh-hero`, `--bg-mesh-card`, `--bg-mesh-primary`)
-- [x] Grain texture (`--texture-grain`, `.csk-grain`)
-- [x] Diagonal patterns (`--pattern-diagonal`, `.csk-diagonal`)
-- [x] Angular clip-paths (`--clip-angle-sm/md/lg`, `.csk-angle`)
-- [x] Border accent (`--border-accent-gradient`, `.csk-border-accent`)
-- [x] Staggered reveals (`.csk-reveal`, `.csk-reveal-1` až `-6`)
-- [x] Sport easings (`--ease-snap`, `--ease-sport`)
-- [x] `gradient-energy` Button variant
-- [x] Aesthetic.stories.tsx showcase
-
-#### Komponenty - Detailní plán
-
-**Button (HOTOVO):**
-- [x] `gradient-energy` varianta
-- [x] Display font pro large size (`font-family: var(--font-family-display)`)
-- [x] Hover glow efekt - `glow` prop pro energy glow on hover
-
-**Card (HOTOVO):**
-- [x] Nová varianta `aesthetic`:
-  - Mesh background (`--bg-mesh-card`)
-  - Border-accent left side
-  - Display font pro title (`.csk-card__title`)
-  - Energy glow on hover
-- [x] Props: `meshBg?: boolean`, `borderAccent?: boolean`
-- [x] Update Card.stories.tsx (Aesthetic, Modifiers, AestheticLiveEvent)
-
-**Header (HOTOVO):**
-- [x] Display font pro brand/title text (`csk-header__brand-title`, `csk-header__app-title`)
-- [x] Energy CTA button v actions slotu (stories ukázka)
-- [x] Update Header.stories.tsx s DisplayFontShowcase
-
-**Badge (HOTOVO):**
-- [x] Nová varianta `energy` (coral-orange)
-- [x] Display font pro `size="lg"`
-- [x] Glow efekt pro `glow` prop s energy barvou
-- [x] Update Badge.stories.tsx
-
-**ResultsTable (HOTOVO):**
-- [x] Display font pro rank čísla (`.csk-results-table__rank`)
-- [x] Energy color pro live indikátor místo red
-- [x] Border-accent pro featured řádky (`.csk-results-table__tr--featured`)
-- [x] Větší rank čísla pro podium (gold/silver/bronze)
-- [x] Live badge component (`.csk-results-table__live-badge`)
-- [x] Mesh background wrapper varianta (`.csk-results-table-wrapper--aesthetic`)
-
-**Avatar (HOTOVO):**
-- [x] Energy glow varianta (`glow` prop s `--glow-energy-md`)
-- [x] Border-accent ring option (`borderAccent` prop)
-- [x] Update Avatar.stories.tsx
-
-**Input/Select (forms):** *(HOTOVO)*
-- [x] Energy focus ring varianta (`energyFocus` prop s coral-orange glow)
-- [x] Display font pro labels (`displayLabel` prop)
-- [x] Update stories (EnergyFocus, DisplayLabel, AestheticForm)
-
-**Tabs:** *(HOTOVO)*
-- [x] Energy underline varianta (`variant="energy"`)
-- [x] Display font pro large size tab labels
-
-**Toast:** *(HOTOVO)*
-- [x] Energy varianta pro info/highlight (`variant="energy"`)
-- [x] Display font pro title (`displayTitle` prop)
-
-#### Prototypy - Detailní plán *(4 iterace celkem)*
-
-**LivePage:** *(HOTOVO)*
-- [x] Hero: mesh background, grain, display typography, energy LIVE badge, staggered reveal
-- [x] Results: ResultsTable aesthetic wrapper, energy live indicators
-- [x] Oncourse: border-accent pro aktivní závodníky (current-card)
-
-**AthletePublicPage:** *(HOTOVO)*
-- [x] Hero s mesh background + display typography
-- [x] Stats cards s border-accent + energy highlights
-- [x] Career highlights s staggered reveal + energy glow
-- [x] Display font pro section titles a rank čísla
-
-**ClubPublicProfile:** *(HOTOVO)*
-- [x] Obdobně jako AthletePublicPage
-- [x] Mesh background, display fonts, border-accent
-- [x] Staggered reveal pro členy a úspěchy klubu
-
-**EventDetailPage:** *(HOTOVO)*
-- [x] Header s energy CTA ("Sledovat live")
-- [x] Display typography + schedule border-accent
-- [x] Mesh background hero + staggered reveals
-- [x] Aesthetic stories (AestheticRegistration, AestheticLive, AestheticSchedule, AestheticDocuments)
-
-**CalendarPage:** *(HOTOVO)*
-- [x] Featured events s border-accent + energy badge pro live
-- [x] Mesh background hero + display typography
-- [x] Staggered reveal pro sidebar + upcoming items
-- [x] Aesthetic stories (Aesthetic, AestheticListView, AestheticDivokaVoda)
-
-**RegistrationPage:** *(HOTOVO)*
-- [x] Energy CTA + mesh background hero
-- [x] Display typography pro titles a stats
-- [x] Border-accent sidebar cards + staggered reveal
-- [x] Aesthetic stories (AestheticHeader, AestheticAthletes, AestheticSummary, AestheticRychlost)
-
-#### Cleanup - Odstranit nepotřebné varianty (HOTOVO)
-
-**Button:**
-- [x] Odstranit `gradient-accent` (nahrazeno `gradient-energy`)
-- [x] Finální varianty: primary, secondary, ghost, danger, gradient, gradient-energy
-
-**Badge:**
-- [x] Odstranit `gradient-accent`, `gradient-success`, `gradient-error`
-- [x] Přidat `energy` variantu (vibrant coral-orange)
-- [x] Finální varianty: default, primary, success, warning, error, info, gradient, energy
-- [x] Section varianty: dv, ry, vt + vtClass (beze změny)
-
-**Card (HOTOVO):**
-- [x] Odstranit `glass` variantu (není use case)
-- [x] Sloučit `featured` → `aesthetic` (duplicita)
-- [x] Finální varianty: surface, elevated, outlined, gradient, aesthetic
-
-**Header:**
-- [x] Odstranit `transparent` a `glass` varianty
-- [x] Finální varianty: default, elevated, gradient, satellite (4 varianty)
-
-**ResultsTable:**
-- [x] Odstranit `glass` style
-- [x] Finální style varianty: default, gradient, embed
-
-#### Dokumentace *(HOTOVO)*
-- [x] DESIGN_PRINCIPLES.md: "Dynamic Sport Aesthetic" sekce (energy color, display font)
-- [x] Aesthetic Guidelines story: display font vs body, energy vs primary, mesh contexts, animations
+Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ---
 
-### 15.1 Kritické - LivePage (P0) *(3 iterace)* ✅ HOTOVO
+### 16.1 Veřejné profily (Athlete, Club, Event)
 
-**Cíl:** LivePage musí být vymazlená namax - první nasazení.
+**AthletePublicProfile** (5 → 3) ✅
+- [x] Sloučit Aesthetic do Embed/Satellite
+- [x] Embed - přepracovat na Aesthetic
+- [x] Satellite - přepracovat na Aesthetic
+- [x] Expressive - nová varianta (Aesthetic standalone)
+- [x] Odstranit: DivokaVoda, EmbedWithSidebar
 
-- [x] **Oncourse redesign** - více závodníků na trati současně
-- [x] **Detail jízdy** - rozklik s penalizacemi na branách, časy (RunDetailModal)
-- [x] **Mobile fullscreen** - využít celou obrazovku, schovat menu
-- [x] **Výběr "svých jezdců"** - sledování + notifikace kdy jedou
-- [x] **Detailní schedule** - SchedulePanel s daty z C123 XML formátu (BR1, BR2, TSR, atd.)
-- [x] **Reorganizace layoutu** - "Další na startu" a "Aktuální pořadí" collapsible, sekundární
+**ClubPublicProfile** (5 → 3)
+- [ ] Sloučit Aesthetic do Embed/Satellite
+- [ ] Embed - přepracovat na Aesthetic
+- [ ] Satellite - přepracovat na Aesthetic
+- [ ] Expressive - ponechat, ověřit Aesthetic
+- [ ] Odstranit: EmbedWithSidebar
 
-Reference: https://live.results.cz/liveres.php (jak to NEMÁ vypadat)
+**EventDetailPage** (7 → 3)
+- [ ] Sloučit AestheticRegistration/Live/Schedule/Documents do hlavních variant
+- [ ] Embed - přepracovat na Aesthetic
+- [ ] Satellite - přepracovat na Aesthetic
+- [ ] Expressive - nová varianta (Aesthetic bez kanoe.cz)
+- [ ] Odstranit: EmbedWithSidebar
 
-### 15.2 Kritické - Results komponenta (P1) *(2 iterace)*
+### 16.2 Calendar + Results
 
-**Cíl:** Results je klíčová komponenta, musí být super vymazlená.
+**CalendarPage** (9 → 4)
+- [ ] Embed - Aesthetic grid view
+- [ ] EmbedListView - Aesthetic list view
+- [ ] Satellite - Aesthetic (grid default)
+- [ ] SatelliteListView - Aesthetic list view (nebo jako prop?)
+- [ ] Sloučit: Aesthetic*, LiveEventIndication jako features
+- [ ] Odstranit: EmbedWithSidebar, EmbedCardsView, původní varianty
 
-- [x] **Top 3 styling** - clean design s medal ikonami místo barevných pozadí
-- [x] **Avatary závodníků** - `showAvatars` prop (true | 'podium' | false)
-- [x] **Kompletní data** - věkové kategorie + `ageCategoryRank`, `showAgeCategoryRank` prop
-- [x] **Detail jízdy** - `RunDetailModal` komponenta s gate-by-gate penalizacemi, rozklik z ResultsTable
-- [x] **Modrá čára vlevo** - intentional hover efekt na clickable řádky (box-shadow inset), vizuálně konzistentní s podium border-left
-- [x] **Varianty** - review provedeno, stories jsou dobře organizované (19 stories s jasným účelem)
+**ResultsPage** (4 → 2)
+- [ ] Embed - přepracovat na Aesthetic
+- [ ] Satellite - přepracovat na Aesthetic
+- [ ] Compact jako feature/prop (ne samostatná story)
+- [ ] Odstranit: EmbedWithSidebar, EmbedCompact
 
-### 15.3 Rozbité věci (P2) *(2 iterace)* ✅ HOTOVO
+### 16.3 LivePage + Registration
 
-- [x] **DashboardPage** - analyzováno, není rozbitá (stories funkční)
-- [x] **CalendarPage EmbedWithSidebar** - přidán `container-type: inline-size` do KanoeCzContext
-- [x] **AthletePublicPage small mobile** - opraveny responsive styly pro 480px
-- [x] **AthletePublicPage header cards** - zmenšen negativní margin, opraveno překrývání
+**LivePage** (5 → 2)
+- [ ] Embed - ověřit plný Aesthetic
+- [ ] Satellite - ověřit plný Aesthetic
+- [ ] MobileFullscreen, FavoriteAthletes jako features v hlavních variantách
+- [ ] Odstranit: EmbedWithSidebar
 
-### 15.4 Design vylepšení (P3) *(2 iterace)* ✅ HOTOVO
+**RegistrationPage** (6 → 2)
+- [ ] Embed - nová varianta (Aesthetic)
+- [ ] Satellite - sloučit všechny Aesthetic* sekce
+- [ ] CrewRegistration jako feature
+- [ ] Odstranit: jednotlivé Aesthetic* stories
 
-**AthletePublicPage / ClubPublicProfile:**
-- [x] Pozadí headeru - akční fotka místo tváře (actionImageUrl oddělené od avataru)
-- [x] (CZ CZE) chip - pouze vlajka (country code jako title)
-- [x] Ikony kariérních úspěchů - profesionální SVG ikony (olympic medal, world, cup, national, promotion)
-- [x] Export button - odstraněn (pouze Sdílet zůstává)
+### 16.4 Vedlejší prototypy
 
-**Calendar:**
-- [x] Víkendové dny - vizuální zvýraznění (`.csk-calendar__day--weekend`)
+**DashboardPage** (1 → 2)
+- [ ] Embed - nová varianta (Aesthetic)
+- [ ] Satellite - přepracovat na Aesthetic
 
-**Results Page:**
-- [x] Top 3 karty redesign - horizontální layout, kompaktnější, dynamic sport aesthetic
+**ProfilePage** (1 → 2)
+- [ ] Embed - nová varianta (Aesthetic)
+- [ ] Satellite - přepracovat na Aesthetic
 
-### 15.5 Nové koncepty *(2 iterace)* ✅ HOTOVO
+**AthletesListPage** (3 → 2)
+- [ ] Embed - přepracovat na Aesthetic
+- [ ] Satellite - přepracovat na Aesthetic
+- [ ] Odstranit: EmbedWithSidebar
 
-- [x] **Sdílená hledací komponenta** - `SearchInput` komponenta s fulltext + chipy pro rychlé filtry
-- [x] **Registration UX** - přidávání jezdců, vícečlenné posádky (C2 crew selection)
-- [x] **Event indikace live** - že závod běží a má live results (Calendar + CalendarList)
+**ClubsListPage** (2 → 2)
+- [ ] Embed - přepracovat na Aesthetic
+- [ ] Satellite - přepracovat na Aesthetic
+
+**RankingsPage** (5 → 2)
+- [ ] Embed - přepracovat na Aesthetic (s section switcher)
+- [ ] Satellite - přepracovat na Aesthetic
+- [ ] Odstranit: EmbedRychlostni, EmbedVodniTuristika, EmbedArchive (jako props/tabs)
+
+---
+
+## Shrnutí změn
+
+| Prototyp | Před | Po | Varianty |
+|----------|------|-----|----------|
+| AthletePublicProfile | 5 | 3 | Embed, Satellite, Expressive |
+| ClubPublicProfile | 5 | 3 | Embed, Satellite, Expressive |
+| EventDetailPage | 7 | 3 | Embed, Satellite, Expressive |
+| CalendarPage | 9 | 4 | Embed, EmbedListView, Satellite, SatelliteListView |
+| ResultsPage | 4 | 2 | Embed, Satellite |
+| LivePage | 5 | 2 | Embed, Satellite |
+| RegistrationPage | 6 | 2 | Embed, Satellite |
+| DashboardPage | 1 | 2 | Embed, Satellite |
+| ProfilePage | 1 | 2 | Embed, Satellite |
+| AthletesListPage | 3 | 2 | Embed, Satellite |
+| ClubsListPage | 2 | 2 | Embed, Satellite |
+| RankingsPage | 5 | 2 | Embed, Satellite |
+| **Celkem** | **53** | **29** | |
 
 ---
 
 ## Odhad iterací
 
-| Sekce | Iterace |
-|-------|---------|
-| ~~15.0 Komponenty (Avatar, Forms, Tabs, Toast)~~ | ~~2~~ ✅ |
-| ~~15.0 Prototypy (AthletePublicPage, ClubPublicProfile)~~ | ~~2~~ ✅ |
-| ~~15.0 Prototypy (EventDetailPage, CalendarPage, RegistrationPage)~~ | ~~1~~ ✅ |
-| ~~15.0 Cleanup + Dokumentace~~ | ~~2~~ ✅ |
-| ~~15.1 LivePage (P0)~~ | ~~3~~ ✅ |
-| ~~15.2 Results (P1)~~ | ~~2~~ ✅ |
-| ~~15.3 Rozbité věci (P2)~~ | ~~1~~ ✅ |
-| ~~15.4 Design vylepšení (P3)~~ | ~~2~~ ✅ |
-| ~~15.5 Nové koncepty~~ | ~~2~~ ✅ |
-| **Celkem** | **~17** ✅ |
+| Sekce | Prototypy | Iterace |
+|-------|-----------|---------|
+| 16.1 Veřejné profily | Athlete, Club, Event | 3 |
+| 16.2 Calendar + Results | Calendar, Results | 2 |
+| 16.3 LivePage + Registration | Live, Registration | 1 |
+| 16.4 Vedlejší prototypy | Dashboard, Profile, AthletesList, ClubsList, Rankings | 3 |
+| **Celkem** | **12 prototypů** | **~9** |
 
 ---
 
 ## Další krok
 
-**Fáze 15 User Feedback dokončena!**
-
-Možné další kroky:
-- Fáze 16: Performance optimalizace (bundle size, lazy loading)
-- Fáze 17: Accessibility audit (WCAG 2.1 AA)
-- Fáze 18: Documentation site (public Storybook deploy)
+Pokračovat s **16.1 Veřejné profily** - ClubPublicProfile.
 
 ---
 
