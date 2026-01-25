@@ -162,7 +162,7 @@
 5. [x] AthletePublicProfile - refaktorováno: Icon, StatsBar
 6. [x] ResultsPage - refaktorováno: Icon, inline styles → CSS classes
 7. [x] CalendarPage - refaktorováno: Icon (7 SVG → Icon component)
-8. [ ] EventDetailPage
+8. [x] EventDetailPage - refaktorováno: Icon (9 SVG → Icon component)
 9. [ ] ProfilePage
 10. [ ] RegistrationPage
 11. [ ] DashboardPage

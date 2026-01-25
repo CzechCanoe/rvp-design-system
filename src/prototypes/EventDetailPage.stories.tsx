@@ -5,6 +5,7 @@ import { MainNav } from '../components/Navigation';
 import { Card } from '../components/Card';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
+import { Icon } from '../components/Icon';
 import { Input } from '../components/Input';
 import { Tabs } from '../components/Tabs';
 import { LiveIndicator } from '../components/LiveIndicator';
@@ -134,84 +135,8 @@ const navItems = [
   { id: 'clubs', label: 'Kluby', href: '#' },
 ];
 
-// ============================================================================
-// Icons
-// ============================================================================
-
-const SearchIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="8" />
-    <path d="M21 21l-4.35-4.35" />
-  </svg>
-);
-
-const LocationIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-    <circle cx="12" cy="10" r="3" />
-  </svg>
-);
-
-const CalendarIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-    <line x1="16" y1="2" x2="16" y2="6" />
-    <line x1="8" y1="2" x2="8" y2="6" />
-    <line x1="3" y1="10" x2="21" y2="10" />
-  </svg>
-);
-
-const UsersIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-    <circle cx="9" cy="7" r="4" />
-    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-  </svg>
-);
-
-const ClockIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" />
-    <polyline points="12 6 12 12 16 14" />
-  </svg>
-);
-
-const DownloadIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-    <polyline points="7 10 12 15 17 10" />
-    <line x1="12" y1="15" x2="12" y2="3" />
-  </svg>
-);
-
-const FileIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-    <polyline points="14 2 14 8 20 8" />
-    <line x1="16" y1="13" x2="8" y2="13" />
-    <line x1="16" y1="17" x2="8" y2="17" />
-    <polyline points="10 9 9 9 8 9" />
-  </svg>
-);
-
-const MapIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
-    <line x1="8" y1="2" x2="8" y2="18" />
-    <line x1="16" y1="6" x2="16" y2="22" />
-  </svg>
-);
-
-const ExternalLinkIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" y1="14" x2="21" y2="3" />
-  </svg>
-);
-
 // Note: WaveDecoration removed for cleaner design (Phase 8.6.3)
+// Note: Inline SVG icons replaced with Icon component (Phase 17.10)
 
 // ============================================================================
 // Helper Functions
@@ -327,13 +252,13 @@ const EventDetailPage = ({
               <Card variant="outlined" padding="md" className="event-detail-info__location-card">
                 <div className="event-detail-info__location">
                   <div className="event-detail-info__location-icon">
-                    <MapIcon />
+                    <Icon name="map" size="sm" />
                   </div>
                   <div className="event-detail-info__location-details">
                     <div className="event-detail-info__location-name">{eventData.location.venue}</div>
                     <div className="event-detail-info__location-address">{eventData.location.address}</div>
                     <a href="#" className="event-detail-info__location-link">
-                      Zobrazit na mapě <ExternalLinkIcon />
+                      Zobrazit na mapě <Icon name="external-link" size={14} />
                     </a>
                   </div>
                 </div>
@@ -490,7 +415,7 @@ const EventDetailPage = ({
                     className="event-detail-documents__item"
                   >
                     <div className="event-detail-documents__icon">
-                      <FileIcon />
+                      <Icon name="file" size="sm" />
                     </div>
                     <div className="event-detail-documents__info">
                       <div className="event-detail-documents__name">{doc.name}</div>
@@ -498,7 +423,7 @@ const EventDetailPage = ({
                         {doc.type.toUpperCase()} · {doc.size}
                       </div>
                     </div>
-                    <Button variant="ghost" size="sm" iconLeft={<DownloadIcon />}>
+                    <Button variant="ghost" size="sm" iconLeft={<Icon name="download" size="sm" />}>
                       Stáhnout
                     </Button>
                   </Card>
@@ -562,7 +487,7 @@ const EventDetailPage = ({
             type="search"
             placeholder="Hledat..."
             size="sm"
-            iconLeft={<SearchIcon />}
+            iconLeft={<Icon name="search" size="md" />}
           />
         }
         userMenu={
@@ -625,15 +550,15 @@ const EventDetailPage = ({
 
             <div className="event-detail-hero__meta">
               <span className="event-detail-hero__meta-item">
-                <CalendarIcon />
+                <Icon name="calendar" size="sm" />
                 {formatDateRange(eventData.dates.start, eventData.dates.end)}
               </span>
               <span className="event-detail-hero__meta-item">
-                <LocationIcon />
+                <Icon name="location" size="sm" />
                 {eventData.location.name}
               </span>
               <span className="event-detail-hero__meta-item">
-                <UsersIcon />
+                <Icon name="users" size="sm" />
                 {eventData.stats.entries} závodníků
               </span>
             </div>
@@ -645,7 +570,7 @@ const EventDetailPage = ({
                   Přihlásit se na závod
                 </Button>
                 <span className="event-detail-hero__deadline">
-                  <ClockIcon />
+                  <Icon name="clock" size="sm" />
                   Deadline: {formatDate(eventData.dates.registrationDeadline)}
                 </span>
               </div>
@@ -759,7 +684,7 @@ const EventDetailPage = ({
                 <div className="event-detail-sidebar__location">
                   <div className="event-detail-sidebar__location-name">{eventData.location.venue}</div>
                   <div className="event-detail-sidebar__location-address">{eventData.location.address}</div>
-                  <Button variant="ghost" size="sm" iconLeft={<MapIcon />}>
+                  <Button variant="ghost" size="sm" iconLeft={<Icon name="map" size="sm" />}>
                     Zobrazit mapu
                   </Button>
                 </div>
