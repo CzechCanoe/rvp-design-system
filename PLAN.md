@@ -199,10 +199,10 @@
 
 ## Plán realizace
 
-### Iterace 1: Icon systém
-- [ ] Rozhodnout: vlastní `<Icon />` vs lucide-react
-- [ ] Implementovat icon komponentu
-- [ ] Vytvořit icon katalog (všechny použité ikony z prototypů)
+### Iterace 1: Icon systém ✅
+- [x] Rozhodnout: vlastní `<Icon />` vs lucide-react → **lucide-react** (už bylo nainstalováno)
+- [x] Implementovat icon komponentu → `<Icon name="..." />` wrapper
+- [x] Vytvořit icon katalog → 45 ikon v kategorických stories
 
 ### Iterace 2: Layout komponenty
 - [ ] `<PageLayout variant="embed|satellite" />`
