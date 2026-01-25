@@ -596,7 +596,7 @@ Všechny utility musí mít dark mode verze v `[data-theme="dark"]` selektoru.
 
 ---
 
-### 18.9 Energy Colors Integration
+### 18.9 Energy Colors Integration ✅
 
 **Problém:** Při Phase 17 cleanup byly odstraněny Energy colors (coral-orange akcenty) jako "experimentální". Ale Energy je klíčová součást Dynamic Sport aesthetic stylu - dodává "šťávu" a vizuální energii.
 
@@ -922,12 +922,12 @@ grep -r "className=.*card" src/prototypes/ | grep -v "Card\|csk-"
 | **Tabs** | Aktivní tab accent | Střední | ✅ |
 | **ResultsTable** | Podium highlights, best time | Střední | ✅ |
 | **LiveIndicator** | Pulsující glow | Střední | ✅ |
-| CalendarPage | Dnešní den, deadline, vybraný event | Vysoká | ⏳ |
-| RegistrationPage | CTA "Registrovat", countdown | Vysoká | ⏳ |
-| LivePage | LIVE badge, current race | Vysoká | ⏳ |
-| ResultsPage | Podium energy glow | Střední | ⏳ |
-| EventDetailPage | CTA registrace | Střední | ⏳ |
-| DashboardPage | Deadlines, trends | Nízká | ⏳ |
+| CalendarPage | Dnešní den, deadline, vybraný event | Vysoká | ✅ |
+| RegistrationPage | CTA "Registrovat", countdown | Vysoká | ✅ |
+| LivePage | LIVE badge, current race | Vysoká | ✅ |
+| ResultsPage | Podium energy glow | Střední | ✅ |
+| EventDetailPage | CTA registrace | Střední | ✅ |
+| DashboardPage | Deadlines, trends | Nízká | ✅ |
 
 ---
 

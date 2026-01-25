@@ -6469,3 +6469,22 @@ EventDetailPage.css mělo již kompletní vizuální styly (hero gradienty, patt
 ### Build
 - ✅ TypeScript kompilace bez chyb
 - ✅ Vite build úspěšný (21.28s)
+
+---
+
+## 2026-01-25 - Fáze 18.9: Energy Colors v Prototypech - Validace
+
+### Dokončeno
+- [x] Ověřena implementace energy accentů ve všech prototypech
+- [x] CalendarPage: `accent="energy"` na CTA, `energyGlow` na LiveIndicator, `csk-energy-glow--sm` na live card
+- [x] RegistrationPage: `accent="energy"` na "Odeslat přihlášku", `csk-energy-glow--sm` na deadline card
+- [x] LivePage: `variant="energy" glow` na LIVE badge, `energyGlow` na LiveIndicator
+- [x] ResultsPage: `energyGlow` na LiveIndicator, `glow` na official results Badge
+- [x] EventDetailPage: `accent="energy"` na CTA tlačítkách, `energyGlow` na LiveIndicator
+- [x] DashboardPage: `energyGlow` na LiveIndicator, `dashboard-alert-item--energy` na danger alerts
+- [x] Build validace prošla úspěšně
+
+### Poznámky
+- Prototypy již měly energy accenty implementované v předchozích commitech
+- PLAN.md aktualizován - všechny položky 18.9 označeny jako ✅
+- Další na řadě: 18.10 Vizuální QA
