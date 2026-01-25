@@ -5728,3 +5728,17 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 ### Notes
 - Build verified successful
 - Pattern consistent with ClubsListPage and AthletesListPage refactoring
+
+---
+
+## 2026-01-25 - Fáze 17.7: ClubPublicProfile cleanup
+
+### Dokončeno
+- [x] Odstranění 10 inline SVG ikon (UsersIcon, TrophyIcon, GraduationCapIcon, UserIcon, MapPinIcon, MailIcon, GlobeIcon, PhoneIcon, ShareIcon, CalendarIcon)
+- [x] Nahrazení custom club-stat-card grid za StatsBar variant="cards"
+- [x] Použití Icon komponenty v hero a kontaktní sekci
+
+### Poznámky
+- Odstraněno ~125 řádků kódu (10 SVG komponent)
+- StatsBar cards varianta pokrývá potřeby club stats banneru
+- Další na řadě: AthletePublicProfile (obdobná struktura)
