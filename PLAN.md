@@ -510,7 +510,7 @@ Všechny utility musí mít dark mode verze v `[data-theme="dark"]` selektoru.
 
 ---
 
-### 18.4 Fix RankingsPage Top 3
+### 18.4 Fix RankingsPage Top 3 ✅
 
 **Soubory:**
 - `src/components/PodiumCard/PodiumCard.css`
@@ -529,11 +529,11 @@ Všechny utility musí mít dark mode verze v `[data-theme="dark"]` selektoru.
 - Hover efekty
 
 **Úkoly:**
-- [ ] Audit PodiumCard.css - má kompletní visual styles?
-- [ ] Pokud chybí, doplnit
-- [ ] Zkontrolovat použití v RankingsPage - správné props?
-- [ ] Případně přidat wrapper styling
-- [ ] Build validace
+- [x] Audit PodiumCard.css - má kompletní visual styles? ✅ (má kompletní gold/silver/bronze styling)
+- [x] Pokud chybí, doplnit - není potřeba
+- [x] Zkontrolovat použití v RankingsPage - správné props? ✅ (používá Card variant="aesthetic")
+- [x] Přidat VISUAL STYLES sekci do RankingsPage.css (header, top section, VT cards, filters, archive notice, footer)
+- [x] Build validace ✅
 - [ ] Vizuální kontrola
 
 ---
@@ -907,7 +907,7 @@ grep -r "className=.*card" src/prototypes/ | grep -v "Card\|csk-"
 |----------|---------|----------|------|
 | AthletePublicProfile | Hero, avatar, rank badges, highlight cards | Vysoká | ⏳ |
 | ClubPublicProfile | Hero, logo ring, member ranks, contacts | Vysoká | ⏳ |
-| RankingsPage | Top 3 nečitelné | Vysoká | ⏳ |
+| RankingsPage | Top 3 nečitelné | Vysoká | ✅ |
 | EventDetailPage | Hero chudé | Střední | ⏳ |
 | ResultsPage | Hero chudé | Střední | ⏳ |
 | ClubsListPage Embed | Header nalepený doleva | Střední | ⏳ |

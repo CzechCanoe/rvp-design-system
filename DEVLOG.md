@@ -6328,3 +6328,44 @@ Zůstává RegistrationPage jako poslední prototyp k reorganizaci.
 ### Poznámky
 - CSS prototypu nyní má jasné rozdělení: LAYOUT ONLY (positioning, flexbox, grid) + VISUAL STYLES (colors, typography, shadows)
 - Zbývá vizuální kontrola v Storybook pro dokončení 18.2
+
+---
+
+## 2026-01-25 - Fáze 18.3: ClubPublicProfile VISUAL STYLES
+
+### Dokončeno
+- [x] Přidána VISUAL STYLES sekce do ClubPublicProfile.css (~200 řádků)
+- [x] Hero section: gradient, pattern overlay, logo ring styling
+- [x] Typography: hero name/fullname, section headers
+- [x] Member cards: rank badges (gold/silver/bronze) 
+- [x] Highlight cards: border-accent, hover efekty
+- [x] Contact section: icon backgrounds, link styling
+- [x] Footer: background, border, text styling
+- [x] Dark mode adjustments pro všechny sekce
+- [x] Build validace OK
+
+### Poznámky
+- Analogická struktura jako AthletePublicProfile
+- Klub nemá sekci (dv/ry/vt), používá generic gradient
+- Logo je rounded (radius-xl) na rozdíl od kulatého avataru atleta
+
+---
+
+## 2026-01-25 - Fáze 18.4: RankingsPage Visual Styles
+
+### Dokončeno
+- [x] Audit PodiumCard.css - ověřeno, že má kompletní gold/silver/bronze visual styles
+- [x] Přidána VISUAL STYLES sekce do RankingsPage.css:
+  - Page header styling (title, subtitle, breadcrumb)
+  - Top 3 section styling (wrapper, title, icon)
+  - VT class cards styling (hover efekty)
+  - Filters label styling
+  - Table header styling
+  - Archive notice styling (včetně dark mode)
+  - Footer styling
+  - Pagination border styling
+
+### Poznámky
+- PodiumCard komponenta již obsahovala kompletní vizuální styly pro gold/silver/bronze pozice
+- Problém "Top 3 nečitelné" z PLAN.md byl způsoben chybějícími wrapper styly v RankingsPage.css
+- RankingsPage.css nyní obsahuje LAYOUT + VISUAL STYLES sekce dle konvencí Phase 17

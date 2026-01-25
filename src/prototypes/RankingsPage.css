@@ -336,3 +336,172 @@
     margin-top: var(--spacing-2);
   }
 }
+
+/* ==========================================================================
+   VISUAL STYLES - RankingsPage
+   ========================================================================== */
+
+/* Page header styling */
+.rankings-header {
+  background-color: var(--csk-color-surface-container, var(--color-bg-secondary));
+}
+
+.rankings-header__breadcrumb {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted, var(--color-text-secondary));
+}
+
+.rankings-header__breadcrumb a {
+  color: var(--color-primary-500);
+  text-decoration: none;
+}
+
+.rankings-header__breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.rankings-header__title {
+  font-family: var(--font-family-display, var(--font-family-sans));
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--csk-color-on-surface, var(--color-text-primary));
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.rankings-header__subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--csk-color-on-surface-muted, var(--color-text-secondary));
+}
+
+/* Top 3 section styling */
+.rankings-top {
+  background: var(--bg-mesh-card);
+  background-color: var(--csk-color-surface, var(--color-bg-primary));
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--csk-color-border, var(--color-border-default));
+}
+
+.rankings-top__title {
+  font-family: var(--font-family-display, var(--font-family-sans));
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--csk-color-on-surface, var(--color-text-primary));
+}
+
+.rankings-top__title svg {
+  color: var(--color-energy-500);
+}
+
+/* VT class cards styling */
+.rankings-vt-class {
+  background: var(--csk-color-surface, var(--color-bg-primary));
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--csk-color-border, var(--color-border-default));
+  transition: transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.rankings-vt-class:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.rankings-vt-class__label {
+  font-family: var(--font-family-display, var(--font-family-sans));
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--csk-color-on-surface, var(--color-text-primary));
+}
+
+.rankings-vt-class__count {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted, var(--color-text-secondary));
+}
+
+.rankings-vt-class__points {
+  font-size: var(--font-size-xs);
+  color: var(--csk-color-on-surface-muted, var(--color-text-tertiary));
+}
+
+/* Filters styling */
+.rankings-filters__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--csk-color-on-surface-muted, var(--color-text-secondary));
+}
+
+/* Table header styling */
+.rankings-table-title {
+  font-family: var(--font-family-display, var(--font-family-sans));
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--csk-color-on-surface, var(--color-text-primary));
+  margin: 0;
+}
+
+.rankings-table-info {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted, var(--color-text-secondary));
+}
+
+.rankings-table-header {
+  border-bottom: 1px solid var(--csk-color-border, var(--color-border-default));
+}
+
+/* Archive notice styling */
+.rankings-archive-notice {
+  background: var(--color-warning-50, #fffbeb);
+  border: 1px solid var(--color-warning-200, #fde68a);
+  border-radius: var(--radius-lg);
+}
+
+.rankings-archive-notice__icon {
+  color: var(--color-warning-500, #f59e0b);
+}
+
+.rankings-archive-notice__title {
+  font-family: var(--font-family-display, var(--font-family-sans));
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-warning-800, #92400e);
+}
+
+.rankings-archive-notice__text {
+  font-size: var(--font-size-sm);
+  color: var(--color-warning-700, #b45309);
+}
+
+/* Pagination styling */
+.rankings-pagination {
+  border-top: 1px solid var(--csk-color-border, var(--color-border-default));
+}
+
+/* Footer styling */
+.prototype-rankings__footer {
+  background: var(--csk-color-surface-container, var(--color-bg-secondary));
+  border-top: 1px solid var(--csk-color-border, var(--color-border-default));
+}
+
+.prototype-rankings__footer-content p {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted, var(--color-text-secondary));
+  margin: 0;
+}
+
+/* ==========================================================================
+   DARK MODE - RankingsPage
+   ========================================================================== */
+
+[data-theme="dark"] .rankings-archive-notice {
+  background: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+[data-theme="dark"] .rankings-archive-notice__title {
+  color: var(--color-warning-300, #fcd34d);
+}
+
+[data-theme="dark"] .rankings-archive-notice__text {
+  color: var(--color-warning-400, #fbbf24);
+}
