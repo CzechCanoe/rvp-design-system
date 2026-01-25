@@ -503,9 +503,9 @@ Všechny utility musí mít dark mode verze v `[data-theme="dark"]` selektoru.
 10. **Dark mode** adjustments
 
 **Úkoly:**
-- [ ] Přidat VISUAL STYLES sekci do ClubPublicProfile.css
-- [ ] Ověřit všechny CSS třídy jsou použity v TSX
-- [ ] Build validace
+- [x] Přidat VISUAL STYLES sekci do ClubPublicProfile.css
+- [x] Ověřit všechny CSS třídy jsou použity v TSX
+- [x] Build validace
 - [ ] Vizuální kontrola v Storybook
 
 ---

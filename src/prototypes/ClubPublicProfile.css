@@ -541,3 +541,248 @@
     padding: var(--spacing-4) 0;
   }
 }
+
+/* ==========================================================================
+   VISUAL STYLES - ClubPublicProfile
+
+   Visual enhancements: colors, gradients, typography, shadows, effects.
+   Organized by component/section for easy maintenance.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Hero Section Visual Styles
+   -------------------------------------------------------------------------- */
+
+/* Generic club hero gradient (clubs don't have sections like athletes) */
+.club-hero__gradient {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #3b82f6 100%);
+}
+
+/* Hero pattern overlay */
+.club-hero__pattern {
+  opacity: 0.15;
+  background-image:
+    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 80% at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+}
+
+/* Logo ring styling */
+.club-hero__logo-ring {
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3), var(--shadow-lg);
+}
+
+.club-hero__logo-img {
+  border-radius: var(--radius-lg);
+  object-fit: contain;
+}
+
+.club-hero__logo-initials {
+  border-radius: var(--radius-lg);
+  background: var(--color-primary-600);
+  color: white;
+  font-family: var(--font-family-display);
+  font-weight: 800;
+  font-size: var(--font-size-3xl);
+}
+
+/* Hero name typography */
+.club-hero__name {
+  font-family: var(--font-family-display);
+  font-size: var(--text-expr-mega-size, var(--font-size-5xl));
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.club-hero__fullname {
+  font-size: var(--font-size-lg);
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Hero meta styling */
+.club-hero__meta-item {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.club-hero__meta-item svg {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* --------------------------------------------------------------------------
+   Section Headers Visual Styles
+   -------------------------------------------------------------------------- */
+
+.club-section__title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--csk-color-on-surface);
+}
+
+.club-section__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Member Cards Visual Styles
+   -------------------------------------------------------------------------- */
+
+.club-member-card__name {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  color: var(--csk-color-on-surface);
+}
+
+.club-member-card__category {
+  font-weight: var(--font-weight-medium);
+  color: var(--csk-color-on-surface);
+}
+
+.club-member-card__year {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted);
+}
+
+/* Member rank badges */
+.club-member-card__rank {
+  border-radius: 50%;
+  font-family: var(--font-family-display);
+  font-weight: 800;
+  font-size: var(--font-size-xs);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.club-member-card__rank--1 {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
+}
+
+.club-member-card__rank--2 {
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  box-shadow: 0 0 6px rgba(156, 163, 175, 0.4);
+}
+
+.club-member-card__rank--3 {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  box-shadow: 0 0 6px rgba(217, 119, 6, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   Highlight Cards Visual Styles
+   -------------------------------------------------------------------------- */
+
+.club-highlight-card {
+  border-left: 4px solid;
+  border-image: var(--border-accent-gradient) 1;
+  transition: transform var(--motion-normal), box-shadow var(--motion-normal);
+}
+
+.club-highlight-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.club-highlight-card__year {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-500);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.club-highlight-card__title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--csk-color-on-surface);
+}
+
+.club-highlight-card__description {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted);
+}
+
+.club-highlight-card__medal {
+  font-size: var(--font-size-2xl);
+  opacity: 0.8;
+}
+
+/* --------------------------------------------------------------------------
+   Contact Section Visual Styles
+   -------------------------------------------------------------------------- */
+
+.club-contact__icon {
+  border-radius: var(--radius-lg);
+  background: var(--color-primary-100);
+  color: var(--color-primary-600);
+}
+
+.club-contact__label {
+  font-size: var(--font-size-xs);
+  color: var(--csk-color-on-surface-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.club-contact__value {
+  font-weight: var(--font-weight-medium);
+  color: var(--csk-color-on-surface);
+}
+
+.club-contact__value--link {
+  color: var(--color-primary-600);
+  text-decoration: none;
+  transition: color var(--motion-fast);
+}
+
+.club-contact__value--link:hover {
+  color: var(--color-primary-700);
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Footer Visual Styles
+   -------------------------------------------------------------------------- */
+
+.club-profile-footer {
+  background: var(--csk-color-surface-container);
+  border-top: 1px solid var(--csk-color-border);
+}
+
+.club-profile-footer__text {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Dark Mode Adjustments
+   -------------------------------------------------------------------------- */
+
+[data-theme="dark"] .club-hero__logo-initials {
+  background: var(--color-primary-500);
+}
+
+[data-theme="dark"] .club-contact__icon {
+  background: var(--color-primary-900);
+  color: var(--color-primary-300);
+}
+
+[data-theme="dark"] .club-contact__value--link {
+  color: var(--color-primary-400);
+}
+
+[data-theme="dark"] .club-contact__value--link:hover {
+  color: var(--color-primary-300);
+}
+
+[data-theme="dark"] .club-highlight-card__year {
+  color: var(--color-primary-400);
+}
