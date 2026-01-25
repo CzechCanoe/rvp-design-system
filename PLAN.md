@@ -107,16 +107,19 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ### 16.5 Polish a opravy 🔄
 
-#### Priorita 1: Cards layout fix
+#### Priorita 1: Cards layout fix ✅
 
 **Problém:** V AthletePublicProfile a ClubPublicProfile mají Cards (např. Results, Achievements) divné okraje nahoře i po stranách. Také dochází ke kolizi obsahu se Share tlačítkem v headeru.
 
 **Řešení:**
-- [ ] Screenshotnout všechny 3 varianty AthletePublicProfile (Embed, Satellite, ExpressiveEmbed)
-- [ ] Screenshotnout ClubPublicProfile varianty
-- [ ] Opravit CSS spacing pro Cards - odstranit nadbytečné okraje
-- [ ] Vyřešit kolizi se Share tlačítkem (z-index nebo layout adjustment)
-- [ ] Ověřit konzistenci napříč variantami
+- [x] Opravit CSS spacing pro Cards - odstranit nadbytečné okraje
+  - Embed mód: odstraněn horizontální padding (kanoe-embed container ho poskytuje)
+  - Hero: negative margin breakout pro full-width efekt v embed kontextu
+  - Main content: snížen vertikální padding, odstraněn horizontální
+- [x] Vyřešit kolizi se Share tlačítkem (z-index nebo layout adjustment)
+  - Embed mód: Share tlačítko absolutně pozicionované v pravém horním rohu
+  - Kompaktnější styl tlačítka v embed módu
+- [x] Ověřit konzistenci napříč variantami - build prošel
 
 ---
 
@@ -260,7 +263,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Začít s **16.5 Polish a opravy** - Priorita 1: Cards layout fix (AthletePublicProfile, ClubPublicProfile).
+Pokračovat s **16.5 Polish a opravy** - Priorita 2: Aesthetic styl pro seznamy (AthletesListPage, ClubsListPage, RankingsPage).
 
 ---
 

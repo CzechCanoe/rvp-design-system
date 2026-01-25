@@ -846,6 +846,7 @@
 
 /* ============================================================================
    Embed Mode - For integration into kanoe.cz (Phase 8.13)
+   Phase 16.5: Fixed spacing - removed side padding since kanoe-embed provides it
    ============================================================================ */
 
 .club-public-profile--embed {
@@ -854,21 +855,45 @@
 }
 
 .club-public-profile--embed .club-hero {
-  min-height: 30vh;
-  padding: var(--spacing-6) var(--spacing-4);
+  min-height: 28vh;
+  /* Remove horizontal padding - kanoe-embed container provides it */
+  padding: var(--spacing-6) 0;
+  /* Negative margin to extend hero full width within embed container */
+  margin-left: -16px;
+  margin-right: -16px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .club-public-profile--embed .club-hero__content {
   gap: var(--spacing-4);
+  /* In embed mode, use relative positioning for better control */
+  position: relative;
+}
+
+/* Share button positioning in embed mode */
+.club-public-profile--embed .club-hero__actions {
+  /* Position absolutely to avoid collision with content */
+  position: absolute;
+  top: var(--spacing-4);
+  right: var(--spacing-4);
+  flex-direction: row;
+  z-index: 5;
+}
+
+.club-public-profile--embed .club-hero__actions .csk-button {
+  min-width: auto;
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-sm);
 }
 
 .club-public-profile--embed .club-hero__logo-ring {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
 }
 
 .club-public-profile--embed .club-hero__logo-initials {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
 }
 
 .club-public-profile--embed .club-hero__name {
@@ -876,8 +901,9 @@
 }
 
 .club-public-profile--embed .club-stats-banner {
-  margin-top: calc(var(--spacing-6) * -1);
-  padding: 0 var(--spacing-4);
+  margin-top: calc(var(--spacing-5) * -1);
+  /* No horizontal padding - inherits from embed container */
+  padding: 0;
 }
 
 .club-public-profile--embed .club-stats-banner__grid {
@@ -889,7 +915,8 @@
 }
 
 .club-public-profile--embed .club-main {
-  padding: var(--spacing-6) var(--spacing-4);
+  /* Reduced vertical padding, no horizontal padding */
+  padding: var(--spacing-6) 0;
 }
 
 /* Container queries for narrow containers */
@@ -908,6 +935,10 @@
   }
 
   .club-public-profile--embed .club-hero__meta {
+    justify-content: center;
+  }
+
+  .club-public-profile--embed .club-hero__actions {
     justify-content: center;
   }
 
@@ -931,16 +962,19 @@
 @container (max-width: 600px) {
   .club-public-profile--embed .club-hero {
     min-height: auto;
-    padding: var(--spacing-5) var(--spacing-3);
+    /* Preserve negative margin breakout but reduce padding */
+    padding: var(--spacing-5) 12px;
+    margin-left: -16px;
+    margin-right: -16px;
   }
 
   .club-public-profile--embed .club-hero__logo-ring {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
   }
 
   .club-public-profile--embed .club-hero__logo-initials {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 
   .club-public-profile--embed .club-hero__name {
@@ -958,5 +992,9 @@
 
   .club-public-profile--embed .club-members-grid {
     grid-template-columns: 1fr;
+  }
+
+  .club-public-profile--embed .club-main {
+    padding: var(--spacing-4) 0;
   }
 }

@@ -5209,3 +5209,34 @@ přepracovanými prototypy. Další na řadě: RankingsPage (5 → 2 varianty).
 - ExpressiveEmbed = "wow" efekty (dramatický hero, animace) + kanoe.cz kontext
 - Embed = standardní Aesthetic v kanoe.cz kontextu
 - Satellite = Aesthetic se standalone headerem
+
+---
+
+## 2026-01-25 - Fáze 16.5.1: Cards layout fix
+
+### Dokončeno
+- [x] Opravit CSS spacing pro Cards v AthletePublicProfile a ClubPublicProfile
+- [x] Vyřešit kolizi se Share tlačítkem v hero sekci
+- [x] Ověřit build a konzistenci
+
+### Změny
+
+**AthletePublicProfile.css:**
+- Embed mód: odstraněn horizontální padding (kanoe-embed container ho poskytuje)
+- Hero: negative margin breakout (-16px) pro full-width efekt v embed kontextu
+- Main content: snížen vertikální padding, odstraněn horizontální
+- Share tlačítko: absolutně pozicionované v pravém horním rohu v embed módu
+- Container queries: přidány pravidla pro actions centering
+
+**ClubPublicProfile.css:**
+- Stejné úpravy jako AthletePublicProfile
+- Konzistentní embed styling
+
+### Technické detaily
+- `kanoe-embed` container má `padding: 16px`, takže prototypy v embed módu tuto vrstvu využívají
+- Hero sekce používá negative margin (-16px) s padding pro breakout efekt
+- Share tlačítko je v embed módu absolutně pozicionované pro prevenci kolize
+
+### Poznámky
+- Build prošel úspěšně
+- Další krok: Priorita 2 - Aesthetic styl pro seznamy

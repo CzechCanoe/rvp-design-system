@@ -995,6 +995,7 @@
 
 /* ============================================================================
    Embed Mode - For integration into kanoe.cz (Phase 8.7.5)
+   Phase 16.5: Fixed spacing - removed side padding since kanoe-embed provides it
    ============================================================================ */
 
 .athlete-public-profile--embed {
@@ -1003,26 +1004,51 @@
 }
 
 .athlete-public-profile--embed .athlete-hero {
-  min-height: 40vh;
-  padding: var(--spacing-8) var(--spacing-4);
+  min-height: 35vh;
+  /* Remove horizontal padding - kanoe-embed container provides it */
+  padding: var(--spacing-6) 0;
+  /* Negative margin to extend hero full width within embed container */
+  margin-left: -16px;
+  margin-right: -16px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .athlete-public-profile--embed .athlete-hero__content {
   gap: var(--spacing-4);
+  /* In embed mode, use relative positioning for better control */
+  position: relative;
+}
+
+/* Share button positioning in embed mode */
+.athlete-public-profile--embed .athlete-hero__actions {
+  /* Position absolutely to avoid collision with content */
+  position: absolute;
+  top: var(--spacing-4);
+  right: var(--spacing-4);
+  flex-direction: row;
+  z-index: 5;
+}
+
+.athlete-public-profile--embed .athlete-hero__actions .csk-button {
+  min-width: auto;
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-sm);
 }
 
 .athlete-public-profile--embed .athlete-hero__avatar-ring {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
 }
 
 .athlete-public-profile--embed .athlete-hero__name {
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-2xl);
 }
 
 .athlete-public-profile--embed .athlete-stats-banner {
-  margin-top: calc(var(--spacing-8) * -1);
-  padding: 0 var(--spacing-4);
+  margin-top: calc(var(--spacing-6) * -1);
+  /* No horizontal padding - inherits from embed container */
+  padding: 0;
 }
 
 .athlete-public-profile--embed .athlete-stats-banner__grid {
@@ -1034,7 +1060,13 @@
 }
 
 .athlete-public-profile--embed .athlete-main {
-  padding: var(--spacing-8) var(--spacing-4);
+  /* Reduced vertical padding, no horizontal padding */
+  padding: var(--spacing-6) 0;
+}
+
+/* Section cards in embed mode - remove side margins */
+.athlete-public-profile--embed .athlete-section {
+  /* Cards already have their own padding */
 }
 
 /* Container queries for narrow containers */
@@ -1060,6 +1092,10 @@
     justify-content: center;
   }
 
+  .athlete-public-profile--embed .athlete-hero__actions {
+    justify-content: center;
+  }
+
   .athlete-public-profile--embed .athlete-stats-banner__grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1076,16 +1112,19 @@
 @container (max-width: 600px) {
   .athlete-public-profile--embed .athlete-hero {
     min-height: auto;
-    padding: var(--spacing-6) var(--spacing-3);
+    /* Preserve negative margin breakout but reduce padding */
+    padding: var(--spacing-5) 12px;
+    margin-left: -16px;
+    margin-right: -16px;
   }
 
   .athlete-public-profile--embed .athlete-hero__avatar-ring {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
   }
 
   .athlete-public-profile--embed .athlete-hero__name {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-xl);
   }
 
   .athlete-public-profile--embed .athlete-stat-card {
@@ -1095,5 +1134,9 @@
   .athlete-public-profile--embed .athlete-stat-card__icon {
     width: 36px;
     height: 36px;
+  }
+
+  .athlete-public-profile--embed .athlete-main {
+    padding: var(--spacing-4) 0;
   }
 }
