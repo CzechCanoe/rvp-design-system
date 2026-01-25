@@ -69,6 +69,10 @@ const meta = {
       control: 'boolean',
       description: 'Weekend-focused layout - gives more width to weekend columns where most sports events occur',
     },
+    weekendShowcase: {
+      control: 'boolean',
+      description: 'Weekend showcase layout - weekdays as compact ribbon, weekends as large cards. Ideal for sports calendars.',
+    },
   },
 } satisfies Meta<typeof Calendar>;
 
@@ -827,6 +831,109 @@ export const WeekendFocusedComparison: Story = {
       description: {
         story:
           'Porovnání standardního layoutu se 7 stejně širokými sloupci a weekend-focused layoutu s rozšířenými víkendovými sloupci.',
+      },
+    },
+  },
+};
+
+// =============================================================================
+// WEEKEND SHOWCASE LAYOUT (Phase 16.5 - Out-of-the-box approach)
+// =============================================================================
+
+/**
+ * Weekend Showcase - completely reimagined layout for sports calendars.
+ *
+ * Features:
+ * - Weekdays (Mon-Fri) appear as a compact horizontal ribbon with event dots
+ * - Weekend days (Sat/Sun) appear as large, prominent cards with full event details
+ * - Focus is clearly on weekends where 90% of canoe races occur
+ * - UX-friendly: entire week visible, but weekend dominates visually
+ */
+export const WeekendShowcase: Story = {
+  args: {
+    events: cskRaceEvents,
+    weekendShowcase: true,
+    size: 'lg',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Zcela nový layout pro sportovní kalendáře. Všední dny jsou jako kompaktní ribbon s event tečkami, víkendy jako velké karty s plnými detaily závodů.',
+      },
+    },
+  },
+};
+
+/**
+ * Weekend Showcase in kanoe.cz embed context.
+ */
+export const WeekendShowcaseEmbed: Story = {
+  args: {
+    events: cskRaceEvents,
+    weekendShowcase: true,
+    styleVariant: 'embed',
+  },
+  render: (args) => (
+    <KanoeCzContext>
+      <Calendar
+        {...args}
+        onEventClick={(event) => console.log('Event clicked:', event)}
+        onDayClick={(date) => console.log('Day clicked:', date)}
+      />
+    </KanoeCzContext>
+  ),
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story:
+          'Weekend Showcase layout v embed módu pro kanoe.cz. Ideální pro kanoistický kalendář závodů - víkendy jsou v centru pozornosti.',
+      },
+    },
+  },
+};
+
+/**
+ * Comparison: all three layout approaches.
+ */
+export const LayoutComparison: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gap: '48px' }}>
+      <div>
+        <h3 style={{ marginBottom: '16px', color: 'var(--color-text-primary)' }}>
+          1. Standard layout (7 equal columns)
+        </h3>
+        <p style={{ marginBottom: '12px', color: 'var(--color-text-secondary)', fontSize: '14px' }}>
+          Klasický grid - všechny dny mají stejnou šířku
+        </p>
+        <Calendar events={cskRaceEvents} />
+      </div>
+      <div>
+        <h3 style={{ marginBottom: '16px', color: 'var(--color-text-primary)' }}>
+          2. Weekend-focused layout (wider Sat/Sun columns)
+        </h3>
+        <p style={{ marginBottom: '12px', color: 'var(--color-text-secondary)', fontSize: '14px' }}>
+          Grid s rozšířenými víkendovými sloupci (1.8x šířka)
+        </p>
+        <Calendar events={cskRaceEvents} weekendFocused />
+      </div>
+      <div>
+        <h3 style={{ marginBottom: '16px', color: 'var(--color-text-primary)' }}>
+          3. Weekend Showcase (ribbon + cards)
+        </h3>
+        <p style={{ marginBottom: '12px', color: 'var(--color-text-secondary)', fontSize: '14px' }}>
+          Zcela jiný přístup: všední dny jako ribbon nahoře, víkendy jako velké karty
+        </p>
+        <Calendar events={cskRaceEvents} weekendShowcase />
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Porovnání všech tří layoutů: standard, weekend-focused a weekend showcase. Každý má své využití v závislosti na kontextu.',
       },
     },
   },

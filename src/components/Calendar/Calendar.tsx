@@ -77,6 +77,13 @@ export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onS
    * and less width to weekday columns (Mon-Fri).
    */
   weekendFocused?: boolean;
+  /**
+   * Weekend showcase layout - completely different approach.
+   * Weekdays appear as a compact ribbon at top (just numbers + dots).
+   * Weekend days (Sat/Sun) appear as large cards below with full event details.
+   * Ideal for sports calendars where 90% of events are on weekends.
+   */
+  weekendShowcase?: boolean;
 }
 
 // Helper functions
@@ -187,6 +194,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       animated = true,
       showLive = false,
       weekendFocused = false,
+      weekendShowcase = false,
       className,
       ...props
     },
@@ -354,6 +362,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       styleVariant !== 'default' && `csk-calendar--style-${styleVariant}`,
       animated && 'csk-calendar--animated',
       weekendFocused && 'csk-calendar--weekend-focused',
+      weekendShowcase && 'csk-calendar--weekend-showcase',
       className,
     ]
       .filter(Boolean)

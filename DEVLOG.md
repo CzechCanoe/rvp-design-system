@@ -5451,3 +5451,23 @@ Priorita 3 byla označena jako hotová, protože implementace již existuje z p�
 - **Fáze 16.5 kompletně dokončena** - všech 6 priorit hotovo
 - Design system je nyní konzistentní s Aesthetic stylem napříč všemi prototypy
 - Připraveno pro další fáze (performance, accessibility, deployment)
+
+---
+
+## 2026-01-25 - Fáze 16.5: Weekend Showcase Calendar Layout
+
+### Dokončeno
+- [x] Nový `weekendShowcase` prop pro Calendar komponentu
+- [x] Out-of-the-box přístup k weekend-focused layoutu:
+  - Všední dny (Po-Pá): ultra-kompaktní, 0.6fr šířka, eventy jako barevné tečky
+  - Víkendy (So/Ne): dominantní, 2fr šířka, velké karty s plnými detaily
+  - Víkend zabírá ~57% horizontálního prostoru
+  - Víkendové buňky jsou 2.5x vyšší než všední dny
+- [x] Aesthetic styling: gradient badge pro víkendová čísla, left-border accent
+- [x] Container query responsivita (600px, 400px breakpointy)
+- [x] Nové stories: WeekendShowcase, WeekendShowcaseEmbed, LayoutComparison
+- [x] CalendarPage aesthetic varianty používají weekendShowcase
+
+### Poznámky
+Původní `weekendFocused` prop zachován pro méně dramatický efekt (jen šířka sloupců).
+Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměřením na víkendy.

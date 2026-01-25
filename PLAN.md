@@ -186,17 +186,25 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 **Reference:** https://jakubbican.github.io/pages/terminovka (tabulkový/listový formát)
 
-**Řešení:** Weekend-focused layout
-- [x] Analyzovat aktuální Calendar grid implementaci
-- [x] Navrhnout lepší layout - vybrán Option C: Weekend-focused layout
-  - Víkendové sloupce (So/Ne) mají šířku 1.8fr
-  - Všední dny (Po-Pá) mají šířku 1fr
-  - Výsledek: víkend dostává ~52% prostoru, všední dny ~48%
-- [x] Implementovat `weekendFocused` prop do Calendar komponenty
-- [x] Přidat CSS styly s container query responsivitou
-- [x] Přidat stories pro dokumentaci nové vlastnosti
-- [x] Aplikovat v CalendarPage aesthetic variantách
-- [x] ListView a Cards varianty - potvrzeno OK (nepoužívají grid)
+**Řešení 1:** Weekend-focused layout (`weekendFocused` prop)
+- [x] Víkendové sloupce (So/Ne) mají šířku 1.8fr
+- [x] Všední dny (Po-Pá) mají šířku 1fr
+- [x] Výsledek: víkend dostává ~52% prostoru, všední dny ~48%
+
+**Řešení 2 (Out-of-the-box):** Weekend Showcase layout (`weekendShowcase` prop)
+- [x] Dramaticky odlišný vizuální přístup
+- [x] Všední dny (Po-Pá): ultra-kompaktní, 0.6fr šířka, malé event tečky
+- [x] Víkendy (So/Ne): dominantní, 2fr šířka, velké karty s plnými detaily
+- [x] Víkend zabírá ~57% horizontálního prostoru
+- [x] Víkendové buňky 2.5x vyšší než všední dny
+- [x] Gradient badge pro víkendová čísla, left-border accent pro eventy
+- [x] Container query responsivita (600px, 400px breakpointy)
+- [x] Aplikováno v CalendarPage aesthetic variantách
+
+**Stories:**
+- [x] `WeekendShowcase` - základní showcase layout
+- [x] `WeekendShowcaseEmbed` - v kanoe.cz kontextu
+- [x] `LayoutComparison` - porovnání všech tří přístupů
 
 ---
 
