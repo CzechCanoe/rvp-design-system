@@ -5312,3 +5312,55 @@ přepracovanými prototypy. Další na řadě: RankingsPage (5 → 2 varianty).
 - Použit stejný přístup jako u AthletesListPage
 - Hlavní rozdíly: ClubsListPage nemá "featured" sekci, místo toho má karty klubů s logem
 - Stats bar má 4 různé accent barvy (energy, success, info, warning)
+
+---
+
+## 2026-01-25 - Fáze 16.5: RankingsPage Aesthetic
+
+### Dokončeno
+- [x] RankingsPage - přepracován na plný Aesthetic styl
+
+### Implementováno
+1. **Hero sekce:** mesh gradient background, diagonal stripe, grain texture overlay
+2. **Stats bar:** 4 stat karty s různými energy accent barvami, hover lift efekty
+3. **Podium sekce:** dramatický podium pro top 3 se staggered reveal animacemi
+4. **Podium karty:** gradient pozadí (gold/silver/bronze), colored borders, hover shadows
+5. **VT class overview:** hover efekty, gradient badges pro třídy M/A/B/C
+6. **Section tabs:** aesthetic pill tabs v rounded kontejneru
+7. **Filtry:** uppercase labels, aesthetic styling
+8. **Dark mode:** plná podpora
+9. **Reduced motion:** respektuje uživatelské preference
+
+### Poznámky
+- RankingsPage nyní vizuálně konzistentní s AthletesListPage a ClubsListPage
+- Priorita 2 (Aesthetic seznamy) dokončena, další je Priorita 3 (Hero/Header vylepšení)
+
+---
+
+## 2026-01-25 - Fáze 16.5: Priorita 3 - Hero/Header audit
+
+### Dokončeno
+- [x] Analyzoval EventDetailPage Satellite hero jako referenci
+- [x] Auditoval AthletePublicProfile hero implementaci
+- [x] Auditoval ClubPublicProfile hero implementaci
+
+### Zjištění
+**AthletePublicProfile** již má plně implementovaný aesthetic hero:
+- Action photo background s actionImageUrl (fallback na portrait)
+- Section-specific gradient overlay (DV/RY/VT)
+- Display font pro mega jméno
+- Animated rank badge na avataru
+- Floating stats cards (wins, podiums, races, world ranking)
+- Parallax-like hover efekt na background
+- Aesthetic mode s mesh background a energy glow
+
+**ClubPublicProfile** již má implementovaný aesthetic hero:
+- Solid gradient background (kluby nemají typicky action photo)
+- Display font pro název klubu
+- Logo ring s initials fallback
+- Section badges s glow
+- Floating stats cards (members, athletes, coaches, juniors)
+- Staggered reveal animace pro členy a highlights
+
+### Poznámky
+Priorita 3 byla označena jako hotová, protože implementace již existuje z předchozích fází (Phase 15.0 Aesthetic Refresh). Plán byl vytvořen před implementací a nebyl aktualizován.

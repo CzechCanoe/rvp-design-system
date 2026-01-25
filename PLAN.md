@@ -158,27 +158,25 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ---
 
-#### Priorita 3: Hero/Header vylepšení
+#### Priorita 3: Hero/Header vylepšení ✅
 
-**Problém:** AthletePublicProfile a ClubPublicProfile nemají aesthetic hero/header. Header je příliš jednoduchý.
+**Stav:** Po analýze zjištěno, že aesthetic hero je již implementován.
 
-**Cíl:** Dramatický hero jako v EventDetailPage Satellite variantě:
-- Fullwidth hero s background image (action photo / club photo)
-- Gradient overlay pro čitelnost textu
-- Velké display fonty pro jméno
-- Stats bar pod hero (wins, podiums, ranking)
-- Animované entry efekty
+**AthletePublicProfile** již má:
+- [x] Background: action photo závodníka (actionImageUrl) s fallback na portrait
+- [x] Overlay: gradient s section barvou (DV modrý, RY zelený, VT červený)
+- [x] Content: jméno (display font), klub, vlajka, ranking badge s animací
+- [x] Stats bar: wins, podiums, závody, world ranking (floating cards)
+- [x] Hover efekty na background image (parallax-like scale)
+- [x] Aesthetic mode: mesh background, energy glow, border-accent
 
-**Úkoly:**
-- [ ] AthletePublicProfile - přidat aesthetic hero
-  - Background: action photo závodníka (actionImageUrl)
-  - Overlay: gradient s section barvou
-  - Content: jméno, klub, vlajka, ranking badge
-  - Stats bar: wins, podiums, world ranking
-- [ ] ClubPublicProfile - přidat aesthetic hero
-  - Background: klubové foto nebo pattern
-  - Content: název klubu, logo, počet členů, sekce
-- [ ] Review dalších kandidátů na hero (EventDetail Embed/ExpressiveEmbed?)
+**ClubPublicProfile** již má:
+- [x] Background: gradient pattern (solid, bez foto)
+- [x] Content: název klubu (display font), logo/initials, sekce badges
+- [x] Stats bar: členové, závodníci, trenéři, junioři (floating cards)
+- [x] Aesthetic mode: mesh background, energy glow, border-accent, staggered reveal
+
+**Poznámka:** ClubPublicProfile nemá background image, protože kluby typicky nemají "action photo". Gradient pozadí je vhodné řešení.
 
 ---
 
@@ -272,7 +270,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.5 Polish a opravy** - Priorita 3: Hero/Header vylepšení (AthletesListPage ✅, ClubsListPage ✅, RankingsPage ✅ hotovo).
+Pokračovat s **16.5 Polish a opravy** - Priorita 4: Calendar komponenta (zarovnání grid mřížky).
 
 ---
 
