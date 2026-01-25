@@ -235,12 +235,7 @@
   box-shadow: var(--shadow-expr-float, var(--shadow-xl));
 }
 
-/* Aesthetic variant - energy glow on hover, border-accent */
-.club-public-profile--aesthetic .club-stat-card {
-  border-left: var(--border-accent-width) solid transparent;
-  border-image: var(--border-accent-gradient) 1;
-}
-
+/* Aesthetic variant - energy glow on hover (top accent already via ::before) */
 .club-public-profile--aesthetic .club-stat-card:hover {
   box-shadow: var(--shadow-expr-float, var(--shadow-xl)), var(--glow-energy-sm);
 }
@@ -515,11 +510,27 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Aesthetic highlight cards - border-accent, staggered reveal, energy glow */
+/* Aesthetic highlight cards - top accent on hover, staggered reveal, energy glow */
 .club-public-profile--aesthetic .club-highlight-card {
-  border-left: var(--border-accent-width) solid transparent;
-  border-image: var(--border-accent-gradient) 1;
+  border: 1px solid var(--color-border);
   animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
+}
+
+/* Top accent bar - appears on hover */
+.club-public-profile--aesthetic .club-highlight-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary, linear-gradient(90deg, var(--color-primary-500), var(--color-energy-500, #fb923c)));
+  opacity: 0;
+  transition: opacity var(--duration-fast, 150ms) var(--ease-out, ease-out);
+}
+
+.club-public-profile--aesthetic .club-highlight-card:hover::after {
+  opacity: 1;
 }
 
 .club-public-profile--aesthetic .club-highlight-card:nth-child(1) { animation-delay: var(--stagger-1); }
@@ -527,6 +538,7 @@
 .club-public-profile--aesthetic .club-highlight-card:nth-child(3) { animation-delay: var(--stagger-3); }
 
 .club-public-profile--aesthetic .club-highlight-card:hover {
+  transform: translateY(-2px);
   box-shadow: var(--shadow-md), var(--glow-energy-sm);
 }
 
