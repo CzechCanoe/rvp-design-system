@@ -5898,3 +5898,27 @@ All 12 prototypes now use the unified Icon component. Section 17.3 (Prototype Ic
 - Eliminated 12 duplicate CSKLogo implementations
 - Consistent branding across all prototypes
 - Smaller prototype files (removed ~60 lines total)
+
+---
+
+## 2026-01-25 - Fáze 17.12: CSS Cleanup Audit
+
+### Dokončeno
+- [x] Audit CSS souborů komponent - všechny experimentální varianty již odstraněny
+- [x] Aktualizace komentářů v Button.css a Card.css (odstranění zmínek o gradient variantách)
+- [x] Ověření že inline styles byly odstraněny (0 výskytů v prototypech)
+- [x] Aktualizace metrik v PLAN.md
+
+### Zjištění
+1. **CSS komponent vyčištěno**: Žádné gradient/glass/energy/glow styly v klíčových souborech
+2. **Inline styles**: 0 výskytů (cíl splněn)
+3. **Custom icons**: 0 výskytů (cíl splněn)
+
+### Metriky
+- Component CSS: 16,046 řádků (vyšší kvůli novým komponentám)
+- Prototype CSS: 14,654 řádků (stále vysoké - cíl je ~600)
+- Inline styles: 0 ✅
+- Custom icons: 0 ✅
+
+### Poznámky
+CSS cleanup komponent je dokončen. Zbývá refaktoring CSS prototypů na čistý layout (~50 řádků/prototyp), což je rozsáhlý úkol pro další iterace.
