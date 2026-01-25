@@ -15,7 +15,7 @@ export interface StatsBarItem {
   iconElement?: ReactNode;
 }
 
-export type StatsBarVariant = 'inline' | 'cards' | 'compact';
+export type StatsBarVariant = 'inline' | 'cards' | 'compact' | 'floating';
 export type StatsBarSize = 'sm' | 'md' | 'lg';
 
 export interface StatsBarProps extends HTMLAttributes<HTMLDivElement> {
@@ -38,6 +38,7 @@ export interface StatsBarProps extends HTMLAttributes<HTMLDivElement> {
  * - inline: Horizontal row with optional dividers
  * - cards: Each stat in a mini card
  * - compact: Minimal styling, icon + value inline
+ * - floating: Aesthetic floating cards with shadows and border-accent
  */
 export function StatsBar({
   items,

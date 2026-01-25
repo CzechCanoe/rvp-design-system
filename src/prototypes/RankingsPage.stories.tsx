@@ -304,7 +304,7 @@ const RankingsPage = ({
           {/* Statistics */}
           <StatsBar
             items={statsBarItems}
-            variant="cards"
+            variant="floating"
             size="md"
             className="rankings-stats"
           />

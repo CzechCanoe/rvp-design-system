@@ -12,7 +12,7 @@ const meta: Meta<typeof StatsBar> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['inline', 'cards', 'compact'],
+      options: ['inline', 'cards', 'compact', 'floating'],
       description: 'Visual variant',
     },
     size: {
@@ -122,6 +122,28 @@ export const Compact: Story = {
     docs: {
       description: {
         story: 'Minimal styling with icon and value inline. Labels shown on hover.',
+      },
+    },
+  },
+};
+
+export const Floating: Story = {
+  args: {
+    items: athleteStats,
+    variant: 'floating',
+    size: 'lg',
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ padding: '40px', background: 'var(--csk-color-surface-container)' }}>
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Aesthetic floating cards with shadows, border-accent gradients, and hover effects. Perfect for hero sections and profile pages.',
       },
     },
   },

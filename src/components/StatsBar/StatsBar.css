@@ -165,3 +165,123 @@
     opacity: 1;
   }
 }
+
+/* ==========================================================================
+   Floating Variant - Aesthetic floating cards
+   ========================================================================== */
+
+.csk-stats-bar--floating {
+  gap: var(--spacing-5, 20px);
+}
+
+.csk-stats-bar--floating .csk-stats-bar__item {
+  position: relative;
+  background: var(--color-bg-primary, #fff);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--spacing-5, 20px) var(--spacing-6, 24px);
+  min-width: 140px;
+  text-align: center;
+  box-shadow:
+    0 4px 12px -2px rgba(0, 0, 0, 0.08),
+    0 8px 24px -4px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--color-border-default, rgba(0, 0, 0, 0.06));
+  border-left: 4px solid;
+  border-image: linear-gradient(180deg, var(--color-primary-500, #1176a6) 0%, var(--color-energy-500, #f97316) 100%) 1;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.csk-stats-bar--floating .csk-stats-bar__item:nth-child(1) {
+  border-image: linear-gradient(180deg, #1176a6 0%, #22a6d6 100%) 1;
+}
+
+.csk-stats-bar--floating .csk-stats-bar__item:nth-child(2) {
+  border-image: linear-gradient(180deg, #22a6d6 0%, #34d399 100%) 1;
+}
+
+.csk-stats-bar--floating .csk-stats-bar__item:nth-child(3) {
+  border-image: linear-gradient(180deg, #f97316 0%, #fbbf24 100%) 1;
+}
+
+.csk-stats-bar--floating .csk-stats-bar__item:nth-child(4) {
+  border-image: linear-gradient(180deg, #ef4444 0%, #f97316 100%) 1;
+}
+
+.csk-stats-bar--floating .csk-stats-bar__item:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 8px 24px -4px rgba(0, 0, 0, 0.12),
+    0 16px 40px -8px rgba(0, 0, 0, 0.08);
+}
+
+.csk-stats-bar--floating .csk-stats-bar__icon {
+  font-size: 1.5em;
+  margin-bottom: var(--spacing-2, 8px);
+  color: var(--color-primary-500, #1176a6);
+}
+
+.csk-stats-bar--floating .csk-stats-bar__value {
+  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: var(--text-2xl-size, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.csk-stats-bar--floating .csk-stats-bar__label {
+  margin-top: var(--spacing-1, 4px);
+  font-size: var(--text-sm-size, 0.875rem);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Floating size variants */
+.csk-stats-bar--floating.csk-stats-bar--sm .csk-stats-bar__item {
+  padding: var(--spacing-3, 12px) var(--spacing-4, 16px);
+  min-width: 100px;
+}
+
+.csk-stats-bar--floating.csk-stats-bar--sm .csk-stats-bar__value {
+  font-size: var(--text-lg-size, 1.125rem);
+}
+
+.csk-stats-bar--floating.csk-stats-bar--lg .csk-stats-bar__item {
+  padding: var(--spacing-6, 24px) var(--spacing-8, 32px);
+  min-width: 160px;
+}
+
+.csk-stats-bar--floating.csk-stats-bar--lg .csk-stats-bar__value {
+  font-size: var(--text-3xl-size, 1.875rem);
+}
+
+.csk-stats-bar--floating.csk-stats-bar--lg .csk-stats-bar__icon {
+  font-size: 2em;
+}
+
+/* Dark mode for floating */
+[data-theme="dark"] .csk-stats-bar--floating .csk-stats-bar__item {
+  background: var(--color-bg-secondary, #1a1a2e);
+  border-color: var(--color-border-secondary, rgba(255, 255, 255, 0.1));
+  box-shadow:
+    0 4px 12px -2px rgba(0, 0, 0, 0.3),
+    0 8px 24px -4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .csk-stats-bar--floating .csk-stats-bar__item:hover {
+  box-shadow:
+    0 8px 24px -4px rgba(0, 0, 0, 0.4),
+    0 16px 40px -8px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(17, 118, 166, 0.15);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .csk-stats-bar--floating .csk-stats-bar__item {
+    transition: none;
+  }
+
+  .csk-stats-bar--floating .csk-stats-bar__item:hover {
+    transform: none;
+  }
+}

@@ -296,7 +296,7 @@ const AthletesListPage = ({
 
           {/* Statistics */}
           <StatsBar
-            variant="cards"
+            variant="floating"
             size="md"
             className="athletes-list-stats"
             items={[

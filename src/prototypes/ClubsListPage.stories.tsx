@@ -344,7 +344,7 @@ const ClubsListPage = ({
 
           {/* Statistics */}
           <StatsBar
-            variant="cards"
+            variant="floating"
             size="lg"
             className="clubs-list-stats"
             items={[

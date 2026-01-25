@@ -103,6 +103,11 @@
   position: relative;
   margin-bottom: var(--spacing-10);
   padding: var(--spacing-8);
+  overflow: hidden;
+}
+
+.rankings-top__podium > div {
+  min-width: 0; /* Prevent grid item overflow */
 }
 
 .rankings-top__header {

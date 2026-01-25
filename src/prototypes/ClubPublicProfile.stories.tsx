@@ -248,7 +248,7 @@ function ClubPublicProfile({
       <div className="club-stats-banner">
         <div className="club-stats-banner__container">
           <StatsBar
-            variant="cards"
+            variant="floating"
             size="lg"
             items={[
               { key: 'members', icon: 'users', value: club.stats.members, label: 'Členů' },

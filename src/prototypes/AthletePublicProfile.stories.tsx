@@ -398,7 +398,7 @@ function AthletePublicProfile({
       <div className="athlete-stats-banner">
         <div className="athlete-stats-banner__container">
           <StatsBar
-            variant="cards"
+            variant="floating"
             size="lg"
             items={[
               { key: 'wins', icon: 'trophy', value: athlete.stats.wins, label: 'Vítězství' },
