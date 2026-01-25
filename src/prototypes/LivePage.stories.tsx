@@ -1754,16 +1754,20 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // ============================================================================
-// Integration Variants - Embed/Satellite only (Phase 8.9)
+// Story Variants (2 aesthetic variants: Embed, Satellite)
 // ============================================================================
 
 /**
  * **EMBED varianta** - Live výsledky vložené do kanoe.cz layoutu.
  *
- * Komponenta bez vlastního headeru a footeru, určená pro embedding
- * do existujícího webu kanoe.cz (Joomla + Bootstrap 4).
+ * Aesthetic design s plnou funkcionalitou:
+ * - Mesh gradient hero header
+ * - Immersive real-time updates
+ * - Favorite athletes tracking (star icon)
+ * - Fullscreen mode toggle (enableFullscreen prop)
+ * - Collapsible schedule, podium, and next-up panels
  *
- * Používá data-mode="embed" pro neutrální styling.
+ * Bez vlastního headeru/footeru - používá layout hostitelské stránky.
  */
 export const Embed: Story = {
   args: {
@@ -1772,6 +1776,7 @@ export const Embed: Story = {
     updateInterval: 3000,
     section: 'dv',
     variant: 'embed',
+    enableFullscreen: true,
   },
   decorators: [
     (Story) => (
@@ -1801,8 +1806,14 @@ export const Embed: Story = {
 /**
  * **SATELLITE varianta** - Standalone live výsledky s minimálním headerem.
  *
- * Pro samostatnou aplikaci live výsledků s odkazem zpět na kanoe.cz.
- * Header obsahuje pouze logo CSK, název aplikace a přihlášení.
+ * Aesthetic design s plnou funkcionalitou:
+ * - Mesh gradient hero header
+ * - Satellite header with CSK branding
+ * - Favorite athletes tracking (star icon)
+ * - Fullscreen mode toggle (bottom-right button)
+ * - Collapsible schedule, podium, and next-up panels
+ *
+ * Standalone aplikace s odkazem zpět na kanoe.cz.
  */
 export const Satellite: Story = {
   args: {
@@ -1811,117 +1822,14 @@ export const Satellite: Story = {
     updateInterval: 3000,
     section: 'dv',
     variant: 'satellite',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Standalone aplikace live výsledků s minimálním satellite headerem. Obsahuje odkaz zpět na kanoe.cz.',
-      },
-    },
-  },
-};
-
-/**
- * **EMBED + Sidebar** - Live výsledky v úzkém sloupci s postranním panelem.
- *
- * Demonstrace responzivity v omezeném prostoru typickém pro
- * Joomla šablony s postranním panelem.
- */
-export const EmbedWithSidebar: Story = {
-  args: {
-    initialCategory: 'K1M',
-    simulateLive: true,
-    updateInterval: 3000,
-    section: 'dv',
-    variant: 'embed',
-  },
-  decorators: [
-    (Story) => (
-      <KanoeCzContext
-        layout="sidebar"
-        showSidebar={true}
-        pageVariant="detail"
-        pageTitle="Live výsledky"
-        breadcrumbs={[
-          { label: 'Úvod', href: '#' },
-          { label: 'Divoká voda', href: '#' },
-          { label: 'Live výsledky' },
-        ]}
-      >
-        <Story />
-      </KanoeCzContext>
-    ),
-  ],
-  parameters: {
-    docs: {
-      description: {
-        story: 'Live výsledky v layoutu se sidebarem. Demonstrace container queries a responzivity v úzkém prostoru.',
-      },
-    },
-  },
-};
-
-// ============================================================================
-// Interactive Features - Fullscreen & Favorites (Phase 15.1)
-// ============================================================================
-
-/**
- * **Mobile Fullscreen Mode** - Maximized view for mobile devices.
- *
- * Features:
- * - Floating fullscreen toggle button (bottom-right)
- * - In fullscreen: hides header, footer, sidebar
- * - Oncourse panel becomes horizontal strip
- * - Optimized for small screens
- *
- * Click the fullscreen button in bottom-right to toggle.
- */
-export const MobileFullscreen: Story = {
-  args: {
-    initialCategory: 'K1M',
-    simulateLive: true,
-    updateInterval: 3000,
-    section: 'dv',
-    variant: 'standalone',
-    enableFullscreen: true,
-  },
-  parameters: {
-    viewport: {
-      defaultViewport: 'mobile2',
-    },
-    docs: {
-      description: {
-        story: 'Fullscreen režim optimalizovaný pro mobilní zařízení. Klikněte na tlačítko v pravém dolním rohu pro přepnutí do fullscreen režimu, který schová navigaci a sidebar pro maximální využití obrazovky.',
-      },
-    },
-  },
-};
-
-/**
- * **Favorite Athletes** - Track your athletes during the race.
- *
- * Features:
- * - Star icon next to each athlete name to add/remove favorites
- * - Favorites toggle button in filter bar
- * - Filter to show only favorite athletes
- *
- * Try clicking the star icon next to athlete names to favorite them,
- * then use the star filter button to show only favorites.
- */
-export const FavoriteAthletes: Story = {
-  args: {
-    initialCategory: 'K1M',
-    simulateLive: true,
-    updateInterval: 3000,
-    section: 'dv',
-    variant: 'standalone',
     enableFullscreen: true,
   },
   parameters: {
     docs: {
       description: {
-        story: 'Funkce sledování oblíbených závodníků. Klikněte na hvězdičku u jména závodníka pro přidání do sledovaných. Pomocí tlačítka s hvězdičkou ve filtru můžete zobrazit pouze sledované závodníky.',
+        story: 'Standalone aplikace live výsledků s Aesthetic designem. Obsahuje satellite header s odkazem na kanoe.cz, fullscreen režim a sledování oblíbených závodníků.',
       },
     },
   },
 };
+

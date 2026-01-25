@@ -69,11 +69,11 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ### 16.3 LivePage + Registration
 
-**LivePage** (5 → 2)
-- [ ] Embed - ověřit plný Aesthetic
-- [ ] Satellite - ověřit plný Aesthetic
-- [ ] MobileFullscreen, FavoriteAthletes jako features v hlavních variantách
-- [ ] Odstranit: EmbedWithSidebar
+**LivePage** (5 → 2) ✅
+- [x] Embed - ověřit plný Aesthetic
+- [x] Satellite - ověřit plný Aesthetic
+- [x] MobileFullscreen, FavoriteAthletes jako features v hlavních variantách
+- [x] Odstranit: EmbedWithSidebar
 
 **RegistrationPage** (6 → 2)
 - [ ] Embed - nová varianta (Aesthetic)
@@ -141,7 +141,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.3 LivePage + Registration** - LivePage.
+Pokračovat s **16.3 LivePage + Registration** - RegistrationPage.
 
 ---
 
