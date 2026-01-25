@@ -538,39 +538,35 @@ Všechny utility musí mít dark mode verze v `[data-theme="dark"]` selektoru.
 
 ---
 
-### 18.5 Fix EventDetailPage Hero
+### 18.5 Fix EventDetailPage Hero ✅
 
 **Soubory:**
 - `src/prototypes/EventDetailPage.css`
 
-**Aktuální stav:** CSS má VISUAL STYLES sekci, ale možná chybí mesh/pattern efekty.
-
-**Co zkontrolovat:**
-1. Hero gradient pro dv/ry/vt sekce
-2. Mesh background overlay
-3. Pattern overlay
-4. Stats floating cards styling
-5. Text shadows
+**Aktuální stav:** CSS má kompletní VISUAL STYLES sekci včetně:
+- Hero gradientů pro dv/ry/vt sekce
+- Pattern overlay
+- Typography stylů
+- Aesthetic animací
+- Expressive mode efektů (diagonal stripe, grain)
+- Dark mode a reduced motion
 
 **Úkoly:**
-- [ ] Audit VISUAL STYLES sekce v CSS
-- [ ] Doplnit chybějící efekty
-- [ ] Build validace
+- [x] Audit VISUAL STYLES sekce v CSS - kompletní, nepotřebuje doplnění
+- [x] Build validace
 - [ ] Vizuální kontrola
 
 ---
 
-### 18.6 Fix ResultsPage Hero
+### 18.6 Fix ResultsPage Hero ✅
 
 **Soubory:**
 - `src/prototypes/ResultsPage.css`
 
-**Postup:** Stejný jako EventDetailPage.
-
 **Úkoly:**
-- [ ] Audit VISUAL STYLES sekce v CSS
-- [ ] Doplnit chybějící efekty
-- [ ] Build validace
+- [x] Audit VISUAL STYLES sekce v CSS - chyběla kompletně
+- [x] Doplnit VISUAL STYLES sekci (header, podium, sidebar, footer, dark mode)
+- [x] Build validace
 - [ ] Vizuální kontrola
 
 ---

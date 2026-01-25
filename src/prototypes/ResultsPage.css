@@ -487,3 +487,301 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ==========================================================================
+   VISUAL STYLES - ResultsPage
+   Phase 18.6: Visual styling for results page prototype
+   ========================================================================== */
+
+/* ==========================================================================
+   Logo Visual Styles
+   ========================================================================== */
+
+.prototype-results-page__logo-text {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-600);
+  line-height: 1;
+}
+
+.prototype-results-page__logo-subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--csk-color-on-surface-muted);
+  line-height: 1.2;
+}
+
+/* ==========================================================================
+   Page Header Visual Styles
+   ========================================================================== */
+
+.results-page-header {
+  background: var(--csk-color-surface);
+  border-bottom: 1px solid var(--csk-color-border);
+}
+
+.results-page-header--dv {
+  background: linear-gradient(
+    135deg,
+    rgba(17, 118, 166, 0.05) 0%,
+    rgba(37, 99, 235, 0.03) 100%
+  );
+  border-left: var(--border-accent-width, 4px) solid;
+  border-image: linear-gradient(180deg, var(--color-section-dv) 0%, var(--color-primary-400) 100%) 1;
+}
+
+.results-page-header--ry {
+  background: linear-gradient(
+    135deg,
+    rgba(22, 163, 74, 0.05) 0%,
+    rgba(34, 197, 94, 0.03) 100%
+  );
+  border-left: var(--border-accent-width, 4px) solid;
+  border-image: linear-gradient(180deg, var(--color-section-ry) 0%, #4ade80 100%) 1;
+}
+
+.results-page-header--vt {
+  background: linear-gradient(
+    135deg,
+    rgba(185, 28, 28, 0.05) 0%,
+    rgba(220, 38, 38, 0.03) 100%
+  );
+  border-left: var(--border-accent-width, 4px) solid;
+  border-image: linear-gradient(180deg, var(--color-section-vt) 0%, #f87171 100%) 1;
+}
+
+.results-page-header__breadcrumb {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted);
+}
+
+.results-page-header__breadcrumb a {
+  color: var(--csk-color-on-surface-muted);
+  transition: color var(--transition-fast);
+}
+
+.results-page-header__breadcrumb a:hover {
+  color: var(--color-primary-600);
+}
+
+.results-page-header__breadcrumb span {
+  color: var(--csk-color-on-surface-muted);
+  opacity: 0.5;
+}
+
+.results-page-header__title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--csk-color-on-surface);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.results-page-header__meta {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted);
+}
+
+.results-page-header__meta-item svg {
+  color: var(--color-primary-500);
+  opacity: 0.8;
+}
+
+.results-page-header__stat-value {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  color: var(--color-energy-600);
+  line-height: 1;
+}
+
+.results-page-header__stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--csk-color-on-surface-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+/* Embed header adjustments */
+.prototype-results-page--embed .results-page-header {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--csk-color-border);
+}
+
+/* ==========================================================================
+   Podium Section Visual Styles
+   ========================================================================== */
+
+.results-page-podium {
+  background: var(--csk-color-surface-container);
+  border-bottom: 1px solid var(--csk-color-border);
+}
+
+.results-page-podium__title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--csk-color-on-surface);
+}
+
+.results-page-podium__header svg {
+  color: var(--color-energy-500);
+}
+
+/* Embed podium adjustments */
+.prototype-results-page--embed .results-page-podium {
+  background: transparent;
+  border-radius: var(--radius-lg);
+  border: none;
+}
+
+/* ==========================================================================
+   Main Content Visual Styles
+   ========================================================================== */
+
+.prototype-results-page__main {
+  background: var(--csk-color-surface);
+}
+
+.prototype-results-page__filters {
+  border-bottom: 1px solid var(--csk-color-border);
+}
+
+.prototype-results-page__results-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--csk-color-on-surface);
+}
+
+.prototype-results-page__results-count {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--csk-color-on-surface-muted);
+}
+
+/* ==========================================================================
+   Sidebar Visual Styles
+   ========================================================================== */
+
+.prototype-results-page__race-info-title,
+.prototype-results-page__categories-title,
+.prototype-results-page__downloads-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--csk-color-on-surface);
+  letter-spacing: -0.01em;
+}
+
+.prototype-results-page__race-info-label {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted);
+}
+
+.prototype-results-page__race-info-value {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--csk-color-on-surface);
+}
+
+/* Categories List Visual Styles */
+.prototype-results-page__categories-header {
+  border-bottom: 1px solid var(--csk-color-border);
+}
+
+.prototype-results-page__category-item {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.prototype-results-page__category-item:hover {
+  background: var(--csk-color-surface-container);
+}
+
+.prototype-results-page__category-item--active {
+  background: var(--color-primary-50);
+  color: var(--color-primary-700);
+  font-weight: var(--font-weight-medium);
+}
+
+.prototype-results-page__category-item--active:hover {
+  background: var(--color-primary-100);
+}
+
+.prototype-results-page__category-name {
+  font-weight: inherit;
+}
+
+.prototype-results-page__category-count {
+  font-size: var(--font-size-xs);
+  color: var(--csk-color-on-surface-muted);
+}
+
+.prototype-results-page__category-item--active .prototype-results-page__category-count {
+  color: var(--color-primary-600);
+}
+
+.prototype-results-page__category-count svg {
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   Footer Visual Styles
+   ========================================================================== */
+
+.prototype-results-page__footer {
+  background: var(--csk-color-surface-container);
+  border-top: 1px solid var(--csk-color-border);
+}
+
+.prototype-results-page__footer-content p {
+  font-size: var(--font-size-sm);
+  color: var(--csk-color-on-surface-muted);
+}
+
+/* ==========================================================================
+   Dark Mode Adjustments
+   ========================================================================== */
+
+[data-theme="dark"] .results-page-header--dv {
+  background: linear-gradient(
+    135deg,
+    rgba(17, 118, 166, 0.1) 0%,
+    rgba(37, 99, 235, 0.05) 100%
+  );
+}
+
+[data-theme="dark"] .results-page-header--ry {
+  background: linear-gradient(
+    135deg,
+    rgba(22, 163, 74, 0.1) 0%,
+    rgba(34, 197, 94, 0.05) 100%
+  );
+}
+
+[data-theme="dark"] .results-page-header--vt {
+  background: linear-gradient(
+    135deg,
+    rgba(185, 28, 28, 0.1) 0%,
+    rgba(220, 38, 38, 0.05) 100%
+  );
+}
+
+[data-theme="dark"] .prototype-results-page__category-item--active {
+  background: rgba(37, 99, 235, 0.15);
+  color: var(--color-primary-300);
+}
+
+[data-theme="dark"] .prototype-results-page__category-item--active:hover {
+  background: rgba(37, 99, 235, 0.2);
+}
+
+[data-theme="dark"] .prototype-results-page__category-item--active .prototype-results-page__category-count {
+  color: var(--color-primary-400);
+}
+
+[data-theme="dark"] .results-page-header__stat-value {
+  color: var(--color-energy-400);
+}
