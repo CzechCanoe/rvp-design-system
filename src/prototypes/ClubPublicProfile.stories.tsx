@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Header } from '../components/Header';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
+import { Card } from '../components/Card';
 import { Tabs } from '../components/Tabs';
 import { Avatar } from '../components/Avatar';
 import { Icon } from '../components/Icon';
@@ -284,7 +285,12 @@ function ClubPublicProfile({
             </div>
             <div className="club-members-grid">
               {members.map((member) => (
-                <article key={member.id} className="club-member-card">
+                <Card
+                  key={member.id}
+                  variant="outlined"
+                  className="club-member-card"
+                  clickable
+                >
                   <div className="club-member-card__avatar">
                     {member.imageUrl ? (
                       <Avatar
@@ -314,7 +320,7 @@ function ClubPublicProfile({
                       {member.section.toUpperCase()}
                     </Badge>
                   </div>
-                </article>
+                </Card>
               ))}
             </div>
           </section>
@@ -329,12 +335,17 @@ function ClubPublicProfile({
             </div>
             <div className="club-highlights">
               {club.highlights.map((highlight, index) => (
-                <article key={index} className="club-highlight-card">
+                <Card
+                  key={index}
+                  variant="outlined"
+                  className="club-highlight-card"
+                  clickable
+                >
                   <span className="club-highlight-card__year">{highlight.year}</span>
                   <h3 className="club-highlight-card__title">{highlight.title}</h3>
                   <p className="club-highlight-card__description">{highlight.description}</p>
                   <span className="club-highlight-card__medal">{highlight.medal}</span>
-                </article>
+                </Card>
               ))}
             </div>
           </section>
@@ -347,55 +358,53 @@ function ClubPublicProfile({
                 <p className="club-section__subtitle">Spojte se s námi</p>
               </div>
             </div>
-            <div className="club-contact">
-              <div className="club-contact__card">
-                <div className="club-contact__item">
-                  <div className="club-contact__icon">
-                    <Icon name="map-pin" />
-                  </div>
-                  <div className="club-contact__content">
-                    <span className="club-contact__label">Adresa</span>
-                    <span className="club-contact__value">{club.address}</span>
-                  </div>
+            <Card variant="outlined" className="club-contact__card">
+              <div className="club-contact__item">
+                <div className="club-contact__icon">
+                  <Icon name="map-pin" />
                 </div>
-
-                <div className="club-contact__item">
-                  <div className="club-contact__icon">
-                    <Icon name="mail" />
-                  </div>
-                  <div className="club-contact__content">
-                    <span className="club-contact__label">E-mail</span>
-                    <a href={`mailto:${club.email}`} className="club-contact__value club-contact__value--link">
-                      {club.email}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="club-contact__item">
-                  <div className="club-contact__icon">
-                    <Icon name="phone" />
-                  </div>
-                  <div className="club-contact__content">
-                    <span className="club-contact__label">Telefon</span>
-                    <a href={`tel:${club.phone}`} className="club-contact__value club-contact__value--link">
-                      {club.phone}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="club-contact__item">
-                  <div className="club-contact__icon">
-                    <Icon name="globe" />
-                  </div>
-                  <div className="club-contact__content">
-                    <span className="club-contact__label">Web</span>
-                    <a href={`https://${club.web}`} target="_blank" rel="noopener noreferrer" className="club-contact__value club-contact__value--link">
-                      {club.web}
-                    </a>
-                  </div>
+                <div className="club-contact__content">
+                  <span className="club-contact__label">Adresa</span>
+                  <span className="club-contact__value">{club.address}</span>
                 </div>
               </div>
-            </div>
+
+              <div className="club-contact__item">
+                <div className="club-contact__icon">
+                  <Icon name="mail" />
+                </div>
+                <div className="club-contact__content">
+                  <span className="club-contact__label">E-mail</span>
+                  <a href={`mailto:${club.email}`} className="club-contact__value club-contact__value--link">
+                    {club.email}
+                  </a>
+                </div>
+              </div>
+
+              <div className="club-contact__item">
+                <div className="club-contact__icon">
+                  <Icon name="phone" />
+                </div>
+                <div className="club-contact__content">
+                  <span className="club-contact__label">Telefon</span>
+                  <a href={`tel:${club.phone}`} className="club-contact__value club-contact__value--link">
+                    {club.phone}
+                  </a>
+                </div>
+              </div>
+
+              <div className="club-contact__item">
+                <div className="club-contact__icon">
+                  <Icon name="globe" />
+                </div>
+                <div className="club-contact__content">
+                  <span className="club-contact__label">Web</span>
+                  <a href={`https://${club.web}`} target="_blank" rel="noopener noreferrer" className="club-contact__value club-contact__value--link">
+                    {club.web}
+                  </a>
+                </div>
+              </div>
+            </Card>
           </section>
         </div>
       </main>

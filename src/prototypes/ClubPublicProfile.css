@@ -1,35 +1,30 @@
-/* ============================================================================
-   Club Public Profile - EXPRESSIVE Mode Prototype
-   Public club/organization profile with hero, stats, and member listing
+/* ==========================================================================
+   ClubPublicProfile Prototype Styles - LAYOUT ONLY
 
-   Phase 15.0: Aesthetic Refresh - Dynamic Sport aesthetic applied
-   - Mesh backgrounds, display typography, energy accents
-   - Staggered reveal animations, border accents
-   ============================================================================ */
+   Phase 17.21: CSS reduction to layout-only
+   Visual styles handled by design tokens (aesthetic.css) and components.
 
+   Guidelines:
+   - Only layout properties: display, flex, grid, gap, padding, margin
+   - Only sizing: max-width, width, height, min-width
+   - Only positioning: position, z-index (for stacking)
+   - NO colors, fonts, shadows, borders, animations, effects
+   ========================================================================== */
+
+/* Page container - flex column for header/main/footer */
 .club-public-profile {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-bg-primary);
 }
 
-/* Aesthetic variant with mesh background */
-.club-public-profile--aesthetic {
-  background: var(--bg-mesh-primary);
-  background-color: var(--color-bg-primary);
+.club-public-profile--embed {
+  min-height: auto;
 }
 
-/* Logo */
-.club-public-profile__logo {
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: var(--color-primary);
-}
-
-/* ============================================================================
-   HERO SECTION
-   ============================================================================ */
+/* ==========================================================================
+   Hero Section Layout
+   ========================================================================== */
 
 .club-hero {
   position: relative;
@@ -38,39 +33,26 @@
   align-items: flex-end;
   padding: var(--spacing-expr-hero-padding-y) var(--spacing-expr-hero-padding-x);
   overflow: hidden;
-  color: white;
 }
 
+/* Background layers - absolute positioning */
 .club-hero__background {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 }
 
-/* Gradient overlay */
 .club-hero__gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.7) 0%,
-    rgba(0, 0, 0, 0.4) 40%,
-    rgba(0, 0, 0, 0.1) 100%
-  );
 }
 
-/* Decorative pattern overlay */
 .club-hero__pattern {
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 40%);
-  opacity: 1;
 }
 
-/* Hero content */
+/* Hero content - grid layout */
 .club-hero__content {
   position: relative;
   z-index: 1;
@@ -83,7 +65,7 @@
   align-items: end;
 }
 
-/* Club logo/avatar */
+/* Club logo layout */
 .club-hero__logo {
   position: relative;
 }
@@ -91,35 +73,23 @@
 .club-hero__logo-ring {
   width: 140px;
   height: 140px;
-  border-radius: var(--radius-xl);
   padding: 4px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
-  box-shadow: var(--shadow-expr-avatar), 0 0 60px rgba(255, 255, 255, 0.2);
 }
 
 .club-hero__logo-img {
   width: 100%;
   height: 100%;
-  border-radius: var(--radius-lg);
-  object-fit: contain;
-  background-color: white;
 }
 
 .club-hero__logo-initials {
   width: 100%;
   height: 100%;
-  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-800));
-  font-size: 2.5rem;
-  font-weight: var(--font-weight-bold);
-  color: white;
-  letter-spacing: 0.05em;
 }
 
-/* Hero info section */
+/* Hero info layout */
 .club-hero__info {
   display: flex;
   flex-direction: column;
@@ -127,24 +97,10 @@
 }
 
 .club-hero__name {
-  font-size: var(--text-expr-mega-size, 3.5rem);
-  font-weight: var(--text-expr-mega-weight, 800);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
   margin: 0;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Aesthetic variant - display font for club name */
-.club-public-profile--aesthetic .club-hero__name {
-  font-family: var(--font-family-display);
-  font-weight: var(--text-display-weight);
-  letter-spacing: var(--text-display-tracking);
 }
 
 .club-hero__fullname {
-  font-size: var(--font-size-lg);
-  color: rgba(255, 255, 255, 0.8);
   margin: 0;
 }
 
@@ -160,8 +116,6 @@
   flex-wrap: wrap;
   gap: var(--spacing-6);
   margin-top: var(--spacing-2);
-  font-size: var(--font-size-base);
-  color: rgba(255, 255, 255, 0.9);
 }
 
 .club-hero__meta-item {
@@ -173,10 +127,9 @@
 .club-hero__meta-item svg {
   width: 18px;
   height: 18px;
-  opacity: 0.8;
 }
 
-/* Hero actions */
+/* Hero actions layout */
 .club-hero__actions {
   display: flex;
   flex-direction: column;
@@ -184,22 +137,9 @@
   align-self: end;
 }
 
-.club-hero__actions .csk-button {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  border-color: rgba(255, 255, 255, 0.3);
-  color: white;
-  min-width: 140px;
-}
-
-.club-hero__actions .csk-button:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
-/* ============================================================================
-   STATS BANNER
-   ============================================================================ */
+/* ==========================================================================
+   Stats Banner Layout
+   ========================================================================== */
 
 .club-stats-banner {
   position: relative;
@@ -213,114 +153,9 @@
   margin: 0 auto;
 }
 
-.club-stats-banner__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-6);
-}
-
-.club-stat-card {
-  position: relative;
-  padding: var(--spacing-6);
-  background: var(--color-surface-primary);
-  border-radius: var(--radius-expr-card-lg, var(--radius-xl));
-  box-shadow: var(--shadow-expr-featured, var(--shadow-lg));
-  text-align: center;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.club-stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-expr-float, var(--shadow-xl));
-}
-
-/* Aesthetic variant - energy glow on hover (top accent already via ::before) */
-.club-public-profile--aesthetic .club-stat-card:hover {
-  box-shadow: var(--shadow-expr-float, var(--shadow-xl)), var(--glow-energy-sm);
-}
-
-/* Stat card decorative accent */
-.club-stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--stat-accent, var(--color-primary));
-}
-
-.club-stat-card--primary::before {
-  background: linear-gradient(90deg, var(--color-primary-500), var(--color-primary-600));
-}
-
-.club-stat-card--gold::before {
-  background: linear-gradient(90deg, #ffd700, #ffb300);
-}
-
-.club-stat-card--silver::before {
-  background: linear-gradient(90deg, #e8e8e8, #a0a0a0);
-}
-
-.club-stat-card--bronze::before {
-  background: linear-gradient(90deg, #cd7f32, #a0522d);
-}
-
-.club-stat-card__icon {
-  width: 48px;
-  height: 48px;
-  margin: 0 auto var(--spacing-3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: var(--color-primary-100);
-  color: var(--color-primary-600);
-}
-
-.club-stat-card--gold .club-stat-card__icon {
-  background: linear-gradient(135deg, #fff9e6, #fff3cc);
-  color: #b8860b;
-}
-
-.club-stat-card--silver .club-stat-card__icon {
-  background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-  color: #666;
-}
-
-.club-stat-card--bronze .club-stat-card__icon {
-  background: linear-gradient(135deg, #fef3e6, #fde4cc);
-  color: #a0522d;
-}
-
-.club-stat-card__icon svg {
-  width: 24px;
-  height: 24px;
-}
-
-.club-stat-card__value {
-  font-size: var(--text-expr-stat-size, 2.5rem);
-  font-weight: var(--text-expr-stat-weight, 700);
-  line-height: 1.2;
-  color: var(--color-text-primary);
-  font-family: var(--font-family-mono);
-}
-
-.club-stat-card__label {
-  font-size: var(--font-size-base);
-  color: var(--color-text-secondary);
-  margin-top: var(--spacing-1);
-}
-
-/* Aesthetic stat card value - display font */
-.club-public-profile--aesthetic .club-stat-card__value {
-  font-family: var(--font-family-display);
-}
-
-/* ============================================================================
-   MAIN CONTENT
-   ============================================================================ */
+/* ==========================================================================
+   Main Content Layout
+   ========================================================================== */
 
 .club-main {
   flex: 1;
@@ -335,12 +170,15 @@
   gap: var(--spacing-expr-section-sm, var(--spacing-12));
 }
 
-/* Tabs */
+/* Tabs layout */
 .club-tabs {
   margin-bottom: var(--spacing-4);
 }
 
-/* Section titles */
+/* ==========================================================================
+   Section Layout
+   ========================================================================== */
+
 .club-section {
   display: flex;
   flex-direction: column;
@@ -355,29 +193,16 @@
 }
 
 .club-section__title {
-  font-size: var(--text-expr-h2-size, var(--font-size-2xl));
-  font-weight: var(--text-expr-h2-weight, 700);
-  line-height: 1.3;
   margin: 0;
-  color: var(--color-text-primary);
-}
-
-/* Aesthetic section titles - display font */
-.club-public-profile--aesthetic .club-section__title {
-  font-family: var(--font-family-display);
-  font-weight: var(--text-headline-weight);
-  letter-spacing: var(--text-headline-tracking);
 }
 
 .club-section__subtitle {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-secondary);
   margin: var(--spacing-1) 0 0;
 }
 
-/* ============================================================================
-   MEMBERS GRID
-   ============================================================================ */
+/* ==========================================================================
+   Members Grid Layout
+   ========================================================================== */
 
 .club-members-grid {
   display: grid;
@@ -385,39 +210,12 @@
   gap: var(--spacing-4);
 }
 
+/* Member Card Layout - Card component handles padding/border/background */
 .club-member-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--spacing-5);
-  background: var(--color-surface-primary);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
   text-align: center;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
-}
-
-.club-member-card:hover {
-  border-color: var(--color-primary-300);
-  box-shadow: var(--shadow-md);
-}
-
-/* Aesthetic member cards - staggered reveal, energy hover */
-.club-public-profile--aesthetic .club-member-card {
-  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
-}
-
-.club-public-profile--aesthetic .club-member-card:nth-child(1) { animation-delay: var(--stagger-1); }
-.club-public-profile--aesthetic .club-member-card:nth-child(2) { animation-delay: var(--stagger-2); }
-.club-public-profile--aesthetic .club-member-card:nth-child(3) { animation-delay: var(--stagger-3); }
-.club-public-profile--aesthetic .club-member-card:nth-child(4) { animation-delay: var(--stagger-4); }
-.club-public-profile--aesthetic .club-member-card:nth-child(5) { animation-delay: var(--stagger-5); }
-.club-public-profile--aesthetic .club-member-card:nth-child(6) { animation-delay: var(--stagger-6); }
-.club-public-profile--aesthetic .club-member-card:nth-child(n+7) { animation-delay: calc(var(--stagger-6) + 50ms); }
-
-.club-public-profile--aesthetic .club-member-card:hover {
-  box-shadow: var(--shadow-md), var(--glow-energy-sm);
 }
 
 .club-member-card__avatar {
@@ -431,29 +229,9 @@
   right: -4px;
   width: 28px;
   height: 28px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
-  font-weight: var(--font-weight-bold);
-  color: white;
-  border: 2px solid white;
-  box-shadow: var(--shadow-sm);
-}
-
-.club-member-card__rank--1 {
-  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
-  color: #7a5c00;
-}
-
-.club-member-card__rank--2 {
-  background: linear-gradient(135deg, #e8e8e8 0%, #a0a0a0 100%);
-  color: #333;
-}
-
-.club-member-card__rank--3 {
-  background: linear-gradient(135deg, #cd7f32 0%, #a0522d 100%);
 }
 
 .club-member-card__info {
@@ -464,30 +242,17 @@
 }
 
 .club-member-card__name {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
   margin: 0;
 }
 
 .club-member-card__meta {
   display: flex;
   gap: var(--spacing-2);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
 }
 
-.club-member-card__category {
-  font-weight: var(--font-weight-medium);
-}
-
-.club-member-card__year {
-  color: var(--color-text-muted);
-}
-
-/* ============================================================================
-   HIGHLIGHTS
-   ============================================================================ */
+/* ==========================================================================
+   Highlights Layout
+   ========================================================================== */
 
 .club-highlights {
   display: grid;
@@ -495,78 +260,21 @@
   gap: var(--spacing-6);
 }
 
+/* Highlight Card Layout - Card component handles padding/border/background */
 .club-highlight-card {
   position: relative;
-  padding: var(--spacing-6);
-  background: var(--color-surface-primary);
-  border-radius: var(--radius-expr-card, var(--radius-xl));
-  border: 1px solid var(--color-border);
   overflow: hidden;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.club-highlight-card:hover {
-  border-color: var(--color-primary-300);
-  box-shadow: var(--shadow-md);
-}
-
-/* Aesthetic highlight cards - top accent on hover, staggered reveal, energy glow */
-.club-public-profile--aesthetic .club-highlight-card {
-  border: 1px solid var(--color-border);
-  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
-}
-
-/* Top accent bar - appears on hover */
-.club-public-profile--aesthetic .club-highlight-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--gradient-primary, linear-gradient(90deg, var(--color-primary-500), var(--color-energy-500, #fb923c)));
-  opacity: 0;
-  transition: opacity var(--duration-fast, 150ms) var(--ease-out, ease-out);
-}
-
-.club-public-profile--aesthetic .club-highlight-card:hover::after {
-  opacity: 1;
-}
-
-.club-public-profile--aesthetic .club-highlight-card:nth-child(1) { animation-delay: var(--stagger-1); }
-.club-public-profile--aesthetic .club-highlight-card:nth-child(2) { animation-delay: var(--stagger-2); }
-.club-public-profile--aesthetic .club-highlight-card:nth-child(3) { animation-delay: var(--stagger-3); }
-
-.club-public-profile--aesthetic .club-highlight-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md), var(--glow-energy-sm);
 }
 
 .club-highlight-card__year {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
   margin-bottom: var(--spacing-2);
 }
 
 .club-highlight-card__title {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
   margin: 0 0 var(--spacing-2);
 }
 
-/* Aesthetic highlight title - display font */
-.club-public-profile--aesthetic .club-highlight-card__title {
-  font-family: var(--font-family-display);
-  font-weight: var(--text-headline-weight);
-}
-
 .club-highlight-card__description {
-  font-size: var(--font-size-base);
-  color: var(--color-text-secondary);
   margin: 0;
 }
 
@@ -574,21 +282,17 @@
   position: absolute;
   top: var(--spacing-4);
   right: var(--spacing-4);
-  font-size: 2rem;
 }
 
-/* ============================================================================
-   CONTACT
-   ============================================================================ */
+/* ==========================================================================
+   Contact Layout
+   ========================================================================== */
 
+/* Contact Card Layout - Card component handles padding/border/background */
 .club-contact__card {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-6);
-  padding: var(--spacing-6);
-  background: var(--color-surface-primary);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border);
 }
 
 .club-contact__item {
@@ -603,9 +307,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-primary-100);
-  color: var(--color-primary-600);
-  border-radius: var(--radius-md);
   flex-shrink: 0;
 }
 
@@ -620,34 +321,11 @@
   gap: var(--spacing-1);
 }
 
-.club-contact__label {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.club-contact__value {
-  font-size: var(--font-size-base);
-  color: var(--color-text-primary);
-}
-
-.club-contact__value--link {
-  color: var(--color-primary-600);
-  text-decoration: none;
-}
-
-.club-contact__value--link:hover {
-  text-decoration: underline;
-}
-
-/* ============================================================================
-   FOOTER
-   ============================================================================ */
+/* ==========================================================================
+   Footer Layout
+   ========================================================================== */
 
 .club-profile-footer {
-  background: var(--color-surface-secondary);
-  border-top: 1px solid var(--color-border);
   padding: var(--spacing-8) var(--spacing-8);
   text-align: center;
 }
@@ -659,51 +337,13 @@
 
 .club-profile-footer__text {
   margin: 0;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
 }
 
-/* ============================================================================
-   DARK MODE
-   ============================================================================ */
-
-[data-theme="dark"] .club-stat-card {
-  background: var(--color-surface-elevated);
-}
-
-[data-theme="dark"] .club-member-card {
-  background: var(--color-surface-elevated);
-}
-
-[data-theme="dark"] .club-highlight-card {
-  background: var(--color-surface-elevated);
-}
-
-[data-theme="dark"] .club-contact__card {
-  background: var(--color-surface-elevated);
-}
-
-[data-theme="dark"] .club-stat-card--gold .club-stat-card__icon {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 179, 0, 0.1));
-}
-
-[data-theme="dark"] .club-stat-card--silver .club-stat-card__icon {
-  background: linear-gradient(135deg, rgba(200, 200, 200, 0.2), rgba(160, 160, 160, 0.1));
-}
-
-[data-theme="dark"] .club-stat-card--bronze .club-stat-card__icon {
-  background: linear-gradient(135deg, rgba(205, 127, 50, 0.2), rgba(160, 82, 45, 0.1));
-}
-
-/* ============================================================================
-   RESPONSIVE DESIGN
-   ============================================================================ */
+/* ==========================================================================
+   Responsive Design - Layout Only
+   ========================================================================== */
 
 @media (max-width: 1200px) {
-  .club-stats-banner__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .club-members-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -755,14 +395,6 @@
     height: 100px;
   }
 
-  .club-hero__logo-initials {
-    font-size: 1.75rem;
-  }
-
-  .club-hero__name {
-    font-size: 2rem;
-  }
-
   .club-hero__badges {
     justify-content: center;
   }
@@ -778,25 +410,6 @@
   .club-stats-banner {
     padding: 0 var(--spacing-4);
     margin-top: calc(var(--spacing-8) * -1);
-  }
-
-  .club-stats-banner__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-3);
-  }
-
-  .club-stat-card {
-    padding: var(--spacing-4);
-  }
-
-  .club-stat-card__icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .club-stat-card__icon svg {
-    width: 20px;
-    height: 20px;
   }
 
   .club-main {
@@ -823,54 +436,18 @@
     height: 80px;
   }
 
-  .club-hero__logo-initials {
-    font-size: 1.5rem;
-  }
-
-  .club-hero__name {
-    font-size: 1.75rem;
-  }
-
   .club-members-grid {
     grid-template-columns: 1fr;
   }
-
-  .club-stat-card {
-    padding: var(--spacing-3);
-  }
-
-  .club-stat-card__value {
-    font-size: 1.75rem;
-  }
 }
 
-/* ============================================================================
-   REDUCED MOTION
-   ============================================================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  .club-stat-card,
-  .club-member-card,
-  .club-highlight-card {
-    transition: none;
-  }
-}
-
-/* ============================================================================
-   Embed Mode - For integration into kanoe.cz (Phase 8.13)
-   Phase 16.5: Fixed spacing - removed side padding since kanoe-embed provides it
-   ============================================================================ */
-
-.club-public-profile--embed {
-  min-height: auto;
-  background-color: transparent;
-}
+/* ==========================================================================
+   Embed Mode Layout Adjustments
+   ========================================================================== */
 
 .club-public-profile--embed .club-hero {
   min-height: 28vh;
-  /* Remove horizontal padding - kanoe-embed container provides it */
   padding: var(--spacing-6) 0;
-  /* Negative margin to extend hero full width within embed container */
   margin-left: -16px;
   margin-right: -16px;
   padding-left: 16px;
@@ -879,13 +456,10 @@
 
 .club-public-profile--embed .club-hero__content {
   gap: var(--spacing-4);
-  /* In embed mode, use relative positioning for better control */
   position: relative;
 }
 
-/* Share button positioning in embed mode */
 .club-public-profile--embed .club-hero__actions {
-  /* Position absolutely to avoid collision with content */
   position: absolute;
   top: var(--spacing-4);
   right: var(--spacing-4);
@@ -893,45 +467,24 @@
   z-index: 5;
 }
 
-.club-public-profile--embed .club-hero__actions .csk-button {
-  min-width: auto;
-  padding: var(--spacing-2) var(--spacing-3);
-  font-size: var(--font-size-sm);
-}
-
 .club-public-profile--embed .club-hero__logo-ring {
   width: 90px;
   height: 90px;
 }
 
-.club-public-profile--embed .club-hero__logo-initials {
-  font-size: 1.5rem;
-}
-
-.club-public-profile--embed .club-hero__name {
-  font-size: var(--font-size-2xl);
-}
-
 .club-public-profile--embed .club-stats-banner {
   margin-top: calc(var(--spacing-5) * -1);
-  /* No horizontal padding - inherits from embed container */
   padding: 0;
 }
 
-.club-public-profile--embed .club-stats-banner__grid {
-  gap: var(--spacing-3);
-}
-
-.club-public-profile--embed .club-stat-card {
-  padding: var(--spacing-4);
-}
-
 .club-public-profile--embed .club-main {
-  /* Reduced vertical padding, no horizontal padding */
   padding: var(--spacing-6) 0;
 }
 
-/* Container queries for narrow containers */
+/* ==========================================================================
+   Container Query Adjustments
+   ========================================================================== */
+
 @container (max-width: 900px) {
   .club-public-profile--embed .club-hero__content {
     grid-template-columns: 1fr;
@@ -954,10 +507,6 @@
     justify-content: center;
   }
 
-  .club-public-profile--embed .club-stats-banner__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .club-public-profile--embed .club-members-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -974,7 +523,6 @@
 @container (max-width: 600px) {
   .club-public-profile--embed .club-hero {
     min-height: auto;
-    /* Preserve negative margin breakout but reduce padding */
     padding: var(--spacing-5) 12px;
     margin-left: -16px;
     margin-right: -16px;
@@ -983,23 +531,6 @@
   .club-public-profile--embed .club-hero__logo-ring {
     width: 72px;
     height: 72px;
-  }
-
-  .club-public-profile--embed .club-hero__logo-initials {
-    font-size: 1.25rem;
-  }
-
-  .club-public-profile--embed .club-hero__name {
-    font-size: var(--font-size-xl);
-  }
-
-  .club-public-profile--embed .club-stat-card {
-    padding: var(--spacing-3);
-  }
-
-  .club-public-profile--embed .club-stat-card__icon {
-    width: 36px;
-    height: 36px;
   }
 
   .club-public-profile--embed .club-members-grid {

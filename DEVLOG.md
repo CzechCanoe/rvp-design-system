@@ -6104,3 +6104,21 @@ CSS cleanup komponent je dokončen. Zbývá refaktoring CSS prototypů na čist�
 - Většina vizuálních stylů byla již v komponentách (Calendar, Card, Tabs)
 - Odstraněno 575 řádků CSS celkem (13167 → 12592)
 - Další na řadě: ClubPublicProfile (1012 řádků)
+
+---
+
+## 2026-01-25 - Fáze 17.21: CSS redukce ClubPublicProfile
+
+### Dokončeno
+- [x] Redukce CSS z 1012 → 543 řádků (46% redukce)
+- [x] Převod member cards na Card komponenta (variant="outlined", clickable)
+- [x] Převod highlight cards na Card komponenta (variant="outlined", clickable)
+- [x] Převod contact card na Card komponenta (variant="outlined")
+- [x] Odstranění vizuálních stylů (barvy, fonty, stíny, animace)
+- [x] Zachování layout-only stylů (flex, grid, gap, padding, margin)
+- [x] Build validace OK
+
+### Poznámky
+- Card komponenta řeší padding, border, background, hover efekty
+- Prototyp nyní závisí na designových tokenech pro vizuální styling
+- Zbývající prototypy k redukci: AthletePublicProfile (1154), EventDetailPage (1150), ResultsPage (1199), DashboardPage (1215), ProfilePage (1550), RegistrationPage (1557), LivePage (2433)

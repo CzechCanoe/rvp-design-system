@@ -282,6 +282,12 @@
 - [x] Detail card: Card variant="aesthetic" s csk-border-accent
 - [x] Build validace OK
 
+### Iterace 21: CSS redukce ClubPublicProfile ✅
+- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
+- [x] Přepsat CSS na layout-only (1012 → 543 řádků, 46% redukce)
+- [x] Aktualizovat TSX - member cards, highlight cards, contact card → Card komponenta
+- [x] Build validace OK
+
 ---
 
 ## Metriky úspěchu
