@@ -31,6 +31,8 @@ interface ProfilePageProps {
   section?: 'dv' | 'ry' | 'vt';
   /** Display variant - embed (no header, in kanoe.cz context), satellite (minimal header) */
   variant?: ProfilePageVariant;
+  /** Aesthetic mode - display fonts, energy accents, mesh backgrounds */
+  aesthetic?: boolean;
 }
 
 interface AthleteResult {
@@ -682,7 +684,7 @@ const CSKLogo = () => (
 // Profile Page Component
 // ============================================================================
 
-function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellite' }: ProfilePageProps) {
+function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellite', aesthetic = true }: ProfilePageProps) {
   const [activeTab, setActiveTab] = useState('overview');
 
   // Select athlete data based on section
@@ -770,8 +772,8 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
     );
   };
 
-  // Get CSS class based on variant
-  const pageClassName = `profile-page ${variant === 'embed' ? 'profile-page--embed' : 'profile-page--satellite'}`;
+  // Get CSS class based on variant and aesthetic mode
+  const pageClassName = `profile-page ${variant === 'embed' ? 'profile-page--embed' : 'profile-page--satellite'}${aesthetic ? ' profile-page--aesthetic' : ''}`;
 
   return (
     <div className={pageClassName}>
@@ -1237,6 +1239,10 @@ Dvě varianty: Embed (v kanoe.cz kontextu) a Satellite (standalone s minimální
       control: 'boolean',
       description: 'Show edit controls',
     },
+    aesthetic: {
+      control: 'boolean',
+      description: 'Aesthetic mode - display fonts, energy accents, mesh backgrounds',
+    },
   },
 };
 
@@ -1265,6 +1271,7 @@ export const Embed: Story = {
     isOwnProfile: true,
     section: 'dv',
     variant: 'embed',
+    aesthetic: true,
   },
   decorators: [
     (Story) => (
@@ -1309,6 +1316,7 @@ export const Satellite: Story = {
     isOwnProfile: true,
     section: 'dv',
     variant: 'satellite',
+    aesthetic: true,
   },
   parameters: {
     docs: {

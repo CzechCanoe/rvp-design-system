@@ -219,20 +219,20 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ---
 
-#### Priorita 6: ProfilePage konzistence
+#### Priorita 6: ProfilePage konzistence ✅
 
 **Problém:** ProfilePage (přihlášený uživatel) vypadá jinak od zbytku design systému.
 
-**Cíl:** Sjednotit vizuální styl s ostatními prototypy:
-- Aesthetic header/hero
-- Konzistentní Card styling
-- Stejné spacing a typography
-
-**Úkoly:**
-- [ ] Screenshotnout ProfilePage Embed a Satellite
-- [ ] Porovnat s AthletePublicProfile (veřejný profil)
-- [ ] Sjednotit vizuální prvky
-- [ ] Zachovat funkční rozdíly (edit tlačítka, dashboard prvky)
+**Řešení:** Přidán aesthetic mode konzistentní s AthletePublicProfile:
+- [x] Přidán `aesthetic` prop do ProfilePageProps
+- [x] Mesh background pro aesthetic variantu
+- [x] Diagonal stripe a grain texture dekorace v hero
+- [x] Display font pro jméno (font-family: var(--font-display))
+- [x] Energy glow efekty na avatar a ranking badge
+- [x] Floating stats cards s border-accent (4 barvy)
+- [x] Staggered reveal animace pro cards
+- [x] Zachovány funkční rozdíly (edit tlačítka, status karty)
+- [x] Reduced motion support
 
 ---
 
@@ -275,7 +275,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.5 Polish a opravy** - Priorita 6: ProfilePage konzistence (sjednotit vizuální styl s ostatními prototypy).
+**Fáze 16.5 dokončena!** Všechny priority (1-6) jsou hotové. Design system je konzistentní s Aesthetic stylem.
 
 ---
 

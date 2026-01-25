@@ -1358,3 +1358,193 @@
     transition: none;
   }
 }
+
+/* ============================================================================
+   AESTHETIC MODE - Dynamic Sport styling
+   Phase 16.5: ProfilePage consistency with AthletePublicProfile
+   ============================================================================ */
+
+/* Aesthetic page background with mesh gradient */
+.profile-page--aesthetic {
+  background: var(--bg-mesh-primary,
+    linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, transparent 50%),
+    linear-gradient(225deg, rgba(168, 85, 247, 0.03) 0%, transparent 50%),
+    var(--color-bg-primary)
+  );
+  background-color: var(--color-bg-primary);
+}
+
+/* Aesthetic hero section enhancements */
+.profile-page--aesthetic .profile-hero-section {
+  position: relative;
+}
+
+/* Diagonal stripe decoration */
+.profile-page--aesthetic .profile-hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    -45deg,
+    transparent 0%,
+    transparent 45%,
+    rgba(255, 255, 255, 0.03) 45%,
+    rgba(255, 255, 255, 0.03) 55%,
+    transparent 55%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Grain texture overlay */
+.profile-page--aesthetic .profile-hero-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Display font for name in aesthetic mode */
+.profile-page--aesthetic .profile-hero-name {
+  font-family: var(--font-display, var(--font-family-base));
+  font-size: var(--font-size-5xl, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Energy glow on hero content */
+.profile-page--aesthetic .profile-hero-section__content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Floating avatar with energy ring */
+.profile-page--aesthetic .profile-hero-avatar .csk-avatar {
+  border: 4px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    var(--shadow-xl),
+    0 0 40px rgba(255, 255, 255, 0.2),
+    0 0 60px var(--color-energy-glow, rgba(251, 146, 60, 0.15));
+}
+
+/* Ranking badge with energy glow */
+.profile-page--aesthetic .profile-hero-ranking {
+  box-shadow:
+    var(--shadow-lg),
+    0 0 20px var(--color-energy-glow, rgba(251, 146, 60, 0.3));
+}
+
+/* Stats cards with aesthetic styling */
+.profile-page--aesthetic .profile-achievements {
+  margin-top: calc(-1 * var(--spacing-10));
+  position: relative;
+  z-index: 10;
+}
+
+.profile-page--aesthetic .profile-achievement {
+  background: var(--color-surface-primary, white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border-subtle);
+  padding: var(--spacing-4);
+  transition: all var(--transition-base);
+}
+
+.profile-page--aesthetic .profile-achievement:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Border accent on stats cards */
+.profile-page--aesthetic .profile-achievement:nth-child(1) {
+  border-top: 3px solid var(--color-energy-primary, #fb923c);
+}
+
+.profile-page--aesthetic .profile-achievement:nth-child(2) {
+  border-top: 3px solid var(--color-energy-secondary, #a78bfa);
+}
+
+.profile-page--aesthetic .profile-achievement:nth-child(3) {
+  border-top: 3px solid var(--color-success, #22c55e);
+}
+
+.profile-page--aesthetic .profile-achievement:nth-child(4) {
+  border-top: 3px solid var(--color-info, #3b82f6);
+}
+
+/* Status cards with aesthetic styling */
+.profile-page--aesthetic .profile-status-card {
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.profile-page--aesthetic .profile-status-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Staggered reveal animation */
+.profile-page--aesthetic .profile-achievement,
+.profile-page--aesthetic .profile-status-card {
+  animation: aestheticReveal 0.5s ease-out backwards;
+}
+
+.profile-page--aesthetic .profile-achievement:nth-child(1) { animation-delay: 0.1s; }
+.profile-page--aesthetic .profile-achievement:nth-child(2) { animation-delay: 0.15s; }
+.profile-page--aesthetic .profile-achievement:nth-child(3) { animation-delay: 0.2s; }
+.profile-page--aesthetic .profile-achievement:nth-child(4) { animation-delay: 0.25s; }
+
+.profile-page--aesthetic .profile-status-card:nth-child(1) { animation-delay: 0.3s; }
+.profile-page--aesthetic .profile-status-card:nth-child(2) { animation-delay: 0.35s; }
+.profile-page--aesthetic .profile-status-card:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes aestheticReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section titles with display font */
+.profile-page--aesthetic .profile-section-title {
+  font-family: var(--font-display, var(--font-family-base));
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Cards with subtle border accent */
+.profile-page--aesthetic .csk-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* Tabs with aesthetic styling */
+.profile-page--aesthetic .csk-tabs__tab--active {
+  background: var(--gradient-primary, linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-600) 100%));
+  color: white;
+}
+
+/* Reduced motion - disable aesthetic animations */
+@media (prefers-reduced-motion: reduce) {
+  .profile-page--aesthetic .profile-achievement,
+  .profile-page--aesthetic .profile-status-card {
+    animation: none;
+  }
+
+  .profile-page--aesthetic .profile-achievement:hover,
+  .profile-page--aesthetic .profile-status-card:hover {
+    transform: none;
+  }
+}

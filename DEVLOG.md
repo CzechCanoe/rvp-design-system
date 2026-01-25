@@ -5426,3 +5426,28 @@ Priorita 3 byla označena jako hotová, protože implementace již existuje z p�
 - Embed zůstává konzervativní pro běžné použití v kanoe.cz
 - ExpressiveEmbed je pro "wow" prezentace (registrace, live eventy)
 - Priorita 5 dokončena, další je Priorita 6: ProfilePage konzistence
+
+---
+
+## 2026-01-25 - Fáze 16.5: ProfilePage konzistence (DOKONČENÍ FÁZE 16.5)
+
+### Dokončeno
+- [x] Přidán `aesthetic` prop do ProfilePage
+- [x] Mesh background pro aesthetic variantu
+- [x] Diagonal stripe a grain texture dekorace v hero
+- [x] Display font pro jméno
+- [x] Energy glow efekty na avatar a ranking badge
+- [x] Floating stats cards s border-accent (4 barvy)
+- [x] Staggered reveal animace pro cards
+- [x] Reduced motion support
+
+### Detaily implementace
+- CSS: přidáno ~150 řádků aesthetic stylů do ProfilePage.css
+- TypeScript: přidán `aesthetic` prop s default `true`
+- Stories: aktualizovány Embed a Satellite s `aesthetic: true`
+- Build prošel úspěšně
+
+### Poznámky
+- **Fáze 16.5 kompletně dokončena** - všech 6 priorit hotovo
+- Design system je nyní konzistentní s Aesthetic stylem napříč všemi prototypy
+- Připraveno pro další fáze (performance, accessibility, deployment)
