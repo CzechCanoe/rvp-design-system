@@ -35,6 +35,11 @@ const preview: Preview = {
     backgrounds: {
       disable: true, // We handle backgrounds via theme
     },
+    options: {
+      storySort: {
+        order: ['Prototypes', 'Components', '*'],
+      },
+    },
   },
   globalTypes: {
     theme: {
