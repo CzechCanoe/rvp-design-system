@@ -53,13 +53,13 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ### 16.2 Calendar + Results
 
-**CalendarPage** (9 → 4)
-- [ ] Embed - Aesthetic grid view
-- [ ] EmbedListView - Aesthetic list view
-- [ ] Satellite - Aesthetic (grid default)
-- [ ] SatelliteListView - Aesthetic list view (nebo jako prop?)
-- [ ] Sloučit: Aesthetic*, LiveEventIndication jako features
-- [ ] Odstranit: EmbedWithSidebar, EmbedCardsView, původní varianty
+**CalendarPage** (9 → 4) ✅
+- [x] Embed - Aesthetic grid view
+- [x] EmbedListView - Aesthetic list view
+- [x] Satellite - Aesthetic (grid default)
+- [x] SatelliteListView - Aesthetic list view
+- [x] Sloučit: Aesthetic*, LiveEventIndication jako features
+- [x] Odstranit: EmbedWithSidebar, EmbedCardsView, původní varianty
 
 **ResultsPage** (4 → 2)
 - [ ] Embed - přepracovat na Aesthetic
@@ -141,7 +141,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.2 Calendar + Results** - CalendarPage.
+Pokračovat s **16.2 Calendar + Results** - ResultsPage.
 
 ---
 

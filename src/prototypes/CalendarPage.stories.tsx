@@ -840,18 +840,27 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // ============================================================================
-// Integration Variants - Embed/Satellite only (Phase 8.9)
+// Consolidated Variants - Aesthetic Style (Phase 16.2)
 // ============================================================================
 
 /**
- * Embed varianta pro vložení do kanoe.cz.
- * Bez vlastního headeru a footeru, kompaktní styl.
+ * **Embed** - Aesthetic kalendář pro vložení do kanoe.cz.
+ *
+ * Vlastnosti:
+ * - Mesh background, display typography
+ * - Grid/month view jako výchozí pohled
+ * - Live indikace pro probíhající závody
+ * - Container queries pro responsivní chování
+ * - View switcher pro přepínání pohledů
  */
 export const Embed: Story = {
   args: {
     initialSection: 'all',
     showLive: true,
     variant: 'embed',
+    initialView: 'month',
+    showViewSwitcher: true,
+    style: 'aesthetic',
   },
   decorators: [
     (Story) => (
@@ -872,47 +881,13 @@ export const Embed: Story = {
 };
 
 /**
- * Satellite varianta pro standalone aplikace.
- * Minimální header s odkazem na kanoe.cz.
- */
-export const Satellite: Story = {
-  args: {
-    initialSection: 'all',
-    showLive: true,
-    variant: 'satellite',
-  },
-};
-
-/**
- * Embed varianta se sidebarem v kanoe.cz layoutu.
- * Demonstrace container queries v úzkém sloupci.
- */
-export const EmbedWithSidebar: Story = {
-  args: {
-    initialSection: 'dv',
-    showLive: true,
-    variant: 'embed',
-  },
-  decorators: [
-    (Story) => (
-      <KanoeCzContext
-        layout="sidebar"
-        pageVariant="subpage"
-        pageTitle="Kalendář - Divoká voda"
-        breadcrumbs={[
-          { label: 'Domů', href: '#' },
-          { label: 'Divoká voda', href: '#' },
-          { label: 'Kalendář' },
-        ]}
-      >
-        <Story />
-      </KanoeCzContext>
-    ),
-  ],
-};
-
-/**
- * Embed varianta s pohledem Seznam - vhodné pro úzké sloupce.
+ * **EmbedListView** - Aesthetic seznam závodů pro vložení do kanoe.cz.
+ *
+ * Vlastnosti:
+ * - Kompaktní list view vhodný pro úzké sloupce
+ * - Live indikace s pulsující animací
+ * - Grupování podle měsíců
+ * - Sidebar layout demonstrující container queries
  */
 export const EmbedListView: Story = {
   args: {
@@ -920,6 +895,8 @@ export const EmbedListView: Story = {
     showLive: true,
     variant: 'embed',
     initialView: 'list',
+    showViewSwitcher: true,
+    style: 'aesthetic',
   },
   decorators: [
     (Story) => (
@@ -939,42 +916,19 @@ export const EmbedListView: Story = {
 };
 
 /**
- * Embed varianta s pohledem Karty - přehled na homepage.
+ * **Satellite** - Aesthetic standalone kalendář.
+ *
+ * Vlastnosti:
+ * - Minimální header s odkazem na kanoe.cz
+ * - Plný Aesthetic styl s mesh background
+ * - Grid/month view jako výchozí pohled
+ * - Staggered reveal animations, energy accents
  */
-export const EmbedCardsView: Story = {
-  args: {
-    initialSection: 'all',
-    showLive: false,
-    variant: 'embed',
-    initialView: 'cards',
-    showViewSwitcher: false,
-  },
-  decorators: [
-    (Story) => (
-      <KanoeCzContext
-        layout="full"
-        pageVariant="homepage"
-        pageTitle=""
-      >
-        <Story />
-      </KanoeCzContext>
-    ),
-  ],
-};
-
-// ============================================================================
-// Aesthetic Variants - Dynamic Sport visual style (Phase 15.0)
-// ============================================================================
-
-/**
- * Aesthetic varianta - plný kalendář s mesh background a display typography.
- * Staggered reveals, energy accents na live badge.
- */
-export const Aesthetic: Story = {
+export const Satellite: Story = {
   args: {
     initialSection: 'all',
     showLive: true,
-    variant: 'standalone',
+    variant: 'satellite',
     initialView: 'month',
     showViewSwitcher: true,
     style: 'aesthetic',
@@ -982,83 +936,21 @@ export const Aesthetic: Story = {
 };
 
 /**
- * Aesthetic varianta s pohledem Seznam.
+ * **SatelliteListView** - Aesthetic standalone seznam závodů.
+ *
+ * Vlastnosti:
+ * - Minimální header s odkazem na kanoe.cz
+ * - List view s grupováním podle měsíců
+ * - Live indikace pro probíhající závody
+ * - Staggered reveal animations
  */
-export const AestheticListView: Story = {
+export const SatelliteListView: Story = {
   args: {
     initialSection: 'all',
     showLive: true,
-    variant: 'standalone',
+    variant: 'satellite',
     initialView: 'list',
     showViewSwitcher: true,
     style: 'aesthetic',
-  },
-};
-
-/**
- * Aesthetic varianta s filtrovanou sekcí DV.
- */
-export const AestheticDivokaVoda: Story = {
-  args: {
-    initialSection: 'dv',
-    showLive: true,
-    variant: 'standalone',
-    initialView: 'month',
-    showViewSwitcher: true,
-    style: 'aesthetic',
-  },
-};
-
-/**
- * Live Event Indication Demo.
- *
- * Demonstrace vizuálního zvýraznění živých závodů v kalendáři:
- * - LIVE badge v calendar cell (month view)
- * - LIVE indikátor v seznamu (list view)
- * - Pulsující animace
- * - Energy color (coral-orange) pro okamžitou viditelnost
- *
- * **Jak funguje:**
- * - Eventy s `data.isLive: true` jsou zvýrazněny
- * - V month view se zobrazí LiveIndicator vedle názvu
- * - V list view pulzující rámeček + badge
- * - Sidebar zobrazuje sekci "Právě probíhá"
- */
-export const LiveEventIndication: Story = {
-  args: {
-    initialSection: 'dv',
-    showLive: true,
-    variant: 'standalone',
-    initialView: 'month',
-    showViewSwitcher: true,
-    style: 'aesthetic',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: `Demonstrace live indikace pro závody, které právě probíhají.
-
-**Vlastnosti:**
-- Energy color (coral-orange) pro okamžitou viditelnost
-- Pulsující animace upoutává pozornost
-- LiveIndicator kompatibilní se všemi pohledy (month, list, cards)
-- Sidebar sekce "Právě probíhá" s quick links
-
-**Použití v kódu:**
-\`\`\`tsx
-// Event s live flag
-const event = {
-  id: 'race-1',
-  title: 'MČR ve slalomu',
-  start: new Date(),
-  data: { isLive: true }
-};
-
-// Calendar s showLive prop
-<Calendar events={[event]} showLive={true} />
-<CalendarList events={[event]} showLive={true} />
-\`\`\``,
-      },
-    },
   },
 };
