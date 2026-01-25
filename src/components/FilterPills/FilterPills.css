@@ -1,0 +1,219 @@
+/* FilterPills - Active filter tags with remove functionality */
+
+.csk-filter-pills {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-3);
+}
+
+/* Bordered variant - separator at top */
+.csk-filter-pills--bordered {
+  padding-top: var(--csk-space-4);
+  border-top: 1px solid var(--csk-color-border);
+}
+
+/* Pills list container */
+.csk-filter-pills__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--csk-space-2);
+}
+
+/* Individual pill */
+.csk-filter-pills__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--csk-space-2);
+  padding: var(--csk-space-1) var(--csk-space-3);
+  font-size: var(--csk-font-size-sm);
+  font-weight: var(--csk-font-weight-medium);
+  background: linear-gradient(
+    135deg,
+    var(--csk-color-primary-50),
+    var(--csk-color-primary-100)
+  );
+  border: 1px solid var(--csk-color-primary-200);
+  border-radius: var(--csk-radius-full);
+  color: var(--csk-color-primary-700);
+  transition: all var(--csk-duration-fast) var(--csk-ease-out);
+}
+
+.csk-filter-pills__pill:hover {
+  background: linear-gradient(
+    135deg,
+    var(--csk-color-primary-100),
+    var(--csk-color-primary-200)
+  );
+  border-color: var(--csk-color-primary-300);
+}
+
+/* Pill label */
+.csk-filter-pills__label {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Remove button */
+.csk-filter-pills__remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin-left: var(--csk-space-1);
+  background: var(--csk-color-primary-200);
+  border: none;
+  border-radius: var(--csk-radius-full);
+  color: var(--csk-color-primary-700);
+  cursor: pointer;
+  transition: all var(--csk-duration-fast) var(--csk-ease-out);
+}
+
+.csk-filter-pills__remove:hover {
+  background: var(--csk-color-error-500);
+  color: white;
+  transform: scale(1.1);
+}
+
+.csk-filter-pills__remove:focus-visible {
+  outline: 2px solid var(--csk-color-focus);
+  outline-offset: 2px;
+}
+
+/* Clear all button */
+.csk-filter-pills__clear-all {
+  font-size: var(--csk-font-size-sm);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-primary-600);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--csk-space-1) var(--csk-space-3);
+  transition: all var(--csk-duration-fast) var(--csk-ease-out);
+}
+
+.csk-filter-pills__clear-all:hover {
+  color: var(--csk-color-primary-700);
+  text-decoration: underline;
+}
+
+.csk-filter-pills__clear-all:focus-visible {
+  outline: 2px solid var(--csk-color-focus);
+  outline-offset: 2px;
+  border-radius: var(--csk-radius-sm);
+}
+
+/* ==========================================================================
+   Size Variants
+   ========================================================================== */
+
+/* Small */
+.csk-filter-pills--sm .csk-filter-pills__pill {
+  padding: 2px var(--csk-space-2);
+  font-size: var(--csk-font-size-xs);
+  gap: var(--csk-space-1);
+}
+
+.csk-filter-pills--sm .csk-filter-pills__remove {
+  width: 14px;
+  height: 14px;
+}
+
+.csk-filter-pills--sm .csk-filter-pills__clear-all {
+  font-size: var(--csk-font-size-xs);
+}
+
+.csk-filter-pills--sm.csk-filter-pills--bordered {
+  padding-top: var(--csk-space-3);
+}
+
+/* Large */
+.csk-filter-pills--lg .csk-filter-pills__pill {
+  padding: var(--csk-space-2) var(--csk-space-4);
+  font-size: var(--csk-font-size-base);
+}
+
+.csk-filter-pills--lg .csk-filter-pills__remove {
+  width: 22px;
+  height: 22px;
+}
+
+.csk-filter-pills--lg .csk-filter-pills__clear-all {
+  font-size: var(--csk-font-size-base);
+}
+
+.csk-filter-pills--lg.csk-filter-pills--bordered {
+  padding-top: var(--csk-space-5);
+}
+
+/* ==========================================================================
+   Subtle Variant
+   ========================================================================== */
+
+.csk-filter-pills--subtle .csk-filter-pills__pill {
+  background: var(--csk-color-surface-secondary);
+  border-color: var(--csk-color-border);
+  color: var(--csk-color-on-surface);
+}
+
+.csk-filter-pills--subtle .csk-filter-pills__pill:hover {
+  background: var(--csk-color-surface-tertiary);
+  border-color: var(--csk-color-border-secondary);
+}
+
+.csk-filter-pills--subtle .csk-filter-pills__remove {
+  background: var(--csk-color-surface-tertiary);
+  color: var(--csk-color-on-surface-muted);
+}
+
+/* ==========================================================================
+   Dark Mode
+   ========================================================================== */
+
+[data-theme='dark'] .csk-filter-pills__pill {
+  background: linear-gradient(
+    135deg,
+    var(--csk-color-primary-900),
+    var(--csk-color-primary-800)
+  );
+  border-color: var(--csk-color-primary-700);
+  color: var(--csk-color-primary-200);
+}
+
+[data-theme='dark'] .csk-filter-pills__pill:hover {
+  background: linear-gradient(
+    135deg,
+    var(--csk-color-primary-800),
+    var(--csk-color-primary-700)
+  );
+  border-color: var(--csk-color-primary-600);
+}
+
+[data-theme='dark'] .csk-filter-pills__remove {
+  background: var(--csk-color-primary-700);
+  color: var(--csk-color-primary-200);
+}
+
+[data-theme='dark'] .csk-filter-pills__clear-all {
+  color: var(--csk-color-primary-400);
+}
+
+[data-theme='dark'] .csk-filter-pills__clear-all:hover {
+  color: var(--csk-color-primary-300);
+}
+
+/* Dark mode subtle variant */
+[data-theme='dark'] .csk-filter-pills--subtle .csk-filter-pills__pill {
+  background: var(--csk-color-surface-secondary);
+  border-color: var(--csk-color-border);
+  color: var(--csk-color-on-surface);
+}
+
+[data-theme='dark'] .csk-filter-pills--subtle .csk-filter-pills__remove {
+  background: var(--csk-color-surface-tertiary);
+  color: var(--csk-color-on-surface-muted);
+}

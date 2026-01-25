@@ -293,72 +293,7 @@
   min-width: 140px;
 }
 
-/* Filter Tags - AESTHETIC PILLS */
-.clubs-list-filters__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-2);
-  margin-top: var(--spacing-4);
-  padding-top: var(--spacing-4);
-  border-top: 1px solid var(--color-border-primary);
-}
-
-.clubs-list-filters__tag {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-1) var(--spacing-3) var(--spacing-1) var(--spacing-3);
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-medium, 500);
-  background: linear-gradient(135deg, var(--color-primary-50), var(--color-primary-100));
-  border: 1px solid var(--color-primary-200);
-  border-radius: var(--radius-full);
-  color: var(--color-primary-700);
-  transition: all var(--duration-fast) var(--ease-out);
-}
-
-.clubs-list-filters__tag:hover {
-  background: linear-gradient(135deg, var(--color-primary-100), var(--color-primary-200));
-  border-color: var(--color-primary-300);
-}
-
-.clubs-list-filters__tag-remove {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  padding: 0;
-  margin-left: var(--spacing-1);
-  background: var(--color-primary-200);
-  border: none;
-  border-radius: var(--radius-full);
-  color: var(--color-primary-700);
-  cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-out);
-}
-
-.clubs-list-filters__tag-remove:hover {
-  background: var(--color-error-500);
-  color: white;
-  transform: scale(1.1);
-}
-
-.clubs-list-filters__clear {
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-medium, 500);
-  color: var(--color-energy-600, var(--color-primary-600));
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: var(--spacing-1) var(--spacing-3);
-  transition: color var(--duration-fast) var(--ease-out);
-}
-
-.clubs-list-filters__clear:hover {
-  color: var(--color-energy-700, var(--color-primary-700));
-  text-decoration: underline;
-}
+/* Filter pills - Now using FilterPills component (CSS removed) */
 
 /* ==========================================================================
    Results Header - AESTHETIC
@@ -707,12 +642,6 @@
 [data-theme='dark'] .clubs-list-filters {
   background: var(--color-bg-secondary);
   border-color: var(--color-border-secondary);
-}
-
-[data-theme='dark'] .clubs-list-filters__tag {
-  background: linear-gradient(135deg, var(--color-primary-900), var(--color-primary-800));
-  border-color: var(--color-primary-700);
-  color: var(--color-primary-200);
 }
 
 [data-theme='dark'] .clubs-list-section-tabs {

@@ -117,7 +117,7 @@
 
 2. **Střední priorita:**
    - [x] `<SectionHeader />` s title a optional action
-   - [ ] `<FilterPills />` pro filtry
+   - [x] `<FilterPills />` pro filtry
    - [x] `<CSKLogo />` pro konzistentní branding
 
 3. **Nízká priorita:**
@@ -236,6 +236,13 @@
 - [x] AthletesListPage: custom empty state → EmptyState komponenta
 - [x] ClubsListPage: custom empty state → EmptyState komponenta
 - [x] Odstraněno ~106 řádků duplicitního CSS
+
+### Iterace 15: FilterPills komponenta ✅
+- [x] Vytvořit `<FilterPills />` komponentu (FilterPills.tsx, FilterPills.css)
+- [x] Vytvořit stories s variantami (default, subtle, sizes)
+- [x] Refaktorovat AthletesListPage: nahrazeno ~30 řádků custom JSX
+- [x] Refaktorovat ClubsListPage: nahrazeno ~30 řádků custom JSX
+- [x] Odstraněno ~130 řádků duplicitního CSS z prototypů
 
 ---
 

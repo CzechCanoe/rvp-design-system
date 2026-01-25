@@ -12,6 +12,7 @@ import { Icon } from '../components/Icon';
 import { StatsBar } from '../components/StatsBar';
 import { CSKLogo } from '../components/CSKLogo';
 import { EmptyState } from '../components/EmptyState';
+import { FilterPills, type FilterPill } from '../components/FilterPills';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import './ClubsListPage.css';
 
@@ -248,14 +249,14 @@ const ClubsListPage = ({
 
   const totalPages = Math.ceil(filteredClubs.length / itemsPerPage);
 
-  // Active filters for tags
-  const activeFilters = useMemo(() => {
-    const filters: Array<{ key: string; label: string; value: string }> = [];
+  // Active filters for FilterPills
+  const activeFilters: FilterPill[] = useMemo(() => {
+    const filters: FilterPill[] = [];
     if (sectionFilter !== 'all') {
-      filters.push({ key: 'section', label: sectionNames[sectionFilter], value: sectionFilter });
+      filters.push({ key: 'section', label: sectionNames[sectionFilter] });
     }
     if (regionFilter !== 'all') {
-      filters.push({ key: 'region', label: regionFilter, value: regionFilter });
+      filters.push({ key: 'region', label: regionFilter });
     }
     return filters;
   }, [sectionFilter, regionFilter, sectionNames]);
@@ -412,38 +413,14 @@ const ClubsListPage = ({
               </div>
             </div>
 
-            {/* Active Filter Tags */}
-            {(activeFilters.length > 0 || searchQuery) && (
-              <div className="clubs-list-filters__tags">
-                {searchQuery && (
-                  <span className="clubs-list-filters__tag">
-                    Hledání: "{searchQuery}"
-                    <button
-                      className="clubs-list-filters__tag-remove"
-                      onClick={() => setSearchQuery('')}
-                      aria-label="Zrušit hledání"
-                    >
-                      <Icon name="close" size={12} />
-                    </button>
-                  </span>
-                )}
-                {activeFilters.map(filter => (
-                  <span key={filter.key} className="clubs-list-filters__tag">
-                    {filter.label}
-                    <button
-                      className="clubs-list-filters__tag-remove"
-                      onClick={() => clearFilter(filter.key)}
-                      aria-label={`Zrušit filtr ${filter.label}`}
-                    >
-                      <Icon name="close" size={12} />
-                    </button>
-                  </span>
-                ))}
-                <button className="clubs-list-filters__clear" onClick={clearAllFilters}>
-                  Zrušit vše
-                </button>
-              </div>
-            )}
+            {/* Active Filter Pills */}
+            <FilterPills
+              filters={activeFilters}
+              searchQuery={searchQuery}
+              onRemove={clearFilter}
+              onClearSearch={() => setSearchQuery('')}
+              onClearAll={clearAllFilters}
+            />
           </Card>
 
           {/* Results Header */}

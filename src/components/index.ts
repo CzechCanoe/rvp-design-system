@@ -260,3 +260,12 @@ export type {
 // CSKLogo
 export { CSKLogo } from './CSKLogo';
 export type { CSKLogoProps, CSKLogoSize } from './CSKLogo';
+
+// FilterPills
+export { FilterPills } from './FilterPills';
+export type {
+  FilterPillsProps,
+  FilterPill,
+  FilterPillsSize,
+  FilterPillsVariant,
+} from './FilterPills';
