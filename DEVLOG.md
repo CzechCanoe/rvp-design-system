@@ -5551,3 +5551,54 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 
 ### Další kroky
 - Iterace 4-6: Cleanup komponent (Button → Toast) - odstranění experimentálních variant
+
+---
+
+## 2026-01-25 - Fáze 17.1.1: Cleanup tlačítek a vstupů
+
+### Dokončeno
+- [x] Button: Odstraněny `gradient`, `gradient-energy` varianty a `glow` prop
+- [x] Input: Odstraněn `energyFocus` prop a energy focus CSS
+- [x] Select: Odstraněn `energyFocus` prop a energy focus CSS
+- [x] SearchInput: Odstraněn `energyFocus` prop a energy focus CSS
+- [x] Aktualizovány všechny stories - nahrazeny gradient tlačítka za primary/secondary
+- [x] Opraveny TypeScript chyby ve všech affected souborech
+
+### Změny v souborech
+- Button.tsx, Button.css, Button.stories.tsx
+- Input.tsx, Input.css, Input.stories.tsx
+- Select.tsx, Select.css, Select.stories.tsx
+- SearchInput.tsx, SearchInput.css, SearchInput.stories.tsx
+- Card.stories.tsx, Header.stories.tsx, Toast.stories.tsx
+- ThemeContext.stories.tsx, EventDetailPage.stories.tsx
+
+### Poznámky
+- CSS zredukováno o ~2KB
+- Komponenty nyní používají pouze core varianty (primary, secondary, ghost, danger)
+- Zachován displayLabel prop pro aesthetic styling v Input/Select
+- Další krok: 17.1.2 - Karty a kontejnery (Card, StatCard, Modal)
+
+---
+
+## 2026-01-25 - Fáze 17.5: Cleanup Cards a kontejnery
+
+### Dokončeno
+- [x] Card: Odstranit `gradient` variantu, `meshBg` a `borderAccent` props
+- [x] StatCard: Zredukovat `styleVariant` na default/aesthetic, odstranit sparkline
+- [x] Modal: Odstranit `gradient`, `glass` varianty
+
+### Změny v komponentách
+1. **Card** - Odstraněna varianta `gradient` a props `meshBg`, `borderAccent`. Aesthetic varianta obsahuje obojí.
+2. **StatCard** - Redukce z 4 styleVariant na 2 (default, aesthetic). Odstraněn Sparkline mini-graf.
+3. **Modal** - Odstraněny varianty `gradient` a `glass`, ponechány `default` a `danger`.
+
+### Aktualizované prototypy
+- EventDetailPage: gradient → aesthetic
+- ProfilePage: gradient → aesthetic (StatCard)
+
+### Metriky
+- CSS: 269.90 kB → 265.24 kB (-1.7%, -4.66 kB)
+- Odstraněno ~510 řádků kódu
+
+### Další krok
+- Iterace 6: Cleanup Tabs, MainNav, Header (bod 17.1.3)
