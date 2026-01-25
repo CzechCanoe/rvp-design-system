@@ -60,9 +60,9 @@
 | **Header** | default, elevated, gradient, satellite | default, elevated, satellite | gradient, blurOnScroll |
 
 **Úkoly:**
-- [ ] Tabs: Sloučit varianty do line/pills/aesthetic, odstranit ostatní
-- [ ] MainNav: Odstranit `gradient`, `glass` varianty
-- [ ] Header: Odstranit `gradient` variantu, `blurOnScroll` prop
+- [x] Tabs: Sloučit varianty do line/pills/aesthetic, odstranit ostatní
+- [x] MainNav: N/A (komponenta neexistuje)
+- [x] Header: N/A (komponenta neexistuje)
 
 #### 17.1.4 Feedback a indikátory
 

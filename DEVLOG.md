@@ -5602,3 +5602,22 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 
 ### Další krok
 - Iterace 6: Cleanup Tabs, MainNav, Header (bod 17.1.3)
+
+---
+
+## 2026-01-25 - Fáze 17.5: Tabs Cleanup
+
+### Dokončeno
+- [x] Tabs: Sloučit varianty do line/pills/aesthetic
+- [x] Odstranit gradient, gradient-line, energy, glass varianty (TSX, CSS, stories)
+- [x] Opravit referenci v ProfilePage prototypu (gradient → aesthetic)
+- [x] MainNav a Header: Komponenty neexistují - označeno jako N/A
+
+### Změny
+- **Tabs.tsx**: TabsVariant = 'line' | 'pills' | 'aesthetic'
+- **Tabs.css**: Redukce z 524 na 360 řádků (-31%)
+- **Tabs.stories.tsx**: Odstraněny Energy, EnergyLarge stories
+
+### Poznámky
+- MainNav a Header komponenty nejsou implementovány - budou potřeba v budoucnu
+- Aesthetic varianta Tabs zachovává gradient underline efekt z původní gradient-line varianty

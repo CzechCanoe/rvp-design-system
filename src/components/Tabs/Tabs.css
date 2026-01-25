@@ -4,8 +4,7 @@
  * Variants:
  * - line: Underlined tabs with animated indicator
  * - pills: Filled pill-shaped tabs
- * - gradient: Gradient background pills
- * - gradient-line: Line tabs with gradient underline
+ * - aesthetic: Gradient underline for expressive styling
  *
  * Sizes: sm, md, lg
  */
@@ -190,59 +189,22 @@
 }
 
 /* =============================================================================
-   VARIANT: GRADIENT (Gradient pills)
+   VARIANT: AESTHETIC (Gradient underline for expressive styling)
    ============================================================================= */
 
-.csk-tabs--gradient .csk-tabs__list {
-  background-color: var(--color-bg-secondary);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-1);
-  gap: var(--spacing-1);
-}
-
-.csk-tabs--gradient .csk-tabs__tab {
-  border-radius: var(--radius-md);
-  transition:
-    color var(--transition-base),
-    background var(--transition-base),
-    box-shadow var(--transition-base),
-    transform var(--transition-base);
-}
-
-.csk-tabs--gradient .csk-tabs__tab--active {
-  background: var(--gradient-primary);
-  color: var(--color-neutral-0);
-  box-shadow: var(--shadow-primary-sm);
-}
-
-.csk-tabs--gradient .csk-tabs__tab--active:hover:not(:disabled) {
-  background: var(--gradient-primary-hover);
-  box-shadow: var(--shadow-primary-md);
-  transform: translateY(-2px);
-}
-
-.csk-tabs--gradient .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active) {
-  background-color: var(--color-bg-tertiary);
-  transform: translateY(-1px);
-}
-
-/* =============================================================================
-   VARIANT: GRADIENT-LINE (Line tabs with gradient underline)
-   ============================================================================= */
-
-.csk-tabs--gradient-line .csk-tabs__list {
+.csk-tabs--aesthetic .csk-tabs__list {
   border-bottom: 1px solid var(--color-border-default);
   gap: 0;
 }
 
-.csk-tabs--gradient-line .csk-tabs__tab {
+.csk-tabs--aesthetic .csk-tabs__tab {
   position: relative;
   margin-bottom: -1px;
   border-radius: 0;
 }
 
 /* Gradient animated underline */
-.csk-tabs--gradient-line .csk-tabs__tab::after {
+.csk-tabs--aesthetic .csk-tabs__tab::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -256,18 +218,18 @@
     left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.csk-tabs--gradient-line .csk-tabs__tab--active {
+.csk-tabs--aesthetic .csk-tabs__tab--active {
   color: var(--color-interactive-default);
   font-weight: var(--font-weight-semibold);
 }
 
-.csk-tabs--gradient-line .csk-tabs__tab--active::after {
+.csk-tabs--aesthetic .csk-tabs__tab--active::after {
   width: 100%;
   left: 0;
 }
 
 /* Hover preview with gradient hint */
-.csk-tabs--gradient-line .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active)::after {
+.csk-tabs--aesthetic .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active)::after {
   width: 60%;
   left: 20%;
   background: var(--gradient-primary-soft);
@@ -275,111 +237,8 @@
 }
 
 /* Hover translateY effect */
-.csk-tabs--gradient-line .csk-tabs__tab:hover:not(:disabled) {
+.csk-tabs--aesthetic .csk-tabs__tab:hover:not(:disabled) {
   transform: translateY(-1px);
-}
-
-/* =============================================================================
-   VARIANT: ENERGY (Dynamic Sport - coral-orange accent)
-   ============================================================================= */
-
-.csk-tabs--energy .csk-tabs__list {
-  border-bottom: 1px solid var(--color-border-default);
-  gap: 0;
-}
-
-.csk-tabs--energy .csk-tabs__tab {
-  position: relative;
-  margin-bottom: -1px;
-  border-radius: 0;
-}
-
-/* Energy gradient underline */
-.csk-tabs--energy .csk-tabs__tab::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 3px;
-  background: var(--gradient-energy);
-  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-  transition:
-    width 0.3s var(--ease-sport),
-    left 0.3s var(--ease-sport),
-    box-shadow 0.3s var(--ease-sport);
-}
-
-.csk-tabs--energy .csk-tabs__tab--active {
-  color: var(--color-energy-600);
-  font-weight: var(--font-weight-semibold);
-}
-
-.csk-tabs--energy .csk-tabs__tab--active::after {
-  width: 100%;
-  left: 0;
-  box-shadow: var(--glow-energy-sm);
-}
-
-/* Hover preview with energy hint */
-.csk-tabs--energy .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active)::after {
-  width: 60%;
-  left: 20%;
-  background: var(--gradient-energy);
-  opacity: 0.5;
-}
-
-/* Hover translateY effect */
-.csk-tabs--energy .csk-tabs__tab:hover:not(:disabled) {
-  transform: translateY(-1px);
-}
-
-/* Dark mode energy */
-[data-theme="dark"] .csk-tabs--energy .csk-tabs__tab--active {
-  color: var(--color-energy-400);
-}
-
-[data-theme="dark"] .csk-tabs--energy .csk-tabs__tab--active::after {
-  box-shadow: var(--glow-energy-md);
-}
-
-/* =============================================================================
-   VARIANT: GLASS (Glassmorphism pills)
-   ============================================================================= */
-
-.csk-tabs--glass .csk-tabs__list {
-  background: var(--gradient-glass);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-1);
-  gap: var(--spacing-1);
-}
-
-.csk-tabs--glass .csk-tabs__tab {
-  border-radius: var(--radius-md);
-  color: var(--color-neutral-0);
-  transition:
-    color var(--transition-base),
-    background var(--transition-base),
-    box-shadow var(--transition-base),
-    transform var(--transition-base);
-}
-
-.csk-tabs--glass .csk-tabs__tab--active {
-  background: rgba(255, 255, 255, 0.2);
-  color: var(--color-neutral-0);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.csk-tabs--glass .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active) {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-1px);
-}
-
-.csk-tabs--glass .csk-tabs__tab--disabled {
-  color: rgba(255, 255, 255, 0.4);
 }
 
 /* =============================================================================
@@ -473,30 +332,6 @@
 
 [data-theme="dark"] .csk-tabs--pills .csk-tabs__tab--active {
   background-color: var(--color-bg-tertiary);
-}
-
-/* Dark mode: Gradient variant */
-[data-theme="dark"] .csk-tabs--gradient .csk-tabs__list {
-  background-color: var(--color-bg-secondary);
-}
-
-[data-theme="dark"] .csk-tabs--gradient .csk-tabs__tab--active {
-  background: var(--gradient-primary);
-  box-shadow: var(--shadow-primary-sm);
-}
-
-/* Dark mode: Glass variant */
-[data-theme="dark"] .csk-tabs--glass .csk-tabs__list {
-  background: var(--gradient-glass-dark);
-  border-color: rgba(255, 255, 255, 0.05);
-}
-
-[data-theme="dark"] .csk-tabs--glass .csk-tabs__tab {
-  color: var(--color-neutral-0);
-}
-
-[data-theme="dark"] .csk-tabs--glass .csk-tabs__tab--active {
-  background: rgba(255, 255, 255, 0.15);
 }
 
 /* =============================================================================

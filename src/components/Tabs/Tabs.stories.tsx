@@ -11,7 +11,7 @@ const meta: Meta<typeof Tabs> = {
     docs: {
       description: {
         component:
-          'Tabs component for organizing content into switchable panels. Supports multiple variants (line, pills, gradient, glass), three sizes, and full WCAG keyboard navigation.',
+          'Tabs component for organizing content into switchable panels. Supports three variants (line, pills, aesthetic), three sizes, and full WCAG keyboard navigation.',
       },
     },
   },
@@ -19,7 +19,7 @@ const meta: Meta<typeof Tabs> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['line', 'pills', 'gradient', 'gradient-line', 'energy', 'glass'],
+      options: ['line', 'pills', 'aesthetic'],
       description: 'Visual variant of the tabs',
     },
     size: {
@@ -95,46 +95,26 @@ export const Pills: Story = {
   },
 };
 
-export const FullWidth: Story = {
+export const Aesthetic: Story = {
   args: {
     tabs: basicTabs,
-    variant: 'line',
-    fullWidth: true,
-  },
-};
-
-// =============================================================================
-// ENERGY VARIANT (Dynamic Sport Aesthetic)
-// =============================================================================
-
-export const Energy: Story = {
-  args: {
-    tabs: basicTabs,
-    variant: 'energy',
+    variant: 'aesthetic',
     size: 'md',
   },
   parameters: {
     docs: {
       description: {
-        story:
-          'Energy variant with coral-orange underline glow. Part of the Dynamic Sport aesthetic.',
+        story: 'Aesthetic variant with gradient underline for expressive styling.',
       },
     },
   },
 };
 
-export const EnergyLarge: Story = {
+export const FullWidth: Story = {
   args: {
     tabs: basicTabs,
-    variant: 'energy',
-    size: 'lg',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Energy variant in large size uses display font (Plus Jakarta Sans) for emphasis.',
-      },
-    },
+    variant: 'line',
+    fullWidth: true,
   },
 };
 
@@ -348,26 +328,8 @@ export const AllVariants: Story = {
         <Tabs tabs={basicTabs} variant="pills" />
       </div>
       <div>
-        <h3 style={{ marginBottom: '16px' }}>Gradient Pills</h3>
-        <Tabs tabs={basicTabs} variant="gradient" />
-      </div>
-      <div>
-        <h3 style={{ marginBottom: '16px' }}>Gradient Line</h3>
-        <Tabs tabs={basicTabs} variant="gradient-line" />
-      </div>
-      <div>
-        <h3 style={{ marginBottom: '16px' }}>Energy (Dynamic Sport)</h3>
-        <Tabs tabs={basicTabs} variant="energy" />
-      </div>
-      <div
-        style={{
-          background: 'var(--gradient-primary-deep)',
-          padding: '24px',
-          borderRadius: 'var(--radius-lg)',
-        }}
-      >
-        <h3 style={{ marginBottom: '16px', color: 'white' }}>Glass (on gradient background)</h3>
-        <Tabs tabs={basicTabs} variant="glass" />
+        <h3 style={{ marginBottom: '16px' }}>Aesthetic Variant</h3>
+        <Tabs tabs={basicTabs} variant="aesthetic" />
       </div>
     </div>
   ),

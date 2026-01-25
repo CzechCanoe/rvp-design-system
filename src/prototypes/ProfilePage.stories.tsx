@@ -875,7 +875,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
             ]}
             activeTab={activeTab}
             onChange={setActiveTab}
-            variant="gradient"
+            variant="aesthetic"
           />
 
           {/* Tab Content */}
