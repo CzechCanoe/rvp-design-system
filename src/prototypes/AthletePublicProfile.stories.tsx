@@ -805,21 +805,37 @@ export const Satellite: Story = {
  * Expressive varianta - plný "wow" profil bez kanoe.cz kontextu.
  * Aesthetic styl, kompletní standalone aplikace.
  */
-export const Expressive: Story = {
-  name: 'Expressive',
+export const ExpressiveEmbed: Story = {
+  name: 'Expressive Embed',
   args: {
     section: 'dv',
     showBackgroundImage: true,
-    variant: 'standalone',
+    variant: 'embed',
     aesthetic: true,
   },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="full"
+        pageVariant="detail"
+        pageTitle="Jiří Prskavec - Profil závodníka"
+        breadcrumbs={[
+          { label: 'Domů', href: '#' },
+          { label: 'Závodníci', href: '#' },
+          { label: 'Jiří Prskavec' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
   parameters: {
     docs: {
       description: {
         story: `
-**Expressive varianta** - plný "wow" profil:
+**Expressive Embed varianta** - plný "wow" profil v kanoe.cz kontextu:
 - Aesthetic styl (display fonts, energy accents, mesh backgrounds)
-- Kompletní header s navigací
+- Vložené do kanoe.cz layoutu
 - Dramatický fullscreen hero
 - Staggered reveal animace pro career highlights
 - Použijte Controls pro změnu sekce (dv/ry/vt)

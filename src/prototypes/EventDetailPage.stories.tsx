@@ -908,28 +908,44 @@ export const Satellite: Story = {
 };
 
 /**
- * Expressive varianta - plný "wow" detail závodu bez kanoe.cz kontextu.
- * Aesthetic styl, kompletní standalone aplikace.
+ * Expressive Embed varianta - plný "wow" detail závodu v kanoe.cz kontextu.
+ * Aesthetic styl s dramatickými efekty.
  */
-export const Expressive: Story = {
-  name: 'Expressive',
+export const ExpressiveEmbed: Story = {
+  name: 'Expressive Embed',
   args: {
     status: 'registration',
     section: 'dv',
     showHero: true,
     initialTab: 'info',
-    variant: 'standalone',
+    variant: 'embed',
     style: 'aesthetic',
   },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="full"
+        pageVariant="detail"
+        pageTitle="MČR ve slalomu 2026"
+        breadcrumbs={[
+          { label: 'Domů', href: '#' },
+          { label: 'Kalendář', href: '#' },
+          { label: 'MČR ve slalomu 2026' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
   parameters: {
     docs: {
       description: {
         story: `
-**Expressive varianta** - plný "wow" detail závodu:
+**Expressive Embed varianta** - plný "wow" detail závodu v kanoe.cz kontextu:
 - Aesthetic styl (display fonts, energy accents, mesh backgrounds)
-- Kompletní header s navigací
+- Vložené do kanoe.cz layoutu
 - Dramatický hero s CTA
-- Stats bar a sidebar
+- Stats bar
 - Staggered reveal animace
 - Použijte Controls pro změnu status (upcoming/registration/live/finished), sekce a záložky
         `,

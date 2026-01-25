@@ -671,22 +671,38 @@ export const Satellite: Story = {
 };
 
 /**
- * Expressive varianta - plný profil klubu bez kanoe.cz kontextu.
- * Aesthetic styl, kompletní standalone aplikace.
+ * Expressive Embed varianta - plný "wow" profil klubu v kanoe.cz kontextu.
+ * Aesthetic styl s dramatickými efekty.
  */
-export const Expressive: Story = {
-  name: 'Expressive',
+export const ExpressiveEmbed: Story = {
+  name: 'Expressive Embed',
   args: {
-    variant: 'standalone',
+    variant: 'embed',
     aesthetic: true,
   },
+  decorators: [
+    (Story) => (
+      <KanoeCzContext
+        layout="full"
+        pageVariant="detail"
+        pageTitle="USK Praha - Profil klubu"
+        breadcrumbs={[
+          { label: 'Domů', href: '#' },
+          { label: 'Kluby', href: '#' },
+          { label: 'USK Praha' },
+        ]}
+      >
+        <Story />
+      </KanoeCzContext>
+    ),
+  ],
   parameters: {
     docs: {
       description: {
         story: `
-**Expressive varianta** - plný "wow" profil klubu:
+**Expressive Embed varianta** - plný "wow" profil klubu v kanoe.cz kontextu:
 - Aesthetic styl (display fonts, energy accents, mesh backgrounds)
-- Kompletní header s navigací (pokud bude implementován)
+- Vložené do kanoe.cz layoutu
 - Dramatický fullscreen hero
 - Staggered reveal animace pro členy a úspěchy
         `,
