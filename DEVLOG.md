@@ -5783,3 +5783,16 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 - ResultsPage prototyp nyní používá konzistentně Icon komponentu
 - Všechny inline styly nahrazeny CSS třídami
 - Build projde bez chyb
+
+---
+
+## 2026-01-25 - Phase 17.9: CalendarPage cleanup
+
+### Completed
+- [x] Replaced 7 inline SVG icons with Icon component (SearchIcon, LocationIcon, CalendarIcon, UsersIcon, ArrowRightIcon, GridIcon, ListIcon, CardsIcon)
+- [x] Verified no inline styles present in CalendarPage
+
+### Notes
+- CalendarPage was already clean - no inline styles, just SVG icons needed replacement
+- All view switcher buttons now use Icon component with size={18}
+- Sidebar icons use size="sm" for consistency
