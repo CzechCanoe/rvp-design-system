@@ -1,80 +1,35 @@
 /* ==========================================================================
-   ClubsListPage Prototype Styles - AESTHETIC VERSION
+   ClubsListPage Prototype Styles - LAYOUT ONLY
 
-   Phase 16.5: Aesthetic refresh with Dynamic Sport visual identity
-   - Mesh backgrounds and grain textures
-   - Display typography for headlines
-   - Energy accent colors
-   - Staggered reveal animations
-   - Card-based layout with hover effects
+   Phase 17.18: CSS reduction to layout-only
+   Visual styles handled by design tokens (aesthetic.css) and components.
+
+   Guidelines:
+   - Only layout properties: display, flex, grid, gap, padding, margin
+   - Only sizing: max-width, width, height, min-width
+   - Only positioning: position, z-index (for stacking)
+   - NO colors, fonts, shadows, borders, animations, effects
    ========================================================================== */
 
+/* Page container - flex column for header/main/footer */
 .prototype-clubs-list {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--bg-mesh-primary);
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
 }
 
 .prototype-clubs-list--embed {
   min-height: auto;
-  background: transparent;
 }
 
 /* ==========================================================================
-   Logo
-   ========================================================================== */
-
-.prototype-clubs-list__logo {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  text-decoration: none;
-  color: inherit;
-}
-
-.prototype-clubs-list__logo-text {
-  font-size: var(--text-xl-size);
-  font-weight: var(--font-bold);
-  color: var(--color-primary-600);
-}
-
-/* ==========================================================================
-   Page Header - AESTHETIC HERO
+   Page Header Layout
    ========================================================================== */
 
 .clubs-list-header {
   position: relative;
   padding: var(--spacing-12) 0 var(--spacing-8);
-  background: var(--bg-mesh-hero);
-  background-color: var(--color-bg-primary);
-  border-bottom: none;
   overflow: hidden;
-}
-
-/* Decorative diagonal stripe */
-.clubs-list-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: -10%;
-  width: 35%;
-  height: 100%;
-  background: var(--gradient-energy-subtle, linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(255, 107, 53, 0.02)));
-  transform: skewX(-12deg);
-  pointer-events: none;
-}
-
-/* Grain texture overlay */
-.clubs-list-header::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
 }
 
 .clubs-list-header__container {
@@ -90,18 +45,6 @@
   align-items: center;
   gap: var(--spacing-2);
   margin-bottom: var(--spacing-4);
-  font-size: var(--text-sm-size);
-  color: var(--color-text-tertiary);
-}
-
-.clubs-list-header__breadcrumb a {
-  color: var(--color-text-secondary);
-  text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-out);
-}
-
-.clubs-list-header__breadcrumb a:hover {
-  color: var(--color-energy-500, var(--color-primary-600));
 }
 
 .clubs-list-header__content {
@@ -120,113 +63,20 @@
 
 .clubs-list-header__title {
   margin: 0;
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: var(--font-black, 800);
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  color: var(--color-text-primary);
 }
 
 .clubs-list-header__subtitle {
   margin: var(--spacing-2) 0 0;
-  font-size: var(--text-lg-size);
-  color: var(--color-text-secondary);
   max-width: 500px;
 }
 
-/* ==========================================================================
-   Statistics Bar - StatsBar override for AESTHETIC styling
-   ========================================================================== */
-
-.clubs-list-stats.csk-stats-bar {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-4);
+/* Statistics positioning */
+.clubs-list-stats {
   margin-top: var(--spacing-6);
 }
 
-@media (min-width: 640px) {
-  .clubs-list-stats.csk-stats-bar {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.clubs-list-stats .csk-stats-bar__item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: var(--spacing-5) var(--spacing-4);
-  background: var(--color-bg-primary);
-  border-radius: var(--radius-lg);
-  text-align: center;
-  border: 1px solid var(--color-border-primary);
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--duration-fast) var(--ease-out),
-              box-shadow var(--duration-fast) var(--ease-out);
-  overflow: hidden;
-}
-
-/* Energy accent border on hover */
-.clubs-list-stats .csk-stats-bar__item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--gradient-primary, linear-gradient(90deg, var(--color-primary-500), var(--color-primary-400)));
-  opacity: 0;
-  transition: opacity var(--duration-fast) var(--ease-out);
-}
-
-.clubs-list-stats .csk-stats-bar__item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.clubs-list-stats .csk-stats-bar__item:hover::before {
-  opacity: 1;
-}
-
-/* Specific accent colors for each stat */
-.clubs-list-stats .csk-stats-bar__item:nth-child(1)::before {
-  background: var(--gradient-energy, linear-gradient(90deg, var(--color-energy-500, #ff6b35), var(--color-energy-400, #ff8c5a)));
-}
-
-.clubs-list-stats .csk-stats-bar__item:nth-child(2)::before {
-  background: linear-gradient(90deg, var(--color-success-500), var(--color-success-400));
-}
-
-.clubs-list-stats .csk-stats-bar__item:nth-child(3)::before {
-  background: linear-gradient(90deg, var(--color-info-500), var(--color-info-400));
-}
-
-.clubs-list-stats .csk-stats-bar__item:nth-child(4)::before {
-  background: linear-gradient(90deg, var(--color-warning-500), var(--color-warning-400));
-}
-
-.clubs-list-stats .csk-stats-bar__value {
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-3xl-size, 1.875rem);
-  font-weight: var(--font-black, 800);
-  font-variant-numeric: tabular-nums;
-  color: var(--color-text-primary);
-  letter-spacing: -0.02em;
-}
-
-.clubs-list-stats .csk-stats-bar__label {
-  font-size: var(--text-sm-size);
-  color: var(--color-text-secondary);
-  margin-top: var(--spacing-1);
-  font-weight: var(--font-medium, 500);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
 /* ==========================================================================
-   Main Content
+   Main Content Layout
    ========================================================================== */
 
 .prototype-clubs-list__main {
@@ -241,28 +91,21 @@
 }
 
 /* ==========================================================================
-   Section Tabs - AESTHETIC PILL TABS
+   Section Tabs Layout
    ========================================================================== */
 
 .clubs-list-section-tabs {
   margin-bottom: var(--spacing-6);
   padding: var(--spacing-3);
-  background: var(--color-bg-secondary);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border-primary);
 }
 
 /* ==========================================================================
-   Search and Filters - AESTHETIC FILTER BAR
+   Filters Layout
    ========================================================================== */
 
 .clubs-list-filters {
   margin-bottom: var(--spacing-6);
   padding: var(--spacing-5);
-  background: var(--color-bg-primary);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border-primary);
-  box-shadow: var(--shadow-sm);
 }
 
 .clubs-list-filters__row {
@@ -293,10 +136,8 @@
   min-width: 140px;
 }
 
-/* Filter pills - Now using FilterPills component (CSS removed) */
-
 /* ==========================================================================
-   Results Header - AESTHETIC
+   Results Layout
    ========================================================================== */
 
 .clubs-list-results__header {
@@ -305,7 +146,6 @@
   gap: var(--spacing-3);
   margin-bottom: var(--spacing-5);
   padding-bottom: var(--spacing-4);
-  border-bottom: 1px solid var(--color-border-primary);
 }
 
 @media (min-width: 640px) {
@@ -316,37 +156,19 @@
   }
 }
 
-.clubs-list-results__count {
-  font-size: var(--text-base-size);
-  color: var(--color-text-secondary);
-}
-
-.clubs-list-results__count strong {
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-weight: var(--font-bold, 700);
-  color: var(--color-text-primary);
-  font-variant-numeric: tabular-nums;
-}
-
 .clubs-list-results__sort {
   display: flex;
   align-items: center;
   gap: var(--spacing-3);
 }
 
-.clubs-list-results__sort-label {
-  font-size: var(--text-sm-size);
-  color: var(--color-text-tertiary);
-  font-weight: var(--font-medium, 500);
-}
-
 /* ==========================================================================
-   Clubs Grid - AESTHETIC CARD GRID
+   Clubs Grid Layout
    ========================================================================== */
 
 .clubs-list-grid {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--spacing-5);
 }
 
@@ -363,49 +185,17 @@
 }
 
 /* ==========================================================================
-   Club Card - AESTHETIC
+   Club Card Layout
    ========================================================================== */
 
 .club-card {
-  position: relative;
   display: flex;
   flex-direction: column;
   padding: var(--spacing-5);
-  background: var(--color-bg-primary);
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--duration-fast) var(--ease-out),
-              box-shadow var(--duration-fast) var(--ease-out),
-              border-color var(--duration-fast) var(--ease-out);
-  overflow: hidden;
-}
-
-/* Accent border on top */
-.club-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--gradient-primary, linear-gradient(90deg, var(--color-primary-500), var(--color-primary-400)));
-  opacity: 0;
-  transition: opacity var(--duration-fast) var(--ease-out);
 }
 
 .club-card--clickable {
   cursor: pointer;
-}
-
-.club-card--clickable:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--color-primary-300);
-}
-
-.club-card--clickable:hover::before {
-  opacity: 1;
 }
 
 .club-card__header {
@@ -422,27 +212,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--color-primary-50), var(--color-primary-100));
-  border: 2px solid var(--color-primary-200);
-  border-radius: var(--radius-lg);
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-xl-size);
-  font-weight: var(--font-bold);
-  color: var(--color-primary-600);
-  transition: all var(--duration-fast) var(--ease-out);
-}
-
-.club-card--clickable:hover .club-card__logo {
-  background: linear-gradient(135deg, var(--color-primary-100), var(--color-primary-200));
-  border-color: var(--color-primary-300);
-  transform: scale(1.05);
 }
 
 .club-card__logo img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  border-radius: var(--radius-md);
 }
 
 .club-card__info {
@@ -452,26 +227,12 @@
 
 .club-card__name {
   margin: 0;
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-lg-size);
-  font-weight: var(--font-bold, 700);
-  color: var(--color-text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  letter-spacing: -0.01em;
 }
 
 .club-card__code {
   display: inline-block;
   margin-top: var(--spacing-1);
   padding: var(--spacing-0) var(--spacing-2);
-  font-size: var(--text-xs-size);
-  font-weight: var(--font-semibold, 600);
-  color: var(--color-primary-600);
-  background: var(--color-primary-50);
-  border-radius: var(--radius-sm);
-  letter-spacing: 0.05em;
 }
 
 .club-card__location {
@@ -479,46 +240,24 @@
   align-items: center;
   gap: var(--spacing-2);
   margin-top: var(--spacing-2);
-  font-size: var(--text-sm-size);
-  color: var(--color-text-secondary);
 }
 
 .club-card__location svg {
   width: 14px;
   height: 14px;
   flex-shrink: 0;
-  color: var(--color-text-tertiary);
 }
 
 .club-card__stats {
   display: flex;
   gap: var(--spacing-6);
   padding: var(--spacing-4) 0;
-  border-top: 1px solid var(--color-border-primary);
-  border-bottom: 1px solid var(--color-border-primary);
 }
 
 .club-card__stat {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-0);
-}
-
-.club-card__stat-value {
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-xl-size);
-  font-weight: var(--font-bold, 700);
-  font-variant-numeric: tabular-nums;
-  color: var(--color-text-primary);
-  letter-spacing: -0.01em;
-}
-
-.club-card__stat-label {
-  font-size: var(--text-xs-size);
-  color: var(--color-text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: var(--font-medium, 500);
 }
 
 .club-card__sections {
@@ -528,7 +267,7 @@
 }
 
 /* ==========================================================================
-   Pagination
+   Pagination Layout
    ========================================================================== */
 
 .clubs-list-pagination {
@@ -536,17 +275,14 @@
   justify-content: center;
   margin-top: var(--spacing-8);
   padding-top: var(--spacing-6);
-  border-top: 1px solid var(--color-border-primary);
 }
 
 /* ==========================================================================
-   Footer
+   Footer Layout
    ========================================================================== */
 
 .prototype-clubs-list__footer {
   padding: var(--spacing-6) 0;
-  background: var(--color-bg-secondary);
-  border-top: 1px solid var(--color-border-primary);
 }
 
 .prototype-clubs-list__footer-content {
@@ -554,22 +290,14 @@
   margin: 0 auto;
   padding: 0 var(--spacing-4);
   text-align: center;
-  font-size: var(--text-sm-size);
-  color: var(--color-text-tertiary);
 }
 
 /* ==========================================================================
-   Embed Mode Adjustments
+   Embed Mode Layout Adjustments
    ========================================================================== */
 
 .prototype-clubs-list--embed .clubs-list-header {
   padding: var(--spacing-6) 0 var(--spacing-4);
-  background: transparent;
-}
-
-.prototype-clubs-list--embed .clubs-list-header::before,
-.prototype-clubs-list--embed .clubs-list-header::after {
-  display: none;
 }
 
 .prototype-clubs-list--embed .clubs-list-header__container {
@@ -580,29 +308,13 @@
   padding: 0;
 }
 
-.prototype-clubs-list--embed .clubs-list-filters {
-  background: var(--color-bg-primary);
-}
-
-.prototype-clubs-list--embed .clubs-list-stats .csk-stats-bar__item {
-  background: var(--color-bg-secondary);
-}
-
-.prototype-clubs-list--embed .clubs-list-section-tabs {
-  background: var(--color-bg-primary);
-}
-
 /* ==========================================================================
-   Responsive Adjustments for Narrow Containers
+   Container Query Adjustments
    ========================================================================== */
 
 @container (max-width: 600px) {
   .clubs-list-grid {
     grid-template-columns: 1fr;
-  }
-
-  .clubs-list-stats.csk-stats-bar {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -622,66 +334,5 @@
 
   .club-card__stat {
     min-width: 60px;
-  }
-}
-
-/* ==========================================================================
-   Dark Mode
-   ========================================================================== */
-
-[data-theme='dark'] .clubs-list-header {
-  background: var(--bg-mesh-hero);
-  background-color: var(--color-bg-secondary);
-}
-
-[data-theme='dark'] .clubs-list-stats .csk-stats-bar__item {
-  background: var(--color-bg-tertiary);
-  border-color: var(--color-border-secondary);
-}
-
-[data-theme='dark'] .clubs-list-filters {
-  background: var(--color-bg-secondary);
-  border-color: var(--color-border-secondary);
-}
-
-[data-theme='dark'] .clubs-list-section-tabs {
-  background: var(--color-bg-tertiary);
-  border-color: var(--color-border-secondary);
-}
-
-[data-theme='dark'] .club-card {
-  background: var(--color-bg-secondary);
-  border-color: var(--color-border-secondary);
-}
-
-[data-theme='dark'] .club-card--clickable:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
-}
-
-[data-theme='dark'] .club-card__logo {
-  background: linear-gradient(135deg, var(--color-primary-900), var(--color-primary-800));
-  border-color: var(--color-primary-700);
-}
-
-[data-theme='dark'] .club-card__code {
-  background: var(--color-primary-900);
-  color: var(--color-primary-300);
-}
-
-/* ==========================================================================
-   Reduced Motion
-   ========================================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  .clubs-list-stats .csk-stats-bar__item,
-  .club-card,
-  .club-card__logo {
-    transition: none;
-  }
-
-  .clubs-list-stats .csk-stats-bar__item:hover,
-  .club-card--clickable:hover,
-  .club-card--clickable:hover .club-card__logo {
-    transform: none;
   }
 }

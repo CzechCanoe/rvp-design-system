@@ -110,17 +110,12 @@ const ClubCard = ({ club, onClick }: ClubCardProps) => {
   };
 
   return (
-    <div
+    <Card
+      variant="aesthetic"
+      padding="none"
       className={`club-card ${onClick ? 'club-card--clickable' : ''}`}
+      clickable={!!onClick}
       onClick={onClick}
-      role={onClick ? 'button' : undefined}
-      tabIndex={onClick ? 0 : undefined}
-      onKeyDown={onClick ? (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onClick();
-        }
-      } : undefined}
     >
       <div className="club-card__header">
         <div className="club-card__logo">
@@ -162,7 +157,7 @@ const ClubCard = ({ club, onClick }: ClubCardProps) => {
           </Badge>
         ))}
       </div>
-    </div>
+    </Card>
   );
 };
 
@@ -329,7 +324,7 @@ const ClubsListPage = ({
       {renderHeader()}
 
       {/* Page Header */}
-      <section className="clubs-list-header">
+      <section className="clubs-list-header csk-mesh-bg--hero csk-grain">
         <div className="clubs-list-header__container">
           {variant !== 'embed' && (
             <div className="clubs-list-header__breadcrumb">
@@ -340,7 +335,7 @@ const ClubsListPage = ({
           )}
           <div className="clubs-list-header__content">
             <div>
-              <h1 className="clubs-list-header__title">Registr klubů a oddílů</h1>
+              <h1 className="clubs-list-header__title csk-display">Registr klubů a oddílů</h1>
               <p className="clubs-list-header__subtitle">
                 Kompletní seznam klubů a oddílů Českého svazu kanoistů
               </p>

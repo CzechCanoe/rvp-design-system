@@ -258,6 +258,13 @@
 - [x] Nahradit custom sekce Card komponentou s variant="aesthetic"
 - [x] Build validace OK
 
+### Iterace 18: CSS redukce ClubsListPage ✅
+- [x] Analyzovat CSS - identifikovat layout vs vizuální styly
+- [x] Přepsat CSS na layout-only (687 → 338 řádků, 51% redukce)
+- [x] Aktualizovat TSX pro použití utility tříd (csk-mesh-bg--hero, csk-grain, csk-display)
+- [x] Nahradit custom club-card za Card komponentu s variant="aesthetic"
+- [x] Build validace OK
+
 ---
 
 ## Metriky úspěchu
@@ -265,7 +272,7 @@
 | Metrika | Před | Aktuální | Cíl |
 |---------|------|----------|-----|
 | Component CSS | ~7,800 řádků | 16,046 řádků* | ~10,000 řádků |
-| Prototype CSS | ~4,500 řádků | 14,171 řádků | ~600 řádků |
+| Prototype CSS | ~4,500 řádků | 13,822 řádků | ~600 řádků |
 | Inline styles | 28 | **0** ✅ | 0 |
 | Custom icons | 80+ | **0** ✅ | 0 (vše přes Icon) |
 
