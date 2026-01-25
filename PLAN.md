@@ -44,12 +44,12 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 - [x] Expressive - ponechat, ověřit Aesthetic
 - [x] Odstranit: EmbedWithSidebar
 
-**EventDetailPage** (7 → 3)
-- [ ] Sloučit AestheticRegistration/Live/Schedule/Documents do hlavních variant
-- [ ] Embed - přepracovat na Aesthetic
-- [ ] Satellite - přepracovat na Aesthetic
-- [ ] Expressive - nová varianta (Aesthetic bez kanoe.cz)
-- [ ] Odstranit: EmbedWithSidebar
+**EventDetailPage** (7 → 3) ✅
+- [x] Sloučit AestheticRegistration/Live/Schedule/Documents do hlavních variant
+- [x] Embed - přepracovat na Aesthetic
+- [x] Satellite - přepracovat na Aesthetic
+- [x] Expressive - nová varianta (Aesthetic bez kanoe.cz)
+- [x] Odstranit: EmbedWithSidebar
 
 ### 16.2 Calendar + Results
 
@@ -141,7 +141,7 @@ Pro Calendar navíc zachovat různé prezentace (Grid/ListView).
 
 ## Další krok
 
-Pokračovat s **16.1 Veřejné profily** - EventDetailPage.
+Pokračovat s **16.2 Calendar + Results** - CalendarPage.
 
 ---
 

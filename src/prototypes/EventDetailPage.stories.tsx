@@ -829,20 +829,23 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // ============================================================================
-// Integration Variants - Embed/Satellite only (Phase 8.9)
+// Phase 16.1: Consolidated Variants - Embed/Satellite/Expressive (all Aesthetic)
+// Use Storybook Controls to change status, section, and initialTab
 // ============================================================================
 
 /**
  * Embed varianta pro vložení do kanoe.cz.
- * Bez vlastního headeru a footeru, kompaktní styl.
+ * Aesthetic styl, bez vlastního headeru a footeru.
  */
 export const Embed: Story = {
+  name: 'Embed',
   args: {
     status: 'finished',
     section: 'dv',
     showHero: true,
     initialTab: 'results',
     variant: 'embed',
+    style: 'aesthetic',
   },
   decorators: [
     (Story) => (
@@ -860,61 +863,56 @@ export const Embed: Story = {
       </KanoeCzContext>
     ),
   ],
+  parameters: {
+    docs: {
+      description: {
+        story: `
+**Embed varianta** pro vložení do kanoe.cz kontextu:
+- Aesthetic styl (display fonts, energy accents, mesh backgrounds)
+- Bez vlastního headeru a footeru
+- Kompaktní hero a layout
+- Použijte Controls pro změnu status (upcoming/registration/live/finished)
+        `,
+      },
+    },
+  },
 };
 
 /**
  * Satellite varianta pro standalone aplikace.
- * Minimální header s odkazem na kanoe.cz.
+ * Aesthetic styl, minimální header s odkazem na kanoe.cz.
  */
 export const Satellite: Story = {
+  name: 'Satellite',
   args: {
     status: 'live',
     section: 'dv',
     showHero: true,
     initialTab: 'results',
     variant: 'satellite',
+    style: 'aesthetic',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+**Satellite varianta** pro standalone aplikace:
+- Aesthetic styl (display fonts, energy accents, mesh backgrounds)
+- Minimální header s odkazem zpět na kanoe.cz
+- Vlastní footer a sidebar
+- Použijte Controls pro změnu status a initialTab
+        `,
+      },
+    },
   },
 };
 
 /**
- * Embed varianta se sidebarem v kanoe.cz layoutu.
- * Demonstrace container queries v úzkém sloupci.
+ * Expressive varianta - plný "wow" detail závodu bez kanoe.cz kontextu.
+ * Aesthetic styl, kompletní standalone aplikace.
  */
-export const EmbedWithSidebar: Story = {
-  args: {
-    status: 'registration',
-    section: 'dv',
-    showHero: false,
-    initialTab: 'info',
-    variant: 'embed',
-  },
-  decorators: [
-    (Story) => (
-      <KanoeCzContext
-        layout="sidebar"
-        pageVariant="detail"
-        pageTitle="MČR ve slalomu 2026"
-        breadcrumbs={[
-          { label: 'Domů', href: '#' },
-          { label: 'Kalendář', href: '#' },
-          { label: 'MČR ve slalomu 2026' },
-        ]}
-      >
-        <Story />
-      </KanoeCzContext>
-    ),
-  ],
-};
-
-// ============================================================================
-// Aesthetic Variants - Dynamic Sport visual style (Phase 15.0)
-// ============================================================================
-
-/**
- * Aesthetic varianta s registrací otevřenou.
- * Mesh backgrounds, display typography, energy CTA, staggered reveals.
- */
-export const AestheticRegistration: Story = {
+export const Expressive: Story = {
+  name: 'Expressive',
   args: {
     status: 'registration',
     section: 'dv',
@@ -923,49 +921,19 @@ export const AestheticRegistration: Story = {
     variant: 'standalone',
     style: 'aesthetic',
   },
-};
-
-/**
- * Aesthetic varianta s live závodem.
- * Energy LIVE badge, gradient-energy CTA.
- */
-export const AestheticLive: Story = {
-  args: {
-    status: 'live',
-    section: 'dv',
-    showHero: true,
-    initialTab: 'results',
-    variant: 'standalone',
-    style: 'aesthetic',
-  },
-};
-
-/**
- * Aesthetic varianta - záložka Program.
- * Border-accent na schedule items, staggered reveal.
- */
-export const AestheticSchedule: Story = {
-  args: {
-    status: 'upcoming',
-    section: 'dv',
-    showHero: true,
-    initialTab: 'schedule',
-    variant: 'standalone',
-    style: 'aesthetic',
-  },
-};
-
-/**
- * Aesthetic varianta - záložka Dokumenty.
- * Hover glow efekty, energy icon colors.
- */
-export const AestheticDocuments: Story = {
-  args: {
-    status: 'finished',
-    section: 'dv',
-    showHero: true,
-    initialTab: 'documents',
-    variant: 'standalone',
-    style: 'aesthetic',
+  parameters: {
+    docs: {
+      description: {
+        story: `
+**Expressive varianta** - plný "wow" detail závodu:
+- Aesthetic styl (display fonts, energy accents, mesh backgrounds)
+- Kompletní header s navigací
+- Dramatický hero s CTA
+- Stats bar a sidebar
+- Staggered reveal animace
+- Použijte Controls pro změnu status (upcoming/registration/live/finished), sekce a záložky
+        `,
+      },
+    },
   },
 };

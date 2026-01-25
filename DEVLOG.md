@@ -5041,3 +5041,17 @@ Zbývá v 15.4: Calendar víkendová prezentace, Results Top 3 karty přehodnoce
 
 ### Další krok
 EventDetailPage (7 → 3 varianty)
+
+---
+
+## 2026-01-25 - Fáze 16.1: EventDetailPage konsolidace
+
+### Dokončeno
+- [x] EventDetailPage: sloučeny 7 stories do 3 variant (Embed, Satellite, Expressive)
+- [x] Aesthetic styl aplikován na všechny varianty
+- [x] Odstraněny: EmbedWithSidebar, AestheticRegistration, AestheticLive, AestheticSchedule, AestheticDocuments
+- [x] Všechny stavy (upcoming/registration/live/finished) dostupné přes Storybook Controls
+
+### Poznámky
+- Fáze 16.1 Veřejné profily dokončena (Athlete ✅, Club ✅, Event ✅)
+- Další krok: 16.2 Calendar + Results
