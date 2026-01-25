@@ -5796,3 +5796,20 @@ Nový `weekendShowcase` poskytuje "wow" faktor s jasným vizuálním zaměření
 - CalendarPage was already clean - no inline styles, just SVG icons needed replacement
 - All view switcher buttons now use Icon component with size={18}
 - Sidebar icons use size="sm" for consistency
+
+---
+
+## 2026-01-25 - Phase 17.10: EventDetailPage cleanup
+
+### Dokončeno
+- [x] Replace 9 inline SVG icons with Icon component (Search, Location, Calendar, Users, Clock, Download, File, Map, ExternalLink)
+- [x] Verify no inline styles (prototype already uses CSS classes)
+
+### Změny
+- Removed ~75 lines of inline SVG icon definitions
+- Added Icon component import
+- Updated all icon usages to `<Icon name="..." size="..." />`
+
+### Poznámky
+- EventDetailPage was already well-structured with CSS classes, no inline styles needed conversion
+- 9 SVG icons replaced, continuing with ProfilePage next
