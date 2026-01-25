@@ -350,9 +350,9 @@ const CalendarPage = ({
     }
 
     return (
-      <footer className="prototype-calendar-page__footer">
+      <footer className="prototype-calendar-page__footer csk-border-top csk-bg-secondary">
         <div className="prototype-calendar-page__footer-content">
-          <p>© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
+          <p className="csk-text-sm csk-text-tertiary">© 2026 Český svaz kanoistů. Všechna práva vyhrazena.</p>
         </div>
       </footer>
     );
@@ -363,7 +363,6 @@ const CalendarPage = ({
   const pageClasses = [
     'prototype-calendar-page',
     variant === 'embed' && 'prototype-calendar-page--embed',
-    isAesthetic && 'prototype-calendar-page--aesthetic',
   ].filter(Boolean).join(' ');
 
   return (
@@ -375,15 +374,15 @@ const CalendarPage = ({
       <main className="prototype-calendar-page__main">
         <div className="prototype-calendar-page__container">
           {/* Page header */}
-          <div className="prototype-calendar-page__header">
-            <h1 className="prototype-calendar-page__title">Kalendář závodů</h1>
-            <p className="prototype-calendar-page__subtitle">
+          <div className={`prototype-calendar-page__header ${isAesthetic ? 'csk-reveal' : ''}`}>
+            <h1 className={`prototype-calendar-page__title ${isAesthetic ? 'csk-display' : ''}`}>Kalendář závodů</h1>
+            <p className="prototype-calendar-page__subtitle csk-text-secondary">
               Přehled všech závodů a akcí Českého svazu kanoistů
             </p>
           </div>
 
           {/* Filters */}
-          <div className="prototype-calendar-page__filters">
+          <div className={`prototype-calendar-page__filters csk-border-bottom ${isAesthetic ? 'csk-reveal csk-reveal-2' : ''}`}>
             <Tabs
               tabs={sectionTabs.map((tab) => ({ ...tab, content: null }))}
               activeTab={selectedSection}
@@ -405,10 +404,10 @@ const CalendarPage = ({
               />
 
               {showViewSwitcher && (
-                <div className="prototype-calendar-page__view-switcher">
+                <div className="prototype-calendar-page__view-switcher csk-surface-elevated csk-rounded">
                   <button
                     type="button"
-                    className={`prototype-calendar-page__view-btn ${currentView === 'month' ? 'prototype-calendar-page__view-btn--active' : ''}`}
+                    className={`prototype-calendar-page__view-btn csk-rounded-sm csk-interactive ${currentView === 'month' ? 'csk-surface csk-shadow-sm csk-text-primary' : 'csk-text-tertiary'}`}
                     onClick={() => setCurrentView('month')}
                     aria-label="Měsíční pohled"
                     title="Měsíční pohled"
@@ -417,7 +416,7 @@ const CalendarPage = ({
                   </button>
                   <button
                     type="button"
-                    className={`prototype-calendar-page__view-btn ${currentView === 'list' ? 'prototype-calendar-page__view-btn--active' : ''}`}
+                    className={`prototype-calendar-page__view-btn csk-rounded-sm csk-interactive ${currentView === 'list' ? 'csk-surface csk-shadow-sm csk-text-primary' : 'csk-text-tertiary'}`}
                     onClick={() => setCurrentView('list')}
                     aria-label="Seznam"
                     title="Seznam"
@@ -426,7 +425,7 @@ const CalendarPage = ({
                   </button>
                   <button
                     type="button"
-                    className={`prototype-calendar-page__view-btn ${currentView === 'cards' ? 'prototype-calendar-page__view-btn--active' : ''}`}
+                    className={`prototype-calendar-page__view-btn csk-rounded-sm csk-interactive ${currentView === 'cards' ? 'csk-surface csk-shadow-sm csk-text-primary' : 'csk-text-tertiary'}`}
                     onClick={() => setCurrentView('cards')}
                     aria-label="Měsíční karty"
                     title="Měsíční karty"
@@ -441,7 +440,7 @@ const CalendarPage = ({
           {/* Content grid */}
           <div className="prototype-calendar-page__content">
             {/* Calendar - different views */}
-            <div className="prototype-calendar-page__calendar">
+            <div className={`prototype-calendar-page__calendar ${isAesthetic ? 'csk-reveal csk-reveal-3' : ''}`}>
               {currentView === 'month' && (
                 <Calendar
                   date={currentDate}
@@ -487,17 +486,17 @@ const CalendarPage = ({
             <aside className="prototype-calendar-page__sidebar">
               {/* Live races */}
               {showLive && upcomingRaces.some((race) => race.data?.isLive) && (
-                <Card variant="outlined" padding="md" className="prototype-calendar-page__live-card">
-                  <div className="prototype-calendar-page__live-header">
+                <Card variant="outlined" padding="md" className={`prototype-calendar-page__live-card csk-border-energy ${isAesthetic ? 'csk-reveal csk-reveal-2' : ''}`}>
+                  <div className="prototype-calendar-page__live-header csk-text-energy">
                     <LiveIndicator variant="live" size="md" label="LIVE" />
-                    <span>Právě probíhá</span>
+                    <span className="csk-font-semibold">Právě probíhá</span>
                   </div>
                   {upcomingRaces
                     .filter((race) => race.data?.isLive)
                     .map((race) => (
                       <div key={race.id} className="prototype-calendar-page__live-race">
-                        <div className="prototype-calendar-page__race-title">{race.title}</div>
-                        <div className="prototype-calendar-page__race-meta">
+                        <div className="prototype-calendar-page__race-title csk-font-semibold csk-text-primary">{race.title}</div>
+                        <div className="prototype-calendar-page__race-meta csk-text-sm csk-text-secondary">
                           <Icon name="location" size="sm" />
                           <span>{String(race.data?.location || '')}</span>
                         </div>
@@ -510,9 +509,9 @@ const CalendarPage = ({
               )}
 
               {/* Upcoming races */}
-              <Card variant="surface" padding="none">
-                <div className="prototype-calendar-page__upcoming-header">
-                  <h2 className="prototype-calendar-page__upcoming-title">Nadcházející závody</h2>
+              <Card variant="surface" padding="none" className={isAesthetic ? 'csk-reveal csk-reveal-3' : ''}>
+                <div className="prototype-calendar-page__upcoming-header csk-border-bottom">
+                  <h2 className={`prototype-calendar-page__upcoming-title csk-text-lg csk-font-semibold ${isAesthetic ? 'csk-headline' : ''}`}>Nadcházející závody</h2>
                 </div>
 
                 {upcomingRaces.length > 0 ? (
@@ -521,17 +520,17 @@ const CalendarPage = ({
                       <button
                         key={race.id}
                         type="button"
-                        className={`prototype-calendar-page__upcoming-item ${
-                          selectedEvent?.id === race.id ? 'prototype-calendar-page__upcoming-item--selected' : ''
+                        className={`prototype-calendar-page__upcoming-item csk-interactive csk-border-bottom ${
+                          selectedEvent?.id === race.id ? 'csk-bg-primary-subtle csk-border-left-accent' : ''
                         }`}
                         onClick={() => handleEventClick(race)}
                       >
-                        <div className="prototype-calendar-page__upcoming-date">
+                        <div className="prototype-calendar-page__upcoming-date csk-text-sm csk-text-secondary">
                           <Icon name="calendar" size="sm" />
                           <span>{formatDateRange(race.start, race.end)}</span>
                         </div>
                         <div className="prototype-calendar-page__upcoming-content">
-                          <div className="prototype-calendar-page__upcoming-name">
+                          <div className="prototype-calendar-page__upcoming-name csk-font-medium csk-text-primary">
                             {race.section && (
                               <Badge section={race.section as 'dv' | 'ry' | 'vt'} size="sm">
                                 {sectionShortNames[race.section]}
@@ -539,7 +538,7 @@ const CalendarPage = ({
                             )}
                             <span>{race.title}</span>
                           </div>
-                          <div className="prototype-calendar-page__upcoming-meta">
+                          <div className="prototype-calendar-page__upcoming-meta csk-text-sm csk-text-tertiary">
                             <span className="prototype-calendar-page__upcoming-location">
                               <Icon name="location" size="sm" />
                               {String(race.data?.location || '')}
@@ -552,7 +551,7 @@ const CalendarPage = ({
                             ) : null}
                           </div>
                         </div>
-                        <Icon name="arrow-right" size="sm" />
+                        <Icon name="arrow-right" size="sm" className="csk-text-tertiary" />
                       </button>
                     ))}
                   </div>
@@ -564,7 +563,7 @@ const CalendarPage = ({
                   />
                 )}
 
-                <div className="prototype-calendar-page__upcoming-footer">
+                <div className="prototype-calendar-page__upcoming-footer csk-border-top">
                   <Button variant="ghost" size="sm" fullWidth>
                     Zobrazit všechny závody
                   </Button>
@@ -573,9 +572,9 @@ const CalendarPage = ({
 
               {/* Event detail (when selected) */}
               {selectedEvent && (
-                <Card variant="elevated" padding="md" className="prototype-calendar-page__detail-card">
+                <Card variant={isAesthetic ? 'aesthetic' : 'elevated'} padding="md" className={`prototype-calendar-page__detail-card ${isAesthetic ? 'csk-border-accent' : ''}`}>
                   <div className="prototype-calendar-page__detail-header">
-                    <h3 className="prototype-calendar-page__detail-title">{selectedEvent.title}</h3>
+                    <h3 className={`prototype-calendar-page__detail-title csk-text-lg csk-font-semibold ${isAesthetic ? 'csk-headline' : ''}`}>{selectedEvent.title}</h3>
                     {selectedEvent.section && (
                       <Badge section={selectedEvent.section as 'dv' | 'ry' | 'vt'}>
                         {sectionNames[selectedEvent.section]}
@@ -583,7 +582,7 @@ const CalendarPage = ({
                     )}
                   </div>
 
-                  <div className="prototype-calendar-page__detail-info">
+                  <div className="prototype-calendar-page__detail-info csk-text-sm csk-text-secondary">
                     <div className="prototype-calendar-page__detail-row">
                       <Icon name="calendar" size="sm" />
                       <span>{formatDateRange(selectedEvent.start, selectedEvent.end)}</span>
@@ -596,13 +595,13 @@ const CalendarPage = ({
                     ) : null}
                     {selectedEvent.data?.discipline ? (
                       <div className="prototype-calendar-page__detail-row">
-                        <span className="prototype-calendar-page__detail-label">Disciplína:</span>
+                        <span className="prototype-calendar-page__detail-label csk-font-medium csk-text-tertiary">Disciplína:</span>
                         <span>{String(selectedEvent.data.discipline)}</span>
                       </div>
                     ) : null}
                     {selectedEvent.data?.level ? (
                       <div className="prototype-calendar-page__detail-row">
-                        <span className="prototype-calendar-page__detail-label">Úroveň:</span>
+                        <span className="prototype-calendar-page__detail-label csk-font-medium csk-text-tertiary">Úroveň:</span>
                         <span>{String(selectedEvent.data.level)}</span>
                       </div>
                     ) : null}

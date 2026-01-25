@@ -1,315 +1,41 @@
-/* ============================================================================
-   Calendar Page Prototype - Styles
-   Phase 15.0: Aesthetic Refresh - Dynamic Sport aesthetic applied
-   - Mesh backgrounds, display typography, energy accents
-   - Staggered reveal animations, border accents for featured events
-   ============================================================================ */
+/* ==========================================================================
+   CalendarPage Prototype Styles - LAYOUT ONLY
 
+   Phase 17.20: CSS reduction to layout-only
+   Visual styles handled by design tokens (aesthetic.css) and components.
+
+   Guidelines:
+   - Only layout properties: display, flex, grid, gap, padding, margin
+   - Only sizing: max-width, width, height, min-width
+   - Only positioning: position, z-index (for stacking)
+   - NO colors, fonts, shadows, borders, animations, effects
+   ========================================================================== */
+
+/* Page container - flex column for header/main/footer */
 .prototype-calendar-page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-bg-primary);
 }
 
-/* Aesthetic variant with mesh background */
-.prototype-calendar-page--aesthetic {
-  background: var(--bg-mesh-primary);
-  background-color: var(--color-bg-primary);
+.prototype-calendar-page--embed {
+  min-height: auto;
 }
 
-/* ============================================================================
-   Hero Section
-   ============================================================================ */
-
-.calendar-page-hero {
-  position: relative;
-  padding: var(--spacing-16) var(--spacing-4) var(--spacing-20);
-  overflow: hidden;
-  color: var(--color-text-inverse);
-}
-
-.calendar-page-hero__background {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.calendar-page-hero__gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary-700) 0%,
-    var(--color-primary-500) 50%,
-    var(--color-primary-400) 100%
-  );
-}
-
-.calendar-page-hero__pattern {
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
-  opacity: 1;
-}
-
-.calendar-page-hero__content {
-  position: relative;
-  z-index: 1;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.calendar-page-hero__text {
-  max-width: 600px;
-}
-
-.calendar-page-hero__title {
-  font-size: var(--font-size-5xl);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.1;
-  letter-spacing: var(--letter-spacing-tight);
-  margin: 0 0 var(--spacing-4) 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.calendar-page-hero__subtitle {
-  font-size: var(--font-size-lg);
-  line-height: 1.6;
-  margin: 0 0 var(--spacing-8) 0;
-  opacity: 0.9;
-}
-
-.calendar-page-hero__stats {
-  display: flex;
-  gap: var(--spacing-8);
-}
-
-.calendar-page-hero__stat {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1);
-}
-
-.calendar-page-hero__stat-value {
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
-  font-family: var(--font-family-mono);
-  line-height: 1;
-}
-
-.calendar-page-hero__stat-label {
-  font-size: var(--font-size-sm);
-  opacity: 0.8;
-  text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-wide);
-}
-
-.calendar-page-hero__wave {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  color: var(--color-bg-primary);
-  z-index: 2;
-}
-
-.calendar-page-wave {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* ============================================================================
-   Featured Events Section
-   ============================================================================ */
-
-.calendar-page-featured {
-  background-color: var(--color-bg-primary);
-  padding: var(--spacing-8) var(--spacing-4);
-  margin-top: calc(var(--spacing-8) * -1);
-  position: relative;
-  z-index: 3;
-}
-
-.calendar-page-featured__container {
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.calendar-page-featured__header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-  margin-bottom: var(--spacing-6);
-  color: var(--color-text-primary);
-}
-
-.calendar-page-featured__header svg {
-  color: var(--color-accent-500);
-}
-
-.calendar-page-featured__title {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
-  margin: 0;
-}
-
-.calendar-page-featured__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--spacing-4);
-}
-
-.calendar-page-featured__card {
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  background: var(--color-bg-elevated);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  border: 1px solid var(--color-border-default);
-  cursor: pointer;
-  text-align: left;
-  width: 100%;
-  transition: all var(--transition-normal);
-  box-shadow: var(--shadow-sm);
-}
-
-.calendar-page-featured__card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--color-border-strong);
-}
-
-.calendar-page-featured__card-accent {
-  width: 4px;
-  flex-shrink: 0;
-  background: var(--gradient-primary);
-}
-
-.calendar-page-featured__card--dv .calendar-page-featured__card-accent {
-  background: var(--gradient-section-dv);
-}
-
-.calendar-page-featured__card--ry .calendar-page-featured__card-accent {
-  background: var(--gradient-section-ry);
-}
-
-.calendar-page-featured__card--vt .calendar-page-featured__card-accent {
-  background: var(--gradient-section-vt);
-}
-
-.calendar-page-featured__card-content {
-  flex: 1;
-  padding: var(--spacing-4);
-  min-width: 0;
-}
-
-.calendar-page-featured__card-top {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  margin-bottom: var(--spacing-3);
-}
-
-.calendar-page-featured__card-star {
-  color: var(--color-accent-500);
-  display: flex;
-  animation: starPulse 2s ease-in-out infinite;
-}
-
-@keyframes starPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.1); }
-}
-
-.calendar-page-featured__card-title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-  margin: 0 0 var(--spacing-3) 0;
-  line-height: 1.3;
-}
-
-.calendar-page-featured__card-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-4);
-  margin-bottom: var(--spacing-2);
-}
-
-.calendar-page-featured__card-date,
-.calendar-page-featured__card-location {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-1);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-}
-
-.calendar-page-featured__card-date svg,
-.calendar-page-featured__card-location svg {
-  flex-shrink: 0;
-  opacity: 0.7;
-}
-
-.calendar-page-featured__card-entries {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-1);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-tertiary);
-  margin-top: var(--spacing-2);
-}
-
-.calendar-page-featured__card-entries svg {
-  opacity: 0.6;
-}
-
-.calendar-page-featured__card-arrow {
-  display: flex;
-  align-items: center;
-  padding: var(--spacing-4);
-  color: var(--color-text-tertiary);
-  transition: all var(--transition-fast);
-}
-
-.calendar-page-featured__card:hover .calendar-page-featured__card-arrow {
-  color: var(--color-primary-500);
-  transform: translateX(4px);
-}
-
-/* ============================================================================
-   Logo
-   ============================================================================ */
+/* ==========================================================================
+   Logo Layout
+   ========================================================================== */
 
 .prototype-calendar-page__logo {
   display: flex;
   align-items: baseline;
   gap: var(--spacing-2);
   text-decoration: none;
-  color: inherit;
 }
 
-.prototype-calendar-page__logo-text {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
-}
-
-.prototype-calendar-page__logo-subtitle {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-}
-
-/* ============================================================================
-   Main Content
-   ============================================================================ */
+/* ==========================================================================
+   Main Content Layout
+   ========================================================================== */
 
 .prototype-calendar-page__main {
   flex: 1;
@@ -317,41 +43,25 @@
 }
 
 .prototype-calendar-page__container {
-  max-width: 1280px;
+  max-width: var(--container-xl);
   margin: 0 auto;
 }
 
-/* ============================================================================
-   Page Header
-   ============================================================================ */
+/* ==========================================================================
+   Page Header Layout
+   ========================================================================== */
 
 .prototype-calendar-page__header {
   margin-bottom: var(--spacing-6);
 }
 
-.prototype-calendar-page__title {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
-  margin: 0 0 var(--spacing-2) 0;
-}
-
-/* Aesthetic title with display font */
-.prototype-calendar-page--aesthetic .prototype-calendar-page__title {
-  font-family: var(--font-family-display);
-  font-weight: var(--text-display-weight);
-  letter-spacing: var(--text-display-tracking);
-}
-
 .prototype-calendar-page__subtitle {
-  font-size: var(--font-size-md);
-  color: var(--color-text-secondary);
-  margin: 0;
+  margin: var(--spacing-2) 0 0;
 }
 
-/* ============================================================================
-   Filters
-   ============================================================================ */
+/* ==========================================================================
+   Filters Layout
+   ========================================================================== */
 
 .prototype-calendar-page__filters {
   display: flex;
@@ -361,7 +71,6 @@
   gap: var(--spacing-4);
   margin-bottom: var(--spacing-6);
   padding-bottom: var(--spacing-4);
-  border-bottom: 1px solid var(--color-border-primary);
 }
 
 .prototype-calendar-page__filters-right {
@@ -370,18 +79,15 @@
   gap: var(--spacing-3);
 }
 
-/* ============================================================================
-   View Switcher
-   ============================================================================ */
+/* ==========================================================================
+   View Switcher Layout
+   ========================================================================== */
 
 .prototype-calendar-page__view-switcher {
   display: flex;
   align-items: center;
   gap: var(--spacing-1);
   padding: var(--spacing-1);
-  background-color: var(--color-bg-secondary);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border-default);
 }
 
 .prototype-calendar-page__view-btn {
@@ -393,31 +99,12 @@
   padding: 0;
   border: none;
   background: transparent;
-  border-radius: var(--radius-sm);
-  color: var(--color-text-tertiary);
   cursor: pointer;
-  transition: all var(--transition-fast);
 }
 
-.prototype-calendar-page__view-btn:hover {
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-tertiary);
-}
-
-.prototype-calendar-page__view-btn--active {
-  color: var(--color-primary);
-  background-color: var(--color-bg-primary);
-  box-shadow: var(--shadow-sm);
-}
-
-.prototype-calendar-page__view-btn--active:hover {
-  color: var(--color-primary);
-  background-color: var(--color-bg-primary);
-}
-
-/* ============================================================================
-   Content Grid
-   ============================================================================ */
+/* ==========================================================================
+   Content Grid Layout
+   ========================================================================== */
 
 .prototype-calendar-page__content {
   display: grid;
@@ -431,17 +118,17 @@
   }
 }
 
-/* ============================================================================
-   Calendar Section
-   ============================================================================ */
+/* ==========================================================================
+   Calendar Section Layout
+   ========================================================================== */
 
 .prototype-calendar-page__calendar {
   min-width: 0; /* Prevent grid blowout */
 }
 
-/* ============================================================================
-   Sidebar
-   ============================================================================ */
+/* ==========================================================================
+   Sidebar Layout
+   ========================================================================== */
 
 .prototype-calendar-page__sidebar {
   display: flex;
@@ -449,35 +136,15 @@
   gap: var(--spacing-4);
 }
 
-/* ============================================================================
-   Live Card
-   ============================================================================ */
-
-.prototype-calendar-page__live-card {
-  border-color: var(--color-error);
-  background-color: var(--color-error-bg);
-}
-
-/* Aesthetic live card with energy colors */
-.prototype-calendar-page--aesthetic .prototype-calendar-page__live-card {
-  border-color: var(--color-energy-500);
-  background: var(--gradient-energy-subtle);
-  border-left: var(--border-accent-width) solid;
-  border-image: var(--border-accent-gradient) 1;
-}
+/* ==========================================================================
+   Live Card Layout
+   ========================================================================== */
 
 .prototype-calendar-page__live-header {
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-error);
   margin-bottom: var(--spacing-4);
-}
-
-/* Aesthetic live header with energy color */
-.prototype-calendar-page--aesthetic .prototype-calendar-page__live-header {
-  color: var(--color-energy-600);
 }
 
 .prototype-calendar-page__live-race {
@@ -486,40 +153,18 @@
   gap: var(--spacing-2);
 }
 
-.prototype-calendar-page__race-title {
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-}
-
 .prototype-calendar-page__race-meta {
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
 }
 
-/* ============================================================================
-   Upcoming Races
-   ============================================================================ */
+/* ==========================================================================
+   Upcoming Races Layout
+   ========================================================================== */
 
 .prototype-calendar-page__upcoming-header {
   padding: var(--spacing-4);
-  border-bottom: 1px solid var(--color-border-primary);
-}
-
-.prototype-calendar-page__upcoming-title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-  margin: 0;
-}
-
-/* Aesthetic upcoming title with display font */
-.prototype-calendar-page--aesthetic .prototype-calendar-page__upcoming-title {
-  font-family: var(--font-family-display);
-  font-weight: 700;
-  letter-spacing: -0.02em;
 }
 
 .prototype-calendar-page__upcoming-list {
@@ -533,32 +178,16 @@
   gap: var(--spacing-3);
   padding: var(--spacing-3) var(--spacing-4);
   border: none;
-  border-bottom: 1px solid var(--color-border-primary);
   background: transparent;
   cursor: pointer;
   text-align: left;
   width: 100%;
-  transition: background-color var(--transition-fast);
-}
-
-.prototype-calendar-page__upcoming-item:hover {
-  background-color: var(--color-bg-secondary);
-}
-
-.prototype-calendar-page__upcoming-item--selected {
-  background-color: var(--color-primary-bg);
-}
-
-.prototype-calendar-page__upcoming-item:last-child {
-  border-bottom: none;
 }
 
 .prototype-calendar-page__upcoming-date {
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
   min-width: 100px;
   flex-shrink: 0;
 }
@@ -572,8 +201,6 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-primary);
   margin-bottom: var(--spacing-1);
 }
 
@@ -582,8 +209,6 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--spacing-3);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-tertiary);
 }
 
 .prototype-calendar-page__upcoming-location,
@@ -595,12 +220,11 @@
 
 .prototype-calendar-page__upcoming-footer {
   padding: var(--spacing-3) var(--spacing-4);
-  border-top: 1px solid var(--color-border-primary);
 }
 
-/* ============================================================================
-   Event Detail Card
-   ============================================================================ */
+/* ==========================================================================
+   Event Detail Card Layout
+   ========================================================================== */
 
 .prototype-calendar-page__detail-card {
   position: sticky;
@@ -615,20 +239,6 @@
   margin-bottom: var(--spacing-4);
 }
 
-.prototype-calendar-page__detail-title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-  margin: 0;
-}
-
-/* Aesthetic detail title with display font */
-.prototype-calendar-page--aesthetic .prototype-calendar-page__detail-title {
-  font-family: var(--font-family-display);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
 .prototype-calendar-page__detail-info {
   display: flex;
   flex-direction: column;
@@ -640,13 +250,6 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-}
-
-.prototype-calendar-page__detail-label {
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-tertiary);
 }
 
 .prototype-calendar-page__detail-actions {
@@ -655,39 +258,27 @@
   gap: var(--spacing-2);
 }
 
-/* ============================================================================
-   Footer
-   ============================================================================ */
+/* ==========================================================================
+   Footer Layout
+   ========================================================================== */
 
 .prototype-calendar-page__footer {
   padding: var(--spacing-6) var(--spacing-4);
-  border-top: 1px solid var(--color-border-primary);
-  background-color: var(--color-bg-secondary);
 }
 
 .prototype-calendar-page__footer-content {
-  max-width: 1280px;
+  max-width: var(--container-xl);
   margin: 0 auto;
   text-align: center;
 }
 
-.prototype-calendar-page__footer-content p {
-  margin: 0;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-tertiary);
-}
-
-/* ============================================================================
-   Responsive Adjustments
-   ============================================================================ */
+/* ==========================================================================
+   Responsive Layout Adjustments
+   ========================================================================== */
 
 @media (max-width: 768px) {
   .prototype-calendar-page__main {
     padding: var(--spacing-4) var(--spacing-3);
-  }
-
-  .prototype-calendar-page__title {
-    font-size: var(--font-size-2xl);
   }
 
   .prototype-calendar-page__filters {
@@ -708,89 +299,9 @@
   }
 }
 
-/* ============================================================================
-   Dark Mode Overrides
-   ============================================================================ */
-
-[data-theme="dark"] .prototype-calendar-page__live-card {
-  background-color: rgba(239, 68, 68, 0.1);
-}
-
-[data-theme="dark"] .calendar-page-hero__gradient {
-  background: linear-gradient(
-    135deg,
-    var(--color-primary-300) 0%,
-    var(--color-primary-400) 50%,
-    var(--color-primary-500) 100%
-  );
-}
-
-[data-theme="dark"] .calendar-page-featured__card {
-  background: var(--color-bg-secondary);
-}
-
-/* ============================================================================
-   Hero Responsive
-   ============================================================================ */
-
-@media (max-width: 768px) {
-  .calendar-page-hero {
-    padding: var(--spacing-10) var(--spacing-4) var(--spacing-16);
-  }
-
-  .calendar-page-hero__title {
-    font-size: var(--font-size-3xl);
-  }
-
-  .calendar-page-hero__subtitle {
-    font-size: var(--font-size-base);
-  }
-
-  .calendar-page-hero__stats {
-    gap: var(--spacing-6);
-  }
-
-  .calendar-page-hero__stat-value {
-    font-size: var(--font-size-2xl);
-  }
-
-  .calendar-page-hero__stat-label {
-    font-size: var(--font-size-xs);
-  }
-
-  .calendar-page-featured__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .calendar-page-featured__card-meta {
-    flex-direction: column;
-    gap: var(--spacing-2);
-  }
-}
-
-/* ============================================================================
-   Reduced Motion Support
-   ============================================================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  .calendar-page-featured__card-star {
-    animation: none;
-  }
-
-  .calendar-page-featured__card,
-  .calendar-page-featured__card-arrow {
-    transition: none;
-  }
-}
-
-/* ============================================================================
-   Embed Mode - For integration into kanoe.cz (Phase 8.7.3)
-   ============================================================================ */
-
-.prototype-calendar-page--embed {
-  min-height: auto;
-  background-color: transparent;
-}
+/* ==========================================================================
+   Embed Mode Layout Adjustments
+   ========================================================================== */
 
 .prototype-calendar-page--embed .prototype-calendar-page__main {
   padding: var(--spacing-4) 0;
@@ -804,16 +315,15 @@
   margin-bottom: var(--spacing-4);
 }
 
-.prototype-calendar-page--embed .prototype-calendar-page__title {
-  font-size: var(--font-size-2xl);
-}
-
 .prototype-calendar-page--embed .prototype-calendar-page__filters {
   margin-bottom: var(--spacing-4);
   padding-bottom: var(--spacing-3);
 }
 
-/* Container queries for narrow containers */
+/* ==========================================================================
+   Container Query Adjustments
+   ========================================================================== */
+
 @container (max-width: 900px) {
   .prototype-calendar-page--embed .prototype-calendar-page__content {
     grid-template-columns: 1fr;
@@ -833,90 +343,5 @@
 
   .prototype-calendar-page--embed .prototype-calendar-page__upcoming-date {
     min-width: auto;
-  }
-}
-
-/* ============================================================================
-   Aesthetic Mode - Dynamic Sport Enhancements (Phase 15.0)
-   ============================================================================ */
-
-/* Header with staggered reveal */
-.prototype-calendar-page--aesthetic .prototype-calendar-page__header {
-  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
-}
-
-/* Filters reveal */
-.prototype-calendar-page--aesthetic .prototype-calendar-page__filters {
-  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
-  animation-delay: var(--stagger-2);
-}
-
-/* Calendar content reveal */
-.prototype-calendar-page--aesthetic .prototype-calendar-page__calendar {
-  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
-  animation-delay: var(--stagger-3);
-}
-
-/* Sidebar items with staggered reveal */
-.prototype-calendar-page--aesthetic .prototype-calendar-page__sidebar > *:nth-child(1) {
-  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
-  animation-delay: var(--stagger-2);
-}
-
-.prototype-calendar-page--aesthetic .prototype-calendar-page__sidebar > *:nth-child(2) {
-  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
-  animation-delay: var(--stagger-3);
-}
-
-.prototype-calendar-page--aesthetic .prototype-calendar-page__sidebar > *:nth-child(3) {
-  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
-  animation-delay: var(--stagger-4);
-}
-
-/* Upcoming item hover with glow */
-.prototype-calendar-page--aesthetic .prototype-calendar-page__upcoming-item {
-  transition: box-shadow 200ms var(--ease-sport), background-color var(--transition-fast);
-}
-
-.prototype-calendar-page--aesthetic .prototype-calendar-page__upcoming-item:hover {
-  box-shadow: var(--glow-energy-sm);
-}
-
-/* Selected upcoming item with border accent */
-.prototype-calendar-page--aesthetic .prototype-calendar-page__upcoming-item--selected {
-  background-color: var(--gradient-energy-subtle);
-  border-left: var(--border-accent-width) solid var(--color-energy-500);
-}
-
-/* Detail card with aesthetic styling */
-.prototype-calendar-page--aesthetic .prototype-calendar-page__detail-card {
-  border-left: var(--border-accent-width) solid;
-  border-image: var(--border-accent-gradient) 1;
-  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-}
-
-/* Featured card aesthetic accent */
-.prototype-calendar-page--aesthetic .calendar-page-featured__card {
-  transition: box-shadow 200ms var(--ease-sport), transform var(--transition-normal);
-}
-
-.prototype-calendar-page--aesthetic .calendar-page-featured__card:hover {
-  box-shadow: var(--glow-energy-sm);
-}
-
-/* View switcher active button with energy color */
-.prototype-calendar-page--aesthetic .prototype-calendar-page__view-btn--active {
-  color: var(--color-energy-600);
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .prototype-calendar-page--aesthetic .prototype-calendar-page__header,
-  .prototype-calendar-page--aesthetic .prototype-calendar-page__filters,
-  .prototype-calendar-page--aesthetic .prototype-calendar-page__calendar,
-  .prototype-calendar-page--aesthetic .prototype-calendar-page__sidebar > * {
-    animation: none;
-    opacity: 1;
-    transform: none;
   }
 }
