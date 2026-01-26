@@ -331,3 +331,71 @@
     min-width: 60px;
   }
 }
+
+/* ==========================================================================
+   VISUAL STYLES - ClubsListPage
+   Visual enhancements for club cards
+   ========================================================================== */
+
+/* Club card visual styles */
+.club-card__name {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+  /* Allow wrapping for long club names */
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.club-card__code {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-family-mono, monospace);
+  color: var(--color-text-muted);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.club-card__location {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  /* Prevent long locations from breaking layout */
+  overflow-wrap: break-word;
+}
+
+.club-card__location svg {
+  color: var(--color-text-muted);
+}
+
+.club-card__stat-value {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.club-card__stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Club card hover effects */
+.club-card--clickable:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  transition: all var(--transition-normal);
+}
+
+.club-card--clickable:hover .club-card__name {
+  color: var(--color-primary-600);
+}
+
+/* Stats section border */
+.club-card__stats {
+  border-top: 1px solid var(--color-border-secondary);
+  border-bottom: 1px solid var(--color-border-secondary);
+}

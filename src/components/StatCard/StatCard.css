@@ -463,9 +463,19 @@
     radial-gradient(ellipse at 100% 100%, rgba(249, 115, 22, 0.05) 0%, transparent 50%));
   background-color: var(--color-bg-primary);
   border: 1px solid var(--color-border-default);
-  border-left: var(--border-accent-width, 4px) solid;
-  border-image: var(--border-accent-gradient, linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-energy-500, #f97316) 100%)) 1;
   box-shadow: var(--shadow-md);
+}
+
+/* Accent border using pseudo-element to preserve border-radius */
+.csk-stat-card--style-aesthetic::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--border-accent-width, 4px);
+  background: var(--border-accent-gradient, linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-energy-500, #f97316) 100%));
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
 }
 
 .csk-stat-card--style-aesthetic .csk-stat-card__icon-container {

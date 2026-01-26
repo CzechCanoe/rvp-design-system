@@ -257,7 +257,7 @@
 
 .podium-card__info {
   flex: 1;
-  min-width: 0;
+  min-width: 80px;
 }
 
 .podium-card__name {
@@ -265,9 +265,9 @@
   font-weight: var(--font-semibold);
   color: var(--color-text-primary);
   line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* Allow wrapping on very narrow cards */
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .podium-card__club {

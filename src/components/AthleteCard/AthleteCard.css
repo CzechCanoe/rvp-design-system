@@ -355,9 +355,10 @@
   font-weight: var(--font-semibold);
   line-height: var(--line-height-tight);
   color: var(--color-text-primary);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  /* Allow wrapping for better visibility in narrow cards */
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
   transition: color var(--duration-fast) var(--ease-out);
 }
 

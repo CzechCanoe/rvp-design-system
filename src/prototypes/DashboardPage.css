@@ -142,6 +142,16 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--spacing-4);
+  align-items: stretch;
+}
+
+/* Ensure stat cards have consistent height */
+.dashboard-stats-grid .csk-stat-card {
+  height: 100%;
+}
+
+.dashboard-stats-grid .csk-stat-card__content {
+  height: 100%;
 }
 
 /* ----------------------------------------------------------------------------

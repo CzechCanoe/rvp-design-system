@@ -880,17 +880,36 @@
 .athlete-result-card__race {
   font-weight: var(--font-weight-semibold);
   color: var(--csk-color-on-surface);
+  font-size: var(--font-size-base);
 }
 
 .athlete-result-card__meta {
   font-size: var(--font-size-sm);
   color: var(--csk-color-on-surface-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1);
+}
+
+.athlete-result-card__meta span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.athlete-result-card__meta span:not(:last-child)::after {
+  content: '·';
+  margin-left: var(--spacing-1);
+  color: var(--color-border-secondary);
 }
 
 .athlete-result-card__time {
   font-family: var(--font-family-mono, monospace);
   font-weight: var(--font-weight-bold);
-  color: var(--csk-color-on-surface);
+  font-size: var(--font-size-lg);
+  color: var(--color-primary-600);
+  background: var(--color-primary-50);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-md);
 }
 
 /* --------------------------------------------------------------------------

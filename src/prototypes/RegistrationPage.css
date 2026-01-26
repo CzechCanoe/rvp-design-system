@@ -909,8 +909,13 @@
 }
 
 .registration-wizard-step__line {
-  background: var(--color-border-secondary);
+  background: var(--color-border-primary);
   transition: background-color var(--transition-normal);
+}
+
+/* Completed step line */
+.registration-wizard-step--completed .registration-wizard-step__line {
+  background: var(--color-primary);
 }
 
 .registration-wizard-step__number {
