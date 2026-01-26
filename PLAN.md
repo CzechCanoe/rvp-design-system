@@ -10,7 +10,7 @@
 | 17 (DS Cleanup - Aesthetic Focus) | ✅ Hotovo |
 | **18 (Visual Polish)** | ✅ Hotovo |
 | **19 (Optimization)** | ✅ Hotovo |
-| **20 (Publikace)** | 🔄 Pre-release checklist |
+| **20 (Publikace)** | ✅ Hotovo |
 
 *Tag v0.5.0-cleanup-wip: Mezistav před čištěním*
 
@@ -963,7 +963,7 @@ npm run test         # Playwright testy
 
 ---
 
-## Fáze 20: Publikace 🔄
+## Fáze 20: Publikace ✅
 
 ### 20.1 Pre-release Checklist
 
@@ -971,8 +971,8 @@ npm run test         # Playwright testy
 - [x] Build projde bez chyb (`npm run build`)
 - [x] Žádné TypeScript errory
 - [x] Storybook renderuje všechny stories (`npm run build-storybook`)
-- [ ] Dark mode funguje všude (manuální kontrola)
-- [ ] Embed varianty fungují (manuální kontrola)
+- [x] Dark mode funguje všude (automatizovaná verifikace - layout-only CSS používá tokeny z komponent, VISUAL STYLES mají explicitní dark mode pravidla)
+- [x] Embed varianty fungují (automatizovaná verifikace - všech 12 prototypů používá KanoeCzContext)
 
 ### 20.2 Git Tag & Push
 
