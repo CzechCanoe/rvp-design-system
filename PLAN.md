@@ -52,16 +52,50 @@ npm install -D @storybook/test-runner playwright
 npx playwright install chromium
 ```
 
-**Baseline prototypy k zachycení:**
-- CalendarPage (utility, expressive, embed, satellite, aesthetic × light/dark)
-- EventDetailPage (dv/ry/vt × utility/expressive/embed/aesthetic × light/dark)
-- LivePage (dv/ry/vt × utility/aesthetic × light/dark)
-- ResultsPage (dv/ry/vt × utility/aesthetic × light/dark)
-- AthletePublicProfile (dv/ry/vt × utility/embed/aesthetic × light/dark)
-- ClubPublicProfile (utility/embed/aesthetic × light/dark)
-- ProfilePage (dv/ry/vt × utility/satellite/aesthetic × light/dark)
-- RegistrationPage (dv/ry/vt × utility/satellite/aesthetic × light/dark)
-- DashboardPage (dv/ry/vt/federation × utility/satellite/embed/aesthetic × light/dark)
+**Soubory k vytvoření:**
+```
+tests/
+├── visual/
+│   ├── README.md              # Dokumentace visual testingu
+│   ├── visual.spec.ts         # Playwright test soubor
+│   └── baseline/              # Baseline screenshots (git-ignored nebo LFS)
+├── playwright.config.ts       # Playwright konfigurace
+```
+
+**Struktura visual.spec.ts:**
+```typescript
+// Pro každý prototype story:
+// 1. Načíst story URL
+// 2. Počkat na stabilizaci (fonts, images)
+// 3. Screenshot celé stránky
+// 4. Porovnat s baseline (threshold 0.1%)
+```
+
+**Baseline prototypy k zachycení (celkem ~80 screenshots):**
+| Prototype | Varianty | Screenshots |
+|-----------|----------|-------------|
+| CalendarPage | utility, expressive, embed, satellite, aesthetic × light/dark | 10 |
+| EventDetailPage | dv/ry/vt × utility/embed/aesthetic × light/dark | 18 |
+| LivePage | dv/ry/vt × utility/aesthetic × light/dark | 12 |
+| ResultsPage | dv/ry/vt × utility/aesthetic × light/dark | 12 |
+| AthletePublicProfile | dv/ry/vt × utility/embed/aesthetic × light/dark | 18 |
+| ClubPublicProfile | utility/embed/aesthetic × light/dark | 6 |
+| ProfilePage | dv/ry/vt × utility/satellite/aesthetic × light/dark | 18 |
+| RegistrationPage | dv/ry/vt × utility/satellite/aesthetic × light/dark | 18 |
+| DashboardPage | dv/ry/vt/federation × utility/satellite/embed/aesthetic × light/dark | 32 |
+
+**npm scripts k přidání do package.json:**
+```json
+{
+  "test:visual": "playwright test tests/visual/",
+  "test:visual:update": "playwright test tests/visual/ --update-snapshots"
+}
+```
+
+**Kritéria dokončení:**
+- [ ] `npm run test:visual` projde bez chyb
+- [ ] Všechny baseline screenshots existují
+- [ ] README.md dokumentuje workflow
 
 #### 22.2 Section Color System
 - [ ] Přidat `--section-color` CSS custom property pattern do `tokens/colors.css`
@@ -69,13 +103,58 @@ npx playwright install chromium
 - [ ] Dokumentovat v Storybook (Colors story)
 - [ ] Srovnat screenshots (žádná vizuální změna)
 
-**Implementace:**
+**Soubory k úpravě:**
+- `src/tokens/colors.css` - přidat section utility classes
+
+**Implementace v colors.css:**
 ```css
-/* tokens/colors.css */
-.csk-section-dv { --section-color: var(--color-section-dv); --section-color-light: ...; --section-color-dark: ...; }
-.csk-section-ry { --section-color: var(--color-section-ry); ... }
-.csk-section-vt { --section-color: var(--color-section-vt); ... }
+/* Section Color System
+   Použití: <div class="csk-section-dv"> - vše uvnitř používá --section-color */
+
+.csk-section-dv {
+  --section-color: var(--color-section-dv);
+  --section-color-light: var(--color-section-dv-light, #60a5fa);
+  --section-color-dark: var(--color-section-dv-dark, #1e3a5f);
+  --section-color-rgb: 37, 99, 235;
+}
+
+.csk-section-ry {
+  --section-color: var(--color-section-ry);
+  --section-color-light: var(--color-section-ry-light, #4ade80);
+  --section-color-dark: var(--color-section-ry-dark, #14532d);
+  --section-color-rgb: 22, 163, 74;
+}
+
+.csk-section-vt {
+  --section-color: var(--color-section-vt);
+  --section-color-light: var(--color-section-vt-light, #f87171);
+  --section-color-dark: var(--color-section-vt-dark, #7f1d1d);
+  --section-color-rgb: 220, 38, 38;
+}
+
+.csk-section-federation {
+  --section-color: var(--color-primary);
+  --section-color-light: var(--color-primary-400);
+  --section-color-dark: var(--color-primary-700);
+  --section-color-rgb: 17, 118, 166;
+}
 ```
+
+**Pattern nahrazení v prototypech:**
+```css
+/* PŘED (opakuje se 100×): */
+.xxx--dv .element { color: var(--color-section-dv); }
+.xxx--ry .element { color: var(--color-section-ry); }
+.xxx--vt .element { color: var(--color-section-vt); }
+
+/* PO (1×): */
+.element { color: var(--section-color, var(--color-primary)); }
+```
+
+**Kritéria dokončení:**
+- [ ] `npm run test:visual` - 0 změn (pouze infrastruktura)
+- [ ] Nové CSS classes existují v colors.css
+- [ ] Story ukazuje section colors
 
 #### 22.3 HeroSection Component Enhancement
 - [ ] Rozšířit existující `HeroSection` o:
@@ -89,6 +168,96 @@ npx playwright install chromium
 
 **Úspora:** ~1750 řádků (hero-related CSS z 7 prototypů)
 
+**Soubory k úpravě:**
+- `src/components/HeroSection/HeroSection.tsx`
+- `src/components/HeroSection/HeroSection.css`
+- `src/components/HeroSection/HeroSection.stories.tsx`
+
+**Nové props (TypeScript interface):**
+```typescript
+interface HeroSectionProps {
+  // Existující
+  children: React.ReactNode;
+  className?: string;
+
+  // Nové
+  section?: 'dv' | 'ry' | 'vt' | 'federation' | 'generic';
+  variant?: 'gradient' | 'image' | 'minimal';
+  backgroundImage?: string;
+  wave?: boolean;
+  pattern?: boolean;  // radial gradient overlay
+  size?: 'sm' | 'md' | 'lg';  // padding velikost
+}
+```
+
+**CSS struktura (HeroSection.css):**
+```css
+/* Base */
+.csk-hero-section { position: relative; overflow: hidden; }
+.csk-hero-section__background { position: absolute; inset: 0; z-index: 0; }
+.csk-hero-section__gradient { position: absolute; inset: 0; }
+.csk-hero-section__image { position: absolute; inset: 0; object-fit: cover; }
+.csk-hero-section__pattern { position: absolute; inset: 0; /* radial gradients */ }
+.csk-hero-section__content { position: relative; z-index: 1; }
+.csk-hero-section__wave { position: absolute; bottom: 0; left: 0; right: 0; }
+
+/* Section gradients - používá --section-color z 22.2 */
+.csk-hero-section--gradient {
+  background: linear-gradient(135deg,
+    var(--section-color-dark) 0%,
+    var(--section-color) 50%,
+    var(--section-color-light) 100%);
+}
+
+/* Image variant s overlay */
+.csk-hero-section--image .csk-hero-section__gradient {
+  background: linear-gradient(135deg,
+    rgba(var(--section-color-rgb), 0.85) 0%,
+    rgba(var(--section-color-rgb), 0.7) 100%);
+}
+
+/* Size variants */
+.csk-hero-section--sm { padding: var(--spacing-8) var(--spacing-4); }
+.csk-hero-section--md { padding: var(--spacing-10) var(--spacing-4) var(--spacing-16); }
+.csk-hero-section--lg { padding: var(--spacing-12) var(--spacing-4) var(--spacing-20); }
+```
+
+**Wave SVG komponenta (inline):**
+```tsx
+const WaveDivider = () => (
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" className="csk-hero-section__wave-svg">
+    <path fill="currentColor" d="M0,0 C480,60 960,60 1440,0 L1440,60 L0,60 Z" />
+  </svg>
+);
+```
+
+**Pattern overlay CSS:**
+```css
+.csk-hero-section__pattern {
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 60%);
+}
+```
+
+**Stories k vytvoření:**
+```typescript
+// HeroSection.stories.tsx
+export const GradientDV: Story = { args: { section: 'dv', variant: 'gradient' } };
+export const GradientRY: Story = { args: { section: 'ry', variant: 'gradient' } };
+export const GradientVT: Story = { args: { section: 'vt', variant: 'gradient' } };
+export const WithImage: Story = { args: { section: 'dv', variant: 'image', backgroundImage: '...' } };
+export const WithWave: Story = { args: { section: 'dv', wave: true } };
+export const Minimal: Story = { args: { variant: 'minimal' } };
+```
+
+**Kritéria dokončení:**
+- [ ] Všechny props fungují
+- [ ] Stories pokrývají všechny varianty
+- [ ] `npm run test:visual` - 0 regresí
+- [ ] TypeScript types exportovány
+
 #### 22.4 StatCard Variants
 - [ ] Přidat varianty do `StatCard`:
   - `variant="medal-gold" | "medal-silver" | "medal-bronze"`
@@ -99,6 +268,52 @@ npx playwright install chromium
 - [ ] Srovnat screenshots
 
 **Úspora:** ~400 řádků
+
+**Soubory k úpravě:**
+- `src/components/StatCard/StatCard.tsx`
+- `src/components/StatCard/StatCard.css`
+- `src/components/StatCard/StatCard.stories.tsx`
+
+**Nové props:**
+```typescript
+interface StatCardProps {
+  // Existující props zachovat...
+
+  // Nové
+  variant?: 'default' | 'medal-gold' | 'medal-silver' | 'medal-bronze'
+          | 'gradient-primary' | 'gradient-success' | 'gradient-warning' | 'gradient-info';
+  iconBackground?: 'default' | 'gradient';
+  sparkline?: React.ReactNode;  // slot pro sparkline graf
+}
+```
+
+**CSS varianty:**
+```css
+/* Medal variants */
+.csk-stat-card--medal-gold {
+  background: linear-gradient(135deg, rgba(255,215,0,0.15) 0%, rgba(255,215,0,0.05) 100%);
+  border: 1px solid rgba(255,215,0,0.3);
+}
+.csk-stat-card--medal-gold .csk-stat-card__icon {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+  box-shadow: 0 4px 12px rgba(255,215,0,0.4);
+}
+
+/* Gradient variants */
+.csk-stat-card--gradient-primary {
+  background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-400) 100%);
+  border: none;
+  color: #fff;
+}
+.csk-stat-card--gradient-primary .csk-stat-card__label,
+.csk-stat-card--gradient-primary .csk-stat-card__value { color: #fff; }
+```
+
+**Kritéria dokončení:**
+- [ ] 8 nových variant funguje
+- [ ] Sparkline slot renderuje children
+- [ ] Stories pro každou variantu
+- [ ] `npm run test:visual` - 0 regresí
 
 #### 22.5 ResultItem / TimelineItem Component
 - [ ] Vytvořit novou komponentu `ResultItem`:
@@ -111,6 +326,88 @@ npx playwright install chromium
 
 **Úspora:** ~300 řádků
 
+**Nové soubory:**
+- `src/components/ResultItem/ResultItem.tsx`
+- `src/components/ResultItem/ResultItem.css`
+- `src/components/ResultItem/ResultItem.stories.tsx`
+- `src/components/ResultItem/index.ts`
+
+**Props interface:**
+```typescript
+interface ResultItemProps {
+  rank?: number;  // 1-3 = medal styling, 4+ = default
+  title: string;
+  subtitle?: string;
+  meta?: React.ReactNode;  // datum, místo, atd.
+  trailing?: React.ReactNode;  // čas, body, badge
+  variant?: 'default' | 'compact' | 'detailed';
+  href?: string;
+  onClick?: () => void;
+  className?: string;
+}
+```
+
+**CSS struktura:**
+```css
+.csk-result-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  border-left: 4px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.csk-result-item:hover {
+  background: var(--color-bg-secondary);
+  transform: translateX(4px);
+}
+
+/* Medal ranks */
+.csk-result-item--rank-1 {
+  border-left-color: #ffd700;
+  background: linear-gradient(90deg, rgba(255,215,0,0.08) 0%, transparent 30%);
+}
+.csk-result-item--rank-2 {
+  border-left-color: #c0c0c0;
+  background: linear-gradient(90deg, rgba(192,192,192,0.08) 0%, transparent 30%);
+}
+.csk-result-item--rank-3 {
+  border-left-color: #cd7f32;
+  background: linear-gradient(90deg, rgba(205,127,50,0.08) 0%, transparent 30%);
+}
+
+/* Compact variant */
+.csk-result-item--compact {
+  padding: var(--spacing-3);
+  gap: var(--spacing-3);
+}
+```
+
+**Rank badge (interní subkomponenta):**
+```tsx
+const RankBadge = ({ rank }: { rank: number }) => {
+  if (rank > 3) return <span className="csk-result-item__rank">{rank}.</span>;
+  const medals = { 1: '🥇', 2: '🥈', 3: '🥉' };
+  return <span className="csk-result-item__medal">{medals[rank]}</span>;
+};
+```
+
+**Stories:**
+```typescript
+export const Gold: Story = { args: { rank: 1, title: 'MS Praha 2024', subtitle: 'C1M' } };
+export const Silver: Story = { args: { rank: 2, ... } };
+export const Bronze: Story = { args: { rank: 3, ... } };
+export const NoMedal: Story = { args: { rank: 7, ... } };
+export const Compact: Story = { args: { variant: 'compact', ... } };
+```
+
+**Kritéria dokončení:**
+- [ ] Export z `src/components/index.ts`
+- [ ] 3 medal varianty + default fungují
+- [ ] Hover efekt funguje
+- [ ] `npm run test:visual` - 0 regresí
+
 #### 22.6 ListItem Component
 - [ ] Vytvořit novou komponentu `ListItem`:
   - `variant="alert" | "activity" | "feed"`
@@ -121,6 +418,93 @@ npx playwright install chromium
 - [ ] Srovnat screenshots
 
 **Úspora:** ~250 řádků
+
+**Nové soubory:**
+- `src/components/ListItem/ListItem.tsx`
+- `src/components/ListItem/ListItem.css`
+- `src/components/ListItem/ListItem.stories.tsx`
+- `src/components/ListItem/index.ts`
+
+**Props interface:**
+```typescript
+interface ListItemProps {
+  icon?: React.ReactNode;
+  type?: 'default' | 'warning' | 'danger' | 'info' | 'success' | 'energy';
+  variant?: 'default' | 'alert' | 'activity' | 'feed';
+  title: string;
+  description?: string;
+  timestamp?: string;
+  action?: React.ReactNode;  // button, link
+  divider?: boolean;
+  onClick?: () => void;
+  className?: string;
+}
+```
+
+**CSS struktura:**
+```css
+.csk-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4) var(--spacing-5);
+  transition: background-color var(--transition-fast);
+}
+
+.csk-list-item--divider {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.csk-list-item:hover {
+  background-color: var(--color-surface-secondary);
+}
+
+/* Icon container s type-based gradient */
+.csk-list-item__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.csk-list-item--warning .csk-list-item__icon {
+  background: linear-gradient(135deg, var(--color-warning-100) 0%, var(--color-warning-50) 100%);
+  color: var(--color-warning-600);
+}
+
+.csk-list-item--danger .csk-list-item__icon {
+  background: linear-gradient(135deg, var(--color-danger-100) 0%, var(--color-danger-50) 100%);
+  color: var(--color-danger-600);
+}
+
+.csk-list-item--energy .csk-list-item__icon {
+  background: var(--gradient-energy-subtle);
+  color: var(--color-energy-600);
+}
+
+/* Alert variant - left border accent */
+.csk-list-item--alert.csk-list-item--energy {
+  border-left: 3px solid var(--color-energy-500);
+}
+```
+
+**Stories:**
+```typescript
+export const AlertWarning: Story = { args: { variant: 'alert', type: 'warning', title: 'Expiring license' } };
+export const AlertDanger: Story = { args: { variant: 'alert', type: 'danger', title: 'Payment overdue' } };
+export const AlertEnergy: Story = { args: { variant: 'alert', type: 'energy', title: 'Urgent action needed' } };
+export const Activity: Story = { args: { variant: 'activity', title: 'John registered', timestamp: '2 hours ago' } };
+export const WithAction: Story = { args: { action: <Button size="sm">View</Button> } };
+```
+
+**Kritéria dokončení:**
+- [ ] Export z `src/components/index.ts`
+- [ ] 5 type variant + 3 variant varianty
+- [ ] Divider funguje
+- [ ] `npm run test:visual` - 0 regresí
 
 #### 22.7 Wizard / Stepper Component
 - [ ] Vytvořit novou komponentu `Wizard`:
@@ -134,6 +518,115 @@ npx playwright install chromium
 
 **Úspora:** ~200 řádků
 
+**Nové soubory:**
+- `src/components/Wizard/Wizard.tsx`
+- `src/components/Wizard/Wizard.css`
+- `src/components/Wizard/WizardStep.tsx` (interní)
+- `src/components/Wizard/Wizard.stories.tsx`
+- `src/components/Wizard/index.ts`
+
+**Props interface:**
+```typescript
+interface WizardStep {
+  id: string;
+  label: string;
+  icon?: React.ReactNode;
+  description?: string;
+}
+
+interface WizardProps {
+  steps: WizardStep[];
+  activeStep: string | number;  // id nebo index
+  completedSteps?: string[];    // array of completed step ids
+  section?: 'dv' | 'ry' | 'vt';  // pro barevnou variantu
+  variant?: 'horizontal' | 'vertical';
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+}
+```
+
+**CSS struktura:**
+```css
+.csk-wizard {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.csk-wizard__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.csk-wizard__circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-tertiary);
+  border: 2px solid var(--color-border-secondary);
+  color: var(--color-text-tertiary);
+  z-index: 1;
+  transition: all var(--transition-normal);
+}
+
+/* Connector line */
+.csk-wizard__line {
+  position: absolute;
+  top: 24px;
+  left: calc(50% + 24px);
+  right: calc(-50% + 24px);
+  height: 3px;
+  background: var(--color-border-primary);
+}
+
+/* Active step - používá --section-color */
+.csk-wizard__step--active .csk-wizard__circle {
+  background: var(--section-color, var(--color-primary));
+  border-color: var(--section-color, var(--color-primary));
+  color: white;
+  box-shadow: 0 0 0 4px rgba(var(--section-color-rgb, var(--color-primary-rgb)), 0.1);
+}
+
+/* Completed step */
+.csk-wizard__step--completed .csk-wizard__circle {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: white;
+}
+
+.csk-wizard__step--completed .csk-wizard__line {
+  background: var(--color-success);
+}
+
+/* Responsive - hide labels on mobile */
+@media (max-width: 640px) {
+  .csk-wizard__label { display: none; }
+  .csk-wizard__circle { width: 40px; height: 40px; }
+}
+```
+
+**Stories:**
+```typescript
+export const ThreeSteps: Story = { args: { steps: [...], activeStep: 1 } };
+export const FourSteps: Story = { args: { steps: [...], activeStep: 2 } };
+export const WithCompleted: Story = { args: { completedSteps: ['step-1', 'step-2'] } };
+export const SectionDV: Story = { args: { section: 'dv' } };
+export const Vertical: Story = { args: { variant: 'vertical' } };
+```
+
+**Kritéria dokončení:**
+- [ ] Export z `src/components/index.ts`
+- [ ] Active/completed/pending stavy fungují
+- [ ] Connector lines správně pozicované
+- [ ] Responsive chování
+- [ ] `npm run test:visual` - 0 regresí
+
 #### 22.8 ActionCard Component
 - [ ] Vytvořit novou komponentu `ActionCard`:
   - Icon + title + description + arrow layout
@@ -143,6 +636,86 @@ npx playwright install chromium
 - [ ] Srovnat screenshots
 
 **Úspora:** ~150 řádků
+
+**Nové soubory:**
+- `src/components/ActionCard/ActionCard.tsx`
+- `src/components/ActionCard/ActionCard.css`
+- `src/components/ActionCard/ActionCard.stories.tsx`
+- `src/components/ActionCard/index.ts`
+
+**Props interface:**
+```typescript
+interface ActionCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description?: string;
+  href?: string;
+  onClick?: () => void;
+  iconBackground?: 'primary' | 'success' | 'warning' | 'info' | 'energy';
+  showArrow?: boolean;
+  className?: string;
+}
+```
+
+**CSS struktura:**
+```css
+.csk-action-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, var(--color-surface-secondary) 0%, var(--color-surface-primary) 100%);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+  color: inherit;
+}
+
+.csk-action-card:hover {
+  border-color: var(--color-primary-300);
+  background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-surface-primary) 100%);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-md);
+}
+
+.csk-action-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-400) 100%);
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.csk-action-card__arrow {
+  color: var(--color-text-muted);
+  transition: transform var(--transition-fast);
+}
+
+.csk-action-card:hover .csk-action-card__arrow {
+  transform: translateX(4px);
+  color: var(--color-primary);
+}
+```
+
+**Stories:**
+```typescript
+export const Default: Story = { args: { icon: <UserPlus />, title: 'Add member', description: 'Register new athlete' } };
+export const WithoutDescription: Story = { args: { icon: <Settings />, title: 'Settings' } };
+export const EnergyIcon: Story = { args: { iconBackground: 'energy' } };
+export const AsLink: Story = { args: { href: '/members' } };
+```
+
+**Kritéria dokončení:**
+- [ ] Export z `src/components/index.ts`
+- [ ] Hover efekt funguje
+- [ ] Funguje jako link (href) i button (onClick)
+- [ ] `npm run test:visual` - 0 regresí
 
 #### 22.9 DateBadge Component
 - [ ] Vytvořit novou komponentu `DateBadge`:
@@ -154,11 +727,144 @@ npx playwright install chromium
 
 **Úspora:** ~100 řádků
 
+**Nové soubory:**
+- `src/components/DateBadge/DateBadge.tsx`
+- `src/components/DateBadge/DateBadge.css`
+- `src/components/DateBadge/DateBadge.stories.tsx`
+- `src/components/DateBadge/index.ts`
+
+**Props interface:**
+```typescript
+interface DateBadgeProps {
+  date: Date | string;
+  section?: 'dv' | 'ry' | 'vt' | 'generic';
+  size?: 'sm' | 'md' | 'lg';
+  locale?: string;  // default 'cs-CZ'
+  className?: string;
+}
+```
+
+**Komponenta:**
+```tsx
+export const DateBadge = ({ date, section = 'generic', size = 'md', locale = 'cs-CZ' }) => {
+  const d = new Date(date);
+  const day = d.getDate();
+  const month = d.toLocaleDateString(locale, { month: 'short' }).toUpperCase();
+
+  return (
+    <div className={`csk-date-badge csk-date-badge--${size} csk-date-badge--${section}`}>
+      <span className="csk-date-badge__day">{day}</span>
+      <span className="csk-date-badge__month">{month}</span>
+    </div>
+  );
+};
+```
+
+**CSS struktura:**
+```css
+.csk-date-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-primary-100) 0%, var(--color-primary-50) 100%);
+  border: 1px solid var(--color-primary-200);
+}
+
+/* Sizes */
+.csk-date-badge--sm { width: 44px; height: 44px; }
+.csk-date-badge--md { width: 56px; height: 56px; }
+.csk-date-badge--lg { width: 72px; height: 72px; }
+
+.csk-date-badge__day {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
+.csk-date-badge__month {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+/* Section variants - používá section color system */
+.csk-date-badge--dv {
+  background: linear-gradient(135deg, var(--color-section-dv-light, #dbeafe) 0%, #eff6ff 100%);
+  border-color: var(--color-section-dv);
+}
+
+.csk-date-badge--ry {
+  background: linear-gradient(135deg, var(--color-section-ry-light, #dcfce7) 0%, #f0fdf4 100%);
+  border-color: var(--color-section-ry);
+}
+
+.csk-date-badge--vt {
+  background: linear-gradient(135deg, var(--color-section-vt-light, #fee2e2) 0%, #fef2f2 100%);
+  border-color: var(--color-section-vt);
+}
+```
+
+**Stories:**
+```typescript
+export const Default: Story = { args: { date: new Date() } };
+export const SectionDV: Story = { args: { date: '2024-06-15', section: 'dv' } };
+export const SectionRY: Story = { args: { date: '2024-07-20', section: 'ry' } };
+export const SectionVT: Story = { args: { date: '2024-08-10', section: 'vt' } };
+export const Small: Story = { args: { size: 'sm' } };
+export const Large: Story = { args: { size: 'lg' } };
+```
+
+**Kritéria dokončení:**
+- [ ] Export z `src/components/index.ts`
+- [ ] 3 section varianty + generic
+- [ ] 3 size varianty
+- [ ] Locale formatting funguje
+- [ ] `npm run test:visual` - 0 regresí
+
 #### 22.10 Prototype Adoption - Batch 1 (Calendar, Results)
 - [ ] CalendarPage: Adoptovat DateBadge
 - [ ] ResultsPage: Adoptovat HeroSection, ResultItem
 - [ ] Smazat nahrazený CSS kód
 - [ ] Srovnat screenshots - **musí být pixel-perfect**
+
+**CalendarPage změny:**
+```
+Soubory:
+- src/prototypes/CalendarPage.tsx
+- src/prototypes/CalendarPage.css
+
+Nahradit:
+- .calendar-event-date → <DateBadge date={event.date} section={event.section} />
+
+Smazat z CSS (~30 řádků):
+- .calendar-event-date a všechny related styles
+```
+
+**ResultsPage změny:**
+```
+Soubory:
+- src/prototypes/ResultsPage.tsx
+- src/prototypes/ResultsPage.css
+
+Nahradit:
+- .results-page-hero → <HeroSection section={section} variant="gradient" wave>
+- .result-item → <ResultItem rank={...} title={...} />
+
+Smazat z CSS (~200 řádků):
+- .results-page-hero__* (všechny hero related)
+- .result-item--gold/silver/bronze
+- hero gradient variants pro dv/ry/vt
+```
+
+**Kritéria dokončení:**
+- [ ] CalendarPage renderuje DateBadge komponenty
+- [ ] ResultsPage používá HeroSection a ResultItem
+- [ ] `npm run test:visual` - 0 regresí (pixel-perfect)
+- [ ] CSS soubory zmenšeny o ~230 řádků
 
 #### 22.11 Prototype Adoption - Batch 2 (Profiles)
 - [ ] AthletePublicProfile: HeroSection, StatCard variants, ResultItem
@@ -167,11 +873,110 @@ npx playwright install chromium
 - [ ] Smazat nahrazený CSS kód
 - [ ] Srovnat screenshots
 
+**AthletePublicProfile změny:**
+```
+Soubory:
+- src/prototypes/AthletePublicProfile.tsx
+- src/prototypes/AthletePublicProfile.css
+
+Nahradit:
+- .athlete-hero → <HeroSection section={section} variant="image" backgroundImage={...} wave>
+- .athlete-stat-card--medal-* → <StatCard variant="medal-gold|silver|bronze" />
+- .athlete-result-item → <ResultItem rank={...} />
+
+Smazat z CSS (~400 řádků):
+- .athlete-hero__* hero sekce
+- .athlete-stat-card--medal-* varianty
+- .athlete-result-item--rank-* varianty
+- section gradient duplicity (dv/ry/vt)
+```
+
+**ClubPublicProfile změny:**
+```
+Soubory:
+- src/prototypes/ClubPublicProfile.tsx
+- src/prototypes/ClubPublicProfile.css
+
+Nahradit:
+- .club-hero → <HeroSection section="generic" variant="gradient" wave>
+- .club-stat-card--medal-* → <StatCard variant="medal-*" />
+- .club-member-item → <ListItem variant="default" />
+
+Smazat z CSS (~250 řádků):
+- .club-hero__* hero sekce
+- medal stat varianty
+- member item styles
+```
+
+**ProfilePage změny:**
+```
+Soubory:
+- src/prototypes/ProfilePage.tsx
+- src/prototypes/ProfilePage.css
+
+Nahradit:
+- .profile-hero → <HeroSection section={section} variant="gradient">
+- .profile-achievement → <StatCard variant="medal-*" />
+
+Smazat z CSS (~300 řádků):
+- .profile-hero__* sekce
+- .profile-achievement__icon--gold/silver/bronze
+- section variant duplicity
+```
+
+**Kritéria dokončení:**
+- [ ] 3 prototypy používají nové komponenty
+- [ ] `npm run test:visual` - 0 regresí
+- [ ] CSS soubory zmenšeny o ~950 řádků celkem
+
 #### 22.12 Prototype Adoption - Batch 3 (Dashboard, Registration)
 - [ ] DashboardPage: HeroSection, StatCard variants, ListItem, ActionCard
 - [ ] RegistrationPage: HeroSection, Wizard
 - [ ] Smazat nahrazený CSS kód
 - [ ] Srovnat screenshots
+
+**DashboardPage změny:**
+```
+Soubory:
+- src/prototypes/DashboardPage.tsx
+- src/prototypes/DashboardPage.css
+
+Nahradit:
+- .dashboard-hero-section → <HeroSection section={section} variant="gradient" wave>
+- .dashboard-stat-card--gradient-* → <StatCard variant="gradient-*" />
+- .dashboard-alert-item → <ListItem variant="alert" type={...} />
+- .dashboard-quick-action → <ActionCard icon={...} title={...} />
+
+Smazat z CSS (~450 řádků):
+- .dashboard-hero-section__* kompletní hero
+- .dashboard-stat-card--gradient-* varianty
+- .dashboard-alert-item + .dashboard-alert-icon--* typy
+- .dashboard-quick-action + hover efekty
+- section variant duplicity (dv/ry/vt/federation)
+```
+
+**RegistrationPage změny:**
+```
+Soubory:
+- src/prototypes/RegistrationPage.tsx
+- src/prototypes/RegistrationPage.css
+
+Nahradit:
+- .registration-page-hero → <HeroSection section={section} variant="gradient" wave>
+- .registration-page__wizard + .registration-wizard-step → <Wizard steps={...} activeStep={...} />
+
+Smazat z CSS (~350 řádků):
+- .registration-page-hero__* kompletní hero
+- .registration-page__wizard layout
+- .registration-wizard-step__* circle, line, states
+- section variant duplicity
+```
+
+**Kritéria dokončení:**
+- [ ] 2 prototypy používají nové komponenty
+- [ ] Wizard komponenta plně nahrazuje custom implementation
+- [ ] `npm run test:visual` - 0 regresí
+- [ ] CSS soubory zmenšeny o ~800 řádků celkem
 
 #### 22.13 Prototype Adoption - Batch 4 (Live, Event)
 - [ ] LivePage: HeroSection, StatCard variants, ListItem
@@ -179,11 +984,99 @@ npx playwright install chromium
 - [ ] Smazat nahrazený CSS kód
 - [ ] Srovnat screenshots
 
+**LivePage změny:**
+```
+Soubory:
+- src/prototypes/LivePage.tsx
+- src/prototypes/LivePage.css
+
+Nahradit:
+- .live-page-hero → <HeroSection section={section} variant="gradient">
+- stat cards s gradient → <StatCard variant="gradient-*" />
+- activity/alert items → <ListItem variant="activity|alert" />
+
+Smazat z CSS (~500 řádků):
+- .live-page-hero__* kompletní hero
+- gradient stat card varianty
+- activity/alert item styles
+- section variant duplicity
+
+POZOR: LivePage má komplexní modální okna - ty NEZASAHOVAT, pouze hero a list items.
+```
+
+**EventDetailPage změny:**
+```
+Soubory:
+- src/prototypes/EventDetailPage.tsx
+- src/prototypes/EventDetailPage.css
+
+Nahradit:
+- .event-detail-hero → <HeroSection section={section} variant="gradient" wave>
+- sidebar stat cards → <StatCard variant="gradient-*" />
+
+Smazat z CSS (~350 řádků):
+- .event-detail-hero__* kompletní hero
+- stat card gradient varianty
+- section variant duplicity (dv/ry/vt)
+```
+
+**Kritéria dokončení:**
+- [ ] 2 prototypy používají nové komponenty
+- [ ] LivePage modály zůstávají nedotčeny
+- [ ] `npm run test:visual` - 0 regresí
+- [ ] CSS soubory zmenšeny o ~850 řádků celkem
+
 #### 22.14 Final Cleanup
 - [ ] Audit všech prototype CSS souborů - odstranit mrtvý kód
 - [ ] Aktualizovat bundle size metriky
 - [ ] Finální visual regression test - full suite
 - [ ] Aktualizovat dokumentaci
+
+**CSS Audit checklist:**
+```bash
+# Pro každý prototype CSS soubor:
+# 1. Grep pro nepoužívané selektory
+# 2. Ověřit že všechny .xxx--dv/ry/vt byly nahrazeny section systemem
+# 3. Ověřit že hero, stat, list, wizard styly byly odstraněny
+
+# Očekávané velikosti po cleanup:
+# CalendarPage.css:    348 → ~320 řádků (-8%)
+# ResultsPage.css:     811 → ~600 řádků (-26%)
+# AthletePublicProfile.css: 1265 → ~850 řádků (-33%)
+# ClubPublicProfile.css:    788 → ~550 řádků (-30%)
+# ProfilePage.css:     1750 → ~1400 řádků (-20%)
+# DashboardPage.css:   1414 → ~950 řádků (-33%)
+# RegistrationPage.css: 1773 → ~1400 řádků (-21%)
+# EventDetailPage.css: 1257 → ~900 řádků (-28%)
+# LivePage.css:        2779 → ~2250 řádků (-19%)
+# CELKEM:              12185 → ~9220 řádků (-24%)
+```
+
+**Bundle size měření:**
+```bash
+npm run build
+# Zaznamenat nové velikosti do PLAN.md metriky sekce
+```
+
+**Dokumentace k aktualizaci:**
+- [ ] `src/components/index.ts` - exporty nových komponent
+- [ ] `PLAN.md` - metriky, shrnutí fáze 22
+- [ ] Případně `PROJECT.md` - nové komponenty
+
+**Finální visual regression:**
+```bash
+npm run test:visual
+# Všechny testy musí projít
+# Žádné vizuální rozdíly oproti baseline
+```
+
+**Kritéria dokončení fáze 22:**
+- [ ] Všechny visual testy projdou
+- [ ] CSS redukce ≥ 20% (12185 → <9750)
+- [ ] 6 nových komponent exportováno
+- [ ] 2 komponenty rozšířeny (HeroSection, StatCard)
+- [ ] Žádné TODO komentáře v kódu
+- [ ] Bundle size změřen a zaznamenán
 
 ### Metriky úspěchu
 
