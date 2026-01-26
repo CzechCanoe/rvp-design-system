@@ -245,43 +245,61 @@
 }
 
 /* --------------------------------------------------------------------------
-   Highlight Cards Visual Styles
+   Highlight Cards Visual Styles - Enhanced "wow" design
    -------------------------------------------------------------------------- */
 
 .athlete-highlight-card {
+  background: linear-gradient(
+    135deg,
+    var(--csk-color-surface) 0%,
+    var(--csk-color-surface-container) 100%
+  );
   border-left: 4px solid;
-  border-image: var(--border-accent-gradient) 1;
+  border-image: linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-energy-500) 100%) 1;
+  box-shadow:
+    0 4px 12px -2px rgba(0, 0, 0, 0.06),
+    0 8px 24px -4px rgba(0, 0, 0, 0.04);
   transition: transform var(--motion-normal), box-shadow var(--motion-normal);
 }
 
 .athlete-highlight-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 12px 32px -4px rgba(0, 0, 0, 0.12),
+    0 20px 48px -8px rgba(0, 0, 0, 0.08),
+    0 0 24px rgba(249, 115, 22, 0.1);
 }
 
 .athlete-highlight-card__year {
+  display: inline-block;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary-500);
+  color: white;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-600) 100%);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
 }
 
 .athlete-highlight-card__title {
   font-family: var(--font-family-display);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xl);
+  font-weight: 800;
   color: var(--csk-color-on-surface);
+  letter-spacing: -0.01em;
 }
 
 .athlete-highlight-card__description {
   font-size: var(--font-size-sm);
   color: var(--csk-color-on-surface-muted);
+  line-height: 1.5;
 }
 
 .athlete-highlight-card__icon {
-  color: var(--color-energy-400);
-  opacity: 0.6;
+  color: var(--color-energy-500);
+  opacity: 0.8;
+  filter: drop-shadow(0 2px 8px rgba(249, 115, 22, 0.3));
 }
 
 /* --------------------------------------------------------------------------
@@ -313,10 +331,29 @@
    Dark Mode Adjustments
    -------------------------------------------------------------------------- */
 
+[data-theme="dark"] .athlete-highlight-card {
+  background: linear-gradient(
+    135deg,
+    var(--csk-color-surface) 0%,
+    rgba(30, 41, 59, 0.8) 100%
+  );
+  box-shadow:
+    0 4px 12px -2px rgba(0, 0, 0, 0.2),
+    0 8px 24px -4px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .athlete-highlight-card:hover {
+  box-shadow:
+    0 12px 32px -4px rgba(0, 0, 0, 0.3),
+    0 20px 48px -8px rgba(0, 0, 0, 0.2),
+    0 0 24px rgba(249, 115, 22, 0.15);
+}
+
 [data-theme="dark"] .athlete-highlight-card__year {
-  color: var(--color-primary-400);
+  background: linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-primary-500) 100%);
 }
 
 [data-theme="dark"] .athlete-highlight-card__icon {
-  color: var(--color-energy-300);
+  color: var(--color-energy-400);
+  filter: drop-shadow(0 2px 8px rgba(249, 115, 22, 0.4));
 }

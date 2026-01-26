@@ -218,6 +218,7 @@
 .csk-stats-bar--floating .csk-stats-bar__icon {
   font-size: 1.5em;
   margin-bottom: var(--spacing-2, 8px);
+  /* Explicit color to override inherited white from hero */
   color: var(--color-primary-500, #1176a6);
 }
 
@@ -227,6 +228,8 @@
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.1;
+  /* Explicit color to override inherited white from hero */
+  color: var(--color-primary-700, #1d4ed8);
 }
 
 .csk-stats-bar--floating .csk-stats-bar__label {
@@ -234,6 +237,8 @@
   font-size: var(--text-sm-size, 0.875rem);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  /* Explicit color to override inherited white from hero */
+  color: var(--color-text-secondary, #64748b);
 }
 
 /* Floating size variants */
@@ -273,6 +278,14 @@
     0 8px 24px -4px rgba(0, 0, 0, 0.4),
     0 16px 40px -8px rgba(0, 0, 0, 0.3),
     0 0 20px rgba(17, 118, 166, 0.15);
+}
+
+[data-theme="dark"] .csk-stats-bar--floating .csk-stats-bar__value {
+  color: var(--color-primary-300, #93c5fd);
+}
+
+[data-theme="dark"] .csk-stats-bar--floating .csk-stats-bar__label {
+  color: var(--color-text-secondary-dark, #94a3b8);
 }
 
 /* Reduced motion */
