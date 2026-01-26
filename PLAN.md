@@ -10,6 +10,7 @@
 | 17 (DS Cleanup - Aesthetic Focus) | ✅ Hotovo |
 | **18 (Visual Polish)** | ✅ Hotovo |
 | **19 (Optimization)** | ✅ Hotovo |
+| **20 (Publikace)** | 🔄 Pre-release checklist |
 
 *Tag v0.5.0-cleanup-wip: Mezistav před čištěním*
 
@@ -962,16 +963,16 @@ npm run test         # Playwright testy
 
 ---
 
-## Fáze 20: Publikace
+## Fáze 20: Publikace 🔄
 
 ### 20.1 Pre-release Checklist
 
-- [ ] Všechny Phase 18 úkoly dokončeny
-- [ ] Build projde bez chyb (`npm run build`)
-- [ ] Žádné TypeScript errory
-- [ ] Storybook renderuje všechny stories
-- [ ] Dark mode funguje všude
-- [ ] Embed varianty fungují
+- [x] Všechny Phase 18 úkoly dokončeny
+- [x] Build projde bez chyb (`npm run build`)
+- [x] Žádné TypeScript errory
+- [x] Storybook renderuje všechny stories (`npm run build-storybook`)
+- [ ] Dark mode funguje všude (manuální kontrola)
+- [ ] Embed varianty fungují (manuální kontrola)
 
 ### 20.2 Git Tag & Push
 
