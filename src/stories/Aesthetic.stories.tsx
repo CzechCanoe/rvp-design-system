@@ -13,7 +13,7 @@ import type { Meta, StoryObj } from '@storybook/react';
  */
 
 const meta: Meta = {
-  title: 'Design System/Aesthetic',
+  title: 'CzechCanoe Aesthetic',
   parameters: {
     layout: 'fullscreen',
     docs: {

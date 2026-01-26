@@ -37,7 +37,7 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['Introduction', 'Design System', 'Prototypes', 'Components', 'Context', '*'],
+        order: ['Introduction', 'CzechCanoe Aesthetic', 'Prototypes', 'Components', 'Context', '*'],
       },
     },
   },
