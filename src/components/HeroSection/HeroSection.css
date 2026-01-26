@@ -49,17 +49,24 @@
   inset: 0;
   background-size: cover;
   background-position: center;
-  opacity: 0.6;
-}
-
-/* Higher opacity for full hero with prominent background */
-.csk-hero-section--full .csk-hero-section__bg-image {
-  opacity: 0.7;
+  z-index: 1;
 }
 
 .csk-hero-section__bg-gradient {
   position: absolute;
   inset: 0;
+  z-index: 0;
+}
+
+/* When image is present, add dark overlay for text readability */
+.csk-hero-section--has-image .csk-hero-section__bg-gradient {
+  z-index: 2;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.4) 100%
+  ) !important;
 }
 
 .csk-hero-section__bg-pattern {
