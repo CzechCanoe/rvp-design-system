@@ -450,27 +450,53 @@ function AthletePublicProfile({
               </div>
               <Button variant="ghost">Zobrazit všechny</Button>
             </div>
-            <div className="athlete-results-grid">
-              {athlete.recentResults.map((result) => (
-                <Card
+            <div className="athlete-results-timeline">
+              {athlete.recentResults.map((result, index) => (
+                <article
                   key={result.id}
-                  variant="outlined"
-                  className="athlete-result-card"
-                  clickable
+                  className={`athlete-result-item ${getRankClass(result.rank)}`}
+                  style={{ '--delay': `${index * 0.05}s` } as React.CSSProperties}
                 >
-                  <div className={`athlete-result-card__rank ${getRankClass(result.rank)}`}>
-                    {result.rank}.
+                  {/* Rank medallion */}
+                  <div className="athlete-result-item__rank-wrapper">
+                    <div className={`athlete-result-item__rank ${getRankClass(result.rank)}`}>
+                      <span className="athlete-result-item__rank-number">{result.rank}</span>
+                      {result.rank <= 3 && <span className="athlete-result-item__rank-medal" />}
+                    </div>
+                    {index < athlete.recentResults.length - 1 && (
+                      <div className="athlete-result-item__connector" />
+                    )}
                   </div>
-                  <div className="athlete-result-card__info">
-                    <h3 className="athlete-result-card__race">{result.race}</h3>
-                    <div className="athlete-result-card__meta">
-                      <span>{result.location}</span>
-                      <span>{formatDate(result.date)}</span>
-                      <span>{result.category}</span>
+
+                  {/* Result content */}
+                  <div className="athlete-result-item__content">
+                    <div className="athlete-result-item__header">
+                      <h3 className="athlete-result-item__race">{result.race}</h3>
+                      <Badge variant="default" size="sm">{result.category}</Badge>
+                    </div>
+                    <div className="athlete-result-item__details">
+                      <span className="athlete-result-item__location">
+                        <Icon name="map-pin" size="sm" />
+                        {result.location}
+                      </span>
+                      <span className="athlete-result-item__date">
+                        <Icon name="calendar" size="sm" />
+                        {formatDate(result.date)}
+                      </span>
                     </div>
                   </div>
-                  <div className="athlete-result-card__time">{result.time}</div>
-                </Card>
+
+                  {/* Time display - hero element */}
+                  <div className="athlete-result-item__time-block">
+                    <span className="athlete-result-item__time">{result.time}</span>
+                    <span className="athlete-result-item__time-label">čas</span>
+                  </div>
+
+                  {/* Arrow indicator */}
+                  <div className="athlete-result-item__arrow">
+                    <Icon name="chevron-right" size="sm" />
+                  </div>
+                </article>
               ))}
             </div>
           </section>

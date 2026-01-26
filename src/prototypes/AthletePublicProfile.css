@@ -295,77 +295,320 @@
 }
 
 /* ==========================================================================
-   Recent Results Layout
+   Recent Results - Timeline Layout
+   Bold, sports-focused design with rank medallions and timeline connectors
    ========================================================================== */
 
-.athlete-results-grid {
+.athlete-results-timeline {
   display: flex;
   flex-direction: column;
   gap: 0;
+}
+
+/* Individual result item */
+.athlete-result-item {
+  display: grid;
+  grid-template-columns: 72px 1fr auto auto;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4) var(--spacing-5);
+  background: var(--color-bg-primary);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-lg);
-  overflow: hidden;
+  margin-bottom: var(--spacing-3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  animation: result-slide-in 0.4s ease backwards;
+  animation-delay: var(--delay, 0s);
 }
 
-/* Result card layout - compact list row */
-.athlete-result-card {
-  display: grid;
-  grid-template-columns: 40px 1fr auto auto;
+@keyframes result-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.athlete-result-item:hover {
+  transform: translateX(4px);
+  border-color: var(--color-primary-300);
+  box-shadow: var(--shadow-md), -4px 0 0 var(--color-primary-500);
+}
+
+/* Rank wrapper with timeline connector */
+.athlete-result-item__rank-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--spacing-3);
-  padding: var(--spacing-3) var(--spacing-4);
-  border-bottom: 1px solid var(--color-border-secondary);
+  height: 100%;
 }
 
-.athlete-result-card:last-child {
-  border-bottom: none;
+/* The connector line between results */
+.athlete-result-item__connector {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 2px;
+  height: calc(var(--spacing-3) + 8px);
+  background: linear-gradient(180deg, var(--color-border-secondary) 0%, transparent 100%);
+  transform: translateX(-50%);
 }
 
-.athlete-result-card__rank {
-  width: 32px;
-  height: 32px;
+/* Rank medallion */
+.athlete-result-item__rank {
+  position: relative;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-bg-secondary);
+  border: 2px solid var(--color-border-secondary);
+  transition: all 0.2s ease;
 }
 
-.athlete-result-card__info {
-  min-width: 0;
+.athlete-result-item:hover .athlete-result-item__rank {
+  transform: scale(1.05);
 }
 
-.athlete-result-card__race {
-  margin: 0;
-  font-size: var(--font-size-sm);
+.athlete-result-item__rank-number {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xl);
+  font-weight: 800;
+  line-height: 1;
 }
 
-.athlete-result-card__meta {
-  display: flex;
-  gap: var(--spacing-2);
-  font-size: var(--font-size-xs);
+/* Medal glow for podium positions */
+.athlete-result-item__rank-medal {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: medal-pulse 2s ease-in-out infinite;
 }
 
-.athlete-result-card__time {
-  white-space: nowrap;
-  text-align: right;
+@keyframes medal-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.1); opacity: 0.5; }
 }
 
-.athlete-result-card__category {
+/* Gold - 1st place */
+.athlete-result-item__rank.athlete-result-card__rank--1 {
+  background: linear-gradient(145deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
+  border-color: #f59e0b;
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+}
+
+.athlete-result-item__rank.athlete-result-card__rank--1 .athlete-result-item__rank-number {
+  color: #92400e;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.athlete-result-item__rank.athlete-result-card__rank--1 .athlete-result-item__rank-medal {
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.6) 0%, transparent 70%);
+}
+
+/* Silver - 2nd place */
+.athlete-result-item__rank.athlete-result-card__rank--2 {
+  background: linear-gradient(145deg, #f3f4f6 0%, #e5e7eb 50%, #d1d5db 100%);
+  border-color: #9ca3af;
+  box-shadow: 0 0 16px rgba(156, 163, 175, 0.4);
+}
+
+.athlete-result-item__rank.athlete-result-card__rank--2 .athlete-result-item__rank-number {
+  color: #374151;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.athlete-result-item__rank.athlete-result-card__rank--2 .athlete-result-item__rank-medal {
+  background: radial-gradient(circle, rgba(156, 163, 175, 0.5) 0%, transparent 70%);
+}
+
+/* Bronze - 3rd place */
+.athlete-result-item__rank.athlete-result-card__rank--3 {
+  background: linear-gradient(145deg, #fef3e2 0%, #fed7aa 50%, #fdba74 100%);
+  border-color: #d97706;
+  box-shadow: 0 0 16px rgba(217, 119, 6, 0.4);
+}
+
+.athlete-result-item__rank.athlete-result-card__rank--3 .athlete-result-item__rank-number {
+  color: #7c2d12;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.athlete-result-item__rank.athlete-result-card__rank--3 .athlete-result-item__rank-medal {
+  background: radial-gradient(circle, rgba(217, 119, 6, 0.5) 0%, transparent 70%);
+}
+
+/* Other positions */
+.athlete-result-item__rank.athlete-result-card__rank--other .athlete-result-item__rank-number {
+  color: var(--color-text-secondary);
+}
+
+.athlete-result-item__rank.athlete-result-card__rank--other .athlete-result-item__rank-medal {
   display: none;
 }
 
-/* Show category on wider screens */
-@media (min-width: 640px) {
-  .athlete-result-card__category {
-    display: block;
-    font-size: var(--font-size-xs);
-    color: var(--color-text-muted);
-    text-align: center;
-    min-width: 40px;
+/* Result content section */
+.athlete-result-item__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  min-width: 0;
+}
+
+.athlete-result-item__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+.athlete-result-item__race {
+  margin: 0;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+.athlete-result-item__details {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.athlete-result-item__location,
+.athlete-result-item__date {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.athlete-result-item__location svg,
+.athlete-result-item__date svg {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+/* Time block - hero element */
+.athlete-result-item__time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding: var(--spacing-2) var(--spacing-4);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  min-width: 80px;
+}
+
+.athlete-result-item__time {
+  font-family: var(--font-family-mono, 'JetBrains Mono', monospace);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.athlete-result-item__time-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Arrow indicator */
+.athlete-result-item__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--color-text-muted);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.2s ease;
+}
+
+.athlete-result-item:hover .athlete-result-item__arrow {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--color-primary-500);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .athlete-result-item {
+    grid-template-columns: 56px 1fr auto;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3) var(--spacing-4);
   }
 
-  .athlete-result-card {
-    grid-template-columns: 40px 1fr 50px auto;
+  .athlete-result-item__rank {
+    width: 40px;
+    height: 40px;
+  }
+
+  .athlete-result-item__rank-number {
+    font-size: var(--font-size-lg);
+  }
+
+  .athlete-result-item__time-block {
+    padding: var(--spacing-2);
+    min-width: 70px;
+  }
+
+  .athlete-result-item__time {
+    font-size: var(--font-size-lg);
+  }
+
+  .athlete-result-item__arrow {
+    display: none;
+  }
+
+  .athlete-result-item__connector {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .athlete-result-item {
+    grid-template-columns: 48px 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .athlete-result-item__rank-wrapper {
+    grid-row: span 2;
+  }
+
+  .athlete-result-item__time-block {
+    grid-column: 2;
+    justify-self: start;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-1) var(--spacing-2);
+    background: transparent;
+  }
+
+  .athlete-result-item__time {
+    font-size: var(--font-size-base);
+  }
+
+  .athlete-result-item__time-label {
+    display: none;
   }
 }
 
@@ -643,8 +886,12 @@
     grid-template-columns: 1fr;
   }
 
-  .athlete-public-profile--embed .athlete-results-grid {
-    grid-template-columns: 1fr;
+  .athlete-public-profile--embed .athlete-result-item {
+    grid-template-columns: 56px 1fr auto;
+  }
+
+  .athlete-public-profile--embed .athlete-result-item__arrow {
+    display: none;
   }
 }
 
@@ -672,6 +919,17 @@
 
   .athlete-public-profile--embed .athlete-main {
     padding: var(--spacing-4) 0;
+  }
+
+  .athlete-public-profile--embed .athlete-result-item {
+    grid-template-columns: 48px 1fr;
+    grid-template-rows: auto auto;
+    padding: var(--spacing-3);
+  }
+
+  .athlete-public-profile--embed .athlete-result-item__time-block {
+    grid-column: 2;
+    justify-self: start;
   }
 }
 
@@ -874,65 +1132,9 @@
 }
 
 /* --------------------------------------------------------------------------
-   Result Cards Visual Styles
+   Result Timeline Visual Styles (already defined in layout section above)
+   Additional dark mode support below
    -------------------------------------------------------------------------- */
-
-.athlete-result-card__rank {
-  border-radius: var(--radius-md);
-  font-family: var(--font-family-display);
-  font-weight: 800;
-  font-size: var(--font-size-xl);
-}
-
-.athlete-result-card__rank--1 {
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%);
-  color: #b45309;
-}
-
-.athlete-result-card__rank--2 {
-  background: linear-gradient(135deg, rgba(156, 163, 175, 0.2) 0%, rgba(107, 114, 128, 0.1) 100%);
-  color: #4b5563;
-}
-
-.athlete-result-card__rank--3 {
-  background: linear-gradient(135deg, rgba(217, 119, 6, 0.2) 0%, rgba(180, 83, 9, 0.1) 100%);
-  color: #92400e;
-}
-
-.athlete-result-card__rank--other {
-  background: var(--csk-color-surface-container);
-  color: var(--csk-color-on-surface-muted);
-}
-
-.athlete-result-card__race {
-  font-weight: var(--font-weight-medium);
-  color: var(--csk-color-on-surface);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.athlete-result-card__meta {
-  color: var(--csk-color-on-surface-muted);
-}
-
-.athlete-result-card__meta span:not(:last-child)::after {
-  content: '·';
-  margin: 0 var(--spacing-1);
-  color: var(--color-border-secondary);
-}
-
-.athlete-result-card__time {
-  font-family: var(--font-family-mono, monospace);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-base);
-  color: var(--csk-color-on-surface);
-}
-
-/* Hover effect for result rows */
-.athlete-result-card:hover {
-  background: var(--color-bg-secondary);
-}
 
 /* --------------------------------------------------------------------------
    Section Headers Visual Styles
@@ -993,25 +1195,70 @@
   color: var(--color-success-300);
 }
 
-[data-theme="dark"] .athlete-result-card__rank--1 {
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.08) 100%);
-  color: #fbbf24;
-}
-
-[data-theme="dark"] .athlete-result-card__rank--2 {
-  background: linear-gradient(135deg, rgba(156, 163, 175, 0.15) 0%, rgba(107, 114, 128, 0.08) 100%);
-  color: #9ca3af;
-}
-
-[data-theme="dark"] .athlete-result-card__rank--3 {
-  background: linear-gradient(135deg, rgba(217, 119, 6, 0.15) 0%, rgba(180, 83, 9, 0.08) 100%);
-  color: #d97706;
-}
-
 [data-theme="dark"] .athlete-highlight-card__year {
   color: var(--color-primary-400);
 }
 
 [data-theme="dark"] .athlete-highlight-card__icon {
   color: var(--color-energy-300);
+}
+
+/* --------------------------------------------------------------------------
+   Result Timeline Dark Mode
+   -------------------------------------------------------------------------- */
+
+[data-theme="dark"] .athlete-result-item {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border-secondary);
+}
+
+[data-theme="dark"] .athlete-result-item:hover {
+  border-color: var(--color-primary-400);
+  box-shadow: var(--shadow-lg), -4px 0 0 var(--color-primary-400);
+}
+
+[data-theme="dark"] .athlete-result-item__rank {
+  background: var(--color-bg-tertiary);
+  border-color: var(--color-border-secondary);
+}
+
+/* Gold dark mode */
+[data-theme="dark"] .athlete-result-item__rank.athlete-result-card__rank--1 {
+  background: linear-gradient(145deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.15) 100%);
+  border-color: rgba(251, 191, 36, 0.4);
+}
+
+[data-theme="dark"] .athlete-result-item__rank.athlete-result-card__rank--1 .athlete-result-item__rank-number {
+  color: #fcd34d;
+  text-shadow: none;
+}
+
+/* Silver dark mode */
+[data-theme="dark"] .athlete-result-item__rank.athlete-result-card__rank--2 {
+  background: linear-gradient(145deg, rgba(156, 163, 175, 0.2) 0%, rgba(107, 114, 128, 0.15) 100%);
+  border-color: rgba(156, 163, 175, 0.4);
+}
+
+[data-theme="dark"] .athlete-result-item__rank.athlete-result-card__rank--2 .athlete-result-item__rank-number {
+  color: #d1d5db;
+  text-shadow: none;
+}
+
+/* Bronze dark mode */
+[data-theme="dark"] .athlete-result-item__rank.athlete-result-card__rank--3 {
+  background: linear-gradient(145deg, rgba(217, 119, 6, 0.2) 0%, rgba(180, 83, 9, 0.15) 100%);
+  border-color: rgba(217, 119, 6, 0.4);
+}
+
+[data-theme="dark"] .athlete-result-item__rank.athlete-result-card__rank--3 .athlete-result-item__rank-number {
+  color: #fdba74;
+  text-shadow: none;
+}
+
+[data-theme="dark"] .athlete-result-item__time-block {
+  background: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .athlete-result-item__connector {
+  background: linear-gradient(180deg, var(--color-border-secondary) 0%, transparent 100%);
 }

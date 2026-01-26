@@ -470,11 +470,15 @@
   border-radius: 0;
 }
 
-/* StatCard - simpler, flat */
+/* StatCard - simpler, flat, 0 radius to match kanoe.cz square borders */
 [data-mode="embed"] .csk-stat-card {
-  border-radius: 4px;
+  border-radius: 0;
   box-shadow: none;
   border: 1px solid #dee2e6;
+}
+
+[data-mode="embed"] .csk-stat-card--style-aesthetic::before {
+  border-radius: 0;
 }
 
 /* Toast - simpler appearance */
