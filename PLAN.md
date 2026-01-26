@@ -836,30 +836,24 @@ Přidat do `aesthetic.css`:
 - [x] Odstranit duplicitní CSS - žádný nalezen
 - [x] Build validace ✅
 
-### 19.3 Stories Cleanup
+### 19.3 Stories Cleanup ✅
 
-**Dopad:** Nízký, ale přehlednější dokumentace
+**Výsledek:** Audit ukázal, že stories jsou již dobře strukturované - žádné redundance k odstranění.
 
-**Problém:** Některé stories jsou redundantní nebo mají příliš mnoho variant.
+**Provedený audit:**
+- Přečteny všechny stories soubory (52 souborů v src/)
+- Zkontrolován vzor použití: Default + kombinované AllVariants/AllSizes + CSK příklady
+- Žádné samostatné stories pro jednotlivé velikosti/varianty (správně sloučeny)
+- Žádné zastaralé stories odkazující na odstraněné varianty
 
-**Příklady redundance:**
-- Samostatná story pro každou size variantu místo jedné s controls
-- Duplicate stories s minimálními rozdíly
-- Zastaralé stories pro odstraněné varianty
-
-**Postup:**
-1. Projít stories jednotlivých komponent
-2. Identifikovat redundantní (mohou být sloučeny do jedné s controls)
-3. Identifikovat zastaralé (odkazují na neexistující varianty)
-4. Sloučit/odstranit
-5. Aktualizovat autodocs
+**Závěr:** Phase 17 cleanup byl důkladný - stories jsou clean a konzistentní.
 
 **Úkoly:**
-- [ ] Audit stories - identifikovat redundantní
-- [ ] Sloučit podobné stories do jedné s controls
-- [ ] Odstranit nepoužívané/zastaralé stories
-- [ ] Aktualizovat autodocs
-- [ ] Build validace
+- [x] Audit stories - identifikovat redundantní - žádné nalezeny
+- [x] Sloučit podobné stories do jedné s controls - již používáno
+- [x] Odstranit nepoužívané/zastaralé stories - žádné nalezeny
+- [x] Aktualizovat autodocs - nevyžadovalo změny
+- [x] Build validace ✅
 
 ### 19.4 Bundle Size Audit
 

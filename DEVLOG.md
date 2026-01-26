@@ -6541,3 +6541,48 @@ Všech 12 prototypových CSS souborů má kompletní strukturu:
 
 ### Další krok
 Pokračovat na Phase 19.2 (Konsolidace Card použití) nebo 19.3 (Stories cleanup)
+
+---
+
+## 2026-01-26 - Fáze 19.2: Card Usage Consolidation
+
+### Dokončeno
+- [x] Audit všech 12 prototypů pro card-like div struktury
+- [x] DashboardPage: nahrazeny div.dashboard-section-card za Card komponentu
+- [x] CSS aktualizováno pro Card komponentu (odstraněny redundantní background/border)
+- [x] Kontrola duplicitního CSS - žádný nalezen
+- [x] Build validace ✅
+
+### Zjištění
+1. **Kód je čistý:** Všechny prototypy již správně používají Card komponentu jako wrapper
+2. **BEM třídy:** jsou pouze pro interní layout uvnitř Card (např. `.athlete-highlight-card__year`)
+3. **DashboardPage wrapper pattern:** `<div className="dashboard-stat-card--gradient-*">` kolem StatCard je legitimní pro gradient pozadí
+4. **Hero gradienty:** v prototypech nejsou duplicity - jsou to specifické selektory pro daný kontext
+5. **Utility třídy:** v aesthetic.css slouží pro nové prototypy
+
+### Statistiky
+- CSS bundle: 268.82 kB (gzip: 32.74 kB)
+- JS bundle: 338.94 kB (gzip: 54.35 kB)
+
+---
+
+## 2026-01-26 - Fáze 19.3: Stories Cleanup
+
+### Dokončeno
+- [x] Audit všech 52 stories souborů v src/
+- [x] Kontrola vzorů použití (Default, AllVariants, AllSizes, CSK příklady)
+- [x] Build validace ✅
+
+### Výsledky auditu
+**Žádné redundance nalezeny.** Stories jsou již dobře strukturované:
+- Používají kombinované showcase stories (AllVariants, AllSizes) místo individuálních
+- Mají konzistentní strukturu: Default → Varianty → Příklady použití
+- Všechny autodocs jsou aktuální
+
+### Metriky buildu
+- CSS bundle: 268.82 kB (gzip: 32.74 kB)
+- JS bundle: 338.94 kB (gzip: 54.35 kB)
+
+### Poznámky
+Phase 17 cleanup byl důkladný - kód je čistý bez redundancí.
+Další krok: 19.4 Bundle Size Audit (volitelný)
