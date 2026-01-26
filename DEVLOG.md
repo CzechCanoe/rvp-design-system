@@ -6658,3 +6658,19 @@ Další krok: 19.4 Bundle Size Audit (volitelný)
 - Infrastruktura pro visual regression testing již existovala (playwright.config.ts, prototypes.spec.ts)
 - Bylo potřeba pouze rozšířit config.ts o chybějící prototypy a vygenerovat baseline
 - Storybook běží stabilně, všechny testy projdou
+
+---
+
+## 2026-01-26 - Fáze 22.2: Section Color System
+
+### Dokončeno
+- [x] Přidán Section Color System do `tokens/colors.css`
+- [x] Vytvořeny utility classes: `.csk-section-dv`, `.csk-section-ry`, `.csk-section-vt`, `.csk-section-federation`
+- [x] Každá class nastavuje 5 CSS custom properties: `--section-color`, `--section-color-light`, `--section-color-dark`, `--section-color-rgb`, `--section-gradient`
+- [x] Přidána SectionColors story do `Aesthetic.stories.tsx` s dokumentací a příklady
+- [x] 57 prototype visual regression testů prošlo bez regresí
+
+### Poznámky
+- Pattern umožní redukci CSS kódu v prototypech o ~70% pro section-specific styly
+- Připraveno pro adopci v krocích 22.10-22.13
+- Testy trvaly ~33 minut (5 prohlížečů × 29 stories × 2 modes)

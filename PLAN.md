@@ -64,40 +64,33 @@ Redukce ~3750 řádků duplicitního CSS v prototypech přesunem opakujících s
 - `tests/visual/README.md` - dokumentace workflow
 - `tests/prototypes.spec.ts-snapshots/` - baseline screenshots
 
-#### 22.2 Section Color System
-- [ ] Přidat `--section-color` CSS custom property pattern do `tokens/colors.css`
-- [ ] Vytvořit utility classes `.csk-section-dv`, `.csk-section-ry`, `.csk-section-vt`
-- [ ] Dokumentovat v Storybook (Colors story)
-- [ ] Srovnat screenshots (žádná vizuální změna)
+#### 22.2 Section Color System ✅
+- [x] Přidat `--section-color` CSS custom property pattern do `tokens/colors.css`
+- [x] Vytvořit utility classes `.csk-section-dv`, `.csk-section-ry`, `.csk-section-vt`, `.csk-section-federation`
+- [x] Dokumentovat v Storybook (SectionColors story v Aesthetic.stories.tsx)
+- [x] Srovnat screenshots (57 testů, 0 regresí)
 
-**Soubory k úpravě:**
-- `src/tokens/colors.css` - přidat section utility classes
+**Implementace:**
+- `src/tokens/colors.css` - 4 section utility classes s CSS custom properties:
+  - `--section-color`, `--section-color-light`, `--section-color-dark`
+  - `--section-color-rgb`, `--section-gradient`
+- `src/stories/Aesthetic.stories.tsx` - nová SectionColors story s dokumentací
 
-**Implementace v colors.css:**
+**Výsledky:**
+- 57 prototype visual regression testů prošlo bez regresí
+- Section color system ready pro adopci v prototypech (22.10+)
+
+**Kód v colors.css:**
 ```css
-/* Section Color System
-   Použití: <div class="csk-section-dv"> - vše uvnitř používá --section-color */
-
+/* Section Color System - utility classes */
 .csk-section-dv {
   --section-color: var(--color-section-dv);
-  --section-color-light: var(--color-section-dv-light, #60a5fa);
-  --section-color-dark: var(--color-section-dv-dark, #1e3a5f);
+  --section-color-light: var(--color-section-dv-light);
+  --section-color-dark: #1e3a5f;
   --section-color-rgb: 37, 99, 235;
+  --section-gradient: var(--gradient-section-dv);
 }
-
-.csk-section-ry {
-  --section-color: var(--color-section-ry);
-  --section-color-light: var(--color-section-ry-light, #4ade80);
-  --section-color-dark: var(--color-section-ry-dark, #14532d);
-  --section-color-rgb: 22, 163, 74;
-}
-
-.csk-section-vt {
-  --section-color: var(--color-section-vt);
-  --section-color-light: var(--color-section-vt-light, #f87171);
-  --section-color-dark: var(--color-section-vt-dark, #7f1d1d);
-  --section-color-rgb: 220, 38, 38;
-}
+/* ... analogicky pro ry, vt, federation */
 
 .csk-section-federation {
   --section-color: var(--color-primary);
@@ -1084,7 +1077,7 @@ npm run test:visual
 
 ### Další krok
 
-**Pokračovat s 22.2 Section Color System** - přidat utility classes pro section colors do tokens/colors.css.
+**Pokračovat s 22.3 HeroSection Component Enhancement** - rozšířit HeroSection o section prop, background image support, wave divider a pattern overlay.
 
 ### Git tag
 
