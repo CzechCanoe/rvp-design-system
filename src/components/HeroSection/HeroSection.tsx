@@ -55,6 +55,10 @@ export interface HeroSectionProps extends HTMLAttributes<HTMLElement> {
   wave?: boolean;
   /** Color for the wave (defaults to background color) */
   waveColor?: string;
+  /** Part of title to highlight with accent color */
+  titleAccent?: string;
+  /** Insert line break before accent text */
+  titleAccentBreak?: boolean;
 }
 
 /**
@@ -87,6 +91,8 @@ export function HeroSection({
   breadcrumbs,
   wave = false,
   waveColor,
+  titleAccent,
+  titleAccentBreak = false,
   className,
   ...props
 }: HeroSectionProps) {
@@ -113,6 +119,22 @@ export function HeroSection({
   };
 
   const hasAvatar = avatarSrc || avatarInitials;
+
+  // Render title with optional accent highlighting
+  const renderTitle = () => {
+    if (!titleAccent || !title.includes(titleAccent)) {
+      return title;
+    }
+    const parts = title.split(titleAccent);
+    return (
+      <>
+        {parts[0]}
+        {titleAccentBreak && <br />}
+        <span className="csk-hero-section__title-accent">{titleAccent}</span>
+        {parts[1]}
+      </>
+    );
+  };
 
   return (
     <section className={classes} {...props}>
@@ -157,7 +179,7 @@ export function HeroSection({
             {badges && <div className="csk-hero-section__badges">{badges}</div>}
 
             {/* Title */}
-            <h1 className="csk-hero-section__title">{title}</h1>
+            <h1 className="csk-hero-section__title">{renderTitle()}</h1>
 
             {/* Subtitle */}
             {subtitle && (

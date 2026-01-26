@@ -50,6 +50,11 @@
   box-shadow: var(--shadow-md);
 }
 
+/* Featured + Aesthetic - angular clip for sporty feel */
+.csk-athlete-card--featured.csk-athlete-card--style-aesthetic {
+  clip-path: var(--clip-angle-sm);
+}
+
 /* ==========================================================================
    Sizes
    ========================================================================== */

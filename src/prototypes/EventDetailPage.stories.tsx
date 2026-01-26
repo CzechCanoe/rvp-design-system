@@ -512,6 +512,8 @@ const EventDetailPage = ({
           variant={isEmbed ? 'minimal' : 'compact'}
           section={section}
           title={eventData.title}
+          titleAccent={isAesthetic ? 've slalomu' : undefined}
+          titleAccentBreak={isAesthetic && !isEmbed}
           subtitle={!isEmbed ? eventData.subtitle : undefined}
           meshBackground={isAesthetic}
           patternOverlay

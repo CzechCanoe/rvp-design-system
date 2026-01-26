@@ -274,6 +274,24 @@
   max-width: 60ch;
 }
 
+/* Title accent - highlighted part of the title */
+.csk-hero-section__title-accent {
+  color: var(--color-primary-300);
+}
+
+/* Section-specific accent colors */
+.csk-hero-section--dv .csk-hero-section__title-accent {
+  color: #93c5fd; /* blue-300 */
+}
+
+.csk-hero-section--ry .csk-hero-section__title-accent {
+  color: #86efac; /* green-300 */
+}
+
+.csk-hero-section--vt .csk-hero-section__title-accent {
+  color: #fca5a5; /* red-300 */
+}
+
 /* =============================================================================
    METADATA
    ============================================================================= */
