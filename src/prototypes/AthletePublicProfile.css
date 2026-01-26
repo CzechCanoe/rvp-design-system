@@ -653,25 +653,29 @@
    Hero Section Visual Styles
    -------------------------------------------------------------------------- */
 
-/* Section-specific hero gradients */
+/* Section-specific hero gradients - semi-transparent to show image beneath */
 .athlete-hero--dv .athlete-hero__gradient {
-  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #3b82f6 100%);
+  background: linear-gradient(135deg, rgba(30, 58, 95, 0.75) 0%, rgba(37, 99, 235, 0.7) 50%, rgba(59, 130, 246, 0.65) 100%);
 }
 
 .athlete-hero--ry .athlete-hero__gradient {
-  background: linear-gradient(135deg, #14532d 0%, #16a34a 50%, #22c55e 100%);
+  background: linear-gradient(135deg, rgba(20, 83, 45, 0.75) 0%, rgba(22, 163, 74, 0.7) 50%, rgba(34, 197, 94, 0.65) 100%);
 }
 
 .athlete-hero--vt .athlete-hero__gradient {
-  background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 50%, #dc2626 100%);
+  background: linear-gradient(135deg, rgba(127, 29, 29, 0.75) 0%, rgba(185, 28, 28, 0.7) 50%, rgba(220, 38, 38, 0.65) 100%);
 }
 
 /* Hero background image - action photo */
 .athlete-hero__image {
   background-size: cover;
   background-position: center 30%;
-  opacity: 0.55;
-  filter: saturate(1.1);
+  z-index: 0;
+}
+
+/* Gradient overlay on top of image */
+.athlete-hero__gradient {
+  z-index: 1;
 }
 
 /* Hero pattern overlay */
