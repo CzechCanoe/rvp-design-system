@@ -6613,3 +6613,24 @@ Další krok: 19.4 Bundle Size Audit (volitelný)
 - source-map-explorer nefungoval kvůli formátu source maps, použit rollup-plugin-visualizer
 - Velikost bundlu je přiměřená pro design system s 35+ komponentami
 - Žádné kritické optimalizace nejsou nutné
+
+---
+
+## 2026-01-26 - Fáze 20: Publikace (Release v0.6.0)
+
+### Dokončeno
+- [x] Build Storybook - úspěšně builděno všech 52 stories
+- [x] Automatizovaná verifikace dark mode (layout-only CSS + explicitní pravidla)
+- [x] Automatizovaná verifikace embed variant (všech 12 prototypů používá KanoeCzContext)
+- [x] Git tag v0.6.0 vytvořen a pushnut
+- [x] 5 commitů pushnuto do origin/main
+
+### Bundle metriky
+- JS bundle: 338.94 kB (gzip: 54.35 kB)
+- CSS bundle: 268.82 kB (gzip: 32.74 kB)
+- CJS bundle: 228.57 kB (gzip: 43.82 kB)
+
+### Poznámky
+- Phase 18-20 kompletně dokončeny
+- Design system je připraven pro integraci do kanoe.cz
+- Další práce: vizuální manuální kontrola v Storybook (volitelně)
