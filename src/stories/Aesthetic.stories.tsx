@@ -912,6 +912,290 @@ export const Guidelines: StoryObj = {
    COMPARISON: BEFORE/AFTER
    ========================================================================== */
 
+/* ==========================================================================
+   SECTION COLOR SYSTEM
+   ========================================================================== */
+
+export const SectionColors: StoryObj = {
+  render: () => (
+    <div style={{ padding: '48px', background: 'var(--color-bg-primary)' }}>
+      <h2
+        className="csk-headline"
+        style={{ fontSize: 'var(--font-size-3xl)', marginBottom: '8px' }}
+      >
+        Section Color System
+      </h2>
+      <p
+        style={{
+          color: 'var(--color-text-secondary)',
+          marginBottom: '32px',
+          maxWidth: '700px',
+        }}
+      >
+        Utility classes that set <code>--section-color</code> CSS custom property for descendant
+        elements. This enables writing section-agnostic CSS that adapts to the current section context.
+      </p>
+
+      {/* Section Demo Cards */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '48px' }}>
+        <div
+          className="csk-section-dv"
+          style={{
+            padding: '24px',
+            borderRadius: '12px',
+            background: 'var(--section-color-light)',
+            border: '2px solid var(--section-color)',
+          }}
+        >
+          <h3 style={{ color: 'var(--section-color)', fontWeight: 700, marginBottom: '8px' }}>
+            .csk-section-dv
+          </h3>
+          <p style={{ fontSize: '14px', color: 'var(--color-text-secondary)', marginBottom: '12px' }}>
+            Divoká voda (Whitewater)
+          </p>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <span
+              style={{
+                padding: '4px 12px',
+                borderRadius: '100px',
+                background: 'var(--section-color)',
+                color: 'white',
+                fontSize: '12px',
+                fontWeight: 600,
+              }}
+            >
+              Badge
+            </span>
+          </div>
+        </div>
+
+        <div
+          className="csk-section-ry"
+          style={{
+            padding: '24px',
+            borderRadius: '12px',
+            background: 'var(--section-color-light)',
+            border: '2px solid var(--section-color)',
+          }}
+        >
+          <h3 style={{ color: 'var(--section-color)', fontWeight: 700, marginBottom: '8px' }}>
+            .csk-section-ry
+          </h3>
+          <p style={{ fontSize: '14px', color: 'var(--color-text-secondary)', marginBottom: '12px' }}>
+            Rychlostní (Sprint)
+          </p>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <span
+              style={{
+                padding: '4px 12px',
+                borderRadius: '100px',
+                background: 'var(--section-color)',
+                color: 'white',
+                fontSize: '12px',
+                fontWeight: 600,
+              }}
+            >
+              Badge
+            </span>
+          </div>
+        </div>
+
+        <div
+          className="csk-section-vt"
+          style={{
+            padding: '24px',
+            borderRadius: '12px',
+            background: 'var(--section-color-light)',
+            border: '2px solid var(--section-color)',
+          }}
+        >
+          <h3 style={{ color: 'var(--section-color)', fontWeight: 700, marginBottom: '8px' }}>
+            .csk-section-vt
+          </h3>
+          <p style={{ fontSize: '14px', color: 'var(--color-text-secondary)', marginBottom: '12px' }}>
+            Vodní turistika (Touring)
+          </p>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <span
+              style={{
+                padding: '4px 12px',
+                borderRadius: '100px',
+                background: 'var(--section-color)',
+                color: 'white',
+                fontSize: '12px',
+                fontWeight: 600,
+              }}
+            >
+              Badge
+            </span>
+          </div>
+        </div>
+
+        <div
+          className="csk-section-federation"
+          style={{
+            padding: '24px',
+            borderRadius: '12px',
+            background: 'var(--section-color-light)',
+            border: '2px solid var(--section-color)',
+          }}
+        >
+          <h3 style={{ color: 'var(--section-color)', fontWeight: 700, marginBottom: '8px' }}>
+            .csk-section-federation
+          </h3>
+          <p style={{ fontSize: '14px', color: 'var(--color-text-secondary)', marginBottom: '12px' }}>
+            ČSK Branding
+          </p>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <span
+              style={{
+                padding: '4px 12px',
+                borderRadius: '100px',
+                background: 'var(--section-color)',
+                color: 'white',
+                fontSize: '12px',
+                fontWeight: 600,
+              }}
+            >
+              Badge
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Available CSS Variables */}
+      <h3 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 700, marginBottom: '16px' }}>
+        Available CSS Variables
+      </h3>
+      <div
+        style={{
+          background: 'var(--color-bg-secondary)',
+          padding: '24px',
+          borderRadius: '8px',
+          fontFamily: 'monospace',
+          fontSize: '14px',
+          lineHeight: 1.8,
+          marginBottom: '48px',
+        }}
+      >
+        <code style={{ display: 'block', color: 'var(--color-primary-600)' }}>--section-color</code>
+        <code style={{ display: 'block', color: 'var(--color-primary-600)' }}>--section-color-light</code>
+        <code style={{ display: 'block', color: 'var(--color-primary-600)' }}>--section-color-dark</code>
+        <code style={{ display: 'block', color: 'var(--color-primary-600)' }}>--section-color-rgb</code>
+        <code style={{ display: 'block', color: 'var(--color-primary-600)' }}>--section-gradient</code>
+      </div>
+
+      {/* Usage Example */}
+      <h3 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 700, marginBottom: '16px' }}>
+        Usage Pattern
+      </h3>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+        <div
+          style={{
+            padding: '20px',
+            background: 'var(--color-error-50)',
+            borderRadius: '8px',
+            border: '1px solid var(--color-error-200)',
+          }}
+        >
+          <h4
+            style={{
+              fontSize: '14px',
+              fontWeight: 600,
+              color: 'var(--color-error-700)',
+              marginBottom: '12px',
+            }}
+          >
+            Before (repeated 3×)
+          </h4>
+          <pre
+            style={{
+              margin: 0,
+              fontSize: '12px',
+              lineHeight: 1.6,
+              whiteSpace: 'pre-wrap',
+              color: 'var(--color-error-800)',
+            }}
+          >
+{`.hero--dv .title { color: var(--color-section-dv); }
+.hero--ry .title { color: var(--color-section-ry); }
+.hero--vt .title { color: var(--color-section-vt); }`}
+          </pre>
+        </div>
+        <div
+          style={{
+            padding: '20px',
+            background: 'var(--color-success-50)',
+            borderRadius: '8px',
+            border: '1px solid var(--color-success-200)',
+          }}
+        >
+          <h4
+            style={{
+              fontSize: '14px',
+              fontWeight: 600,
+              color: 'var(--color-success-700)',
+              marginBottom: '12px',
+            }}
+          >
+            After (single rule)
+          </h4>
+          <pre
+            style={{
+              margin: 0,
+              fontSize: '12px',
+              lineHeight: 1.6,
+              whiteSpace: 'pre-wrap',
+              color: 'var(--color-success-800)',
+            }}
+          >
+{`.title { color: var(--section-color, var(--color-primary)); }`}
+          </pre>
+        </div>
+      </div>
+
+      {/* Hero Section Demo */}
+      <h3 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 700, marginBottom: '16px', marginTop: '48px' }}>
+        Hero Section Demo
+      </h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        {(['dv', 'ry', 'vt', 'federation'] as const).map((section) => (
+          <div
+            key={section}
+            className={`csk-section-${section}`}
+            style={{
+              background: 'var(--section-gradient)',
+              padding: '32px',
+              borderRadius: '12px',
+              color: 'white',
+            }}
+          >
+            <h4 style={{ fontWeight: 700, marginBottom: '4px' }}>
+              {section === 'dv' && 'Mistrovství ČR ve vodním slalomu'}
+              {section === 'ry' && 'Regata Troja - Rychlostní kanoistika'}
+              {section === 'vt' && 'Podzimní sjezd Otavy'}
+              {section === 'federation' && 'Český svaz kanoistů'}
+            </h4>
+            <p style={{ opacity: 0.9, fontSize: '14px' }}>
+              Using <code style={{ background: 'rgba(255,255,255,0.2)', padding: '2px 6px', borderRadius: '4px' }}>
+                .csk-section-{section}
+              </code> wrapper class
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Section Color System utility classes allow writing section-agnostic CSS that adapts based on the parent container class. This reduces CSS duplication by ~70% for section-specific styles.',
+      },
+    },
+  },
+};
+
 export const Comparison: StoryObj = {
   render: () => (
     <div style={{ display: 'flex' }}>

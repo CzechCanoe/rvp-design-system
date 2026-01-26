@@ -419,3 +419,62 @@
   }
 }
 */
+
+/* =============================================================================
+   SECTION COLOR SYSTEM
+
+   Utility classes that set --section-color CSS custom property for descendant
+   elements. This enables writing section-agnostic CSS that adapts to the
+   current section context.
+
+   Usage:
+     <div class="csk-section-dv">
+       <span style="color: var(--section-color)">Blue text</span>
+       <div style="background: var(--section-color-light)">Light blue bg</div>
+     </div>
+
+   Pattern replacement example:
+     BEFORE (repeated 3× for each section):
+       .hero--dv .title { color: var(--color-section-dv); }
+       .hero--ry .title { color: var(--color-section-ry); }
+       .hero--vt .title { color: var(--color-section-vt); }
+
+     AFTER (single rule):
+       .title { color: var(--section-color, var(--color-primary)); }
+   ============================================================================= */
+
+/* Divoka voda (Whitewater) - Blue */
+.csk-section-dv {
+  --section-color: var(--color-section-dv);
+  --section-color-light: var(--color-section-dv-light);
+  --section-color-dark: #1e3a5f;
+  --section-color-rgb: 37, 99, 235;
+  --section-gradient: var(--gradient-section-dv);
+}
+
+/* Rychlostni (Sprint) - Green */
+.csk-section-ry {
+  --section-color: var(--color-section-ry);
+  --section-color-light: var(--color-section-ry-light);
+  --section-color-dark: #14532d;
+  --section-color-rgb: 22, 163, 74;
+  --section-gradient: var(--gradient-section-ry);
+}
+
+/* Vodni turistika (Touring) - Red */
+.csk-section-vt {
+  --section-color: var(--color-section-vt);
+  --section-color-light: var(--color-section-vt-light);
+  --section-color-dark: #7f1d1d;
+  --section-color-rgb: 220, 38, 38;
+  --section-gradient: var(--gradient-section-vt);
+}
+
+/* Federation (generic CSK branding) - Primary brand color */
+.csk-section-federation {
+  --section-color: var(--color-primary-500);
+  --section-color-light: var(--color-primary-100);
+  --section-color-dark: var(--color-primary-700);
+  --section-color-rgb: 17, 118, 166;
+  --section-gradient: var(--gradient-primary);
+}
