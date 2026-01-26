@@ -102,6 +102,14 @@ const sortOptions = [
   { value: 'birthYear', label: 'Rok narození' },
 ];
 
+// Section names for display (constant outside component)
+const sectionNames: Record<string, string> = {
+  all: 'Všechny sekce',
+  dv: 'Divoká voda',
+  ry: 'Rychlostní kanoistika',
+  vt: 'Vodní turistika',
+};
+
 
 // ============================================================================
 // Page Component
@@ -118,14 +126,6 @@ const AthletesListPage = ({
   const [sortBy, setSortBy] = useState<string>('ranking');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
-
-  // Section names for display
-  const sectionNames: Record<string, string> = {
-    all: 'Všechny sekce',
-    dv: 'Divoká voda',
-    ry: 'Rychlostní kanoistika',
-    vt: 'Vodní turistika',
-  };
 
   // Section tabs
   const sectionTabs = [
@@ -202,7 +202,7 @@ const AthletesListPage = ({
       filters.push({ key: 'vtClass', label: `Třída ${vtClassFilter.toUpperCase()}` });
     }
     return filters;
-  }, [sectionFilter, vtClassFilter, sectionNames]);
+  }, [sectionFilter, vtClassFilter]);
 
   const clearFilter = (key: string) => {
     if (key === 'section') setSectionFilter('all');

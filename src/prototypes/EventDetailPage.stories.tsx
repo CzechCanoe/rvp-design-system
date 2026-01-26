@@ -13,7 +13,6 @@ import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
 import { CSKLogo } from '../components/CSKLogo';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import { HeroSection, type HeroSectionMetaItem } from '../components/HeroSection';
-import { DateBadge } from '../components/DateBadge';
 import './EventDetailPage.css';
 
 // ============================================================================

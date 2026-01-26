@@ -265,15 +265,6 @@ const CalendarPage = ({
     { id: 'vt', label: 'Vodní turistika' },
   ];
 
-  // Format date range
-  const formatDateRange = (start: Date, end?: Date) => {
-    const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short' };
-    if (!end || start.getTime() === end.getTime()) {
-      return start.toLocaleDateString('cs-CZ', options);
-    }
-    return `${start.toLocaleDateString('cs-CZ', { day: 'numeric' })}–${end.toLocaleDateString('cs-CZ', options)}`;
-  };
-
   // Handle event click
   const handleEventClick = (event: CalendarEvent) => {
     setSelectedEvent(event);

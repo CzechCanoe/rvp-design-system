@@ -176,6 +176,14 @@ const ClubCard = ({ club, onClick }: ClubCardProps) => {
   );
 };
 
+// Section names for display (constant outside component)
+const sectionNames: Record<string, string> = {
+  all: 'Všechny sekce',
+  dv: 'Divoká voda',
+  ry: 'Rychlostní kanoistika',
+  vt: 'Vodní turistika',
+};
+
 // ============================================================================
 // Page Component
 // ============================================================================
@@ -190,14 +198,6 @@ const ClubsListPage = ({
   const [sortBy, setSortBy] = useState<string>('name');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
-
-  // Section names for display
-  const sectionNames: Record<string, string> = {
-    all: 'Všechny sekce',
-    dv: 'Divoká voda',
-    ry: 'Rychlostní kanoistika',
-    vt: 'Vodní turistika',
-  };
 
   // Section tabs
   const sectionTabs = [
@@ -269,7 +269,7 @@ const ClubsListPage = ({
       filters.push({ key: 'region', label: regionFilter });
     }
     return filters;
-  }, [sectionFilter, regionFilter, sectionNames]);
+  }, [sectionFilter, regionFilter]);
 
   const clearFilter = (key: string) => {
     if (key === 'section') setSectionFilter('all');
