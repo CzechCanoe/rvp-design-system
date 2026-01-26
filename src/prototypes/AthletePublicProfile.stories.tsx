@@ -6,6 +6,8 @@ import { Button } from '../components/Button';
 import { Card } from '../components/Card';
 import { Icon } from '../components/Icon';
 import { StatsBar, type StatsBarItem } from '../components/StatsBar';
+import { HeroSection, HeroActionButton } from '../components/HeroSection';
+import { ResultItem } from '../components/ResultItem';
 import { CSKLogo } from '../components/CSKLogo';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import './AthletePublicProfile.css';
@@ -226,12 +228,6 @@ function getInitials(name: string): string {
   return (words[0].charAt(0) + words[words.length - 1].charAt(0)).toUpperCase();
 }
 
-function getRankClass(rank: number): string {
-  if (rank === 1) return 'athlete-result-card__rank--1';
-  if (rank === 2) return 'athlete-result-card__rank--2';
-  if (rank === 3) return 'athlete-result-card__rank--3';
-  return 'athlete-result-card__rank--other';
-}
 
 // ============================================================================
 // AthletePublicProfile Component
@@ -257,9 +253,6 @@ function AthletePublicProfile({
 
   // Use action photo for hero background, fall back to portrait if not available
   const heroBackgroundUrl = athlete.actionImageUrl || athlete.imageUrl;
-  const heroBackgroundStyle = showBackgroundImage && heroBackgroundUrl
-    ? { backgroundImage: `url(${heroBackgroundUrl})` }
-    : { background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)' };
 
   // Render header based on variant
   const renderHeader = () => {
@@ -319,85 +312,41 @@ function AthletePublicProfile({
       {/* Header */}
       {renderHeader()}
 
-      {/* Hero Section */}
-      <section className={`athlete-hero athlete-hero--${section}`}>
-        <div className="athlete-hero__background">
-          <div
-            className="athlete-hero__image"
-            style={heroBackgroundStyle}
-          />
-          <div className="athlete-hero__gradient" />
-          <div className="athlete-hero__pattern" />
-        </div>
-
-        <div className="athlete-hero__content">
-          {/* Avatar */}
-          <div className="athlete-hero__avatar">
-            <div className="athlete-hero__avatar-ring">
-              {athlete.imageUrl ? (
-                <img
-                  src={athlete.imageUrl}
-                  alt={athlete.name}
-                  className="athlete-hero__avatar-img"
-                />
-              ) : (
-                <div className="athlete-hero__avatar-initials">
-                  {getInitials(athlete.name)}
-                </div>
-              )}
-            </div>
-            {athlete.ranking <= 3 && (
-              <div className={`athlete-hero__rank-badge athlete-hero__rank-badge--${athlete.ranking}`}>
-                #{athlete.ranking}
-              </div>
-            )}
-          </div>
-
-          {/* Info */}
-          <div className="athlete-hero__info">
-            <h1 className="athlete-hero__name">{athlete.name}</h1>
-            <div className="athlete-hero__subtitle">
-              <span className="athlete-hero__country" title={athlete.country}>
-                <span className="athlete-hero__country-flag">{athlete.countryFlag}</span>
-              </span>
-              <div className="athlete-hero__badges">
-                <Badge section={section} size="lg">
-                  {getSectionName(section)}
-                </Badge>
-                <Badge vtClass={athlete.vtClass} size="lg">
-                  {getVtClassName(athlete.vtClass)}
-                </Badge>
-                <Badge outlined size="lg">{athlete.vtPoints} bodů</Badge>
-              </div>
-            </div>
-            <div className="athlete-hero__meta">
-              <div className="athlete-hero__meta-item">
-                <span className="athlete-hero__meta-label">Klub</span>
-                <span className="athlete-hero__meta-value">{athlete.club}</span>
-              </div>
-              <div className="athlete-hero__meta-item">
-                <span className="athlete-hero__meta-label">Ročník</span>
-                <span className="athlete-hero__meta-value">*{athlete.birthYear}</span>
-              </div>
-              <div className="athlete-hero__meta-item">
-                <span className="athlete-hero__meta-label">ID</span>
-                <span className="athlete-hero__meta-value">{athlete.id}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Actions */}
-          <div className="athlete-hero__actions">
-            <Button variant="secondary" size="md">
-              <Icon name="share" size="sm" /> Sdílet
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Banner - using StatsBar component */}
-      <div className="athlete-stats-banner">
-        <div className="athlete-stats-banner__container">
+      {/* Hero Section - using DS component */}
+      <HeroSection
+        variant="full"
+        section={section}
+        title={athlete.name}
+        subtitle={
+          <>
+            <span className="athlete-hero__country" title={athlete.country}>
+              <span className="athlete-hero__country-flag">{athlete.countryFlag}</span>
+            </span>
+          </>
+        }
+        avatarSrc={athlete.imageUrl}
+        avatarInitials={getInitials(athlete.name)}
+        backgroundImage={showBackgroundImage ? heroBackgroundUrl : undefined}
+        badges={
+          <>
+            <Badge section={section} size="lg">
+              {getSectionName(section)}
+            </Badge>
+            <Badge vtClass={athlete.vtClass} size="lg">
+              {getVtClassName(athlete.vtClass)}
+            </Badge>
+            <Badge outlined size="lg">{athlete.vtPoints} bodů</Badge>
+          </>
+        }
+        metadata={[
+          { key: 'club', label: 'Klub', value: athlete.club },
+          { key: 'birth', label: 'Ročník', value: `*${athlete.birthYear}` },
+          { key: 'id', label: 'ID', value: athlete.id },
+        ]}
+        actions={
+          <HeroActionButton label="Sdílet" icon="share" />
+        }
+        floatingContent={
           <StatsBar
             variant="floating"
             size="lg"
@@ -408,8 +357,9 @@ function AthletePublicProfile({
               { key: 'world', icon: 'globe', value: athlete.stats.worldRanking ? `#${athlete.stats.worldRanking}` : '-', label: 'Svět. žebříček' },
             ] satisfies StatsBarItem[]}
           />
-        </div>
-      </div>
+        }
+        wave
+      />
 
       {/* Main Content */}
       <main className="athlete-main">
@@ -441,7 +391,7 @@ function AthletePublicProfile({
             </div>
           </section>
 
-          {/* Recent Results */}
+          {/* Recent Results - using DS ResultItem component */}
           <section className="athlete-section">
             <div className="athlete-section__header">
               <div>
@@ -450,53 +400,27 @@ function AthletePublicProfile({
               </div>
               <Button variant="ghost">Zobrazit všechny</Button>
             </div>
-            <div className="athlete-results-timeline">
-              {athlete.recentResults.map((result, index) => (
-                <article
+            <div className="athlete-results-list">
+              {athlete.recentResults.map((result) => (
+                <ResultItem
                   key={result.id}
-                  className={`athlete-result-item ${getRankClass(result.rank)}`}
-                  style={{ '--delay': `${index * 0.05}s` } as React.CSSProperties}
-                >
-                  {/* Rank medallion */}
-                  <div className="athlete-result-item__rank-wrapper">
-                    <div className={`athlete-result-item__rank ${getRankClass(result.rank)}`}>
-                      <span className="athlete-result-item__rank-number">{result.rank}</span>
-                      {result.rank <= 3 && <span className="athlete-result-item__rank-medal" />}
-                    </div>
-                    {index < athlete.recentResults.length - 1 && (
-                      <div className="athlete-result-item__connector" />
-                    )}
-                  </div>
-
-                  {/* Result content */}
-                  <div className="athlete-result-item__content">
-                    <div className="athlete-result-item__header">
-                      <h3 className="athlete-result-item__race">{result.race}</h3>
-                      <Badge variant="default" size="sm">{result.category}</Badge>
-                    </div>
-                    <div className="athlete-result-item__details">
-                      <span className="athlete-result-item__location">
-                        <Icon name="map-pin" size="sm" />
-                        {result.location}
-                      </span>
-                      <span className="athlete-result-item__date">
-                        <Icon name="calendar" size="sm" />
-                        {formatDate(result.date)}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Time display - hero element */}
-                  <div className="athlete-result-item__time-block">
-                    <span className="athlete-result-item__time">{result.time}</span>
-                    <span className="athlete-result-item__time-label">čas</span>
-                  </div>
-
-                  {/* Arrow indicator */}
-                  <div className="athlete-result-item__arrow">
-                    <Icon name="chevron-right" size="sm" />
-                  </div>
-                </article>
+                  rank={result.rank}
+                  title={result.race}
+                  subtitle={result.category}
+                  meta={
+                    <>
+                      <Icon name="map-pin" size="sm" /> {result.location}
+                      <span style={{ margin: '0 0.5rem' }}>•</span>
+                      <Icon name="calendar" size="sm" /> {formatDate(result.date)}
+                    </>
+                  }
+                  trailing={
+                    <span className="athlete-result-time">{result.time}</span>
+                  }
+                  variant="detailed"
+                  section={section}
+                  onClick={() => {}}
+                />
               ))}
             </div>
           </section>

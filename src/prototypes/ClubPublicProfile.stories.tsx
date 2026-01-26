@@ -7,6 +7,7 @@ import { Tabs } from '../components/Tabs';
 import { Avatar } from '../components/Avatar';
 import { Icon } from '../components/Icon';
 import { StatsBar } from '../components/StatsBar';
+import { HeroSection, HeroActionButton } from '../components/HeroSection';
 import { CSKLogo } from '../components/CSKLogo';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import './ClubPublicProfile.css';
@@ -187,66 +188,32 @@ function ClubPublicProfile({
       {/* Header */}
       {renderHeader()}
 
-      {/* Hero Section */}
-      <section className="club-hero">
-        <div className="club-hero__background">
-          <div className="club-hero__gradient" />
-          <div className="club-hero__pattern" />
-        </div>
-
-        <div className="club-hero__content">
-          {/* Logo/Avatar */}
-          <div className="club-hero__logo">
-            <div className="club-hero__logo-ring">
-              {club.logoUrl ? (
-                <img
-                  src={club.logoUrl}
-                  alt={club.name}
-                  className="club-hero__logo-img"
-                />
-              ) : (
-                <div className="club-hero__logo-initials">
-                  {club.code}
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Info */}
-          <div className="club-hero__info">
-            <h1 className="club-hero__name">{club.shortName}</h1>
-            <p className="club-hero__fullname">{club.name}</p>
-            <div className="club-hero__badges">
-              {club.sections.map(section => (
-                <Badge key={section} section={section} size="lg">
-                  {getSectionName(section)}
-                </Badge>
-              ))}
-            </div>
-            <div className="club-hero__meta">
-              <div className="club-hero__meta-item">
-                <Icon name="map-pin" size="sm" />
-                <span>{club.city}, {club.region}</span>
-              </div>
-              <div className="club-hero__meta-item">
-                <Icon name="calendar" size="sm" />
-                <span>Založeno {club.founded}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Actions */}
-          <div className="club-hero__actions">
-            <Button variant="secondary" size="md">
-              <Icon name="share" size="sm" /> Sdílet
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Banner */}
-      <div className="club-stats-banner">
-        <div className="club-stats-banner__container">
+      {/* Hero Section - using DS component */}
+      <HeroSection
+        variant="compact"
+        section="generic"
+        title={club.shortName}
+        subtitle={club.name}
+        avatarSrc={club.logoUrl || undefined}
+        avatarInitials={club.code}
+        avatarShape="rounded"
+        badges={
+          <>
+            {club.sections.map(section => (
+              <Badge key={section} section={section} size="lg">
+                {getSectionName(section)}
+              </Badge>
+            ))}
+          </>
+        }
+        metadata={[
+          { key: 'location', label: 'Lokalita', value: `${club.city}, ${club.region}`, icon: 'map-pin' },
+          { key: 'founded', label: 'Založeno', value: club.founded, icon: 'calendar' },
+        ]}
+        actions={
+          <HeroActionButton label="Sdílet" icon="share" />
+        }
+        floatingContent={
           <StatsBar
             variant="floating"
             size="lg"
@@ -257,8 +224,9 @@ function ClubPublicProfile({
               { key: 'juniors', icon: 'user', value: club.stats.juniors, label: 'Juniorů' },
             ]}
           />
-        </div>
-      </div>
+        }
+        wave
+      />
 
       {/* Main Content */}
       <main className="club-main">

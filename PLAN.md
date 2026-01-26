@@ -33,56 +33,31 @@
 
 ### Pořadí implementace
 
-| # | Prototype | CSS před→po | Hlavní změny |
-|---|-----------|-------------|--------------|
-| 1 | **ClubPublicProfile** | 787→200 | `.club-hero`→HeroSection, member cards→ListItem |
-| 2 | **RegistrationPage** | 1772→400 | custom wizard→Wizard komponenta |
-| 3 | **DashboardPage** | 1413→350 | stat cards→StatCard, alerts→ListItem, actions→ActionCard |
-| 4 | **AthletePublicProfile** | 1264→300 | hero+image→HeroSection, medals→StatCard, results→ResultItem |
-| 5 | **ResultsPage** | 810→250 | Card header→HeroSection |
-| 6 | **EventDetailPage** | 1256→300 | hero→HeroSection, DateBadge |
-| 7 | **ProfilePage** | 1749→400 | hero→HeroSection, achievements→StatCard, activity→ListItem |
-| 8 | **CalendarPage** | 347→250 | optional DateBadge |
-| 9 | **LivePage** | 2778→1500 | hero→HeroSection (modály ponechat) |
+| # | Prototype | CSS před→po | Hlavní změny | Status |
+|---|-----------|-------------|--------------|--------|
+| 1 | **ClubPublicProfile** | 787→466 | `.club-hero`→HeroSection | ✅ |
+| 2 | **RegistrationPage** | 1772→400 | custom wizard→Wizard komponenta | |
+| 3 | **DashboardPage** | 1413→350 | stat cards→StatCard, alerts→ListItem, actions→ActionCard | |
+| 4 | **AthletePublicProfile** | 1265→322 | hero→HeroSection, results→ResultItem | ✅ |
+| 5 | **ResultsPage** | 810→250 | Card header→HeroSection | |
+| 6 | **EventDetailPage** | 1256→300 | hero→HeroSection, DateBadge | |
+| 7 | **ProfilePage** | 1749→400 | hero→HeroSection, achievements→StatCard, activity→ListItem | |
+| 8 | **CalendarPage** | 347→250 | optional DateBadge | |
+| 9 | **LivePage** | 2778→1500 | hero→HeroSection (modály ponechat) | |
 
-**Celkem:** 12176 → ~3950 řádků CSS (-67%)
+**Aktuální progress:** 2052→788 řádků CSS pro dokončené prototypy
 
 ---
 
-### 23.1 ClubPublicProfile
+### 23.1 ClubPublicProfile ✅
 
-```tsx
-// PŘED: custom .club-hero (~240 řádků)
-// PO:
-<HeroSection
-  section="generic"
-  variant="compact"
-  title={club.shortName}
-  subtitle={club.fullName}
-  avatarSrc={club.logoUrl}
-  avatarShape="rounded"
-  metadata={[
-    { key: 'founded', label: 'Založen', value: club.foundedYear, icon: 'calendar' },
-    { key: 'members', label: 'Členů', value: club.membersCount, icon: 'users' },
-  ]}
-  wave
-/>
-
-// Members: custom card → ListItem
-{members.map(m => (
-  <ListItem
-    icon={<Avatar src={m.photo} />}
-    title={m.name}
-    description={m.category}
-  />
-))}
-```
+**Dokončeno:** CSS 787→466 řádků (-41%)
 
 **Kroky:**
-- [ ] `.club-hero` → `<HeroSection>`
-- [ ] `.club-member-card` → `<ListItem>`
-- [ ] Smazat VISUAL STYLES sekci
-- [ ] Update snapshots
+- [x] `.club-hero` → `<HeroSection>`
+- [x] Member cards ponechány (ListItem není vhodný pro komplexní athlete karty)
+- [x] Smazána hero VISUAL STYLES sekce
+- [x] Update snapshots
 
 ---
 
@@ -137,31 +112,16 @@
 
 ---
 
-### 23.4 AthletePublicProfile
+### 23.4 AthletePublicProfile ✅
 
-```tsx
-// PŘED: custom hero s background image, medal cards, result items
-// PO:
-<HeroSection
-  section={athlete.section}
-  variant="full"
-  title={athlete.name}
-  backgroundImage={athlete.actionPhotoUrl}
-  wave
-/>
-
-<StatCard colorVariant="medal-gold" icon={<Icon name="trophy" />} value="3" label="Zlato" />
-
-{results.map(r => (
-  <ResultItem rank={r.rank} title={r.raceName} section={r.section} />
-))}
-```
+**Dokončeno:** CSS 1265→322 řádků (-75%)
 
 **Kroky:**
-- [ ] `.athlete-hero` → `<HeroSection variant="full" backgroundImage>`
-- [ ] `.athlete-stat-card--medal-*` → `<StatCard colorVariant="medal-*">`
-- [ ] `.athlete-result-item` → `<ResultItem>`
-- [ ] Update snapshots
+- [x] `.athlete-hero` → `<HeroSection variant="full" backgroundImage>`
+- [x] StatsBar již používá DS komponentu
+- [x] `.athlete-result-item` → `<ResultItem>`
+- [x] Highlight karty ponechány (žádná DS komponenta)
+- [x] Update snapshots
 
 ---
 
