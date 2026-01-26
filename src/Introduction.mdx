@@ -5,32 +5,60 @@ import { Meta } from '@storybook/blocks';
 
 # CSK RVP Design System
 
-Design systém pro registrační a výsledkový servis **Českého svazu kanoistů**.
-
-## Účel
-
-Tento design systém slouží jako sjednocující knihovna pro veřejné a komunitní sekce webových stránek:
-
-- **Kalendář závodů** - přehled a filtrování závodů
-- **Výsledkový portál** - archiv výsledků
-- **Live výsledky** - real-time sledování závodů
-- **Přihlašovací systém** - registrace na závody
-- **Veřejné profily** - závodníci a kluby
-- **Správa členství** - členská základna
-
-## Design principy
-
-- **Mobile-first** - optimalizace pro mobilní zařízení
-- **WCAG 2.1 AA** - přístupnost pro všechny uživatele
-- **Dual personality** - utilitární pro backoffice, expressive pro veřejné části
-- **Dark/Light mode** - podpora obou barevných režimů
-
-## Technický stack
-
-- React 18+ s TypeScript (strict mode)
-- Vite pro build
-- Storybook 8 pro dokumentaci
+Design systém pro registrační a výsledkový portál **Českého svazu kanoistů**.
 
 ---
+
+## Co zde najdete
+
+### Prototypes (celé stránky)
+
+Ukázky kompletních stránek - kalendář, výsledky, profily závodníků atd.
+
+**Každý prototyp má dvě varianty:**
+
+| Varianta | Kdy se používá |
+|----------|----------------|
+| **Embed** | Komponenta vložená do stránky kanoe.cz |
+| **Satellite** | Samostatná aplikace (např. zavody.kanoe.cz) |
+
+→ **Embed** = bez vlastního headeru, sedí do kanoe.cz
+→ **Satellite** = má vlastní header s logem ČSK
+
+### Components (jednotlivé prvky)
+
+Tlačítka, karty, tabulky, formuláře a další stavební bloky.
+
+---
+
+## Ovládání v toolbaru
+
+Vpravo nahoře najdete přepínače:
+
+| Ikona | Co dělá |
+|-------|---------|
+| 🌙/☀️ **Theme** | Světlý / Tmavý režim |
+| 📦 **Mode** | Utility (kompaktní) / Expressive (prostornější) / Embed (pro kanoe.cz) |
+
+### Poznámka k tmavému režimu
+
+**Pro Embed varianty používejte vždy světlý režim.** Tmavý režim je určen pouze pro budoucí samostatné aplikace - na kanoe.cz by vizuálně neseděl.
+
+---
+
+## Jak začít
+
+1. Klikněte na **Prototypes** v levém menu - uvidíte ukázky celých stránek
+2. Prozkoumejte **Components** - jednotlivé UI prvky s dokumentací
+3. Použijte přepínač Embed/Satellite pro zobrazení různých variant
+
+---
+
+## Technické info
+
+- React 18+ s TypeScript
+- CSS custom properties (tokeny)
+- Podpora light/dark theme
+- Mobile-first design
 
 *Verze: 0.1.0*
