@@ -12,8 +12,199 @@
 | 19 (Optimization) | ✅ Hotovo |
 | 20 (Publikace) | ✅ Hotovo |
 | 21 (Post-release Polish) | ✅ Hotovo |
+| **22 (CSS Consolidation)** | 🔄 **Aktivní** |
 
-**Projekt je dokončen a připraven k použití.**
+**Aktivní fáze: 22 - Konsolidace CSS z prototypů do DS komponent**
+
+---
+
+## Fáze 22: CSS Consolidation
+
+### Cíl
+Redukce ~3750 řádků duplicitního CSS v prototypech přesunem opakujících se vzorů do DS komponent.
+
+### Analýza (dokončena)
+
+| Soubor | Řádků CSS | Poznámka |
+|--------|-----------|----------|
+| LivePage.css | 2 779 | Největší - modály, animace |
+| ProfilePage.css | 1 750 | Hero, achievements |
+| RegistrationPage.css | 1 773 | Wizard, formuláře |
+| DashboardPage.css | 1 414 | Stats, alerts |
+| AthletePublicProfile.css | 1 265 | Hero, timeline |
+| EventDetailPage.css | 1 257 | Hero, tabs |
+| ResultsPage.css | 811 | Podium |
+| ClubPublicProfile.css | 788 | Hero, members |
+| CalendarPage.css | 348 | Layout-only |
+| **Celkem** | **~12 185** | |
+
+### Kroky
+
+#### 22.1 Visual Regression Setup
+- [ ] Nainstalovat `@storybook/test-runner` + `playwright`
+- [ ] Vytvořit baseline screenshots pro všechny prototypy (všechny varianty)
+- [ ] Nastavit CI job pro vizuální porovnání
+- [ ] Dokumentovat postup v `tests/visual/README.md`
+
+**Příkazy:**
+```bash
+npm install -D @storybook/test-runner playwright
+npx playwright install chromium
+```
+
+**Baseline prototypy k zachycení:**
+- CalendarPage (utility, expressive, embed, satellite, aesthetic × light/dark)
+- EventDetailPage (dv/ry/vt × utility/expressive/embed/aesthetic × light/dark)
+- LivePage (dv/ry/vt × utility/aesthetic × light/dark)
+- ResultsPage (dv/ry/vt × utility/aesthetic × light/dark)
+- AthletePublicProfile (dv/ry/vt × utility/embed/aesthetic × light/dark)
+- ClubPublicProfile (utility/embed/aesthetic × light/dark)
+- ProfilePage (dv/ry/vt × utility/satellite/aesthetic × light/dark)
+- RegistrationPage (dv/ry/vt × utility/satellite/aesthetic × light/dark)
+- DashboardPage (dv/ry/vt/federation × utility/satellite/embed/aesthetic × light/dark)
+
+#### 22.2 Section Color System
+- [ ] Přidat `--section-color` CSS custom property pattern do `tokens/colors.css`
+- [ ] Vytvořit utility classes `.csk-section-dv`, `.csk-section-ry`, `.csk-section-vt`
+- [ ] Dokumentovat v Storybook (Colors story)
+- [ ] Srovnat screenshots (žádná vizuální změna)
+
+**Implementace:**
+```css
+/* tokens/colors.css */
+.csk-section-dv { --section-color: var(--color-section-dv); --section-color-light: ...; --section-color-dark: ...; }
+.csk-section-ry { --section-color: var(--color-section-ry); ... }
+.csk-section-vt { --section-color: var(--color-section-vt); ... }
+```
+
+#### 22.3 HeroSection Component Enhancement
+- [ ] Rozšířit existující `HeroSection` o:
+  - `section` prop pro automatické gradients (dv/ry/vt/federation)
+  - `backgroundImage` prop s automatickým overlay
+  - `wave` prop pro tvarový divider
+  - Pattern overlay (radial gradients)
+- [ ] Přidat varianty: `variant="gradient" | "image" | "minimal"`
+- [ ] Přidat `HeroSection.stories.tsx` s všemi variantami
+- [ ] Srovnat screenshots
+
+**Úspora:** ~1750 řádků (hero-related CSS z 7 prototypů)
+
+#### 22.4 StatCard Variants
+- [ ] Přidat varianty do `StatCard`:
+  - `variant="medal-gold" | "medal-silver" | "medal-bronze"`
+  - `variant="gradient-primary" | "gradient-success" | "gradient-warning" | "gradient-info"`
+  - `iconBackground="gradient"` prop
+- [ ] Přidat sparkline slot
+- [ ] Aktualizovat stories
+- [ ] Srovnat screenshots
+
+**Úspora:** ~400 řádků
+
+#### 22.5 ResultItem / TimelineItem Component
+- [ ] Vytvořit novou komponentu `ResultItem`:
+  - `rank` prop s automatickým medal stylingem (1-3)
+  - `variant="default" | "compact" | "detailed"`
+  - Border-left accent podle ranku
+  - Hover efekty
+- [ ] Přidat `ResultItem.stories.tsx`
+- [ ] Srovnat screenshots
+
+**Úspora:** ~300 řádků
+
+#### 22.6 ListItem Component
+- [ ] Vytvořit novou komponentu `ListItem`:
+  - `variant="alert" | "activity" | "feed"`
+  - `type="warning" | "danger" | "info" | "success" | "energy"`
+  - Icon container s gradient pozadím
+  - Divider support
+- [ ] Přidat `ListItem.stories.tsx`
+- [ ] Srovnat screenshots
+
+**Úspora:** ~250 řádků
+
+#### 22.7 Wizard / Stepper Component
+- [ ] Vytvořit novou komponentu `Wizard`:
+  - `steps` array prop
+  - `activeStep` prop
+  - `completedSteps` prop
+  - Connector lines mezi kroky
+  - Responsive (ikonky only na mobilu)
+- [ ] Přidat `Wizard.stories.tsx`
+- [ ] Srovnat screenshots
+
+**Úspora:** ~200 řádků
+
+#### 22.8 ActionCard Component
+- [ ] Vytvořit novou komponentu `ActionCard`:
+  - Icon + title + description + arrow layout
+  - Hover efekt (translateX)
+  - `href` nebo `onClick` prop
+- [ ] Přidat `ActionCard.stories.tsx`
+- [ ] Srovnat screenshots
+
+**Úspora:** ~150 řádků
+
+#### 22.9 DateBadge Component
+- [ ] Vytvořit novou komponentu `DateBadge`:
+  - `date` prop (Date object)
+  - `section` prop pro barevnou variantu
+  - `size="sm" | "md" | "lg"`
+- [ ] Přidat `DateBadge.stories.tsx`
+- [ ] Srovnat screenshots
+
+**Úspora:** ~100 řádků
+
+#### 22.10 Prototype Adoption - Batch 1 (Calendar, Results)
+- [ ] CalendarPage: Adoptovat DateBadge
+- [ ] ResultsPage: Adoptovat HeroSection, ResultItem
+- [ ] Smazat nahrazený CSS kód
+- [ ] Srovnat screenshots - **musí být pixel-perfect**
+
+#### 22.11 Prototype Adoption - Batch 2 (Profiles)
+- [ ] AthletePublicProfile: HeroSection, StatCard variants, ResultItem
+- [ ] ClubPublicProfile: HeroSection, StatCard variants, ListItem
+- [ ] ProfilePage: HeroSection, StatCard variants
+- [ ] Smazat nahrazený CSS kód
+- [ ] Srovnat screenshots
+
+#### 22.12 Prototype Adoption - Batch 3 (Dashboard, Registration)
+- [ ] DashboardPage: HeroSection, StatCard variants, ListItem, ActionCard
+- [ ] RegistrationPage: HeroSection, Wizard
+- [ ] Smazat nahrazený CSS kód
+- [ ] Srovnat screenshots
+
+#### 22.13 Prototype Adoption - Batch 4 (Live, Event)
+- [ ] LivePage: HeroSection, StatCard variants, ListItem
+- [ ] EventDetailPage: HeroSection, StatCard variants
+- [ ] Smazat nahrazený CSS kód
+- [ ] Srovnat screenshots
+
+#### 22.14 Final Cleanup
+- [ ] Audit všech prototype CSS souborů - odstranit mrtvý kód
+- [ ] Aktualizovat bundle size metriky
+- [ ] Finální visual regression test - full suite
+- [ ] Aktualizovat dokumentaci
+
+### Metriky úspěchu
+
+| Metrika | Před | Cíl |
+|---------|------|-----|
+| Prototype CSS řádků | 12 185 | < 8 500 |
+| Nové komponenty | 0 | 6 |
+| Rozšířené komponenty | 0 | 2 |
+| Visual regressions | N/A | 0 |
+
+### Rizika a mitigace
+
+| Riziko | Pravděpodobnost | Mitigace |
+|--------|-----------------|----------|
+| Vizuální rozdíly po refaktoru | Střední | Pixel-perfect visual regression testing |
+| Příliš generické komponenty | Nízká | Začít specificky, generalizovat postupně |
+| Breaking changes v props | Střední | Zachovat zpětnou kompatibilitu, deprecation warnings |
+
+### Další krok
+
+**Začít s 22.1 Visual Regression Setup** - bez baseline screenshots nelze bezpečně refaktorovat.
 
 ---
 
@@ -108,10 +299,12 @@ src/
 
 ## Další rozvoj (budoucí fáze)
 
-Projekt je v produkčním stavu. Možné budoucí rozšíření:
+### Aktivní: Fáze 22 - CSS Consolidation
+Viz detailní plán výše.
 
-1. **NPM publikace** - Balíček pro použití v jiných projektech
-2. **Další prototypy** - Nové stránky podle potřeb ČSK
-3. **Accessibility audit** - WCAG 2.1 AA compliance
-4. **Performance optimization** - CSS purge, lazy loading
-5. **Dokumentace** - Rozšířené guidelines pro vývojáře
+### Budoucí rozšíření:
+
+1. **Fáze 23: NPM publikace** - Balíček pro použití v jiných projektech
+2. **Fáze 24: Accessibility audit** - WCAG 2.1 AA compliance
+3. **Fáze 25: Performance optimization** - CSS purge, lazy loading
+4. **Fáze 26: Další prototypy** - Nové stránky podle potřeb ČSK
