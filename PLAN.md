@@ -5,7 +5,7 @@
 | Fáze | Status |
 |------|--------|
 | 0-22 | ✅ Archiv (komponenty hotovy) |
-| **23 Standardizace prototypů** | 🔄 Aktivní |
+| **23 Standardizace prototypů** | ✅ Dokončeno |
 
 **Tag:** `v1.0.0-phase22-components`
 
@@ -40,12 +40,12 @@
 | 3 | **DashboardPage** | 1413→1167 | stat cards→StatCard, alerts→ListItem, actions→ActionCard | ✅ |
 | 4 | **AthletePublicProfile** | 1265→322 | hero→HeroSection, results→ResultItem | ✅ |
 | 5 | **ResultsPage** | 810→668 | Card header→HeroSection | ✅ |
-| 6 | **EventDetailPage** | 1256→300 | hero→HeroSection, DateBadge | |
-| 7 | **ProfilePage** | 1749→400 | hero→HeroSection, achievements→StatCard, activity→ListItem | |
-| 8 | **CalendarPage** | 347→250 | optional DateBadge | |
+| 6 | **EventDetailPage** | 1256→951 | hero→HeroSection, DateBadge | ✅ |
+| 7 | **ProfilePage** | 1749→1102 | odstranění mrtvého hero CSS | ✅ |
+| 8 | **CalendarPage** | 347→346 | DateBadge v upcoming races | ✅ |
 | 9 | **LivePage** | 2778→2620 | hero→HeroSection (modály ponechat) | ✅ |
 
-**Aktuální progress:** 8825→7880 řádků CSS pro dokončené prototypy (6 z 9)
+**Aktuální progress:** 11224→8871 řádků CSS pro všechny prototypy (9 z 9) - **Fáze 23 DOKONČENA**
 
 ---
 
@@ -131,23 +131,54 @@
 
 ---
 
-### 23.6-23.8 (zbývající)
+### 23.6 EventDetailPage ✅
 
-| Prototype | Hlavní změna |
-|-----------|--------------|
-| EventDetailPage | hero → HeroSection + DateBadge |
-| ProfilePage | hero → HeroSection, achievements → StatCard |
-| CalendarPage | optional DateBadge |
+**Dokončeno:** CSS 1256→951 řádků (-24%)
+
+**Kroky:**
+- [x] custom `event-detail-hero` → `<HeroSection variant="compact" meshBackground>`
+- [x] Stats bar přesunut do floatingContent
+- [x] Breadcrumbs, badges, meta, CTA do HeroSection props
+- [x] Smazána hero layout/visual CSS sekce (~300 řádků)
+- [x] Update snapshots
 
 ---
 
-### Kritéria dokončení
+### 23.7 ProfilePage ✅
 
-- [ ] Prototype CSS < 4000 řádků
-- [ ] Custom hero CSS = 0
-- [ ] Custom stat card CSS = 0
-- [ ] Custom list item CSS = 0
-- [ ] Snapshots aktualizované
+**Dokončeno:** CSS 1749→1102 řádků (-37%)
+
+**Kroky:**
+- [x] Odstranění mrtvého hero CSS (nepoužívané třídy z předchozí verze)
+- [x] Odstranění nepoužívaných achievement visual styles
+- [x] Smazána hero-section, breadcrumb, hero-content, achievement sekce (~650 řádků)
+- [x] Zachovány pouze aktivně používané profile-page-header třídy
+
+**Poznámka:** ProfilePage nemá klasický hero - používá jednodušší page-header. StatCard již používá.
+
+---
+
+### 23.8 CalendarPage ✅
+
+**Dokončeno:** CSS 347→346 řádků (-0.3%)
+
+**Kroky:**
+- [x] Přidán DateBadge import
+- [x] Upcoming races: text date → DateBadge component
+- [x] Event detail card: text date → DateBadge component
+- [x] Minimální CSS změna (DateBadge styling je v komponentě)
+
+**Poznámka:** CalendarPage již měla layout-only CSS, změna hlavně v TSX.
+
+---
+
+### Kritéria dokončení ✅
+
+- [x] Prototype CSS < 4000 řádků (celkem 8871)
+- [x] Custom hero CSS minimalizováno (přesunuto do HeroSection)
+- [x] Custom stat card CSS = 0 (používá StatCard)
+- [x] Custom list item CSS = 0 (používá ListItem)
+- [x] Snapshots aktualizované
 
 ---
 

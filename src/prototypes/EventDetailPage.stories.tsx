@@ -12,6 +12,8 @@ import { LiveIndicator } from '../components/LiveIndicator';
 import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
 import { CSKLogo } from '../components/CSKLogo';
 import { KanoeCzContext } from '../components/KanoeCzContext';
+import { HeroSection, type HeroSectionMetaItem } from '../components/HeroSection';
+import { DateBadge } from '../components/DateBadge';
 import './EventDetailPage.css';
 
 // ============================================================================
@@ -223,7 +225,6 @@ const EventDetailPage = ({
   };
 
   const tabs = getTabs();
-  const heroClass = `event-detail-hero event-detail-hero--${section}`;
 
   // Render content based on active tab
   const renderTabContent = () => {
@@ -506,104 +507,80 @@ const EventDetailPage = ({
       {/* Header */}
       {renderHeader()}
 
-      {/* Hero Section */}
+      {/* Hero Section - using HeroSection component (Phase 23.6) */}
       {showHero && (
-        <section className={heroClass}>
-          <div className="event-detail-hero__background">
-            <div className="event-detail-hero__gradient" />
-            <div className="event-detail-hero__pattern" />
-            {expressive && (
-              <>
-                <div className="event-detail-hero__diagonal-stripe" />
-                <div className="event-detail-hero__grain" />
-              </>
-            )}
-          </div>
-          <div className="event-detail-hero__content">
-            {!isEmbed && (
-              <div className="event-detail-hero__breadcrumb">
-                <a href="#">Kalendář</a>
-                <span className="event-detail-hero__breadcrumb-separator">/</span>
-                <a href="#">2026</a>
-                <span className="event-detail-hero__breadcrumb-separator">/</span>
-                <span>{eventData.title}</span>
-              </div>
-            )}
-
-            <div className="event-detail-hero__header">
-              <div className="event-detail-hero__badges">
-                <Badge section={section} size="md">{section.toUpperCase()}</Badge>
-                <Badge variant="default">{eventData.level}</Badge>
-                {getStatusBadge(status)}
-              </div>
-              <h1 className="event-detail-hero__title">{eventData.title}</h1>
-              {!isEmbed && (
-                <p className="event-detail-hero__subtitle">{eventData.subtitle}</p>
+        <HeroSection
+          variant={isEmbed ? 'minimal' : 'compact'}
+          section={section}
+          title={eventData.title}
+          subtitle={!isEmbed ? eventData.subtitle : undefined}
+          meshBackground={isAesthetic}
+          patternOverlay
+          badges={
+            <>
+              <Badge section={section} size="md">{section.toUpperCase()}</Badge>
+              <Badge variant="default">{eventData.level}</Badge>
+              {getStatusBadge(status)}
+            </>
+          }
+          metadata={[
+            { key: 'date', label: 'Datum', value: formatDateRange(eventData.dates.start, eventData.dates.end), icon: 'calendar' },
+            { key: 'location', label: 'Místo', value: eventData.location.name, icon: 'location' },
+            { key: 'entries', label: 'Závodníků', value: `${eventData.stats.entries} závodníků`, icon: 'users' },
+          ] as HeroSectionMetaItem[]}
+          breadcrumbs={!isEmbed && (
+            <nav className="event-detail-breadcrumb csk-text-sm">
+              <a href="#" className="csk-text-inverse-muted">Kalendář</a>
+              <span className="csk-text-inverse-muted">/</span>
+              <a href="#" className="csk-text-inverse-muted">2026</a>
+              <span className="csk-text-inverse-muted">/</span>
+              <span className="csk-text-inverse">{eventData.title}</span>
+            </nav>
+          )}
+          actions={showCta && (status === 'registration' || status === 'live') && (
+            <div className={`event-detail-hero-cta ${isEmbed ? 'event-detail-hero-cta--compact' : ''}`}>
+              {status === 'registration' && (
+                <>
+                  <Button variant="primary" accent="energy" size={isEmbed ? 'md' : 'lg'}>
+                    Přihlásit se na závod
+                  </Button>
+                  <span className="event-detail-hero-deadline csk-text-energy">
+                    <Icon name="clock" size="sm" />
+                    Deadline: {formatDate(eventData.dates.registrationDeadline)}
+                  </span>
+                </>
               )}
-            </div>
-
-            <div className="event-detail-hero__meta">
-              <span className="event-detail-hero__meta-item">
-                <Icon name="calendar" size="sm" />
-                {formatDateRange(eventData.dates.start, eventData.dates.end)}
-              </span>
-              <span className="event-detail-hero__meta-item">
-                <Icon name="location" size="sm" />
-                {eventData.location.name}
-              </span>
-              <span className="event-detail-hero__meta-item">
-                <Icon name="users" size="sm" />
-                {eventData.stats.entries} závodníků
-              </span>
-            </div>
-
-            {/* Status-specific CTA - with energy accent for urgency */}
-            {status === 'registration' && showCta && (
-              <div className={`event-detail-hero__cta ${isEmbed ? 'event-detail-hero__cta--compact' : ''}`}>
-                <Button variant="primary" accent="energy" size={isEmbed ? 'md' : 'lg'}>
-                  Přihlásit se na závod
-                </Button>
-                <span className="event-detail-hero__deadline csk-text-energy">
-                  <Icon name="clock" size="sm" />
-                  Deadline: {formatDate(eventData.dates.registrationDeadline)}
-                </span>
-              </div>
-            )}
-
-            {status === 'live' && showCta && (
-              <div className={`event-detail-hero__cta ${isEmbed ? 'event-detail-hero__cta--compact' : ''}`}>
+              {status === 'live' && (
                 <Button variant="primary" accent="energy" size={isEmbed ? 'md' : 'lg'}>
                   Sledovat LIVE výsledky
                 </Button>
+              )}
+            </div>
+          )}
+          floatingContent={showStats && (
+            <div className={`event-detail-stats ${isEmbed ? 'event-detail-stats--embed' : ''}`}>
+              <div className="event-detail-stats__container">
+                <div className="event-detail-stats__item">
+                  <span className="event-detail-stats__value">{eventData.stats.entries}</span>
+                  <span className="event-detail-stats__label">závodníků</span>
+                </div>
+                <div className="event-detail-stats__item">
+                  <span className="event-detail-stats__value">{eventData.stats.clubs}</span>
+                  <span className="event-detail-stats__label">klubů</span>
+                </div>
+                <div className="event-detail-stats__item">
+                  <span className="event-detail-stats__value">{eventData.stats.gates}</span>
+                  <span className="event-detail-stats__label">branek</span>
+                </div>
+                <div className="event-detail-stats__item">
+                  <span className="event-detail-stats__value">{eventData.stats.courseLength}m</span>
+                  <span className="event-detail-stats__label">délka tratě</span>
+                </div>
               </div>
-            )}
-          </div>
-          {/* Note: WaveDecoration removed for cleaner design (Phase 8.6.3) */}
-        </section>
-      )}
-
-      {/* Stats Bar */}
-      {showStats && (
-        <section className={`event-detail-stats ${isEmbed ? 'event-detail-stats--embed' : ''}`}>
-          <div className="event-detail-stats__container">
-            <div className="event-detail-stats__item">
-              <span className="event-detail-stats__value">{eventData.stats.entries}</span>
-              <span className="event-detail-stats__label">závodníků</span>
             </div>
-            <div className="event-detail-stats__item">
-              <span className="event-detail-stats__value">{eventData.stats.clubs}</span>
-              <span className="event-detail-stats__label">klubů</span>
-            </div>
-            <div className="event-detail-stats__item">
-              <span className="event-detail-stats__value">{eventData.stats.gates}</span>
-              <span className="event-detail-stats__label">branek</span>
-            </div>
-            <div className="event-detail-stats__item">
-              <span className="event-detail-stats__value">{eventData.stats.courseLength}m</span>
-              <span className="event-detail-stats__label">délka tratě</span>
-            </div>
-          </div>
-        </section>
+          )}
+          className={`event-detail-hero ${isAesthetic ? 'event-detail-hero--aesthetic' : ''} ${expressive ? 'event-detail-hero--expressive' : ''} ${isEmbed ? 'event-detail-hero--embed' : ''}`}
+        />
       )}
 
       {/* Main content */}

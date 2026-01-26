@@ -23,194 +23,6 @@
 }
 
 /* --------------------------------------------------------------------------
-   Hero Section - Layout
-   -------------------------------------------------------------------------- */
-
-.profile-hero-section {
-  position: relative;
-  padding: var(--spacing-12) var(--spacing-4) var(--spacing-20);
-  overflow: hidden;
-}
-
-.profile-hero-section__background {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.profile-hero-section__gradient {
-  position: absolute;
-  inset: 0;
-}
-
-.profile-hero-section__pattern {
-  position: absolute;
-  inset: 0;
-}
-
-.profile-hero-section__content {
-  position: relative;
-  z-index: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.profile-hero-section__wave {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  z-index: 2;
-}
-
-.profile-page-wave {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* --------------------------------------------------------------------------
-   Breadcrumb - Layout
-   -------------------------------------------------------------------------- */
-
-.profile-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  margin-bottom: var(--spacing-6);
-}
-
-.profile-breadcrumb svg {
-  width: 14px;
-  height: 14px;
-}
-
-/* --------------------------------------------------------------------------
-   Hero Content - Layout
-   -------------------------------------------------------------------------- */
-
-.profile-hero-content {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: var(--spacing-6);
-  align-items: flex-start;
-}
-
-.profile-hero-avatar {
-  position: relative;
-}
-
-.profile-hero-avatar .csk-avatar {
-  width: 140px;
-  height: 140px;
-}
-
-.profile-hero-ranking {
-  position: absolute;
-  bottom: -8px;
-  right: -8px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.profile-hero-info {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-3);
-}
-
-.profile-hero-name-row {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-}
-
-.profile-hero-name {
-  margin: 0;
-  line-height: 1.2;
-}
-
-.profile-hero-country {
-  padding: var(--spacing-1) var(--spacing-3);
-  border-radius: var(--radius-full);
-}
-
-.profile-hero-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-2);
-}
-
-.profile-hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-6);
-  margin-top: var(--spacing-2);
-}
-
-.profile-hero-meta-item {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.profile-hero-actions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
-
-.profile-hero-actions .csk-button svg {
-  width: 16px;
-  height: 16px;
-  margin-right: var(--spacing-1);
-}
-
-/* --------------------------------------------------------------------------
-   Achievements - Layout
-   -------------------------------------------------------------------------- */
-
-.profile-achievements {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-4);
-  margin-top: var(--spacing-8);
-}
-
-.profile-achievement {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-  padding: var(--spacing-4);
-}
-
-.profile-achievement__icon {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.profile-achievement__icon svg {
-  width: 24px;
-  height: 24px;
-}
-
-.profile-achievement__content {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-/* --------------------------------------------------------------------------
    Main Content - Layout
    -------------------------------------------------------------------------- */
 
@@ -713,219 +525,6 @@
   color: var(--color-primary);
 }
 
-/* --------------------------------------------------------------------------
-   Hero Section - Visual
-   -------------------------------------------------------------------------- */
-
-.profile-hero-section {
-  color: var(--color-text-inverse);
-}
-
-.profile-hero-section__gradient {
-  background: linear-gradient(
-    135deg,
-    var(--color-primary-700) 0%,
-    var(--color-primary-500) 50%,
-    var(--color-primary-400) 100%
-  );
-}
-
-/* Discipline-specific gradients */
-.profile-hero-section--dv .profile-hero-section__gradient {
-  background: linear-gradient(
-    135deg,
-    var(--color-section-dv-dark, #1e3a5f) 0%,
-    var(--color-section-dv, #2563eb) 50%,
-    var(--color-section-dv-light, #60a5fa) 100%
-  );
-}
-
-.profile-hero-section--ry .profile-hero-section__gradient {
-  background: linear-gradient(
-    135deg,
-    var(--color-section-ry-dark, #14532d) 0%,
-    var(--color-section-ry, #16a34a) 50%,
-    var(--color-section-ry-light, #4ade80) 100%
-  );
-}
-
-.profile-hero-section--vt .profile-hero-section__gradient {
-  background: linear-gradient(
-    135deg,
-    var(--color-section-vt-dark, #7f1d1d) 0%,
-    var(--color-section-vt, #dc2626) 50%,
-    var(--color-section-vt-light, #f87171) 100%
-  );
-}
-
-.profile-hero-section__pattern {
-  background-image:
-    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
-  opacity: 1;
-}
-
-.profile-hero-section__wave {
-  color: var(--color-bg-primary);
-}
-
-/* --------------------------------------------------------------------------
-   Breadcrumb - Visual
-   -------------------------------------------------------------------------- */
-
-.profile-breadcrumb {
-  font-size: var(--font-size-sm);
-}
-
-.profile-breadcrumb__link {
-  color: rgba(255, 255, 255, 0.7);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-.profile-breadcrumb__link:hover {
-  color: rgba(255, 255, 255, 1);
-}
-
-.profile-breadcrumb__current {
-  color: rgba(255, 255, 255, 1);
-  font-weight: var(--font-weight-medium);
-}
-
-.profile-breadcrumb svg {
-  opacity: 0.5;
-}
-
-/* --------------------------------------------------------------------------
-   Hero Content - Visual
-   -------------------------------------------------------------------------- */
-
-.profile-hero-avatar .csk-avatar {
-  font-size: 3rem;
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  box-shadow: var(--shadow-xl);
-}
-
-.profile-hero-ranking {
-  font-weight: 700;
-  font-size: 1rem;
-  color: white;
-  box-shadow: var(--shadow-lg);
-  border: 3px solid white;
-  animation: rankingPulse 2s ease-in-out infinite;
-}
-
-@keyframes rankingPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-.profile-hero-ranking--1 {
-  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
-}
-
-.profile-hero-ranking--2 {
-  background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%);
-}
-
-.profile-hero-ranking--3 {
-  background: linear-gradient(135deg, #cd7f32 0%, #a0522d 100%);
-}
-
-.profile-hero-name {
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.profile-hero-country {
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: white;
-}
-
-.profile-hero-meta-label {
-  font-size: var(--font-size-xs);
-  color: rgba(255, 255, 255, 0.7);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.profile-hero-meta-value {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  color: white;
-}
-
-.profile-hero-actions .csk-button {
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
-  border-color: rgba(255, 255, 255, 0.3);
-  color: white;
-}
-
-.profile-hero-actions .csk-button:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
-/* --------------------------------------------------------------------------
-   Achievements - Visual
-   -------------------------------------------------------------------------- */
-
-.profile-achievement {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all var(--transition-normal);
-}
-
-.profile-achievement:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
-
-.profile-achievement--gold .profile-achievement__icon {
-  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
-  color: #7a5c00;
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
-}
-
-.profile-achievement--silver .profile-achievement__icon {
-  background: linear-gradient(135deg, #e8e8e8 0%, #c0c0c0 100%);
-  color: #555555;
-  box-shadow: 0 4px 12px rgba(192, 192, 192, 0.4);
-}
-
-.profile-achievement--bronze .profile-achievement__icon {
-  background: linear-gradient(135deg, #cd7f32 0%, #a0522d 100%);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(205, 127, 50, 0.4);
-}
-
-.profile-achievement--rank .profile-achievement__icon {
-  background: linear-gradient(135deg, var(--color-accent-500) 0%, var(--color-accent-600) 100%);
-  color: white;
-  box-shadow: 0 4px 12px rgba(var(--color-accent-500-rgb, 245, 158, 11), 0.4);
-}
-
-.profile-achievement__value {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  color: white;
-  line-height: 1;
-  font-family: var(--font-family-mono);
-}
-
-.profile-achievement__label {
-  font-size: var(--font-size-sm);
-  color: rgba(255, 255, 255, 0.8);
-}
 
 /* --------------------------------------------------------------------------
    Status Cards - Visual
@@ -1274,30 +873,6 @@
   font-size: var(--font-size-base);
 }
 
-/* --------------------------------------------------------------------------
-   Dark Mode
-   -------------------------------------------------------------------------- */
-
-[data-theme="dark"] .profile-hero-section__gradient {
-  opacity: 0.9;
-}
-
-[data-theme="dark"] .profile-hero-ranking {
-  border-color: var(--color-bg-primary);
-}
-
-[data-theme="dark"] .profile-achievement {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .profile-achievement:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-[data-theme="dark"] .profile-hero-country {
-  background-color: rgba(255, 255, 255, 0.15);
-}
 
 
 /* ============================================================================
@@ -1342,112 +917,6 @@
   background-color: var(--color-bg-primary);
 }
 
-/* Aesthetic hero section enhancements */
-.profile-page--aesthetic .profile-hero-section {
-  position: relative;
-}
-
-/* Diagonal stripe decoration */
-.profile-page--aesthetic .profile-hero-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(
-    -45deg,
-    transparent 0%,
-    transparent 45%,
-    rgba(255, 255, 255, 0.03) 45%,
-    rgba(255, 255, 255, 0.03) 55%,
-    transparent 55%,
-    transparent 100%
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Grain texture overlay */
-.profile-page--aesthetic .profile-hero-section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.02;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Display font for name in aesthetic mode */
-.profile-page--aesthetic .profile-hero-name {
-  font-family: var(--font-display, var(--font-family-base));
-  font-size: var(--font-size-5xl, 3rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Energy glow on hero content */
-.profile-page--aesthetic .profile-hero-section__content {
-  position: relative;
-  z-index: 2;
-}
-
-/* Floating avatar with energy ring */
-.profile-page--aesthetic .profile-hero-avatar .csk-avatar {
-  border: 4px solid rgba(255, 255, 255, 0.4);
-  box-shadow:
-    var(--shadow-xl),
-    0 0 40px rgba(255, 255, 255, 0.2),
-    0 0 60px var(--color-energy-glow, rgba(251, 146, 60, 0.15));
-}
-
-/* Ranking badge with energy glow */
-.profile-page--aesthetic .profile-hero-ranking {
-  box-shadow:
-    var(--shadow-lg),
-    0 0 20px var(--color-energy-glow, rgba(251, 146, 60, 0.3));
-}
-
-/* Stats cards with aesthetic styling */
-.profile-page--aesthetic .profile-achievements {
-  margin-top: calc(-1 * var(--spacing-10));
-  position: relative;
-  z-index: 10;
-}
-
-.profile-page--aesthetic .profile-achievement {
-  background: var(--color-surface-primary, white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--color-border-subtle);
-  padding: var(--spacing-4);
-  transition: all var(--transition-base);
-}
-
-.profile-page--aesthetic .profile-achievement:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-xl);
-}
-
-/* Border accent on stats cards */
-.profile-page--aesthetic .profile-achievement:nth-child(1) {
-  border-top: 3px solid var(--color-energy-primary, #fb923c);
-}
-
-.profile-page--aesthetic .profile-achievement:nth-child(2) {
-  border-top: 3px solid var(--color-energy-secondary, #a78bfa);
-}
-
-.profile-page--aesthetic .profile-achievement:nth-child(3) {
-  border-top: 3px solid var(--color-success, #22c55e);
-}
-
-.profile-page--aesthetic .profile-achievement:nth-child(4) {
-  border-top: 3px solid var(--color-info, #3b82f6);
-}
-
 /* Status cards with aesthetic styling */
 .profile-page--aesthetic .profile-status-card {
   border-radius: var(--radius-lg);
@@ -1460,19 +929,13 @@
 }
 
 /* Staggered reveal animation */
-.profile-page--aesthetic .profile-achievement,
 .profile-page--aesthetic .profile-status-card {
   animation: aestheticReveal 0.5s ease-out backwards;
 }
 
-.profile-page--aesthetic .profile-achievement:nth-child(1) { animation-delay: 0.1s; }
-.profile-page--aesthetic .profile-achievement:nth-child(2) { animation-delay: 0.15s; }
-.profile-page--aesthetic .profile-achievement:nth-child(3) { animation-delay: 0.2s; }
-.profile-page--aesthetic .profile-achievement:nth-child(4) { animation-delay: 0.25s; }
-
-.profile-page--aesthetic .profile-status-card:nth-child(1) { animation-delay: 0.3s; }
-.profile-page--aesthetic .profile-status-card:nth-child(2) { animation-delay: 0.35s; }
-.profile-page--aesthetic .profile-status-card:nth-child(3) { animation-delay: 0.4s; }
+.profile-page--aesthetic .profile-status-card:nth-child(1) { animation-delay: 0.1s; }
+.profile-page--aesthetic .profile-status-card:nth-child(2) { animation-delay: 0.15s; }
+.profile-page--aesthetic .profile-status-card:nth-child(3) { animation-delay: 0.2s; }
 
 @keyframes aestheticReveal {
   from {
@@ -1513,84 +976,9 @@
   .profile-stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .profile-achievements {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 768px) {
-  .profile-hero-section {
-    padding: var(--spacing-8) var(--spacing-4) var(--spacing-16);
-  }
-
-  .profile-hero-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: var(--spacing-4);
-  }
-
-  .profile-hero-avatar {
-    margin: 0 auto;
-  }
-
-  .profile-hero-avatar .csk-avatar {
-    width: 120px;
-    height: 120px;
-    font-size: 2.5rem;
-  }
-
-  .profile-hero-ranking {
-    width: 40px;
-    height: 40px;
-    font-size: 0.875rem;
-  }
-
-  .profile-hero-name-row {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .profile-hero-name {
-    font-size: var(--font-size-2xl);
-  }
-
-  .profile-hero-badges {
-    justify-content: center;
-  }
-
-  .profile-hero-meta {
-    justify-content: center;
-  }
-
-  .profile-hero-actions {
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  .profile-achievements {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-3);
-  }
-
-  .profile-achievement {
-    padding: var(--spacing-3);
-  }
-
-  .profile-achievement__icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .profile-achievement__icon svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .profile-achievement__value {
-    font-size: var(--font-size-xl);
-  }
-
   .profile-main {
     padding: var(--spacing-4) var(--spacing-3);
   }
@@ -1612,10 +1000,6 @@
     flex-direction: column;
     align-items: flex-start;
     gap: var(--spacing-2);
-  }
-
-  .profile-breadcrumb {
-    justify-content: center;
   }
 
   .profile-page-header__content {
@@ -1681,30 +1065,6 @@
 }
 
 @media (max-width: 480px) {
-  .profile-hero-name {
-    font-size: var(--font-size-xl);
-  }
-
-  .profile-hero-avatar .csk-avatar {
-    width: 96px;
-    height: 96px;
-    font-size: 2rem;
-  }
-
-  .profile-achievements {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .profile-achievement {
-    flex-direction: column;
-    text-align: center;
-    padding: var(--spacing-3);
-  }
-
-  .profile-achievement__icon {
-    margin: 0 auto;
-  }
-
   .profile-stats-grid {
     grid-template-columns: 1fr;
   }
@@ -1726,23 +1086,16 @@
    ============================================================================ */
 
 @media (prefers-reduced-motion: reduce) {
-  .profile-hero-ranking {
-    animation: none;
-  }
-
-  .profile-achievement,
   .profile-status-card,
   .profile-registration-item,
   .profile-pinned-item {
     transition: none;
   }
 
-  .profile-page--aesthetic .profile-achievement,
   .profile-page--aesthetic .profile-status-card {
     animation: none;
   }
 
-  .profile-page--aesthetic .profile-achievement:hover,
   .profile-page--aesthetic .profile-status-card:hover {
     transform: none;
   }

@@ -16,6 +16,7 @@ import { EmptyState } from '../components/EmptyState';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import { Icon } from '../components/Icon';
 import { CSKLogo } from '../components/CSKLogo';
+import { DateBadge } from '../components/DateBadge';
 import './CalendarPage.css';
 
 // ============================================================================
@@ -526,9 +527,12 @@ const CalendarPage = ({
                         }`}
                         onClick={() => handleEventClick(race)}
                       >
-                        <div className="prototype-calendar-page__upcoming-date csk-text-sm csk-text-secondary">
-                          <Icon name="calendar" size="sm" />
-                          <span>{formatDateRange(race.start, race.end)}</span>
+                        <div className="prototype-calendar-page__upcoming-date">
+                          <DateBadge
+                            date={race.start}
+                            section={race.section as 'dv' | 'ry' | 'vt' | undefined}
+                            size="sm"
+                          />
                         </div>
                         <div className="prototype-calendar-page__upcoming-content">
                           <div className="prototype-calendar-page__upcoming-name csk-font-medium csk-text-primary">
@@ -585,8 +589,21 @@ const CalendarPage = ({
 
                   <div className="prototype-calendar-page__detail-info csk-text-sm csk-text-secondary">
                     <div className="prototype-calendar-page__detail-row">
-                      <Icon name="calendar" size="sm" />
-                      <span>{formatDateRange(selectedEvent.start, selectedEvent.end)}</span>
+                      <DateBadge
+                        date={selectedEvent.start}
+                        section={selectedEvent.section as 'dv' | 'ry' | 'vt' | undefined}
+                        size="sm"
+                      />
+                      {selectedEvent.end && selectedEvent.end.getTime() !== selectedEvent.start.getTime() && (
+                        <span className="csk-text-tertiary">–</span>
+                      )}
+                      {selectedEvent.end && selectedEvent.end.getTime() !== selectedEvent.start.getTime() && (
+                        <DateBadge
+                          date={selectedEvent.end}
+                          section={selectedEvent.section as 'dv' | 'ry' | 'vt' | undefined}
+                          size="sm"
+                        />
+                      )}
                     </div>
                     {selectedEvent.data?.location ? (
                       <div className="prototype-calendar-page__detail-row">
