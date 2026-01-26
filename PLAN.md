@@ -116,17 +116,28 @@ Redukce ~3750 řádků duplicitního CSS v prototypech přesunem opakujících s
 - [ ] Nové CSS classes existují v colors.css
 - [ ] Story ukazuje section colors
 
-#### 22.3 HeroSection Component Enhancement
-- [ ] Rozšířit existující `HeroSection` o:
-  - `section` prop pro automatické gradients (dv/ry/vt/federation)
-  - `backgroundImage` prop s automatickým overlay
-  - `wave` prop pro tvarový divider
-  - Pattern overlay (radial gradients)
-- [ ] Přidat varianty: `variant="gradient" | "image" | "minimal"`
-- [ ] Přidat `HeroSection.stories.tsx` s všemi variantami
-- [ ] Srovnat screenshots
+#### 22.3 HeroSection Component Enhancement ✅
+- [x] Rozšířit existující `HeroSection` o:
+  - `section` prop pro automatické gradients (dv/ry/vt/federation) - již existovalo
+  - `backgroundImage` prop s automatickým overlay - již existovalo
+  - `wave` prop pro tvarový divider - **přidáno**
+  - Pattern overlay (radial gradients) - již existovalo (`patternOverlay` prop)
+- [x] Varianty: `variant="full" | "compact" | "minimal"` - již existovalo (size-based)
+- [x] Stories existují v `HeroSection.stories.tsx` - rozšířeno o wave examples
+- [x] Visual regression testy: 58 passed (0 regresí)
 
-**Úspora:** ~1750 řádků (hero-related CSS z 7 prototypů)
+**Implementace:**
+- `wave` prop přidán do `HeroSection.tsx` s SVG wave divider
+- `waveColor` prop pro vlastní barvu wave
+- CSS pro wave divider v `HeroSection.css`:
+  - `.csk-hero-section__wave` - positioning
+  - `.csk-hero-section__wave-svg` - SVG styling s currentColor
+  - Automatická úprava paddingu pomocí `:has(.csk-hero-section__wave)`
+- Nové stories: `WithWave`, `FullWithWave`, `MinimalWithWave`
+
+**Poznámka:** HeroSection již měla většinu požadovaných funkcí z předchozích fází. Přidán pouze wave divider.
+
+**Úspora:** ~1750 řádků (hero-related CSS z 7 prototypů) - bude realizována v 22.10-22.13
 
 **Soubory k úpravě:**
 - `src/components/HeroSection/HeroSection.tsx`
@@ -1077,7 +1088,7 @@ npm run test:visual
 
 ### Další krok
 
-**Pokračovat s 22.3 HeroSection Component Enhancement** - rozšířit HeroSection o section prop, background image support, wave divider a pattern overlay.
+**Pokračovat s 22.4 StatCard Variants** - přidat medal varianty (gold/silver/bronze), gradient varianty a sparkline slot.
 
 ### Git tag
 

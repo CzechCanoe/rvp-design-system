@@ -51,6 +51,10 @@ export interface HeroSectionProps extends HTMLAttributes<HTMLElement> {
   floatingContent?: ReactNode;
   /** Optional breadcrumbs (hidden in embed mode) */
   breadcrumbs?: ReactNode;
+  /** Show wave divider at the bottom */
+  wave?: boolean;
+  /** Color for the wave (defaults to background color) */
+  waveColor?: string;
 }
 
 /**
@@ -81,6 +85,8 @@ export function HeroSection({
   patternOverlay = true,
   floatingContent,
   breadcrumbs,
+  wave = false,
+  waveColor,
   className,
   ...props
 }: HeroSectionProps) {
@@ -186,6 +192,23 @@ export function HeroSection({
           )}
         </div>
       </div>
+
+      {/* Wave divider */}
+      {wave && (
+        <div className="csk-hero-section__wave">
+          <svg
+            viewBox="0 0 1440 60"
+            preserveAspectRatio="none"
+            className="csk-hero-section__wave-svg"
+            style={waveColor ? { color: waveColor } : undefined}
+          >
+            <path
+              fill="currentColor"
+              d="M0,0 C480,60 960,60 1440,0 L1440,60 L0,60 Z"
+            />
+          </svg>
+        </div>
+      )}
 
       {/* Floating content (e.g., stats bar) */}
       {floatingContent && (

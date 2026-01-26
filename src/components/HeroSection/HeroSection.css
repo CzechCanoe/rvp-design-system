@@ -331,6 +331,51 @@
 }
 
 /* =============================================================================
+   WAVE DIVIDER
+   ============================================================================= */
+
+.csk-hero-section__wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.csk-hero-section__wave-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: var(--color-bg-primary);
+}
+
+/* Dark mode wave color */
+[data-theme='dark'] .csk-hero-section__wave-svg {
+  color: var(--color-bg-primary);
+}
+
+/* Adjust padding when wave is present */
+.csk-hero-section:has(.csk-hero-section__wave) {
+  padding-bottom: calc(var(--spacing-16) + 30px);
+}
+
+.csk-hero-section--minimal:has(.csk-hero-section__wave) {
+  padding-bottom: calc(var(--spacing-12) + 30px);
+}
+
+@media (max-width: 767px) {
+  .csk-hero-section__wave {
+    height: 40px;
+  }
+
+  .csk-hero-section:has(.csk-hero-section__wave) {
+    padding-bottom: calc(var(--spacing-12) + 20px);
+  }
+}
+
+/* =============================================================================
    FLOATING CONTENT
    ============================================================================= */
 

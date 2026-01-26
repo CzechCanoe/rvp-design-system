@@ -35,6 +35,10 @@ const meta: Meta<typeof HeroSection> = {
       control: 'boolean',
       description: 'Enable decorative pattern overlay',
     },
+    wave: {
+      control: 'boolean',
+      description: 'Show wave divider at the bottom',
+    },
   },
 };
 
@@ -478,6 +482,117 @@ export const EmbedMode: Story = {
       description: {
         story:
           'In embed mode, breadcrumbs and subtitle are hidden for a more compact display.',
+      },
+    },
+  },
+};
+
+/* ==========================================================================
+   WAVE DIVIDER
+   ========================================================================== */
+
+export const WithWave: Story = {
+  args: {
+    variant: 'compact',
+    section: 'dv',
+    title: 'Výsledky závodů',
+    subtitle: 'Kompletní přehled výsledků sezóny 2024',
+    wave: true,
+    badges: (
+      <Badge section="dv" size="sm">
+        DV
+      </Badge>
+    ),
+    metadata: [
+      { key: 'date', label: 'Datum', value: '15. 6. 2024', icon: 'calendar' },
+      { key: 'location', label: 'Místo', value: 'Praha - Troja', icon: 'location' },
+    ],
+  },
+  decorators: [
+    (Story) => (
+      <div>
+        <Story />
+        <div style={{ padding: '2rem', background: 'var(--color-bg-primary)' }}>
+          <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+            Content below the wave divider seamlessly connects with the hero section.
+          </p>
+        </div>
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Wave divider creates a smooth visual transition between the hero and the content below.',
+      },
+    },
+  },
+};
+
+export const FullWithWave: Story = {
+  args: {
+    variant: 'full',
+    section: 'ry',
+    title: 'Český pohár 2024',
+    subtitle: 'Série závodů rychlostní kanoistiky',
+    wave: true,
+    badges: (
+      <>
+        <Badge section="ry" size="sm">
+          RY
+        </Badge>
+        <Badge variant="warning" size="sm">
+          ČP
+        </Badge>
+      </>
+    ),
+    metadata: [
+      { key: 'races', label: 'Závodů', value: '8', icon: 'trophy' },
+      { key: 'athletes', label: 'Závodníků', value: '450+', icon: 'users' },
+    ],
+  },
+  decorators: [
+    (Story) => (
+      <div>
+        <Story />
+        <div style={{ padding: '2rem', background: 'var(--color-bg-primary)' }}>
+          <h3 style={{ margin: '0 0 1rem', color: 'var(--color-text-primary)' }}>
+            Kalendář závodů
+          </h3>
+          <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+            Přehled všech závodů série Český pohár 2024.
+          </p>
+        </div>
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Full-size hero with wave divider for main landing pages.',
+      },
+    },
+  },
+};
+
+export const MinimalWithWave: Story = {
+  args: {
+    variant: 'minimal',
+    section: 'vt',
+    title: 'Registrace závodníků',
+    wave: true,
+    badges: (
+      <Badge section="vt" size="sm">
+        VT
+      </Badge>
+    ),
+  },
+  decorators: WithWave.decorators,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Minimal hero with wave for utility pages.',
       },
     },
   },

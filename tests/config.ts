@@ -109,8 +109,8 @@ export const embedPrototypes: PrototypeConfig[] = [
   { name: 'ClubPublicProfile-Embed', storyId: 'prototypes-clubpublicprofile--embed' },
   // Event Detail
   { name: 'EventDetailPage-Embed', storyId: 'prototypes-event-detail-page--embed' },
-  // Registration
-  { name: 'RegistrationPage-Embed', storyId: 'prototypes-registration-page--embed' },
+  // Registration (countdown timer causes pixel variance)
+  { name: 'RegistrationPage-Embed', storyId: 'prototypes-registration-page--embed', maxDiffPixels: 1500 },
   // Dashboard & Profile (ProfilePage has no space in title)
   { name: 'DashboardPage-Embed', storyId: 'prototypes-dashboard-page--embed', timeout: 60000 },
   { name: 'ProfilePage-Embed', storyId: 'prototypes-profilepage--embed' },
@@ -133,8 +133,8 @@ export const satellitePrototypes: PrototypeConfig[] = [
   { name: 'ClubPublicProfile-Satellite', storyId: 'prototypes-clubpublicprofile--satellite' },
   // Event Detail
   { name: 'EventDetailPage-Satellite', storyId: 'prototypes-event-detail-page--satellite' },
-  // Registration
-  { name: 'RegistrationPage-Satellite', storyId: 'prototypes-registration-page--satellite' },
+  // Registration (countdown timer causes pixel variance)
+  { name: 'RegistrationPage-Satellite', storyId: 'prototypes-registration-page--satellite', maxDiffPixels: 1500 },
   // Dashboard & Profile
   { name: 'DashboardPage-Satellite', storyId: 'prototypes-dashboard-page--satellite', timeout: 60000 },
   { name: 'ProfilePage-Satellite', storyId: 'prototypes-profilepage--satellite' },
