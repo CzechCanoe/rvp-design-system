@@ -43,9 +43,10 @@ const athleteData = {
   vtClass: 'm' as const,
   vtPoints: 1250,
   ranking: 1,
-  imageUrl: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&h=400&fit=crop&crop=faces',
-  // Action photo for hero background (different from portrait)
-  actionImageUrl: 'https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?w=1920&h=1080&fit=crop',
+  // Real Prskavec photos from Wikimedia Commons (CC BY-SA 4.0, Tomas Zuccareno)
+  imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Prskavec_T._–_2023_Canoe_Slalom_WC_Prague_5751a.jpg/400px-Prskavec_T._–_2023_Canoe_Slalom_WC_Prague_5751a.jpg',
+  // Action photo for hero background
+  actionImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Prskavec_T._–_2023_Canoe_Slalom_WC_Prague_5688.jpg/1920px-Prskavec_T._–_2023_Canoe_Slalom_WC_Prague_5688.jpg',
   stats: {
     wins: 98,
     podiums: 187,
