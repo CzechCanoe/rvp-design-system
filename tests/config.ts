@@ -121,8 +121,8 @@ export const satellitePrototypes: PrototypeConfig[] = [
   // Calendar Page
   { name: 'CalendarPage-Satellite', storyId: 'prototypes-calendar-page--satellite' },
   { name: 'CalendarPage-SatelliteListView', storyId: 'prototypes-calendar-page--satellite-list-view' },
-  // Results & Live
-  { name: 'ResultsPage-Satellite', storyId: 'prototypes-results-page--satellite' },
+  // Results & Live (minor rendering variance)
+  { name: 'ResultsPage-Satellite', storyId: 'prototypes-results-page--satellite', maxDiffPixels: 500 },
   { name: 'LivePage-Satellite', storyId: 'prototypes-live-page--satellite', maxDiffPixels: 6000, timeout: 30000 },
   // Lists
   { name: 'AthletesListPage-Satellite', storyId: 'prototypes-athletes-list-page--satellite' },

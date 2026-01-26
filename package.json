@@ -29,7 +29,11 @@
     "lint": "eslint src --ext ts,tsx",
     "typecheck": "tsc --noEmit",
     "test": "playwright test",
+    "test:quick": "playwright test tests/prototypes.spec.ts --project=chromium",
+    "test:proto": "playwright test tests/prototypes.spec.ts",
+    "test:components": "playwright test tests/components.spec.ts --project=chromium",
     "test:update": "playwright test --update-snapshots",
+    "test:update:quick": "playwright test tests/prototypes.spec.ts --project=chromium --update-snapshots",
     "test:report": "playwright show-report"
   },
   "keywords": [
