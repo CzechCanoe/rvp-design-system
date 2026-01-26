@@ -309,126 +309,31 @@ export const Minimal: Story = { args: { variant: 'minimal' } };
 - [x] Divider funguje
 - [x] `npm run test:quick` - 58 passed
 
-#### 22.7 Wizard / Stepper Component
-- [ ] Vytvořit novou komponentu `Wizard`:
+#### 22.7 Wizard / Stepper Component ✅
+- [x] Vytvořit novou komponentu `Wizard`:
   - `steps` array prop
-  - `activeStep` prop
+  - `activeStep` prop (string id nebo number index)
   - `completedSteps` prop
   - Connector lines mezi kroky
   - Responsive (ikonky only na mobilu)
-- [ ] Přidat `Wizard.stories.tsx`
-- [ ] Srovnat screenshots
+- [x] Přidat `Wizard.stories.tsx`
+- [x] Srovnat screenshots (58 testů prošlo)
 
-**Úspora:** ~200 řádků
+**Úspora:** ~200 řádků (při adopci v prototypech)
 
-**Nové soubory:**
-- `src/components/Wizard/Wizard.tsx`
-- `src/components/Wizard/Wizard.css`
-- `src/components/Wizard/WizardStep.tsx` (interní)
-- `src/components/Wizard/Wizard.stories.tsx`
-- `src/components/Wizard/index.ts`
-
-**Props interface:**
-```typescript
-interface WizardStep {
-  id: string;
-  label: string;
-  icon?: React.ReactNode;
-  description?: string;
-}
-
-interface WizardProps {
-  steps: WizardStep[];
-  activeStep: string | number;  // id nebo index
-  completedSteps?: string[];    // array of completed step ids
-  section?: 'dv' | 'ry' | 'vt';  // pro barevnou variantu
-  variant?: 'horizontal' | 'vertical';
-  size?: 'sm' | 'md' | 'lg';
-  className?: string;
-}
-```
-
-**CSS struktura:**
-```css
-.csk-wizard {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-}
-
-.csk-wizard__step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-  position: relative;
-}
-
-.csk-wizard__circle {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-bg-tertiary);
-  border: 2px solid var(--color-border-secondary);
-  color: var(--color-text-tertiary);
-  z-index: 1;
-  transition: all var(--transition-normal);
-}
-
-/* Connector line */
-.csk-wizard__line {
-  position: absolute;
-  top: 24px;
-  left: calc(50% + 24px);
-  right: calc(-50% + 24px);
-  height: 3px;
-  background: var(--color-border-primary);
-}
-
-/* Active step - používá --section-color */
-.csk-wizard__step--active .csk-wizard__circle {
-  background: var(--section-color, var(--color-primary));
-  border-color: var(--section-color, var(--color-primary));
-  color: white;
-  box-shadow: 0 0 0 4px rgba(var(--section-color-rgb, var(--color-primary-rgb)), 0.1);
-}
-
-/* Completed step */
-.csk-wizard__step--completed .csk-wizard__circle {
-  background: var(--color-success);
-  border-color: var(--color-success);
-  color: white;
-}
-
-.csk-wizard__step--completed .csk-wizard__line {
-  background: var(--color-success);
-}
-
-/* Responsive - hide labels on mobile */
-@media (max-width: 640px) {
-  .csk-wizard__label { display: none; }
-  .csk-wizard__circle { width: 40px; height: 40px; }
-}
-```
-
-**Stories:**
-```typescript
-export const ThreeSteps: Story = { args: { steps: [...], activeStep: 1 } };
-export const FourSteps: Story = { args: { steps: [...], activeStep: 2 } };
-export const WithCompleted: Story = { args: { completedSteps: ['step-1', 'step-2'] } };
-export const SectionDV: Story = { args: { section: 'dv' } };
-export const Vertical: Story = { args: { variant: 'vertical' } };
-```
+**Implementace:**
+- `src/components/Wizard/Wizard.tsx` - komponenta s steps, activeStep, completedSteps, section, variant, size, onStepClick props
+- `src/components/Wizard/Wizard.css` - ~350 řádků stylů včetně horizontal/vertical variants, všech sizes a dark mode
+- `src/components/Wizard/Wizard.stories.tsx` - 25+ stories pokrývajících všechny varianty
+- `src/components/Wizard/index.ts` - exporty
 
 **Kritéria dokončení:**
-- [ ] Export z `src/components/index.ts`
-- [ ] Active/completed/pending stavy fungují
-- [ ] Connector lines správně pozicované
-- [ ] Responsive chování
-- [ ] `npm run test:visual` - 0 regresí
+- [x] Export z `src/components/index.ts`
+- [x] Active/completed/pending stavy fungují
+- [x] Connector lines správně pozicované
+- [x] Responsive chování (labels skryté na mobilu u horizontal)
+- [x] Section color variants (dv, ry, vt)
+- [x] `npm run test:quick` - 58 passed
 
 #### 22.8 ActionCard Component
 - [ ] Vytvořit novou komponentu `ActionCard`:
@@ -920,7 +825,7 @@ npm run test:visual
 
 ### Další krok
 
-**Pokračovat s 22.7 Wizard/Stepper Component** - vytvořit novou komponentu pro vícekrokové procesy (registrace, onboarding) s steps array, activeStep, connector lines a responsive chováním.
+**Pokračovat s 22.8 ActionCard Component** - vytvořit novou komponentu pro akční karty s ikonou, titulem, popisem a arrow hover efektem (translateX).
 
 ### Git tag
 

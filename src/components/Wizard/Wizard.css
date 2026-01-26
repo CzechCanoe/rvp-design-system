@@ -1,0 +1,362 @@
+/**
+ * Wizard/Stepper Styles - CSK RVP Design System
+ *
+ * Multi-step progress indicator for registration, onboarding, etc.
+ * Variants: horizontal, vertical
+ * Sizes: sm, md, lg
+ * States: pending, active, completed
+ */
+
+/* =============================================================================
+   BASE STYLES
+   ============================================================================= */
+
+.csk-wizard {
+  width: 100%;
+}
+
+.csk-wizard__steps {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.csk-wizard__step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+/* =============================================================================
+   CIRCLE (Step Indicator)
+   ============================================================================= */
+
+.csk-wizard__circle {
+  position: relative;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-tertiary);
+  border: 2px solid var(--color-border-secondary);
+  color: var(--color-text-tertiary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-base-size);
+  cursor: default;
+  transition:
+    background-color var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out),
+    color var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.csk-wizard__circle:disabled {
+  cursor: default;
+}
+
+.csk-wizard__step--clickable .csk-wizard__circle {
+  cursor: pointer;
+}
+
+.csk-wizard__step--clickable .csk-wizard__circle:hover {
+  transform: scale(1.05);
+}
+
+.csk-wizard__step--clickable .csk-wizard__circle:active {
+  transform: scale(0.98);
+}
+
+.csk-wizard__number {
+  font-variant-numeric: tabular-nums;
+}
+
+/* =============================================================================
+   CONNECTOR LINE
+   ============================================================================= */
+
+.csk-wizard__line {
+  position: absolute;
+  top: 24px;
+  left: calc(50% + 28px);
+  right: calc(-50% + 28px);
+  height: 3px;
+  background-color: var(--color-border-primary);
+  transition: background-color var(--duration-normal) var(--ease-out);
+}
+
+.csk-wizard__line--completed {
+  background-color: var(--color-success-500);
+}
+
+/* =============================================================================
+   CONTENT (Label & Description)
+   ============================================================================= */
+
+.csk-wizard__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: var(--spacing-2);
+  max-width: 120px;
+}
+
+.csk-wizard__label {
+  font-size: var(--text-sm-size);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-tight);
+}
+
+.csk-wizard__description {
+  font-size: var(--text-xs-size);
+  color: var(--color-text-tertiary);
+  margin-top: var(--spacing-1);
+  line-height: var(--line-height-normal);
+}
+
+/* =============================================================================
+   STEP STATES
+   ============================================================================= */
+
+/* Pending (default) - no additional styles needed */
+
+/* Active */
+.csk-wizard__step--active .csk-wizard__circle {
+  background-color: var(--section-color, var(--color-primary-500));
+  border-color: var(--section-color, var(--color-primary-500));
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(17, 118, 166, 0.15);
+}
+
+.csk-wizard__step--active .csk-wizard__label {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Completed */
+.csk-wizard__step--completed .csk-wizard__circle {
+  background-color: var(--color-success-500);
+  border-color: var(--color-success-500);
+  color: #fff;
+}
+
+.csk-wizard__step--completed .csk-wizard__label {
+  color: var(--color-text-secondary);
+}
+
+/* =============================================================================
+   SECTION COLOR VARIANTS
+   ============================================================================= */
+
+/* DV Section */
+.csk-section-dv .csk-wizard__step--active .csk-wizard__circle {
+  background-color: var(--color-section-dv);
+  border-color: var(--color-section-dv);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+/* RY Section */
+.csk-section-ry .csk-wizard__step--active .csk-wizard__circle {
+  background-color: var(--color-section-ry);
+  border-color: var(--color-section-ry);
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+}
+
+/* VT Section */
+.csk-section-vt .csk-wizard__step--active .csk-wizard__circle {
+  background-color: var(--color-section-vt);
+  border-color: var(--color-section-vt);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+}
+
+/* =============================================================================
+   SIZE VARIANTS
+   ============================================================================= */
+
+/* Small */
+.csk-wizard--sm .csk-wizard__circle {
+  width: 36px;
+  height: 36px;
+  font-size: var(--text-sm-size);
+}
+
+.csk-wizard--sm .csk-wizard__circle svg {
+  width: 16px;
+  height: 16px;
+}
+
+.csk-wizard--sm .csk-wizard__line {
+  top: 18px;
+  left: calc(50% + 22px);
+  right: calc(-50% + 22px);
+  height: 2px;
+}
+
+.csk-wizard--sm .csk-wizard__label {
+  font-size: var(--text-xs-size);
+}
+
+.csk-wizard--sm .csk-wizard__content {
+  max-width: 100px;
+}
+
+/* Medium - default, no overrides needed */
+
+/* Large */
+.csk-wizard--lg .csk-wizard__circle {
+  width: 56px;
+  height: 56px;
+  font-size: var(--text-lg-size);
+}
+
+.csk-wizard--lg .csk-wizard__circle svg {
+  width: 24px;
+  height: 24px;
+}
+
+.csk-wizard--lg .csk-wizard__line {
+  top: 28px;
+  left: calc(50% + 32px);
+  right: calc(-50% + 32px);
+  height: 4px;
+}
+
+.csk-wizard--lg .csk-wizard__label {
+  font-size: var(--text-base-size);
+}
+
+.csk-wizard--lg .csk-wizard__content {
+  max-width: 140px;
+}
+
+/* =============================================================================
+   VERTICAL VARIANT
+   ============================================================================= */
+
+.csk-wizard--vertical .csk-wizard__steps {
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.csk-wizard--vertical .csk-wizard__step {
+  flex-direction: row;
+  align-items: flex-start;
+  flex: none;
+}
+
+.csk-wizard--vertical .csk-wizard__line {
+  top: 52px;
+  left: 23px;
+  right: auto;
+  width: 3px;
+  height: calc(100% - 4px);
+}
+
+.csk-wizard--vertical .csk-wizard__content {
+  align-items: flex-start;
+  text-align: left;
+  margin-top: 0;
+  margin-left: var(--spacing-3);
+  max-width: none;
+  padding-top: var(--spacing-2);
+  padding-bottom: var(--spacing-4);
+}
+
+/* Vertical size adjustments */
+.csk-wizard--vertical.csk-wizard--sm .csk-wizard__line {
+  top: 40px;
+  left: 17px;
+  width: 2px;
+}
+
+.csk-wizard--vertical.csk-wizard--lg .csk-wizard__line {
+  top: 60px;
+  left: 27px;
+  width: 4px;
+}
+
+/* =============================================================================
+   RESPONSIVE
+   ============================================================================= */
+
+@media (max-width: 640px) {
+  /* Hide labels on mobile for horizontal variant */
+  .csk-wizard--horizontal .csk-wizard__content {
+    display: none;
+  }
+
+  .csk-wizard--horizontal .csk-wizard__circle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .csk-wizard--horizontal .csk-wizard__line {
+    top: 20px;
+    left: calc(50% + 24px);
+    right: calc(-50% + 24px);
+  }
+
+  .csk-wizard--horizontal.csk-wizard--sm .csk-wizard__circle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .csk-wizard--horizontal.csk-wizard--sm .csk-wizard__line {
+    top: 16px;
+    left: calc(50% + 20px);
+    right: calc(-50% + 20px);
+  }
+
+  .csk-wizard--horizontal.csk-wizard--lg .csk-wizard__circle {
+    width: 48px;
+    height: 48px;
+  }
+
+  .csk-wizard--horizontal.csk-wizard--lg .csk-wizard__line {
+    top: 24px;
+    left: calc(50% + 28px);
+    right: calc(-50% + 28px);
+  }
+
+  /* Keep vertical variant labels visible */
+  .csk-wizard--vertical .csk-wizard__content {
+    display: flex;
+  }
+}
+
+/* =============================================================================
+   DARK MODE
+   ============================================================================= */
+
+[data-theme='dark'] .csk-wizard__circle {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border-primary);
+}
+
+[data-theme='dark'] .csk-wizard__step--active .csk-wizard__circle {
+  box-shadow: 0 0 0 4px rgba(17, 118, 166, 0.25);
+}
+
+[data-theme='dark'] .csk-section-dv .csk-wizard__step--active .csk-wizard__circle {
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25);
+}
+
+[data-theme='dark'] .csk-section-ry .csk-wizard__step--active .csk-wizard__circle {
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+}
+
+[data-theme='dark'] .csk-section-vt .csk-wizard__step--active .csk-wizard__circle {
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.25);
+}
+
+[data-theme='dark'] .csk-wizard__line {
+  background-color: var(--color-border-secondary);
+}

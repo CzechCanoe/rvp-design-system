@@ -281,3 +281,13 @@ export type { ResultItemProps, ResultItemVariant } from './ResultItem';
 // ListItem
 export { ListItem } from './ListItem';
 export type { ListItemProps, ListItemType, ListItemVariant } from './ListItem';
+
+// Wizard
+export { Wizard } from './Wizard';
+export type {
+  WizardProps,
+  WizardStep,
+  WizardVariant,
+  WizardSize,
+  WizardSection,
+} from './Wizard';
