@@ -37,7 +37,7 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['Prototypes', 'Components', '*'],
+        order: ['Docs', 'Design System', 'Prototypes', 'Components', '*'],
       },
     },
   },

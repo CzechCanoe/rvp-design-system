@@ -1,0 +1,138 @@
+{/* Introduction.mdx */}
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Docs/Introduction" />
+
+# CSK RVP Design System
+
+Designovy system pro verejne sekce webu Ceskeho svazu kanoistu (kanoe.cz).
+
+## Ucely systemu
+
+- **Kalendar zavodu** - prehled a filtrování zavodu
+- **Vysledky** - vysledkove listiny s live aktualizacemi
+- **Registrace** - registracni formulare pro zavodniky a kluby
+- **Profily** - verejne profily zavodniku a klubu
+- **Dashboard** - administrativni rozhrani pro spravce
+
+---
+
+## Prototypy - Varianty zobrazeni
+
+Kazdy prototyp existuje v jedne nebo vice variantach podle kontextu pouziti:
+
+### Embed
+
+Komponenty vkladane primo do stranek **kanoe.cz** (Joomla).
+
+- Bez vlastniho headeru/footeru
+- Pouziva layout hostitelskeho webu (Bootstrap 4 grid)
+- Stylovani respektuje kanoe.cz branding
+- Wrapper: `<KanoeCzContext>` v Storybooku
+
+**Priklad:** Vysledky zavodu vlozene do clanku na kanoe.cz.
+
+### Satellite
+
+Samostatne aplikace hostovane na subdomene (napr. `zavody.kanoe.cz`).
+
+- Vlastni minimalni header s CSK logem
+- Odkaz zpet na kanoe.cz
+- Plna kontrola nad layoutem
+- Vhodne pro komplexnejsi aplikace (dashboard, registrace)
+
+**Priklad:** Registracni system, administrativni dashboard.
+
+### ExpressiveEmbed
+
+Specialni varianta pro vkladane komponenty s bogatejsim vizualnim stylem.
+
+- Expressive mode (vetsi spacing, vyraznejsi typografie)
+- Pouziva se kde je potreba vizualne atraktivnejsi prezentace
+- Stale respektuje kanoe.cz layout
+
+---
+
+## Theme a Mode
+
+### Display Mode
+
+Prepinac v toolbaru Storybooku:
+
+| Mode | Popis | Pouziti |
+|------|-------|---------|
+| **Utility** | Kompaktni, efektivni | Tabulky, seznamy, formulare |
+| **Expressive** | Prostornejsi, vyraznejsi | Hero sekce, landing pages |
+| **Embed** | Neutralni, pro vlozeni | Komponenty v kanoe.cz |
+
+### Theme (Light/Dark)
+
+**Dulezite:** Dark mode v kontextu kanoe.cz **nema smysl**, protoze:
+
+1. kanoe.cz pouziva svetly design a nepodporuje dark mode
+2. Embed komponenty by vizualne nesedely s okolnim obsahem
+3. Dark mode je pripraveny pro budouci standalone aplikace
+
+**Doporuceni:**
+- Pro Embed varianty pouzivejte vzdy **Light** theme
+- Dark mode testujte pouze pro Satellite varianty
+
+---
+
+## Toolbar Storybooku
+
+V pravem hornim rohu najdete prepinace:
+
+1. **Theme** (slunce/mesic) - Light / Dark
+2. **Mode** (komponenta) - Utility / Expressive / Embed
+
+Tyto prepinace ovlivnuji vsechny komponenty a prototypy.
+
+---
+
+## Struktura komponent
+
+```
+src/
+├── components/     # Znovupouzitelne UI komponenty
+│   ├── Button/
+│   ├── Card/
+│   ├── Badge/
+│   └── ...
+├── prototypes/     # Celostránkové prototypy
+│   ├── CalendarPage.stories.tsx
+│   ├── ResultsPage.stories.tsx
+│   └── ...
+└── stories/        # Dokumentace a showcases
+    ├── Introduction.mdx
+    └── Aesthetic.stories.tsx
+```
+
+---
+
+## Prehled prototypu
+
+| Prototyp | Varianty | Popis |
+|----------|----------|-------|
+| CalendarPage | Embed, Satellite | Kalendar zavodu |
+| ResultsPage | Embed, Satellite | Vysledky zavodu |
+| LivePage | Embed, Satellite | Live vysledky |
+| EventDetailPage | Embed, Satellite, ExpressiveEmbed | Detail zavodu |
+| AthletesListPage | Embed, Satellite | Seznam zavodniku |
+| ClubsListPage | Embed, Satellite | Seznam klubu |
+| AthletePublicProfile | Satellite, ExpressiveEmbed | Profil zavodnika |
+| ClubPublicProfile | Satellite, ExpressiveEmbed | Profil klubu |
+| RankingsPage | Embed, Satellite | Zebrickz |
+| DashboardPage | Embed, Satellite | Admin dashboard |
+| ProfilePage | Satellite | Uzivatelsky profil |
+| RegistrationPage | Satellite | Registrace |
+
+---
+
+## Jak zacit
+
+1. Projdete si **Prototypes** - ukazuji kompletni stranky
+2. Prozkoumejte **Components** - jednotlive UI prvky
+3. Prectete si **Design System/Aesthetic** - vizualni identita
+
+Pro integraci do kanoe.cz pouzijte Embed varianty s `data-mode="embed"` atributem.
