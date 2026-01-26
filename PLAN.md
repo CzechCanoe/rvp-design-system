@@ -112,9 +112,9 @@ Redukce ~3750 řádků duplicitního CSS v prototypech přesunem opakujících s
 ```
 
 **Kritéria dokončení:**
-- [ ] `npm run test:visual` - 0 změn (pouze infrastruktura)
-- [ ] Nové CSS classes existují v colors.css
-- [ ] Story ukazuje section colors
+- [x] `npm run test:visual` - 0 změn (pouze infrastruktura)
+- [x] Nové CSS classes existují v colors.css
+- [x] Story ukazuje section colors
 
 #### 22.3 HeroSection Component Enhancement ✅
 - [x] Rozšířit existující `HeroSection` o:
