@@ -9,7 +9,7 @@
 | 16 (Konsolidace prototypů) | ✅ Hotovo |
 | 17 (DS Cleanup - Aesthetic Focus) | ✅ Hotovo |
 | **18 (Visual Polish)** | ✅ Hotovo |
-| **19 (Optimization)** | 🔄 Probíhá |
+| **19 (Optimization)** | ✅ Hotovo |
 
 *Tag v0.5.0-cleanup-wip: Mezistav před čištěním*
 
@@ -855,22 +855,44 @@ Přidat do `aesthetic.css`:
 - [x] Aktualizovat autodocs - nevyžadovalo změny
 - [x] Build validace ✅
 
-### 19.4 Bundle Size Audit
+### 19.4 Bundle Size Audit ✅
 
-**Postup:**
-1. Spustit `npm run build`
-2. Analyzovat výstup (dist/assets/)
-3. Použít `source-map-explorer` nebo podobný nástroj
-4. Identifikovat velké chunks
-5. Zvážit lazy loading pro velké komponenty
-6. Ověřit tree-shaking funguje (neimportují se celé knihovny)
+**Výsledek:** Bundle velikost je přiměřená pro design system této velikosti. Žádné kritické optimalizace nejsou nutné.
+
+**Bundle velikosti:**
+| Soubor | Velikost | GZip |
+|--------|----------|------|
+| index.js (ES) | 338.94 kB | 54.35 kB |
+| index.cjs | 228.57 kB | 43.82 kB |
+| rvp-design-system.css | 268.82 kB | 32.74 kB |
+
+**Zdrojové soubory:**
+| Kategorie | Počet souborů | Celkem řádků |
+|-----------|---------------|--------------|
+| Komponenty (TSX) | 80 | ~15,000 |
+| Komponenty (CSS) | 39 | ~16,000 |
+| Prototypy (CSS) | 12 | ~12,000 |
+| Tokeny (CSS) | 12 | ~4,000 |
+
+**Pozitivní zjištění:**
+- ✅ **Tree-shaking funguje:** lucide-react (45MB) se redukuje na ~45 ikon
+- ✅ **Prototypy nejsou v bundlu:** Pouze components a tokens jsou exportovány
+- ✅ **Žádná runtime závislost:** Pouze lucide-react jako peer dependency
+- ✅ **CSS proměnné:** 816 definovaných, efektivně používaných
+
+**Potenciální optimalizace (nízká priorita):**
+1. CSS purge pro production build (vyžaduje tailwind-like setup)
+2. Lazy loading pro velké komponenty (ResultsTable, Calendar)
+3. Split chunks pro stories vs. components
+
+**Závěr:** Velikost bundlu je akceptabilní. Pro design system s 35+ komponentami a 12 prototypy je 339KB JS + 269KB CSS rozumná velikost. GZip komprese (~55KB JS, ~33KB CSS) je efektivní.
 
 **Úkoly:**
-- [ ] Analyzovat bundle size (npm run build)
-- [ ] Nainstalovat source-map-explorer
-- [ ] Identifikovat velké závislosti
-- [ ] Zvážit optimalizace
-- [ ] Dokumentovat výsledky
+- [x] Analyzovat bundle size (npm run build)
+- [x] Nainstalovat rollup-plugin-visualizer pro analýzu
+- [x] Identifikovat velké závislosti - pouze lucide-react (tree-shaked)
+- [x] Zvážit optimalizace - žádné kritické nejsou nutné
+- [x] Dokumentovat výsledky
 
 ---
 

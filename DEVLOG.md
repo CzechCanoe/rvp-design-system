@@ -6586,3 +6586,30 @@ Pokračovat na Phase 19.2 (Konsolidace Card použití) nebo 19.3 (Stories cleanu
 ### Poznámky
 Phase 17 cleanup byl důkladný - kód je čistý bez redundancí.
 Další krok: 19.4 Bundle Size Audit (volitelný)
+
+---
+
+## 2026-01-26 - Fáze 19.4: Bundle Size Audit
+
+### Dokončeno
+- [x] Build analýza s npm run build
+- [x] Instalace rollup-plugin-visualizer pro vizuální analýzu
+- [x] Analýza závislostí a zdrojových souborů
+- [x] Dokumentace výsledků v PLAN.md
+
+### Výsledky auditu
+
+**Bundle velikosti:**
+- JS (ES): 338.94 kB (gzip: 54.35 kB)
+- JS (CJS): 228.57 kB (gzip: 43.82 kB)
+- CSS: 268.82 kB (gzip: 32.74 kB)
+
+**Pozitivní zjištění:**
+- Tree-shaking funguje správně (lucide-react 45MB → ~45 ikon)
+- Prototypy nejsou exportovány (správně odděleny od production bundlu)
+- Žádné zbytečné runtime závislosti
+
+### Poznámky
+- source-map-explorer nefungoval kvůli formátu source maps, použit rollup-plugin-visualizer
+- Velikost bundlu je přiměřená pro design system s 35+ komponentami
+- Žádné kritické optimalizace nejsou nutné
