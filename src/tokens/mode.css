@@ -477,12 +477,6 @@
   border: 1px solid #dee2e6;
 }
 
-/* StatsBar floating - smaller radius for embed */
-[data-mode="embed"] .csk-stats-bar--floating .csk-stats-bar__item {
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-}
-
 /* Toast - simpler appearance */
 [data-mode="embed"] .csk-toast {
   border-radius: 4px;

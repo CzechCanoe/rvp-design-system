@@ -285,3 +285,12 @@
     transform: none;
   }
 }
+
+/* ==========================================================================
+   Embed Mode - Smaller radius to match Bootstrap 4 / kanoe.cz
+   ========================================================================== */
+
+[data-mode="embed"] .csk-stats-bar--floating .csk-stats-bar__item {
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
