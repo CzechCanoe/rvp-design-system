@@ -666,11 +666,12 @@
   background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 50%, #dc2626 100%);
 }
 
-/* Hero background image */
+/* Hero background image - action photo */
 .athlete-hero__image {
   background-size: cover;
-  background-position: center top;
-  opacity: 0.4;
+  background-position: center 30%;
+  opacity: 0.55;
+  filter: saturate(1.1);
 }
 
 /* Hero pattern overlay */

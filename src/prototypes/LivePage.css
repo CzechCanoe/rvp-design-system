@@ -2697,6 +2697,12 @@
 .prototype-live-page--embed .live-page-header {
   background-color: var(--color-bg-primary);
   border-bottom: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-4);
+}
+
+.prototype-live-page--embed .live-page-header__container {
+  padding: 0 var(--spacing-4);
 }
 
 .prototype-live-page--embed .live-page-header__title {

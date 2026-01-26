@@ -586,14 +586,51 @@
   background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 30%, #ef4444 70%, #f87171 100%);
 }
 
-/* Embed mode rounded hero */
+/* Embed mode rounded hero - enhanced styling */
 .event-detail-page--embed .event-detail-hero {
   border-radius: var(--radius-lg);
   margin-bottom: var(--spacing-4);
+  padding: var(--spacing-8) var(--spacing-6);
 }
 
 .event-detail-page--embed .event-detail-hero__gradient {
   border-radius: var(--radius-lg);
+}
+
+/* Embed hero pattern - more visible */
+.event-detail-page--embed .event-detail-hero__pattern {
+  opacity: 0.2;
+  background-image:
+    radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.1) 0%, transparent 35%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+}
+
+/* Embed hero mesh overlay for aesthetic mode */
+.event-detail-page--embed.event-detail-page--aesthetic .event-detail-hero__gradient {
+  background:
+    radial-gradient(ellipse 60% 50% at 10% 90%, rgba(249, 115, 22, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 60% at 90% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+    linear-gradient(135deg, var(--color-primary-700) 0%, var(--color-primary-500) 50%, var(--color-primary-400) 100%);
+}
+
+/* Section-specific embed gradients with energy accent */
+.event-detail-page--embed .event-detail-hero--dv .event-detail-hero__gradient {
+  background:
+    radial-gradient(ellipse 50% 40% at 5% 95%, rgba(249, 115, 22, 0.2) 0%, transparent 50%),
+    linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+}
+
+.event-detail-page--embed .event-detail-hero--ry .event-detail-hero__gradient {
+  background:
+    radial-gradient(ellipse 50% 40% at 5% 95%, rgba(249, 115, 22, 0.2) 0%, transparent 50%),
+    linear-gradient(135deg, #14532d 0%, #166534 50%, #22c55e 100%);
+}
+
+.event-detail-page--embed .event-detail-hero--vt .event-detail-hero__gradient {
+  background:
+    radial-gradient(ellipse 50% 40% at 5% 95%, rgba(249, 115, 22, 0.15) 0%, transparent 50%),
+    linear-gradient(135deg, #7f1d1d 0%, #b91c1c 50%, #ef4444 100%);
 }
 
 /* ==========================================================================
