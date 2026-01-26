@@ -470,17 +470,17 @@
   border-radius: 0;
 }
 
-/* StatCard - simpler, flat, 0 radius to match kanoe.cz square borders */
-[data-mode="embed"] .csk-stat-card,
-.kanoe-context .csk-stat-card {
-  border-radius: 0 !important;
+/* StatCard - simpler, flat */
+[data-mode="embed"] .csk-stat-card {
+  border-radius: 4px;
   box-shadow: none;
   border: 1px solid #dee2e6;
 }
 
-[data-mode="embed"] .csk-stat-card--style-aesthetic::before,
-.kanoe-context .csk-stat-card--style-aesthetic::before {
-  border-radius: 0 !important;
+/* StatsBar floating - smaller radius for embed */
+[data-mode="embed"] .csk-stats-bar--floating .csk-stats-bar__item {
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
 /* Toast - simpler appearance */

@@ -1319,11 +1319,6 @@
   max-width: none;
 }
 
-/* Force square corners on stat cards in embed mode */
-.dashboard-page--embed .dashboard-stats-grid .csk-stat-card {
-  border-radius: 0 !important;
-}
-
 .dashboard-page--embed .dashboard-main {
   padding: var(--spacing-6) 0;
 }
