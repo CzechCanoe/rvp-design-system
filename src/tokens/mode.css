@@ -472,13 +472,13 @@
 
 /* StatCard - simpler, flat, 0 radius to match kanoe.cz square borders */
 [data-mode="embed"] .csk-stat-card {
-  border-radius: 0;
+  border-radius: 0 !important;
   box-shadow: none;
   border: 1px solid #dee2e6;
 }
 
 [data-mode="embed"] .csk-stat-card--style-aesthetic::before {
-  border-radius: 0;
+  border-radius: 0 !important;
 }
 
 /* Toast - simpler appearance */

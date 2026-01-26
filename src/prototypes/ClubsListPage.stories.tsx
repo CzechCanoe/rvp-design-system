@@ -46,25 +46,40 @@ interface Club {
 // Sample Data
 // ============================================================================
 
+// Generate SVG logo as data URI - styled monogram with club colors
+const createClubLogo = (code: string, primaryColor: string, secondaryColor: string = '#ffffff'): string => {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56">
+    <defs>
+      <linearGradient id="bg${code}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:${primaryColor};stop-opacity:1" />
+        <stop offset="100%" style="stop-color:${primaryColor};stop-opacity:0.8" />
+      </linearGradient>
+    </defs>
+    <rect width="56" height="56" rx="8" fill="url(#bg${code})"/>
+    <text x="28" y="36" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="${secondaryColor}">${code.substring(0, 3)}</text>
+  </svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+};
+
 const sampleClubs: Club[] = [
-  { id: 1, name: 'USK Praha', code: 'USK', city: 'Praha', region: 'Praha', sections: ['dv', 'ry'], memberCount: 245, athleteCount: 128, coachCount: 12, logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/USK_Praha_logo.svg/200px-USK_Praha_logo.svg.png' },
-  { id: 2, name: 'Dukla Praha', code: 'DUK', city: 'Praha', region: 'Praha', sections: ['dv', 'ry'], memberCount: 312, athleteCount: 156, coachCount: 18, logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Dukla_Praha.svg/200px-Dukla_Praha.svg.png' },
-  { id: 3, name: 'SK Brandýs nad Labem', code: 'BRA', city: 'Brandýs nad Labem', region: 'Středočeský', sections: ['ry'], memberCount: 87, athleteCount: 42, coachCount: 5 },
-  { id: 4, name: 'TJ Jablonec nad Nisou', code: 'JAB', city: 'Jablonec nad Nisou', region: 'Liberecký', sections: ['vt', 'dv'], memberCount: 156, athleteCount: 78, coachCount: 8 },
-  { id: 5, name: 'KK Roudnice nad Labem', code: 'ROU', city: 'Roudnice nad Labem', region: 'Ústecký', sections: ['vt'], memberCount: 94, athleteCount: 45, coachCount: 4 },
-  { id: 6, name: 'SK Trnávka', code: 'TRN', city: 'Trnávka', region: 'Pardubický', sections: ['dv', 'vt'], memberCount: 112, athleteCount: 56, coachCount: 6 },
-  { id: 7, name: 'Bohemians Praha', code: 'BOH', city: 'Praha', region: 'Praha', sections: ['dv', 'ry', 'vt'], memberCount: 198, athleteCount: 89, coachCount: 10, logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/72/Bohemians_1905_logo.svg/200px-Bohemians_1905_logo.svg.png' },
-  { id: 8, name: 'KK Hradec Králové', code: 'HKR', city: 'Hradec Králové', region: 'Královéhradecký', sections: ['dv'], memberCount: 134, athleteCount: 67, coachCount: 7 },
-  { id: 9, name: 'SK Slavoj Český Krumlov', code: 'CKR', city: 'Český Krumlov', region: 'Jihočeský', sections: ['dv'], memberCount: 89, athleteCount: 43, coachCount: 5 },
-  { id: 10, name: 'TJ Lokomotiva Beroun', code: 'BER', city: 'Beroun', region: 'Středočeský', sections: ['dv', 'vt'], memberCount: 76, athleteCount: 34, coachCount: 4 },
-  { id: 11, name: 'KK Olomouc', code: 'OLO', city: 'Olomouc', region: 'Olomoucký', sections: ['ry', 'vt'], memberCount: 145, athleteCount: 72, coachCount: 8 },
-  { id: 12, name: 'SK Žilina', code: 'ZIL', city: 'Žilina', region: 'Zlínský', sections: ['dv'], memberCount: 67, athleteCount: 31, coachCount: 3 },
-  { id: 13, name: 'TJ Přerov', code: 'PRE', city: 'Přerov', region: 'Olomoucký', sections: ['ry'], memberCount: 54, athleteCount: 26, coachCount: 3 },
-  { id: 14, name: 'KK Brno', code: 'BRN', city: 'Brno', region: 'Jihomoravský', sections: ['dv', 'ry', 'vt'], memberCount: 223, athleteCount: 112, coachCount: 14 },
-  { id: 15, name: 'SK Opava', code: 'OPA', city: 'Opava', region: 'Moravskoslezský', sections: ['vt'], memberCount: 48, athleteCount: 22, coachCount: 2 },
-  { id: 16, name: 'TJ Ostrava', code: 'OST', city: 'Ostrava', region: 'Moravskoslezský', sections: ['dv', 'ry'], memberCount: 167, athleteCount: 84, coachCount: 9 },
-  { id: 17, name: 'KK Plzeň', code: 'PLZ', city: 'Plzeň', region: 'Plzeňský', sections: ['dv'], memberCount: 98, athleteCount: 48, coachCount: 5 },
-  { id: 18, name: 'SK Liberec', code: 'LIB', city: 'Liberec', region: 'Liberecký', sections: ['dv', 'vt'], memberCount: 121, athleteCount: 59, coachCount: 6 },
+  { id: 1, name: 'USK Praha', code: 'USK', city: 'Praha', region: 'Praha', sections: ['dv', 'ry'], memberCount: 245, athleteCount: 128, coachCount: 12, logoUrl: createClubLogo('USK', '#1e3a5f') },
+  { id: 2, name: 'Dukla Praha', code: 'DUK', city: 'Praha', region: 'Praha', sections: ['dv', 'ry'], memberCount: 312, athleteCount: 156, coachCount: 18, logoUrl: createClubLogo('DUK', '#c41e3a') },
+  { id: 3, name: 'SK Brandýs nad Labem', code: 'BRA', city: 'Brandýs nad Labem', region: 'Středočeský', sections: ['ry'], memberCount: 87, athleteCount: 42, coachCount: 5, logoUrl: createClubLogo('BRA', '#2d5a27') },
+  { id: 4, name: 'TJ Jablonec nad Nisou', code: 'JAB', city: 'Jablonec nad Nisou', region: 'Liberecký', sections: ['vt', 'dv'], memberCount: 156, athleteCount: 78, coachCount: 8, logoUrl: createClubLogo('JAB', '#1e88e5') },
+  { id: 5, name: 'KK Roudnice nad Labem', code: 'ROU', city: 'Roudnice nad Labem', region: 'Ústecký', sections: ['vt'], memberCount: 94, athleteCount: 45, coachCount: 4, logoUrl: createClubLogo('ROU', '#6a1b9a') },
+  { id: 6, name: 'SK Trnávka', code: 'TRN', city: 'Trnávka', region: 'Pardubický', sections: ['dv', 'vt'], memberCount: 112, athleteCount: 56, coachCount: 6, logoUrl: createClubLogo('TRN', '#00695c') },
+  { id: 7, name: 'Bohemians Praha', code: 'BOH', city: 'Praha', region: 'Praha', sections: ['dv', 'ry', 'vt'], memberCount: 198, athleteCount: 89, coachCount: 10, logoUrl: createClubLogo('BOH', '#2e7d32') },
+  { id: 8, name: 'KK Hradec Králové', code: 'HKR', city: 'Hradec Králové', region: 'Královéhradecký', sections: ['dv'], memberCount: 134, athleteCount: 67, coachCount: 7, logoUrl: createClubLogo('HKR', '#d84315') },
+  { id: 9, name: 'SK Slavoj Český Krumlov', code: 'CKR', city: 'Český Krumlov', region: 'Jihočeský', sections: ['dv'], memberCount: 89, athleteCount: 43, coachCount: 5, logoUrl: createClubLogo('CKR', '#5d4037') },
+  { id: 10, name: 'TJ Lokomotiva Beroun', code: 'BER', city: 'Beroun', region: 'Středočeský', sections: ['dv', 'vt'], memberCount: 76, athleteCount: 34, coachCount: 4, logoUrl: createClubLogo('BER', '#37474f') },
+  { id: 11, name: 'KK Olomouc', code: 'OLO', city: 'Olomouc', region: 'Olomoucký', sections: ['ry', 'vt'], memberCount: 145, athleteCount: 72, coachCount: 8, logoUrl: createClubLogo('OLO', '#0277bd') },
+  { id: 12, name: 'SK Žilina', code: 'ZIL', city: 'Žilina', region: 'Zlínský', sections: ['dv'], memberCount: 67, athleteCount: 31, coachCount: 3, logoUrl: createClubLogo('ZIL', '#558b2f') },
+  { id: 13, name: 'TJ Přerov', code: 'PRE', city: 'Přerov', region: 'Olomoucký', sections: ['ry'], memberCount: 54, athleteCount: 26, coachCount: 3, logoUrl: createClubLogo('PRE', '#7b1fa2') },
+  { id: 14, name: 'KK Brno', code: 'BRN', city: 'Brno', region: 'Jihomoravský', sections: ['dv', 'ry', 'vt'], memberCount: 223, athleteCount: 112, coachCount: 14, logoUrl: createClubLogo('BRN', '#c62828') },
+  { id: 15, name: 'SK Opava', code: 'OPA', city: 'Opava', region: 'Moravskoslezský', sections: ['vt'], memberCount: 48, athleteCount: 22, coachCount: 2, logoUrl: createClubLogo('OPA', '#00838f') },
+  { id: 16, name: 'TJ Ostrava', code: 'OST', city: 'Ostrava', region: 'Moravskoslezský', sections: ['dv', 'ry'], memberCount: 167, athleteCount: 84, coachCount: 9, logoUrl: createClubLogo('OST', '#1565c0') },
+  { id: 17, name: 'KK Plzeň', code: 'PLZ', city: 'Plzeň', region: 'Plzeňský', sections: ['dv'], memberCount: 98, athleteCount: 48, coachCount: 5, logoUrl: createClubLogo('PLZ', '#f9a825') },
+  { id: 18, name: 'SK Liberec', code: 'LIB', city: 'Liberec', region: 'Liberecký', sections: ['dv', 'vt'], memberCount: 121, athleteCount: 59, coachCount: 6, logoUrl: createClubLogo('LIB', '#0d47a1') },
 ];
 
 const regionOptions = [

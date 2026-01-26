@@ -553,16 +553,20 @@
 /* =============================================================================
    EMBED MODE ADJUSTMENTS
    Match kanoe.cz square borders (0 border-radius)
+   Using !important to ensure override regardless of CSS load order
    ============================================================================= */
 
-.kanoe-embed .csk-stat-card {
-  border-radius: 0;
+.kanoe-embed .csk-stat-card,
+[data-mode="embed"] .csk-stat-card {
+  border-radius: 0 !important;
 }
 
-.kanoe-embed .csk-stat-card--style-aesthetic::before {
-  border-radius: 0;
+.kanoe-embed .csk-stat-card--style-aesthetic::before,
+[data-mode="embed"] .csk-stat-card--style-aesthetic::before {
+  border-radius: 0 !important;
 }
 
-.kanoe-embed .csk-stat-card__icon-container {
-  border-radius: 0;
+.kanoe-embed .csk-stat-card__icon-container,
+[data-mode="embed"] .csk-stat-card__icon-container {
+  border-radius: 0 !important;
 }
