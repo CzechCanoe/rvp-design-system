@@ -6,4 +6,5 @@ export type {
   StatCardColor,
   StatCardTrend,
   StatCardStyleVariant,
+  StatCardColorVariant,
 } from './StatCard';

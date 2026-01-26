@@ -14,6 +14,17 @@ export type StatCardColor =
 export type StatCardTrend = 'up' | 'down' | 'neutral';
 export type StatCardStyleVariant = 'default' | 'aesthetic';
 
+/** Medal and gradient color variants for special visual treatments */
+export type StatCardColorVariant =
+  | 'default'
+  | 'medal-gold'
+  | 'medal-silver'
+  | 'medal-bronze'
+  | 'gradient-primary'
+  | 'gradient-success'
+  | 'gradient-warning'
+  | 'gradient-info';
+
 export interface StatCardProps extends HTMLAttributes<HTMLDivElement> {
   /** Main statistic value to display */
   value: string | number;
@@ -29,8 +40,14 @@ export interface StatCardProps extends HTMLAttributes<HTMLDivElement> {
   color?: StatCardColor;
   /** Style variant for different visual treatments */
   styleVariant?: StatCardStyleVariant;
+  /** Medal or gradient color variant for special cards */
+  colorVariant?: StatCardColorVariant;
+  /** Use gradient background for icon container */
+  iconGradient?: boolean;
   /** Icon to display */
   icon?: ReactNode;
+  /** Sparkline chart or mini visualization */
+  sparkline?: ReactNode;
   /** Trend indicator (up/down/neutral) */
   trend?: StatCardTrend;
   /** Trend value text (e.g. "+12%", "-5%") */
@@ -63,7 +80,10 @@ export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
       size = 'md',
       color = 'default',
       styleVariant = 'default',
+      colorVariant = 'default',
+      iconGradient = false,
       icon,
+      sparkline,
       trend,
       trendValue,
       secondaryValue,
@@ -85,6 +105,7 @@ export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
       `csk-stat-card--${size}`,
       `csk-stat-card--${color}`,
       `csk-stat-card--style-${styleVariant}`,
+      colorVariant !== 'default' && `csk-stat-card--${colorVariant}`,
       isClickable && 'csk-stat-card--clickable',
       loading && 'csk-stat-card--loading',
       className,
@@ -161,7 +182,14 @@ export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
 
         <div className="csk-stat-card__content">
           {icon && (
-            <div className="csk-stat-card__icon-container">
+            <div
+              className={[
+                'csk-stat-card__icon-container',
+                iconGradient && 'csk-stat-card__icon-container--gradient',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+            >
               <span className="csk-stat-card__icon">{icon}</span>
             </div>
           )}
@@ -207,6 +235,10 @@ export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
             )}
           </div>
         </div>
+
+        {sparkline && (
+          <div className="csk-stat-card__sparkline">{sparkline}</div>
+        )}
 
         {footer && <div className="csk-stat-card__footer">{footer}</div>}
       </div>

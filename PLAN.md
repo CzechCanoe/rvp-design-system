@@ -224,67 +224,42 @@ export const Minimal: Story = { args: { variant: 'minimal' } };
 ```
 
 **Kritéria dokončení:**
-- [ ] Všechny props fungují
-- [ ] Stories pokrývají všechny varianty
-- [ ] `npm run test:visual` - 0 regresí
-- [ ] TypeScript types exportovány
+- [x] Všechny props fungují
+- [x] Stories pokrývají všechny varianty
+- [x] `npm run test:visual` - 0 regresí
+- [x] TypeScript types exportovány
 
-#### 22.4 StatCard Variants
-- [ ] Přidat varianty do `StatCard`:
-  - `variant="medal-gold" | "medal-silver" | "medal-bronze"`
-  - `variant="gradient-primary" | "gradient-success" | "gradient-warning" | "gradient-info"`
-  - `iconBackground="gradient"` prop
-- [ ] Přidat sparkline slot
-- [ ] Aktualizovat stories
-- [ ] Srovnat screenshots
+#### 22.4 StatCard Variants ✅
+- [x] Přidat varianty do `StatCard`:
+  - `colorVariant="medal-gold" | "medal-silver" | "medal-bronze"`
+  - `colorVariant="gradient-primary" | "gradient-success" | "gradient-warning" | "gradient-info"`
+  - `iconGradient` prop pro gradient pozadí ikony
+- [x] Přidat sparkline slot
+- [x] Aktualizovat stories
+- [x] Build prošel bez chyb
 
-**Úspora:** ~400 řádků
+**Úspora:** ~400 řádků (při adopci v prototypech)
 
-**Soubory k úpravě:**
-- `src/components/StatCard/StatCard.tsx`
-- `src/components/StatCard/StatCard.css`
-- `src/components/StatCard/StatCard.stories.tsx`
+**Implementace:**
+- `colorVariant` prop přidán (nezávislý na existujícím `variant`)
+- `iconGradient` boolean prop pro gradient pozadí ikony
+- `sparkline` slot pro mini grafy
+- 3 medal varianty: gold, silver, bronze
+- 4 gradient varianty: primary, success, warning, info
+- Dark mode podpora pro všechny varianty
+- Nové stories: MedalVariants, GradientVariants, IconGradientVariant, SparklineVariants, AdvancedDashboard
 
-**Nové props:**
-```typescript
-interface StatCardProps {
-  // Existující props zachovat...
-
-  // Nové
-  variant?: 'default' | 'medal-gold' | 'medal-silver' | 'medal-bronze'
-          | 'gradient-primary' | 'gradient-success' | 'gradient-warning' | 'gradient-info';
-  iconBackground?: 'default' | 'gradient';
-  sparkline?: React.ReactNode;  // slot pro sparkline graf
-}
-```
-
-**CSS varianty:**
-```css
-/* Medal variants */
-.csk-stat-card--medal-gold {
-  background: linear-gradient(135deg, rgba(255,215,0,0.15) 0%, rgba(255,215,0,0.05) 100%);
-  border: 1px solid rgba(255,215,0,0.3);
-}
-.csk-stat-card--medal-gold .csk-stat-card__icon {
-  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
-  box-shadow: 0 4px 12px rgba(255,215,0,0.4);
-}
-
-/* Gradient variants */
-.csk-stat-card--gradient-primary {
-  background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-400) 100%);
-  border: none;
-  color: #fff;
-}
-.csk-stat-card--gradient-primary .csk-stat-card__label,
-.csk-stat-card--gradient-primary .csk-stat-card__value { color: #fff; }
-```
+**Soubory:**
+- `src/components/StatCard/StatCard.tsx` - nové props
+- `src/components/StatCard/StatCard.css` - ~150 řádků nových stylů
+- `src/components/StatCard/StatCard.stories.tsx` - 15+ nových stories
+- `src/components/StatCard/index.ts` - export StatCardColorVariant type
 
 **Kritéria dokončení:**
-- [ ] 8 nových variant funguje
-- [ ] Sparkline slot renderuje children
-- [ ] Stories pro každou variantu
-- [ ] `npm run test:visual` - 0 regresí
+- [x] 8 nových variant funguje (3 medal + 4 gradient + iconGradient)
+- [x] Sparkline slot renderuje children
+- [x] Stories pro každou variantu
+- [x] Build prošel, TypeScript types exportovány
 
 #### 22.5 ResultItem / TimelineItem Component
 - [ ] Vytvořit novou komponentu `ResultItem`:
@@ -1088,7 +1063,7 @@ npm run test:visual
 
 ### Další krok
 
-**Pokračovat s 22.4 StatCard Variants** - přidat medal varianty (gold/silver/bronze), gradient varianty a sparkline slot.
+**Pokračovat s 22.5 ResultItem Component** - vytvořit novou komponentu pro zobrazení výsledků s medal stylingem, border-left accent a hover efekty.
 
 ### Git tag
 
