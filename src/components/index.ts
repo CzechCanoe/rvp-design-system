@@ -291,3 +291,19 @@ export type {
   WizardSize,
   WizardSection,
 } from './Wizard';
+
+// ActionCard
+export { ActionCard } from './ActionCard';
+export type {
+  ActionCardProps,
+  ActionCardIconBackground,
+  ActionCardSize,
+} from './ActionCard';
+
+// DateBadge
+export { DateBadge } from './DateBadge';
+export type {
+  DateBadgeProps,
+  DateBadgeSection,
+  DateBadgeSize,
+} from './DateBadge';

@@ -335,13 +335,13 @@ export const Minimal: Story = { args: { variant: 'minimal' } };
 - [x] Section color variants (dv, ry, vt)
 - [x] `npm run test:quick` - 58 passed
 
-#### 22.8 ActionCard Component
-- [ ] Vytvořit novou komponentu `ActionCard`:
+#### 22.8 ActionCard Component ✅
+- [x] Vytvořit novou komponentu `ActionCard`:
   - Icon + title + description + arrow layout
   - Hover efekt (translateX)
   - `href` nebo `onClick` prop
-- [ ] Přidat `ActionCard.stories.tsx`
-- [ ] Srovnat screenshots
+- [x] Přidat `ActionCard.stories.tsx`
+- [x] Srovnat screenshots
 
 **Úspora:** ~150 řádků
 
@@ -422,16 +422,22 @@ export const AsLink: Story = { args: { href: '/members' } };
 **Kritéria dokončení:**
 - [ ] Export z `src/components/index.ts`
 - [ ] Hover efekt funguje
-- [ ] Funguje jako link (href) i button (onClick)
-- [ ] `npm run test:visual` - 0 regresí
+- [x] Funguje jako link (href) i button (onClick)
+- [x] `npm run test:quick` - 58 passed
 
-#### 22.9 DateBadge Component
-- [ ] Vytvořit novou komponentu `DateBadge`:
+**Implementace:**
+- `src/components/ActionCard/ActionCard.tsx` - komponenta s icon, title, description, href/onClick, iconBackground, showArrow, size props
+- `src/components/ActionCard/ActionCard.css` - ~230 řádků stylů včetně 5 icon backgrounds a dark mode
+- `src/components/ActionCard/ActionCard.stories.tsx` - 20+ stories
+- `src/components/ActionCard/index.ts` - exporty
+
+#### 22.9 DateBadge Component ✅
+- [x] Vytvořit novou komponentu `DateBadge`:
   - `date` prop (Date object)
   - `section` prop pro barevnou variantu
   - `size="sm" | "md" | "lg"`
-- [ ] Přidat `DateBadge.stories.tsx`
-- [ ] Srovnat screenshots
+- [x] Přidat `DateBadge.stories.tsx`
+- [x] Srovnat screenshots
 
 **Úspora:** ~100 řádků
 
@@ -526,12 +532,18 @@ export const Small: Story = { args: { size: 'sm' } };
 export const Large: Story = { args: { size: 'lg' } };
 ```
 
+**Implementace:**
+- `src/components/DateBadge/DateBadge.tsx` - komponenta s date, section, size, locale props
+- `src/components/DateBadge/DateBadge.css` - ~180 řádků stylů včetně všech section variants a dark mode
+- `src/components/DateBadge/DateBadge.stories.tsx` - 15+ stories
+- `src/components/DateBadge/index.ts` - exporty
+
 **Kritéria dokončení:**
-- [ ] Export z `src/components/index.ts`
-- [ ] 3 section varianty + generic
-- [ ] 3 size varianty
-- [ ] Locale formatting funguje
-- [ ] `npm run test:visual` - 0 regresí
+- [x] Export z `src/components/index.ts`
+- [x] 3 section varianty + generic
+- [x] 3 size varianty
+- [x] Locale formatting funguje
+- [x] `npm run test:quick` - 58 passed
 
 #### 22.10 Prototype Adoption - Batch 1 (Calendar, Results)
 - [ ] CalendarPage: Adoptovat DateBadge

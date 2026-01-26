@@ -1,0 +1,218 @@
+/**
+ * DateBadge Styles - CSK RVP Design System
+ *
+ * Compact date display with day number and month abbreviation.
+ * Sections: generic, dv, ry, vt
+ * Sizes: sm, md, lg
+ */
+
+/* =============================================================================
+   BASE STYLES
+   ============================================================================= */
+
+.csk-date-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+  transition:
+    background var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out);
+}
+
+.csk-date-badge__day {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
+.csk-date-badge__month {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+/* =============================================================================
+   SIZE VARIANTS
+   ============================================================================= */
+
+/* Small */
+.csk-date-badge--sm {
+  width: 44px;
+  height: 44px;
+  gap: var(--spacing-0-5);
+}
+
+.csk-date-badge--sm .csk-date-badge__day {
+  font-size: var(--text-lg-size);
+}
+
+.csk-date-badge--sm .csk-date-badge__month {
+  font-size: 9px;
+}
+
+/* Medium (default) */
+.csk-date-badge--md {
+  width: 56px;
+  height: 56px;
+  gap: var(--spacing-1);
+}
+
+.csk-date-badge--md .csk-date-badge__day {
+  font-size: var(--text-xl-size);
+}
+
+.csk-date-badge--md .csk-date-badge__month {
+  font-size: var(--text-xs-size);
+}
+
+/* Large */
+.csk-date-badge--lg {
+  width: 72px;
+  height: 72px;
+  gap: var(--spacing-1);
+}
+
+.csk-date-badge--lg .csk-date-badge__day {
+  font-size: var(--text-2xl-size);
+}
+
+.csk-date-badge--lg .csk-date-badge__month {
+  font-size: var(--text-sm-size);
+}
+
+/* =============================================================================
+   SECTION COLOR VARIANTS
+   ============================================================================= */
+
+/* Generic (default) - neutral gray */
+.csk-date-badge--generic {
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-tertiary) 0%,
+    var(--color-bg-secondary) 100%
+  );
+  border: 1px solid var(--color-border-primary);
+}
+
+/* DV Section - Blue */
+.csk-date-badge--dv {
+  background: linear-gradient(
+    135deg,
+    #dbeafe 0%,
+    #eff6ff 100%
+  );
+  border: 1px solid var(--color-section-dv, #2563eb);
+}
+
+.csk-date-badge--dv .csk-date-badge__day {
+  color: var(--color-section-dv, #2563eb);
+}
+
+.csk-date-badge--dv .csk-date-badge__month {
+  color: #3b82f6;
+}
+
+/* RY Section - Green */
+.csk-date-badge--ry {
+  background: linear-gradient(
+    135deg,
+    #dcfce7 0%,
+    #f0fdf4 100%
+  );
+  border: 1px solid var(--color-section-ry, #22c55e);
+}
+
+.csk-date-badge--ry .csk-date-badge__day {
+  color: var(--color-section-ry, #22c55e);
+}
+
+.csk-date-badge--ry .csk-date-badge__month {
+  color: #16a34a;
+}
+
+/* VT Section - Red */
+.csk-date-badge--vt {
+  background: linear-gradient(
+    135deg,
+    #fee2e2 0%,
+    #fef2f2 100%
+  );
+  border: 1px solid var(--color-section-vt, #ef4444);
+}
+
+.csk-date-badge--vt .csk-date-badge__day {
+  color: var(--color-section-vt, #ef4444);
+}
+
+.csk-date-badge--vt .csk-date-badge__month {
+  color: #dc2626;
+}
+
+/* =============================================================================
+   DARK MODE
+   ============================================================================= */
+
+[data-theme='dark'] .csk-date-badge--generic {
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-secondary) 0%,
+    var(--color-bg-tertiary) 100%
+  );
+  border-color: var(--color-border-secondary);
+}
+
+[data-theme='dark'] .csk-date-badge--dv {
+  background: linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.2) 0%,
+    rgba(37, 99, 235, 0.1) 100%
+  );
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+[data-theme='dark'] .csk-date-badge--dv .csk-date-badge__day {
+  color: #60a5fa;
+}
+
+[data-theme='dark'] .csk-date-badge--dv .csk-date-badge__month {
+  color: #93c5fd;
+}
+
+[data-theme='dark'] .csk-date-badge--ry {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 197, 94, 0.2) 0%,
+    rgba(34, 197, 94, 0.1) 100%
+  );
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+[data-theme='dark'] .csk-date-badge--ry .csk-date-badge__day {
+  color: #4ade80;
+}
+
+[data-theme='dark'] .csk-date-badge--ry .csk-date-badge__month {
+  color: #86efac;
+}
+
+[data-theme='dark'] .csk-date-badge--vt {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.2) 0%,
+    rgba(239, 68, 68, 0.1) 100%
+  );
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+[data-theme='dark'] .csk-date-badge--vt .csk-date-badge__day {
+  color: #f87171;
+}
+
+[data-theme='dark'] .csk-date-badge--vt .csk-date-badge__month {
+  color: #fca5a5;
+}

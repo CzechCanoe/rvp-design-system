@@ -1,0 +1,279 @@
+/**
+ * ActionCard Styles - CSK RVP Design System
+ *
+ * Interactive card with icon, title, description, and arrow animation.
+ * Icon backgrounds: primary, success, warning, info, energy
+ * Sizes: sm, md, lg
+ */
+
+/* =============================================================================
+   BASE STYLES
+   ============================================================================= */
+
+.csk-action-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-secondary) 0%,
+    var(--color-bg-primary) 100%
+  );
+  border: 1px solid var(--color-border-primary);
+  cursor: pointer;
+  transition:
+    border-color var(--duration-normal) var(--ease-out),
+    background var(--duration-normal) var(--ease-out),
+    transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.csk-action-card:hover {
+  border-color: var(--color-primary-300);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-50) 0%,
+    var(--color-bg-primary) 100%
+  );
+  transform: translateX(4px);
+  box-shadow: var(--shadow-md);
+}
+
+.csk-action-card:active {
+  transform: translateX(2px);
+}
+
+.csk-action-card:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   ICON
+   ============================================================================= */
+
+.csk-action-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.csk-action-card:hover .csk-action-card__icon {
+  transform: scale(1.05);
+}
+
+/* Icon background variants */
+.csk-action-card--icon-primary .csk-action-card__icon {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-500) 0%,
+    var(--color-primary-400) 100%
+  );
+}
+
+.csk-action-card--icon-success .csk-action-card__icon {
+  background: linear-gradient(
+    135deg,
+    var(--color-success-500) 0%,
+    var(--color-success-400) 100%
+  );
+}
+
+.csk-action-card--icon-warning .csk-action-card__icon {
+  background: linear-gradient(
+    135deg,
+    var(--color-warning-500) 0%,
+    var(--color-warning-400) 100%
+  );
+}
+
+.csk-action-card--icon-info .csk-action-card__icon {
+  background: linear-gradient(
+    135deg,
+    var(--color-info-500) 0%,
+    var(--color-info-400) 100%
+  );
+}
+
+.csk-action-card--icon-energy .csk-action-card__icon {
+  background: linear-gradient(
+    135deg,
+    var(--color-energy-start) 0%,
+    var(--color-energy-end) 100%
+  );
+}
+
+/* =============================================================================
+   CONTENT
+   ============================================================================= */
+
+.csk-action-card__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.csk-action-card__title {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+}
+
+.csk-action-card__description {
+  font-size: var(--text-sm-size);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+/* =============================================================================
+   ARROW
+   ============================================================================= */
+
+.csk-action-card__arrow {
+  color: var(--color-text-tertiary);
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+  flex-shrink: 0;
+}
+
+.csk-action-card:hover .csk-action-card__arrow {
+  transform: translateX(4px);
+  color: var(--color-primary-500);
+}
+
+/* =============================================================================
+   SIZE VARIANTS
+   ============================================================================= */
+
+/* Small */
+.csk-action-card--sm {
+  padding: var(--spacing-3);
+  gap: var(--spacing-3);
+}
+
+.csk-action-card--sm .csk-action-card__icon {
+  width: 40px;
+  height: 40px;
+}
+
+.csk-action-card--sm .csk-action-card__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.csk-action-card--sm .csk-action-card__title {
+  font-size: var(--text-sm-size);
+}
+
+.csk-action-card--sm .csk-action-card__description {
+  font-size: var(--text-xs-size);
+}
+
+/* Medium - default, minimal overrides */
+.csk-action-card--md .csk-action-card__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Large */
+.csk-action-card--lg {
+  padding: var(--spacing-5);
+  gap: var(--spacing-5);
+}
+
+.csk-action-card--lg .csk-action-card__icon {
+  width: 56px;
+  height: 56px;
+}
+
+.csk-action-card--lg .csk-action-card__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.csk-action-card--lg .csk-action-card__title {
+  font-size: var(--text-lg-size);
+}
+
+.csk-action-card--lg .csk-action-card__description {
+  font-size: var(--text-base-size);
+}
+
+/* =============================================================================
+   DARK MODE
+   ============================================================================= */
+
+[data-theme='dark'] .csk-action-card {
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-tertiary) 0%,
+    var(--color-bg-secondary) 100%
+  );
+  border-color: var(--color-border-secondary);
+}
+
+[data-theme='dark'] .csk-action-card:hover {
+  border-color: var(--color-primary-400);
+  background: linear-gradient(
+    135deg,
+    rgba(17, 118, 166, 0.15) 0%,
+    var(--color-bg-secondary) 100%
+  );
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme='dark'] .csk-action-card:hover .csk-action-card__arrow {
+  color: var(--color-primary-400);
+}
+
+/* =============================================================================
+   RESPONSIVE
+   ============================================================================= */
+
+@media (max-width: 480px) {
+  .csk-action-card {
+    padding: var(--spacing-3);
+    gap: var(--spacing-3);
+  }
+
+  .csk-action-card__icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .csk-action-card__icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .csk-action-card__description {
+    display: none;
+  }
+
+  .csk-action-card--lg {
+    padding: var(--spacing-4);
+    gap: var(--spacing-4);
+  }
+
+  .csk-action-card--lg .csk-action-card__icon {
+    width: 48px;
+    height: 48px;
+  }
+}
