@@ -209,7 +209,7 @@
 }
 
 /* ----------------------------------------------------------------------------
-   Alerts Layout
+   Alerts Layout - using ListItem component
    ---------------------------------------------------------------------------- */
 
 .dashboard-alerts {
@@ -221,49 +221,6 @@
 .dashboard-alert-list {
   display: flex;
   flex-direction: column;
-}
-
-.dashboard-alert-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-  padding: var(--spacing-4) var(--spacing-5);
-}
-
-.dashboard-alert-item:last-child {
-  border-bottom: none;
-}
-
-.dashboard-alert-icon {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.dashboard-alert-icon svg {
-  width: 20px;
-  height: 20px;
-}
-
-.dashboard-alert-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.dashboard-alert-title {
-  margin: 0;
-}
-
-.dashboard-alert-description {
-  margin: var(--spacing-1) 0 0;
-}
-
-.dashboard-alert-action {
-  flex-shrink: 0;
 }
 
 /* ----------------------------------------------------------------------------
@@ -345,7 +302,7 @@
 }
 
 /* ----------------------------------------------------------------------------
-   Quick Actions Layout
+   Quick Actions Layout - using ActionCard component
    ---------------------------------------------------------------------------- */
 
 .dashboard-quick-actions {
@@ -353,46 +310,6 @@
   flex-direction: column;
   gap: var(--spacing-3);
   padding: var(--spacing-4);
-}
-
-.dashboard-quick-action {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
-  padding: var(--spacing-4);
-  border-radius: var(--radius-xl);
-  cursor: pointer;
-}
-
-.dashboard-quick-action-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.dashboard-quick-action-icon svg {
-  width: 24px;
-  height: 24px;
-}
-
-.dashboard-quick-action-text {
-  flex: 1;
-}
-
-.dashboard-quick-action-title {
-  margin: 0;
-}
-
-.dashboard-quick-action-description {
-  margin: var(--spacing-1) 0 0;
-}
-
-.dashboard-quick-action-arrow svg {
-  width: 20px;
-  height: 20px;
 }
 
 /* ----------------------------------------------------------------------------
@@ -698,15 +615,6 @@
     flex-direction: column;
   }
 
-  .dashboard-quick-action {
-    padding: var(--spacing-3);
-  }
-
-  .dashboard-quick-action-description {
-    display: none;
-  }
-
-  .dashboard-alert-item,
   .dashboard-race-item,
   .dashboard-activity-item {
     padding: var(--spacing-3) var(--spacing-4);
@@ -883,53 +791,8 @@
   box-shadow: var(--shadow-xl);
 }
 
-/* Gradient stat cards */
-.dashboard-stat-card--gradient-primary {
-  background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-400) 100%) !important;
-  border: none !important;
-  color: #fff !important;
-}
-
-.dashboard-stat-card--gradient-success {
-  background: linear-gradient(135deg, var(--color-success-600, #059669) 0%, var(--color-success-400, #34d399) 100%) !important;
-  border: none !important;
-  color: #fff !important;
-}
-
-.dashboard-stat-card--gradient-warning {
-  background: linear-gradient(135deg, var(--color-warning-600, #d97706) 0%, var(--color-warning-400, #fbbf24) 100%) !important;
-  border: none !important;
-  color: #fff !important;
-}
-
-.dashboard-stat-card--gradient-info {
-  background: linear-gradient(135deg, var(--color-info-600, #0284c7) 0%, var(--color-info-400, #38bdf8) 100%) !important;
-  border: none !important;
-  color: #fff !important;
-}
-
-.dashboard-stat-card--gradient-primary .csk-stat-card__label,
-.dashboard-stat-card--gradient-primary .csk-stat-card__value,
-.dashboard-stat-card--gradient-primary .csk-stat-card__secondary,
-.dashboard-stat-card--gradient-success .csk-stat-card__label,
-.dashboard-stat-card--gradient-success .csk-stat-card__value,
-.dashboard-stat-card--gradient-success .csk-stat-card__secondary,
-.dashboard-stat-card--gradient-warning .csk-stat-card__label,
-.dashboard-stat-card--gradient-warning .csk-stat-card__value,
-.dashboard-stat-card--gradient-warning .csk-stat-card__secondary,
-.dashboard-stat-card--gradient-info .csk-stat-card__label,
-.dashboard-stat-card--gradient-info .csk-stat-card__value,
-.dashboard-stat-card--gradient-info .csk-stat-card__secondary {
-  color: #fff !important;
-}
-
-.dashboard-stat-card--gradient-primary .csk-stat-card__icon-container,
-.dashboard-stat-card--gradient-success .csk-stat-card__icon-container,
-.dashboard-stat-card--gradient-warning .csk-stat-card__icon-container,
-.dashboard-stat-card--gradient-info .csk-stat-card__icon-container {
-  background: rgba(255, 255, 255, 0.2) !important;
-  color: #fff !important;
-}
+/* Gradient stat cards - using StatCard colorVariant prop
+   StatCard component handles gradient styling internally. */
 
 .dashboard-stat-sparkline__bar {
   background: rgba(255, 255, 255, 0.3);
@@ -977,43 +840,9 @@
 }
 
 /* ----------------------------------------------------------------------------
-   Alerts Visual
+   Alerts Visual - using ListItem component
+   ListItem handles its own styling via type and variant props.
    ---------------------------------------------------------------------------- */
-
-.dashboard-alert-item {
-  border-bottom: 1px solid var(--color-border);
-  transition: background-color var(--transition-fast);
-}
-
-.dashboard-alert-item:hover {
-  background-color: var(--color-surface-secondary);
-}
-
-.dashboard-alert-icon--warning {
-  background: linear-gradient(135deg, var(--color-warning-100) 0%, var(--color-warning-50) 100%);
-  color: var(--color-warning-600);
-}
-
-.dashboard-alert-icon--danger {
-  background: linear-gradient(135deg, var(--color-danger-100) 0%, var(--color-danger-50) 100%);
-  color: var(--color-danger-600);
-}
-
-.dashboard-alert-icon--info {
-  background: linear-gradient(135deg, var(--color-info-100) 0%, var(--color-info-50) 100%);
-  color: var(--color-info-600);
-}
-
-.dashboard-alert-title {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-primary);
-}
-
-.dashboard-alert-description {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-}
 
 /* ----------------------------------------------------------------------------
    Races Visual
@@ -1084,48 +913,9 @@
 }
 
 /* ----------------------------------------------------------------------------
-   Quick Actions Visual
+   Quick Actions Visual - using ActionCard component
+   ActionCard handles its own styling via iconBackground prop.
    ---------------------------------------------------------------------------- */
-
-.dashboard-quick-action {
-  background: linear-gradient(135deg, var(--color-surface-secondary) 0%, var(--color-surface-primary) 100%);
-  border: 1px solid var(--color-border);
-  transition: all var(--transition-normal);
-}
-
-.dashboard-quick-action:hover {
-  border-color: var(--color-primary-300);
-  background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-surface-primary) 100%);
-  transform: translateX(4px);
-  box-shadow: var(--shadow-md);
-}
-
-.dashboard-quick-action-icon {
-  background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-400) 100%);
-  color: #fff;
-  box-shadow: var(--shadow-sm);
-}
-
-.dashboard-quick-action-title {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-}
-
-.dashboard-quick-action-description {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-}
-
-.dashboard-quick-action-arrow {
-  color: var(--color-text-muted);
-  transition: all var(--transition-fast);
-}
-
-.dashboard-quick-action:hover .dashboard-quick-action-arrow {
-  transform: translateX(4px);
-  color: var(--color-primary);
-}
 
 /* ----------------------------------------------------------------------------
    Activity Visual
@@ -1348,13 +1138,7 @@
   background: var(--color-surface-tertiary);
 }
 
-[data-theme="dark"] .dashboard-quick-action {
-  background: linear-gradient(135deg, var(--color-surface-tertiary) 0%, var(--color-surface-secondary) 100%);
-}
-
-[data-theme="dark"] .dashboard-quick-action:hover {
-  background: linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-surface-secondary) 100%);
-}
+/* Note: Quick action dark mode handled by ActionCard component */
 
 [data-theme="dark"] .dashboard-race-date {
   background: var(--color-surface-tertiary);
@@ -1375,39 +1159,9 @@
     animation: none;
   }
 
-  .dashboard-quick-action,
   .dashboard-stats-grid .csk-stat-card {
     transition: none;
   }
 }
 
-/* ----------------------------------------------------------------------------
-   Energy Accent for Critical Alerts (Phase 18.9)
-   ---------------------------------------------------------------------------- */
-
-.dashboard-alert-item--energy {
-  border-left: 3px solid var(--color-energy-500, #f97316);
-  background: linear-gradient(
-    90deg,
-    rgba(249, 115, 22, 0.08) 0%,
-    transparent 30%
-  );
-  animation: dashboard-alert-energy-pulse 3s ease-in-out infinite;
-}
-
-@keyframes dashboard-alert-energy-pulse {
-  0%, 100% {
-    box-shadow: inset 0 0 0 0 rgba(249, 115, 22, 0);
-  }
-  50% {
-    box-shadow: inset 0 0 12px rgba(249, 115, 22, 0.1);
-  }
-}
-
-[data-theme="dark"] .dashboard-alert-item--energy {
-  background: linear-gradient(
-    90deg,
-    rgba(249, 115, 22, 0.15) 0%,
-    transparent 30%
-  );
-}
+/* Note: Energy accent for critical alerts handled by ListItem type="energy" */

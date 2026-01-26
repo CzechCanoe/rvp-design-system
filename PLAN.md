@@ -36,8 +36,8 @@
 | # | Prototype | CSS před→po | Hlavní změny | Status |
 |---|-----------|-------------|--------------|--------|
 | 1 | **ClubPublicProfile** | 787→466 | `.club-hero`→HeroSection | ✅ |
-| 2 | **RegistrationPage** | 1772→400 | custom wizard→Wizard komponenta | |
-| 3 | **DashboardPage** | 1413→350 | stat cards→StatCard, alerts→ListItem, actions→ActionCard | |
+| 2 | **RegistrationPage** | 1772→1603 | custom wizard→Wizard komponenta | ✅ |
+| 3 | **DashboardPage** | 1413→1167 | stat cards→StatCard, alerts→ListItem, actions→ActionCard | ✅ |
 | 4 | **AthletePublicProfile** | 1265→322 | hero→HeroSection, results→ResultItem | ✅ |
 | 5 | **ResultsPage** | 810→250 | Card header→HeroSection | |
 | 6 | **EventDetailPage** | 1256→300 | hero→HeroSection, DateBadge | |
@@ -45,7 +45,7 @@
 | 8 | **CalendarPage** | 347→250 | optional DateBadge | |
 | 9 | **LivePage** | 2778→1500 | hero→HeroSection (modály ponechat) | |
 
-**Aktuální progress:** 2052→788 řádků CSS pro dokončené prototypy
+**Aktuální progress:** 5237→4537 řádků CSS pro dokončené prototypy (4 z 9)
 
 ---
 
@@ -61,54 +61,34 @@
 
 ---
 
-### 23.2 RegistrationPage
+### 23.2 RegistrationPage ✅
 
-```tsx
-// PŘED: custom .registration-wizard-step (~200 řádků)
-// PO:
-<HeroSection section={event.section} variant="compact" title="Registrace" wave />
-
-<Wizard
-  steps={[
-    { id: 'personal', label: 'Osobní údaje', icon: 'user' },
-    { id: 'category', label: 'Kategorie', icon: 'flag' },
-    { id: 'payment', label: 'Platba', icon: 'credit-card' },
-  ]}
-  activeStep={currentStep}
-  section={event.section}
-/>
-```
+**Dokončeno:** CSS 1772→1603 řádků (-10%)
 
 **Kroky:**
-- [ ] custom hero → `<HeroSection>`
-- [ ] `.registration-wizard-step` → `<Wizard>`
-- [ ] Smazat wizard VISUAL STYLES
-- [ ] Update snapshots
+- [x] custom `WizardStep` component → `<Wizard>` DS komponenta
+- [x] Smazat wizard layout CSS (~85 řádků)
+- [x] Smazat wizard visual CSS (~85 řádků)
+- [x] Update snapshots
+
+**Poznámka:** Hero section ponechán (komplexní s breadcrumbs a deadline stats)
 
 ---
 
-### 23.3 DashboardPage
+### 23.3 DashboardPage ✅
 
-```tsx
-// PŘED: custom stat cards, alert items, quick actions
-// PO:
-<HeroSection variant="minimal" title={`Vítejte, ${user.name}`} wave />
-
-<StatCard colorVariant="gradient-primary" icon={<Icon name="calendar" />} value="12" label="Závodů" />
-
-{alerts.map(a => (
-  <ListItem variant="alert" type={a.type} icon={<Icon name={a.icon} />} title={a.title} />
-))}
-
-<ActionCard icon={<Icon name="user-plus" />} title="Přidat člena" href="/add" iconBackground="primary" />
-```
+**Dokončeno:** CSS 1413→1167 řádků (-17%)
 
 **Kroky:**
-- [ ] custom hero → `<HeroSection variant="minimal">`
-- [ ] `.dashboard-stat-card--gradient-*` → `<StatCard colorVariant>`
-- [ ] `.dashboard-alert-item` → `<ListItem variant="alert">`
-- [ ] `.dashboard-quick-action` → `<ActionCard>`
-- [ ] Update snapshots
+- [x] `.dashboard-stat-card--gradient-*` wrapper divy → `<StatCard colorVariant>` prop
+- [x] `.dashboard-alert-item` → `<ListItem variant="alert" type>`
+- [x] `.dashboard-quick-action` → `<ActionCard iconBackground>`
+- [x] Smazat alert layout/visual CSS (~80 řádků)
+- [x] Smazat quick action layout/visual CSS (~90 řádků)
+- [x] Smazat gradient wrapper CSS (~50 řádků)
+- [x] Update snapshots
+
+**Poznámka:** Page header ponechán (custom pro embed/satellite varianty)
 
 ---
 

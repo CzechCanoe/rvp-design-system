@@ -249,92 +249,11 @@
 }
 
 /* ----------------------------------------------------------------------------
-   1.4 Wizard Layout
+   1.4 Wizard Layout - using DS Wizard component
    ---------------------------------------------------------------------------- */
 
 .registration-page__wizard {
   margin-bottom: var(--spacing-8);
-  padding: var(--spacing-6);
-}
-
-.registration-page__wizard-steps {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-}
-
-.registration-wizard-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-  position: relative;
-}
-
-.registration-wizard-step__indicator {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  position: relative;
-}
-
-.registration-wizard-step__circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  flex-shrink: 0;
-  z-index: 1;
-}
-
-.registration-wizard-step__circle svg {
-  width: 20px;
-  height: 20px;
-}
-
-.registration-wizard-step__line {
-  position: absolute;
-  top: 50%;
-  left: calc(50% + 24px);
-  right: calc(-50% + 24px);
-  height: 3px;
-  transform: translateY(-50%);
-}
-
-/* Hide line on last step */
-.registration-wizard-step:last-child .registration-wizard-step__line {
-  display: none;
-}
-
-.registration-wizard-step__content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-top: var(--spacing-3);
-}
-
-.registration-wizard-step__number {
-  margin-bottom: var(--spacing-1);
-}
-
-/* Mobile wizard */
-@media (max-width: 640px) {
-  .registration-wizard-step__content {
-    display: none;
-  }
-
-  .registration-wizard-step__circle {
-    width: 40px;
-    height: 40px;
-  }
-
-  .registration-wizard-step__circle svg {
-    width: 18px;
-    height: 18px;
-  }
 }
 
 /* ----------------------------------------------------------------------------
@@ -901,91 +820,9 @@
 }
 
 /* ----------------------------------------------------------------------------
-   2.4 Wizard Visual
+   2.4 Wizard Visual - using DS Wizard component
+   Wizard component handles its own styling via section prop.
    ---------------------------------------------------------------------------- */
-
-.registration-page__wizard {
-  background: var(--color-bg-secondary);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-sm);
-}
-
-.registration-wizard-step__circle {
-  border-radius: 50%;
-  background: var(--color-bg-tertiary);
-  border: 2px solid var(--color-border-secondary);
-  color: var(--color-text-tertiary);
-  transition: all var(--transition-normal);
-}
-
-.registration-wizard-step__line {
-  background: var(--color-border-primary);
-  transition: background-color var(--transition-normal);
-}
-
-/* Completed step line */
-.registration-wizard-step--completed .registration-wizard-step__line {
-  background: var(--color-primary);
-}
-
-.registration-wizard-step__number {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.registration-wizard-step__label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
-}
-
-/* Active Step Visual */
-.registration-wizard-step--active .registration-wizard-step__circle {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  color: white;
-  box-shadow: 0 0 0 4px var(--color-primary-bg), 0 4px 12px rgba(var(--color-primary-rgb), 0.3);
-}
-
-.registration-page--dv .registration-wizard-step--active .registration-wizard-step__circle {
-  background: #0369a1;
-  border-color: #0369a1;
-  box-shadow: 0 0 0 4px rgba(3, 105, 161, 0.1), 0 4px 12px rgba(3, 105, 161, 0.3);
-}
-
-.registration-page--ry .registration-wizard-step--active .registration-wizard-step__circle {
-  background: #059669;
-  border-color: #059669;
-  box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1), 0 4px 12px rgba(5, 150, 105, 0.3);
-}
-
-.registration-page--vt .registration-wizard-step--active .registration-wizard-step__circle {
-  background: #dc2626;
-  border-color: #dc2626;
-  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1), 0 4px 12px rgba(220, 38, 38, 0.3);
-}
-
-.registration-wizard-step--active .registration-wizard-step__label {
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-semibold);
-}
-
-/* Completed Step Visual */
-.registration-wizard-step--completed .registration-wizard-step__circle {
-  background: var(--color-success);
-  border-color: var(--color-success);
-  color: white;
-}
-
-.registration-wizard-step--completed .registration-wizard-step__line {
-  background: var(--color-success);
-}
-
-.registration-wizard-step--completed .registration-wizard-step__label {
-  color: var(--color-success);
-}
 
 /* ----------------------------------------------------------------------------
    2.5 Step Card Visual
@@ -1505,10 +1342,7 @@
     linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%);
 }
 
-/* Wizard with staggered reveal */
-.registration-page--aesthetic .registration-page__wizard {
-  animation: csk-reveal var(--duration-reveal) var(--ease-sport) both;
-}
+/* Note: Wizard animation handled by DS Wizard component */
 
 /* Step cards with reveal animation */
 .registration-page--aesthetic .registration-page__step-card {
@@ -1756,13 +1590,10 @@
    ---------------------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
-  .registration-wizard-step__circle,
-  .registration-wizard-step__line,
   .registration-page__athlete-item {
     transition: none;
   }
 
-  .registration-page--aesthetic .registration-page__wizard,
   .registration-page--aesthetic .registration-page__step-card,
   .registration-page--aesthetic .registration-page__sidebar > * {
     animation: none;

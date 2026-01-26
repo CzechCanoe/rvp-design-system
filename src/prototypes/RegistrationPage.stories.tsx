@@ -16,6 +16,7 @@ import { EmptyState } from '../components/EmptyState';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import { Icon } from '../components/Icon';
 import { CSKLogo } from '../components/CSKLogo';
+import { Wizard } from '../components/Wizard';
 import './RegistrationPage.css';
 
 // ============================================================================
@@ -156,38 +157,6 @@ function calculateAge(birthYear: number): number {
 function isCrewCategory(category: string): boolean {
   return category.startsWith('C2');
 }
-
-// ============================================================================
-// Wizard Step Component
-// ============================================================================
-
-interface WizardStepProps {
-  step: number;
-  currentStep: number;
-  label: string;
-  icon: React.ReactNode;
-  isLast?: boolean;
-}
-
-const WizardStep = ({ step, currentStep, label, icon, isLast = false }: WizardStepProps) => {
-  const isActive = step === currentStep;
-  const isCompleted = step < currentStep;
-
-  return (
-    <div className={`registration-wizard-step ${isActive ? 'registration-wizard-step--active' : ''} ${isCompleted ? 'registration-wizard-step--completed' : ''}`}>
-      <div className="registration-wizard-step__indicator">
-        <div className="registration-wizard-step__circle">
-          {isCompleted ? <Icon name="check-circle" size="sm" /> : icon}
-        </div>
-        {!isLast && <div className="registration-wizard-step__line" />}
-      </div>
-      <div className="registration-wizard-step__content">
-        <span className="registration-wizard-step__number">Krok {step + 1}</span>
-        <span className="registration-wizard-step__label">{label}</span>
-      </div>
-    </div>
-  );
-};
 
 // ============================================================================
 // Inner Page Component (needs ToastProvider context)
@@ -345,11 +314,11 @@ const RegistrationPageInner = ({
     }, 0);
   }, [entries]);
 
-  // Steps configuration
-  const steps = [
-    { id: 'header', label: 'Záhlaví přihlášky', icon: <Icon name="file-text" size="md" /> },
+  // Steps configuration for Wizard component
+  const wizardSteps = [
+    { id: 'header', label: 'Záhlaví přihlášky', icon: <Icon name="file-text" size="sm" /> },
     { id: 'athletes', label: 'Výběr závodníků', icon: <Icon name="users" size="sm" /> },
-    { id: 'summary', label: 'Shrnutí a odeslání', icon: <Icon name="clipboard-check" size="md" /> },
+    { id: 'summary', label: 'Shrnutí a odeslání', icon: <Icon name="clipboard-check" size="sm" /> },
   ];
 
   // Calculate time to deadline
@@ -653,21 +622,14 @@ const RegistrationPageInner = ({
       {/* Main content */}
       <main className="registration-page__main">
         <div className="registration-page__container">
-          {/* Wizard Progress */}
-          <div className="registration-page__wizard">
-            <div className="registration-page__wizard-steps">
-              {steps.map((step, index) => (
-                <WizardStep
-                  key={step.id}
-                  step={index}
-                  currentStep={currentStep}
-                  label={step.label}
-                  icon={step.icon}
-                  isLast={index === steps.length - 1}
-                />
-              ))}
-            </div>
-          </div>
+          {/* Wizard Progress - using DS Wizard component */}
+          <Wizard
+            steps={wizardSteps}
+            activeStep={currentStep}
+            section={section}
+            size="lg"
+            className="registration-page__wizard"
+          />
 
           {/* Content Grid */}
           <div className="registration-page__content">

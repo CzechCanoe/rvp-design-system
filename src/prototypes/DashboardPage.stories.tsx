@@ -14,6 +14,8 @@ import { Avatar } from '../components/Avatar';
 import { LiveIndicator } from '../components/LiveIndicator';
 import { CSKLogo } from '../components/CSKLogo';
 import { KanoeCzContext } from '../components/KanoeCzContext';
+import { ListItem } from '../components/ListItem';
+import { ActionCard } from '../components/ActionCard';
 import './DashboardPage.css';
 
 // ============================================================================
@@ -640,55 +642,47 @@ const DashboardPage = ({
       {/* Page Header */}
       {renderPageHeader()}
 
-      {/* Stats Grid */}
+      {/* Stats Grid - using StatCard colorVariant prop */}
       <div className="dashboard-stats-section">
         <div className="dashboard-stats-grid">
-          <div className="dashboard-stat-card--gradient-primary">
-            <StatCard
-              value={activeAthletesCount}
-              label="Aktivni zavodnici"
-              icon={<Icon name="users" />}
-              color="primary"
-              trend="up"
-              trendValue="+2"
-              secondaryValue={`${members.length} celkem`}
-              clickable
-            />
-          </div>
-          <div className="dashboard-stat-card--gradient-info">
-            <StatCard
-              value={upcomingRaces.length}
-              label="Nadchazejici zavody"
-              icon={<Icon name="calendar" />}
-              color="info"
-              secondaryValue="Nejblizsi za 6 dni"
-              clickable
-            />
-          </div>
-          <div className="dashboard-stat-card--gradient-warning">
-            <StatCard
-              value={inactiveAthletesCount}
-              label="Bez prava startu"
-              icon={<Icon name="clock" />}
-              color={inactiveAthletesCount > 0 ? 'warning' : 'success'}
-              description={
-                inactiveAthletesCount > 0 ? 'Vyzaduje pozornost' : 'Vse v poradku'
-              }
-              clickable
-            />
-          </div>
-          <div className="dashboard-stat-card--gradient-success">
-            <StatCard
-              value={registrationsThisMonth}
-              label="Nove registrace"
-              icon={<Icon name="user-plus" />}
-              color="success"
-              secondaryValue="Tento mesic"
-              trend="up"
-              trendValue="+50%"
-              clickable
-            />
-          </div>
+          <StatCard
+            value={activeAthletesCount}
+            label="Aktivni zavodnici"
+            icon={<Icon name="users" />}
+            colorVariant="gradient-primary"
+            trend="up"
+            trendValue="+2"
+            secondaryValue={`${members.length} celkem`}
+            clickable
+          />
+          <StatCard
+            value={upcomingRaces.length}
+            label="Nadchazejici zavody"
+            icon={<Icon name="calendar" />}
+            colorVariant="gradient-info"
+            secondaryValue="Nejblizsi za 6 dni"
+            clickable
+          />
+          <StatCard
+            value={inactiveAthletesCount}
+            label="Bez prava startu"
+            icon={<Icon name="clock" />}
+            colorVariant={inactiveAthletesCount > 0 ? 'gradient-warning' : 'gradient-success'}
+            description={
+              inactiveAthletesCount > 0 ? 'Vyzaduje pozornost' : 'Vse v poradku'
+            }
+            clickable
+          />
+          <StatCard
+            value={registrationsThisMonth}
+            label="Nove registrace"
+            icon={<Icon name="user-plus" />}
+            colorVariant="gradient-success"
+            secondaryValue="Tento mesic"
+            trend="up"
+            trendValue="+50%"
+            clickable
+          />
         </div>
       </div>
 
@@ -714,28 +708,24 @@ const DashboardPage = ({
                 </div>
                 <div className="dashboard-alert-list">
                   {alerts.map((alert) => (
-                    <div key={alert.id} className={`dashboard-alert-item ${alert.type === 'danger' ? 'dashboard-alert-item--energy' : ''}`}>
-                      <div
-                        className={`dashboard-alert-icon dashboard-alert-icon--${alert.type}`}
-                      >
-                        {alert.type === 'warning' && <Icon name="warning" size="sm" />}
-                        {alert.type === 'danger' && <Icon name="danger" size="sm" />}
-                        {alert.type === 'info' && <Icon name="info" size="sm" />}
-                      </div>
-                      <div className="dashboard-alert-content">
-                        <p className="dashboard-alert-title">{alert.title}</p>
-                        <p className="dashboard-alert-description">
-                          {alert.description}
-                        </p>
-                      </div>
-                      {alert.actionLabel && (
-                        <div className="dashboard-alert-action">
-                          <Button variant="ghost" size="sm">
-                            {alert.actionLabel}
-                          </Button>
-                        </div>
+                    <ListItem
+                      key={alert.id}
+                      icon={
+                        alert.type === 'warning' ? <Icon name="warning" size="sm" /> :
+                        alert.type === 'danger' ? <Icon name="danger" size="sm" /> :
+                        <Icon name="info" size="sm" />
+                      }
+                      type={alert.type}
+                      variant="alert"
+                      title={alert.title}
+                      description={alert.description}
+                      action={alert.actionLabel && (
+                        <Button variant="ghost" size="sm">
+                          {alert.actionLabel}
+                        </Button>
                       )}
-                    </div>
+                      divider
+                    />
                   ))}
                 </div>
               </Card>
@@ -831,52 +821,33 @@ const DashboardPage = ({
                 </div>
               </Card>
 
-              {/* Quick Actions */}
+              {/* Quick Actions - using ActionCard component */}
               <Card variant="surface" padding="none" className="dashboard-section-card">
                 <div className="dashboard-section-header">
                   <h2 className="dashboard-section-title">Rychle akce</h2>
                 </div>
                 <div className="dashboard-quick-actions">
-                  <button className="dashboard-quick-action" type="button">
-                    <div className="dashboard-quick-action-icon"><Icon name="user-plus" /></div>
-                    <div className="dashboard-quick-action-text">
-                      <p className="dashboard-quick-action-title">
-                        Registrovat zavodnika
-                      </p>
-                      <p className="dashboard-quick-action-description">
-                        Pridat noveho clena do oddilu
-                      </p>
-                    </div>
-                    <div className="dashboard-quick-action-arrow">
-                      <Icon name="arrow-right" size="sm" />
-                    </div>
-                  </button>
-                  <button className="dashboard-quick-action" type="button">
-                    <div className="dashboard-quick-action-icon"><Icon name="file-text" /></div>
-                    <div className="dashboard-quick-action-text">
-                      <p className="dashboard-quick-action-title">Hromadna prihlaska</p>
-                      <p className="dashboard-quick-action-description">
-                        Prihlasit zavodniky na zavod
-                      </p>
-                    </div>
-                    <div className="dashboard-quick-action-arrow">
-                      <Icon name="arrow-right" size="sm" />
-                    </div>
-                  </button>
-                  <button className="dashboard-quick-action" type="button">
-                    <div className="dashboard-quick-action-icon">
-                      <Icon name="credit-card" />
-                    </div>
-                    <div className="dashboard-quick-action-text">
-                      <p className="dashboard-quick-action-title">Sprava prispevku</p>
-                      <p className="dashboard-quick-action-description">
-                        Evidovat platby clenu
-                      </p>
-                    </div>
-                    <div className="dashboard-quick-action-arrow">
-                      <Icon name="arrow-right" size="sm" />
-                    </div>
-                  </button>
+                  <ActionCard
+                    icon={<Icon name="user-plus" />}
+                    title="Registrovat zavodnika"
+                    description="Pridat noveho clena do oddilu"
+                    iconBackground="primary"
+                    onClick={() => {}}
+                  />
+                  <ActionCard
+                    icon={<Icon name="file-text" />}
+                    title="Hromadna prihlaska"
+                    description="Prihlasit zavodniky na zavod"
+                    iconBackground="info"
+                    onClick={() => {}}
+                  />
+                  <ActionCard
+                    icon={<Icon name="credit-card" />}
+                    title="Sprava prispevku"
+                    description="Evidovat platby clenu"
+                    iconBackground="success"
+                    onClick={() => {}}
+                  />
                 </div>
               </Card>
 
