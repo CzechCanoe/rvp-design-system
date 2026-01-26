@@ -273,3 +273,7 @@ export type {
 // PodiumCard
 export { PodiumCard } from './PodiumCard';
 export type { PodiumCardProps, PodiumPosition } from './PodiumCard';
+
+// ResultItem
+export { ResultItem } from './ResultItem';
+export type { ResultItemProps, ResultItemVariant } from './ResultItem';

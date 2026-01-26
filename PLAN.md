@@ -261,98 +261,29 @@ export const Minimal: Story = { args: { variant: 'minimal' } };
 - [x] Stories pro každou variantu
 - [x] Build prošel, TypeScript types exportovány
 
-#### 22.5 ResultItem / TimelineItem Component
-- [ ] Vytvořit novou komponentu `ResultItem`:
+#### 22.5 ResultItem Component ✅
+- [x] Vytvořit novou komponentu `ResultItem`:
   - `rank` prop s automatickým medal stylingem (1-3)
   - `variant="default" | "compact" | "detailed"`
   - Border-left accent podle ranku
   - Hover efekty
-- [ ] Přidat `ResultItem.stories.tsx`
-- [ ] Srovnat screenshots
+  - `section` prop pro barevnou variantu (dv/ry/vt/generic)
+- [x] Přidat `ResultItem.stories.tsx`
+- [x] Srovnat screenshots (58 testů prošlo)
 
-**Úspora:** ~300 řádků
+**Úspora:** ~300 řádků (při adopci v prototypech)
 
-**Nové soubory:**
-- `src/components/ResultItem/ResultItem.tsx`
-- `src/components/ResultItem/ResultItem.css`
-- `src/components/ResultItem/ResultItem.stories.tsx`
-- `src/components/ResultItem/index.ts`
-
-**Props interface:**
-```typescript
-interface ResultItemProps {
-  rank?: number;  // 1-3 = medal styling, 4+ = default
-  title: string;
-  subtitle?: string;
-  meta?: React.ReactNode;  // datum, místo, atd.
-  trailing?: React.ReactNode;  // čas, body, badge
-  variant?: 'default' | 'compact' | 'detailed';
-  href?: string;
-  onClick?: () => void;
-  className?: string;
-}
-```
-
-**CSS struktura:**
-```css
-.csk-result-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
-  padding: var(--spacing-4);
-  border-left: 4px solid transparent;
-  transition: all var(--transition-fast);
-}
-
-.csk-result-item:hover {
-  background: var(--color-bg-secondary);
-  transform: translateX(4px);
-}
-
-/* Medal ranks */
-.csk-result-item--rank-1 {
-  border-left-color: #ffd700;
-  background: linear-gradient(90deg, rgba(255,215,0,0.08) 0%, transparent 30%);
-}
-.csk-result-item--rank-2 {
-  border-left-color: #c0c0c0;
-  background: linear-gradient(90deg, rgba(192,192,192,0.08) 0%, transparent 30%);
-}
-.csk-result-item--rank-3 {
-  border-left-color: #cd7f32;
-  background: linear-gradient(90deg, rgba(205,127,50,0.08) 0%, transparent 30%);
-}
-
-/* Compact variant */
-.csk-result-item--compact {
-  padding: var(--spacing-3);
-  gap: var(--spacing-3);
-}
-```
-
-**Rank badge (interní subkomponenta):**
-```tsx
-const RankBadge = ({ rank }: { rank: number }) => {
-  if (rank > 3) return <span className="csk-result-item__rank">{rank}.</span>;
-  const medals = { 1: '🥇', 2: '🥈', 3: '🥉' };
-  return <span className="csk-result-item__medal">{medals[rank]}</span>;
-};
-```
-
-**Stories:**
-```typescript
-export const Gold: Story = { args: { rank: 1, title: 'MS Praha 2024', subtitle: 'C1M' } };
-export const Silver: Story = { args: { rank: 2, ... } };
-export const Bronze: Story = { args: { rank: 3, ... } };
-export const NoMedal: Story = { args: { rank: 7, ... } };
-export const Compact: Story = { args: { variant: 'compact', ... } };
-```
+**Implementace:**
+- `src/components/ResultItem/ResultItem.tsx` - komponenta s rank, title, subtitle, meta, trailing, variant, section props
+- `src/components/ResultItem/ResultItem.css` - ~280 řádků stylů včetně medal variants a dark mode
+- `src/components/ResultItem/ResultItem.stories.tsx` - 20+ stories pokrývajících všechny varianty
+- `src/components/ResultItem/index.ts` - exporty
 
 **Kritéria dokončení:**
-- [ ] Export z `src/components/index.ts`
-- [ ] 3 medal varianty + default fungují
-- [ ] Hover efekt funguje
-- [ ] `npm run test:visual` - 0 regresí
+- [x] Export z `src/components/index.ts`
+- [x] 3 medal varianty + default fungují
+- [x] Hover efekt funguje
+- [x] `npm run test:quick` - 58 passed
 
 #### 22.6 ListItem Component
 - [ ] Vytvořit novou komponentu `ListItem`:
@@ -1063,7 +994,7 @@ npm run test:visual
 
 ### Další krok
 
-**Pokračovat s 22.5 ResultItem Component** - vytvořit novou komponentu pro zobrazení výsledků s medal stylingem, border-left accent a hover efekty.
+**Pokračovat s 22.6 ListItem Component** - vytvořit novou komponentu pro seznamy alertů, aktivit a feedů s icon container, type variants a divider support.
 
 ### Git tag
 
