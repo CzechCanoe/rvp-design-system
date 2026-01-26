@@ -556,6 +556,12 @@
   height: 100px;
 }
 
+.athlete-public-profile--embed .athlete-hero__rank-badge {
+  width: 36px;
+  height: 36px;
+  font-size: var(--font-size-sm);
+}
+
 .athlete-public-profile--embed .athlete-stats-banner {
   margin-top: calc(var(--spacing-6) * -1);
 }
