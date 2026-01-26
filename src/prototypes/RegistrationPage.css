@@ -274,8 +274,9 @@
 .registration-wizard-step__indicator {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  margin-bottom: var(--spacing-3);
+  position: relative;
 }
 
 .registration-wizard-step__circle {
@@ -294,9 +295,17 @@
 }
 
 .registration-wizard-step__line {
-  flex: 1;
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 24px);
+  right: calc(-50% + 24px);
   height: 3px;
-  margin: 0 var(--spacing-2);
+  transform: translateY(-50%);
+}
+
+/* Hide line on last step */
+.registration-wizard-step:last-child .registration-wizard-step__line {
+  display: none;
 }
 
 .registration-wizard-step__content {
@@ -304,6 +313,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  margin-top: var(--spacing-3);
 }
 
 .registration-wizard-step__number {

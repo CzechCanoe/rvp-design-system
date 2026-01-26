@@ -299,22 +299,31 @@
    ========================================================================== */
 
 .athlete-results-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
-/* Result card layout */
+/* Result card layout - compact list row */
 .athlete-result-card {
-  display: flex;
+  display: grid;
+  grid-template-columns: 40px 1fr auto auto;
   align-items: center;
-  gap: var(--spacing-4);
-  padding: var(--spacing-4) var(--spacing-5);
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--color-border-secondary);
+}
+
+.athlete-result-card:last-child {
+  border-bottom: none;
 }
 
 .athlete-result-card__rank {
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -322,24 +331,42 @@
 }
 
 .athlete-result-card__info {
-  flex: 1;
   min-width: 0;
 }
 
 .athlete-result-card__race {
-  margin: 0 0 var(--spacing-1);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  margin: 0;
+  font-size: var(--font-size-sm);
 }
 
 .athlete-result-card__meta {
   display: flex;
-  gap: var(--spacing-3);
+  gap: var(--spacing-2);
+  font-size: var(--font-size-xs);
 }
 
 .athlete-result-card__time {
   white-space: nowrap;
+  text-align: right;
+}
+
+.athlete-result-card__category {
+  display: none;
+}
+
+/* Show category on wider screens */
+@media (min-width: 640px) {
+  .athlete-result-card__category {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    text-align: center;
+    min-width: 40px;
+  }
+
+  .athlete-result-card {
+    grid-template-columns: 40px 1fr 50px auto;
+  }
 }
 
 /* ==========================================================================
@@ -878,38 +905,33 @@
 }
 
 .athlete-result-card__race {
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-medium);
   color: var(--csk-color-on-surface);
-  font-size: var(--font-size-base);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .athlete-result-card__meta {
-  font-size: var(--font-size-sm);
   color: var(--csk-color-on-surface-muted);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-1);
-}
-
-.athlete-result-card__meta span {
-  display: inline-flex;
-  align-items: center;
 }
 
 .athlete-result-card__meta span:not(:last-child)::after {
   content: '·';
-  margin-left: var(--spacing-1);
+  margin: 0 var(--spacing-1);
   color: var(--color-border-secondary);
 }
 
 .athlete-result-card__time {
   font-family: var(--font-family-mono, monospace);
   font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-lg);
-  color: var(--color-primary-600);
-  background: var(--color-primary-50);
-  padding: var(--spacing-1) var(--spacing-2);
-  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  color: var(--csk-color-on-surface);
+}
+
+/* Hover effect for result rows */
+.athlete-result-card:hover {
+  background: var(--color-bg-secondary);
 }
 
 /* --------------------------------------------------------------------------

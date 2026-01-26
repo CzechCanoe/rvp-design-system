@@ -337,6 +337,17 @@
    Visual enhancements for club cards
    ========================================================================== */
 
+/* Club card logo */
+.club-card__logo {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 /* Club card visual styles */
 .club-card__name {
   font-size: var(--font-size-lg);

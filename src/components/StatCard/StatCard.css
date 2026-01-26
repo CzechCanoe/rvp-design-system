@@ -549,3 +549,20 @@
     animation: none;
   }
 }
+
+/* =============================================================================
+   EMBED MODE ADJUSTMENTS
+   Match kanoe.cz Bootstrap 4 styling (4px border-radius)
+   ============================================================================= */
+
+.kanoe-embed .csk-stat-card {
+  border-radius: 4px;
+}
+
+.kanoe-embed .csk-stat-card--style-aesthetic::before {
+  border-radius: 4px 0 0 4px;
+}
+
+.kanoe-embed .csk-stat-card__icon-container {
+  border-radius: 4px;
+}
