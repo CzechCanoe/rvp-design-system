@@ -39,13 +39,13 @@
 | 2 | **RegistrationPage** | 1772→1603 | custom wizard→Wizard komponenta | ✅ |
 | 3 | **DashboardPage** | 1413→1167 | stat cards→StatCard, alerts→ListItem, actions→ActionCard | ✅ |
 | 4 | **AthletePublicProfile** | 1265→322 | hero→HeroSection, results→ResultItem | ✅ |
-| 5 | **ResultsPage** | 810→250 | Card header→HeroSection | |
+| 5 | **ResultsPage** | 810→668 | Card header→HeroSection | ✅ |
 | 6 | **EventDetailPage** | 1256→300 | hero→HeroSection, DateBadge | |
 | 7 | **ProfilePage** | 1749→400 | hero→HeroSection, achievements→StatCard, activity→ListItem | |
 | 8 | **CalendarPage** | 347→250 | optional DateBadge | |
-| 9 | **LivePage** | 2778→1500 | hero→HeroSection (modály ponechat) | |
+| 9 | **LivePage** | 2778→2620 | hero→HeroSection (modály ponechat) | ✅ |
 
-**Aktuální progress:** 5237→4537 řádků CSS pro dokončené prototypy (4 z 9)
+**Aktuální progress:** 8825→7880 řádků CSS pro dokončené prototypy (6 z 9)
 
 ---
 
@@ -105,15 +105,39 @@
 
 ---
 
-### 23.5-23.9 (analogicky)
+### 23.5 ResultsPage ✅
+
+**Dokončeno:** CSS 810→668 řádků (-18%)
+
+**Kroky:**
+- [x] Card header → `<HeroSection variant="minimal">`
+- [x] Stats přesunuty do floatingContent
+- [x] Smazána header layout/visual CSS sekce
+- [x] Update snapshots
+
+---
+
+### 23.9 LivePage ✅
+
+**Dokončeno:** CSS 2778→2620 řádků (-6%)
+
+**Kroky:**
+- [x] custom `live-page-header` → `<HeroSection variant="compact" meshBackground>`
+- [x] Smazána header layout/visual CSS sekce
+- [x] Modály ponechány (komplexní interaktivní komponenty)
+- [x] Update snapshots
+
+**Poznámka:** Menší redukce kvůli komplexitě LivePage (modály, real-time funkce).
+
+---
+
+### 23.6-23.8 (zbývající)
 
 | Prototype | Hlavní změna |
 |-----------|--------------|
-| ResultsPage | Card header → HeroSection |
 | EventDetailPage | hero → HeroSection + DateBadge |
 | ProfilePage | hero → HeroSection, achievements → StatCard |
 | CalendarPage | optional DateBadge |
-| LivePage | hero → HeroSection (modály ponechat) |
 
 ---
 

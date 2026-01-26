@@ -34,99 +34,45 @@
 }
 
 /* ==========================================================================
-   Page Header Layout
+   Hero Section Layout Overrides (using HeroSection component)
    ========================================================================== */
 
-.results-page-header {
-  padding: var(--spacing-6) var(--spacing-4);
+.results-page-hero {
+  /* Minimal adjustments for results page context */
 }
 
-.results-page-header__container {
-  max-width: var(--container-xl);
-  margin: 0 auto;
-}
-
-.results-page-header__breadcrumb {
+.results-page-breadcrumb {
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  margin-bottom: var(--spacing-4);
 }
 
-.results-page-header__breadcrumb a {
+.results-page-breadcrumb a {
   text-decoration: none;
 }
 
-.results-page-header__content {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--spacing-6);
-  flex-wrap: wrap;
-}
-
-.results-page-header__left {
-  flex: 1;
-  min-width: 280px;
-}
-
-.results-page-header__title-row {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
-  margin-bottom: var(--spacing-3);
-  flex-wrap: wrap;
-}
-
-.results-page-header__title {
-  margin: 0;
-}
-
-.results-page-header__meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--spacing-4);
-}
-
-.results-page-header__meta-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-1-5);
-}
-
-.results-page-header__stats {
+/* Stats bar in hero floating content */
+.results-page-stats {
   display: flex;
   gap: var(--spacing-6);
-  flex-shrink: 0;
 }
 
-.results-page-header__stat {
+.results-page-stats__item {
   text-align: center;
 }
 
-.results-page-header__stat-value {
+.results-page-stats__value {
   display: block;
 }
 
-.results-page-header__stat-label {
+.results-page-stats__label {
   display: block;
 }
 
 @media (max-width: 768px) {
-  .results-page-header {
-    padding: var(--spacing-4) var(--spacing-3);
-  }
-
-  .results-page-header__content {
-    flex-direction: column;
-  }
-
-  .results-page-header__stats {
-    width: 100%;
+  .results-page-stats {
     justify-content: space-around;
-    padding-top: var(--spacing-4);
-    margin-top: var(--spacing-4);
+    width: 100%;
   }
 }
 
@@ -413,17 +359,8 @@
    Embed Mode Layout Adjustments
    ========================================================================== */
 
-.prototype-results-page--embed .results-page-header {
-  padding: var(--spacing-4) 0;
+.prototype-results-page--embed .results-page-hero {
   margin-bottom: var(--spacing-4);
-}
-
-.prototype-results-page--embed .results-page-header__container {
-  max-width: none;
-}
-
-.prototype-results-page--embed .results-page-header__breadcrumb {
-  display: none;
 }
 
 .prototype-results-page--embed .results-page-podium {
@@ -459,13 +396,10 @@
 }
 
 @container (max-width: 600px) {
-  .prototype-results-page--embed .results-page-header__content {
+  .prototype-results-page--embed .results-page-stats {
     flex-direction: column;
-    gap: var(--spacing-3);
-  }
-
-  .prototype-results-page--embed .results-page-header__stats {
-    justify-content: flex-start;
+    gap: var(--spacing-2);
+    align-items: flex-start;
   }
 
   .prototype-results-page--embed .prototype-results-page__sidebar {
@@ -509,82 +443,30 @@
 }
 
 /* ==========================================================================
-   Page Header Visual Styles
+   Hero Section Visual Overrides (using HeroSection component)
    ========================================================================== */
 
-.results-page-header {
-  background: var(--csk-color-surface);
-  border-bottom: 1px solid var(--csk-color-border);
-}
-
-.results-page-header--dv {
-  background: linear-gradient(
-    135deg,
-    rgba(17, 118, 166, 0.05) 0%,
-    rgba(37, 99, 235, 0.03) 100%
-  );
-  border-left: var(--border-accent-width, 4px) solid;
-  border-image: linear-gradient(180deg, var(--color-section-dv) 0%, var(--color-primary-400) 100%) 1;
-}
-
-.results-page-header--ry {
-  background: linear-gradient(
-    135deg,
-    rgba(22, 163, 74, 0.05) 0%,
-    rgba(34, 197, 94, 0.03) 100%
-  );
-  border-left: var(--border-accent-width, 4px) solid;
-  border-image: linear-gradient(180deg, var(--color-section-ry) 0%, #4ade80 100%) 1;
-}
-
-.results-page-header--vt {
-  background: linear-gradient(
-    135deg,
-    rgba(185, 28, 28, 0.05) 0%,
-    rgba(220, 38, 38, 0.03) 100%
-  );
-  border-left: var(--border-accent-width, 4px) solid;
-  border-image: linear-gradient(180deg, var(--color-section-vt) 0%, #f87171 100%) 1;
-}
-
-.results-page-header__breadcrumb {
+.results-page-breadcrumb {
   font-size: var(--font-size-sm);
   color: var(--csk-color-on-surface-muted);
 }
 
-.results-page-header__breadcrumb a {
+.results-page-breadcrumb a {
   color: var(--csk-color-on-surface-muted);
   transition: color var(--transition-fast);
 }
 
-.results-page-header__breadcrumb a:hover {
+.results-page-breadcrumb a:hover {
   color: var(--color-primary-600);
 }
 
-.results-page-header__breadcrumb span {
+.results-page-breadcrumb span {
   color: var(--csk-color-on-surface-muted);
   opacity: 0.5;
 }
 
-.results-page-header__title {
-  font-family: var(--font-family-display);
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--csk-color-on-surface);
-  letter-spacing: var(--letter-spacing-tight);
-}
-
-.results-page-header__meta {
-  font-size: var(--font-size-sm);
-  color: var(--csk-color-on-surface-muted);
-}
-
-.results-page-header__meta-item svg {
-  color: var(--color-primary-500);
-  opacity: 0.8;
-}
-
-.results-page-header__stat-value {
+/* Stats visual styles */
+.results-page-stats__value {
   font-family: var(--font-family-display);
   font-size: var(--font-size-3xl);
   font-weight: 800;
@@ -592,17 +474,17 @@
   line-height: 1;
 }
 
-.results-page-header__stat-label {
+.results-page-stats__label {
   font-size: var(--font-size-xs);
   color: var(--csk-color-on-surface-muted);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-wide);
 }
 
-/* Embed header adjustments */
-.prototype-results-page--embed .results-page-header {
+/* Embed hero adjustments */
+.results-page-hero--embed {
   border-radius: var(--radius-lg);
-  border: 1px solid var(--csk-color-border);
+  margin-bottom: var(--spacing-4);
 }
 
 /* ==========================================================================
@@ -743,30 +625,6 @@
    Dark Mode Adjustments
    ========================================================================== */
 
-[data-theme="dark"] .results-page-header--dv {
-  background: linear-gradient(
-    135deg,
-    rgba(17, 118, 166, 0.1) 0%,
-    rgba(37, 99, 235, 0.05) 100%
-  );
-}
-
-[data-theme="dark"] .results-page-header--ry {
-  background: linear-gradient(
-    135deg,
-    rgba(22, 163, 74, 0.1) 0%,
-    rgba(34, 197, 94, 0.05) 100%
-  );
-}
-
-[data-theme="dark"] .results-page-header--vt {
-  background: linear-gradient(
-    135deg,
-    rgba(185, 28, 28, 0.1) 0%,
-    rgba(220, 38, 38, 0.05) 100%
-  );
-}
-
 [data-theme="dark"] .prototype-results-page__category-item--active {
   background: rgba(37, 99, 235, 0.15);
   color: var(--color-primary-300);
@@ -780,7 +638,7 @@
   color: var(--color-primary-400);
 }
 
-[data-theme="dark"] .results-page-header__stat-value {
+[data-theme="dark"] .results-page-stats__value {
   color: var(--color-energy-400);
 }
 

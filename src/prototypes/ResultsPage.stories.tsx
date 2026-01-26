@@ -4,6 +4,7 @@ import { Header } from '../components/Header';
 import { MainNav } from '../components/Navigation';
 import { Card } from '../components/Card';
 import { Badge } from '../components/Badge';
+import { HeroSection } from '../components/HeroSection';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Select } from '../components/Select';
@@ -270,56 +271,52 @@ const ResultsPage = ({
       {/* Header */}
       {renderHeader()}
 
-      {/* Page Header - Clean design without waves */}
+      {/* Page Header - Using HeroSection component */}
       {showHero && (
-        <Card variant="surface" className={`results-page-header results-page-header--${section}`}>
-          <div className="results-page-header__container">
-            <div className="results-page-header__breadcrumb">
-              <a href="#">Výsledky</a>
-              <span>/</span>
-              <a href="#">2026</a>
-              <span>/</span>
-              <span>MČR ve slalomu</span>
-            </div>
-            <div className="results-page-header__content">
-              <div className="results-page-header__left">
-                <div className="results-page-header__title-row">
-                  <h1 className="results-page-header__title csk-display">MČR ve slalomu 2026</h1>
-                  {isLive && <LiveIndicator variant="live" size="md" label="LIVE" energyGlow />}
-                  {!isLive && <Badge variant="success" glow>Oficiální výsledky</Badge>}
-                </div>
-                <div className="results-page-header__meta">
-                  <span className="results-page-header__meta-item">
-                    <Icon name="calendar" size="sm" />
-                    3.–5. května 2026
-                  </span>
-                  <span className="results-page-header__meta-item">
-                    <Icon name="location" size="sm" />
-                    Praha – Troja
-                  </span>
-                  <span className="results-page-header__meta-item">
-                    <Icon name="users" size="sm" />
-                    156 závodníků
-                  </span>
-                </div>
+        <HeroSection
+          variant="minimal"
+          section={section}
+          title="MČR ve slalomu 2026"
+          badges={
+            <>
+              {isLive && <LiveIndicator variant="live" size="md" label="LIVE" energyGlow />}
+              {!isLive && <Badge variant="success" glow>Oficiální výsledky</Badge>}
+            </>
+          }
+          metadata={[
+            { key: 'date', label: 'Datum', value: '3.–5. května 2026', icon: 'calendar' },
+            { key: 'location', label: 'Místo', value: 'Praha – Troja', icon: 'location' },
+            { key: 'athletes', label: 'Závodníků', value: '156', icon: 'users' },
+          ]}
+          breadcrumbs={
+            variant !== 'embed' && (
+              <div className="results-page-breadcrumb">
+                <a href="#">Výsledky</a>
+                <span>/</span>
+                <a href="#">2026</a>
+                <span>/</span>
+                <span>MČR ve slalomu</span>
               </div>
-              <div className="results-page-header__stats">
-                <div className="results-page-header__stat csk-reveal csk-reveal-1">
-                  <span className="results-page-header__stat-value csk-display">4</span>
-                  <span className="results-page-header__stat-label">kategorie</span>
-                </div>
-                <div className="results-page-header__stat csk-reveal csk-reveal-2">
-                  <span className="results-page-header__stat-value csk-display">156</span>
-                  <span className="results-page-header__stat-label">závodníků</span>
-                </div>
-                <div className="results-page-header__stat csk-reveal csk-reveal-3">
-                  <span className="results-page-header__stat-value csk-display">24</span>
-                  <span className="results-page-header__stat-label">branek</span>
-                </div>
+            )
+          }
+          floatingContent={
+            <div className="results-page-stats">
+              <div className="results-page-stats__item csk-reveal csk-reveal-1">
+                <span className="results-page-stats__value csk-display">4</span>
+                <span className="results-page-stats__label">kategorie</span>
+              </div>
+              <div className="results-page-stats__item csk-reveal csk-reveal-2">
+                <span className="results-page-stats__value csk-display">156</span>
+                <span className="results-page-stats__label">závodníků</span>
+              </div>
+              <div className="results-page-stats__item csk-reveal csk-reveal-3">
+                <span className="results-page-stats__value csk-display">24</span>
+                <span className="results-page-stats__label">branek</span>
               </div>
             </div>
-          </div>
-        </Card>
+          }
+          className={`results-page-hero ${variant === 'embed' ? 'results-page-hero--embed' : ''}`}
+        />
       )}
 
       {/* Podium Section - Using PodiumCard component with energy glow */}

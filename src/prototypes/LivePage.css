@@ -77,69 +77,21 @@
 }
 
 /* ----------------------------------------------------------------------------
-   Page Header Layout
+   Hero Section Layout Overrides (using HeroSection component)
    ---------------------------------------------------------------------------- */
 
-.live-page-header {
-  padding: var(--spacing-6) var(--spacing-4);
+.live-page-hero {
+  /* Minimal adjustments for live page context */
 }
 
-.live-page-header--aesthetic {
-  position: relative;
-  overflow: hidden;
-  padding: var(--spacing-10) var(--spacing-4);
-}
-
-.live-page-header__container {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.live-page-header__breadcrumb {
+.live-page-breadcrumb {
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  margin-bottom: var(--spacing-4);
-}
-
-.live-page-header__content {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--spacing-6);
-}
-
-.live-page-header__left {
-  flex: 1;
-}
-
-.live-page-header__title-row {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
-  margin-bottom: var(--spacing-3);
-  flex-wrap: wrap;
-}
-
-.live-page-header__title {
-  margin: 0;
-}
-
-.live-page-header__meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--spacing-4);
-}
-
-.live-page-header__meta-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-1-5);
 }
 
 /* Live dot layout */
-.live-page-header__live-dot {
+.live-page-live-dot {
   width: 8px;
   height: 8px;
 }
@@ -1013,16 +965,8 @@
   display: none;
 }
 
-.prototype-live-page--fullscreen .live-page-header {
+.prototype-live-page--fullscreen .live-page-hero {
   padding: var(--spacing-3);
-}
-
-.prototype-live-page--fullscreen .live-page-header--aesthetic {
-  padding: var(--spacing-4);
-}
-
-.prototype-live-page--fullscreen .live-page-header__breadcrumb {
-  display: none;
 }
 
 .prototype-live-page--fullscreen .prototype-live-page__footer {
@@ -1104,17 +1048,8 @@
   min-height: auto;
 }
 
-.prototype-live-page--embed .live-page-header {
-  padding: var(--spacing-4) 0;
+.prototype-live-page--embed .live-page-hero {
   margin-bottom: var(--spacing-4);
-}
-
-.prototype-live-page--embed .live-page-header__container {
-  max-width: none;
-}
-
-.prototype-live-page--embed .live-page-header__breadcrumb {
-  display: none;
 }
 
 .prototype-live-page--embed .prototype-live-page__container {
@@ -1144,12 +1079,6 @@
 @container (max-width: 600px) {
   .prototype-live-page--embed .prototype-live-page__current-run {
     grid-template-columns: 1fr;
-  }
-
-  .prototype-live-page--embed .live-page-header__title-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-2);
   }
 }
 
@@ -1181,38 +1110,6 @@
 }
 
 @media (max-width: 768px) {
-  .live-page-header {
-    padding: var(--spacing-4) var(--spacing-3);
-  }
-
-  .live-page-header__title-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-2);
-  }
-
-  .live-page-header__meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-2);
-  }
-
-  .live-page-hero {
-    padding: var(--spacing-8) var(--spacing-4) var(--spacing-12);
-  }
-
-  .live-page-hero__meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-2);
-  }
-
-  .live-page-hero__title-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-2);
-  }
-
   .prototype-live-page__main {
     padding: var(--spacing-4) var(--spacing-3);
   }
@@ -1340,69 +1237,31 @@
 }
 
 /* ----------------------------------------------------------------------------
-   Page Header Visual Styles
+   Hero Section Visual Overrides (using HeroSection component)
    ---------------------------------------------------------------------------- */
 
-.live-page-header {
-  background-color: var(--color-bg-secondary);
-  border-bottom: 1px solid var(--color-border-default);
-}
-
-.live-page-header--aesthetic {
-  background: var(--bg-mesh-hero);
-  background-color: var(--color-bg-secondary);
-  border-bottom: 2px solid transparent;
-  border-image: var(--border-accent-gradient) 1;
-}
-
-.live-page-header__breadcrumb {
+.live-page-breadcrumb {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
 }
 
-.live-page-header__breadcrumb a {
+.live-page-breadcrumb a {
   color: var(--color-primary);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
-.live-page-header__breadcrumb a:hover {
+.live-page-breadcrumb a:hover {
   text-decoration: underline;
 }
 
-.live-page-header__title {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
-  color: var(--color-text-primary);
-}
-
-.live-page-header--aesthetic .live-page-header__title {
-  font-size: var(--font-size-4xl);
-  font-weight: 800;
-  letter-spacing: -0.025em;
-}
-
-.live-page-header__meta {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-}
-
-/* Section-specific accent colors for header */
-.live-page-header--dv {
-  border-bottom-color: var(--color-section-dv);
-}
-
-.live-page-header--ry {
-  border-bottom-color: var(--color-section-ry);
-}
-
-.live-page-header--vt {
-  border-bottom-color: var(--color-section-vt);
+.live-page-breadcrumb span {
+  color: var(--color-text-tertiary);
+  opacity: 0.5;
 }
 
 /* Live dot animation */
-.live-page-header__live-dot {
+.live-page-live-dot {
   border-radius: 50%;
   background-color: currentColor;
   animation: live-dot-pulse 1.5s ease-in-out infinite;
@@ -2573,13 +2432,7 @@
   box-shadow: none;
 }
 
-.prototype-live-page--fullscreen .live-page-header__title {
-  font-size: var(--font-size-lg);
-}
-
-.prototype-live-page--fullscreen .live-page-header--aesthetic .live-page-header__title {
-  font-size: var(--font-size-xl);
-}
+/* Fullscreen hero adjustments handled by HeroSection component */
 
 /* Hide fullscreen toggle in embed mode */
 .prototype-live-page--embed .live-page-fullscreen-toggle {
@@ -2694,19 +2547,8 @@
   background-color: transparent;
 }
 
-.prototype-live-page--embed .live-page-header {
-  background-color: var(--color-bg-primary);
-  border-bottom: 1px solid var(--color-border-default);
+.live-page-hero--embed {
   border-radius: var(--radius-lg);
-  margin-bottom: var(--spacing-4);
-}
-
-.prototype-live-page--embed .live-page-header__container {
-  padding: 0 var(--spacing-4);
-}
-
-.prototype-live-page--embed .live-page-header__title {
-  font-size: var(--font-size-xl);
 }
 
 .prototype-live-page--embed .live-page-current-card {

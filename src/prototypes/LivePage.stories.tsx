@@ -9,6 +9,7 @@ import { Input } from '../components/Input';
 import { Tabs } from '../components/Tabs';
 import { Switch } from '../components/Switch';
 import { LiveIndicator } from '../components/LiveIndicator';
+import { HeroSection } from '../components/HeroSection';
 import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import { Icon } from '../components/Icon';
@@ -1116,46 +1117,42 @@ const LivePage = ({
       {/* Header - hidden in fullscreen */}
       {!isFullscreen && renderHeader()}
 
-      {/* Page Header - Aesthetic design with mesh background */}
-      <section className={`live-page-header live-page-header--${section} live-page-header--aesthetic csk-grain`}>
-        <div className="live-page-header__container">
-          <div className="live-page-header__breadcrumb csk-reveal csk-reveal-1">
-            <a href="#">Výsledky</a>
-            <span>/</span>
-            <a href="#">2026</a>
-            <span>/</span>
-            <span>MČR ve slalomu</span>
-          </div>
-          <div className="live-page-header__content">
-            <div className="live-page-header__left">
-              <div className="live-page-header__title-row csk-reveal csk-reveal-2">
-                <h1 className="live-page-header__title csk-display">MČR ve slalomu 2026</h1>
-                <Badge variant="energy" size="lg" glow>
-                  <span className="live-page-header__live-dot" />
-                  LIVE
-                </Badge>
-              </div>
-              <div className="live-page-header__meta csk-reveal csk-reveal-3">
-                <span className="live-page-header__meta-item">
-                  <Icon name="calendar" size="sm" />
-                  3. května 2026 • 14:32
-                </span>
-                <span className="live-page-header__meta-item">
-                  <Icon name="location" size="sm" />
-                  Praha – Troja
-                </span>
-                <span className="live-page-header__meta-item">
-                  <Icon name="users" size="sm" />
-                  70 závodníků
-                </span>
-                <Badge section={section}>
-                  {sectionNames[section]}
-                </Badge>
-              </div>
+      {/* Page Header - Using HeroSection component */}
+      <HeroSection
+        variant="compact"
+        section={section}
+        title="MČR ve slalomu 2026"
+        meshBackground
+        patternOverlay
+        badges={
+          <Badge variant="energy" size="lg" glow>
+            <span className="live-page-live-dot" />
+            LIVE
+          </Badge>
+        }
+        metadata={[
+          { key: 'datetime', label: 'Datum', value: '3. května 2026 • 14:32', icon: 'calendar' },
+          { key: 'location', label: 'Místo', value: 'Praha – Troja', icon: 'location' },
+          { key: 'athletes', label: 'Závodníků', value: '70', icon: 'users' },
+        ]}
+        subtitle={
+          <Badge section={section}>
+            {sectionNames[section]}
+          </Badge>
+        }
+        breadcrumbs={
+          variant !== 'embed' && (
+            <div className="live-page-breadcrumb csk-reveal csk-reveal-1">
+              <a href="#">Výsledky</a>
+              <span>/</span>
+              <a href="#">2026</a>
+              <span>/</span>
+              <span>MČR ve slalomu</span>
             </div>
-          </div>
-        </div>
-      </section>
+          )
+        }
+        className={`live-page-hero live-page-hero--${section} ${variant === 'embed' ? 'live-page-hero--embed' : ''}`}
+      />
 
       {/* Main content */}
       <main className="prototype-live-page__main">
