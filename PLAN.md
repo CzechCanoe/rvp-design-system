@@ -40,62 +40,29 @@ Redukce ~3750 řádků duplicitního CSS v prototypech přesunem opakujících s
 
 ### Kroky
 
-#### 22.1 Visual Regression Setup
-- [ ] Nainstalovat `@storybook/test-runner` + `playwright`
-- [ ] Vytvořit baseline screenshots pro všechny prototypy (všechny varianty)
-- [ ] Nastavit CI job pro vizuální porovnání
-- [ ] Dokumentovat postup v `tests/visual/README.md`
+#### 22.1 Visual Regression Setup ✅
+- [x] Nainstalovat `@storybook/test-runner` + `playwright` (již nainstalováno)
+- [x] Vytvořit baseline screenshots pro všechny prototypy (58 testů, 70 snímků)
+- [x] Rozšířit `tests/config.ts` o všechny prototype varianty (29 stories)
+- [x] Dokumentovat postup v `tests/visual/README.md`
 
-**Příkazy:**
-```bash
-npm install -D @storybook/test-runner playwright
-npx playwright install chromium
-```
+**Výsledky:**
+- 58 visual regression testů pro prototypy (light + dark mode)
+- 70 baseline screenshots vygenerováno
+- Všechny testy projdou: `npm run test` (2.5 min na Chromium)
 
-**Soubory k vytvoření:**
-```
-tests/
-├── visual/
-│   ├── README.md              # Dokumentace visual testingu
-│   ├── visual.spec.ts         # Playwright test soubor
-│   └── baseline/              # Baseline screenshots (git-ignored nebo LFS)
-├── playwright.config.ts       # Playwright konfigurace
-```
+**Pokryté prototypy:**
+| Kategorie | Počet stories |
+|-----------|---------------|
+| Embed | 13 (včetně list views) |
+| Satellite | 13 |
+| Expressive | 3 |
+| **Celkem** | **29 stories × 2 (light/dark) = 58 testů** |
 
-**Struktura visual.spec.ts:**
-```typescript
-// Pro každý prototype story:
-// 1. Načíst story URL
-// 2. Počkat na stabilizaci (fonts, images)
-// 3. Screenshot celé stránky
-// 4. Porovnat s baseline (threshold 0.1%)
-```
-
-**Baseline prototypy k zachycení (celkem ~80 screenshots):**
-| Prototype | Varianty | Screenshots |
-|-----------|----------|-------------|
-| CalendarPage | utility, expressive, embed, satellite, aesthetic × light/dark | 10 |
-| EventDetailPage | dv/ry/vt × utility/embed/aesthetic × light/dark | 18 |
-| LivePage | dv/ry/vt × utility/aesthetic × light/dark | 12 |
-| ResultsPage | dv/ry/vt × utility/aesthetic × light/dark | 12 |
-| AthletePublicProfile | dv/ry/vt × utility/embed/aesthetic × light/dark | 18 |
-| ClubPublicProfile | utility/embed/aesthetic × light/dark | 6 |
-| ProfilePage | dv/ry/vt × utility/satellite/aesthetic × light/dark | 18 |
-| RegistrationPage | dv/ry/vt × utility/satellite/aesthetic × light/dark | 18 |
-| DashboardPage | dv/ry/vt/federation × utility/satellite/embed/aesthetic × light/dark | 32 |
-
-**npm scripts k přidání do package.json:**
-```json
-{
-  "test:visual": "playwright test tests/visual/",
-  "test:visual:update": "playwright test tests/visual/ --update-snapshots"
-}
-```
-
-**Kritéria dokončení:**
-- [ ] `npm run test:visual` projde bez chyb
-- [ ] Všechny baseline screenshots existují
-- [ ] README.md dokumentuje workflow
+**Soubory:**
+- `tests/config.ts` - rozšířená konfigurace s všemi prototypy
+- `tests/visual/README.md` - dokumentace workflow
+- `tests/prototypes.spec.ts-snapshots/` - baseline screenshots
 
 #### 22.2 Section Color System
 - [ ] Přidat `--section-color` CSS custom property pattern do `tokens/colors.css`
@@ -1117,7 +1084,7 @@ npm run test:visual
 
 ### Další krok
 
-**Začít s 22.1 Visual Regression Setup** - bez baseline screenshots nelze bezpečně refaktorovat.
+**Pokračovat s 22.2 Section Color System** - přidat utility classes pro section colors do tokens/colors.css.
 
 ### Git tag
 

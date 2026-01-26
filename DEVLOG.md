@@ -6634,3 +6634,27 @@ Další krok: 19.4 Bundle Size Audit (volitelný)
 - Phase 18-20 kompletně dokončeny
 - Design system je připraven pro integraci do kanoe.cz
 - Další práce: vizuální manuální kontrola v Storybook (volitelně)
+
+---
+
+## 2026-01-26 - Fáze 22.1: Visual Regression Setup
+
+### Dokončeno
+- [x] Rozšíření `tests/config.ts` o všechny prototype varianty (29 stories)
+- [x] Vytvoření baseline screenshots (58 testů, 70 snímků)
+- [x] Dokumentace v `tests/visual/README.md`
+- [x] Oprava story ID formátů (ProfilePage, AthletePublicProfile, ClubPublicProfile)
+
+### Problémy a řešení
+1. **Problém:** Nesprávné story ID formáty - `prototypes-profile-page` místo `prototypes-profilepage`
+   **Řešení:** Storybook převádí title bez mezer na ID bez pomlček. Opraveno v config.ts.
+
+### Metriky
+- 29 prototype stories × 2 (light/dark) = 58 visual regression testů
+- Doba běhu: ~2.5 min (Chromium only)
+- Baseline screenshots: 70 souborů
+
+### Poznámky
+- Infrastruktura pro visual regression testing již existovala (playwright.config.ts, prototypes.spec.ts)
+- Bylo potřeba pouze rozšířit config.ts o chybějící prototypy a vygenerovat baseline
+- Storybook běží stabilně, všechny testy projdou

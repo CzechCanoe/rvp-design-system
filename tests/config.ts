@@ -83,34 +83,84 @@ export const allComponents: ComponentConfig[] = [
 export const crossBrowserComponents = allComponents.filter(c => c.cssFeatures && c.cssFeatures.length > 0);
 
 // =============================================================================
-// PROTOTYPES
+// PROTOTYPES - Complete coverage for Phase 22 CSS Consolidation
 // =============================================================================
 
+/**
+ * Embed prototypes - for embedding into kanoe.cz
+ *
+ * Story ID format follows Storybook convention:
+ * - 'Prototypes/Calendar Page' → 'prototypes-calendar-page--*'
+ * - 'Prototypes/ProfilePage' → 'prototypes-profilepage--*' (no space = no hyphen)
+ */
 export const embedPrototypes: PrototypeConfig[] = [
+  // Calendar Page
   { name: 'CalendarPage-Embed', storyId: 'prototypes-calendar-page--embed' },
+  { name: 'CalendarPage-EmbedListView', storyId: 'prototypes-calendar-page--embed-list-view' },
+  // Results & Live
   { name: 'ResultsPage-Embed', storyId: 'prototypes-results-page--embed' },
   { name: 'LivePage-Embed', storyId: 'prototypes-live-page--embed', maxDiffPixels: 6000, timeout: 30000 },
+  // Lists
   { name: 'AthletesListPage-Embed', storyId: 'prototypes-athletes-list-page--embed' },
+  { name: 'ClubsListPage-Embed', storyId: 'prototypes-clubs-list-page--embed' },
   { name: 'RankingsPage-Embed', storyId: 'prototypes-rankings-page--embed' },
+  // Profiles (note: no space in title = no hyphen in storyId)
+  { name: 'AthletePublicProfile-Embed', storyId: 'prototypes-athletepublicprofile--embed' },
+  { name: 'ClubPublicProfile-Embed', storyId: 'prototypes-clubpublicprofile--embed' },
+  // Event Detail
+  { name: 'EventDetailPage-Embed', storyId: 'prototypes-event-detail-page--embed' },
+  // Registration
+  { name: 'RegistrationPage-Embed', storyId: 'prototypes-registration-page--embed' },
+  // Dashboard & Profile (ProfilePage has no space in title)
+  { name: 'DashboardPage-Embed', storyId: 'prototypes-dashboard-page--embed', timeout: 60000 },
+  { name: 'ProfilePage-Embed', storyId: 'prototypes-profilepage--embed' },
 ];
 
+/** Satellite prototypes - standalone pages with minimal header */
 export const satellitePrototypes: PrototypeConfig[] = [
+  // Calendar Page
+  { name: 'CalendarPage-Satellite', storyId: 'prototypes-calendar-page--satellite' },
+  { name: 'CalendarPage-SatelliteListView', storyId: 'prototypes-calendar-page--satellite-list-view' },
+  // Results & Live
+  { name: 'ResultsPage-Satellite', storyId: 'prototypes-results-page--satellite' },
+  { name: 'LivePage-Satellite', storyId: 'prototypes-live-page--satellite', maxDiffPixels: 6000, timeout: 30000 },
+  // Lists
+  { name: 'AthletesListPage-Satellite', storyId: 'prototypes-athletes-list-page--satellite' },
+  { name: 'ClubsListPage-Satellite', storyId: 'prototypes-clubs-list-page--satellite' },
+  { name: 'RankingsPage-Satellite', storyId: 'prototypes-rankings-page--satellite' },
+  // Profiles
+  { name: 'AthletePublicProfile-Satellite', storyId: 'prototypes-athletepublicprofile--satellite' },
+  { name: 'ClubPublicProfile-Satellite', storyId: 'prototypes-clubpublicprofile--satellite' },
+  // Event Detail
+  { name: 'EventDetailPage-Satellite', storyId: 'prototypes-event-detail-page--satellite' },
+  // Registration
   { name: 'RegistrationPage-Satellite', storyId: 'prototypes-registration-page--satellite' },
-  { name: 'ProfilePage-Satellite', storyId: 'prototypes-profilepage--satellite' },
+  // Dashboard & Profile
   { name: 'DashboardPage-Satellite', storyId: 'prototypes-dashboard-page--satellite', timeout: 60000 },
+  { name: 'ProfilePage-Satellite', storyId: 'prototypes-profilepage--satellite' },
 ];
 
-/** All prototypes for visual regression testing */
+/** Expressive embed prototypes - with enhanced visual styling */
+export const expressivePrototypes: PrototypeConfig[] = [
+  { name: 'AthletePublicProfile-ExpressiveEmbed', storyId: 'prototypes-athletepublicprofile--expressive-embed' },
+  { name: 'ClubPublicProfile-ExpressiveEmbed', storyId: 'prototypes-clubpublicprofile--expressive-embed' },
+  { name: 'EventDetailPage-ExpressiveEmbed', storyId: 'prototypes-event-detail-page--expressive-embed' },
+];
+
+/** All prototypes for visual regression testing (complete coverage) */
 export const allPrototypes: PrototypeConfig[] = [
   ...embedPrototypes,
   ...satellitePrototypes,
+  ...expressivePrototypes,
 ];
 
-/** Prototypes for cross-browser testing (subset) */
+/** Prototypes for cross-browser testing (key representatives) */
 export const crossBrowserPrototypes: PrototypeConfig[] = [
   { name: 'CalendarPage', storyId: 'prototypes-calendar-page--embed', maxDiffPixels: 150 },
   { name: 'LivePage', storyId: 'prototypes-live-page--embed', maxDiffPixels: 6000 },
   { name: 'DashboardPage', storyId: 'prototypes-dashboard-page--satellite', maxDiffPixels: 200 },
+  { name: 'AthleteProfile', storyId: 'prototypes-athletepublicprofile--embed', maxDiffPixels: 150 },
+  { name: 'EventDetail', storyId: 'prototypes-event-detail-page--embed', maxDiffPixels: 150 },
 ];
 
 // =============================================================================
