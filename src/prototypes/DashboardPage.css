@@ -779,11 +779,15 @@
    ---------------------------------------------------------------------------- */
 
 .dashboard-stats-grid .csk-stat-card {
-  background: var(--color-surface-primary);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
   transition: all var(--transition-normal);
+}
+
+/* Only apply surface background to non-gradient stat cards */
+.dashboard-stats-grid .csk-stat-card:not([class*="gradient"]) {
+  background: var(--color-surface-primary);
+  border: 1px solid var(--color-border);
 }
 
 .dashboard-stats-grid .csk-stat-card:hover {
