@@ -202,9 +202,36 @@ npx playwright install chromium
 | Příliš generické komponenty | Nízká | Začít specificky, generalizovat postupně |
 | Breaking changes v props | Střední | Zachovat zpětnou kompatibilitu, deprecation warnings |
 
+### Odhad iterací
+
+| Krok | Iterací | Poznámka |
+|------|---------|----------|
+| 22.1 Visual Regression | 1-2 | Setup + baseline |
+| 22.2 Section Colors | 1 | Jednoduchý |
+| 22.3 HeroSection | 2 | Největší komponenta |
+| 22.4 StatCard | 1 | |
+| 22.5 ResultItem | 1 | |
+| 22.6 ListItem | 1 | |
+| 22.7 Wizard | 2 | Komplexnější |
+| 22.8 ActionCard | 1 | Jednoduchý |
+| 22.9 DateBadge | 1 | Jednoduchý |
+| 22.10 Batch 1 | 1 | 2 prototypy |
+| 22.11 Batch 2 | 2 | 3 prototypy |
+| 22.12 Batch 3 | 1 | 2 prototypy |
+| 22.13 Batch 4 | 1 | 2 prototypy |
+| 22.14 Cleanup | 1 | |
+| **Celkem** | **~16-18** | |
+
 ### Další krok
 
 **Začít s 22.1 Visual Regression Setup** - bez baseline screenshots nelze bezpečně refaktorovat.
+
+### Git tag
+
+```
+v1.0.0-phase21-complete
+```
+Návratový bod před Phase 22.
 
 ---
 
