@@ -4,6 +4,7 @@ import { Header } from '../components/Header';
 import { MainNav } from '../components/Navigation';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
+import { Card } from '../components/Card';
 import { Icon } from '../components/Icon';
 import { Input } from '../components/Input';
 import { Select } from '../components/Select';
@@ -699,7 +700,7 @@ const DashboardPage = ({
             {/* Left Column */}
             <div className="dashboard-alerts">
               {/* Alerts Card */}
-              <div className="dashboard-section-card">
+              <Card variant="surface" padding="none" className="dashboard-section-card">
                 <div className="dashboard-section-header">
                   <h2 className="dashboard-section-title">
                     Upozorneni
@@ -737,10 +738,10 @@ const DashboardPage = ({
                     </div>
                   ))}
                 </div>
-              </div>
+              </Card>
 
               {/* Members Table */}
-              <div className="dashboard-section-card">
+              <Card variant="surface" padding="none" className="dashboard-section-card">
                 <div className="dashboard-section-header">
                   <h2 className="dashboard-section-title">Zavodnici</h2>
                   <Button variant="ghost" size="sm">
@@ -778,13 +779,13 @@ const DashboardPage = ({
                   rowKey="id"
                   hoverable
                 />
-              </div>
+              </Card>
             </div>
 
             {/* Right Column */}
             <div className="dashboard-races">
               {/* Upcoming Races */}
-              <div className="dashboard-section-card">
+              <Card variant="surface" padding="none" className="dashboard-section-card">
                 <div className="dashboard-section-header">
                   <h2 className="dashboard-section-title">Nadchazejici zavody</h2>
                   <Button variant="ghost" size="sm">
@@ -828,10 +829,10 @@ const DashboardPage = ({
                     </div>
                   ))}
                 </div>
-              </div>
+              </Card>
 
               {/* Quick Actions */}
-              <div className="dashboard-section-card">
+              <Card variant="surface" padding="none" className="dashboard-section-card">
                 <div className="dashboard-section-header">
                   <h2 className="dashboard-section-title">Rychle akce</h2>
                 </div>
@@ -877,10 +878,10 @@ const DashboardPage = ({
                     </div>
                   </button>
                 </div>
-              </div>
+              </Card>
 
               {/* Recent Activity */}
-              <div className="dashboard-section-card">
+              <Card variant="surface" padding="none" className="dashboard-section-card">
                 <div className="dashboard-section-header">
                   <h2 className="dashboard-section-title">Posledni aktivita</h2>
                 </div>
@@ -904,7 +905,7 @@ const DashboardPage = ({
                     </div>
                   ))}
                 </div>
-              </div>
+              </Card>
             </div>
           </div>
         </div>

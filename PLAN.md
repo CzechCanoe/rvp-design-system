@@ -815,29 +815,26 @@ Přidat do `aesthetic.css`:
 - [x] Audit token CSS souborů - žádný mrtvý kód
 - [x] Build validace ✅
 
-### 19.2 Konsolidace Card použití
+### 19.2 Konsolidace Card použití ✅
 
-**Dopad:** Nízký, ale čistší kód
+**Výsledek:** Kód je již čistý - všechny card-like struktury správně používají Card komponentu.
 
-**Problém:** Některé prototypy stále používají custom `<div className="...">` místo `<Card>` komponenty.
+**Audit zjistil:**
+- Všechny prototypy (AthletePublicProfile, ClubPublicProfile, ClubsListPage, etc.) již používají `<Card variant="...">` jako wrapper
+- BEM třídy (`.athlete-highlight-card__*`, `.club-member-card__*`, etc.) jsou pouze pro interní layout uvnitř Card
+- DashboardPage používá wrapper pattern `<div className="dashboard-stat-card--gradient-*">` kolem StatCard pro gradient pozadí - legitimní pattern
+- Žádné div elementy s hardcoded box-shadow/border-radius bez Card wrapperu
 
-**Jak najít:**
-```bash
-grep -r "className=.*card" src/prototypes/ | grep -v "Card\|csk-"
-```
-
-**Postup:**
-1. Projít každý prototyp
-2. Najít div elementy s card-like třídami
-3. Ověřit, že `<Card variant="...">` by bylo vhodné
-4. Nahradit a případně přidat className pro specifické styly
-5. Odstranit duplicitní CSS (pokud Card má již stejné styly)
+**Duplicitní CSS:**
+- Hero gradienty v prototypech (`.athlete-hero--dv`, etc.) nejsou duplicity - jsou to specifické selektory pro daný kontext
+- Utility třídy v aesthetic.css (`.csk-hero-gradient--*`) slouží pro nové prototypy
+- Pouze 2 `csk-` prefixed třídy v prototypech CSS (ResultsTable aesthetic varianta)
 
 **Úkoly:**
-- [ ] Audit prototypů - najít custom div s card-like styly
-- [ ] Nahradit za `<Card variant="...">` kde to dává smysl
-- [ ] Odstranit duplicitní CSS
-- [ ] Build validace
+- [x] Audit prototypů - všechny card-like struktury používají Card komponentu
+- [x] Nahradit za `<Card variant="...">` - není potřeba, již používáno
+- [x] Odstranit duplicitní CSS - žádný nalezen
+- [x] Build validace ✅
 
 ### 19.3 Stories Cleanup
 
