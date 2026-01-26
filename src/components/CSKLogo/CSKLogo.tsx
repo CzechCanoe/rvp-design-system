@@ -1,4 +1,5 @@
 import './CSKLogo.css';
+import logoSvg from './csk-logo.svg';
 
 export type CSKLogoSize = 'sm' | 'md' | 'lg';
 
@@ -25,7 +26,11 @@ export const CSKLogo = ({
 }: CSKLogoProps) => {
   const content = (
     <>
-      <span className="csk-logo__text">CSK</span>
+      <img
+        src={logoSvg}
+        alt="ČSK - Český svaz kanoistů"
+        className="csk-logo__image"
+      />
       {subtitle && <span className="csk-logo__subtitle">{subtitle}</span>}
     </>
   );

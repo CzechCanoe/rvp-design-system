@@ -10,10 +10,10 @@
   color: inherit;
 }
 
-.csk-logo__text {
-  font-weight: var(--font-bold);
-  color: var(--color-primary-600);
-  line-height: 1;
+.csk-logo__image {
+  height: auto;
+  width: auto;
+  object-fit: contain;
 }
 
 .csk-logo__subtitle {
@@ -22,24 +22,24 @@
 }
 
 /* Size variants */
-.csk-logo--sm .csk-logo__text {
-  font-size: var(--text-base-size);
+.csk-logo--sm .csk-logo__image {
+  height: 1.5rem;
 }
 
 .csk-logo--sm .csk-logo__subtitle {
   font-size: var(--text-2xs-size, 0.625rem);
 }
 
-.csk-logo--md .csk-logo__text {
-  font-size: var(--text-xl-size);
+.csk-logo--md .csk-logo__image {
+  height: 2rem;
 }
 
 .csk-logo--md .csk-logo__subtitle {
   font-size: var(--text-xs-size);
 }
 
-.csk-logo--lg .csk-logo__text {
-  font-size: var(--text-2xl-size);
+.csk-logo--lg .csk-logo__image {
+  height: 2.5rem;
 }
 
 .csk-logo--lg .csk-logo__subtitle {
@@ -51,9 +51,4 @@
   .csk-logo__subtitle {
     display: block;
   }
-}
-
-/* Dark mode */
-[data-theme='dark'] .csk-logo__text {
-  color: var(--color-primary-400);
 }
