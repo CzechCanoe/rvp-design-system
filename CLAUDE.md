@@ -63,6 +63,44 @@ npm run build-storybook  # Static Storybook
 
 ---
 
+## Testování - Metodika
+
+### Dostupné test scripty
+
+| Script | Co testuje | Čas | Kdy použít |
+|--------|------------|-----|------------|
+| `npm run test` | Vše (1645 testů × 5 prohlížečů) | 30+ min | CI/CD, před release |
+| `npm run test:quick` | Prototypy, pouze chromium | ~4-5 min | **Běžný vývoj** |
+| `npm run test:proto` | Prototypy, všechny prohlížeče | ~20 min | Cross-browser check |
+| `npm run test:components` | Komponenty, pouze chromium | ~2 min | Změny v komponentách |
+| `npm run test:update:quick` | Update snapshots (proto/chromium) | ~4 min | Po záměrných změnách |
+
+### Správný postup při vývoji
+
+1. **Po změně kódu:** Spusť `npm run test:quick`
+2. **Pokud test selže:**
+   - **Prohlédni diff obrázek** (`test-results/*/...-diff.png`)
+   - Rozhodni, zda je změna:
+     - **Záměrná** → update snapshots
+     - **Nezáměrná regrese** → oprav kód
+     - **Flaky (rendering variance)** → zvyš `maxDiffPixels` v `tests/config.ts`
+3. **NIKDY nezvyšuj toleranci bez kontroly diffu!**
+
+### Tolerance (maxDiffPixels)
+
+- **Výchozí komponenty:** 30 px
+- **Výchozí prototypy:** 80 px
+- **Animované prvky** (LiveIndicator, Skeleton): 100+ px
+- **Dynamický obsah** (countdown): 1500+ px
+- **Minor rendering variance** (fonty, ikony): 500 px
+
+### Konfigurace
+
+- `tests/config.ts` - definice komponent a prototypů s tolerancemi
+- `playwright.config.ts` - projekty (prohlížeče), timeouty
+
+---
+
 ## Důležitá pravidla
 
 1. **Read-only:**
