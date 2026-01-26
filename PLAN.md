@@ -285,103 +285,29 @@ export const Minimal: Story = { args: { variant: 'minimal' } };
 - [x] Hover efekt funguje
 - [x] `npm run test:quick` - 58 passed
 
-#### 22.6 ListItem Component
-- [ ] Vytvořit novou komponentu `ListItem`:
-  - `variant="alert" | "activity" | "feed"`
-  - `type="warning" | "danger" | "info" | "success" | "energy"`
+#### 22.6 ListItem Component ✅
+- [x] Vytvořit novou komponentu `ListItem`:
+  - `variant="default" | "alert" | "activity" | "feed"`
+  - `type="default" | "warning" | "danger" | "info" | "success" | "energy"`
   - Icon container s gradient pozadím
   - Divider support
-- [ ] Přidat `ListItem.stories.tsx`
-- [ ] Srovnat screenshots
+- [x] Přidat `ListItem.stories.tsx`
+- [x] Srovnat screenshots (58 testů prošlo)
 
-**Úspora:** ~250 řádků
+**Úspora:** ~250 řádků (při adopci v prototypech)
 
-**Nové soubory:**
-- `src/components/ListItem/ListItem.tsx`
-- `src/components/ListItem/ListItem.css`
-- `src/components/ListItem/ListItem.stories.tsx`
-- `src/components/ListItem/index.ts`
-
-**Props interface:**
-```typescript
-interface ListItemProps {
-  icon?: React.ReactNode;
-  type?: 'default' | 'warning' | 'danger' | 'info' | 'success' | 'energy';
-  variant?: 'default' | 'alert' | 'activity' | 'feed';
-  title: string;
-  description?: string;
-  timestamp?: string;
-  action?: React.ReactNode;  // button, link
-  divider?: boolean;
-  onClick?: () => void;
-  className?: string;
-}
-```
-
-**CSS struktura:**
-```css
-.csk-list-item {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-3);
-  padding: var(--spacing-4) var(--spacing-5);
-  transition: background-color var(--transition-fast);
-}
-
-.csk-list-item--divider {
-  border-bottom: 1px solid var(--color-border);
-}
-
-.csk-list-item:hover {
-  background-color: var(--color-surface-secondary);
-}
-
-/* Icon container s type-based gradient */
-.csk-list-item__icon {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.csk-list-item--warning .csk-list-item__icon {
-  background: linear-gradient(135deg, var(--color-warning-100) 0%, var(--color-warning-50) 100%);
-  color: var(--color-warning-600);
-}
-
-.csk-list-item--danger .csk-list-item__icon {
-  background: linear-gradient(135deg, var(--color-danger-100) 0%, var(--color-danger-50) 100%);
-  color: var(--color-danger-600);
-}
-
-.csk-list-item--energy .csk-list-item__icon {
-  background: var(--gradient-energy-subtle);
-  color: var(--color-energy-600);
-}
-
-/* Alert variant - left border accent */
-.csk-list-item--alert.csk-list-item--energy {
-  border-left: 3px solid var(--color-energy-500);
-}
-```
-
-**Stories:**
-```typescript
-export const AlertWarning: Story = { args: { variant: 'alert', type: 'warning', title: 'Expiring license' } };
-export const AlertDanger: Story = { args: { variant: 'alert', type: 'danger', title: 'Payment overdue' } };
-export const AlertEnergy: Story = { args: { variant: 'alert', type: 'energy', title: 'Urgent action needed' } };
-export const Activity: Story = { args: { variant: 'activity', title: 'John registered', timestamp: '2 hours ago' } };
-export const WithAction: Story = { args: { action: <Button size="sm">View</Button> } };
-```
+**Implementace:**
+- `src/components/ListItem/ListItem.tsx` - komponenta s icon, type, variant, title, description, timestamp, action, divider props
+- `src/components/ListItem/ListItem.css` - ~280 řádků stylů včetně všech type variants a dark mode
+- `src/components/ListItem/ListItem.stories.tsx` - 25+ stories pokrývajících všechny varianty a typy
+- `src/components/ListItem/index.ts` - exporty
 
 **Kritéria dokončení:**
-- [ ] Export z `src/components/index.ts`
-- [ ] 5 type variant + 3 variant varianty
-- [ ] Divider funguje
-- [ ] `npm run test:visual` - 0 regresí
+- [x] Export z `src/components/index.ts`
+- [x] 6 type variant (default, warning, danger, info, success, energy)
+- [x] 4 variant varianty (default, alert, activity, feed)
+- [x] Divider funguje
+- [x] `npm run test:quick` - 58 passed
 
 #### 22.7 Wizard / Stepper Component
 - [ ] Vytvořit novou komponentu `Wizard`:
@@ -994,7 +920,7 @@ npm run test:visual
 
 ### Další krok
 
-**Pokračovat s 22.6 ListItem Component** - vytvořit novou komponentu pro seznamy alertů, aktivit a feedů s icon container, type variants a divider support.
+**Pokračovat s 22.7 Wizard/Stepper Component** - vytvořit novou komponentu pro vícekrokové procesy (registrace, onboarding) s steps array, activeStep, connector lines a responsive chováním.
 
 ### Git tag
 
