@@ -45,9 +45,8 @@ const athleteData = {
   ranking: 1,
   // Official ICF portrait
   imageUrl: 'https://www.slalom-world.com/slalom-world-photos/prskavec_jiri-009162-2020-1597818813.png',
-  // TODO: Add action photo - download from Wikimedia Commons and save to public/images/
-  // https://commons.wikimedia.org/wiki/File:Prskavec_T._%E2%80%93_2023_Canoe_Slalom_WC_Prague_5688.jpg
-  actionImageUrl: '/images/athletes/prskavec-action.jpg',
+  // Action photo from MS Bratislava 2021 (kanoe.cz)
+  actionImageUrl: 'https://www.kanoe.cz/img/slalom/2021/MS-Bratislava/Jiri_Prskavec1.JPG',
   stats: {
     wins: 98,
     podiums: 187,
