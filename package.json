@@ -1,6 +1,6 @@
 {
   "name": "@czechcanoe/rvp-design-system",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Design system pro registracni a vysledkovy servis Ceskeho svazu kanoistu",
   "type": "module",
   "main": "./dist/index.cjs",
