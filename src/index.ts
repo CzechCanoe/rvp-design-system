@@ -1,3 +1,6 @@
+// Global styles (CSS reset)
+import './styles/globals.css';
+
 // Design Tokens
 export * from './tokens';
 
