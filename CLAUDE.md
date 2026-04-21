@@ -188,6 +188,50 @@ docs: update component API documentation
 
 ---
 
+## Versioning & Releases
+
+Tento projekt používá **Release Please** (commit-based) pro automatické verzování. **Neměň ručně `package.json` version ani `CHANGELOG.md`** — Release Please obojí spravuje přes rolling release PR.
+
+### Jak to funguje
+
+1. Každý push do `main` spustí `.github/workflows/release-please.yml`.
+2. Release Please drží otevřený **release PR** (label `autorelease: pending`) s přehledem nahromaděných změn a navrženou další verzí.
+3. Merge release PR vytvoří:
+   - Commit `chore(main): release X.Y.Z` v `main`
+   - Git tag `vX.Y.Z`
+   - GitHub Release s vygenerovaným CHANGELOGem
+   - Spustí `publish.yml` → publikuje `@czechcanoe/rvp-design-system@X.Y.Z` na GitHub Packages
+
+### Commit typy a pravidla bumpu
+
+| Commit typ | Bump | V CHANGELOGu |
+|---|---|---|
+| `feat:` | **minor** | ✓ Features |
+| `fix:` / `perf:` | **patch** | ✓ Bug Fixes / Performance |
+| `feat!:` nebo `BREAKING CHANGE:` | **major** | ✓ Features |
+| `revert:` / `docs:` | žádný | ✓ Reverts / Documentation |
+| `chore:` / `ci:` / `test:` / `style:` / `refactor:` / `build:` | **žádný** | skryté |
+| `chore(deps):` / `chore(deps-dev):` (dependabot) | **žádný** | skryté |
+
+### Pravidla pro agenty připravující PR
+
+1. **Vždy používat conventional commits** (`feat:`, `fix:`, `chore:`...). Release Please podle prefixu určí bump.
+2. **Neměnit `package.json` version ani `CHANGELOG.md`** v běžných PR — spravuje je Release Please.
+3. **Nemergnout release PR společně s feature PR** — release PR musí být v release cyklu poslední.
+4. **PR title by měl zachovat commit prefix** (u squash merge dbát na to, ať výsledný commit zůstává conventional).
+5. **Nekomitovat stav skillů** — `.superpowers/` a `.claude/` jsou lokální per-session stav. Preferovat `git add <file>` před `git add -A`.
+6. **Konzumenti aktualizují deps samostatně** — po vydání nové DS verze je bump `^X.Y.0` v konzumujících projektech (c123-live-mini, ...) samostatný `chore:` commit v tamním repu.
+
+### Vynucený přechod na konkrétní verzi
+
+Pro vynucený skok verze (např. major jump) přidej do commitu v daném release cyklu footer:
+
+```
+Release-As: 2.0.0
+```
+
+---
+
 ## kanoe.cz kontext
 
 - **Tech stack:** Bootstrap 4, jQuery 3.1.1, Joomla, DataTables
