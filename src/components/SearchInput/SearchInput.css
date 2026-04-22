@@ -264,6 +264,23 @@
 }
 
 /* ==========================================================================
+   TOUCH DEVICES — iOS Safari zoom prevention
+
+   iOS Safari auto-zooms the viewport on focus when the target input has
+   computed font-size < 16px. The `sm` (12px) and default `md` (14px)
+   variants trigger this. Bump to 16px on touch pointers so the visual
+   density stays designed on desktop (mouse/trackpad) and the zoom is
+   suppressed on phones/tablets without disabling user-scalable.
+   ========================================================================== */
+
+@media (pointer: coarse) {
+  .csk-search-input__input,
+  .csk-search-input--sm .csk-search-input__input {
+    font-size: 16px;
+  }
+}
+
+/* ==========================================================================
    CHIPS
    ========================================================================== */
 
