@@ -49,20 +49,6 @@ jobs:
       - name: Build Storybook
         run: npm run build-storybook
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: dist
-          path: dist/
-          retention-days: 1
-
-      - name: Upload Storybook artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: storybook-static
-          path: storybook-static/
-          retention-days: 1
-
   test:
     name: Playwright Tests
     runs-on: ubuntu-latest
@@ -84,11 +70,8 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
 
-      - name: Download Storybook artifacts
-        uses: actions/download-artifact@v8
-        with:
-          name: storybook-static
-          path: storybook-static/
+      - name: Build Storybook
+        run: npm run build-storybook
 
       - name: Run Playwright tests
         run: npm run test
@@ -98,6 +81,7 @@ jobs:
       - name: Upload test results
         uses: actions/upload-artifact@v7
         if: failure()
+        continue-on-error: true
         with:
           name: playwright-report
           path: playwright-report/
