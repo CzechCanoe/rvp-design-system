@@ -6748,3 +6748,17 @@ Další krok: 19.4 Bundle Size Audit (volitelný)
 
 ### Poznámky
 - `update-snapshots.yml` jde spustit přes workflow_dispatch i z větve, ale na `main` ho zatím nemusí GitHub znát pro UI.
+
+---
+
+## 2026-10-18 - v2 T0b (pokračování): stabilizace testů a karanténa
+
+### Dokončeno
+- [x] `reducedMotion: 'reduce'` + `toHaveScreenshot: { animations: 'disabled', caret: 'hide' }` v `playwright.config.ts`
+- [x] Opravená neexistující story ID (Toast, Header-Glass, prototypy `*-page--*`, Calendar) a `.csk-btn` -> `.csk-button`, `hasContent` pro Avatar/Progress/Skeleton -> zmizely `waitForSelector` timeouty (job 15 min -> ~5 min)
+- [x] Tag `@prototype` (prototypes.spec, cross-browser, container-queries); CI krok A `--grep-invert @prototype`, krok B `--grep @prototype --ignore-snapshots`; update workflow prototypy nemění
+- [x] `QUARANTINE` v `tests/config.ts` + `tests/quarantine.ts` (`test.fixme` v beforeEach): 25 testů (T3 7, T4 4, T8 1, T17 13)
+- [x] PNG prototypových testů vrácena na verzi z `main`
+
+### Poznámky
+- Karanténa je klíčovaná titlePath bez názvu souboru; T17 ji vyprázdní.
