@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Základ: barvy, písmo, stavy</title>
+
+<link rel="stylesheet" href="./rvp.css">
+</head>
+<body>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>body{margin:0}a{color:#2a66b4}a:hover{color:#1d4f8f}</style>
+
+<div style="width: 1280px; height: 1180px; padding: 48px 56px; display: flex; flex-direction: column; gap: 36px; background: #ffffff; font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #1b1f26">
+
+  <div style="display: flex; align-items: flex-end; gap: 24px">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <h1 style="font-size: 44px">Klidná voda</h1>
+      <div style="color: #444b55; font-size: 16px; max-width: 720px">Jeden vizuální jazyk ve dvou registrech. Veřejný: bílá, svazová modrá, vzduch. Pracovní: stejné tokeny, hustší, tabulkový. Pohyb jen tam, kde se něco opravdu děje.</div>
+    </div>
+    <div style="margin-left: auto; display: flex; gap: 8px">
+      <span class="badge b-dv">Divoká voda</span><span class="badge b-ry">Rychlost</span><span class="badge b-vt">Turistika</span>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <h3>Barvy, odvozené z kanoe.cz a loga ČSK</h3>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+        <div style="height: 76px; border-radius: 8px; background: #004899; color: #fff; padding: 10px; display: flex; flex-direction: column; justify-content: flex-end; font-size: 12px"><b>Svazová modrá</b><span class="mono">#004899 · logo</span></div>
+        <div style="height: 76px; border-radius: 8px; background: #2a66b4; color: #fff; padding: 10px; display: flex; flex-direction: column; justify-content: flex-end; font-size: 12px"><b>Akce, odkazy</b><span class="mono">#2a66b4 · kanoe.cz</span></div>
+        <div style="height: 76px; border-radius: 8px; background: #e42313; color: #fff; padding: 10px; display: flex; flex-direction: column; justify-content: flex-end; font-size: 12px"><b>Červená</b><span class="mono">#e42313 · jen LIVE, chyba</span></div>
+        <div style="height: 76px; border-radius: 8px; background: #e8f0fa; color: #1d4f8f; padding: 10px; display: flex; flex-direction: column; justify-content: flex-end; font-size: 12px"><b>Modrá podložka</b><span class="mono">#e8f0fa</span></div>
+        <div style="height: 56px; border-radius: 8px; background: #1b1f26; color: #fff; padding: 8px; font-size: 12px"><b>Text</b> <span class="mono">#1b1f26</span></div>
+        <div style="height: 56px; border-radius: 8px; background: #6b7280; color: #fff; padding: 8px; font-size: 12px"><b>Vedlejší</b> <span class="mono">#6b7280</span></div>
+        <div style="height: 56px; border-radius: 8px; background: #d9dee5; color: #1b1f26; padding: 8px; font-size: 12px"><b>Linky</b> <span class="mono">#d9dee5</span></div>
+        <div style="height: 56px; border-radius: 8px; background: #f4f6f8; color: #1b1f26; padding: 8px; font-size: 12px; border: 1px solid #d9dee5"><b>Pracovní plocha</b> <span class="mono">#f4f6f8</span></div>
+      </div>
+      <div style="color: #6b7280; font-size: 13px">Žádné gradienty ani mesh pozadí. Fotografie jen v hero veřejných stránek, stejně jako na kanoe.cz.</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <h3>Písmo</h3>
+      <div style="display: flex; flex-direction: column; gap: 10px; border: 1px solid #d9dee5; border-radius: 10px; padding: 18px">
+        <div style="font-family: 'Barlow Semi Condensed', sans-serif; font-weight: 700; font-size: 34px; line-height: 1.05">Český pohár ve slalomu, Troja</div>
+        <div style="font-size: 13px; color: #6b7280">Barlow Semi Condensed 600/700: nadpisy, pořadí, čísla v hero. Zúžené jako Roboto Condensed na kanoe.cz, ale kreslené pro obrazovku.</div>
+        <div style="font-size: 15px">IBM Plex Sans 400/500/600 pro text, formuláře a tabulky. Tabulkové číslice, aby sloupce časů stály pod sebou.</div>
+        <div style="display: flex; gap: 24px; align-items: baseline">
+          <span class="mono" style="font-size: 22px">1:32.34</span>
+          <span class="mono" style="font-size: 22px; color: #6b7280">+0:01.53</span>
+          <span class="mono" style="font-size: 22px; color: #e42313">0:46.50</span>
+          <span style="font-size: 13px; color: #6b7280">IBM Plex Mono pro časy a rozdíly</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 14px">
+    <h3>Stavy hodnoty, to, co dnešní systémy neumějí říct</h3>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+      <div class="card" style="padding: 14px; display: flex; flex-direction: column; gap: 8px"><span class="badge b-ok">Oficiální</span><div style="font-size: 13px; color: #444b55">Schválené vrchním rozhodčím a počtářem. Jediný stav bez označení v tabulce.</div></div>
+      <div class="card" style="padding: 14px; display: flex; flex-direction: column; gap: 8px"><span class="badge b-warn">Předběžné</span><div style="font-size: 13px; color: #444b55">Hodnota se ještě může pohnout. Živé výsledky, nepotvrzené VT, průběžný žebříček.</div></div>
+      <div class="card" style="padding: 14px; display: flex; flex-direction: column; gap: 8px"><span class="badge b-rev">V revizi</span><div style="font-size: 13px; color: #444b55">Rozhodčí hodnotu přezkoumávají. Může platit zároveň s Předběžné, proto jiná barva i tvar textu.</div></div>
+      <div class="card" style="padding: 14px; display: flex; flex-direction: column; gap: 8px"><span class="badge b-unk">Neznámo</span><div style="font-size: 13px; color: #444b55">Ještě nedorazilo, nebo k dispozici není. Nikdy nula, nikdy pomlčka tvářící se jako hodnota.</div></div>
+    </div>
+    <div style="display: flex; gap: 28px; align-items: center; flex-wrap: wrap; padding: 12px 16px; background: #f4f6f8; border-radius: 10px">
+      <span class="badge b-live"><i></i> Live</span>
+      <span style="display: inline-flex; gap: 8px; align-items: baseline"><span class="mono" style="font-size: 20px; color: #e42313">0:46.50</span><span class="small muted">běží</span></span>
+      <span style="display: inline-flex; gap: 8px; align-items: baseline"><span class="mono stale" style="font-size: 20px">0:46.50</span><span class="small muted">zastaveno, bez dat 6 s</span></span>
+      <span style="display: inline-flex; gap: 6px; align-items: center"><span class="pen pen-0">0</span><span class="pen pen-2">2</span><span class="pen pen-50">50</span><span class="pen pen-n">·</span><span class="small muted">branky: čistá, dotek, minutí, neposouzeno</span></span>
+      <span style="display: inline-flex; gap: 6px; align-items: center"><span class="badge b-out">DNS</span><span class="badge b-out">DNF</span><span class="badge b-out">DSQ</span><span class="small muted">značky místo času, nikdy vedle něj</span></span>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <h3>Ovládání</h3>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center">
+        <a href="#x" class="btn btn-p">Přihlásit oddíl</a>
+        <a href="#x" class="btn btn-s">Propozice (PDF)</a>
+        <a href="#x" class="btn btn-g">Sledovat závod</a>
+        <span class="badge b-level">ČP</span><span class="badge b-level">MČR</span><span class="badge b-level">NKZ</span><span class="badge b-level">Veřejný</span>
+      </div>
+      <div class="pills"><button class="pill on">K1 muži</button><button class="pill">K1 ženy</button><button class="pill">C1 muži</button><button class="pill">C1 ženy</button><button class="pill">C2</button></div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+        <div><label class="f" for="q">Hledat závodníka</label><input id="q" class="in" placeholder="Jméno nebo RGC"></div>
+        <div><label class="f" for="d">Uzávěrka</label><input id="d" class="in" value="7. 5. 2026 23:59"></div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <h3>Varování nikdy neblokuje</h3>
+      <div class="note note-warn"><b>Prohlídka propadla 3. 4. 2026.</b> Za splnění podmínek ručí oddíl. Přihlášku můžete odeslat, pořadatel varování uvidí.</div>
+      <div class="note note-info">Pozdní přihláška: do pátku 18:00 bez penalizace (DNS-A).</div>
+      <div class="note note-err">Platbu se nepodařilo spárovat, zkontrolujte variabilní symbol <span class="mono">2026051703</span>.</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

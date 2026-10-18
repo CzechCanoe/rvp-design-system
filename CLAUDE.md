@@ -4,7 +4,18 @@
 
 Designový systém pro veřejné sekce webů ČSK: kalendář závodů, výsledky, live výsledky, registrace, profily závodníků a klubů.
 
-**GitHub:** bude upřesněno | **Licence:** bude upřesněno
+**GitHub:** CzechCanoe/rvp-design-system | **Licence:** AGPL-3.0
+
+---
+
+## v2 „Klidná voda“: probíhá, čti nejdřív
+
+Na `main` běží přechod na major verzi 2.0.0. Zadání je v `docs/v2/` (`README.md` → `BRIEF.md` → `TASKS.md`; `TOKENS.md`, `COMPONENTS.md`, `MIGRATION.md`, `reference/` podle tasku). Platí:
+
+- Práce jde po issues „v2 T<N>“, větev `feat/v2-<N>-<slug>` z `main`, PR do `main`. Storybook se po každém merge nasazuje na GitHub Pages.
+- Rolling release PR od Release Please („chore(main): release 2.0.0“) se **nemerguje** až do konce fáze 5. Feature PR se mergují normálně.
+- Kde `docs/v2` a tenhle soubor nesouhlasí (typy, režimy, barvy níže), platí `docs/v2`. Quick Reference níže popisuje 1.x a aktualizuje se v T17.
+- Tokeny jen `--csk-*`, nikdy hex v komponentách; `src/prototypes/` se v T17 maže, nové obrazovky jsou Page stories.
 
 ---
 
@@ -121,20 +132,20 @@ npm run build-storybook  # Static Storybook
 
 ### Před zahájením práce
 
-1. Přečti `PLAN.md` – aktuální stav a další kroky (kompaktní, ~100 řádků)
+1. Během v2: přečti `docs/v2/README.md` a issue svého tasku. `PLAN.md` je stav 1.x a přepíše se v T17.
 2. Pokud je krok příliš velký, rozděl na menší části
 
 ### Během práce
 
 1. **Implementace:** Pracuj v blocích (~70 % kontextu)
-2. **Průběžně:** Aktualizuj `PLAN.md` při změnách plánu
-3. **Po dokončení kroku:** Označ `- [x]` v PLAN.md
+2. **Průběžně:** rozhodnutí mimo zadání piš do PR do sekce „Rozhodnuto bez maintainera“
+3. **Mimo rozsah tasku nic neměň**; chybějící token doplň do `src/tokens/` a `docs/v2/TOKENS.md`
 
 ### Po dokončení bloku/iterace
 
-1. **PLAN.md:** Označ dokončené kroky, aktualizuj "Další krok"
+1. **Issue a PR:** akceptační kritéria z `docs/v2/TASKS.md` odškrtnutá v PR, příkazy a exit kódy v popisu
 2. **DEVLOG.md:** **POUZE APPEND** (viz níže)
-3. **Commit:** Potvrď změny
+3. **Commit:** konvenční, squash merge přes PR
 
 ### DEVLOG.md - pravidla
 
@@ -170,7 +181,8 @@ EOF
 
 | Soubor | Účel | Kdy číst |
 |--------|------|----------|
-| `PLAN.md` | Aktuální plán (~100 řádků) | **Vždy na začátku** |
+| `docs/v2/` | Zadání v2 (brief, tokeny, komponenty, tasky) | **Vždy na začátku během v2** |
+| `PLAN.md` | Plán 1.x, historický | Jen při diagnostice |
 | `CLAUDE.md` | Pokyny + quick reference | Vždy (automaticky) |
 | `DEVLOG.md` | Historie práce | **Jen při diagnostice** |
 | `PROJECT.md` | Přehled projektu | Při potřebě kontextu |
@@ -215,6 +227,8 @@ Tento projekt používá **Release Please** (commit-based) pro automatické verz
 
 ### Pravidla pro agenty připravující PR
 
+0. **Během v2:** release PR na 2.0.0 nechat otevřený až do T19; breaking změny značit `feat!:`. Merge release PR dělá jen maintainer.
+
 1. **Vždy používat conventional commits** (`feat:`, `fix:`, `chore:`...). Release Please podle prefixu určí bump.
 2. **Neměnit `package.json` version ani `CHANGELOG.md`** v běžných PR — spravuje je Release Please.
 3. **Nemergnout release PR společně s feature PR** — release PR musí být v release cyklu poslední.
@@ -235,6 +249,6 @@ Release-As: 2.0.0
 ## kanoe.cz kontext
 
 - **Tech stack:** Bootstrap 4, jQuery 3.1.1, Joomla, DataTables
-- **Primární barva:** `#1176a6`
+- **Barvy (v2):** svazová modrá `#004899` (logo), akční modrá `#2a66b4` (kanoe.cz navigace), červená `#e42313` jen LIVE a chyby; viz `docs/v2/TOKENS.md`. Hodnota `#1176a6` z 1.x se na kanoe.cz nepoužívá.
 - **Grid:** 12-column Bootstrap
 - **Embed komponenty:** používají `data-mode="embed"` pro neutrální styling

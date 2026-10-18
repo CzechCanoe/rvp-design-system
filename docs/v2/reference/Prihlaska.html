@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Přihláška oddílu na závod</title>
+
+<link rel="stylesheet" href="./rvp.css">
+</head>
+<body>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>body{margin:0}a{color:#2a66b4}a:hover{color:#1d4f8f}</style>
+
+<div style="min-height: 1400px; display: flex; flex-direction: column; background: #f4f6f8; font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #1b1f26; font-size: 14px">
+
+  <div class="topbar" style="height: 44px">
+    <a href="#h" class="brand" style="font-size: 16px"><span style="display: inline-block; width: 22px; height: 22px; border-radius: 4px; background: linear-gradient(135deg, #e42313 50%, #ffffff 50%)" aria-hidden="true"></span>ČSK · Přihlášky</a>
+    <nav style="font-size: 13px"><a href="Kalendar.dc.html">Kalendář</a><a href="#p" class="on">Přihlášky oddílu</a><a href="#c">Členové</a><a href="#pl">Platby</a><span style="opacity: .7">TJ Bohemians Praha · [JMÉNO SPRÁVCE]</span><a href="#o">Odhlásit</a></nav>
+  </div>
+
+  <div style="background: #fff; border-bottom: 1px solid #d9dee5; padding: 14px 24px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap">
+    <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+      <div class="crumbs"><a href="#p">Přihlášky oddílu</a><span>/</span><span>Nominační závod, Lipno</span></div>
+      <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span class="badge b-dv">DV</span><span class="badge b-level">NKZ</span><h2 style="font-size: 24px">Nominační závod, Lipno · 23.–24. 5. 2026</h2><span class="badge b-out">Rozpracovaná</span></div>
+    </div>
+    <div style="margin-left: auto; display: flex; gap: 18px; align-items: center; flex-wrap: wrap">
+      <div style="display: flex; flex-direction: column; align-items: flex-end"><span class="small muted">Uzávěrka přihlášek</span><span style="font-family: 'Barlow Semi Condensed', sans-serif; font-weight: 700; font-size: 20px; color: #9a5b00">za 5 dní · st 13. 5. 23:59</span></div>
+      <div style="display: flex; flex-direction: column; align-items: flex-end"><span class="small muted">Dohlášky</span><span style="font-weight: 600">do po 18. 5., +100 %</span></div>
+      <a href="#p" class="btn btn-s btn-sm">Propozice</a>
+    </div>
+  </div>
+
+  <div style="padding: 20px 24px 40px; display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start">
+    <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+      <div class="card" style="padding: 12px 16px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
+        <label class="f" for="add" style="margin: 0; white-space: nowrap">Přidat závodníka</label>
+        <input id="add" class="in" placeholder="Začněte psát jméno nebo RGC, Enter přidá do poslední kategorie" style="flex: 1 1 300px; height: 36px">
+        <a href="#m" class="btn btn-s btn-sm">Jako na ČP #2 (14 lodí)</a>
+        <a href="#k" class="btn btn-s btn-sm">Vybrat z členů oddílu</a>
+      </div>
+
+      <div class="card" style="border-color: #c9dbf1">
+        <div class="card-h" style="background: #e8f0fa; border-radius: 10px 10px 0 0"><h3 style="font-size: 16px">Návrhy od závodníků</h3><span class="small muted">dospělí členové si přihlášku navrhli sami, oddíl potvrzuje</span><span class="badge b-level" style="margin-left: auto">2 čekají</span></div>
+        <div style="display: flex; flex-direction: column">
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 140px 120px 200px; gap: 12px; padding: 10px 16px; align-items: center; border-bottom: 1px solid #eceff3"><div><b>[JMÉNO ZÁVODNÍKA]</b> <span class="small muted">1999 · RGC 118 203</span></div><span>K1 muži</span><span class="small muted">navrhl út 9:12</span><div style="display: flex; gap: 6px"><button class="btn btn-p btn-sm">Potvrdit</button><button class="btn btn-s btn-sm">Odmítnout</button></div></div>
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 140px 120px 200px; gap: 12px; padding: 10px 16px; align-items: center"><div><b>[JMÉNO ZÁVODNÍKA]</b> <span class="small muted">2002 · RGC 121 877</span></div><span>C1 ženy</span><span class="small muted">navrhla po 20:40</span><div style="display: flex; gap: 6px"><button class="btn btn-p btn-sm">Potvrdit</button><button class="btn btn-s btn-sm">Odmítnout</button></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3 style="font-size: 16px">K1 muži</h3><span class="small muted">4 lodě · startovné 300 Kč / loď</span><a href="#a" class="btn btn-g btn-sm" style="margin-left: auto">+ Přidat do K1 muži</a></div>
+        <div style="overflow-x: auto">
+        <table class="t">
+          <thead><tr><th>Závodník</th><th>Roč.</th><th>Věková kat.</th><th>VT</th><th>Registrace</th><th>Příspěvky</th><th>Prohlídka</th><th class="r">Startovné</th><th></th></tr></thead>
+          <tbody>
+            <tr><td><b>[JMÉNO ZÁVODNÍKA]</b> <span class="small muted">RGC 118 203</span></td><td class="num">1999</td><td><select class="in" style="height: 32px; padding: 0 8px; width: 130px"><option>Dospělí</option></select></td><td class="num">1</td><td><span class="badge b-ok">platná</span></td><td><span class="badge b-ok">2026</span></td><td><span class="badge b-ok">do 2. 2027</span></td><td class="r num">300</td><td class="r"><a href="#x" class="small">odebrat</a></td></tr>
+            <tr><td><b>[JMÉNO ZÁVODNÍKA]</b> <span class="small muted">RGC 125 410</span></td><td class="num">2008</td><td><select class="in" style="height: 32px; padding: 0 8px; width: 130px"><option>U18</option></select></td><td class="num">2+</td><td><span class="badge b-ok">platná</span></td><td><span class="badge b-ok">2026</span></td><td><span class="badge b-warn">propadla 3. 4.</span></td><td class="r num">300</td><td class="r"><a href="#x" class="small">odebrat</a></td></tr>
+            <tr><td><b>[JMÉNO ZÁVODNÍKA]</b> <span class="small muted">RGC 127 002</span></td><td class="num">2011</td><td><select class="in" style="height: 32px; padding: 0 8px; width: 130px; border-color: #9a5b00"><option>U18</option></select><div class="small" style="color: #9a5b00; margin-top: 3px">ročník 2011 odpovídá U16</div></td><td class="num muted">bez VT</td><td><span class="badge b-ok">platná</span></td><td><span class="badge b-warn">2026 nezaplaceno</span></td><td><span class="badge b-ok">do 9. 2026</span></td><td class="r num">300</td><td class="r"><a href="#x" class="small">odebrat</a></td></tr>
+            <tr><td><b>[JMÉNO ZÁVODNÍKA]</b> <span class="small muted">RGC 119 555</span></td><td class="num">2001</td><td><select class="in" style="height: 32px; padding: 0 8px; width: 130px"><option>Dospělí</option></select></td><td class="num">M</td><td><span class="badge b-ok">platná</span></td><td><span class="badge b-ok">2026</span></td><td><span class="badge b-ok">do 11. 2026</span></td><td class="r num">300</td><td class="r"><a href="#x" class="small">odebrat</a></td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3 style="font-size: 16px">C2 mix</h3><span class="small muted">2 lodě · 400 Kč / loď</span><a href="#a" class="btn btn-g btn-sm" style="margin-left: auto">+ Přidat loď C2</a></div>
+        <div style="overflow-x: auto">
+        <table class="t">
+          <thead><tr><th>Posádka</th><th>Roč.</th><th>Věková kat.</th><th>VT</th><th>Registrace</th><th>Příspěvky</th><th>Prohlídka</th><th class="r">Startovné</th><th></th></tr></thead>
+          <tbody>
+            <tr><td style="border-bottom: 0"><b>[JMÉNO ZÁVODNÍKA]</b> <span class="small muted">háček</span></td><td class="num" style="border-bottom: 0">2003</td><td rowspan="2"><select class="in" style="height: 32px; padding: 0 8px; width: 130px"><option>Dospělí</option></select></td><td class="num" style="border-bottom: 0">2</td><td style="border-bottom: 0"><span class="badge b-ok">platná</span></td><td style="border-bottom: 0"><span class="badge b-ok">2026</span></td><td style="border-bottom: 0"><span class="badge b-ok">do 3. 2027</span></td><td class="r num" rowspan="2">400</td><td class="r" rowspan="2" style="white-space: nowrap"><a href="#x" class="small">vyměnit člena</a><br><a href="#x" class="small">odebrat loď</a></td></tr>
+            <tr><td><b>[JMÉNO ZÁVODNÍKA]</b> <span class="small muted">zadák</span></td><td class="num">2004</td><td class="num">2</td><td><span class="badge b-ok">platná</span></td><td><span class="badge b-ok">2026</span></td><td><span class="badge b-ok">do 1. 2027</span></td></tr>
+            <tr><td style="border-bottom: 0"><b>[JMÉNO ZÁVODNÍKA]</b> <span class="small muted">háček</span></td><td class="num" style="border-bottom: 0">2007</td><td rowspan="2"><select class="in" style="height: 32px; padding: 0 8px; width: 130px"><option>U18</option></select></td><td class="num" style="border-bottom: 0">3</td><td style="border-bottom: 0"><span class="badge b-ok">platná</span></td><td style="border-bottom: 0"><span class="badge b-ok">2026</span></td><td style="border-bottom: 0"><span class="badge b-ok">do 5. 2027</span></td><td class="r num" rowspan="2">400</td><td class="r" rowspan="2" style="white-space: nowrap"><a href="#x" class="small">vyměnit člena</a><br><a href="#x" class="small">odebrat loď</a></td></tr>
+            <tr><td><span class="muted">druhé místo v lodi je volné</span> · <a href="#x">doplnit zadáka</a></td><td></td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <div class="card" style="padding: 12px 16px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; color: #444b55">
+        <span><b>Záhlaví přihlášky:</b> vedoucí družstva [JMÉNO], [TELEFON], [E-MAIL]</span><a href="#z" class="small" style="margin-left: auto">upravit</a>
+      </div>
+    </div>
+
+    <aside style="flex: 1 1 300px; min-width: 280px; display: flex; flex-direction: column; gap: 14px">
+      <div class="card">
+        <div class="card-h"><h3 style="font-size: 16px">Souhrn</h3></div>
+        <div class="card-b" style="display: flex; flex-direction: column; gap: 8px; padding-top: 12px">
+          <div style="display: flex; justify-content: space-between"><span>Lodí</span><b class="num">6</b></div>
+          <div style="display: flex; justify-content: space-between"><span>Závodníků</span><b class="num">7</b></div>
+          <div style="display: flex; justify-content: space-between"><span>Z toho nezletilých</span><b class="num">3</b></div>
+          <div style="display: flex; justify-content: space-between; border-top: 1px solid #eceff3; padding-top: 8px; font-size: 16px"><span>Startovné</span><b class="num">2 000 Kč</b></div>
+          <div class="small muted">Pořadatel: převodem, VS 2026052302. QR kód se objeví po odeslání.</div>
+        </div>
+      </div>
+
+      <div class="card" style="border-color: #f0c36d">
+        <div class="card-h"><h3 style="font-size: 16px">Varování</h3><span class="badge b-warn" style="margin-left: auto">2</span></div>
+        <div style="display: flex; flex-direction: column; font-size: 13px">
+          <div style="padding: 10px 16px; border-bottom: 1px solid #eceff3"><b>Propadlá lékařská prohlídka</b> u 1 závodníka. Za splnění podmínek ručí oddíl, pořadatel varování uvidí.</div>
+          <div style="padding: 10px 16px; border-bottom: 1px solid #eceff3"><b>Věk neodpovídá kategorii</b> u 1 závodníka. Pokud startuje ve vyšší kategorii záměrně, nechte tak.</div>
+          <div style="padding: 10px 16px; color: #6b7280">Nic z toho odeslání neblokuje.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-b" style="display: flex; flex-direction: column; gap: 12px">
+          <label style="display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 1.4"><input type="checkbox" style="margin-top: 3px"><span>Potvrzuji za oddíl <b>TJ Bohemians Praha</b>, že přihlášení závodníci splňují podmínky práva startu (Registrační řád čl. 14.2–14.3).</span></label>
+          <button class="btn btn-p" style="width: 100%">Odeslat přihlášku pořadateli</button>
+          <button class="btn btn-s" style="width: 100%">Uložit rozpracované</button>
+          <div class="small muted" style="text-align: center">Naposledy uloženo před 2 min · po odeslání dostanete potvrzení e-mailem</div>
+        </div>
+      </div>
+
+      <div class="note note-info" style="flex-direction: column; gap: 4px"><b>Po uzávěrce</b><span>Změny dělá pořadatel. Omluvy DNS-A do pátku 18:00 bez penalizace.</span><a href="#o">Omluvit závodníka →</a></div>
+    </aside>
+  </div>
+</div>
+
+</body>
+</html>

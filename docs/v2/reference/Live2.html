@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Live: rozbalený řádek</title>
+
+<link rel="stylesheet" href="./rvp.css">
+</head>
+<body>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>body{margin:0}a{color:#2a66b4}a:hover{color:#1d4f8f}</style>
+
+<div class="lv" style="height: 1100px">
+
+  <div class="lv-top" style="padding-bottom: 8px">
+    <div style="display: flex; align-items: center; gap: 10px">
+      <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+        <span class="t" style="font-size: 17px">Olympic Hopes 2026</span>
+        <span style="font-size: 12px; opacity: .85">Ne 4. 10. · K1 muži · 2. jízdy</span>
+      </div>
+      <span class="badge b-live" style="margin-left: auto; flex: none"><i></i> Live</span>
+    </div>
+  </div>
+  <div style="background: #fff; border-bottom: 1px solid #d9dee5; padding: 6px 10px; font-size: 11px; color: #6b7280; display: flex; gap: 8px"><span>Při scrollu se hlavička stáhne na jeden řádek, navigace zůstane nahoře</span></div>
+
+  <div class="lv-nav" style="padding-top: 6px">
+    <div class="carousel"><button class="pill">Forerunners</button><button class="pill">C1 ženy</button><button class="pill">C1 muži</button><button class="pill">K1 ženy</button><button class="pill on">K1 muži</button><button class="pill">C2 mix</button></div>
+  </div>
+
+  <div style="margin: 8px 10px 0; display: flex; flex-direction: column; border: 1px solid #d9dee5; border-radius: 10px; overflow: hidden; background: #fff">
+    <div class="lv-tool">
+      <input class="in" placeholder="Hledat závodníka" aria-label="Hledat závodníka">
+      <button class="pill">Kategorie ▾</button>
+      <button class="pill" aria-label="Jen oblíbení">★ 2</button>
+    </div>
+    <table class="lv-tbl">
+      <thead><tr><th class="chev"></th><th class="rk">#</th><th class="star"></th><th>Závodník</th><th class="r">Jízdy</th><th class="r">Výsledek</th></tr></thead>
+      <tbody>
+        <tr class="p1"><td class="chev">›</td><td class="rk p1">1</td><td class="star on">★</td><td><div class="nm"><b>HNILICA Lukas <i>U16</i></b><span>Slovenská kanoistika</span></div></td><td class="r"><div class="runs"><span>89.83</span><span class="best">89.81</span></div></td><td class="r"><div class="res"><b>89.81</b><span>–</span></div></td></tr>
+        <tr class="p2" style="background: #f7f9fc"><td class="chev" style="color: #2a66b4">⌄</td><td class="rk p2">2</td><td class="star">☆</td><td><div class="nm"><b>REZEK Adam <i>U16</i></b><span>SK Vodní slalom Č. Budějovice</span></div></td><td class="r"><div class="runs"><span>98.05<span class="pen">(2)</span></span><span class="best">90.38</span></div></td><td class="r"><div class="res"><b>90.38</b><span>+0.57</span></div></td></tr>
+        <tr><td colspan="6" style="padding: 0">
+          <div class="det" style="border-left: 0; border-bottom: 1px solid #d9dee5; padding: 10px 10px 12px 12px">
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span class="bib">35</span><span><b>2.</b> ve třídě · <b>1.</b> v U16 <span class="muted">(+0.00)</span></span><span class="badge b-warn" style="margin-left: auto">Předběžné</span></div>
+            <div class="blk">
+              <div style="display: flex; gap: 8px; align-items: center; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: #6b7280">1. jízda<span class="muted" style="font-weight: 400; text-transform: none; letter-spacing: 0; margin-left: auto">11:22 · 14. po 1. jízdě</span></div>
+              <div class="kv"><span><small>Čas</small>96.05</span><span><small>Tr.</small>2</span><span><small>Celkem</small>98.05</span></div>
+              <div class="gates"><span class="pen pen-0">1</span><span class="pen pen-0">2</span><span class="pen pen-0">3</span><span class="pen pen-0">4</span><span class="pen pen-0" style="text-decoration: underline; font-style: italic">5</span><span class="pen pen-0">6</span><span class="pen pen-0">7</span><span class="pen pen-0" style="text-decoration: underline; font-style: italic">8</span><span class="pen pen-0">9</span><span class="pen pen-0">10</span><span class="pen pen-0" style="text-decoration: underline; font-style: italic">11</span><span class="pen pen-0" style="text-decoration: underline; font-style: italic">12</span><span class="pen pen-0">13</span><span class="pen pen-0">14</span><span class="pen pen-0">15</span><span class="pen pen-2">16</span><span class="pen pen-0">17</span><span class="pen pen-0">18</span><span class="pen pen-0" style="text-decoration: underline; font-style: italic">19</span><span class="pen pen-0" style="text-decoration: underline; font-style: italic">20</span><span class="pen pen-0">21</span><span class="pen pen-0">22</span></div>
+            </div>
+            <div class="blk best">
+              <div style="display: flex; gap: 8px; align-items: center; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: #1d4f8f">2. jízda <span class="badge b-level" style="height: 16px; font-size: 10px; padding: 0 5px">počítá se</span><span class="muted" style="font-weight: 400; text-transform: none; letter-spacing: 0; margin-left: auto">15:24</span></div>
+              <div class="kv"><span><small>Čas</small>90.38</span><span><small>Tr.</small>0</span><span><small>Celkem</small>90.38</span></div>
+              <div class="gates"><span class="pen pen-0">1</span><span class="pen pen-0">2</span><span class="pen pen-0">3</span><span class="pen pen-0">4</span><span class="pen pen-0" style="text-decoration: underline; font-style: italic">5</span><span class="pen pen-0">6</span><span class="pen pen-0">7</span><span class="pen pen-0" style="text-decoration: underline; font-style: italic">8</span><span class="pen pen-0">9</span><span class="pen pen-0">10</span><span class="pen pen-0" style="text-decoration: underline; font-style: italic">11</span><span class="pen pen-0" style="text-decoration: underline; font-style: italic">12</span><span class="pen pen-0">13</span><span class="pen pen-0">14</span><span class="pen pen-0">15</span><span class="pen pen-0">16</span><span class="pen pen-0">17</span><span class="pen pen-0">18</span><span class="pen pen-n">19</span><span class="pen pen-n">20</span><span class="pen pen-0">21</span><span class="pen pen-0">22</span></div>
+              <div class="ttb">Branky 19 a 20 zatím neposouzené, čas se ještě může změnit.</div>
+            </div>
+            <div style="display: flex; gap: 14px; font-size: 12px"><a href="Profil.dc.html">Profil závodníka</a><a href="#s">Sledovat ★</a></div>
+          </div>
+        </td></tr>
+        <tr class="p3"><td class="chev">›</td><td class="rk p3">3</td><td class="star on">★</td><td><div class="nm"><b>FABIAN František <i>U18</i></b><span>Vodní sporty Ostrava</span></div></td><td class="r"><div class="runs"><span>94.48<span class="pen">(2)</span></span><span class="best">91.52</span></div></td><td class="r"><div class="res"><b>91.52</b><span>+1.71</span></div></td></tr>
+        <tr><td class="chev">›</td><td class="rk">4</td><td class="star">☆</td><td><div class="nm"><b>DUSIK Krzysztof <i>U16</i></b><span>KS Pieniny Szczawnica</span></div></td><td class="r"><div class="runs"><span>95.63<span class="pen">(2)</span></span><span class="best">91.59</span></div></td><td class="r"><div class="res"><b>91.59</b><span>+1.78</span></div></td></tr>
+        <tr><td class="chev">›</td><td class="rk muted">·</td><td class="star">☆</td><td><div class="nm"><b>HRADECKÝ Daniel <i>U16</i></b><span>KK Roudnice n. L.</span></div></td><td class="r"><div class="runs"><span class="badge b-out" style="height: 16px; font-size: 10px; padding: 0 5px">DNS</span><span class="badge b-out" style="height: 16px; font-size: 10px; padding: 0 5px">DNS</span></div></td><td class="r"><div class="res"><b class="muted">–</b></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="lv-bot"><a href="#Výsledky" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13"/></svg><span>Výsledky</span></a><a href="#Startovka"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4M5 4h12l-2 4 2 4H5"/></svg><span>Startovka</span></a><a href="#Na trati"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 9c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg><span>Na trati</span></a><a href="#Program"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span>Program</span></a></div>
+</div>
+
+</body>
+</html>

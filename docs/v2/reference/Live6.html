@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Program, dvě fáze naráz</title>
+
+<link rel="stylesheet" href="./rvp.css">
+</head>
+<body>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>body{margin:0}a{color:#2a66b4}a:hover{color:#1d4f8f}</style>
+
+<div class="lv" style="height: 1100px">
+
+  <div class="lv-top">
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; opacity: .85"><a href="Kalendar.dc.html">‹ Závody</a><span style="margin-left: auto">aktualizováno před 3 s</span></div>
+    <div style="display: flex; align-items: center; gap: 10px">
+      <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+        <span class="t">Olympic Hopes 2026</span>
+        <span style="font-size: 12px; opacity: .85">Roudnice nad Labem · neděle 4. 10.</span>
+      </div>
+      <span class="badge b-live" style="margin-left: auto; flex: none"><i></i> Live</span>
+    </div>
+  </div>
+
+  <div class="lv-nav">
+    <div style="display: flex; gap: 8px; align-items: center">
+      <div class="seg"><span>So 3. 10.</span><span class="on">Ne 4. 10.</span></div>
+    </div>
+  </div>
+
+  <div class="note note-warn" style="margin: 8px 10px 0; font-size: 12px; padding: 8px 10px; flex-direction: column; gap: 4px">
+    <b>Právě běží dvě kategorie naráz</b>
+    <div style="display: flex; gap: 6px"><a href="Live1.dc.html" class="btn btn-p btn-sm" style="height: 28px; font-size: 12px">K1 muži · 2. jízda</a><a href="#c1" class="btn btn-s btn-sm" style="height: 28px; font-size: 12px">C1 ženy · 2. jízda</a></div>
+  </div>
+
+  <div style="margin: 8px 10px 0; display: flex; flex-direction: column; border: 1px solid #d9dee5; border-radius: 10px; overflow: hidden; background: #fff; font-size: 13px">
+    <div style="padding: 8px 12px; border-bottom: 1px solid #d9dee5; display: flex; align-items: center; gap: 8px"><h3 style="font-size: 15px">Neděle 4. 10.</h3><span class="small muted" style="margin-left: auto">časy podle rozpisu, skutečné se liší</span></div>
+
+    <div style="display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 12px; border-bottom: 1px solid #eceff3; color: #6b7280"><span class="mono">09:25</span><div class="nm"><b style="color: #6b7280">Forerunners</b><span>1. jízda</span></div><span class="badge b-ok">Oficiální</span></div>
+    <div style="display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 12px; border-bottom: 1px solid #eceff3"><span class="mono">09:30</span><div class="nm"><b>C1 ženy</b><span>1. jízda</span></div><span class="badge b-ok">Oficiální</span></div>
+    <div style="display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 12px; border-bottom: 1px solid #eceff3"><span class="mono">09:56</span><div class="nm"><b>C1 muži</b><span>1. jízda</span></div><span class="badge b-ok">Oficiální</span></div>
+    <div style="display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 12px; border-bottom: 1px solid #eceff3"><span class="mono">10:39</span><div class="nm"><b>K1 ženy</b><span>1. jízda</span></div><span class="badge b-warn">Předběžné</span></div>
+    <div style="display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 12px; border-bottom: 1px solid #eceff3"><span class="mono">11:21</span><div class="nm"><b>K1 muži</b><span>1. jízda</span></div><span class="badge b-warn">Předběžné</span></div>
+    <div style="display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 12px; border-bottom: 1px solid #eceff3"><span class="mono">13:25</span><div class="nm"><b>Forerunners</b><span>2. jízda</span></div><span class="badge b-ok">Oficiální</span></div>
+    <div style="display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 12px; border-bottom: 1px solid #eceff3; background: #fdecea"><span class="mono" style="color: #e42313; font-weight: 600">13:30</span><div class="nm"><b>C1 ženy</b><span>2. jízda · 9 z 14 v cíli</span></div><a href="#c1" class="badge b-live" style="color: #fff"><i></i> Live</a></div>
+    <div style="display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 12px; border-bottom: 1px solid #eceff3"><span class="mono">13:56</span><div class="nm"><b>C1 muži</b><span>2. jízda</span></div><span class="badge b-unk">čeká</span></div>
+    <div style="display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 12px; border-bottom: 1px solid #eceff3"><span class="mono">14:39</span><div class="nm"><b>K1 ženy</b><span>2. jízda</span></div><span class="badge b-unk">čeká</span></div>
+    <div style="display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 12px; border-bottom: 1px solid #eceff3; background: #fdecea"><span class="mono" style="color: #e42313; font-weight: 600">15:21</span><div class="nm"><b>K1 muži</b><span>2. jízda · 8 z 24 v cíli · <span style="color: #9a5b00">předběhli rozpis o 40 min</span></span></div><a href="Live1.dc.html" class="badge b-live" style="color: #fff"><i></i> Live</a></div>
+    <div style="display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 12px"><span class="mono">16:30</span><div class="nm"><b>Vyhlášení výsledků</b><span>u cílového mola</span></div><span class="badge b-unk">čeká</span></div>
+  </div>
+
+  <div class="note note-info" style="margin: 8px 10px 0; font-size: 12px; padding: 8px 10px"><span>Když běží víc fází naráz, aplikace nevybírá za diváka. Nahoře nabídne obě, výchozí je ta s prvním jezdcem na trati.</span></div>
+
+  <div class="lv-bot"><a href="#Výsledky"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13"/></svg><span>Výsledky</span></a><a href="#Startovka"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4M5 4h12l-2 4 2 4H5"/></svg><span>Startovka</span></a><a href="#Na trati"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 9c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg><span>Na trati</span></a><a href="#Program" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span>Program</span></a></div>
+</div>
+
+</body>
+</html>
