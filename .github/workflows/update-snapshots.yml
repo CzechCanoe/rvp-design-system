@@ -74,7 +74,7 @@ jobs:
       - name: Commit snapshots
         id: commit
         run: |
-          git add -A -- 'tests/**/*-snapshots/**/*.png'
+          git add -A -- ':(glob)tests/**/*-snapshots/**/*.png'
           if git diff --cached --quiet; then
             echo "No snapshot changes."
             echo "changed=false" >> "$GITHUB_OUTPUT"
