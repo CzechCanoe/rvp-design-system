@@ -6815,3 +6815,20 @@ Další krok: 19.4 Bundle Size Audit (volitelný)
 
 ### Poznámky
 Zbývající px v `TokensOverview.css` jsou rozměry prvků (výška badge, šířka sloupce pořadí) a breakpointy, pro ty token není.
+
+---
+
+## 2026-10-19 - v2 T2: Písma
+
+### Dokončeno
+- [x] woff2 Barlow Semi Condensed 500/600/700, IBM Plex Sans 400/500/600, IBM Plex Mono 400/600 (latin + latin-ext) v `public/fonts/`, OFL licence v `public/fonts/LICENSES/` (zdroj: `@fontsource/*` 5.3.0 přes `npm pack`, nejsou v dependencies)
+- [x] `src/styles/fonts.css` (`font-display: swap`, `unicode-range`), import v `globals.css`; `tabular-nums` na `.csk-table`, `.csk-results-table`, `.csk-time` v `globals.css`
+- [x] Inter / JetBrains Mono odstraněny (Google Fonts link ze Storybooku, zmínky ve stories/docs)
+- [x] Storybook: `staticDirs: ['../public']`, preload kritických woff2 v `preview-head.html`
+
+### Problémy a řešení
+1. **Problém:** Vite v lib režimu inlinuje assety z CSS jako base64 (CSS 700 kB, `assetsInlineLimit` se ignoruje).
+   **Řešení:** `url('./fonts/…')` v `fonts.css` Vite nerozliší a nechá beze změny (16 varování při buildu), `public/` se kopíruje do `dist/fonts/` vedle `rvp-design-system.css`. Storybook build emituje `preview.css` do kořene, aby `./fonts/` ukazovalo na `/fonts/` (shoda s preloady).
+
+### Poznámky
+- Komponentní CSS stále odkazují na staré `--font-family-*` / Plus Jakarta Sans fallbacky – řeší T3.

@@ -118,7 +118,7 @@
 
 /* Time display in result trailing */
 .athlete-result-time {
-  font-family: var(--font-family-mono, 'JetBrains Mono', monospace);
+  font-family: var(--font-family-mono, 'IBM Plex Mono', monospace);
   font-size: var(--font-size-lg);
   font-weight: 700;
   font-variant-numeric: tabular-nums;

@@ -1,5 +1,6 @@
 /* Global CSS reset and base styles */
 
+@import './fonts.css';
 @import './motion.css';
 
 *,
@@ -48,6 +49,13 @@ h4,
 h5,
 h6 {
   overflow-wrap: break-word;
+}
+
+/* Tabular figures so times, ranks and points align in columns */
+.csk-table,
+.csk-results-table,
+.csk-time {
+  font-variant-numeric: tabular-nums;
 }
 
 /* Theme tokens are loaded from src/tokens/index.css */

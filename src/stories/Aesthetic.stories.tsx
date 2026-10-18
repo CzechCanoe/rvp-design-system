@@ -78,7 +78,7 @@ export const Typography: StoryObj = {
             marginBottom: '32px',
           }}
         >
-          Body text remains Inter for optimal readability. The contrast between
+          Body text remains IBM Plex Sans for optimal readability. The contrast between
           the geometric display font and clean body text creates visual hierarchy
           and interest.
         </p>
@@ -703,7 +703,7 @@ export const Guidelines: StoryObj = {
                 marginBottom: '12px',
               }}
             >
-              Ponech Body Font (Inter)
+              Ponech Body Font (IBM Plex Sans)
             </h3>
             <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', lineHeight: 1.6 }}>
               <li>Odstavcový text, popisy</li>
@@ -1221,7 +1221,7 @@ export const Comparison: StoryObj = {
         </p>
         <h2
           style={{
-            fontFamily: 'Inter, sans-serif',
+            fontFamily: 'IBM Plex Sans, sans-serif',
             fontSize: '32px',
             fontWeight: 600,
             marginBottom: '16px',
@@ -1231,7 +1231,7 @@ export const Comparison: StoryObj = {
           Výsledky závodu
         </h2>
         <p style={{ color: '#666', marginBottom: '24px' }}>
-          Standard Inter typography, safe amber accent, flat backgrounds.
+          Standard IBM Plex Sans typography, safe amber accent, flat backgrounds.
         </p>
         <button
           style={{
