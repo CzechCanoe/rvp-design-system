@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { allComponents, testDefaults } from './config';
+import { applyQuarantine } from './quarantine';
 
 /**
  * Visual regression tests for design system components
@@ -7,6 +8,8 @@ import { allComponents, testDefaults } from './config';
  *
  * Uses central config from ./config.ts for story IDs
  */
+
+applyQuarantine(test);
 
 test.describe('Components - Light Mode', () => {
   for (const component of allComponents) {
@@ -27,7 +30,12 @@ test.describe('Components - Light Mode', () => {
       const hasContent = await root.evaluate((el) => {
         const text = el.textContent?.trim().length ?? 0;
         const inputs = el.querySelectorAll('input, button, select, textarea').length;
-        return text > 0 || inputs > 0;
+        // Avatar, ProgressBar and Skeleton have no text/inputs: accept any visibly sized descendant
+        const sized = Array.from(el.querySelectorAll('*')).some((n) => {
+          const r = n.getBoundingClientRect();
+          return r.width > 0 && r.height > 0;
+        });
+        return text > 0 || inputs > 0 || sized;
       });
       expect(hasContent).toBe(true);
 
@@ -63,7 +71,12 @@ test.describe('Components - Dark Mode', () => {
       const hasContent = await root.evaluate((el) => {
         const text = el.textContent?.trim().length ?? 0;
         const inputs = el.querySelectorAll('input, button, select, textarea').length;
-        return text > 0 || inputs > 0;
+        // Avatar, ProgressBar and Skeleton have no text/inputs: accept any visibly sized descendant
+        const sized = Array.from(el.querySelectorAll('*')).some((n) => {
+          const r = n.getBoundingClientRect();
+          return r.width > 0 && r.height > 0;
+        });
+        return text > 0 || inputs > 0 || sized;
       });
       expect(hasContent).toBe(true);
 

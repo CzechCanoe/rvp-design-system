@@ -5,11 +5,23 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+    # labeled/unlabeled: only `skip-snapshots` matters (see the if: condition on each job)
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  # Dispatched by update-snapshots.yml after it pushes a snapshot commit
+  # (pushes made with GITHUB_TOKEN do not trigger workflows).
+  workflow_dispatch:
+
+# Newer runs of the same event on the same branch cancel older ones
+# (dispatch and pull_request runs do not cancel each other).
+concurrency:
+  group: ci-${{ github.event_name }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 
 jobs:
   lint-and-typecheck:
     name: Lint & Typecheck
     runs-on: ubuntu-latest
+    if: (github.event.action != 'labeled' && github.event.action != 'unlabeled') || github.event.label.name == 'skip-snapshots'
     steps:
       - uses: actions/checkout@v7
 
@@ -34,6 +46,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    if: (github.event.action != 'labeled' && github.event.action != 'unlabeled') || github.event.label.name == 'skip-snapshots'
     steps:
       - uses: actions/checkout@v7
 
@@ -56,8 +69,14 @@ jobs:
     name: Playwright Tests
     runs-on: ubuntu-latest
     needs: build
-    # Disabled for now; re-enable by setting repo variable PLAYWRIGHT_CI=true
-    if: github.event_name == 'pull_request' && vars.PLAYWRIGHT_CI == 'true'
+    if: >-
+      (github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch') &&
+      ((github.event.action != 'labeled' && github.event.action != 'unlabeled') ||
+       github.event.label.name == 'skip-snapshots')
+    env:
+      CI: true
+      # Label `skip-snapshots` on the PR: functional tests only, no snapshot comparison
+      SKIP_SNAPSHOTS: ${{ contains(github.event.pull_request.labels.*.name, 'skip-snapshots') }}
     steps:
       - uses: actions/checkout@v7
 
@@ -76,10 +95,18 @@ jobs:
       - name: Build Storybook
         run: npm run build-storybook
 
-      - name: Run Playwright tests
-        run: npx playwright test --project=chromium
+      # Tests tagged @prototype (render a prototype page) never compare snapshots until T17.
+      - name: Run Playwright tests (snapshots compared)
+        run: |
+          FLAGS=""
+          if [ "$SKIP_SNAPSHOTS" = "true" ]; then FLAGS="--ignore-snapshots"; fi
+          npx playwright test --project=chromium --grep-invert @prototype $FLAGS
+
+      - name: Run Playwright tests (@prototype, snapshots ignored)
+        if: ${{ !cancelled() }}
         env:
-          CI: true
+          PLAYWRIGHT_HTML_OUTPUT_DIR: playwright-report-prototypes
+        run: npx playwright test --project=chromium --grep @prototype --ignore-snapshots
 
       - name: Upload test results
         uses: actions/upload-artifact@v7
@@ -87,5 +114,7 @@ jobs:
         continue-on-error: true
         with:
           name: playwright-report
-          path: playwright-report/
+          path: |
+            playwright-report/
+            playwright-report-prototypes/
           retention-days: 1

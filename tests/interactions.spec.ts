@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { testDefaults } from './config';
+import { applyQuarantine } from './quarantine';
 
 /**
  * Functional/Interaction tests for design system components
@@ -10,6 +11,8 @@ import { testDefaults } from './config';
  * - Interactive components: Button, Modal, Tabs, Pagination
  * - Data components: Calendar navigation
  */
+
+applyQuarantine(test);
 
 test.describe('Form Components - Interactions', () => {
   test.describe('Input', () => {

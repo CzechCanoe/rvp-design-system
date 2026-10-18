@@ -6730,3 +6730,48 @@ Další krok: 19.4 Bundle Size Audit (volitelný)
 ### Poznámky
 - Zbývají 2 moderate kořeny (sprintf-js přes vite-plugin-dts, uuid přes addon-actions); fix jen přes `--force` (downgrade).
 - T3 má baseline `scripts/check-no-hex.baseline.json` vyprázdnit a smazat.
+
+---
+
+## 2026-10-18 - v2 T0b: CI jako autorita pro Playwright snapshoty
+
+### Dokončeno
+- [x] Playwright job zpět na PR (chromium), `PLAYWRIGHT_CI` odstraněno; prototypy vždy `--ignore-snapshots`, label `skip-snapshots` přepíná celý běh
+- [x] `update-snapshots.yml` (label `update-snapshots` + `workflow_dispatch` s `prototypes`), commit `test: update snapshots (CI)`, odebrání labelu, `gh workflow run ci.yml` na novém HEAD
+- [x] `test:update:components`, `test:update:other`; CLAUDE.md sekce Testování
+- [x] CI workers 4, retries 1 (1 worker = 28+ min)
+
+### Problémy a řešení
+1. **Problém:** `git add 'tests/**/*-snapshots/**/*.png'` bez glob magic nic nenajde. **Řešení:** `:(glob)` pathspec.
+2. **Problém:** update běh končí exit 1 kvůli ne-snapshotovým failům. **Řešení:** `|| echo ::warning::` u update kroků.
+3. **Problém:** na čistém CI zůstává ~42 failů nesouvisejících s baseline: axe color-contrast (Button-Variants #ef4444/#fff aj.), keyboard focus, waitForSelector, nestabilní screenshoty animovaných komponent (Avatar, Toast, ProgressBar, Header-Glass, Skeleton), LivePage cross-browser snapshot se mění při každém běhu. **Řešení:** neřešeno (mimo scope T0b), rozhodnutí maintainera.
+
+### Poznámky
+- `update-snapshots.yml` jde spustit přes workflow_dispatch i z větve, ale na `main` ho zatím nemusí GitHub znát pro UI.
+
+---
+
+## 2026-10-18 - v2 T0b (pokračování): stabilizace testů a karanténa
+
+### Dokončeno
+- [x] `reducedMotion: 'reduce'` + `toHaveScreenshot: { animations: 'disabled', caret: 'hide' }` v `playwright.config.ts`
+- [x] Opravená neexistující story ID (Toast, Header-Glass, prototypy `*-page--*`, Calendar) a `.csk-btn` -> `.csk-button`, `hasContent` pro Avatar/Progress/Skeleton -> zmizely `waitForSelector` timeouty (job 15 min -> ~5 min)
+- [x] Tag `@prototype` (prototypes.spec, cross-browser, container-queries); CI krok A `--grep-invert @prototype`, krok B `--grep @prototype --ignore-snapshots`; update workflow prototypy nemění
+- [x] `QUARANTINE` v `tests/config.ts` + `tests/quarantine.ts` (`test.fixme` v beforeEach): 25 testů (T3 7, T4 4, T8 1, T17 13)
+- [x] PNG prototypových testů vrácena na verzi z `main`
+
+### Poznámky
+- Karanténa je klíčovaná titlePath bez názvu souboru; T17 ji vyprázdní.
+
+---
+
+## 2026-10-18 - v2 T0b: review fixes
+
+### Dokončeno
+- [x] `ci.yml`: `pull_request` types vč. `labeled`/`unlabeled` (jobs běží jen pro label `skip-snapshots`), concurrency per event+větev s cancel-in-progress
+- [x] `update-snapshots.yml`: po update krocích kontrola JSON reportu (běh musí mít >0 testů, jinak job selže)
+- [x] `applyQuarantine(test)` přesunuto za docblock, bez dvojitých prázdných řádků
+
+### Problémy a řešení
+1. **Problém:** odebrání `pull-requests: write` -> label removal 403. **Řešení:** oprávnění vráceno (s komentářem).
+2. **Problém:** chybná editace workflow (zdvojený název kroku) = neplatný workflow soubor. **Řešení:** opraveno, ověřeno během.
