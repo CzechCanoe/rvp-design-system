@@ -10,7 +10,8 @@ Pořadí je závazné jen mezi fázemi; uvnitř fáze lze paralelně, pokud nen�
 - Založit `v2-klidna-voda` z `main` (hotovo), přidat do CI job pro tuto větev (stejný workflow, jen `branches`).
 - Skript `scripts/check-no-hex.js`: selže, když `src/components/**/*.css` nebo `src/styles/**` obsahuje `#[0-9a-f]{3,8}` mimo `src/tokens/`. Zapojit do `npm run lint`.
 - Přidat Vitest + `@testing-library/react` (devDependencies), `npm run test:unit`, jeden smoke test.
-- AK: CI zelené na větvi; `npm run lint` padá na záměrně vloženém hexu v komponentě.
+- `npm audit` (stav 18. 10. 2026: 31 zranitelností, 17 high, 13 moderate, 1 low, vše jen dev závislosti; GitHub na `main` hlásí 69, protože počítá i duplicitní cesty). Přímé: `vite` ^6.1 → nejnovější 6.x (high), `storybook` + `@storybook/*` ^8.5.3 → nejnovější 8.x (high), zbytek jsou tranzitivní (`minimatch`, `brace-expansion`, `postcss`, `rollup`, `ws`, `nanoid`, `js-yaml`, `lodash`, `@microsoft/api-extractor`…) a spraví je `npm audit fix` bez `--force`. **Nepoužívat `npm audit fix --force`**: navrhuje downgrade `@storybook/addon-essentials` na 7.0.6. Storybook 9 ani Vite 7 v T0 neřešit, to je samostatný `chore:` až po fázi 1, pokud vůbec.
+- AK: CI zelené na větvi; `npm run lint` padá na záměrně vloženém hexu v komponentě; `npm audit --audit-level=high` hlásí 0 nebo jen položky bez dostupné opravy, vyjmenované v PR.
 
 ## Fáze 1: tokeny a písma (3 tasky, T1 → T2 → T3)
 
