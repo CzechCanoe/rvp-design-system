@@ -1,15 +1,15 @@
 import { test, expect } from '@playwright/test';
-import { applyQuarantine } from './quarantine';
 import { allComponents, testDefaults } from './config';
+import { applyQuarantine } from './quarantine';
 
-
-applyQuarantine(test);
 /**
  * Visual regression tests for design system components
  * Tests all components in both light and dark modes
  *
  * Uses central config from ./config.ts for story IDs
  */
+
+applyQuarantine(test);
 
 test.describe('Components - Light Mode', () => {
   for (const component of allComponents) {

@@ -19,7 +19,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
   issues: write
   actions: write
 
@@ -61,15 +60,34 @@ jobs:
         run: npm run build-storybook
 
       - name: Update component, container-query and cross-browser snapshots
-        # Non-snapshot failures (a11y, functional) make Playwright exit non-zero even in update mode;
-        # they are not this workflow's concern (the CI job reports them), so do not block the commit.
+        # Snapshot/functional test failures are tolerated in update mode (the CI job reports them),
+      # but a crashed run (Storybook down, Playwright error) must fail the job: the JSON report
+      # has to exist and contain at least one executed test.
+      - name: Update component, container-query and cross-browser snapshots
         run: |
-          npm run test:update:components || echo "::warning::components run exited non-zero (non-snapshot failures)"
-          npm run test:update:other || echo "::warning::container-queries/cross-browser run exited non-zero (non-snapshot failures)"
+          PLAYWRIGHT_JSON_OUTPUT_NAME=results-components.json npm run test:update:components -- --reporter=json,line || true
+          PLAYWRIGHT_JSON_OUTPUT_NAME=results-other.json npm run test:update:other -- --reporter=json,line || true
 
       - name: Update prototype snapshots
         if: ${{ inputs.prototypes }}
-        run: npm run test:update:quick || echo "::warning::prototypes run exited non-zero (non-snapshot failures)"
+        run: PLAYWRIGHT_JSON_OUTPUT_NAME=results-prototypes.json npm run test:update:quick -- --reporter=json,line || true
+
+      - name: Verify Playwright actually ran
+        run: |
+          FILES="results-components.json results-other.json"
+          if [ "${{ inputs.prototypes }}" = "true" ]; then FILES="$FILES results-prototypes.json"; fi
+          for f in $FILES; do
+            node -e '
+              const f = process.argv[1];
+              let r;
+              try { r = JSON.parse(require("fs").readFileSync(f, "utf8")); }
+              catch (e) { console.error("::error::" + f + " missing or unreadable (Playwright crashed?)"); process.exit(1); }
+              const s = r.stats || {};
+              const ran = (s.expected || 0) + (s.unexpected || 0) + (s.flaky || 0);
+              console.log(f + ": ran=" + ran + " unexpected=" + (s.unexpected || 0) + " skipped=" + (s.skipped || 0));
+              if (ran === 0 || (r.errors && r.errors.length)) { console.error("::error::" + f + ": no tests ran or global errors"); process.exit(1); }
+            ' "$f"
+          done
 
       - name: Commit snapshots
         id: commit

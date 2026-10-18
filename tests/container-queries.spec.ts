@@ -1,9 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { applyQuarantine } from './quarantine';
 import { containerQueryComponents, embedPrototypes, testDefaults } from './config';
+import { applyQuarantine } from './quarantine';
 
-
-applyQuarantine(test);
 /**
  * Container Query and Overflow/Layout Tests
  *
@@ -19,6 +17,8 @@ applyQuarantine(test);
  * - lg: 800px (wide - expanded layout)
  * - xl: 1024px (extra wide - full features)
  */
+
+applyQuarantine(test);
 
 // Container sizes for testing
 const containerSizes = {

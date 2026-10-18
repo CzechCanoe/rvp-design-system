@@ -1,15 +1,15 @@
 import { test, expect } from '@playwright/test';
-import { applyQuarantine } from './quarantine';
 import { crossBrowserComponents, crossBrowserPrototypes, testDefaults } from './config';
+import { applyQuarantine } from './quarantine';
 
-
-applyQuarantine(test);
 /**
  * Cross-browser compatibility tests
  * Tests CSS features and rendering across Chrome, Firefox, and WebKit
  *
  * Uses central config from ./config.ts for story IDs
  */
+
+applyQuarantine(test);
 
 test.describe('Cross-Browser: Component Rendering', () => {
   for (const component of crossBrowserComponents) {

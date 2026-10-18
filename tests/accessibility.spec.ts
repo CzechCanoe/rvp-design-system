@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
-import { applyQuarantine } from './quarantine';
 import AxeBuilder from '@axe-core/playwright';
+import { applyQuarantine } from './quarantine';
 
-
-applyQuarantine(test);
 /**
  * WCAG 2.1 AA Accessibility tests for design system components
  * Uses axe-core for automated accessibility testing
  */
+
+applyQuarantine(test);
 
 // Core components to test for accessibility
 const coreComponents = [
