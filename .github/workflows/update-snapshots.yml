@@ -61,13 +61,15 @@ jobs:
         run: npm run build-storybook
 
       - name: Update component, container-query and cross-browser snapshots
+        # Non-snapshot failures (a11y, functional) make Playwright exit non-zero even in update mode;
+        # they are not this workflow's concern (the CI job reports them), so do not block the commit.
         run: |
-          npm run test:update:components
-          npm run test:update:other
+          npm run test:update:components || echo "::warning::components run exited non-zero (non-snapshot failures)"
+          npm run test:update:other || echo "::warning::container-queries/cross-browser run exited non-zero (non-snapshot failures)"
 
       - name: Update prototype snapshots
         if: ${{ inputs.prototypes }}
-        run: npm run test:update:quick
+        run: npm run test:update:quick || echo "::warning::prototypes run exited non-zero (non-snapshot failures)"
 
       - name: Commit snapshots
         id: commit
