@@ -6775,3 +6775,43 @@ Další krok: 19.4 Bundle Size Audit (volitelný)
 ### Problémy a řešení
 1. **Problém:** odebrání `pull-requests: write` -> label removal 403. **Řešení:** oprávnění vráceno (s komentářem).
 2. **Problém:** chybná editace workflow (zdvojený název kroku) = neplatný workflow soubor. **Řešení:** opraveno, ověřeno během.
+
+---
+
+## 2026-10-19 - v2 T1: Nové tokeny (#41, PR #44)
+
+### Dokončeno
+- [x] `src/tokens/` přepsáno na `--csk-*`: `primitives.css`, `semantic.css`, `typography.css`, `spacing.css`, `radius.css`, `shadows.css`, `embed.css`, `index.css`; `container-queries.css` přejmenováno na `--csk-container-*`
+- [x] Smazáno `colors.css`, `utility.css`, `expressive.css`, `aesthetic.css`, `gradients.css`, `mode.css`, `effects.css`, `transitions.css`
+- [x] Keyframes používané komponentami + globální reduced-motion pravidlo → `src/styles/motion.css`; `globals.css` body na nové tokeny
+- [x] `ThemeContext`: bez `mode`, `theme: 'light' | 'system'` (→ light), `embed` → `data-mode="embed"`; unit testy
+- [x] Storybook: toolbar Embed místo Mode, nová story `Tokens/Overview`, přepsané `Context/ThemeProvider`
+- [x] `scripts/count-css-vars.mjs` (`--strict-tokens` pro T1, `--strict` pro T3)
+- [x] `docs/v2/TOKENS.md`: podsekce „Doplněno v T1“
+
+### Problémy a řešení
+1. **Problém:** smazaný `transitions.css` obsahoval i keyframes (`spin`, `pulse`, …), na které komponenty odkazují.
+   **Řešení:** přesunuty do `src/styles/motion.css` (nejsou to tokeny).
+2. **Problém:** dark-mode testy ověřují `data-theme="dark"`, 2.0 tmavý režim nekreslí.
+   **Řešení:** Storybook toolbar Theme ponechává `dark` (jen atribut, vykreslí se světle); ThemeContext dark nezná.
+3. **Problém:** komponenty do T3 odkazují na smazané tokeny → funkční pády (focus outline, axe kontrast).
+   **Řešení:** karanténa v `tests/config.ts` s ownerem T3 (seznam v PR #44).
+
+### Poznámky
+- dist po T1: všech 133 jmen definovaných v `src/tokens` + `src/styles` je `--csk-*`; zbývá 7 jmen `--timeline-*` z komponenty Timeline (T3).
+- Sémantické tokeny odkazují jen na primitiva, aby tmavý režim (2.x) byl jen blok `[data-theme="dark"]` v `semantic.css`.
+- `--csk-ink-3` na `--csk-ground-2` = 4.46:1 (těsně pod AA), řešit v T3/T4.
+- Písma (IBM Plex, Barlow) dodá T2, do té doby systémový fallback.
+
+---
+
+## 2026-10-19 - v2 T1: review follow-ups (PR #44)
+
+### Dokončeno
+- [x] `TOKENS.md`: řádek mapování `--color-success/warning/error/info-*` → `--csk-color-success*/-warning*/-error*/-info*` (rozhodnutí orchestrátora); `--csk-color-state-*` jen pro stavy hodnoty
+- [x] `AthletePublicProfile.stories.tsx`: pryč `data-mode="expressive"` a expressive text v docs (export `ExpressiveEmbed` a story id zůstávají kvůli testům)
+- [x] `count-css-vars.mjs`: `--strict` i `--strict-tokens` padají i na definicích, které nejde přiřadit k žádnému souboru v `src/**`
+- [x] `TokensOverview.css`: `--csk-layout-max-width` a spacing/radius tokeny místo px tam, kde token existuje
+
+### Poznámky
+Zbývající px v `TokensOverview.css` jsou rozměry prvků (výška badge, šířka sloupce pořadí) a breakpointy, pro ty token není.

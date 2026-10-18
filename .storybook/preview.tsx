@@ -4,10 +4,10 @@ import type { Preview, Decorator } from '@storybook/react';
 import '../src/styles/globals.css';
 import '../src/tokens/index.css';
 
-// Decorator to apply theme and mode to document
+// Decorator to apply theme and embed mode to document
 const withTheme: Decorator = (Story, context) => {
   const theme = context.globals.theme || 'light';
-  const mode = context.globals.mode || 'utility';
+  const embed = context.globals.embed === 'on';
 
   useEffect(() => {
     // Apply theme to both document and iframe body
@@ -16,10 +16,12 @@ const withTheme: Decorator = (Story, context) => {
   }, [theme]);
 
   useEffect(() => {
-    // Apply mode to both document and iframe body
-    document.documentElement.setAttribute('data-mode', mode);
-    document.body.setAttribute('data-mode', mode);
-  }, [mode]);
+    // Embed is the only display mode (v2): data-mode="embed" or no attribute
+    for (const el of [document.documentElement, document.body]) {
+      if (embed) el.setAttribute('data-mode', 'embed');
+      else el.removeAttribute('data-mode');
+    }
+  }, [embed]);
 
   return <Story />;
 };
@@ -37,31 +39,35 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['Introduction', 'CzechCanoe Aesthetic', 'Prototypes', 'Components', 'Context', '*'],
+        order: ['Introduction', 'Tokens', 'CzechCanoe Aesthetic', 'Prototypes', 'Components', 'Context', '*'],
       },
     },
   },
   globalTypes: {
     theme: {
+      // 2.0 draws only the light theme; 'dark' only sets data-theme="dark"
+      // (no dark tokens yet, renders light) and is kept for the dark-mode test runs.
       description: 'Global theme for components',
       defaultValue: 'light',
       toolbar: {
         title: 'Theme',
         icon: 'circlehollow',
-        items: ['light', 'dark'],
+        items: [
+          { value: 'light', title: 'Light' },
+          { value: 'dark', title: 'Dark (not drawn in 2.0)' },
+        ],
         dynamicTitle: true,
       },
     },
-    mode: {
-      description: 'Display mode for components',
-      defaultValue: 'utility',
+    embed: {
+      description: 'Embed mode for kanoe.cz (data-mode="embed")',
+      defaultValue: 'off',
       toolbar: {
-        title: 'Mode',
+        title: 'Embed',
         icon: 'component',
         items: [
-          { value: 'utility', title: 'Utility (compact)' },
-          { value: 'expressive', title: 'Expressive (generous)' },
-          { value: 'embed', title: 'Embed (kanoe.cz)' },
+          { value: 'off', title: 'Standalone' },
+          { value: 'on', title: 'Embed (kanoe.cz)' },
         ],
         dynamicTitle: true,
       },

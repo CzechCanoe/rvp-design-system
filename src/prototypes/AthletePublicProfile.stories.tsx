@@ -308,7 +308,7 @@ function AthletePublicProfile({
   };
 
   return (
-    <div className={rootClasses} data-mode="expressive">
+    <div className={rootClasses}>
       {/* Header */}
       {renderHeader()}
 
@@ -458,13 +458,13 @@ const meta: Meta<typeof AthletePublicProfile> = {
     docs: {
       description: {
         component: `
-# Veřejný profil závodníka - EXPRESSIVE Mode
+# Veřejný profil závodníka
 
 Celostránkový "wow" profil závodníka s dramatickým vizuálním stylem pro veřejné zobrazení.
 
 ## Použití
 
-Tento prototyp využívá **expressive mode** s většími fonty, dramatickými gradienty a animovanými prvky.
+Prototyp z 1.x s většími fonty, dramatickými gradienty a animovanými prvky (aesthetic styl).
 
 ## Hlavní sekce
 
@@ -480,19 +480,10 @@ Tento prototyp využívá **expressive mode** s většími fonty, dramatickými 
 - **RY (Rychlostní kanoistika)** - zelený gradient
 - **VT (Vodní turistika)** - červený gradient
 
-## Design Tokens
-
-Využívá expressive tokeny:
-- \`--text-expr-mega-*\` - mega typography pro jméno
-- \`--text-expr-stat-*\` - statistiky
-- \`--shadow-expr-*\` - dramatické stíny
-- \`--spacing-expr-*\` - štědré odsazení
-
 ## Rozdíl od ProfilePage
 
 | ProfilePage | AthletePublicProfile |
 |------------|---------------------|
-| Utility mode | Expressive mode |
 | Interní/admin | Veřejný wow profil |
 | Kompaktní | Dramatický fullscreen |
 | Registrační data | Kariérní úspěchy |
@@ -602,7 +593,7 @@ export const Satellite: Story = {
 };
 
 /**
- * Expressive varianta - plný "wow" profil bez kanoe.cz kontextu.
+ * Plný "wow" profil vložený do kanoe.cz layoutu.
  * Aesthetic styl, kompletní standalone aplikace.
  */
 export const ExpressiveEmbed: Story = {
@@ -633,7 +624,7 @@ export const ExpressiveEmbed: Story = {
     docs: {
       description: {
         story: `
-**Expressive Embed varianta** - plný "wow" profil v kanoe.cz kontextu:
+**Plný "wow" profil v kanoe.cz kontextu:**
 - Aesthetic styl (display fonts, energy accents, mesh backgrounds)
 - Vložené do kanoe.cz layoutu
 - Dramatický fullscreen hero
