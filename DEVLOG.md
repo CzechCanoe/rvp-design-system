@@ -6710,3 +6710,23 @@ Další krok: 19.4 Bundle Size Audit (volitelný)
 - Zachována zpětná kompatibilita - nový `colorVariant` prop je nezávislý na existujícím `variant` (default/outlined/elevated)
 - CSS přidáno ~214 řádků pro medal, gradient, iconGradient a sparkline styly
 - Vizuální testy mají problémy s infrastrukturou (timeouty), ale build prochází
+
+---
+
+## 2026-10-18 - v2 T0: Příprava (hex lint, Vitest, audit)
+
+### Dokončeno
+- [x] `scripts/check-no-hex.js` + baseline (22 souborů 1.x dluhu), zapojeno do `npm run lint`
+- [x] Vitest + Testing Library, `npm run test:unit`, smoke test Badge, krok v CI jobu Lint & Typecheck
+- [x] vite -> 6.4.4, storybook + @storybook/* -> 8.6.19, lockfile přegenerován; `npm audit --audit-level=high` bez high
+- [x] Pages: run 39155706105 zelený, Storybook dostupný; odkaz v README už byl
+
+### Problémy a řešení
+1. **Problém:** `npm install` s bumpem Storybooku padal na ERESOLVE (lockfile držel 8.6.15).
+   **Řešení:** smazán `package-lock.json` a `node_modules`, čistá instalace.
+2. **Problém:** `npm run test:components` padá 64/68 na `origin/main` i na větvi (stejná množina), na ARM hostu jiný rendering než baseline snapshoty.
+   **Řešení:** žádné update snapshotů; zdokumentováno v PR.
+
+### Poznámky
+- Zbývají 2 moderate kořeny (sprintf-js přes vite-plugin-dts, uuid přes addon-actions); fix jen přes `--force` (downgrade).
+- T3 má baseline `scripts/check-no-hex.baseline.json` vyprázdnit a smazat.
