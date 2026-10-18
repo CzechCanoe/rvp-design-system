@@ -6832,3 +6832,7 @@ Zbývající px v `TokensOverview.css` jsou rozměry prvků (výška badge, ší
 
 ### Poznámky
 - Komponentní CSS stále odkazují na staré `--font-family-*` / Plus Jakarta Sans fallbacky – řeší T3.
+
+### Review fixes (T2)
+- Preloads in `preview-head.html` are relative (`fonts/…`) so they work under the GitHub Pages sub-path; verified with `storybook-static` served under `/rvp-design-system/` (0x 404 for woff2).
+- Filtered only the expected `./fonts/` "didn't resolve" warnings (lib build and Storybook); `package.json` exports `./fonts/*`; added `tests/fonts.spec.ts` guard.

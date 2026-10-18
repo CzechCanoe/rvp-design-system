@@ -12,7 +12,8 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./styles": "./dist/rvp-design-system.css"
+    "./styles": "./dist/rvp-design-system.css",
+    "./fonts/*": "./dist/fonts/*"
   },
   "files": [
     "dist"
