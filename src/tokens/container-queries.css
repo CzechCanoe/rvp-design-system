@@ -29,11 +29,11 @@
 
 :root {
   /* Container size tokens (for reference in JS/documentation) */
-  --container-xs: 320px;    /* Very narrow - single column */
-  --container-sm: 480px;    /* Narrow - compact layout */
-  --container-md: 640px;    /* Medium - standard layout */
-  --container-lg: 800px;    /* Wide - expanded layout */
-  --container-xl: 1024px;   /* Extra wide - full features */
+  --csk-container-xs: 320px;    /* Very narrow - single column */
+  --csk-container-sm: 480px;    /* Narrow - compact layout */
+  --csk-container-md: 640px;    /* Medium - standard layout */
+  --csk-container-lg: 800px;    /* Wide - expanded layout */
+  --csk-container-xl: 1024px;   /* Extra wide - full features */
 }
 
 /* =============================================================================
@@ -82,10 +82,10 @@
   container-name: widget;
 
   /* Reset styles to prevent kanoe.cz CSS bleed */
-  font-family: var(--font-family-sans);
-  font-size: var(--text-embed-body-size);
-  line-height: var(--text-embed-body-line-height);
-  color: var(--color-text-primary);
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-base);
+  line-height: var(--csk-line-height-normal);
+  color: var(--csk-color-text);
   box-sizing: border-box;
 }
 

@@ -1,5 +1,7 @@
 /* Global CSS reset and base styles */
 
+@import './motion.css';
+
 *,
 *::before,
 *::after {
@@ -16,10 +18,10 @@ html {
 }
 
 body {
-  line-height: 1.5;
-  font-family: var(--font-family-sans, Inter, system-ui, sans-serif);
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
+  line-height: var(--csk-line-height-normal);
+  font-family: var(--csk-font-sans);
+  background-color: var(--csk-color-surface);
+  color: var(--csk-color-text);
 }
 
 img,

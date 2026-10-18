@@ -1,21 +1,16 @@
 /**
- * Design Tokens - CSK RVP Design System
+ * Design tokens – CSK RVP Design System v2 („Klidná voda“)
  *
- * Central import for all design tokens.
- * Import this file to get all CSS custom properties.
+ * Every custom property is prefixed `--csk-` (docs/v2/TOKENS.md).
+ * Layers: primitives → semantic (the only colour layer for components);
+ * scales: typography, spacing, radius, shadows; mode: embed.
  */
 
-@import './colors.css';
+@import './primitives.css';
+@import './semantic.css';
 @import './typography.css';
 @import './spacing.css';
 @import './radius.css';
 @import './shadows.css';
-@import './transitions.css';
-@import './gradients.css';
-@import './effects.css';
-@import './aesthetic.css';
-@import './utility.css';
-@import './expressive.css';
 @import './embed.css';
-@import './mode.css';
 @import './container-queries.css';

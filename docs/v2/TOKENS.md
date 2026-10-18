@@ -62,6 +62,37 @@ Cíl: jeden prefix, jedna paleta, žádné režimy kromě `embed`. Zdroj hodnot:
 --csk-tap 44px
 ```
 
+### Doplněno v T1
+
+Úplný seznam je v `src/tokens/` (`primitives.css`, `semantic.css`, `typography.css`, `spacing.css`, `radius.css`, `shadows.css`, `embed.css`, `container-queries.css`), vizuálně ve story `Tokens/Overview`. Oproti výběru výše přibylo:
+
+| Token | Hodnota | Proč |
+|---|---|---|
+| `--csk-white` | `#ffffff` | primitivum pro text na plných barvách; `--csk-ground` je plocha a v tmavém režimu se změní |
+| `--csk-red-dark` / `--csk-green-dark` / `--csk-amber-dark` | `#8a1a10` / `#14532d` / `#5c3700` | text poznámek (`.note-err` / `.note-ok` / `.note-warn` v `reference/rvp.css`) |
+| `--csk-gold-dark` / `--csk-silver-dark` / `--csk-bronze-dark` | `#8a6a00` / `#5f6b78` / `#8a4b1f` | pojmenování barev textu pořadí z tabulky primitiv |
+| `--csk-color-text-on-fill` | `--csk-white` | text na brand / action / live / sekci |
+| `--csk-color-overlay` | `--csk-ink` 50 % | podklad Modalu |
+| `--csk-color-focus` | `--csk-blue` | focus outline (`.in:focus` v referenci) |
+| `--csk-color-highlight-bg` / `-border` / `-text` | `--csk-blue-100` / `-200` / `--csk-blue-dark` | podložka, aktivní položka, úroveň závodu; rám zvýrazněné karty |
+| `--csk-color-live-bg` | `--csk-red-100` | běžící řádek v programu |
+| `--csk-color-state-*-text` | official / provisional / review = základní barva, unknown = `--csk-ink-2` | text na `-bg` s kontrastem AA; `--csk-gray` na `--csk-gray-100` má 2.8:1 a `--csk-ink-3` 4.3:1 |
+| `--csk-color-state-stale` | `--csk-gray` | tečkované podtržení zastavené hodnoty |
+| `--csk-color-success` / `-warning` / `-error` / `-info` (+ `-bg`, `-text`) | zelená / jantar / červená / modrá, `-100`, `-dark` | poznámky, hlášky, validace formulářů; odděleno od stavů hodnoty a od LIVE |
+| `--csk-color-podium-1-text` / `-2-text` / `-3-text` | `--csk-gold-dark` / … | číslo pořadí |
+| `--csk-transition-fast` / `-slow` | `150ms` / `300ms` `cubic-bezier(0, 0, 0.2, 1)` | dva tokeny přechodů; při `prefers-reduced-motion: reduce` jsou `0s` |
+| `--csk-font-weight-regular` / `-medium` / `-semibold` / `-bold` | 400 / 500 / 600 / 700 | řezy z tabulky Typografie |
+| `--csk-line-height-tight` / `-snug` / `-normal` | 1.1 / 1.25 / 1.45 | nadpisy / skládané buňky / text (`reference/rvp.css`) |
+| `--csk-letter-spacing-tight` / `-caps` | -0.005em / 0.04em | nadpisy / verzálková záhlaví tabulek |
+| `--csk-space-10` / `-12` | 40px / 48px | mezery sekcí a okraje stránky v referenci |
+| `--csk-layout-max-width` | 1200px | `.wrap` v referenci |
+| `--csk-container-xs` … `-xl` | 320 … 1024px | přejmenované `--container-*` z `container-queries.css` |
+
+- `--csk-text-*` jsou v `rem` (16px kořen), px hodnoty výše platí.
+- Sémantické tokeny odkazují jen na primitiva, nikdy na jiný sémantický token, aby `[data-theme="dark"]` mohl přepsat libovolnou podmnožinu.
+- `[data-mode="embed"]` přepisuje `--csk-radius-sm/md/lg` na 2 / 4 / 4px a `--csk-shadow-sm` na `none`. Systémové písmo volitelně přes `data-font="system"` vedle `data-mode="embed"`.
+- Pro codemod (T3): `--color-success-*` / `--color-warning-*` / `--color-error-*` / `--color-info-*` míří na `--csk-color-success*` / `-warning*` / `-error*` / `-info*` tam, kde jde o hlášky a validaci; `--csk-color-state-*` a `--csk-color-live` jen tam, kde jde o stav hodnoty nebo LIVE.
+
 ## Typografie
 
 | Role | Písmo | Řezy | Poznámka |

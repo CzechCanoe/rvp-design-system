@@ -1,17 +1,22 @@
 /**
  * ThemeContext - CSK RVP Design System
  *
- * Provides context for theme (light/dark) and display mode (utility/expressive).
- * Implements the dual-personality system from DESIGN_PRINCIPLES.md Section 3.
+ * Provides the colour theme and the embed flag and mirrors them to data
+ * attributes, which the tokens (src/tokens/) react to:
+ * - `data-theme="light"` – the only theme drawn in 2.0. `theme: 'system'` is
+ *   accepted and currently resolves to light (dark arrives in 2.x by
+ *   overriding the semantic tokens, without an API change).
+ * - `data-mode="embed"` – set while `embed` is true: neutral wrapper for
+ *   components embedded in kanoe.cz (smaller radii, no shadows).
  *
  * Usage:
  * ```tsx
- * <ThemeProvider mode="expressive" theme="light">
+ * <ThemeProvider embed>
  *   <App />
  * </ThemeProvider>
  *
  * // In components:
- * const { mode, theme, setMode, setTheme } = useTheme();
+ * const { theme, resolvedTheme, setTheme, embed } = useTheme();
  * ```
  */
 
@@ -26,42 +31,28 @@ import {
 } from 'react';
 
 /**
- * Display mode:
- * - utility: compact, efficient - for backoffice and admin interfaces
- * - expressive: generous, dramatic - for public-facing pages
- * - embed: neutral, modern - for components embedded in kanoe.cz (Joomla)
+ * Colour theme preference. 'system' follows the OS once a dark theme exists;
+ * in 2.0 it resolves to 'light'.
  */
-export type DisplayMode = 'utility' | 'expressive' | 'embed';
+export type ColorTheme = 'light' | 'system';
 
 /**
- * Color theme: light or dark
+ * Theme actually applied as `data-theme` (never 'system').
  */
-export type ColorTheme = 'light' | 'dark' | 'system';
-
-/**
- * Resolved theme (never 'system')
- */
-export type ResolvedTheme = 'light' | 'dark';
+export type ResolvedTheme = 'light';
 
 /**
  * Theme context value
  */
 export interface ThemeContextValue {
-  /** Current display mode */
-  mode: DisplayMode;
-  /** Set display mode */
-  setMode: (mode: DisplayMode) => void;
-  /** Toggle between utility and expressive */
-  toggleMode: () => void;
-
   /** Current theme preference */
   theme: ColorTheme;
-  /** Resolved theme (accounts for system preference) */
+  /** Theme applied to the document (always 'light' in 2.0) */
   resolvedTheme: ResolvedTheme;
-  /** Set theme */
+  /** Set theme preference */
   setTheme: (theme: ColorTheme) => void;
-  /** Toggle between light and dark (sets explicit, not system) */
-  toggleTheme: () => void;
+  /** Whether embed mode (`data-mode="embed"`) is active */
+  embed: boolean;
 }
 
 /**
@@ -69,13 +60,11 @@ export interface ThemeContextValue {
  */
 export interface ThemeProviderProps {
   children: ReactNode;
-  /** Initial display mode (default: 'utility') */
-  defaultMode?: DisplayMode;
-  /** Initial color theme (default: 'light') */
+  /** Initial colour theme (default: 'light') */
   defaultTheme?: ColorTheme;
-  /** Storage key for persisting mode preference */
-  modeStorageKey?: string;
-  /** Storage key for persisting theme preference */
+  /** Embed mode for kanoe.cz: sets `data-mode="embed"` on the target (default: false) */
+  embed?: boolean;
+  /** Storage key for persisting the theme preference */
   themeStorageKey?: string;
   /** Disable persistence */
   disablePersistence?: boolean;
@@ -86,32 +75,32 @@ export interface ThemeProviderProps {
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 /**
- * Get system color scheme preference
+ * Normalize a theme value from props or storage. 1.x stored 'dark', which
+ * maps to 'light' until a dark theme is drawn.
  */
-function getSystemTheme(): ResolvedTheme {
-  if (typeof window === 'undefined') return 'light';
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'dark'
-    : 'light';
+function normalizeTheme(value: unknown, fallback: ColorTheme): ColorTheme {
+  if (value === 'light' || value === 'system') return value;
+  if (value === 'dark') return 'light';
+  return fallback;
 }
 
 /**
  * Get stored value from localStorage
  */
-function getStoredValue<T>(key: string, fallback: T): T {
-  if (typeof window === 'undefined') return fallback;
+function getStoredValue(key: string): unknown {
+  if (typeof window === 'undefined') return undefined;
   try {
     const stored = localStorage.getItem(key);
-    return stored ? (JSON.parse(stored) as T) : fallback;
+    return stored ? (JSON.parse(stored) as unknown) : undefined;
   } catch {
-    return fallback;
+    return undefined;
   }
 }
 
 /**
  * Store value in localStorage
  */
-function setStoredValue<T>(key: string, value: T): void {
+function setStoredValue(key: string, value: unknown): void {
   if (typeof window === 'undefined') return;
   try {
     localStorage.setItem(key, JSON.stringify(value));
@@ -120,109 +109,66 @@ function setStoredValue<T>(key: string, value: T): void {
   }
 }
 
+function getTarget(targetSelector?: string): Element | null {
+  if (typeof document === 'undefined') return null;
+  return targetSelector ? document.querySelector(targetSelector) : document.documentElement;
+}
+
 /**
  * ThemeProvider component
  *
  * Wraps your application to provide theme context.
- * Applies data-theme and data-mode attributes to the target element.
+ * Applies `data-theme` (and `data-mode="embed"` when `embed`) to the target element.
  */
 export function ThemeProvider({
   children,
-  defaultMode = 'utility',
   defaultTheme = 'light',
-  modeStorageKey = 'csk-display-mode',
+  embed = false,
   themeStorageKey = 'csk-color-theme',
   disablePersistence = false,
   targetSelector,
 }: ThemeProviderProps) {
-  // Initialize state from storage or defaults
-  const [mode, setModeState] = useState<DisplayMode>(() =>
-    disablePersistence ? defaultMode : getStoredValue(modeStorageKey, defaultMode)
-  );
+  const initialTheme = normalizeTheme(defaultTheme, 'light');
 
   const [theme, setThemeState] = useState<ColorTheme>(() =>
-    disablePersistence ? defaultTheme : getStoredValue(themeStorageKey, defaultTheme)
+    disablePersistence
+      ? initialTheme
+      : normalizeTheme(getStoredValue(themeStorageKey), initialTheme)
   );
 
-  const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(() =>
-    getSystemTheme()
-  );
+  // 'system' would follow prefers-color-scheme; 2.0 has no dark theme, so
+  // every preference resolves to light.
+  const resolvedTheme: ResolvedTheme = 'light';
 
-  // Resolve theme (handle 'system' preference)
-  const resolvedTheme: ResolvedTheme = useMemo(() => {
-    return theme === 'system' ? systemTheme : theme;
-  }, [theme, systemTheme]);
-
-  // Listen for system theme changes
+  // Apply data-theme to the target element
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    const target = getTarget(targetSelector);
+    target?.setAttribute('data-theme', resolvedTheme);
+  }, [resolvedTheme, targetSelector]);
 
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e: MediaQueryListEvent) => {
-      setSystemTheme(e.matches ? 'dark' : 'light');
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
-
-  // Apply data attributes to target element
+  // Apply data-mode="embed" while embed is on; remove it again when it turns off
   useEffect(() => {
-    if (typeof document === 'undefined') return;
-
-    const target = targetSelector
-      ? document.querySelector(targetSelector)
-      : document.documentElement;
-
-    if (target) {
-      target.setAttribute('data-theme', resolvedTheme);
-      target.setAttribute('data-mode', mode);
-    }
-  }, [resolvedTheme, mode, targetSelector]);
-
-  // Setters with persistence
-  const setMode = useCallback(
-    (newMode: DisplayMode) => {
-      setModeState(newMode);
-      if (!disablePersistence) {
-        setStoredValue(modeStorageKey, newMode);
-      }
-    },
-    [disablePersistence, modeStorageKey]
-  );
+    if (!embed) return;
+    const target = getTarget(targetSelector);
+    if (!target) return;
+    target.setAttribute('data-mode', 'embed');
+    return () => target.removeAttribute('data-mode');
+  }, [embed, targetSelector]);
 
   const setTheme = useCallback(
     (newTheme: ColorTheme) => {
-      setThemeState(newTheme);
+      const next = normalizeTheme(newTheme, 'light');
+      setThemeState(next);
       if (!disablePersistence) {
-        setStoredValue(themeStorageKey, newTheme);
+        setStoredValue(themeStorageKey, next);
       }
     },
     [disablePersistence, themeStorageKey]
   );
 
-  const toggleMode = useCallback(() => {
-    const modes: DisplayMode[] = ['utility', 'expressive', 'embed'];
-    const currentIndex = modes.indexOf(mode);
-    const nextIndex = (currentIndex + 1) % modes.length;
-    setMode(modes[nextIndex]);
-  }, [mode, setMode]);
-
-  const toggleTheme = useCallback(() => {
-    setTheme(resolvedTheme === 'light' ? 'dark' : 'light');
-  }, [resolvedTheme, setTheme]);
-
   const value = useMemo<ThemeContextValue>(
-    () => ({
-      mode,
-      setMode,
-      toggleMode,
-      theme,
-      resolvedTheme,
-      setTheme,
-      toggleTheme,
-    }),
-    [mode, setMode, toggleMode, theme, resolvedTheme, setTheme, toggleTheme]
+    () => ({ theme, resolvedTheme, setTheme, embed }),
+    [theme, resolvedTheme, setTheme, embed]
   );
 
   return (

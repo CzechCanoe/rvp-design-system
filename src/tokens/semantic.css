@@ -1,0 +1,118 @@
+/**
+ * Semantic tokens – CSK RVP Design System v2 („Klidná voda“)
+ *
+ * The only colour layer components may use (docs/v2/TOKENS.md, „Sémantika“).
+ *
+ * Rules that keep a dark theme possible in 2.x without touching components:
+ * - every semantic token points at a primitive (primitives.css) or a literal,
+ *   never at another semantic token, so a theme block can override any subset
+ *   and the rest stays consistent, also when the theme is set on a subtree;
+ * - a theme overrides only this file's tokens, e.g. in 2.x:
+ *     [data-theme="dark"] { color-scheme: dark; --csk-color-text: …; … }
+ *   2.0 ships the light theme only (`data-theme="light"`, ThemeProvider maps
+ *   'system' to light).
+ */
+
+:root {
+  color-scheme: light;
+
+  /* ---------------------------------------------------------------------------
+     Text
+     ------------------------------------------------------------------------- */
+  --csk-color-text: var(--csk-ink);                 /* body text, values */
+  --csk-color-text-2: var(--csk-ink-2);             /* secondary text */
+  --csk-color-text-3: var(--csk-ink-3);             /* labels, meta (4.8:1 on surface) */
+  --csk-color-text-on-fill: var(--csk-white);       /* text on brand/action/live/section fills */
+
+  /* ---------------------------------------------------------------------------
+     Surfaces and lines
+     ------------------------------------------------------------------------- */
+  --csk-color-surface: var(--csk-ground);           /* tribuna ground, cards, inputs */
+  --csk-color-surface-2: var(--csk-ground-2);       /* work ground (Úřad), detail, row hover */
+  --csk-color-surface-3: var(--csk-ground-3);       /* segments, neutral chips */
+  --csk-color-overlay: color-mix(in srgb, var(--csk-ink) 50%, transparent); /* modal backdrop */
+  --csk-color-border: var(--csk-line);              /* frames, inputs, table header rule */
+  --csk-color-border-2: var(--csk-line-2);          /* row separators */
+
+  /* ---------------------------------------------------------------------------
+     Brand and action
+     ------------------------------------------------------------------------- */
+  --csk-color-brand: var(--csk-navy);               /* top band, active tab, selected pill */
+  --csk-color-action: var(--csk-blue);              /* primary button, links */
+  --csk-color-action-hover: var(--csk-blue-dark);   /* hover / active */
+  --csk-color-focus: var(--csk-blue);               /* focus outline */
+  --csk-color-highlight-bg: var(--csk-blue-100);    /* tinted pad, active/selected item, level badge */
+  --csk-color-highlight-border: var(--csk-blue-200); /* frame of a highlighted card */
+  --csk-color-highlight-text: var(--csk-blue-dark); /* text on highlight-bg */
+
+  /* ---------------------------------------------------------------------------
+     Live (red is reserved for LIVE, running time and errors)
+     ------------------------------------------------------------------------- */
+  --csk-color-live: var(--csk-red);                 /* LIVE badge fill, running time */
+  --csk-color-live-bg: var(--csk-red-100);          /* running row in the programme */
+
+  /* ---------------------------------------------------------------------------
+     Value states: Oficiální · Předběžné · V revizi · Neznámo · Zastaveno (stale)
+     base = signal colour (border, dot, underline, icon)
+     -bg  = pad behind a state badge or cell
+     -text = text on -bg and on surface (WCAG AA)
+     ------------------------------------------------------------------------- */
+  --csk-color-state-official: var(--csk-green);
+  --csk-color-state-official-bg: var(--csk-green-100);
+  --csk-color-state-official-text: var(--csk-green);
+  --csk-color-state-provisional: var(--csk-amber);
+  --csk-color-state-provisional-bg: var(--csk-amber-100);
+  --csk-color-state-provisional-text: var(--csk-amber);
+  --csk-color-state-review: var(--csk-violet);
+  --csk-color-state-review-bg: var(--csk-violet-100);
+  --csk-color-state-review-text: var(--csk-violet);
+  --csk-color-state-unknown: var(--csk-gray);       /* non-text only (3.2:1 on surface) */
+  --csk-color-state-unknown-bg: var(--csk-gray-100);
+  --csk-color-state-unknown-text: var(--csk-ink-2);
+  --csk-color-state-stale: var(--csk-gray);         /* dotted underline of a stale running value */
+
+  /* ---------------------------------------------------------------------------
+     Feedback: notes, alerts, form validation („Varování nikdy neblokuje“)
+     base = icon / border, -bg = pad, -text = body text on -bg
+     ------------------------------------------------------------------------- */
+  --csk-color-success: var(--csk-green);
+  --csk-color-success-bg: var(--csk-green-100);
+  --csk-color-success-text: var(--csk-green-dark);
+  --csk-color-warning: var(--csk-amber);
+  --csk-color-warning-bg: var(--csk-amber-100);
+  --csk-color-warning-text: var(--csk-amber-dark);
+  --csk-color-error: var(--csk-red);
+  --csk-color-error-bg: var(--csk-red-100);
+  --csk-color-error-text: var(--csk-red-dark);
+  --csk-color-info: var(--csk-blue);
+  --csk-color-info-bg: var(--csk-blue-100);
+  --csk-color-info-text: var(--csk-blue-dark);
+
+  /* ---------------------------------------------------------------------------
+     Sections and podium
+     ------------------------------------------------------------------------- */
+  --csk-color-section-dv: var(--csk-dv);
+  --csk-color-section-ry: var(--csk-ry);
+  --csk-color-section-vt: var(--csk-vt);
+
+  --csk-color-podium-1: var(--csk-gold);            /* row stripe */
+  --csk-color-podium-2: var(--csk-silver);
+  --csk-color-podium-3: var(--csk-bronze);
+  --csk-color-podium-1-text: var(--csk-gold-dark);  /* rank number */
+  --csk-color-podium-2-text: var(--csk-silver-dark);
+  --csk-color-podium-3-text: var(--csk-bronze-dark);
+
+  /* ---------------------------------------------------------------------------
+     Transitions (motion only where data changes; hover/focus feedback is fast)
+     Usage: transition: background-color var(--csk-transition-fast);
+     ------------------------------------------------------------------------- */
+  --csk-transition-fast: 150ms cubic-bezier(0, 0, 0.2, 1);  /* hover, focus, press */
+  --csk-transition-slow: 300ms cubic-bezier(0, 0, 0.2, 1);  /* data: new state, rank change */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --csk-transition-fast: 0s linear;
+    --csk-transition-slow: 0s linear;
+  }
+}

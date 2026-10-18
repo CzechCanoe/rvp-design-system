@@ -1,0 +1,62 @@
+/**
+ * Primitive colour tokens – CSK RVP Design System v2 („Klidná voda“)
+ *
+ * Raw palette derived from the ČSK logo and kanoe.cz (docs/v2/TOKENS.md, „Primitiva“).
+ * Primitives are theme-independent values. Components never use them directly:
+ * they use the semantic layer (semantic.css), which is the only layer a theme
+ * (`[data-theme="dark"]`, 2.x) or a mode (`[data-mode="embed"]`) overrides.
+ */
+
+:root {
+  /* Blues: union navy (logo) and action blue (kanoe.cz navigation, darkened to 4.5:1 on white) */
+  --csk-navy: #004899;
+  --csk-blue: #2a66b4;
+  --csk-blue-dark: #1d4f8f;
+  --csk-blue-100: #e8f0fa;
+  --csk-blue-200: #c9dbf1;
+
+  /* Red (logo): LIVE, errors, running time only */
+  --csk-red: #e42313;
+  --csk-red-100: #fdecea;
+  --csk-red-dark: #8a1a10;
+
+  /* Ink (text) */
+  --csk-ink: #1b1f26;
+  --csk-ink-2: #444b55;
+  --csk-ink-3: #6b7280;
+
+  /* Lines */
+  --csk-line: #d9dee5;
+  --csk-line-2: #eceff3;
+
+  /* Grounds (surfaces) */
+  --csk-white: #ffffff;
+  --csk-ground: #ffffff;
+  --csk-ground-2: #f4f6f8;
+  --csk-ground-3: #eaeef2;
+
+  /* Value states */
+  --csk-green: #1f7a3a;
+  --csk-green-100: #e4f3e8;
+  --csk-green-dark: #14532d;
+  --csk-amber: #9a5b00;
+  --csk-amber-100: #fff3dc;
+  --csk-amber-dark: #5c3700;
+  --csk-violet: #5b3fa6;
+  --csk-violet-100: #efeafa;
+  --csk-gray: #8a919b;
+  --csk-gray-100: #f1f2f4;
+
+  /* Sections: divoká voda, rychlost, turistika */
+  --csk-dv: #1d4f8f;
+  --csk-ry: #1f7a3a;
+  --csk-vt: #b0471a;
+
+  /* Podium: row stripe colours and rank text colours */
+  --csk-gold: #d4a72c;
+  --csk-silver: #9aa5b1;
+  --csk-bronze: #c0712f;
+  --csk-gold-dark: #8a6a00;
+  --csk-silver-dark: #5f6b78;
+  --csk-bronze-dark: #8a4b1f;
+}
