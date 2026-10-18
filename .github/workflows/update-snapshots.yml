@@ -20,6 +20,7 @@ on:
 permissions:
   contents: write
   issues: write
+  pull-requests: write # required to remove the label from a PR (issues: write alone gives 403)
   actions: write
 
 concurrency:
