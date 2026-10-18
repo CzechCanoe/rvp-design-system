@@ -18,6 +18,10 @@
 7. **Prototypy** `src/prototypes/*` a jejich stories zrušené; nahrazeny Page stories z v2 komponent.
 8. **Nový povinný peer**: žádný. `react` ^18 || ^19 zůstává.
 
+## Kdy migrovat c123-live-mini
+
+**Až v M5 Live, ne dřív.** Venues jedou tag `legacy-2026` a větev `legacy/2026` bere jen `fix:` commity; bump DS na major tam nepatří. Na `main` se klient v M5 píše znovu proti kontraktu (handshake, SSE, `Observed` stavy, `Clock` pravidlo, on-course z `attempt.updated`), takže migrace dnešního klienta na v2 by byla práce, kterou M5 zahodí. DS v2 se staví teď a nezávisle, protože jeho model je vizuální, ne doménový. V M5 se stane zadáním UI: Page stories `Live/*` jsou kostra nového klienta, mapování kontraktu na `ResultRow` je jediná aplikační vrstva. Mezery v DS se hledají předem suchým testem (T18) a znovu na začátku M5. Jediná výjimka: dílčí `fix:` na `legacy/2026` (nižší hero, ztráta na mobilu), pokud má být něco vidět na Jarním slalomu; bez DS.
+
 ## Dopad na c123-live-mini (M5 Live v rebuildu)
 
 Migrace live-mini je součástí milníku M5 a definicí hotovo je `CLIENT-OBLIGATIONS.md` sekce „live-mini-client“. DS v2 jí má umožnit tohle:

@@ -83,7 +83,7 @@ Pořadí je závazné jen mezi fázemi; uvnitř fáze lze paralelně, pokud nen�
 - Smazat komponenty s verdiktem X, `src/prototypes/`, utility třídy, staré stories, staré snapshoty; `tests/config.ts` přepsat na nové story ID; `npm run test` celé zelené.
 - `docs/COMPONENT_API.md` přegenerovat; `CLAUDE.md`, `README.md`, `DESIGN_PRINCIPLES.md`, `PLAN.md` podle `MIGRATION.md`.
 
-**T18 Migrační ověření na c123-live-mini** (bez commitu do live-mini)
+**T18 Hledání mezer nad c123-live-mini** (suchý test, bez commitu do live-mini; není to migrace, viz `MIGRATION.md` „Kdy migrovat“)
 - Lokálně nainstalovat DS z `v2-klidna-voda` (`npm pack` → `npm i ../rvp-design-system-2.0.0.tgz` v live-mini na dočasné větvi), přepsat `ResultList`, `ClassTabs`, `OnCoursePanel`, `EventHeader` na v2 a zapsat do issue v DS, co chybělo. Chybějící věci se stanou T19.
 - AK: seznam mezer v issue; žádná `:global` třída nezůstala nutná.
 
