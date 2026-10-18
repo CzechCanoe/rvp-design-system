@@ -74,7 +74,7 @@ jobs:
         run: npm run build-storybook
 
       - name: Run Playwright tests
-        run: npm run test
+        run: npx playwright test --project=chromium
         env:
           CI: true
 
