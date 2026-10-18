@@ -6762,3 +6762,16 @@ Další krok: 19.4 Bundle Size Audit (volitelný)
 
 ### Poznámky
 - Karanténa je klíčovaná titlePath bez názvu souboru; T17 ji vyprázdní.
+
+---
+
+## 2026-10-18 - v2 T0b: review fixes
+
+### Dokončeno
+- [x] `ci.yml`: `pull_request` types vč. `labeled`/`unlabeled` (jobs běží jen pro label `skip-snapshots`), concurrency per event+větev s cancel-in-progress
+- [x] `update-snapshots.yml`: po update krocích kontrola JSON reportu (běh musí mít >0 testů, jinak job selže)
+- [x] `applyQuarantine(test)` přesunuto za docblock, bez dvojitých prázdných řádků
+
+### Problémy a řešení
+1. **Problém:** odebrání `pull-requests: write` -> label removal 403. **Řešení:** oprávnění vráceno (s komentářem).
+2. **Problém:** chybná editace workflow (zdvojený název kroku) = neplatný workflow soubor. **Řešení:** opraveno, ověřeno během.
