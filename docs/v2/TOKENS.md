@@ -91,7 +91,7 @@ Cíl: jeden prefix, jedna paleta, žádné režimy kromě `embed`. Zdroj hodnot:
 - `--csk-text-*` jsou v `rem` (16px kořen), px hodnoty výše platí.
 - Sémantické tokeny odkazují jen na primitiva, nikdy na jiný sémantický token, aby `[data-theme="dark"]` mohl přepsat libovolnou podmnožinu.
 - `[data-mode="embed"]` přepisuje `--csk-radius-sm/md/lg` na 2 / 4 / 4px a `--csk-shadow-sm` na `none`. Systémové písmo volitelně přes `data-font="system"` vedle `data-mode="embed"`.
-- Pro codemod (T3): `--color-success-*` / `--color-warning-*` / `--color-error-*` / `--color-info-*` míří na `--csk-color-success*` / `-warning*` / `-error*` / `-info*` tam, kde jde o hlášky a validaci; `--csk-color-state-*` a `--csk-color-live` jen tam, kde jde o stav hodnoty nebo LIVE.
+- `--csk-color-state-*` a `--csk-color-live*` jsou jen pro stavy hodnoty (Oficiální, Předběžné, V revizi, Neznámo, Live, stale). Hlášky, varování a validace používají `--csk-color-success*` / `-warning*` / `-error*` / `-info*`; codemod T3 mapuje podle tabulky níže.
 
 ## Typografie
 
@@ -113,7 +113,7 @@ Fonty self-hosted v `public/fonts/` jako dnes Inter a JetBrains Mono (woff2, sub
 | `--color-neutral-700/900` | `--csk-color-text-2 / -text` |
 | `--color-neutral-500` | `--csk-color-text-3` |
 | `--color-neutral-200/300` | `--csk-color-border-2 / -border` |
-| `--color-success-*`, `--color-warning-*`, `--color-error-*`, `--color-info-*` | `--csk-color-state-*`, `--csk-color-live` |
+| `--color-success-*`, `--color-warning-*`, `--color-error-*`, `--color-info-*` | `--csk-color-success*`, `--csk-color-warning*`, `--csk-color-error*`, `--csk-color-info*` (`-bg` pro podložky 50/100, `-text` pro text na podložce) |
 | `--color-energy-*`, `--gradient-*`, `--mesh-*` | bez náhrady, smazat |
 | `--text-util-*`, `--text-expr-*`, `--spacing-util-*`, `--spacing-expr-*` | `--csk-text-*`, `--csk-space-*` |
 | `--font-family-sans` (Inter) | `--csk-font-sans` (IBM Plex Sans) |

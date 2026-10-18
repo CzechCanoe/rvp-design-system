@@ -13,6 +13,8 @@
 //                    from src/tokens or src/styles (v2 T1 acceptance criterion)
 //   --strict         exit 1 when the file contains any non --csk-* definition
 //                    (v2 T3 acceptance criterion)
+// Both strict modes also exit 1 when a definition cannot be attributed to any
+// source file (its origin, and so the criterion, cannot be verified).
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, relative, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -141,6 +143,11 @@ if (flags.has('--strict-tokens') && bySource.tokens.other.total > 0) {
 }
 if (flags.has('--strict') && report.definitions.other.total > 0) {
   console.error(`FAIL: ${report.definitions.other.unique} non --csk-* definition(s) in ${target}`);
+  failed = true;
+}
+if ((flags.has('--strict') || flags.has('--strict-tokens')) && unattributed.total > 0) {
+  const names = [...new Set(defs.filter((n) => !groups.some((g) => sourceNames[g.key].has(n))))];
+  console.error(`FAIL: ${unattributed.unique} definition(s) not attributable to any src/** file: ${names.join(', ')}`);
   failed = true;
 }
 process.exit(failed ? 1 : 0);

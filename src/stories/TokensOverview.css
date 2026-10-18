@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--csk-space-10);
-  max-width: 1280px;
+  max-width: var(--csk-layout-max-width);
   padding: var(--csk-space-12) var(--csk-space-12);
   background: var(--csk-color-surface);
   font-family: var(--csk-font-sans);
@@ -93,7 +93,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 2px;
+  gap: var(--csk-space-1);
   min-height: 76px;
   padding: var(--csk-space-3);
   border-radius: var(--csk-radius-lg);
@@ -145,7 +145,7 @@
 .tokens-overview__badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--csk-space-1);
   height: 22px;
   padding: 0 var(--csk-space-2);
   border-radius: var(--csk-radius-sm);
@@ -251,7 +251,7 @@
   justify-content: center;
   min-width: 22px;
   height: 22px;
-  padding: 0 5px;
+  padding: 0 var(--csk-space-1);
   border-radius: var(--csk-radius-sm);
   font-family: var(--csk-font-mono);
   font-size: var(--csk-text-xs);
@@ -271,7 +271,7 @@
 /* Notes */
 
 .tokens-overview__note {
-  padding: 10px var(--csk-space-3);
+  padding: var(--csk-space-3);
   border-radius: var(--csk-radius-md);
   font-size: var(--csk-text-md);
 }
@@ -328,7 +328,7 @@
 }
 
 .tokens-overview__table th {
-  padding: var(--csk-space-2) 10px;
+  padding: var(--csk-space-2) var(--csk-space-3);
   border-bottom: 1px solid var(--csk-color-border);
   color: var(--csk-color-text-3);
   font-size: var(--csk-text-xs);
@@ -340,7 +340,7 @@
 }
 
 .tokens-overview__table td {
-  padding: var(--csk-space-2) 10px;
+  padding: var(--csk-space-2) var(--csk-space-3);
   border-bottom: 1px solid var(--csk-color-border-2);
   vertical-align: middle;
 }
@@ -367,7 +367,7 @@
   display: inline-block;
   height: 12px;
   background: var(--csk-color-action);
-  border-radius: 2px;
+  border-radius: var(--csk-radius-sm);
   vertical-align: middle;
 }
 

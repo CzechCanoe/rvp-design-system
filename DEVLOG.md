@@ -6802,3 +6802,16 @@ Další krok: 19.4 Bundle Size Audit (volitelný)
 - Sémantické tokeny odkazují jen na primitiva, aby tmavý režim (2.x) byl jen blok `[data-theme="dark"]` v `semantic.css`.
 - `--csk-ink-3` na `--csk-ground-2` = 4.46:1 (těsně pod AA), řešit v T3/T4.
 - Písma (IBM Plex, Barlow) dodá T2, do té doby systémový fallback.
+
+---
+
+## 2026-10-19 - v2 T1: review follow-ups (PR #44)
+
+### Dokončeno
+- [x] `TOKENS.md`: řádek mapování `--color-success/warning/error/info-*` → `--csk-color-success*/-warning*/-error*/-info*` (rozhodnutí orchestrátora); `--csk-color-state-*` jen pro stavy hodnoty
+- [x] `AthletePublicProfile.stories.tsx`: pryč `data-mode="expressive"` a expressive text v docs (export `ExpressiveEmbed` a story id zůstávají kvůli testům)
+- [x] `count-css-vars.mjs`: `--strict` i `--strict-tokens` padají i na definicích, které nejde přiřadit k žádnému souboru v `src/**`
+- [x] `TokensOverview.css`: `--csk-layout-max-width` a spacing/radius tokeny místo px tam, kde token existuje
+
+### Poznámky
+Zbývající px v `TokensOverview.css` jsou rozměry prvků (výška badge, šířka sloupce pořadí) a breakpointy, pro ty token není.
