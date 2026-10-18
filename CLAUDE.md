@@ -84,7 +84,15 @@ npm run build-storybook  # Static Storybook
 | `npm run test:quick` | Prototypy, pouze chromium | ~4-5 min | **Běžný vývoj** |
 | `npm run test:proto` | Prototypy, všechny prohlížeče | ~20 min | Cross-browser check |
 | `npm run test:components` | Komponenty, pouze chromium | ~2 min | Změny v komponentách |
-| `npm run test:update:quick` | Update snapshots (proto/chromium) | ~4 min | Po záměrných změnách |
+| `npm run test:update:quick` | Update snapshots (proto/chromium) | ~4 min | **Jen CI** (workflow), lokálně ne |
+| `npm run test:update:components` | Update snapshots komponent (chromium) | ~2 min | **Jen CI** (workflow), lokálně ne |
+
+### Snapshoty: CI je jediná autorita
+
+- **Lokálně na ARM/RPi** spouštěj `npx playwright test --project=chromium --ignore-snapshots` (funkční testy, axe, bounding boxy). ARM renderuje jinak, takže porovnání snapshotů dělá **jen CI**; snapshoty lokálně negeneruj ani necommituj.
+- **Záměrná změna UI:** přidej na PR label `update-snapshots`. Workflow `update-snapshots.yml` přegeneruje chromium snapshoty (komponenty, container-queries, cross-browser), commitne je jako `test: update snapshots (CI)`, label odebere a spustí CI na novém HEAD. Počkej na ten commit (`git pull`). Prototypy: `workflow_dispatch` workflow `Update snapshots` s `prototypes: true`.
+- **Label `skip-snapshots`** na PR: celý Playwright běh s `--ignore-snapshots`. `tests/prototypes.spec.ts` běží na CI vždy s `--ignore-snapshots` (do T17).
+- **Diff obrázky** jsou v artifactu `playwright-report` daného runu (jen při selhání); do PR dej odkaz na run/artifact.
 
 ### Správný postup při vývoji
 

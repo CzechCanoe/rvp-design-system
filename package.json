@@ -34,6 +34,8 @@
     "test:proto": "playwright test tests/prototypes.spec.ts",
     "test:components": "playwright test tests/components.spec.ts --project=chromium",
     "test:update": "playwright test --update-snapshots",
+    "test:update:components": "playwright test tests/components.spec.ts --project=chromium --update-snapshots",
+    "test:update:other": "playwright test tests/container-queries.spec.ts tests/cross-browser.spec.ts --project=chromium --update-snapshots",
     "test:update:quick": "playwright test tests/prototypes.spec.ts --project=chromium --update-snapshots",
     "test:report": "playwright show-report"
   },

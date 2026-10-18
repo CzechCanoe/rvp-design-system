@@ -1,0 +1,103 @@
+name: Update snapshots
+
+# Regenerates chromium Playwright snapshots on the CI environment (the only authority;
+# ARM/RPi renders differently). Triggered by label `update-snapshots` on a PR or manually.
+on:
+  pull_request:
+    types: [labeled]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch to update (default - the branch the workflow is dispatched on)
+        required: false
+        type: string
+      prototypes:
+        description: Also update prototype snapshots
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: update-snapshots-${{ github.event.pull_request.head.ref || inputs.branch || github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  update:
+    name: Update snapshots (CI)
+    runs-on: ubuntu-latest
+    # Same-repo PRs only (GITHUB_TOKEN is read-only for forks)
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.label.name == 'update-snapshots' &&
+       github.event.pull_request.head.repo.full_name == github.repository)
+    env:
+      CI: true
+      BRANCH: ${{ github.event.pull_request.head.ref || inputs.branch || github.ref_name }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.BRANCH }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: Update component, container-query and cross-browser snapshots
+        run: |
+          npm run test:update:components
+          npm run test:update:other
+
+      - name: Update prototype snapshots
+        if: ${{ inputs.prototypes }}
+        run: npm run test:update:quick
+
+      - name: Commit snapshots
+        id: commit
+        run: |
+          git add -A -- 'tests/**/*-snapshots/**/*.png'
+          if git diff --cached --quiet; then
+            echo "No snapshot changes."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "test: update snapshots (CI)"
+          git push origin "HEAD:${BRANCH}"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # Pushes with GITHUB_TOKEN do not trigger workflows, so run CI on the new head explicitly.
+      - name: Run CI on the new head
+        if: steps.commit.outputs.changed == 'true'
+        run: gh workflow run ci.yml --ref "$BRANCH"
+
+      - name: Remove label
+        if: ${{ always() && github.event_name == 'pull_request' }}
+        run: gh api -X DELETE "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels/update-snapshots"
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v7
+        if: failure()
+        continue-on-error: true
+        with:
+          name: playwright-report-update
+          path: playwright-report/
+          retention-days: 1
