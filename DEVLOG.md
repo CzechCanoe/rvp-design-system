@@ -6730,3 +6730,21 @@ Další krok: 19.4 Bundle Size Audit (volitelný)
 ### Poznámky
 - Zbývají 2 moderate kořeny (sprintf-js přes vite-plugin-dts, uuid přes addon-actions); fix jen přes `--force` (downgrade).
 - T3 má baseline `scripts/check-no-hex.baseline.json` vyprázdnit a smazat.
+
+---
+
+## 2026-10-18 - v2 T0b: CI jako autorita pro Playwright snapshoty
+
+### Dokončeno
+- [x] Playwright job zpět na PR (chromium), `PLAYWRIGHT_CI` odstraněno; prototypy vždy `--ignore-snapshots`, label `skip-snapshots` přepíná celý běh
+- [x] `update-snapshots.yml` (label `update-snapshots` + `workflow_dispatch` s `prototypes`), commit `test: update snapshots (CI)`, odebrání labelu, `gh workflow run ci.yml` na novém HEAD
+- [x] `test:update:components`, `test:update:other`; CLAUDE.md sekce Testování
+- [x] CI workers 4, retries 1 (1 worker = 28+ min)
+
+### Problémy a řešení
+1. **Problém:** `git add 'tests/**/*-snapshots/**/*.png'` bez glob magic nic nenajde. **Řešení:** `:(glob)` pathspec.
+2. **Problém:** update běh končí exit 1 kvůli ne-snapshotovým failům. **Řešení:** `|| echo ::warning::` u update kroků.
+3. **Problém:** na čistém CI zůstává ~42 failů nesouvisejících s baseline: axe color-contrast (Button-Variants #ef4444/#fff aj.), keyboard focus, waitForSelector, nestabilní screenshoty animovaných komponent (Avatar, Toast, ProgressBar, Header-Glass, Skeleton), LivePage cross-browser snapshot se mění při každém běhu. **Řešení:** neřešeno (mimo scope T0b), rozhodnutí maintainera.
+
+### Poznámky
+- `update-snapshots.yml` jde spustit přes workflow_dispatch i z větve, ale na `main` ho zatím nemusí GitHub znát pro UI.
