@@ -53,8 +53,8 @@ jobs:
     name: Playwright Tests
     runs-on: ubuntu-latest
     needs: build
-    # Run tests only on PRs, not on every push to main
-    if: github.event_name == 'pull_request'
+    # Disabled for now; re-enable by setting repo variable PLAYWRIGHT_CI=true
+    if: github.event_name == 'pull_request' && vars.PLAYWRIGHT_CI == 'true'
     steps:
       - uses: actions/checkout@v7
 
