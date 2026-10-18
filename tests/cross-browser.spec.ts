@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { applyQuarantine } from './quarantine';
 import { crossBrowserComponents, crossBrowserPrototypes, testDefaults } from './config';
 
+
+applyQuarantine(test);
 /**
  * Cross-browser compatibility tests
  * Tests CSS features and rendering across Chrome, Firefox, and WebKit
@@ -61,7 +64,7 @@ test.describe('Cross-Browser: CSS Features', () => {
     await page.waitForTimeout(testDefaults.settleTime);
 
     // Find a gradient button specifically
-    const gradientButton = page.locator('#storybook-root .csk-btn--gradient, #storybook-root [class*="gradient"]').first();
+    const gradientButton = page.locator('#storybook-root .csk-button--gradient, #storybook-root [class*="gradient"]').first();
 
     const styles = await gradientButton.evaluate((el) => {
       const computed = window.getComputedStyle(el);
@@ -139,7 +142,7 @@ test.describe('Cross-Browser: CSS Features', () => {
   });
 
   test('Backdrop-filter renders or has fallback', async ({ page }) => {
-    await page.goto('/iframe.html?id=components-header--glass&viewMode=story');
+    await page.goto('/iframe.html?id=components-header--sticky-with-blur&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
     await page.waitForTimeout(testDefaults.settleTime);
 
@@ -219,7 +222,7 @@ test.describe('Cross-Browser: CSS Features', () => {
   });
 });
 
-test.describe('Cross-Browser: Prototype Pages', () => {
+test.describe('Cross-Browser: Prototype Pages', { tag: '@prototype' }, () => {
   for (const prototype of crossBrowserPrototypes) {
     test(`${prototype.name} - full page render`, async ({ page, browserName }) => {
       await page.goto(`/iframe.html?id=${prototype.storyId}&viewMode=story`);
@@ -320,7 +323,7 @@ test.describe('Cross-Browser: Dark Mode', () => {
 });
 
 test.describe('Cross-Browser: Responsive Behavior', () => {
-  test('Mobile viewport renders correctly', async ({ page, browserName }) => {
+  test('Mobile viewport renders correctly', { tag: '@prototype' }, async ({ page, browserName }) => {
     await page.setViewportSize({ width: 375, height: 667 });
 
     await page.goto('/iframe.html?id=prototypes-calendar-page--embed&viewMode=story');
@@ -349,7 +352,7 @@ test.describe('Cross-Browser: Responsive Behavior', () => {
     );
   });
 
-  test('Tablet viewport renders correctly', async ({ page, browserName }, testInfo) => {
+  test('Tablet viewport renders correctly', { tag: '@prototype' }, async ({ page, browserName }, testInfo) => {
     if (browserName === 'webkit') {
       testInfo.setTimeout(90000);
     }

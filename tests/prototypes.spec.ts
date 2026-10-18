@@ -8,7 +8,7 @@ import { allPrototypes, testDefaults } from './config';
  * Uses central config from ./config.ts for story IDs
  */
 
-test.describe('Prototype Pages - Light Mode', () => {
+test.describe('Prototype Pages - Light Mode', { tag: '@prototype' }, () => {
   for (const prototype of allPrototypes) {
     test(`${prototype.name} - screenshot`, async ({ page }) => {
       await page.goto(`/iframe.html?id=${prototype.storyId}&viewMode=story`);
@@ -49,7 +49,7 @@ test.describe('Prototype Pages - Light Mode', () => {
   }
 });
 
-test.describe('Prototype Pages - Dark Mode', () => {
+test.describe('Prototype Pages - Dark Mode', { tag: '@prototype' }, () => {
   for (const prototype of allPrototypes) {
     test(`${prototype.name} - dark mode screenshot`, async ({ page }) => {
       await page.goto(

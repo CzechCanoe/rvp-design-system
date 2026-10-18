@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { applyQuarantine } from './quarantine';
 import AxeBuilder from '@axe-core/playwright';
 
+
+applyQuarantine(test);
 /**
  * WCAG 2.1 AA Accessibility tests for design system components
  * Uses axe-core for automated accessibility testing
@@ -26,7 +29,7 @@ const coreComponents = [
 const advancedComponents = [
   { name: 'Modal', storyId: 'components-modal--default' },
   { name: 'Tabs', storyId: 'components-tabs--default' },
-  { name: 'Toast', storyId: 'components-toast--all-style-variants' },
+  { name: 'Toast', storyId: 'components-toast--default' },
   { name: 'Pagination', storyId: 'components-pagination--default' },
   { name: 'Progress', storyId: 'components-progress--bar-default' },
   { name: 'Header', storyId: 'components-header--default' },
@@ -48,12 +51,12 @@ const specificComponents = [
 
 // Prototype pages to test
 const prototypes = [
-  { name: 'LivePage-Embed', storyId: 'prototypes-livepage--embed' },
-  { name: 'ResultsPage-Embed', storyId: 'prototypes-resultspage--embed' },
-  { name: 'CalendarPage-Embed', storyId: 'prototypes-calendarpage--embed' },
-  { name: 'EventDetailPage-Embed', storyId: 'prototypes-eventdetailpage--embed' },
+  { name: 'LivePage-Embed', storyId: 'prototypes-live-page--embed' },
+  { name: 'ResultsPage-Embed', storyId: 'prototypes-results-page--embed' },
+  { name: 'CalendarPage-Embed', storyId: 'prototypes-calendar-page--embed' },
+  { name: 'EventDetailPage-Embed', storyId: 'prototypes-event-detail-page--embed' },
   { name: 'ProfilePage', storyId: 'prototypes-profilepage--satellite' },
-  { name: 'DashboardPage', storyId: 'prototypes-dashboardpage--satellite' },
+  { name: 'DashboardPage', storyId: 'prototypes-dashboard-page--satellite' },
 ];
 
 // Helper to run axe and check results
@@ -146,6 +149,7 @@ test.describe('Accessibility - Prototypes', () => {
 test.describe('Keyboard Navigation', () => {
   test('Button - focusable and activatable', async ({ page }) => {
     await page.goto('/iframe.html?id=components-button--default&viewMode=story');
+    await page.waitForLoadState('networkidle');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
 
     // Tab to button
@@ -172,6 +176,7 @@ test.describe('Keyboard Navigation', () => {
 
   test('Checkbox - keyboard toggle with Space', async ({ page }) => {
     await page.goto('/iframe.html?id=components-checkbox--default&viewMode=story');
+    await page.waitForLoadState('networkidle');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
 
     // Tab to checkbox
@@ -188,6 +193,7 @@ test.describe('Keyboard Navigation', () => {
 
   test('Switch - keyboard toggle with Space', async ({ page }) => {
     await page.goto('/iframe.html?id=components-switch--default&viewMode=story');
+    await page.waitForLoadState('networkidle');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
 
     // Tab to switch

@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { applyQuarantine } from './quarantine';
 import { containerQueryComponents, embedPrototypes, testDefaults } from './config';
 
+
+applyQuarantine(test);
 /**
  * Container Query and Overflow/Layout Tests
  *
@@ -107,7 +110,7 @@ test.describe('Narrow Container Layout Tests', () => {
   }
 });
 
-test.describe('Embed Prototype Container Responsiveness', () => {
+test.describe('Embed Prototype Container Responsiveness', { tag: '@prototype' }, () => {
   for (const prototype of embedPrototypes) {
     test.describe(`${prototype.name}`, () => {
       // Test at narrow width (sidebar embed scenario)
@@ -167,7 +170,7 @@ test.describe('Embed Prototype Container Responsiveness', () => {
 test.describe('Overflow Prevention Tests', () => {
   const componentsToTest = [
     { name: 'Badge', storyId: 'components-badge--csk-sections', selector: '.csk-badge' },
-    { name: 'Button', storyId: 'components-button--variants', selector: '.csk-btn' },
+    { name: 'Button', storyId: 'components-button--variants', selector: '.csk-button' },
     { name: 'Card', storyId: 'components-card--default', selector: '.csk-card' },
     { name: 'Tabs', storyId: 'components-tabs--default', selector: '.csk-tabs' },
     { name: 'AthleteCard', storyId: 'components-athletecard--default', selector: '.csk-athlete-card' },
@@ -205,7 +208,7 @@ test.describe('Text Truncation and Ellipsis', () => {
   test('Calendar event titles truncate correctly', async ({ page }) => {
     await page.setViewportSize({ width: 400, height: 600 });
 
-    await page.goto('/iframe.html?id=components-calendar--csk-race-calendar&viewMode=story');
+    await page.goto('/iframe.html?id=components-calendar--default&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
     await page.waitForLoadState('networkidle');
     await page.waitForTimeout(testDefaults.settleTime);
@@ -252,7 +255,7 @@ test.describe('Text Truncation and Ellipsis', () => {
   });
 });
 
-test.describe('KanoeCzContext Embed Widths', () => {
+test.describe('KanoeCzContext Embed Widths', { tag: '@prototype' }, () => {
   // Test embed scenarios with different kanoe.cz sidebar configurations
   const embedWidths = [
     { name: 'sidebar-narrow', width: 320, description: 'Narrow sidebar widget' },

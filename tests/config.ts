@@ -50,7 +50,7 @@ export const advancedComponents: ComponentConfig[] = [
   { name: 'Modal', storyId: 'components-modal--default', tier: 'advanced' },
   { name: 'Modal-StyleVariants', storyId: 'components-modal--all-style-variants', tier: 'advanced', cssFeatures: ['backdrop-filter', 'animations'] },
   { name: 'Tabs', storyId: 'components-tabs--default', tier: 'advanced', cssFeatures: ['flexbox', 'underline'] },
-  { name: 'Toast', storyId: 'components-toast--all-style-variants', tier: 'advanced' },
+  { name: 'Toast', storyId: 'components-toast--default', tier: 'advanced' },
   { name: 'Breadcrumbs', storyId: 'components-navigation-breadcrumbs--default', tier: 'advanced' },
   { name: 'Pagination', storyId: 'components-pagination--default', tier: 'advanced' },
   { name: 'ProgressBar', storyId: 'components-progress--bar-default', tier: 'advanced' },
@@ -60,7 +60,7 @@ export const advancedComponents: ComponentConfig[] = [
 
 export const specificComponents: ComponentConfig[] = [
   { name: 'Header', storyId: 'components-header--default', tier: 'specific' },
-  { name: 'Header-Glass', storyId: 'components-header--glass', tier: 'specific', cssFeatures: ['backdrop-filter'] },
+  { name: 'Header-Glass', storyId: 'components-header--sticky-with-blur', tier: 'specific', cssFeatures: ['backdrop-filter'] },
   { name: 'Calendar', storyId: 'components-calendar--default', tier: 'specific', cssFeatures: ['grid', 'responsive'] },
   { name: 'Dropzone', storyId: 'components-dropzone--default', tier: 'specific' },
   { name: 'Timeline', storyId: 'components-timeline--default', tier: 'specific' },
@@ -242,3 +242,16 @@ export const a11ySpecificComponents = specificComponents
     name: c.name.replace('-', ' '),
     storyId: c.storyId,
   }));
+
+// ---------------------------------------------------------------------------
+// Quarantine: known failures that pre-date v2 and are fixed by the owning v2
+// task (the task that retokenizes/rewrites/deletes the component). Keyed by the
+// full title path (describe blocks + test title joined by ' › ', no file name). Quarantined tests are
+// reported as skipped (test.fixme) so CI stays green and the debt stays visible.
+// A task that touches a quarantined component must remove its entries; T17
+// empties the list.
+// ---------------------------------------------------------------------------
+export type QuarantineOwner = 'T1' | 'T3' | 'T4' | 'T5' | 'T7' | 'T8' | 'T17';
+
+export const QUARANTINE: Record<string, { reason: string; owner: QuarantineOwner }> = {
+};

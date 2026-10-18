@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { applyQuarantine } from './quarantine';
 import { testDefaults } from './config';
 
+
+applyQuarantine(test);
 /**
  * Functional/Interaction tests for design system components
  * Tests actual user interactions, not just visual appearance

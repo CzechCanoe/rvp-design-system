@@ -12,10 +12,16 @@ export default defineConfig({
   workers: process.env.CI ? 4 : undefined,
   reporter: 'html',
 
+  // Deterministic screenshots: no animations, no blinking caret
+  expect: {
+    toHaveScreenshot: { animations: 'disabled', caret: 'hide' },
+  },
+
   use: {
     baseURL: 'http://localhost:6006',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
+    reducedMotion: 'reduce',
   },
 
   projects: [

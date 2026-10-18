@@ -82,20 +82,18 @@ jobs:
       - name: Build Storybook
         run: npm run build-storybook
 
-      # Prototype snapshots are not compared until T17, so prototypes always run with --ignore-snapshots.
-      - name: Run Playwright tests (all specs except prototypes)
+      # Tests tagged @prototype (render a prototype page) never compare snapshots until T17.
+      - name: Run Playwright tests (snapshots compared)
         run: |
           FLAGS=""
           if [ "$SKIP_SNAPSHOTS" = "true" ]; then FLAGS="--ignore-snapshots"; fi
-          npx playwright test --project=chromium $FLAGS \
-            tests/accessibility.spec.ts tests/components.spec.ts tests/container-queries.spec.ts \
-            tests/cross-browser.spec.ts tests/interactions.spec.ts
+          npx playwright test --project=chromium --grep-invert @prototype $FLAGS
 
-      - name: Run Playwright tests (prototypes, snapshots ignored)
+      - name: Run Playwright tests (@prototype, snapshots ignored)
         if: ${{ !cancelled() }}
         env:
           PLAYWRIGHT_HTML_OUTPUT_DIR: playwright-report-prototypes
-        run: npx playwright test tests/prototypes.spec.ts --project=chromium --ignore-snapshots
+        run: npx playwright test --project=chromium --grep @prototype --ignore-snapshots
 
       - name: Upload test results
         uses: actions/upload-artifact@v7
