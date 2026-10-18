@@ -59,8 +59,7 @@ jobs:
       - name: Build Storybook
         run: npm run build-storybook
 
-      - name: Update component, container-query and cross-browser snapshots
-        # Snapshot/functional test failures are tolerated in update mode (the CI job reports them),
+      # Snapshot/functional test failures are tolerated in update mode (the CI job reports them),
       # but a crashed run (Storybook down, Playwright error) must fail the job: the JSON report
       # has to exist and contain at least one executed test.
       - name: Update component, container-query and cross-browser snapshots
