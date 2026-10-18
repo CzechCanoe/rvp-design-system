@@ -279,4 +279,6 @@ export const QUARANTINE: Record<string, { reason: string; owner: QuarantineOwner
   'Accessibility - Prototypes › ProfilePage - WCAG 2.1 AA (dark)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
   'Accessibility - Prototypes › DashboardPage - WCAG 2.1 AA (light)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
   'Accessibility - Prototypes › DashboardPage - WCAG 2.1 AA (dark)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
+  'Keyboard Navigation › Button - focusable and activatable': { owner: 'T3', reason: 'focus outline uses removed 1.x token --color-border-focus (outline-style none) until the T3 codemod' },
+  'Cross-Browser: CSS Features › Backdrop-filter renders or has fallback': { owner: 'T3', reason: 'Header background-color uses removed 1.x token --color-bg-primary (transparent) until the T3 codemod' },
 };
