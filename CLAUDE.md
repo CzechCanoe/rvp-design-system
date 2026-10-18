@@ -92,6 +92,8 @@ npm run build-storybook  # Static Storybook
 - **Lokálně na ARM/RPi** spouštěj `npx playwright test --project=chromium --ignore-snapshots` (funkční testy, axe, bounding boxy). ARM renderuje jinak, takže porovnání snapshotů dělá **jen CI**; snapshoty lokálně negeneruj ani necommituj.
 - **Záměrná změna UI:** přidej na PR label `update-snapshots`. Workflow `update-snapshots.yml` přegeneruje chromium snapshoty (komponenty, container-queries, cross-browser), commitne je jako `test: update snapshots (CI)`, label odebere a spustí CI na novém HEAD. Počkej na ten commit (`git pull`). Prototypy: `workflow_dispatch` workflow `Update snapshots` s `prototypes: true`.
 - **Label `skip-snapshots`** na PR: celý Playwright běh s `--ignore-snapshots`. `tests/prototypes.spec.ts` běží na CI vždy s `--ignore-snapshots` (do T17).
+- **Tag `@prototype`:** testy, které renderují prototyp (celý `prototypes.spec.ts` a prototypové testy v `cross-browser`/`container-queries`), CI vždy pouští s `--ignore-snapshots`; label `update-snapshots` je neaktualizuje (jen `workflow_dispatch` s `prototypes: true`).
+- **Karanténa:** známé předexistující faily jsou v `QUARANTINE` v `tests/config.ts` (klíč = názvy describe + test, owner = v2 task, který komponentu přetokenuje/přepíše/smaže); CI je hlásí jako skipped. Task, který sáhne na komponentu v karanténě, musí její záznamy odstranit. Nové faily způsobené záměrně rozbitým stylováním mezi T1 a T3 lze přidat s `owner: 'T3'`; T17 seznam vyprázdní.
 - **Diff obrázky** jsou v artifactu `playwright-report` daného runu (jen při selhání); do PR dej odkaz na run/artifact.
 
 ### Správný postup při vývoji

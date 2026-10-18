@@ -167,6 +167,7 @@ test.describe('Keyboard Navigation', () => {
   test('Input - focusable with visible focus state', async ({ page }) => {
     await page.goto('/iframe.html?id=components-input--default&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
+    await page.waitForLoadState('networkidle');
 
     // Tab to input
     await page.keyboard.press('Tab');
