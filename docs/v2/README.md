@@ -13,8 +13,8 @@ Pracovní složka pro major release 2.0.0. Vznikla z revize designu v říjnu 20
 
 ## Jak s tím pracovat
 
-1. Větev `v2-klidna-voda` je integrační. Každý task z `TASKS.md` je vlastní issue a vlastní větev `feat/v2-<N>-<slug>` z `v2-klidna-voda`, PR zpět do ní.
+1. Pracuje se přímo nad `main`. Každý task z `TASKS.md` je vlastní issue a vlastní větev `feat/v2-<N>-<slug>` z `main`, PR do `main`. Po každém merge se z `main` vybuildí Storybook na GitHub Pages (`.github/workflows/storybook-pages.yml`), takže rozpracovaný stav je vidět průběžně. Větev `v2-klidna-voda` byla jen pro tuto dokumentaci.
 2. `reference/*.html` se otevírá v prohlížeči přímo ze souboru (`rvp.css` je vedle). Je to návrh, ne kód k převzetí: komponenty se píšou znovu v konvencích repa (React + CSS, BEM třídy `csk-*`, stories, Playwright snapshoty).
 3. Kde reference a `COMPONENTS.md` mlčí, platí dnešní chování komponenty. Kde si odporují, platí `COMPONENTS.md` a agent to napíše do PR.
 4. Tokeny se nikdy nezapisují natvrdo do komponent. Když chybí, přidá se do `src/tokens/` a zapíše do `TOKENS.md`.
-5. Release: na větvi `v2-klidna-voda` se neverzuje. Při merge do `main` dostane poslední commit footer `Release-As: 2.0.0` (viz `MIGRATION.md`).
+5. Release: Release Please po prvním `feat!:` otevře rolling release PR „chore(main): release 2.0.0“. **Ten se nemerguje**, dokud neskončí fáze 5 (T19); feature PR se mergují normálně. Mezitím se nic nepublikuje na GitHub Packages (publish běží až po vydání release). Detaily v `MIGRATION.md`.

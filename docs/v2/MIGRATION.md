@@ -2,10 +2,11 @@
 
 ## Verze a větve
 
-- Integrační větev `v2-klidna-voda`. Dílčí větve `feat/v2-<N>-<slug>` podle `TASKS.md`, PR do `v2-klidna-voda`, squash merge, konvenční commity (`feat:`, `feat!:`, `refactor:`…).
-- Na `v2-klidna-voda` Release Please neběží (workflow je jen pro `main`). Verze a CHANGELOG se neupravují ručně.
-- Merge `v2-klidna-voda` → `main`: jeden squash commit `feat!: design system v2 „Klidná voda“` s footerem `Release-As: 2.0.0`. Release Please pak vytvoří release PR na 2.0.0 a po jeho merge publikuje `@czechcanoe/rvp-design-system@2.0.0` na GitHub Packages.
-- Řada 1.x se po 2.0.0 neudržuje; `c123-live-mini` na `legacy-2026` zůstává na `^1.2.0` (lockfile), nic ho nenutí přejít.
+- Vývoj v2 běží přímo nad `main`: větve `feat/v2-<N>-<slug>` podle `TASKS.md`, PR do `main`, squash merge, konvenční commity. Breaking změny jako `feat!:` nebo s footerem `BREAKING CHANGE:`.
+- Každý merge do `main` spustí CI a nasazení Storybooku na GitHub Pages, takže rozpracovaný v2 je kdykoli k prohlédnutí. Tag `v1.2.0` a balíček 1.2.0 na GitHub Packages zůstávají nedotčené; `c123-live-mini` na `legacy-2026` je pinovaný lockfilem.
+- Release Please po prvním `feat!:` otevře rolling release PR na 2.0.0 (config má `bump-minor-pre-major: false`, takže `feat!:` znamená major). **Release PR se nemerguje až do konce fáze 5.** Jeho merge vytvoří tag `v2.0.0`, GitHub Release a spustí `publish.yml`. Poslední commit T19 nese pro jistotu footer `Release-As: 2.0.0`.
+- Mezi fázemi je `main` v přechodném stavu (část komponent v2, část 1.x). To je záměr; kdo potřebuje stabilní 1.x, instaluje `@czechcanoe/rvp-design-system@1.2.0`.
+- Řada 1.x se po 2.0.0 neudržuje.
 
 ## Breaking changes (do CHANGELOG a do PR popisu)
 

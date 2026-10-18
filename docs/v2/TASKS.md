@@ -1,13 +1,13 @@
 # Rozpad práce v2 na issues
 
-Každý task = jedno issue + jedna větev `feat/v2-<N>-<slug>` z `v2-klidna-voda` + PR zpět. Task je napsaný tak, aby ho zvládl agent bez kontextu konverzace: přečte `README.md`, `BRIEF.md`, soubory uvedené u tasku, udělá, ověří akceptační kritéria, do PR dá příkazy a výsledky, do `DEVLOG.md` přidá záznam.
+Každý task = jedno issue + jedna větev `feat/v2-<N>-<slug>` z `main` + PR do `main`. Task je napsaný tak, aby ho zvládl agent bez kontextu konverzace: přečte `README.md`, `BRIEF.md`, soubory uvedené u tasku, udělá, ověří akceptační kritéria, do PR dá příkazy a výsledky, do `DEVLOG.md` přidá záznam.
 
 Pořadí je závazné jen mezi fázemi; uvnitř fáze lze paralelně, pokud není uvedená závislost.
 
 ## Fáze 0: příprava (1 task)
 
 **T0 Větev, lint pravidlo, kostra testů**
-- Založit `v2-klidna-voda` z `main` (hotovo), přidat do CI job pro tuto větev (stejný workflow, jen `branches`).
+- Ověřit, že `.github/workflows/storybook-pages.yml` nasazuje Storybook na GitHub Pages z `main` (vyžaduje v Settings → Pages zdroj „GitHub Actions“ a veřejné repo; nastavuje maintainer). Do `README.md` dát odkaz na Pages.
 - Skript `scripts/check-no-hex.js`: selže, když `src/components/**/*.css` nebo `src/styles/**` obsahuje `#[0-9a-f]{3,8}` mimo `src/tokens/`. Zapojit do `npm run lint`.
 - Přidat Vitest + `@testing-library/react` (devDependencies), `npm run test:unit`, jeden smoke test.
 - `npm audit` (stav 18. 10. 2026: 31 zranitelností, 17 high, 13 moderate, 1 low, vše jen dev závislosti; GitHub na `main` hlásí 69, protože počítá i duplicitní cesty). Přímé: `vite` ^6.1 → nejnovější 6.x (high), `storybook` + `@storybook/*` ^8.5.3 → nejnovější 8.x (high), zbytek jsou tranzitivní (`minimatch`, `brace-expansion`, `postcss`, `rollup`, `ws`, `nanoid`, `js-yaml`, `lodash`, `@microsoft/api-extractor`…) a spraví je `npm audit fix` bez `--force`. **Nepoužívat `npm audit fix --force`**: navrhuje downgrade `@storybook/addon-essentials` na 7.0.6. Storybook 9 ani Vite 7 v T0 neřešit, to je samostatný `chore:` až po fázi 1, pokud vůbec.
@@ -85,11 +85,11 @@ Pořadí je závazné jen mezi fázemi; uvnitř fáze lze paralelně, pokud nen�
 - `docs/COMPONENT_API.md` přegenerovat; `CLAUDE.md`, `README.md`, `DESIGN_PRINCIPLES.md`, `PLAN.md` podle `MIGRATION.md`.
 
 **T18 Hledání mezer nad c123-live-mini** (suchý test, bez commitu do live-mini; není to migrace, viz `MIGRATION.md` „Kdy migrovat“)
-- Lokálně nainstalovat DS z `v2-klidna-voda` (`npm pack` → `npm i ../rvp-design-system-2.0.0.tgz` v live-mini na dočasné větvi), přepsat `ResultList`, `ClassTabs`, `OnCoursePanel`, `EventHeader` na v2 a zapsat do issue v DS, co chybělo. Chybějící věci se stanou T19.
+- Lokálně nainstalovat DS z `main` (`npm pack` → `npm i ../rvp-design-system-2.0.0.tgz` v live-mini na dočasné větvi), přepsat `ResultList`, `ClassTabs`, `OnCoursePanel`, `EventHeader` na v2 a zapsat do issue v DS, co chybělo. Chybějící věci se stanou T19.
 - AK: seznam mezer v issue; žádná `:global` třída nezůstala nutná.
 
-**T19 Doplnění mezer z T18 a merge do main**
-- Opravit mezery, squash merge do `main` s `Release-As: 2.0.0` (viz `MIGRATION.md`), release PR, publish.
+**T19 Doplnění mezer z T18 a vydání 2.0.0**
+- Opravit mezery v běžném PR; poslední commit s footerem `Release-As: 2.0.0`. Pak maintainer mergne rolling release PR od Release Please → tag `v2.0.0`, GitHub Release, publish na GitHub Packages (viz `MIGRATION.md`).
 
 ## Odhad
 
