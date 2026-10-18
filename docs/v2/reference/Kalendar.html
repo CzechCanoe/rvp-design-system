@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Kalendář závodů</title>
+
+<link rel="stylesheet" href="./rvp.css">
+</head>
+<body>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>body{margin:0}a{color:#2a66b4}a:hover{color:#1d4f8f}</style>
+
+<div style="min-height: 1560px; display: flex; flex-direction: column; background: #ffffff; font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #1b1f26">
+
+  <div class="topbar">
+    <a href="Kalendar.dc.html" class="brand"><span style="display: inline-block; width: 26px; height: 26px; border-radius: 4px; background: linear-gradient(135deg, #e42313 50%, #ffffff 50%)" aria-hidden="true"></span>Český svaz kanoistů</a>
+    <nav><a href="#u">Úvod</a><a href="#s">Sporty</a><a href="Kalendar.dc.html" class="on">Závody</a><a href="Profil.dc.html">Závodníci</a><a href="#t">Trenéři</a><a href="Prihlaska.dc.html">Přihlásit se</a></nav>
+  </div>
+  <div class="subbar"><a href="Zavod.dc.html">Výsledky</a><a href="#k" class="on">Kalendář</a><a href="#z">Žebříčky a VT</a><a href="Live.dc.html">Live</a><a href="Prihlaska.dc.html">Online přihlašování</a></div>
+
+  <div class="wrap" style="display: flex; flex-direction: column; gap: 20px; padding-top: 20px; padding-bottom: 40px">
+    <div style="display: flex; gap: 24px; align-items: flex-end; flex-wrap: wrap">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <h1>Kalendář závodů 2026</h1>
+        <div style="color: #444b55">Termínová listina všech sekcí. Víkend za víkendem, protože tak se sezóna žije.</div>
+      </div>
+      <div style="margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap"><a href="#i" class="btn btn-s">Přidat do kalendáře (iCal)</a><a href="#t" class="btn btn-s">Tabulka</a><a href="#p" class="btn btn-s">PDF termínovka</a></div>
+    </div>
+
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; padding: 12px 14px; background: #f4f6f8; border-radius: 10px">
+      <div class="pills"><button class="pill on">Všechny sekce</button><button class="pill">Divoká voda</button><button class="pill">Rychlost</button><button class="pill">Turistika</button></div>
+      <span style="width: 1px; height: 24px; background: #d9dee5"></span>
+      <div class="pills"><button class="pill on">Vše</button><button class="pill">ČP</button><button class="pill">MČR</button><button class="pill">NKZ</button><button class="pill">Veřejné</button><button class="pill">Zahraničí</button></div>
+      <label style="margin-left: auto; display: flex; gap: 8px; align-items: center; font-size: 14px"><input type="checkbox" checked> Jen s online přihláškou</label>
+      <label style="display: flex; gap: 8px; align-items: center; font-size: 14px"><input type="checkbox"> Jen sledované ★</label>
+    </div>
+
+    <div style="display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start">
+      <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
+          <h2>Květen</h2>
+          <div class="pills" style="margin-left: 6px"><button class="pill">Duben</button><button class="pill on">Květen</button><button class="pill">Červen</button><button class="pill">Červenec</button><button class="pill">Srpen</button><button class="pill">Září</button></div>
+        </div>
+
+        <!-- víkend -->
+        <div style="display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 0; border: 1px solid #d9dee5; border-radius: 10px; overflow: hidden">
+          <div style="background: #f4f6f8; padding: 14px; border-right: 1px solid #d9dee5; display: flex; flex-direction: column; gap: 4px">
+            <span style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: #6b7280">Víkend</span>
+            <span style="font-family: 'Barlow Semi Condensed', sans-serif; font-weight: 700; font-size: 26px; line-height: 1">9.–10. 5.</span>
+            <span class="small muted">so, ne</span>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) 150px 150px 120px; gap: 12px; padding: 12px 16px; align-items: center; border-bottom: 1px solid #eceff3">
+              <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><div style="display: flex; gap: 8px; align-items: center"><span class="badge b-dv">DV</span><span class="badge b-level">ČP</span><a href="Zavod.dc.html" style="font-weight: 600; color: #1b1f26; font-size: 16px">Český pohár #1 ve slalomu</a></div><span class="small muted">Praha – Troja · USK Praha · so i ne</span></div>
+              <div style="font-size: 13px"><span class="badge b-unk">Přihlášky uzavřeny</span></div>
+              <div style="font-size: 13px"><a href="#p">Propozice</a> · <a href="#s">Startovky</a></div>
+              <div><span class="badge b-ok">Výsledky</span></div>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) 150px 150px 120px; gap: 12px; padding: 12px 16px; align-items: center">
+              <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><div style="display: flex; gap: 8px; align-items: center"><span class="badge b-ry">RY</span><span class="badge b-level">Veřejný</span><a href="#e" style="font-weight: 600; color: #1b1f26; font-size: 16px">Jarní regata Račice</a></div><span class="small muted">Račice · KK Račice · so</span></div>
+              <div style="font-size: 13px"><span class="badge b-unk">Přihlášky uzavřeny</span></div>
+              <div style="font-size: 13px"><a href="#p">Propozice</a></div>
+              <div><span class="badge b-ok">Výsledky</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- všední den -->
+        <div style="display: grid; grid-template-columns: 150px minmax(0, 1fr); border: 1px dashed #d9dee5; border-radius: 10px; overflow: hidden">
+          <div style="padding: 10px 14px; border-right: 1px dashed #d9dee5; display: flex; align-items: center; gap: 8px"><span style="font-family: 'Barlow Semi Condensed', sans-serif; font-weight: 600; font-size: 18px">St 13. 5.</span><span class="small muted">mimo víkend</span></div>
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 150px 150px 120px; gap: 12px; padding: 10px 16px; align-items: center">
+            <div style="display: flex; gap: 8px; align-items: center; min-width: 0"><span class="badge b-vt">VT</span><a href="#e" style="font-weight: 600; color: #1b1f26">Školení rozhodčích, Brno</a><span class="small muted">· seminář</span></div>
+            <div class="small"><span class="badge b-warn">Uzávěrka za 2 dny</span></div><div class="small"><a href="#p">Pozvánka</a></div><div></div>
+          </div>
+        </div>
+
+        <!-- tento víkend -->
+        <div style="display: grid; grid-template-columns: 150px minmax(0, 1fr); border: 2px solid #004899; border-radius: 10px; overflow: hidden">
+          <div style="background: #004899; color: #fff; padding: 14px; display: flex; flex-direction: column; gap: 4px">
+            <span style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; opacity: .85">Tento víkend</span>
+            <span style="font-family: 'Barlow Semi Condensed', sans-serif; font-weight: 700; font-size: 26px; line-height: 1">16.–17. 5.</span>
+            <span class="small" style="opacity: .85">so, ne</span>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) 150px 150px 120px; gap: 12px; padding: 12px 16px; align-items: center; border-bottom: 1px solid #eceff3">
+              <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><div style="display: flex; gap: 8px; align-items: center"><span class="badge b-dv">DV</span><span class="badge b-level">ČP</span><a href="Zavod.dc.html" style="font-weight: 600; color: #1b1f26; font-size: 16px">Český pohár #2 ve slalomu</a><span style="color: #b0471a">★</span></div><span class="small muted">Praha – Troja · USK Praha · so i ne · 112 lodí</span></div>
+              <div class="small"><span class="badge b-unk">Dohlášky do pá 18:00</span></div>
+              <div class="small"><a href="#p">Propozice</a> · <a href="#s">Startovky</a></div>
+              <div><a href="Live.dc.html" class="badge b-live" style="color: #fff"><i></i> Live</a></div>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) 150px 150px 120px; gap: 12px; padding: 12px 16px; align-items: center; border-bottom: 1px solid #eceff3">
+              <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><div style="display: flex; gap: 8px; align-items: center"><span class="badge b-dv">DV</span><span class="badge b-level">Veřejný</span><a href="#e" style="font-weight: 600; color: #1b1f26; font-size: 16px">Sjezd na Berounce</a></div><span class="small muted">Beroun · TJ Bohemians Praha · ne</span></div>
+              <div class="small"><span class="badge b-unk">Přihlášky uzavřeny</span></div>
+              <div class="small"><a href="#p">Propozice</a></div>
+              <div><span class="badge b-unk">ne 14:00</span></div>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) 150px 150px 120px; gap: 12px; padding: 12px 16px; align-items: center">
+              <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><div style="display: flex; gap: 8px; align-items: center"><span class="badge b-vt">VT</span><a href="#e" style="font-weight: 600; color: #1b1f26; font-size: 16px">Vodácký víkend Sázava</a></div><span class="small muted">Týnec nad Sázavou · so i ne · bez online přihlášky</span></div>
+              <div class="small muted">Přihláška u pořadatele</div>
+              <div class="small"><a href="#p">Pozvánka</a></div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- další víkend -->
+        <div style="display: grid; grid-template-columns: 150px minmax(0, 1fr); border: 1px solid #d9dee5; border-radius: 10px; overflow: hidden">
+          <div style="background: #f4f6f8; padding: 14px; border-right: 1px solid #d9dee5; display: flex; flex-direction: column; gap: 4px">
+            <span style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: #6b7280">Víkend</span>
+            <span style="font-family: 'Barlow Semi Condensed', sans-serif; font-weight: 700; font-size: 26px; line-height: 1">23.–24. 5.</span>
+            <span class="small muted">so, ne</span>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) 150px 150px 120px; gap: 12px; padding: 12px 16px; align-items: center; border-bottom: 1px solid #eceff3">
+              <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><div style="display: flex; gap: 8px; align-items: center"><span class="badge b-dv">DV</span><span class="badge b-level">NKZ</span><a href="#e" style="font-weight: 600; color: #1b1f26; font-size: 16px">Nominační závod, Lipno</a></div><span class="small muted">Lipno · SK Lipno · so i ne</span></div>
+              <div class="small"><span class="badge b-warn">Uzávěrka za 5 dní</span><div class="muted" style="margin-top: 2px">st 13. 5. 23:59</div></div>
+              <div class="small"><a href="#p">Propozice</a></div>
+              <div><a href="Prihlaska.dc.html" class="btn btn-p btn-sm">Přihlásit</a></div>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) 150px 150px 120px; gap: 12px; padding: 12px 16px; align-items: center">
+              <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><div style="display: flex; gap: 8px; align-items: center"><span class="badge b-ry">RY</span><span class="badge b-level">MČR</span><a href="#e" style="font-weight: 600; color: #1b1f26; font-size: 16px">MČR dlouhé tratě</a></div><span class="small muted">Labe aréna Račice · so i ne</span></div>
+              <div class="small"><span class="badge b-warn">Uzávěrka za 6 dní</span></div>
+              <div class="small"><span class="badge b-warn">Propozice chybí</span><div class="muted" style="margin-top: 2px">lhůta 6 týdnů uplynula</div></div>
+              <div><a href="Prihlaska.dc.html" class="btn btn-s btn-sm">Přihlásit</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 150px minmax(0, 1fr); border: 1px solid #d9dee5; border-radius: 10px; overflow: hidden">
+          <div style="background: #f4f6f8; padding: 14px; border-right: 1px solid #d9dee5; display: flex; flex-direction: column; gap: 4px">
+            <span style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: #6b7280">Víkend</span>
+            <span style="font-family: 'Barlow Semi Condensed', sans-serif; font-weight: 700; font-size: 26px; line-height: 1">30.–31. 5.</span>
+            <span class="small muted">so, ne</span>
+          </div>
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 150px 150px 120px; gap: 12px; padding: 12px 16px; align-items: center">
+            <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><div style="display: flex; gap: 8px; align-items: center"><span class="badge b-dv">DV</span><span class="badge b-level">Zahraničí</span><a href="#e" style="font-weight: 600; color: #1b1f26; font-size: 16px">ICF World Cup #1, Augsburg</a></div><span class="small muted">Německo · reprezentace</span></div>
+            <div class="small muted">Nominace RDA</div><div class="small"><a href="#p">canoeicf.com ↗</a></div><div></div>
+          </div>
+        </div>
+      </div>
+
+      <aside style="flex: 1 1 280px; min-width: 260px; display: flex; flex-direction: column; gap: 16px">
+        <div class="card" style="border-color: #c9dbf1">
+          <div class="card-h" style="background: #e8f0fa; border-radius: 10px 10px 0 0"><h3>Moje lhůty</h3><span class="small muted">TJ Bohemians Praha</span></div>
+          <div style="display: flex; flex-direction: column; font-size: 14px">
+            <div style="padding: 10px 18px; border-bottom: 1px solid #eceff3; display: flex; flex-direction: column; gap: 2px"><div style="display: flex; gap: 8px; align-items: center"><b>ČP #2 ve slalomu</b><span class="badge b-warn" style="margin-left: auto">pá 18:00</span></div><span class="small muted">omluvy DNS-A bez penalizace · 14 lodí přihlášeno</span></div>
+            <div style="padding: 10px 18px; border-bottom: 1px solid #eceff3; display: flex; flex-direction: column; gap: 2px"><div style="display: flex; gap: 8px; align-items: center"><b>Nominační závod, Lipno</b><span class="badge b-warn" style="margin-left: auto">za 5 dní</span></div><span class="small muted">uzávěrka přihlášek · zatím 0 lodí</span></div>
+            <div style="padding: 10px 18px; display: flex; flex-direction: column; gap: 2px"><div style="display: flex; gap: 8px; align-items: center"><b>MČR dlouhé tratě</b><span class="badge b-unk" style="margin-left: auto">za 6 dní</span></div><span class="small muted">sekce rychlost · vyžaduje roční prohlášení oddílu ✓</span></div>
+          </div>
+          <div style="padding: 10px 18px; border-top: 1px solid #eceff3" class="small"><a href="#n">Nastavit upozornění e-mailem</a></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h3>Sezóna 2026</h3></div>
+          <div class="card-b" style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; padding-top: 12px">
+            <div style="display: flex; justify-content: space-between"><span>Závodů v kalendáři</span><b class="num">184</b></div>
+            <div style="display: flex; justify-content: space-between"><span>Z toho tento měsíc</span><b class="num">23</b></div>
+            <div style="display: flex; justify-content: space-between"><span>S online přihláškou</span><b class="num">121</b></div>
+            <div class="pills" style="margin-top: 4px"><button class="pill">2025</button><button class="pill on">2026</button><button class="pill">2027</button></div>
+          </div>
+        </div>
+        <div class="note note-info" style="flex-direction: column; gap: 4px"><b>Pořadatelé</b><span>Propozice zveřejněte nejpozději 6 týdnů před závodem. Kalendář vám lhůtu připomene.</span><a href="#o">Vypsat závod →</a></div>
+      </aside>
+    </div>
+  </div>
+  <div class="foot">© 2026 Český svaz kanoistů · Termínová listina je závazná po schválení výkonným výborem sekce.</div>
+</div>
+
+</body>
+</html>
