@@ -1039,7 +1039,7 @@ export const DisplayFontShowcase: Story = {
             </a>
           }
           actions={
-            <Badge variant="error" size="lg" pill>ŽIVĚ</Badge>
+            <Badge variant="error" size="md" pill>ŽIVĚ</Badge>
           }
         />
       </div>

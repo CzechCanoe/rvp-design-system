@@ -11,7 +11,7 @@ const meta: Meta<typeof Tabs> = {
     docs: {
       description: {
         component:
-          'Tabs component for organizing content into switchable panels. Supports three variants (line, pills, aesthetic), three sizes, and full WCAG keyboard navigation.',
+          'Tabs component for organizing content into switchable panels. Supports three variants (line, pills, nav), two sizes, overflow handling (wrap, scroll, carousel) and full WCAG keyboard navigation.',
       },
     },
   },
@@ -19,13 +19,18 @@ const meta: Meta<typeof Tabs> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['line', 'pills', 'aesthetic'],
+      options: ['line', 'pills', 'nav'],
       description: 'Visual variant of the tabs',
     },
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md'],
       description: 'Size of the tabs',
+    },
+    overflow: {
+      control: 'select',
+      options: ['wrap', 'scroll', 'carousel'],
+      description: 'Behaviour when the tabs do not fit the width',
     },
     fullWidth: {
       control: 'boolean',
@@ -95,19 +100,63 @@ export const Pills: Story = {
   },
 };
 
-export const Aesthetic: Story = {
+// Navigation chips: no panels, e.g. the class switcher of a results page
+const classIds = ['K1M', 'K1Ž', 'C1M', 'C1Ž', 'C2M', 'K1M-U18', 'K1Ž-U18', 'C1M-U18'];
+const classTabs: TabItem[] = classIds.map((id) => ({ id, label: id }));
+
+export const Nav: Story = {
   args: {
-    tabs: basicTabs,
-    variant: 'aesthetic',
+    tabs: classTabs,
+    variant: 'nav',
     size: 'md',
+    defaultActiveTab: 'K1Ž',
   },
   parameters: {
     docs: {
       description: {
-        story: 'Aesthetic variant with gradient underline for expressive styling.',
+        story: 'Navigation chips without panels. Only the tab list is rendered; the page below reacts to `onChange`.',
       },
     },
   },
+};
+
+export const NavSmall: Story = {
+  args: { ...Nav.args, size: 'sm' },
+};
+
+/** 8 classes in a 390 px wide phone viewport: edge mask, arrow, active tab scrolled into view. */
+export const NavCarousel390: Story = {
+  render: () => {
+    const [active, setActive] = useState('C1M-U18');
+    return (
+      <div style={{ width: 390, padding: 10, background: 'var(--csk-color-surface)' }}>
+        <Tabs
+          tabs={classTabs}
+          variant="nav"
+          size="sm"
+          overflow="carousel"
+          activeTab={active}
+          onChange={setActive}
+        />
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '`overflow="carousel"`: the list scrolls horizontally with an edge mask on the side that has more content, arrows, and the active tab is scrolled into view (instantly with `prefers-reduced-motion`).',
+      },
+    },
+  },
+};
+
+export const NavWrap: Story = {
+  render: () => (
+    <div style={{ width: 390 }}>
+      <Tabs tabs={classTabs} variant="nav" size="sm" overflow="wrap" defaultActiveTab="K1M" />
+    </div>
+  ),
 };
 
 export const FullWidth: Story = {
@@ -328,8 +377,8 @@ export const AllVariants: Story = {
         <Tabs tabs={basicTabs} variant="pills" />
       </div>
       <div>
-        <h3 style={{ marginBottom: '16px' }}>Aesthetic Variant</h3>
-        <Tabs tabs={basicTabs} variant="aesthetic" />
+        <h3 style={{ marginBottom: '16px' }}>Nav Variant</h3>
+        <Tabs tabs={classTabs.slice(0, 4)} variant="nav" />
       </div>
     </div>
   ),
@@ -352,10 +401,6 @@ export const AllSizes: Story = {
       <div>
         <h3 style={{ marginBottom: '16px' }}>Medium (default)</h3>
         <Tabs tabs={basicTabs} size="md" />
-      </div>
-      <div>
-        <h3 style={{ marginBottom: '16px' }}>Large</h3>
-        <Tabs tabs={basicTabs} size="lg" />
       </div>
     </div>
   ),

@@ -2,7 +2,7 @@
  * Button Component Styles - CSK RVP Design System
  *
  * Supports variants: primary, secondary, ghost, danger
- * Supports sizes: sm, md, lg
+ * Supports sizes: md (40 px), sm (32 px); min touch width 44 px
  */
 
 /* ==========================================================================
@@ -19,15 +19,16 @@
 
   /* Typography */
   font-family: var(--csk-font-sans);
-  font-weight: var(--csk-font-weight-medium);
+  font-weight: var(--csk-font-weight-semibold);
   line-height: var(--csk-line-height-snug);
   text-decoration: none;
   white-space: nowrap;
 
   /* Default size (md) */
-  padding: var(--csk-space-2) var(--csk-space-4);
+  padding: 0 var(--csk-space-4);
   font-size: var(--csk-text-md);
-  min-height: var(--csk-tap);
+  height: 40px;
+  min-width: var(--csk-tap);
 
   /* Shape */
   border: 1px solid transparent;
@@ -36,9 +37,7 @@
   /* Interaction */
   cursor: pointer;
   user-select: none;
-  transition: var(--csk-transition-fast),
-              box-shadow 0.2s ease-out,
-              transform 0.15s ease-out;
+  transition: var(--csk-transition-fast);
 
   /* Focus visible */
   outline: none;
@@ -53,8 +52,6 @@
 .csk-button[aria-disabled='true'] {
   cursor: not-allowed;
   opacity: 0.5;
-  transform: none !important;
-  box-shadow: none !important;
 }
 
 /* ==========================================================================
@@ -66,21 +63,16 @@
   background-color: var(--csk-color-action);
   border-color: var(--csk-color-action);
   color: var(--csk-color-text-on-fill);
-  box-shadow: none;
 }
 
 .csk-button--primary:hover:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--csk-color-action-hover);
   border-color: var(--csk-color-action-hover);
-  box-shadow: none;
-  transform: translateY(-1px);
 }
 
 .csk-button--primary:active:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--csk-color-brand);
   border-color: var(--csk-color-brand);
-  box-shadow: none;
-  transform: translateY(0);
 }
 
 /* Secondary - secondary actions with border emphasis */
@@ -88,28 +80,24 @@
   background-color: var(--csk-color-surface);
   border-color: var(--csk-color-border);
   color: var(--csk-color-text);
-  box-shadow: none;
 }
 
 .csk-button--secondary:hover:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--csk-color-surface-2);
   border-color: var(--csk-color-action);
   color: var(--csk-color-action-hover);
-  box-shadow: none;
-  transform: translateY(-1px);
 }
 
 .csk-button--secondary:active:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--csk-color-surface-3);
   border-color: var(--csk-color-action);
-  transform: translateY(0);
 }
 
 /* Ghost - minimal visual weight */
 .csk-button--ghost {
   background-color: transparent;
   border-color: transparent;
-  color: var(--csk-color-text);
+  color: var(--csk-color-action);
 }
 
 .csk-button--ghost:hover:not(:disabled):not([aria-disabled='true']) {
@@ -121,26 +109,21 @@
   background-color: var(--csk-color-surface-3);
 }
 
-/* Danger - destructive actions with red shadow */
+/* Danger - destructive actions */
 .csk-button--danger {
   background-color: var(--csk-color-error);
   border-color: var(--csk-color-error);
   color: var(--csk-color-text-on-fill);
-  box-shadow: none;
 }
 
 .csk-button--danger:hover:not(:disabled):not([aria-disabled='true']) {
-  background-color: var(--csk-color-error);
-  border-color: var(--csk-color-error);
-  box-shadow: none;
-  transform: translateY(-1px);
+  background-color: var(--csk-color-error-text);
+  border-color: var(--csk-color-error-text);
 }
 
 .csk-button--danger:active:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--csk-color-error-text);
   border-color: var(--csk-color-error-text);
-  box-shadow: none;
-  transform: translateY(0);
 }
 
 .csk-button--danger:focus-visible {
@@ -153,23 +136,14 @@
 
 /* Small */
 .csk-button--sm {
-  padding: calc(var(--csk-space-1) * 1.5) var(--csk-space-3);
+  padding: 0 var(--csk-space-3);
   font-size: var(--csk-text-sm);
-  min-height: 32px;
-  border-radius: var(--csk-radius-sm);
+  height: 32px;
+  min-width: var(--csk-tap);
+  border-radius: var(--csk-radius-md);
 }
 
 /* Medium (default) - defined in base */
-
-/* Large - with display font for prominent CTAs */
-.csk-button--lg {
-  padding: var(--csk-space-3) var(--csk-space-6);
-  font-size: var(--csk-text-base);
-  min-height: 52px;
-  font-weight: var(--csk-font-weight-semibold);
-  font-family: var(--csk-font-display);
-  letter-spacing: var(--csk-letter-spacing-tight);
-}
 
 /* ==========================================================================
    MODIFIERS
@@ -237,50 +211,12 @@
   height: 1em;
 }
 
-/* Adjust icon size for large buttons */
-.csk-button--lg .csk-button__icon svg {
-  width: 1.5em;
-  height: 1.5em;
-}
-
 /* ==========================================================================
    LABEL
    ========================================================================== */
 
 .csk-button__label {
   display: inline-block;
-}
-
-/* ==========================================================================
-   ACCENT - ENERGY
-   Adds coral-orange glow for prominent CTAs
-   ========================================================================== */
-
-/* Energy accent on primary button */
-.csk-button--primary.csk-button--accent-energy:hover:not(:disabled):not([aria-disabled='true']) {
-  box-shadow: none;
-}
-
-.csk-button--primary.csk-button--accent-energy:active:not(:disabled):not([aria-disabled='true']) {
-  box-shadow: none;
-}
-
-/* Energy accent on secondary button */
-.csk-button--secondary.csk-button--accent-energy:hover:not(:disabled):not([aria-disabled='true']) {
-  border-color: var(--csk-color-action);
-  color: var(--csk-color-action);
-  box-shadow: none;
-}
-
-/* Energy accent on ghost button */
-.csk-button--ghost.csk-button--accent-energy:hover:not(:disabled):not([aria-disabled='true']) {
-  background-color: var(--csk-color-highlight-bg);
-  color: var(--csk-color-action);
-}
-
-/* Energy focus ring override */
-.csk-button--accent-energy:focus-visible {
-  outline-color: var(--csk-color-action);
 }
 
 /* ==========================================================================
@@ -292,8 +228,4 @@
     transition: none;
   }
 
-  .csk-button:hover:not(:disabled):not([aria-disabled='true']),
-  .csk-button:active:not(:disabled):not([aria-disabled='true']) {
-    transform: none;
-  }
 }

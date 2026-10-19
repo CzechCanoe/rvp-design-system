@@ -165,7 +165,7 @@ function getStatusBadge(status: EventStatus) {
     case 'upcoming':
       return <Badge variant="info">Nadcházející</Badge>;
     case 'registration':
-      return <Badge variant="warning" glow>Registrace otevřena</Badge>;
+      return <Badge variant="warning">Registrace otevřena</Badge>;
     case 'live':
       return <LiveIndicator variant="live" size="md" label="LIVE" styleVariant="badge" energyGlow />;
     case 'finished':
@@ -542,7 +542,7 @@ const EventDetailPage = ({
             <div className={`event-detail-hero-cta ${isEmbed ? 'event-detail-hero-cta--compact' : ''}`}>
               {status === 'registration' && (
                 <>
-                  <Button variant="primary" accent="energy" size={isEmbed ? 'md' : 'lg'}>
+                  <Button variant="primary" size="md">
                     Přihlásit se na závod
                   </Button>
                   <span className="event-detail-hero-deadline csk-text-energy">
@@ -552,7 +552,7 @@ const EventDetailPage = ({
                 </>
               )}
               {status === 'live' && (
-                <Button variant="primary" accent="energy" size={isEmbed ? 'md' : 'lg'}>
+                <Button variant="primary" size="md">
                   Sledovat LIVE výsledky
                 </Button>
               )}
@@ -639,7 +639,7 @@ const EventDetailPage = ({
 
               {/* Registration CTA */}
               {status === 'registration' && (
-                <Card variant="aesthetic" className="event-detail-sidebar__card event-detail-sidebar__card--cta">
+                <Card variant="surface" className="event-detail-sidebar__card event-detail-sidebar__card--cta">
                   <h3 className="event-detail-sidebar__title">Přihlášky</h3>
                   <p className="event-detail-sidebar__text">
                     Registrace je otevřena do {formatDate(eventData.dates.registrationDeadline)}

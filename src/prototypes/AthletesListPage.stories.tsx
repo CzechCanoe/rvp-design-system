@@ -315,7 +315,7 @@ const AthletesListPage = ({
 
           {/* Featured Athletes */}
           {showFeatured && featuredAthletes.length > 0 && (
-            <Card variant="aesthetic" className="athletes-list-featured csk-border-accent">
+            <Card variant="surface" className="athletes-list-featured csk-border-accent">
               <div className="athletes-list-featured__header">
                 <h2 className="athletes-list-featured__title csk-headline">
                   <Icon name="star" size="lg" />

@@ -1,9 +1,7 @@
 /**
  * SearchInput Component Styles - CSK RVP Design System
  *
- * Search input with filter chips for quick filtering.
- * Supports sizes: sm, md, lg
- * Uses Dynamic Sport aesthetic with energy accents.
+ * Search field. Supports sizes: md (40 px), sm (34 px).
  */
 
 /* ==========================================================================
@@ -51,12 +49,12 @@
   padding: calc(var(--csk-space-1) * 2.5) var(--csk-space-3);
   padding-left: calc(var(--csk-space-3) * 2 + 1.25em);
   padding-right: calc(var(--csk-space-3) * 2 + 1em);
-  min-height: var(--csk-tap);
+  min-height: 40px;
 
   /* Shape */
   background-color: var(--csk-color-surface);
-  border: 1.5px solid var(--csk-color-border);
-  border-radius: var(--csk-radius-lg);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-md);
 
   /* Subtle inner shadow for depth */
   box-shadow: none;
@@ -207,7 +205,6 @@
   font-size: var(--csk-text-sm);
   min-height: 34px;
   border-radius: var(--csk-radius-md);
-  border-width: 1px;
 }
 
 .csk-search-input--sm .csk-search-input__icon {
@@ -230,37 +227,6 @@
   height: 0.75em;
 }
 
-/* Large */
-.csk-search-input--lg .csk-search-input__input {
-  padding: var(--csk-space-3) var(--csk-space-4);
-  padding-left: calc(var(--csk-space-4) * 2 + 1.5em);
-  padding-right: calc(var(--csk-space-4) * 2 + 1.25em);
-  font-size: var(--csk-text-base);
-  min-height: 52px;
-  border-radius: var(--csk-radius-lg);
-  border-width: 2px;
-}
-
-.csk-search-input--lg .csk-search-input__icon {
-  left: var(--csk-space-4);
-}
-
-.csk-search-input--lg .csk-search-input__icon svg {
-  width: 1.5em;
-  height: 1.5em;
-}
-
-.csk-search-input--lg .csk-search-input__clear {
-  right: var(--csk-space-4);
-  width: 1.75em;
-  height: 1.75em;
-}
-
-.csk-search-input--lg .csk-search-input__clear svg {
-  width: 1.25em;
-  height: 1.25em;
-}
-
 /* ==========================================================================
    TOUCH DEVICES — iOS Safari zoom prevention
 
@@ -276,109 +242,6 @@
   .csk-search-input--sm .csk-search-input__input {
     font-size: 16px;
   }
-}
-
-/* ==========================================================================
-   CHIPS
-   ========================================================================== */
-
-.csk-search-input__chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: calc(var(--csk-space-1) * 1.5);
-}
-
-.csk-search-input__chip {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--csk-space-1);
-  padding: var(--csk-space-1) calc(var(--csk-space-1) * 2.5);
-  font-family: var(--csk-font-sans);
-  font-size: var(--csk-text-sm);
-  font-weight: var(--csk-font-weight-medium);
-  line-height: var(--csk-line-height-snug);
-  color: var(--csk-color-text-2);
-  background-color: var(--csk-color-surface-2);
-  border: 1px solid var(--csk-color-border);
-  border-radius: var(--csk-radius-pill);
-  cursor: pointer;
-  transition:
-    color var(--csk-transition-fast),
-    background-color var(--csk-transition-fast),
-    border-color var(--csk-transition-fast),
-    box-shadow var(--csk-transition-fast),
-    transform var(--csk-transition-fast);
-  user-select: none;
-}
-
-.csk-search-input__chip:hover:not(:disabled) {
-  color: var(--csk-color-text);
-  background-color: var(--csk-color-surface-3);
-  border-color: var(--csk-color-border);
-}
-
-.csk-search-input__chip:active:not(:disabled) {
-  transform: scale(0.97);
-}
-
-.csk-search-input__chip:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Active state */
-.csk-search-input__chip--active {
-  color: var(--csk-color-brand);
-  background-color: var(--csk-color-highlight-bg);
-  border-color: var(--csk-color-highlight-border);
-}
-
-.csk-search-input__chip--active:hover:not(:disabled) {
-  background-color: var(--csk-color-highlight-bg);
-  border-color: var(--csk-color-action);
-}
-
-/* Color variants */
-.csk-search-input__chip--primary.csk-search-input__chip--active {
-  color: var(--csk-color-brand);
-  background-color: var(--csk-color-highlight-bg);
-  border-color: var(--csk-color-highlight-border);
-}
-
-.csk-search-input__chip--energy.csk-search-input__chip--active {
-  color: var(--csk-color-action);
-  background-color: var(--csk-color-highlight-bg);
-  border-color: var(--csk-color-action);
-}
-
-.csk-search-input__chip--dv.csk-search-input__chip--active {
-  color: var(--csk-color-section-dv);
-  background-color: color-mix(in srgb, var(--csk-color-section-dv) 12%, var(--csk-color-surface));
-  border-color: var(--csk-color-section-dv);
-}
-
-.csk-search-input__chip--ry.csk-search-input__chip--active {
-  color: var(--csk-color-section-ry);
-  background-color: color-mix(in srgb, var(--csk-color-section-ry) 12%, var(--csk-color-surface));
-  border-color: var(--csk-color-section-ry);
-}
-
-.csk-search-input__chip--vt.csk-search-input__chip--active {
-  color: var(--csk-color-section-vt);
-  background-color: color-mix(in srgb, var(--csk-color-section-vt) 12%, var(--csk-color-surface));
-  border-color: var(--csk-color-section-vt);
-}
-
-/* Chip icon */
-.csk-search-input__chip-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.csk-search-input__chip-icon svg {
-  width: 0.875em;
-  height: 0.875em;
 }
 
 /* ==========================================================================
@@ -429,20 +292,6 @@
   background-color: var(--csk-color-text-2);
 }
 
-[data-theme='dark'] .csk-search-input__chip {
-  background-color: var(--csk-color-surface-3);
-  border-color: var(--csk-color-border-2);
-}
-
-[data-theme='dark'] .csk-search-input__chip:hover:not(:disabled) {
-  background-color: var(--csk-color-text-2);
-}
-
-[data-theme='dark'] .csk-search-input__chip--active {
-  background-color: color-mix(in srgb, var(--csk-color-action) 20%, transparent);
-  border-color: var(--csk-color-action);
-}
-
 /* ==========================================================================
    REDUCED MOTION
    ========================================================================== */
@@ -450,14 +299,12 @@
 @media (prefers-reduced-motion: reduce) {
   .csk-search-input__input,
   .csk-search-input__icon,
-  .csk-search-input__clear,
-  .csk-search-input__chip {
+  .csk-search-input__clear {
     transition: none;
   }
 
   .csk-search-input__clear:hover,
-  .csk-search-input__clear:active,
-  .csk-search-input__chip:active {
+  .csk-search-input__clear:active {
     transform: none;
   }
 

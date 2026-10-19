@@ -493,7 +493,7 @@ const CalendarPage = ({
                           <Icon name="location" size="sm" />
                           <span>{String(race.data?.location || '')}</span>
                         </div>
-                        <Button variant="primary" size="sm" accent={isAesthetic ? 'energy' : undefined} fullWidth>
+                        <Button variant="primary" size="sm" fullWidth>
                           Sledovat živě
                         </Button>
                       </div>
@@ -568,7 +568,7 @@ const CalendarPage = ({
 
               {/* Event detail (when selected) */}
               {selectedEvent && (
-                <Card variant={isAesthetic ? 'aesthetic' : 'elevated'} padding="md" className={`prototype-calendar-page__detail-card ${isAesthetic ? 'csk-border-accent' : ''}`}>
+                <Card variant="surface" padding="md" className={`prototype-calendar-page__detail-card ${isAesthetic ? 'csk-border-accent' : ''}`}>
                   <div className="prototype-calendar-page__detail-header">
                     <h3 className={`prototype-calendar-page__detail-title csk-text-lg csk-font-semibold ${isAesthetic ? 'csk-headline' : ''}`}>{selectedEvent.title}</h3>
                     {selectedEvent.section && (
