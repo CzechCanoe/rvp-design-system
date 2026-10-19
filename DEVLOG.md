@@ -6868,3 +6868,14 @@ Snapshoty generuje CI (label `update-snapshots`). Zbylé `[data-theme="dark"]` b
 
 ### Poznámky
 Label eventy dřív spouštěly přeskočené CI běhy, které přes concurrency rušily skutečný `synchronize` běh a v `gh pr checks` maskovaly zelené joby.
+## 2026-10-19 - v2 T7: SegmentedControl, StarButton, FavoritesToggle, TableToolbar
+
+### Dokončeno
+- [x] SegmentedControl (radiogroup, šipky/Home/End, `size` sm|md, nowrap popisky, zalomení celého segmentu)
+- [x] StarButton (22 px hvězda, 44x44), FavoritesToggle ("★ 2", 34 px pilulka, 44 px dotyk), TableToolbar + TableToolbarButton
+- [x] Stories, export z indexu, `tests/controls.spec.ts` (bounding box 44 px, 360 px, klávesnice), axe + `tests/config.ts`
+
+### Poznámky
+- Viditelný segment/pilulka je menší než interaktivní box (button 44 px, vnitřní span kreslí vzhled), aby boundingBox() měřil skutečných 44 px.
+- Prop pro změnu stavu je `onPressedChange` (ne `onToggle`, koliduje s DOM `ToggleEvent`).
+- SearchInput (34 px) a Switch ve story TableToolbar do měření 44 px nepatří (T4).

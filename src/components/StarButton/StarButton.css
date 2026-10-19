@@ -1,0 +1,36 @@
+/* StarButton – 22 px star, 44 x 44 px touch target */
+
+.csk-star-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: var(--csk-radius-md);
+  color: var(--csk-color-text-3);
+  cursor: pointer;
+}
+
+.csk-star-button:hover:not(:disabled) {
+  color: var(--csk-color-text);
+}
+
+/* "Favourite" uses the gold of the podium scale */
+.csk-star-button--on,
+.csk-star-button--on:hover:not(:disabled) {
+  color: var(--csk-color-podium-1);
+}
+
+.csk-star-button:focus-visible {
+  outline: 2px solid var(--csk-color-focus);
+  outline-offset: -2px;
+}
+
+.csk-star-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

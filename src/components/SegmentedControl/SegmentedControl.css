@@ -1,0 +1,65 @@
+/* SegmentedControl – radiogroup of segments. The item box is the 44 px touch
+   target; the visible segment (label) is smaller and centred inside it. */
+
+.csk-segmented {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 100%;
+}
+
+.csk-segmented__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0 1px;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.csk-segmented__label {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 var(--csk-space-3);
+  background: var(--csk-color-surface-3);
+  border-radius: var(--csk-radius-md);
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text-2);
+  white-space: nowrap;
+}
+
+.csk-segmented--sm .csk-segmented__label {
+  height: 28px;
+  padding: 0 var(--csk-space-2);
+  font-size: var(--csk-text-sm);
+}
+
+.csk-segmented__item:hover:not(:disabled):not(.csk-segmented__item--on) .csk-segmented__label {
+  color: var(--csk-color-text);
+}
+
+.csk-segmented__item--on .csk-segmented__label {
+  background: var(--csk-color-brand);
+  color: var(--csk-color-text-on-fill);
+  font-weight: var(--csk-font-weight-semibold);
+}
+
+.csk-segmented__item:focus-visible {
+  outline: 2px solid var(--csk-color-focus);
+  outline-offset: -2px;
+  border-radius: var(--csk-radius-md);
+}
+
+.csk-segmented__item:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

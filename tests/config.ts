@@ -70,6 +70,12 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'LiveIndicator', storyId: 'components-liveindicator--default', tier: 'specific', cssFeatures: ['animations', 'keyframes'], maxDiffPixels: 100 },
   { name: 'EmptyState', storyId: 'components-emptystate--default', tier: 'specific' },
   { name: 'Skeleton', storyId: 'components-skeleton--default', tier: 'specific', cssFeatures: ['animations', 'shimmer'] },
+  { name: 'SegmentedControl', storyId: 'components-segmentedcontrol--default', tier: 'specific' },
+  { name: 'SegmentedControl-Wrapping360', storyId: 'components-segmentedcontrol--wrapping-360', tier: 'specific' },
+  { name: 'StarButton', storyId: 'components-starbutton--default', tier: 'specific' },
+  { name: 'FavoritesToggle', storyId: 'components-favoritestoggle--default', tier: 'specific' },
+  { name: 'TableToolbar', storyId: 'components-tabletoolbar--default', tier: 'specific' },
+  { name: 'TableToolbar-Mobile', storyId: 'components-tabletoolbar--mobile', tier: 'specific' },
 ];
 
 /** All components for visual regression testing */

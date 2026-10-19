@@ -307,3 +307,23 @@ export type {
   DateBadgeSection,
   DateBadgeSize,
 } from './DateBadge';
+
+// SegmentedControl
+export { SegmentedControl } from './SegmentedControl';
+export type {
+  SegmentedControlProps,
+  SegmentedControlItem,
+  SegmentedControlSize,
+} from './SegmentedControl';
+
+// StarButton
+export { StarButton } from './StarButton';
+export type { StarButtonProps } from './StarButton';
+
+// FavoritesToggle
+export { FavoritesToggle } from './FavoritesToggle';
+export type { FavoritesToggleProps } from './FavoritesToggle';
+
+// TableToolbar
+export { TableToolbar, TableToolbarButton } from './TableToolbar';
+export type { TableToolbarProps, TableToolbarButtonProps } from './TableToolbar';

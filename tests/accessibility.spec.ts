@@ -47,6 +47,11 @@ const specificComponents = [
   { name: 'LiveIndicator', storyId: 'components-liveindicator--default' },
   { name: 'StatCard', storyId: 'components-statcard--default' },
   { name: 'AthleteCard', storyId: 'components-athletecard--default' },
+  { name: 'SegmentedControl', storyId: 'components-segmentedcontrol--default' },
+  { name: 'SegmentedControl-Wrapping360', storyId: 'components-segmentedcontrol--wrapping-360' },
+  { name: 'StarButton', storyId: 'components-starbutton--default' },
+  { name: 'FavoritesToggle', storyId: 'components-favoritestoggle--default' },
+  { name: 'TableToolbar', storyId: 'components-tabletoolbar--default' },
 ];
 
 // Prototype pages to test
