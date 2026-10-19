@@ -7031,3 +7031,6 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 ### Poznámky
 - `time` pro `finished-pending` je `finish: { time, penalty }`; `time` (RunningSpec) jen pro `running`.
 - Stale panel předává jezdcům `staleAfterSeconds=0`, takže čas mrzne hned a ukáže stáří přes `RunningTime`.
+
+### Snapshoty (T10)
+- CI commit `test: update snapshots (CI)` přidal 18 snapshotů OnCoursePanel (9 stories × 390 + 1280, chromium).
