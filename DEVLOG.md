@@ -6889,6 +6889,24 @@ Snapshoty generuje CI (label `update-snapshots`). Zbylé `[data-theme="dark"]` b
 
 ### Poznámky
 Label eventy dřív spouštěly přeskočené CI běhy, které přes concurrency rušily skutečný `synchronize` běh a v `gh pr checks` maskovaly zelené joby.
+## 2026-10-19 - v2 T8: Header, Subbar, Breadcrumbs, PageTitle, BottomBar, EventHeader, PageLayout
+
+### Dokončeno
+- [x] `Header variant="site" | "satellite" | "app"` (navy 48 px / světlý satelit / 44 px úřad), odstraněno `size`, `bordered`, `blurOnScroll`, `scrollThreshold`, varianty `default`/`elevated`/`gradient`
+- [x] Nové: `Subbar`, `PageTitle`, `BottomBar` (container query 768 px), `EventHeader` (`condensed`)
+- [x] `Breadcrumbs` přesunut z `Navigation/` do vlastní komponenty (`id` nepovinné)
+- [x] `PageLayout`: varianty `tribuna | urad | embed`, sloty `banner`, `bottomBar`, `stickyHeader`
+- [x] Stories `Layout/Tribuna`, `Layout/LiveMobile`, `Layout/Urad`; `tests/layout.spec.ts` (1280 + 390, axe); QUARANTINE T8 smazána
+
+### Problémy a řešení
+1. **Problém:** port 6006 obsazený http-serverem jiného agenta, `reuseExistingServer` by testoval cizí build.
+   **Řešení:** lokálně dev Storybook na jiném portu + nekomitovaný `playwright.t8.config.ts`.
+2. **Problém:** `--csk-color-text-3` na `--csk-color-surface-2` má 4.46:1 (axe).
+   **Řešení:** placeholdery ve stories používají `text-2`; token se nemění.
+
+### Poznámky
+- Test „Backdrop-filter renders or has fallback" (story Header sticky-with-blur) smazán, blur v2 neexistuje; snapshoty Header-Glass smazány.
+- Placeholdery ve stories: Tabs carousel (T4), StatusBadge LIVE (T5), SegmentedControl (T7), Badge/Button (T4), DataAge (T6).
 ## 2026-10-19 - v2 T7: SegmentedControl, StarButton, FavoritesToggle, TableToolbar
 
 ### Dokončeno
@@ -6945,3 +6963,9 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 ### Poznámky
 - Zmrzlá hodnota zůstává na `elapsedSeconds + 3 s` (bez skoku zpět), `now()` prohlížečových hodin je `Date.now()` (počítá i spánek telefonu, potřebné pro `mode="absolute"`).
 - `OnCourseRider` / `ResultsTable` mají skládat tyto komponenty; konec jízdy (status ≠ on-course) řeší aplikace přepnutím na `TimeValue`.
+
+### T8 doplněk (2026-10-19)
+- Merge `origin/main` (T6), placeholder DataAge ve stories nahrazen skutečným `DataAge` (fixní testovací `Clock`). Zbývá vyměnit placeholdery T4/T5/T7.
+
+### T8 závěr (2026-10-19)
+- Merge `origin/main` (T4, T5, T7); stories používají reálné Tabs nav/carousel, Badge, Button, StatusBadge, SegmentedControl, DataAge.

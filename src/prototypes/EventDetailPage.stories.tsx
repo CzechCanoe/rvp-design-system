@@ -441,8 +441,6 @@ const EventDetailPage = ({
       return (
         <Header
           variant="satellite"
-          size="sm"
-          bordered
           brand={<CSKLogo />}
           appName="Detail závodu"
           homeLink="https://kanoe.cz"
@@ -459,9 +457,7 @@ const EventDetailPage = ({
     // Default: standalone with full navigation
     return (
       <Header
-        variant="default"
-        size="md"
-        bordered
+        variant="site"
         brand={
           <a href="#" className="event-detail-page__logo">
             <span className="event-detail-page__logo-text">CSK</span>

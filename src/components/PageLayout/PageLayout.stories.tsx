@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { PageLayout } from './PageLayout';
 import { Header } from '../Header';
-import { Card } from '../Card';
+import { Subbar } from '../Subbar';
+import { BrandMark, siteNav, subbarItems, ContentPlaceholder } from './layoutStoryParts';
 
 const meta: Meta<typeof PageLayout> = {
   title: 'Layout/PageLayout',
@@ -13,8 +14,8 @@ const meta: Meta<typeof PageLayout> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['standalone', 'satellite', 'embed'],
-      description: 'Layout variant determines header/footer visibility',
+      options: ['tribuna', 'urad', 'embed'],
+      description: 'Surface and slots: tribuna (white), urad (grey), embed (content only)',
     },
     maxWidth: {
       control: 'select',
@@ -23,7 +24,11 @@ const meta: Meta<typeof PageLayout> = {
     },
     padded: {
       control: 'boolean',
-      description: 'Add padding to the main content area',
+      description: 'Add side padding to the main content area',
+    },
+    stickyHeader: {
+      control: 'boolean',
+      description: 'Keep the header area at the top while scrolling',
     },
   },
 };
@@ -34,11 +39,10 @@ type Story = StoryObj<typeof PageLayout>;
 const SimpleFooter = () => (
   <div
     style={{
-      padding: '24px',
+      padding: '20px 24px',
       textAlign: 'center',
-      background: 'var(--csk-color-surface-3)',
       borderTop: '1px solid var(--csk-color-border)',
-      fontSize: '14px',
+      fontSize: 13,
       color: 'var(--csk-color-text-3)',
     }}
   >
@@ -46,143 +50,75 @@ const SimpleFooter = () => (
   </div>
 );
 
-const PageContent = () => (
-  <div style={{ padding: '24px 0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-    <Card variant="surface">
-      <h2 style={{ margin: '0 0 8px' }}>Welcome to CSK</h2>
-      <p style={{ margin: 0 }}>This is an example page layout demonstrating the component.</p>
-    </Card>
-    <Card variant="outlined">
-      <h3 style={{ margin: '0 0 8px' }}>Section Title</h3>
-      <p style={{ margin: 0 }}>Content goes here. The layout provides consistent structure.</p>
-    </Card>
+const header = (
+  <>
+    <Header variant="site" brand={<BrandMark />} navigation={siteNav} />
+    <Subbar items={subbarItems} />
+  </>
+);
+
+const content = (
+  <div style={{ padding: '24px 0', display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <ContentPlaceholder label="Obsah stránky" height={120} />
+    <ContentPlaceholder label="Další sekce" height={120} />
   </div>
 );
 
-/* ==========================================================================
-   DEFAULT - STANDALONE
-   ========================================================================== */
-
 export const Default: Story = {
   args: {
-    variant: 'standalone',
+    variant: 'tribuna',
     maxWidth: 'xl',
     padded: true,
-    header: <Header variant="elevated" />,
+    header,
     footer: <SimpleFooter />,
-    children: <PageContent />,
+    children: content,
   },
 };
 
-/* ==========================================================================
-   VARIANTS
-   ========================================================================== */
-
-export const Standalone: Story = {
+export const Urad: Story = {
   args: {
-    variant: 'standalone',
-    header: <Header variant="elevated" />,
+    variant: 'urad',
+    header: <Header variant="app" brand={<BrandMark name="ČSK · Přihlášky" />} />,
     footer: <SimpleFooter />,
-    children: <PageContent />,
+    children: content,
   },
   parameters: {
-    docs: {
-      description: {
-        story: 'Full standalone layout with header and footer.',
-      },
-    },
-  },
-};
-
-export const Satellite: Story = {
-  args: {
-    variant: 'satellite',
-    header: (
-      <div
-        style={{
-          padding: '12px 24px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '12px',
-          background: 'var(--csk-color-surface)',
-          borderBottom: '1px solid var(--csk-color-border)',
-        }}
-      >
-        <div
-          style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '6px',
-            background: 'var(--csk-color-action)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontWeight: 700,
-            fontSize: '14px',
-          }}
-        >
-          CSK
-        </div>
-        <span style={{ fontWeight: 600 }}>Calendar</span>
-      </div>
-    ),
-    footer: <SimpleFooter />,
-    children: <PageContent />,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Satellite layout with minimal header for standalone apps.',
-      },
-    },
+    docs: { description: { story: 'Grey working surface for registration and the register.' } },
   },
 };
 
 export const Embed: Story = {
   args: {
     variant: 'embed',
-    header: <Header variant="elevated" />,
+    header,
     footer: <SimpleFooter />,
-    children: <PageContent />,
+    children: content,
   },
   parameters: {
     docs: {
       description: {
-        story: 'Embed layout hides header and footer for embedding in external sites.',
+        story: 'Embed renders content only. Header, banner, bottom bar and footer are not rendered.',
       },
     },
   },
 };
 
-/* ==========================================================================
-   MAX WIDTH VARIANTS
-   ========================================================================== */
-
 export const MaxWidthVariants: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      {(['sm', 'md', 'lg', 'xl', 'full'] as const).map((size) => (
-        <PageLayout key={size} variant="embed" maxWidth={size} padded>
-          <Card variant="outlined">
-            <strong>maxWidth="{size}"</strong>
-            <p style={{ margin: '8px 0 0', fontSize: '14px' }}>
-              {size === 'sm' && '640px'}
-              {size === 'md' && '768px'}
-              {size === 'lg' && '1024px'}
-              {size === 'xl' && '1280px'}
-              {size === 'full' && 'No max-width'}
-            </p>
-          </Card>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      {(['sm', 'md', 'lg', 'xl'] as const).map((size) => (
+        <PageLayout key={size} maxWidth={size}>
+          <div
+            style={{
+              padding: 16,
+              background: 'var(--csk-color-surface-2)',
+              border: '1px dashed var(--csk-color-border)',
+            }}
+          >
+            maxWidth="{size}"
+          </div>
         </PageLayout>
       ))}
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Different max-width options for content container.',
-      },
-    },
-  },
 };

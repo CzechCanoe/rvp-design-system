@@ -495,8 +495,6 @@ const DashboardPage = ({
       return (
         <Header
           variant="satellite"
-          size="sm"
-          bordered
           brand={<CSKLogo />}
           appName="Dashboard"
           homeLink="https://kanoe.cz"

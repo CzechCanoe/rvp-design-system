@@ -264,8 +264,6 @@ function AthletePublicProfile({
       return (
         <Header
           variant="satellite"
-          size="sm"
-          bordered
           brand={<CSKLogo />}
           appName="Profil závodníka"
           homeLink="https://kanoe.cz"
@@ -285,7 +283,6 @@ function AthletePublicProfile({
         brand={<span className="athlete-public-profile__logo">CSK</span>}
         navigation={<MainNav items={navItems} />}
         userMenu={<Button variant="ghost" size="sm">Přihlásit se</Button>}
-        bordered
       />
     );
   };

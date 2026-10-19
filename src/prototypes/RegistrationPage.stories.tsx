@@ -351,8 +351,6 @@ const RegistrationPageInner = ({
       return (
         <Header
           variant="satellite"
-          size="sm"
-          bordered
           brand={<CSKLogo />}
           appName="Přihlášky"
           homeLink="https://kanoe.cz"
@@ -371,9 +369,7 @@ const RegistrationPageInner = ({
     // Default: standalone with full navigation
     return (
       <Header
-        variant="default"
-        size="md"
-        bordered
+        variant="site"
         brand={
           <a href="#" className="registration-page__logo">
             <span className="registration-page__logo-text">CSK</span>

@@ -1025,8 +1025,6 @@ const LivePage = ({
       return (
         <Header
           variant="satellite"
-          size="sm"
-          bordered
           brand={<CSKLogo />}
           appName="Live výsledky"
           homeLink="https://kanoe.cz"
@@ -1043,9 +1041,7 @@ const LivePage = ({
     // Default: standalone with full navigation
     return (
       <Header
-        variant="default"
-        size="md"
-        bordered
+        variant="site"
         brand={
           <a href="#" className="prototype-live-page__logo">
             <span className="prototype-live-page__logo-text">CSK</span>

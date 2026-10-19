@@ -147,8 +147,6 @@ function ClubPublicProfile({
       return (
         <Header
           variant="satellite"
-          size="sm"
-          bordered
           brand={<CSKLogo />}
           appName="Profil klubu"
           homeLink="https://kanoe.cz"

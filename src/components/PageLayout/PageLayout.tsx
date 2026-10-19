@@ -1,38 +1,48 @@
 import { type ReactNode, type HTMLAttributes } from 'react';
 import './PageLayout.css';
 
-export type PageLayoutVariant = 'standalone' | 'satellite' | 'embed';
+/**
+ * - `tribuna`: white page for the public parts (calendar, results, live)
+ * - `urad`: grey working surface for registration and the register
+ * - `embed`: content only, no header, banner, bottom bar or footer (kanoe.cz)
+ */
+export type PageLayoutVariant = 'tribuna' | 'urad' | 'embed';
 
 export interface PageLayoutProps extends HTMLAttributes<HTMLDivElement> {
-  /** Layout variant determines header/footer visibility */
+  /** Layout variant determines the surface and which slots render */
   variant?: PageLayoutVariant;
-  /** Optional header content (hidden in embed mode) */
+  /** Header area, e.g. `<Header />` followed by `<Subbar />` (hidden in embed) */
   header?: ReactNode;
-  /** Optional footer content (hidden in embed mode) */
+  /** Full-width band between header and content, e.g. `<PageTitle variant="bar" />` (hidden in embed) */
+  banner?: ReactNode;
+  /** Phone navigation after the content, e.g. `<BottomBar />` (hidden in embed) */
+  bottomBar?: ReactNode;
+  /** Footer content (hidden in embed) */
   footer?: ReactNode;
   /** Main content */
   children: ReactNode;
   /** Maximum width of the content container */
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
-  /** Add padding to the main content area */
+  /** Add side padding to the main content area (16 px phone, 24 px desktop) */
   padded?: boolean;
+  /** Keep the header area at the top while scrolling */
+  stickyHeader?: boolean;
 }
 
 /**
- * PageLayout component provides consistent page structure across display modes.
- *
- * Variants:
- * - standalone: Full header with navigation, search, user menu + footer
- * - satellite: Minimal header with logo + footer, for standalone apps
- * - embed: No header/footer, content only for embedding in kanoe.cz
+ * PageLayout provides the page structure: header area, optional banner,
+ * centered content and footer.
  */
 export function PageLayout({
-  variant = 'standalone',
+  variant = 'tribuna',
   header,
+  banner,
+  bottomBar,
   footer,
   children,
   maxWidth = 'xl',
   padded = true,
+  stickyHeader = true,
   className,
   ...props
 }: PageLayoutProps) {
@@ -51,16 +61,22 @@ export function PageLayout({
   return (
     <div className={classes} {...props}>
       {!isEmbed && header && (
-        <header className="csk-page-layout__header">{header}</header>
+        <div
+          className={`csk-page-layout__header${stickyHeader ? ' csk-page-layout__header--sticky' : ''}`}
+        >
+          {header}
+        </div>
       )}
+
+      {!isEmbed && banner && <div className="csk-page-layout__banner">{banner}</div>}
 
       <main className="csk-page-layout__main">
         <div className="csk-page-layout__container">{children}</div>
       </main>
 
-      {!isEmbed && footer && (
-        <footer className="csk-page-layout__footer">{footer}</footer>
-      )}
+      {!isEmbed && bottomBar}
+
+      {!isEmbed && footer && <footer className="csk-page-layout__footer">{footer}</footer>}
     </div>
   );
 }

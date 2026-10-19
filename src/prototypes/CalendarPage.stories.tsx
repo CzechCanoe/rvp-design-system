@@ -280,8 +280,6 @@ const CalendarPage = ({
       return (
         <Header
           variant="satellite"
-          size="sm"
-          bordered
           brand={<CSKLogo />}
           appName="Kalendář závodů"
           homeLink="https://kanoe.cz"
@@ -298,9 +296,7 @@ const CalendarPage = ({
     // Default: standalone with full navigation
     return (
       <Header
-        variant="default"
-        size="md"
-        bordered
+        variant="site"
         brand={
           <a href="#" className="prototype-calendar-page__logo">
             <span className="prototype-calendar-page__logo-text">CSK</span>

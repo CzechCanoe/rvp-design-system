@@ -301,8 +301,6 @@ const ClubsListPage = ({
       return (
         <Header
           variant="satellite"
-          size="sm"
-          bordered
           brand={<CSKLogo />}
           appName="Registr klubů"
           homeLink="https://kanoe.cz"

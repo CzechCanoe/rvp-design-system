@@ -77,10 +77,8 @@ export type {
 } from './Toast';
 
 // Navigation
-export { Breadcrumbs, BreadcrumbChevronIcon, MainNav } from './Navigation';
+export { MainNav } from './Navigation';
 export type {
-  BreadcrumbsProps,
-  BreadcrumbItem,
   MainNavProps,
   MainNavVariant,
   MainNavSize,
@@ -105,7 +103,27 @@ export type {
 
 // Header
 export { Header } from './Header';
-export type { HeaderProps, HeaderSize, HeaderVariant } from './Header';
+export type { HeaderProps, HeaderVariant, HeaderMaxWidth } from './Header';
+
+// Subbar
+export { Subbar } from './Subbar';
+export type { SubbarProps, SubbarItem } from './Subbar';
+
+// Breadcrumbs
+export { Breadcrumbs } from './Breadcrumbs';
+export type { BreadcrumbsProps, BreadcrumbItem } from './Breadcrumbs';
+
+// PageTitle
+export { PageTitle } from './PageTitle';
+export type { PageTitleProps, PageTitleSize, PageTitleVariant } from './PageTitle';
+
+// BottomBar
+export { BottomBar } from './BottomBar';
+export type { BottomBarProps, BottomBarItem } from './BottomBar';
+
+// EventHeader
+export { EventHeader } from './EventHeader';
+export type { EventHeaderProps } from './EventHeader';
 
 // Avatar
 export { Avatar, AvatarGroup } from './Avatar';

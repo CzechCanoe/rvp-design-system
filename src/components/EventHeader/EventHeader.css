@@ -1,0 +1,117 @@
+/* EventHeader: compact live header on the navy band */
+
+.csk-event-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 14px 12px;
+  background: var(--csk-color-brand);
+  color: var(--csk-color-text-on-fill);
+  font-family: var(--csk-font-sans);
+}
+
+.csk-event-header a {
+  color: inherit;
+}
+
+.csk-event-header__top {
+  display: flex;
+  align-items: center;
+  gap: var(--csk-space-2);
+  font-size: 12px;
+}
+
+.csk-event-header__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--csk-space-1);
+  min-height: 24px;
+  text-decoration: none;
+}
+
+.csk-event-header__back:hover {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.csk-event-header__back:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.csk-event-header__age {
+  margin-left: auto;
+}
+
+.csk-event-header__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.csk-event-header__logo {
+  flex: none;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: var(--csk-radius-md);
+}
+
+.csk-event-header__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.csk-event-header__title {
+  font-family: var(--csk-font-display);
+  font-weight: var(--csk-font-weight-bold);
+  font-size: 21px;
+  line-height: 1.05;
+}
+
+.csk-event-header__subtitle {
+  font-size: 12px;
+}
+
+.csk-event-header__status {
+  flex: none;
+  margin-left: auto;
+}
+
+/* One row for a scrolled page */
+.csk-event-header--condensed {
+  padding: 6px 14px;
+}
+
+.csk-event-header--condensed .csk-event-header__row {
+  gap: var(--csk-space-3);
+}
+
+.csk-event-header--condensed .csk-event-header__title {
+  font-size: var(--csk-text-lg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.csk-event-header--condensed .csk-event-header__back {
+  min-width: var(--csk-tap);
+  min-height: var(--csk-tap);
+  margin: -10px 0 -10px -14px;
+  padding-left: 14px;
+  font-size: var(--csk-text-xl);
+}
+
+.csk-event-header__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

@@ -2,7 +2,6 @@
  * Navigation Component Styles
  *
  * Includes:
- * - Breadcrumbs (with hover effects and visual polish)
  * - MainNav (horizontal and vertical with gradient/glass variants)
  *
  * Redesigned with:
@@ -11,110 +10,6 @@
  * - Gradient and glass variants
  * - Enhanced visual hierarchy
  */
-
-/* =============================================================================
-   BREADCRUMBS
-   ============================================================================= */
-
-.csk-breadcrumbs {
-  font-family: var(--csk-font-sans);
-  font-size: var(--csk-text-md);
-  color: var(--csk-color-text-2);
-}
-
-.csk-breadcrumbs__list {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--csk-space-1);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.csk-breadcrumbs__item {
-  display: flex;
-  align-items: center;
-  gap: var(--csk-space-1);
-}
-
-.csk-breadcrumbs__link {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--csk-space-1);
-  padding: var(--csk-space-1) calc(var(--csk-space-1) * 1.5);
-  color: var(--csk-color-text-2);
-  text-decoration: none;
-  border-radius: var(--csk-radius-sm);
-  transition:
-    color var(--csk-transition-fast),
-    background-color var(--csk-transition-fast),
-    transform var(--csk-transition-fast);
-}
-
-.csk-breadcrumbs__link:hover {
-  color: var(--csk-color-action);
-  background-color: var(--csk-color-highlight-bg);
-  transform: translateY(-1px);
-}
-
-.csk-breadcrumbs__link:active {
-  transform: translateY(0);
-}
-
-.csk-breadcrumbs__link:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--csk-color-surface), 0 0 0 4px var(--csk-color-focus);
-  border-radius: var(--csk-radius-sm);
-}
-
-.csk-breadcrumbs__current {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--csk-space-1);
-  padding: var(--csk-space-1) calc(var(--csk-space-1) * 1.5);
-  color: var(--csk-color-text);
-  font-weight: var(--csk-font-weight-semibold);
-  background: var(--csk-color-highlight-bg);
-  border-radius: var(--csk-radius-sm);
-}
-
-.csk-breadcrumbs__collapsed {
-  color: var(--csk-color-text-3);
-  padding: 0 var(--csk-space-1);
-  cursor: default;
-}
-
-.csk-breadcrumbs__separator {
-  color: var(--csk-color-text-3);
-  margin: 0 calc(var(--csk-space-1) / 2);
-  user-select: none;
-  opacity: 0.6;
-}
-
-.csk-breadcrumbs__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  transition: transform var(--csk-transition-fast);
-}
-
-.csk-breadcrumbs__link:hover .csk-breadcrumbs__icon {
-  transform: scale(1.1);
-}
-
-.csk-breadcrumbs__icon svg {
-  width: 16px;
-  height: 16px;
-}
-
-.csk-breadcrumbs__label {
-  display: inline-block;
-}
 
 /* =============================================================================
    MAIN NAVIGATION - BASE
@@ -702,14 +597,6 @@
   background-color: var(--csk-color-surface-3);
 }
 
-[data-theme="dark"] .csk-breadcrumbs__link:hover {
-  background-color: var(--csk-color-surface-3);
-}
-
-[data-theme="dark"] .csk-breadcrumbs__current {
-  background: var(--csk-color-highlight-bg);
-}
-
 @media (max-width: 768px) {
   [data-theme="dark"] .csk-mainnav--horizontal .csk-mainnav__menu {
     background-color: var(--csk-color-surface);
@@ -729,20 +616,16 @@
   .csk-mainnav__menu,
   .csk-mainnav__toggle,
   .csk-mainnav__toggle svg,
-  .csk-mainnav__icon,
-  .csk-breadcrumbs__link,
-  .csk-breadcrumbs__icon {
+  .csk-mainnav__icon {
     transition: none;
   }
 
   .csk-mainnav__link:hover,
-  .csk-mainnav__toggle:hover,
-  .csk-breadcrumbs__link:hover {
+  .csk-mainnav__toggle:hover {
     transform: none;
   }
 
-  .csk-mainnav__link:hover .csk-mainnav__icon,
-  .csk-breadcrumbs__link:hover .csk-breadcrumbs__icon {
+  .csk-mainnav__link:hover .csk-mainnav__icon {
     transform: none;
   }
 }

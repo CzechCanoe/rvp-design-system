@@ -1,9 +1,9 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
-import './Navigation.css';
+import './Breadcrumbs.css';
 
 export interface BreadcrumbItem {
-  /** Unique identifier for the breadcrumb item */
-  id: string;
+  /** Stable key (defaults to the position) */
+  id?: string;
   /** Label displayed for this breadcrumb */
   label: ReactNode;
   /** URL for the breadcrumb link (omit for current page) */
@@ -31,25 +31,8 @@ const DefaultSeparator = () => (
   </span>
 );
 
-const ChevronIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <polyline points="9 18 15 12 9 6" />
-  </svg>
-);
-
 /**
- * Breadcrumbs component for showing navigation hierarchy.
+ * Breadcrumbs: location in the site hierarchy (13 px, muted, "/" separators).
  *
  * Features:
  * - Automatic collapsing for long paths
@@ -63,7 +46,7 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
       items,
       separator,
       maxItems = 0,
-      collapsedLabel = '...',
+      collapsedLabel = '…',
       renderLink,
       className,
       ...props
@@ -98,7 +81,7 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
     const classes = ['csk-breadcrumbs', className].filter(Boolean).join(' ');
 
     return (
-      <nav ref={ref} className={classes} aria-label="Breadcrumb" {...props}>
+      <nav ref={ref} className={classes} aria-label="Drobečková navigace" {...props}>
         <ol className="csk-breadcrumbs__list">
           {displayItems.map((item, index) => {
             const isLast = index === displayItems.length - 1;
@@ -124,7 +107,7 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
             );
 
             return (
-              <li key={item.id} className="csk-breadcrumbs__item">
+              <li key={item.id ?? index} className="csk-breadcrumbs__item">
                 {item.href && !isLast ? (
                   linkRenderer(item, content)
                 ) : (
@@ -146,5 +129,3 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(
 );
 
 Breadcrumbs.displayName = 'Breadcrumbs';
-
-export { ChevronIcon as BreadcrumbChevronIcon };
