@@ -19,7 +19,8 @@ import { StatusBadge } from '../../components/StatusBadge';
 import { Subbar } from '../../components/Subbar';
 import { Tabs } from '../../components/Tabs';
 import { sunday } from '../Live/Live.fixtures';
-import { CLASSES, LiveResults, ResultsCard, STORY_NOW, ageAt, liveClock } from '../Live/LivePage';
+import { ResultsCard, LiveResults } from '../_shared/ResultsCard';
+import { STORY_NOW, ageAt, liveClock } from '../_shared/storyClock';
 import './Event.stories.css';
 
 /**
@@ -38,6 +39,7 @@ const days = [
   { value: 'sat', label: 'So 3. 10.' },
   { value: 'sun', label: 'Ne 4. 10.' },
 ];
+const CLASSES = ['Forerunners', 'C1 ženy', 'C1 muži', 'K1 ženy', 'K1 muži', 'C2 mix'].map((label) => ({ id: label, label }));
 const views = [
   { value: 'results', label: 'Výsledky' },
   { value: 'startlist', label: 'Startovka' },
@@ -60,6 +62,9 @@ function EventDetail() {
   return (
     <ClockProvider clock={liveClock}>
       <PageLayout
+        footer={
+          <>© 2026 Český svaz kanoistů · Výsledky jsou oficiální po schválení vrchním rozhodčím a počtářem.</>
+        }
         header={
           <>
             <Header variant="site" brand={<BrandMark />} navigation={siteNav} />

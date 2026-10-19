@@ -81,6 +81,8 @@
 
 .event-page__link {
   color: var(--csk-color-action);
+  font-size: var(--csk-text-md);
+  text-decoration: none;
 }
 
 .event-page__muted {

@@ -7,18 +7,9 @@ import { ProgramList } from '../../components/ProgramList';
 import { brRows, categoryRows, dnsRow } from '../../components/ResultsTable/ResultsTable.fixtures';
 import { StatusBadge } from '../../components/StatusBadge';
 import { sunday, startlistRows } from './Live.fixtures';
-import {
-  CLASSES,
-  CLASS_CODES,
-  LiveNav,
-  LivePage,
-  LiveResults,
-  LiveStartlist,
-  ResultsCard,
-  STORY_NOW,
-  ageAt,
-  liveClock,
-} from './LivePage';
+import { ResultsCard, LiveResults } from '../_shared/ResultsCard';
+import { STORY_NOW, ageAt, liveClock } from '../_shared/storyClock';
+import { CLASSES, CLASS_CODES, LiveNav, LivePage, LiveStartlist } from './LivePage';
 
 /**
  * Live pages (reference `docs/v2/reference/Live1–6.html`), composed only of design system components.

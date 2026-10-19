@@ -41,29 +41,6 @@
   gap: var(--csk-space-2);
 }
 
-.live-page__status {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--csk-space-2);
-  padding: var(--csk-space-2);
-  border-bottom: 1px solid var(--csk-color-border-2);
-}
-
-.live-page__foot {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--csk-space-3);
-  padding: var(--csk-space-2);
-}
-
-.live-page__foot-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--csk-space-3);
-  margin-left: auto;
-}
-
 .live-page__link {
   color: var(--csk-color-action);
 }
