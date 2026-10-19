@@ -10,19 +10,10 @@ export interface ComponentConfig {
   name: string;
   storyId: string;
   tier: ComponentTier;
-  /** CSS features to verify in cross-browser tests */
+  /** CSS features this component relies on (informational) */
   cssFeatures?: string[];
   /** Higher tolerance for animated components */
   maxDiffPixels?: number;
-}
-
-export interface PrototypeConfig {
-  name: string;
-  storyId: string;
-  /** Higher tolerance for pages with animations */
-  maxDiffPixels?: number;
-  /** Extended timeout for complex pages */
-  timeout?: number;
 }
 
 // =============================================================================
@@ -70,8 +61,6 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'Calendar', storyId: 'components-calendar--default', tier: 'specific', cssFeatures: ['grid', 'responsive'] },
   { name: 'Dropzone', storyId: 'components-dropzone--default', tier: 'specific' },
   { name: 'Timeline', storyId: 'components-timeline--default', tier: 'specific' },
-  { name: 'StatCard', storyId: 'components-statcard--default', tier: 'specific' },
-  { name: 'AthleteCard', storyId: 'components-athletecard--default', tier: 'specific' },
   { name: 'ResultsTable', storyId: 'components-resultstable--default', tier: 'specific' },
   { name: 'LiveIndicator', storyId: 'components-liveindicator--default', tier: 'specific', cssFeatures: ['animations', 'keyframes'], maxDiffPixels: 100 },
   { name: 'StatusBadge-AllStates', storyId: 'components-statusbadge--all-states', tier: 'specific' },
@@ -117,7 +106,7 @@ export const layoutStories: Array<{ name: string; storyId: string; a11y?: boolea
   { name: 'Layout-Tribuna', storyId: 'layout-tribuna--default' },
   { name: 'Layout-LiveMobile', storyId: 'layout-livemobile--default' },
   { name: 'Layout-LiveMobile-Condensed', storyId: 'layout-livemobile--condensed' },
-  // a11y off: the KanoeCzContext mock itself has axe violations (1.x, removed in T17)
+  // a11y off: the KanoeCzContext mock itself has axe violations (1.x mock, kept only as the embed host decorator)
   { name: 'Layout-Tribuna-Embed', storyId: 'layout-tribuna--embed', a11y: false },
   { name: 'Layout-Urad', storyId: 'layout-urad--default' },
 ];
@@ -163,90 +152,6 @@ export const viewportStories: Array<{ name: string; storyId: string }> = [
   { name: 'OnCoursePanel-RiderStates', storyId: 'components-oncoursepanel--rider-states' },
 ];
 
-/** Components with CSS features worth cross-browser testing */
-export const crossBrowserComponents = allComponents.filter(c => c.cssFeatures && c.cssFeatures.length > 0);
-
-// =============================================================================
-// PROTOTYPES - Complete coverage for Phase 22 CSS Consolidation
-// =============================================================================
-
-/**
- * Embed prototypes - for embedding into kanoe.cz
- *
- * Story ID format follows Storybook convention:
- * - 'Prototypes/Calendar Page' → 'prototypes-calendar-page--*'
- * - 'Prototypes/ProfilePage' → 'prototypes-profilepage--*' (no space = no hyphen)
- */
-export const embedPrototypes: PrototypeConfig[] = [
-  // Calendar Page
-  { name: 'CalendarPage-Embed', storyId: 'prototypes-calendar-page--embed' },
-  { name: 'CalendarPage-EmbedListView', storyId: 'prototypes-calendar-page--embed-list-view' },
-  // Results & Live
-  { name: 'ResultsPage-Embed', storyId: 'prototypes-results-page--embed' },
-  { name: 'LivePage-Embed', storyId: 'prototypes-live-page--embed', maxDiffPixels: 6000, timeout: 30000 },
-  // Lists
-  { name: 'AthletesListPage-Embed', storyId: 'prototypes-athletes-list-page--embed' },
-  { name: 'ClubsListPage-Embed', storyId: 'prototypes-clubs-list-page--embed' },
-  { name: 'RankingsPage-Embed', storyId: 'prototypes-rankings-page--embed' },
-  // Profiles (note: no space in title = no hyphen in storyId)
-  { name: 'AthletePublicProfile-Embed', storyId: 'prototypes-athletepublicprofile--embed' },
-  { name: 'ClubPublicProfile-Embed', storyId: 'prototypes-clubpublicprofile--embed' },
-  // Event Detail
-  { name: 'EventDetailPage-Embed', storyId: 'prototypes-event-detail-page--embed' },
-  // Registration (countdown timer causes pixel variance)
-  { name: 'RegistrationPage-Embed', storyId: 'prototypes-registration-page--embed', maxDiffPixels: 1500 },
-  // Dashboard & Profile (ProfilePage has no space in title)
-  { name: 'DashboardPage-Embed', storyId: 'prototypes-dashboard-page--embed', timeout: 60000 },
-  { name: 'ProfilePage-Embed', storyId: 'prototypes-profilepage--embed' },
-];
-
-/** Satellite prototypes - standalone pages with minimal header */
-export const satellitePrototypes: PrototypeConfig[] = [
-  // Calendar Page
-  { name: 'CalendarPage-Satellite', storyId: 'prototypes-calendar-page--satellite' },
-  { name: 'CalendarPage-SatelliteListView', storyId: 'prototypes-calendar-page--satellite-list-view' },
-  // Results & Live
-  { name: 'ResultsPage-Satellite', storyId: 'prototypes-results-page--satellite', maxDiffPixels: 500 },
-  { name: 'LivePage-Satellite', storyId: 'prototypes-live-page--satellite', maxDiffPixels: 6000, timeout: 30000 },
-  // Lists
-  { name: 'AthletesListPage-Satellite', storyId: 'prototypes-athletes-list-page--satellite' },
-  { name: 'ClubsListPage-Satellite', storyId: 'prototypes-clubs-list-page--satellite' },
-  { name: 'RankingsPage-Satellite', storyId: 'prototypes-rankings-page--satellite' },
-  // Profiles
-  { name: 'AthletePublicProfile-Satellite', storyId: 'prototypes-athletepublicprofile--satellite' },
-  { name: 'ClubPublicProfile-Satellite', storyId: 'prototypes-clubpublicprofile--satellite' },
-  // Event Detail
-  { name: 'EventDetailPage-Satellite', storyId: 'prototypes-event-detail-page--satellite' },
-  // Registration (countdown timer causes pixel variance)
-  { name: 'RegistrationPage-Satellite', storyId: 'prototypes-registration-page--satellite', maxDiffPixels: 1500 },
-  // Dashboard & Profile
-  { name: 'DashboardPage-Satellite', storyId: 'prototypes-dashboard-page--satellite', timeout: 60000 },
-  { name: 'ProfilePage-Satellite', storyId: 'prototypes-profilepage--satellite' },
-];
-
-/** Expressive embed prototypes - with enhanced visual styling */
-export const expressivePrototypes: PrototypeConfig[] = [
-  { name: 'AthletePublicProfile-ExpressiveEmbed', storyId: 'prototypes-athletepublicprofile--expressive-embed' },
-  { name: 'ClubPublicProfile-ExpressiveEmbed', storyId: 'prototypes-clubpublicprofile--expressive-embed' },
-  { name: 'EventDetailPage-ExpressiveEmbed', storyId: 'prototypes-event-detail-page--expressive-embed' },
-];
-
-/** All prototypes for visual regression testing (complete coverage) */
-export const allPrototypes: PrototypeConfig[] = [
-  ...embedPrototypes,
-  ...satellitePrototypes,
-  ...expressivePrototypes,
-];
-
-/** Prototypes for cross-browser testing (key representatives) */
-export const crossBrowserPrototypes: PrototypeConfig[] = [
-  { name: 'CalendarPage', storyId: 'prototypes-calendar-page--embed', maxDiffPixels: 150 },
-  { name: 'LivePage', storyId: 'prototypes-live-page--embed', maxDiffPixels: 6000 },
-  { name: 'DashboardPage', storyId: 'prototypes-dashboard-page--satellite', maxDiffPixels: 200 },
-  { name: 'AthleteProfile', storyId: 'prototypes-athletepublicprofile--embed', maxDiffPixels: 150 },
-  { name: 'EventDetail', storyId: 'prototypes-event-detail-page--embed', maxDiffPixels: 150 },
-];
-
 // =============================================================================
 // TEST DEFAULTS
 // =============================================================================
@@ -254,16 +159,10 @@ export const crossBrowserPrototypes: PrototypeConfig[] = [
 export const testDefaults = {
   /** Default pixel tolerance for visual regression */
   maxDiffPixels: 30,
-  /** Pixel tolerance for prototypes (larger, more variance) */
-  prototypeMaxDiffPixels: 80,
   /** Default timeout for component loading */
   componentTimeout: 10000,
-  /** Extended timeout for complex pages */
-  prototypeTimeout: 30000,
   /** Wait time after load for animations to settle */
   settleTime: 500,
-  /** Extended settle time for prototypes */
-  prototypeSettleTime: 1500,
 };
 
 // =============================================================================
@@ -332,23 +231,10 @@ export const a11ySpecificComponents = specificComponents
 // task (the task that retokenizes/rewrites/deletes the component). Keyed by the
 // full title path (describe blocks + test title joined by ' › ', no file name). Quarantined tests are
 // reported as skipped (test.fixme) so CI stays green and the debt stays visible.
-// A task that touches a quarantined component must remove its entries; T17
-// empties the list.
+// A task that touches a quarantined component must remove its entries; T17a
+// emptied the list (all entries belonged to deleted 1.x tests).
 // ---------------------------------------------------------------------------
 export type QuarantineOwner = 'T1' | 'T3' | 'T4' | 'T5' | 'T7' | 'T8' | 'T17';
 
 export const QUARANTINE: Record<string, { reason: string; owner: QuarantineOwner }> = {
-  'Accessibility - Specific Components (Tier 3) › AthleteCard - WCAG 2.1 AA (light)': { owner: 'T17', reason: 'axe color-contrast; AthleteCard is removed in v2' },
-  'Accessibility - Prototypes › LivePage-Embed - WCAG 2.1 AA (light)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
-  'Accessibility - Prototypes › LivePage-Embed - WCAG 2.1 AA (dark)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
-  'Accessibility - Prototypes › ResultsPage-Embed - WCAG 2.1 AA (light)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
-  'Accessibility - Prototypes › ResultsPage-Embed - WCAG 2.1 AA (dark)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
-  'Accessibility - Prototypes › CalendarPage-Embed - WCAG 2.1 AA (light)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
-  'Accessibility - Prototypes › CalendarPage-Embed - WCAG 2.1 AA (dark)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
-  'Accessibility - Prototypes › EventDetailPage-Embed - WCAG 2.1 AA (light)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
-  'Accessibility - Prototypes › EventDetailPage-Embed - WCAG 2.1 AA (dark)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
-  'Accessibility - Prototypes › ProfilePage - WCAG 2.1 AA (light)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
-  'Accessibility - Prototypes › ProfilePage - WCAG 2.1 AA (dark)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
-  'Accessibility - Prototypes › DashboardPage - WCAG 2.1 AA (light)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
-  'Accessibility - Prototypes › DashboardPage - WCAG 2.1 AA (dark)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
 };

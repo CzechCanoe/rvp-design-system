@@ -76,15 +76,6 @@ export type {
   ToastItemProps,
 } from './Toast';
 
-// Navigation
-export { MainNav } from './Navigation';
-export type {
-  MainNavProps,
-  MainNavVariant,
-  MainNavSize,
-  NavItem,
-} from './Navigation';
-
 // Pagination
 export { Pagination } from './Pagination';
 export type { PaginationProps, PaginationSize, PaginationVariant } from './Pagination';
@@ -179,26 +170,6 @@ export type {
   TimelineItemStatus,
 } from './Timeline';
 
-// StatCard
-export { StatCard } from './StatCard';
-export type {
-  StatCardProps,
-  StatCardVariant,
-  StatCardSize,
-  StatCardColor,
-  StatCardTrend,
-} from './StatCard';
-
-// AthleteCard
-export { AthleteCard } from './AthleteCard';
-export type {
-  AthleteCardProps,
-  AthleteCardVariant,
-  AthleteCardSize,
-  AthleteSection,
-  AthleteVtClass,
-} from './AthleteCard';
-
 // ResultsTable v2 + RunDetail (+ row/cell primitives shared with the other live tables)
 export {
   ResultsTable,
@@ -280,29 +251,6 @@ export type {
 export { PageLayout } from './PageLayout';
 export type { PageLayoutProps, PageLayoutVariant } from './PageLayout';
 
-// SectionHeader
-export { SectionHeader } from './SectionHeader';
-export type { SectionHeaderProps, SectionHeaderSize } from './SectionHeader';
-
-// StatsBar
-export { StatsBar } from './StatsBar';
-export type {
-  StatsBarProps,
-  StatsBarItem,
-  StatsBarVariant,
-  StatsBarSize,
-} from './StatsBar';
-
-// HeroSection
-export { HeroSection, HeroActionButton } from './HeroSection';
-export type {
-  HeroSectionProps,
-  HeroSectionVariant,
-  HeroSectionSection,
-  HeroSectionMetaItem,
-  HeroActionButtonProps,
-} from './HeroSection';
-
 // CSKLogo
 export { CSKLogo } from './CSKLogo';
 export type { CSKLogoProps, CSKLogoSize } from './CSKLogo';
@@ -315,18 +263,6 @@ export type {
   FilterPillsSize,
 } from './FilterPills';
 
-// PodiumCard
-export { PodiumCard } from './PodiumCard';
-export type { PodiumCardProps, PodiumPosition } from './PodiumCard';
-
-// ResultItem
-export { ResultItem } from './ResultItem';
-export type { ResultItemProps, ResultItemVariant } from './ResultItem';
-
-// ListItem
-export { ListItem } from './ListItem';
-export type { ListItemProps, ListItemType, ListItemVariant } from './ListItem';
-
 // Wizard
 export { Wizard } from './Wizard';
 export type {
@@ -336,22 +272,6 @@ export type {
   WizardSize,
   WizardSection,
 } from './Wizard';
-
-// ActionCard
-export { ActionCard } from './ActionCard';
-export type {
-  ActionCardProps,
-  ActionCardIconBackground,
-  ActionCardSize,
-} from './ActionCard';
-
-// DateBadge
-export { DateBadge } from './DateBadge';
-export type {
-  DateBadgeProps,
-  DateBadgeSection,
-  DateBadgeSize,
-} from './DateBadge';
 
 // SegmentedControl
 export { SegmentedControl } from './SegmentedControl';
