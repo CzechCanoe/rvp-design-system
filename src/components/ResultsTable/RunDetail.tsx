@@ -8,6 +8,7 @@ import { RunningTime } from '../RunningTime';
 import { SkeletonText } from '../Skeleton';
 import { StatusBadge, type StatusBadgeState } from '../StatusBadge';
 import { TimeValue } from '../TimeValue';
+import { PenaltyText } from './cells';
 import type { ObservedNumber, ResultsTableDensity, RunningSpec } from './types';
 import { knownNumber } from './values';
 import './RunDetail.css';
@@ -91,15 +92,11 @@ export interface RunDetailProps extends Omit<HTMLAttributes<HTMLDivElement>, 'ch
   labels?: Partial<RunDetailLabels>;
 }
 
+/** Known penalty as a plain number; not judged as „(·)“, the same form as in the table (`PenaltyText`). */
 function PenaltyValue({ penalty, notJudged }: { penalty: ObservedNumber; notJudged: string }) {
   const value = knownNumber(penalty);
   if (value !== null) return <span className="csk-run-detail__mono">{value}</span>;
-  return (
-    <span className="csk-run-detail__mono csk-run-detail__unknown">
-      <span aria-hidden="true">—</span>
-      <span className="csk-run-detail__sr">{notJudged}</span>
-    </span>
-  );
+  return <PenaltyText penalty={null} notJudgedLabel={notJudged} />;
 }
 
 function RunBlock({ run, labels, clock }: { run: RunDetailRun; labels: RunDetailLabels; clock?: Clock }) {

@@ -7011,3 +7011,17 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 ### Poznámka po CI (T9)
 - Snapshoty 390 + 1280 vygenerovalo CI (`test: update snapshots (CI)`, 31 PNG, jen ResultsTable / RunDetail).
 - Výkon 100 řádků v CI (4 workery paralelně): medián 306.5 ms (146–454 ms), rozpočet testu 800 ms.
+
+---
+
+## 2026-10-19 - v2 T9 follow-ups: memo řádků, zúžené overridy, neposouzená penalizace
+
+### Dokončeno
+- [x] Memo řádků i s inline callbacky: `onToggle` / `onFavoriteChange` přes latest-ref (stabilní obaly), `labels` porovnané klíč po klíči, `renderDetail` se volá v tabulce jen pro rozbalené řádky (prop `detail`); test počítá rendery řádků po rozbalení / hvězdičce
+- [x] Kompaktní `MarkBadge` jen v buňkách datových řádků (`.csk-results-table__row`), ne v `RunDetail` rozbaleného řádku; hack okrajů `StarButton` zdokumentován s TODO na T7 (a `MarkBadge size` na T5)
+- [x] Neposouzená penalizace jednotně „(·)“ v tabulce i v `RunDetail` (přes `PenaltyText`)
+- [x] Doc komentář `ObservedNumber`: proč buňky (`RunCell.time/penalty`) berou i `number | null` a řádkové hodnoty (`rank`, `result`, `diff`) jen `Observed`
+
+### Poznámky
+- Rozbalený řádek se dál překresluje s každým renderem tabulky (detail může záviset na stavu aplikace).
+- Veřejné exporty a názvy beze změny (T10/T11 je používají).
