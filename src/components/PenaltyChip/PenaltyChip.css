@@ -1,0 +1,51 @@
+.csk-penalty-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  font-family: var(--csk-font-mono);
+  font-size: var(--csk-text-sm);
+  font-weight: var(--csk-font-weight-semibold);
+  line-height: 1;
+  border: 1px solid transparent;
+  border-radius: var(--csk-radius-sm);
+}
+
+.csk-penalty-chip--sm {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 3px;
+  font-size: var(--csk-text-xs);
+}
+
+.csk-penalty-chip--clean {
+  background: var(--csk-color-surface-3);
+  color: var(--csk-color-text-2);
+}
+
+.csk-penalty-chip--touch {
+  background: var(--csk-color-warning-bg);
+  color: var(--csk-color-warning-text);
+}
+
+.csk-penalty-chip--miss {
+  background: var(--csk-color-error-bg);
+  color: var(--csk-color-error-text);
+}
+
+/* Not judged: dashed frame, never reads as 0 */
+.csk-penalty-chip--unjudged {
+  background: transparent;
+  color: var(--csk-color-text-3);
+  border-color: var(--csk-color-border);
+  border-style: dashed;
+}
+
+.csk-penalty-chip--upstream {
+  font-style: italic;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

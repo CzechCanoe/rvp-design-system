@@ -307,6 +307,22 @@ export type {
   DateBadgeSize,
 } from './DateBadge';
 
+// Value states and numbers (v2 T5)
+export { StatusBadge, STATUS_BADGE_LABELS } from './StatusBadge';
+export type { StatusBadgeProps, StatusBadgeState, StatusBadgeSize } from './StatusBadge';
+export { MarkBadge, MARK_DESCRIPTIONS } from './MarkBadge';
+export type { MarkBadgeProps, Mark } from './MarkBadge';
+export { PenaltyChip, penaltyTone } from './PenaltyChip';
+export type { PenaltyChipProps, PenaltyChipSize } from './PenaltyChip';
+export { GateGrid } from './GateGrid';
+export type { GateGridProps, GateGridGate } from './GateGrid';
+export { BibBadge } from './BibBadge';
+export type { BibBadgeProps } from './BibBadge';
+export { Notice } from './Notice';
+export type { NoticeProps, NoticeTone } from './Notice';
+export { StatTile } from './StatTile';
+export type { StatTileProps } from './StatTile';
+
 // TimeValue
 export { TimeValue } from './TimeValue';
 export type {
