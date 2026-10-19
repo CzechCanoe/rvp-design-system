@@ -119,11 +119,26 @@ for (const sec of ['dv', 'ry', 'vt']) {
 alias('section-color', 'section-color');
 alias('section-color-light', 'section-color-light');
 
+// Pre-v2 `--csk-*` names that never existed in dist (written against c123-live-mini); map to v2.
+for (const [o, n] of Object.entries({
+  'color-border-secondary': 'color-border', 'color-error-500': 'color-error', 'color-on-surface': 'color-text',
+  'color-on-surface-inverse': 'color-text-on-fill', 'color-on-surface-muted': 'color-text-3',
+  'color-primary': 'color-action', 'color-primary-50': 'color-highlight-bg', 'color-primary-100': 'color-highlight-bg',
+  'color-primary-200': 'color-highlight-border', 'color-primary-300': 'color-highlight-border',
+  'color-primary-400': 'color-action', 'color-primary-600': 'color-action-hover', 'color-primary-700': 'color-brand',
+  'color-primary-800': 'color-brand', 'color-primary-900': 'color-brand',
+  'color-surface-container': 'color-surface-2', 'color-surface-dim': 'color-surface-3', 'color-surface-inverse': 'color-text',
+  'color-surface-secondary': 'color-surface-2', 'color-surface-tertiary': 'color-surface-3',
+  'font-size-xs': 'text-sm', 'font-size-sm': 'text-md', 'font-size-base': 'text-base', 'font-size-lg': 'text-lg', 'font-size-xl': 'text-xl',
+  'radius-full': 'radius-pill',
+})) RENAME[`csk-${o}`] = C(n);
+
 // Containers
 for (const s of ['xs', 'sm', 'md', 'lg', 'xl']) RENAME[`container-${s}`] = C(`container-${s}`);
 
 // Names that are replaced by a whole expression (no single token fits).
 const EXPR = {
+  'csk-z-sticky': '100',
   'spacing-0': '0',
   'spacing-px': '1px',
   'spacing-0-5': 'calc(var(--csk-space-1) / 2)',
@@ -208,19 +223,44 @@ const EXPR = {
 const PATTERNS = [
   // duration + easing pair (var or literal) -> one transition token. <= 200ms is "fast".
   {
-    re: /(?:var\(--duration-(fastest|fast|normal|moderate|base)(?:,[^)]*)?\)|var\(--motion-(?:embed|util|expr)-fast\)|\b(?:50|100|150|200)ms|\b0?\.[12]s)\s+(?:var\(--ease-[\w-]+(?:,[^)]*)?\)|cubic-bezier\([^)]*\))/g,
+    re: /(?:var\(--(?:csk-)?duration-(fastest|fast|normal|moderate|base)(?:,[^)]*)?\)|var\(--motion-(?:embed|util|expr)-fast\)|\b(?:50|100|150|200)ms|\b0?\.[12]s)\s+(?:var\(--(?:csk-)?ease-[\w-]+(?:,[^)]*)?\)|cubic-bezier\([^)]*\))/g,
     to: 'var(--csk-transition-fast)',
     name: 'transition (fast)',
   },
   {
-    re: /(?:var\(--duration-(slow|slower|slowest)(?:,[^)]*)?\)|\b(?:250|300|400|500|600)ms|\b0?\.[3-9]s)\s+(?:var\(--ease-[\w-]+(?:,[^)]*)?\)|cubic-bezier\([^)]*\))/g,
+    re: /(?:var\(--(?:csk-)?duration-(slow|slower|slowest)(?:,[^)]*)?\)|\b(?:250|300|400|500|600)ms|\b0?\.[3-9]s)\s+(?:var\(--(?:csk-)?ease-[\w-]+(?:,[^)]*)?\)|cubic-bezier\([^)]*\))/g,
     to: 'var(--csk-transition-slow)',
     name: 'transition (slow)',
   },
-  { re: /(var\(--csk-transition-(?:fast|slow)\))\s+var\(--ease-[\w-]+\)/g, to: '$1', name: 'stray easing after transition token' },
+  { re: /(var\(--csk-transition-(?:fast|slow)\))\s+var\(--(?:csk-)?ease-[\w-]+\)/g, to: '$1', name: 'stray easing after transition token' },
   { re: /var\(--transition-(?:fast|base|normal|button|input|switch|card|badge|util-fast|util-base)\)/g, to: 'var(--csk-transition-fast)', name: 'transition-fast alias' },
   { re: /var\(--transition-(?:slow|slower|util-slow)\)/g, to: 'var(--csk-transition-slow)', name: 'transition-slow alias' },
 ];
+
+// 1.x palette literals: rgb triple -> token (alpha becomes a color-mix percentage).
+const RGB = {
+  '255,255,255': 'white', '0,0,0': 'color-text', '10,10,10': 'color-text', '15,23,42': 'color-text',
+  '249,115,22': 'color-live', '251,146,60': 'color-live',
+  '255,215,0': 'color-podium-1', '192,192,192': 'color-podium-2', '205,127,50': 'color-podium-3',
+  '34,197,94': 'color-success', '74,222,128': 'color-success', '22,163,74': 'color-success',
+  '239,68,68': 'color-error', '248,113,113': 'color-error', '220,38,38': 'color-error', '185,28,28': 'color-error',
+  '17,118,166': 'color-action', '77,163,204': 'color-action', '14,100,141': 'color-action', '59,130,246': 'color-action',
+  '96,165,250': 'color-action', '37,99,235': 'color-action',
+  '245,158,11': 'color-warning', '251,191,36': 'color-warning',
+};
+// Hex literals (lower-case, 6 digits) -> token. Applied outside X components only.
+const HEX = {
+  '#ffd700': 'color-podium-1', '#c0c0c0': 'color-podium-2', '#cd7f32': 'color-podium-3',
+  '#b8860b': 'color-podium-1-text', '#6b7280': 'color-podium-2-text', '#8b4513': 'color-podium-3-text',
+  '#d4d4d4': 'color-podium-2', '#e8a860': 'color-podium-3',
+  '#fff': 'color-text-on-fill', '#ffffff': 'color-text-on-fill',
+  // kanoe.cz mock (KanoeCzContext): Bootstrap 4 greys and the old site blue -> nearest DS semantics.
+  '#1176a6': 'color-action', '#0d5a7d': 'color-action-hover', '#212529': 'color-text', '#6c757d': 'color-text-3',
+  '#f8f9fa': 'color-surface-2', '#f0f0f0': 'color-surface-3', '#f1f1f1': 'color-surface-3', '#dee2e6': 'color-border-2',
+  '#6d28d9': 'violet', '#b91c1c': 'red', '#d97706': 'amber', '#15803d': 'green',
+};
+// Verdict X (removed in T17): the codemod leaves their hex literals alone (check-no-hex baseline).
+const X_COMPONENTS = ['ActionCard', 'AthleteCard', 'DateBadge', 'HeroSection', 'ListItem', 'Navigation', 'PodiumCard', 'ResultItem', 'SectionHeader', 'StatCard', 'StatsBar'];
 
 // ---------------------------------------------------------------------------------
 
@@ -274,18 +314,32 @@ function rewriteVars(text, fn) {
   }
 }
 
+function splitTop(v) {
+  const out = [];
+  let depth = 0, cur = '';
+  for (const ch of v) {
+    if (ch === '(') depth++;
+    if (ch === ')') depth--;
+    if (ch === ',' && depth === 0) { out.push(cur); cur = ''; } else cur += ch;
+  }
+  out.push(cur);
+  return out;
+}
+
 let changedFiles = 0;
+let rgbMapped = 0, hexMapped = 0;
+const rgbUnmapped = new Map(), hexUnmapped = new Map();
 for (const [f, text] of sources) {
   let out = text;
   // Phase 0: var(--old, fallback) of a global 1.x token -> var(--old) (the fallback was a 1.x
   // hex/px copy; v2 tokens are always defined) or the replacement expression.
   out = rewriteVars(out, (name, hasFallback) => {
-    if (localDefs.has(name) || name.startsWith('csk-')) return null;
+    if (localDefs.has(name) || (name.startsWith('csk-') && EXPR[name] === undefined && !RENAME[name])) return null;
     if (EXPR[name] !== undefined || EXPR_PRE[name] !== undefined) {
       mapped.set(name, (mapped.get(name) ?? 0) + 1);
       return EXPR_PRE[name] ?? EXPR[name];
     }
-    if (hasFallback && RENAME[name]) return `var(--${name})`;
+    if (hasFallback && RENAME[name] && known.has(RENAME[name])) return `var(--${name})`;
     return null;
   });
   for (const p of PATTERNS) {
@@ -295,7 +349,7 @@ for (const [f, text] of sources) {
     });
   }
   out = out.replace(NAME, (all, name) => {
-    if (name.startsWith('csk-')) return all;
+    if (name.startsWith('csk-') && !RENAME[name]) return all;
     if (RENAME[name] && !(localDefs.has(name) && !(name in RENAME))) {
       mapped.set(name, (mapped.get(name) ?? 0) + 1);
       return RENAME[name];
@@ -309,6 +363,35 @@ for (const [f, text] of sources) {
     u.files.add(relative(root, f));
     unmapped.set(name, u);
     return all;
+  });
+  out = out.replace(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+)\s*)?\)/g, (all, r, g, b, a) => {
+    const tok = RGB[`${r},${g},${b}`];
+    if (!tok) {
+      rgbUnmapped.set(all, (rgbUnmapped.get(all) ?? 0) + 1);
+      return all;
+    }
+    rgbMapped++;
+    const pct = a === undefined ? 100 : Math.round(parseFloat(a) * 100);
+    return pct >= 100 ? `var(--csk-${tok})` : `color-mix(in srgb, var(--csk-${tok}) ${pct}%, transparent)`;
+  });
+  if (extname(f) === '.css' && !X_COMPONENTS.some((x) => f.includes(`/components/${x}/`))) {
+    out = out.replace(/#[0-9a-fA-F]{3,8}\b/g, (h) => {
+      const tok = HEX[h.toLowerCase()];
+      if (!tok) {
+        hexUnmapped.set(h, (hexUnmapped.get(h) ?? 0) + 1);
+        return h;
+      }
+      hexMapped++;
+      return `var(--csk-${tok})`;
+    });
+  }
+  // `none` produced by dropped shadows/glows must not stay inside a shadow list.
+  if (extname(f) === '.css') out = out.replace(/(box-shadow:\s*)([^;{}]+);/g, (all, head, val) => {
+    if (!/\bnone\b/.test(val)) return all;
+    const parts = splitTop(val).map((x) => x.trim()).filter(Boolean);
+    const kept = parts.filter((x) => x !== 'none');
+    const fixed = kept.length ? kept.join(',\n    ') : 'none';
+    return fixed === val.trim() ? all : `${head}${fixed};`;
   });
   if (out !== text) {
     changedFiles++;
@@ -324,4 +407,6 @@ console.log(`unmapped: ${sum(new Map([...unmapped].map(([k, v]) => [k, v.count])
 for (const [name, u] of [...unmapped].sort((a, b) => b[1].count - a[1].count)) {
   console.log(`  --${name}  x${u.count}  ${verbose ? [...u.files].join(', ') : [...u.files].slice(0, 3).join(', ')}`);
 }
+console.log(`rgb()/rgba() literals mapped: ${rgbMapped}; left: ${sum(rgbUnmapped)}${[...rgbUnmapped.keys()].length ? ` (${[...rgbUnmapped.keys()].join(' ')})` : ''}`);
+console.log(`hex literals mapped (non-X): ${hexMapped}; left in non-X: ${sum(hexUnmapped)}${[...hexUnmapped.keys()].length ? ` (${[...hexUnmapped.keys()].join(' ')})` : ''}`);
 if (verbose) for (const [name, n] of [...mapped].sort((a, b) => b[1] - a[1])) console.log(`  mapped --${name} x${n}`);

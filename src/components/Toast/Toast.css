@@ -84,9 +84,9 @@
   background-color: var(--csk-color-surface);
   border-radius: var(--csk-radius-lg);
   box-shadow:
-    0 10px 40px -10px rgba(0, 0, 0, 0.2),
-    0 4px 16px -4px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(0, 0, 0, 0.05);
+    0 10px 40px -10px color-mix(in srgb, var(--csk-color-text) 20%, transparent),
+    0 4px 16px -4px color-mix(in srgb, var(--csk-color-text) 10%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--csk-color-text) 5%, transparent);
   pointer-events: auto;
   overflow: hidden;
   transition:
@@ -98,9 +98,9 @@
 .csk-toast:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 14px 48px -10px rgba(0, 0, 0, 0.25),
-    0 6px 20px -4px rgba(0, 0, 0, 0.12),
-    0 0 0 1px rgba(0, 0, 0, 0.05);
+    0 14px 48px -10px color-mix(in srgb, var(--csk-color-text) 25%, transparent),
+    0 6px 20px -4px color-mix(in srgb, var(--csk-color-text) 12%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--csk-color-text) 5%, transparent);
 }
 
 /* ==========================================================================
@@ -255,7 +255,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: color-mix(in srgb, var(--csk-color-text) 10%, transparent);
   overflow: hidden;
   border-radius: 0 0 var(--csk-radius-lg) var(--csk-radius-lg);
 }
@@ -546,16 +546,16 @@
 [data-theme="dark"] .csk-toast {
   background-color: var(--csk-color-surface);
   box-shadow:
-    0 10px 40px -10px rgba(0, 0, 0, 0.5),
-    0 4px 16px -4px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
+    0 10px 40px -10px color-mix(in srgb, var(--csk-color-text) 50%, transparent),
+    0 4px 16px -4px color-mix(in srgb, var(--csk-color-text) 30%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--csk-white) 5%, transparent);
 }
 
 [data-theme="dark"] .csk-toast:hover {
   box-shadow:
-    0 14px 48px -10px rgba(0, 0, 0, 0.6),
-    0 6px 20px -4px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.08);
+    0 14px 48px -10px color-mix(in srgb, var(--csk-color-text) 60%, transparent),
+    0 6px 20px -4px color-mix(in srgb, var(--csk-color-text) 35%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--csk-white) 8%, transparent);
 }
 
 [data-theme="dark"] .csk-toast__action {
@@ -576,7 +576,7 @@
 }
 
 [data-theme="dark"] .csk-toast__progress {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: color-mix(in srgb, var(--csk-white) 10%, transparent);
 }
 
 /* ==========================================================================

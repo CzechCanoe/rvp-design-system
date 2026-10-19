@@ -86,7 +86,7 @@
 .csk-results-table--style-gradient .csk-results-table__th {
   color: var(--csk-color-text-on-fill);
   border-bottom-color: transparent;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 2px color-mix(in srgb, var(--csk-color-text) 20%, transparent);
 }
 
 .csk-results-table--style-gradient .csk-results-table__tr--gold,
@@ -242,17 +242,17 @@
   height: 10px;
   border-radius: 50%;
   background: var(--csk-color-live);
-  box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.5);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--csk-color-live) 50%, transparent);
   animation: csk-results-live-pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes csk-results-live-pulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.5);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--csk-color-live) 50%, transparent);
     transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(249, 115, 22, 0);
+    box-shadow: 0 0 0 8px color-mix(in srgb, var(--csk-color-live) 0%, transparent);
     transform: scale(1.1);
   }
 }
@@ -312,18 +312,18 @@
 
 /* Podium avatars with medal-colored borders */
 .csk-results-table__tr--gold .csk-results-table__avatar {
-  border-color: #FFD700;
-  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3);
+  border-color: var(--csk-color-podium-1);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--csk-color-podium-1) 30%, transparent);
 }
 
 .csk-results-table__tr--silver .csk-results-table__avatar {
-  border-color: #C0C0C0;
-  box-shadow: 0 0 0 2px rgba(192, 192, 192, 0.3);
+  border-color: var(--csk-color-podium-2);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--csk-color-podium-2) 30%, transparent);
 }
 
 .csk-results-table__tr--bronze .csk-results-table__avatar {
-  border-color: #CD7F32;
-  box-shadow: 0 0 0 2px rgba(205, 127, 50, 0.3);
+  border-color: var(--csk-color-podium-3);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--csk-color-podium-3) 30%, transparent);
 }
 
 .csk-results-table__section {
@@ -340,17 +340,17 @@
 }
 
 .csk-results-table__section--dv {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-section-dv) 12%, var(--csk-color-surface)), rgba(37, 99, 235, 0.15));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-section-dv) 12%, var(--csk-color-surface)), color-mix(in srgb, var(--csk-color-action) 15%, transparent));
   color: var(--csk-color-section-dv);
 }
 
 .csk-results-table__section--ry {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-section-ry) 12%, var(--csk-color-surface)), rgba(22, 163, 74, 0.15));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-section-ry) 12%, var(--csk-color-surface)), color-mix(in srgb, var(--csk-color-success) 15%, transparent));
   color: var(--csk-color-section-ry);
 }
 
 .csk-results-table__section--vt {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-section-vt) 12%, var(--csk-color-surface)), rgba(220, 38, 38, 0.15));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-section-vt) 12%, var(--csk-color-surface)), color-mix(in srgb, var(--csk-color-error) 15%, transparent));
   color: var(--csk-color-section-vt);
 }
 
@@ -412,15 +412,15 @@
 /* Gold - 1st place */
 .csk-results-table__tr--gold {
   background: transparent;
-  border-left: 4px solid #FFD700;
+  border-left: 4px solid var(--csk-color-podium-1);
 }
 
 .csk-results-table__tr--gold:hover {
-  background: rgba(255, 215, 0, 0.06);
+  background: color-mix(in srgb, var(--csk-color-podium-1) 6%, transparent);
 }
 
 .csk-results-table__tr--gold .csk-results-table__rank {
-  color: #B8860B;
+  color: var(--csk-color-podium-1-text);
 }
 
 .csk-results-table__tr--gold .csk-results-table__name {
@@ -430,15 +430,15 @@
 /* Silver - 2nd place */
 .csk-results-table__tr--silver {
   background: transparent;
-  border-left: 4px solid #C0C0C0;
+  border-left: 4px solid var(--csk-color-podium-2);
 }
 
 .csk-results-table__tr--silver:hover {
-  background: rgba(192, 192, 192, 0.08);
+  background: color-mix(in srgb, var(--csk-color-podium-2) 8%, transparent);
 }
 
 .csk-results-table__tr--silver .csk-results-table__rank {
-  color: #6B7280;
+  color: var(--csk-color-podium-2-text);
 }
 
 .csk-results-table__tr--silver .csk-results-table__name {
@@ -448,15 +448,15 @@
 /* Bronze - 3rd place */
 .csk-results-table__tr--bronze {
   background: transparent;
-  border-left: 4px solid #CD7F32;
+  border-left: 4px solid var(--csk-color-podium-3);
 }
 
 .csk-results-table__tr--bronze:hover {
-  background: rgba(205, 127, 50, 0.08);
+  background: color-mix(in srgb, var(--csk-color-podium-3) 8%, transparent);
 }
 
 .csk-results-table__tr--bronze .csk-results-table__rank {
-  color: #8B4513;
+  color: var(--csk-color-podium-3-text);
 }
 
 .csk-results-table__tr--bronze .csk-results-table__name {
@@ -503,21 +503,21 @@
    ============================================================================= */
 
 .csk-results-table__tr--live {
-  background: linear-gradient(90deg, rgba(249, 115, 22, 0.08) 0%, transparent 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-live) 8%, transparent) 0%, transparent 100%);
   animation: csk-results-live-row 2s ease-in-out infinite;
 }
 
 @keyframes csk-results-live-row {
   0%, 100% {
-    background: linear-gradient(90deg, rgba(249, 115, 22, 0.08) 0%, transparent 100%);
+    background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-live) 8%, transparent) 0%, transparent 100%);
   }
   50% {
-    background: linear-gradient(90deg, rgba(249, 115, 22, 0.12) 0%, transparent 100%);
+    background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-live) 12%, transparent) 0%, transparent 100%);
   }
 }
 
 .csk-results-table__tr--live:hover {
-  background: linear-gradient(90deg, rgba(249, 115, 22, 0.15) 0%, rgba(249, 115, 22, 0.05) 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-live) 15%, transparent) 0%, color-mix(in srgb, var(--csk-color-live) 5%, transparent) 100%);
 }
 
 /* =============================================================================
@@ -678,7 +678,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-white) 90%, transparent), color-mix(in srgb, var(--csk-white) 80%, transparent));
   backdrop-filter: blur(4px);
   z-index: 2;
 }
@@ -712,11 +712,11 @@
 }
 
 [data-theme='dark'] .csk-results-table__tr--gold:hover {
-  background: rgba(255, 215, 0, 0.08);
+  background: color-mix(in srgb, var(--csk-color-podium-1) 8%, transparent);
 }
 
 [data-theme='dark'] .csk-results-table__tr--gold .csk-results-table__rank {
-  color: #FFD700;
+  color: var(--csk-color-podium-1);
 }
 
 [data-theme='dark'] .csk-results-table__tr--silver {
@@ -724,11 +724,11 @@
 }
 
 [data-theme='dark'] .csk-results-table__tr--silver:hover {
-  background: rgba(192, 192, 192, 0.1);
+  background: color-mix(in srgb, var(--csk-color-podium-2) 10%, transparent);
 }
 
 [data-theme='dark'] .csk-results-table__tr--silver .csk-results-table__rank {
-  color: #D4D4D4;
+  color: var(--csk-color-podium-2);
 }
 
 [data-theme='dark'] .csk-results-table__tr--bronze {
@@ -736,11 +736,11 @@
 }
 
 [data-theme='dark'] .csk-results-table__tr--bronze:hover {
-  background: rgba(205, 127, 50, 0.1);
+  background: color-mix(in srgb, var(--csk-color-podium-3) 10%, transparent);
 }
 
 [data-theme='dark'] .csk-results-table__tr--bronze .csk-results-table__rank {
-  color: #E8A860;
+  color: var(--csk-color-podium-3);
 }
 
 /* Dark mode avatar borders */
@@ -754,21 +754,21 @@
 }
 
 [data-theme='dark'] .csk-results-table__tr--live {
-  background: linear-gradient(90deg, rgba(249, 115, 22, 0.12) 0%, transparent 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-live) 12%, transparent) 0%, transparent 100%);
 }
 
 [data-theme='dark'] .csk-results-table__loading-overlay {
-  background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.8));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-text) 90%, transparent), color-mix(in srgb, var(--csk-color-text) 80%, transparent));
 }
 
 [data-theme='dark'] .csk-results-table__position-change--up {
   color: var(--csk-color-success);
-  background: rgba(34, 197, 94, 0.2);
+  background: color-mix(in srgb, var(--csk-color-success) 20%, transparent);
 }
 
 [data-theme='dark'] .csk-results-table__position-change--down {
   color: var(--csk-color-error);
-  background: rgba(239, 68, 68, 0.2);
+  background: color-mix(in srgb, var(--csk-color-error) 20%, transparent);
 }
 
 [data-theme='dark'] .csk-results-table__status--dns {
@@ -778,12 +778,12 @@
 
 [data-theme='dark'] .csk-results-table__status--dnf {
   color: var(--csk-color-warning);
-  background: rgba(245, 158, 11, 0.2);
+  background: color-mix(in srgb, var(--csk-color-warning) 20%, transparent);
 }
 
 [data-theme='dark'] .csk-results-table__status--dsq {
   color: var(--csk-color-error);
-  background: rgba(239, 68, 68, 0.2);
+  background: color-mix(in srgb, var(--csk-color-error) 20%, transparent);
 }
 
 /* =============================================================================
@@ -1000,17 +1000,17 @@
 }
 
 [data-theme='dark'] .csk-results-table__round--q {
-  background: rgba(59, 130, 246, 0.2);
+  background: color-mix(in srgb, var(--csk-color-action) 20%, transparent);
   color: var(--csk-color-info);
 }
 
 [data-theme='dark'] .csk-results-table__round--sf {
-  background: rgba(245, 158, 11, 0.2);
+  background: color-mix(in srgb, var(--csk-color-warning) 20%, transparent);
   color: var(--csk-color-warning);
 }
 
 [data-theme='dark'] .csk-results-table__round--f {
-  background: rgba(34, 197, 94, 0.2);
+  background: color-mix(in srgb, var(--csk-color-success) 20%, transparent);
   color: var(--csk-color-success);
 }
 
@@ -1035,7 +1035,7 @@
 
 /* Progressed row highlight */
 .csk-results-table__tr--progressed {
-  background: linear-gradient(90deg, rgba(34, 197, 94, 0.05) 0%, transparent 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-success) 5%, transparent) 0%, transparent 100%);
 }
 
 /* =============================================================================
@@ -1093,11 +1093,11 @@
 .csk-results-table__tr--featured {
   border-left: 4px solid;
   border-image: var(--csk-color-brand) 1;
-  background: linear-gradient(90deg, rgba(249, 115, 22, 0.05) 0%, transparent 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-live) 5%, transparent) 0%, transparent 100%);
 }
 
 .csk-results-table__tr--featured:hover {
-  background: linear-gradient(90deg, rgba(249, 115, 22, 0.1) 0%, rgba(249, 115, 22, 0.02) 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-live) 10%, transparent) 0%, color-mix(in srgb, var(--csk-color-live) 2%, transparent) 100%);
 }
 
 /* Live row with energy glow effect */
@@ -1123,7 +1123,7 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   border-radius: var(--csk-radius-pill);
-  box-shadow: 0 2px 8px -2px rgba(249, 115, 22, 0.4);
+  box-shadow: 0 2px 8px -2px color-mix(in srgb, var(--csk-color-live) 40%, transparent);
 }
 
 .csk-results-table__live-badge .csk-results-table__live-indicator {
@@ -1146,11 +1146,11 @@
 
 /* Dark mode aesthetic enhancements */
 [data-theme='dark'] .csk-results-table__tr--featured {
-  background: linear-gradient(90deg, rgba(249, 115, 22, 0.08) 0%, transparent 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-live) 8%, transparent) 0%, transparent 100%);
 }
 
 [data-theme='dark'] .csk-results-table__tr--featured:hover {
-  background: linear-gradient(90deg, rgba(249, 115, 22, 0.12) 0%, rgba(249, 115, 22, 0.04) 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-live) 12%, transparent) 0%, color-mix(in srgb, var(--csk-color-live) 4%, transparent) 100%);
 }
 
 [data-theme='dark'] .csk-results-table__tr--live .csk-results-table__rank {
@@ -1168,22 +1168,22 @@
 
 /* Gold row with energy glow */
 .csk-results-table--energy-highlights .csk-results-table__tr--gold {
-  box-shadow: inset 0 0 0 1px rgba(255, 215, 0, 0.3);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--csk-color-podium-1) 30%, transparent);
 }
 
 .csk-results-table--energy-highlights .csk-results-table__tr--gold:hover {
-  box-shadow: inset 0 0 0 1px rgba(255, 215, 0, 0.5),
-              0 4px 12px -4px rgba(255, 215, 0, 0.3);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--csk-color-podium-1) 50%, transparent),
+              0 4px 12px -4px color-mix(in srgb, var(--csk-color-podium-1) 30%, transparent);
 }
 
 /* Energy glow on gold rank badge */
 .csk-results-table--energy-highlights .csk-results-table__tr--gold .csk-results-table__rank {
-  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+  text-shadow: 0 0 8px color-mix(in srgb, var(--csk-color-podium-1) 50%, transparent);
 }
 
 /* Energy border accent on podium */
 .csk-results-table--energy-highlights .csk-results-table__tr--gold {
-  border-image: linear-gradient(180deg, #FFD700 0%, var(--csk-color-live) 100%) 1;
+  border-image: linear-gradient(180deg, var(--csk-color-podium-1) 0%, var(--csk-color-live) 100%) 1;
 }
 
 /* Best time highlight (first place total time) */
@@ -1194,28 +1194,28 @@
 
 /* Live row enhanced energy glow */
 .csk-results-table--energy-highlights .csk-results-table__tr--live {
-  box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.3);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--csk-color-live) 30%, transparent);
 }
 
 .csk-results-table--energy-highlights .csk-results-table__tr--live:hover {
-  box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.5),
-              0 4px 12px -4px rgba(249, 115, 22, 0.3);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--csk-color-live) 50%, transparent),
+              0 4px 12px -4px color-mix(in srgb, var(--csk-color-live) 30%, transparent);
 }
 
 /* Enhanced live indicator with energy */
 .csk-results-table--energy-highlights .csk-results-table__live-indicator {
-  box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.5),
-              0 0 8px rgba(249, 115, 22, 0.4);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--csk-color-live) 50%, transparent),
+              0 0 8px color-mix(in srgb, var(--csk-color-live) 40%, transparent);
 }
 
 /* Dark mode energy highlights */
 [data-theme='dark'] .csk-results-table--energy-highlights .csk-results-table__tr--gold {
-  box-shadow: inset 0 0 0 1px rgba(255, 215, 0, 0.2);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--csk-color-podium-1) 20%, transparent);
 }
 
 [data-theme='dark'] .csk-results-table--energy-highlights .csk-results-table__tr--gold:hover {
-  box-shadow: inset 0 0 0 1px rgba(255, 215, 0, 0.4),
-              0 4px 16px -4px rgba(255, 215, 0, 0.2);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--csk-color-podium-1) 40%, transparent),
+              0 4px 16px -4px color-mix(in srgb, var(--csk-color-podium-1) 20%, transparent);
 }
 
 [data-theme='dark'] .csk-results-table--energy-highlights .csk-results-table__tr--gold .csk-results-table__time--total {
@@ -1223,10 +1223,10 @@
 }
 
 [data-theme='dark'] .csk-results-table--energy-highlights .csk-results-table__tr--live {
-  box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.2);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--csk-color-live) 20%, transparent);
 }
 
 [data-theme='dark'] .csk-results-table--energy-highlights .csk-results-table__tr--live:hover {
-  box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.4),
-              0 4px 16px -4px rgba(249, 115, 22, 0.2);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--csk-color-live) 40%, transparent),
+              0 4px 16px -4px color-mix(in srgb, var(--csk-color-live) 20%, transparent);
 }

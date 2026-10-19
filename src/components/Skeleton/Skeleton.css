@@ -75,7 +75,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.4),
+    color-mix(in srgb, var(--csk-white) 40%, transparent),
     transparent
   );
   animation: csk-skeleton-wave 1.6s ease-in-out infinite;
@@ -176,7 +176,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.1),
+    color-mix(in srgb, var(--csk-white) 10%, transparent),
     transparent
   );
 }

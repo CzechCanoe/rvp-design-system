@@ -196,11 +196,11 @@
 }
 
 .csk-card--aesthetic .csk-card__header {
-  border-bottom-color: rgba(17, 118, 166, 0.15);
+  border-bottom-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
 }
 
 .csk-card--aesthetic .csk-card__footer {
-  border-top-color: rgba(17, 118, 166, 0.15);
+  border-top-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
 }
 
 /* Aesthetic card title styling */
@@ -212,7 +212,7 @@
 
 /* Clickable aesthetic */
 .csk-card--clickable.csk-card--aesthetic:hover {
-  box-shadow: var(--csk-shadow-sm), none;
+  box-shadow: var(--csk-shadow-sm);
   transform: translateY(-2px);
 }
 
@@ -232,13 +232,13 @@
 }
 
 [data-theme="dark"] .csk-card--aesthetic .csk-card__header {
-  border-bottom-color: rgba(77, 163, 204, 0.15);
+  border-bottom-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
 }
 
 [data-theme="dark"] .csk-card--aesthetic .csk-card__footer {
-  border-top-color: rgba(77, 163, 204, 0.15);
+  border-top-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
 }
 
 [data-theme="dark"] .csk-card--clickable.csk-card--aesthetic:hover {
-  box-shadow: var(--csk-shadow-sm), none;
+  box-shadow: var(--csk-shadow-sm);
 }

@@ -233,7 +233,7 @@
   border-color: var(--csk-color-action);
   background: linear-gradient(
     135deg,
-    rgba(17, 118, 166, 0.15) 0%,
+    color-mix(in srgb, var(--csk-color-action) 15%, transparent) 0%,
     var(--csk-color-surface-2) 100%
   );
   box-shadow: var(--csk-shadow-sm);

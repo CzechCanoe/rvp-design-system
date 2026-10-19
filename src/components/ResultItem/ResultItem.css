@@ -107,19 +107,19 @@
 .csk-result-item__medal--gold {
   background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
   color: #000;
-  box-shadow: 0 2px 6px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--csk-color-podium-1) 40%, transparent);
 }
 
 .csk-result-item__medal--silver {
   background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
   color: #333;
-  box-shadow: 0 2px 6px rgba(192, 192, 192, 0.4);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--csk-color-podium-2) 40%, transparent);
 }
 
 .csk-result-item__medal--bronze {
   background: linear-gradient(135deg, #cd7f32 0%, #daa06d 100%);
   color: #fff;
-  box-shadow: 0 2px 6px rgba(205, 127, 50, 0.4);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--csk-color-podium-3) 40%, transparent);
 }
 
 /* ==========================================================================
@@ -129,31 +129,31 @@
 /* Gold (1st place) */
 .csk-result-item--rank-1 {
   border-left-color: #ffd700;
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.08) 0%, transparent 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-1) 8%, transparent) 0%, transparent 30%);
 }
 
 .csk-result-item--rank-1:hover {
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.12) 0%, var(--csk-color-surface-2) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-1) 12%, transparent) 0%, var(--csk-color-surface-2) 30%);
 }
 
 /* Silver (2nd place) */
 .csk-result-item--rank-2 {
   border-left-color: #c0c0c0;
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.08) 0%, transparent 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-2) 8%, transparent) 0%, transparent 30%);
 }
 
 .csk-result-item--rank-2:hover {
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.12) 0%, var(--csk-color-surface-2) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-2) 12%, transparent) 0%, var(--csk-color-surface-2) 30%);
 }
 
 /* Bronze (3rd place) */
 .csk-result-item--rank-3 {
   border-left-color: #cd7f32;
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.08) 0%, transparent 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-3) 8%, transparent) 0%, transparent 30%);
 }
 
 .csk-result-item--rank-3:hover {
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.12) 0%, var(--csk-color-surface-2) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-3) 12%, transparent) 0%, var(--csk-color-surface-2) 30%);
 }
 
 /* ==========================================================================
@@ -330,29 +330,29 @@
 
 /* Gold in dark mode */
 [data-theme='dark'] .csk-result-item--rank-1 {
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.12) 0%, var(--csk-color-surface-2) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-1) 12%, transparent) 0%, var(--csk-color-surface-2) 30%);
 }
 
 [data-theme='dark'] .csk-result-item--rank-1:hover {
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.18) 0%, var(--csk-color-surface-3) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-1) 18%, transparent) 0%, var(--csk-color-surface-3) 30%);
 }
 
 /* Silver in dark mode */
 [data-theme='dark'] .csk-result-item--rank-2 {
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.12) 0%, var(--csk-color-surface-2) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-2) 12%, transparent) 0%, var(--csk-color-surface-2) 30%);
 }
 
 [data-theme='dark'] .csk-result-item--rank-2:hover {
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.18) 0%, var(--csk-color-surface-3) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-2) 18%, transparent) 0%, var(--csk-color-surface-3) 30%);
 }
 
 /* Bronze in dark mode */
 [data-theme='dark'] .csk-result-item--rank-3 {
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.12) 0%, var(--csk-color-surface-2) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-3) 12%, transparent) 0%, var(--csk-color-surface-2) 30%);
 }
 
 [data-theme='dark'] .csk-result-item--rank-3:hover {
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.18) 0%, var(--csk-color-surface-3) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-3) 18%, transparent) 0%, var(--csk-color-surface-3) 30%);
 }
 
 /* ==========================================================================

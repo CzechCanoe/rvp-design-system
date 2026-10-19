@@ -26,26 +26,26 @@
   align-items: center;
   gap: var(--csk-space-2);
   padding: var(--csk-space-1) var(--csk-space-3);
-  font-size: var(--csk-font-size-sm);
+  font-size: var(--csk-text-md);
   font-weight: var(--csk-font-weight-medium);
   background: linear-gradient(
     135deg,
-    var(--csk-color-primary-50),
-    var(--csk-color-primary-100)
+    var(--csk-color-highlight-bg),
+    var(--csk-color-highlight-bg)
   );
-  border: 1px solid var(--csk-color-primary-200);
-  border-radius: var(--csk-radius-full);
-  color: var(--csk-color-primary-700);
-  transition: all var(--csk-duration-fast) var(--csk-ease-out);
+  border: 1px solid var(--csk-color-highlight-border);
+  border-radius: var(--csk-radius-pill);
+  color: var(--csk-color-brand);
+  transition: all var(--csk-transition-fast);
 }
 
 .csk-filter-pills__pill:hover {
   background: linear-gradient(
     135deg,
-    var(--csk-color-primary-100),
-    var(--csk-color-primary-200)
+    var(--csk-color-highlight-bg),
+    var(--csk-color-highlight-border)
   );
-  border-color: var(--csk-color-primary-300);
+  border-color: var(--csk-color-highlight-border);
 }
 
 /* Pill label */
@@ -65,16 +65,16 @@
   height: 18px;
   padding: 0;
   margin-left: var(--csk-space-1);
-  background: var(--csk-color-primary-200);
+  background: var(--csk-color-highlight-border);
   border: none;
-  border-radius: var(--csk-radius-full);
-  color: var(--csk-color-primary-700);
+  border-radius: var(--csk-radius-pill);
+  color: var(--csk-color-brand);
   cursor: pointer;
-  transition: all var(--csk-duration-fast) var(--csk-ease-out);
+  transition: all var(--csk-transition-fast);
 }
 
 .csk-filter-pills__remove:hover {
-  background: var(--csk-color-error-500);
+  background: var(--csk-color-error);
   color: white;
   transform: scale(1.1);
 }
@@ -86,18 +86,18 @@
 
 /* Clear all button */
 .csk-filter-pills__clear-all {
-  font-size: var(--csk-font-size-sm);
+  font-size: var(--csk-text-md);
   font-weight: var(--csk-font-weight-medium);
-  color: var(--csk-color-primary-600);
+  color: var(--csk-color-action-hover);
   background: none;
   border: none;
   cursor: pointer;
   padding: var(--csk-space-1) var(--csk-space-3);
-  transition: all var(--csk-duration-fast) var(--csk-ease-out);
+  transition: all var(--csk-transition-fast);
 }
 
 .csk-filter-pills__clear-all:hover {
-  color: var(--csk-color-primary-700);
+  color: var(--csk-color-brand);
   text-decoration: underline;
 }
 
@@ -114,7 +114,7 @@
 /* Small */
 .csk-filter-pills--sm .csk-filter-pills__pill {
   padding: 2px var(--csk-space-2);
-  font-size: var(--csk-font-size-xs);
+  font-size: var(--csk-text-sm);
   gap: var(--csk-space-1);
 }
 
@@ -124,7 +124,7 @@
 }
 
 .csk-filter-pills--sm .csk-filter-pills__clear-all {
-  font-size: var(--csk-font-size-xs);
+  font-size: var(--csk-text-sm);
 }
 
 .csk-filter-pills--sm.csk-filter-pills--bordered {
@@ -134,7 +134,7 @@
 /* Large */
 .csk-filter-pills--lg .csk-filter-pills__pill {
   padding: var(--csk-space-2) var(--csk-space-4);
-  font-size: var(--csk-font-size-base);
+  font-size: var(--csk-text-base);
 }
 
 .csk-filter-pills--lg .csk-filter-pills__remove {
@@ -143,7 +143,7 @@
 }
 
 .csk-filter-pills--lg .csk-filter-pills__clear-all {
-  font-size: var(--csk-font-size-base);
+  font-size: var(--csk-text-base);
 }
 
 .csk-filter-pills--lg.csk-filter-pills--bordered {
@@ -155,19 +155,19 @@
    ========================================================================== */
 
 .csk-filter-pills--subtle .csk-filter-pills__pill {
-  background: var(--csk-color-surface-secondary);
+  background: var(--csk-color-surface-2);
   border-color: var(--csk-color-border);
-  color: var(--csk-color-on-surface);
+  color: var(--csk-color-text);
 }
 
 .csk-filter-pills--subtle .csk-filter-pills__pill:hover {
-  background: var(--csk-color-surface-tertiary);
-  border-color: var(--csk-color-border-secondary);
+  background: var(--csk-color-surface-3);
+  border-color: var(--csk-color-border);
 }
 
 .csk-filter-pills--subtle .csk-filter-pills__remove {
-  background: var(--csk-color-surface-tertiary);
-  color: var(--csk-color-on-surface-muted);
+  background: var(--csk-color-surface-3);
+  color: var(--csk-color-text-3);
 }
 
 /* ==========================================================================
@@ -177,43 +177,43 @@
 [data-theme='dark'] .csk-filter-pills__pill {
   background: linear-gradient(
     135deg,
-    var(--csk-color-primary-900),
-    var(--csk-color-primary-800)
+    var(--csk-color-brand),
+    var(--csk-color-brand)
   );
-  border-color: var(--csk-color-primary-700);
-  color: var(--csk-color-primary-200);
+  border-color: var(--csk-color-brand);
+  color: var(--csk-color-highlight-border);
 }
 
 [data-theme='dark'] .csk-filter-pills__pill:hover {
   background: linear-gradient(
     135deg,
-    var(--csk-color-primary-800),
-    var(--csk-color-primary-700)
+    var(--csk-color-brand),
+    var(--csk-color-brand)
   );
-  border-color: var(--csk-color-primary-600);
+  border-color: var(--csk-color-action-hover);
 }
 
 [data-theme='dark'] .csk-filter-pills__remove {
-  background: var(--csk-color-primary-700);
-  color: var(--csk-color-primary-200);
+  background: var(--csk-color-brand);
+  color: var(--csk-color-highlight-border);
 }
 
 [data-theme='dark'] .csk-filter-pills__clear-all {
-  color: var(--csk-color-primary-400);
+  color: var(--csk-color-action);
 }
 
 [data-theme='dark'] .csk-filter-pills__clear-all:hover {
-  color: var(--csk-color-primary-300);
+  color: var(--csk-color-highlight-border);
 }
 
 /* Dark mode subtle variant */
 [data-theme='dark'] .csk-filter-pills--subtle .csk-filter-pills__pill {
-  background: var(--csk-color-surface-secondary);
+  background: var(--csk-color-surface-2);
   border-color: var(--csk-color-border);
-  color: var(--csk-color-on-surface);
+  color: var(--csk-color-text);
 }
 
 [data-theme='dark'] .csk-filter-pills--subtle .csk-filter-pills__remove {
-  background: var(--csk-color-surface-tertiary);
-  color: var(--csk-color-on-surface-muted);
+  background: var(--csk-color-surface-3);
+  color: var(--csk-color-text-3);
 }

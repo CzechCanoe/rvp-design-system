@@ -86,9 +86,8 @@
 .csk-search-input__input:focus {
   border-color: var(--csk-color-action);
   box-shadow:
-    none,
-    0 0 0 3px rgba(17, 118, 166, 0.15),
-    0 0 0 1px rgba(17, 118, 166, 0.3);
+    0 0 0 3px color-mix(in srgb, var(--csk-color-action) 15%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--csk-color-action) 30%, transparent);
   background-color: var(--csk-color-surface);
 }
 
@@ -103,8 +102,7 @@
 .csk-search-input__input:hover:not(:disabled):not(:focus) {
   border-color: var(--csk-color-highlight-border);
   box-shadow:
-    none,
-    0 1px 3px rgba(0, 0, 0, 0.05);
+    0 1px 3px color-mix(in srgb, var(--csk-color-text) 5%, transparent);
 }
 
 /* ==========================================================================
@@ -417,16 +415,14 @@
 [data-theme='dark'] .csk-search-input__input:hover:not(:disabled):not(:focus) {
   border-color: var(--csk-color-action);
   box-shadow:
-    none,
-    0 1px 3px rgba(0, 0, 0, 0.2);
+    0 1px 3px color-mix(in srgb, var(--csk-color-text) 20%, transparent);
 }
 
 [data-theme='dark'] .csk-search-input__input:focus {
   border-color: var(--csk-color-action);
   box-shadow:
-    none,
-    0 0 0 3px rgba(77, 163, 204, 0.2),
-    0 0 0 1px rgba(77, 163, 204, 0.4);
+    0 0 0 3px color-mix(in srgb, var(--csk-color-action) 20%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--csk-color-action) 40%, transparent);
 }
 
 [data-theme='dark'] .csk-search-input__clear:hover {
@@ -443,7 +439,7 @@
 }
 
 [data-theme='dark'] .csk-search-input__chip--active {
-  background-color: rgba(17, 118, 166, 0.2);
+  background-color: color-mix(in srgb, var(--csk-color-action) 20%, transparent);
   border-color: var(--csk-color-action);
 }
 

@@ -138,12 +138,12 @@
 
 /* Dark mode trend colors */
 [data-theme='dark'] .csk-stat-card__trend--up {
-  background-color: rgba(34, 197, 94, 0.15);
+  background-color: color-mix(in srgb, var(--csk-color-success) 15%, transparent);
   color: var(--csk-color-success);
 }
 
 [data-theme='dark'] .csk-stat-card__trend--down {
-  background-color: rgba(239, 68, 68, 0.15);
+  background-color: color-mix(in srgb, var(--csk-color-error) 15%, transparent);
   color: var(--csk-color-error);
 }
 
@@ -333,7 +333,7 @@
 
 /* Dark mode color adjustments */
 [data-theme='dark'] .csk-stat-card--primary .csk-stat-card__icon-container {
-  background-color: rgba(17, 118, 166, 0.15);
+  background-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
 }
 
 [data-theme='dark'] .csk-stat-card--primary .csk-stat-card__icon {
@@ -341,7 +341,7 @@
 }
 
 [data-theme='dark'] .csk-stat-card--success .csk-stat-card__icon-container {
-  background-color: rgba(34, 197, 94, 0.15);
+  background-color: color-mix(in srgb, var(--csk-color-success) 15%, transparent);
 }
 
 [data-theme='dark'] .csk-stat-card--success .csk-stat-card__icon {
@@ -349,7 +349,7 @@
 }
 
 [data-theme='dark'] .csk-stat-card--warning .csk-stat-card__icon-container {
-  background-color: rgba(245, 158, 11, 0.15);
+  background-color: color-mix(in srgb, var(--csk-color-warning) 15%, transparent);
 }
 
 [data-theme='dark'] .csk-stat-card--warning .csk-stat-card__icon {
@@ -357,7 +357,7 @@
 }
 
 [data-theme='dark'] .csk-stat-card--error .csk-stat-card__icon-container {
-  background-color: rgba(239, 68, 68, 0.15);
+  background-color: color-mix(in srgb, var(--csk-color-error) 15%, transparent);
 }
 
 [data-theme='dark'] .csk-stat-card--error .csk-stat-card__icon {
@@ -365,7 +365,7 @@
 }
 
 [data-theme='dark'] .csk-stat-card--info .csk-stat-card__icon-container {
-  background-color: rgba(59, 130, 246, 0.15);
+  background-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
 }
 
 [data-theme='dark'] .csk-stat-card--info .csk-stat-card__icon {
@@ -419,12 +419,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: color-mix(in srgb, var(--csk-white) 80%, transparent);
   z-index: 1;
 }
 
 [data-theme='dark'] .csk-stat-card__loading-overlay {
-  background-color: rgba(10, 10, 10, 0.8);
+  background-color: color-mix(in srgb, var(--csk-color-text) 80%, transparent);
 }
 
 .csk-stat-card__spinner {
@@ -487,7 +487,7 @@
 }
 
 [data-theme='dark'] .csk-stat-card--style-aesthetic .csk-stat-card__icon-container {
-  background: rgba(77, 163, 204, 0.1);
+  background: color-mix(in srgb, var(--csk-color-action) 10%, transparent);
 }
 
 /* =============================================================================
@@ -507,7 +507,7 @@
 }
 
 .csk-stat-card--clickable.csk-stat-card--style-aesthetic:hover {
-  box-shadow: var(--csk-shadow-sm), none;
+  box-shadow: var(--csk-shadow-sm);
 }
 
 /* Reduced motion */
@@ -552,13 +552,13 @@
    ============================================================================= */
 
 .csk-stat-card--medal-gold {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%);
-  border: 1px solid rgba(255, 215, 0, 0.3);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-podium-1) 15%, transparent) 0%, color-mix(in srgb, var(--csk-color-podium-1) 5%, transparent) 100%);
+  border: 1px solid color-mix(in srgb, var(--csk-color-podium-1) 30%, transparent);
 }
 
 .csk-stat-card--medal-gold .csk-stat-card__icon-container {
   background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--csk-color-podium-1) 40%, transparent);
 }
 
 .csk-stat-card--medal-gold .csk-stat-card__icon {
@@ -566,13 +566,13 @@
 }
 
 .csk-stat-card--medal-silver {
-  background: linear-gradient(135deg, rgba(192, 192, 192, 0.15) 0%, rgba(192, 192, 192, 0.05) 100%);
-  border: 1px solid rgba(192, 192, 192, 0.3);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-podium-2) 15%, transparent) 0%, color-mix(in srgb, var(--csk-color-podium-2) 5%, transparent) 100%);
+  border: 1px solid color-mix(in srgb, var(--csk-color-podium-2) 30%, transparent);
 }
 
 .csk-stat-card--medal-silver .csk-stat-card__icon-container {
   background: linear-gradient(135deg, #c0c0c0 0%, #a8a8a8 100%);
-  box-shadow: 0 4px 12px rgba(192, 192, 192, 0.4);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--csk-color-podium-2) 40%, transparent);
 }
 
 .csk-stat-card--medal-silver .csk-stat-card__icon {
@@ -580,13 +580,13 @@
 }
 
 .csk-stat-card--medal-bronze {
-  background: linear-gradient(135deg, rgba(205, 127, 50, 0.15) 0%, rgba(205, 127, 50, 0.05) 100%);
-  border: 1px solid rgba(205, 127, 50, 0.3);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-podium-3) 15%, transparent) 0%, color-mix(in srgb, var(--csk-color-podium-3) 5%, transparent) 100%);
+  border: 1px solid color-mix(in srgb, var(--csk-color-podium-3) 30%, transparent);
 }
 
 .csk-stat-card--medal-bronze .csk-stat-card__icon-container {
   background: linear-gradient(135deg, #cd7f32 0%, #b56c28 100%);
-  box-shadow: 0 4px 12px rgba(205, 127, 50, 0.4);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--csk-color-podium-3) 40%, transparent);
 }
 
 .csk-stat-card--medal-bronze .csk-stat-card__icon {
@@ -595,18 +595,18 @@
 
 /* Dark mode medal adjustments */
 [data-theme='dark'] .csk-stat-card--medal-gold {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.12) 0%, rgba(255, 215, 0, 0.03) 100%);
-  border-color: rgba(255, 215, 0, 0.25);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-podium-1) 12%, transparent) 0%, color-mix(in srgb, var(--csk-color-podium-1) 3%, transparent) 100%);
+  border-color: color-mix(in srgb, var(--csk-color-podium-1) 25%, transparent);
 }
 
 [data-theme='dark'] .csk-stat-card--medal-silver {
-  background: linear-gradient(135deg, rgba(192, 192, 192, 0.12) 0%, rgba(192, 192, 192, 0.03) 100%);
-  border-color: rgba(192, 192, 192, 0.25);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-podium-2) 12%, transparent) 0%, color-mix(in srgb, var(--csk-color-podium-2) 3%, transparent) 100%);
+  border-color: color-mix(in srgb, var(--csk-color-podium-2) 25%, transparent);
 }
 
 [data-theme='dark'] .csk-stat-card--medal-bronze {
-  background: linear-gradient(135deg, rgba(205, 127, 50, 0.12) 0%, rgba(205, 127, 50, 0.03) 100%);
-  border-color: rgba(205, 127, 50, 0.25);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-podium-3) 12%, transparent) 0%, color-mix(in srgb, var(--csk-color-podium-3) 3%, transparent) 100%);
+  border-color: color-mix(in srgb, var(--csk-color-podium-3) 25%, transparent);
 }
 
 /* =============================================================================
@@ -627,7 +627,7 @@
 }
 
 .csk-stat-card--gradient-primary .csk-stat-card__icon-container {
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
 }
 
 .csk-stat-card--gradient-primary .csk-stat-card__icon {
@@ -637,7 +637,7 @@
 .csk-stat-card--gradient-primary .csk-stat-card__trend--up,
 .csk-stat-card--gradient-primary .csk-stat-card__trend--down,
 .csk-stat-card--gradient-primary .csk-stat-card__trend--neutral {
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
   color: #fff;
 }
 
@@ -654,7 +654,7 @@
 }
 
 .csk-stat-card--gradient-success .csk-stat-card__icon-container {
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
 }
 
 .csk-stat-card--gradient-success .csk-stat-card__icon {
@@ -664,7 +664,7 @@
 .csk-stat-card--gradient-success .csk-stat-card__trend--up,
 .csk-stat-card--gradient-success .csk-stat-card__trend--down,
 .csk-stat-card--gradient-success .csk-stat-card__trend--neutral {
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
   color: #fff;
 }
 
@@ -681,7 +681,7 @@
 }
 
 .csk-stat-card--gradient-warning .csk-stat-card__icon-container {
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
 }
 
 .csk-stat-card--gradient-warning .csk-stat-card__icon {
@@ -691,7 +691,7 @@
 .csk-stat-card--gradient-warning .csk-stat-card__trend--up,
 .csk-stat-card--gradient-warning .csk-stat-card__trend--down,
 .csk-stat-card--gradient-warning .csk-stat-card__trend--neutral {
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
   color: #fff;
 }
 
@@ -708,7 +708,7 @@
 }
 
 .csk-stat-card--gradient-info .csk-stat-card__icon-container {
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
 }
 
 .csk-stat-card--gradient-info .csk-stat-card__icon {
@@ -718,7 +718,7 @@
 .csk-stat-card--gradient-info .csk-stat-card__trend--up,
 .csk-stat-card--gradient-info .csk-stat-card__trend--down,
 .csk-stat-card--gradient-info .csk-stat-card__trend--neutral {
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
   color: #fff;
 }
 
@@ -729,7 +729,7 @@
 
 .csk-stat-card__icon-container--gradient {
   background: linear-gradient(135deg, var(--csk-color-action) 0%, var(--csk-color-action) 100%);
-  box-shadow: 0 4px 12px rgba(17, 118, 166, 0.3);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--csk-color-action) 30%, transparent);
 }
 
 .csk-stat-card__icon-container--gradient .csk-stat-card__icon,

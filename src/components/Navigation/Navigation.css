@@ -330,12 +330,12 @@
 }
 
 .csk-mainnav--gradient .csk-mainnav__link {
-  color: rgba(255, 255, 255, 0.85);
+  color: color-mix(in srgb, var(--csk-white) 85%, transparent);
 }
 
 .csk-mainnav--gradient .csk-mainnav__link:hover {
   color: var(--csk-color-surface);
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: color-mix(in srgb, var(--csk-white) 15%, transparent);
 }
 
 .csk-mainnav--gradient .csk-mainnav__item--active > .csk-mainnav__link,
@@ -352,20 +352,20 @@
 }
 
 .csk-mainnav--gradient .csk-mainnav__toggle:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: color-mix(in srgb, var(--csk-white) 15%, transparent);
 }
 
 .csk-mainnav--gradient .csk-mainnav__toggle:focus-visible {
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3), 0 0 0 4px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--csk-white) 30%, transparent), 0 0 0 4px color-mix(in srgb, var(--csk-white) 50%, transparent);
 }
 
 /* Glass variant - frosted glass effect */
 .csk-mainnav--glass {
-  background: rgba(255, 255, 255, 0.8);
+  background: color-mix(in srgb, var(--csk-white) 80%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid color-mix(in srgb, var(--csk-white) 30%, transparent);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--csk-color-text) 5%, transparent);
 }
 
 /* Pills variant - nav items as pills */
@@ -689,8 +689,8 @@
 }
 
 [data-theme="dark"] .csk-mainnav--glass {
-  background: rgba(0, 0, 0, 0.7);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
+  background: color-mix(in srgb, var(--csk-color-text) 70%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--csk-white) 10%, transparent);
 }
 
 [data-theme="dark"] .csk-mainnav__dropdown {

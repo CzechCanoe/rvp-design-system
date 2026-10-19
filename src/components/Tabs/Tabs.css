@@ -350,18 +350,18 @@
 }
 
 .csk-tabs--aesthetic.csk-tabs--energy-accent .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active)::after {
-  background: linear-gradient(135deg, rgba(251, 146, 60, 0.5) 0%, rgba(249, 115, 22, 0.4) 100%);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-live) 50%, transparent) 0%, color-mix(in srgb, var(--csk-color-live) 40%, transparent) 100%);
 }
 
 /* Energy accent for pills variant */
 .csk-tabs--pills.csk-tabs--energy-accent .csk-tabs__tab--active {
   background: var(--csk-color-live);
   color: white;
-  box-shadow: 0 2px 8px -2px rgba(249, 115, 22, 0.4);
+  box-shadow: 0 2px 8px -2px color-mix(in srgb, var(--csk-color-live) 40%, transparent);
 }
 
 .csk-tabs--pills.csk-tabs--energy-accent .csk-tabs__tab--active:hover {
-  box-shadow: 0 4px 12px -2px rgba(249, 115, 22, 0.5);
+  box-shadow: 0 4px 12px -2px color-mix(in srgb, var(--csk-color-live) 50%, transparent);
 }
 
 /* =============================================================================

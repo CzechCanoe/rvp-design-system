@@ -51,16 +51,16 @@
 }
 
 .csk-header--gradient .csk-header__toggle:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: color-mix(in srgb, var(--csk-white) 15%, transparent);
 }
 
 .csk-header--gradient .csk-header__toggle:focus-visible {
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3), 0 0 0 4px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--csk-white) 30%, transparent), 0 0 0 4px color-mix(in srgb, var(--csk-white) 50%, transparent);
 }
 
 /* Scrolled state - adds blur effect when sticky header has scrolled */
 .csk-header--scrolled {
-  background: rgba(255, 255, 255, 0.95);
+  background: color-mix(in srgb, var(--csk-white) 95%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--csk-shadow-sm);
@@ -69,8 +69,8 @@
 .csk-header--gradient.csk-header--scrolled {
   background: linear-gradient(
     135deg,
-    rgba(17, 118, 166, 0.95) 0%,
-    rgba(14, 100, 141, 0.95) 100%
+    color-mix(in srgb, var(--csk-color-action) 95%, transparent) 0%,
+    color-mix(in srgb, var(--csk-color-action) 95%, transparent) 100%
   );
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -252,7 +252,7 @@
   position: fixed;
   inset: 0;
   z-index: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: color-mix(in srgb, var(--csk-color-text) 50%, transparent);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   opacity: 0;
@@ -382,14 +382,14 @@
 }
 
 [data-theme="dark"] .csk-header--scrolled {
-  background: rgba(15, 23, 42, 0.95);
+  background: color-mix(in srgb, var(--csk-color-text) 95%, transparent);
 }
 
 [data-theme="dark"] .csk-header--gradient.csk-header--scrolled {
   background: linear-gradient(
     135deg,
-    rgba(17, 118, 166, 0.95) 0%,
-    rgba(14, 100, 141, 0.95) 100%
+    color-mix(in srgb, var(--csk-color-action) 95%, transparent) 0%,
+    color-mix(in srgb, var(--csk-color-action) 95%, transparent) 100%
   );
 }
 
@@ -402,7 +402,7 @@
 }
 
 [data-theme="dark"] .csk-header__backdrop {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: color-mix(in srgb, var(--csk-color-text) 70%, transparent);
 }
 
 /* =============================================================================

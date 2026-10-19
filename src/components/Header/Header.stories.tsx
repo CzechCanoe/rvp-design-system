@@ -561,7 +561,7 @@ export const Gradient: Story = {
     brand: (
       <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'white' }}>
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="32" height="32" rx="8" fill="rgba(255,255,255,0.2)"/>
+          <rect width="32" height="32" rx="8" fill="color-mix(in srgb, var(--csk-white) 20%, transparent)"/>
           <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
         </svg>
         <span style={{ fontWeight: 600, fontSize: '1.125rem' }}>Kanoistika</span>
@@ -577,12 +577,12 @@ export const Gradient: Story = {
               padding: '8px 16px',
               borderRadius: '8px',
               textDecoration: 'none',
-              color: 'rgba(255,255,255,0.9)',
+              color: 'color-mix(in srgb, var(--csk-white) 90%, transparent)',
               fontWeight: 500,
               transition: 'background-color 0.15s ease',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.15)';
+              e.currentTarget.style.backgroundColor = 'color-mix(in srgb, var(--csk-white) 15%, transparent)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'transparent';
@@ -599,8 +599,8 @@ export const Gradient: Story = {
           width: '36px',
           height: '36px',
           borderRadius: '50%',
-          border: '2px solid rgba(255,255,255,0.5)',
-          backgroundColor: 'rgba(255,255,255,0.2)',
+          border: '2px solid color-mix(in srgb, var(--csk-white) 50%, transparent)',
+          backgroundColor: 'color-mix(in srgb, var(--csk-white) 20%, transparent)',
           color: 'white',
           fontWeight: 600,
           fontSize: '14px',
@@ -687,7 +687,7 @@ export const GradientStickyWithBlur: Story = {
     brand: (
       <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'white' }}>
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="32" height="32" rx="8" fill="rgba(255,255,255,0.2)"/>
+          <rect width="32" height="32" rx="8" fill="color-mix(in srgb, var(--csk-white) 20%, transparent)"/>
           <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
         </svg>
         <span style={{ fontWeight: 600, fontSize: '1.125rem' }}>Kanoistika</span>
@@ -703,7 +703,7 @@ export const GradientStickyWithBlur: Story = {
               padding: '8px 16px',
               borderRadius: '8px',
               textDecoration: 'none',
-              color: 'rgba(255,255,255,0.9)',
+              color: 'color-mix(in srgb, var(--csk-white) 90%, transparent)',
               fontWeight: 500,
             }}
           >
@@ -718,8 +718,8 @@ export const GradientStickyWithBlur: Story = {
           width: '36px',
           height: '36px',
           borderRadius: '50%',
-          border: '2px solid rgba(255,255,255,0.5)',
-          backgroundColor: 'rgba(255,255,255,0.2)',
+          border: '2px solid color-mix(in srgb, var(--csk-white) 50%, transparent)',
+          backgroundColor: 'color-mix(in srgb, var(--csk-white) 20%, transparent)',
           color: 'white',
           fontWeight: 600,
           fontSize: '14px',
@@ -776,7 +776,7 @@ export const AllVariants: Story = {
           brand={
             <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'white' }}>
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="32" height="32" rx="8" fill="rgba(255,255,255,0.2)"/>
+                <rect width="32" height="32" rx="8" fill="color-mix(in srgb, var(--csk-white) 20%, transparent)"/>
                 <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
               </svg>
               <span style={{ fontWeight: 600, fontSize: '1.125rem' }}>Kanoistika</span>
@@ -792,7 +792,7 @@ export const AllVariants: Story = {
                     padding: '8px 16px',
                     borderRadius: '8px',
                     textDecoration: 'none',
-                    color: 'rgba(255,255,255,0.9)',
+                    color: 'color-mix(in srgb, var(--csk-white) 90%, transparent)',
                     fontWeight: 500,
                   }}
                 >
@@ -807,8 +807,8 @@ export const AllVariants: Story = {
                 width: '36px',
                 height: '36px',
                 borderRadius: '50%',
-                border: '2px solid rgba(255,255,255,0.5)',
-                backgroundColor: 'rgba(255,255,255,0.2)',
+                border: '2px solid color-mix(in srgb, var(--csk-white) 50%, transparent)',
+                backgroundColor: 'color-mix(in srgb, var(--csk-white) 20%, transparent)',
                 color: 'white',
                 fontWeight: 600,
                 fontSize: '14px',
@@ -1053,7 +1053,7 @@ export const DisplayFontShowcase: Story = {
           brand={
             <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'white' }}>
               <svg width="36" height="36" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="32" height="32" rx="8" fill="rgba(255,255,255,0.2)"/>
+                <rect width="32" height="32" rx="8" fill="color-mix(in srgb, var(--csk-white) 20%, transparent)"/>
                 <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
               </svg>
               <span className="csk-header__brand-title" style={{ fontSize: '1.25rem' }}>Český svaz kanoistů</span>
@@ -1068,8 +1068,8 @@ export const DisplayFontShowcase: Story = {
                 width: '36px',
                 height: '36px',
                 borderRadius: '50%',
-                border: '2px solid rgba(255,255,255,0.5)',
-                backgroundColor: 'rgba(255,255,255,0.2)',
+                border: '2px solid color-mix(in srgb, var(--csk-white) 50%, transparent)',
+                backgroundColor: 'color-mix(in srgb, var(--csk-white) 20%, transparent)',
                 color: 'white',
                 fontWeight: 600,
                 fontSize: '14px',

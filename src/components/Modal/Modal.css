@@ -28,7 +28,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--csk-space-4);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: color-mix(in srgb, var(--csk-color-text) 40%, transparent);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   animation: modal-backdrop-in var(--csk-transition-fast);
@@ -265,7 +265,7 @@
  * ========================================================================== */
 
 [data-theme="dark"] .csk-modal__backdrop {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: color-mix(in srgb, var(--csk-color-text) 60%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }

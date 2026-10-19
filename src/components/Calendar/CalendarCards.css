@@ -387,17 +387,17 @@
 }
 
 [data-theme='dark'] .csk-calendar-cards__event-badge--dv {
-  background-color: rgba(17, 118, 166, 0.2);
+  background-color: color-mix(in srgb, var(--csk-color-action) 20%, transparent);
   color: var(--csk-color-action);
 }
 
 [data-theme='dark'] .csk-calendar-cards__event-badge--ry {
-  background-color: rgba(34, 197, 94, 0.2);
+  background-color: color-mix(in srgb, var(--csk-color-success) 20%, transparent);
   color: var(--csk-color-success);
 }
 
 [data-theme='dark'] .csk-calendar-cards__event-badge--vt {
-  background-color: rgba(239, 68, 68, 0.2);
+  background-color: color-mix(in srgb, var(--csk-color-error) 20%, transparent);
   color: var(--csk-color-error);
 }
 

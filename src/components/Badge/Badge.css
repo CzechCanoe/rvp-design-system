@@ -145,7 +145,7 @@
 
 /* M - Mistr (Master) - purple with gradient */
 .csk-badge--vt-m {
-  background: linear-gradient(135deg, var(--csk-violet) 0%, #6d28d9 100%);
+  background: linear-gradient(135deg, var(--csk-violet) 0%, var(--csk-violet) 100%);
   color: var(--csk-color-surface);
   border-color: transparent;
   box-shadow: none;
@@ -154,7 +154,7 @@
 
 /* A - Class A - red with gradient */
 .csk-badge--vt-a {
-  background: linear-gradient(135deg, var(--csk-red) 0%, #b91c1c 100%);
+  background: linear-gradient(135deg, var(--csk-red) 0%, var(--csk-red) 100%);
   color: var(--csk-color-surface);
   border-color: transparent;
   box-shadow: none;
@@ -162,7 +162,7 @@
 
 /* B - Class B - amber with gradient */
 .csk-badge--vt-b {
-  background: linear-gradient(135deg, var(--csk-amber) 0%, #d97706 100%);
+  background: linear-gradient(135deg, var(--csk-amber) 0%, var(--csk-amber) 100%);
   color: var(--csk-color-text);
   border-color: transparent;
   box-shadow: none;
@@ -170,7 +170,7 @@
 
 /* C - Class C - green with gradient */
 .csk-badge--vt-c {
-  background: linear-gradient(135deg, var(--csk-green) 0%, #15803d 100%);
+  background: linear-gradient(135deg, var(--csk-green) 0%, var(--csk-green) 100%);
   color: var(--csk-color-surface);
   border-color: transparent;
   box-shadow: none;
@@ -293,10 +293,10 @@
 
 @keyframes csk-badge-glow-pulse-success {
   0%, 100% {
-    box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--csk-color-success) 40%, transparent);
   }
   50% {
-    box-shadow: 0 0 24px rgba(34, 197, 94, 0.6);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--csk-color-success) 60%, transparent);
   }
 }
 
@@ -306,10 +306,10 @@
 
 @keyframes csk-badge-glow-pulse-error {
   0%, 100% {
-    box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--csk-color-error) 40%, transparent);
   }
   50% {
-    box-shadow: 0 0 24px rgba(239, 68, 68, 0.6);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--csk-color-error) 60%, transparent);
   }
 }
 

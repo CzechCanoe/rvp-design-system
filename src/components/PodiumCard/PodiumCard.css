@@ -75,10 +75,10 @@
 .podium-card--gold {
   background: linear-gradient(
     135deg,
-    rgba(255, 215, 0, 0.08) 0%,
-    rgba(255, 215, 0, 0.02) 100%
+    color-mix(in srgb, var(--csk-color-podium-1) 8%, transparent) 0%,
+    color-mix(in srgb, var(--csk-color-podium-1) 2%, transparent) 100%
   );
-  border-color: rgba(255, 215, 0, 0.3);
+  border-color: color-mix(in srgb, var(--csk-color-podium-1) 30%, transparent);
 }
 
 .podium-card--gold::before {
@@ -91,21 +91,21 @@
 }
 
 .podium-card--gold:hover {
-  border-color: rgba(255, 215, 0, 0.5);
+  border-color: color-mix(in srgb, var(--csk-color-podium-1) 50%, transparent);
   box-shadow:
     var(--csk-shadow-sm),
-    0 0 20px rgba(255, 215, 0, 0.15);
+    0 0 20px color-mix(in srgb, var(--csk-color-podium-1) 15%, transparent);
 }
 
 .podium-card--gold .podium-card__rank {
   background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
   color: #000;
-  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--csk-color-podium-1) 40%, transparent);
 }
 
 .podium-card--gold .podium-card__avatar {
-  border-color: rgba(255, 215, 0, 0.5);
-  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+  border-color: color-mix(in srgb, var(--csk-color-podium-1) 50%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-podium-1) 20%, transparent);
 }
 
 .podium-card--gold .podium-card__name {
@@ -123,10 +123,10 @@
 .podium-card--silver {
   background: linear-gradient(
     135deg,
-    rgba(192, 192, 192, 0.08) 0%,
-    rgba(192, 192, 192, 0.02) 100%
+    color-mix(in srgb, var(--csk-color-podium-2) 8%, transparent) 0%,
+    color-mix(in srgb, var(--csk-color-podium-2) 2%, transparent) 100%
   );
-  border-color: rgba(192, 192, 192, 0.3);
+  border-color: color-mix(in srgb, var(--csk-color-podium-2) 30%, transparent);
 }
 
 .podium-card--silver::before {
@@ -139,21 +139,21 @@
 }
 
 .podium-card--silver:hover {
-  border-color: rgba(192, 192, 192, 0.5);
+  border-color: color-mix(in srgb, var(--csk-color-podium-2) 50%, transparent);
   box-shadow:
     var(--csk-shadow-sm),
-    0 0 20px rgba(192, 192, 192, 0.15);
+    0 0 20px color-mix(in srgb, var(--csk-color-podium-2) 15%, transparent);
 }
 
 .podium-card--silver .podium-card__rank {
   background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
   color: #333;
-  box-shadow: 0 2px 8px rgba(192, 192, 192, 0.4);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--csk-color-podium-2) 40%, transparent);
 }
 
 .podium-card--silver .podium-card__avatar {
-  border-color: rgba(192, 192, 192, 0.5);
-  box-shadow: 0 0 0 3px rgba(192, 192, 192, 0.2);
+  border-color: color-mix(in srgb, var(--csk-color-podium-2) 50%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-podium-2) 20%, transparent);
 }
 
 .podium-card--silver .podium-card__primary-value {
@@ -167,10 +167,10 @@
 .podium-card--bronze {
   background: linear-gradient(
     135deg,
-    rgba(205, 127, 50, 0.08) 0%,
-    rgba(205, 127, 50, 0.02) 100%
+    color-mix(in srgb, var(--csk-color-podium-3) 8%, transparent) 0%,
+    color-mix(in srgb, var(--csk-color-podium-3) 2%, transparent) 100%
   );
-  border-color: rgba(205, 127, 50, 0.3);
+  border-color: color-mix(in srgb, var(--csk-color-podium-3) 30%, transparent);
 }
 
 .podium-card--bronze::before {
@@ -183,21 +183,21 @@
 }
 
 .podium-card--bronze:hover {
-  border-color: rgba(205, 127, 50, 0.5);
+  border-color: color-mix(in srgb, var(--csk-color-podium-3) 50%, transparent);
   box-shadow:
     var(--csk-shadow-sm),
-    0 0 20px rgba(205, 127, 50, 0.15);
+    0 0 20px color-mix(in srgb, var(--csk-color-podium-3) 15%, transparent);
 }
 
 .podium-card--bronze .podium-card__rank {
   background: linear-gradient(135deg, #cd7f32 0%, #daa06d 100%);
   color: #fff;
-  box-shadow: 0 2px 8px rgba(205, 127, 50, 0.4);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--csk-color-podium-3) 40%, transparent);
 }
 
 .podium-card--bronze .podium-card__avatar {
-  border-color: rgba(205, 127, 50, 0.5);
-  box-shadow: 0 0 0 3px rgba(205, 127, 50, 0.2);
+  border-color: color-mix(in srgb, var(--csk-color-podium-3) 50%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-podium-3) 20%, transparent);
 }
 
 .podium-card--bronze .podium-card__primary-value {
@@ -435,10 +435,10 @@
 [data-theme='dark'] .podium-card--gold {
   background: linear-gradient(
     135deg,
-    rgba(255, 215, 0, 0.12) 0%,
-    rgba(255, 215, 0, 0.04) 100%
+    color-mix(in srgb, var(--csk-color-podium-1) 12%, transparent) 0%,
+    color-mix(in srgb, var(--csk-color-podium-1) 4%, transparent) 100%
   );
-  border-color: rgba(255, 215, 0, 0.4);
+  border-color: color-mix(in srgb, var(--csk-color-podium-1) 40%, transparent);
 }
 
 [data-theme='dark'] .podium-card--gold .podium-card__primary-value {
@@ -448,10 +448,10 @@
 [data-theme='dark'] .podium-card--silver {
   background: linear-gradient(
     135deg,
-    rgba(192, 192, 192, 0.12) 0%,
-    rgba(192, 192, 192, 0.04) 100%
+    color-mix(in srgb, var(--csk-color-podium-2) 12%, transparent) 0%,
+    color-mix(in srgb, var(--csk-color-podium-2) 4%, transparent) 100%
   );
-  border-color: rgba(192, 192, 192, 0.4);
+  border-color: color-mix(in srgb, var(--csk-color-podium-2) 40%, transparent);
 }
 
 [data-theme='dark'] .podium-card--silver .podium-card__primary-value {
@@ -461,10 +461,10 @@
 [data-theme='dark'] .podium-card--bronze {
   background: linear-gradient(
     135deg,
-    rgba(205, 127, 50, 0.12) 0%,
-    rgba(205, 127, 50, 0.04) 100%
+    color-mix(in srgb, var(--csk-color-podium-3) 12%, transparent) 0%,
+    color-mix(in srgb, var(--csk-color-podium-3) 4%, transparent) 100%
   );
-  border-color: rgba(205, 127, 50, 0.4);
+  border-color: color-mix(in srgb, var(--csk-color-podium-3) 40%, transparent);
 }
 
 [data-theme='dark'] .podium-card--bronze .podium-card__primary-value {

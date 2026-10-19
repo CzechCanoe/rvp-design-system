@@ -126,7 +126,7 @@
   padding: var(--csk-space-6);
   background: var(--csk-color-surface-2);
   border: none;
-  box-shadow: var(--csk-shadow-sm), none;
+  box-shadow: var(--csk-shadow-sm);
 }
 
 .csk-athlete-card--featured::before {
@@ -144,7 +144,7 @@
   width: 96px;
   height: 96px;
   margin-bottom: var(--csk-space-2);
-  box-shadow: var(--csk-shadow-sm), none;
+  box-shadow: var(--csk-shadow-sm);
   border: 3px solid var(--csk-color-surface);
 }
 
@@ -235,12 +235,12 @@
 
 /* Clickable + Featured hover */
 .csk-athlete-card--clickable.csk-athlete-card--featured:hover {
-  box-shadow: var(--csk-shadow-sm), none;
+  box-shadow: var(--csk-shadow-sm);
   transform: translateY(-4px);
 }
 
 .csk-athlete-card--clickable.csk-athlete-card--featured:active {
-  box-shadow: var(--csk-shadow-sm), none;
+  box-shadow: var(--csk-shadow-sm);
   transform: translateY(0);
 }
 

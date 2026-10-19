@@ -366,7 +366,7 @@ export const CSKFullExample: MainNavStory = {
             style={{
               width: '140px',
               height: '40px',
-              background: 'rgba(255, 255, 255, 0.2)',
+              background: 'color-mix(in srgb, var(--csk-white) 20%, transparent)',
               borderRadius: 'var(--csk-radius-md)',
               display: 'flex',
               alignItems: 'center',
@@ -389,8 +389,8 @@ export const CSKFullExample: MainNavStory = {
               variant="primary"
               size="sm"
               style={{
-                background: 'rgba(255, 255, 255, 0.2)',
-                borderColor: 'rgba(255, 255, 255, 0.3)',
+                background: 'color-mix(in srgb, var(--csk-white) 20%, transparent)',
+                borderColor: 'color-mix(in srgb, var(--csk-white) 30%, transparent)',
                 color: 'white',
               }}
             >

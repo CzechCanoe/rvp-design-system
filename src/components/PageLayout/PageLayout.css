@@ -5,7 +5,7 @@
   flex-direction: column;
   min-height: 100%;
   background: var(--csk-color-surface);
-  color: var(--csk-color-on-surface);
+  color: var(--csk-color-text);
 }
 
 /* Header */
@@ -13,7 +13,7 @@
   flex-shrink: 0;
   position: sticky;
   top: 0;
-  z-index: var(--csk-z-sticky, 100);
+  z-index: 100;
 }
 
 /* Main content area */
@@ -79,5 +79,5 @@
 
 /* Satellite variant - slightly different background */
 .csk-page-layout--satellite {
-  background: var(--csk-color-surface-dim);
+  background: var(--csk-color-surface-3);
 }

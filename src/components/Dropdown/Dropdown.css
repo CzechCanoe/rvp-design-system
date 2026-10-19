@@ -350,7 +350,7 @@
 
 [data-theme="dark"] .csk-dropdown__item--danger:hover,
 [data-theme="dark"] .csk-dropdown__item--danger.csk-dropdown__item--focused {
-  background-color: rgba(239, 68, 68, 0.15);
+  background-color: color-mix(in srgb, var(--csk-color-error) 15%, transparent);
 }
 
 /* ==========================================================================

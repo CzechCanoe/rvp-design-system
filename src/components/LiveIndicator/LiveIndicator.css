@@ -311,9 +311,9 @@
 .csk-live-indicator--energy-glow .csk-live-indicator__dot {
   background: var(--csk-color-live);
   box-shadow:
-    0 0 8px rgba(249, 115, 22, 0.6),
-    0 0 16px rgba(249, 115, 22, 0.4),
-    0 0 24px rgba(249, 115, 22, 0.2);
+    0 0 8px color-mix(in srgb, var(--csk-color-live) 60%, transparent),
+    0 0 16px color-mix(in srgb, var(--csk-color-live) 40%, transparent),
+    0 0 24px color-mix(in srgb, var(--csk-color-live) 20%, transparent);
 }
 
 .csk-live-indicator--energy-glow.csk-live-indicator--pulse .csk-live-indicator__dot {
@@ -327,13 +327,13 @@
 /* Energy badge style */
 .csk-live-indicator--style-badge.csk-live-indicator--energy-glow,
 .csk-live-indicator--style-badge.csk-live-indicator--color-energy {
-  background: linear-gradient(135deg, rgba(251, 146, 60, 0.15) 0%, rgba(249, 115, 22, 0.1) 100%);
-  border: 1px solid rgba(249, 115, 22, 0.3);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-live) 15%, transparent) 0%, color-mix(in srgb, var(--csk-color-live) 10%, transparent) 100%);
+  border: 1px solid color-mix(in srgb, var(--csk-color-live) 30%, transparent);
 }
 
 .csk-live-indicator--style-badge.csk-live-indicator--energy-glow:hover {
-  background: linear-gradient(135deg, rgba(251, 146, 60, 0.2) 0%, rgba(249, 115, 22, 0.15) 100%);
-  box-shadow: 0 4px 12px -2px rgba(249, 115, 22, 0.3);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-live) 20%, transparent) 0%, color-mix(in srgb, var(--csk-color-live) 15%, transparent) 100%);
+  box-shadow: 0 4px 12px -2px color-mix(in srgb, var(--csk-color-live) 30%, transparent);
 }
 
 /* ==========================================================================
@@ -376,17 +376,17 @@
 @keyframes live-indicator-energy-glow {
   0%, 100% {
     box-shadow:
-      0 0 8px rgba(249, 115, 22, 0.6),
-      0 0 16px rgba(249, 115, 22, 0.4),
-      0 0 24px rgba(249, 115, 22, 0.2);
+      0 0 8px color-mix(in srgb, var(--csk-color-live) 60%, transparent),
+      0 0 16px color-mix(in srgb, var(--csk-color-live) 40%, transparent),
+      0 0 24px color-mix(in srgb, var(--csk-color-live) 20%, transparent);
     transform: scale(1);
   }
   50% {
     box-shadow:
-      0 0 12px rgba(249, 115, 22, 0.8),
-      0 0 24px rgba(249, 115, 22, 0.5),
-      0 0 36px rgba(249, 115, 22, 0.3),
-      0 0 48px rgba(249, 115, 22, 0.1);
+      0 0 12px color-mix(in srgb, var(--csk-color-live) 80%, transparent),
+      0 0 24px color-mix(in srgb, var(--csk-color-live) 50%, transparent),
+      0 0 36px color-mix(in srgb, var(--csk-color-live) 30%, transparent),
+      0 0 48px color-mix(in srgb, var(--csk-color-live) 10%, transparent);
     transform: scale(1.1);
   }
 }
@@ -451,35 +451,35 @@
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-error,
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--live,
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--recording {
-  background: rgba(239, 68, 68, 0.15);
-  border-color: rgba(239, 68, 68, 0.3);
+  background: color-mix(in srgb, var(--csk-color-error) 15%, transparent);
+  border-color: color-mix(in srgb, var(--csk-color-error) 30%, transparent);
 }
 
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-success {
-  background: rgba(34, 197, 94, 0.15);
-  border-color: rgba(34, 197, 94, 0.3);
+  background: color-mix(in srgb, var(--csk-color-success) 15%, transparent);
+  border-color: color-mix(in srgb, var(--csk-color-success) 30%, transparent);
 }
 
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-warning,
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--connecting {
-  background: rgba(245, 158, 11, 0.15);
-  border-color: rgba(245, 158, 11, 0.3);
+  background: color-mix(in srgb, var(--csk-color-warning) 15%, transparent);
+  border-color: color-mix(in srgb, var(--csk-color-warning) 30%, transparent);
 }
 
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-info {
-  background: rgba(59, 130, 246, 0.15);
-  border-color: rgba(59, 130, 246, 0.3);
+  background: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
+  border-color: color-mix(in srgb, var(--csk-color-action) 30%, transparent);
 }
 
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-primary {
-  background: rgba(17, 118, 166, 0.15);
-  border-color: rgba(17, 118, 166, 0.3);
+  background: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
+  border-color: color-mix(in srgb, var(--csk-color-action) 30%, transparent);
 }
 
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-default,
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--offline {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: color-mix(in srgb, var(--csk-white) 5%, transparent);
+  border-color: color-mix(in srgb, var(--csk-white) 10%, transparent);
 }
 
 /* Dark mode energy color */
@@ -494,8 +494,8 @@
 /* Dark mode energy badge */
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--energy-glow,
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-energy {
-  background: rgba(249, 115, 22, 0.15);
-  border-color: rgba(249, 115, 22, 0.3);
+  background: color-mix(in srgb, var(--csk-color-live) 15%, transparent);
+  border-color: color-mix(in srgb, var(--csk-color-live) 30%, transparent);
 }
 
 /* ==========================================================================
