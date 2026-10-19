@@ -126,7 +126,7 @@ const ClubCard = ({ club, onClick }: ClubCardProps) => {
 
   return (
     <Card
-      variant="aesthetic"
+      variant="surface"
       padding="none"
       className={`club-card ${onClick ? 'club-card--clickable' : ''}`}
       clickable={!!onClick}

@@ -48,7 +48,7 @@ const SimpleFooter = () => (
 
 const PageContent = () => (
   <div style={{ padding: '24px 0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-    <Card variant="elevated">
+    <Card variant="surface">
       <h2 style={{ margin: '0 0 8px' }}>Welcome to CSK</h2>
       <p style={{ margin: 0 }}>This is an example page layout demonstrating the component.</p>
     </Card>

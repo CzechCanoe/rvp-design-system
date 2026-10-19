@@ -12,7 +12,7 @@ const meta: Meta<typeof Card> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['surface', 'elevated', 'outlined', 'aesthetic'],
+      options: ['surface', 'outlined'],
       description: 'Visual variant of the card',
     },
     padding: {
@@ -52,7 +52,7 @@ type Story = StoryObj<typeof Card>;
 
 export const Default: Story = {
   args: {
-    variant: 'elevated',
+    variant: 'surface',
     children: 'Card content goes here.',
   },
   decorators: [
@@ -71,30 +71,14 @@ export const Default: Story = {
 export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-      <div style={{ width: '200px' }}>
-        <Card variant="surface">
-          <strong>Surface</strong>
-          <p style={{ margin: '8px 0 0', fontSize: '14px' }}>Subtle background</p>
+      <div style={{ width: '240px' }}>
+        <Card variant="surface" header={<strong>Surface</strong>} footer={<span>Footer</span>}>
+          <p style={{ margin: 0, fontSize: '14px' }}>White card with a hairline border</p>
         </Card>
       </div>
-      <div style={{ width: '200px' }}>
-        <Card variant="elevated">
-          <strong>Elevated</strong>
-          <p style={{ margin: '8px 0 0', fontSize: '14px' }}>Shadow elevation</p>
-        </Card>
-      </div>
-      <div style={{ width: '200px' }}>
-        <Card variant="outlined">
-          <strong>Outlined</strong>
-          <p style={{ margin: '8px 0 0', fontSize: '14px' }}>Visible border</p>
-        </Card>
-      </div>
-      <div style={{ width: '200px' }}>
-        <Card variant="aesthetic">
-          <h3 className="csk-card__title" style={{ margin: '0 0 8px', fontWeight: 600 }}>
-            Aesthetic
-          </h3>
-          <p style={{ margin: 0, fontSize: '14px' }}>Dynamic sport style</p>
+      <div style={{ width: '240px' }}>
+        <Card variant="outlined" header={<strong>Outlined</strong>} footer={<span>Footer</span>}>
+          <p style={{ margin: 0, fontSize: '14px' }}>Transparent card with a border</p>
         </Card>
       </div>
     </div>
@@ -102,7 +86,7 @@ export const Variants: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All available card variants: surface, elevated, outlined, and aesthetic.',
+        story: 'Both card variants (surface, outlined), each with header, body and footer slots.',
       },
     },
   },
@@ -154,7 +138,7 @@ export const Padding: Story = {
 
 export const WithHeaderAndFooter: Story = {
   args: {
-    variant: 'elevated',
+    variant: 'surface',
     header: (
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <strong>Event Details</strong>
@@ -206,7 +190,7 @@ export const Clickable: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px' }}>
       <div style={{ width: '200px' }}>
-        <Card variant="elevated" clickable onClick={() => alert('Clicked!')}>
+        <Card variant="surface" clickable onClick={() => alert('Clicked!')}>
           <strong>Clickable Card</strong>
           <p style={{ margin: '8px 0 0', fontSize: '14px' }}>Click me</p>
         </Card>
@@ -237,7 +221,7 @@ export const EventCard: Story = {
   render: () => (
     <div style={{ width: '320px' }}>
       <Card
-        variant="elevated"
+        variant="surface"
         padding="none"
         header={
           <div
@@ -290,125 +274,6 @@ export const EventCard: Story = {
     docs: {
       description: {
         story: 'Event card example with discipline badge, dates, and action buttons.',
-      },
-    },
-  },
-};
-
-/* ==========================================================================
-   AESTHETIC VARIANT - Dynamic Sport
-   ========================================================================== */
-
-export const Aesthetic: Story = {
-  render: () => (
-    <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-      <div style={{ width: '280px' }}>
-        <Card variant="aesthetic">
-          <h3 className="csk-card__title" style={{ margin: '0 0 8px', fontSize: '18px' }}>
-            Aesthetic Card
-          </h3>
-          <p style={{ margin: 0, fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
-            Mesh background with border-accent gradient. Perfect for featured content.
-          </p>
-        </Card>
-      </div>
-      <div style={{ width: '280px' }}>
-        <Card variant="aesthetic" clickable>
-          <h3 className="csk-card__title" style={{ margin: '0 0 8px', fontSize: '18px' }}>
-            Clickable Aesthetic
-          </h3>
-          <p style={{ margin: 0, fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
-            Hover for energy glow effect.
-          </p>
-        </Card>
-      </div>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Aesthetic variant with mesh background, border-accent gradient, and display font titles.',
-      },
-    },
-  },
-};
-
-/* ==========================================================================
-   AESTHETIC EXAMPLE: LIVE EVENT
-   ========================================================================== */
-
-export const AestheticLiveEvent: Story = {
-  name: 'Example: Aesthetic Live Event',
-  render: () => (
-    <div style={{ width: '360px' }}>
-      <Card
-        variant="aesthetic"
-        clickable
-        header={
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '4px 10px',
-                borderRadius: '999px',
-                background: 'linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%)',
-                color: 'white',
-                fontSize: '11px',
-                fontWeight: 700,
-                letterSpacing: '0.05em',
-                textTransform: 'uppercase',
-              }}
-            >
-              <span
-                style={{
-                  width: '6px',
-                  height: '6px',
-                  borderRadius: '50%',
-                  background: 'white',
-                  animation: 'pulse 1.5s ease-in-out infinite',
-                }}
-              />
-              ŽIVĚ
-            </span>
-            <span style={{ fontSize: '13px', color: 'var(--csk-color-text-2)' }}>
-              Semifinále K1M
-            </span>
-          </div>
-        }
-        footer={
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <Button variant="secondary" size="sm" fullWidth>
-              Výsledky
-            </Button>
-            <Button variant="primary" size="sm" fullWidth>
-              Sledovat live
-            </Button>
-          </div>
-        }
-      >
-        <div style={{ padding: '4px 0' }}>
-          <h3
-            className="csk-card__title"
-            style={{
-              margin: '0 0 6px',
-              fontSize: '20px',
-            }}
-          >
-            Český pohár #3
-          </h3>
-          <p style={{ margin: 0, fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
-            Praha Troja • 24. ledna 2026
-          </p>
-        </div>
-      </Card>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Live event card using aesthetic variant with energy badge and CTA button.',
       },
     },
   },

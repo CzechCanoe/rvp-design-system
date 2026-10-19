@@ -6856,3 +6856,26 @@ Zbývající px v `TokensOverview.css` jsou rozměry prvků (výška badge, ší
 
 ### Poznámky
 Snapshoty generuje CI (label `update-snapshots`). Zbylé `[data-theme="dark"]` bloky v ostatních komponentách zůstávají (dark režim se v 2.0 nekreslí).
+
+---
+
+## 2026-10-19 - v2 T4: Button, Card, Badge, Tabs, FilterPills, SearchInput, Avatar (verdikt U)
+
+### Dokončeno
+- [x] Button: sizes md 40 / sm 32, min. šířka dotyku 44, `lg` a `accent="energy"` pryč
+- [x] Card: jen `surface` (bílá s rámem) a `outlined`, `elevated` / `aesthetic` pryč
+- [x] Badge: `level`, `outline`, `live` (statická tečka), `section` / `vtClass` zůstávají; `energy`, `glow`, `outlined`, `lg` pryč
+- [x] Tabs: `variant="nav"` bez panelů, `overflow="wrap|scroll|carousel"` (maska, šipky, doscrollování aktivního, `prefers-reduced-motion`), `size` sm / md; `aesthetic`, `energyAccent`, `lg` pryč
+- [x] FilterPills: pilulky podle reference (34 / 30 px, aktivní navy), `onFilterToggle`, `dismissible`; `lg` a `variant` pryč
+- [x] SearchInput: `sm` 34 / `md` 40, filtr chipy pryč
+- [x] Avatar: `variant` přejmenováno na `shape`, `square` zobrazuje logo celé (`object-fit: contain`)
+- [x] Quarantine záznamy T4 vyřešeny a smazány, test „Gradients render“ přepsán na primary button
+
+### Problémy a řešení
+1. **Problém:** `reuseExistingServer` v Playwright configu použil cizí Storybook na :6006 (jiný worktree), výsledky byly o starém kódu.
+   **Řešení:** vlastní statický build na jiném portu a dočasný config mimo git.
+2. **Problém:** test „Button variants have sufficient contrast“ občas padal na „Axe is already running“.
+   **Řešení:** `networkidle` + 300 ms jako u ostatních a11y testů.
+
+### Poznámky
+- Prototypy: jen minimální úpravy pro kompilaci (velikosti `lg` → `md`, `aesthetic` / `elevated` → `surface`).

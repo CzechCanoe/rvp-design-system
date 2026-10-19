@@ -82,7 +82,7 @@ export const AllSizes: Story = {
         variant="card"
         title="Large"
         description="Prominent empty state for full-page or hero sections."
-        action={<Button size="lg">Take Action</Button>}
+        action={<Button size="md">Take Action</Button>}
       />
     </div>
   ),

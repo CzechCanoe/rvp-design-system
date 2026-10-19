@@ -2,7 +2,7 @@ export { Avatar, AvatarGroup } from './Avatar';
 export type {
   AvatarProps,
   AvatarSize,
-  AvatarVariant,
+  AvatarShape,
   AvatarColor,
   AvatarGroupProps,
 } from './Avatar';

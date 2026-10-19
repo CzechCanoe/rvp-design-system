@@ -491,7 +491,7 @@ const SchedulePanel = ({
                   </span>
                 </div>
                 <div className="live-page-schedule__item-status">
-                  <Badge variant="energy" size="sm" glow>
+                  <Badge variant="primary" size="sm">
                     <span className="live-page-schedule__live-dot" />
                     LIVE
                   </Badge>
@@ -1125,7 +1125,7 @@ const LivePage = ({
         meshBackground
         patternOverlay
         badges={
-          <Badge variant="energy" size="lg" glow>
+          <Badge variant="primary" size="md">
             <span className="live-page-live-dot" />
             LIVE
           </Badge>

@@ -31,7 +31,7 @@ export interface PrototypeConfig {
 
 export const coreComponents: ComponentConfig[] = [
   { name: 'Button', storyId: 'components-button--default', tier: 'core' },
-  { name: 'Button-Variants', storyId: 'components-button--variants', tier: 'core', cssFeatures: ['gradients', 'transitions'] },
+  { name: 'Button-Variants', storyId: 'components-button--variants', tier: 'core', cssFeatures: ['transitions'] },
   { name: 'Input', storyId: 'components-input--default', tier: 'core' },
   { name: 'Input-States', storyId: 'components-input--states', tier: 'core' },
   { name: 'Select', storyId: 'components-select--default', tier: 'core' },
@@ -39,9 +39,9 @@ export const coreComponents: ComponentConfig[] = [
   { name: 'Radio', storyId: 'components-radio--default', tier: 'core' },
   { name: 'Switch', storyId: 'components-switch--default', tier: 'core' },
   { name: 'Card', storyId: 'components-card--default', tier: 'core' },
-  { name: 'Card-Variants', storyId: 'components-card--variants', tier: 'core', cssFeatures: ['flexbox', 'shadows', 'gradients'] },
+  { name: 'Card-Variants', storyId: 'components-card--variants', tier: 'core', cssFeatures: ['flexbox'] },
   { name: 'Badge', storyId: 'components-badge--default', tier: 'core' },
-  { name: 'Badge-CskSections', storyId: 'components-badge--csk-sections', tier: 'core', cssFeatures: ['gradients', 'colors'] },
+  { name: 'Badge-CskSections', storyId: 'components-badge--csk-sections', tier: 'core', cssFeatures: ['colors'] },
   { name: 'Avatar', storyId: 'components-avatar--default', tier: 'core' },
 ];
 
@@ -254,10 +254,6 @@ export const a11ySpecificComponents = specificComponents
 export type QuarantineOwner = 'T1' | 'T3' | 'T4' | 'T5' | 'T7' | 'T8' | 'T17';
 
 export const QUARANTINE: Record<string, { reason: string; owner: QuarantineOwner }> = {
-  'Accessibility - Core Components (Tier 1) › Button-Variants - WCAG 2.1 AA (light)': { owner: 'T4', reason: 'axe color-contrast on 1.x palette (white on #ef4444 = 3.76)' },
-  'Color Contrast › Button variants have sufficient contrast': { owner: 'T4', reason: 'axe color-contrast on 1.x palette' },
-  'Cross-Browser: CSS Features › Gradients render with actual colors': { owner: 'T4', reason: '1.x gradient button variant not found in the story (locator times out); gradients are removed in v2' },
-  'Cross-Browser: CSS Features › Flexbox layouts position children correctly': { owner: 'T4', reason: '1.x Card story has no flex card with >1 positioned children; Card is rewritten in T4' },
   'Accessibility - Advanced Components (Tier 2) › Header - WCAG 2.1 AA (dark)': { owner: 'T8', reason: 'axe color-contrast on 1.x Header' },
   'Accessibility - Specific Components (Tier 3) › AthleteCard - WCAG 2.1 AA (light)': { owner: 'T17', reason: 'axe color-contrast; AthleteCard is removed in v2' },
   'Accessibility - Prototypes › LivePage-Embed - WCAG 2.1 AA (light)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },

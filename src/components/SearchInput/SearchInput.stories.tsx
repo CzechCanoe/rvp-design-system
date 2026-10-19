@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { SearchInput, type SearchFilterChip } from './SearchInput';
+import { SearchInput } from './SearchInput';
+import { FilterPills } from '../FilterPills';
 
 const meta: Meta<typeof SearchInput> = {
   title: 'Components/SearchInput',
@@ -10,7 +11,7 @@ const meta: Meta<typeof SearchInput> = {
     docs: {
       description: {
         component: `
-SearchInput component combines a search field with optional filter chips for quick filtering.
+SearchInput is a search field in two sizes (md 40 px, sm 34 px). Quick filters are separate FilterPills placed next to it (see the Toolbar story).
 
 ## Features
 - Debounced search with configurable delay
@@ -22,10 +23,8 @@ SearchInput component combines a search field with optional filter chips for qui
 - Helper text support
 
 ## Use Cases
-- Calendar page event search with section filters (DV, RY, VT)
-- Athletes list search with club/class filters
-- Registration search with category filters
-- Results search with discipline filters
+- Event, athlete and club search
+- Table toolbar of live results (sm, 16 px font on touch)
         `,
       },
     },
@@ -33,7 +32,7 @@ SearchInput component combines a search field with optional filter chips for qui
   argTypes: {
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md'],
       description: 'Size of the input',
     },
     fullWidth: {
@@ -106,7 +105,6 @@ export const Sizes: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <SearchInput size="sm" placeholder="Small search..." />
       <SearchInput size="md" placeholder="Medium search (default)..." />
-      <SearchInput size="lg" placeholder="Large search..." />
     </div>
   ),
 };
@@ -130,67 +128,7 @@ export const Disabled: Story = {
 };
 
 // =============================================================================
-// With Chips
-// =============================================================================
-
-const sectionChips: SearchFilterChip[] = [
-  { id: 'dv', label: 'Divoká voda', color: 'dv' },
-  { id: 'ry', label: 'Rychlostní', color: 'ry' },
-  { id: 'vt', label: 'Vodní turistika', color: 'vt' },
-];
-
-export const WithChips: Story = {
-  render: () => {
-    const [value, setValue] = useState('');
-    const [activeChips, setActiveChips] = useState<string[]>([]);
-
-    const handleChipToggle = (chipId: string, active: boolean) => {
-      setActiveChips((prev) =>
-        active ? [...prev, chipId] : prev.filter((id) => id !== chipId)
-      );
-    };
-
-    return (
-      <SearchInput
-        value={value}
-        onChange={setValue}
-        placeholder="Hledat závody..."
-        chips={sectionChips}
-        activeChips={activeChips}
-        onChipToggle={handleChipToggle}
-        fullWidth
-      />
-    );
-  },
-};
-
-export const WithActiveChips: Story = {
-  render: () => {
-    const [value, setValue] = useState('');
-    const [activeChips, setActiveChips] = useState<string[]>(['dv']);
-
-    const handleChipToggle = (chipId: string, active: boolean) => {
-      setActiveChips((prev) =>
-        active ? [...prev, chipId] : prev.filter((id) => id !== chipId)
-      );
-    };
-
-    return (
-      <SearchInput
-        value={value}
-        onChange={setValue}
-        placeholder="Hledat závody..."
-        chips={sectionChips}
-        activeChips={activeChips}
-        onChipToggle={handleChipToggle}
-        fullWidth
-      />
-    );
-  },
-};
-
-// =============================================================================
-// With Results Count
+// Results and helper
 // =============================================================================
 
 export const WithResultsCount: Story = {
@@ -233,209 +171,33 @@ export const WithHelperText: Story = {
 };
 
 // =============================================================================
-// Interactive Example
+// Toolbar (search + pills, 390 px)
 // =============================================================================
 
-const categoryChips: SearchFilterChip[] = [
-  { id: 'mcr', label: 'MČR' },
-  { id: 'cp', label: 'Český pohár' },
-  { id: 'nominace', label: 'Nominace' },
-  { id: 'trenink', label: 'Trénink' },
-];
-
-export const Interactive: Story = {
+export const Toolbar: Story = {
   render: () => {
     const [value, setValue] = useState('');
-    const [activeChips, setActiveChips] = useState<string[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [results, setResults] = useState<number | undefined>(undefined);
-
-    const handleSearch = (searchValue: string) => {
-      setLoading(true);
-      setResults(undefined);
-      // Simulate API call
-      setTimeout(() => {
-        setLoading(false);
-        if (searchValue) {
-          setResults(Math.floor(Math.random() * 100));
-        } else {
-          setResults(undefined);
-        }
-      }, 500);
-    };
-
-    const handleChipToggle = (chipId: string, active: boolean) => {
-      setActiveChips((prev) =>
-        active ? [...prev, chipId] : prev.filter((id) => id !== chipId)
-      );
-      handleSearch(value);
-    };
-
-    return (
-      <div style={{ maxWidth: 500 }}>
-        <SearchInput
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-            handleSearch(newValue);
-          }}
-          onSearch={handleSearch}
-          placeholder="Hledat závody..."
-          chips={categoryChips}
-          activeChips={activeChips}
-          onChipToggle={handleChipToggle}
-          loading={loading}
-          resultsCount={results}
-          helperText="Stiskni Enter pro okamžité vyhledání"
-          fullWidth
-        />
-      </div>
-    );
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Fully interactive example with debounced search, loading states, and filter chips.',
-      },
-    },
-  },
-};
-
-// =============================================================================
-// Calendar Search Example
-// =============================================================================
-
-export const CalendarSearch: Story = {
-  render: () => {
-    const [value, setValue] = useState('');
-    const [activeChips, setActiveChips] = useState<string[]>([]);
-
-    const chips: SearchFilterChip[] = [
-      { id: 'dv', label: 'DV', color: 'dv' },
-      { id: 'ry', label: 'RY', color: 'ry' },
-      { id: 'vt', label: 'VT', color: 'vt' },
-      { id: 'live', label: 'LIVE', color: 'energy' },
-    ];
-
-    const handleChipToggle = (chipId: string, active: boolean) => {
-      setActiveChips((prev) =>
-        active ? [...prev, chipId] : prev.filter((id) => id !== chipId)
-      );
-    };
-
-    return (
-      <div style={{ maxWidth: 400 }}>
-        <SearchInput
-          value={value}
-          onChange={setValue}
-          placeholder="Hledat závody..."
-          chips={chips}
-          activeChips={activeChips}
-          onChipToggle={handleChipToggle}
-          size="lg"
-          fullWidth
-        />
-      </div>
-    );
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Example search for calendar page with section filters and LIVE indicator chip.',
-      },
-    },
-  },
-};
-
-// =============================================================================
-// Athletes Search Example
-// =============================================================================
-
-export const AthletesSearch: Story = {
-  render: () => {
-    const [value, setValue] = useState('');
-    const [activeChips, setActiveChips] = useState<string[]>([]);
-
-    const chips: SearchFilterChip[] = [
-      { id: 'junior', label: 'Junioři' },
-      { id: 'senior', label: 'Senioři' },
-      { id: 'vt-m', label: 'VT M', color: 'vt' },
-      { id: 'vt-a', label: 'VT A', color: 'vt' },
-    ];
-
-    const handleChipToggle = (chipId: string, active: boolean) => {
-      setActiveChips((prev) =>
-        active ? [...prev, chipId] : prev.filter((id) => id !== chipId)
-      );
-    };
-
-    return (
-      <div style={{ maxWidth: 450 }}>
-        <SearchInput
-          value={value}
-          onChange={setValue}
-          placeholder="Hledat závodníky podle jména nebo klubu..."
-          chips={chips}
-          activeChips={activeChips}
-          onChipToggle={handleChipToggle}
-          helperText="Např. 'Přindiš', 'USK Praha', 'CZE'"
-          fullWidth
-        />
-      </div>
-    );
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Example search for athletes list with category filters.',
-      },
-    },
-  },
-};
-
-// =============================================================================
-// Dark Mode
-// =============================================================================
-
-export const DarkMode: Story = {
-  render: () => {
-    const [value, setValue] = useState('');
-    const [activeChips, setActiveChips] = useState<string[]>(['dv']);
-
-    const handleChipToggle = (chipId: string, active: boolean) => {
-      setActiveChips((prev) =>
-        active ? [...prev, chipId] : prev.filter((id) => id !== chipId)
-      );
-    };
-
+    const [favorites, setFavorites] = useState(false);
     return (
       <div
-        data-theme="dark"
         style={{
-          padding: 24,
-          backgroundColor: 'var(--csk-color-surface)',
-          borderRadius: 8,
+          width: 390,
+          display: 'flex',
+          gap: 6,
+          alignItems: 'center',
+          padding: 8,
+          background: 'var(--csk-color-surface)',
         }}
       >
-        <SearchInput
-          value={value}
-          onChange={setValue}
-          placeholder="Hledat závody..."
-          chips={sectionChips}
-          activeChips={activeChips}
-          onChipToggle={handleChipToggle}
-          resultsCount={24}
-          fullWidth
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <SearchInput size="sm" fullWidth value={value} onChange={setValue} placeholder="Hledat jméno, klub…" />
+        </div>
+        <FilterPills
+          size="md"
+          filters={[{ key: 'fav', label: '★ 2', active: favorites }]}
+          onFilterToggle={() => setFavorites((v) => !v)}
         />
       </div>
     );
-  },
-  parameters: {
-    backgrounds: { default: 'dark' },
-    docs: {
-      description: {
-        story: 'SearchInput in dark mode.',
-      },
-    },
   },
 };
