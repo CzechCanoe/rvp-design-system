@@ -306,7 +306,6 @@
 
 .csk-calendar__event:hover {
   filter: brightness(0.92);
-  box-shadow: 0 2px 4px color-mix(in srgb, var(--csk-color-text) 10%, transparent);
 }
 
 .csk-calendar--animated .csk-calendar__event:hover {
@@ -1057,7 +1056,6 @@
   background: var(--csk-color-brand);
   color: var(--csk-color-text-on-fill);
   border-radius: var(--csk-radius-md);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--csk-color-action) 25%, transparent);
 }
 
 /* Weekend events - full display with left accent */
@@ -1072,12 +1070,10 @@
   border-radius: var(--csk-radius-md);
   border-left: 3px solid;
   border-left-color: inherit;
-  box-shadow: 0 1px 3px color-mix(in srgb, var(--csk-color-text) 8%, transparent);
 }
 
 .csk-calendar--weekend-showcase .csk-calendar__day--weekend .csk-calendar__event:hover {
   transform: translateX(3px);
-  box-shadow: 0 2px 6px color-mix(in srgb, var(--csk-color-text) 12%, transparent);
 }
 
 /* Section-specific left borders for weekend events */

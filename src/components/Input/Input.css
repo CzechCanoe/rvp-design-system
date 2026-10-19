@@ -130,17 +130,14 @@
 
 .csk-input:hover:not(:disabled):not(:focus) {
   border-color: var(--csk-color-highlight-border);
-  box-shadow: 0 1px 3px color-mix(in srgb, var(--csk-color-text) 5%, transparent);
 }
 
 .csk-input-container--error .csk-input:hover:not(:disabled):not(:focus) {
   border-color: var(--csk-color-error);
-  box-shadow: 0 1px 3px color-mix(in srgb, var(--csk-color-error) 10%, transparent);
 }
 
 .csk-input-container--success .csk-input:hover:not(:disabled):not(:focus) {
   border-color: var(--csk-color-success);
-  box-shadow: 0 1px 3px color-mix(in srgb, var(--csk-color-success) 10%, transparent);
 }
 
 /* ==========================================================================
@@ -415,7 +412,6 @@
 
 [data-theme="dark"] .csk-input:hover:not(:disabled):not(:focus) {
   border-color: var(--csk-color-action);
-  box-shadow: 0 1px 3px color-mix(in srgb, var(--csk-color-text) 20%, transparent);
 }
 
 [data-theme="dark"] .csk-input:focus {

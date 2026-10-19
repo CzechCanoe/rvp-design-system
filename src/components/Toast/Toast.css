@@ -468,10 +468,6 @@
   color: var(--csk-color-warning);
 }
 
-.csk-toast--warning:not(.csk-toast--exiting) .csk-toast__icon {
-  filter: drop-shadow(0 0 6px var(--csk-color-warning));
-}
-
 /* Error variant */
 .csk-toast--error {
   border-left: 4px solid var(--csk-color-error);
@@ -481,10 +477,6 @@
   color: var(--csk-color-error);
 }
 
-.csk-toast--error:not(.csk-toast--exiting) .csk-toast__icon {
-  filter: drop-shadow(0 0 6px var(--csk-color-error));
-}
-
 /* Info variant */
 .csk-toast--info {
   border-left: 4px solid var(--csk-color-info);
@@ -492,10 +484,6 @@
 
 .csk-toast--info .csk-toast__icon {
   color: var(--csk-color-info);
-}
-
-.csk-toast--info:not(.csk-toast--exiting) .csk-toast__icon {
-  filter: drop-shadow(0 0 6px var(--csk-color-info));
 }
 
 /* ==========================================================================
