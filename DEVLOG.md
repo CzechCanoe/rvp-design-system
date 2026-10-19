@@ -7121,3 +7121,6 @@ Live1/Live5 reference shows no on-dark badge; no new token needed (`--csk-color-
 
 ### Poznámky
 Gaps for T18/T19 are listed in the PR body.
+
+### Doplněk (PR #72): Live story
+- Live/Disconnected: header shows `StatusBadge stale`; `.live-page__status` / `__foot` use xs text-2, foot padding left to Card footer; dismissible category pill clears story state.
