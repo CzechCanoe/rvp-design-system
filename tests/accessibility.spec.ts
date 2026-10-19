@@ -47,6 +47,10 @@ const specificComponents = [
   { name: 'LiveIndicator', storyId: 'components-liveindicator--default' },
   { name: 'StatCard', storyId: 'components-statcard--default' },
   { name: 'AthleteCard', storyId: 'components-athletecard--default' },
+  { name: 'TimeValue', storyId: 'components-timevalue--observed-states' },
+  { name: 'RunningTime', storyId: 'components-runningtime--states' },
+  { name: 'RunningTime-StateSwitching', storyId: 'components-runningtime--state-switching' },
+  { name: 'DataAge', storyId: 'components-dataage--overview' },
 ];
 
 // Prototype pages to test

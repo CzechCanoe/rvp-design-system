@@ -1,0 +1,61 @@
+/* =============================================================================
+   DataAge – age of shown data + connection dot, one inline line, never a banner
+   Colour and size are inherited (works on the surface and on the brand band).
+   ============================================================================= */
+
+.csk-data-age {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--csk-space-1);
+  max-width: 100%;
+  min-width: 0;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.csk-data-age__dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--csk-radius-pill);
+  background: currentColor;
+}
+
+.csk-data-age--ok .csk-data-age__dot {
+  background: var(--csk-color-success);
+}
+
+.csk-data-age--reconnecting .csk-data-age__dot {
+  background: var(--csk-color-warning);
+}
+
+.csk-data-age--offline .csk-data-age__dot {
+  background: var(--csk-color-error);
+}
+
+.csk-data-age__connection {
+  flex: none;
+  font-weight: var(--csk-font-weight-semibold);
+}
+
+.csk-data-age__sep {
+  flex: none;
+}
+
+.csk-data-age__text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.csk-data-age__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
