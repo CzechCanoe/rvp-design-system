@@ -5,25 +5,17 @@ import { Subbar } from '../Subbar';
 import { Breadcrumbs } from '../Breadcrumbs';
 import { PageTitle } from '../PageTitle';
 import { KanoeCzContext } from '../KanoeCzContext';
-import {
-  BrandMark,
-  siteNav,
-  subbarItems,
-  SegPlaceholder,
-  PillsPlaceholder,
-  LivePlaceholder,
-  StoryDataAge,
-  TagPlaceholder,
-  LinkButton,
-  ContentPlaceholder,
-} from './layoutStoryParts';
+import { Badge } from '../Badge';
+import { Button } from '../Button';
+import { StatusBadge } from '../StatusBadge';
+import { SegmentedControl } from '../SegmentedControl';
+import { Tabs } from '../Tabs';
+import { BrandMark, siteNav, subbarItems, StoryDataAge, ContentPlaceholder } from './layoutStoryParts';
 
 /**
  * Top part of `docs/v2/reference/Zavod.html` (event detail, desktop):
  * navy site band, action-blue subbar, breadcrumbs, PageTitle with logo,
  * badges, meta row and actions, and the filter toolbar.
- *
- * Placeholders: SegmentedControl (T7), class pills (T4), LIVE badge (T5), badges and buttons (T4).
  */
 const meta: Meta<typeof PageLayout> = {
   title: 'Layout/Tribuna',
@@ -34,7 +26,21 @@ const meta: Meta<typeof PageLayout> = {
 export default meta;
 type Story = StoryObj<typeof PageLayout>;
 
-const classes = ['Forerunners', 'C1 ženy', 'C1 muži', 'K1 ženy', 'K1 muži', 'C2 mix'];
+const classes = ['Forerunners', 'C1 ženy', 'C1 muži', 'K1 ženy', 'K1 muži', 'C2 mix'].map((label) => ({
+  id: label,
+  label,
+}));
+const days = [
+  { value: 'sat', label: 'So 3. 10.' },
+  { value: 'sun', label: 'Ne 4. 10.' },
+];
+const views = [
+  { value: 'results', label: 'Výsledky' },
+  { value: 'startlist', label: 'Startovka' },
+  { value: 'oncourse', label: 'Na trati' },
+  { value: 'program', label: 'Program' },
+];
+const noop = () => {};
 
 const Page = ({ variant = 'tribuna' }: { variant?: 'tribuna' | 'embed' }) => (
   <PageLayout
@@ -60,11 +66,13 @@ const Page = ({ variant = 'tribuna' }: { variant?: 'tribuna' | 'embed' }) => (
         logo="OH"
         badges={
           <>
-            <TagPlaceholder tone="dv">Divoká voda</TagPlaceholder>
-            <TagPlaceholder>Slalom</TagPlaceholder>
-            <TagPlaceholder>Mezinárodní</TagPlaceholder>
-            <LivePlaceholder />
-            <StoryDataAge />
+            <Badge section="dv">Divoká voda</Badge>
+            <Badge variant="level">Slalom</Badge>
+            <Badge variant="level">Mezinárodní</Badge>
+            <StatusBadge state="live" />
+            <span style={{ fontSize: 13 }}>
+              <StoryDataAge />
+            </span>
           </>
         }
         title="Olympic Hopes 2026"
@@ -82,8 +90,8 @@ const Page = ({ variant = 'tribuna' }: { variant?: 'tribuna' | 'embed' }) => (
         }
         actions={
           <>
-            <LinkButton href="#p">Propozice (PDF)</LinkButton>
-            <LinkButton href="#f">★ Sledovat</LinkButton>
+            <Button variant="secondary">Propozice (PDF)</Button>
+            <Button variant="secondary">★ Sledovat</Button>
           </>
         }
       />
@@ -99,11 +107,13 @@ const Page = ({ variant = 'tribuna' }: { variant?: 'tribuna' | 'embed' }) => (
           borderRadius: 'var(--csk-radius-lg)',
         }}
       >
-        <SegPlaceholder items={['So 3. 10.', 'Ne 4. 10.']} active={1} />
+        <SegmentedControl items={days} value="sun" onChange={noop} aria-label="Den" />
         <span style={{ width: 1, height: 24, background: 'var(--csk-color-border)' }} />
-        <PillsPlaceholder items={classes} active={4} />
-        <div style={{ marginLeft: 'auto' }}>
-          <SegPlaceholder items={['Výsledky', 'Startovka', 'Na trati', 'Program']} active={0} />
+        <div style={{ flex: '1 1 320px', minWidth: 0 }}>
+          <Tabs variant="nav" size="sm" tabs={classes} activeTab="K1 muži" aria-label="Třída" />
+        </div>
+        <div>
+          <SegmentedControl items={views} value="results" onChange={noop} aria-label="Pohled" />
         </div>
       </div>
 

@@ -3,13 +3,15 @@ import { PageLayout } from './PageLayout';
 import { Header } from '../Header';
 import { Breadcrumbs } from '../Breadcrumbs';
 import { PageTitle } from '../PageTitle';
-import { BrandMark, TagPlaceholder, LinkButton, ContentPlaceholder } from './layoutStoryParts';
+import { Badge } from '../Badge';
+import { Button } from '../Button';
+import { BrandMark, ContentPlaceholder } from './layoutStoryParts';
 
 /**
  * Header of `docs/v2/reference/Prihlaska.html` (office, grey working surface):
  * 44 px app bar, white title band with breadcrumbs, status and deadlines.
  *
- * Placeholders: badges (T4), outline button (T4), deadline text (DeadlineBadge, later phase).
+ * Deadline text stands in for DeadlineBadge (later phase).
  */
 const meta: Meta<typeof PageLayout> = {
   title: 'Layout/Urad',
@@ -61,12 +63,12 @@ export const Default: Story = {
           }
           titleBefore={
             <>
-              <TagPlaceholder tone="dv">DV</TagPlaceholder>
-              <TagPlaceholder>NKZ</TagPlaceholder>
+              <Badge section="dv">DV</Badge>
+              <Badge variant="level">NKZ</Badge>
             </>
           }
           title="Nominační závod, Lipno · 23.–24. 5. 2026"
-          titleAfter={<TagPlaceholder tone="outline">Rozpracovaná</TagPlaceholder>}
+          titleAfter={<Badge variant="outline">Rozpracovaná</Badge>}
           aside={
             <>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
@@ -88,7 +90,7 @@ export const Default: Story = {
               </div>
             </>
           }
-          actions={<LinkButton small href="#propozice">Propozice</LinkButton>}
+          actions={<Button variant="secondary" size="sm">Propozice</Button>}
         />
       }
     >

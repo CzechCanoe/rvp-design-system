@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { EventHeader } from './EventHeader';
-import { LivePlaceholder, StoryDataAge } from '../PageLayout/layoutStoryParts';
+import { StatusBadge } from '../StatusBadge';
+import { StoryDataAge } from '../PageLayout/layoutStoryParts';
 
 const meta: Meta<typeof EventHeader> = {
   title: 'Components/EventHeader',
@@ -32,7 +33,7 @@ export const Default: Story = {
     title: 'Olympic Hopes 2026',
     subtitle: 'Roudnice nad Labem · neděle 4. 10. · 2. jízdy',
     backHref: '#zavody',
-    status: <LivePlaceholder />,
+    status: <StatusBadge state="live" />,
     dataAge: <StoryDataAge />,
   },
 };

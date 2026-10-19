@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { PageTitle } from './PageTitle';
 import { Breadcrumbs } from '../Breadcrumbs';
-import { LinkButton, TagPlaceholder } from '../PageLayout/layoutStoryParts';
+import { Badge } from '../Badge';
+import { Button } from '../Button';
 
 const meta: Meta<typeof PageTitle> = {
   title: 'Components/PageTitle',
@@ -32,8 +33,8 @@ export const Default: Story = {
     logo: 'OH',
     badges: (
       <>
-        <TagPlaceholder tone="dv">Divoká voda</TagPlaceholder>
-        <TagPlaceholder>Slalom</TagPlaceholder>
+        <Badge section="dv">Divoká voda</Badge>
+        <Badge variant="level">Slalom</Badge>
       </>
     ),
     meta: (
@@ -45,7 +46,7 @@ export const Default: Story = {
         <span>246 lodí</span>
       </>
     ),
-    actions: <LinkButton>Propozice (PDF)</LinkButton>,
+    actions: <Button variant="secondary">Propozice (PDF)</Button>,
   },
 };
 
@@ -60,8 +61,8 @@ export const OfficeBar: Story = {
       <Breadcrumbs items={[{ label: 'Přihlášky oddílu', href: '#p' }, { label: 'Nominační závod, Lipno' }]} />
     ),
     title: 'Nominační závod, Lipno · 23.–24. 5. 2026',
-    titleAfter: <TagPlaceholder tone="outline">Rozpracovaná</TagPlaceholder>,
-    actions: <LinkButton small>Propozice</LinkButton>,
+    titleAfter: <Badge variant="outline">Rozpracovaná</Badge>,
+    actions: <Button variant="secondary" size="sm">Propozice</Button>,
   },
   parameters: { layout: 'fullscreen' },
 };
