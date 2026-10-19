@@ -6,6 +6,16 @@
  * and are replaced by the real ones in the Page stories (T15+).
  */
 import type { CSSProperties, ReactNode } from 'react';
+import { DataAge } from '../DataAge';
+import { createTestClock } from '../../clock';
+
+const STORY_NOW = Date.UTC(2026, 9, 4, 12, 32, 10);
+const storyClock = createTestClock({ now: STORY_NOW });
+
+/** DataAge on a fixed clock: "aktualizováno před 1 s". */
+export function StoryDataAge() {
+  return <DataAge receivedAt={STORY_NOW - 1_000} clock={storyClock} />;
+}
 
 export function BrandMark({ name = 'Český svaz kanoistů' }: { name?: string }) {
   return (

@@ -12,6 +12,7 @@ import {
   SegPlaceholder,
   PillsPlaceholder,
   LivePlaceholder,
+  StoryDataAge,
   TagPlaceholder,
   LinkButton,
   ContentPlaceholder,
@@ -63,7 +64,7 @@ const Page = ({ variant = 'tribuna' }: { variant?: 'tribuna' | 'embed' }) => (
             <TagPlaceholder>Slalom</TagPlaceholder>
             <TagPlaceholder>Mezinárodní</TagPlaceholder>
             <LivePlaceholder />
-            <span style={{ fontSize: 13, color: 'var(--csk-color-text-3)' }}>aktualizováno před 1 s</span>
+            <StoryDataAge />
           </>
         }
         title="Olympic Hopes 2026"

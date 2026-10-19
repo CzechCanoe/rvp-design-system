@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { EventHeader } from './EventHeader';
-import { LivePlaceholder } from '../PageLayout/layoutStoryParts';
+import { LivePlaceholder, StoryDataAge } from '../PageLayout/layoutStoryParts';
 
 const meta: Meta<typeof EventHeader> = {
   title: 'Components/EventHeader',
@@ -33,7 +33,7 @@ export const Default: Story = {
     subtitle: 'Roudnice nad Labem · neděle 4. 10. · 2. jízdy',
     backHref: '#zavody',
     status: <LivePlaceholder />,
-    dataAge: 'aktualizováno před 1 s',
+    dataAge: <StoryDataAge />,
   },
 };
 

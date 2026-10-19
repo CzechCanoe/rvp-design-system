@@ -6,6 +6,7 @@ import {
   SegPlaceholder,
   PillsPlaceholder,
   LivePlaceholder,
+  StoryDataAge,
   ContentPlaceholder,
   bottomBarItems,
 } from './layoutStoryParts';
@@ -45,7 +46,7 @@ const Phone = ({ condensed = false }: { condensed?: boolean }) => (
       title="Olympic Hopes 2026"
       subtitle="Roudnice nad Labem · neděle 4. 10. · 2. jízdy"
       status={<LivePlaceholder />}
-      dataAge="aktualizováno před 1 s"
+      dataAge={<StoryDataAge />}
     />
 
     <div
