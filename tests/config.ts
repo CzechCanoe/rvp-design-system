@@ -191,6 +191,7 @@ export const pageStories: Array<{ name: string; storyId: string }> = [
   { name: 'Athlete-MobileProfile', storyId: 'athlete--mobile-profile' },
   // v2 T13: Calendar page (reference Kalendar). Same spec/tolerance; the file is live-pages.spec.ts.
   { name: 'Calendar-Season', storyId: 'calendar--season' },
+  { name: 'Event-Detail', storyId: 'event-detail--default' },
 ];
 
 export const pageStoryMaxDiffPixels = 80;
