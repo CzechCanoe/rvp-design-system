@@ -6995,3 +6995,7 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 - Čas jen v sekundách (`95.43`), bez `m:ss` (čeká na maintainera).
 - Výkon 100 řádků na RPi (2 workery): medián ~300–450 ms (render + commit + layout); test má rozpočet 800 ms.
 - `docs/COMPONENT_API.md` popisuje ještě 1.x API (stejně jako u ostatních v2 komponent), aktualizace patří k dokumentační fázi.
+
+### Poznámka po CI (T9)
+- Snapshoty 390 + 1280 vygenerovalo CI (`test: update snapshots (CI)`, 31 PNG, jen ResultsTable / RunDetail).
+- Výkon 100 řádků v CI (4 workery paralelně): medián 306.5 ms (146–454 ms), rozpočet testu 800 ms.
