@@ -63,6 +63,7 @@ const specificComponents = [
   { name: 'TimeValue', storyId: 'components-timevalue--observed-states' },
   { name: 'RunningTime', storyId: 'components-runningtime--states' },
   { name: 'RunningTime-StateSwitching', storyId: 'components-runningtime--state-switching' },
+  { name: 'EventHeader-StatusStates', storyId: 'components-eventheader--status-states' },
   { name: 'DataAge', storyId: 'components-dataage--overview' },
   { name: 'OnCoursePanel-ThreeRiders', storyId: 'components-oncoursepanel--three-riders' },
   { name: 'OnCoursePanel-SixRiders', storyId: 'components-oncoursepanel--six-riders' },

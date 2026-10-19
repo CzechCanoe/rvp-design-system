@@ -147,6 +147,7 @@ export const viewportStories: Array<{ name: string; storyId: string }> = [
   { name: 'ResultsTable-Expanded', storyId: 'components-resultstable--expanded' },
   { name: 'ResultsTable-Startlist', storyId: 'components-resultstable--startlist' },
   { name: 'ResultsTable-Empty', storyId: 'components-resultstable--empty' },
+  { name: 'EventHeader-StatusStates', storyId: 'components-eventheader--status-states' },
   { name: 'StartlistTable', storyId: 'components-startlisttable--default' },
   { name: 'StartlistTable-SingleStart', storyId: 'components-startlisttable--single-start' },
   { name: 'StartlistTable-WithNotice', storyId: 'components-startlisttable--with-notice' },
