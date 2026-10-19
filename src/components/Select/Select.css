@@ -132,31 +132,7 @@
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-success) 12%, transparent),
     0 0 0 1px color-mix(in srgb, var(--csk-color-success) 25%, transparent),
     0 0 12px color-mix(in srgb, var(--csk-color-success) 15%, transparent);
-}
-
-/* Energy focus - coral-orange accent for prominent selects */
-.csk-select-container--energy-focus .csk-select:focus {
-  border-color: var(--csk-color-live);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-live) 15%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--csk-color-live) 35%, transparent),
-    0 0 12px color-mix(in srgb, var(--csk-color-live) 20%, transparent);
-}
-
-.csk-select-container--energy-focus .csk-select:focus + .csk-select-chevron {
-  color: var(--csk-color-live);
-}
-
-.csk-select-container--energy-focus .csk-select:hover:not(:disabled):not(:focus) {
-  border-color: var(--csk-color-live);
-  box-shadow: 0 1px 3px color-mix(in srgb, var(--csk-color-live) 10%, transparent);
-}
-
-/* Energy focus label color */
-.csk-select-wrapper:focus-within:has(.csk-select-container--energy-focus) .csk-select-label {
-  color: var(--csk-color-live);
-}
-
-/* ==========================================================================
+}/* ==========================================================================
    HOVER STATES - Subtle enhancement
    ========================================================================== */
 
@@ -409,20 +385,7 @@
 
 [data-theme="dark"] .csk-select-container--success .csk-select {
   background-color: color-mix(in srgb, var(--csk-color-success) 5%, transparent);
-}
-
-[data-theme="dark"] .csk-select-container--energy-focus .csk-select:focus {
-  border-color: var(--csk-color-live);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-live) 20%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--csk-color-live) 45%, transparent);
-}
-
-[data-theme="dark"] .csk-select-container--energy-focus .csk-select:hover:not(:disabled):not(:focus) {
-  border-color: var(--csk-color-live);
-  box-shadow: 0 1px 3px color-mix(in srgb, var(--csk-color-live) 15%, transparent);
-}
-
-/* ==========================================================================
+}/* ==========================================================================
    REDUCED MOTION
    ========================================================================== */
 

@@ -131,27 +131,7 @@
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-success) 12%, transparent),
     0 0 0 1px color-mix(in srgb, var(--csk-color-success) 25%, transparent),
     0 0 12px color-mix(in srgb, var(--csk-color-success) 15%, transparent);
-}
-
-/* Energy focus - coral-orange accent for prominent inputs */
-.csk-input-container--energy-focus .csk-input:focus {
-  border-color: var(--csk-color-live);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-live) 15%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--csk-color-live) 35%, transparent),
-    0 0 12px color-mix(in srgb, var(--csk-color-live) 20%, transparent);
-}
-
-.csk-input-container--energy-focus .csk-input:hover:not(:disabled):not(:focus) {
-  border-color: var(--csk-color-live);
-  box-shadow: 0 1px 3px color-mix(in srgb, var(--csk-color-live) 10%, transparent);
-}
-
-/* Energy focus label color */
-.csk-input-wrapper:focus-within:has(.csk-input-container--energy-focus) .csk-input-label {
-  color: var(--csk-color-live);
-}
-
-/* ==========================================================================
+}/* ==========================================================================
    HOVER STATES - Subtle lift and border enhancement
    ========================================================================== */
 
@@ -461,20 +441,7 @@
 
 [data-theme="dark"] .csk-input-clear:hover {
   background-color: var(--csk-color-text-2);
-}
-
-[data-theme="dark"] .csk-input-container--energy-focus .csk-input:focus {
-  border-color: var(--csk-color-live);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-live) 20%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--csk-color-live) 45%, transparent);
-}
-
-[data-theme="dark"] .csk-input-container--energy-focus .csk-input:hover:not(:disabled):not(:focus) {
-  border-color: var(--csk-color-live);
-  box-shadow: 0 1px 3px color-mix(in srgb, var(--csk-color-live) 15%, transparent);
-}
-
-/* ==========================================================================
+}/* ==========================================================================
    REDUCED MOTION
    ========================================================================== */
 

@@ -30,8 +30,6 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   onClear?: () => void;
   /** Use display font for label (aesthetic emphasis) */
   displayLabel?: boolean;
-  /** Use energy (coral-orange) focus ring instead of primary blue */
-  energyFocus?: boolean;
 }
 
 /**
@@ -55,7 +53,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       clearable = false,
       onClear,
       displayLabel = false,
-      energyFocus = false,
       disabled,
       className,
       id,
@@ -94,7 +91,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       `csk-input-container--${size}`,
       `csk-input-container--${state}`,
       disabled && 'csk-input-container--disabled',
-      energyFocus && 'csk-input-container--energy-focus',
       iconLeft && 'csk-input-container--has-icon-left',
       (iconRight || showClearButton) && 'csk-input-container--has-icon-right',
     ]
