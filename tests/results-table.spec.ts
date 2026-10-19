@@ -213,6 +213,26 @@ test.describe('ResultsTable - 100 rows (performance)', () => {
   });
 });
 
+/**
+ * Storybook's a11y addon runs axe in the story frame right after load; a second run then fails with
+ * „Axe is already running“. Wait like accessibility.spec.ts and retry only that error.
+ */
+async function analyzeA11y(page: Page) {
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(300);
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await new AxeBuilder({ page })
+        .include('#storybook-root')
+        .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+        .analyze();
+    } catch (error) {
+      if (attempt >= 5 || !String(error).includes('Axe is already running')) throw error;
+      await page.waitForTimeout(500);
+    }
+  }
+}
+
 test.describe('ResultsTable / RunDetail - WCAG 2.1 AA', () => {
   for (const viewport of [
     { label: 'mobile', width: 390 },
@@ -222,10 +242,7 @@ test.describe('ResultsTable / RunDetail - WCAG 2.1 AA', () => {
       test(`${s.name} (${viewport.label})`, async ({ page }) => {
         await page.setViewportSize({ width: viewport.width, height: 900 });
         await open(page, s.storyId);
-        const results = await new AxeBuilder({ page })
-          .include('#storybook-root')
-          .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-          .analyze();
+        const results = await analyzeA11y(page);
         expect(results.violations).toEqual([]);
       });
     }
