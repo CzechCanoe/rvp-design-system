@@ -1,0 +1,14 @@
+/* DeadlineBadge: Badge plus an optional formatted date underneath (reference Kalendar). */
+
+.csk-deadline-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  font-family: var(--csk-font-sans);
+}
+
+.csk-deadline-badge__date {
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+}

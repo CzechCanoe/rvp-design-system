@@ -344,3 +344,13 @@ export { SeasonSparkline, SEASON_SPARKLINE_LABELS } from './SeasonSparkline';
 export type { SeasonSparklineProps, SeasonSparklinePoint, SeasonSparklineLabels } from './SeasonSparkline';
 export { RivalsList, RIVALS_LIST_LABELS } from './RivalsList';
 export type { RivalsListProps, RivalsListItem, RivalsListLabels } from './RivalsList';
+// Calendar by weekends (v2 T13)
+export { DeadlineBadge, DEADLINE_LABELS } from './DeadlineBadge';
+export type { DeadlineBadgeProps, DeadlineKind } from './DeadlineBadge';
+export { WeekendCalendar } from './WeekendCalendar';
+export type {
+  WeekendCalendarProps,
+  CalendarGroup,
+  CalendarEventRow,
+  CalendarEventDocument,
+} from './WeekendCalendar';

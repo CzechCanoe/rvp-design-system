@@ -73,6 +73,9 @@ const specificComponents = [
   { name: 'ProfileHeader-Band', storyId: 'components-profileheader--band' },
   { name: 'SeasonSparkline', storyId: 'components-seasonsparkline--default' },
   { name: 'RivalsList', storyId: 'components-rivalslist--default' },
+  { name: 'DeadlineBadge-AllKinds', storyId: 'components-deadlinebadge--all-kinds' },
+  { name: 'WeekendCalendar', storyId: 'components-weekendcalendar--default' },
+  { name: 'WeekendCalendar-InNarrowContainer', storyId: 'components-weekendcalendar--in-narrow-container' },
 ];
 
 // Helper to run axe and check results

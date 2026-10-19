@@ -1,0 +1,230 @@
+/* =============================================================================
+   WeekendCalendar – season by weekends (reference Kalendar)
+   Group = dates column + rows. Rows: race · entries · documents · result.
+   Container query on the list: under 720 px the dates become a band and the columns wrap.
+   ============================================================================= */
+
+.csk-weekend-calendar {
+  container-type: inline-size;
+  container-name: weekend-calendar;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text);
+}
+
+.csk-weekend-calendar__group {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  overflow: hidden;
+  background: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-lg);
+}
+
+.csk-weekend-calendar__group--weekday {
+  border-style: dashed;
+}
+
+.csk-weekend-calendar__group--current {
+  border: 2px solid var(--csk-color-brand);
+}
+
+/* Dates column */
+.csk-weekend-calendar__when {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  background: var(--csk-color-surface-2);
+  border-right: 1px solid var(--csk-color-border);
+}
+
+.csk-weekend-calendar__group--weekday .csk-weekend-calendar__when {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--csk-space-2);
+  padding: 10px 14px;
+  background: transparent;
+  border-right-style: dashed;
+}
+
+.csk-weekend-calendar__group--current .csk-weekend-calendar__when {
+  background: var(--csk-color-brand);
+  color: var(--csk-color-text-on-fill);
+  border-right-color: transparent;
+}
+
+.csk-weekend-calendar__label {
+  font-size: var(--csk-text-xs);
+  font-weight: var(--csk-font-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--csk-color-text-2);
+}
+
+.csk-weekend-calendar__group--current .csk-weekend-calendar__label,
+.csk-weekend-calendar__group--current .csk-weekend-calendar__note {
+  color: inherit;
+  opacity: 0.85;
+}
+
+.csk-weekend-calendar__dates {
+  font-family: var(--csk-font-display);
+  font-size: var(--csk-text-2xl);
+  font-weight: var(--csk-font-weight-bold);
+  line-height: 1;
+}
+
+.csk-weekend-calendar__group--weekday .csk-weekend-calendar__dates {
+  font-size: var(--csk-text-xl);
+  font-weight: var(--csk-font-weight-semibold);
+  white-space: nowrap;
+}
+
+.csk-weekend-calendar__note {
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-2);
+}
+
+/* Rows */
+.csk-weekend-calendar__events {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.csk-weekend-calendar__event {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px 150px 120px;
+  gap: var(--csk-space-3);
+  align-items: center;
+  padding: 12px var(--csk-space-4);
+  border-bottom: 1px solid var(--csk-color-border-2);
+}
+
+.csk-weekend-calendar__event:last-child {
+  border-bottom: 0;
+}
+
+.csk-weekend-calendar__group--weekday .csk-weekend-calendar__event {
+  padding-block: 10px;
+}
+
+.csk-weekend-calendar__main {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.csk-weekend-calendar__heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--csk-space-2);
+}
+
+.csk-weekend-calendar__title {
+  font-size: var(--csk-text-base);
+  font-weight: var(--csk-font-weight-semibold);
+  overflow-wrap: anywhere;
+}
+
+.csk-weekend-calendar__title-link {
+  color: var(--csk-color-text);
+  text-decoration: none;
+}
+
+.csk-weekend-calendar__title-link:hover {
+  color: var(--csk-color-action);
+  text-decoration: underline;
+}
+
+.csk-weekend-calendar__star {
+  display: inline-flex;
+  color: var(--csk-color-warning-text);
+}
+
+.csk-weekend-calendar__details,
+.csk-weekend-calendar__muted {
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+}
+
+.csk-weekend-calendar__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
+  font-size: var(--csk-text-sm);
+}
+
+.csk-weekend-calendar__link {
+  color: var(--csk-color-action);
+}
+
+.csk-weekend-calendar__link:hover {
+  text-decoration: underline;
+}
+
+.csk-weekend-calendar__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Narrow container: dates band above, columns wrap under the title */
+@container weekend-calendar (max-width: 720px) {
+  .csk-weekend-calendar__group {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .csk-weekend-calendar__when {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px var(--csk-space-3);
+    padding: 10px var(--csk-space-4);
+    border-right: 0;
+    border-bottom: 1px solid var(--csk-color-border);
+  }
+
+  .csk-weekend-calendar__group--weekday .csk-weekend-calendar__when {
+    border-bottom-style: dashed;
+  }
+
+  .csk-weekend-calendar__group--current .csk-weekend-calendar__when {
+    border-bottom-color: transparent;
+  }
+
+  .csk-weekend-calendar__dates {
+    font-size: var(--csk-text-xl);
+  }
+
+  .csk-weekend-calendar__event {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--csk-space-2) var(--csk-space-4);
+  }
+
+  .csk-weekend-calendar__main {
+    flex: 1 1 100%;
+  }
+
+  .csk-weekend-calendar__cell[data-empty='true'] {
+    display: none;
+  }
+}

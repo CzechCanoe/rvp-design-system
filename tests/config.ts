@@ -99,6 +99,10 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'RivalsList', storyId: 'components-rivalslist--default', tier: 'specific' },
   { name: 'RivalsList-LeaderAndTie', storyId: 'components-rivalslist--leader-and-tie', tier: 'specific' },
   { name: 'RivalsList-LongName', storyId: 'components-rivalslist--long-name', tier: 'specific' },
+  // T13: DeadlineBadge has no time-dependent state (the application passes the text), so the stories are deterministic.
+  { name: 'DeadlineBadge-AllKinds', storyId: 'components-deadlinebadge--all-kinds', tier: 'specific' },
+  { name: 'WeekendCalendar', storyId: 'components-weekendcalendar--default', tier: 'specific', cssFeatures: ['grid', 'container-queries'] },
+  { name: 'WeekendCalendar-InNarrowContainer', storyId: 'components-weekendcalendar--in-narrow-container', tier: 'specific', cssFeatures: ['container-queries'] },
 ];
 
 /** All components for visual regression testing */
@@ -160,6 +164,9 @@ export const viewportStories: Array<{ name: string; storyId: string }> = [
   { name: 'OnCoursePanel-Collapsed', storyId: 'components-oncoursepanel--collapsed' },
   { name: 'OnCoursePanel-InNarrowContainer', storyId: 'components-oncoursepanel--in-narrow-container' },
   { name: 'OnCoursePanel-RiderStates', storyId: 'components-oncoursepanel--rider-states' },
+  // v2 T13: WeekendCalendar (dates column / band by container query)
+  { name: 'WeekendCalendar-Default', storyId: 'components-weekendcalendar--default' },
+  { name: 'WeekendCalendar-CurrentWeekend', storyId: 'components-weekendcalendar--current-weekend' },
 ];
 
 /**
@@ -177,6 +184,8 @@ export const pageStories: Array<{ name: string; storyId: string }> = [
   // v2 T15: athlete pages (references Profil.html, ProfilMobil.html)
   { name: 'Athlete-PublicProfile', storyId: 'athlete--public-profile' },
   { name: 'Athlete-MobileProfile', storyId: 'athlete--mobile-profile' },
+  // v2 T13: Calendar page (reference Kalendar). Same spec/tolerance; the file is live-pages.spec.ts.
+  { name: 'Calendar-Season', storyId: 'calendar--season' },
 ];
 
 export const pageStoryMaxDiffPixels = 80;
