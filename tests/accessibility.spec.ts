@@ -249,7 +249,8 @@ test.describe('Keyboard Navigation', () => {
 
   test('Pagination - keyboard navigation', async ({ page }) => {
     await page.goto('/iframe.html?id=components-pagination--default&viewMode=story');
-    await page.waitForSelector('#storybook-root', { state: 'visible' });
+    await page.waitForLoadState('networkidle');
+    await page.waitForSelector('.csk-pagination', { state: 'visible' });
 
     // Tab to pagination
     await page.keyboard.press('Tab');
