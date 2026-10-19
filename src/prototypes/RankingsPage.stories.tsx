@@ -245,8 +245,6 @@ const RankingsPage = ({
       return (
         <Header
           variant="satellite"
-          size="sm"
-          bordered
           brand={<CSKLogo />}
           appName="Žebříčky"
           homeLink="https://kanoe.cz"

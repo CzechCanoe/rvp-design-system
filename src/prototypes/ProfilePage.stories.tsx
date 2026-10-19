@@ -588,8 +588,6 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
     return (
       <Header
         variant="satellite"
-        size="sm"
-        bordered
         brand={<CSKLogo />}
         appName="Můj profil"
         homeLink="https://kanoe.cz"

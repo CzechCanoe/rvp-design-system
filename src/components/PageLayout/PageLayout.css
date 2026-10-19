@@ -11,9 +11,17 @@
 /* Header */
 .csk-page-layout__header {
   flex-shrink: 0;
+}
+
+.csk-page-layout__header--sticky {
   position: sticky;
   top: 0;
   z-index: 100;
+}
+
+/* Full-width band under the header */
+.csk-page-layout__banner {
+  flex-shrink: 0;
 }
 
 /* Main content area */
@@ -43,7 +51,7 @@
 }
 
 .csk-page-layout--max-xl .csk-page-layout__container {
-  max-width: 1280px;
+  max-width: var(--csk-layout-max-width);
 }
 
 .csk-page-layout--max-full .csk-page-layout__container {
@@ -77,7 +85,7 @@
   flex: none;
 }
 
-/* Satellite variant - slightly different background */
-.csk-page-layout--satellite {
-  background: var(--csk-color-surface-3);
+/* Office: grey working surface */
+.csk-page-layout--urad {
+  background: var(--csk-color-surface-2);
 }

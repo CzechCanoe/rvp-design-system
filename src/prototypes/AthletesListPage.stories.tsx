@@ -238,8 +238,6 @@ const AthletesListPage = ({
       return (
         <Header
           variant="satellite"
-          size="sm"
-          bordered
           brand={<CSKLogo />}
           appName="Registr závodníků"
           homeLink="https://kanoe.cz"

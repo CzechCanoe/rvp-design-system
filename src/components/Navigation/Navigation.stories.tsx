@@ -1,96 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Breadcrumbs, type BreadcrumbItem } from './Breadcrumbs';
 import { MainNav, type NavItem } from './MainNav';
 import { Button } from '../Button';
-
-// =============================================================================
-// BREADCRUMBS
-// =============================================================================
-
-const breadcrumbsMeta: Meta<typeof Breadcrumbs> = {
-  title: 'Components/Navigation/Breadcrumbs',
-  component: Breadcrumbs,
-  parameters: {
-    layout: 'padded',
-    docs: {
-      description: {
-        component:
-          'Breadcrumbs component for showing navigation hierarchy. Supports collapsing for long paths and custom link renderers for router integration.',
-      },
-    },
-  },
-  tags: ['autodocs'],
-  argTypes: {
-    maxItems: {
-      control: { type: 'number', min: 0, max: 10 },
-      description: 'Maximum number of items to show before collapsing (0 = no collapse)',
-    },
-    collapsedLabel: {
-      control: 'text',
-      description: 'Label for collapsed items',
-    },
-  },
-};
-
-export default breadcrumbsMeta;
-type BreadcrumbsStory = StoryObj<typeof Breadcrumbs>;
-
-// Basic breadcrumbs data
-const basicBreadcrumbs: BreadcrumbItem[] = [
-  { id: 'home', label: 'Domů', href: '/' },
-  { id: 'events', label: 'Kalendář závodů', href: '/kalendar' },
-  { id: 'current', label: 'MČR slalom 2024' },
-];
-
-export const Default: BreadcrumbsStory = {
-  args: {
-    items: basicBreadcrumbs,
-  },
-};
-
-// With icons
-const HomeIcon = () => (
-  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-    <polyline points="9 22 9 12 15 12 15 22" />
-  </svg>
-);
-
-const breadcrumbsWithIcons: BreadcrumbItem[] = [
-  { id: 'home', label: 'Domů', href: '/', icon: <HomeIcon /> },
-  { id: 'events', label: 'Kalendář závodů', href: '/kalendar' },
-  { id: 'year', label: '2024', href: '/kalendar/2024' },
-  { id: 'current', label: 'MČR slalom' },
-];
-
-export const WithIcons: BreadcrumbsStory = {
-  args: {
-    items: breadcrumbsWithIcons,
-  },
-};
-
-// Long path with collapsing
-const longBreadcrumbs: BreadcrumbItem[] = [
-  { id: 'home', label: 'Domů', href: '/' },
-  { id: 'athletes', label: 'Závodníci', href: '/zavodnici' },
-  { id: 'clubs', label: 'Kluby', href: '/zavodnici/kluby' },
-  { id: 'club', label: 'USK Praha', href: '/zavodnici/kluby/usk-praha' },
-  { id: 'members', label: 'Členové', href: '/zavodnici/kluby/usk-praha/clenove' },
-  { id: 'current', label: 'Jan Novák' },
-];
-
-export const CollapsedPath: BreadcrumbsStory = {
-  args: {
-    items: longBreadcrumbs,
-    maxItems: 4,
-  },
-};
+import { Breadcrumbs, type BreadcrumbItem } from '../Breadcrumbs';
 
 // =============================================================================
 // MAIN NAVIGATION
 // =============================================================================
 
-export const MainNavMeta: Meta<typeof MainNav> = {
+const MainNavMeta: Meta<typeof MainNav> = {
   title: 'Components/Navigation/MainNav',
   component: MainNav,
   parameters: {
@@ -126,6 +43,7 @@ export const MainNavMeta: Meta<typeof MainNav> = {
   },
 };
 
+export default MainNavMeta;
 type MainNavStory = StoryObj<typeof MainNav>;
 
 // Basic navigation items

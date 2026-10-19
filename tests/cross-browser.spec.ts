@@ -141,30 +141,6 @@ test.describe('Cross-Browser: CSS Features', () => {
     expect(gridInfo.hasGrid).toBe(true);
   });
 
-  test('Backdrop-filter renders or has fallback', async ({ page }) => {
-    await page.goto('/iframe.html?id=components-header--sticky-with-blur&viewMode=story');
-    await page.waitForSelector('#storybook-root', { state: 'visible' });
-    await page.waitForTimeout(testDefaults.settleTime);
-
-    const root = page.locator('#storybook-root');
-    await expect(root).toBeVisible();
-
-    // Glass effect should have visible content (either blur works or fallback bg)
-    const hasVisibleHeader = await root.evaluate((el) => {
-      const header = el.querySelector('[class*="header"]');
-      if (!header) return false;
-
-      const style = window.getComputedStyle(header);
-      // Either backdrop-filter is applied, or has fallback background
-      const hasBackdrop = style.backdropFilter && style.backdropFilter !== 'none';
-      const hasBg = style.backgroundColor && style.backgroundColor !== 'rgba(0, 0, 0, 0)';
-
-      return hasBackdrop || hasBg;
-    });
-
-    expect(hasVisibleHeader).toBe(true);
-  });
-
   test('Animations are defined and running', async ({ page }) => {
     await page.goto('/iframe.html?id=components-liveindicator--default&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });

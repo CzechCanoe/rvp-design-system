@@ -199,8 +199,6 @@ const ResultsPage = ({
       return (
         <Header
           variant="satellite"
-          size="sm"
-          bordered
           brand={<CSKLogo />}
           appName="Výsledky"
           homeLink="https://kanoe.cz"
@@ -217,9 +215,7 @@ const ResultsPage = ({
     // Default: standalone with full navigation
     return (
       <Header
-        variant="default"
-        size="md"
-        bordered
+        variant="site"
         brand={
           <a href="#" className="prototype-results-page__logo">
             <span className="prototype-results-page__logo-text">CSK</span>

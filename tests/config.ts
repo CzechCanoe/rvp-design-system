@@ -51,7 +51,7 @@ export const advancedComponents: ComponentConfig[] = [
   { name: 'Modal-StyleVariants', storyId: 'components-modal--all-style-variants', tier: 'advanced', cssFeatures: ['backdrop-filter', 'animations'] },
   { name: 'Tabs', storyId: 'components-tabs--default', tier: 'advanced', cssFeatures: ['flexbox', 'underline'] },
   { name: 'Toast', storyId: 'components-toast--default', tier: 'advanced' },
-  { name: 'Breadcrumbs', storyId: 'components-navigation-breadcrumbs--default', tier: 'advanced' },
+  { name: 'Breadcrumbs', storyId: 'components-breadcrumbs--default', tier: 'advanced' },
   { name: 'Pagination', storyId: 'components-pagination--default', tier: 'advanced' },
   { name: 'ProgressBar', storyId: 'components-progress--bar-default', tier: 'advanced' },
   { name: 'ProgressSteps', storyId: 'components-progress--steps-default', tier: 'advanced' },
@@ -60,7 +60,13 @@ export const advancedComponents: ComponentConfig[] = [
 
 export const specificComponents: ComponentConfig[] = [
   { name: 'Header', storyId: 'components-header--default', tier: 'specific' },
-  { name: 'Header-Glass', storyId: 'components-header--sticky-with-blur', tier: 'specific', cssFeatures: ['backdrop-filter'] },
+  { name: 'Header-App', storyId: 'components-header--app', tier: 'specific' },
+  { name: 'Header-Satellite', storyId: 'components-header--satellite', tier: 'specific' },
+  { name: 'Subbar', storyId: 'components-subbar--default', tier: 'specific' },
+  { name: 'PageTitle', storyId: 'components-pagetitle--default', tier: 'specific' },
+  { name: 'BottomBar', storyId: 'components-bottombar--default', tier: 'specific' },
+  { name: 'EventHeader', storyId: 'components-eventheader--default', tier: 'specific' },
+  { name: 'EventHeader-Condensed', storyId: 'components-eventheader--condensed', tier: 'specific' },
   { name: 'Calendar', storyId: 'components-calendar--default', tier: 'specific', cssFeatures: ['grid', 'responsive'] },
   { name: 'Dropzone', storyId: 'components-dropzone--default', tier: 'specific' },
   { name: 'Timeline', storyId: 'components-timeline--default', tier: 'specific' },
@@ -77,6 +83,19 @@ export const allComponents: ComponentConfig[] = [
   ...coreComponents,
   ...advancedComponents,
   ...specificComponents,
+];
+
+/**
+ * Layout stories (T8): full page tops, snapshotted at desktop 1280 and phone 390
+ * by tests/layout.spec.ts.
+ */
+export const layoutStories: Array<{ name: string; storyId: string; a11y?: boolean }> = [
+  { name: 'Layout-Tribuna', storyId: 'layout-tribuna--default' },
+  { name: 'Layout-LiveMobile', storyId: 'layout-livemobile--default' },
+  { name: 'Layout-LiveMobile-Condensed', storyId: 'layout-livemobile--condensed' },
+  // a11y off: the KanoeCzContext mock itself has axe violations (1.x, removed in T17)
+  { name: 'Layout-Tribuna-Embed', storyId: 'layout-tribuna--embed', a11y: false },
+  { name: 'Layout-Urad', storyId: 'layout-urad--default' },
 ];
 
 /** Components with CSS features worth cross-browser testing */
@@ -258,7 +277,6 @@ export const QUARANTINE: Record<string, { reason: string; owner: QuarantineOwner
   'Color Contrast › Button variants have sufficient contrast': { owner: 'T4', reason: 'axe color-contrast on 1.x palette' },
   'Cross-Browser: CSS Features › Gradients render with actual colors': { owner: 'T4', reason: '1.x gradient button variant not found in the story (locator times out); gradients are removed in v2' },
   'Cross-Browser: CSS Features › Flexbox layouts position children correctly': { owner: 'T4', reason: '1.x Card story has no flex card with >1 positioned children; Card is rewritten in T4' },
-  'Accessibility - Advanced Components (Tier 2) › Header - WCAG 2.1 AA (dark)': { owner: 'T8', reason: 'axe color-contrast on 1.x Header' },
   'Accessibility - Specific Components (Tier 3) › AthleteCard - WCAG 2.1 AA (light)': { owner: 'T17', reason: 'axe color-contrast; AthleteCard is removed in v2' },
   'Accessibility - Prototypes › LivePage-Embed - WCAG 2.1 AA (light)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
   'Accessibility - Prototypes › LivePage-Embed - WCAG 2.1 AA (dark)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
