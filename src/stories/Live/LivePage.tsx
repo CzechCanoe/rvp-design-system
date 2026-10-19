@@ -2,12 +2,14 @@ import { useState, type ReactNode } from 'react';
 import { ClockProvider, createTestClock } from '../../clock';
 import { BottomBar } from '../../components/BottomBar';
 import { Card } from '../../components/Card';
+import { FilterPills } from '../../components/FilterPills';
+import { Icon } from '../../components/Icon';
 import { DataAge } from '../../components/DataAge';
 import { EventHeader } from '../../components/EventHeader';
 import { FavoritesToggle } from '../../components/FavoritesToggle';
 import { PageLayout } from '../../components/PageLayout';
 import { ResultsTable, RunDetail, type ResultRow, type ResultRowId } from '../../components/ResultsTable';
-import { STORY_NOW, rezekDetail } from '../../components/ResultsTable/ResultsTable.fixtures';
+import { STORY_NOW, known, rezekDetail } from '../../components/ResultsTable/ResultsTable.fixtures';
 import { knownNumber } from '../../components/ResultsTable/values';
 import { SearchInput } from '../../components/SearchInput';
 import { SegmentedControl } from '../../components/SegmentedControl';
@@ -123,7 +125,7 @@ export function LiveNav({ days, day: initialDay, classes, activeClass: initialCl
 export interface LivePageProps {
   title: ReactNode;
   subtitle: ReactNode;
-  /** Header status; default is the Live badge. */
+  /** Header status; default (undefined) is the Live badge, `null` shows none. */
   status?: ReactNode;
   dataAge?: ReactNode;
   condensed?: boolean;
@@ -146,7 +148,7 @@ export function LivePage({ title, subtitle, status, dataAge, condensed, section 
               backHref="#zavody"
               title={title}
               subtitle={subtitle}
-              status={status ?? <StatusBadge state="live" />}
+              status={status === undefined ? <StatusBadge state="live" /> : status}
               dataAge={dataAge}
               condensed={condensed}
             />
@@ -173,8 +175,8 @@ export interface ResultsCardProps {
   foot?: ReactNode;
   footLinks?: ReactNode;
   children: ReactNode;
-  /** Toolbar pill (category filter). */
-  filter?: { label: ReactNode; pressed?: boolean };
+  /** Active category filter shown as a dismissible pill instead of the Kategorie button. */
+  activeCategory?: string;
   /** Number of favourites; `undefined` = no favourites toggle. */
   favorites?: number;
   searchLabel?: string;
@@ -187,14 +189,25 @@ export function ResultsCard({
   foot,
   footLinks,
   children,
-  filter = { label: 'Kategorie ▾' },
+  activeCategory,
   favorites,
   searchLabel = 'Hledat závodníka',
 }: ResultsCardProps) {
   const [q, setQ] = useState('');
   const [onlyFavorites, setOnlyFavorites] = useState(false);
   return (
-    <Card variant="surface" padding="none">
+    <Card
+      variant="surface"
+      padding="none"
+      footer={
+        foot || footLinks ? (
+          <div className="live-page__foot">
+            {foot && <span>{foot}</span>}
+            {footLinks && <span className="live-page__foot-links">{footLinks}</span>}
+          </div>
+        ) : undefined
+      }
+    >
       <TableToolbar
         aria-label="Nástroje tabulky"
         search={
@@ -206,7 +219,18 @@ export function ResultsCard({
           )
         }
       >
-        <TableToolbarButton pressed={filter.pressed}>{filter.label}</TableToolbarButton>
+        {activeCategory ? (
+          <FilterPills
+            size="sm"
+            aria-label="Aktivní filtry"
+            filters={[{ key: activeCategory, label: activeCategory, dismissible: true }]}
+            onRemove={() => {}}
+          />
+        ) : (
+          <TableToolbarButton>
+            Kategorie <Icon name="chevron-down" size="sm" aria-hidden />
+          </TableToolbarButton>
+        )}
       </TableToolbar>
       {(state || status) && (
         <div className="live-page__status">
@@ -215,12 +239,6 @@ export function ResultsCard({
         </div>
       )}
       {children}
-      {(foot || footLinks) && (
-        <div className="live-page__foot">
-          {foot && <span>{foot}</span>}
-          {footLinks && <span className="live-page__foot-links">{footLinks}</span>}
-        </div>
-      )}
     </Card>
   );
 }
@@ -228,7 +246,7 @@ export function ResultsCard({
 const detailActions = (
   <>
     <a className="live-page__link" href="#profil">Profil závodníka</a>
-    <a className="live-page__link" href="#sledovat">Sledovat ★</a>
+    <a className="live-page__link" href="#sledovat">Sledovat <Icon name="star" size="sm" aria-hidden /></a>
   </>
 );
 
@@ -239,13 +257,18 @@ function renderDetail(row: ResultRow): ReactNode {
     <RunDetail
       bib={row.bib}
       ranks={[{ rank: row.rank, label: 've třídě' }]}
-      runs={row.runs.map((r, i) => ({
-        label: `${i + 1}. jízda`,
-        time: r.time,
-        penalty: r.penalty === undefined ? 0 : knownNumber(r.penalty),
-        total: r.time,
-        counts: Boolean(r.best),
-      }))}
+      runs={row.runs.map((r, i) => {
+        const total = knownNumber(r.time);
+        const penalty = r.penalty === undefined ? 0 : knownNumber(r.penalty);
+        return {
+          label: `${i + 1}. jízda`,
+          // time without penalties = total - penalty; unknown when either is not known
+          time: total !== null && penalty !== null ? known(Math.round((total - penalty) * 100) / 100) : null,
+          penalty,
+          total: r.time,
+          counts: Boolean(r.best),
+        };
+      })}
       actions={detailActions}
     />
   );

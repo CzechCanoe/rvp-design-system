@@ -67,6 +67,7 @@ export const Expanded: Story = {
       section="results"
       nav={<LiveNav days={[]} day="sun" classes={CLASSES} activeClass="K1 muži" />}
     >
+      <Notice tone="info">Při scrollu se hlavička stáhne na jeden řádek, navigace zůstane nahoře.</Notice>
       <ResultsCard favorites={2}>
         <LiveResults rows={[...brRows.slice(0, 4), dnsRow]} initialExpanded="k1m-35" />
       </ResultsCard>
@@ -129,7 +130,7 @@ export const Official: Story = {
       <ResultsCard
         state="official"
         status="schváleno 20. 9. 16:40 · pořadí v U18, vedle celkové"
-        filter={{ label: 'U18 ✕', pressed: true }}
+        activeCategory="U18"
         favorites={0}
         foot="7 v U18 · 31 celkem"
         footLinks={
@@ -166,6 +167,7 @@ export const Disconnected: Story = {
     <LivePage
       title="Olympic Hopes 2026"
       subtitle={SUBTITLE}
+      status={null}
       dataAge={
         <DataAge
           receivedAt={STORY_NOW - STALE_AGE_SECONDS * 1000}
