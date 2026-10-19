@@ -58,7 +58,8 @@ export const ProfileHeader = forwardRef<HTMLElement, ProfileHeaderProps>(
     const avatarNode = avatar ?? (
       <Avatar
         name={name}
-        size={isBand ? 'xl' : '2xl'}
+        size={isBand ? 'xl' : '3xl'}
+        ring={isBand}
         shape={isBand ? 'circular' : 'rounded'}
         color="primary"
         aria-hidden="true"
@@ -89,7 +90,7 @@ export const ProfileHeader = forwardRef<HTMLElement, ProfileHeaderProps>(
     );
 
     return (
-      <header ref={ref} className={classes} {...props}>
+      <header ref={ref} className={classes} data-tone={isBand ? 'on-dark' : undefined} {...props}>
         {isBand && (topbar || actions) && (
           <div className="csk-profile-header__topbar">
             {topbar}

@@ -180,10 +180,6 @@
   padding: 12px 12px var(--csk-space-4);
 }
 
-.athlete-page__last {
-  border-color: var(--csk-color-highlight-border);
-}
-
 .athlete-page__last-body {
   display: flex;
   flex-direction: column;
@@ -229,40 +225,6 @@
 .athlete-page__last-actions {
   display: flex;
   gap: var(--csk-space-2);
-}
-
-.athlete-page__list {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.athlete-page__list li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 14px;
-  border-bottom: 1px solid var(--csk-color-border-2);
-}
-
-.athlete-page__list li:last-child {
-  border-bottom: 0;
-}
-
-.athlete-page__list-rank {
-  flex: none;
-  width: 28px;
-  font-family: var(--csk-font-display);
-  font-size: var(--csk-text-lg);
-  font-weight: var(--csk-font-weight-bold);
-}
-
-.athlete-page__list-text {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
 }
 
 @media (max-width: 720px) {

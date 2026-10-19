@@ -3,8 +3,12 @@ import './Card.css';
 
 export type CardVariant = 'surface' | 'outlined';
 export type CardPadding = 'none' | 'sm' | 'md' | 'lg';
+/** `highlight`: brand-tinted frame for the card that matters now (last result, own deadlines) */
+export type CardTone = 'default' | 'highlight';
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+  /** Tone of the frame (default `default`) */
+  tone?: CardTone;
   /** Visual variant of the card */
   variant?: CardVariant;
   /** Padding inside the card */
@@ -37,6 +41,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
   (
     {
       variant = 'surface',
+      tone = 'default',
       padding = 'md',
       clickable = false,
       href,
@@ -59,6 +64,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       'csk-card',
       `csk-card--${variant}`,
       `csk-card--padding-${padding}`,
+      tone === 'highlight' && 'csk-card--highlight',
       isClickable && 'csk-card--clickable',
       className,
     ]

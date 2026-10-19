@@ -89,7 +89,11 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'TimeValue-Formats', storyId: 'components-timevalue--formats', tier: 'specific' },
   { name: 'RunningTime-States', storyId: 'components-runningtime--states', tier: 'specific' },
   { name: 'DataAge-Overview', storyId: 'components-dataage--overview', tier: 'specific' },
-  // v2 T15: profile components
+  // v2 T15: profile components and the additive variants they need (on-dark tone, Avatar 3xl/ring, Card highlight)
+  { name: 'Avatar-LargeAndRing', storyId: 'components-avatar--large-and-ring', tier: 'specific' },
+  { name: 'Card-Highlight', storyId: 'components-card--highlight', tier: 'specific' },
+  { name: 'Badge-OnDark', storyId: 'components-badge--on-dark', tier: 'specific' },
+  { name: 'StatTile-OnDark', storyId: 'components-stattile--on-dark', tier: 'specific' },
   { name: 'ProfileHeader-Page', storyId: 'components-profileheader--page', tier: 'specific' },
   { name: 'ProfileHeader-Band', storyId: 'components-profileheader--band', tier: 'specific' },
   { name: 'ProfileHeader-WithoutTiles', storyId: 'components-profileheader--without-tiles', tier: 'specific' },

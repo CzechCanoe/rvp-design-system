@@ -41,3 +41,19 @@
   font-size: var(--csk-text-sm);
   color: var(--csk-color-text-3);
 }
+
+/* On dark (container sets data-tone="on-dark", e.g. the navy profile band) */
+[data-tone='on-dark'] .csk-stat-tile {
+  background: var(--csk-color-on-dark-pad);
+  border-color: transparent;
+}
+
+[data-tone='on-dark'] .csk-stat-tile__label,
+[data-tone='on-dark'] .csk-stat-tile__value,
+[data-tone='on-dark'] .csk-stat-tile__hint {
+  color: var(--csk-color-text-on-fill);
+}
+
+[data-tone='on-dark'] .csk-stat-tile__delta {
+  color: var(--csk-color-state-provisional-bg);
+}

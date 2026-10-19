@@ -296,6 +296,33 @@ const mobileBottomItems = [
   },
 ];
 
+const mobileColumns: ColumnDef<SeasonResult>[] = [
+  { key: 'rank', header: 'Místo', cell: (r) => <span className="athlete-page__rank">{r.rank}.</span> },
+  {
+    key: 'race',
+    header: 'Závod',
+    cell: (r) => (
+      <>
+        <span className="athlete-page__race">{r.race.replace('Český pohár', 'ČP').replace(' ve slalomu', '')}</span>
+        <div className="athlete-page__sub">
+          {r.date} · K1M{r.seconds !== undefined && <> · <TimeValue value={r.seconds} /></>}
+        </div>
+      </>
+    ),
+  },
+  {
+    key: 'status',
+    header: 'Body / stav',
+    align: 'right',
+    cell: (r) =>
+      r.status === 'provisional' ? (
+        <StatusBadge state="provisional" size="sm" />
+      ) : (
+        <span className="athlete-page__muted-2">{r.points === null ? '·' : `${r.points} b.`}</span>
+      ),
+  },
+];
+
 const recent = ['r2', 'r1', 'r3', 'r4'].map((id) => seasonResults.find((r) => r.id === id)!);
 
 /** Reference ProfilMobil.html: "Moje" profile on a 390 px phone. */
@@ -325,7 +352,7 @@ export function MobileProfilePage() {
       bottomBar={<BottomBar items={mobileBottomItems} aria-label="Moje" />}
     >
       <div className="athlete-page__phone">
-        <Card variant="surface" className="athlete-page__last" padding="none">
+        <Card tone="highlight" padding="none">
           <div className="athlete-page__last-body">
             <div className="athlete-page__last-head">
               <span className="athlete-page__eyebrow">Poslední závod</span>
@@ -385,26 +412,12 @@ export function MobileProfilePage() {
             </div>
           }
         >
-          <ul className="athlete-page__list">
-            {recent.map((r) => (
-              <li key={r.id}>
-                <span className="athlete-page__list-rank">{r.rank}.</span>
-                <div className="athlete-page__list-text">
-                  <span className="athlete-page__race">{r.race.replace('Český pohár', 'ČP').replace(' ve slalomu', '')}</span>
-                  <span className="athlete-page__sub">
-                    {r.date} · K1M{r.seconds !== undefined && <> · <TimeValue value={r.seconds} /></>}
-                  </span>
-                </div>
-                <span className="athlete-page__end">
-                  {r.status === 'provisional' ? (
-                    <StatusBadge state="provisional" size="sm" />
-                  ) : (
-                    <span className="athlete-page__muted-2">{r.points === null ? '·' : `${r.points} b.`}</span>
-                  )}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <Table<SeasonResult>
+            aria-label="Poslední výsledky"
+            columns={mobileColumns}
+            data={recent}
+            rowKey="id"
+          />
         </Card>
 
         <Notice tone="info">
