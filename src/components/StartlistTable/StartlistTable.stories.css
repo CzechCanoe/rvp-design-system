@@ -1,0 +1,41 @@
+/* Story frame for StartlistTable: page ground, card around the table (reference Live3) */
+
+.sl-story {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: var(--csk-space-2);
+  background: var(--csk-color-surface-2);
+  font-family: var(--csk-font-sans);
+  color: var(--csk-color-text);
+}
+
+@media (min-width: 768px) {
+  .sl-story {
+    padding: var(--csk-space-6);
+  }
+}
+
+.sl-story__card {
+  max-width: 960px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-lg);
+}
+
+.sl-story__status,
+.sl-story__foot {
+  padding: 6px 10px;
+  font-size: var(--csk-text-xs);
+  color: var(--csk-color-text-3);
+}
+
+.sl-story__status {
+  border-bottom: 1px solid var(--csk-color-border-2);
+}
+
+.sl-story__notice {
+  padding: var(--csk-space-2);
+  font-size: var(--csk-text-sm);
+}
