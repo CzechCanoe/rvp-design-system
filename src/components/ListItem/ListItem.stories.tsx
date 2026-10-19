@@ -371,7 +371,7 @@ export const AllTypes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <Card variant="surface" padding="none">
-        <h4 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid var(--color-border-primary)' }}>
+        <h4 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid var(--csk-color-border)' }}>
           Default Variant - All Types
         </h4>
         <ListItem
@@ -418,7 +418,7 @@ export const AllTypes: Story = {
       </Card>
 
       <Card variant="surface" padding="none">
-        <h4 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid var(--color-border-primary)' }}>
+        <h4 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid var(--csk-color-border)' }}>
           Alert Variant - All Types
         </h4>
         <ListItem

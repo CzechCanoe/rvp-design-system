@@ -90,7 +90,7 @@ type Story = StoryObj<typeof Header>;
 const Logo = () => (
   <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="32" height="32" rx="8" fill="var(--color-primary-500)"/>
+      <rect width="32" height="32" rx="8" fill="var(--csk-color-action)"/>
       <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
     </svg>
     <span className="csk-header__brand-title" style={{ fontSize: '1.125rem' }}>Kanoistika</span>
@@ -108,17 +108,17 @@ const NavLinks = () => (
           padding: '8px 16px',
           borderRadius: '8px',
           textDecoration: 'none',
-          color: 'var(--color-text-secondary)',
+          color: 'var(--csk-color-text-2)',
           fontWeight: 500,
           transition: 'all 0.15s ease',
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = 'var(--color-bg-secondary)';
-          e.currentTarget.style.color = 'var(--color-text-primary)';
+          e.currentTarget.style.backgroundColor = 'var(--csk-color-surface-2)';
+          e.currentTarget.style.color = 'var(--csk-color-text)';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.backgroundColor = 'transparent';
-          e.currentTarget.style.color = 'var(--color-text-secondary)';
+          e.currentTarget.style.color = 'var(--csk-color-text-2)';
         }}
       >
         {item}
@@ -138,7 +138,7 @@ const MobileNavLinks = () => (
           padding: '12px 16px',
           borderRadius: '8px',
           textDecoration: 'none',
-          color: 'var(--color-text-secondary)',
+          color: 'var(--csk-color-text-2)',
           fontWeight: 500,
         }}
       >
@@ -156,7 +156,7 @@ const UserAvatar = () => (
       height: '36px',
       borderRadius: '50%',
       border: 'none',
-      backgroundColor: 'var(--color-primary-500)',
+      backgroundColor: 'var(--csk-color-action)',
       color: 'white',
       fontWeight: 600,
       fontSize: '14px',
@@ -235,7 +235,7 @@ export const WithActions: Story = {
             height: '40px',
             border: 'none',
             background: 'transparent',
-            color: 'var(--color-text-secondary)',
+            color: 'var(--csk-color-text-2)',
             cursor: 'pointer',
             borderRadius: '8px',
             position: 'relative',
@@ -250,7 +250,7 @@ export const WithActions: Story = {
               width: '8px',
               height: '8px',
               borderRadius: '50%',
-              backgroundColor: 'var(--color-error-500)',
+              backgroundColor: 'var(--csk-color-error)',
             }}
           />
         </button>
@@ -335,7 +335,7 @@ export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
           Size: sm (48px)
         </p>
         <Header
@@ -346,7 +346,7 @@ export const Sizes: Story = {
         />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
           Size: md (56px) - default
         </p>
         <Header
@@ -357,7 +357,7 @@ export const Sizes: Story = {
         />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
           Size: lg (64px)
         </p>
         <Header
@@ -379,12 +379,12 @@ export const CSKPublicPortal: Story = {
     brand: (
       <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none', color: 'inherit' }}>
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="40" height="40" rx="8" fill="var(--color-primary-500)"/>
+          <rect width="40" height="40" rx="8" fill="var(--csk-color-action)"/>
           <text x="20" y="26" textAnchor="middle" fill="white" fontSize="16" fontWeight="bold">CSK</text>
         </svg>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <span style={{ fontWeight: 700, fontSize: '1rem' }}>Český svaz kanoistů</span>
-          <span style={{ fontSize: '0.75rem', color: 'var(--color-text-tertiary)' }}>Výsledkový servis</span>
+          <span style={{ fontSize: '0.75rem', color: 'var(--csk-color-text-3)' }}>Výsledkový servis</span>
         </div>
       </a>
     ),
@@ -407,7 +407,7 @@ export const CSKPublicPortal: Story = {
               padding: '8px 16px',
               borderRadius: '8px',
               textDecoration: 'none',
-              color: 'var(--color-text-secondary)',
+              color: 'var(--csk-color-text-2)',
               fontWeight: 500,
             }}
           >
@@ -450,7 +450,7 @@ export const CSKPublicPortal: Story = {
               padding: '12px 16px',
               borderRadius: '8px',
               textDecoration: 'none',
-              color: 'var(--color-text-secondary)',
+              color: 'var(--csk-color-text-2)',
               fontWeight: 500,
             }}
           >
@@ -475,7 +475,7 @@ export const CSKAdminPanel: Story = {
     brand: (
       <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="32" height="32" rx="6" fill="var(--color-neutral-800)"/>
+          <rect width="32" height="32" rx="6" fill="var(--csk-color-text)"/>
           <text x="16" y="21" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">CSK</text>
         </svg>
         <span style={{ fontWeight: 600 }}>Admin</span>
@@ -491,7 +491,7 @@ export const CSKAdminPanel: Story = {
               padding: '8px 12px',
               borderRadius: '6px',
               textDecoration: 'none',
-              color: 'var(--color-text-secondary)',
+              color: 'var(--csk-color-text-2)',
               fontWeight: 500,
               fontSize: '14px',
             }}
@@ -515,7 +515,7 @@ export const CSKAdminPanel: Story = {
             height: '36px',
             border: 'none',
             background: 'transparent',
-            color: 'var(--color-text-secondary)',
+            color: 'var(--csk-color-text-2)',
             cursor: 'pointer',
             borderRadius: '6px',
           }}
@@ -529,7 +529,7 @@ export const CSKAdminPanel: Story = {
         <UserAvatar />
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <span style={{ fontSize: '14px', fontWeight: 500 }}>Jan Novák</span>
-          <span style={{ fontSize: '12px', color: 'var(--color-text-tertiary)' }}>Správce</span>
+          <span style={{ fontSize: '12px', color: 'var(--csk-color-text-3)' }}>Správce</span>
         </div>
       </div>
     ),
@@ -626,7 +626,7 @@ export const StickyWithBlur: Story = {
         <Story />
         <div style={{ padding: '24px' }}>
           <h2>Blur efekt při scrollu</h2>
-          <p style={{ color: 'var(--color-text-secondary)' }}>
+          <p style={{ color: 'var(--csk-color-text-2)' }}>
             Scrollujte dolů - header získá blur efekt a stín po překročení prahu 10px.
           </p>
           {Array.from({ length: 20 }).map((_, i) => (
@@ -670,7 +670,7 @@ export const GradientStickyWithBlur: Story = {
         <Story />
         <div style={{ padding: '24px' }}>
           <h2>Gradient header s blur efektem</h2>
-          <p style={{ color: 'var(--color-text-secondary)' }}>
+          <p style={{ color: 'var(--csk-color-text-2)' }}>
             Kombinace gradient varianty se sticky a blur efektem pro prémiový vzhled.
           </p>
           {Array.from({ length: 20 }).map((_, i) => (
@@ -744,7 +744,7 @@ export const AllVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
           Variant: default
         </p>
         <Header
@@ -755,7 +755,7 @@ export const AllVariants: Story = {
         />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
           Variant: elevated
         </p>
         <Header
@@ -767,7 +767,7 @@ export const AllVariants: Story = {
         />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
           Variant: gradient
         </p>
         <Header
@@ -821,7 +821,7 @@ export const AllVariants: Story = {
         />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
           Variant: satellite (pro standalone aplikace)
         </p>
         <Header
@@ -874,7 +874,7 @@ export const SatelliteRegistr: Story = {
     brand: (
       <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="32" height="32" rx="8" fill="var(--color-primary-500)"/>
+          <rect width="32" height="32" rx="8" fill="var(--csk-color-action)"/>
           <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
         </svg>
       </a>
@@ -884,7 +884,7 @@ export const SatelliteRegistr: Story = {
         <UserAvatar />
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <span style={{ fontSize: '14px', fontWeight: 500 }}>Jan Novák</span>
-          <span style={{ fontSize: '12px', color: 'var(--color-text-tertiary)' }}>USK Praha</span>
+          <span style={{ fontSize: '12px', color: 'var(--csk-color-text-3)' }}>USK Praha</span>
         </div>
       </div>
     ),
@@ -914,7 +914,7 @@ export const SatellitePrihlasky: Story = {
     brand: (
       <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="32" height="32" rx="8" fill="var(--color-primary-500)"/>
+          <rect width="32" height="32" rx="8" fill="var(--csk-color-action)"/>
           <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
         </svg>
       </a>
@@ -929,10 +929,10 @@ export const SatellitePrihlasky: Story = {
               padding: '6px 12px',
               borderRadius: '6px',
               textDecoration: 'none',
-              color: index === 0 ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+              color: index === 0 ? 'var(--csk-color-text)' : 'var(--csk-color-text-2)',
               fontWeight: 500,
               fontSize: '14px',
-              backgroundColor: index === 0 ? 'var(--color-bg-secondary)' : 'transparent',
+              backgroundColor: index === 0 ? 'var(--csk-color-surface-2)' : 'transparent',
             }}
           >
             {item}
@@ -961,7 +961,7 @@ export const SatelliteLive: Story = {
     brand: (
       <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="32" height="32" rx="8" fill="var(--color-primary-500)"/>
+          <rect width="32" height="32" rx="8" fill="var(--csk-color-action)"/>
           <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
         </svg>
       </a>
@@ -971,7 +971,7 @@ export const SatelliteLive: Story = {
         <Badge variant="error" size="sm" pill>
           LIVE
         </Badge>
-        <span style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+        <span style={{ fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
           Český pohár #2 - Praha Troja
         </span>
       </div>
@@ -999,13 +999,13 @@ export const SatelliteCustomHomeLink: Story = {
 // =============================================================================
 
 /**
- * Display font showcase - brand title a app name používají Plus Jakarta Sans.
+ * Display font showcase - brand title a app name používají Barlow Semi Condensed.
  */
 export const DisplayFontShowcase: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--color-text-tertiary)' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--csk-color-text-3)' }}>
           Brand title with display font (csk-header__brand-title class)
         </p>
         <Header
@@ -1013,7 +1013,7 @@ export const DisplayFontShowcase: Story = {
           brand={
             <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit' }}>
               <svg width="36" height="36" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="32" height="32" rx="8" fill="var(--color-primary-500)"/>
+                <rect width="32" height="32" rx="8" fill="var(--csk-color-action)"/>
                 <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
               </svg>
               <span className="csk-header__brand-title" style={{ fontSize: '1.25rem' }}>Kanoistika</span>
@@ -1024,7 +1024,7 @@ export const DisplayFontShowcase: Story = {
         />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--color-text-tertiary)' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--csk-color-text-3)' }}>
           Satellite app name with display font (automatic)
         </p>
         <Header
@@ -1033,7 +1033,7 @@ export const DisplayFontShowcase: Story = {
           brand={
             <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="32" height="32" rx="8" fill="var(--color-primary-500)"/>
+                <rect width="32" height="32" rx="8" fill="var(--csk-color-action)"/>
                 <text x="16" y="22" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">CSK</text>
               </svg>
             </a>
@@ -1044,7 +1044,7 @@ export const DisplayFontShowcase: Story = {
         />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--color-text-tertiary)' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--csk-color-text-3)' }}>
           Gradient variant with display font brand
         </p>
         <Header
@@ -1086,7 +1086,7 @@ export const DisplayFontShowcase: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Header with display font (Plus Jakarta Sans) for brand titles and app names. Use `csk-header__brand-title` class for brand text.',
+        story: 'Header with display font (Barlow Semi Condensed) for brand titles and app names. Use `csk-header__brand-title` class for brand text.',
       },
     },
   },

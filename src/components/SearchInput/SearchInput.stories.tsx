@@ -413,7 +413,7 @@ export const DarkMode: Story = {
         data-theme="dark"
         style={{
           padding: 24,
-          backgroundColor: 'var(--color-bg-primary)',
+          backgroundColor: 'var(--csk-color-surface)',
           borderRadius: 8,
         }}
       >

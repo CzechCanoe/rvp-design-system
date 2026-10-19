@@ -147,7 +147,7 @@ export const UserSettings: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', minWidth: '300px' }}>
-        <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: 'var(--color-text-primary)' }}>
+        <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: 'var(--csk-color-text)' }}>
           Account Settings
         </h3>
         <Switch

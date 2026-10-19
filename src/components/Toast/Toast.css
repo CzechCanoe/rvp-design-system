@@ -16,11 +16,11 @@
 
 .csk-toast-container {
   position: fixed;
-  z-index: 800; /* --z-toast */
+  z-index: 800; /* toast layer */
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-3);
-  padding: var(--spacing-4);
+  gap: var(--csk-space-3);
+  padding: var(--csk-space-4);
   pointer-events: none;
   max-width: 100%;
   max-height: 100vh;
@@ -77,12 +77,12 @@
   position: relative;
   display: flex;
   align-items: flex-start;
-  gap: var(--spacing-3);
+  gap: var(--csk-space-3);
   width: 380px;
-  max-width: calc(100vw - var(--spacing-8));
-  padding: var(--spacing-4);
-  background-color: var(--color-bg-elevated);
-  border-radius: var(--radius-lg);
+  max-width: calc(100vw - var(--csk-space-8));
+  padding: var(--csk-space-4);
+  background-color: var(--csk-color-surface);
+  border-radius: var(--csk-radius-lg);
   box-shadow:
     0 10px 40px -10px rgba(0, 0, 0, 0.2),
     0 4px 16px -4px rgba(0, 0, 0, 0.1),
@@ -90,8 +90,8 @@
   pointer-events: auto;
   overflow: hidden;
   transition:
-    transform var(--duration-fast) var(--ease-out),
-    box-shadow var(--duration-fast) var(--ease-out);
+    transform var(--csk-transition-fast),
+    box-shadow var(--csk-transition-fast);
 }
 
 /* Hover lift effect */
@@ -110,7 +110,7 @@
 .csk-toast-container--bottom-left .csk-toast,
 .csk-toast-container--bottom-center .csk-toast,
 .csk-toast-container--bottom-right .csk-toast {
-  animation: toast-slide-in-bottom var(--duration-moderate) cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: toast-slide-in-bottom var(--csk-transition-fast);
 }
 
 @keyframes toast-slide-in-bottom {
@@ -127,7 +127,7 @@
 /* Slide in from right for right positions */
 .csk-toast-container--bottom-right .csk-toast,
 .csk-toast-container--top-right .csk-toast {
-  animation: toast-slide-in-right var(--duration-moderate) cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: toast-slide-in-right var(--csk-transition-fast);
 }
 
 @keyframes toast-slide-in-right {
@@ -144,7 +144,7 @@
 /* Slide in from left for left positions */
 .csk-toast-container--bottom-left .csk-toast,
 .csk-toast-container--top-left .csk-toast {
-  animation: toast-slide-in-left var(--duration-moderate) cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: toast-slide-in-left var(--csk-transition-fast);
 }
 
 @keyframes toast-slide-in-left {
@@ -163,7 +163,7 @@
  * ========================================================================== */
 
 .csk-toast-container--top-center .csk-toast {
-  animation: toast-slide-in-top var(--duration-moderate) cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: toast-slide-in-top var(--csk-transition-fast);
 }
 
 @keyframes toast-slide-in-top {
@@ -182,7 +182,7 @@
  * ========================================================================== */
 
 .csk-toast--exiting {
-  animation: toast-slide-out var(--duration-fast) var(--ease-in) forwards;
+  animation: toast-slide-out var(--csk-transition-fast) forwards;
 }
 
 @keyframes toast-slide-out {
@@ -257,15 +257,15 @@
   height: 3px;
   background-color: rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  border-radius: 0 0 var(--csk-radius-lg) var(--csk-radius-lg);
 }
 
 .csk-toast__progress-bar {
   height: 100%;
-  background: var(--gradient-primary);
+  background: var(--csk-color-brand);
   transform-origin: left;
   animation: toast-progress linear forwards;
-  border-radius: 0 0 0 var(--radius-lg);
+  border-radius: 0 0 0 var(--csk-radius-lg);
 }
 
 @keyframes toast-progress {
@@ -285,19 +285,19 @@
 
 /* Variant-specific progress colors */
 .csk-toast--success .csk-toast__progress-bar {
-  background: linear-gradient(90deg, var(--color-success-400), var(--color-success-600));
+  background: linear-gradient(90deg, var(--csk-color-success), var(--csk-color-success));
 }
 
 .csk-toast--warning .csk-toast__progress-bar {
-  background: linear-gradient(90deg, var(--color-warning-400), var(--color-warning-600));
+  background: linear-gradient(90deg, var(--csk-color-warning), var(--csk-color-warning));
 }
 
 .csk-toast--error .csk-toast__progress-bar {
-  background: linear-gradient(90deg, var(--color-error-400), var(--color-error-600));
+  background: linear-gradient(90deg, var(--csk-color-error), var(--csk-color-error));
 }
 
 .csk-toast--info .csk-toast__progress-bar {
-  background: linear-gradient(90deg, var(--color-info-400), var(--color-info-600));
+  background: linear-gradient(90deg, var(--csk-color-info), var(--csk-color-info));
 }
 
 /* ==========================================================================
@@ -308,10 +308,10 @@
   flex-shrink: 0;
   width: 22px;
   height: 22px;
-  color: var(--color-text-tertiary);
+  color: var(--csk-color-text-3);
   transition:
-    transform var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out);
+    transform var(--csk-transition-fast),
+    color var(--csk-transition-fast);
 }
 
 .csk-toast__icon svg {
@@ -345,33 +345,33 @@
 .csk-toast__content {
   flex: 1;
   min-width: 0;
-  padding-right: var(--spacing-2);
+  padding-right: var(--csk-space-2);
 }
 
 .csk-toast__title {
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-tight);
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-1);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-semibold);
+  line-height: var(--csk-line-height-snug);
+  color: var(--csk-color-text);
+  margin-bottom: var(--csk-space-1);
 }
 
 /* Display font for title (aesthetic enhancement) */
 .csk-toast--display-title .csk-toast__title {
-  font-family: var(--font-family-display);
-  font-weight: var(--text-display-weight);
-  letter-spacing: var(--text-display-tracking);
+  font-family: var(--csk-font-display);
+  font-weight: var(--csk-font-weight-bold);
+  letter-spacing: var(--csk-letter-spacing-tight);
 }
 
 .csk-toast__message {
-  font-size: var(--text-sm-size);
-  line-height: var(--line-height-normal);
-  color: var(--color-text-secondary);
+  font-size: var(--csk-text-md);
+  line-height: var(--csk-line-height-normal);
+  color: var(--csk-color-text-2);
 }
 
 /* Without title, message uses primary color */
 .csk-toast__content:not(:has(.csk-toast__title)) .csk-toast__message {
-  color: var(--color-text-primary);
+  color: var(--csk-color-text);
 }
 
 /* ==========================================================================
@@ -380,32 +380,32 @@
 
 .csk-toast__action {
   flex-shrink: 0;
-  padding: var(--spacing-1) var(--spacing-3);
+  padding: var(--csk-space-1) var(--csk-space-3);
   border: none;
-  border-radius: var(--radius-md);
-  background-color: var(--color-primary-50);
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-primary-600);
+  border-radius: var(--csk-radius-md);
+  background-color: var(--csk-color-highlight-bg);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-semibold);
+  color: var(--csk-color-action-hover);
   cursor: pointer;
   transition:
-    background-color var(--duration-fast) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out),
-    box-shadow var(--duration-fast) var(--ease-out);
+    background-color var(--csk-transition-fast),
+    transform var(--csk-transition-fast),
+    box-shadow var(--csk-transition-fast);
 }
 
 .csk-toast__action:hover {
-  background-color: var(--color-primary-100);
+  background-color: var(--csk-color-highlight-bg);
   transform: translateY(-1px);
 }
 
 .csk-toast__action:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--color-bg-elevated), 0 0 0 4px var(--color-primary-500);
+  box-shadow: 0 0 0 2px var(--csk-color-surface), 0 0 0 4px var(--csk-color-action);
 }
 
 .csk-toast__action:active {
-  background-color: var(--color-primary-200);
+  background-color: var(--csk-color-highlight-border);
   transform: translateY(0);
 }
 
@@ -422,19 +422,19 @@
   height: 28px;
   padding: 0;
   border: none;
-  border-radius: var(--radius-full);
+  border-radius: var(--csk-radius-pill);
   background-color: transparent;
-  color: var(--color-text-tertiary);
+  color: var(--csk-color-text-3);
   cursor: pointer;
   transition:
-    background-color var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out);
+    background-color var(--csk-transition-fast),
+    color var(--csk-transition-fast),
+    transform var(--csk-transition-fast);
 }
 
 .csk-toast__dismiss:hover {
-  background-color: var(--color-bg-tertiary);
-  color: var(--color-text-primary);
+  background-color: var(--csk-color-surface-3);
+  color: var(--csk-color-text);
   transform: scale(1.1);
 }
 
@@ -444,7 +444,7 @@
 
 .csk-toast__dismiss:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--color-bg-elevated), 0 0 0 4px var(--color-primary-500);
+  box-shadow: 0 0 0 2px var(--csk-color-surface), 0 0 0 4px var(--csk-color-action);
 }
 
 .csk-toast__dismiss:active {
@@ -454,7 +454,7 @@
 .csk-toast__dismiss svg {
   width: 14px;
   height: 14px;
-  transition: transform var(--duration-fast) var(--ease-out);
+  transition: transform var(--csk-transition-fast);
 }
 
 /* ==========================================================================
@@ -463,80 +463,80 @@
 
 /* Default variant */
 .csk-toast--default {
-  border-left: 4px solid var(--color-border-secondary);
+  border-left: 4px solid var(--csk-color-border);
 }
 
 .csk-toast--default .csk-toast__icon {
-  color: var(--color-text-tertiary);
+  color: var(--csk-color-text-3);
 }
 
 /* Success variant */
 .csk-toast--success {
   border-left: 4px solid transparent;
-  border-image: linear-gradient(180deg, var(--color-success-400), var(--color-success-600)) 1;
+  border-image: linear-gradient(180deg, var(--csk-color-success), var(--csk-color-success)) 1;
   background:
-    linear-gradient(var(--color-bg-elevated), var(--color-bg-elevated)) padding-box,
-    linear-gradient(180deg, var(--color-success-400), var(--color-success-600)) border-box;
+    linear-gradient(var(--csk-color-surface), var(--csk-color-surface)) padding-box,
+    linear-gradient(180deg, var(--csk-color-success), var(--csk-color-success)) border-box;
 }
 
 .csk-toast--success .csk-toast__icon {
-  color: var(--color-success-500);
+  color: var(--csk-color-success);
 }
 
 /* Success icon glow */
 .csk-toast--success:not(.csk-toast--exiting) .csk-toast__icon {
-  filter: drop-shadow(0 0 6px var(--color-success-400));
+  filter: drop-shadow(0 0 6px var(--csk-color-success));
 }
 
 /* Warning variant */
 .csk-toast--warning {
   border-left: 4px solid transparent;
-  border-image: linear-gradient(180deg, var(--color-warning-400), var(--color-warning-600)) 1;
+  border-image: linear-gradient(180deg, var(--csk-color-warning), var(--csk-color-warning)) 1;
   background:
-    linear-gradient(var(--color-bg-elevated), var(--color-bg-elevated)) padding-box,
-    linear-gradient(180deg, var(--color-warning-400), var(--color-warning-600)) border-box;
+    linear-gradient(var(--csk-color-surface), var(--csk-color-surface)) padding-box,
+    linear-gradient(180deg, var(--csk-color-warning), var(--csk-color-warning)) border-box;
 }
 
 .csk-toast--warning .csk-toast__icon {
-  color: var(--color-warning-500);
+  color: var(--csk-color-warning);
 }
 
 .csk-toast--warning:not(.csk-toast--exiting) .csk-toast__icon {
-  filter: drop-shadow(0 0 6px var(--color-warning-400));
+  filter: drop-shadow(0 0 6px var(--csk-color-warning));
 }
 
 /* Error variant */
 .csk-toast--error {
   border-left: 4px solid transparent;
-  border-image: linear-gradient(180deg, var(--color-error-400), var(--color-error-600)) 1;
+  border-image: linear-gradient(180deg, var(--csk-color-error), var(--csk-color-error)) 1;
   background:
-    linear-gradient(var(--color-bg-elevated), var(--color-bg-elevated)) padding-box,
-    linear-gradient(180deg, var(--color-error-400), var(--color-error-600)) border-box;
+    linear-gradient(var(--csk-color-surface), var(--csk-color-surface)) padding-box,
+    linear-gradient(180deg, var(--csk-color-error), var(--csk-color-error)) border-box;
 }
 
 .csk-toast--error .csk-toast__icon {
-  color: var(--color-error-500);
+  color: var(--csk-color-error);
 }
 
 .csk-toast--error:not(.csk-toast--exiting) .csk-toast__icon {
-  filter: drop-shadow(0 0 6px var(--color-error-400));
+  filter: drop-shadow(0 0 6px var(--csk-color-error));
 }
 
 /* Info variant */
 .csk-toast--info {
   border-left: 4px solid transparent;
-  border-image: linear-gradient(180deg, var(--color-info-400), var(--color-info-600)) 1;
+  border-image: linear-gradient(180deg, var(--csk-color-info), var(--csk-color-info)) 1;
   background:
-    linear-gradient(var(--color-bg-elevated), var(--color-bg-elevated)) padding-box,
-    linear-gradient(180deg, var(--color-info-400), var(--color-info-600)) border-box;
+    linear-gradient(var(--csk-color-surface), var(--csk-color-surface)) padding-box,
+    linear-gradient(180deg, var(--csk-color-info), var(--csk-color-info)) border-box;
 }
 
 .csk-toast--info .csk-toast__icon {
-  color: var(--color-info-500);
+  color: var(--csk-color-info);
 }
 
 .csk-toast--info:not(.csk-toast--exiting) .csk-toast__icon {
-  filter: drop-shadow(0 0 6px var(--color-info-400));
+  filter: drop-shadow(0 0 6px var(--csk-color-info));
 }
 
 /* ==========================================================================
@@ -544,7 +544,7 @@
  * ========================================================================== */
 
 [data-theme="dark"] .csk-toast {
-  background-color: var(--color-bg-elevated);
+  background-color: var(--csk-color-surface);
   box-shadow:
     0 10px 40px -10px rgba(0, 0, 0, 0.5),
     0 4px 16px -4px rgba(0, 0, 0, 0.3),
@@ -559,20 +559,20 @@
 }
 
 [data-theme="dark"] .csk-toast__action {
-  background-color: var(--color-primary-900);
-  color: var(--color-primary-300);
+  background-color: var(--csk-color-brand);
+  color: var(--csk-color-highlight-border);
 }
 
 [data-theme="dark"] .csk-toast__action:hover {
-  background-color: var(--color-primary-800);
+  background-color: var(--csk-color-brand);
 }
 
 [data-theme="dark"] .csk-toast__action:active {
-  background-color: var(--color-primary-700);
+  background-color: var(--csk-color-brand);
 }
 
 [data-theme="dark"] .csk-toast__dismiss:hover {
-  background-color: var(--color-bg-tertiary);
+  background-color: var(--csk-color-surface-3);
 }
 
 [data-theme="dark"] .csk-toast__progress {
@@ -607,7 +607,7 @@
 
 @media (max-width: 575px) {
   .csk-toast-container {
-    padding: var(--spacing-2);
+    padding: var(--csk-space-2);
   }
 
   /* Center on mobile */

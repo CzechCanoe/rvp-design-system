@@ -235,8 +235,8 @@ const LogoPlaceholder = () => (
     style={{
       width: '120px',
       height: '32px',
-      background: 'var(--color-interactive-default)',
-      borderRadius: 'var(--radius-sm)',
+      background: 'var(--csk-color-action)',
+      borderRadius: 'var(--csk-radius-sm)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -284,7 +284,7 @@ export const AllStyleVariants: MainNavStory = {
       </div>
       <div
         style={{
-          background: 'linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-800) 100%)',
+          background: 'linear-gradient(135deg, var(--csk-color-action-hover) 0%, var(--csk-color-brand) 100%)',
         }}
       >
         <h3 style={{ margin: '0 0 8px', padding: '16px', color: 'white' }}>Glass (na barevném pozadí)</h3>
@@ -367,7 +367,7 @@ export const CSKFullExample: MainNavStory = {
               width: '140px',
               height: '40px',
               background: 'rgba(255, 255, 255, 0.2)',
-              borderRadius: 'var(--radius-md)',
+              borderRadius: 'var(--csk-radius-md)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -399,12 +399,12 @@ export const CSKFullExample: MainNavStory = {
           </>
         }
       />
-      <div style={{ padding: '16px 24px', borderBottom: '1px solid var(--color-border-default)' }}>
+      <div style={{ padding: '16px 24px', borderBottom: '1px solid var(--csk-color-border)' }}>
         <Breadcrumbs items={resultsBreadcrumbs} />
       </div>
       <div style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
         <h1 style={{ fontSize: '2rem', marginBottom: '16px' }}>K1 Muži - Výsledky</h1>
-        <p style={{ color: 'var(--color-text-secondary)' }}>
+        <p style={{ color: 'var(--csk-color-text-2)' }}>
           Kompletní příklad navigace pro web CSK s gradient stylem a breadcrumbs.
         </p>
       </div>

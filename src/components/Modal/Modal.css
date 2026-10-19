@@ -27,11 +27,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-4);
+  padding: var(--csk-space-4);
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  animation: modal-backdrop-in var(--duration-moderate) var(--ease-out);
+  animation: modal-backdrop-in var(--csk-transition-fast);
 }
 
 @keyframes modal-backdrop-in {
@@ -56,12 +56,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-height: calc(100vh - var(--spacing-8));
+  max-height: calc(100vh - var(--csk-space-8));
   overflow: hidden;
-  background-color: var(--color-bg-primary);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-modal);
-  animation: modal-slide-in var(--duration-moderate) cubic-bezier(0.34, 1.56, 0.64, 1);
+  background-color: var(--csk-color-surface);
+  border-radius: var(--csk-radius-lg);
+  box-shadow: var(--csk-shadow-sm);
+  animation: modal-slide-in var(--csk-transition-fast);
 }
 
 /* Slide-in from bottom animation */
@@ -78,7 +78,7 @@
 
 /* Alternative: Scale animation for centered feel */
 .csk-modal--animate-scale {
-  animation: modal-scale-in var(--duration-moderate) cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: modal-scale-in var(--csk-transition-fast);
 }
 
 @keyframes modal-scale-in {
@@ -113,8 +113,8 @@
 }
 
 .csk-modal--full {
-  max-width: calc(100vw - var(--spacing-8));
-  max-height: calc(100vh - var(--spacing-8));
+  max-width: calc(100vw - var(--csk-space-8));
+  max-height: calc(100vh - var(--csk-space-8));
 }
 
 /* ==========================================================================
@@ -126,9 +126,9 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: var(--spacing-4);
-  padding: var(--spacing-6);
-  border-bottom: 1px solid var(--color-border-secondary);
+  gap: var(--csk-space-4);
+  padding: var(--csk-space-6);
+  border-bottom: 1px solid var(--csk-color-border);
 }
 
 /* Gradient accent line at top of header */
@@ -139,8 +139,8 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--gradient-primary);
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background: var(--csk-color-brand);
+  border-radius: var(--csk-radius-lg) var(--csk-radius-lg) 0 0;
 }
 
 .csk-modal__title-wrapper {
@@ -150,17 +150,17 @@
 
 .csk-modal__title {
   margin: 0;
-  font-size: var(--text-lg-size);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-tight);
-  color: var(--color-text-primary);
+  font-size: var(--csk-text-lg);
+  font-weight: var(--csk-font-weight-semibold);
+  line-height: var(--csk-line-height-snug);
+  color: var(--csk-color-text);
 }
 
 .csk-modal__description {
-  margin: var(--spacing-1) 0 0;
-  font-size: var(--text-sm-size);
-  line-height: var(--line-height-normal);
-  color: var(--color-text-secondary);
+  margin: var(--csk-space-1) 0 0;
+  font-size: var(--csk-text-md);
+  line-height: var(--csk-line-height-normal);
+  color: var(--csk-color-text-2);
 }
 
 /* ==========================================================================
@@ -169,7 +169,7 @@
 
 /* Danger variant for destructive actions */
 .csk-modal--danger .csk-modal__header::before {
-  background: var(--gradient-danger, linear-gradient(135deg, var(--color-error-500) 0%, var(--color-error-700) 100%));
+  background: var(--csk-color-error);
 }
 
 /* ==========================================================================
@@ -185,37 +185,37 @@
   height: 32px;
   padding: 0;
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--csk-radius-md);
   background-color: transparent;
-  color: var(--color-text-tertiary);
+  color: var(--csk-color-text-3);
   cursor: pointer;
   transition:
-    background-color var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out),
-    box-shadow var(--duration-fast) var(--ease-out);
+    background-color var(--csk-transition-fast),
+    color var(--csk-transition-fast),
+    transform var(--csk-transition-fast),
+    box-shadow var(--csk-transition-fast);
 }
 
 .csk-modal__close:hover {
-  background-color: var(--color-bg-secondary);
-  color: var(--color-text-primary);
+  background-color: var(--csk-color-surface-2);
+  color: var(--csk-color-text);
   transform: scale(1.1);
 }
 
 .csk-modal__close:focus-visible {
   outline: none;
-  box-shadow: var(--shadow-button-focus);
+  box-shadow: 0 0 0 2px var(--csk-color-focus);
 }
 
 .csk-modal__close:active {
-  background-color: var(--color-bg-tertiary);
+  background-color: var(--csk-color-surface-3);
   transform: scale(0.95);
 }
 
 .csk-modal__close-icon {
   width: 20px;
   height: 20px;
-  transition: transform var(--duration-fast) var(--ease-out);
+  transition: transform var(--csk-transition-fast);
 }
 
 .csk-modal__close:hover .csk-modal__close-icon {
@@ -228,7 +228,7 @@
 
 .csk-modal__body {
   flex: 1;
-  padding: var(--spacing-6);
+  padding: var(--csk-space-6);
   overflow-y: auto;
 }
 
@@ -239,11 +239,11 @@
 
 /* Remove padding when no header/footer */
 .csk-modal:not(:has(.csk-modal__header)) .csk-modal__body {
-  padding-top: var(--spacing-6);
+  padding-top: var(--csk-space-6);
 }
 
 .csk-modal:not(:has(.csk-modal__footer)) .csk-modal__body {
-  padding-bottom: var(--spacing-6);
+  padding-bottom: var(--csk-space-6);
 }
 
 /* ==========================================================================
@@ -254,10 +254,10 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--spacing-3);
-  padding: var(--spacing-4) var(--spacing-6);
-  border-top: 1px solid var(--color-border-secondary);
-  background-color: var(--color-bg-secondary);
+  gap: var(--csk-space-3);
+  padding: var(--csk-space-4) var(--csk-space-6);
+  border-top: 1px solid var(--csk-color-border);
+  background-color: var(--csk-color-surface-2);
 }
 
 /* ==========================================================================
@@ -271,12 +271,12 @@
 }
 
 [data-theme="dark"] .csk-modal {
-  background-color: var(--color-bg-elevated);
-  border: 1px solid var(--color-border-secondary);
+  background-color: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
 }
 
 [data-theme="dark"] .csk-modal__footer {
-  background-color: var(--color-bg-primary);
+  background-color: var(--csk-color-surface);
 }
 
 /* ==========================================================================
@@ -296,12 +296,12 @@
 
 @media (max-width: 575px) {
   .csk-modal__backdrop {
-    padding: var(--spacing-2);
+    padding: var(--csk-space-2);
     align-items: flex-end;
   }
 
   .csk-modal {
-    max-height: calc(100vh - var(--spacing-4));
+    max-height: calc(100vh - var(--csk-space-4));
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
@@ -315,7 +315,7 @@
   .csk-modal__header,
   .csk-modal__body,
   .csk-modal__footer {
-    padding-left: var(--spacing-4);
-    padding-right: var(--spacing-4);
+    padding-left: var(--csk-space-4);
+    padding-right: var(--csk-space-4);
   }
 }

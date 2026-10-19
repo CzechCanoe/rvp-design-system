@@ -15,22 +15,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-lg);
+  border-radius: var(--csk-radius-lg);
   flex-shrink: 0;
   transition:
-    background var(--duration-normal) var(--ease-out),
-    border-color var(--duration-normal) var(--ease-out);
+    background var(--csk-transition-fast),
+    border-color var(--csk-transition-fast);
 }
 
 .csk-date-badge__day {
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
+  font-weight: var(--csk-font-weight-bold);
+  color: var(--csk-color-text);
   line-height: 1;
 }
 
 .csk-date-badge__month {
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text-2);
   text-transform: uppercase;
   line-height: 1;
   letter-spacing: 0.02em;
@@ -44,11 +44,11 @@
 .csk-date-badge--sm {
   width: 44px;
   height: 44px;
-  gap: var(--spacing-0-5);
+  gap: calc(var(--csk-space-1) / 2);
 }
 
 .csk-date-badge--sm .csk-date-badge__day {
-  font-size: var(--text-lg-size);
+  font-size: var(--csk-text-lg);
 }
 
 .csk-date-badge--sm .csk-date-badge__month {
@@ -59,30 +59,30 @@
 .csk-date-badge--md {
   width: 56px;
   height: 56px;
-  gap: var(--spacing-1);
+  gap: var(--csk-space-1);
 }
 
 .csk-date-badge--md .csk-date-badge__day {
-  font-size: var(--text-xl-size);
+  font-size: var(--csk-text-xl);
 }
 
 .csk-date-badge--md .csk-date-badge__month {
-  font-size: var(--text-xs-size);
+  font-size: var(--csk-text-sm);
 }
 
 /* Large */
 .csk-date-badge--lg {
   width: 72px;
   height: 72px;
-  gap: var(--spacing-1);
+  gap: var(--csk-space-1);
 }
 
 .csk-date-badge--lg .csk-date-badge__day {
-  font-size: var(--text-2xl-size);
+  font-size: var(--csk-text-2xl);
 }
 
 .csk-date-badge--lg .csk-date-badge__month {
-  font-size: var(--text-sm-size);
+  font-size: var(--csk-text-md);
 }
 
 /* =============================================================================
@@ -93,10 +93,10 @@
 .csk-date-badge--generic {
   background: linear-gradient(
     135deg,
-    var(--color-bg-tertiary) 0%,
-    var(--color-bg-secondary) 100%
+    var(--csk-color-surface-3) 0%,
+    var(--csk-color-surface-2) 100%
   );
-  border: 1px solid var(--color-border-primary);
+  border: 1px solid var(--csk-color-border);
 }
 
 /* DV Section - Blue */
@@ -106,11 +106,11 @@
     #dbeafe 0%,
     #eff6ff 100%
   );
-  border: 1px solid var(--color-section-dv, #2563eb);
+  border: 1px solid var(--csk-color-section-dv);
 }
 
 .csk-date-badge--dv .csk-date-badge__day {
-  color: var(--color-section-dv, #2563eb);
+  color: var(--csk-color-section-dv);
 }
 
 .csk-date-badge--dv .csk-date-badge__month {
@@ -124,11 +124,11 @@
     #dcfce7 0%,
     #f0fdf4 100%
   );
-  border: 1px solid var(--color-section-ry, #22c55e);
+  border: 1px solid var(--csk-color-section-ry);
 }
 
 .csk-date-badge--ry .csk-date-badge__day {
-  color: var(--color-section-ry, #22c55e);
+  color: var(--csk-color-section-ry);
 }
 
 .csk-date-badge--ry .csk-date-badge__month {
@@ -142,11 +142,11 @@
     #fee2e2 0%,
     #fef2f2 100%
   );
-  border: 1px solid var(--color-section-vt, #ef4444);
+  border: 1px solid var(--csk-color-section-vt);
 }
 
 .csk-date-badge--vt .csk-date-badge__day {
-  color: var(--color-section-vt, #ef4444);
+  color: var(--csk-color-section-vt);
 }
 
 .csk-date-badge--vt .csk-date-badge__month {
@@ -160,10 +160,10 @@
 [data-theme='dark'] .csk-date-badge--generic {
   background: linear-gradient(
     135deg,
-    var(--color-bg-secondary) 0%,
-    var(--color-bg-tertiary) 100%
+    var(--csk-color-surface-2) 0%,
+    var(--csk-color-surface-3) 100%
   );
-  border-color: var(--color-border-secondary);
+  border-color: var(--csk-color-border);
 }
 
 [data-theme='dark'] .csk-date-badge--dv {

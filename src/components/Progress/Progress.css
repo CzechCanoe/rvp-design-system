@@ -17,26 +17,26 @@
 
 .csk-progress--bar {
   flex-direction: column;
-  gap: var(--spacing-2);
+  gap: var(--csk-space-2);
 }
 
 .csk-progress__track {
   width: 100%;
-  background-color: var(--color-bg-tertiary);
-  border-radius: var(--radius-full);
+  background-color: var(--csk-color-surface-3);
+  border-radius: var(--csk-radius-pill);
   overflow: hidden;
 }
 
 .csk-progress__fill {
   height: 100%;
-  border-radius: var(--radius-full);
-  transition: width var(--duration-normal) var(--ease-out);
+  border-radius: var(--csk-radius-pill);
+  transition: width var(--csk-transition-fast);
 }
 
 .csk-progress__label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text-2);
   text-align: right;
 }
 
@@ -55,23 +55,23 @@
 
 /* Bar Colors */
 .csk-progress--primary .csk-progress__fill {
-  background-color: var(--color-primary-500);
+  background-color: var(--csk-color-action);
 }
 
 .csk-progress--success .csk-progress__fill {
-  background-color: var(--color-success-500);
+  background-color: var(--csk-color-success);
 }
 
 .csk-progress--warning .csk-progress__fill {
-  background-color: var(--color-warning-500);
+  background-color: var(--csk-color-warning);
 }
 
 .csk-progress--error .csk-progress__fill {
-  background-color: var(--color-error-500);
+  background-color: var(--csk-color-error);
 }
 
 .csk-progress--info .csk-progress__fill {
-  background-color: var(--color-info-500);
+  background-color: var(--csk-color-info);
 }
 
 /* Striped Pattern */
@@ -153,7 +153,7 @@
   right: 50%;
   width: 100%;
   height: 2px;
-  background-color: var(--color-border-secondary);
+  background-color: var(--csk-color-border);
   transform: translateY(-50%);
   z-index: 0;
 }
@@ -164,7 +164,7 @@
 
 .csk-progress--horizontal .csk-progress__content {
   text-align: center;
-  margin-top: var(--spacing-2);
+  margin-top: var(--csk-space-2);
 }
 
 /* Vertical Orientation */
@@ -177,7 +177,7 @@
   flex-direction: row;
   align-items: flex-start;
   position: relative;
-  padding-bottom: var(--spacing-6);
+  padding-bottom: var(--csk-space-6);
 }
 
 .csk-progress--vertical .csk-progress__step:last-child {
@@ -190,7 +190,7 @@
   top: 0;
   width: 2px;
   height: 100%;
-  background-color: var(--color-border-secondary);
+  background-color: var(--csk-color-border);
   transform: translateX(-50%);
   z-index: 0;
 }
@@ -204,8 +204,8 @@
 }
 
 .csk-progress--vertical .csk-progress__content {
-  margin-left: var(--spacing-3);
-  padding-top: var(--spacing-1);
+  margin-left: var(--csk-space-3);
+  padding-top: var(--csk-space-1);
 }
 
 /* Step Indicator */
@@ -213,33 +213,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-full);
-  background-color: var(--color-bg-secondary);
-  border: 2px solid var(--color-border-secondary);
-  color: var(--color-text-tertiary);
-  font-weight: var(--font-weight-semibold);
+  border-radius: var(--csk-radius-pill);
+  background-color: var(--csk-color-surface-2);
+  border: 2px solid var(--csk-color-border);
+  color: var(--csk-color-text-3);
+  font-weight: var(--csk-font-weight-semibold);
   position: relative;
   z-index: 1;
-  transition: all var(--duration-fast) var(--ease-out);
+  transition: all var(--csk-transition-fast);
 }
 
 /* Step Sizes - Indicator */
 .csk-progress--sm .csk-progress__indicator {
   width: 24px;
   height: 24px;
-  font-size: var(--font-size-xs);
+  font-size: var(--csk-text-sm);
 }
 
 .csk-progress--md .csk-progress__indicator {
   width: 32px;
   height: 32px;
-  font-size: var(--font-size-sm);
+  font-size: var(--csk-text-md);
 }
 
 .csk-progress--lg .csk-progress__indicator {
   width: 40px;
   height: 40px;
-  font-size: var(--font-size-base);
+  font-size: var(--csk-text-base);
 }
 
 /* Step Sizes - Connector positioning for horizontal */
@@ -270,77 +270,77 @@
 
 /* Connector completed state */
 .csk-progress__connector--completed {
-  background-color: var(--color-primary-500);
+  background-color: var(--csk-color-action);
 }
 
 .csk-progress--success .csk-progress__connector--completed {
-  background-color: var(--color-success-500);
+  background-color: var(--csk-color-success);
 }
 
 .csk-progress--warning .csk-progress__connector--completed {
-  background-color: var(--color-warning-500);
+  background-color: var(--csk-color-warning);
 }
 
 .csk-progress--error .csk-progress__connector--completed {
-  background-color: var(--color-error-500);
+  background-color: var(--csk-color-error);
 }
 
 .csk-progress--info .csk-progress__connector--completed {
-  background-color: var(--color-info-500);
+  background-color: var(--csk-color-info);
 }
 
 /* Current Step */
 .csk-progress__step--current .csk-progress__indicator {
-  border-color: var(--color-primary-500);
-  color: var(--color-primary-500);
-  background-color: var(--color-bg-primary);
+  border-color: var(--csk-color-action);
+  color: var(--csk-color-action);
+  background-color: var(--csk-color-surface);
 }
 
 .csk-progress--success .csk-progress__step--current .csk-progress__indicator {
-  border-color: var(--color-success-500);
-  color: var(--color-success-500);
+  border-color: var(--csk-color-success);
+  color: var(--csk-color-success);
 }
 
 .csk-progress--warning .csk-progress__step--current .csk-progress__indicator {
-  border-color: var(--color-warning-500);
-  color: var(--color-warning-500);
+  border-color: var(--csk-color-warning);
+  color: var(--csk-color-warning);
 }
 
 .csk-progress--error .csk-progress__step--current .csk-progress__indicator {
-  border-color: var(--color-error-500);
-  color: var(--color-error-500);
+  border-color: var(--csk-color-error);
+  color: var(--csk-color-error);
 }
 
 .csk-progress--info .csk-progress__step--current .csk-progress__indicator {
-  border-color: var(--color-info-500);
-  color: var(--color-info-500);
+  border-color: var(--csk-color-info);
+  color: var(--csk-color-info);
 }
 
 /* Completed Step */
 .csk-progress__step--completed .csk-progress__indicator {
-  background-color: var(--color-primary-500);
-  border-color: var(--color-primary-500);
+  background-color: var(--csk-color-action);
+  border-color: var(--csk-color-action);
   color: white;
 }
 
 .csk-progress--success .csk-progress__step--completed .csk-progress__indicator {
-  background-color: var(--color-success-500);
-  border-color: var(--color-success-500);
+  background-color: var(--csk-color-success);
+  border-color: var(--csk-color-success);
 }
 
 .csk-progress--warning .csk-progress__step--completed .csk-progress__indicator {
-  background-color: var(--color-warning-500);
-  border-color: var(--color-warning-500);
+  background-color: var(--csk-color-warning);
+  border-color: var(--csk-color-warning);
 }
 
 .csk-progress--error .csk-progress__step--completed .csk-progress__indicator {
-  background-color: var(--color-error-500);
-  border-color: var(--color-error-500);
+  background-color: var(--csk-color-error);
+  border-color: var(--csk-color-error);
 }
 
 .csk-progress--info .csk-progress__step--completed .csk-progress__indicator {
-  background-color: var(--color-info-500);
-  border-color: var(--color-info-500);
+  background-color: var(--csk-color-info);
+  border-color: var(--csk-color-info);
 }
 
 /* Check Icon */
@@ -375,25 +375,25 @@
 /* Step Content */
 .csk-progress__step-label {
   display: block;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text-2);
 }
 
 .csk-progress__step--current .csk-progress__step-label {
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-semibold);
+  color: var(--csk-color-text);
+  font-weight: var(--csk-font-weight-semibold);
 }
 
 .csk-progress__step--completed .csk-progress__step-label {
-  color: var(--color-text-primary);
+  color: var(--csk-color-text);
 }
 
 .csk-progress__step-description {
   display: block;
-  font-size: var(--font-size-xs);
-  color: var(--color-text-tertiary);
-  margin-top: var(--spacing-0-5);
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+  margin-top: calc(var(--csk-space-1) / 2);
 }
 
 /* Clickable Steps */
@@ -403,7 +403,7 @@
 
 .csk-progress__step--clickable .csk-progress__indicator:hover {
   transform: scale(1.1);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--csk-shadow-sm);
 }
 
 .csk-progress__step--clickable .csk-progress__indicator:focus-visible {
@@ -416,15 +416,15 @@
  * ============================================================================ */
 
 [data-theme='dark'] .csk-progress__track {
-  background-color: var(--color-bg-tertiary);
+  background-color: var(--csk-color-surface-3);
 }
 
 [data-theme='dark'] .csk-progress__indicator {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--csk-color-surface-2);
 }
 
 [data-theme='dark'] .csk-progress__step--current .csk-progress__indicator {
-  background-color: var(--color-bg-primary);
+  background-color: var(--csk-color-surface);
 }
 
 /* ============================================================================
@@ -469,7 +469,7 @@
   .csk-progress--horizontal.csk-progress--lg .csk-progress__indicator {
     width: 32px;
     height: 32px;
-    font-size: var(--font-size-sm);
+    font-size: var(--csk-text-md);
   }
 
   .csk-progress--horizontal.csk-progress--lg .csk-progress__connector {

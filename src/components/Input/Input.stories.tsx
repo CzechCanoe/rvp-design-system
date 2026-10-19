@@ -312,7 +312,7 @@ export const DisplayLabel: Story = {
         />
       </div>
       <div>
-        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Display Label (Plus Jakarta Sans)</h4>
+        <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Display Label (Barlow Semi Condensed)</h4>
         <Input
           label="Jméno závodníka"
           placeholder="Jan Novák"
@@ -324,7 +324,7 @@ export const DisplayLabel: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Display label uses Plus Jakarta Sans font for aesthetic emphasis. Use for hero forms and prominent inputs.',
+        story: 'Display label uses Barlow Semi Condensed font for aesthetic emphasis. Use for hero forms and prominent inputs.',
       },
     },
   },
@@ -336,12 +336,12 @@ export const AestheticForm: Story = {
     <div
       style={{
         padding: '32px',
-        background: 'var(--bg-mesh-primary, linear-gradient(135deg, rgba(17, 118, 166, 0.1) 0%, rgba(249, 115, 22, 0.05) 100%))',
+        background: 'none',
         borderRadius: '16px',
         maxWidth: '400px',
       }}
     >
-      <h2 style={{ margin: '0 0 24px 0', fontFamily: 'Plus Jakarta Sans, sans-serif', fontWeight: 700 }}>
+      <h2 style={{ margin: '0 0 24px 0', fontFamily: 'var(--csk-font-display)', fontWeight: 700 }}>
         Registrace závodníka
       </h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>

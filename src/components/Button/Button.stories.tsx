@@ -94,7 +94,7 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Three sizes: sm (32px), md (40px), lg (52px). Large size uses display font (Plus Jakarta Sans) for prominent CTAs.',
+        story: 'Three sizes: sm (32px), md (40px), lg (52px). Large size uses display font (Barlow Semi Condensed) for prominent CTAs.',
       },
     },
   },
@@ -217,7 +217,7 @@ export const LargeCTA: Story = {
         </Button>
       </div>
       <div style={{ fontSize: '12px', color: '#666' }}>
-        Large buttons use Plus Jakarta Sans display font with tighter letter-spacing for prominent CTAs.
+        Large buttons use Barlow Semi Condensed display font with tighter letter-spacing for prominent CTAs.
       </div>
     </div>
   ),

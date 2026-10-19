@@ -158,7 +158,7 @@ export const WithHeaderAndFooter: Story = {
     header: (
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <strong>Event Details</strong>
-        <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>
+        <span style={{ fontSize: '12px', color: 'var(--csk-color-text-2)' }}>
           15.6.2026
         </span>
       </div>
@@ -166,7 +166,7 @@ export const WithHeaderAndFooter: Story = {
     children: (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <p style={{ margin: 0 }}>MČR ve slalomu na divoké vodě</p>
-        <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: 0, fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
           Lipno nad Vltavou
         </p>
       </div>
@@ -251,7 +251,7 @@ export const EventCard: Story = {
               style={{
                 padding: '4px 8px',
                 borderRadius: '4px',
-                backgroundColor: 'var(--color-section-dv)',
+                backgroundColor: 'var(--csk-color-section-dv)',
                 color: 'white',
                 fontSize: '12px',
                 fontWeight: 500,
@@ -259,7 +259,7 @@ export const EventCard: Story = {
             >
               Slalom
             </span>
-            <span style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+            <span style={{ fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
               15. – 16. 6. 2026
             </span>
           </div>
@@ -279,7 +279,7 @@ export const EventCard: Story = {
           <h3 style={{ margin: '0 0 8px', fontSize: '18px', fontWeight: 600 }}>
             MČR ve slalomu
           </h3>
-          <p style={{ margin: '0', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+          <p style={{ margin: '0', fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
             Lipno nad Vltavou
           </p>
         </div>
@@ -307,7 +307,7 @@ export const Aesthetic: Story = {
           <h3 className="csk-card__title" style={{ margin: '0 0 8px', fontSize: '18px' }}>
             Aesthetic Card
           </h3>
-          <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+          <p style={{ margin: 0, fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
             Mesh background with border-accent gradient. Perfect for featured content.
           </p>
         </Card>
@@ -317,7 +317,7 @@ export const Aesthetic: Story = {
           <h3 className="csk-card__title" style={{ margin: '0 0 8px', fontSize: '18px' }}>
             Clickable Aesthetic
           </h3>
-          <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+          <p style={{ margin: 0, fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
             Hover for energy glow effect.
           </p>
         </Card>
@@ -372,7 +372,7 @@ export const AestheticLiveEvent: Story = {
               />
               ŽIVĚ
             </span>
-            <span style={{ fontSize: '13px', color: 'var(--color-text-secondary)' }}>
+            <span style={{ fontSize: '13px', color: 'var(--csk-color-text-2)' }}>
               Semifinále K1M
             </span>
           </div>
@@ -398,7 +398,7 @@ export const AestheticLiveEvent: Story = {
           >
             Český pohár #3
           </h3>
-          <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+          <p style={{ margin: 0, fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
             Praha Troja • 24. ledna 2026
           </p>
         </div>

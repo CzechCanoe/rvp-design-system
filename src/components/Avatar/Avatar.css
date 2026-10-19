@@ -9,10 +9,10 @@
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
-  background-color: var(--color-bg-subtle);
-  color: var(--color-text-secondary);
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-medium);
+  background-color: var(--csk-color-surface-2);
+  color: var(--csk-color-text-2);
+  font-family: var(--csk-font-sans);
+  font-weight: var(--csk-font-weight-medium);
   user-select: none;
   vertical-align: middle;
 }
@@ -24,37 +24,37 @@
 .csk-avatar--xs {
   width: 24px;
   height: 24px;
-  font-size: var(--font-size-xs);
+  font-size: var(--csk-text-sm);
 }
 
 .csk-avatar--sm {
   width: 32px;
   height: 32px;
-  font-size: var(--font-size-sm);
+  font-size: var(--csk-text-md);
 }
 
 .csk-avatar--md {
   width: 40px;
   height: 40px;
-  font-size: var(--font-size-base);
+  font-size: var(--csk-text-base);
 }
 
 .csk-avatar--lg {
   width: 48px;
   height: 48px;
-  font-size: var(--font-size-lg);
+  font-size: var(--csk-text-lg);
 }
 
 .csk-avatar--xl {
   width: 64px;
   height: 64px;
-  font-size: var(--font-size-xl);
+  font-size: var(--csk-text-xl);
 }
 
 .csk-avatar--2xl {
   width: 96px;
   height: 96px;
-  font-size: var(--font-size-2xl);
+  font-size: var(--csk-text-2xl);
 }
 
 /* ==========================================================================
@@ -62,15 +62,15 @@
    ========================================================================== */
 
 .csk-avatar--circular {
-  border-radius: var(--radius-full);
+  border-radius: var(--csk-radius-pill);
 }
 
 .csk-avatar--rounded {
-  border-radius: var(--radius-lg);
+  border-radius: var(--csk-radius-lg);
 }
 
 .csk-avatar--square {
-  border-radius: var(--radius-sm);
+  border-radius: var(--csk-radius-sm);
 }
 
 /* ==========================================================================
@@ -78,56 +78,56 @@
    ========================================================================== */
 
 .csk-avatar--default {
-  background-color: var(--color-neutral-200);
-  color: var(--color-neutral-600);
+  background-color: var(--csk-color-border-2);
+  color: var(--csk-color-text-2);
 }
 
 .csk-avatar--primary {
-  background-color: var(--color-primary-100);
-  color: var(--color-primary-700);
+  background-color: var(--csk-color-highlight-bg);
+  color: var(--csk-color-brand);
 }
 
 .csk-avatar--success {
-  background-color: var(--color-success-100);
-  color: var(--color-success-700);
+  background-color: var(--csk-color-success-bg);
+  color: var(--csk-color-success-text);
 }
 
 .csk-avatar--warning {
-  background-color: var(--color-warning-100);
-  color: var(--color-warning-700);
+  background-color: var(--csk-color-warning-bg);
+  color: var(--csk-color-warning-text);
 }
 
 .csk-avatar--error {
-  background-color: var(--color-error-100);
-  color: var(--color-error-700);
+  background-color: var(--csk-color-error-bg);
+  color: var(--csk-color-error-text);
 }
 
 .csk-avatar--info {
-  background-color: var(--color-info-100);
-  color: var(--color-info-700);
+  background-color: var(--csk-color-info-bg);
+  color: var(--csk-color-info-text);
 }
 
 /* CSK Section Colors */
 .csk-avatar--dv {
-  background-color: var(--color-section-dv-bg);
-  color: var(--color-section-dv);
+  background-color: color-mix(in srgb, var(--csk-color-section-dv) 12%, var(--csk-color-surface));
+  color: var(--csk-color-section-dv);
 }
 
 .csk-avatar--ry {
-  background-color: var(--color-section-ry-bg);
-  color: var(--color-section-ry);
+  background-color: color-mix(in srgb, var(--csk-color-section-ry) 12%, var(--csk-color-surface));
+  color: var(--csk-color-section-ry);
 }
 
 .csk-avatar--vt {
-  background-color: var(--color-section-vt-bg);
-  color: var(--color-section-vt);
+  background-color: color-mix(in srgb, var(--csk-color-section-vt) 12%, var(--csk-color-surface));
+  color: var(--csk-color-section-vt);
 }
 
 /* Overflow indicator */
 .csk-avatar--overflow {
-  background-color: var(--color-neutral-100);
-  color: var(--color-neutral-700);
-  border: 2px solid var(--color-bg-primary);
+  background-color: var(--csk-color-surface-3);
+  color: var(--csk-color-text-2);
+  border: 2px solid var(--csk-color-surface);
 }
 
 /* ==========================================================================
@@ -152,7 +152,7 @@
   height: 100%;
   line-height: 1;
   text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-tight);
+  letter-spacing: var(--csk-letter-spacing-tight);
 }
 
 /* ==========================================================================
@@ -184,25 +184,25 @@
   height: 25%;
   min-width: 8px;
   min-height: 8px;
-  border-radius: var(--radius-full);
-  border: 2px solid var(--color-bg-primary);
+  border-radius: var(--csk-radius-pill);
+  border: 2px solid var(--csk-color-surface);
   box-sizing: content-box;
 }
 
 .csk-avatar__status--online {
-  background-color: var(--color-success-500);
+  background-color: var(--csk-color-success);
 }
 
 .csk-avatar__status--offline {
-  background-color: var(--color-neutral-400);
+  background-color: var(--csk-color-text-3);
 }
 
 .csk-avatar__status--busy {
-  background-color: var(--color-error-500);
+  background-color: var(--csk-color-error);
 }
 
 .csk-avatar__status--away {
-  background-color: var(--color-warning-500);
+  background-color: var(--csk-color-warning);
 }
 
 /* Adjust status position for different shapes */
@@ -223,7 +223,7 @@
 }
 
 .csk-avatar-group > .csk-avatar {
-  border: 2px solid var(--color-bg-primary);
+  border: 2px solid var(--csk-color-surface);
   box-sizing: content-box;
 }
 
@@ -283,7 +283,7 @@
 
 /* Hover effect for group - bring avatar to front */
 .csk-avatar-group > .csk-avatar {
-  transition: transform var(--transition-fast);
+  transition: transform var(--csk-transition-fast);
 }
 
 .csk-avatar-group > .csk-avatar:hover {
@@ -296,47 +296,47 @@
    ========================================================================== */
 
 [data-theme='dark'] .csk-avatar--default {
-  background-color: var(--color-neutral-700);
-  color: var(--color-neutral-200);
+  background-color: var(--csk-color-text-2);
+  color: var(--csk-color-border-2);
 }
 
 [data-theme='dark'] .csk-avatar--primary {
-  background-color: var(--color-primary-900);
-  color: var(--color-primary-200);
+  background-color: var(--csk-color-brand);
+  color: var(--csk-color-highlight-border);
 }
 
 [data-theme='dark'] .csk-avatar--success {
-  background-color: var(--color-success-900);
-  color: var(--color-success-200);
+  background-color: var(--csk-color-success-text);
+  color: var(--csk-color-success-bg);
 }
 
 [data-theme='dark'] .csk-avatar--warning {
-  background-color: var(--color-warning-900);
-  color: var(--color-warning-200);
+  background-color: var(--csk-color-warning-text);
+  color: var(--csk-color-warning-bg);
 }
 
 [data-theme='dark'] .csk-avatar--error {
-  background-color: var(--color-error-900);
-  color: var(--color-error-200);
+  background-color: var(--csk-color-error-text);
+  color: var(--csk-color-error-bg);
 }
 
 [data-theme='dark'] .csk-avatar--info {
-  background-color: var(--color-info-900);
-  color: var(--color-info-200);
+  background-color: var(--csk-color-info-text);
+  color: var(--csk-color-info-bg);
 }
 
 [data-theme='dark'] .csk-avatar--overflow {
-  background-color: var(--color-neutral-800);
-  color: var(--color-neutral-200);
-  border-color: var(--color-bg-primary);
+  background-color: var(--csk-color-text);
+  color: var(--csk-color-border-2);
+  border-color: var(--csk-color-surface);
 }
 
 [data-theme='dark'] .csk-avatar-group > .csk-avatar {
-  border-color: var(--color-bg-primary);
+  border-color: var(--csk-color-surface);
 }
 
 [data-theme='dark'] .csk-avatar__status {
-  border-color: var(--color-bg-primary);
+  border-color: var(--csk-color-surface);
 }
 
 /* ==========================================================================

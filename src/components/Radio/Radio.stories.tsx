@@ -157,7 +157,7 @@ export const DisciplineSelection: Story = {
 
     return (
       <div>
-        <p style={{ marginBottom: '12px', fontWeight: 500, fontSize: '14px', color: 'var(--color-text-primary)' }}>
+        <p style={{ marginBottom: '12px', fontWeight: 500, fontSize: '14px', color: 'var(--csk-color-text)' }}>
           Select section
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>

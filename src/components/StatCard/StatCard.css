@@ -16,19 +16,19 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-bg-primary);
-  border-radius: var(--radius-lg);
+  background-color: var(--csk-color-surface);
+  border-radius: var(--csk-radius-lg);
   overflow: hidden;
   transition:
-    transform var(--duration-normal) var(--ease-out),
-    box-shadow var(--duration-normal) var(--ease-out),
-    background-color var(--duration-normal) var(--ease-out);
+    transform var(--csk-transition-fast),
+    box-shadow var(--csk-transition-fast),
+    background-color var(--csk-transition-fast);
 }
 
 .csk-stat-card__content {
   display: flex;
-  gap: var(--spacing-4);
-  padding: var(--spacing-4);
+  gap: var(--csk-space-4);
+  padding: var(--csk-space-4);
 }
 
 .csk-stat-card__body {
@@ -36,41 +36,41 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-1);
+  gap: var(--csk-space-1);
 }
 
 .csk-stat-card__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--spacing-2);
+  gap: var(--csk-space-2);
 }
 
 .csk-stat-card__label {
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
-  line-height: var(--line-height-tight);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text-2);
+  line-height: var(--csk-line-height-snug);
 }
 
 .csk-stat-card__value-container {
   display: flex;
   align-items: baseline;
-  gap: var(--spacing-2);
+  gap: var(--csk-space-2);
 }
 
 .csk-stat-card__value {
-  font-size: var(--text-3xl-size);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
-  line-height: var(--line-height-tight);
+  font-size: var(--csk-text-2xl);
+  font-weight: var(--csk-font-weight-bold);
+  color: var(--csk-color-text);
+  line-height: var(--csk-line-height-snug);
   font-variant-numeric: tabular-nums;
 }
 
 .csk-stat-card__description {
-  font-size: var(--text-sm-size);
-  color: var(--color-text-tertiary);
-  line-height: var(--line-height-normal);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text-3);
+  line-height: var(--csk-line-height-normal);
   margin: 0;
 }
 
@@ -85,16 +85,16 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  background-color: var(--color-bg-secondary);
-  border-radius: var(--radius-md);
-  transition: var(--transition-base);
+  background-color: var(--csk-color-surface-2);
+  border-radius: var(--csk-radius-md);
+  transition: var(--csk-transition-fast);
 }
 
 .csk-stat-card__icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-secondary);
+  color: var(--csk-color-text-2);
 }
 
 .csk-stat-card__icon svg {
@@ -109,11 +109,11 @@
 .csk-stat-card__trend {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-1);
-  padding: var(--spacing-0-5) var(--spacing-1-5);
-  border-radius: var(--radius-full);
-  font-size: var(--text-xs-size);
-  font-weight: var(--font-weight-medium);
+  gap: var(--csk-space-1);
+  padding: calc(var(--csk-space-1) / 2) calc(var(--csk-space-1) * 1.5);
+  border-radius: var(--csk-radius-pill);
+  font-size: var(--csk-text-sm);
+  font-weight: var(--csk-font-weight-medium);
 }
 
 .csk-stat-card__trend-icon {
@@ -122,34 +122,34 @@
 }
 
 .csk-stat-card__trend--up {
-  background-color: var(--color-success-50);
-  color: var(--color-success-700);
+  background-color: var(--csk-color-success-bg);
+  color: var(--csk-color-success-text);
 }
 
 .csk-stat-card__trend--down {
-  background-color: var(--color-error-50);
-  color: var(--color-error-700);
+  background-color: var(--csk-color-error-bg);
+  color: var(--csk-color-error-text);
 }
 
 .csk-stat-card__trend--neutral {
-  background-color: var(--color-neutral-100);
-  color: var(--color-neutral-600);
+  background-color: var(--csk-color-surface-3);
+  color: var(--csk-color-text-2);
 }
 
 /* Dark mode trend colors */
 [data-theme='dark'] .csk-stat-card__trend--up {
   background-color: rgba(34, 197, 94, 0.15);
-  color: var(--color-success-400);
+  color: var(--csk-color-success);
 }
 
 [data-theme='dark'] .csk-stat-card__trend--down {
   background-color: rgba(239, 68, 68, 0.15);
-  color: var(--color-error-400);
+  color: var(--csk-color-error);
 }
 
 [data-theme='dark'] .csk-stat-card__trend--neutral {
-  background-color: var(--color-neutral-800);
-  color: var(--color-neutral-400);
+  background-color: var(--csk-color-text);
+  color: var(--csk-color-text-3);
 }
 
 /* =============================================================================
@@ -159,20 +159,20 @@
 .csk-stat-card__secondary {
   display: flex;
   align-items: baseline;
-  gap: var(--spacing-1);
-  margin-top: var(--spacing-1);
+  gap: var(--csk-space-1);
+  margin-top: var(--csk-space-1);
 }
 
 .csk-stat-card__secondary-value {
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-secondary);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-semibold);
+  color: var(--csk-color-text-2);
   font-variant-numeric: tabular-nums;
 }
 
 .csk-stat-card__secondary-label {
-  font-size: var(--text-xs-size);
-  color: var(--color-text-tertiary);
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
 }
 
 /* =============================================================================
@@ -180,9 +180,9 @@
    ============================================================================= */
 
 .csk-stat-card__footer {
-  padding: var(--spacing-3) var(--spacing-4);
-  border-top: 1px solid var(--color-border-primary);
-  background-color: var(--color-bg-secondary);
+  padding: var(--csk-space-3) var(--csk-space-4);
+  border-top: 1px solid var(--csk-color-border);
+  background-color: var(--csk-color-surface-2);
 }
 
 /* =============================================================================
@@ -191,17 +191,17 @@
 
 /* Default */
 .csk-stat-card--default {
-  border: 1px solid var(--color-border-primary);
+  border: 1px solid var(--csk-color-border);
 }
 
 /* Outlined */
 .csk-stat-card--outlined {
-  border: 2px solid var(--color-border-secondary);
+  border: 2px solid var(--csk-color-border);
 }
 
 /* Elevated */
 .csk-stat-card--elevated {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--csk-shadow-sm);
 }
 
 /* =============================================================================
@@ -210,8 +210,8 @@
 
 /* Small */
 .csk-stat-card--sm .csk-stat-card__content {
-  padding: var(--spacing-3);
-  gap: var(--spacing-3);
+  padding: var(--csk-space-3);
+  gap: var(--csk-space-3);
 }
 
 .csk-stat-card--sm .csk-stat-card__icon-container {
@@ -225,19 +225,19 @@
 }
 
 .csk-stat-card--sm .csk-stat-card__value {
-  font-size: var(--text-2xl-size);
+  font-size: var(--csk-text-2xl);
 }
 
 .csk-stat-card--sm .csk-stat-card__footer {
-  padding: var(--spacing-2) var(--spacing-3);
+  padding: var(--csk-space-2) var(--csk-space-3);
 }
 
 /* Medium - default, no overrides needed */
 
 /* Large */
 .csk-stat-card--lg .csk-stat-card__content {
-  padding: var(--spacing-6);
-  gap: var(--spacing-5);
+  padding: var(--csk-space-6);
+  gap: var(--csk-space-5);
 }
 
 .csk-stat-card--lg .csk-stat-card__icon-container {
@@ -251,15 +251,15 @@
 }
 
 .csk-stat-card--lg .csk-stat-card__value {
-  font-size: var(--text-4xl-size);
+  font-size: var(--csk-text-3xl);
 }
 
 .csk-stat-card--lg .csk-stat-card__label {
-  font-size: var(--text-base-size);
+  font-size: var(--csk-text-base);
 }
 
 .csk-stat-card--lg .csk-stat-card__footer {
-  padding: var(--spacing-4) var(--spacing-6);
+  padding: var(--csk-space-4) var(--csk-space-6);
 }
 
 /* =============================================================================
@@ -268,67 +268,67 @@
 
 /* Primary */
 .csk-stat-card--primary .csk-stat-card__icon-container {
-  background-color: var(--color-primary-50);
+  background-color: var(--csk-color-highlight-bg);
 }
 
 .csk-stat-card--primary .csk-stat-card__icon {
-  color: var(--color-primary-600);
+  color: var(--csk-color-action-hover);
 }
 
 .csk-stat-card--primary.csk-stat-card--outlined {
-  border-color: var(--color-primary-200);
+  border-color: var(--csk-color-highlight-border);
 }
 
 /* Success */
 .csk-stat-card--success .csk-stat-card__icon-container {
-  background-color: var(--color-success-50);
+  background-color: var(--csk-color-success-bg);
 }
 
 .csk-stat-card--success .csk-stat-card__icon {
-  color: var(--color-success-600);
+  color: var(--csk-color-success);
 }
 
 .csk-stat-card--success.csk-stat-card--outlined {
-  border-color: var(--color-success-200);
+  border-color: var(--csk-color-success-bg);
 }
 
 /* Warning */
 .csk-stat-card--warning .csk-stat-card__icon-container {
-  background-color: var(--color-warning-50);
+  background-color: var(--csk-color-warning-bg);
 }
 
 .csk-stat-card--warning .csk-stat-card__icon {
-  color: var(--color-warning-600);
+  color: var(--csk-color-warning);
 }
 
 .csk-stat-card--warning.csk-stat-card--outlined {
-  border-color: var(--color-warning-200);
+  border-color: var(--csk-color-warning-bg);
 }
 
 /* Error */
 .csk-stat-card--error .csk-stat-card__icon-container {
-  background-color: var(--color-error-50);
+  background-color: var(--csk-color-error-bg);
 }
 
 .csk-stat-card--error .csk-stat-card__icon {
-  color: var(--color-error-600);
+  color: var(--csk-color-error);
 }
 
 .csk-stat-card--error.csk-stat-card--outlined {
-  border-color: var(--color-error-200);
+  border-color: var(--csk-color-error-bg);
 }
 
 /* Info */
 .csk-stat-card--info .csk-stat-card__icon-container {
-  background-color: var(--color-info-50);
+  background-color: var(--csk-color-info-bg);
 }
 
 .csk-stat-card--info .csk-stat-card__icon {
-  color: var(--color-info-600);
+  color: var(--csk-color-info);
 }
 
 .csk-stat-card--info.csk-stat-card--outlined {
-  border-color: var(--color-info-200);
+  border-color: var(--csk-color-info-bg);
 }
 
 /* Dark mode color adjustments */
@@ -337,7 +337,7 @@
 }
 
 [data-theme='dark'] .csk-stat-card--primary .csk-stat-card__icon {
-  color: var(--color-primary-400);
+  color: var(--csk-color-action);
 }
 
 [data-theme='dark'] .csk-stat-card--success .csk-stat-card__icon-container {
@@ -345,7 +345,7 @@
 }
 
 [data-theme='dark'] .csk-stat-card--success .csk-stat-card__icon {
-  color: var(--color-success-400);
+  color: var(--csk-color-success);
 }
 
 [data-theme='dark'] .csk-stat-card--warning .csk-stat-card__icon-container {
@@ -353,7 +353,7 @@
 }
 
 [data-theme='dark'] .csk-stat-card--warning .csk-stat-card__icon {
-  color: var(--color-warning-400);
+  color: var(--csk-color-warning);
 }
 
 [data-theme='dark'] .csk-stat-card--error .csk-stat-card__icon-container {
@@ -361,7 +361,7 @@
 }
 
 [data-theme='dark'] .csk-stat-card--error .csk-stat-card__icon {
-  color: var(--color-error-400);
+  color: var(--csk-color-error);
 }
 
 [data-theme='dark'] .csk-stat-card--info .csk-stat-card__icon-container {
@@ -369,7 +369,7 @@
 }
 
 [data-theme='dark'] .csk-stat-card--info .csk-stat-card__icon {
-  color: var(--color-info-400);
+  color: var(--csk-color-info);
 }
 
 /* =============================================================================
@@ -381,11 +381,11 @@
 }
 
 .csk-stat-card--clickable:hover {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--csk-color-surface-2);
 }
 
 .csk-stat-card--clickable.csk-stat-card--elevated:hover {
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--csk-shadow-sm);
   transform: translateY(-2px);
 }
 
@@ -394,7 +394,7 @@
 }
 
 .csk-stat-card--clickable:focus-visible {
-  outline: 2px solid var(--color-interactive-focus);
+  outline: 2px solid var(--csk-color-focus);
   outline-offset: 2px;
 }
 
@@ -430,9 +430,9 @@
 .csk-stat-card__spinner {
   width: 24px;
   height: 24px;
-  border: 2px solid var(--color-border-secondary);
-  border-top-color: var(--color-primary-500);
-  border-radius: var(--radius-full);
+  border: 2px solid var(--csk-color-border);
+  border-top-color: var(--csk-color-action);
+  border-radius: var(--csk-radius-pill);
   animation: csk-stat-card-spin 0.8s linear infinite;
 }
 
@@ -445,9 +445,9 @@
 @media (prefers-reduced-motion: reduce) {
   .csk-stat-card__spinner {
     animation: none;
-    border-top-color: var(--color-border-secondary);
-    border-right-color: var(--color-primary-500);
-    border-bottom-color: var(--color-primary-500);
+    border-top-color: var(--csk-color-border);
+    border-right-color: var(--csk-color-action);
+    border-bottom-color: var(--csk-color-action);
   }
 }
 
@@ -458,12 +458,10 @@
 /* Aesthetic style - mesh background with border accent */
 .csk-stat-card--style-aesthetic {
   position: relative;
-  background: var(--bg-mesh-card,
-    radial-gradient(ellipse at 0% 0%, rgba(17, 118, 166, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 100% 100%, rgba(249, 115, 22, 0.05) 0%, transparent 50%));
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-default);
-  box-shadow: var(--shadow-md);
+  background: none;
+  background-color: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
+  box-shadow: var(--csk-shadow-sm);
 }
 
 /* Accent border using pseudo-element to preserve border-radius */
@@ -473,21 +471,19 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: var(--border-accent-width, 4px);
-  background: var(--border-accent-gradient, linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-energy-500, #f97316) 100%));
-  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  width: 4px;
+  background: var(--csk-color-brand);
+  border-radius: var(--csk-radius-lg) 0 0 var(--csk-radius-lg);
 }
 
 .csk-stat-card--style-aesthetic .csk-stat-card__icon-container {
-  background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-bg-primary) 100%);
+  background: linear-gradient(135deg, var(--csk-color-highlight-bg) 0%, var(--csk-color-surface) 100%);
 }
 
 [data-theme='dark'] .csk-stat-card--style-aesthetic {
-  background: var(--bg-mesh-card,
-    radial-gradient(ellipse at 0% 0%, rgba(77, 163, 204, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 100% 100%, rgba(251, 146, 60, 0.04) 0%, transparent 50%));
-  background-color: var(--color-bg-primary);
-  border-color: var(--color-border-secondary);
+  background: none;
+  background-color: var(--csk-color-surface);
+  border-color: var(--csk-color-border);
 }
 
 [data-theme='dark'] .csk-stat-card--style-aesthetic .csk-stat-card__icon-container {
@@ -511,7 +507,7 @@
 }
 
 .csk-stat-card--clickable.csk-stat-card--style-aesthetic:hover {
-  box-shadow: var(--shadow-lg), var(--glow-energy-sm, 0 0 8px rgba(249, 115, 22, 0.4));
+  box-shadow: var(--csk-shadow-sm), none;
 }
 
 /* Reduced motion */
@@ -530,7 +526,7 @@
    ============================================================================= */
 
 .csk-stat-card__value {
-  animation: csk-stat-card-value-appear 0.3s var(--ease-out);
+  animation: csk-stat-card-value-appear var(--csk-transition-slow);
 }
 
 @keyframes csk-stat-card-value-appear {
@@ -619,7 +615,7 @@
    ============================================================================= */
 
 .csk-stat-card--gradient-primary {
-  background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-400) 100%);
+  background: linear-gradient(135deg, var(--csk-color-action-hover) 0%, var(--csk-color-action) 100%);
   border: none;
   color: #fff;
 }
@@ -646,7 +642,7 @@
 }
 
 .csk-stat-card--gradient-success {
-  background: linear-gradient(135deg, var(--color-success-600) 0%, var(--color-success-400) 100%);
+  background: linear-gradient(135deg, var(--csk-color-success) 0%, var(--csk-color-success) 100%);
   border: none;
   color: #fff;
 }
@@ -673,7 +669,7 @@
 }
 
 .csk-stat-card--gradient-warning {
-  background: linear-gradient(135deg, var(--color-warning-600) 0%, var(--color-warning-400) 100%);
+  background: linear-gradient(135deg, var(--csk-color-warning) 0%, var(--csk-color-warning) 100%);
   border: none;
   color: #fff;
 }
@@ -700,7 +696,7 @@
 }
 
 .csk-stat-card--gradient-info {
-  background: linear-gradient(135deg, var(--color-info-600) 0%, var(--color-info-400) 100%);
+  background: linear-gradient(135deg, var(--csk-color-info) 0%, var(--csk-color-info) 100%);
   border: none;
   color: #fff;
 }
@@ -732,7 +728,7 @@
    ============================================================================= */
 
 .csk-stat-card__icon-container--gradient {
-  background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-400) 100%);
+  background: linear-gradient(135deg, var(--csk-color-action) 0%, var(--csk-color-action) 100%);
   box-shadow: 0 4px 12px rgba(17, 118, 166, 0.3);
 }
 
@@ -752,16 +748,16 @@
    ============================================================================= */
 
 .csk-stat-card__sparkline {
-  padding: 0 var(--spacing-4) var(--spacing-3);
-  margin-top: calc(-1 * var(--spacing-2));
+  padding: 0 var(--csk-space-4) var(--csk-space-3);
+  margin-top: calc(-1 * var(--csk-space-2));
 }
 
 .csk-stat-card--sm .csk-stat-card__sparkline {
-  padding: 0 var(--spacing-3) var(--spacing-2);
+  padding: 0 var(--csk-space-3) var(--csk-space-2);
 }
 
 .csk-stat-card--lg .csk-stat-card__sparkline {
-  padding: 0 var(--spacing-6) var(--spacing-4);
+  padding: 0 var(--csk-space-6) var(--csk-space-4);
 }
 
 /* =============================================================================

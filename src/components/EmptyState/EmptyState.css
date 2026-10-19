@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: var(--spacing-8);
+  padding: var(--csk-space-8);
 }
 
 /* Variants
@@ -21,17 +21,17 @@
 
 /* Card - with background and border */
 .csk-empty-state--card {
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-lg);
+  background: var(--csk-color-surface-2);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-lg);
 }
 
 /* Inline - horizontal compact layout */
 .csk-empty-state--inline {
   flex-direction: row;
   text-align: left;
-  gap: var(--spacing-4);
-  padding: var(--spacing-4);
+  gap: var(--csk-space-4);
+  padding: var(--csk-space-4);
 }
 
 .csk-empty-state--inline .csk-empty-state__icon-container {
@@ -51,14 +51,14 @@
 
 /* Small */
 .csk-empty-state--sm {
-  padding: var(--spacing-4);
-  gap: var(--spacing-2);
+  padding: var(--csk-space-4);
+  gap: var(--csk-space-2);
 }
 
 .csk-empty-state--sm .csk-empty-state__icon-container {
   width: 40px;
   height: 40px;
-  margin-bottom: var(--spacing-2);
+  margin-bottom: var(--csk-space-2);
 }
 
 .csk-empty-state--sm .csk-empty-state__icon {
@@ -68,33 +68,33 @@
 
 .csk-empty-state--sm .csk-empty-state__illustration {
   max-width: 120px;
-  margin-bottom: var(--spacing-2);
+  margin-bottom: var(--csk-space-2);
 }
 
 .csk-empty-state--sm .csk-empty-state__title {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-semibold);
 }
 
 .csk-empty-state--sm .csk-empty-state__description {
-  font-size: var(--font-size-xs);
+  font-size: var(--csk-text-sm);
 }
 
 .csk-empty-state--sm .csk-empty-state__actions {
-  margin-top: var(--spacing-3);
-  gap: var(--spacing-2);
+  margin-top: var(--csk-space-3);
+  gap: var(--csk-space-2);
 }
 
 /* Medium (default) */
 .csk-empty-state--md {
-  padding: var(--spacing-8);
-  gap: var(--spacing-3);
+  padding: var(--csk-space-8);
+  gap: var(--csk-space-3);
 }
 
 .csk-empty-state--md .csk-empty-state__icon-container {
   width: 56px;
   height: 56px;
-  margin-bottom: var(--spacing-3);
+  margin-bottom: var(--csk-space-3);
 }
 
 .csk-empty-state--md .csk-empty-state__icon {
@@ -104,33 +104,33 @@
 
 .csk-empty-state--md .csk-empty-state__illustration {
   max-width: 180px;
-  margin-bottom: var(--spacing-4);
+  margin-bottom: var(--csk-space-4);
 }
 
 .csk-empty-state--md .csk-empty-state__title {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--csk-text-base);
+  font-weight: var(--csk-font-weight-semibold);
 }
 
 .csk-empty-state--md .csk-empty-state__description {
-  font-size: var(--font-size-sm);
+  font-size: var(--csk-text-md);
 }
 
 .csk-empty-state--md .csk-empty-state__actions {
-  margin-top: var(--spacing-4);
-  gap: var(--spacing-3);
+  margin-top: var(--csk-space-4);
+  gap: var(--csk-space-3);
 }
 
 /* Large */
 .csk-empty-state--lg {
-  padding: var(--spacing-12);
-  gap: var(--spacing-4);
+  padding: var(--csk-space-12);
+  gap: var(--csk-space-4);
 }
 
 .csk-empty-state--lg .csk-empty-state__icon-container {
   width: 80px;
   height: 80px;
-  margin-bottom: var(--spacing-4);
+  margin-bottom: var(--csk-space-4);
 }
 
 .csk-empty-state--lg .csk-empty-state__icon {
@@ -140,22 +140,22 @@
 
 .csk-empty-state--lg .csk-empty-state__illustration {
   max-width: 280px;
-  margin-bottom: var(--spacing-6);
+  margin-bottom: var(--csk-space-6);
 }
 
 .csk-empty-state--lg .csk-empty-state__title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--csk-text-lg);
+  font-weight: var(--csk-font-weight-semibold);
 }
 
 .csk-empty-state--lg .csk-empty-state__description {
-  font-size: var(--font-size-base);
+  font-size: var(--csk-text-base);
   max-width: 400px;
 }
 
 .csk-empty-state--lg .csk-empty-state__actions {
-  margin-top: var(--spacing-6);
-  gap: var(--spacing-3);
+  margin-top: var(--csk-space-6);
+  gap: var(--csk-space-3);
 }
 
 /* Icon Container
@@ -165,9 +165,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-bg-tertiary);
-  border-radius: var(--radius-full);
-  color: var(--color-text-muted);
+  background: var(--csk-color-surface-3);
+  border-radius: var(--csk-radius-pill);
+  color: var(--csk-color-text-3);
   flex-shrink: 0;
 }
 
@@ -203,26 +203,26 @@
 .csk-empty-state__content {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-1);
+  gap: var(--csk-space-1);
 }
 
 .csk-empty-state__title {
   margin: 0;
-  color: var(--color-text-primary);
-  line-height: var(--line-height-tight);
+  color: var(--csk-color-text);
+  line-height: var(--csk-line-height-snug);
 }
 
 .csk-empty-state__description {
   margin: 0;
-  color: var(--color-text-secondary);
-  line-height: var(--line-height-normal);
+  color: var(--csk-color-text-2);
+  line-height: var(--csk-line-height-normal);
 }
 
 /* Custom Content (children)
    ========================================================================== */
 
 .csk-empty-state__custom-content {
-  margin-top: var(--spacing-2);
+  margin-top: var(--csk-space-2);
 }
 
 /* Actions
@@ -244,12 +244,12 @@
    ========================================================================== */
 
 [data-theme='dark'] .csk-empty-state--card {
-  background: var(--color-bg-secondary);
-  border-color: var(--color-border-default);
+  background: var(--csk-color-surface-2);
+  border-color: var(--csk-color-border);
 }
 
 [data-theme='dark'] .csk-empty-state__icon-container {
-  background: var(--color-bg-tertiary);
+  background: var(--csk-color-surface-3);
 }
 
 /* Responsive
@@ -264,12 +264,12 @@
 
   .csk-empty-state--inline .csk-empty-state__actions {
     justify-content: center;
-    margin-top: var(--spacing-3);
+    margin-top: var(--csk-space-3);
   }
 
   /* Reduce padding on mobile */
   .csk-empty-state--lg {
-    padding: var(--spacing-8);
+    padding: var(--csk-space-8);
   }
 
   .csk-empty-state--lg .csk-empty-state__illustration {

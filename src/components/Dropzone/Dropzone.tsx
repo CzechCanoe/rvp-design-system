@@ -122,10 +122,10 @@ const FileIcon = ({ extension }: { extension: string }) => {
     const docExts = ['doc', 'docx', 'pdf'];
     const dataExts = ['xls', 'xlsx', 'csv'];
 
-    if (imageExts.includes(extension)) return 'var(--color-success-500)';
-    if (docExts.includes(extension)) return 'var(--color-error-500)';
-    if (dataExts.includes(extension)) return 'var(--color-success-600)';
-    return 'var(--color-primary-500)';
+    if (imageExts.includes(extension)) return 'var(--csk-color-success)';
+    if (docExts.includes(extension)) return 'var(--csk-color-error)';
+    if (dataExts.includes(extension)) return 'var(--csk-color-success)';
+    return 'var(--csk-color-action)';
   };
 
   return (

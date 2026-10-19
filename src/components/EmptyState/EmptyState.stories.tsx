@@ -92,7 +92,7 @@ export const AllVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '500px' }}>
       <div>
-        <h4 style={{ marginBottom: '8px', color: 'var(--color-text-secondary)' }}>Default</h4>
+        <h4 style={{ marginBottom: '8px', color: 'var(--csk-color-text-2)' }}>Default</h4>
         <EmptyState
           variant="default"
           title="Default Variant"
@@ -100,7 +100,7 @@ export const AllVariants: Story = {
         />
       </div>
       <div>
-        <h4 style={{ marginBottom: '8px', color: 'var(--color-text-secondary)' }}>Card</h4>
+        <h4 style={{ marginBottom: '8px', color: 'var(--csk-color-text-2)' }}>Card</h4>
         <EmptyState
           variant="card"
           title="Card Variant"
@@ -108,7 +108,7 @@ export const AllVariants: Story = {
         />
       </div>
       <div>
-        <h4 style={{ marginBottom: '8px', color: 'var(--color-text-secondary)' }}>Inline</h4>
+        <h4 style={{ marginBottom: '8px', color: 'var(--csk-color-text-2)' }}>Inline</h4>
         <EmptyState
           variant="inline"
           title="Inline Variant"
@@ -225,7 +225,7 @@ export const ErrorState: Story = {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        style={{ color: 'var(--color-error-500)' }}
+        style={{ color: 'var(--csk-color-error)' }}
       >
         <circle cx="12" cy="12" r="10" />
         <line x1="12" y1="8" x2="12" y2="12" />

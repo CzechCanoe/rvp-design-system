@@ -14,10 +14,10 @@
   /* Layout */
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-3);
+  gap: var(--csk-space-3);
 
   /* Text */
-  font-family: var(--font-family);
+  font-family: var(--csk-font-sans);
 }
 
 /* ==========================================================================
@@ -30,30 +30,30 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-8) var(--spacing-4);
+  gap: var(--csk-space-2);
+  padding: var(--csk-space-8) var(--csk-space-4);
 
   /* Shape */
-  border: 2px dashed var(--color-border-default);
-  border-radius: var(--radius-lg);
-  background-color: var(--color-bg-secondary);
+  border: 2px dashed var(--csk-color-border);
+  border-radius: var(--csk-radius-lg);
+  background-color: var(--csk-color-surface-2);
 
   /* Cursor */
   cursor: pointer;
 
   /* Transition */
   transition:
-    border-color var(--duration-fast) var(--ease-out),
-    background-color var(--duration-fast) var(--ease-out);
+    border-color var(--csk-transition-fast),
+    background-color var(--csk-transition-fast);
 }
 
 .csk-dropzone__area:hover {
-  border-color: var(--color-primary-400);
-  background-color: var(--color-primary-50);
+  border-color: var(--csk-color-action);
+  background-color: var(--csk-color-highlight-bg);
 }
 
 .csk-dropzone__area:focus-visible {
-  outline: 2px solid var(--color-border-focus);
+  outline: 2px solid var(--csk-color-focus);
   outline-offset: 2px;
 }
 
@@ -78,12 +78,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-tertiary);
-  transition: color var(--duration-fast) var(--ease-out);
+  color: var(--csk-color-text-3);
+  transition: color var(--csk-transition-fast);
 }
 
 .csk-dropzone__area:hover .csk-dropzone__icon {
-  color: var(--color-primary-500);
+  color: var(--csk-color-action);
 }
 
 .csk-dropzone__icon-svg {
@@ -92,15 +92,15 @@
 }
 
 .csk-dropzone__label {
-  font-size: var(--text-base-size);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-primary);
+  font-size: var(--csk-text-base);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text);
   text-align: center;
 }
 
 .csk-dropzone__hint {
-  font-size: var(--text-sm-size);
-  color: var(--color-text-tertiary);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text-3);
   text-align: center;
 }
 
@@ -110,64 +110,64 @@
 
 /* Drag over */
 .csk-dropzone--drag-over .csk-dropzone__area {
-  border-color: var(--color-primary-500);
-  background-color: var(--color-primary-50);
+  border-color: var(--csk-color-action);
+  background-color: var(--csk-color-highlight-bg);
 }
 
 .csk-dropzone--drag-over .csk-dropzone__icon {
-  color: var(--color-primary-500);
+  color: var(--csk-color-action);
 }
 
 /* Error state */
 .csk-dropzone--error .csk-dropzone__area {
-  border-color: var(--color-error-300);
-  background-color: var(--color-feedback-error-bg);
+  border-color: var(--csk-color-error);
+  background-color: var(--csk-color-error-bg);
 }
 
 .csk-dropzone--error .csk-dropzone__area:hover {
-  border-color: var(--color-error-400);
-  background-color: var(--color-error-100);
+  border-color: var(--csk-color-error);
+  background-color: var(--csk-color-error-bg);
 }
 
 .csk-dropzone--error .csk-dropzone__icon {
-  color: var(--color-error-500);
+  color: var(--csk-color-error);
 }
 
 /* Success state */
 .csk-dropzone--success .csk-dropzone__area {
-  border-color: var(--color-success-300);
-  background-color: var(--color-feedback-success-bg);
+  border-color: var(--csk-color-success);
+  background-color: var(--csk-color-success-bg);
 }
 
 .csk-dropzone--success .csk-dropzone__area:hover {
-  border-color: var(--color-success-400);
-  background-color: var(--color-success-100);
+  border-color: var(--csk-color-success);
+  background-color: var(--csk-color-success-bg);
 }
 
 .csk-dropzone--success .csk-dropzone__icon {
-  color: var(--color-success-500);
+  color: var(--csk-color-success);
 }
 
 /* Disabled */
 .csk-dropzone--disabled .csk-dropzone__area {
   cursor: not-allowed;
-  border-color: var(--color-border-subtle);
-  background-color: var(--color-bg-tertiary);
+  border-color: var(--csk-color-border-2);
+  background-color: var(--csk-color-surface-3);
   opacity: 0.6;
 }
 
 .csk-dropzone--disabled .csk-dropzone__area:hover {
-  border-color: var(--color-border-subtle);
-  background-color: var(--color-bg-tertiary);
+  border-color: var(--csk-color-border-2);
+  background-color: var(--csk-color-surface-3);
 }
 
 .csk-dropzone--disabled .csk-dropzone__icon {
-  color: var(--color-text-disabled);
+  color: var(--csk-color-text-3);
 }
 
 .csk-dropzone--disabled .csk-dropzone__label,
 .csk-dropzone--disabled .csk-dropzone__hint {
-  color: var(--color-text-disabled);
+  color: var(--csk-color-text-3);
 }
 
 /* ==========================================================================
@@ -175,8 +175,8 @@
    ========================================================================== */
 
 .csk-dropzone__error {
-  font-size: var(--text-sm-size);
-  color: var(--color-error-500);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-error);
 }
 
 /* ==========================================================================
@@ -186,29 +186,29 @@
 .csk-dropzone__files {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
+  gap: var(--csk-space-2);
 }
 
 .csk-dropzone__file {
   display: flex;
   align-items: center;
-  gap: var(--spacing-3);
-  padding: var(--spacing-3);
-  background-color: var(--color-bg-secondary);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-md);
+  gap: var(--csk-space-3);
+  padding: var(--csk-space-3);
+  background-color: var(--csk-color-surface-2);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-md);
   transition:
-    border-color var(--duration-fast) var(--ease-out),
-    background-color var(--duration-fast) var(--ease-out);
+    border-color var(--csk-transition-fast),
+    background-color var(--csk-transition-fast);
 }
 
 .csk-dropzone__file:hover {
-  border-color: var(--color-border-strong);
+  border-color: var(--csk-color-border);
 }
 
 .csk-dropzone__file--error {
-  border-color: var(--color-error-300);
-  background-color: var(--color-feedback-error-bg);
+  border-color: var(--csk-color-error);
+  background-color: var(--csk-color-error-bg);
 }
 
 /* File preview */
@@ -217,10 +217,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--spacing-10);
-  height: var(--spacing-10);
-  background-color: var(--color-bg-tertiary);
-  border-radius: var(--radius-sm);
+  width: var(--csk-space-10);
+  height: var(--csk-space-10);
+  background-color: var(--csk-color-surface-3);
+  border-radius: var(--csk-radius-sm);
   overflow: hidden;
 }
 
@@ -236,44 +236,44 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-0-5);
+  gap: calc(var(--csk-space-1) / 2);
 }
 
 .csk-dropzone__file-name {
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-primary);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .csk-dropzone__file-size {
-  font-size: var(--text-xs-size);
-  color: var(--color-text-tertiary);
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
   display: flex;
   align-items: center;
-  gap: var(--spacing-2);
+  gap: var(--csk-space-2);
 }
 
 .csk-dropzone__file-error-text {
-  color: var(--color-error-500);
+  color: var(--csk-color-error);
 }
 
 /* Progress bar */
 .csk-dropzone__file-progress {
   width: 100%;
   height: 4px;
-  background-color: var(--color-bg-tertiary);
-  border-radius: var(--radius-full);
+  background-color: var(--csk-color-surface-3);
+  border-radius: var(--csk-radius-pill);
   overflow: hidden;
 }
 
 .csk-dropzone__file-progress-bar {
   height: 100%;
-  background-color: var(--color-primary-500);
-  border-radius: var(--radius-full);
-  transition: width var(--duration-normal) var(--ease-out);
+  background-color: var(--csk-color-action);
+  border-radius: var(--csk-radius-pill);
+  transition: width var(--csk-transition-fast);
 }
 
 /* Remove button */
@@ -292,28 +292,28 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--spacing-6);
-  height: var(--spacing-6);
+  width: var(--csk-space-6);
+  height: var(--csk-space-6);
 
   /* Shape */
-  border-radius: var(--radius-sm);
+  border-radius: var(--csk-radius-sm);
 
   /* Colors */
-  color: var(--color-text-tertiary);
+  color: var(--csk-color-text-3);
 
   /* Transition */
   transition:
-    color var(--duration-fast) var(--ease-out),
-    background-color var(--duration-fast) var(--ease-out);
+    color var(--csk-transition-fast),
+    background-color var(--csk-transition-fast);
 }
 
 .csk-dropzone__file-remove:hover {
-  color: var(--color-error-500);
-  background-color: var(--color-error-50);
+  color: var(--csk-color-error);
+  background-color: var(--csk-color-error-bg);
 }
 
 .csk-dropzone__file-remove:focus-visible {
-  outline: 2px solid var(--color-border-focus);
+  outline: 2px solid var(--csk-color-focus);
   outline-offset: 1px;
 }
 
@@ -323,8 +323,8 @@
 
 /* Small */
 .csk-dropzone--sm .csk-dropzone__area {
-  padding: var(--spacing-4) var(--spacing-3);
-  gap: var(--spacing-1);
+  padding: var(--csk-space-4) var(--csk-space-3);
+  gap: var(--csk-space-1);
 }
 
 .csk-dropzone--sm .csk-dropzone__icon-svg {
@@ -333,27 +333,27 @@
 }
 
 .csk-dropzone--sm .csk-dropzone__label {
-  font-size: var(--text-sm-size);
+  font-size: var(--csk-text-md);
 }
 
 .csk-dropzone--sm .csk-dropzone__hint {
-  font-size: var(--text-xs-size);
+  font-size: var(--csk-text-sm);
 }
 
 .csk-dropzone--sm .csk-dropzone__file {
-  padding: var(--spacing-2);
-  gap: var(--spacing-2);
+  padding: var(--csk-space-2);
+  gap: var(--csk-space-2);
 }
 
 .csk-dropzone--sm .csk-dropzone__file-preview {
-  width: var(--spacing-8);
-  height: var(--spacing-8);
+  width: var(--csk-space-8);
+  height: var(--csk-space-8);
 }
 
 /* Large */
 .csk-dropzone--lg .csk-dropzone__area {
-  padding: var(--spacing-12) var(--spacing-6);
-  gap: var(--spacing-3);
+  padding: var(--csk-space-12) var(--csk-space-6);
+  gap: var(--csk-space-3);
 }
 
 .csk-dropzone--lg .csk-dropzone__icon-svg {
@@ -362,29 +362,29 @@
 }
 
 .csk-dropzone--lg .csk-dropzone__label {
-  font-size: var(--text-lg-size);
+  font-size: var(--csk-text-lg);
 }
 
 .csk-dropzone--lg .csk-dropzone__hint {
-  font-size: var(--text-base-size);
+  font-size: var(--csk-text-base);
 }
 
 .csk-dropzone--lg .csk-dropzone__file {
-  padding: var(--spacing-4);
-  gap: var(--spacing-4);
+  padding: var(--csk-space-4);
+  gap: var(--csk-space-4);
 }
 
 .csk-dropzone--lg .csk-dropzone__file-preview {
-  width: var(--spacing-12);
-  height: var(--spacing-12);
+  width: var(--csk-space-12);
+  height: var(--csk-space-12);
 }
 
 .csk-dropzone--lg .csk-dropzone__file-name {
-  font-size: var(--text-base-size);
+  font-size: var(--csk-text-base);
 }
 
 .csk-dropzone--lg .csk-dropzone__file-size {
-  font-size: var(--text-sm-size);
+  font-size: var(--csk-text-md);
 }
 
 /* ==========================================================================
@@ -392,23 +392,23 @@
    ========================================================================== */
 
 [data-theme='dark'] .csk-dropzone__area {
-  background-color: var(--color-bg-secondary);
-  border-color: var(--color-border-default);
+  background-color: var(--csk-color-surface-2);
+  border-color: var(--csk-color-border);
 }
 
 [data-theme='dark'] .csk-dropzone__area:hover {
   background-color: rgba(77, 163, 204, 0.1);
-  border-color: var(--color-primary-500);
+  border-color: var(--csk-color-action);
 }
 
 [data-theme='dark'] .csk-dropzone--drag-over .csk-dropzone__area {
   background-color: rgba(77, 163, 204, 0.15);
-  border-color: var(--color-primary-500);
+  border-color: var(--csk-color-action);
 }
 
 [data-theme='dark'] .csk-dropzone--error .csk-dropzone__area {
   background-color: rgba(248, 113, 113, 0.1);
-  border-color: var(--color-error-500);
+  border-color: var(--csk-color-error);
 }
 
 [data-theme='dark'] .csk-dropzone--error .csk-dropzone__area:hover {
@@ -417,7 +417,7 @@
 
 [data-theme='dark'] .csk-dropzone--success .csk-dropzone__area {
   background-color: rgba(74, 222, 128, 0.1);
-  border-color: var(--color-success-500);
+  border-color: var(--csk-color-success);
 }
 
 [data-theme='dark'] .csk-dropzone--success .csk-dropzone__area:hover {
@@ -425,21 +425,21 @@
 }
 
 [data-theme='dark'] .csk-dropzone__file {
-  background-color: var(--color-bg-secondary);
-  border-color: var(--color-border-default);
+  background-color: var(--csk-color-surface-2);
+  border-color: var(--csk-color-border);
 }
 
 [data-theme='dark'] .csk-dropzone__file:hover {
-  border-color: var(--color-border-strong);
+  border-color: var(--csk-color-border);
 }
 
 [data-theme='dark'] .csk-dropzone__file--error {
   background-color: rgba(248, 113, 113, 0.1);
-  border-color: var(--color-error-500);
+  border-color: var(--csk-color-error);
 }
 
 [data-theme='dark'] .csk-dropzone__file-preview {
-  background-color: var(--color-bg-tertiary);
+  background-color: var(--csk-color-surface-3);
 }
 
 [data-theme='dark'] .csk-dropzone__file-remove:hover {
@@ -452,7 +452,7 @@
 
 @media (max-width: 640px) {
   .csk-dropzone__area {
-    padding: var(--spacing-6) var(--spacing-3);
+    padding: var(--csk-space-6) var(--csk-space-3);
   }
 
   .csk-dropzone__icon-svg {
@@ -461,21 +461,21 @@
   }
 
   .csk-dropzone__label {
-    font-size: var(--text-sm-size);
+    font-size: var(--csk-text-md);
   }
 
   .csk-dropzone__file {
-    padding: var(--spacing-2);
-    gap: var(--spacing-2);
+    padding: var(--csk-space-2);
+    gap: var(--csk-space-2);
   }
 
   .csk-dropzone__file-preview {
-    width: var(--spacing-8);
-    height: var(--spacing-8);
+    width: var(--csk-space-8);
+    height: var(--csk-space-8);
   }
 
   .csk-dropzone__file-name {
-    font-size: var(--text-xs-size);
+    font-size: var(--csk-text-sm);
   }
 }
 

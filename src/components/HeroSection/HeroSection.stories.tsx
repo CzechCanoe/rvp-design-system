@@ -271,7 +271,7 @@ export const WithFloatingStats: Story = {
     ],
     actions: <HeroActionButton label="Sdílet" icon="share" />,
     floatingContent: (
-      <Card variant="elevated" style={{ padding: 'var(--spacing-4)' }}>
+      <Card variant="elevated" style={{ padding: 'var(--csk-space-4)' }}>
         <StatsBar items={athleteStats} variant="cards" centered />
       </Card>
     ),
@@ -395,7 +395,7 @@ export const ClubProfile: Story = {
     ],
     actions: <HeroActionButton label="Sdílet" icon="share" />,
     floatingContent: (
-      <Card variant="elevated" style={{ padding: 'var(--spacing-4)' }}>
+      <Card variant="elevated" style={{ padding: 'var(--csk-space-4)' }}>
         <StatsBar items={clubStats} variant="cards" centered />
       </Card>
     ),
@@ -512,8 +512,8 @@ export const WithWave: Story = {
     (Story) => (
       <div>
         <Story />
-        <div style={{ padding: '2rem', background: 'var(--color-bg-primary)' }}>
-          <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+        <div style={{ padding: '2rem', background: 'var(--csk-color-surface)' }}>
+          <p style={{ margin: 0, color: 'var(--csk-color-text-2)' }}>
             Content below the wave divider seamlessly connects with the hero section.
           </p>
         </div>
@@ -556,11 +556,11 @@ export const FullWithWave: Story = {
     (Story) => (
       <div>
         <Story />
-        <div style={{ padding: '2rem', background: 'var(--color-bg-primary)' }}>
-          <h3 style={{ margin: '0 0 1rem', color: 'var(--color-text-primary)' }}>
+        <div style={{ padding: '2rem', background: 'var(--csk-color-surface)' }}>
+          <h3 style={{ margin: '0 0 1rem', color: 'var(--csk-color-text)' }}>
             Kalendář závodů
           </h3>
-          <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+          <p style={{ margin: 0, color: 'var(--csk-color-text-2)' }}>
             Přehled všech závodů série Český pohár 2024.
           </p>
         </div>

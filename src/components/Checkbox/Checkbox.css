@@ -14,7 +14,7 @@
 .csk-checkbox-wrapper {
   display: inline-flex;
   flex-direction: column;
-  gap: var(--spacing-1);
+  gap: var(--csk-space-1);
 }
 
 /* ==========================================================================
@@ -24,7 +24,7 @@
 .csk-checkbox-label {
   display: inline-flex;
   align-items: flex-start;
-  gap: var(--spacing-2);
+  gap: var(--csk-space-2);
   cursor: pointer;
   user-select: none;
 }
@@ -73,12 +73,12 @@
   height: 20px;
 
   /* Shape */
-  background-color: var(--color-bg-primary);
-  border: 2px solid var(--color-border-default);
-  border-radius: var(--radius-sm);
+  background-color: var(--csk-color-surface);
+  border: 2px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-sm);
 
   /* Interaction */
-  transition: var(--transition-input);
+  transition: var(--csk-transition-fast);
 }
 
 /* ==========================================================================
@@ -88,10 +88,10 @@
 .csk-checkbox-icon {
   width: 14px;
   height: 14px;
-  color: var(--color-neutral-0);
+  color: var(--csk-color-surface);
   opacity: 0;
   transform: scale(0.5);
-  transition: var(--transition-fast);
+  transition: var(--csk-transition-fast);
 }
 
 .csk-checkbox-icon--indeterminate {
@@ -103,8 +103,8 @@
    ========================================================================== */
 
 .csk-checkbox:checked + .csk-checkbox-box {
-  background-color: var(--color-primary-500);
-  border-color: var(--color-primary-500);
+  background-color: var(--csk-color-action);
+  border-color: var(--csk-color-action);
 }
 
 .csk-checkbox:checked + .csk-checkbox-box .csk-checkbox-icon--check {
@@ -117,8 +117,8 @@
    ========================================================================== */
 
 .csk-checkbox--indeterminate + .csk-checkbox-box {
-  background-color: var(--color-primary-500);
-  border-color: var(--color-primary-500);
+  background-color: var(--csk-color-action);
+  border-color: var(--csk-color-action);
 }
 
 .csk-checkbox--indeterminate + .csk-checkbox-box .csk-checkbox-icon--check {
@@ -136,8 +136,8 @@
    ========================================================================== */
 
 .csk-checkbox:focus-visible + .csk-checkbox-box {
-  border-color: var(--color-border-focus);
-  box-shadow: 0 0 0 3px var(--color-primary-500-alpha-30, rgba(17, 118, 166, 0.3));
+  border-color: var(--csk-color-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-action) 30%, transparent);
 }
 
 /* ==========================================================================
@@ -145,13 +145,13 @@
    ========================================================================== */
 
 .csk-checkbox:hover:not(:disabled) + .csk-checkbox-box {
-  border-color: var(--color-border-strong);
+  border-color: var(--csk-color-border);
 }
 
 .csk-checkbox:hover:not(:disabled):checked + .csk-checkbox-box,
 .csk-checkbox--indeterminate:hover:not(:disabled) + .csk-checkbox-box {
-  background-color: var(--color-primary-600);
-  border-color: var(--color-primary-600);
+  background-color: var(--csk-color-action-hover);
+  border-color: var(--csk-color-action-hover);
 }
 
 /* ==========================================================================
@@ -160,44 +160,44 @@
 
 /* Error state */
 .csk-checkbox-wrapper--error .csk-checkbox-box {
-  border-color: var(--color-error-500);
+  border-color: var(--csk-color-error);
 }
 
 .csk-checkbox-wrapper--error .csk-checkbox:checked + .csk-checkbox-box,
 .csk-checkbox-wrapper--error .csk-checkbox--indeterminate + .csk-checkbox-box {
-  background-color: var(--color-error-500);
-  border-color: var(--color-error-500);
+  background-color: var(--csk-color-error);
+  border-color: var(--csk-color-error);
 }
 
 .csk-checkbox-wrapper--error .csk-checkbox:hover:not(:disabled):checked + .csk-checkbox-box,
 .csk-checkbox-wrapper--error .csk-checkbox--indeterminate:hover:not(:disabled) + .csk-checkbox-box {
-  background-color: var(--color-error-600);
-  border-color: var(--color-error-600);
+  background-color: var(--csk-color-error);
+  border-color: var(--csk-color-error);
 }
 
 .csk-checkbox-wrapper--error .csk-checkbox:focus-visible + .csk-checkbox-box {
-  box-shadow: 0 0 0 3px var(--color-error-500-alpha-30, rgba(239, 68, 68, 0.3));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-error) 30%, transparent);
 }
 
 /* Success state */
 .csk-checkbox-wrapper--success .csk-checkbox-box {
-  border-color: var(--color-success-500);
+  border-color: var(--csk-color-success);
 }
 
 .csk-checkbox-wrapper--success .csk-checkbox:checked + .csk-checkbox-box,
 .csk-checkbox-wrapper--success .csk-checkbox--indeterminate + .csk-checkbox-box {
-  background-color: var(--color-success-500);
-  border-color: var(--color-success-500);
+  background-color: var(--csk-color-success);
+  border-color: var(--csk-color-success);
 }
 
 .csk-checkbox-wrapper--success .csk-checkbox:hover:not(:disabled):checked + .csk-checkbox-box,
 .csk-checkbox-wrapper--success .csk-checkbox--indeterminate:hover:not(:disabled) + .csk-checkbox-box {
-  background-color: var(--color-success-600);
-  border-color: var(--color-success-600);
+  background-color: var(--csk-color-success);
+  border-color: var(--csk-color-success);
 }
 
 .csk-checkbox-wrapper--success .csk-checkbox:focus-visible + .csk-checkbox-box {
-  box-shadow: 0 0 0 3px var(--color-success-500-alpha-30, rgba(34, 197, 94, 0.3));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-success) 30%, transparent);
 }
 
 /* ==========================================================================
@@ -206,13 +206,13 @@
 
 .csk-checkbox:disabled + .csk-checkbox-box {
   opacity: 0.5;
-  background-color: var(--color-bg-secondary);
+  background-color: var(--csk-color-surface-2);
 }
 
 .csk-checkbox:disabled:checked + .csk-checkbox-box,
 .csk-checkbox--indeterminate:disabled + .csk-checkbox-box {
-  background-color: var(--color-primary-300);
-  border-color: var(--color-primary-300);
+  background-color: var(--csk-color-highlight-border);
+  border-color: var(--csk-color-highlight-border);
 }
 
 .csk-checkbox-wrapper--disabled .csk-checkbox-text {
@@ -235,7 +235,7 @@
 }
 
 .csk-checkbox-wrapper--sm .csk-checkbox-text {
-  font-size: var(--font-size-xs);
+  font-size: var(--csk-text-sm);
 }
 
 /* Medium (default) - defined in base */
@@ -244,7 +244,7 @@
 .csk-checkbox-wrapper--lg .csk-checkbox-box {
   width: 24px;
   height: 24px;
-  border-radius: var(--radius-md);
+  border-radius: var(--csk-radius-md);
 }
 
 .csk-checkbox-wrapper--lg .csk-checkbox-icon {
@@ -253,7 +253,7 @@
 }
 
 .csk-checkbox-wrapper--lg .csk-checkbox-text {
-  font-size: var(--font-size-base);
+  font-size: var(--csk-text-base);
 }
 
 /* ==========================================================================
@@ -261,10 +261,10 @@
    ========================================================================== */
 
 .csk-checkbox-text {
-  font-family: var(--font-family-sans);
-  font-size: var(--font-size-sm);
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-md);
   line-height: 1.4;
-  color: var(--color-text-primary);
+  color: var(--csk-color-text);
   padding-top: 1px; /* Visual alignment with checkbox */
 }
 
@@ -273,24 +273,24 @@
    ========================================================================== */
 
 .csk-checkbox-helper {
-  margin-left: calc(20px + var(--spacing-2)); /* Align with label text */
-  font-family: var(--font-family-sans);
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-tight);
-  color: var(--color-text-secondary);
+  margin-left: calc(20px + var(--csk-space-2)); /* Align with label text */
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-sm);
+  line-height: var(--csk-line-height-snug);
+  color: var(--csk-color-text-2);
 }
 
 .csk-checkbox-helper--error {
-  color: var(--color-error-500);
+  color: var(--csk-color-error);
 }
 
 /* Size adjustments for helper alignment */
 .csk-checkbox-wrapper--sm .csk-checkbox-helper {
-  margin-left: calc(16px + var(--spacing-2));
+  margin-left: calc(16px + var(--csk-space-2));
 }
 
 .csk-checkbox-wrapper--lg .csk-checkbox-helper {
-  margin-left: calc(24px + var(--spacing-2));
+  margin-left: calc(24px + var(--csk-space-2));
 }
 
 /* ==========================================================================

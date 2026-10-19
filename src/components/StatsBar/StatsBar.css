@@ -171,22 +171,22 @@
    ========================================================================== */
 
 .csk-stats-bar--floating {
-  gap: var(--spacing-5, 20px);
+  gap: var(--csk-space-5);
 }
 
 .csk-stats-bar--floating .csk-stats-bar__item {
   position: relative;
-  background: var(--color-bg-primary, #fff);
-  border-radius: var(--radius-lg, 12px);
-  padding: var(--spacing-5, 20px) var(--spacing-6, 24px);
+  background: var(--csk-color-surface);
+  border-radius: var(--csk-radius-lg);
+  padding: var(--csk-space-5) var(--csk-space-6);
   min-width: 140px;
   text-align: center;
   box-shadow:
     0 4px 12px -2px rgba(0, 0, 0, 0.08),
     0 8px 24px -4px rgba(0, 0, 0, 0.06);
-  border: 1px solid var(--color-border-default, rgba(0, 0, 0, 0.06));
+  border: 1px solid var(--csk-color-border);
   border-left: 4px solid;
-  border-image: linear-gradient(180deg, var(--color-primary-500, #1176a6) 0%, var(--color-energy-500, #f97316) 100%) 1;
+  border-image: linear-gradient(180deg, var(--csk-color-action) 0%, var(--csk-color-live) 100%) 1;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -217,47 +217,47 @@
 
 .csk-stats-bar--floating .csk-stats-bar__icon {
   font-size: 1.5em;
-  margin-bottom: var(--spacing-2, 8px);
+  margin-bottom: var(--csk-space-2);
   /* Explicit color to override inherited white from hero */
-  color: var(--color-primary-500, #1176a6);
+  color: var(--csk-color-action);
 }
 
 .csk-stats-bar--floating .csk-stats-bar__value {
-  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
-  font-size: var(--text-2xl-size, 1.5rem);
+  font-family: var(--csk-font-display);
+  font-size: var(--csk-text-2xl);
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.1;
   /* Explicit color to override inherited white from hero */
-  color: var(--color-primary-700, #1d4ed8);
+  color: var(--csk-color-brand);
 }
 
 .csk-stats-bar--floating .csk-stats-bar__label {
-  margin-top: var(--spacing-1, 4px);
-  font-size: var(--text-sm-size, 0.875rem);
+  margin-top: var(--csk-space-1);
+  font-size: var(--csk-text-md);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   /* Explicit color to override inherited white from hero */
-  color: var(--color-text-secondary, #64748b);
+  color: var(--csk-color-text-2);
 }
 
 /* Floating size variants */
 .csk-stats-bar--floating.csk-stats-bar--sm .csk-stats-bar__item {
-  padding: var(--spacing-3, 12px) var(--spacing-4, 16px);
+  padding: var(--csk-space-3) var(--csk-space-4);
   min-width: 100px;
 }
 
 .csk-stats-bar--floating.csk-stats-bar--sm .csk-stats-bar__value {
-  font-size: var(--text-lg-size, 1.125rem);
+  font-size: var(--csk-text-lg);
 }
 
 .csk-stats-bar--floating.csk-stats-bar--lg .csk-stats-bar__item {
-  padding: var(--spacing-6, 24px) var(--spacing-8, 32px);
+  padding: var(--csk-space-6) var(--csk-space-8);
   min-width: 160px;
 }
 
 .csk-stats-bar--floating.csk-stats-bar--lg .csk-stats-bar__value {
-  font-size: var(--text-3xl-size, 1.875rem);
+  font-size: var(--csk-text-2xl);
 }
 
 .csk-stats-bar--floating.csk-stats-bar--lg .csk-stats-bar__icon {
@@ -266,8 +266,8 @@
 
 /* Dark mode for floating */
 [data-theme="dark"] .csk-stats-bar--floating .csk-stats-bar__item {
-  background: var(--color-bg-secondary, #1a1a2e);
-  border-color: var(--color-border-secondary, rgba(255, 255, 255, 0.1));
+  background: var(--csk-color-surface-2);
+  border-color: var(--csk-color-border);
   box-shadow:
     0 4px 12px -2px rgba(0, 0, 0, 0.3),
     0 8px 24px -4px rgba(0, 0, 0, 0.2);
@@ -281,11 +281,11 @@
 }
 
 [data-theme="dark"] .csk-stats-bar--floating .csk-stats-bar__value {
-  color: var(--color-primary-300, #93c5fd);
+  color: var(--csk-color-highlight-border);
 }
 
 [data-theme="dark"] .csk-stats-bar--floating .csk-stats-bar__label {
-  color: var(--color-text-secondary-dark, #94a3b8);
+  color: var(--csk-color-text-2);
 }
 
 /* Reduced motion */

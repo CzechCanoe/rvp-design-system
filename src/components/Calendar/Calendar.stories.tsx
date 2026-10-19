@@ -239,7 +239,7 @@ export const Interactive: Story = {
         <div
           style={{
             padding: '16px',
-            background: 'var(--color-bg-secondary)',
+            background: 'var(--csk-color-surface-2)',
             borderRadius: '8px',
             minHeight: '80px',
           }}
@@ -272,7 +272,7 @@ export const Interactive: Story = {
             </div>
           )}
           {!selectedDate && !selectedEvent && (
-            <span style={{ color: 'var(--color-text-tertiary)' }}>
+            <span style={{ color: 'var(--csk-color-text-3)' }}>
               Klikněte na den nebo událost pro zobrazení detailu.
             </span>
           )}

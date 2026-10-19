@@ -14,29 +14,29 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-button-gap);
+  gap: var(--csk-space-2);
   position: relative;
 
   /* Typography */
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-tight);
+  font-family: var(--csk-font-sans);
+  font-weight: var(--csk-font-weight-medium);
+  line-height: var(--csk-line-height-snug);
   text-decoration: none;
   white-space: nowrap;
 
   /* Default size (md) */
-  padding: var(--spacing-button-padding-y) var(--spacing-button-padding-x);
-  font-size: var(--font-size-sm);
-  min-height: var(--spacing-touch-target);
+  padding: var(--csk-space-2) var(--csk-space-4);
+  font-size: var(--csk-text-md);
+  min-height: var(--csk-tap);
 
   /* Shape */
   border: 1px solid transparent;
-  border-radius: var(--radius-button);
+  border-radius: var(--csk-radius-md);
 
   /* Interaction */
   cursor: pointer;
   user-select: none;
-  transition: var(--transition-button),
+  transition: var(--csk-transition-fast),
               box-shadow 0.2s ease-out,
               transform 0.15s ease-out;
 
@@ -45,7 +45,7 @@
 }
 
 .csk-button:focus-visible {
-  outline: 2px solid var(--color-border-focus);
+  outline: 2px solid var(--csk-color-focus);
   outline-offset: 2px;
 }
 
@@ -63,45 +63,45 @@
 
 /* Primary - main call-to-action with subtle shadow */
 .csk-button--primary {
-  background-color: var(--color-interactive-default);
-  border-color: var(--color-interactive-default);
-  color: var(--color-text-inverse);
-  box-shadow: var(--shadow-button);
+  background-color: var(--csk-color-action);
+  border-color: var(--csk-color-action);
+  color: var(--csk-color-text-on-fill);
+  box-shadow: none;
 }
 
 .csk-button--primary:hover:not(:disabled):not([aria-disabled='true']) {
-  background-color: var(--color-interactive-hover);
-  border-color: var(--color-interactive-hover);
-  box-shadow: var(--shadow-button-hover);
+  background-color: var(--csk-color-action-hover);
+  border-color: var(--csk-color-action-hover);
+  box-shadow: none;
   transform: translateY(-1px);
 }
 
 .csk-button--primary:active:not(:disabled):not([aria-disabled='true']) {
-  background-color: var(--color-interactive-active);
-  border-color: var(--color-interactive-active);
-  box-shadow: var(--shadow-button-active);
+  background-color: var(--csk-color-brand);
+  border-color: var(--csk-color-brand);
+  box-shadow: none;
   transform: translateY(0);
 }
 
 /* Secondary - secondary actions with border emphasis */
 .csk-button--secondary {
-  background-color: var(--color-bg-primary);
-  border-color: var(--color-border-strong);
-  color: var(--color-text-primary);
-  box-shadow: var(--shadow-xs);
+  background-color: var(--csk-color-surface);
+  border-color: var(--csk-color-border);
+  color: var(--csk-color-text);
+  box-shadow: none;
 }
 
 .csk-button--secondary:hover:not(:disabled):not([aria-disabled='true']) {
-  background-color: var(--color-bg-secondary);
-  border-color: var(--color-primary-400);
-  color: var(--color-primary-600);
-  box-shadow: var(--shadow-sm);
+  background-color: var(--csk-color-surface-2);
+  border-color: var(--csk-color-action);
+  color: var(--csk-color-action-hover);
+  box-shadow: var(--csk-shadow-sm);
   transform: translateY(-1px);
 }
 
 .csk-button--secondary:active:not(:disabled):not([aria-disabled='true']) {
-  background-color: var(--color-bg-tertiary);
-  border-color: var(--color-primary-500);
+  background-color: var(--csk-color-surface-3);
+  border-color: var(--csk-color-action);
   transform: translateY(0);
 }
 
@@ -109,42 +109,42 @@
 .csk-button--ghost {
   background-color: transparent;
   border-color: transparent;
-  color: var(--color-text-primary);
+  color: var(--csk-color-text);
 }
 
 .csk-button--ghost:hover:not(:disabled):not([aria-disabled='true']) {
-  background-color: var(--color-bg-secondary);
-  color: var(--color-primary-600);
+  background-color: var(--csk-color-surface-2);
+  color: var(--csk-color-action-hover);
 }
 
 .csk-button--ghost:active:not(:disabled):not([aria-disabled='true']) {
-  background-color: var(--color-bg-tertiary);
+  background-color: var(--csk-color-surface-3);
 }
 
 /* Danger - destructive actions with red shadow */
 .csk-button--danger {
-  background-color: var(--color-error-500);
-  border-color: var(--color-error-500);
-  color: var(--color-text-inverse);
-  box-shadow: var(--shadow-error-sm);
+  background-color: var(--csk-color-error);
+  border-color: var(--csk-color-error);
+  color: var(--csk-color-text-on-fill);
+  box-shadow: none;
 }
 
 .csk-button--danger:hover:not(:disabled):not([aria-disabled='true']) {
-  background-color: var(--color-error-600);
-  border-color: var(--color-error-600);
-  box-shadow: var(--shadow-error-md);
+  background-color: var(--csk-color-error);
+  border-color: var(--csk-color-error);
+  box-shadow: none;
   transform: translateY(-1px);
 }
 
 .csk-button--danger:active:not(:disabled):not([aria-disabled='true']) {
-  background-color: var(--color-error-700);
-  border-color: var(--color-error-700);
-  box-shadow: var(--shadow-error-sm);
+  background-color: var(--csk-color-error-text);
+  border-color: var(--csk-color-error-text);
+  box-shadow: none;
   transform: translateY(0);
 }
 
 .csk-button--danger:focus-visible {
-  outline-color: var(--color-error-500);
+  outline-color: var(--csk-color-error);
 }
 
 /* ==========================================================================
@@ -153,22 +153,22 @@
 
 /* Small */
 .csk-button--sm {
-  padding: var(--spacing-button-padding-y-sm) var(--spacing-button-padding-x-sm);
-  font-size: var(--font-size-xs);
+  padding: calc(var(--csk-space-1) * 1.5) var(--csk-space-3);
+  font-size: var(--csk-text-sm);
   min-height: 32px;
-  border-radius: var(--radius-button-sm);
+  border-radius: var(--csk-radius-sm);
 }
 
 /* Medium (default) - defined in base */
 
 /* Large - with display font for prominent CTAs */
 .csk-button--lg {
-  padding: var(--spacing-button-padding-y-lg) var(--spacing-button-padding-x-lg);
-  font-size: var(--font-size-base);
+  padding: var(--csk-space-3) var(--csk-space-6);
+  font-size: var(--csk-text-base);
   min-height: 52px;
-  font-weight: var(--font-weight-semibold);
-  font-family: var(--font-family-display, var(--font-family-sans));
-  letter-spacing: var(--text-headline-tracking, -0.02em);
+  font-weight: var(--csk-font-weight-semibold);
+  font-family: var(--csk-font-display);
+  letter-spacing: var(--csk-letter-spacing-tight);
 }
 
 /* ==========================================================================
@@ -200,18 +200,18 @@
 .csk-button__spinner-icon {
   width: 1.25em;
   height: 1.25em;
-  animation: var(--animation-spin);
+  animation: csk-spin 1s linear infinite;
 }
 
 /* Restore text color for spinner */
 .csk-button--loading.csk-button--primary .csk-button__spinner,
 .csk-button--loading.csk-button--danger .csk-button__spinner {
-  color: var(--color-text-inverse);
+  color: var(--csk-color-text-on-fill);
 }
 
 .csk-button--loading.csk-button--secondary .csk-button__spinner,
 .csk-button--loading.csk-button--ghost .csk-button__spinner {
-  color: var(--color-text-primary);
+  color: var(--csk-color-text);
 }
 
 
@@ -258,29 +258,29 @@
 
 /* Energy accent on primary button */
 .csk-button--primary.csk-button--accent-energy:hover:not(:disabled):not([aria-disabled='true']) {
-  box-shadow: var(--glow-energy-md, 0 0 16px rgba(249, 115, 22, 0.5));
+  box-shadow: none;
 }
 
 .csk-button--primary.csk-button--accent-energy:active:not(:disabled):not([aria-disabled='true']) {
-  box-shadow: var(--glow-energy-sm, 0 0 8px rgba(249, 115, 22, 0.4));
+  box-shadow: none;
 }
 
 /* Energy accent on secondary button */
 .csk-button--secondary.csk-button--accent-energy:hover:not(:disabled):not([aria-disabled='true']) {
-  border-color: var(--color-energy-400, #fb923c);
-  color: var(--color-energy-600, #ea580c);
-  box-shadow: var(--glow-energy-sm, 0 0 8px rgba(249, 115, 22, 0.4));
+  border-color: var(--csk-color-live);
+  color: var(--csk-color-live);
+  box-shadow: none;
 }
 
 /* Energy accent on ghost button */
 .csk-button--ghost.csk-button--accent-energy:hover:not(:disabled):not([aria-disabled='true']) {
-  background-color: var(--color-energy-50, #fff7ed);
-  color: var(--color-energy-600, #ea580c);
+  background-color: var(--csk-color-live-bg);
+  color: var(--csk-color-live);
 }
 
 /* Energy focus ring override */
 .csk-button--accent-energy:focus-visible {
-  outline-color: var(--color-energy-400, #fb923c);
+  outline-color: var(--csk-color-live);
 }
 
 /* ==========================================================================

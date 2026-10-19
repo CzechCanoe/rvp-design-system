@@ -53,19 +53,19 @@ export const Sizes: Story = {
     <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
       <div style={{ textAlign: 'center' }}>
         <Icon name="calendar" size="sm" />
-        <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)', marginTop: '4px' }}>sm (16px)</div>
+        <div style={{ fontSize: '12px', color: 'var(--csk-color-text-2)', marginTop: '4px' }}>sm (16px)</div>
       </div>
       <div style={{ textAlign: 'center' }}>
         <Icon name="calendar" size="md" />
-        <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)', marginTop: '4px' }}>md (20px)</div>
+        <div style={{ fontSize: '12px', color: 'var(--csk-color-text-2)', marginTop: '4px' }}>md (20px)</div>
       </div>
       <div style={{ textAlign: 'center' }}>
         <Icon name="calendar" size="lg" />
-        <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)', marginTop: '4px' }}>lg (24px)</div>
+        <div style={{ fontSize: '12px', color: 'var(--csk-color-text-2)', marginTop: '4px' }}>lg (24px)</div>
       </div>
       <div style={{ textAlign: 'center' }}>
         <Icon name="calendar" size="xl" />
-        <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)', marginTop: '4px' }}>xl (32px)</div>
+        <div style={{ fontSize: '12px', color: 'var(--csk-color-text-2)', marginTop: '4px' }}>xl (32px)</div>
       </div>
     </div>
   ),
@@ -91,12 +91,12 @@ const IconGridItem = ({ name }: { name: IconName }) => (
       gap: '8px',
       padding: '12px',
       borderRadius: '8px',
-      backgroundColor: 'var(--color-surface-secondary)',
+      backgroundColor: 'var(--csk-color-surface-2)',
       minWidth: '100px',
     }}
   >
     <Icon name={name} size="lg" />
-    <span style={{ fontSize: '11px', color: 'var(--color-text-secondary)', textAlign: 'center' }}>{name}</span>
+    <span style={{ fontSize: '11px', color: 'var(--csk-color-text-2)', textAlign: 'center' }}>{name}</span>
   </div>
 );
 
@@ -381,11 +381,11 @@ export const AllIcons: Story = {
 export const WithColor: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-      <Icon name="check-circle" size="lg" className="text-success" style={{ color: 'var(--color-success)' }} />
-      <Icon name="alert" size="lg" style={{ color: 'var(--color-warning)' }} />
-      <Icon name="alert-circle" size="lg" style={{ color: 'var(--color-error)' }} />
-      <Icon name="info" size="lg" style={{ color: 'var(--color-info)' }} />
-      <Icon name="trophy" size="lg" style={{ color: 'var(--color-accent-primary)' }} />
+      <Icon name="check-circle" size="lg" className="text-success" style={{ color: 'var(--csk-color-success)' }} />
+      <Icon name="alert" size="lg" style={{ color: 'var(--csk-color-warning)' }} />
+      <Icon name="alert-circle" size="lg" style={{ color: 'var(--csk-color-error)' }} />
+      <Icon name="info" size="lg" style={{ color: 'var(--csk-color-info)' }} />
+      <Icon name="trophy" size="lg" style={{ color: 'var(--csk-color-action)' }} />
     </div>
   ),
   parameters: {

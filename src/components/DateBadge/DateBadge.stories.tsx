@@ -134,10 +134,10 @@ export const InCard: Story = {
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
         <DateBadge date="2024-06-15" section="dv" />
         <div>
-          <h4 style={{ margin: 0, color: 'var(--color-text-primary)' }}>
+          <h4 style={{ margin: 0, color: 'var(--csk-color-text)' }}>
             MČR ve slalomu
           </h4>
-          <p style={{ margin: '0.25rem 0 0', color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>
+          <p style={{ margin: '0.25rem 0 0', color: 'var(--csk-color-text-2)', fontSize: '0.875rem' }}>
             Troja, Praha
           </p>
         </div>
@@ -153,10 +153,10 @@ export const EventList: Story = {
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <DateBadge date="2024-06-15" section="dv" size="md" />
           <div>
-            <h4 style={{ margin: 0, color: 'var(--color-text-primary)' }}>
+            <h4 style={{ margin: 0, color: 'var(--csk-color-text)' }}>
               MČR ve slalomu - DV
             </h4>
-            <p style={{ margin: '0.25rem 0 0', color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>
+            <p style={{ margin: '0.25rem 0 0', color: 'var(--csk-color-text-2)', fontSize: '0.875rem' }}>
               Troja, Praha
             </p>
           </div>
@@ -164,10 +164,10 @@ export const EventList: Story = {
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <DateBadge date="2024-07-20" section="ry" size="md" />
           <div>
-            <h4 style={{ margin: 0, color: 'var(--color-text-primary)' }}>
+            <h4 style={{ margin: 0, color: 'var(--csk-color-text)' }}>
               Pohár v rychlostní kanoistice
             </h4>
-            <p style={{ margin: '0.25rem 0 0', color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>
+            <p style={{ margin: '0.25rem 0 0', color: 'var(--csk-color-text-2)', fontSize: '0.875rem' }}>
               Račice
             </p>
           </div>
@@ -175,10 +175,10 @@ export const EventList: Story = {
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <DateBadge date="2024-08-10" section="vt" size="md" />
           <div>
-            <h4 style={{ margin: 0, color: 'var(--color-text-primary)' }}>
+            <h4 style={{ margin: 0, color: 'var(--csk-color-text)' }}>
               Soutěž ve vodním turistice
             </h4>
-            <p style={{ margin: '0.25rem 0 0', color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>
+            <p style={{ margin: '0.25rem 0 0', color: 'var(--csk-color-text-2)', fontSize: '0.875rem' }}>
               Vltava
             </p>
           </div>
@@ -197,25 +197,25 @@ export const AllSections: Story = {
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
       <div style={{ textAlign: 'center' }}>
         <DateBadge date={sampleDate} section="generic" />
-        <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--csk-color-text-2)' }}>
           Generic
         </p>
       </div>
       <div style={{ textAlign: 'center' }}>
         <DateBadge date={sampleDate} section="dv" />
-        <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--csk-color-text-2)' }}>
           DV
         </p>
       </div>
       <div style={{ textAlign: 'center' }}>
         <DateBadge date={sampleDate} section="ry" />
-        <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--csk-color-text-2)' }}>
           RY
         </p>
       </div>
       <div style={{ textAlign: 'center' }}>
         <DateBadge date={sampleDate} section="vt" />
-        <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--csk-color-text-2)' }}>
           VT
         </p>
       </div>
@@ -232,19 +232,19 @@ export const AllSizes: Story = {
     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
       <div style={{ textAlign: 'center' }}>
         <DateBadge date={sampleDate} section="dv" size="sm" />
-        <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--csk-color-text-2)' }}>
           Small
         </p>
       </div>
       <div style={{ textAlign: 'center' }}>
         <DateBadge date={sampleDate} section="dv" size="md" />
-        <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--csk-color-text-2)' }}>
           Medium
         </p>
       </div>
       <div style={{ textAlign: 'center' }}>
         <DateBadge date={sampleDate} section="dv" size="lg" />
-        <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
+        <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--csk-color-text-2)' }}>
           Large
         </p>
       </div>

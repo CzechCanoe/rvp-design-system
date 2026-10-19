@@ -12,9 +12,9 @@
 .csk-live-indicator {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-2);
-  font-family: var(--font-family-sans);
-  transition: transform var(--transition-fast);
+  gap: var(--csk-space-2);
+  font-family: var(--csk-font-sans);
+  transition: transform var(--csk-transition-fast);
 }
 
 .csk-live-indicator:hover {
@@ -36,11 +36,11 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border-radius: var(--radius-full);
+  border-radius: var(--csk-radius-pill);
   background-color: currentColor;
   transition:
-    transform var(--transition-fast),
-    box-shadow var(--transition-fast);
+    transform var(--csk-transition-fast),
+    box-shadow var(--csk-transition-fast);
 }
 
 /* Hover effect on dot */
@@ -52,7 +52,7 @@
 .csk-live-indicator__pulse-ring {
   position: absolute;
   inset: 0;
-  border-radius: var(--radius-full);
+  border-radius: var(--csk-radius-pill);
   background-color: currentColor;
   animation: live-indicator-pulse 2s ease-in-out infinite;
   pointer-events: none;
@@ -75,8 +75,8 @@
 }
 
 .csk-live-indicator--sm .csk-live-indicator__label {
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-tight);
+  font-size: var(--csk-text-sm);
+  line-height: var(--csk-line-height-snug);
 }
 
 /* Medium - 10px dot (default) */
@@ -86,8 +86,8 @@
 }
 
 .csk-live-indicator--md .csk-live-indicator__label {
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-tight);
+  font-size: var(--csk-text-md);
+  line-height: var(--csk-line-height-snug);
 }
 
 /* Large - 12px dot */
@@ -97,8 +97,8 @@
 }
 
 .csk-live-indicator--lg .csk-live-indicator__label {
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-normal);
+  font-size: var(--csk-text-base);
+  line-height: var(--csk-line-height-normal);
 }
 
 /* Extra Large - 16px dot */
@@ -108,9 +108,9 @@
 }
 
 .csk-live-indicator--xl .csk-live-indicator__label {
-  font-size: var(--font-size-lg);
-  line-height: var(--line-height-normal);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--csk-text-lg);
+  line-height: var(--csk-line-height-normal);
+  font-weight: var(--csk-font-weight-semibold);
 }
 
 /* ==========================================================================
@@ -131,56 +131,56 @@
 
 /* Default - gray */
 .csk-live-indicator--color-default {
-  color: var(--color-neutral-400);
+  color: var(--csk-color-text-3);
 }
 
 .csk-live-indicator--color-default .csk-live-indicator__label {
-  color: var(--color-text-secondary);
+  color: var(--csk-color-text-2);
 }
 
 /* Primary */
 .csk-live-indicator--color-primary {
-  color: var(--color-primary-500);
+  color: var(--csk-color-action);
 }
 
 .csk-live-indicator--color-primary .csk-live-indicator__label {
-  color: var(--color-primary-700);
+  color: var(--csk-color-brand);
 }
 
 /* Success - green */
 .csk-live-indicator--color-success {
-  color: var(--color-success-500);
+  color: var(--csk-color-success);
 }
 
 .csk-live-indicator--color-success .csk-live-indicator__label {
-  color: var(--color-success-700);
+  color: var(--csk-color-success-text);
 }
 
 /* Warning - yellow/amber */
 .csk-live-indicator--color-warning {
-  color: var(--color-warning-500);
+  color: var(--csk-color-warning);
 }
 
 .csk-live-indicator--color-warning .csk-live-indicator__label {
-  color: var(--color-warning-700);
+  color: var(--csk-color-warning-text);
 }
 
 /* Error - red (used for live/recording) */
 .csk-live-indicator--color-error {
-  color: var(--color-error-500);
+  color: var(--csk-color-error);
 }
 
 .csk-live-indicator--color-error .csk-live-indicator__label {
-  color: var(--color-error-700);
+  color: var(--csk-color-error-text);
 }
 
 /* Info - blue */
 .csk-live-indicator--color-info {
-  color: var(--color-info-500);
+  color: var(--csk-color-info);
 }
 
 .csk-live-indicator--color-info .csk-live-indicator__label {
-  color: var(--color-info-700);
+  color: var(--csk-color-info-text);
 }
 
 /* ==========================================================================
@@ -194,43 +194,43 @@
 
 /* Badge style - pill-shaped container with background */
 .csk-live-indicator--style-badge {
-  padding: var(--spacing-1) var(--spacing-3);
-  border-radius: var(--radius-full);
-  gap: var(--spacing-2);
+  padding: var(--csk-space-1) var(--csk-space-3);
+  border-radius: var(--csk-radius-pill);
+  gap: var(--csk-space-2);
 }
 
 .csk-live-indicator--style-badge.csk-live-indicator--color-error,
 .csk-live-indicator--style-badge.csk-live-indicator--live,
 .csk-live-indicator--style-badge.csk-live-indicator--recording {
-  background: var(--color-error-50);
-  border: 1px solid var(--color-error-200);
+  background: var(--csk-color-error-bg);
+  border: 1px solid var(--csk-color-error-bg);
 }
 
 .csk-live-indicator--style-badge.csk-live-indicator--color-success {
-  background: var(--color-success-50);
-  border: 1px solid var(--color-success-200);
+  background: var(--csk-color-success-bg);
+  border: 1px solid var(--csk-color-success-bg);
 }
 
 .csk-live-indicator--style-badge.csk-live-indicator--color-warning,
 .csk-live-indicator--style-badge.csk-live-indicator--connecting {
-  background: var(--color-warning-50);
-  border: 1px solid var(--color-warning-200);
+  background: var(--csk-color-warning-bg);
+  border: 1px solid var(--csk-color-warning-bg);
 }
 
 .csk-live-indicator--style-badge.csk-live-indicator--color-info {
-  background: var(--color-info-50);
-  border: 1px solid var(--color-info-200);
+  background: var(--csk-color-info-bg);
+  border: 1px solid var(--csk-color-info-bg);
 }
 
 .csk-live-indicator--style-badge.csk-live-indicator--color-primary {
-  background: var(--color-primary-50);
-  border: 1px solid var(--color-primary-200);
+  background: var(--csk-color-highlight-bg);
+  border: 1px solid var(--csk-color-highlight-border);
 }
 
 .csk-live-indicator--style-badge.csk-live-indicator--color-default,
 .csk-live-indicator--style-badge.csk-live-indicator--offline {
-  background: var(--color-neutral-100);
-  border: 1px solid var(--color-neutral-200);
+  background: var(--csk-color-surface-3);
+  border: 1px solid var(--csk-color-border-2);
 }
 
 /* Badge hover effect */
@@ -244,14 +244,14 @@
 
 /* Live - red with "LIVE" text styling */
 .csk-live-indicator--live .csk-live-indicator__label {
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--csk-font-weight-bold);
   text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-wide);
+  letter-spacing: var(--csk-letter-spacing-caps);
 }
 
 /* Recording - similar to live */
 .csk-live-indicator--recording .csk-live-indicator__label {
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--csk-font-weight-semibold);
   text-transform: uppercase;
 }
 
@@ -261,7 +261,7 @@
 }
 
 .csk-live-indicator--offline .csk-live-indicator__label {
-  color: var(--color-text-tertiary);
+  color: var(--csk-color-text-3);
 }
 
 /* Connecting - blinking animation */
@@ -300,16 +300,16 @@
 
 /* Energy color */
 .csk-live-indicator--color-energy {
-  color: var(--color-energy-500, #f97316);
+  color: var(--csk-color-live);
 }
 
 .csk-live-indicator--color-energy .csk-live-indicator__label {
-  color: var(--color-energy-700, #c2410c);
+  color: var(--csk-color-live);
 }
 
 /* Energy glow effect - dramatic pulsing orange glow */
 .csk-live-indicator--energy-glow .csk-live-indicator__dot {
-  background: var(--gradient-energy, linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%));
+  background: var(--csk-color-live);
   box-shadow:
     0 0 8px rgba(249, 115, 22, 0.6),
     0 0 16px rgba(249, 115, 22, 0.4),
@@ -321,7 +321,7 @@
 }
 
 .csk-live-indicator--energy-glow .csk-live-indicator__pulse-ring {
-  background: var(--color-energy-400, #fb923c);
+  background: var(--csk-color-live);
 }
 
 /* Energy badge style */
@@ -396,55 +396,55 @@
  * ========================================================================== */
 
 [data-theme='dark'] .csk-live-indicator--color-default {
-  color: var(--color-neutral-500);
+  color: var(--csk-color-text-3);
 }
 
 [data-theme='dark'] .csk-live-indicator--color-default .csk-live-indicator__label {
-  color: var(--color-text-secondary);
+  color: var(--csk-color-text-2);
 }
 
 [data-theme='dark'] .csk-live-indicator--color-primary {
-  color: var(--color-primary-400);
+  color: var(--csk-color-action);
 }
 
 [data-theme='dark'] .csk-live-indicator--color-primary .csk-live-indicator__label {
-  color: var(--color-primary-300);
+  color: var(--csk-color-highlight-border);
 }
 
 [data-theme='dark'] .csk-live-indicator--color-success {
-  color: var(--color-success-400);
+  color: var(--csk-color-success);
 }
 
 [data-theme='dark'] .csk-live-indicator--color-success .csk-live-indicator__label {
-  color: var(--color-success-300);
+  color: var(--csk-color-success);
 }
 
 [data-theme='dark'] .csk-live-indicator--color-warning {
-  color: var(--color-warning-400);
+  color: var(--csk-color-warning);
 }
 
 [data-theme='dark'] .csk-live-indicator--color-warning .csk-live-indicator__label {
-  color: var(--color-warning-300);
+  color: var(--csk-color-warning);
 }
 
 [data-theme='dark'] .csk-live-indicator--color-error {
-  color: var(--color-error-400);
+  color: var(--csk-color-error);
 }
 
 [data-theme='dark'] .csk-live-indicator--color-error .csk-live-indicator__label {
-  color: var(--color-error-300);
+  color: var(--csk-color-error);
 }
 
 [data-theme='dark'] .csk-live-indicator--color-info {
-  color: var(--color-info-400);
+  color: var(--csk-color-info);
 }
 
 [data-theme='dark'] .csk-live-indicator--color-info .csk-live-indicator__label {
-  color: var(--color-info-300);
+  color: var(--csk-color-info);
 }
 
 [data-theme='dark'] .csk-live-indicator--offline .csk-live-indicator__label {
-  color: var(--color-text-tertiary);
+  color: var(--csk-color-text-3);
 }
 
 /* Dark mode badge style */
@@ -484,11 +484,11 @@
 
 /* Dark mode energy color */
 [data-theme='dark'] .csk-live-indicator--color-energy {
-  color: var(--color-energy-400, #fb923c);
+  color: var(--csk-color-live);
 }
 
 [data-theme='dark'] .csk-live-indicator--color-energy .csk-live-indicator__label {
-  color: var(--color-energy-300, #fdba74);
+  color: var(--csk-color-live);
 }
 
 /* Dark mode energy badge */
