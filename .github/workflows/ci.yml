@@ -127,7 +127,7 @@ jobs:
   # and the PR then shows no checks; check runs of a dispatched run are not linked to the PR.
   # Commit statuses are, so the dispatched run reports its result on the head SHA as a status.
   report-status:
-    name: CI (dispatched run)
+    name: Report dispatched CI result
     runs-on: ubuntu-latest
     needs: [lint-and-typecheck, build, test]
     if: ${{ always() && !cancelled() && github.event_name == 'workflow_dispatch' }}
