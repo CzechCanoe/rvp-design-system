@@ -323,3 +323,20 @@ export { Notice } from './Notice';
 export type { NoticeProps, NoticeTone } from './Notice';
 export { StatTile } from './StatTile';
 export type { StatTileProps } from './StatTile';
+
+// TimeValue
+export { TimeValue } from './TimeValue';
+export type {
+  TimeValueProps,
+  TimeValueVariant,
+  TimeValuePrecision,
+  TimeValueAlign,
+} from './TimeValue';
+
+// RunningTime
+export { RunningTime, RUNNING_STALE_AFTER_SECONDS } from './RunningTime';
+export type { RunningTimeProps } from './RunningTime';
+
+// DataAge
+export { DataAge } from './DataAge';
+export type { DataAgeProps, DataAgeMode, DataAgeConnection } from './DataAge';

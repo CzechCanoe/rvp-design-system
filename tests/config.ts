@@ -80,6 +80,14 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'States-Overview', storyId: 'states-overview--default', tier: 'specific' },
   { name: 'EmptyState', storyId: 'components-emptystate--default', tier: 'specific' },
   { name: 'Skeleton', storyId: 'components-skeleton--default', tier: 'specific', cssFeatures: ['animations', 'shimmer'] },
+  // T6 time components: stories use createTestClock() at a fixed time, so nothing ticks.
+  // Never list RunningTime 'Real Clock' (components-runningtime--real-clock, tag no-snapshot): it ticks in real time.
+  // 'State Switching' (interactive acceptance story) is checked by axe only; its controls are Buttons owned by T4.
+  { name: 'TimeValue-Variants', storyId: 'components-timevalue--variants', tier: 'specific' },
+  { name: 'TimeValue-ObservedStates', storyId: 'components-timevalue--observed-states', tier: 'specific' },
+  { name: 'TimeValue-Formats', storyId: 'components-timevalue--formats', tier: 'specific' },
+  { name: 'RunningTime-States', storyId: 'components-runningtime--states', tier: 'specific' },
+  { name: 'DataAge-Overview', storyId: 'components-dataage--overview', tier: 'specific' },
 ];
 
 /** All components for visual regression testing */

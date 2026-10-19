@@ -57,6 +57,10 @@ const specificComponents = [
   { name: 'StatTile', storyId: 'components-stattile--with-delta' },
   { name: 'States-Overview', storyId: 'states-overview--default' },
   { name: 'AthleteCard', storyId: 'components-athletecard--default' },
+  { name: 'TimeValue', storyId: 'components-timevalue--observed-states' },
+  { name: 'RunningTime', storyId: 'components-runningtime--states' },
+  { name: 'RunningTime-StateSwitching', storyId: 'components-runningtime--state-switching' },
+  { name: 'DataAge', storyId: 'components-dataage--overview' },
 ];
 
 // Prototype pages to test
