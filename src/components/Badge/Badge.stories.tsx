@@ -290,3 +290,14 @@ export const EventRow: Story = {
     </div>
   ),
 };
+
+/** Inside a container with `data-tone="on-dark"` (navy band) level and default badges become translucent white. */
+export const OnDark: Story = {
+  render: () => (
+    <div data-tone="on-dark" style={{ display: 'flex', gap: 8, padding: 16, background: 'var(--csk-color-brand)' }}>
+      <Badge variant="level">Slalom</Badge>
+      <Badge variant="level">Sjezd</Badge>
+      <Badge>K1</Badge>
+    </div>
+  ),
+};

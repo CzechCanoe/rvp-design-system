@@ -1,27 +1,14 @@
 import { useState, type ReactNode } from 'react';
-import { ClockProvider, createTestClock } from '../../clock';
+import { ClockProvider } from '../../clock';
 import { BottomBar } from '../../components/BottomBar';
-import { Card } from '../../components/Card';
-import { FilterPills } from '../../components/FilterPills';
-import { Icon } from '../../components/Icon';
-import { DataAge } from '../../components/DataAge';
 import { EventHeader } from '../../components/EventHeader';
-import { FavoritesToggle } from '../../components/FavoritesToggle';
 import { PageLayout } from '../../components/PageLayout';
-import { ResultsTable, RunDetail, type ResultRow, type ResultRowId } from '../../components/ResultsTable';
-import { STORY_NOW, known, rezekDetail } from '../../components/ResultsTable/ResultsTable.fixtures';
-import { knownNumber } from '../../components/ResultsTable/values';
-import { SearchInput } from '../../components/SearchInput';
 import { SegmentedControl } from '../../components/SegmentedControl';
 import { StartlistTable, type StartlistRow } from '../../components/StartlistTable';
-import { StatusBadge, type StatusBadgeState } from '../../components/StatusBadge';
-import { TableToolbar, TableToolbarButton } from '../../components/TableToolbar';
+import { StatusBadge } from '../../components/StatusBadge';
 import { Tabs } from '../../components/Tabs';
+import { liveClock } from '../_shared/storyClock';
 import './Live.stories.css';
-
-/** One fixed clock for all Live stories (2026-10-04 15:24:45 Europe/Prague): nothing ticks in screenshots. */
-export const liveClock = createTestClock({ now: STORY_NOW });
-export { STORY_NOW };
 
 const iconProps = { viewBox: '0 0 24 24', 'aria-hidden': true } as const;
 type Section = 'results' | 'startlist' | 'on-course' | 'program';
@@ -162,141 +149,6 @@ export function LivePage({ title, subtitle, status, dataAge, condensed, section 
         </div>
       </PageLayout>
     </ClockProvider>
-  );
-}
-
-/** „Aktualizováno před N s“ on the fixed clock. */
-export const ageAt = (secondsAgo: number) => <DataAge receivedAt={STORY_NOW - secondsAgo * 1000} clock={liveClock} />;
-
-export interface ResultsCardProps {
-  /** Status badge and text above the table. */
-  state?: StatusBadgeState;
-  status?: ReactNode;
-  foot?: ReactNode;
-  footLinks?: ReactNode;
-  children: ReactNode;
-  /** Active category filter shown as a dismissible pill instead of the Kategorie button. */
-  activeCategory?: string;
-  /** Number of favourites; `undefined` = no favourites toggle. */
-  favorites?: number;
-  searchLabel?: string;
-}
-
-/** Toolbar + status line + table + footer in one outlined card. */
-export function ResultsCard({
-  state,
-  status,
-  foot,
-  footLinks,
-  children,
-  activeCategory,
-  favorites,
-  searchLabel = 'Hledat závodníka',
-}: ResultsCardProps) {
-  const [q, setQ] = useState('');
-  const [onlyFavorites, setOnlyFavorites] = useState(false);
-  const [category, setCategory] = useState(activeCategory);
-  return (
-    <Card
-      variant="surface"
-      padding="none"
-      footer={
-        foot || footLinks ? (
-          <div className="live-page__foot">
-            {foot && <span>{foot}</span>}
-            {footLinks && <span className="live-page__foot-links">{footLinks}</span>}
-          </div>
-        ) : undefined
-      }
-    >
-      <TableToolbar
-        aria-label="Nástroje tabulky"
-        search={
-          <SearchInput size="sm" fullWidth aria-label={searchLabel} placeholder={searchLabel} value={q} onChange={setQ} />
-        }
-        favorites={
-          favorites === undefined ? undefined : (
-            <FavoritesToggle pressed={onlyFavorites} onPressedChange={setOnlyFavorites} count={favorites} label="Jen oblíbení" />
-          )
-        }
-      >
-        {category ? (
-          <FilterPills
-            size="sm"
-            aria-label="Aktivní filtry"
-            filters={[{ key: category, label: category, dismissible: true }]}
-            onRemove={() => setCategory(undefined)}
-          />
-        ) : (
-          <TableToolbarButton>
-            Kategorie <Icon name="chevron-down" size="sm" aria-hidden />
-          </TableToolbarButton>
-        )}
-      </TableToolbar>
-      {(state || status) && (
-        <div className="live-page__status">
-          {state && <StatusBadge state={state} />}
-          {status && <span>{status}</span>}
-        </div>
-      )}
-      {children}
-    </Card>
-  );
-}
-
-const detailActions = (
-  <>
-    <a className="live-page__link" href="#profil">Profil závodníka</a>
-    <a className="live-page__link" href="#sledovat">Sledovat <Icon name="star" size="sm" aria-hidden /></a>
-  </>
-);
-
-/** Detail of an expanded row: REZEK has the reference detail (Live2), the others a short one derived from the row. */
-function renderDetail(row: ResultRow): ReactNode {
-  if (row.id === 'k1m-35') return <RunDetail {...rezekDetail} actions={detailActions} />;
-  return (
-    <RunDetail
-      bib={row.bib}
-      ranks={[{ rank: row.rank, label: 've třídě' }]}
-      runs={row.runs.map((r, i) => {
-        const total = knownNumber(r.time);
-        const penalty = r.penalty === undefined ? 0 : knownNumber(r.penalty);
-        return {
-          label: `${i + 1}. jízda`,
-          // time without penalties = total - penalty; unknown when either is not known
-          time: total !== null && penalty !== null ? known(Math.round((total - penalty) * 100) / 100) : null,
-          penalty,
-          total: r.time,
-          counts: Boolean(r.best),
-        };
-      })}
-      actions={detailActions}
-    />
-  );
-}
-
-export interface LiveResultsProps {
-  rows: ResultRow[];
-  columns?: 'single' | 'pair';
-  initialExpanded?: ResultRowId | null;
-}
-
-/** ResultsTable with local expand / favourite state (the application owns it in real use). */
-export function LiveResults({ rows: initial, columns = 'pair', initialExpanded = null }: LiveResultsProps) {
-  const [rows, setRows] = useState(initial);
-  const [expanded, setExpanded] = useState<ResultRowId | null>(initialExpanded);
-  return (
-    <ResultsTable
-      rows={rows}
-      columns={columns}
-      clock={liveClock}
-      expandedId={expanded}
-      onToggle={(id) => setExpanded((current) => (current === id ? null : id))}
-      onFavoriteChange={(row, favorite) =>
-        setRows((current) => current.map((r) => (r.id === row.id ? { ...r, favorite } : r)))
-      }
-      renderDetail={renderDetail}
-    />
   );
 }
 

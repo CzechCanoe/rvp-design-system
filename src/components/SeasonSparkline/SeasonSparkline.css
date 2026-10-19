@@ -1,0 +1,76 @@
+/* SeasonSparkline: season placement curve. Static, no motion. */
+
+.csk-season-sparkline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-2);
+  font-family: var(--csk-font-sans);
+  color: var(--csk-color-text);
+}
+
+.csk-season-sparkline__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--csk-space-2);
+}
+
+.csk-season-sparkline__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: var(--csk-font-weight-semibold);
+}
+
+.csk-season-sparkline__meta {
+  margin-left: auto;
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+}
+
+.csk-season-sparkline__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.csk-season-sparkline__axis {
+  stroke: var(--csk-color-border);
+  stroke-width: 1;
+}
+
+.csk-season-sparkline__tick {
+  font-size: 10px;
+  fill: var(--csk-color-text-3);
+}
+
+.csk-season-sparkline__line {
+  fill: none;
+  stroke: var(--csk-color-action);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+
+.csk-season-sparkline__dot {
+  fill: var(--csk-color-action);
+}
+
+.csk-season-sparkline__dot--best {
+  fill: var(--csk-color-brand);
+}
+
+.csk-season-sparkline__dot--provisional {
+  fill: var(--csk-color-surface);
+  stroke: var(--csk-color-state-provisional);
+  stroke-width: 2;
+}
+
+.csk-season-sparkline__best {
+  font-size: 11px;
+  font-weight: var(--csk-font-weight-semibold);
+  fill: var(--csk-color-brand);
+}
+
+.csk-season-sparkline__note {
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+}

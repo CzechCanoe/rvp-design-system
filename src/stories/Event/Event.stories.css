@@ -1,0 +1,90 @@
+/* Page layout of the Event/Detail story: columns and spacing only (reference Zavod.html). Components are never restyled. */
+
+.event-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-4);
+  padding-block: var(--csk-space-4) var(--csk-space-8);
+}
+
+.event-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--csk-space-3);
+  padding: var(--csk-space-2) var(--csk-space-3);
+  background: var(--csk-color-surface-2);
+  border-radius: var(--csk-radius-lg);
+}
+
+.event-page__filters-classes {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+.event-page__columns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--csk-space-6);
+}
+
+.event-page__main {
+  display: flex;
+  flex: 999 1 720px;
+  flex-direction: column;
+  gap: var(--csk-space-4);
+  min-width: 0;
+}
+
+.event-page__aside {
+  display: flex;
+  flex: 1 1 280px;
+  flex-direction: column;
+  gap: var(--csk-space-4);
+  min-width: 260px;
+}
+
+.event-page__collapsed {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--csk-space-3);
+  margin: 0;
+  padding: var(--csk-space-3) var(--csk-space-4);
+}
+
+.event-page__collapsed-head {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--csk-space-3);
+}
+
+.event-page__collapsed-actions {
+  display: flex;
+  gap: var(--csk-space-2);
+  margin-left: auto;
+}
+
+.event-page__heading {
+  margin: 0;
+  font-size: var(--csk-text-lg);
+}
+
+.event-page__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-2);
+}
+
+.event-page__link {
+  color: var(--csk-color-action);
+  font-size: var(--csk-text-md);
+  text-decoration: none;
+}
+
+.event-page__muted {
+  color: var(--csk-color-text-2);
+}

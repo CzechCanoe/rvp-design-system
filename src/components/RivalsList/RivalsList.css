@@ -1,0 +1,98 @@
+/* RivalsList: standings cut around the viewer with the point gap per rival. */
+
+.csk-rivals-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text);
+}
+
+.csk-rivals-list__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--csk-color-border-2);
+}
+
+.csk-rivals-list__item:last-child {
+  border-bottom: 0;
+}
+
+.csk-rivals-list__item--self {
+  background: var(--csk-color-highlight-bg);
+  font-weight: var(--csk-font-weight-semibold);
+}
+
+.csk-rivals-list__rank {
+  flex: none;
+  width: 24px;
+  font-family: var(--csk-font-display);
+  font-weight: var(--csk-font-weight-bold);
+  color: var(--csk-color-text-3);
+}
+
+.csk-rivals-list__item--self .csk-rivals-list__rank {
+  color: var(--csk-color-highlight-text);
+}
+
+.csk-rivals-list__name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.csk-rivals-list__name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.csk-rivals-list__name a:hover {
+  text-decoration: underline;
+}
+
+.csk-rivals-list__name a:focus-visible {
+  outline: 2px solid var(--csk-color-focus);
+  outline-offset: 2px;
+}
+
+.csk-rivals-list__club {
+  flex: none;
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+}
+
+.csk-rivals-list__item--self .csk-rivals-list__club {
+  color: var(--csk-color-highlight-text);
+}
+
+.csk-rivals-list__points {
+  flex: none;
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+  color: var(--csk-color-text-3);
+}
+
+.csk-rivals-list__points--behind {
+  color: var(--csk-color-success-text);
+}
+
+.csk-rivals-list__points--self {
+  font-weight: var(--csk-font-weight-semibold);
+  color: var(--csk-color-text);
+}
+
+.csk-rivals-list__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

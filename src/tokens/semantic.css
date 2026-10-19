@@ -31,7 +31,9 @@
   --csk-color-surface-2: var(--csk-ground-2);       /* work ground (Úřad), detail, row hover */
   --csk-color-surface-3: var(--csk-ground-3);       /* segments, neutral chips */
   --csk-color-overlay: color-mix(in srgb, var(--csk-ink) 50%, transparent); /* modal backdrop */
-  --csk-color-border: var(--csk-line);              /* frames, inputs, table header rule */
+  --csk-color-on-dark-pad: color-mix(in srgb, var(--csk-white) 14%, transparent);  /* badge / tile pad on the navy band (data-tone="on-dark") */
+  --csk-color-on-dark-ring: color-mix(in srgb, var(--csk-white) 40%, transparent); /* avatar ring on the navy band */
+  --csk-color-border: var(--csk-line);             /* frames, inputs, table header rule */
   --csk-color-border-2: var(--csk-line-2);          /* row separators */
 
   /* ---------------------------------------------------------------------------

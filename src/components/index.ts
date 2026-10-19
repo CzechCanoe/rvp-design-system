@@ -32,7 +32,7 @@ export type { SwitchProps, SwitchSize, SwitchState } from './Switch';
 
 // Card
 export { Card } from './Card';
-export type { CardProps, CardVariant, CardPadding } from './Card';
+export type { CardProps, CardVariant, CardPadding, CardTone } from './Card';
 
 // Badge
 export { Badge } from './Badge';
@@ -352,6 +352,14 @@ export type { ProposalListProps, ProposalListLabels, Proposal } from './Proposal
 export { SummaryCard } from './SummaryCard';
 export type { SummaryCardProps, SummaryRow } from './SummaryCard';
 
+
+// ProfileHeader + SeasonSparkline + RivalsList (v2 T15)
+export { ProfileHeader } from './ProfileHeader';
+export type { ProfileHeaderProps, ProfileHeaderTile, ProfileHeaderVariant } from './ProfileHeader';
+export { SeasonSparkline, SEASON_SPARKLINE_LABELS } from './SeasonSparkline';
+export type { SeasonSparklineProps, SeasonSparklinePoint, SeasonSparklineLabels } from './SeasonSparkline';
+export { RivalsList, RIVALS_LIST_LABELS } from './RivalsList';
+export type { RivalsListProps, RivalsListItem, RivalsListLabels } from './RivalsList';
 // Calendar by weekends (v2 T13)
 export { DeadlineBadge, DEADLINE_LABELS } from './DeadlineBadge';
 export type { DeadlineBadgeProps, DeadlineKind } from './DeadlineBadge';

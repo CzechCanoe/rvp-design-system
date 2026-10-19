@@ -192,3 +192,13 @@
 .csk-badge__content {
   display: inline-block;
 }
+
+/* ==========================================================================
+   On dark (container sets data-tone="on-dark", e.g. the navy profile band)
+   ========================================================================== */
+
+[data-tone='on-dark'] .csk-badge--level,
+[data-tone='on-dark'] .csk-badge--default {
+  background-color: var(--csk-color-on-dark-pad);
+  color: var(--csk-color-text-on-fill);
+}
