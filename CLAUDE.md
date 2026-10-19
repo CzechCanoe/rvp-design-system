@@ -89,7 +89,7 @@ npm run build-storybook  # Static Storybook
 - **Lokálně na ARM/RPi** spouštěj `npx playwright test --project=chromium --ignore-snapshots` (funkční testy, axe, bounding boxy). ARM renderuje jinak, takže porovnání snapshotů dělá **jen CI**; snapshoty lokálně negeneruj ani necommituj.
 - **Záměrná změna UI:** přidej na PR label `update-snapshots`. Workflow `update-snapshots.yml` přegeneruje chromium snapshoty všech specs, commitne je jako `test: update snapshots (CI)`, label odebere a vždy (i bez změn snapshotů) spustí CI na HEAD. Počkej na ten commit (`git pull`). Bot commit (GITHUB_TOKEN) spustí `pull_request` run, který skončí `action_required` (bot = first-time contributor) a PR ho nezobrazí; výsledek dispatchnutého CI se proto hlásí jako commit status `CI (dispatched run)` (job `report-status` v `ci.yml`) a PR ho ukáže. Vlastní finální commit po commitu bota není potřeba.
 - **Playwright na PR** běží jen při změně `src/`, `tests/`, `.storybook/`, `package*.json`, `playwright.config.ts` nebo `.github/workflows/` (job `changes` v `ci.yml`); dispatchnuté běhy vždy. Lint, typecheck, unit testy a build běží vždy.
-- **Jen light, jen chromium:** v2 kreslí pouze světlé téma; žádné `-dark` varianty ani cross-browser projekty.
+- **Jen light, snapshoty jen chromium:** v2 kreslí pouze světlé téma; žádné `-dark` varianty. PR CI pouští `--project=chromium`. **Plný běh před release:** dispatchni CI s `browsers=all` (`gh workflow run ci.yml --ref <větev> -f browsers=all`); firefox, webkit, mobile-chrome a mobile-safari běží s `--ignore-snapshots` (jen funkční testy a axe), jejich snapshoty se neudržují.
 - **Karanténa:** známé předexistující faily lze zapsat do `QUARANTINE` v `tests/config.ts` (klíč = názvy describe + test, owner = v2 task); CI je hlásí jako skipped. Seznam je nyní prázdný; task, který sáhne na komponentu v karanténě, musí její záznamy odstranit.
 - **Diff obrázky** jsou v artifactu `playwright-report` daného runu (jen při selhání); do PR dej odkaz na run/artifact.
 
@@ -114,7 +114,7 @@ npm run build-storybook  # Static Storybook
 ### Konfigurace
 
 - `tests/config.ts` - definice komponent a layout stories s tolerancemi
-- `playwright.config.ts` - projekt (chromium), timeouty
+- `playwright.config.ts` - projekty (chromium + firefox/webkit/mobile pro plný běh), timeouty
 
 ---
 
