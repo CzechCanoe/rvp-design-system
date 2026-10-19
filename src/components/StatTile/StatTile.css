@@ -1,0 +1,43 @@
+.csk-stat-tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-1);
+  box-sizing: border-box;
+  padding: var(--csk-space-3) var(--csk-space-4);
+  background: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-lg);
+  font-family: var(--csk-font-sans);
+}
+
+.csk-stat-tile__label {
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+}
+
+.csk-stat-tile__main {
+  display: flex;
+  align-items: baseline;
+  gap: var(--csk-space-2);
+}
+
+.csk-stat-tile__value {
+  font-family: var(--csk-font-display);
+  font-size: var(--csk-text-2xl);
+  font-weight: var(--csk-font-weight-bold);
+  line-height: var(--csk-line-height-tight);
+  color: var(--csk-color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.csk-stat-tile__delta {
+  font-family: var(--csk-font-mono);
+  font-size: var(--csk-text-sm);
+  font-weight: var(--csk-font-weight-semibold);
+  color: var(--csk-color-text-2);
+}
+
+.csk-stat-tile__hint {
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+}

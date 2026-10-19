@@ -6869,6 +6869,22 @@ Snapshoty generuje CI (label `update-snapshots`). Zbylé `[data-theme="dark"]` b
 ### Poznámky
 Label eventy dřív spouštěly přeskočené CI běhy, které přes concurrency rušily skutečný `synchronize` běh a v `gh pr checks` maskovaly zelené joby.
 
+## 2026-10-19 - v2 T5: StatusBadge, MarkBadge, PenaltyChip, GateGrid, BibBadge, Notice, StatTile
+
+### Dokončeno
+- [x] 7 nových komponent (tokeny `--csk-color-state-*`, `--csk-color-live`, `--csk-color-{success,warning,error,info}*`), exporty v `src/components/index.ts`
+- [x] Stories per komponenta a stav, `States/Overview` (spodní pás z `reference/Main.html`)
+- [x] Vitest testy, axe (light + dark) a snapshoty v `tests/config.ts`, `tests/states.spec.ts` (reduced motion, 390 px)
+
+### Problémy a řešení
+1. **Problém:** `playwright.config.ts` nastavuje globálně `reducedMotion: 'reduce'`, test „pulzuje“ proto musí explicitně použít `no-preference`.
+   **Řešení:** `test.use({ reducedMotion: 'no-preference' })` v samostatném describe.
+2. **Problém:** axe v `States/Overview`: červená `#e42313` na `--csk-color-surface-2` má 4.26:1, `--csk-color-text-3` na `surface-2` 4.46:1.
+   **Řešení:** běžící čas bold (velký text, 3:1), poznámky a stale čas `--csk-color-text-2`.
+
+### Poznámky
+Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka. Ztlumená/stale hodnota je tečkované podtržení.
+
 ---
 
 ## 2026-10-19 - v2 T6: TimeValue, RunningTime, DataAge, Clock
