@@ -1,0 +1,92 @@
+.states-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: var(--csk-space-4);
+  max-width: 1100px;
+  font-family: var(--csk-font-sans);
+  color: var(--csk-color-text);
+}
+
+.states-overview__title {
+  margin: 0;
+  font-family: var(--csk-font-display);
+  font-size: var(--csk-text-xl);
+  font-weight: var(--csk-font-weight-bold);
+}
+
+.states-overview__cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--csk-space-3);
+}
+
+@media (max-width: 900px) {
+  .states-overview__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .states-overview__cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.states-overview__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--csk-space-2);
+  padding: 14px;
+  background: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-lg);
+}
+
+.states-overview__text {
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-2);
+}
+
+.states-overview__strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--csk-space-3) 28px;
+  padding: var(--csk-space-3) var(--csk-space-4);
+  background: var(--csk-color-surface-2);
+  border-radius: var(--csk-radius-lg);
+}
+
+.states-overview__item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--csk-space-2);
+}
+
+.states-overview__item--centered {
+  align-items: center;
+  gap: 6px;
+}
+
+.states-overview__time {
+  font-family: var(--csk-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 20px;
+}
+
+.states-overview__time--running {
+  color: var(--csk-color-live);
+  font-weight: var(--csk-font-weight-bold); /* large text: 3:1 is enough for red on the strip */
+}
+
+.states-overview__time--stale {
+  color: var(--csk-color-text-2);
+  border-bottom: 2px dotted var(--csk-color-state-stale);
+}
+
+.states-overview__note {
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-2);
+}

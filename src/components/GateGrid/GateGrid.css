@@ -1,0 +1,11 @@
+.csk-gate-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.csk-gate-grid--unavailable {
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+}

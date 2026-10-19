@@ -1,0 +1,103 @@
+/**
+ * StatusBadge - CSK RVP Design System v2
+ * State tokens: --csk-color-state-*, --csk-color-live (red only for live).
+ */
+
+.csk-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--csk-space-2);
+  box-sizing: border-box;
+  font-family: var(--csk-font-sans);
+  font-weight: var(--csk-font-weight-semibold);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: var(--csk-radius-sm);
+}
+
+.csk-status-badge--md {
+  height: 22px;
+  padding: 0 var(--csk-space-2);
+  font-size: var(--csk-text-sm);
+}
+
+.csk-status-badge--sm {
+  height: 18px;
+  padding: 0 6px;
+  font-size: var(--csk-text-xs);
+}
+
+/* Official: filled, calm green */
+.csk-status-badge--official {
+  background: var(--csk-color-state-official-bg);
+  color: var(--csk-color-state-official-text);
+}
+
+/* Provisional: filled square amber */
+.csk-status-badge--provisional {
+  background: var(--csk-color-state-provisional-bg);
+  color: var(--csk-color-state-provisional-text);
+}
+
+/* In review: different colour AND shape (outlined italic pill) so it can sit next to provisional */
+.csk-status-badge--review {
+  background: var(--csk-color-state-review-bg);
+  color: var(--csk-color-state-review-text);
+  border-color: var(--csk-color-state-review);
+  border-radius: var(--csk-radius-pill);
+  font-style: italic;
+}
+
+/* Unknown: dashed frame, never looks like a value */
+.csk-status-badge--unknown {
+  background: var(--csk-color-state-unknown-bg);
+  color: var(--csk-color-state-unknown-text);
+  border-color: var(--csk-color-state-unknown);
+  border-style: dashed;
+}
+
+/* Live: the only red fill */
+.csk-status-badge--live {
+  background: var(--csk-color-live);
+  color: var(--csk-color-text-on-fill);
+  text-transform: uppercase;
+}
+
+/* Stale: no fill, dotted underline like a stopped running value */
+.csk-status-badge--stale {
+  background: transparent;
+  color: var(--csk-color-text-3);
+  border-radius: 0;
+  border-width: 0 0 2px;
+  border-bottom-style: dotted;
+  border-bottom-color: var(--csk-color-state-stale);
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.csk-status-badge__dot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--csk-color-text-on-fill);
+  animation: csk-status-badge-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes csk-status-badge-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .csk-status-badge__dot {
+    animation: none;
+  }
+}

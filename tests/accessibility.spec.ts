@@ -46,6 +46,16 @@ const specificComponents = [
   { name: 'ResultsTable', storyId: 'components-resultstable--default' },
   { name: 'LiveIndicator', storyId: 'components-liveindicator--default' },
   { name: 'StatCard', storyId: 'components-statcard--default' },
+  { name: 'StatusBadge-AllStates', storyId: 'components-statusbadge--all-states' },
+  { name: 'StatusBadge-ProvisionalAndReview', storyId: 'components-statusbadge--provisional-and-review' },
+  { name: 'MarkBadge-AllMarks', storyId: 'components-markbadge--all-marks' },
+  { name: 'PenaltyChip-AllStates', storyId: 'components-penaltychip--all-states' },
+  { name: 'GateGrid', storyId: 'components-gategrid--default' },
+  { name: 'GateGrid-Unavailable', storyId: 'components-gategrid--unavailable' },
+  { name: 'BibBadge', storyId: 'components-bibbadge--default' },
+  { name: 'Notice-AllTones', storyId: 'components-notice--all-tones' },
+  { name: 'StatTile', storyId: 'components-stattile--with-delta' },
+  { name: 'States-Overview', storyId: 'states-overview--default' },
   { name: 'AthleteCard', storyId: 'components-athletecard--default' },
 ];
 
