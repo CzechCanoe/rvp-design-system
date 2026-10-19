@@ -47,6 +47,7 @@ function Demo() {
 }
 
 export const Default: Story = {
+  args: { 'aria-label': 'Nástroje tabulky' },
   render: () => (
     <div style={{ width: 720 }}>
       <Demo />
@@ -56,6 +57,7 @@ export const Default: Story = {
 
 /** 390 px wide: the search field shrinks, pills and toggles keep their width. */
 export const Mobile: Story = {
+  args: { 'aria-label': 'Nástroje tabulky' },
   render: () => (
     <div style={{ width: 390 }}>
       <Demo />

@@ -1,34 +1,40 @@
-/* SegmentedControl – radiogroup of segments. The item box is the 44 px touch
-   target; the visible segment (label) is smaller and centred inside it. */
+/* SegmentedControl – one continuous track; every segment button is the 44 px
+   touch target and fills the track height (the track grows to fit). The active
+   segment is separated by a 1 px border: the only shadow token is reserved for
+   floating layers (TOKENS.md). */
 
 .csk-segmented {
   display: inline-flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: stretch;
   max-width: 100%;
+  padding: 2px;
+  background: var(--csk-color-surface-3);
+  border-radius: var(--csk-radius-lg);
 }
 
 .csk-segmented__item {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   flex: none;
   min-width: 44px;
   min-height: 44px;
   margin: 0;
-  padding: 0 1px;
+  padding: 0;
   background: transparent;
   border: 0;
+  border-radius: var(--csk-radius-md);
   font: inherit;
   cursor: pointer;
 }
 
 .csk-segmented__label {
   display: inline-flex;
+  flex: 1;
   align-items: center;
-  height: 32px;
+  justify-content: center;
+  box-sizing: border-box;
   padding: 0 var(--csk-space-3);
-  background: var(--csk-color-surface-3);
+  border: 1px solid transparent;
   border-radius: var(--csk-radius-md);
   font-family: var(--csk-font-sans);
   font-size: var(--csk-text-md);
@@ -38,7 +44,6 @@
 }
 
 .csk-segmented--sm .csk-segmented__label {
-  height: 28px;
   padding: 0 var(--csk-space-2);
   font-size: var(--csk-text-sm);
 }
@@ -48,15 +53,15 @@
 }
 
 .csk-segmented__item--on .csk-segmented__label {
-  background: var(--csk-color-brand);
-  color: var(--csk-color-text-on-fill);
-  font-weight: var(--csk-font-weight-semibold);
+  background: var(--csk-color-surface);
+  border-color: var(--csk-color-border);
+  color: var(--csk-color-brand);
+  font-weight: var(--csk-font-weight-bold);
 }
 
 .csk-segmented__item:focus-visible {
   outline: 2px solid var(--csk-color-focus);
-  outline-offset: -2px;
-  border-radius: var(--csk-radius-md);
+  outline-offset: 1px;
 }
 
 .csk-segmented__item:disabled {

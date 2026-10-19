@@ -6879,3 +6879,8 @@ Label eventy dřív spouštěly přeskočené CI běhy, které přes concurrency
 - Viditelný segment/pilulka je menší než interaktivní box (button 44 px, vnitřní span kreslí vzhled), aby boundingBox() měřil skutečných 44 px.
 - Prop pro změnu stavu je `onPressedChange` (ne `onToggle`, koliduje s DOM `ToggleEvent`).
 - SearchInput (34 px) a Switch ve story TableToolbar do měření 44 px nepatří (T4).
+
+### T7 review fixes
+- SegmentedControl: jedna souvislá šedá dráha, aktivní segment bílý s navy tučným textem a 1 px rámečkem (stín `--csk-shadow-sm` je jen pro plovoucí vrstvy), segmenty samy 44 px vysoké.
+- TableToolbar vyžaduje `aria-label` nebo `aria-labelledby`.
+- Rozhodnutí: `onPressedChange` místo `onToggle` (kolize s DOM `ToggleEvent`); COMPONENTS.md se neupravuje.

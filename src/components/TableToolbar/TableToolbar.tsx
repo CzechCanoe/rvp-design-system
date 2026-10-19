@@ -1,7 +1,13 @@
 import { type ButtonHTMLAttributes, type HTMLAttributes, type ReactNode } from 'react';
 import './TableToolbar.css';
 
-export interface TableToolbarProps extends HTMLAttributes<HTMLDivElement> {
+type TableToolbarName =
+  | { 'aria-label': string; 'aria-labelledby'?: string }
+  | { 'aria-labelledby': string; 'aria-label'?: string };
+
+export type TableToolbarProps = TableToolbarName & TableToolbarBaseProps;
+
+interface TableToolbarBaseProps extends HTMLAttributes<HTMLDivElement> {
   /** Search field; grows to take the remaining width (e.g. SearchInput) */
   search?: ReactNode;
   /** Filter pills (TableToolbarButton); labels never wrap */

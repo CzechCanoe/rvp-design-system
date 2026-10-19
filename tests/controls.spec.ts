@@ -61,8 +61,8 @@ test.describe('Controls - SegmentedControl', () => {
     for (let i = 0; i < (await labels.count()); i++) {
       const el = labels.nth(i);
       expect(await el.evaluate((e) => getComputedStyle(e).whiteSpace)).toBe('nowrap');
-      // single line: label height equals the 32 px segment height
-      expect((await el.boundingBox())!.height).toBeLessThanOrEqual(32);
+      // single line: label is one line: as tall as the 44 px segment
+      expect((await el.boundingBox())!.height).toBeLessThanOrEqual(44);
     }
   });
 
