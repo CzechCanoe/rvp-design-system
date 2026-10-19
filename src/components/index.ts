@@ -12,7 +12,7 @@ export type { InputProps, InputType, InputSize, InputState } from './Input';
 
 // SearchInput
 export { SearchInput } from './SearchInput';
-export type { SearchInputProps, SearchInputSize, SearchFilterChip } from './SearchInput';
+export type { SearchInputProps, SearchInputSize } from './SearchInput';
 
 // Select
 export { Select } from './Select';
@@ -62,7 +62,7 @@ export type { ModalProps, ModalSize } from './Modal';
 
 // Tabs
 export { Tabs } from './Tabs';
-export type { TabsProps, TabItem, TabsVariant, TabsSize } from './Tabs';
+export type { TabsProps, TabItem, TabsVariant, TabsSize, TabsOverflow } from './Tabs';
 
 // Toast
 export { ToastProvider, useToast } from './Toast';
@@ -130,7 +130,7 @@ export { Avatar, AvatarGroup } from './Avatar';
 export type {
   AvatarProps,
   AvatarSize,
-  AvatarVariant,
+  AvatarShape,
   AvatarColor,
   AvatarGroupProps,
 } from './Avatar';
@@ -285,7 +285,6 @@ export type {
   FilterPillsProps,
   FilterPill,
   FilterPillsSize,
-  FilterPillsVariant,
 } from './FilterPills';
 
 // PodiumCard
@@ -325,6 +324,41 @@ export type {
   DateBadgeSection,
   DateBadgeSize,
 } from './DateBadge';
+
+// SegmentedControl
+export { SegmentedControl } from './SegmentedControl';
+export type {
+  SegmentedControlProps,
+  SegmentedControlItem,
+  SegmentedControlSize,
+} from './SegmentedControl';
+
+// StarButton
+export { StarButton } from './StarButton';
+export type { StarButtonProps } from './StarButton';
+
+// FavoritesToggle
+export { FavoritesToggle } from './FavoritesToggle';
+export type { FavoritesToggleProps } from './FavoritesToggle';
+
+// TableToolbar
+export { TableToolbar, TableToolbarButton } from './TableToolbar';
+export type { TableToolbarProps, TableToolbarButtonProps } from './TableToolbar';
+// Value states and numbers (v2 T5)
+export { StatusBadge, STATUS_BADGE_LABELS } from './StatusBadge';
+export type { StatusBadgeProps, StatusBadgeState, StatusBadgeSize } from './StatusBadge';
+export { MarkBadge, MARK_DESCRIPTIONS } from './MarkBadge';
+export type { MarkBadgeProps, Mark } from './MarkBadge';
+export { PenaltyChip, penaltyTone } from './PenaltyChip';
+export type { PenaltyChipProps, PenaltyChipSize } from './PenaltyChip';
+export { GateGrid } from './GateGrid';
+export type { GateGridProps, GateGridGate } from './GateGrid';
+export { BibBadge } from './BibBadge';
+export type { BibBadgeProps } from './BibBadge';
+export { Notice } from './Notice';
+export type { NoticeProps, NoticeTone } from './Notice';
+export { StatTile } from './StatTile';
+export type { StatTileProps } from './StatTile';
 
 // TimeValue
 export { TimeValue } from './TimeValue';

@@ -347,7 +347,7 @@ const RankingsPage = ({
 
           {/* Top 3 Podium */}
           {showPodium && topThree.length >= 3 && (
-            <Card variant="aesthetic" className="rankings-top csk-border-accent">
+            <Card variant="surface" className="rankings-top csk-border-accent">
               <div className="rankings-top__header">
                 <h2 className="rankings-top__title csk-headline">
                   <Icon name="medal" />
@@ -375,25 +375,25 @@ const RankingsPage = ({
           {sectionFilter === 'vt' && vtStats && (
             <div className="rankings-vt-overview">
               <Card variant="surface" className="rankings-vt-class">
-                <Badge vtClass="m" size="lg" />
+                <Badge vtClass="m" size="md" />
                 <div className="rankings-vt-class__label">Třída M</div>
                 <div className="rankings-vt-class__count">{vtStats.m.count} závodníků</div>
                 <div className="rankings-vt-class__points">od {vtStats.m.minPoints} bodů</div>
               </Card>
               <Card variant="surface" className="rankings-vt-class">
-                <Badge vtClass="a" size="lg" />
+                <Badge vtClass="a" size="md" />
                 <div className="rankings-vt-class__label">Třída A</div>
                 <div className="rankings-vt-class__count">{vtStats.a.count} závodníků</div>
                 <div className="rankings-vt-class__points">od {vtStats.a.minPoints} bodů</div>
               </Card>
               <Card variant="surface" className="rankings-vt-class">
-                <Badge vtClass="b" size="lg" />
+                <Badge vtClass="b" size="md" />
                 <div className="rankings-vt-class__label">Třída B</div>
                 <div className="rankings-vt-class__count">{vtStats.b.count} závodníků</div>
                 <div className="rankings-vt-class__points">od {vtStats.b.minPoints} bodů</div>
               </Card>
               <Card variant="surface" className="rankings-vt-class">
-                <Badge vtClass="c" size="lg" />
+                <Badge vtClass="c" size="md" />
                 <div className="rankings-vt-class__label">Třída C</div>
                 <div className="rankings-vt-class__count">{vtStats.c.count} závodníků</div>
                 <div className="rankings-vt-class__points">začátečníci</div>

@@ -1,0 +1,54 @@
+/* FavoritesToggle – "★ 2": 34 px pill, 44 px touch target */
+
+.csk-favorites-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.csk-favorites-toggle__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--csk-space-1);
+  height: 34px;
+  padding: 0 var(--csk-space-3);
+  background: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-pill);
+  color: var(--csk-color-text-2);
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-sm);
+  font-weight: var(--csk-font-weight-medium);
+  white-space: nowrap;
+}
+
+.csk-favorites-toggle__pill .csk-star-glyph {
+  width: 16px;
+  height: 16px;
+  color: var(--csk-color-podium-1);
+}
+
+.csk-favorites-toggle--on .csk-favorites-toggle__pill {
+  background: var(--csk-color-brand);
+  border-color: var(--csk-color-brand);
+  color: var(--csk-color-text-on-fill);
+}
+
+.csk-favorites-toggle:focus-visible {
+  outline: 2px solid var(--csk-color-focus);
+  outline-offset: -2px;
+  border-radius: var(--csk-radius-pill);
+}
+
+.csk-favorites-toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

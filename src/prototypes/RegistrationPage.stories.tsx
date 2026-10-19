@@ -471,7 +471,7 @@ const RegistrationPageInner = ({
                 <Badge section={section} size="md">
                   {sectionNames[section]}
                 </Badge>
-                <Badge variant="default" size="md" outlined>
+                <Badge variant="outline" size="md">
                   Český pohár
                 </Badge>
               </div>
@@ -888,7 +888,6 @@ const RegistrationPageInner = ({
                     </Button>
                     <Button
                       variant="primary"
-                      accent="energy"
                       iconLeft={<Icon name="send" size="sm" />}
                       onClick={() => {
                         toast.success('Vaše přihláška byla úspěšně odeslána. Potvrzení obdržíte e-mailem.', {

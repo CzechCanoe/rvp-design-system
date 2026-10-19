@@ -31,7 +31,7 @@ export interface PrototypeConfig {
 
 export const coreComponents: ComponentConfig[] = [
   { name: 'Button', storyId: 'components-button--default', tier: 'core' },
-  { name: 'Button-Variants', storyId: 'components-button--variants', tier: 'core', cssFeatures: ['gradients', 'transitions'] },
+  { name: 'Button-Variants', storyId: 'components-button--variants', tier: 'core', cssFeatures: ['transitions'] },
   { name: 'Input', storyId: 'components-input--default', tier: 'core' },
   { name: 'Input-States', storyId: 'components-input--states', tier: 'core' },
   { name: 'Select', storyId: 'components-select--default', tier: 'core' },
@@ -39,9 +39,9 @@ export const coreComponents: ComponentConfig[] = [
   { name: 'Radio', storyId: 'components-radio--default', tier: 'core' },
   { name: 'Switch', storyId: 'components-switch--default', tier: 'core' },
   { name: 'Card', storyId: 'components-card--default', tier: 'core' },
-  { name: 'Card-Variants', storyId: 'components-card--variants', tier: 'core', cssFeatures: ['flexbox', 'shadows', 'gradients'] },
+  { name: 'Card-Variants', storyId: 'components-card--variants', tier: 'core', cssFeatures: ['flexbox'] },
   { name: 'Badge', storyId: 'components-badge--default', tier: 'core' },
-  { name: 'Badge-CskSections', storyId: 'components-badge--csk-sections', tier: 'core', cssFeatures: ['gradients', 'colors'] },
+  { name: 'Badge-CskSections', storyId: 'components-badge--csk-sections', tier: 'core', cssFeatures: ['colors'] },
   { name: 'Avatar', storyId: 'components-avatar--default', tier: 'core' },
 ];
 
@@ -74,8 +74,24 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'AthleteCard', storyId: 'components-athletecard--default', tier: 'specific' },
   { name: 'ResultsTable', storyId: 'components-resultstable--default', tier: 'specific' },
   { name: 'LiveIndicator', storyId: 'components-liveindicator--default', tier: 'specific', cssFeatures: ['animations', 'keyframes'], maxDiffPixels: 100 },
+  { name: 'StatusBadge-AllStates', storyId: 'components-statusbadge--all-states', tier: 'specific' },
+  { name: 'StatusBadge-Live', storyId: 'components-statusbadge--live', tier: 'specific', cssFeatures: ['animations', 'keyframes'], maxDiffPixels: 100 },
+  { name: 'MarkBadge-AllMarks', storyId: 'components-markbadge--all-marks', tier: 'specific' },
+  { name: 'PenaltyChip-AllStates', storyId: 'components-penaltychip--all-states', tier: 'specific' },
+  { name: 'GateGrid', storyId: 'components-gategrid--default', tier: 'specific' },
+  { name: 'GateGrid-Unavailable', storyId: 'components-gategrid--unavailable', tier: 'specific' },
+  { name: 'BibBadge', storyId: 'components-bibbadge--default', tier: 'specific' },
+  { name: 'Notice-AllTones', storyId: 'components-notice--all-tones', tier: 'specific' },
+  { name: 'StatTile', storyId: 'components-stattile--with-delta', tier: 'specific' },
+  { name: 'States-Overview', storyId: 'states-overview--default', tier: 'specific' },
   { name: 'EmptyState', storyId: 'components-emptystate--default', tier: 'specific' },
   { name: 'Skeleton', storyId: 'components-skeleton--default', tier: 'specific', cssFeatures: ['animations', 'shimmer'] },
+  { name: 'SegmentedControl', storyId: 'components-segmentedcontrol--default', tier: 'specific' },
+  { name: 'SegmentedControl-Wrapping360', storyId: 'components-segmentedcontrol--wrapping-360', tier: 'specific' },
+  { name: 'StarButton', storyId: 'components-starbutton--default', tier: 'specific' },
+  { name: 'FavoritesToggle', storyId: 'components-favoritestoggle--default', tier: 'specific' },
+  { name: 'TableToolbar', storyId: 'components-tabletoolbar--default', tier: 'specific' },
+  { name: 'TableToolbar-Mobile', storyId: 'components-tabletoolbar--mobile', tier: 'specific' },
   // T6 time components: stories use createTestClock() at a fixed time, so nothing ticks.
   // Never list RunningTime 'Real Clock' (components-runningtime--real-clock, tag no-snapshot): it ticks in real time.
   // 'State Switching' (interactive acceptance story) is checked by axe only; its controls are Buttons owned by T4.
@@ -281,10 +297,6 @@ export const a11ySpecificComponents = specificComponents
 export type QuarantineOwner = 'T1' | 'T3' | 'T4' | 'T5' | 'T7' | 'T8' | 'T17';
 
 export const QUARANTINE: Record<string, { reason: string; owner: QuarantineOwner }> = {
-  'Accessibility - Core Components (Tier 1) › Button-Variants - WCAG 2.1 AA (light)': { owner: 'T4', reason: 'axe color-contrast on 1.x palette (white on #ef4444 = 3.76)' },
-  'Color Contrast › Button variants have sufficient contrast': { owner: 'T4', reason: 'axe color-contrast on 1.x palette' },
-  'Cross-Browser: CSS Features › Gradients render with actual colors': { owner: 'T4', reason: '1.x gradient button variant not found in the story (locator times out); gradients are removed in v2' },
-  'Cross-Browser: CSS Features › Flexbox layouts position children correctly': { owner: 'T4', reason: '1.x Card story has no flex card with >1 positioned children; Card is rewritten in T4' },
   'Accessibility - Specific Components (Tier 3) › AthleteCard - WCAG 2.1 AA (light)': { owner: 'T17', reason: 'axe color-contrast; AthleteCard is removed in v2' },
   'Accessibility - Prototypes › LivePage-Embed - WCAG 2.1 AA (light)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },
   'Accessibility - Prototypes › LivePage-Embed - WCAG 2.1 AA (dark)': { owner: 'T17', reason: 'axe violations (color-contrast, labels, link-name) in 1.x prototype; prototypes are deleted in T17' },

@@ -198,7 +198,7 @@ function ClubPublicProfile({
         badges={
           <>
             {club.sections.map(section => (
-              <Badge key={section} section={section} size="lg">
+              <Badge key={section} section={section} size="md">
                 {getSectionName(section)}
               </Badge>
             ))}
@@ -236,7 +236,7 @@ function ClubPublicProfile({
               activeTab="members"
               onChange={() => {}}
               variant="line"
-              size="lg"
+              size="md"
             />
           </div>
 

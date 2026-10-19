@@ -1,0 +1,70 @@
+/* SegmentedControl – one continuous track; every segment button is the 44 px
+   touch target and fills the track height (the track grows to fit). The active
+   segment is separated by a 1 px border: the only shadow token is reserved for
+   floating layers (TOKENS.md). */
+
+.csk-segmented {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  max-width: 100%;
+  padding: 2px;
+  background: var(--csk-color-surface-3);
+  border-radius: var(--csk-radius-lg);
+}
+
+.csk-segmented__item {
+  display: inline-flex;
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: var(--csk-radius-md);
+  font: inherit;
+  cursor: pointer;
+}
+
+.csk-segmented__label {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0 var(--csk-space-3);
+  border: 1px solid transparent;
+  border-radius: var(--csk-radius-md);
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text-2);
+  white-space: nowrap;
+}
+
+.csk-segmented--sm .csk-segmented__label {
+  padding: 0 var(--csk-space-2);
+  font-size: var(--csk-text-sm);
+}
+
+.csk-segmented__item:hover:not(:disabled):not(.csk-segmented__item--on) .csk-segmented__label {
+  color: var(--csk-color-text);
+}
+
+.csk-segmented__item--on .csk-segmented__label {
+  background: var(--csk-color-surface);
+  border-color: var(--csk-color-border);
+  color: var(--csk-color-brand);
+  font-weight: var(--csk-font-weight-bold);
+}
+
+.csk-segmented__item:focus-visible {
+  outline: 2px solid var(--csk-color-focus);
+  outline-offset: 1px;
+}
+
+.csk-segmented__item:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

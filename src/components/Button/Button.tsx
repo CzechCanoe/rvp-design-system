@@ -2,16 +2,13 @@ import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import './Button.css';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
-export type ButtonSize = 'sm' | 'md' | 'lg';
-export type ButtonAccent = 'energy' | 'none';
+export type ButtonSize = 'sm' | 'md';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Visual variant of the button */
   variant?: ButtonVariant;
   /** Size of the button */
   size?: ButtonSize;
-  /** Accent style for CTA emphasis (adds energy glow on hover) */
-  accent?: ButtonAccent;
   /** Full width button */
   fullWidth?: boolean;
   /** Icon to display before the label */
@@ -28,14 +25,13 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * Button component for user actions.
  *
  * Supports multiple variants (primary, secondary, ghost, danger),
- * sizes (sm, md, lg), and states (disabled, loading).
+ * sizes (md 40 px, sm 32 px; touch width at least 44 px), and states (disabled, loading).
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       variant = 'primary',
       size = 'md',
-      accent = 'none',
       fullWidth = false,
       iconLeft,
       iconRight,
@@ -53,7 +49,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       'csk-button',
       `csk-button--${variant}`,
       `csk-button--${size}`,
-      accent !== 'none' && `csk-button--accent-${accent}`,
       fullWidth && 'csk-button--full-width',
       loading && 'csk-button--loading',
       className,

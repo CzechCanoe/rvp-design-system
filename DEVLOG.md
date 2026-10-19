@@ -6859,6 +6859,27 @@ Snapshoty generuje CI (label `update-snapshots`). Zbylé `[data-theme="dark"]` b
 
 ---
 
+## 2026-10-19 - v2 T4: Button, Card, Badge, Tabs, FilterPills, SearchInput, Avatar (verdikt U)
+
+### Dokončeno
+- [x] Button: sizes md 40 / sm 32, min. šířka dotyku 44, `lg` a `accent="energy"` pryč
+- [x] Card: jen `surface` (bílá s rámem) a `outlined`, `elevated` / `aesthetic` pryč
+- [x] Badge: `level`, `outline`, `live` (statická tečka), `section` / `vtClass` zůstávají; `energy`, `glow`, `outlined`, `lg` pryč
+- [x] Tabs: `variant="nav"` bez panelů, `overflow="wrap|scroll|carousel"` (maska, šipky, doscrollování aktivního, `prefers-reduced-motion`), `size` sm / md; `aesthetic`, `energyAccent`, `lg` pryč
+- [x] FilterPills: pilulky podle reference (34 / 30 px, aktivní navy), `onFilterToggle`, `dismissible`; `lg` a `variant` pryč
+- [x] SearchInput: `sm` 34 / `md` 40, filtr chipy pryč
+- [x] Avatar: `variant` přejmenováno na `shape`, `square` zobrazuje logo celé (`object-fit: contain`)
+- [x] Quarantine záznamy T4 vyřešeny a smazány, test „Gradients render“ přepsán na primary button
+
+### Problémy a řešení
+1. **Problém:** `reuseExistingServer` v Playwright configu použil cizí Storybook na :6006 (jiný worktree), výsledky byly o starém kódu.
+   **Řešení:** vlastní statický build na jiném portu a dočasný config mimo git.
+2. **Problém:** test „Button variants have sufficient contrast“ občas padal na „Axe is already running“.
+   **Řešení:** `networkidle` + 300 ms jako u ostatních a11y testů.
+
+### Poznámky
+- Prototypy: jen minimální úpravy pro kompilaci (velikosti `lg` → `md`, `aesthetic` / `elevated` → `surface`).
+
 ## 2026-10-19 - CI: label events no longer cancel or mask PR CI
 
 ### Dokončeno
@@ -6886,6 +6907,38 @@ Label eventy dřív spouštěly přeskočené CI běhy, které přes concurrency
 ### Poznámky
 - Test „Backdrop-filter renders or has fallback" (story Header sticky-with-blur) smazán, blur v2 neexistuje; snapshoty Header-Glass smazány.
 - Placeholdery ve stories: Tabs carousel (T4), StatusBadge LIVE (T5), SegmentedControl (T7), Badge/Button (T4), DataAge (T6).
+## 2026-10-19 - v2 T7: SegmentedControl, StarButton, FavoritesToggle, TableToolbar
+
+### Dokončeno
+- [x] SegmentedControl (radiogroup, šipky/Home/End, `size` sm|md, nowrap popisky, zalomení celého segmentu)
+- [x] StarButton (22 px hvězda, 44x44), FavoritesToggle ("★ 2", 34 px pilulka, 44 px dotyk), TableToolbar + TableToolbarButton
+- [x] Stories, export z indexu, `tests/controls.spec.ts` (bounding box 44 px, 360 px, klávesnice), axe + `tests/config.ts`
+
+### Poznámky
+- Viditelný segment/pilulka je menší než interaktivní box (button 44 px, vnitřní span kreslí vzhled), aby boundingBox() měřil skutečných 44 px.
+- Prop pro změnu stavu je `onPressedChange` (ne `onToggle`, koliduje s DOM `ToggleEvent`).
+- SearchInput (34 px) a Switch ve story TableToolbar do měření 44 px nepatří (T4).
+
+### T7 review fixes
+- SegmentedControl: jedna souvislá šedá dráha, aktivní segment bílý s navy tučným textem a 1 px rámečkem (stín `--csk-shadow-sm` je jen pro plovoucí vrstvy), segmenty samy 44 px vysoké.
+- TableToolbar vyžaduje `aria-label` nebo `aria-labelledby`.
+- Rozhodnutí: `onPressedChange` místo `onToggle` (kolize s DOM `ToggleEvent`); COMPONENTS.md se neupravuje.
+
+## 2026-10-19 - v2 T5: StatusBadge, MarkBadge, PenaltyChip, GateGrid, BibBadge, Notice, StatTile
+
+### Dokončeno
+- [x] 7 nových komponent (tokeny `--csk-color-state-*`, `--csk-color-live`, `--csk-color-{success,warning,error,info}*`), exporty v `src/components/index.ts`
+- [x] Stories per komponenta a stav, `States/Overview` (spodní pás z `reference/Main.html`)
+- [x] Vitest testy, axe (light + dark) a snapshoty v `tests/config.ts`, `tests/states.spec.ts` (reduced motion, 390 px)
+
+### Problémy a řešení
+1. **Problém:** `playwright.config.ts` nastavuje globálně `reducedMotion: 'reduce'`, test „pulzuje“ proto musí explicitně použít `no-preference`.
+   **Řešení:** `test.use({ reducedMotion: 'no-preference' })` v samostatném describe.
+2. **Problém:** axe v `States/Overview`: červená `#e42313` na `--csk-color-surface-2` má 4.26:1, `--csk-color-text-3` na `surface-2` 4.46:1.
+   **Řešení:** běžící čas bold (velký text, 3:1), poznámky a stale čas `--csk-color-text-2`.
+
+### Poznámky
+Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka. Ztlumená/stale hodnota je tečkované podtržení.
 
 ---
 

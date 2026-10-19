@@ -46,7 +46,22 @@ const specificComponents = [
   { name: 'ResultsTable', storyId: 'components-resultstable--default' },
   { name: 'LiveIndicator', storyId: 'components-liveindicator--default' },
   { name: 'StatCard', storyId: 'components-statcard--default' },
+  { name: 'StatusBadge-AllStates', storyId: 'components-statusbadge--all-states' },
+  { name: 'StatusBadge-ProvisionalAndReview', storyId: 'components-statusbadge--provisional-and-review' },
+  { name: 'MarkBadge-AllMarks', storyId: 'components-markbadge--all-marks' },
+  { name: 'PenaltyChip-AllStates', storyId: 'components-penaltychip--all-states' },
+  { name: 'GateGrid', storyId: 'components-gategrid--default' },
+  { name: 'GateGrid-Unavailable', storyId: 'components-gategrid--unavailable' },
+  { name: 'BibBadge', storyId: 'components-bibbadge--default' },
+  { name: 'Notice-AllTones', storyId: 'components-notice--all-tones' },
+  { name: 'StatTile', storyId: 'components-stattile--with-delta' },
+  { name: 'States-Overview', storyId: 'states-overview--default' },
   { name: 'AthleteCard', storyId: 'components-athletecard--default' },
+  { name: 'SegmentedControl', storyId: 'components-segmentedcontrol--default' },
+  { name: 'SegmentedControl-Wrapping360', storyId: 'components-segmentedcontrol--wrapping-360' },
+  { name: 'StarButton', storyId: 'components-starbutton--default' },
+  { name: 'FavoritesToggle', storyId: 'components-favoritestoggle--default' },
+  { name: 'TableToolbar', storyId: 'components-tabletoolbar--default' },
   { name: 'TimeValue', storyId: 'components-timevalue--observed-states' },
   { name: 'RunningTime', storyId: 'components-runningtime--states' },
   { name: 'RunningTime-StateSwitching', storyId: 'components-runningtime--state-switching' },
@@ -272,6 +287,9 @@ test.describe('Color Contrast', () => {
   test('Badge variants have sufficient contrast', async ({ page }) => {
     await page.goto('/iframe.html?id=components-badge--default&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
+    // let Storybook's own axe run settle, otherwise axe reports "already running"
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(300);
 
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2aa'])
@@ -284,6 +302,9 @@ test.describe('Color Contrast', () => {
   test('Button variants have sufficient contrast', async ({ page }) => {
     await page.goto('/iframe.html?id=components-button--variants&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
+    // let Storybook's own axe run settle, otherwise axe reports "already running"
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(300);
 
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2aa'])
@@ -298,6 +319,9 @@ test.describe('Color Contrast', () => {
       '/iframe.html?id=components-card--variants&viewMode=story&globals=theme:dark'
     );
     await page.waitForSelector('#storybook-root', { state: 'visible' });
+    // let Storybook's own axe run settle, otherwise axe reports "already running"
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(300);
 
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2aa'])

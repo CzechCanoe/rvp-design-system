@@ -167,7 +167,7 @@ export function HeroSection({
                 alt={avatarAlt || title}
                 initials={avatarInitials}
                 size={avatarSizeMap[variant]}
-                variant={avatarShape === 'rounded' ? 'rounded' : 'circular'}
+                shape={avatarShape === 'rounded' ? 'rounded' : 'circular'}
                 color={avatarColor}
               />
             </div>

@@ -13,15 +13,15 @@ const meta = {
         component: `
 # FilterPills
 
-Component for displaying active filters with remove functionality.
+Pills as in the reference: toggle filters (navy when active), dismissible pills ("U18 ✕"), search query and clear all.
 
 ## Features
 
 - Display active filters as removable pills
 - Optional search query display
 - Clear individual filters or all at once
-- Size variants (sm, md, lg)
-- Visual variants (default, subtle)
+- Toggle pills (onFilterToggle, aria-pressed, active = navy)
+- Size variants (md 34 px, sm 30 px)
 - Dark mode support
 - Accessible with keyboard navigation
 
@@ -67,12 +67,7 @@ and manage active filters.
     size: {
       description: 'Size variant',
       control: 'select',
-      options: ['sm', 'md', 'lg'],
-    },
-    variant: {
-      description: 'Visual variant',
-      control: 'select',
-      options: ['default', 'subtle'],
+      options: ['sm', 'md'],
     },
     bordered: {
       description: 'Show separator line at top',
@@ -164,40 +159,48 @@ export const Small: Story = {
 };
 
 /**
- * Large size variant.
+ * Toggle pills: the pressed pill is navy (reference `.pill.on`).
  */
-export const Large: Story = {
-  args: {
-    filters: sampleFilters,
-    searchQuery: 'Prskavec',
-    size: 'lg',
-    onRemove: (key) => console.log('Remove filter:', key),
-    onClearSearch: () => console.log('Clear search'),
-    onClearAll: () => console.log('Clear all'),
+export const Toggle: Story = {
+  args: { filters: [] },
+  render: function ToggleStory() {
+    const [pressed, setPressed] = useState<string[]>(['all']);
+    const items = ['all', 'K1M', 'K1Ž', 'C1M', 'C1Ž'];
+    return (
+      <FilterPills
+        filters={items.map((key) => ({
+          key,
+          label: key === 'all' ? 'Všechny' : key,
+          active: pressed.includes(key),
+        }))}
+        onFilterToggle={(key) => setPressed([key])}
+        bordered={false}
+      />
+    );
   },
 };
 
 /**
- * Subtle visual variant.
+ * Dismissible pill ("U18 ✕") next to toggles.
  */
-export const Subtle: Story = {
+export const Dismissible: Story = {
   args: {
-    filters: sampleFilters,
-    searchQuery: 'Prskavec',
-    variant: 'subtle',
-    onRemove: (key) => console.log('Remove filter:', key),
-    onClearSearch: () => console.log('Clear search'),
-    onClearAll: () => console.log('Clear all'),
+    filters: [
+      { key: 'fav', label: '★ 2', active: false },
+      { key: 'u18', label: 'U18', active: true, dismissible: true },
+    ],
+    onFilterToggle: (key) => console.log('Toggle:', key),
+    onRemove: (key) => console.log('Remove:', key),
   },
 };
 
 /**
- * Without border separator.
+ * With a separator line at the top.
  */
-export const NoBorder: Story = {
+export const Bordered: Story = {
   args: {
     filters: sampleFilters,
-    bordered: false,
+    bordered: true,
     onRemove: (key) => console.log('Remove filter:', key),
     onClearAll: () => console.log('Clear all'),
   },
@@ -263,7 +266,7 @@ export const Interactive: Story = {
 
     const handleAddFilter = () => {
       const newFilter: FilterPill = {
-        key: `filter-${Date.now()}`,
+        key: `filter-${filters.length + 1}`,
         label: `Filtr ${filters.length + 1}`,
       };
       setFilters((prev) => [...prev, newFilter]);
@@ -360,18 +363,6 @@ export const SizeComparison: Story = {
           filters={sampleFilters}
           searchQuery="test"
           size="md"
-          bordered={false}
-          onRemove={(key) => console.log('Remove:', key)}
-          onClearSearch={() => console.log('Clear search')}
-          onClearAll={() => console.log('Clear all')}
-        />
-      </div>
-      <div>
-        <h4 style={{ marginBottom: '0.5rem' }}>Large</h4>
-        <FilterPills
-          filters={sampleFilters}
-          searchQuery="test"
-          size="lg"
           bordered={false}
           onRemove={(key) => console.log('Remove:', key)}
           onClearSearch={() => console.log('Clear search')}

@@ -20,7 +20,7 @@ const meta: Meta<typeof Avatar> = {
       options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
       description: 'Size of the avatar',
     },
-    variant: {
+    shape: {
       control: 'select',
       options: ['circular', 'rounded', 'square'],
       description: 'Shape variant',
@@ -63,25 +63,25 @@ export const Variants: Story = {
       <div>
         <p style={{ marginBottom: '8px', fontSize: '14px', color: '#666' }}>With Image</p>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <Avatar src="https://i.pravatar.cc/150?u=shape1" size="lg" variant="circular" alt="Circular" />
-          <Avatar src="https://i.pravatar.cc/150?u=shape2" size="lg" variant="rounded" alt="Rounded" />
-          <Avatar src="https://i.pravatar.cc/150?u=shape3" size="lg" variant="square" alt="Square" />
+          <Avatar src="https://i.pravatar.cc/150?u=shape1" size="lg" shape="circular" alt="Circular" />
+          <Avatar src="https://i.pravatar.cc/150?u=shape2" size="lg" shape="rounded" alt="Rounded" />
+          <Avatar src="https://i.pravatar.cc/150?u=shape3" size="lg" shape="square" alt="Square" />
         </div>
       </div>
       <div>
         <p style={{ marginBottom: '8px', fontSize: '14px', color: '#666' }}>With Initials</p>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <Avatar initials="JN" size="lg" color="primary" variant="circular" />
-          <Avatar initials="JN" size="lg" color="primary" variant="rounded" />
-          <Avatar initials="JN" size="lg" color="primary" variant="square" />
+          <Avatar initials="JN" size="lg" color="primary" shape="circular" />
+          <Avatar initials="JN" size="lg" color="primary" shape="rounded" />
+          <Avatar initials="JN" size="lg" color="primary" shape="square" />
         </div>
       </div>
       <div>
         <p style={{ marginBottom: '8px', fontSize: '14px', color: '#666' }}>Fallback Icon</p>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <Avatar size="lg" variant="circular" />
-          <Avatar size="lg" variant="rounded" />
-          <Avatar size="lg" variant="square" />
+          <Avatar size="lg" shape="circular" />
+          <Avatar size="lg" shape="rounded" />
+          <Avatar size="lg" shape="square" />
         </div>
       </div>
     </div>
@@ -226,7 +226,7 @@ export const AthleteProfile: Story = {
       <Avatar
         src="https://i.pravatar.cc/150?u=athlete-profile"
         size="2xl"
-        variant="circular"
+        shape="circular"
         status="online"
         alt="Jiří Prskavec"
       />
@@ -264,6 +264,34 @@ export const AthleteProfile: Story = {
     docs: {
       description: {
         story: 'Athlete profile example with large avatar, status, and metadata.',
+      },
+    },
+  },
+};
+
+/* ==========================================================================
+   SQUARE: EVENT LOGOS
+   ========================================================================== */
+
+// Wide logo (2:1), inline so the story needs no network
+const wideLogo =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100"><rect width="200" height="100" fill="navy"/><circle cx="50" cy="50" r="30" fill="white"/><rect x="100" y="35" width="80" height="30" fill="white"/></svg>'
+  );
+
+export const EventLogo: Story = {
+  render: () => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <Avatar src={wideLogo} alt="Logo akce" size="2xl" shape="square" />
+      <Avatar src={wideLogo} alt="Logo akce" size="xl" shape="square" />
+      <Avatar src={wideLogo} alt="Logo akce" size="lg" shape="square" />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'shape="square" is for event and club logos: the image is contained and never cropped (replaces the live-mini override of .csk-avatar--rounded).',
       },
     },
   },

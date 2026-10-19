@@ -50,6 +50,28 @@ test.describe('Components - Light Mode', () => {
   }
 });
 
+// v2 T5: the states strip must hold together at phone width (390 px)
+test.describe('Components - Mobile 390', () => {
+  test.use({ viewport: { width: 390, height: 900 } });
+
+  test('States-Overview - 390 px screenshot', async ({ page }) => {
+    await page.goto('/iframe.html?id=states-overview--default&viewMode=story');
+    await page.waitForSelector('.states-overview');
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(testDefaults.settleTime);
+
+    const overflow = await page.evaluate(
+      () => document.documentElement.scrollWidth - document.documentElement.clientWidth
+    );
+    expect(overflow).toBeLessThanOrEqual(0);
+
+    await expect(page.locator('#storybook-root')).toHaveScreenshot('States-Overview-390.png', {
+      maxDiffPixels: 100,
+      animations: 'disabled',
+    });
+  });
+});
+
 test.describe('Components - Dark Mode', () => {
   for (const component of allComponents) {
     test(`${component.name} - dark mode screenshot`, async ({ page }) => {

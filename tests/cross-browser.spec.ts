@@ -58,15 +58,14 @@ test.describe('Cross-Browser: CSS Features', () => {
     expect(backgroundColor).toMatch(/^rgb/);
   });
 
-  test('Gradients render with actual colors', async ({ page }) => {
+  test('Primary button renders with an actual background color', async ({ page }) => {
     await page.goto('/iframe.html?id=components-button--variants&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
     await page.waitForTimeout(testDefaults.settleTime);
 
-    // Find a gradient button specifically
-    const gradientButton = page.locator('#storybook-root .csk-button--gradient, #storybook-root [class*="gradient"]').first();
+    const primaryButton = page.locator('#storybook-root .csk-button--primary').first();
 
-    const styles = await gradientButton.evaluate((el) => {
+    const styles = await primaryButton.evaluate((el) => {
       const computed = window.getComputedStyle(el);
       return {
         backgroundImage: computed.backgroundImage,
@@ -74,10 +73,10 @@ test.describe('Cross-Browser: CSS Features', () => {
       };
     });
 
-    // Should have gradient or solid background (not empty)
-    const hasBackground =
-      (styles.backgroundImage && styles.backgroundImage !== 'none') ||
-      (styles.backgroundColor && styles.backgroundColor !== 'rgba(0, 0, 0, 0)');
+    // Should have a solid (non-transparent) background
+    const hasBackground = Boolean(
+      styles.backgroundColor && styles.backgroundColor !== 'rgba(0, 0, 0, 0)'
+    );
     expect(hasBackground).toBe(true);
   });
 
