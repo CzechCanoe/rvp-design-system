@@ -155,6 +155,8 @@ export interface IconProps extends Omit<LucideProps, 'ref'> {
   name: IconName;
   /** Icon size - defaults to 20 (medium) */
   size?: number | 'sm' | 'md' | 'lg' | 'xl';
+  /** Fill the glyph with currentColor (e.g. the "on" state of a star) */
+  filled?: boolean;
   /** Additional CSS class */
   className?: string;
   /** Accessible label for screen readers */
@@ -184,6 +186,7 @@ export function Icon({
   name,
   size = 'md',
   className,
+  filled,
   'aria-label': ariaLabel,
   ...props
 }: IconProps) {
@@ -196,6 +199,7 @@ export function Icon({
       className={className}
       aria-label={ariaLabel}
       aria-hidden={!ariaLabel}
+      fill={filled ? 'currentColor' : undefined}
       {...props}
     />
   );

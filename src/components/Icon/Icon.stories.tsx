@@ -396,3 +396,13 @@ export const WithColor: Story = {
     },
   },
 };
+
+/** `filled` fills the glyph with currentColor, e.g. the "on" state of a favourite star. */
+export const FilledStar: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 12, color: 'var(--csk-color-warning-text)' }}>
+      <Icon name="star" size="lg" aria-label="Star" />
+      <Icon name="star" size="lg" filled aria-label="Filled star" />
+    </div>
+  ),
+};

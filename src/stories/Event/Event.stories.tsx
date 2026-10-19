@@ -134,6 +134,7 @@ function EventDetail() {
                 state="provisional"
                 status="K1 muži · neděle · 2. jízdy · 8 z 24 v cíli"
                 favorites={2}
+                detailSwitch
                 searchLabel="Hledat závodníka, oddíl, st. č."
                 foot="24 lodí, zobrazeno 9"
                 footLinks={

@@ -8,7 +8,7 @@ import { test, expect } from '@playwright/test';
  */
 
 const OWN =
-  '.csk-segmented__item, .csk-star-button, .csk-favorites-toggle, .csk-table-toolbar__button';
+  '.csk-segmented__item, .csk-star-button, .csk-favorites-toggle, .csk-table-toolbar__button, .csk-table-toolbar__detail .csk-switch-label';
 
 const stories = [
   'components-segmentedcontrol--default',
@@ -18,6 +18,7 @@ const stories = [
   'components-favoritestoggle--default',
   'components-tabletoolbar--default',
   'components-tabletoolbar--mobile',
+  'components-tabletoolbar--detail-on',
 ];
 
 async function open(page: import('@playwright/test').Page, id: string) {

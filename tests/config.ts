@@ -82,6 +82,8 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'FavoritesToggle', storyId: 'components-favoritestoggle--default', tier: 'specific' },
   { name: 'TableToolbar', storyId: 'components-tabletoolbar--default', tier: 'specific' },
   { name: 'TableToolbar-Mobile', storyId: 'components-tabletoolbar--mobile', tier: 'specific' },
+  { name: 'TableToolbar-DetailOn', storyId: 'components-tabletoolbar--detail-on', tier: 'specific' },
+  { name: 'Icon-FilledStar', storyId: 'components-icon--filled-star', tier: 'specific' },
   // T6 time components: stories use createTestClock() at a fixed time, so nothing ticks.
   // Never list RunningTime 'Real Clock' (components-runningtime--real-clock, tag no-snapshot): it ticks in real time.
   // 'State Switching' (interactive acceptance story) is checked by axe only; its controls are Buttons owned by T4.

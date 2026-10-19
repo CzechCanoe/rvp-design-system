@@ -19,6 +19,11 @@
   white-space: nowrap;
 }
 
+/* 44 px touch target for the whole switch row (label included) */
+.csk-table-toolbar__detail .csk-switch-label {
+  min-height: 44px;
+}
+
 .csk-table-toolbar__button {
   display: inline-flex;
   align-items: center;
