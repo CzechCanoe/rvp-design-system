@@ -15,7 +15,7 @@ const story = (id: string) => `/iframe.html?id=${id}&viewMode=story`;
 async function open(page: Page, id: string) {
   await page.goto(story(id));
   await page.waitForSelector(
-    '#storybook-root .csk-results-table, #storybook-root .csk-run-detail, #storybook-root .csk-program-list, #storybook-root .csk-oncourse-panel, #storybook-root .csk-oncourse-rider, #storybook-root .csk-event-header, #storybook-root .csk-weekend-calendar'
+    '#storybook-root .csk-results-table, #storybook-root .csk-run-detail, #storybook-root .csk-program-list, #storybook-root .csk-oncourse-panel, #storybook-root .csk-oncourse-rider, #storybook-root .csk-event-header, #storybook-root .csk-weekend-calendar, #storybook-root .csk-entry-table, #storybook-root .csk-proposal-list, #storybook-root .csk-summary-card'
   );
   await page.evaluate(() => document.fonts.ready);
 }
