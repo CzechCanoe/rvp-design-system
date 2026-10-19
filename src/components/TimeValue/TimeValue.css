@@ -1,0 +1,81 @@
+/* =============================================================================
+   TimeValue – a time or difference in mono, tabular digits, never wrapping
+   ============================================================================= */
+
+.csk-time-value {
+  display: inline-block;
+  position: relative;
+  font-family: var(--csk-font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Decimal alignment: the integer part sits right-aligned in a 3ch box */
+.csk-time-value__int {
+  display: inline-block;
+  min-width: 3ch;
+  text-align: right;
+}
+
+.csk-time-value__frac {
+  display: inline-block;
+  text-align: left;
+}
+
+/* Keeps the width of an unknown value equal to a known one in stacked columns */
+.csk-time-value__frac--placeholder {
+  visibility: hidden;
+}
+
+/* Variants
+   ========================================================================== */
+
+.csk-time-value--best {
+  color: var(--csk-color-brand);
+  font-weight: var(--csk-font-weight-semibold);
+}
+
+.csk-time-value--running {
+  color: var(--csk-color-live);
+}
+
+.csk-time-value--muted {
+  color: var(--csk-color-text-3);
+}
+
+/* Stale: frozen value, dotted underline (reference .stale) */
+.csk-time-value--stale {
+  color: var(--csk-color-text-3);
+}
+
+.csk-time-value--stale::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  border-bottom: 2px dotted var(--csk-color-state-stale);
+}
+
+/* Not known (not-yet / unavailable / null): muted dash, no underline */
+.csk-time-value--unknown {
+  color: var(--csk-color-text-3);
+  font-weight: inherit;
+}
+
+.csk-time-value--unknown::after {
+  content: none;
+}
+
+/* Screen-reader-only label for the dash */
+.csk-time-value__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
