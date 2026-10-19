@@ -6981,3 +6981,33 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 ### Problémy a řešení
 1. **Problém:** po bot commitu PR nemá checks (`pull_request` run `action_required`)
    **Řešení:** příčina = actor github-actions[bot] + approval policy `first_time_contributors`; bez admin změny nastavení nelze schválit. Dispatchnutý run teď posílá commit status.
+
+---
+
+## 2026-10-19 - v2 T9: ResultsTable v2 + RunDetail (#59)
+
+### Dokončeno
+- [x] `ResultsTable` přepsán (breaking): vizuální datový model `ResultRow` / `RunCell` / `Observed<T>` / `Mark`, `columns: 'single' | 'pair' | 'startlist'`, `density` (jinak container query od 640 px šířky tabulky), `expandedId` (jedno id nebo pole), `onToggle`, `renderDetail`, `onFavoriteChange`, `clock`, `labels`
+- [x] Mobil: chevron · # · ★ · jméno+klub · jízdy pod sebou (pozice = číslo jízdy, desetinné tečky zarovnané) · výsledek+ztráta; desktop: + oddíl, jízdy vedle sebe s `PenaltyChip`, sloupec ztráty
+- [x] `RunDetail` (nový): st. č., pořadí (třída + kategorie), stav, bloky jízd (čas, tr., celkem, `GateGrid`, start, poznámka, „počítá se“), `loading` skeleton; mobil pod sebou, desktop vedle sebe (container query), přes celou šířku bez odsazení
+- [x] Sdílené primitivy pro T10–T12: `AthleteName`, `RankValue`, `RunValue`, `PenaltyText` + typy `RunCell`, `RunningSpec`
+- [x] `RunDetailModal` odstraněn; prototypy a KanoeCzContext stories převedeny (prototypy přes `src/prototypes/legacyResults.ts`)
+- [x] Stories (fixní test clock): BR 8 řádků, jednojízdový, kategorie, na trati, V revizi, značky, rozbalený řádek, startovka, prázdná, 100 řádků (měření)
+- [x] Testy: Vitest (27), `tests/results-table.spec.ts` (360 px bez zalamování, detail přes celou šířku, CQ vs. media query, interakce, výkon 100 řádků, axe 390/1280), snapshoty 390 + 1280 přes `viewportStories` v `components.spec.ts`
+
+### Problémy a řešení
+1. **Problém:** vedle sloupce jména s `width: 100%` Chrome nebere šířku buňky jako minimum (pořadí sjelo na 13 px) a grid jízd s `min-width` na položce počítal min-content z min-width, takže „300.82(158)“ přetékal.
+   **Řešení:** min-width na obsahu buňky (`RankValue`), stopy gridu `max-content max-content`.
+2. **Problém:** `--csk-color-text-3` má na `surface-2` 4.46:1 a na fialové podložce revize 4.10:1, červený běžící čas je AA jen na bílé.
+   **Řešení:** rozbalený řádek zůstává bílý (šedou nese detail), řádek na trati se nikdy netónuje, v řádku V revizi se lokálně přemapuje `text-3` a `podium-1-text` na `text-2`; v `RunDetail` text přímo na šedé ploše používá `text-2`.
+3. **Problém:** plný řádek detailu přes skryté buňky (mobil/desktop kopie) by mohl měnit šířky sloupců.
+   **Řešení:** obsah detailu má `container-type: inline-size` (nepřispívá do šířek sloupců); test ověřuje, že se šířky sloupců po rozbalení nemění.
+
+### Poznámky
+- Čas jen v sekundách (`95.43`), bez `m:ss` (čeká na maintainera).
+- Výkon 100 řádků na RPi (2 workery): medián ~300–450 ms (render + commit + layout); test má rozpočet 800 ms.
+- `docs/COMPONENT_API.md` popisuje ještě 1.x API (stejně jako u ostatních v2 komponent), aktualizace patří k dokumentační fázi.
+
+### Poznámka po CI (T9)
+- Snapshoty 390 + 1280 vygenerovalo CI (`test: update snapshots (CI)`, 31 PNG, jen ResultsTable / RunDetail).
+- Výkon 100 řádků v CI (4 workery paralelně): medián 306.5 ms (146–454 ms), rozpočet testu 800 ms.

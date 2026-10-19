@@ -10,7 +10,8 @@ import { Tabs } from '../components/Tabs';
 import { Switch } from '../components/Switch';
 import { LiveIndicator } from '../components/LiveIndicator';
 import { HeroSection } from '../components/HeroSection';
-import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
+import { ResultsTable } from '../components/ResultsTable';
+import { legacyColumns, toResultRows, type LegacyResultEntry as ResultEntry } from './legacyResults';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import { Icon } from '../components/Icon';
 import { CSKLogo } from '../components/CSKLogo';
@@ -1366,42 +1367,16 @@ const LivePage = ({
               {/* Results Table - Aesthetic wrapper */}
               <div className="csk-results-table-wrapper--aesthetic">
                 <ResultsTable
-                  results={results}
-                  variant="striped"
-                  size="md"
-                  showRuns={false}
-                  showTimeDiff={true}
-                  showClub={true}
-                  showPodiumHighlights={true}
-                  showLiveIndicator={true}
-                  stickyHeader
-                  onRowClick={handleRowClick}
-                  renderCell={(entry, columnKey) => {
-                    if (columnKey === 'name') {
-                      const isFavorite = favoriteAthletes.has(entry.id as number);
-                      return (
-                        <div className="live-page-results-row">
-                          <button
-                            className={`live-page-favorite-btn ${isFavorite ? 'live-page-favorite-btn--active' : ''}`}
-                            onClick={(e) => toggleFavorite(entry.id as number, e)}
-                            title={isFavorite ? 'Odebrat ze sledovaných' : 'Přidat ke sledovaným'}
-                            aria-label={isFavorite ? 'Odebrat ze sledovaných' : 'Přidat ke sledovaným'}
-                          >
-                            <Icon name="star" size="sm" fill={isFavorite ? 'currentColor' : 'none'} />
-                          </button>
-                          <span className="live-page-results-row__name">
-                            {entry.name}
-                            {entry.section && (
-                              <span className={`csk-results-table__section csk-results-table__section--${entry.section}`}>
-                                {entry.section.toUpperCase()}
-                              </span>
-                            )}
-                          </span>
-                        </div>
-                      );
-                    }
-                    return undefined; // Use default rendering
+                  rows={toResultRows(results).map((row) => ({
+                    ...row,
+                    favorite: favoriteAthletes.has(row.id as number),
+                  }))}
+                  columns={legacyColumns(results)}
+                  onToggle={(id) => {
+                    const entry = results.find((r) => r.id === id);
+                    if (entry) handleRowClick(entry);
                   }}
+                  onFavoriteChange={(row) => toggleFavorite(row.id as number)}
                 />
               </div>
             </div>

@@ -97,7 +97,7 @@ test.describe('Narrow Container Layout Tests', () => {
       await page.waitForLoadState('networkidle');
       await page.waitForTimeout(testDefaults.settleTime);
 
-      const table = page.locator('.csk-results-table').first();
+      const table = page.locator('.csk-results-table__table').first();
       await expect(table).toBeVisible();
 
       // Table should be visible and have content
@@ -242,7 +242,7 @@ test.describe('Text Truncation and Ellipsis', () => {
     await page.waitForLoadState('networkidle');
     await page.waitForTimeout(testDefaults.settleTime);
 
-    const table = page.locator('.csk-results-table').first();
+    const table = page.locator('.csk-results-table__table').first();
     await expect(table).toBeVisible();
 
     // Table should not cause horizontal page overflow
@@ -314,7 +314,7 @@ test.describe('Container Query CSS Support', () => {
     await page.waitForSelector('#storybook-root', { state: 'visible' });
     await page.waitForTimeout(testDefaults.settleTime);
 
-    const wrapper = page.locator('.csk-results-table-wrapper').first();
+    const wrapper = page.locator('.csk-results-table').first();
     await expect(wrapper).toBeVisible();
 
     const containerType = await wrapper.evaluate((el) => {

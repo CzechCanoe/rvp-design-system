@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { KanoeCzContext } from './KanoeCzContext';
-import { ResultsTable, type ResultEntry } from '../ResultsTable';
+import { ResultsTable, type ResultRow } from '../ResultsTable';
+import type { Observed } from '../../types';
 import { Card } from '../Card';
 import { Button } from '../Button';
 import { Badge } from '../Badge';
@@ -44,88 +45,32 @@ in the actual website.
 export default meta;
 type Story = StoryObj<typeof KanoeCzContext>;
 
-// Sample results data
-const sampleResults: ResultEntry[] = [
-  {
-    id: 1,
-    rank: 1,
-    name: 'Jiří Prskavec',
-    club: 'USK Praha',
-    country: 'CZE',
-    category: 'K1M',
-    section: 'dv',
-    run1Time: 92.45,
-    run1Penalty: 0,
-    run2Time: 89.12,
-    run2Penalty: 2,
-    totalTime: 89.12,
-    status: 'final',
-  },
-  {
-    id: 2,
-    rank: 2,
-    name: 'Vít Přindiš',
-    club: 'Dukla Praha',
-    country: 'CZE',
-    category: 'K1M',
-    section: 'dv',
-    run1Time: 93.21,
-    run1Penalty: 2,
-    run2Time: 90.45,
-    run2Penalty: 0,
-    totalTime: 90.45,
-    timeDiff: 1.33,
-    status: 'final',
-  },
-  {
-    id: 3,
-    rank: 3,
-    name: 'Lukáš Rohan',
-    club: 'Dukla Praha',
-    country: 'CZE',
-    category: 'C1M',
-    section: 'dv',
-    run1Time: 94.56,
-    run1Penalty: 0,
-    run2Time: 91.23,
-    run2Penalty: 0,
-    totalTime: 91.23,
-    timeDiff: 2.11,
-    status: 'final',
-  },
-  {
-    id: 4,
-    rank: 4,
-    name: 'Václav Chaloupka',
-    club: 'Bohemians Praha',
-    country: 'CZE',
-    category: 'K1M',
-    section: 'dv',
-    run1Time: 95.12,
-    run1Penalty: 4,
-    run2Time: 92.67,
-    run2Penalty: 2,
-    totalTime: 92.67,
-    timeDiff: 3.55,
-    status: 'final',
-  },
-  {
-    id: 5,
-    rank: 5,
-    name: 'Ondřej Tunka',
-    club: 'TJ Slavia',
-    country: 'CZE',
-    category: 'C1M',
-    section: 'dv',
-    run1Time: 96.34,
-    run1Penalty: 0,
-    run2Time: 93.12,
-    run2Penalty: 0,
-    totalTime: 93.12,
-    timeDiff: 4.00,
-    status: 'final',
-  },
+// Sample results data (best-run race after the 2nd run)
+const known = (value: number): Observed<number> => ({ state: 'known', value });
+
+const sample = [
+  { name: 'PRSKAVEC Jiří', club: 'USK Praha', tag: 'K1M', r1: 92.45, p1: 0, r2: 91.12, p2: 2, diff: undefined },
+  { name: 'PŘINDIŠ Vít', club: 'Dukla Praha', tag: 'K1M', r1: 95.21, p1: 2, r2: 90.45, p2: 0, diff: 1.33 },
+  { name: 'ROHAN Lukáš', club: 'Dukla Praha', tag: 'C1M', r1: 94.56, p1: 0, r2: 91.23, p2: 0, diff: 2.11 },
+  { name: 'CHALOUPKA Václav', club: 'Bohemians Praha', tag: 'K1M', r1: 99.12, p1: 4, r2: 94.67, p2: 2, diff: 3.55 },
+  { name: 'TUNKA Ondřej', club: 'TJ Slavia', tag: 'C1M', r1: 96.34, p1: 0, r2: 93.12, p2: 0, diff: 4.0 },
 ];
+
+const sampleResults: ResultRow[] = sample.map((a, i) => ({
+  id: i + 1,
+  rank: known(i + 1),
+  podium: i < 3 ? ((i + 1) as 1 | 2 | 3) : undefined,
+  bib: i + 1,
+  name: a.name,
+  categoryTag: a.tag,
+  club: a.club,
+  runs: [
+    { time: known(a.r1), penalty: a.p1 || undefined, best: a.r1 < a.r2 },
+    { time: known(a.r2), penalty: a.p2 || undefined, best: a.r2 <= a.r1 },
+  ],
+  result: known(Math.min(a.r1, a.r2)),
+  diff: a.diff === undefined ? undefined : known(a.diff),
+}));
 
 // =============================================================================
 // BASIC STORIES
@@ -143,9 +88,8 @@ export const Default: Story = {
           Toto je ukázka komponenty ResultsTable embedované v prostředí kanoe.cz
         </p>
         <ResultsTable
-          results={sampleResults}
-          showClub
-          showPodiumHighlights
+          rows={sampleResults}
+          columns="pair"
           caption="Finálové výsledky K1 muži"
         />
       </div>
@@ -254,8 +198,8 @@ export const SmallContainer: Story = {
           Simulace mobilního nebo sidebar widgetu (max 540px)
         </p>
         <ResultsTable
-          results={sampleResults.slice(0, 3)}
-          size="sm"
+          rows={sampleResults.slice(0, 3)}
+          columns="pair"
           caption="Top 3"
         />
       </div>
@@ -275,10 +219,8 @@ export const FluidContainer: Story = {
           Komponenta využívá celou dostupnou šířku kontejneru
         </p>
         <ResultsTable
-          results={sampleResults}
-          showClub
-          showRuns
-          showPodiumHighlights
+          rows={sampleResults}
+          columns="pair"
           caption="Kompletní výsledky"
         />
       </div>
@@ -411,8 +353,8 @@ export const WithoutHeader: Story = {
           Pro případy kdy je komponenta embedována hluboko ve stránce
         </p>
         <ResultsTable
-          results={sampleResults.slice(0, 3)}
-          showClub
+          rows={sampleResults.slice(0, 3)}
+          columns="pair"
           caption="Výsledky"
         />
       </div>

@@ -1,0 +1,121 @@
+/* =============================================================================
+   Row / cell primitives: AthleteName, RankValue, PenaltyText
+   ============================================================================= */
+
+/* AthleteName – two lines, never wrapping, both end with an ellipsis
+   ========================================================================== */
+
+.csk-athlete-name {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: var(--csk-line-height-snug);
+}
+
+/* One text run: a long name cuts the tag first, then the name */
+.csk-athlete-name__primary {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.csk-athlete-name__name {
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text);
+}
+
+.csk-athlete-name__tag {
+  margin-left: var(--csk-space-1);
+  font-size: var(--csk-text-xs);
+  font-weight: var(--csk-font-weight-semibold);
+  color: var(--csk-color-text-3);
+}
+
+.csk-athlete-name__secondary {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--csk-text-xs);
+  color: var(--csk-color-text-3);
+}
+
+/* Badges inside the second line stay on the text line */
+.csk-athlete-name__secondary .csk-status-badge,
+.csk-athlete-name__secondary .csk-mark-badge {
+  vertical-align: middle;
+  margin-right: var(--csk-space-1);
+}
+
+/* RankValue – display face, podium colours
+   ========================================================================== */
+
+.csk-rank-value {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: var(--csk-line-height-tight);
+  white-space: nowrap;
+}
+
+.csk-rank-value__main {
+  font-family: var(--csk-font-display);
+  font-weight: var(--csk-font-weight-bold);
+  font-size: var(--csk-text-lg);
+  color: var(--csk-color-text-2);
+}
+
+.csk-rank-value--none .csk-rank-value__main {
+  color: var(--csk-color-text-3);
+}
+
+.csk-rank-value--podium-1 .csk-rank-value__main {
+  color: var(--csk-color-podium-1-text);
+}
+
+.csk-rank-value--podium-2 .csk-rank-value__main {
+  color: var(--csk-color-podium-2-text);
+}
+
+.csk-rank-value--podium-3 .csk-rank-value__main {
+  color: var(--csk-color-podium-3-text);
+}
+
+.csk-rank-value__sub {
+  margin-top: 1px;
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-xs);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text-3);
+}
+
+/* PenaltyText – „(2)“ after a stacked time
+   ========================================================================== */
+
+.csk-penalty-text {
+  font-family: var(--csk-font-mono);
+  font-size: var(--csk-text-xs);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--csk-color-warning-text);
+}
+
+.csk-penalty-text--unjudged {
+  color: var(--csk-color-text-3);
+}
+
+/* Screen-reader-only text used by the primitives */
+.csk-cell-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

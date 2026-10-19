@@ -1,660 +1,515 @@
-import { forwardRef, useState, type HTMLAttributes, type ReactNode } from 'react';
+import {
+  Fragment,
+  forwardRef,
+  memo,
+  useId,
+  useMemo,
+  type HTMLAttributes,
+  type MouseEvent,
+  type ReactNode,
+} from 'react';
+import type { Clock } from '../../clock/Clock';
+import { BibBadge } from '../BibBadge';
+import { Icon } from '../Icon';
+import { MarkBadge } from '../MarkBadge';
+import { PenaltyChip } from '../PenaltyChip';
+import { StarButton } from '../StarButton';
+import { StatusBadge } from '../StatusBadge';
+import { TimeValue } from '../TimeValue';
+import { AthleteName, PenaltyText, RankValue, RunValue } from './cells';
+import type {
+  ResultRow,
+  ResultRowId,
+  ResultsTableColumns,
+  ResultsTableDensity,
+  RunCell,
+} from './types';
+import { isNotYet, knownNumber } from './values';
 import './ResultsTable.css';
 
 // ============================================================================
-// Types
+// Labels
 // ============================================================================
 
-export type ResultsTableSize = 'sm' | 'md' | 'lg';
-export type ResultsTableVariant = 'default' | 'striped' | 'compact';
-export type ResultsTableStyleVariant = 'default' | 'gradient' | 'embed';
-export type ResultSection = 'dv' | 'ry' | 'vt';
-export type ResultStatus = 'dns' | 'dnf' | 'dsq' | 'final' | 'provisional' | 'live';
-
-export interface ResultEntry {
-  /** Unique identifier */
-  id: string | number;
-  /** Position/rank */
-  rank?: number;
-  /** Athlete name */
-  name: string;
-  /** Club or team */
-  club?: string;
-  /** Country code (ISO 3166-1 alpha-3) */
-  country?: string;
-  /** Section/discipline */
-  section?: ResultSection;
-  /** Category (e.g., K1M, C1W) */
-  category?: string;
-  /** Age category (e.g., U23, Junior, Senior, Master) */
-  ageCategory?: string;
-  /** Rank within age category */
-  ageCategoryRank?: number;
-  /** Points scored in this race */
-  points?: number;
-  /** Run 1 time in seconds */
-  run1Time?: number;
-  /** Run 1 penalty seconds */
-  run1Penalty?: number;
-  /** Run 2 time in seconds */
-  run2Time?: number;
-  /** Run 2 penalty seconds */
-  run2Penalty?: number;
-  /** Total time in seconds */
-  totalTime?: number;
-  /** Time difference to leader */
-  timeDiff?: number;
-  /** Status (DNS, DNF, DSQ, etc.) */
-  status?: ResultStatus;
-  /** Whether this entry is currently highlighted (e.g., live update) */
-  highlighted?: boolean;
-  /** Additional custom data */
-  meta?: Record<string, unknown>;
-  /** Previous rank for position change animation */
-  previousRank?: number;
-  /** Slalom round (Q = qualification, SF = semifinal, F = final) */
-  round?: 'Q' | 'SF' | 'F';
-  /** Whether athlete progressed to next round */
-  progressed?: boolean;
-  /** Starting position in current round */
-  startNumber?: number;
-  /** Avatar image URL */
-  avatarUrl?: string;
+/** Texts of the table. Czech defaults; every one can be overridden via `labels`. */
+export interface ResultsTableLabels {
+  /** Rank column header. Default `#`, or the category when rows carry `categoryRank`. */
+  rank: ReactNode;
+  bib: ReactNode;
+  athlete: ReactNode;
+  club: ReactNode;
+  /** Mobile header of the stacked runs (`pair`). */
+  runs: ReactNode;
+  /** Desktop headers of the runs (`pair`). */
+  runLabels: ReactNode[];
+  /** Header of the run column (`single`). */
+  singleRun: ReactNode;
+  result: ReactNode;
+  diff: ReactNode;
+  /** Header of the start column (`startlist`). */
+  start: ReactNode;
+  /** Screen-reader header of the expand column. */
+  detailColumn: string;
+  /** Screen-reader header of the favourites column. */
+  favoriteColumn: string;
+  /** Result slot of a row on course. */
+  onCourse: string;
+  /** Result slot of a row whose standing is not settled yet (`diff: not-yet`). */
+  waiting: string;
+  /** Result slot of an `NR` row. */
+  nonRanked: string;
+  /** Screen-reader text of a missing rank. */
+  noRank: string;
+  /** Screen-reader text of a penalty that is not judged yet. */
+  notJudged: string;
+  /** Class rank under the category rank. */
+  overall: (rank: number) => string;
+  /** Accessible name of the expand button. */
+  toggle: (row: ResultRow) => string;
+  /** Accessible name of the favourite star. */
+  favorite: (row: ResultRow) => string;
+  /** Content of an empty table. */
+  empty: ReactNode;
 }
 
-export interface ResultsTableColumn {
-  /** Column key */
-  key: string;
-  /** Column header */
-  header: ReactNode;
-  /** Column width (CSS value) */
-  width?: string;
-  /** Horizontal alignment */
-  align?: 'left' | 'center' | 'right';
-  /** Whether to show this column */
-  visible?: boolean;
-  /** Hide column at container width (uses container queries) */
-  hideAt?: 'sm' | 'md' | 'lg';
-  /** Priority for responsive hiding (lower = hide first) */
-  priority?: number;
-}
+export const RESULTS_TABLE_LABELS: ResultsTableLabels = {
+  rank: '#',
+  bib: 'St. č.',
+  athlete: 'Závodník',
+  club: 'Oddíl',
+  runs: 'Jízdy',
+  runLabels: ['1. jízda', '2. jízda'],
+  singleRun: 'Čas · tr.',
+  result: 'Výsledek',
+  diff: 'Ztráta',
+  start: 'Start',
+  detailColumn: 'Detail',
+  favoriteColumn: 'Oblíbení',
+  onCourse: 'na trati',
+  waiting: 'čeká',
+  nonRanked: 'mimo pořadí',
+  noRank: 'bez pořadí',
+  notJudged: 'neposouzeno',
+  overall: (rank) => `${rank}. celk.`,
+  toggle: (row) => `Detail: ${row.name}`,
+  favorite: (row) => `Oblíbený: ${row.name}`,
+  empty: 'Žádné výsledky',
+};
 
-export interface ResultsTableProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'results'> {
-  /** Result entries */
-  results: ResultEntry[];
-  /** Visual variant */
-  variant?: ResultsTableVariant;
-  /** Style variant for visual appearance */
-  styleVariant?: ResultsTableStyleVariant;
-  /** Table size */
-  size?: ResultsTableSize;
-  /** Section filter (show only specific section) */
-  section?: ResultSection;
-  /** Show run details (run1, run2) */
-  showRuns?: boolean;
-  /** Show time difference to leader */
-  showTimeDiff?: boolean;
-  /** Show country column */
-  showCountry?: boolean;
-  /** Show club column */
-  showClub?: boolean;
-  /** Show category column */
-  showCategory?: boolean;
-  /** Show age category column (U23, Junior, Senior, etc.) */
-  showAgeCategory?: boolean;
-  /** Show rank within age category */
-  showAgeCategoryRank?: boolean;
-  /** Show points column */
-  showPoints?: boolean;
-  /** Enable podium highlights (gold, silver, bronze) */
-  showPodiumHighlights?: boolean;
-  /** Number of positions to highlight (default: 3) */
-  highlightPositions?: number;
-  /** Enable live indicator for live status */
-  showLiveIndicator?: boolean;
-  /** Show slalom round column (Q/SF/F) */
-  showRound?: boolean;
-  /** Show progression indicator (checkmark for athletes who progressed) */
-  showProgression?: boolean;
-  /** Show start number column */
-  showStartNumber?: boolean;
-  /** Show athlete avatars (for top positions or all) */
-  showAvatars?: boolean | 'podium';
-  /** Custom columns override */
-  columns?: ResultsTableColumn[];
-  /** Custom cell renderer */
-  renderCell?: (entry: ResultEntry, columnKey: string) => ReactNode;
-  /** Click handler for row */
-  onRowClick?: (entry: ResultEntry) => void;
-  /** Enable energy (coral-orange) glow effects for podium positions and best times */
-  energyHighlights?: boolean;
-  /** Caption for accessibility */
-  caption?: string;
-  /** Show caption visually */
-  captionVisible?: boolean;
-  /** Loading state */
-  loading?: boolean;
-  /** Empty state content */
+// ============================================================================
+// Props
+// ============================================================================
+
+export interface ResultsTableProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'onToggle'> {
+  /** Rows in display order (the application sorts; marks usually last). */
+  rows: ResultRow[];
+  /** Column set (default `single`). */
+  columns?: ResultsTableColumns;
+  /** Forces mobile or desktop columns; omitted = container query (desktop from 640 px of table width). */
+  density?: ResultsTableDensity;
+  /** Expanded row(s): one id, or several (e.g. a „Detailní“ view). */
+  expandedId?: ResultRowId | readonly ResultRowId[] | null;
+  /** Row clicked anywhere (or its expand button activated). Enables the expand column. */
+  onToggle?: (id: ResultRowId, row: ResultRow) => void;
+  /** Content of an expanded row (usually `RunDetail`); spans the full table width, no indentation. */
+  renderDetail?: (row: ResultRow) => ReactNode;
+  /** Favourite star toggled. Enables the favourites column; the state stays in `row.favorite`. */
+  onFavoriteChange?: (row: ResultRow, favorite: boolean) => void;
+  /** Clock for running times (else the nearest `ClockProvider`). */
+  clock?: Clock;
+  /** Overrides of the Czech texts. */
+  labels?: Partial<ResultsTableLabels>;
+  /** Table caption for screen readers (visually hidden). */
+  caption?: ReactNode;
+  /** Content of an empty table (default `labels.empty`). */
   emptyState?: ReactNode;
-  /** Sticky header */
-  stickyHeader?: boolean;
 }
 
 // ============================================================================
-// Helper Functions
+// Row
 // ============================================================================
 
-/**
- * Format time from seconds to MM:SS.ss or HH:MM:SS.ss
- */
-function formatTime(seconds: number | undefined): string {
-  if (seconds === undefined || seconds === null) return '-';
-
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  const secs = seconds % 60;
-
-  if (hours > 0) {
-    return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toFixed(2).padStart(5, '0')}`;
-  }
-  return `${minutes}:${secs.toFixed(2).padStart(5, '0')}`;
+interface RowContext {
+  columns: ResultsTableColumns;
+  runCount: number;
+  labels: ResultsTableLabels;
+  clock?: Clock;
+  expandable: boolean;
+  favorites: boolean;
+  totalCells: number;
+  idPrefix: string;
+  onToggle?: ResultsTableProps['onToggle'];
+  onFavoriteChange?: ResultsTableProps['onFavoriteChange'];
+  renderDetail?: ResultsTableProps['renderDetail'];
 }
 
-/**
- * Format time difference (with + prefix)
- */
-function formatTimeDiff(seconds: number | undefined): string {
-  if (seconds === undefined || seconds === null || seconds === 0) return '-';
-  return `+${formatTime(seconds)}`;
-}
+const range = (n: number) => Array.from({ length: n }, (_, i) => i);
 
-/**
- * Format run time with penalty
- */
-function formatRunTime(time: number | undefined, penalty: number | undefined): string {
-  if (time === undefined || time === null) return '-';
+const INTERACTIVE = 'a, button, input, select, textarea, label, summary, [role="button"], [contenteditable="true"]';
 
-  const total = time + (penalty || 0);
-  const timeStr = formatTime(total);
-
-  if (penalty && penalty > 0) {
-    return `${timeStr} (${penalty}s)`;
-  }
-  return timeStr;
-}
-
-/**
- * Get status display text
- */
-function getStatusDisplay(status: ResultStatus | undefined): string {
-  const statusMap: Record<ResultStatus, string> = {
-    dns: 'DNS',
-    dnf: 'DNF',
-    dsq: 'DSQ',
-    final: '',
-    provisional: 'PROV',
-    live: 'LIVE',
-  };
-  return status ? statusMap[status] : '';
-}
-
-/**
- * Get rank display (with medal indicator)
- */
-function getRankDisplay(rank: number | undefined, status: ResultStatus | undefined): string {
-  if (status === 'dns' || status === 'dnf' || status === 'dsq') {
-    return getStatusDisplay(status);
-  }
-  if (rank === undefined || rank === null) return '-';
-  return rank.toString();
-}
-
-/**
- * Medal icon SVG for podium positions
- */
-function MedalIcon({ position }: { position: 1 | 2 | 3 }) {
-  const colors = {
-    1: { primary: '#FFD700', secondary: '#FFA500', accent: '#B8860B' },
-    2: { primary: '#C0C0C0', secondary: '#A8A8A8', accent: '#6B7280' },
-    3: { primary: '#CD7F32', secondary: '#B8733D', accent: '#8B4513' },
-  };
-  const { primary, secondary, accent } = colors[position];
-
+function Dash() {
   return (
-    <svg
-      className="csk-results-table__medal-icon"
-      viewBox="0 0 20 20"
-      fill="none"
-      aria-hidden="true"
-    >
-      {/* Ribbon */}
-      <path d="M7 0L10 6L13 0" stroke={accent} strokeWidth="2" fill="none" />
-      {/* Medal circle */}
-      <circle cx="10" cy="12" r="6" fill={primary} stroke={secondary} strokeWidth="1.5" />
-      {/* Inner circle */}
-      <circle cx="10" cy="12" r="3.5" fill={secondary} />
-      {/* Number */}
-      <text
-        x="10"
-        y="13.5"
-        textAnchor="middle"
-        fontSize="5"
-        fontWeight="bold"
-        fill={accent}
-      >
-        {position}
-      </text>
-    </svg>
-  );
-}
-
-/**
- * Simple avatar component for inline use in table
- */
-function InlineAvatar({
-  src,
-  name,
-  size = 'sm'
-}: {
-  src?: string;
-  name: string;
-  size?: 'xs' | 'sm' | 'md';
-}) {
-  const initials = name
-    .split(/\s+/)
-    .map(w => w[0])
-    .slice(0, 2)
-    .join('')
-    .toUpperCase();
-
-  const sizeClass = `csk-results-table__avatar--${size}`;
-
-  if (src) {
-    return (
-      <img
-        src={src}
-        alt=""
-        className={`csk-results-table__avatar ${sizeClass}`}
-        onError={(e) => {
-          // Replace with initials on error
-          const target = e.currentTarget;
-          target.style.display = 'none';
-          const fallback = target.nextElementSibling as HTMLElement;
-          if (fallback) fallback.style.display = 'flex';
-        }}
-      />
-    );
-  }
-
-  return (
-    <span className={`csk-results-table__avatar csk-results-table__avatar--initials ${sizeClass}`}>
-      {initials}
+    <span className="csk-results-table__dash" aria-hidden="true">
+      –
     </span>
   );
 }
 
+/** Mobile stacked runs: one line per run slot, position = run number. */
+function RunStack({ row, ctx }: { row: ResultRow; ctx: RowContext }) {
+  return (
+    <span className="csk-results-table__stack">
+      {range(ctx.runCount).map((i) => {
+        const run: RunCell | undefined = row.runs[i];
+        const showPenalty = run && !run.mark && !run.running;
+        return (
+          <Fragment key={i}>
+            <span
+              className={['csk-results-table__stack-time', run?.best && 'csk-results-table__stack-time--best']
+                .filter(Boolean)
+                .join(' ')}
+            >
+              <RunValue run={run} clock={ctx.clock} />
+            </span>
+            <span className="csk-results-table__stack-pen">
+              {showPenalty && <PenaltyText penalty={run.penalty} notJudgedLabel={ctx.labels.notJudged} />}
+            </span>
+          </Fragment>
+        );
+      })}
+    </span>
+  );
+}
+
+/** Start list: start time per run slot, stacked; a mark (e.g. DNS omluven) inline instead. */
+function StartStack({ row, ctx }: { row: ResultRow; ctx: RowContext }) {
+  return (
+    <span className="csk-results-table__starts">
+      {range(ctx.runCount).map((i) => {
+        const run = row.runs[i];
+        return (
+          <span key={i} className="csk-results-table__start">
+            {run?.mark ? <MarkBadge mark={run.mark} /> : run?.start ?? <TimeValue value={null} />}
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
+const ResultsTableRow = memo(function ResultsTableRow({
+  row,
+  expanded,
+  ctx,
+}: {
+  row: ResultRow;
+  expanded: boolean;
+  ctx: RowContext;
+}) {
+  const { labels } = ctx;
+  const startlist = ctx.columns === 'startlist';
+  const nonRanked = row.mark === 'NR';
+  const blockingMark = row.mark && !nonRanked ? row.mark : undefined;
+  const runCarriesMark = row.runs.some((r) => r?.mark);
+  const waiting = isNotYet(row.diff);
+  const mutedResult = Boolean(row.running) || waiting || nonRanked;
+  const detailId = `${ctx.idPrefix}-detail-${String(row.id)}`;
+  const hasDetail = expanded && Boolean(ctx.renderDetail);
+
+  // Name line 2: state badge, NR mark and note first (they must stay visible), then the club (mobile only).
+  const hasExtras = Boolean(row.state || nonRanked || row.note);
+  const secondary =
+    hasExtras || row.club ? (
+      <>
+        {row.state && <StatusBadge state={row.state} size="sm" />}
+        {nonRanked && <MarkBadge mark="NR" />}
+        {row.note && <span className="csk-results-table__note">{row.note}</span>}
+        {row.club && (
+          <span className="csk-results-table__club-inline">
+            {hasExtras ? ' · ' : ''}
+            {row.club}
+          </span>
+        )}
+      </>
+    ) : undefined;
+
+  const handleClick = (e: MouseEvent<HTMLTableRowElement>) => {
+    const target = e.target as Element;
+    const interactive = target.closest(INTERACTIVE);
+    if (interactive && !interactive.hasAttribute('data-csk-row-toggle')) return;
+    ctx.onToggle?.(row.id, row);
+  };
+
+  const classes = [
+    'csk-results-table__row',
+    ctx.expandable && 'csk-results-table__row--expandable',
+    expanded && 'csk-results-table__row--expanded',
+    row.podium && `csk-results-table__row--podium-${row.podium}`,
+    row.state && `csk-results-table__row--${row.state}`,
+    row.running && 'csk-results-table__row--running',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const rankCell = (() => {
+    if (startlist) return <BibBadge bib={row.bib} />;
+    if (row.categoryRank) {
+      const classRank = knownNumber(row.rank);
+      return (
+        <RankValue
+          rank={row.categoryRank.rank}
+          podium={row.podium}
+          sub={classRank !== null ? labels.overall(classRank) : undefined}
+          noRankLabel={labels.noRank}
+        />
+      );
+    }
+    return <RankValue rank={row.rank} podium={row.podium} noRankLabel={labels.noRank} />;
+  })();
+
+  const diffContent = (desktop: boolean): ReactNode => {
+    const badge = (label: string) =>
+      desktop ? (
+        <StatusBadge state="unknown" size="sm" label={label} />
+      ) : (
+        <span className="csk-results-table__sub-text">{label}</span>
+      );
+    if (row.running) return badge(labels.onCourse);
+    if (nonRanked) return <span className="csk-results-table__sub-text">{labels.nonRanked}</span>;
+    if (blockingMark) return null;
+    if (waiting) return badge(labels.waiting);
+    if (row.diff === undefined) return <Dash />;
+    return <TimeValue value={row.diff} sign variant="muted" />;
+  };
+
+  let resultMain: ReactNode;
+  if (blockingMark) {
+    resultMain = runCarriesMark ? <Dash /> : <MarkBadge mark={blockingMark} />;
+  } else {
+    resultMain = <TimeValue value={row.result} variant={mutedResult ? 'muted' : 'default'} />;
+  }
+
+  return (
+    <>
+      <tr className={classes} onClick={ctx.expandable ? handleClick : undefined}>
+        {ctx.expandable && (
+          <td className="csk-results-table__chev">
+            <button
+              type="button"
+              className="csk-results-table__toggle"
+              data-csk-row-toggle=""
+              aria-expanded={expanded}
+              aria-controls={hasDetail ? detailId : undefined}
+              aria-label={labels.toggle(row)}
+            >
+              <Icon name="chevron-right" size={14} />
+            </button>
+          </td>
+        )}
+        <td className={startlist ? 'csk-results-table__bib' : 'csk-results-table__rank'}>{rankCell}</td>
+        {ctx.favorites && (
+          <td className="csk-results-table__star">
+            <StarButton
+              pressed={Boolean(row.favorite)}
+              label={labels.favorite(row)}
+              onPressedChange={(next) => ctx.onFavoriteChange?.(row, next)}
+            />
+          </td>
+        )}
+        <th scope="row" className="csk-results-table__name">
+          <AthleteName name={row.name} categoryTag={row.categoryTag} secondary={secondary} />
+        </th>
+        <td className="csk-results-table__club csk-results-table__d">{row.club}</td>
+        {startlist ? (
+          <td className="csk-results-table__num csk-results-table__starts-cell">
+            <StartStack row={row} ctx={ctx} />
+          </td>
+        ) : (
+          <>
+            <td className="csk-results-table__num csk-results-table__runs csk-results-table__m">
+              <RunStack row={row} ctx={ctx} />
+            </td>
+            {range(ctx.runCount).map((i) => {
+              const run = row.runs[i];
+              const penalty = run && !run.mark && !run.running ? run.penalty : undefined;
+              return (
+                <Fragment key={i}>
+                  <td className="csk-results-table__num csk-results-table__run-time csk-results-table__d">
+                    <RunValue run={run} clock={ctx.clock} />
+                  </td>
+                  <td className="csk-results-table__run-pen csk-results-table__d">
+                    {penalty !== undefined && <PenaltyChip penalty={knownNumber(penalty)} />}
+                  </td>
+                </Fragment>
+              );
+            })}
+            <td className="csk-results-table__num csk-results-table__result">
+              <span className="csk-results-table__result-main">{resultMain}</span>
+              <span className="csk-results-table__result-sub">{diffContent(false)}</span>
+            </td>
+            <td className="csk-results-table__num csk-results-table__diff csk-results-table__d">
+              {diffContent(true)}
+            </td>
+          </>
+        )}
+      </tr>
+      {hasDetail && (
+        <tr className="csk-results-table__detail-row" id={detailId}>
+          <td colSpan={ctx.totalCells} className="csk-results-table__detail-cell">
+            <div className="csk-results-table__detail">{ctx.renderDetail?.(row)}</div>
+          </td>
+        </tr>
+      )}
+    </>
+  );
+});
+
 // ============================================================================
-// ResultsTable Component
+// ResultsTable
 // ============================================================================
 
+/**
+ * Results table v2 (live and official results, start list).
+ *
+ * The data model is visual (`ResultRow`, `RunCell`, `Observed<T>`); the
+ * application maps its contract onto it and sorts the rows. Mobile columns:
+ * chevron · # · ★ · name + club · runs (stacked, position = run number) ·
+ * result + gap. Desktop columns (container query from 640 px, or `density`):
+ * + club column, runs side by side with `PenaltyChip` after the time, separate
+ * gap column. Times never wrap. A mark replaces the time. The table has no
+ * sticky header and no overflow wrapper: sticky headers belong to the page.
+ */
 export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
   (
     {
-      results,
-      variant = 'default',
-      styleVariant = 'default',
-      size = 'md',
-      section,
-      showRuns = false,
-      showTimeDiff = true,
-      showCountry = false,
-      showClub = true,
-      showCategory = false,
-      showAgeCategory = false,
-      showAgeCategoryRank = false,
-      showPoints = false,
-      showPodiumHighlights = true,
-      highlightPositions = 3,
-      showLiveIndicator = true,
-      showRound = false,
-      showProgression = false,
-      showStartNumber = false,
-      showAvatars = false,
-      columns: customColumns,
-      renderCell,
-      onRowClick,
-      energyHighlights = false,
+      rows,
+      columns = 'single',
+      density,
+      expandedId,
+      onToggle,
+      renderDetail,
+      onFavoriteChange,
+      clock,
+      labels: labelsProp,
       caption,
-      captionVisible = false,
-      loading = false,
       emptyState,
-      stickyHeader = false,
       className,
       ...props
     },
     ref
   ) => {
-    const [hoveredRow, setHoveredRow] = useState<string | number | null>(null);
+    const idPrefix = useId();
+    const labels = useMemo(() => ({ ...RESULTS_TABLE_LABELS, ...labelsProp }), [labelsProp]);
+    const startlist = columns === 'startlist';
+    const runCount = startlist
+      ? Math.max(1, ...rows.map((r) => r.runs.length))
+      : columns === 'pair'
+        ? 2
+        : 1;
+    const expandable = Boolean(onToggle);
+    const favorites = Boolean(onFavoriteChange);
+    const totalCells =
+      (expandable ? 1 : 0) +
+      (favorites ? 1 : 0) +
+      (startlist ? 4 : 5 + 2 * runCount + 1);
 
-    // Filter results by section if specified
-    const filteredResults = section
-      ? results.filter((r) => r.section === section)
-      : results;
+    const ctx = useMemo<RowContext>(
+      () => ({
+        columns,
+        runCount,
+        labels,
+        clock,
+        expandable,
+        favorites,
+        totalCells,
+        idPrefix,
+        onToggle,
+        onFavoriteChange,
+        renderDetail,
+      }),
+      [columns, runCount, labels, clock, expandable, favorites, totalCells, idPrefix, onToggle, onFavoriteChange, renderDetail]
+    );
 
-    // Default columns with container query responsive hiding
-    const defaultColumns: ResultsTableColumn[] = [
-      { key: 'rank', header: '#', width: '60px', align: 'center', visible: true, priority: 1 },
-      { key: 'startNumber', header: 'St.č.', width: '50px', align: 'center', visible: showStartNumber, hideAt: 'sm', priority: 6 },
-      { key: 'name', header: 'Závodník', align: 'left', visible: true, priority: 1 },
-      { key: 'club', header: 'Klub', align: 'left', visible: showClub, hideAt: 'md', priority: 4 },
-      { key: 'country', header: 'Země', width: '70px', align: 'center', visible: showCountry, hideAt: 'sm', priority: 5 },
-      { key: 'category', header: 'Kat.', width: '70px', align: 'center', visible: showCategory, hideAt: 'sm', priority: 5 },
-      { key: 'ageCategory', header: 'Věk', width: '70px', align: 'center', visible: showAgeCategory, hideAt: 'md', priority: 5 },
-      { key: 'round', header: 'Kolo', width: '60px', align: 'center', visible: showRound, priority: 3 },
-      { key: 'run1', header: '1. jízda', width: '120px', align: 'right', visible: showRuns, hideAt: 'md', priority: 4 },
-      { key: 'run2', header: '2. jízda', width: '120px', align: 'right', visible: showRuns, hideAt: 'md', priority: 4 },
-      { key: 'totalTime', header: 'Čas', width: '100px', align: 'right', visible: true, priority: 1 },
-      { key: 'timeDiff', header: 'Rozdíl', width: '100px', align: 'right', visible: showTimeDiff, hideAt: 'sm', priority: 3 },
-      { key: 'points', header: 'Body', width: '70px', align: 'right', visible: showPoints, hideAt: 'sm', priority: 3 },
-      { key: 'progression', header: '', width: '40px', align: 'center', visible: showProgression, priority: 2 },
-    ];
+    const expanded = useMemo(() => {
+      if (expandedId === null || expandedId === undefined) return new Set<ResultRowId>();
+      return new Set<ResultRowId>(typeof expandedId === 'object' ? expandedId : [expandedId]);
+    }, [expandedId]);
 
-    const columns = customColumns || defaultColumns.filter((col) => col.visible !== false);
+    const categoryHeader = rows.find((r) => r.categoryRank)?.categoryRank?.category;
+    const rankHeader = labelsProp?.rank ?? (startlist ? labels.bib : categoryHeader ?? labels.rank);
 
-    // Render cell content
-    const getCellContent = (entry: ResultEntry, columnKey: string): ReactNode => {
-      // Custom renderer takes priority
-      if (renderCell) {
-        const customContent = renderCell(entry, columnKey);
-        if (customContent !== undefined) return customContent;
-      }
-
-      switch (columnKey) {
-        case 'rank': {
-          const positionChange =
-            entry.previousRank !== undefined && entry.rank !== undefined
-              ? entry.previousRank - entry.rank
-              : 0;
-          const isPodium = entry.rank && entry.rank >= 1 && entry.rank <= 3 && showPodiumHighlights;
-          return (
-            <span className="csk-results-table__rank-cell">
-              {isPodium && (
-                <MedalIcon position={entry.rank as 1 | 2 | 3} />
-              )}
-              <span className={`csk-results-table__rank ${isPodium ? 'csk-results-table__rank--podium' : ''}`}>
-                {getRankDisplay(entry.rank, entry.status)}
-              </span>
-              {positionChange !== 0 && (
-                <span
-                  className={`csk-results-table__position-change csk-results-table__position-change--${positionChange > 0 ? 'up' : 'down'}`}
-                  aria-label={positionChange > 0 ? `Up ${positionChange}` : `Down ${Math.abs(positionChange)}`}
-                >
-                  {positionChange > 0 ? (
-                    <svg viewBox="0 0 12 12" aria-hidden="true">
-                      <path d="M6 2L10 7H2L6 2Z" fill="currentColor" />
-                    </svg>
-                  ) : (
-                    <svg viewBox="0 0 12 12" aria-hidden="true">
-                      <path d="M6 10L2 5H10L6 10Z" fill="currentColor" />
-                    </svg>
-                  )}
-                  <span>{Math.abs(positionChange)}</span>
-                </span>
-              )}
-              {entry.status === 'live' && showLiveIndicator && (
-                <span className="csk-results-table__live-indicator" aria-label="Live" />
-              )}
-            </span>
-          );
-        }
-        case 'name': {
-          const shouldShowAvatar = showAvatars === true ||
-            (showAvatars === 'podium' && entry.rank && entry.rank <= 3);
-          return (
-            <span className="csk-results-table__name">
-              {shouldShowAvatar && (
-                <InlineAvatar src={entry.avatarUrl} name={entry.name} size="sm" />
-              )}
-              <span className="csk-results-table__name-text">
-                {entry.name}
-                {entry.section && (
-                  <span className={`csk-results-table__section csk-results-table__section--${entry.section}`}>
-                    {entry.section.toUpperCase()}
-                  </span>
-                )}
-              </span>
-            </span>
-          );
-        }
-        case 'club':
-          return entry.club || '-';
-        case 'country':
-          return entry.country || '-';
-        case 'category':
-          return entry.category || '-';
-        case 'ageCategory':
-          return entry.ageCategory ? (
-            <span className="csk-results-table__age-category">
-              {entry.ageCategory}
-              {showAgeCategoryRank && entry.ageCategoryRank && (
-                <span className="csk-results-table__age-category-rank">
-                  ({entry.ageCategoryRank}.)
-                </span>
-              )}
-            </span>
-          ) : '-';
-        case 'points':
-          return entry.points !== undefined ? (
-            <span className="csk-results-table__points">{entry.points}</span>
-          ) : '-';
-        case 'run1':
-          return (
-            <span className="csk-results-table__time">
-              {formatRunTime(entry.run1Time, entry.run1Penalty)}
-            </span>
-          );
-        case 'run2':
-          return (
-            <span className="csk-results-table__time">
-              {formatRunTime(entry.run2Time, entry.run2Penalty)}
-            </span>
-          );
-        case 'totalTime':
-          if (entry.status === 'dns' || entry.status === 'dnf' || entry.status === 'dsq') {
-            return (
-              <span className={`csk-results-table__status csk-results-table__status--${entry.status}`}>
-                {getStatusDisplay(entry.status)}
-              </span>
-            );
-          }
-          return (
-            <span className="csk-results-table__time csk-results-table__time--total">
-              {formatTime(entry.totalTime)}
-            </span>
-          );
-        case 'timeDiff':
-          if (entry.rank === 1) return '-';
-          return (
-            <span className="csk-results-table__time csk-results-table__time--diff">
-              {formatTimeDiff(entry.timeDiff)}
-            </span>
-          );
-        case 'startNumber':
-          return entry.startNumber || '-';
-        case 'round':
-          if (!entry.round) return '-';
-          return (
-            <span className={`csk-results-table__round csk-results-table__round--${entry.round.toLowerCase()}`}>
-              {entry.round}
-            </span>
-          );
-        case 'progression':
-          if (!entry.progressed) return null;
-          return (
-            <span className="csk-results-table__progression" title="Postoupil/a do dalšího kola">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z" />
-              </svg>
-            </span>
-          );
-        default:
-          return entry.meta?.[columnKey] !== undefined ? String(entry.meta[columnKey]) : '-';
-      }
-    };
-
-    // Get row modifier classes
-    const getRowClasses = (entry: ResultEntry): string => {
-      const classes = ['csk-results-table__tr'];
-
-      // Podium highlights
-      if (showPodiumHighlights && entry.rank && entry.rank <= highlightPositions) {
-        classes.push(`csk-results-table__tr--rank-${entry.rank}`);
-        if (entry.rank === 1) classes.push('csk-results-table__tr--gold');
-        else if (entry.rank === 2) classes.push('csk-results-table__tr--silver');
-        else if (entry.rank === 3) classes.push('csk-results-table__tr--bronze');
-      }
-
-      // Section highlight
-      if (entry.section) {
-        classes.push(`csk-results-table__tr--section-${entry.section}`);
-      }
-
-      // Status
-      if (entry.status) {
-        classes.push(`csk-results-table__tr--${entry.status}`);
-      }
-
-      // Highlighted (e.g., live update)
-      if (entry.highlighted) {
-        classes.push('csk-results-table__tr--highlighted');
-      }
-
-      // Position change animation
-      if (entry.previousRank !== undefined && entry.rank !== undefined) {
-        if (entry.rank < entry.previousRank) {
-          classes.push('csk-results-table__tr--moved-up');
-        } else if (entry.rank > entry.previousRank) {
-          classes.push('csk-results-table__tr--moved-down');
-        }
-      }
-
-      // Clickable
-      if (onRowClick) {
-        classes.push('csk-results-table__tr--clickable');
-      }
-
-      // Hovered
-      if (hoveredRow === entry.id) {
-        classes.push('csk-results-table__tr--hovered');
-      }
-
-      return classes.join(' ');
-    };
-
-    // Wrapper classes
-    const wrapperClasses = [
-      'csk-results-table-wrapper',
-      stickyHeader && 'csk-results-table-wrapper--sticky',
-      loading && 'csk-results-table-wrapper--loading',
+    const classes = [
+      'csk-results-table',
+      `csk-results-table--${columns}`,
+      density && `csk-results-table--${density}`,
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
-    // Table classes
-    const tableClasses = [
-      'csk-results-table',
-      `csk-results-table--${variant}`,
-      `csk-results-table--${size}`,
-      `csk-results-table--style-${styleVariant}`,
-      energyHighlights && 'csk-results-table--energy-highlights',
-    ]
-      .filter(Boolean)
-      .join(' ');
-
     return (
-      <div ref={ref} className={wrapperClasses} {...props}>
-        <table className={tableClasses}>
-          {caption && (
-            <caption
-              className={
-                captionVisible ? 'csk-results-table__caption' : 'csk-results-table__caption--sr-only'
-              }
-            >
-              {caption}
-            </caption>
-          )}
-          <thead className="csk-results-table__thead">
-            <tr className="csk-results-table__tr csk-results-table__tr--header">
-              {columns.map((column) => (
-                <th
-                  key={column.key}
-                  className={[
-                    'csk-results-table__th',
-                    column.hideAt && `csk-results-table__col--hide-${column.hideAt}`,
-                  ].filter(Boolean).join(' ')}
-                  style={{
-                    width: column.width,
-                    textAlign: column.align,
-                  }}
-                  scope="col"
-                >
-                  {column.header}
+      <div ref={ref} className={classes} {...props}>
+        <table className="csk-results-table__table">
+          {caption && <caption className="csk-results-table__caption">{caption}</caption>}
+          <thead className="csk-results-table__head">
+            <tr>
+              {expandable && (
+                <th scope="col" className="csk-results-table__chev">
+                  <span className="csk-cell-sr">{labels.detailColumn}</span>
                 </th>
-              ))}
+              )}
+              <th scope="col" className={startlist ? 'csk-results-table__bib' : 'csk-results-table__rank'}>
+                {rankHeader}
+              </th>
+              {favorites && (
+                <th scope="col" className="csk-results-table__star">
+                  <span className="csk-cell-sr">{labels.favoriteColumn}</span>
+                </th>
+              )}
+              <th scope="col" className="csk-results-table__name">
+                {labels.athlete}
+              </th>
+              <th scope="col" className="csk-results-table__club csk-results-table__d">
+                {labels.club}
+              </th>
+              {startlist ? (
+                <th scope="col" className="csk-results-table__num">
+                  {labels.start}
+                </th>
+              ) : (
+                <>
+                  <th scope="col" className="csk-results-table__num csk-results-table__m">
+                    {columns === 'pair' ? labels.runs : labels.singleRun}
+                  </th>
+                  {range(runCount).map((i) => (
+                    <th key={i} scope="col" colSpan={2} className="csk-results-table__num csk-results-table__d">
+                      {columns === 'pair' ? labels.runLabels[i] ?? `${i + 1}.` : labels.singleRun}
+                    </th>
+                  ))}
+                  <th scope="col" className="csk-results-table__num">
+                    {labels.result}
+                  </th>
+                  <th scope="col" className="csk-results-table__num csk-results-table__d">
+                    {labels.diff}
+                  </th>
+                </>
+              )}
             </tr>
           </thead>
-          <tbody className="csk-results-table__tbody">
-            {filteredResults.length === 0 ? (
-              <tr className="csk-results-table__tr csk-results-table__tr--empty">
-                <td colSpan={columns.length} className="csk-results-table__td">
-                  {emptyState || <span className="csk-results-table__empty">Žádné výsledky</span>}
+          <tbody>
+            {rows.length === 0 ? (
+              <tr className="csk-results-table__empty-row">
+                <td colSpan={totalCells} className="csk-results-table__empty">
+                  {emptyState ?? labels.empty}
                 </td>
               </tr>
             ) : (
-              filteredResults.map((entry) => (
-                <tr
-                  key={entry.id}
-                  className={getRowClasses(entry)}
-                  onClick={onRowClick ? () => onRowClick(entry) : undefined}
-                  onMouseEnter={() => setHoveredRow(entry.id)}
-                  onMouseLeave={() => setHoveredRow(null)}
-                  tabIndex={onRowClick ? 0 : undefined}
-                  onKeyDown={
-                    onRowClick
-                      ? (e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            onRowClick(entry);
-                          }
-                        }
-                      : undefined
-                  }
-                  role={onRowClick ? 'button' : undefined}
-                >
-                  {columns.map((column) => (
-                    <td
-                      key={column.key}
-                      className={[
-                        'csk-results-table__td',
-                        `csk-results-table__td--${column.key}`,
-                        column.hideAt && `csk-results-table__col--hide-${column.hideAt}`,
-                      ].filter(Boolean).join(' ')}
-                      style={{ textAlign: column.align }}
-                    >
-                      {getCellContent(entry, column.key)}
-                    </td>
-                  ))}
-                </tr>
+              rows.map((row) => (
+                <ResultsTableRow key={row.id} row={row} expanded={expanded.has(row.id)} ctx={ctx} />
               ))
             )}
           </tbody>
         </table>
-        {loading && (
-          <div className="csk-results-table__loading-overlay">
-            <div className="csk-results-table__spinner" aria-label="Načítání" />
-          </div>
-        )}
       </div>
     );
   }

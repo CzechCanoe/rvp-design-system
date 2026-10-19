@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { allComponents, testDefaults } from './config';
+import { allComponents, testDefaults, viewportStories } from './config';
 import { applyQuarantine } from './quarantine';
 
 /**
@@ -71,6 +71,32 @@ test.describe('Components - Mobile 390', () => {
     });
   });
 });
+
+// v2 T9+: responsive stories (ResultsTable, RunDetail) at phone 390 and desktop 1280 width;
+// the columns switch by container query. Functional checks: tests/results-table.spec.ts.
+for (const viewport of [
+  { label: 'mobile', width: 390, height: 800 },
+  { label: 'desktop', width: 1280, height: 800 },
+]) {
+  test.describe(`Components - ${viewport.label} ${viewport.width}`, () => {
+    test.use({ viewport: { width: viewport.width, height: viewport.height } });
+
+    for (const story of viewportStories) {
+      test(`${story.name} - ${viewport.width} px screenshot`, async ({ page }) => {
+        await page.goto(`/iframe.html?id=${story.storyId}&viewMode=story`);
+        await page.waitForSelector('#storybook-root', { state: 'visible' });
+        await page.waitForLoadState('networkidle');
+        await page.evaluate(() => document.fonts.ready);
+        await page.waitForTimeout(testDefaults.settleTime);
+
+        await expect(page.locator('#storybook-root')).toHaveScreenshot(`${story.name}-${viewport.label}.png`, {
+          maxDiffPixels: testDefaults.maxDiffPixels,
+          animations: 'disabled',
+        });
+      });
+    }
+  });
+}
 
 test.describe('Components - Dark Mode', () => {
   for (const component of allComponents) {
