@@ -29,7 +29,7 @@ Display font (Plus Jakarta Sans):
 ├── Large buttons
 └── Card titles (.csk-card__title)
 
-Body font (Inter):
+Body font (IBM Plex Sans):
 ├── Body text
 ├── Form inputs
 ├── Table content

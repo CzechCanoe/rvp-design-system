@@ -6,8 +6,7 @@
  * - sans:    IBM Plex Sans 400/500/600 – text, tables, forms
  * - mono:    IBM Plex Mono 400/600 – times, gaps, start times
  *
- * Font files are loaded by the fonts task (v2 T2); until then the stacks fall
- * back to system fonts.
+ * Font files are self-hosted and declared in src/styles/fonts.css (public/fonts/).
  *
  * Sizes are in rem (16px root) so they follow the reader's font-size setting;
  * the px value from TOKENS.md is noted next to each.

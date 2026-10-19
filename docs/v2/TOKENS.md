@@ -101,7 +101,7 @@ Cíl: jeden prefix, jedna paleta, žádné režimy kromě `embed`. Zdroj hodnot:
 | sans | IBM Plex Sans | 400, 500, 600 | text, tabulky, formuláře; `font-variant-numeric: tabular-nums` globálně v tabulkách |
 | mono | IBM Plex Mono | 400, 600 | časy, rozdíly, startovní časy |
 
-Fonty self-hosted v `public/fonts/` jako dnes Inter a JetBrains Mono (woff2, subset latin-ext). Inter a JetBrains Mono se odstraní.
+Fonty self-hosted v `public/fonts/` (woff2, subsety latin + latin-ext, licence OFL v `public/fonts/LICENSES/`), `@font-face` v `src/styles/fonts.css` s `font-display: swap`. Inter a JetBrains Mono jsou odstraněny. Do `dist/` se woff2 soubory kopírují jako `dist/fonts/` (nevkládají se inline); `fonts.css` je odkazuje jako `url('./fonts/…')` vedle CSS.
 
 ## Mapování 1.x → 2.0 (pro codemod ve fázi 1)
 
