@@ -7125,3 +7125,5 @@ Gaps for T18/T19 are listed in the PR body.
 
 ### Poznámky
 Lokální Playwright proti vlastnímu storybook-static (port 6006 byl obsazen cizím serverem).
+
+Snapshots Event-Detail (390 + 1280) vygenerovány v CI (PR #77).
