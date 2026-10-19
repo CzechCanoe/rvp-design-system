@@ -169,7 +169,7 @@
 }
 
 .csk-calendar__day--outside .csk-calendar__day-number {
-  color: var(--csk-color-text-3);
+  color: var(--csk-color-text-2);
 }
 
 .csk-calendar__day--today {
@@ -601,81 +601,7 @@
 .csk-calendar--lg .csk-calendar__event {
   padding: var(--csk-space-1) var(--csk-space-2);
   font-size: var(--csk-text-md);
-}
-
-/* Note: Style variants gradient, glass, bordered removed. Only 'embed' variant remains. */
-
-/* ==========================================================================
-   DARK MODE
-   ========================================================================== */
-
-[data-theme='dark'] .csk-calendar__day--today {
-  background-color: color-mix(in srgb, var(--csk-color-action) 10%, transparent);
-}
-
-[data-theme='dark'] .csk-calendar__day--weekend {
-  background-color: var(--csk-color-text);
-}
-
-[data-theme='dark'] .csk-calendar__day--weekend.csk-calendar__day--outside {
-  background-color: var(--csk-color-text);
-}
-
-[data-theme='dark'] .csk-calendar__day--clickable:hover {
-  background-color: var(--csk-color-surface-3);
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--csk-color-action) 20%, transparent);
-}
-
-[data-theme='dark'] .csk-calendar__day--clickable.csk-calendar__day--today:hover {
-  background-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--csk-color-action) 30%, transparent);
-}
-
-[data-theme='dark'] .csk-calendar__event--default {
-  background-color: var(--csk-color-text-2);
-  color: var(--csk-color-text);
-}
-
-[data-theme='dark'] .csk-calendar__event--primary {
-  background-color: color-mix(in srgb, var(--csk-color-action) 20%, transparent);
-  color: var(--csk-color-action);
-}
-
-[data-theme='dark'] .csk-calendar__event--success {
-  background-color: color-mix(in srgb, var(--csk-color-success) 20%, transparent);
-  color: var(--csk-color-success);
-}
-
-[data-theme='dark'] .csk-calendar__event--warning {
-  background-color: color-mix(in srgb, var(--csk-color-warning) 20%, transparent);
-  color: var(--csk-color-warning);
-}
-
-[data-theme='dark'] .csk-calendar__event--error {
-  background-color: color-mix(in srgb, var(--csk-color-error) 20%, transparent);
-  color: var(--csk-color-error);
-}
-
-[data-theme='dark'] .csk-calendar__event--info {
-  background-color: color-mix(in srgb, var(--csk-color-action) 20%, transparent);
-  color: var(--csk-color-info);
-}
-
-[data-theme='dark'] .csk-calendar__event-preview {
-  background-color: var(--csk-color-surface-2);
-  border-color: var(--csk-color-border);
-}
-
-[data-theme='dark'] .csk-calendar__event-preview::before {
-  border-right-color: var(--csk-color-border);
-}
-
-[data-theme='dark'] .csk-calendar__event-preview::after {
-  border-right-color: var(--csk-color-surface-2);
-}
-
-
-/* ==========================================================================
+}/* ==========================================================================
    ANIMATIONS
    ========================================================================== */
 
@@ -1015,22 +941,7 @@
 
 .csk-calendar--style-embed.csk-calendar--animated .csk-calendar__nav-btn:active {
   transform: none;
-}
-
-/* Dark mode embed */
-[data-theme='dark'] .csk-calendar--style-embed {
-  border-color: var(--csk-color-border);
-}
-
-[data-theme='dark'] .csk-calendar--style-embed .csk-calendar__days {
-  border-color: var(--csk-color-border);
-}
-
-[data-theme='dark'] .csk-calendar--style-embed .csk-calendar__nav-btn {
-  border-color: var(--csk-color-border);
-}
-
-/* ==========================================================================
+}/* ==========================================================================
    WEEKEND SHOWCASE LAYOUT
    Completely reimagined layout for sports calendars.
    Weekdays are minimized, weekends are visually dominant.
@@ -1223,30 +1134,7 @@
 
 .csk-calendar--weekend-showcase .csk-calendar__day:not(.csk-calendar__day--weekend).csk-calendar__day--outside {
   opacity: 0.3;
-}
-
-/* Dark mode */
-[data-theme='dark'] .csk-calendar--weekend-showcase .csk-calendar__weekday:nth-child(6),
-[data-theme='dark'] .csk-calendar--weekend-showcase .csk-calendar__weekday:nth-child(7) {
-  color: var(--csk-color-action);
-  background: linear-gradient(180deg, color-mix(in srgb, var(--csk-color-action) 10%, transparent) 0%, transparent 100%);
-}
-
-[data-theme='dark'] .csk-calendar--weekend-showcase .csk-calendar__day--weekend {
-  background: var(--csk-color-surface-2);
-  border-left-color: var(--csk-color-brand);
-}
-
-[data-theme='dark'] .csk-calendar--weekend-showcase .csk-calendar__day--weekend:hover {
-  background: color-mix(in srgb, var(--csk-color-action) 10%, transparent);
-  border-left-color: var(--csk-color-action);
-}
-
-[data-theme='dark'] .csk-calendar--weekend-showcase .csk-calendar__day--weekend.csk-calendar__day--today {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-action) 15%, transparent) 0%, var(--csk-color-surface-2) 100%);
-}
-
-/* Container queries for showcase layout */
+}/* Container queries for showcase layout */
 @container calendar (max-width: 600px) {
   .csk-calendar--weekend-showcase .csk-calendar__weekdays {
     grid-template-columns: 0.4fr 0.4fr 0.4fr 0.4fr 0.4fr 2fr 2fr;

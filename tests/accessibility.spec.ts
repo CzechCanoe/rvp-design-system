@@ -182,7 +182,7 @@ test.describe('Keyboard Navigation', () => {
 
     // Tab to checkbox
     await page.keyboard.press('Tab');
-    const checkbox = page.locator('.csk-checkbox__input');
+    const checkbox = page.locator('input.csk-checkbox');
     await expect(checkbox).toBeFocused();
 
     // Toggle with Space
@@ -199,7 +199,7 @@ test.describe('Keyboard Navigation', () => {
 
     // Tab to switch
     await page.keyboard.press('Tab');
-    const switchInput = page.locator('.csk-switch__input');
+    const switchInput = page.locator('input.csk-switch');
     await expect(switchInput).toBeFocused();
 
     // Toggle with Space
