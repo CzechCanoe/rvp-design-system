@@ -67,12 +67,25 @@ export interface OnCourseRiderProps extends Omit<HTMLAttributes<HTMLDivElement>,
   /** Gap to the leader in seconds, signed (− = ahead). */
   toLeader?: number;
   timeToBeat?: OnCourseTimeToBeat;
-  /** The rider the page follows: tinted, with a brand stripe. */
+  /** The rider the page follows: a brand stripe and a semibold name. */
   featured?: boolean;
   /** No fresh data: everything on the rider is frozen (the panel passes this on). */
   stale?: boolean;
   clock?: Clock;
   labels?: Partial<OnCourseRiderLabels>;
+}
+
+/** „+2 tr.“; a penalty not judged yet reads „(·) tr.“, never „+0 tr.“. */
+function penaltyLabel(penalty: ObservedNumber, unit: string): ReactNode {
+  const value = typeof penalty === 'number' ? penalty : penalty && penalty.state === 'known' ? penalty.value : null;
+  if (value === null || !Number.isFinite(value)) {
+    return (
+      <>
+        <PenaltyText penalty={null} /> {unit}
+      </>
+    );
+  }
+  return `+${value} ${unit}`;
 }
 
 /**
@@ -122,8 +135,7 @@ export const OnCourseRider = forwardRef<HTMLDivElement, OnCourseRiderProps>(
         <RunningTime
           elapsedSeconds={time.elapsedSeconds}
           receivedAt={time.receivedAt}
-          // A stale panel freezes the value at once, whatever its receipt time.
-          staleAfterSeconds={stale ? 0 : time.staleAfterSeconds}
+          staleAfterSeconds={time.staleAfterSeconds}
           clock={clock}
           ageLabel={labels.stopped}
         />
@@ -131,14 +143,20 @@ export const OnCourseRider = forwardRef<HTMLDivElement, OnCourseRiderProps>(
     } else if (status === 'finished-pending') {
       timeNode = <TimeValue value={finish?.time ?? null} variant="stale" />;
     } else {
-      timeNode = <TimeValue value={status === 'at-start' ? 0 : null} precision={1} variant="muted" />;
+      timeNode = (
+        <TimeValue
+          value={status === 'at-start' ? 0 : null}
+          precision={1}
+          variant={stale ? 'stale' : 'muted'}
+        />
+      );
     }
 
     const subs: ReactNode[] = [];
     if (status === 'finished-pending' && finish && finish.penalty !== undefined) {
       subs.push(
         <span key="pen">
-          <PenaltyText penalty={finish.penalty} /> {labels.penalty}
+          {penaltyLabel(finish.penalty, labels.penalty)}
         </span>
       );
     }

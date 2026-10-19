@@ -72,8 +72,9 @@ export const Stale: Story = {
             featured: false,
             toLeader: undefined,
             split: undefined,
-            secondary: undefined,
-            time: { elapsedSeconds: 46.5, receivedAt: STALE_SINCE },
+            secondary: 'Slovenská kanoistika',
+            // RunningTime itself froze 3 s after receipt: 43.5 + 3 = 46.5
+            time: { elapsedSeconds: 43.5, receivedAt: STALE_SINCE },
           }
         : r
     ),

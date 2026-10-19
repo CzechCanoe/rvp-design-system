@@ -38,7 +38,7 @@ describe('OnCoursePanel', () => {
   it('keeps all riders when stale, freezes the time and says since when', () => {
     const clock = createTestClock({ now: STORY_NOW });
     const riders = liveRiders().map((r) =>
-      r.status === 'running' ? { ...r, time: { elapsedSeconds: 46.5, receivedAt: STALE_SINCE } } : r
+      r.status === 'running' ? { ...r, time: { elapsedSeconds: 43.5, receivedAt: STALE_SINCE } } : r
     );
     render(
       <OnCoursePanel riders={riders} stale receivedAt={STALE_SINCE} timeZone="Europe/Prague" clock={clock} />
@@ -52,10 +52,22 @@ describe('OnCoursePanel', () => {
     expect(screen.getByRole('timer')).toHaveTextContent('46.5');
   });
 
-  it('freezes a freshly received time at once when the panel is stale', () => {
+  it('does not move a running time when the panel goes stale (no jump back)', () => {
     const clock = createTestClock({ now: STORY_NOW });
-    render(<OnCoursePanel riders={liveRiders()} stale receivedAt={STORY_NOW} clock={clock} />);
-    expect(screen.getByRole('timer').hasAttribute('data-stale')).toBe(true);
+    const { rerender } = render(<OnCoursePanel riders={liveRiders()} clock={clock} />);
+    act(() => {
+      clock.advance(5000);
+      clock.flushFrames();
+    });
+    const frozen = screen.getByRole('timer').textContent;
+    rerender(<OnCoursePanel riders={liveRiders()} stale receivedAt={STORY_NOW} clock={clock} />);
+    expect(screen.getByRole('timer').textContent).toBe(frozen);
+  });
+
+  it('writes the penalty of a finished rider as +2 tr.', () => {
+    const clock = createTestClock({ now: STORY_NOW });
+    render(<OnCoursePanel riders={liveRiders()} clock={clock} />);
+    expect(screen.getByText('+2 tr.')).toBeInTheDocument();
   });
 
   it('collapses through the header toggle', () => {
