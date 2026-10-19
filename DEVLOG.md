@@ -7028,3 +7028,6 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 ### Poznámky
 - Running time in ProgramList uses `error-text` (red-dark): `live` red is not AA on `live-bg` (same rule as in ResultsTable).
 - The Notice with the choice of running phases stays in the application (COMPONENTS.md).
+
+### Poznámka po CI (T11)
+- Snapshoty 390 + 1280 vygenerovalo CI (`test: update snapshots (CI)`): StartlistTable (4 stories), ProgramList (3 stories).
