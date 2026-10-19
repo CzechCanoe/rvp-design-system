@@ -152,6 +152,22 @@ export const viewportStories: Array<{ name: string; storyId: string }> = [
   { name: 'OnCoursePanel-RiderStates', storyId: 'components-oncoursepanel--rider-states' },
 ];
 
+/**
+ * Live page stories (v2 T12, reference Live1-6): full pages composed of design system components,
+ * snapshotted at phone 390 (primary canvas) and desktop 1280 by tests/live-pages.spec.ts.
+ * Prototype tolerance (80 px, see CLAUDE.md Testování). All use one fixed test clock.
+ */
+export const pageStories: Array<{ name: string; storyId: string }> = [
+  { name: 'Live-Running', storyId: 'live--running' },
+  { name: 'Live-Expanded', storyId: 'live--expanded' },
+  { name: 'Live-Startlist', storyId: 'live--startlist' },
+  { name: 'Live-Official', storyId: 'live--official' },
+  { name: 'Live-Disconnected', storyId: 'live--disconnected' },
+  { name: 'Live-Program', storyId: 'live--program' },
+];
+
+export const pageStoryMaxDiffPixels = 80;
+
 // =============================================================================
 // TEST DEFAULTS
 // =============================================================================
