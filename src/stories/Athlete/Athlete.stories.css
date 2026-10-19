@@ -166,7 +166,6 @@
 
 .athlete-page__foot {
   display: block;
-  padding: var(--csk-space-4) var(--csk-space-4);
   font-size: var(--csk-text-sm);
   color: var(--csk-color-text-2);
 }
