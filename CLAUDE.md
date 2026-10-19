@@ -15,7 +15,7 @@ Na `main` běží přechod na major verzi 2.0.0. Zadání je v `docs/v2/` (`READ
 - Práce jde po issues „v2 T<N>“, větev `feat/v2-<N>-<slug>` z `main`, PR do `main`. Storybook se po každém merge nasazuje na GitHub Pages.
 - Rolling release PR od Release Please („chore(main): release 2.0.0“) se **nemerguje** až do konce fáze 5. Feature PR se mergují normálně.
 - Kde `docs/v2` a tenhle soubor nesouhlasí (typy, režimy, barvy níže), platí `docs/v2`. Quick Reference níže popisuje 1.x a aktualizuje se v T17.
-- Tokeny jen `--csk-*`, nikdy hex v komponentách; `src/prototypes/` se v T17 maže, nové obrazovky jsou Page stories.
+- Tokeny jen `--csk-*`, nikdy hex v komponentách; `src/prototypes/` byl smazán v T17a, nové obrazovky jsou Page stories.
 
 ---
 
@@ -80,25 +80,22 @@ npm run build-storybook  # Static Storybook
 
 | Script | Co testuje | Čas | Kdy použít |
 |--------|------------|-----|------------|
-| `npm run test` | Vše (1645 testů × 5 prohlížečů) | 30+ min | CI/CD, před release |
-| `npm run test:quick` | Prototypy, pouze chromium | ~4-5 min | **Běžný vývoj** |
-| `npm run test:proto` | Prototypy, všechny prohlížeče | ~20 min | Cross-browser check |
-| `npm run test:components` | Komponenty, pouze chromium | ~2 min | Změny v komponentách |
-| `npm run test:update:quick` | Update snapshots (proto/chromium) | ~4 min | **Jen CI** (workflow), lokálně ne |
-| `npm run test:update:all` | Update snapshots všech specs kromě `@prototype` (chromium) | ~3 min | **Jen CI** (workflow), lokálně ne |
+| `npm run test` | Vše (jen light, jen chromium) | ~3 min | CI/CD, před release |
+| `npm run test:components` | Komponenty (`components.spec.ts`), chromium | ~1-2 min | Změny v komponentách |
+| `npm run test:update` | Update snapshots všech specs (chromium) | ~3 min | **Jen CI** (workflow), lokálně ne |
 
 ### Snapshoty: CI je jediná autorita
 
 - **Lokálně na ARM/RPi** spouštěj `npx playwright test --project=chromium --ignore-snapshots` (funkční testy, axe, bounding boxy). ARM renderuje jinak, takže porovnání snapshotů dělá **jen CI**; snapshoty lokálně negeneruj ani necommituj.
-- **Záměrná změna UI:** přidej na PR label `update-snapshots`. Workflow `update-snapshots.yml` přegeneruje chromium snapshoty všech specs kromě `@prototype`, commitne je jako `test: update snapshots (CI)`, label odebere a vždy (i bez změn snapshotů) spustí CI na HEAD. Počkej na ten commit (`git pull`). Bot commit (GITHUB_TOKEN) spustí `pull_request` run, který skončí `action_required` (bot = first-time contributor, repo setting „Require approval“; nejde obejít autorem commitu ani bez admin změny nastavení) a PR ho nezobrazí; výsledek dispatchnutého CI se proto hlásí jako commit status `CI (dispatched run)` (job `report-status` v `ci.yml`) a PR ho ukáže. Pro čistý `pull_request` run po `git pull` pushni vlastní finální commit. Prototypy: `workflow_dispatch` workflow `Update snapshots` s `prototypes: true`.
-- **Label `skip-snapshots`** na PR: celý Playwright běh s `--ignore-snapshots`; přidání/odebrání labelu spustí CI přes `skip-snapshots-label.yml` (dispatch). Jiné labely CI nespouští ani neruší. `tests/prototypes.spec.ts` běží na CI vždy s `--ignore-snapshots` (do T17).
-- **Tag `@prototype`:** testy, které renderují prototyp (celý `prototypes.spec.ts` a prototypové testy v `cross-browser`/`container-queries`), CI vždy pouští s `--ignore-snapshots`; label `update-snapshots` je neaktualizuje (jen `workflow_dispatch` s `prototypes: true`).
-- **Karanténa:** známé předexistující faily jsou v `QUARANTINE` v `tests/config.ts` (klíč = názvy describe + test, owner = v2 task, který komponentu přetokenuje/přepíše/smaže); CI je hlásí jako skipped. Task, který sáhne na komponentu v karanténě, musí její záznamy odstranit. Nové faily způsobené záměrně rozbitým stylováním mezi T1 a T3 lze přidat s `owner: 'T3'`; T17 seznam vyprázdní.
+- **Záměrná změna UI:** přidej na PR label `update-snapshots`. Workflow `update-snapshots.yml` přegeneruje chromium snapshoty všech specs, commitne je jako `test: update snapshots (CI)`, label odebere a vždy (i bez změn snapshotů) spustí CI na HEAD. Počkej na ten commit (`git pull`). Bot commit (GITHUB_TOKEN) spustí `pull_request` run, který skončí `action_required` (bot = first-time contributor) a PR ho nezobrazí; výsledek dispatchnutého CI se proto hlásí jako commit status `CI (dispatched run)` (job `report-status` v `ci.yml`) a PR ho ukáže. Vlastní finální commit po commitu bota není potřeba.
+- **Playwright na PR** běží jen při změně `src/`, `tests/`, `.storybook/`, `package*.json`, `playwright.config.ts` nebo `.github/workflows/` (job `changes` v `ci.yml`); dispatchnuté běhy vždy. Lint, typecheck, unit testy a build běží vždy.
+- **Jen light, jen chromium:** v2 kreslí pouze světlé téma; žádné `-dark` varianty ani cross-browser projekty.
+- **Karanténa:** známé předexistující faily lze zapsat do `QUARANTINE` v `tests/config.ts` (klíč = názvy describe + test, owner = v2 task); CI je hlásí jako skipped. Seznam je nyní prázdný; task, který sáhne na komponentu v karanténě, musí její záznamy odstranit.
 - **Diff obrázky** jsou v artifactu `playwright-report` daného runu (jen při selhání); do PR dej odkaz na run/artifact.
 
 ### Správný postup při vývoji
 
-1. **Po změně kódu:** Spusť `npm run test:quick`
+1. **Po změně kódu:** Spusť `npm run test:components` (nebo scoped `npx playwright test --project=chromium --ignore-snapshots <soubor>`)
 2. **Pokud test selže:**
    - **Prohlédni diff obrázek** (`test-results/*/...-diff.png`)
    - Rozhodni, zda je změna:
@@ -110,15 +107,14 @@ npm run build-storybook  # Static Storybook
 ### Tolerance (maxDiffPixels)
 
 - **Výchozí komponenty:** 30 px
-- **Výchozí prototypy:** 80 px
 - **Animované prvky** (LiveIndicator, Skeleton): 100+ px
 - **Dynamický obsah** (countdown): 1500+ px
 - **Minor rendering variance** (fonty, ikony): 500 px
 
 ### Konfigurace
 
-- `tests/config.ts` - definice komponent a prototypů s tolerancemi
-- `playwright.config.ts` - projekty (prohlížeče), timeouty
+- `tests/config.ts` - definice komponent a layout stories s tolerancemi
+- `playwright.config.ts` - projekt (chromium), timeouty
 
 ---
 

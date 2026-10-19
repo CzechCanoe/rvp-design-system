@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Playwright configuration for visual regression testing
- * Captures screenshots of all prototypes and Storybook components
+ * Captures screenshots of Storybook components and layouts
  */
 export default defineConfig({
   testDir: './tests',
@@ -24,26 +24,11 @@ export default defineConfig({
     reducedMotion: 'reduce',
   },
 
+  // CI renders and compares chromium only (the sole snapshot authority)
   projects: [
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-    },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-    {
-      name: 'mobile-chrome',
-      use: { ...devices['Pixel 5'] },
-    },
-    {
-      name: 'mobile-safari',
-      use: { ...devices['iPhone 13'] },
     },
   ],
 

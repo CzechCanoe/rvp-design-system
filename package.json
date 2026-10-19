@@ -31,12 +31,8 @@
     "test:unit": "vitest run",
     "typecheck": "tsc --noEmit",
     "test": "playwright test",
-    "test:quick": "playwright test tests/prototypes.spec.ts --project=chromium",
-    "test:proto": "playwright test tests/prototypes.spec.ts",
     "test:components": "playwright test tests/components.spec.ts --project=chromium",
-    "test:update": "playwright test --update-snapshots",
-    "test:update:all": "playwright test --project=chromium --grep-invert @prototype --update-snapshots",
-    "test:update:quick": "playwright test --project=chromium --grep @prototype --update-snapshots",
+    "test:update": "playwright test --project=chromium --update-snapshots",
     "test:report": "playwright show-report"
   },
   "keywords": [
