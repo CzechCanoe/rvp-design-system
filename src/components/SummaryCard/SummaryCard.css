@@ -1,0 +1,60 @@
+.csk-summary-card {
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text);
+  background: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-lg);
+}
+
+.csk-summary-card__title {
+  margin: 0;
+  padding: var(--csk-space-3) var(--csk-space-4);
+  font-family: var(--csk-font-display);
+  font-size: var(--csk-text-lg);
+  font-weight: var(--csk-font-weight-bold);
+  border-bottom: 1px solid var(--csk-color-border-2);
+}
+
+.csk-summary-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-2);
+  padding: var(--csk-space-3) var(--csk-space-4) var(--csk-space-4);
+}
+
+.csk-summary-card__rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-2);
+  margin: 0;
+}
+
+.csk-summary-card__row {
+  display: flex;
+  gap: var(--csk-space-3);
+  justify-content: space-between;
+}
+
+.csk-summary-card__row dt {
+  margin: 0;
+}
+
+.csk-summary-card__row dd {
+  margin: 0;
+  font-weight: var(--csk-font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.csk-summary-card__row--total {
+  padding-top: var(--csk-space-2);
+  font-size: var(--csk-text-lg);
+  border-top: 1px solid var(--csk-color-border-2);
+}
+
+.csk-summary-card__note {
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+}

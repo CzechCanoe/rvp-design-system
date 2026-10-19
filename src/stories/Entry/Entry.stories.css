@@ -1,0 +1,114 @@
+/* Page layout of the Entry story (reference Prihlaska.html): gutters, columns and spacing only. Components are never restyled. */
+
+.entry-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--csk-space-5);
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+  padding-block: var(--csk-space-4) var(--csk-space-8);
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text);
+}
+
+.entry-page__main {
+  display: flex;
+  flex: 999 1 640px;
+  flex-direction: column;
+  gap: var(--csk-space-4);
+  min-width: 0;
+}
+
+.entry-page__aside {
+  display: flex;
+  flex: 1 1 300px;
+  flex-direction: column;
+  gap: var(--csk-space-3);
+  min-width: 0;
+}
+
+.entry-page__muted {
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+}
+
+.entry-page__push {
+  margin-inline-start: auto;
+}
+
+.entry-page__center {
+  text-align: center;
+}
+
+.entry-page__class-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--csk-space-1) var(--csk-space-3);
+  align-items: center;
+}
+
+.entry-page__class-title {
+  margin: 0;
+  font-family: var(--csk-font-display);
+  font-size: var(--csk-text-lg);
+  font-weight: var(--csk-font-weight-bold);
+}
+
+.entry-page__add {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--csk-space-2);
+  align-items: flex-end;
+}
+
+.entry-page__add-input {
+  flex: 1 1 300px;
+}
+
+.entry-page__head-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--csk-space-2) var(--csk-space-4);
+  align-items: center;
+}
+
+.entry-page__warnings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-2);
+  padding: var(--csk-space-3);
+}
+
+.entry-page__nothing-blocks {
+  margin: 0;
+}
+
+.entry-page__submit {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-3);
+}
+
+.entry-page__deadline {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.entry-page__deadline-label {
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+}
+
+.entry-page__deadline-value {
+  font-weight: var(--csk-font-weight-semibold);
+}
+
+.entry-page__deadline-value--accent {
+  font-family: var(--csk-font-display);
+  font-size: var(--csk-text-xl);
+  font-weight: var(--csk-font-weight-bold);
+  color: var(--csk-color-state-provisional-text);
+}

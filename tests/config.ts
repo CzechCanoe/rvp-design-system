@@ -150,6 +150,13 @@ export const viewportStories: Array<{ name: string; storyId: string }> = [
   { name: 'OnCoursePanel-Collapsed', storyId: 'components-oncoursepanel--collapsed' },
   { name: 'OnCoursePanel-InNarrowContainer', storyId: 'components-oncoursepanel--in-narrow-container' },
   { name: 'OnCoursePanel-RiderStates', storyId: 'components-oncoursepanel--rider-states' },
+  // v2 T14: office components (EntryTable scrolls horizontally inside itself on a phone)
+  { name: 'EntryTable-SingleBoats', storyId: 'components-entrytable--single-boats' },
+  { name: 'EntryTable-TwoPersonBoats', storyId: 'components-entrytable--two-person-boats' },
+  { name: 'EntryTable-Empty', storyId: 'components-entrytable--empty' },
+  { name: 'ProposalList', storyId: 'components-proposallist--default' },
+  { name: 'ProposalList-Single', storyId: 'components-proposallist--single-proposal' },
+  { name: 'SummaryCard', storyId: 'components-summarycard--default' },
 ];
 
 /**
@@ -164,6 +171,8 @@ export const pageStories: Array<{ name: string; storyId: string }> = [
   { name: 'Live-Official', storyId: 'live--official' },
   { name: 'Live-Disconnected', storyId: 'live--disconnected' },
   { name: 'Live-Program', storyId: 'live--program' },
+  // v2 T14: club entry (reference Prihlaska.html); functional checks in tests/entry.spec.ts
+  { name: 'Entry-ClubEntry', storyId: 'entry--club-entry' },
 ];
 
 export const pageStoryMaxDiffPixels = 80;
