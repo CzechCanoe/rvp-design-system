@@ -7086,3 +7086,9 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 ### Poznámky
 - Před: Playwright job 6 m 18 s, 567 testů (472 + 95 @prototype). Po: viz PR.
 - KanoeCzContext (verdikt Z) zůstává jako host dekorátor.
+
+### Review follow-ups (T10)
+- Stale panel neprepisuje `staleAfterSeconds` (zadny skok zpet o 3 s); Stale story ma `elapsedSeconds: 43.5` (+3 s = 46.5).
+- Live5 detaily: sekundarni radek zustava, `0.0` na startu je v stale tecovane, penalizace `+2 tr.`, stari zmrazeneho casu pod casem.
+- Radek jezdce je CSS grid (bib | jmeno | cas), podradek ve sloupci jmena bez pevne sirky BibBadge.
+- Po T17a: jen light varianty (a11y spec uz bez dark).
