@@ -287,7 +287,7 @@ export const Interactive: Story = {
           />
         </Card>
 
-        <p style={{ fontSize: '0.875rem', color: 'var(--csk-color-on-surface-muted)' }}>
+        <p style={{ fontSize: '0.875rem', color: 'var(--csk-color-text-3)' }}>
           Aktivní filtry: {filters.length}, Hledání: {searchQuery || '(prázdné)'}
         </p>
       </div>
@@ -318,11 +318,11 @@ export const InsideCard: Story = {
               gap: '0.5rem',
               marginTop: '0.5rem',
               padding: '0.5rem',
-              background: 'var(--csk-color-surface-secondary)',
+              background: 'var(--csk-color-surface-2)',
               borderRadius: 'var(--csk-radius-md)',
             }}
           >
-            <span style={{ color: 'var(--csk-color-on-surface-muted)', fontSize: '0.875rem' }}>
+            <span style={{ color: 'var(--csk-color-text-3)', fontSize: '0.875rem' }}>
               [Input a Select komponenty]
             </span>
           </div>

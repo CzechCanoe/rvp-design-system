@@ -168,7 +168,7 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Three sizes available: sm (20px), md (24px), lg (32px). Large size uses Plus Jakarta Sans display font for more prominent presentation.',
+        story: 'Three sizes available: sm (20px), md (24px), lg (32px). Large size uses Barlow Semi Condensed display font for more prominent presentation.',
       },
     },
   },
@@ -205,7 +205,7 @@ export const DisplayFontShowcase: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Large badges use Plus Jakarta Sans display font with tighter letter-spacing for prominent, sporty feel.',
+        story: 'Large badges use Barlow Semi Condensed display font with tighter letter-spacing for prominent, sporty feel.',
       },
     },
   },

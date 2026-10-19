@@ -23,15 +23,15 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: var(--spacing-3);
-  padding: var(--spacing-3) var(--spacing-4);
-  background: var(--color-bg-primary);
+  gap: var(--csk-space-3);
+  padding: var(--csk-space-3) var(--csk-space-4);
+  background: var(--csk-color-surface);
   border-left: 4px solid transparent;
-  border-bottom: 1px solid var(--color-border-primary);
+  border-bottom: 1px solid var(--csk-color-border);
   transition:
-    background-color var(--duration-fast) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out),
-    border-color var(--duration-fast) var(--ease-out);
+    background-color var(--csk-transition-fast),
+    transform var(--csk-transition-fast),
+    border-color var(--csk-transition-fast);
   text-decoration: none;
   color: inherit;
   font-family: inherit;
@@ -54,12 +54,12 @@
 }
 
 .csk-result-item--clickable:hover {
-  background: var(--color-bg-secondary);
+  background: var(--csk-color-surface-2);
   transform: translateX(4px);
 }
 
 .csk-result-item--clickable:focus {
-  outline: 2px solid var(--color-primary-500);
+  outline: 2px solid var(--csk-color-action);
   outline-offset: -2px;
 }
 
@@ -80,10 +80,10 @@
 }
 
 .csk-result-item__rank-number {
-  font-family: var(--font-family-mono, monospace);
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-semibold);
-  color: var(--color-text-secondary);
+  font-family: var(--csk-font-mono);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-semibold);
+  color: var(--csk-color-text-2);
   font-variant-numeric: tabular-nums;
 }
 
@@ -97,29 +97,29 @@
   justify-content: center;
   width: 28px;
   height: 28px;
-  border-radius: var(--radius-full);
-  font-family: var(--font-family-display, var(--font-family-base));
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-bold);
+  border-radius: var(--csk-radius-pill);
+  font-family: var(--csk-font-display);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-bold);
   line-height: 1;
 }
 
 .csk-result-item__medal--gold {
   background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
   color: #000;
-  box-shadow: 0 2px 6px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--csk-color-podium-1) 40%, transparent);
 }
 
 .csk-result-item__medal--silver {
   background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
   color: #333;
-  box-shadow: 0 2px 6px rgba(192, 192, 192, 0.4);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--csk-color-podium-2) 40%, transparent);
 }
 
 .csk-result-item__medal--bronze {
   background: linear-gradient(135deg, #cd7f32 0%, #daa06d 100%);
   color: #fff;
-  box-shadow: 0 2px 6px rgba(205, 127, 50, 0.4);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--csk-color-podium-3) 40%, transparent);
 }
 
 /* ==========================================================================
@@ -129,31 +129,31 @@
 /* Gold (1st place) */
 .csk-result-item--rank-1 {
   border-left-color: #ffd700;
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.08) 0%, transparent 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-1) 8%, transparent) 0%, transparent 30%);
 }
 
 .csk-result-item--rank-1:hover {
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.12) 0%, var(--color-bg-secondary) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-1) 12%, transparent) 0%, var(--csk-color-surface-2) 30%);
 }
 
 /* Silver (2nd place) */
 .csk-result-item--rank-2 {
   border-left-color: #c0c0c0;
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.08) 0%, transparent 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-2) 8%, transparent) 0%, transparent 30%);
 }
 
 .csk-result-item--rank-2:hover {
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.12) 0%, var(--color-bg-secondary) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-2) 12%, transparent) 0%, var(--csk-color-surface-2) 30%);
 }
 
 /* Bronze (3rd place) */
 .csk-result-item--rank-3 {
   border-left-color: #cd7f32;
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.08) 0%, transparent 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-3) 8%, transparent) 0%, transparent 30%);
 }
 
 .csk-result-item--rank-3:hover {
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.12) 0%, var(--color-bg-secondary) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-3) 12%, transparent) 0%, var(--csk-color-surface-2) 30%);
 }
 
 /* ==========================================================================
@@ -161,19 +161,19 @@
    ========================================================================== */
 
 .csk-result-item--section-dv {
-  border-left-color: var(--color-section-dv);
+  border-left-color: var(--csk-color-section-dv);
 }
 
 .csk-result-item--section-ry {
-  border-left-color: var(--color-section-ry);
+  border-left-color: var(--csk-color-section-ry);
 }
 
 .csk-result-item--section-vt {
-  border-left-color: var(--color-section-vt);
+  border-left-color: var(--csk-color-section-vt);
 }
 
 .csk-result-item--section-generic {
-  border-left-color: var(--color-primary);
+  border-left-color: var(--csk-color-action);
 }
 
 /* ==========================================================================
@@ -185,36 +185,36 @@
   min-width: 0; /* Enable text truncation */
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-1);
+  gap: var(--csk-space-1);
 }
 
 .csk-result-item__header {
   display: flex;
   align-items: baseline;
-  gap: var(--spacing-2);
+  gap: var(--csk-space-2);
   flex-wrap: wrap;
 }
 
 .csk-result-item__title {
-  font-size: var(--text-base-size);
-  font-weight: var(--font-medium);
-  color: var(--color-text-primary);
+  font-size: var(--csk-text-base);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text);
   line-height: 1.4;
 }
 
 .csk-result-item__subtitle {
-  font-size: var(--text-sm-size);
-  color: var(--color-text-secondary);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text-2);
   line-height: 1.4;
 }
 
 .csk-result-item__meta {
-  font-size: var(--text-sm-size);
-  color: var(--color-text-tertiary);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text-3);
   line-height: 1.4;
   display: flex;
   align-items: center;
-  gap: var(--spacing-2);
+  gap: var(--csk-space-2);
   flex-wrap: wrap;
 }
 
@@ -226,11 +226,11 @@
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  gap: var(--spacing-2);
-  font-family: var(--font-family-mono, monospace);
-  font-size: var(--text-base-size);
-  font-weight: var(--font-semibold);
-  color: var(--color-text-primary);
+  gap: var(--csk-space-2);
+  font-family: var(--csk-font-mono);
+  font-size: var(--csk-text-base);
+  font-weight: var(--csk-font-weight-semibold);
+  color: var(--csk-color-text);
   font-variant-numeric: tabular-nums;
 }
 
@@ -243,13 +243,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-tertiary);
-  transition: transform var(--duration-fast) var(--ease-out);
+  color: var(--csk-color-text-3);
+  transition: transform var(--csk-transition-fast);
 }
 
 .csk-result-item--clickable:hover .csk-result-item__arrow {
   transform: translateX(4px);
-  color: var(--color-text-secondary);
+  color: var(--csk-color-text-2);
 }
 
 /* ==========================================================================
@@ -257,8 +257,8 @@
    ========================================================================== */
 
 .csk-result-item--compact {
-  padding: var(--spacing-2) var(--spacing-3);
-  gap: var(--spacing-2);
+  padding: var(--csk-space-2) var(--csk-space-3);
+  gap: var(--csk-space-2);
 }
 
 .csk-result-item--compact .csk-result-item__rank {
@@ -268,19 +268,19 @@
 .csk-result-item--compact .csk-result-item__medal {
   width: 24px;
   height: 24px;
-  font-size: var(--text-xs-size);
+  font-size: var(--csk-text-sm);
 }
 
 .csk-result-item--compact .csk-result-item__title {
-  font-size: var(--text-sm-size);
+  font-size: var(--csk-text-md);
 }
 
 .csk-result-item--compact .csk-result-item__subtitle {
-  font-size: var(--text-xs-size);
+  font-size: var(--csk-text-sm);
 }
 
 .csk-result-item--compact .csk-result-item__trailing {
-  font-size: var(--text-sm-size);
+  font-size: var(--csk-text-md);
 }
 
 /* ==========================================================================
@@ -288,8 +288,8 @@
    ========================================================================== */
 
 .csk-result-item--detailed {
-  padding: var(--spacing-4);
-  gap: var(--spacing-4);
+  padding: var(--csk-space-4);
+  gap: var(--csk-space-4);
 }
 
 .csk-result-item--detailed .csk-result-item__rank {
@@ -299,20 +299,20 @@
 .csk-result-item--detailed .csk-result-item__medal {
   width: 32px;
   height: 32px;
-  font-size: var(--text-base-size);
+  font-size: var(--csk-text-base);
 }
 
 .csk-result-item--detailed .csk-result-item__content {
-  gap: var(--spacing-1-5);
+  gap: calc(var(--csk-space-1) * 1.5);
 }
 
 .csk-result-item--detailed .csk-result-item__title {
-  font-size: var(--text-lg-size);
-  font-weight: var(--font-semibold);
+  font-size: var(--csk-text-lg);
+  font-weight: var(--csk-font-weight-semibold);
 }
 
 .csk-result-item--detailed .csk-result-item__trailing {
-  font-size: var(--text-lg-size);
+  font-size: var(--csk-text-lg);
 }
 
 /* ==========================================================================
@@ -320,39 +320,39 @@
    ========================================================================== */
 
 [data-theme='dark'] .csk-result-item {
-  background: var(--color-bg-secondary);
-  border-bottom-color: var(--color-border-secondary);
+  background: var(--csk-color-surface-2);
+  border-bottom-color: var(--csk-color-border);
 }
 
 [data-theme='dark'] .csk-result-item--clickable:hover {
-  background: var(--color-bg-tertiary);
+  background: var(--csk-color-surface-3);
 }
 
 /* Gold in dark mode */
 [data-theme='dark'] .csk-result-item--rank-1 {
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.12) 0%, var(--color-bg-secondary) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-1) 12%, transparent) 0%, var(--csk-color-surface-2) 30%);
 }
 
 [data-theme='dark'] .csk-result-item--rank-1:hover {
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.18) 0%, var(--color-bg-tertiary) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-1) 18%, transparent) 0%, var(--csk-color-surface-3) 30%);
 }
 
 /* Silver in dark mode */
 [data-theme='dark'] .csk-result-item--rank-2 {
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.12) 0%, var(--color-bg-secondary) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-2) 12%, transparent) 0%, var(--csk-color-surface-2) 30%);
 }
 
 [data-theme='dark'] .csk-result-item--rank-2:hover {
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.18) 0%, var(--color-bg-tertiary) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-2) 18%, transparent) 0%, var(--csk-color-surface-3) 30%);
 }
 
 /* Bronze in dark mode */
 [data-theme='dark'] .csk-result-item--rank-3 {
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.12) 0%, var(--color-bg-secondary) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-3) 12%, transparent) 0%, var(--csk-color-surface-2) 30%);
 }
 
 [data-theme='dark'] .csk-result-item--rank-3:hover {
-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.18) 0%, var(--color-bg-tertiary) 30%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--csk-color-podium-3) 18%, transparent) 0%, var(--csk-color-surface-3) 30%);
 }
 
 /* ==========================================================================

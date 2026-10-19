@@ -178,7 +178,7 @@ export const WithMultipleTrailing: Story = {
     trailing: (
       <>
         <Badge section="dv" size="sm">DV</Badge>
-        <span style={{ fontFamily: 'var(--font-family-mono)', fontWeight: 600 }}>1:32.45</span>
+        <span style={{ fontFamily: 'var(--csk-font-mono)', fontWeight: 600 }}>1:32.45</span>
       </>
     ),
     onClick: () => {},
@@ -384,7 +384,7 @@ export const AllMedals: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <Card variant="surface" padding="none">
-        <h4 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid var(--color-border-primary)' }}>
+        <h4 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid var(--csk-color-border)' }}>
           Default Variant
         </h4>
         <ResultItem rank={1} title="First Place" subtitle="Gold medal" trailing="1:32.45" onClick={() => {}} />
@@ -394,7 +394,7 @@ export const AllMedals: Story = {
       </Card>
 
       <Card variant="surface" padding="none">
-        <h4 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid var(--color-border-primary)' }}>
+        <h4 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid var(--csk-color-border)' }}>
           Compact Variant
         </h4>
         <ResultItem rank={1} title="First Place" subtitle="Gold" trailing="1:32.45" variant="compact" onClick={() => {}} />
@@ -403,7 +403,7 @@ export const AllMedals: Story = {
       </Card>
 
       <Card variant="surface" padding="none">
-        <h4 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid var(--color-border-primary)' }}>
+        <h4 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid var(--csk-color-border)' }}>
           Detailed Variant
         </h4>
         <ResultItem

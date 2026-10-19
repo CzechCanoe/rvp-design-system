@@ -293,10 +293,10 @@ export const ConfirmStartList: Story = {
           }
         >
           <div style={{ padding: '0.5rem 0' }}>
-            <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+            <p style={{ margin: 0, color: 'var(--csk-color-text-2)' }}>
               <strong>Závod:</strong> Mistrovství ČR ve slalomu 2026
             </p>
-            <p style={{ margin: '0.5rem 0 0', color: 'var(--color-text-secondary)' }}>
+            <p style={{ margin: '0.5rem 0 0', color: 'var(--csk-color-text-2)' }}>
               <strong>Počet přihlášených:</strong> 156 závodníků
             </p>
           </div>

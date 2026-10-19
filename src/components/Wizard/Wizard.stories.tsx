@@ -290,9 +290,9 @@ export const RegistrationFlow: Story = {
           section="dv"
         />
       </div>
-      <div style={{ padding: '2rem', background: 'var(--color-bg-secondary)', borderRadius: 'var(--radius-lg)' }}>
+      <div style={{ padding: '2rem', background: 'var(--csk-color-surface-2)', borderRadius: 'var(--csk-radius-lg)' }}>
         <h3 style={{ margin: '0 0 1rem' }}>Krok 3: Zdravotní prohlídka</h3>
-        <p style={{ color: 'var(--color-text-secondary)', margin: 0 }}>
+        <p style={{ color: 'var(--csk-color-text-2)', margin: 0 }}>
           Nahrajte potvrzení o zdravotní prohlídce...
         </p>
       </div>
@@ -308,15 +308,15 @@ export const AllSizes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Card variant="surface" padding="md">
-        <h4 style={{ margin: '0 0 1rem', color: 'var(--color-text-secondary)' }}>Small</h4>
+        <h4 style={{ margin: '0 0 1rem', color: 'var(--csk-color-text-2)' }}>Small</h4>
         <Wizard steps={threeSteps} activeStep={1} size="sm" />
       </Card>
       <Card variant="surface" padding="md">
-        <h4 style={{ margin: '0 0 1rem', color: 'var(--color-text-secondary)' }}>Medium (default)</h4>
+        <h4 style={{ margin: '0 0 1rem', color: 'var(--csk-color-text-2)' }}>Medium (default)</h4>
         <Wizard steps={threeSteps} activeStep={1} size="md" />
       </Card>
       <Card variant="surface" padding="md">
-        <h4 style={{ margin: '0 0 1rem', color: 'var(--color-text-secondary)' }}>Large</h4>
+        <h4 style={{ margin: '0 0 1rem', color: 'var(--csk-color-text-2)' }}>Large</h4>
         <Wizard steps={threeSteps} activeStep={1} size="lg" />
       </Card>
     </div>
@@ -331,19 +331,19 @@ export const AllSections: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <Card variant="surface" padding="md">
-        <h4 style={{ margin: '0 0 1rem', color: 'var(--color-text-secondary)' }}>Default (Primary)</h4>
+        <h4 style={{ margin: '0 0 1rem', color: 'var(--csk-color-text-2)' }}>Default (Primary)</h4>
         <Wizard steps={threeSteps} activeStep={1} />
       </Card>
       <Card variant="surface" padding="md">
-        <h4 style={{ margin: '0 0 1rem', color: 'var(--color-text-secondary)' }}>Section DV (Blue)</h4>
+        <h4 style={{ margin: '0 0 1rem', color: 'var(--csk-color-text-2)' }}>Section DV (Blue)</h4>
         <Wizard steps={threeSteps} activeStep={1} section="dv" />
       </Card>
       <Card variant="surface" padding="md">
-        <h4 style={{ margin: '0 0 1rem', color: 'var(--color-text-secondary)' }}>Section RY (Green)</h4>
+        <h4 style={{ margin: '0 0 1rem', color: 'var(--csk-color-text-2)' }}>Section RY (Green)</h4>
         <Wizard steps={threeSteps} activeStep={1} section="ry" />
       </Card>
       <Card variant="surface" padding="md">
-        <h4 style={{ margin: '0 0 1rem', color: 'var(--color-text-secondary)' }}>Section VT (Red)</h4>
+        <h4 style={{ margin: '0 0 1rem', color: 'var(--csk-color-text-2)' }}>Section VT (Red)</h4>
         <Wizard steps={threeSteps} activeStep={1} section="vt" />
       </Card>
     </div>

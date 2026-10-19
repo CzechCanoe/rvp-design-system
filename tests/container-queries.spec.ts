@@ -206,7 +206,8 @@ test.describe('Overflow Prevention Tests', () => {
 
 test.describe('Text Truncation and Ellipsis', () => {
   test('Calendar event titles truncate correctly', async ({ page }) => {
-    await page.setViewportSize({ width: 400, height: 600 });
+    // Below ~768px the calendar collapses events to colour bars and hides titles by design.
+    await page.setViewportSize({ width: 1024, height: 768 });
 
     await page.goto('/iframe.html?id=components-calendar--default&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });

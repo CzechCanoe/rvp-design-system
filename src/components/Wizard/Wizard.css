@@ -43,18 +43,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-bg-tertiary);
-  border: 2px solid var(--color-border-secondary);
-  color: var(--color-text-tertiary);
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--text-base-size);
+  background-color: var(--csk-color-surface-3);
+  border: 2px solid var(--csk-color-border);
+  color: var(--csk-color-text-3);
+  font-weight: var(--csk-font-weight-semibold);
+  font-size: var(--csk-text-base);
   cursor: default;
   transition:
-    background-color var(--duration-normal) var(--ease-out),
-    border-color var(--duration-normal) var(--ease-out),
-    color var(--duration-normal) var(--ease-out),
-    box-shadow var(--duration-normal) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out);
+    background-color var(--csk-transition-fast),
+    border-color var(--csk-transition-fast),
+    color var(--csk-transition-fast),
+    box-shadow var(--csk-transition-fast),
+    transform var(--csk-transition-fast);
 }
 
 .csk-wizard__circle:disabled {
@@ -87,12 +87,12 @@
   left: calc(50% + 28px);
   right: calc(-50% + 28px);
   height: 3px;
-  background-color: var(--color-border-primary);
-  transition: background-color var(--duration-normal) var(--ease-out);
+  background-color: var(--csk-color-border);
+  transition: background-color var(--csk-transition-fast);
 }
 
 .csk-wizard__line--completed {
-  background-color: var(--color-success-500);
+  background-color: var(--csk-color-success);
 }
 
 /* =============================================================================
@@ -104,22 +104,22 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-top: var(--spacing-2);
+  margin-top: var(--csk-space-2);
   max-width: 120px;
 }
 
 .csk-wizard__label {
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
-  line-height: var(--line-height-tight);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text-2);
+  line-height: var(--csk-line-height-snug);
 }
 
 .csk-wizard__description {
-  font-size: var(--text-xs-size);
-  color: var(--color-text-tertiary);
-  margin-top: var(--spacing-1);
-  line-height: var(--line-height-normal);
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+  margin-top: var(--csk-space-1);
+  line-height: var(--csk-line-height-normal);
 }
 
 /* =============================================================================
@@ -130,26 +130,26 @@
 
 /* Active */
 .csk-wizard__step--active .csk-wizard__circle {
-  background-color: var(--section-color, var(--color-primary-500));
-  border-color: var(--section-color, var(--color-primary-500));
-  color: #fff;
-  box-shadow: 0 0 0 4px rgba(17, 118, 166, 0.15);
+  background-color: var(--csk-section-color, var(--csk-color-action));
+  border-color: var(--csk-section-color, var(--csk-color-action));
+  color: var(--csk-color-text-on-fill);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--csk-color-action) 15%, transparent);
 }
 
 .csk-wizard__step--active .csk-wizard__label {
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-semibold);
+  color: var(--csk-color-text);
+  font-weight: var(--csk-font-weight-semibold);
 }
 
 /* Completed */
 .csk-wizard__step--completed .csk-wizard__circle {
-  background-color: var(--color-success-500);
-  border-color: var(--color-success-500);
-  color: #fff;
+  background-color: var(--csk-color-success);
+  border-color: var(--csk-color-success);
+  color: var(--csk-color-text-on-fill);
 }
 
 .csk-wizard__step--completed .csk-wizard__label {
-  color: var(--color-text-secondary);
+  color: var(--csk-color-text-2);
 }
 
 /* =============================================================================
@@ -158,23 +158,23 @@
 
 /* DV Section */
 .csk-section-dv .csk-wizard__step--active .csk-wizard__circle {
-  background-color: var(--color-section-dv);
-  border-color: var(--color-section-dv);
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+  background-color: var(--csk-color-section-dv);
+  border-color: var(--csk-color-section-dv);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--csk-color-action) 15%, transparent);
 }
 
 /* RY Section */
 .csk-section-ry .csk-wizard__step--active .csk-wizard__circle {
-  background-color: var(--color-section-ry);
-  border-color: var(--color-section-ry);
-  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+  background-color: var(--csk-color-section-ry);
+  border-color: var(--csk-color-section-ry);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--csk-color-success) 15%, transparent);
 }
 
 /* VT Section */
 .csk-section-vt .csk-wizard__step--active .csk-wizard__circle {
-  background-color: var(--color-section-vt);
-  border-color: var(--color-section-vt);
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+  background-color: var(--csk-color-section-vt);
+  border-color: var(--csk-color-section-vt);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--csk-color-error) 15%, transparent);
 }
 
 /* =============================================================================
@@ -185,7 +185,7 @@
 .csk-wizard--sm .csk-wizard__circle {
   width: 36px;
   height: 36px;
-  font-size: var(--text-sm-size);
+  font-size: var(--csk-text-md);
 }
 
 .csk-wizard--sm .csk-wizard__circle svg {
@@ -201,7 +201,7 @@
 }
 
 .csk-wizard--sm .csk-wizard__label {
-  font-size: var(--text-xs-size);
+  font-size: var(--csk-text-sm);
 }
 
 .csk-wizard--sm .csk-wizard__content {
@@ -214,7 +214,7 @@
 .csk-wizard--lg .csk-wizard__circle {
   width: 56px;
   height: 56px;
-  font-size: var(--text-lg-size);
+  font-size: var(--csk-text-lg);
 }
 
 .csk-wizard--lg .csk-wizard__circle svg {
@@ -230,7 +230,7 @@
 }
 
 .csk-wizard--lg .csk-wizard__label {
-  font-size: var(--text-base-size);
+  font-size: var(--csk-text-base);
 }
 
 .csk-wizard--lg .csk-wizard__content {
@@ -243,7 +243,7 @@
 
 .csk-wizard--vertical .csk-wizard__steps {
   flex-direction: column;
-  gap: var(--spacing-2);
+  gap: var(--csk-space-2);
 }
 
 .csk-wizard--vertical .csk-wizard__step {
@@ -264,10 +264,10 @@
   align-items: flex-start;
   text-align: left;
   margin-top: 0;
-  margin-left: var(--spacing-3);
+  margin-left: var(--csk-space-3);
   max-width: none;
-  padding-top: var(--spacing-2);
-  padding-bottom: var(--spacing-4);
+  padding-top: var(--csk-space-2);
+  padding-bottom: var(--csk-space-4);
 }
 
 /* Vertical size adjustments */
@@ -337,26 +337,26 @@
    ============================================================================= */
 
 [data-theme='dark'] .csk-wizard__circle {
-  background-color: var(--color-bg-secondary);
-  border-color: var(--color-border-primary);
+  background-color: var(--csk-color-surface-2);
+  border-color: var(--csk-color-border);
 }
 
 [data-theme='dark'] .csk-wizard__step--active .csk-wizard__circle {
-  box-shadow: 0 0 0 4px rgba(17, 118, 166, 0.25);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--csk-color-action) 25%, transparent);
 }
 
 [data-theme='dark'] .csk-section-dv .csk-wizard__step--active .csk-wizard__circle {
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--csk-color-action) 25%, transparent);
 }
 
 [data-theme='dark'] .csk-section-ry .csk-wizard__step--active .csk-wizard__circle {
-  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--csk-color-success) 25%, transparent);
 }
 
 [data-theme='dark'] .csk-section-vt .csk-wizard__step--active .csk-wizard__circle {
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.25);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--csk-color-error) 25%, transparent);
 }
 
 [data-theme='dark'] .csk-wizard__line {
-  background-color: var(--color-border-secondary);
+  background-color: var(--csk-color-border);
 }

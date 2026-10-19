@@ -135,7 +135,7 @@ export const Floating: Story = {
   },
   decorators: [
     (Story) => (
-      <div style={{ padding: '40px', background: 'var(--csk-color-surface-container)' }}>
+      <div style={{ padding: '40px', background: 'var(--csk-color-surface-2)' }}>
         <Story />
       </div>
     ),
@@ -157,19 +157,19 @@ export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--csk-color-on-surface-muted)' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--csk-color-text-3)' }}>
           Small
         </p>
         <StatsBar items={clubStats} variant="cards" size="sm" />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--csk-color-on-surface-muted)' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--csk-color-text-3)' }}>
           Medium (default)
         </p>
         <StatsBar items={clubStats} variant="cards" size="md" />
       </div>
       <div>
-        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--csk-color-on-surface-muted)' }}>
+        <p style={{ margin: '0 0 8px', fontSize: '12px', color: 'var(--csk-color-text-3)' }}>
           Large
         </p>
         <StatsBar items={clubStats} variant="cards" size="lg" />
@@ -221,12 +221,12 @@ export const EventHeader: Story = {
     <div
       style={{
         padding: '24px',
-        background: 'var(--csk-color-surface-container)',
+        background: 'var(--csk-color-surface-2)',
         borderRadius: '12px',
       }}
     >
       <h2 style={{ margin: '0 0 4px', fontSize: '20px' }}>MČR ve slalomu 2026</h2>
-      <p style={{ margin: '0 0 16px', color: 'var(--csk-color-on-surface-muted)', fontSize: '14px' }}>
+      <p style={{ margin: '0 0 16px', color: 'var(--csk-color-text-3)', fontSize: '14px' }}>
         Praha Troja • 15. - 16. června 2026
       </p>
       <StatsBar items={eventStats} variant="inline" dividers size="sm" />
@@ -250,7 +250,7 @@ export const AthleteProfile: Story = {
           width: '80px',
           height: '80px',
           borderRadius: '50%',
-          background: 'var(--csk-color-primary)',
+          background: 'var(--csk-color-action)',
           margin: '0 auto 12px',
           display: 'flex',
           alignItems: 'center',
@@ -263,7 +263,7 @@ export const AthleteProfile: Story = {
         JP
       </div>
       <h2 style={{ margin: '0 0 4px', fontSize: '24px' }}>Jan Přikryl</h2>
-      <p style={{ margin: '0 0 20px', color: 'var(--csk-color-on-surface-muted)' }}>
+      <p style={{ margin: '0 0 20px', color: 'var(--csk-color-text-3)' }}>
         USK Praha • K1 / C1
       </p>
       <StatsBar items={athleteStats} variant="cards" centered />
@@ -303,7 +303,7 @@ export const CompactLiveBar: Story = {
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '8px 16px',
-        background: 'var(--csk-color-surface-container)',
+        background: 'var(--csk-color-surface-2)',
         borderRadius: '8px',
       }}
     >

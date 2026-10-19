@@ -3,17 +3,17 @@
    ============================================================================= */
 
 .csk-timeline {
-  --timeline-dot-size: var(--spacing-8);
-  --timeline-dot-border: 2px;
-  --timeline-icon-size: var(--spacing-4);
-  --timeline-connector-width: 2px;
-  --timeline-content-gap: var(--spacing-3);
-  --timeline-item-gap: var(--spacing-6);
-  --timeline-marker-width: var(--spacing-12);
+  --csk-timeline-dot-size: var(--csk-space-8);
+  --csk-timeline-dot-border: 2px;
+  --csk-timeline-icon-size: var(--csk-space-4);
+  --csk-timeline-connector-width: 2px;
+  --csk-timeline-content-gap: var(--csk-space-3);
+  --csk-timeline-item-gap: var(--csk-space-6);
+  --csk-timeline-marker-width: var(--csk-space-12);
 
   display: flex;
   flex-direction: column;
-  gap: var(--timeline-item-gap);
+  gap: var(--csk-timeline-item-gap);
   position: relative;
 }
 
@@ -22,27 +22,27 @@
    ============================================================================= */
 
 .csk-timeline--sm {
-  --timeline-dot-size: var(--spacing-6);
-  --timeline-icon-size: var(--spacing-3);
-  --timeline-content-gap: var(--spacing-2);
-  --timeline-item-gap: var(--spacing-4);
-  --timeline-marker-width: var(--spacing-10);
+  --csk-timeline-dot-size: var(--csk-space-6);
+  --csk-timeline-icon-size: var(--csk-space-3);
+  --csk-timeline-content-gap: var(--csk-space-2);
+  --csk-timeline-item-gap: var(--csk-space-4);
+  --csk-timeline-marker-width: var(--csk-space-10);
 }
 
 .csk-timeline--md {
-  --timeline-dot-size: var(--spacing-8);
-  --timeline-icon-size: var(--spacing-4);
-  --timeline-content-gap: var(--spacing-3);
-  --timeline-item-gap: var(--spacing-6);
-  --timeline-marker-width: var(--spacing-12);
+  --csk-timeline-dot-size: var(--csk-space-8);
+  --csk-timeline-icon-size: var(--csk-space-4);
+  --csk-timeline-content-gap: var(--csk-space-3);
+  --csk-timeline-item-gap: var(--csk-space-6);
+  --csk-timeline-marker-width: var(--csk-space-12);
 }
 
 .csk-timeline--lg {
-  --timeline-dot-size: var(--spacing-10);
-  --timeline-icon-size: var(--spacing-5);
-  --timeline-content-gap: var(--spacing-4);
-  --timeline-item-gap: var(--spacing-8);
-  --timeline-marker-width: var(--spacing-14);
+  --csk-timeline-dot-size: var(--csk-space-10);
+  --csk-timeline-icon-size: var(--csk-space-5);
+  --csk-timeline-content-gap: var(--csk-space-4);
+  --csk-timeline-item-gap: var(--csk-space-8);
+  --csk-timeline-marker-width: calc(var(--csk-space-1) * 14);
 }
 
 /* =============================================================================
@@ -51,25 +51,25 @@
 
 .csk-timeline__item {
   display: flex;
-  gap: var(--spacing-4);
+  gap: var(--csk-space-4);
   position: relative;
-  min-height: var(--timeline-dot-size);
+  min-height: var(--csk-timeline-dot-size);
 }
 
 .csk-timeline__item--clickable {
   cursor: pointer;
-  border-radius: var(--radius-md);
-  margin: calc(var(--spacing-2) * -1);
-  padding: var(--spacing-2);
-  transition: background-color var(--transition-fast);
+  border-radius: var(--csk-radius-md);
+  margin: calc(var(--csk-space-2) * -1);
+  padding: var(--csk-space-2);
+  transition: background-color var(--csk-transition-fast);
 }
 
 .csk-timeline__item--clickable:hover {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--csk-color-surface-2);
 }
 
 .csk-timeline__item--clickable:focus-visible {
-  outline: 2px solid var(--color-interactive-focus);
+  outline: 2px solid var(--csk-color-focus);
   outline-offset: 2px;
 }
 
@@ -82,19 +82,19 @@
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
-  width: var(--timeline-marker-width);
+  width: var(--csk-timeline-marker-width);
 }
 
 .csk-timeline__dot {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--timeline-dot-size);
-  height: var(--timeline-dot-size);
-  border-radius: var(--radius-full);
-  border: var(--timeline-dot-border) solid var(--color-border-secondary);
-  background-color: var(--color-bg-primary);
-  transition: all var(--transition-fast);
+  width: var(--csk-timeline-dot-size);
+  height: var(--csk-timeline-dot-size);
+  border-radius: var(--csk-radius-pill);
+  border: var(--csk-timeline-dot-border) solid var(--csk-color-border);
+  background-color: var(--csk-color-surface);
+  transition: all var(--csk-transition-fast);
   flex-shrink: 0;
 }
 
@@ -102,9 +102,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--timeline-icon-size);
-  height: var(--timeline-icon-size);
-  color: var(--color-text-tertiary);
+  width: var(--csk-timeline-icon-size);
+  height: var(--csk-timeline-icon-size);
+  color: var(--csk-color-text-3);
 }
 
 .csk-timeline__icon svg {
@@ -114,10 +114,10 @@
 
 .csk-timeline__connector {
   flex: 1;
-  width: var(--timeline-connector-width);
-  min-height: var(--spacing-4);
-  background-color: var(--color-border-secondary);
-  margin-top: var(--spacing-2);
+  width: var(--csk-timeline-connector-width);
+  min-height: var(--csk-space-4);
+  background-color: var(--csk-color-border);
+  margin-top: var(--csk-space-2);
 }
 
 /* =============================================================================
@@ -128,54 +128,54 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--timeline-content-gap);
-  padding-bottom: var(--spacing-2);
+  gap: var(--csk-timeline-content-gap);
+  padding-bottom: var(--csk-space-2);
   min-width: 0;
 }
 
 .csk-timeline__timestamp {
-  font-size: var(--text-xs-size);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-tertiary);
+  font-size: var(--csk-text-sm);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text-3);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .csk-timeline__title {
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-  line-height: var(--line-height-snug);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-semibold);
+  color: var(--csk-color-text);
+  line-height: var(--csk-line-height-snug);
   margin: 0;
 }
 
 .csk-timeline--lg .csk-timeline__title {
-  font-size: var(--text-base-size);
+  font-size: var(--csk-text-base);
 }
 
 .csk-timeline__description {
-  font-size: var(--text-sm-size);
-  color: var(--color-text-secondary);
-  line-height: var(--line-height-relaxed);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text-2);
+  line-height: var(--csk-line-height-normal);
 }
 
 .csk-timeline--sm .csk-timeline__description {
-  font-size: var(--text-xs-size);
+  font-size: var(--csk-text-sm);
 }
 
 .csk-timeline__meta {
-  font-size: var(--text-xs-size);
-  color: var(--color-text-tertiary);
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-2);
+  gap: var(--csk-space-2);
 }
 
 .csk-timeline__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-2);
-  margin-top: var(--spacing-1);
+  gap: var(--csk-space-2);
+  margin-top: var(--csk-space-1);
 }
 
 /* =============================================================================
@@ -184,60 +184,60 @@
 
 /* Completed */
 .csk-timeline__item--completed .csk-timeline__dot {
-  border-color: var(--color-success-500);
-  background-color: var(--color-success-500);
+  border-color: var(--csk-color-success);
+  background-color: var(--csk-color-success);
 }
 
 .csk-timeline__item--completed .csk-timeline__icon {
-  color: white;
+  color: var(--csk-color-text-on-fill);
 }
 
 .csk-timeline__item--completed .csk-timeline__connector {
-  background-color: var(--color-success-500);
+  background-color: var(--csk-color-success);
 }
 
 /* Current */
 .csk-timeline__item--current .csk-timeline__dot {
-  border-color: var(--color-primary-500);
-  background-color: var(--color-primary-50);
-  box-shadow: 0 0 0 4px var(--color-primary-100);
+  border-color: var(--csk-color-action);
+  background-color: var(--csk-color-highlight-bg);
+  box-shadow: 0 0 0 4px var(--csk-color-highlight-bg);
 }
 
 .csk-timeline__item--current .csk-timeline__icon {
-  color: var(--color-primary-500);
+  color: var(--csk-color-action);
 }
 
 /* Pending */
 .csk-timeline__item--pending .csk-timeline__dot {
-  border-color: var(--color-border-secondary);
-  background-color: var(--color-bg-secondary);
+  border-color: var(--csk-color-border);
+  background-color: var(--csk-color-surface-2);
 }
 
 .csk-timeline__item--pending .csk-timeline__icon {
-  color: var(--color-text-tertiary);
+  color: var(--csk-color-text-3);
 }
 
 .csk-timeline__item--pending .csk-timeline__title {
-  color: var(--color-text-tertiary);
+  color: var(--csk-color-text-3);
 }
 
 .csk-timeline__item--pending .csk-timeline__connector {
-  background-color: var(--color-border-secondary);
+  background-color: var(--csk-color-border);
   border-style: dashed;
 }
 
 /* Error */
 .csk-timeline__item--error .csk-timeline__dot {
-  border-color: var(--color-error-500);
-  background-color: var(--color-error-500);
+  border-color: var(--csk-color-error);
+  background-color: var(--csk-color-error);
 }
 
 .csk-timeline__item--error .csk-timeline__icon {
-  color: white;
+  color: var(--csk-color-text-on-fill);
 }
 
 .csk-timeline__item--error .csk-timeline__title {
-  color: var(--color-error-600);
+  color: var(--csk-color-error);
 }
 
 /* =============================================================================
@@ -246,59 +246,59 @@
 
 /* Primary */
 .csk-timeline__item--primary .csk-timeline__dot {
-  border-color: var(--color-primary-500);
+  border-color: var(--csk-color-action);
 }
 
 .csk-timeline__item--primary.csk-timeline__item--completed .csk-timeline__dot {
-  background-color: var(--color-primary-500);
+  background-color: var(--csk-color-action);
 }
 
 .csk-timeline__item--primary.csk-timeline__item--completed .csk-timeline__connector {
-  background-color: var(--color-primary-500);
+  background-color: var(--csk-color-action);
 }
 
 /* Success */
 .csk-timeline__item--success .csk-timeline__dot {
-  border-color: var(--color-success-500);
+  border-color: var(--csk-color-success);
 }
 
 .csk-timeline__item--success.csk-timeline__item--completed .csk-timeline__dot {
-  background-color: var(--color-success-500);
+  background-color: var(--csk-color-success);
 }
 
 .csk-timeline__item--success.csk-timeline__item--completed .csk-timeline__connector {
-  background-color: var(--color-success-500);
+  background-color: var(--csk-color-success);
 }
 
 /* Warning */
 .csk-timeline__item--warning .csk-timeline__dot {
-  border-color: var(--color-warning-500);
+  border-color: var(--csk-color-warning);
 }
 
 .csk-timeline__item--warning.csk-timeline__item--completed .csk-timeline__dot {
-  background-color: var(--color-warning-500);
+  background-color: var(--csk-color-warning);
 }
 
 .csk-timeline__item--warning.csk-timeline__item--completed .csk-timeline__connector {
-  background-color: var(--color-warning-500);
+  background-color: var(--csk-color-warning);
 }
 
 /* Error color */
 .csk-timeline__item--error .csk-timeline__dot {
-  border-color: var(--color-error-500);
+  border-color: var(--csk-color-error);
 }
 
 /* Info */
 .csk-timeline__item--info .csk-timeline__dot {
-  border-color: var(--color-info-500);
+  border-color: var(--csk-color-info);
 }
 
 .csk-timeline__item--info.csk-timeline__item--completed .csk-timeline__dot {
-  background-color: var(--color-info-500);
+  background-color: var(--csk-color-info);
 }
 
 .csk-timeline__item--info.csk-timeline__item--completed .csk-timeline__connector {
-  background-color: var(--color-info-500);
+  background-color: var(--csk-color-info);
 }
 
 /* =============================================================================
@@ -306,10 +306,10 @@
    ============================================================================= */
 
 .csk-timeline--compact {
-  --timeline-dot-size: var(--spacing-3);
-  --timeline-icon-size: var(--spacing-2);
-  --timeline-item-gap: var(--spacing-3);
-  --timeline-marker-width: var(--spacing-6);
+  --csk-timeline-dot-size: var(--csk-space-3);
+  --csk-timeline-icon-size: var(--csk-space-2);
+  --csk-timeline-item-gap: var(--csk-space-3);
+  --csk-timeline-marker-width: var(--csk-space-6);
 }
 
 .csk-timeline--compact .csk-timeline__dot {
@@ -323,20 +323,20 @@
 }
 
 .csk-timeline--compact .csk-timeline__item--completed .csk-timeline__dot {
-  color: var(--color-success-500);
+  color: var(--csk-color-success);
 }
 
 .csk-timeline--compact .csk-timeline__item--current .csk-timeline__dot {
-  color: var(--color-primary-500);
-  box-shadow: 0 0 0 3px var(--color-primary-100);
+  color: var(--csk-color-action);
+  box-shadow: 0 0 0 3px var(--csk-color-highlight-bg);
 }
 
 .csk-timeline--compact .csk-timeline__item--pending .csk-timeline__dot {
-  color: var(--color-border-secondary);
+  color: var(--csk-color-border);
 }
 
 .csk-timeline--compact .csk-timeline__item--error .csk-timeline__dot {
-  color: var(--color-error-500);
+  color: var(--csk-color-error);
 }
 
 .csk-timeline--compact .csk-timeline__icon {
@@ -344,7 +344,7 @@
 }
 
 .csk-timeline--compact .csk-timeline__content {
-  gap: var(--spacing-1);
+  gap: var(--csk-space-1);
 }
 
 .csk-timeline--compact .csk-timeline__timestamp {
@@ -356,20 +356,20 @@
    ============================================================================= */
 
 .csk-timeline--card .csk-timeline__content {
-  background-color: var(--color-bg-secondary);
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-4);
+  background-color: var(--csk-color-surface-2);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-lg);
+  padding: var(--csk-space-4);
 }
 
 .csk-timeline--card .csk-timeline__item--current .csk-timeline__content {
-  background-color: var(--color-primary-50);
-  border-color: var(--color-primary-200);
+  background-color: var(--csk-color-highlight-bg);
+  border-color: var(--csk-color-highlight-border);
 }
 
 .csk-timeline--card .csk-timeline__item--error .csk-timeline__content {
-  background-color: var(--color-error-50);
-  border-color: var(--color-error-200);
+  background-color: var(--csk-color-error-bg);
+  border-color: var(--csk-color-error-bg);
 }
 
 /* =============================================================================
@@ -378,7 +378,7 @@
 
 @media (min-width: 768px) {
   .csk-timeline--alternate {
-    --timeline-marker-width: auto;
+    --csk-timeline-marker-width: auto;
   }
 
   .csk-timeline--alternate .csk-timeline__item {
@@ -386,7 +386,7 @@
     justify-content: flex-start;
     width: 50%;
     margin-left: 50%;
-    padding-left: var(--spacing-4);
+    padding-left: var(--csk-space-4);
   }
 
   .csk-timeline--alternate .csk-timeline__item--alternate {
@@ -394,7 +394,7 @@
     margin-left: 0;
     margin-right: 50%;
     padding-left: 0;
-    padding-right: var(--spacing-4);
+    padding-right: var(--csk-space-4);
     text-align: right;
   }
 
@@ -418,34 +418,34 @@
    ============================================================================= */
 
 [data-theme="dark"] .csk-timeline__item--clickable:hover {
-  background-color: var(--color-bg-elevated);
+  background-color: var(--csk-color-surface);
 }
 
 [data-theme="dark"] .csk-timeline__item--completed .csk-timeline__icon {
-  color: var(--color-neutral-900);
+  color: var(--csk-color-text);
 }
 
 [data-theme="dark"] .csk-timeline__item--error .csk-timeline__icon {
-  color: var(--color-neutral-900);
+  color: var(--csk-color-text);
 }
 
 [data-theme="dark"] .csk-timeline__item--current .csk-timeline__dot {
-  background-color: var(--color-primary-900);
-  box-shadow: 0 0 0 4px var(--color-primary-800);
+  background-color: var(--csk-color-brand);
+  box-shadow: 0 0 0 4px var(--csk-color-brand);
 }
 
 [data-theme="dark"] .csk-timeline--card .csk-timeline__content {
-  background-color: var(--color-bg-elevated);
+  background-color: var(--csk-color-surface);
 }
 
 [data-theme="dark"] .csk-timeline--card .csk-timeline__item--current .csk-timeline__content {
-  background-color: var(--color-primary-900);
-  border-color: var(--color-primary-700);
+  background-color: var(--csk-color-brand);
+  border-color: var(--csk-color-brand);
 }
 
 [data-theme="dark"] .csk-timeline--card .csk-timeline__item--error .csk-timeline__content {
-  background-color: var(--color-error-900);
-  border-color: var(--color-error-700);
+  background-color: var(--csk-color-error-text);
+  border-color: var(--csk-color-error-text);
 }
 
 /* =============================================================================

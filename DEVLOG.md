@@ -6836,3 +6836,23 @@ Zbývající px v `TokensOverview.css` jsou rozměry prvků (výška badge, ší
 ### Review fixes (T2)
 - Preloads in `preview-head.html` are relative (`fonts/…`) so they work under the GitHub Pages sub-path; verified with `storybook-static` served under `/rvp-design-system/` (0x 404 for woff2).
 - Filtered only the expected `./fonts/` "didn't resolve" warnings (lib build and Storybook); `package.json` exports `./fonts/*`; added `tests/fonts.spec.ts` guard.
+
+---
+
+## 2026-10-19 - v2 T3: Codemod a přetokenování základu
+
+### Dokončeno
+- [x] `scripts/codemod-tokens.mjs` (mapa z TOKENS.md + rozšíření, idempotentní, report mapped/unmapped), spuštěn nad `src/components/**`
+- [x] rgba()/hex literály v komponentách Z a U nahrazeny tokeny (`color-mix` pro alfa); baseline `check-no-hex` obsahuje jen komponenty X
+- [x] `count-css-vars --strict` projde (dist definuje i referencuje jen `--csk-*`)
+- [x] Odstraněno `energyFocus` (Input, Select), blur v Modalu; Calendar dark pravidla pryč
+- [x] QUARANTINE: všechny záznamy ownera T3 vyřešeny a smazány
+
+### Problémy a řešení
+1. **Problém:** `gradient-primary-soft` → světlé pozadí, bílý text v Table th (axe)
+   **Řešení:** `.csk-table__thead` explicitně `--csk-color-brand`
+2. **Problém:** Checkbox/Switch testy hledaly BEM `__input`, markup má `.csk-checkbox` / `.csk-switch`
+   **Řešení:** opraveny selektory v testu
+
+### Poznámky
+Snapshoty generuje CI (label `update-snapshots`). Zbylé `[data-theme="dark"]` bloky v ostatních komponentách zůstávají (dark režim se v 2.0 nekreslí).

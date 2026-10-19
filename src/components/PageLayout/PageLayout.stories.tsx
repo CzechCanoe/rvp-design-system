@@ -36,10 +36,10 @@ const SimpleFooter = () => (
     style={{
       padding: '24px',
       textAlign: 'center',
-      background: 'var(--csk-color-surface-dim)',
+      background: 'var(--csk-color-surface-3)',
       borderTop: '1px solid var(--csk-color-border)',
       fontSize: '14px',
-      color: 'var(--csk-color-on-surface-muted)',
+      color: 'var(--csk-color-text-3)',
     }}
   >
     © 2026 Český svaz kanoistů
@@ -113,7 +113,7 @@ export const Satellite: Story = {
             width: '32px',
             height: '32px',
             borderRadius: '6px',
-            background: 'var(--csk-color-primary)',
+            background: 'var(--csk-color-action)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

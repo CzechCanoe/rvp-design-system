@@ -62,7 +62,7 @@ const ToastDemo = () => {
       <Button variant="ghost" onClick={() => info('Nová verze aplikace je k dispozici')}>
         Info Toast
       </Button>
-      <hr style={{ margin: '8px 0', border: 'none', borderTop: '1px solid var(--color-border-secondary)' }} />
+      <hr style={{ margin: '8px 0', border: 'none', borderTop: '1px solid var(--csk-color-border)' }} />
       <Button variant="ghost" onClick={dismissAll}>Zavřít všechny</Button>
     </div>
   );

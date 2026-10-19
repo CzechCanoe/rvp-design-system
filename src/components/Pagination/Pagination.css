@@ -13,8 +13,8 @@
 .csk-pagination {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-1);
-  font-family: var(--font-family-sans);
+  gap: var(--csk-space-1);
+  font-family: var(--csk-font-sans);
 }
 
 .csk-pagination--disabled {
@@ -29,7 +29,7 @@
 .csk-pagination__list {
   display: flex;
   align-items: center;
-  gap: var(--spacing-1);
+  gap: var(--csk-space-1);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -50,42 +50,42 @@
   justify-content: center;
 
   /* Typography */
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-medium);
+  font-family: var(--csk-font-sans);
+  font-weight: var(--csk-font-weight-medium);
   line-height: 1;
 
   /* Default size (md) */
-  min-width: var(--spacing-touch-target);
-  min-height: var(--spacing-touch-target);
-  padding: var(--spacing-2);
-  font-size: var(--font-size-sm);
+  min-width: var(--csk-tap);
+  min-height: var(--csk-tap);
+  padding: var(--csk-space-2);
+  font-size: var(--csk-text-md);
 
   /* Shape */
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-md);
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-md);
+  background-color: var(--csk-color-surface);
+  color: var(--csk-color-text);
 
   /* Interaction */
   cursor: pointer;
   user-select: none;
-  transition: var(--transition-button);
+  transition: var(--csk-transition-fast);
 
   /* Focus visible */
   outline: none;
 }
 
 .csk-pagination__button:hover:not(:disabled) {
-  background-color: var(--color-bg-secondary);
-  border-color: var(--color-border-strong);
+  background-color: var(--csk-color-surface-2);
+  border-color: var(--csk-color-border);
 }
 
 .csk-pagination__button:active:not(:disabled) {
-  background-color: var(--color-bg-tertiary);
+  background-color: var(--csk-color-surface-3);
 }
 
 .csk-pagination__button:focus-visible {
-  outline: 2px solid var(--color-border-focus);
+  outline: 2px solid var(--csk-color-focus);
   outline-offset: 2px;
 }
 
@@ -96,19 +96,19 @@
 
 /* Active page button */
 .csk-pagination__button--active {
-  background-color: var(--color-interactive-default);
-  border-color: var(--color-interactive-default);
-  color: var(--color-text-inverse);
+  background-color: var(--csk-color-action);
+  border-color: var(--csk-color-action);
+  color: var(--csk-color-text-on-fill);
 }
 
 .csk-pagination__button--active:hover:not(:disabled) {
-  background-color: var(--color-interactive-hover);
-  border-color: var(--color-interactive-hover);
+  background-color: var(--csk-color-action-hover);
+  border-color: var(--csk-color-action-hover);
 }
 
 .csk-pagination__button--active:active:not(:disabled) {
-  background-color: var(--color-interactive-active);
-  border-color: var(--color-interactive-active);
+  background-color: var(--csk-color-brand);
+  border-color: var(--csk-color-brand);
 }
 
 /* Icon buttons */
@@ -116,7 +116,7 @@
 .csk-pagination__button--prev,
 .csk-pagination__button--next,
 .csk-pagination__button--last {
-  padding: var(--spacing-2);
+  padding: var(--csk-space-2);
 }
 
 .csk-pagination__button svg {
@@ -133,10 +133,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: var(--spacing-touch-target);
-  min-height: var(--spacing-touch-target);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-tertiary);
+  min-width: var(--csk-tap);
+  min-height: var(--csk-tap);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text-3);
   letter-spacing: 0.1em;
 }
 
@@ -148,10 +148,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 var(--spacing-3);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
+  padding: 0 var(--csk-space-3);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text-2);
   white-space: nowrap;
 }
 
@@ -163,9 +163,9 @@
 .csk-pagination--sm .csk-pagination__button {
   min-width: 32px;
   min-height: 32px;
-  padding: var(--spacing-1);
-  font-size: var(--font-size-xs);
-  border-radius: var(--radius-sm);
+  padding: var(--csk-space-1);
+  font-size: var(--csk-text-sm);
+  border-radius: var(--csk-radius-sm);
 }
 
 .csk-pagination--sm .csk-pagination__button svg {
@@ -177,16 +177,16 @@
 .csk-pagination--sm .csk-pagination__info {
   min-width: 32px;
   min-height: 32px;
-  font-size: var(--font-size-xs);
+  font-size: var(--csk-text-sm);
 }
 
 /* Large */
 .csk-pagination--lg .csk-pagination__button {
   min-width: 52px;
   min-height: 52px;
-  padding: var(--spacing-3);
-  font-size: var(--font-size-base);
-  border-radius: var(--radius-lg);
+  padding: var(--csk-space-3);
+  font-size: var(--csk-text-base);
+  border-radius: var(--csk-radius-lg);
 }
 
 .csk-pagination--lg .csk-pagination__button svg {
@@ -198,7 +198,7 @@
 .csk-pagination--lg .csk-pagination__info {
   min-width: 52px;
   min-height: 52px;
-  font-size: var(--font-size-base);
+  font-size: var(--csk-text-base);
 }
 
 /* ==========================================================================
@@ -211,14 +211,14 @@
 }
 
 .csk-pagination--simple .csk-pagination__button--page:hover:not(:disabled) {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--csk-color-surface-2);
   border-color: transparent;
 }
 
 .csk-pagination--simple .csk-pagination__button--active {
-  background-color: var(--color-interactive-default);
-  border-color: var(--color-interactive-default);
-  color: var(--color-text-inverse);
+  background-color: var(--csk-color-action);
+  border-color: var(--csk-color-action);
+  color: var(--csk-color-text-on-fill);
 }
 
 /* ==========================================================================
@@ -226,7 +226,7 @@
    ========================================================================== */
 
 .csk-pagination--minimal {
-  gap: var(--spacing-2);
+  gap: var(--csk-space-2);
 }
 
 .csk-pagination--minimal .csk-pagination__button {
@@ -235,12 +235,12 @@
 }
 
 .csk-pagination--minimal .csk-pagination__button:hover:not(:disabled) {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--csk-color-surface-2);
 }
 
 .csk-pagination--minimal .csk-pagination__info {
   min-width: auto;
-  padding: 0 var(--spacing-2);
+  padding: 0 var(--csk-space-2);
   font-variant-numeric: tabular-nums;
 }
 
@@ -262,10 +262,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0 var(--spacing-3);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-text-secondary);
+    padding: 0 var(--csk-space-3);
+    font-size: var(--csk-text-md);
+    font-weight: var(--csk-font-weight-medium);
+    color: var(--csk-color-text-2);
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
   }
@@ -276,12 +276,12 @@
    ========================================================================== */
 
 [data-theme='dark'] .csk-pagination__button {
-  background-color: var(--color-bg-primary);
-  border-color: var(--color-border-default);
+  background-color: var(--csk-color-surface);
+  border-color: var(--csk-color-border);
 }
 
 [data-theme='dark'] .csk-pagination__button:hover:not(:disabled) {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--csk-color-surface-2);
 }
 
 /* ==========================================================================

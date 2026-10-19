@@ -392,7 +392,7 @@ export const Empty: Story = {
     emptyState: (
       <div style={{ padding: '2rem', textAlign: 'center' }}>
         <p style={{ marginBottom: '0.5rem', fontWeight: 'bold' }}>Zatim zadne vysledky</p>
-        <p style={{ color: 'var(--color-text-secondary)' }}>Vysledky budou k dispozici po dokonceni zavodu</p>
+        <p style={{ color: 'var(--csk-color-text-2)' }}>Vysledky budou k dispozici po dokonceni zavodu</p>
       </div>
     ),
     caption: 'Prazdna tabulka',
@@ -712,7 +712,7 @@ const InteractiveResultsTable = () => {
 
   return (
     <div>
-      <p style={{ marginBottom: '1rem', color: 'var(--color-text-secondary)', fontSize: 'var(--font-size-sm)' }}>
+      <p style={{ marginBottom: '1rem', color: 'var(--csk-color-text-2)', fontSize: 'var(--csk-text-md)' }}>
         Klikněte na řádek pro zobrazení detailu jízdy s penalizacemi na branách.
       </p>
       <ResultsTable
@@ -831,10 +831,10 @@ const RunDetailModalDemo = () => {
         onClick={() => setOpen(true)}
         style={{
           padding: '0.5rem 1rem',
-          background: 'var(--color-primary)',
+          background: 'var(--csk-color-action)',
           color: 'white',
           border: 'none',
-          borderRadius: 'var(--radius-md)',
+          borderRadius: 'var(--csk-radius-md)',
           cursor: 'pointer',
         }}
       >

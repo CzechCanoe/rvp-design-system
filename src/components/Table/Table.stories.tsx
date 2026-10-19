@@ -91,7 +91,7 @@ const resultColumns: ColumnDef<Result>[] = [
     accessor: 'time',
     align: 'right',
     sortable: true,
-    cell: (row) => <span style={{ fontFamily: 'var(--font-family-mono)' }}>{row.time}</span>,
+    cell: (row) => <span style={{ fontFamily: 'var(--csk-font-mono)' }}>{row.time}</span>,
   },
   {
     key: 'penalty',
@@ -102,7 +102,7 @@ const resultColumns: ColumnDef<Result>[] = [
       row.penalty > 0 ? (
         <Badge variant="error" size="sm">{row.penalty}</Badge>
       ) : (
-        <span style={{ color: 'var(--color-text-tertiary)' }}>0</span>
+        <span style={{ color: 'var(--csk-color-text-3)' }}>0</span>
       ),
   },
   {
@@ -111,7 +111,7 @@ const resultColumns: ColumnDef<Result>[] = [
     accessor: 'total',
     align: 'right',
     sortable: true,
-    cell: (row) => <span style={{ fontFamily: 'var(--font-family-mono)', fontWeight: 'bold' }}>{row.total}</span>,
+    cell: (row) => <span style={{ fontFamily: 'var(--csk-font-mono)', fontWeight: 'bold' }}>{row.total}</span>,
   },
 ];
 
@@ -178,10 +178,10 @@ export const Empty = {
       rowKey="id"
       emptyState={
         <div style={{ padding: '2rem', textAlign: 'center' }}>
-          <p style={{ color: 'var(--color-text-secondary)', marginBottom: '0.5rem' }}>
+          <p style={{ color: 'var(--csk-color-text-2)', marginBottom: '0.5rem' }}>
             Žádní závodníci nenalezeni
           </p>
-          <p style={{ color: 'var(--color-text-tertiary)', fontSize: '0.875rem' }}>
+          <p style={{ color: 'var(--csk-color-text-3)', fontSize: '0.875rem' }}>
             Zkuste upravit filtry vyhledávání
           </p>
         </div>

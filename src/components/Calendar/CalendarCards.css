@@ -21,16 +21,16 @@
 .csk-calendar-cards {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-4);
-  font-family: var(--font-family);
-  color: var(--color-text-primary);
+  gap: var(--csk-space-4);
+  font-family: var(--csk-font-sans);
+  color: var(--csk-color-text);
 }
 
 .csk-calendar-cards__title {
   margin: 0;
-  font-size: var(--text-xl-size);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
+  font-size: var(--csk-text-xl);
+  font-weight: var(--csk-font-weight-semibold);
+  color: var(--csk-color-text);
 }
 
 /* ==========================================================================
@@ -40,7 +40,7 @@
 .csk-calendar-cards__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--spacing-4);
+  gap: var(--csk-space-4);
 }
 
 /* ==========================================================================
@@ -50,15 +50,15 @@
 .csk-calendar-cards__card {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-lg);
+  background-color: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-lg);
   overflow: hidden;
-  transition: box-shadow var(--duration-fast) var(--ease-out);
+  transition: box-shadow var(--csk-transition-fast);
 }
 
 .csk-calendar-cards__card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 
 /* ==========================================================================
@@ -69,20 +69,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-3) var(--spacing-4);
-  background-color: var(--color-bg-secondary);
-  border-bottom: 1px solid var(--color-border-default);
+  padding: var(--csk-space-3) var(--csk-space-4);
+  background-color: var(--csk-color-surface-2);
+  border-bottom: 1px solid var(--csk-color-border);
 }
 
 .csk-calendar-cards__month-name {
-  font-size: var(--text-base-size);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--csk-text-base);
+  font-weight: var(--csk-font-weight-semibold);
   text-transform: capitalize;
 }
 
 .csk-calendar-cards__event-count {
-  font-size: var(--text-sm-size);
-  color: var(--color-text-tertiary);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text-3);
 }
 
 /* ==========================================================================
@@ -92,7 +92,7 @@
 .csk-calendar-cards__card-content {
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-3);
+  padding: var(--csk-space-3);
   min-height: 120px;
 }
 
@@ -101,8 +101,8 @@
   align-items: center;
   justify-content: center;
   flex: 1;
-  color: var(--color-text-tertiary);
-  font-size: var(--text-sm-size);
+  color: var(--csk-color-text-3);
+  font-size: var(--csk-text-md);
   font-style: italic;
 }
 
@@ -116,7 +116,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-1);
+  gap: var(--csk-space-1);
 }
 
 .csk-calendar-cards__event-item {
@@ -138,16 +138,16 @@
 
   display: flex;
   align-items: center;
-  gap: var(--spacing-2);
+  gap: var(--csk-space-2);
   width: 100%;
-  padding: var(--spacing-2);
-  border-radius: var(--radius-md);
+  padding: var(--csk-space-2);
+  border-radius: var(--csk-radius-md);
   background-color: transparent;
   border-left: 2px solid transparent;
 
   transition:
-    background-color var(--duration-fast) var(--ease-out),
-    border-color var(--duration-fast) var(--ease-out);
+    background-color var(--csk-transition-fast),
+    border-color var(--csk-transition-fast);
 }
 
 .csk-calendar-cards__event--clickable {
@@ -155,11 +155,11 @@
 }
 
 .csk-calendar-cards__event--clickable:hover {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--csk-color-surface-2);
 }
 
 .csk-calendar-cards__event:focus-visible {
-  outline: 2px solid var(--color-border-focus);
+  outline: 2px solid var(--csk-color-focus);
   outline-offset: 1px;
 }
 
@@ -170,16 +170,16 @@
 .csk-calendar-cards__event-date {
   flex-shrink: 0;
   min-width: 48px;
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-text-2);
   font-variant-numeric: tabular-nums;
 }
 
 .csk-calendar-cards__event-title {
   flex: 1;
-  font-size: var(--text-sm-size);
-  color: var(--color-text-primary);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -196,25 +196,25 @@
   justify-content: center;
   padding: 2px 6px;
   font-size: 10px;
-  font-weight: var(--font-weight-bold);
-  border-radius: var(--radius-sm);
+  font-weight: var(--csk-font-weight-bold);
+  border-radius: var(--csk-radius-sm);
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
 
 .csk-calendar-cards__event-badge--dv {
-  background-color: var(--color-section-dv-light);
-  color: var(--color-section-dv);
+  background-color: color-mix(in srgb, var(--csk-color-section-dv) 12%, var(--csk-color-surface));
+  color: var(--csk-color-section-dv);
 }
 
 .csk-calendar-cards__event-badge--ry {
-  background-color: var(--color-section-ry-light);
-  color: var(--color-section-ry);
+  background-color: color-mix(in srgb, var(--csk-color-section-ry) 12%, var(--csk-color-surface));
+  color: var(--csk-color-section-ry);
 }
 
 .csk-calendar-cards__event-badge--vt {
-  background-color: var(--color-section-vt-light);
-  color: var(--color-section-vt);
+  background-color: color-mix(in srgb, var(--csk-color-section-vt) 12%, var(--csk-color-surface));
+  color: var(--csk-color-section-vt);
 }
 
 /* ==========================================================================
@@ -222,35 +222,35 @@
    ========================================================================== */
 
 .csk-calendar-cards__event--section-dv {
-  border-left-color: var(--color-section-dv);
+  border-left-color: var(--csk-color-section-dv);
 }
 
 .csk-calendar-cards__event--section-ry {
-  border-left-color: var(--color-section-ry);
+  border-left-color: var(--csk-color-section-ry);
 }
 
 .csk-calendar-cards__event--section-vt {
-  border-left-color: var(--color-section-vt);
+  border-left-color: var(--csk-color-section-vt);
 }
 
 .csk-calendar-cards__event--primary {
-  border-left-color: var(--color-primary-500);
+  border-left-color: var(--csk-color-action);
 }
 
 .csk-calendar-cards__event--success {
-  border-left-color: var(--color-success-500);
+  border-left-color: var(--csk-color-success);
 }
 
 .csk-calendar-cards__event--warning {
-  border-left-color: var(--color-warning-500);
+  border-left-color: var(--csk-color-warning);
 }
 
 .csk-calendar-cards__event--error {
-  border-left-color: var(--color-error-500);
+  border-left-color: var(--csk-color-error);
 }
 
 .csk-calendar-cards__event--info {
-  border-left-color: var(--color-info-500);
+  border-left-color: var(--csk-color-info);
 }
 
 /* ==========================================================================
@@ -261,27 +261,27 @@
   appearance: none;
   background: none;
   border: none;
-  padding: var(--spacing-2);
-  margin-top: var(--spacing-1);
+  padding: var(--csk-space-2);
+  margin-top: var(--csk-space-1);
   font: inherit;
-  font-size: var(--text-sm-size);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-primary-600);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-medium);
+  color: var(--csk-color-action-hover);
   cursor: pointer;
   text-align: center;
-  border-radius: var(--radius-md);
+  border-radius: var(--csk-radius-md);
   transition:
-    color var(--duration-fast) var(--ease-out),
-    background-color var(--duration-fast) var(--ease-out);
+    color var(--csk-transition-fast),
+    background-color var(--csk-transition-fast);
 }
 
 .csk-calendar-cards__more:hover {
-  color: var(--color-primary-700);
-  background-color: var(--color-bg-secondary);
+  color: var(--csk-color-brand);
+  background-color: var(--csk-color-surface-2);
 }
 
 .csk-calendar-cards__more:focus-visible {
-  outline: 2px solid var(--color-border-focus);
+  outline: 2px solid var(--csk-color-focus);
   outline-offset: 1px;
 }
 
@@ -293,13 +293,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-8);
-  color: var(--color-text-tertiary);
-  font-size: var(--text-sm-size);
+  padding: var(--csk-space-8);
+  color: var(--csk-color-text-3);
+  font-size: var(--csk-text-md);
   font-style: italic;
   text-align: center;
-  background-color: var(--color-bg-secondary);
-  border-radius: var(--radius-lg);
+  background-color: var(--csk-color-surface-2);
+  border-radius: var(--csk-radius-lg);
 }
 
 /* ==========================================================================
@@ -308,50 +308,50 @@
 
 /* Embed style - neutral, modern, for kanoe.cz integration */
 .csk-calendar-cards--style-embed .csk-calendar-cards__title {
-  font-size: var(--text-embed-h4-size);
+  font-size: var(--csk-text-lg);
 }
 
 .csk-calendar-cards--style-embed .csk-calendar-cards__card {
-  border: var(--border-embed-card);
-  border-radius: var(--radius-embed-card);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-sm);
   box-shadow: none;
 }
 
 .csk-calendar-cards--style-embed .csk-calendar-cards__card:hover {
   box-shadow: none;
-  border-color: var(--color-border-secondary);
+  border-color: var(--csk-color-border);
 }
 
 .csk-calendar-cards--style-embed .csk-calendar-cards__card-header {
-  padding: var(--spacing-embed-sm) var(--spacing-embed-md);
-  background-color: var(--color-bg-secondary);
+  padding: var(--csk-space-2) var(--csk-space-3);
+  background-color: var(--csk-color-surface-2);
 }
 
 .csk-calendar-cards--style-embed .csk-calendar-cards__month-name {
-  font-size: var(--text-embed-small-size);
+  font-size: var(--csk-text-md);
 }
 
 .csk-calendar-cards--style-embed .csk-calendar-cards__event-count {
-  font-size: var(--text-xs-size);
+  font-size: var(--csk-text-sm);
 }
 
 .csk-calendar-cards--style-embed .csk-calendar-cards__card-content {
-  padding: var(--spacing-embed-sm);
+  padding: var(--csk-space-2);
   min-height: 100px;
 }
 
 .csk-calendar-cards--style-embed .csk-calendar-cards__event {
-  padding: var(--spacing-1) var(--spacing-2);
-  border-radius: var(--radius-sm);
+  padding: var(--csk-space-1) var(--csk-space-2);
+  border-radius: var(--csk-radius-sm);
 }
 
 .csk-calendar-cards--style-embed .csk-calendar-cards__event-date {
-  font-size: var(--text-xs-size);
+  font-size: var(--csk-text-sm);
   min-width: 40px;
 }
 
 .csk-calendar-cards--style-embed .csk-calendar-cards__event-title {
-  font-size: var(--text-xs-size);
+  font-size: var(--csk-text-sm);
 }
 
 .csk-calendar-cards--style-embed .csk-calendar-cards__event-badge {
@@ -360,12 +360,12 @@
 }
 
 .csk-calendar-cards--style-embed .csk-calendar-cards__more {
-  font-size: var(--text-xs-size);
-  padding: var(--spacing-1);
+  font-size: var(--csk-text-sm);
+  padding: var(--csk-space-1);
 }
 
 .csk-calendar-cards--style-embed .csk-calendar-cards__card-empty {
-  font-size: var(--text-xs-size);
+  font-size: var(--csk-text-sm);
 }
 
 /* ==========================================================================
@@ -373,36 +373,36 @@
    ========================================================================== */
 
 [data-theme='dark'] .csk-calendar-cards__card {
-  background-color: var(--color-bg-secondary);
-  border-color: var(--color-border-secondary);
+  background-color: var(--csk-color-surface-2);
+  border-color: var(--csk-color-border);
 }
 
 [data-theme='dark'] .csk-calendar-cards__card-header {
-  background-color: var(--color-bg-tertiary);
-  border-color: var(--color-border-secondary);
+  background-color: var(--csk-color-surface-3);
+  border-color: var(--csk-color-border);
 }
 
 [data-theme='dark'] .csk-calendar-cards__event--clickable:hover {
-  background-color: var(--color-bg-tertiary);
+  background-color: var(--csk-color-surface-3);
 }
 
 [data-theme='dark'] .csk-calendar-cards__event-badge--dv {
-  background-color: rgba(17, 118, 166, 0.2);
-  color: var(--color-primary-400);
+  background-color: color-mix(in srgb, var(--csk-color-action) 20%, transparent);
+  color: var(--csk-color-action);
 }
 
 [data-theme='dark'] .csk-calendar-cards__event-badge--ry {
-  background-color: rgba(34, 197, 94, 0.2);
-  color: var(--color-success-400);
+  background-color: color-mix(in srgb, var(--csk-color-success) 20%, transparent);
+  color: var(--csk-color-success);
 }
 
 [data-theme='dark'] .csk-calendar-cards__event-badge--vt {
-  background-color: rgba(239, 68, 68, 0.2);
-  color: var(--color-error-400);
+  background-color: color-mix(in srgb, var(--csk-color-error) 20%, transparent);
+  color: var(--csk-color-error);
 }
 
 [data-theme='dark'] .csk-calendar-cards__empty {
-  background-color: var(--color-bg-tertiary);
+  background-color: var(--csk-color-surface-3);
 }
 
 /* ==========================================================================
@@ -428,7 +428,7 @@
   .csk-calendar-cards__card-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--spacing-1);
+    gap: var(--csk-space-1);
   }
 
   .csk-calendar-cards__event {
@@ -437,7 +437,7 @@
 
   .csk-calendar-cards__event-badge {
     order: -1;
-    margin-bottom: var(--spacing-1);
+    margin-bottom: var(--csk-space-1);
   }
 }
 

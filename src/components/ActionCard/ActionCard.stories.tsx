@@ -164,7 +164,7 @@ export const SizeLarge: Story = {
 export const InCard: Story = {
   render: () => (
     <Card variant="surface" padding="lg">
-      <h3 style={{ margin: '0 0 1rem', color: 'var(--color-text-primary)' }}>
+      <h3 style={{ margin: '0 0 1rem', color: 'var(--csk-color-text)' }}>
         Quick Actions
       </h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -284,7 +284,7 @@ export const AllSizes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <Card variant="surface" padding="md">
-        <h4 style={{ margin: '0 0 0.75rem', color: 'var(--color-text-secondary)' }}>
+        <h4 style={{ margin: '0 0 0.75rem', color: 'var(--csk-color-text-2)' }}>
           Small
         </h4>
         <ActionCard
@@ -295,7 +295,7 @@ export const AllSizes: Story = {
         />
       </Card>
       <Card variant="surface" padding="md">
-        <h4 style={{ margin: '0 0 0.75rem', color: 'var(--color-text-secondary)' }}>
+        <h4 style={{ margin: '0 0 0.75rem', color: 'var(--csk-color-text-2)' }}>
           Medium (default)
         </h4>
         <ActionCard
@@ -306,7 +306,7 @@ export const AllSizes: Story = {
         />
       </Card>
       <Card variant="surface" padding="md">
-        <h4 style={{ margin: '0 0 0.75rem', color: 'var(--color-text-secondary)' }}>
+        <h4 style={{ margin: '0 0 0.75rem', color: 'var(--csk-color-text-2)' }}>
           Large
         </h4>
         <ActionCard

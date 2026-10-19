@@ -505,14 +505,14 @@ const DemoSparkline = () => (
   <svg viewBox="0 0 200 40" style={{ width: '100%', height: '40px' }}>
     <defs>
       <linearGradient id="sparklineGradient" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor="var(--color-primary-500)" stopOpacity="0.3" />
-        <stop offset="100%" stopColor="var(--color-primary-500)" stopOpacity="0" />
+        <stop offset="0%" stopColor="var(--csk-color-action)" stopOpacity="0.3" />
+        <stop offset="100%" stopColor="var(--csk-color-action)" stopOpacity="0" />
       </linearGradient>
     </defs>
     <path
       d="M0 30 L20 25 L40 28 L60 20 L80 22 L100 15 L120 18 L140 10 L160 12 L180 8 L200 5"
       fill="none"
-      stroke="var(--color-primary-500)"
+      stroke="var(--csk-color-action)"
       strokeWidth="2"
     />
     <path
@@ -526,14 +526,14 @@ const DemoSparklineSuccess = () => (
   <svg viewBox="0 0 200 40" style={{ width: '100%', height: '40px' }}>
     <defs>
       <linearGradient id="sparklineGradientSuccess" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor="var(--color-success-500)" stopOpacity="0.3" />
-        <stop offset="100%" stopColor="var(--color-success-500)" stopOpacity="0" />
+        <stop offset="0%" stopColor="var(--csk-color-success)" stopOpacity="0.3" />
+        <stop offset="100%" stopColor="var(--csk-color-success)" stopOpacity="0" />
       </linearGradient>
     </defs>
     <path
       d="M0 35 L20 32 L40 30 L60 28 L80 25 L100 20 L120 18 L140 15 L160 12 L180 8 L200 5"
       fill="none"
-      stroke="var(--color-success-500)"
+      stroke="var(--csk-color-success)"
       strokeWidth="2"
     />
     <path

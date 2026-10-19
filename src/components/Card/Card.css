@@ -16,18 +16,18 @@
   flex-direction: column;
 
   /* Shape */
-  border-radius: var(--radius-card);
+  border-radius: var(--csk-radius-lg);
   overflow: hidden;
 
   /* Default background */
-  background-color: var(--color-bg-primary);
+  background-color: var(--csk-color-surface);
 
   /* Text */
-  color: var(--color-text-primary);
+  color: var(--csk-color-text);
   text-decoration: none;
 
   /* Transition for interactive states */
-  transition: var(--transition-card);
+  transition: var(--csk-transition-fast);
 }
 
 /* ==========================================================================
@@ -36,21 +36,21 @@
 
 /* Surface - flat card with subtle background */
 .csk-card--surface {
-  background-color: var(--color-bg-secondary);
-  border: 1px solid var(--color-border-default);
+  background-color: var(--csk-color-surface-2);
+  border: 1px solid var(--csk-color-border);
 }
 
 /* Elevated - card with shadow */
 .csk-card--elevated {
-  background-color: var(--color-bg-primary);
+  background-color: var(--csk-color-surface);
   border: 1px solid transparent;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 }
 
 /* Outlined - card with visible border */
 .csk-card--outlined {
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-strong);
+  background-color: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
 }
 
 /* ==========================================================================
@@ -62,15 +62,15 @@
 }
 
 .csk-card--padding-sm .csk-card__body {
-  padding: var(--spacing-card-padding-sm);
+  padding: var(--csk-space-2);
 }
 
 .csk-card--padding-md .csk-card__body {
-  padding: var(--spacing-card-padding);
+  padding: var(--csk-space-4);
 }
 
 .csk-card--padding-lg .csk-card__body {
-  padding: var(--spacing-card-padding-lg);
+  padding: var(--csk-space-6);
 }
 
 /* ==========================================================================
@@ -78,38 +78,38 @@
    ========================================================================== */
 
 .csk-card__header {
-  padding: var(--spacing-card-padding);
-  border-bottom: 1px solid var(--color-border-default);
+  padding: var(--csk-space-4);
+  border-bottom: 1px solid var(--csk-color-border);
 }
 
 .csk-card--padding-sm .csk-card__header {
-  padding: var(--spacing-card-padding-sm);
+  padding: var(--csk-space-2);
 }
 
 .csk-card--padding-lg .csk-card__header {
-  padding: var(--spacing-card-padding-lg);
+  padding: var(--csk-space-6);
 }
 
 .csk-card--padding-none .csk-card__header {
-  padding: var(--spacing-card-padding);
+  padding: var(--csk-space-4);
 }
 
 .csk-card__footer {
-  padding: var(--spacing-card-padding);
-  border-top: 1px solid var(--color-border-default);
+  padding: var(--csk-space-4);
+  border-top: 1px solid var(--csk-color-border);
   margin-top: auto;
 }
 
 .csk-card--padding-sm .csk-card__footer {
-  padding: var(--spacing-card-padding-sm);
+  padding: var(--csk-space-2);
 }
 
 .csk-card--padding-lg .csk-card__footer {
-  padding: var(--spacing-card-padding-lg);
+  padding: var(--csk-space-6);
 }
 
 .csk-card--padding-none .csk-card__footer {
-  padding: var(--spacing-card-padding);
+  padding: var(--csk-space-4);
 }
 
 /* ==========================================================================
@@ -129,38 +129,38 @@
 }
 
 .csk-card--clickable:focus-visible {
-  outline: 2px solid var(--color-border-focus);
+  outline: 2px solid var(--csk-color-focus);
   outline-offset: 2px;
 }
 
 /* Hover states for clickable cards */
 .csk-card--clickable.csk-card--surface:hover {
-  background-color: var(--color-bg-tertiary);
-  border-color: var(--color-border-strong);
+  background-color: var(--csk-color-surface-3);
+  border-color: var(--csk-color-border);
 }
 
 .csk-card--clickable.csk-card--elevated:hover {
-  box-shadow: var(--shadow-card-hover);
+  box-shadow: none;
   transform: translateY(-2px);
 }
 
 .csk-card--clickable.csk-card--outlined:hover {
-  background-color: var(--color-bg-secondary);
-  border-color: var(--color-interactive-default);
+  background-color: var(--csk-color-surface-2);
+  border-color: var(--csk-color-action);
 }
 
 /* Active states for clickable cards */
 .csk-card--clickable.csk-card--surface:active {
-  background-color: var(--color-bg-tertiary);
+  background-color: var(--csk-color-surface-3);
 }
 
 .csk-card--clickable.csk-card--elevated:active {
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
   transform: translateY(0);
 }
 
 .csk-card--clickable.csk-card--outlined:active {
-  background-color: var(--color-bg-tertiary);
+  background-color: var(--csk-color-surface-3);
 }
 
 /* ==========================================================================
@@ -186,40 +186,37 @@
 
 .csk-card--aesthetic {
   position: relative;
-  background: var(--bg-mesh-card,
-    radial-gradient(ellipse at 0% 0%, rgba(17, 118, 166, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 100% 100%, rgba(249, 115, 22, 0.05) 0%, transparent 50%));
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-default);
-  border-left: var(--border-accent-width, 4px) solid;
-  border-image: var(--border-accent-gradient, linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-energy-500, #f97316) 100%)) 1;
-  box-shadow: var(--shadow-md);
+  background: none;
+  background-color: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
+  border-left: 4px solid var(--csk-color-brand);
+  box-shadow: none;
   overflow: visible;
 }
 
 .csk-card--aesthetic .csk-card__header {
-  border-bottom-color: rgba(17, 118, 166, 0.15);
+  border-bottom-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
 }
 
 .csk-card--aesthetic .csk-card__footer {
-  border-top-color: rgba(17, 118, 166, 0.15);
+  border-top-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
 }
 
 /* Aesthetic card title styling */
 .csk-card--aesthetic .csk-card__title {
-  font-family: var(--font-family-display, var(--font-family-sans));
-  font-weight: var(--font-weight-bold);
-  letter-spacing: var(--text-headline-tracking, -0.02em);
+  font-family: var(--csk-font-display);
+  font-weight: var(--csk-font-weight-bold);
+  letter-spacing: var(--csk-letter-spacing-tight);
 }
 
 /* Clickable aesthetic */
 .csk-card--clickable.csk-card--aesthetic:hover {
-  box-shadow: var(--shadow-lg), var(--glow-energy-sm, 0 0 8px rgba(249, 115, 22, 0.4));
+  box-shadow: none;
   transform: translateY(-2px);
 }
 
 .csk-card--clickable.csk-card--aesthetic:active {
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
   transform: translateY(0);
 }
 
@@ -228,21 +225,19 @@
    ========================================================================== */
 
 [data-theme="dark"] .csk-card--aesthetic {
-  background: var(--bg-mesh-card,
-    radial-gradient(ellipse at 0% 0%, rgba(77, 163, 204, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 100% 100%, rgba(251, 146, 60, 0.04) 0%, transparent 50%));
-  background-color: var(--color-bg-primary);
-  border-color: var(--color-border-secondary);
+  background: none;
+  background-color: var(--csk-color-surface);
+  border-color: var(--csk-color-border);
 }
 
 [data-theme="dark"] .csk-card--aesthetic .csk-card__header {
-  border-bottom-color: rgba(77, 163, 204, 0.15);
+  border-bottom-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
 }
 
 [data-theme="dark"] .csk-card--aesthetic .csk-card__footer {
-  border-top-color: rgba(77, 163, 204, 0.15);
+  border-top-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
 }
 
 [data-theme="dark"] .csk-card--clickable.csk-card--aesthetic:hover {
-  box-shadow: var(--shadow-lg), var(--glow-energy-sm, 0 0 8px rgba(251, 146, 60, 0.5));
+  box-shadow: none;
 }

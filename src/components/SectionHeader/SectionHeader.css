@@ -20,7 +20,7 @@
   gap: var(--csk-space-2);
   margin: 0;
   font-weight: var(--csk-font-weight-semibold);
-  color: var(--csk-color-on-surface);
+  color: var(--csk-color-text);
 }
 
 /* Badge next to title */
@@ -31,8 +31,8 @@
 /* Description */
 .csk-section-header__description {
   margin: var(--csk-space-1) 0 0;
-  font-size: var(--csk-font-size-sm);
-  color: var(--csk-color-on-surface-muted);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text-3);
 }
 
 /* Action area */
@@ -46,15 +46,15 @@
 }
 
 .csk-section-header--sm .csk-section-header__title {
-  font-size: var(--csk-font-size-sm);
+  font-size: var(--csk-text-md);
 }
 
 .csk-section-header--md .csk-section-header__title {
-  font-size: var(--csk-font-size-base);
+  font-size: var(--csk-text-base);
 }
 
 .csk-section-header--lg .csk-section-header__title {
-  font-size: var(--csk-font-size-lg);
+  font-size: var(--csk-text-lg);
 }
 
 /* Bordered variant */

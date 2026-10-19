@@ -68,7 +68,7 @@ export const BarAllVariants: BarStory = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div>
-        <p style={{ marginBottom: '8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+        <p style={{ marginBottom: '8px', fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
           Sizes (sm, md, lg)
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -78,7 +78,7 @@ export const BarAllVariants: BarStory = {
         </div>
       </div>
       <div>
-        <p style={{ marginBottom: '8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+        <p style={{ marginBottom: '8px', fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
           Colors
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -89,7 +89,7 @@ export const BarAllVariants: BarStory = {
         </div>
       </div>
       <div>
-        <p style={{ marginBottom: '8px', fontSize: '14px', color: 'var(--color-text-secondary)' }}>
+        <p style={{ marginBottom: '8px', fontSize: '14px', color: 'var(--csk-color-text-2)' }}>
           Striped & Animated
         </p>
         <Progress variant="bar" value={60} striped animated size="lg" />
@@ -147,7 +147,7 @@ export const StepsClickable: StepsStory = {
 
     return (
       <div>
-        <p style={{ marginBottom: '24px', color: 'var(--color-text-secondary)' }}>
+        <p style={{ marginBottom: '24px', color: 'var(--csk-color-text-2)' }}>
           Kliknutím na dokončený krok se na něj můžete vrátit. Aktuální krok: {currentStep + 1}
         </p>
         <Progress
@@ -192,12 +192,12 @@ export const CSKRegistrationWizard: StepsStory = {
           style={{
             marginTop: '32px',
             padding: '24px',
-            background: 'var(--color-bg-secondary)',
+            background: 'var(--csk-color-surface-2)',
             borderRadius: '8px',
           }}
         >
           <h3 style={{ margin: '0 0 16px' }}>{steps[step].label}</h3>
-          <p style={{ margin: '0 0 24px', color: 'var(--color-text-secondary)' }}>
+          <p style={{ margin: '0 0 24px', color: 'var(--csk-color-text-2)' }}>
             Obsah kroku {step + 1} z {steps.length}
           </p>
           <div style={{ display: 'flex', gap: '12px' }}>
@@ -207,7 +207,7 @@ export const CSKRegistrationWizard: StepsStory = {
               style={{
                 padding: '8px 16px',
                 borderRadius: '6px',
-                border: '1px solid var(--color-border-primary)',
+                border: '1px solid var(--csk-color-border)',
                 background: 'transparent',
                 cursor: step === 0 ? 'not-allowed' : 'pointer',
                 opacity: step === 0 ? 0.5 : 1,
@@ -222,7 +222,7 @@ export const CSKRegistrationWizard: StepsStory = {
                 padding: '8px 16px',
                 borderRadius: '6px',
                 border: 'none',
-                background: 'var(--color-primary-500)',
+                background: 'var(--csk-color-action)',
                 color: 'white',
                 cursor: step === steps.length - 1 ? 'not-allowed' : 'pointer',
                 opacity: step === steps.length - 1 ? 0.5 : 1,
@@ -263,13 +263,13 @@ export const CSKFileUpload: BarStory = {
         <div
           style={{
             padding: '24px',
-            border: '2px dashed var(--color-border-secondary)',
+            border: '2px dashed var(--csk-color-border)',
             borderRadius: '8px',
             textAlign: 'center',
             marginBottom: '16px',
           }}
         >
-          <p style={{ margin: '0 0 12px', color: 'var(--color-text-secondary)' }}>
+          <p style={{ margin: '0 0 12px', color: 'var(--csk-color-text-2)' }}>
             lekarska_prohlidka_2026.pdf
           </p>
           {uploading ? (
@@ -282,7 +282,7 @@ export const CSKFileUpload: BarStory = {
               striped={progress < 100}
             />
           ) : progress === 100 ? (
-            <p style={{ margin: 0, color: 'var(--color-success-500)' }}>✓ Nahráno</p>
+            <p style={{ margin: 0, color: 'var(--csk-color-success)' }}>✓ Nahráno</p>
           ) : (
             <button
               onClick={startUpload}
@@ -290,7 +290,7 @@ export const CSKFileUpload: BarStory = {
                 padding: '8px 16px',
                 borderRadius: '6px',
                 border: 'none',
-                background: 'var(--color-primary-500)',
+                background: 'var(--csk-color-action)',
                 color: 'white',
                 cursor: 'pointer',
               }}

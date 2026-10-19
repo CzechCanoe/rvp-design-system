@@ -14,7 +14,7 @@
 .csk-select-wrapper {
   display: inline-flex;
   flex-direction: column;
-  gap: var(--spacing-1-5);
+  gap: calc(var(--csk-space-1) * 1.5);
 }
 
 .csk-select-wrapper--full-width {
@@ -27,32 +27,25 @@
    ========================================================================== */
 
 .csk-select-label {
-  font-family: var(--font-family-sans);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-tight);
-  color: var(--color-text-primary);
-  transition: color var(--duration-moderate) var(--ease-out);
-}
-
-/* Display label - uses display font for aesthetic emphasis */
-.csk-select-label--display {
-  font-family: var(--font-family-display, var(--font-family-sans));
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: -0.01em;
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-medium);
+  line-height: var(--csk-line-height-snug);
+  color: var(--csk-color-text);
+  transition: color var(--csk-transition-fast);
 }
 
 /* Label enhancement on focus-within */
 .csk-select-wrapper:focus-within .csk-select-label {
-  color: var(--color-primary-600);
+  color: var(--csk-color-action-hover);
 }
 
 .csk-select-wrapper:has(.csk-select-container--error) .csk-select-label {
-  color: var(--color-error-600);
+  color: var(--csk-color-error);
 }
 
 .csk-select-wrapper:has(.csk-select-container--success) .csk-select-label {
-  color: var(--color-success-600);
+  color: var(--csk-color-success);
 }
 
 /* ==========================================================================
@@ -76,37 +69,37 @@
   width: 100%;
 
   /* Typography */
-  font-family: var(--font-family-sans);
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-tight);
-  color: var(--color-text-primary);
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-md);
+  line-height: var(--csk-line-height-snug);
+  color: var(--csk-color-text);
 
   /* Default size (md) */
-  padding: var(--spacing-input-padding-y) var(--spacing-input-padding-x);
-  padding-right: calc(var(--spacing-input-padding-x) * 2 + 1.25em);
-  min-height: var(--spacing-touch-target);
+  padding: var(--csk-space-2) var(--csk-space-3);
+  padding-right: calc(var(--csk-space-3) * 2 + 1.25em);
+  min-height: var(--csk-tap);
 
   /* Shape */
-  background-color: var(--color-bg-primary);
-  border: 1.5px solid var(--color-border-default);
-  border-radius: var(--radius-input);
+  background-color: var(--csk-color-surface);
+  border: 1.5px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-md);
 
   /* Subtle inner shadow for depth */
-  box-shadow: var(--shadow-inner);
+  box-shadow: none;
 
   /* Remove native appearance */
   appearance: none;
   cursor: pointer;
 
   /* Interaction - enhanced transitions */
-  transition: var(--transition-input);
+  transition: var(--csk-transition-fast);
   outline: none;
 }
 
 /* Placeholder style (first disabled option) */
 .csk-select:invalid,
 .csk-select option[value=""][disabled] {
-  color: var(--color-text-muted);
+  color: var(--csk-color-text-3);
 }
 
 /* ==========================================================================
@@ -114,73 +107,38 @@
    ========================================================================== */
 
 .csk-select:focus {
-  border-color: var(--color-primary-500);
-  box-shadow: var(--shadow-inner),
-              0 0 0 3px rgba(17, 118, 166, 0.15),
-              0 0 0 1px rgba(17, 118, 166, 0.3);
-  background-color: var(--color-bg-primary);
+  border-color: var(--csk-color-action);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-action) 15%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--csk-color-action) 30%, transparent);
+  background-color: var(--csk-color-surface);
 }
 
 .csk-select-container--error .csk-select:focus {
-  border-color: var(--color-error-500);
-  box-shadow: var(--shadow-inner),
-              0 0 0 3px rgba(239, 68, 68, 0.12),
-              0 0 0 1px rgba(239, 68, 68, 0.25),
-              0 0 12px rgba(239, 68, 68, 0.15);
+  border-color: var(--csk-color-error);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-error) 12%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--csk-color-error) 25%, transparent),
+    0 0 12px color-mix(in srgb, var(--csk-color-error) 15%, transparent);
 }
 
 .csk-select-container--success .csk-select:focus {
-  border-color: var(--color-success-500);
-  box-shadow: var(--shadow-inner),
-              0 0 0 3px rgba(34, 197, 94, 0.12),
-              0 0 0 1px rgba(34, 197, 94, 0.25),
-              0 0 12px rgba(34, 197, 94, 0.15);
-}
-
-/* Energy focus - coral-orange accent for prominent selects */
-.csk-select-container--energy-focus .csk-select:focus {
-  border-color: var(--color-energy-400, #fb923c);
-  box-shadow: var(--shadow-inner),
-              0 0 0 3px rgba(249, 115, 22, 0.15),
-              0 0 0 1px rgba(249, 115, 22, 0.35),
-              0 0 12px rgba(249, 115, 22, 0.2);
-}
-
-.csk-select-container--energy-focus .csk-select:focus + .csk-select-chevron {
-  color: var(--color-energy-500, #f97316);
-}
-
-.csk-select-container--energy-focus .csk-select:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-energy-300, #fdba74);
-  box-shadow: var(--shadow-inner),
-              0 1px 3px rgba(249, 115, 22, 0.1);
-}
-
-/* Energy focus label color */
-.csk-select-wrapper:focus-within:has(.csk-select-container--energy-focus) .csk-select-label {
-  color: var(--color-energy-600, #ea580c);
-}
-
-/* ==========================================================================
+  border-color: var(--csk-color-success);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-success) 12%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--csk-color-success) 25%, transparent),
+    0 0 12px color-mix(in srgb, var(--csk-color-success) 15%, transparent);
+}/* ==========================================================================
    HOVER STATES - Subtle enhancement
    ========================================================================== */
 
 .csk-select:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-primary-300);
-  box-shadow: var(--shadow-inner),
-              0 1px 3px rgba(0, 0, 0, 0.05);
+  border-color: var(--csk-color-highlight-border);
 }
 
 .csk-select-container--error .csk-select:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-error-400);
-  box-shadow: var(--shadow-inner),
-              0 1px 3px rgba(239, 68, 68, 0.1);
+  border-color: var(--csk-color-error);
 }
 
 .csk-select-container--success .csk-select:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-success-400);
-  box-shadow: var(--shadow-inner),
-              0 1px 3px rgba(34, 197, 94, 0.1);
+  border-color: var(--csk-color-success);
 }
 
 /* ==========================================================================
@@ -188,13 +146,13 @@
    ========================================================================== */
 
 .csk-select-container--error .csk-select {
-  border-color: var(--color-error-400);
-  background-color: rgba(239, 68, 68, 0.02);
+  border-color: var(--csk-color-error);
+  background-color: color-mix(in srgb, var(--csk-color-error) 2%, transparent);
 }
 
 .csk-select-container--success .csk-select {
-  border-color: var(--color-success-400);
-  background-color: rgba(34, 197, 94, 0.02);
+  border-color: var(--csk-color-success);
+  background-color: color-mix(in srgb, var(--csk-color-success) 2%, transparent);
 }
 
 /* ==========================================================================
@@ -205,9 +163,9 @@
 .csk-select-container--disabled .csk-select {
   cursor: not-allowed;
   opacity: 0.6;
-  background-color: var(--color-bg-secondary);
+  background-color: var(--csk-color-surface-2);
   box-shadow: none;
-  border-color: var(--color-border-muted);
+  border-color: var(--csk-color-border-2);
 }
 
 .csk-select-container--disabled .csk-select-chevron {
@@ -215,7 +173,7 @@
 }
 
 .csk-select-container--disabled .csk-select-label {
-  color: var(--color-text-muted);
+  color: var(--csk-color-text-3);
 }
 
 /* ==========================================================================
@@ -224,11 +182,11 @@
 
 /* Small */
 .csk-select-container--sm .csk-select {
-  padding: var(--spacing-1-5) var(--spacing-2-5);
-  padding-right: calc(var(--spacing-2-5) * 2 + 1em);
-  font-size: var(--font-size-xs);
+  padding: calc(var(--csk-space-1) * 1.5) calc(var(--csk-space-1) * 2.5);
+  padding-right: calc(calc(var(--csk-space-1) * 2.5) * 2 + 1em);
+  font-size: var(--csk-text-sm);
   min-height: 34px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--csk-radius-sm);
   border-width: 1px;
 }
 
@@ -236,11 +194,11 @@
 
 /* Large */
 .csk-select-container--lg .csk-select {
-  padding: var(--spacing-3) var(--spacing-4);
-  padding-right: calc(var(--spacing-4) * 2 + 1.5em);
-  font-size: var(--font-size-base);
+  padding: var(--csk-space-3) var(--csk-space-4);
+  padding-right: calc(var(--csk-space-4) * 2 + 1.5em);
+  font-size: var(--csk-text-base);
   min-height: 52px;
-  border-radius: var(--radius-md);
+  border-radius: var(--csk-radius-md);
   border-width: 2px;
 }
 
@@ -267,14 +225,14 @@
 
 .csk-select-chevron {
   position: absolute;
-  right: var(--spacing-input-padding-x);
+  right: var(--csk-space-3);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-muted);
+  color: var(--csk-color-text-3);
   pointer-events: none;
-  transition: color var(--duration-moderate) var(--ease-out),
-              transform var(--duration-moderate) var(--ease-out);
+  transition: color var(--csk-transition-fast),
+              transform var(--csk-transition-fast);
 }
 
 .csk-select-chevron svg {
@@ -284,18 +242,18 @@
 
 /* Chevron animation on focus */
 .csk-select:focus + .csk-select-chevron {
-  color: var(--color-primary-500);
+  color: var(--csk-color-action);
   transform: translateY(1px);
 }
 
 /* Chevron hover state */
 .csk-select:hover:not(:disabled):not(:focus) + .csk-select-chevron {
-  color: var(--color-text-secondary);
+  color: var(--csk-color-text-2);
 }
 
 /* Size adjustments for chevron */
 .csk-select-container--sm .csk-select-chevron {
-  right: var(--spacing-2);
+  right: var(--csk-space-2);
 }
 
 .csk-select-container--sm .csk-select-chevron svg {
@@ -304,7 +262,7 @@
 }
 
 .csk-select-container--lg .csk-select-chevron {
-  right: var(--spacing-4);
+  right: var(--csk-space-4);
 }
 
 .csk-select-container--lg .csk-select-chevron svg {
@@ -321,7 +279,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-muted);
+  color: var(--csk-color-text-3);
   pointer-events: none;
 }
 
@@ -332,20 +290,20 @@
 
 /* Left icon positioning */
 .csk-select-icon--left {
-  left: var(--spacing-input-padding-x);
+  left: var(--csk-space-3);
 }
 
 .csk-select-container--has-icon-left .csk-select {
-  padding-left: calc(var(--spacing-input-padding-x) * 2 + 1.25em);
+  padding-left: calc(var(--csk-space-3) * 2 + 1.25em);
 }
 
 /* Size adjustments for icons */
 .csk-select-container--sm .csk-select-icon {
-  left: var(--spacing-2);
+  left: var(--csk-space-2);
 }
 
 .csk-select-container--sm.csk-select-container--has-icon-left .csk-select {
-  padding-left: calc(var(--spacing-2) * 2 + 1em);
+  padding-left: calc(var(--csk-space-2) * 2 + 1em);
 }
 
 .csk-select-container--sm .csk-select-icon svg {
@@ -354,11 +312,11 @@
 }
 
 .csk-select-container--lg .csk-select-icon {
-  left: var(--spacing-4);
+  left: var(--csk-space-4);
 }
 
 .csk-select-container--lg.csk-select-container--has-icon-left .csk-select {
-  padding-left: calc(var(--spacing-4) * 2 + 1.5em);
+  padding-left: calc(var(--csk-space-4) * 2 + 1.5em);
 }
 
 .csk-select-container--lg .csk-select-icon svg {
@@ -371,23 +329,23 @@
    ========================================================================== */
 
 .csk-select-helper {
-  font-family: var(--font-family-sans);
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-normal);
-  color: var(--color-text-secondary);
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-sm);
+  line-height: var(--csk-line-height-normal);
+  color: var(--csk-color-text-2);
   display: flex;
   align-items: center;
-  gap: var(--spacing-1);
-  transition: color var(--duration-moderate) var(--ease-out);
+  gap: var(--csk-space-1);
+  transition: color var(--csk-transition-fast);
 }
 
 .csk-select-helper--error {
-  color: var(--color-error-600);
-  font-weight: var(--font-weight-medium);
+  color: var(--csk-color-error);
+  font-weight: var(--csk-font-weight-medium);
 }
 
 .csk-select-helper--success {
-  color: var(--color-success-600);
+  color: var(--csk-color-success);
 }
 
 /* ==========================================================================
@@ -395,46 +353,28 @@
    ========================================================================== */
 
 [data-theme="dark"] .csk-select {
-  background-color: var(--color-bg-secondary);
-  border-color: var(--color-border-default);
-  box-shadow: var(--shadow-inner);
+  background-color: var(--csk-color-surface-2);
+  border-color: var(--csk-color-border);
+  box-shadow: none;
 }
 
 [data-theme="dark"] .csk-select:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-primary-400);
-  box-shadow: var(--shadow-inner),
-              0 1px 3px rgba(0, 0, 0, 0.2);
+  border-color: var(--csk-color-action);
 }
 
 [data-theme="dark"] .csk-select:focus {
-  border-color: var(--color-primary-400);
-  box-shadow: var(--shadow-inner),
-              0 0 0 3px rgba(77, 163, 204, 0.2),
-              0 0 0 1px rgba(77, 163, 204, 0.4);
+  border-color: var(--csk-color-action);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-action) 20%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--csk-color-action) 40%, transparent);
 }
 
 [data-theme="dark"] .csk-select-container--error .csk-select {
-  background-color: rgba(239, 68, 68, 0.05);
+  background-color: color-mix(in srgb, var(--csk-color-error) 5%, transparent);
 }
 
 [data-theme="dark"] .csk-select-container--success .csk-select {
-  background-color: rgba(34, 197, 94, 0.05);
-}
-
-[data-theme="dark"] .csk-select-container--energy-focus .csk-select:focus {
-  border-color: var(--color-energy-400, #fb923c);
-  box-shadow: var(--shadow-inner),
-              0 0 0 3px rgba(251, 146, 60, 0.2),
-              0 0 0 1px rgba(251, 146, 60, 0.45);
-}
-
-[data-theme="dark"] .csk-select-container--energy-focus .csk-select:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-energy-400, #fb923c);
-  box-shadow: var(--shadow-inner),
-              0 1px 3px rgba(251, 146, 60, 0.15);
-}
-
-/* ==========================================================================
+  background-color: color-mix(in srgb, var(--csk-color-success) 5%, transparent);
+}/* ==========================================================================
    REDUCED MOTION
    ========================================================================== */
 

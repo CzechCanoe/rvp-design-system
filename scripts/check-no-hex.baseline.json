@@ -1,24 +1,10 @@
 {
   "src/components/ActionCard/ActionCard.css": 1,
   "src/components/AthleteCard/AthleteCard.css": 6,
-  "src/components/Badge/Badge.css": 9,
-  "src/components/Button/Button.css": 5,
-  "src/components/Calendar/Calendar.css": 3,
-  "src/components/Calendar/CalendarList.css": 1,
-  "src/components/Card/Card.css": 1,
-  "src/components/DateBadge/DateBadge.css": 21,
+  "src/components/DateBadge/DateBadge.css": 15,
   "src/components/HeroSection/HeroSection.css": 21,
-  "src/components/Input/Input.css": 5,
-  "src/components/KanoeCzContext/KanoeCzContext.css": 39,
-  "src/components/LiveIndicator/LiveIndicator.css": 8,
   "src/components/PodiumCard/PodiumCard.css": 24,
   "src/components/ResultItem/ResultItem.css": 12,
-  "src/components/ResultsTable/ResultsTable.css": 24,
-  "src/components/SearchInput/SearchInput.css": 9,
-  "src/components/Select/Select.css": 6,
-  "src/components/StatCard/StatCard.css": 28,
-  "src/components/StatsBar/StatsBar.css": 17,
-  "src/components/Table/Table.css": 3,
-  "src/components/Tabs/Tabs.css": 16,
-  "src/components/Wizard/Wizard.css": 2
+  "src/components/StatCard/StatCard.css": 27,
+  "src/components/StatsBar/StatsBar.css": 8
 }

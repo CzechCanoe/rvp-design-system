@@ -188,7 +188,7 @@ export const Bordered: Story = {
           bordered
           action={<Button variant="ghost" size="sm">View</Button>}
         />
-        <p style={{ margin: 0, color: 'var(--csk-color-on-surface-muted)' }}>
+        <p style={{ margin: 0, color: 'var(--csk-color-text-3)' }}>
           Content below the bordered header.
         </p>
       </div>
@@ -199,7 +199,7 @@ export const Bordered: Story = {
           bordered
           action={<Button variant="ghost" size="sm">View</Button>}
         />
-        <p style={{ margin: 0, color: 'var(--csk-color-on-surface-muted)' }}>
+        <p style={{ margin: 0, color: 'var(--csk-color-text-3)' }}>
           Content below the bordered header.
         </p>
       </div>
@@ -210,7 +210,7 @@ export const Bordered: Story = {
           bordered
           action={<Button variant="secondary" size="sm">View</Button>}
         />
-        <p style={{ margin: 0, color: 'var(--csk-color-on-surface-muted)' }}>
+        <p style={{ margin: 0, color: 'var(--csk-color-text-3)' }}>
           Content below the bordered header.
         </p>
       </div>
@@ -243,7 +243,7 @@ export const DashboardExample: Story = {
         <div
           style={{
             padding: '16px',
-            background: 'var(--csk-color-surface-container)',
+            background: 'var(--csk-color-surface-2)',
             borderRadius: '8px',
           }}
         >
@@ -261,7 +261,7 @@ export const DashboardExample: Story = {
         <div
           style={{
             padding: '16px',
-            background: 'var(--csk-color-surface-container)',
+            background: 'var(--csk-color-surface-2)',
             borderRadius: '8px',
           }}
         >
@@ -279,7 +279,7 @@ export const DashboardExample: Story = {
         <div
           style={{
             padding: '16px',
-            background: 'var(--csk-color-surface-container)',
+            background: 'var(--csk-color-surface-2)',
             borderRadius: '8px',
           }}
         >

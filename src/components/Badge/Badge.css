@@ -15,21 +15,21 @@
   /* Layout */
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-1);
+  gap: var(--csk-space-1);
 
   /* Typography */
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-medium);
+  font-family: var(--csk-font-sans);
+  font-weight: var(--csk-font-weight-medium);
   line-height: 1;
   white-space: nowrap;
   letter-spacing: 0.01em;
 
   /* Shape */
-  border-radius: var(--radius-badge);
+  border-radius: var(--csk-radius-sm);
   border: 1px solid transparent;
 
   /* Transition - enhanced for modern feel */
-  transition: var(--transition-badge);
+  transition: var(--csk-transition-fast);
 }
 
 /* ==========================================================================
@@ -37,24 +37,24 @@
    ========================================================================== */
 
 .csk-badge--sm {
-  font-size: var(--font-size-xs);
-  padding: var(--spacing-0-5) var(--spacing-1-5);
+  font-size: var(--csk-text-sm);
+  padding: calc(var(--csk-space-1) / 2) calc(var(--csk-space-1) * 1.5);
   min-height: 20px;
 }
 
 .csk-badge--md {
-  font-size: var(--font-size-sm);
-  padding: var(--spacing-1) var(--spacing-2);
+  font-size: var(--csk-text-md);
+  padding: var(--csk-space-1) var(--csk-space-2);
   min-height: 24px;
 }
 
 .csk-badge--lg {
-  font-size: var(--font-size-base);
-  padding: var(--spacing-1-5) var(--spacing-3);
+  font-size: var(--csk-text-base);
+  padding: calc(var(--csk-space-1) * 1.5) var(--csk-space-3);
   min-height: 32px;
-  font-family: var(--font-family-display, var(--font-family-sans));
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: var(--text-headline-tracking, -0.02em);
+  font-family: var(--csk-font-display);
+  font-weight: var(--csk-font-weight-semibold);
+  letter-spacing: var(--csk-letter-spacing-tight);
 }
 
 /* ==========================================================================
@@ -63,52 +63,52 @@
 
 /* Default - neutral gray */
 .csk-badge--default {
-  background-color: var(--color-neutral-100);
-  color: var(--color-neutral-700);
-  border-color: var(--color-neutral-200);
+  background-color: var(--csk-color-surface-3);
+  color: var(--csk-color-text-2);
+  border-color: var(--csk-color-border-2);
 }
 
 /* Primary - brand blue */
 .csk-badge--primary {
-  background-color: var(--color-primary-500);
-  color: var(--color-neutral-0);
-  border-color: var(--color-primary-500);
+  background-color: var(--csk-color-action);
+  color: var(--csk-color-surface);
+  border-color: var(--csk-color-action);
 }
 
 /* Success - green */
 .csk-badge--success {
-  background-color: var(--color-feedback-success);
-  color: var(--color-neutral-0);
-  border-color: var(--color-feedback-success);
+  background-color: var(--csk-color-success);
+  color: var(--csk-color-surface);
+  border-color: var(--csk-color-success);
 }
 
 /* Warning - amber */
 .csk-badge--warning {
-  background-color: var(--color-feedback-warning);
-  color: var(--color-neutral-900);
-  border-color: var(--color-feedback-warning);
+  background-color: var(--csk-color-warning);
+  color: var(--csk-color-text);
+  border-color: var(--csk-color-warning);
 }
 
 /* Error - red */
 .csk-badge--error {
-  background-color: var(--color-feedback-error);
-  color: var(--color-neutral-0);
-  border-color: var(--color-feedback-error);
+  background-color: var(--csk-color-error);
+  color: var(--csk-color-surface);
+  border-color: var(--csk-color-error);
 }
 
 /* Info - blue */
 .csk-badge--info {
-  background-color: var(--color-feedback-info);
-  color: var(--color-neutral-0);
-  border-color: var(--color-feedback-info);
+  background-color: var(--csk-color-info);
+  color: var(--csk-color-surface);
+  border-color: var(--csk-color-info);
 }
 
 /* Energy - coral-orange for live/urgent indicators */
 .csk-badge--energy {
-  background: var(--gradient-energy, linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%));
-  color: var(--color-neutral-0);
+  background: var(--csk-color-action);
+  color: var(--csk-color-surface);
   border-color: transparent;
-  box-shadow: var(--shadow-xs);
+  box-shadow: none;
 }
 
 /* ==========================================================================
@@ -117,26 +117,26 @@
 
 /* DV - Divoká voda (Whitewater) - blue with gradient */
 .csk-badge--section-dv {
-  background: var(--gradient-section-dv);
-  color: var(--color-neutral-0);
+  background: var(--csk-color-section-dv);
+  color: var(--csk-color-surface);
   border-color: transparent;
-  box-shadow: var(--shadow-xs);
+  box-shadow: none;
 }
 
 /* RY - Rychlostní (Sprint) - green with gradient */
 .csk-badge--section-ry {
-  background: var(--gradient-section-ry);
-  color: var(--color-neutral-0);
+  background: var(--csk-color-section-ry);
+  color: var(--csk-color-surface);
   border-color: transparent;
-  box-shadow: var(--shadow-xs);
+  box-shadow: none;
 }
 
 /* VT - Vodní turistika (Touring) - red with gradient */
 .csk-badge--section-vt {
-  background: var(--gradient-section-vt);
-  color: var(--color-neutral-0);
+  background: var(--csk-color-section-vt);
+  color: var(--csk-color-surface);
   border-color: transparent;
-  box-shadow: var(--shadow-xs);
+  box-shadow: none;
 }
 
 /* ==========================================================================
@@ -145,35 +145,35 @@
 
 /* M - Mistr (Master) - purple with gradient */
 .csk-badge--vt-m {
-  background: linear-gradient(135deg, var(--color-vt-m) 0%, #6d28d9 100%);
-  color: var(--color-neutral-0);
+  background: var(--csk-violet);
+  color: var(--csk-color-surface);
   border-color: transparent;
-  box-shadow: var(--shadow-xs);
-  font-weight: var(--font-weight-semibold);
+  box-shadow: none;
+  font-weight: var(--csk-font-weight-semibold);
 }
 
 /* A - Class A - red with gradient */
 .csk-badge--vt-a {
-  background: linear-gradient(135deg, var(--color-vt-a) 0%, #b91c1c 100%);
-  color: var(--color-neutral-0);
+  background: var(--csk-red);
+  color: var(--csk-color-surface);
   border-color: transparent;
-  box-shadow: var(--shadow-xs);
+  box-shadow: none;
 }
 
 /* B - Class B - amber with gradient */
 .csk-badge--vt-b {
-  background: linear-gradient(135deg, var(--color-vt-b) 0%, #d97706 100%);
-  color: var(--color-neutral-900);
+  background: var(--csk-amber);
+  color: var(--csk-color-text);
   border-color: transparent;
-  box-shadow: var(--shadow-xs);
+  box-shadow: none;
 }
 
 /* C - Class C - green with gradient */
 .csk-badge--vt-c {
-  background: linear-gradient(135deg, var(--color-vt-c) 0%, #15803d 100%);
-  color: var(--color-neutral-0);
+  background: var(--csk-green);
+  color: var(--csk-color-surface);
   border-color: transparent;
-  box-shadow: var(--shadow-xs);
+  box-shadow: none;
 }
 
 /* ==========================================================================
@@ -185,75 +185,75 @@
 }
 
 .csk-badge--outlined.csk-badge--default {
-  color: var(--color-neutral-600);
-  border-color: var(--color-neutral-300);
+  color: var(--csk-color-text-2);
+  border-color: var(--csk-color-border);
 }
 
 .csk-badge--outlined.csk-badge--primary {
-  color: var(--color-primary-500);
-  border-color: var(--color-primary-500);
+  color: var(--csk-color-action);
+  border-color: var(--csk-color-action);
 }
 
 .csk-badge--outlined.csk-badge--success {
-  color: var(--color-feedback-success);
-  border-color: var(--color-feedback-success);
+  color: var(--csk-color-success);
+  border-color: var(--csk-color-success);
 }
 
 .csk-badge--outlined.csk-badge--warning {
-  color: var(--color-warning-600);
-  border-color: var(--color-warning-500);
+  color: var(--csk-color-warning);
+  border-color: var(--csk-color-warning);
 }
 
 .csk-badge--outlined.csk-badge--error {
-  color: var(--color-feedback-error);
-  border-color: var(--color-feedback-error);
+  color: var(--csk-color-error);
+  border-color: var(--csk-color-error);
 }
 
 .csk-badge--outlined.csk-badge--info {
-  color: var(--color-feedback-info);
-  border-color: var(--color-feedback-info);
+  color: var(--csk-color-info);
+  border-color: var(--csk-color-info);
 }
 
 .csk-badge--outlined.csk-badge--energy {
-  color: var(--color-energy-500, #f97316);
-  border-color: var(--color-energy-400, #fb923c);
+  color: var(--csk-color-action);
+  border-color: var(--csk-color-action);
 }
 
 /* CSK Sections - Outlined */
 .csk-badge--outlined.csk-badge--section-dv {
-  color: var(--color-section-dv);
-  border-color: var(--color-section-dv);
+  color: var(--csk-color-section-dv);
+  border-color: var(--csk-color-section-dv);
 }
 
 .csk-badge--outlined.csk-badge--section-ry {
-  color: var(--color-section-ry);
-  border-color: var(--color-section-ry);
+  color: var(--csk-color-section-ry);
+  border-color: var(--csk-color-section-ry);
 }
 
 .csk-badge--outlined.csk-badge--section-vt {
-  color: var(--color-section-vt);
-  border-color: var(--color-section-vt);
+  color: var(--csk-color-section-vt);
+  border-color: var(--csk-color-section-vt);
 }
 
 /* VT Classes - Outlined */
 .csk-badge--outlined.csk-badge--vt-m {
-  color: var(--color-vt-m);
-  border-color: var(--color-vt-m);
+  color: var(--csk-violet);
+  border-color: var(--csk-violet);
 }
 
 .csk-badge--outlined.csk-badge--vt-a {
-  color: var(--color-vt-a);
-  border-color: var(--color-vt-a);
+  color: var(--csk-red);
+  border-color: var(--csk-red);
 }
 
 .csk-badge--outlined.csk-badge--vt-b {
-  color: var(--color-warning-600);
-  border-color: var(--color-vt-b);
+  color: var(--csk-color-warning);
+  border-color: var(--csk-amber);
 }
 
 .csk-badge--outlined.csk-badge--vt-c {
-  color: var(--color-vt-c);
-  border-color: var(--color-vt-c);
+  color: var(--csk-green);
+  border-color: var(--csk-green);
 }
 
 /* ==========================================================================
@@ -261,7 +261,7 @@
    ========================================================================== */
 
 .csk-badge--pill {
-  border-radius: var(--radius-full);
+  border-radius: var(--csk-radius-pill);
 }
 
 /* ==========================================================================
@@ -271,10 +271,10 @@
 
 @keyframes csk-badge-glow-pulse {
   0%, 100% {
-    box-shadow: var(--glow-energy-sm, 0 0 8px rgba(249, 115, 22, 0.4));
+    box-shadow: none;
   }
   50% {
-    box-shadow: var(--glow-energy-lg, 0 0 24px rgba(249, 115, 22, 0.6));
+    box-shadow: none;
   }
 }
 
@@ -283,7 +283,7 @@
 }
 
 .csk-badge--glow.csk-badge--energy {
-  box-shadow: var(--glow-energy-md, 0 0 16px rgba(249, 115, 22, 0.5));
+  box-shadow: none;
 }
 
 /* Glow for other variants - use their respective colors */
@@ -293,10 +293,10 @@
 
 @keyframes csk-badge-glow-pulse-success {
   0%, 100% {
-    box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--csk-color-success) 40%, transparent);
   }
   50% {
-    box-shadow: 0 0 24px rgba(34, 197, 94, 0.6);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--csk-color-success) 60%, transparent);
   }
 }
 
@@ -306,10 +306,10 @@
 
 @keyframes csk-badge-glow-pulse-error {
   0%, 100% {
-    box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--csk-color-error) 40%, transparent);
   }
   50% {
-    box-shadow: 0 0 24px rgba(239, 68, 68, 0.6);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--csk-color-error) 60%, transparent);
   }
 }
 

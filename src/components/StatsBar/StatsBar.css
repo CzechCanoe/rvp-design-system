@@ -28,48 +28,48 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--csk-color-primary);
+  color: var(--csk-color-action);
 }
 
 /* Value */
 .csk-stats-bar__value {
   font-weight: var(--csk-font-weight-bold);
-  color: var(--csk-color-on-surface);
+  color: var(--csk-color-text);
 }
 
 /* Label */
 .csk-stats-bar__label {
-  font-size: var(--csk-font-size-sm);
-  color: var(--csk-color-on-surface-muted);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text-3);
 }
 
 /* Size variants */
 .csk-stats-bar--sm .csk-stats-bar__value {
-  font-size: var(--csk-font-size-base);
+  font-size: var(--csk-text-base);
 }
 
 .csk-stats-bar--sm .csk-stats-bar__label {
-  font-size: var(--csk-font-size-xs);
+  font-size: var(--csk-text-sm);
 }
 
 .csk-stats-bar--sm .csk-stats-bar__icon {
-  font-size: var(--csk-font-size-sm);
+  font-size: var(--csk-text-md);
 }
 
 .csk-stats-bar--md .csk-stats-bar__value {
-  font-size: var(--csk-font-size-lg);
+  font-size: var(--csk-text-lg);
 }
 
 .csk-stats-bar--lg .csk-stats-bar__value {
-  font-size: var(--csk-font-size-xl);
+  font-size: var(--csk-text-xl);
 }
 
 .csk-stats-bar--lg .csk-stats-bar__label {
-  font-size: var(--csk-font-size-base);
+  font-size: var(--csk-text-base);
 }
 
 .csk-stats-bar--lg .csk-stats-bar__icon {
-  font-size: var(--csk-font-size-lg);
+  font-size: var(--csk-text-lg);
 }
 
 /* Inline variant - horizontal layout */
@@ -103,7 +103,7 @@
 
 /* Cards variant */
 .csk-stats-bar--cards .csk-stats-bar__item {
-  background: var(--csk-color-surface-container);
+  background: var(--csk-color-surface-2);
   border-radius: var(--csk-radius-md);
   padding: var(--csk-space-3) var(--csk-space-4);
   min-width: 120px;
@@ -151,10 +151,10 @@
     left: 50%;
     transform: translateX(-50%);
     padding: var(--csk-space-1) var(--csk-space-2);
-    background: var(--csk-color-surface-inverse);
-    color: var(--csk-color-on-surface-inverse);
+    background: var(--csk-color-text);
+    color: var(--csk-color-text-on-fill);
     border-radius: var(--csk-radius-sm);
-    font-size: var(--csk-font-size-xs);
+    font-size: var(--csk-text-sm);
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
@@ -171,22 +171,22 @@
    ========================================================================== */
 
 .csk-stats-bar--floating {
-  gap: var(--spacing-5, 20px);
+  gap: var(--csk-space-5);
 }
 
 .csk-stats-bar--floating .csk-stats-bar__item {
   position: relative;
-  background: var(--color-bg-primary, #fff);
-  border-radius: var(--radius-lg, 12px);
-  padding: var(--spacing-5, 20px) var(--spacing-6, 24px);
+  background: var(--csk-color-surface);
+  border-radius: var(--csk-radius-lg);
+  padding: var(--csk-space-5) var(--csk-space-6);
   min-width: 140px;
   text-align: center;
   box-shadow:
-    0 4px 12px -2px rgba(0, 0, 0, 0.08),
-    0 8px 24px -4px rgba(0, 0, 0, 0.06);
-  border: 1px solid var(--color-border-default, rgba(0, 0, 0, 0.06));
+    0 4px 12px -2px color-mix(in srgb, var(--csk-color-text) 8%, transparent),
+    0 8px 24px -4px color-mix(in srgb, var(--csk-color-text) 6%, transparent);
+  border: 1px solid var(--csk-color-border);
   border-left: 4px solid;
-  border-image: linear-gradient(180deg, var(--color-primary-500, #1176a6) 0%, var(--color-energy-500, #f97316) 100%) 1;
+  border-image: linear-gradient(180deg, var(--csk-color-action) 0%, var(--csk-color-action) 100%) 1;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -211,53 +211,53 @@
 .csk-stats-bar--floating .csk-stats-bar__item:hover {
   transform: translateY(-4px);
   box-shadow:
-    0 8px 24px -4px rgba(0, 0, 0, 0.12),
-    0 16px 40px -8px rgba(0, 0, 0, 0.08);
+    0 8px 24px -4px color-mix(in srgb, var(--csk-color-text) 12%, transparent),
+    0 16px 40px -8px color-mix(in srgb, var(--csk-color-text) 8%, transparent);
 }
 
 .csk-stats-bar--floating .csk-stats-bar__icon {
   font-size: 1.5em;
-  margin-bottom: var(--spacing-2, 8px);
+  margin-bottom: var(--csk-space-2);
   /* Explicit color to override inherited white from hero */
-  color: var(--color-primary-500, #1176a6);
+  color: var(--csk-color-action);
 }
 
 .csk-stats-bar--floating .csk-stats-bar__value {
-  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
-  font-size: var(--text-2xl-size, 1.5rem);
+  font-family: var(--csk-font-display);
+  font-size: var(--csk-text-2xl);
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.1;
   /* Explicit color to override inherited white from hero */
-  color: var(--color-primary-700, #1d4ed8);
+  color: var(--csk-color-brand);
 }
 
 .csk-stats-bar--floating .csk-stats-bar__label {
-  margin-top: var(--spacing-1, 4px);
-  font-size: var(--text-sm-size, 0.875rem);
+  margin-top: var(--csk-space-1);
+  font-size: var(--csk-text-md);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   /* Explicit color to override inherited white from hero */
-  color: var(--color-text-secondary, #64748b);
+  color: var(--csk-color-text-2);
 }
 
 /* Floating size variants */
 .csk-stats-bar--floating.csk-stats-bar--sm .csk-stats-bar__item {
-  padding: var(--spacing-3, 12px) var(--spacing-4, 16px);
+  padding: var(--csk-space-3) var(--csk-space-4);
   min-width: 100px;
 }
 
 .csk-stats-bar--floating.csk-stats-bar--sm .csk-stats-bar__value {
-  font-size: var(--text-lg-size, 1.125rem);
+  font-size: var(--csk-text-lg);
 }
 
 .csk-stats-bar--floating.csk-stats-bar--lg .csk-stats-bar__item {
-  padding: var(--spacing-6, 24px) var(--spacing-8, 32px);
+  padding: var(--csk-space-6) var(--csk-space-8);
   min-width: 160px;
 }
 
 .csk-stats-bar--floating.csk-stats-bar--lg .csk-stats-bar__value {
-  font-size: var(--text-3xl-size, 1.875rem);
+  font-size: var(--csk-text-2xl);
 }
 
 .csk-stats-bar--floating.csk-stats-bar--lg .csk-stats-bar__icon {
@@ -266,26 +266,26 @@
 
 /* Dark mode for floating */
 [data-theme="dark"] .csk-stats-bar--floating .csk-stats-bar__item {
-  background: var(--color-bg-secondary, #1a1a2e);
-  border-color: var(--color-border-secondary, rgba(255, 255, 255, 0.1));
+  background: var(--csk-color-surface-2);
+  border-color: var(--csk-color-border);
   box-shadow:
-    0 4px 12px -2px rgba(0, 0, 0, 0.3),
-    0 8px 24px -4px rgba(0, 0, 0, 0.2);
+    0 4px 12px -2px color-mix(in srgb, var(--csk-color-text) 30%, transparent),
+    0 8px 24px -4px color-mix(in srgb, var(--csk-color-text) 20%, transparent);
 }
 
 [data-theme="dark"] .csk-stats-bar--floating .csk-stats-bar__item:hover {
   box-shadow:
-    0 8px 24px -4px rgba(0, 0, 0, 0.4),
-    0 16px 40px -8px rgba(0, 0, 0, 0.3),
-    0 0 20px rgba(17, 118, 166, 0.15);
+    0 8px 24px -4px color-mix(in srgb, var(--csk-color-text) 40%, transparent),
+    0 16px 40px -8px color-mix(in srgb, var(--csk-color-text) 30%, transparent),
+    0 0 20px color-mix(in srgb, var(--csk-color-action) 15%, transparent);
 }
 
 [data-theme="dark"] .csk-stats-bar--floating .csk-stats-bar__value {
-  color: var(--color-primary-300, #93c5fd);
+  color: var(--csk-color-highlight-border);
 }
 
 [data-theme="dark"] .csk-stats-bar--floating .csk-stats-bar__label {
-  color: var(--color-text-secondary-dark, #94a3b8);
+  color: var(--csk-color-text-2);
 }
 
 /* Reduced motion */
@@ -305,5 +305,5 @@
 
 [data-mode="embed"] .csk-stats-bar--floating .csk-stats-bar__item {
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 4px color-mix(in srgb, var(--csk-color-text) 6%, transparent);
 }

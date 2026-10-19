@@ -42,9 +42,9 @@
 }
 
 .csk-dropdown__trigger:focus-visible {
-  outline: 2px solid var(--color-interactive-focus);
+  outline: 2px solid var(--csk-color-focus);
   outline-offset: 2px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--csk-radius-sm);
 }
 
 .csk-dropdown__trigger:disabled {
@@ -57,12 +57,12 @@
 
 .csk-dropdown__menu {
   z-index: 1000;
-  background-color: var(--color-bg-elevated);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-dropdown);
+  background-color: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-lg);
+  box-shadow: var(--csk-shadow-sm);
   overflow: hidden;
-  animation: dropdown-enter var(--duration-fast) var(--ease-out);
+  animation: dropdown-enter var(--csk-transition-fast);
 }
 
 @keyframes dropdown-enter {
@@ -95,7 +95,7 @@
 
 .csk-dropdown__menu-content {
   overflow-y: auto;
-  padding: var(--spacing-1) 0;
+  padding: var(--csk-space-1) 0;
 }
 
 /* ==========================================================================
@@ -109,8 +109,8 @@
 
 .csk-dropdown__menu--sm .csk-dropdown__item {
   min-height: 32px;
-  padding: var(--spacing-1-5) var(--spacing-3);
-  font-size: var(--font-size-sm);
+  padding: calc(var(--csk-space-1) * 1.5) var(--csk-space-3);
+  font-size: var(--csk-text-md);
 }
 
 .csk-dropdown__menu--sm .csk-dropdown__item-icon {
@@ -125,8 +125,8 @@
 
 .csk-dropdown__menu--md .csk-dropdown__item {
   min-height: 40px;
-  padding: var(--spacing-2) var(--spacing-4);
-  font-size: var(--font-size-base);
+  padding: var(--csk-space-2) var(--csk-space-4);
+  font-size: var(--csk-text-base);
 }
 
 .csk-dropdown__menu--md .csk-dropdown__item-icon {
@@ -141,8 +141,8 @@
 
 .csk-dropdown__menu--lg .csk-dropdown__item {
   min-height: 48px;
-  padding: var(--spacing-3) var(--spacing-5);
-  font-size: var(--font-size-base);
+  padding: var(--csk-space-3) var(--csk-space-5);
+  font-size: var(--csk-text-base);
 }
 
 .csk-dropdown__menu--lg .csk-dropdown__item-icon {
@@ -166,13 +166,13 @@
   /* Layout */
   display: flex;
   align-items: center;
-  gap: var(--spacing-3);
+  gap: var(--csk-space-3);
   width: 100%;
 
   /* Styling */
-  color: var(--color-text-primary);
+  color: var(--csk-color-text);
   cursor: pointer;
-  transition: var(--transition-util-fast);
+  transition: var(--csk-transition-fast);
   transition-property: background-color, color;
 }
 
@@ -182,28 +182,28 @@
 
 .csk-dropdown__item:hover,
 .csk-dropdown__item--focused {
-  background-color: var(--color-bg-subtle);
+  background-color: var(--csk-color-surface-2);
 }
 
 .csk-dropdown__item:active {
-  background-color: var(--color-bg-muted);
+  background-color: var(--csk-color-surface-3);
 }
 
 /* Disabled state */
 .csk-dropdown__item--disabled {
-  color: var(--color-text-disabled);
+  color: var(--csk-color-text-3);
   cursor: not-allowed;
   pointer-events: none;
 }
 
 /* Danger variant */
 .csk-dropdown__item--danger {
-  color: var(--color-feedback-error);
+  color: var(--csk-color-error);
 }
 
 .csk-dropdown__item--danger:hover,
 .csk-dropdown__item--danger.csk-dropdown__item--focused {
-  background-color: var(--color-error-50);
+  background-color: var(--csk-color-error-bg);
 }
 
 /* ==========================================================================
@@ -212,11 +212,11 @@
 
 .csk-dropdown__item-icon {
   flex-shrink: 0;
-  color: var(--color-text-secondary);
+  color: var(--csk-color-text-2);
 }
 
 .csk-dropdown__item--danger .csk-dropdown__item-icon {
-  color: var(--color-feedback-error);
+  color: var(--csk-color-error);
 }
 
 .csk-dropdown__item-content {
@@ -224,7 +224,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-0-5);
+  gap: calc(var(--csk-space-1) / 2);
 }
 
 .csk-dropdown__item-label {
@@ -233,13 +233,13 @@
 
 .csk-dropdown__item-description {
   display: block;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  line-height: var(--line-height-snug);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text-2);
+  line-height: var(--csk-line-height-snug);
 }
 
 .csk-dropdown__item--disabled .csk-dropdown__item-description {
-  color: var(--color-text-disabled);
+  color: var(--csk-color-text-3);
 }
 
 /* ==========================================================================
@@ -248,8 +248,8 @@
 
 .csk-dropdown__divider {
   height: 1px;
-  margin: var(--spacing-1) 0;
-  background-color: var(--color-border-subtle);
+  margin: var(--csk-space-1) 0;
+  background-color: var(--csk-color-border-2);
 }
 
 /* ==========================================================================
@@ -260,65 +260,65 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-2);
-  font-weight: var(--font-weight-medium);
-  border-radius: var(--radius-md);
-  transition: var(--transition-button);
+  gap: var(--csk-space-2);
+  font-weight: var(--csk-font-weight-medium);
+  border-radius: var(--csk-radius-md);
+  transition: var(--csk-transition-fast);
   cursor: pointer;
 }
 
 /* Size variants */
 .csk-dropdown-button--sm {
   min-height: 32px;
-  padding: var(--spacing-1-5) var(--spacing-3);
-  font-size: var(--font-size-sm);
+  padding: calc(var(--csk-space-1) * 1.5) var(--csk-space-3);
+  font-size: var(--csk-text-md);
 }
 
 .csk-dropdown-button--md {
   min-height: 44px;
-  padding: var(--spacing-2-5) var(--spacing-4);
-  font-size: var(--font-size-base);
+  padding: calc(var(--csk-space-1) * 2.5) var(--csk-space-4);
+  font-size: var(--csk-text-base);
 }
 
 .csk-dropdown-button--lg {
   min-height: 52px;
-  padding: var(--spacing-3) var(--spacing-6);
-  font-size: var(--font-size-lg);
+  padding: var(--csk-space-3) var(--csk-space-6);
+  font-size: var(--csk-text-lg);
 }
 
 /* Variant: Default */
 .csk-dropdown-button--default {
-  background-color: var(--color-bg-elevated);
-  border: 1px solid var(--color-border-default);
-  color: var(--color-text-primary);
+  background-color: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
+  color: var(--csk-color-text);
 }
 
 .csk-dropdown-button--default:hover {
-  background-color: var(--color-bg-subtle);
-  border-color: var(--color-border-hover);
+  background-color: var(--csk-color-surface-2);
+  border-color: var(--csk-color-border);
 }
 
 /* Variant: Primary */
 .csk-dropdown-button--primary {
-  background-color: var(--color-primary-500);
-  border: 1px solid var(--color-primary-500);
-  color: white;
+  background-color: var(--csk-color-action);
+  border: 1px solid var(--csk-color-action);
+  color: var(--csk-color-text-on-fill);
 }
 
 .csk-dropdown-button--primary:hover {
-  background-color: var(--color-primary-600);
-  border-color: var(--color-primary-600);
+  background-color: var(--csk-color-action-hover);
+  border-color: var(--csk-color-action-hover);
 }
 
 /* Variant: Ghost */
 .csk-dropdown-button--ghost {
   background-color: transparent;
   border: 1px solid transparent;
-  color: var(--color-text-primary);
+  color: var(--csk-color-text);
 }
 
 .csk-dropdown-button--ghost:hover {
-  background-color: var(--color-bg-subtle);
+  background-color: var(--csk-color-surface-2);
 }
 
 /* Label */
@@ -332,7 +332,7 @@
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  transition: transform var(--duration-fast) var(--ease-out);
+  transition: transform var(--csk-transition-fast);
 }
 
 .csk-dropdown-button--open .csk-dropdown-button__chevron {
@@ -344,13 +344,13 @@
  * ========================================================================== */
 
 [data-theme="dark"] .csk-dropdown__menu {
-  background-color: var(--color-bg-elevated);
-  border-color: var(--color-border-default);
+  background-color: var(--csk-color-surface);
+  border-color: var(--csk-color-border);
 }
 
 [data-theme="dark"] .csk-dropdown__item--danger:hover,
 [data-theme="dark"] .csk-dropdown__item--danger.csk-dropdown__item--focused {
-  background-color: rgba(239, 68, 68, 0.15);
+  background-color: color-mix(in srgb, var(--csk-color-error) 15%, transparent);
 }
 
 /* ==========================================================================

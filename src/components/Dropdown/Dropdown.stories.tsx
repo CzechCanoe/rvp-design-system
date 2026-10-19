@@ -336,7 +336,7 @@ export const AthleteActions: Story = {
     trigger: (
       <button style={{
         background: 'none',
-        border: '1px solid var(--color-border-default)',
+        border: '1px solid var(--csk-color-border)',
         borderRadius: '4px',
         padding: '4px 8px',
         cursor: 'pointer',
@@ -485,7 +485,7 @@ export const VTClassFilter: Story = {
             </DropdownButton>
           }
         />
-        <small style={{ color: 'var(--color-text-secondary)' }}>
+        <small style={{ color: 'var(--csk-color-text-2)' }}>
           Vybráno: {selected.length > 0 ? selected.map(s => s.toUpperCase()).join(', ') : 'žádné'}
         </small>
       </div>

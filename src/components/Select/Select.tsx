@@ -32,10 +32,6 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement
   iconLeft?: ReactNode;
   /** Placeholder text (displayed as first disabled option) */
   placeholder?: string;
-  /** Use display font for label (aesthetic emphasis) */
-  displayLabel?: boolean;
-  /** Use energy (coral-orange) focus ring instead of primary blue */
-  energyFocus?: boolean;
 }
 
 /**
@@ -56,8 +52,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       errorMessage,
       iconLeft,
       placeholder,
-      displayLabel = false,
-      energyFocus = false,
       disabled,
       className,
       id,
@@ -93,7 +87,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       `csk-select-container--${size}`,
       `csk-select-container--${state}`,
       disabled && 'csk-select-container--disabled',
-      energyFocus && 'csk-select-container--energy-focus',
       iconLeft && 'csk-select-container--has-icon-left',
     ]
       .filter(Boolean)
@@ -101,7 +94,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const labelClasses = [
       'csk-select-label',
-      displayLabel && 'csk-select-label--display',
     ]
       .filter(Boolean)
       .join(' ');

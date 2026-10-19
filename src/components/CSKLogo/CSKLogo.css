@@ -5,7 +5,7 @@
 .csk-logo {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-2);
+  gap: var(--csk-space-2);
   text-decoration: none;
   color: inherit;
 }
@@ -17,7 +17,7 @@
 }
 
 .csk-logo__subtitle {
-  color: var(--color-text-tertiary);
+  color: var(--csk-color-text-3);
   display: none;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .csk-logo--sm .csk-logo__subtitle {
-  font-size: var(--text-2xs-size, 0.625rem);
+  font-size: var(--csk-text-xs);
 }
 
 .csk-logo--md .csk-logo__image {
@@ -35,7 +35,7 @@
 }
 
 .csk-logo--md .csk-logo__subtitle {
-  font-size: var(--text-xs-size);
+  font-size: var(--csk-text-sm);
 }
 
 .csk-logo--lg .csk-logo__image {
@@ -43,7 +43,7 @@
 }
 
 .csk-logo--lg .csk-logo__subtitle {
-  font-size: var(--text-sm-size);
+  font-size: var(--csk-text-md);
 }
 
 /* Show subtitle on larger screens */
