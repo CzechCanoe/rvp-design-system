@@ -158,8 +158,9 @@
   font-family: var(--csk-font-mono);
 }
 
-.csk-run-detail__unknown {
-  color: var(--csk-color-text-3);
+/* Not judged „(·)“ at the size of the other values */
+.csk-run-detail__kv .csk-penalty-text {
+  font-size: inherit;
 }
 
 .csk-run-detail__note {

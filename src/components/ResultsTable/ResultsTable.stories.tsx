@@ -295,8 +295,11 @@ function HundredRowsProbe(props: ResultsTableProps) {
 
 /**
  * 100 rows (performance). The probe measures mounting the table (React render, commit and layout) in the
- * browser; `tests/results-table.spec.ts` asserts a budget and reports the time. Rows are memoised, so
- * expanding a row or toggling a star re-renders only that row; running times tick inside their own cell.
+ * browser; `tests/results-table.spec.ts` asserts a budget and reports the time. Rows are memoised: as long as
+ * unchanged rows keep the same `ResultRow` object and `labels` keep their values, expanding a row or toggling a
+ * star re-renders only the affected rows, also with inline callbacks as in this story (the table calls the latest
+ * `onToggle` / `onFavoriteChange` through stable wrappers). An expanded row re-renders with every table render,
+ * because its detail comes from `renderDetail`. Running times tick inside their own cell.
  */
 export const HundredRows: Story = {
   tags: ['no-snapshot'],

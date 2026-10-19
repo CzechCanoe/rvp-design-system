@@ -137,7 +137,14 @@
   text-align: center;
 }
 
-.csk-results-table__star .csk-star-button {
+/*
+ * TODO(StarButton, T7): layout hack from outside the component. StarButton is
+ * 44 x 44 px; negative margins shrink its layout box to 24 x 22 px so the column
+ * and the row stay compact, while `position: relative` keeps the full 44 px hit
+ * area on top of the neighbouring cells. Replace with a compact / in-table
+ * variant of StarButton once it has one; StarButton files are not changed here.
+ */
+.csk-results-table__row > .csk-results-table__star .csk-star-button {
   position: relative;
   margin: -11px -10px;
   vertical-align: middle;
@@ -163,8 +170,12 @@
   color: var(--csk-color-text-3);
 }
 
-/* Marks in the table: compact (height of StatusBadge sm) */
-.csk-results-table .csk-mark-badge {
+/*
+ * Marks in the row cells: compact (height of StatusBadge sm). Scoped to the data
+ * rows, so a RunDetail in an expanded row keeps the full-size MarkBadge.
+ * TODO(MarkBadge, T5): use a `size="sm"` variant once MarkBadge has one.
+ */
+.csk-results-table__row .csk-mark-badge {
   height: 18px;
   padding: 0 5px;
   font-size: var(--csk-text-xs);
