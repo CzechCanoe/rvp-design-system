@@ -6879,3 +6879,13 @@ Snapshoty generuje CI (label `update-snapshots`). Zbylé `[data-theme="dark"]` b
 
 ### Poznámky
 - Prototypy: jen minimální úpravy pro kompilaci (velikosti `lg` → `md`, `aesthetic` / `elevated` → `surface`).
+
+## 2026-10-19 - CI: label events no longer cancel or mask PR CI
+
+### Dokončeno
+- [x] `ci.yml` bez `labeled`/`unlabeled`, nový vstup `skip_snapshots` pro `workflow_dispatch`
+- [x] `skip-snapshots-label.yml` dispatchuje CI jen pro label `skip-snapshots`
+- [x] `update-snapshots.yml` dispatchuje CI i bez změn snapshotů (zachová skip-snapshots)
+
+### Poznámky
+Label eventy dřív spouštěly přeskočené CI běhy, které přes concurrency rušily skutečný `synchronize` běh a v `gh pr checks` maskovaly zelené joby.

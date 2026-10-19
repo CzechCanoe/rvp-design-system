@@ -104,10 +104,17 @@ jobs:
           git push origin "HEAD:${BRANCH}"
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
-      # Pushes with GITHUB_TOKEN do not trigger workflows, so run CI on the new head explicitly.
-      - name: Run CI on the new head
-        if: steps.commit.outputs.changed == 'true'
-        run: gh workflow run ci.yml --ref "$BRANCH"
+      # Pushes with GITHUB_TOKEN do not trigger workflows, so run CI on the head explicitly.
+      # Also without snapshot changes, so the head always ends with a fresh full CI run.
+      # Keeps skip-snapshots if the PR carries that label.
+      - name: Run CI on the head
+        if: ${{ github.event_name == 'pull_request' || steps.commit.outputs.changed == 'true' }}
+        run: |
+          SKIP=false
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            if gh api "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels" --jq '.[].name' | grep -qx skip-snapshots; then SKIP=true; fi
+          fi
+          gh workflow run ci.yml --ref "$BRANCH" -f skip_snapshots="$SKIP"
 
       - name: Remove label
         if: ${{ always() && github.event_name == 'pull_request' }}

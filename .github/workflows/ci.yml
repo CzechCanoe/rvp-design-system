@@ -5,14 +5,22 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-    # labeled/unlabeled: only `skip-snapshots` matters (see the if: condition on each job)
-    types: [opened, synchronize, reopened, labeled, unlabeled]
-  # Dispatched by update-snapshots.yml after it pushes a snapshot commit
-  # (pushes made with GITHUB_TOKEN do not trigger workflows).
+    # No labeled/unlabeled here: label events would start (and cancel real runs via concurrency)
+    # skipped CI runs. The `skip-snapshots` label is handled by skip-snapshots-label.yml,
+    # which dispatches this workflow.
+    types: [opened, synchronize, reopened]
+  # Dispatched by update-snapshots.yml and skip-snapshots-label.yml
+  # (pushes/labels made with GITHUB_TOKEN do not trigger workflows).
   workflow_dispatch:
+    inputs:
+      skip_snapshots:
+        description: Run Playwright with --ignore-snapshots (mirrors label skip-snapshots)
+        required: false
+        type: boolean
+        default: false
 
 # Newer runs of the same event on the same branch cancel older ones
-# (dispatch and pull_request runs do not cancel each other).
+# (dispatch and pull_request runs do not cancel each other; the newest dispatch wins).
 concurrency:
   group: ci-${{ github.event_name }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
@@ -21,7 +29,6 @@ jobs:
   lint-and-typecheck:
     name: Lint & Typecheck
     runs-on: ubuntu-latest
-    if: (github.event.action != 'labeled' && github.event.action != 'unlabeled') || github.event.label.name == 'skip-snapshots'
     steps:
       - uses: actions/checkout@v7
 
@@ -46,7 +53,6 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    if: (github.event.action != 'labeled' && github.event.action != 'unlabeled') || github.event.label.name == 'skip-snapshots'
     steps:
       - uses: actions/checkout@v7
 
@@ -69,14 +75,11 @@ jobs:
     name: Playwright Tests
     runs-on: ubuntu-latest
     needs: build
-    if: >-
-      (github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch') &&
-      ((github.event.action != 'labeled' && github.event.action != 'unlabeled') ||
-       github.event.label.name == 'skip-snapshots')
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
     env:
       CI: true
-      # Label `skip-snapshots` on the PR: functional tests only, no snapshot comparison
-      SKIP_SNAPSHOTS: ${{ contains(github.event.pull_request.labels.*.name, 'skip-snapshots') }}
+      # Label `skip-snapshots` on the PR (or dispatch input): functional tests only, no snapshot comparison
+      SKIP_SNAPSHOTS: ${{ inputs.skip_snapshots == true || contains(github.event.pull_request.labels.*.name, 'skip-snapshots') }}
     steps:
       - uses: actions/checkout@v7
 
@@ -99,7 +102,7 @@ jobs:
       - name: Run Playwright tests (snapshots compared)
         run: |
           FLAGS=""
-          if [ "$SKIP_SNAPSHOTS" = "true" ]; then FLAGS="--ignore-snapshots"; fi
+          if [ "$SKIP_SNAPSHOTS" = "true" ]; then FLAGS="--ignore-snapshots"; echo "skip-snapshots active: running with --ignore-snapshots"; fi
           npx playwright test --project=chromium --grep-invert @prototype $FLAGS
 
       - name: Run Playwright tests (@prototype, snapshots ignored)
