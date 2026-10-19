@@ -14,7 +14,9 @@ const story = (id: string) => `/iframe.html?id=${id}&viewMode=story`;
 
 async function open(page: Page, id: string) {
   await page.goto(story(id));
-  await page.waitForSelector('#storybook-root .csk-results-table, #storybook-root .csk-run-detail, #storybook-root .csk-oncourse-rider');
+  await page.waitForSelector(
+    '#storybook-root .csk-results-table, #storybook-root .csk-run-detail, #storybook-root .csk-program-list, #storybook-root .csk-oncourse-rider'
+  );
   await page.evaluate(() => document.fonts.ready);
 }
 

@@ -1,0 +1,133 @@
+/* =============================================================================
+   ProgramList – event programme (reference Live6)
+   Rows: time · title + second line · state. Running rows sit on the live ground.
+   ============================================================================= */
+
+.csk-program-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-2);
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text);
+}
+
+.csk-program-list__day {
+  overflow: hidden;
+  background: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-lg);
+}
+
+.csk-program-list__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px var(--csk-space-2);
+  padding: var(--csk-space-2) var(--csk-space-3);
+  border-bottom: 1px solid var(--csk-color-border);
+}
+
+.csk-program-list__label {
+  margin: 0;
+  font-size: var(--csk-text-base);
+  font-weight: var(--csk-font-weight-semibold);
+}
+
+.csk-program-list__day-note {
+  margin-left: auto;
+  font-size: var(--csk-text-xs);
+  color: var(--csk-color-text-3);
+}
+
+.csk-program-list__items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.csk-program-list__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) auto;
+  gap: var(--csk-space-3);
+  align-items: center;
+  padding: 9px var(--csk-space-3);
+  border-bottom: 1px solid var(--csk-color-border-2);
+}
+
+.csk-program-list__item:last-child {
+  border-bottom: 0;
+}
+
+.csk-program-list__time {
+  font-family: var(--csk-font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.csk-program-list__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.csk-program-list__title {
+  font-weight: var(--csk-font-weight-semibold);
+  overflow-wrap: anywhere;
+}
+
+.csk-program-list__sub {
+  font-size: var(--csk-text-xs);
+  color: var(--csk-color-text-3);
+}
+
+.csk-program-list__note {
+  color: var(--csk-color-warning-text);
+}
+
+/* Link: the whole row is the target */
+.csk-program-list__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.csk-program-list__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.csk-program-list__link:focus-visible {
+  outline: none;
+}
+
+.csk-program-list__link:focus-visible::after {
+  outline: 2px solid var(--csk-color-focus);
+  outline-offset: -2px;
+}
+
+.csk-program-list__item--link:hover {
+  background: var(--csk-color-surface-2);
+}
+
+/* Muted phase */
+.csk-program-list__item--muted .csk-program-list__time,
+.csk-program-list__item--muted .csk-program-list__title {
+  color: var(--csk-color-text-3);
+}
+
+/* Running phase: live ground; the time keeps AA contrast with the dark red */
+.csk-program-list__item--running,
+.csk-program-list__item--running:hover {
+  background: var(--csk-color-live-bg);
+}
+
+.csk-program-list__item--running .csk-program-list__time {
+  font-weight: var(--csk-font-weight-semibold);
+  color: var(--csk-color-live-text);
+}
+
+.csk-program-list__item--running .csk-program-list__sub {
+  color: var(--csk-color-text-2);
+}

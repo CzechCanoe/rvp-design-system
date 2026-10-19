@@ -233,6 +233,12 @@ export type {
   PenaltyTextProps,
 } from './ResultsTable';
 
+// StartlistTable + ProgramList (live tables, v2 T11)
+export { StartlistTable, STARTLIST_TABLE_LABELS } from './StartlistTable';
+export type { StartlistTableProps, StartlistTableLabels, StartlistRow, StartlistStart } from './StartlistTable';
+export { ProgramList, PROGRAM_LIST_LABELS } from './ProgramList';
+export type { ProgramListProps, ProgramListLabels, ProgramDay, ProgramItem } from './ProgramList';
+
 // LiveIndicator
 export { LiveIndicator } from './LiveIndicator';
 export type {

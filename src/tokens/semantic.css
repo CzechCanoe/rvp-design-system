@@ -50,6 +50,7 @@
      ------------------------------------------------------------------------- */
   --csk-color-live: var(--csk-red);                 /* LIVE badge fill, running time */
   --csk-color-live-bg: var(--csk-red-100);          /* running row in the programme */
+  --csk-color-live-text: var(--csk-red-dark);       /* text on live-bg (running time), AA */
 
   /* ---------------------------------------------------------------------------
      Value states: Oficiální · Předběžné · V revizi · Neznámo · Zastaveno (stale)
