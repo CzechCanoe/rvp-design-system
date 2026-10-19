@@ -164,6 +164,7 @@ export const pageStories: Array<{ name: string; storyId: string }> = [
   { name: 'Live-Official', storyId: 'live--official' },
   { name: 'Live-Disconnected', storyId: 'live--disconnected' },
   { name: 'Live-Program', storyId: 'live--program' },
+  { name: 'Event-Detail', storyId: 'event-detail--default' },
 ];
 
 export const pageStoryMaxDiffPixels = 80;

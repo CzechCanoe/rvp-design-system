@@ -7110,3 +7110,18 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 
 ### Poznámky
 Gaps for T18/T19 are listed in the PR body.
+
+---
+
+## 2026-10-19 - v2 T16: Event/Detail page story
+
+### Dokončeno
+- [x] Story `Event/Detail` (reference `Zavod.html`) složená z DS komponent (Header site, Subbar, Breadcrumbs, PageTitle, SegmentedControl, Tabs, OnCoursePanel, ResultsCard/ResultsTable/RunDetail, ProgramList, Card, Notice, Button)
+- [x] Přidáno do `pageStories` (390 + 1280, maxDiffPixels 80, axe)
+
+### Problémy a řešení
+1. **Problém:** výsledková karta nemá DS wrapper, Button nejde jako odkaz, FavoritesToggle má jen s počtem
+   **Řešení:** použit `ResultsCard` ze stories T12; mezery zapsány v PR
+
+### Poznámky
+Lokální Playwright proti vlastnímu storybook-static (port 6006 byl obsazen cizím serverem).
