@@ -7125,3 +7125,5 @@ Gaps for T18/T19 are listed in the PR body.
 
 ### Poznámky
 Mezery DS: Select bez `state="warning"` (varovné ohraničení řeší EntryTable přes vlastní třídu), EntryTable na telefonu jen horizontální scroll uvnitř komponenty (bez kartového režimu), bez DeadlineBadge (text v PageTitle).
+
+CI snapshots for T14 generated (`test: update snapshots (CI)`); PR #80.
