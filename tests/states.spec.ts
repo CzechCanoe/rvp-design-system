@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { testDefaults } from './config';
 
 /**
  * v2 T5: value states.
  * - prefers-reduced-motion switches the pulse of StatusBadge `live` off
- * - States/Overview at 390 px (desktop is covered by the components spec)
+ * (The States/Overview 390 px snapshot lives in components.spec.ts, which the
+ * update-snapshots workflow regenerates.)
  */
 
 const LIVE_STORY =
@@ -41,29 +41,5 @@ test.describe('StatusBadge live pulse', () => {
       expect(info.animations).toBe(0);
       expect(info.name).toBe('none');
     });
-  });
-});
-
-test.describe('States/Overview at 390 px', () => {
-  test.use({ viewport: { width: 390, height: 900 } });
-
-  test('has no horizontal overflow and matches snapshot', async ({ page }) => {
-    await page.goto('/iframe.html?id=states-overview--default&viewMode=story');
-    await page.waitForSelector('.states-overview');
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(testDefaults.settleTime);
-    const overflow = await page.evaluate(
-      () =>
-        document.documentElement.scrollWidth -
-        document.documentElement.clientWidth,
-    );
-    expect(overflow).toBeLessThanOrEqual(0);
-    await expect(page.locator('#storybook-root')).toHaveScreenshot(
-      'States-Overview-390.png',
-      {
-        maxDiffPixels: 100,
-        animations: 'disabled',
-      },
-    );
   });
 });
