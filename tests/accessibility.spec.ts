@@ -66,6 +66,11 @@ const specificComponents = [
   { name: 'RunningTime', storyId: 'components-runningtime--states' },
   { name: 'RunningTime-StateSwitching', storyId: 'components-runningtime--state-switching' },
   { name: 'DataAge', storyId: 'components-dataage--overview' },
+  { name: 'OnCoursePanel-ThreeRiders', storyId: 'components-oncoursepanel--three-riders' },
+  { name: 'OnCoursePanel-SixRiders', storyId: 'components-oncoursepanel--six-riders' },
+  { name: 'OnCoursePanel-Stale', storyId: 'components-oncoursepanel--stale' },
+  { name: 'OnCoursePanel-TimeToBeat', storyId: 'components-oncoursepanel--time-to-beat' },
+  { name: 'OnCoursePanel-Collapsed', storyId: 'components-oncoursepanel--collapsed' },
 ];
 
 // Prototype pages to test

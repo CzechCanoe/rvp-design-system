@@ -1,0 +1,105 @@
+/* =============================================================================
+   OnCourseRider – one athlete on course (reference Live1 / Live5 .oc-r)
+   Red only through the running time (TimeValue --running); the rest is neutral.
+   ============================================================================= */
+
+.csk-oncourse-rider {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-2);
+  min-width: 0;
+  box-sizing: border-box;
+  padding: var(--csk-space-2) var(--csk-space-3);
+  border-left: 3px solid transparent;
+}
+
+.csk-oncourse-rider__head {
+  display: flex;
+  align-items: center;
+  gap: var(--csk-space-2);
+  min-width: 0;
+}
+
+.csk-oncourse-rider__name {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.csk-oncourse-rider__result {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex: none;
+  line-height: var(--csk-line-height-tight);
+}
+
+.csk-oncourse-rider__time {
+  font-size: var(--csk-text-md);
+  font-weight: var(--csk-font-weight-semibold);
+}
+
+.csk-oncourse-rider--running .csk-oncourse-rider__time {
+  font-size: 22px;
+}
+
+.csk-oncourse-rider--finished-pending .csk-oncourse-rider__time {
+  font-size: var(--csk-text-lg);
+}
+
+.csk-oncourse-rider__subs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--csk-space-3);
+  /* Under the name: past the bib badge and the head gap */
+  padding-left: calc(26px + var(--csk-space-2));
+  font-size: var(--csk-text-xs);
+  color: var(--csk-color-text-3);
+}
+
+.csk-oncourse-rider__subs .csk-time-value {
+  font-size: inherit;
+}
+
+/* Ahead of the leader: the gain is stated by the minus sign and the green; sign is never colour alone */
+.csk-oncourse-rider__ahead {
+  color: var(--csk-color-success-text);
+  font-weight: var(--csk-font-weight-semibold);
+}
+
+.csk-oncourse-rider__gates {
+  min-width: 0;
+}
+
+/* Featured: the rider the page follows. A brand stripe, no tint: red running time on a grey ground misses 4.5:1 */
+.csk-oncourse-rider--featured {
+  border-left-color: var(--csk-color-brand);
+}
+
+.csk-oncourse-rider--featured .csk-athlete-name__name {
+  font-weight: var(--csk-font-weight-semibold);
+}
+
+/* Stale: nothing is live any more, the gates fade like the values */
+.csk-oncourse-rider--stale .csk-oncourse-rider__gates {
+  opacity: 0.7;
+}
+
+.csk-oncourse-rider--stale .csk-athlete-name__name {
+  color: var(--csk-color-text-2);
+}
+
+/* Entry of a row: a short fade, data only; off for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .csk-oncourse-rider {
+    animation: csk-oncourse-rider-in 160ms ease-out;
+  }
+}
+
+@keyframes csk-oncourse-rider-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -7011,3 +7011,23 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 ### Poznámka po CI (T9)
 - Snapshoty 390 + 1280 vygenerovalo CI (`test: update snapshots (CI)`, 31 PNG, jen ResultsTable / RunDetail).
 - Výkon 100 řádků v CI (4 workery paralelně): medián 306.5 ms (146–454 ms), rozpočet testu 800 ms.
+
+---
+
+## 2026-10-19 - v2 T10: OnCoursePanel + OnCourseRider
+
+### Dokončeno
+- [x] `OnCourseRider` (at-start / running / finished-pending, split, toLeader, timeToBeat target/delta, gates, featured, stale)
+- [x] `OnCoursePanel` (mobil seznam, desktop 3 sloupce přes container query, `stale` + `DataAge` + `StatusBadge stale`, `collapsed`, `leader`, prázdný = nerenderuje se)
+- [x] Stories: ThreeRiders, SixRiders, Stale (= Live5), StaleSixRiders, TimeToBeat, WithLeader, Collapsed, InNarrowContainer, Empty, RiderStates, RealClock (no-snapshot)
+- [x] Unit testy, axe spec, `viewportStories` (390 + 1280)
+
+### Problémy a řešení
+1. **Problém:** tónované pozadí `featured` řádku (surface-2) srazilo kontrast červeného běžícího času na 4,26:1 (axe).
+   **Řešení:** `featured` = proužek 3 px v brand barvě + semibold jméno, bez tónu.
+2. **Problém:** výsledek v pravém sloupci zužoval jména na 3 sloupcích.
+   **Řešení:** split / na vedení / timeToBeat v samostatném řádku pod jménem.
+
+### Poznámky
+- `time` pro `finished-pending` je `finish: { time, penalty }`; `time` (RunningSpec) jen pro `running`.
+- Stale panel předává jezdcům `staleAfterSeconds=0`, takže čas mrzne hned a ukáže stáří přes `RunningTime`.
