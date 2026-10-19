@@ -7092,3 +7092,14 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 - Live5 detaily: sekundarni radek zustava, `0.0` na startu je v stale tecovane, penalizace `+2 tr.`, stari zmrazeneho casu pod casem.
 - Radek jezdce je CSS grid (bib | jmeno | cas), podradek ve sloupci jmena bez pevne sirky BibBadge.
 - Po T17a: jen light varianty (a11y spec uz bez dark).
+
+---
+
+## 2026-10-19 - fix: StatusBadge on the navy EventHeader
+
+### Dokončeno
+- [x] EventHeader wraps its status slot in `data-tone="on-dark"`; StatusBadge.css gives `stale` light text and underline there (was 1.81:1 on navy). Other states keep their own surface/fill and pass axe.
+- [x] Story `EventHeader/StatusStates` (all six states); added to axe (accessibility.spec, results-table.spec via viewportStories) and the 390/1280 snapshot list.
+
+### Poznámky
+Live1/Live5 reference shows no on-dark badge; no new token needed (`--csk-color-text-on-fill`).

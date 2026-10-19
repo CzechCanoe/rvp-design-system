@@ -72,7 +72,7 @@ export const EventHeader = forwardRef<HTMLElement, EventHeaderProps>(
               <span className="csk-event-header__subtitle">{subtitle}</span>
             )}
           </div>
-          {status && <div className="csk-event-header__status">{status}</div>}
+          {status && <div className="csk-event-header__status" data-tone="on-dark">{status}</div>}
         </div>
       </header>
     );
