@@ -201,7 +201,7 @@
 
 /* Elevated */
 .csk-stat-card--elevated {
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 }
 
 /* =============================================================================
@@ -385,7 +385,7 @@
 }
 
 .csk-stat-card--clickable.csk-stat-card--elevated:hover {
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
   transform: translateY(-2px);
 }
 
@@ -419,7 +419,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: color-mix(in srgb, var(--csk-white) 80%, transparent);
+  background-color: color-mix(in srgb, var(--csk-color-surface) 80%, transparent);
   z-index: 1;
 }
 
@@ -461,7 +461,7 @@
   background: none;
   background-color: var(--csk-color-surface);
   border: 1px solid var(--csk-color-border);
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 }
 
 /* Accent border using pseudo-element to preserve border-radius */
@@ -507,7 +507,7 @@
 }
 
 .csk-stat-card--clickable.csk-stat-card--style-aesthetic:hover {
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 }
 
 /* Reduced motion */
@@ -627,7 +627,7 @@
 }
 
 .csk-stat-card--gradient-primary .csk-stat-card__icon-container {
-  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
+  background: color-mix(in srgb, var(--csk-color-surface) 20%, transparent);
 }
 
 .csk-stat-card--gradient-primary .csk-stat-card__icon {
@@ -637,7 +637,7 @@
 .csk-stat-card--gradient-primary .csk-stat-card__trend--up,
 .csk-stat-card--gradient-primary .csk-stat-card__trend--down,
 .csk-stat-card--gradient-primary .csk-stat-card__trend--neutral {
-  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
+  background: color-mix(in srgb, var(--csk-color-surface) 20%, transparent);
   color: #fff;
 }
 
@@ -654,7 +654,7 @@
 }
 
 .csk-stat-card--gradient-success .csk-stat-card__icon-container {
-  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
+  background: color-mix(in srgb, var(--csk-color-surface) 20%, transparent);
 }
 
 .csk-stat-card--gradient-success .csk-stat-card__icon {
@@ -664,7 +664,7 @@
 .csk-stat-card--gradient-success .csk-stat-card__trend--up,
 .csk-stat-card--gradient-success .csk-stat-card__trend--down,
 .csk-stat-card--gradient-success .csk-stat-card__trend--neutral {
-  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
+  background: color-mix(in srgb, var(--csk-color-surface) 20%, transparent);
   color: #fff;
 }
 
@@ -681,7 +681,7 @@
 }
 
 .csk-stat-card--gradient-warning .csk-stat-card__icon-container {
-  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
+  background: color-mix(in srgb, var(--csk-color-surface) 20%, transparent);
 }
 
 .csk-stat-card--gradient-warning .csk-stat-card__icon {
@@ -691,7 +691,7 @@
 .csk-stat-card--gradient-warning .csk-stat-card__trend--up,
 .csk-stat-card--gradient-warning .csk-stat-card__trend--down,
 .csk-stat-card--gradient-warning .csk-stat-card__trend--neutral {
-  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
+  background: color-mix(in srgb, var(--csk-color-surface) 20%, transparent);
   color: #fff;
 }
 
@@ -708,7 +708,7 @@
 }
 
 .csk-stat-card--gradient-info .csk-stat-card__icon-container {
-  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
+  background: color-mix(in srgb, var(--csk-color-surface) 20%, transparent);
 }
 
 .csk-stat-card--gradient-info .csk-stat-card__icon {
@@ -718,7 +718,7 @@
 .csk-stat-card--gradient-info .csk-stat-card__trend--up,
 .csk-stat-card--gradient-info .csk-stat-card__trend--down,
 .csk-stat-card--gradient-info .csk-stat-card__trend--neutral {
-  background: color-mix(in srgb, var(--csk-white) 20%, transparent);
+  background: color-mix(in srgb, var(--csk-color-surface) 20%, transparent);
   color: #fff;
 }
 

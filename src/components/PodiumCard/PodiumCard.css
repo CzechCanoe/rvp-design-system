@@ -55,7 +55,7 @@
 
 .podium-card--clickable:hover {
   transform: translateY(-2px);
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
   border-color: var(--csk-color-border);
 }
 
@@ -93,7 +93,6 @@
 .podium-card--gold:hover {
   border-color: color-mix(in srgb, var(--csk-color-podium-1) 50%, transparent);
   box-shadow:
-    var(--csk-shadow-sm),
     0 0 20px color-mix(in srgb, var(--csk-color-podium-1) 15%, transparent);
 }
 
@@ -141,7 +140,6 @@
 .podium-card--silver:hover {
   border-color: color-mix(in srgb, var(--csk-color-podium-2) 50%, transparent);
   box-shadow:
-    var(--csk-shadow-sm),
     0 0 20px color-mix(in srgb, var(--csk-color-podium-2) 15%, transparent);
 }
 
@@ -185,7 +183,6 @@
 .podium-card--bronze:hover {
   border-color: color-mix(in srgb, var(--csk-color-podium-3) 50%, transparent);
   box-shadow:
-    var(--csk-shadow-sm),
     0 0 20px color-mix(in srgb, var(--csk-color-podium-3) 15%, transparent);
 }
 

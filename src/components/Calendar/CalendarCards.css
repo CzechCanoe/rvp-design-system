@@ -58,7 +58,7 @@
 }
 
 .csk-calendar-cards__card:hover {
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 }
 
 /* ==========================================================================

@@ -132,7 +132,7 @@
   padding: var(--csk-space-2) var(--csk-space-3);
   background: var(--csk-color-brand);
   border-radius: var(--csk-radius-lg);
-  color: white;
+  color: var(--csk-color-text-on-fill);
   text-align: center;
 }
 

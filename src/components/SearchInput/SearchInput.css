@@ -346,9 +346,9 @@
 }
 
 .csk-search-input__chip--energy.csk-search-input__chip--active {
-  color: var(--csk-color-live);
-  background-color: var(--csk-color-live-bg);
-  border-color: var(--csk-color-live);
+  color: var(--csk-color-action);
+  background-color: var(--csk-color-highlight-bg);
+  border-color: var(--csk-color-action);
 }
 
 .csk-search-input__chip--dv.csk-search-input__chip--active {

@@ -300,20 +300,20 @@
 
 /* Energy color */
 .csk-live-indicator--color-energy {
-  color: var(--csk-color-live);
+  color: var(--csk-color-action);
 }
 
 .csk-live-indicator--color-energy .csk-live-indicator__label {
-  color: var(--csk-color-live);
+  color: var(--csk-color-action);
 }
 
 /* Energy glow effect - dramatic pulsing orange glow */
 .csk-live-indicator--energy-glow .csk-live-indicator__dot {
-  background: var(--csk-color-live);
+  background: var(--csk-color-action);
   box-shadow:
-    0 0 8px color-mix(in srgb, var(--csk-color-live) 60%, transparent),
-    0 0 16px color-mix(in srgb, var(--csk-color-live) 40%, transparent),
-    0 0 24px color-mix(in srgb, var(--csk-color-live) 20%, transparent);
+    0 0 8px color-mix(in srgb, var(--csk-color-action) 60%, transparent),
+    0 0 16px color-mix(in srgb, var(--csk-color-action) 40%, transparent),
+    0 0 24px color-mix(in srgb, var(--csk-color-action) 20%, transparent);
 }
 
 .csk-live-indicator--energy-glow.csk-live-indicator--pulse .csk-live-indicator__dot {
@@ -321,19 +321,19 @@
 }
 
 .csk-live-indicator--energy-glow .csk-live-indicator__pulse-ring {
-  background: var(--csk-color-live);
+  background: var(--csk-color-action);
 }
 
 /* Energy badge style */
 .csk-live-indicator--style-badge.csk-live-indicator--energy-glow,
 .csk-live-indicator--style-badge.csk-live-indicator--color-energy {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-live) 15%, transparent) 0%, color-mix(in srgb, var(--csk-color-live) 10%, transparent) 100%);
-  border: 1px solid color-mix(in srgb, var(--csk-color-live) 30%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-action) 15%, transparent) 0%, color-mix(in srgb, var(--csk-color-action) 10%, transparent) 100%);
+  border: 1px solid color-mix(in srgb, var(--csk-color-action) 30%, transparent);
 }
 
 .csk-live-indicator--style-badge.csk-live-indicator--energy-glow:hover {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-live) 20%, transparent) 0%, color-mix(in srgb, var(--csk-color-live) 15%, transparent) 100%);
-  box-shadow: 0 4px 12px -2px color-mix(in srgb, var(--csk-color-live) 30%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-action) 20%, transparent) 0%, color-mix(in srgb, var(--csk-color-action) 15%, transparent) 100%);
+  box-shadow: 0 4px 12px -2px color-mix(in srgb, var(--csk-color-action) 30%, transparent);
 }
 
 /* ==========================================================================
@@ -376,17 +376,17 @@
 @keyframes live-indicator-energy-glow {
   0%, 100% {
     box-shadow:
-      0 0 8px color-mix(in srgb, var(--csk-color-live) 60%, transparent),
-      0 0 16px color-mix(in srgb, var(--csk-color-live) 40%, transparent),
-      0 0 24px color-mix(in srgb, var(--csk-color-live) 20%, transparent);
+      0 0 8px color-mix(in srgb, var(--csk-color-action) 60%, transparent),
+      0 0 16px color-mix(in srgb, var(--csk-color-action) 40%, transparent),
+      0 0 24px color-mix(in srgb, var(--csk-color-action) 20%, transparent);
     transform: scale(1);
   }
   50% {
     box-shadow:
-      0 0 12px color-mix(in srgb, var(--csk-color-live) 80%, transparent),
-      0 0 24px color-mix(in srgb, var(--csk-color-live) 50%, transparent),
-      0 0 36px color-mix(in srgb, var(--csk-color-live) 30%, transparent),
-      0 0 48px color-mix(in srgb, var(--csk-color-live) 10%, transparent);
+      0 0 12px color-mix(in srgb, var(--csk-color-action) 80%, transparent),
+      0 0 24px color-mix(in srgb, var(--csk-color-action) 50%, transparent),
+      0 0 36px color-mix(in srgb, var(--csk-color-action) 30%, transparent),
+      0 0 48px color-mix(in srgb, var(--csk-color-action) 10%, transparent);
     transform: scale(1.1);
   }
 }
@@ -478,24 +478,24 @@
 
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-default,
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--offline {
-  background: color-mix(in srgb, var(--csk-white) 5%, transparent);
-  border-color: color-mix(in srgb, var(--csk-white) 10%, transparent);
+  background: color-mix(in srgb, var(--csk-color-surface) 5%, transparent);
+  border-color: color-mix(in srgb, var(--csk-color-surface) 10%, transparent);
 }
 
 /* Dark mode energy color */
 [data-theme='dark'] .csk-live-indicator--color-energy {
-  color: var(--csk-color-live);
+  color: var(--csk-color-action);
 }
 
 [data-theme='dark'] .csk-live-indicator--color-energy .csk-live-indicator__label {
-  color: var(--csk-color-live);
+  color: var(--csk-color-action);
 }
 
 /* Dark mode energy badge */
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--energy-glow,
 [data-theme='dark'] .csk-live-indicator--style-badge.csk-live-indicator--color-energy {
-  background: color-mix(in srgb, var(--csk-color-live) 15%, transparent);
-  border-color: color-mix(in srgb, var(--csk-color-live) 30%, transparent);
+  background: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
+  border-color: color-mix(in srgb, var(--csk-color-action) 30%, transparent);
 }
 
 /* ==========================================================================

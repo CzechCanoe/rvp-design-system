@@ -44,7 +44,7 @@
     var(--csk-color-surface) 100%
   );
   transform: translateX(4px);
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 }
 
 .csk-action-card:active {
@@ -112,8 +112,8 @@
 .csk-action-card--icon-energy .csk-action-card__icon {
   background: linear-gradient(
     135deg,
-    var(--csk-color-live) 0%,
-    var(--csk-color-live) 100%
+    var(--csk-color-action) 0%,
+    var(--csk-color-action) 100%
   );
 }
 
@@ -236,7 +236,7 @@
     color-mix(in srgb, var(--csk-color-action) 15%, transparent) 0%,
     var(--csk-color-surface-2) 100%
   );
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 }
 
 [data-theme='dark'] .csk-action-card:hover .csk-action-card__arrow {

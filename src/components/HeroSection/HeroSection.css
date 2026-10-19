@@ -15,7 +15,7 @@
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
-  color: white;
+  color: var(--csk-color-text-on-fill);
 }
 
 /* Size variants */
@@ -75,12 +75,12 @@
   opacity: 0.15;
   background-image: radial-gradient(
       ellipse 50% 80% at 20% 80%,
-      color-mix(in srgb, var(--csk-white) 10%, transparent) 0%,
+      color-mix(in srgb, var(--csk-color-surface) 10%, transparent) 0%,
       transparent 50%
     ),
     radial-gradient(
       ellipse 50% 80% at 80% 20%,
-      color-mix(in srgb, var(--csk-white) 8%, transparent) 0%,
+      color-mix(in srgb, var(--csk-color-surface) 8%, transparent) 0%,
       transparent 50%
     );
 }
@@ -207,7 +207,7 @@
 
 /* Add white ring around avatar */
 .csk-hero-section__avatar .csk-avatar {
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--csk-white) 30%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--csk-color-surface) 30%, transparent);
 }
 
 .csk-hero-section--full .csk-hero-section__avatar .csk-avatar {
@@ -249,7 +249,7 @@
   font-weight: var(--csk-font-weight-bold);
   line-height: var(--csk-line-height-tight);
   letter-spacing: var(--csk-letter-spacing-tight);
-  color: white;
+  color: var(--csk-color-text-on-fill);
   text-shadow: 0 4px 20px color-mix(in srgb, var(--csk-color-text) 30%, transparent);
   margin: 0;
 }
@@ -269,7 +269,7 @@
 .csk-hero-section__subtitle {
   margin-top: var(--csk-space-3);
   font-size: var(--csk-text-lg);
-  color: color-mix(in srgb, var(--csk-white) 85%, transparent);
+  color: color-mix(in srgb, var(--csk-color-text-on-fill) 85%, transparent);
   max-width: 60ch;
 }
 
@@ -315,12 +315,12 @@
 }
 
 .csk-hero-section__meta-label {
-  color: color-mix(in srgb, var(--csk-white) 70%, transparent);
+  color: color-mix(in srgb, var(--csk-color-text-on-fill) 70%, transparent);
   font-weight: var(--csk-font-weight-regular);
 }
 
 .csk-hero-section__meta-value {
-  color: white;
+  color: var(--csk-color-text-on-fill);
   font-weight: var(--csk-font-weight-medium);
   margin-left: 0;
 }
@@ -348,15 +348,15 @@
 
 /* Glass-morphism action button */
 .csk-hero-action-button.csk-button {
-  background: color-mix(in srgb, var(--csk-white) 15%, transparent);
+  background: color-mix(in srgb, var(--csk-color-surface) 15%, transparent);
   backdrop-filter: blur(8px);
-  border: 1px solid color-mix(in srgb, var(--csk-white) 30%, transparent);
-  color: white;
+  border: 1px solid color-mix(in srgb, var(--csk-color-surface) 30%, transparent);
+  color: var(--csk-color-text-on-fill);
 }
 
 .csk-hero-action-button.csk-button:hover {
-  background: color-mix(in srgb, var(--csk-white) 25%, transparent);
-  border-color: color-mix(in srgb, var(--csk-white) 40%, transparent);
+  background: color-mix(in srgb, var(--csk-color-surface) 25%, transparent);
+  border-color: color-mix(in srgb, var(--csk-color-surface) 40%, transparent);
 }
 
 /* =============================================================================

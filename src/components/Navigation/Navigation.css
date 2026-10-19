@@ -330,12 +330,12 @@
 }
 
 .csk-mainnav--gradient .csk-mainnav__link {
-  color: color-mix(in srgb, var(--csk-white) 85%, transparent);
+  color: color-mix(in srgb, var(--csk-color-text-on-fill) 85%, transparent);
 }
 
 .csk-mainnav--gradient .csk-mainnav__link:hover {
   color: var(--csk-color-surface);
-  background-color: color-mix(in srgb, var(--csk-white) 15%, transparent);
+  background-color: color-mix(in srgb, var(--csk-color-surface) 15%, transparent);
 }
 
 .csk-mainnav--gradient .csk-mainnav__item--active > .csk-mainnav__link,
@@ -352,19 +352,19 @@
 }
 
 .csk-mainnav--gradient .csk-mainnav__toggle:hover {
-  background-color: color-mix(in srgb, var(--csk-white) 15%, transparent);
+  background-color: color-mix(in srgb, var(--csk-color-surface) 15%, transparent);
 }
 
 .csk-mainnav--gradient .csk-mainnav__toggle:focus-visible {
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--csk-white) 30%, transparent), 0 0 0 4px color-mix(in srgb, var(--csk-white) 50%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--csk-color-surface) 30%, transparent), 0 0 0 4px color-mix(in srgb, var(--csk-color-surface) 50%, transparent);
 }
 
 /* Glass variant - frosted glass effect */
 .csk-mainnav--glass {
-  background: color-mix(in srgb, var(--csk-white) 80%, transparent);
+  background: color-mix(in srgb, var(--csk-color-surface) 80%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid color-mix(in srgb, var(--csk-white) 30%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--csk-color-surface) 30%, transparent);
   box-shadow: 0 4px 16px color-mix(in srgb, var(--csk-color-text) 5%, transparent);
 }
 
@@ -405,7 +405,7 @@
   background-color: var(--csk-color-surface);
   border: 1px solid var(--csk-color-border);
   border-radius: var(--csk-radius-lg);
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-8px) scale(0.98);
@@ -625,7 +625,7 @@
     background-color: var(--csk-color-surface);
     border-bottom: 1px solid var(--csk-color-border);
     padding: var(--csk-space-4);
-    box-shadow: var(--csk-shadow-sm);
+    box-shadow: none;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-8px);
@@ -690,7 +690,7 @@
 
 [data-theme="dark"] .csk-mainnav--glass {
   background: color-mix(in srgb, var(--csk-color-text) 70%, transparent);
-  border-bottom-color: color-mix(in srgb, var(--csk-white) 10%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--csk-color-surface) 10%, transparent);
 }
 
 [data-theme="dark"] .csk-mainnav__dropdown {

@@ -180,7 +180,7 @@
 .csk-tabs--pills .csk-tabs__tab--active {
   background-color: var(--csk-color-surface);
   color: var(--csk-color-text);
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 }
 
 .csk-tabs--pills .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active) {
@@ -329,39 +329,39 @@
 
 /* Energy accent for line variant */
 .csk-tabs--line.csk-tabs--energy-accent .csk-tabs__tab--active::after {
-  background: var(--csk-color-live);
+  background: var(--csk-color-action);
 }
 
 .csk-tabs--line.csk-tabs--energy-accent .csk-tabs__tab--active {
-  color: var(--csk-color-live);
+  color: var(--csk-color-action);
 }
 
 .csk-tabs--line.csk-tabs--energy-accent .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active)::after {
-  background: var(--csk-color-live);
+  background: var(--csk-color-action);
 }
 
 /* Energy accent for aesthetic variant */
 .csk-tabs--aesthetic.csk-tabs--energy-accent .csk-tabs__tab--active::after {
-  background: var(--csk-color-live);
+  background: var(--csk-color-action);
 }
 
 .csk-tabs--aesthetic.csk-tabs--energy-accent .csk-tabs__tab--active {
-  color: var(--csk-color-live);
+  color: var(--csk-color-action);
 }
 
 .csk-tabs--aesthetic.csk-tabs--energy-accent .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active)::after {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-live) 50%, transparent) 0%, color-mix(in srgb, var(--csk-color-live) 40%, transparent) 100%);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-action) 50%, transparent) 0%, color-mix(in srgb, var(--csk-color-action) 40%, transparent) 100%);
 }
 
 /* Energy accent for pills variant */
 .csk-tabs--pills.csk-tabs--energy-accent .csk-tabs__tab--active {
-  background: var(--csk-color-live);
-  color: white;
-  box-shadow: 0 2px 8px -2px color-mix(in srgb, var(--csk-color-live) 40%, transparent);
+  background: var(--csk-color-action);
+  color: var(--csk-color-text-on-fill);
+  box-shadow: 0 2px 8px -2px color-mix(in srgb, var(--csk-color-action) 40%, transparent);
 }
 
 .csk-tabs--pills.csk-tabs--energy-accent .csk-tabs__tab--active:hover {
-  box-shadow: 0 4px 12px -2px color-mix(in srgb, var(--csk-color-live) 50%, transparent);
+  box-shadow: 0 4px 12px -2px color-mix(in srgb, var(--csk-color-action) 50%, transparent);
 }
 
 /* =============================================================================
@@ -379,12 +379,12 @@
 /* Dark mode energy accent */
 [data-theme="dark"] .csk-tabs--line.csk-tabs--energy-accent .csk-tabs__tab--active,
 [data-theme="dark"] .csk-tabs--aesthetic.csk-tabs--energy-accent .csk-tabs__tab--active {
-  color: var(--csk-color-live);
+  color: var(--csk-color-action);
 }
 
 [data-theme="dark"] .csk-tabs--pills.csk-tabs--energy-accent .csk-tabs__tab--active {
-  background: var(--csk-color-live);
-  color: white;
+  background: var(--csk-color-action);
+  color: var(--csk-color-text-on-fill);
 }
 
 /* =============================================================================

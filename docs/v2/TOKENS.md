@@ -114,7 +114,8 @@ Fonty self-hosted v `public/fonts/` (woff2, subsety latin + latin-ext, licence O
 | `--color-neutral-500` | `--csk-color-text-3` |
 | `--color-neutral-200/300` | `--csk-color-border-2 / -border` |
 | `--color-success-*`, `--color-warning-*`, `--color-error-*`, `--color-info-*` | `--csk-color-success*`, `--csk-color-warning*`, `--csk-color-error*`, `--csk-color-info*` (`-bg` pro podložky 50/100, `-text` pro text na podložce) |
-| `--color-energy-*`, `--gradient-*`, `--mesh-*` | bez náhrady, smazat |
+| `--gradient-*`, `--mesh-*` | bez náhrady, smazat |
+| `--color-energy-*` (a oranžová `rgba(249, 115, 22, …)`), `--gradient-energy*` | `--csk-color-action` (`-50`/`-200` -> `--csk-color-highlight-bg`), dočasně do odstranění variant energy v T4 / T9; červená `--csk-color-live` je jen LIVE a chyba |
 | `--text-util-*`, `--text-expr-*`, `--spacing-util-*`, `--spacing-expr-*` | `--csk-text-*`, `--csk-space-*` |
 | `--font-family-sans` (Inter) | `--csk-font-sans` (IBM Plex Sans) |
 | `--font-family-display` | `--csk-font-display` (Barlow Semi Condensed) |

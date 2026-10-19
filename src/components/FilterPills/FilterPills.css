@@ -75,7 +75,7 @@
 
 .csk-filter-pills__remove:hover {
   background: var(--csk-color-error);
-  color: white;
+  color: var(--csk-color-text-on-fill);
   transform: scale(1.1);
 }
 

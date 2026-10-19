@@ -189,9 +189,8 @@
   background: none;
   background-color: var(--csk-color-surface);
   border: 1px solid var(--csk-color-border);
-  border-left: 4px solid;
-  border-image: var(--csk-color-brand) 1;
-  box-shadow: var(--csk-shadow-sm);
+  border-left: 4px solid var(--csk-color-brand);
+  box-shadow: none;
   overflow: visible;
 }
 
@@ -212,12 +211,12 @@
 
 /* Clickable aesthetic */
 .csk-card--clickable.csk-card--aesthetic:hover {
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
   transform: translateY(-2px);
 }
 
 .csk-card--clickable.csk-card--aesthetic:active {
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
   transform: translateY(0);
 }
 
@@ -240,5 +239,5 @@
 }
 
 [data-theme="dark"] .csk-card--clickable.csk-card--aesthetic:hover {
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 }

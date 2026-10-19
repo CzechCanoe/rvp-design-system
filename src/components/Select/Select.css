@@ -35,13 +35,6 @@
   transition: color var(--csk-transition-fast);
 }
 
-/* Display label - uses display font for aesthetic emphasis */
-.csk-select-label--display {
-  font-family: var(--csk-font-display);
-  font-weight: var(--csk-font-weight-semibold);
-  letter-spacing: -0.01em;
-}
-
 /* Label enhancement on focus-within */
 .csk-select-wrapper:focus-within .csk-select-label {
   color: var(--csk-color-action-hover);

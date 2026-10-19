@@ -46,8 +46,6 @@ export interface Toast {
   onDismiss?: () => void;
   /** Custom icon (overrides variant icon) */
   icon?: ReactNode;
-  /** Use display font for title (aesthetic enhancement) */
-  displayTitle?: boolean;
   /** Action button */
   action?: {
     label: string;
@@ -167,7 +165,6 @@ const ToastItem = ({ toast, onDismiss, showProgress = true, className, ...props 
     'csk-toast',
     `csk-toast--${variant}`,
     styleVariant !== 'default' && `csk-toast--style-${styleVariant}`,
-    toast.displayTitle && 'csk-toast--display-title',
     isExiting && 'csk-toast--exiting',
     isPaused && 'csk-toast--paused',
     className,

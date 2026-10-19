@@ -240,7 +240,7 @@
    ============================================================================= */
 
 [data-theme='dark'] .csk-list-item--type-default .csk-list-item__icon {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-white) 10%, transparent) 0%, color-mix(in srgb, var(--csk-white) 5%, transparent) 100%);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-surface) 10%, transparent) 0%, color-mix(in srgb, var(--csk-color-surface) 5%, transparent) 100%);
   color: var(--csk-color-text-2);
 }
 

@@ -95,7 +95,7 @@
   background-color: var(--csk-color-surface-2);
   border-color: var(--csk-color-action);
   color: var(--csk-color-action-hover);
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
   transform: translateY(-1px);
 }
 
@@ -267,20 +267,20 @@
 
 /* Energy accent on secondary button */
 .csk-button--secondary.csk-button--accent-energy:hover:not(:disabled):not([aria-disabled='true']) {
-  border-color: var(--csk-color-live);
-  color: var(--csk-color-live);
+  border-color: var(--csk-color-action);
+  color: var(--csk-color-action);
   box-shadow: none;
 }
 
 /* Energy accent on ghost button */
 .csk-button--ghost.csk-button--accent-energy:hover:not(:disabled):not([aria-disabled='true']) {
-  background-color: var(--csk-color-live-bg);
-  color: var(--csk-color-live);
+  background-color: var(--csk-color-highlight-bg);
+  color: var(--csk-color-action);
 }
 
 /* Energy focus ring override */
 .csk-button--accent-energy:focus-visible {
-  outline-color: var(--csk-color-live);
+  outline-color: var(--csk-color-action);
 }
 
 /* ==========================================================================

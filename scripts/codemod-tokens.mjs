@@ -168,9 +168,9 @@ const EXPR = {
   'gradient-card': 'var(--csk-color-surface-2)',
   'gradient-surface': 'var(--csk-color-surface-2)',
   'gradient-danger': 'var(--csk-color-error)',
-  'gradient-energy': 'var(--csk-color-live)',
-  'gradient-energy-subtle': 'var(--csk-color-live-bg)',
-  'gradient-energy-vibrant': 'var(--csk-color-live)',
+  'gradient-energy': 'var(--csk-color-action)',
+  'gradient-energy-subtle': 'var(--csk-color-highlight-bg)',
+  'gradient-energy-vibrant': 'var(--csk-color-action)',
   'glow-energy-sm': 'none', 'glow-energy-md': 'none', 'glow-energy-lg': 'none',
   'glow-primary-xs': 'none', 'glow-primary-sm': 'none',
   'bg-mesh-card': 'none', 'bg-mesh-primary': 'none', 'bg-mesh-hero': 'none',
@@ -181,18 +181,18 @@ const EXPR = {
   'border-embed-card': '1px solid var(--csk-color-border)',
   'border-accent-width': '4px',
   'border-accent-gradient': 'var(--csk-color-brand)',
-  'color-energy-start': 'var(--csk-color-live)',
-  'color-energy-end': 'var(--csk-color-live)',
-  'color-energy-50': 'var(--csk-color-live-bg)',
-  'color-energy-200': 'var(--csk-color-live-bg)',
-  'color-energy-300': 'var(--csk-color-live)',
-  'color-energy-400': 'var(--csk-color-live)',
-  'color-energy-500': 'var(--csk-color-live)',
-  'color-energy-600': 'var(--csk-color-live)',
-  'color-energy-700': 'var(--csk-color-live)',
-  'color-energy-800': 'var(--csk-color-live)',
-  'color-energy-500-rgb': 'var(--csk-color-live)',
-  'color-energy-rgb': 'var(--csk-color-live)',
+  'color-energy-start': 'var(--csk-color-action)',
+  'color-energy-end': 'var(--csk-color-action)',
+  'color-energy-50': 'var(--csk-color-highlight-bg)',
+  'color-energy-200': 'var(--csk-color-highlight-bg)',
+  'color-energy-300': 'var(--csk-color-action)',
+  'color-energy-400': 'var(--csk-color-action)',
+  'color-energy-500': 'var(--csk-color-action)',
+  'color-energy-600': 'var(--csk-color-action)',
+  'color-energy-700': 'var(--csk-color-action)',
+  'color-energy-800': 'var(--csk-color-action)',
+  'color-energy-500-rgb': 'var(--csk-color-action)',
+  'color-energy-rgb': 'var(--csk-color-action)',
   'color-primary-rgb': 'var(--csk-color-action)',
   'color-primary-500-alpha-30': 'color-mix(in srgb, var(--csk-color-action) 30%, transparent)',
   'color-success-500-alpha-30': 'color-mix(in srgb, var(--csk-color-success) 30%, transparent)',
@@ -240,7 +240,7 @@ const PATTERNS = [
 // 1.x palette literals: rgb triple -> token (alpha becomes a color-mix percentage).
 const RGB = {
   '255,255,255': 'white', '0,0,0': 'color-text', '10,10,10': 'color-text', '15,23,42': 'color-text',
-  '249,115,22': 'color-live', '251,146,60': 'color-live',
+  '249,115,22': 'color-action', '251,146,60': 'color-action',
   '255,215,0': 'color-podium-1', '192,192,192': 'color-podium-2', '205,127,50': 'color-podium-3',
   '34,197,94': 'color-success', '74,222,128': 'color-success', '22,163,74': 'color-success',
   '239,68,68': 'color-error', '248,113,113': 'color-error', '220,38,38': 'color-error', '185,28,28': 'color-error',
@@ -259,6 +259,7 @@ const HEX = {
   '#f8f9fa': 'color-surface-2', '#f0f0f0': 'color-surface-3', '#f1f1f1': 'color-surface-3', '#dee2e6': 'color-border-2',
   '#6d28d9': 'violet', '#b91c1c': 'red', '#d97706': 'amber', '#15803d': 'green',
 };
+const SHADOW_COMPONENTS = ['Modal', 'Dropdown', 'Toast'];
 // Verdict X (removed in T17): the codemod leaves their hex literals alone (check-no-hex baseline).
 const X_COMPONENTS = ['ActionCard', 'AthleteCard', 'DateBadge', 'HeroSection', 'ListItem', 'Navigation', 'PodiumCard', 'ResultItem', 'SectionHeader', 'StatCard', 'StatsBar'];
 
@@ -384,6 +385,26 @@ for (const [f, text] of sources) {
       hexMapped++;
       return `var(--csk-${tok})`;
     });
+  }
+  // Components use semantics, not primitives: white text on a fill is text-on-fill, white
+  // as a surface (background, border, shadow, outline) is the surface token.
+  if (extname(f) === '.css') {
+    out = out.replace(/(^|[;{\s])((?:-webkit-)?[a-z-]+)(\s*:\s*)([^;{}]*?)(?=;|\})/g, (all, pre, prop, colon, val) => {
+      if (!/var\(--csk-white\)|(?<![\w-])white(?![\w-])|var\(--csk-color-text-on-fill\)/.test(val)) return all;
+      const textual = /^(color|fill|stroke|caret-color|-webkit-text-fill-color)$/.test(prop);
+      if (prop.startsWith('--')) return all;
+      if (textual) {
+        const v2 = val.replace(/var\(--csk-white\)/g, 'var(--csk-color-text-on-fill)').replace(/(?<![\w-])white(?![\w-])/g, 'var(--csk-color-text-on-fill)');
+        return v2 === val ? all : `${pre}${prop}${colon}${v2}`;
+      }
+      if (!/^(background|border|outline|box-shadow|text-shadow|filter)/.test(prop)) return all;
+      const v2 = val.replace(/var\(--csk-white\)/g, 'var(--csk-color-surface)').replace(/(?<![\w-])white(?![\w-])/g, 'var(--csk-color-surface)').replace(/var\(--csk-color-text-on-fill\)/g, 'var(--csk-color-surface)');
+      return v2 === val ? all : `${pre}${prop}${colon}${v2}`;
+    });
+  }
+  // Only Modal, Dropdown and Toast carry a shadow in v2 (TOKENS.md); everything else is flat.
+  if (extname(f) === '.css' && !SHADOW_COMPONENTS.some((x) => f.includes(`/components/${x}/`)) && !f.endsWith('RunDetailModal.css')) {
+    out = out.replace(/(box-shadow:[^;{}]*?)var\(--csk-shadow-sm\)/g, '$1none');
   }
   // `none` produced by dropped shadows/glows must not stay inside a shadow list.
   if (extname(f) === '.css') out = out.replace(/(box-shadow:\s*)([^;{}]+);/g, (all, head, val) => {

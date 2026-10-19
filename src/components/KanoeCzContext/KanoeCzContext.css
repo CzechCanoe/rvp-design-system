@@ -64,7 +64,7 @@
 
 .kanoe-topbar {
   background-color: var(--csk-color-action-hover);
-  color: color-mix(in srgb, var(--csk-white) 80%, transparent);
+  color: color-mix(in srgb, var(--csk-color-text-on-fill) 80%, transparent);
   font-size: 13px;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .kanoe-topbar__link {
-  color: color-mix(in srgb, var(--csk-white) 70%, transparent);
+  color: color-mix(in srgb, var(--csk-color-text-on-fill) 70%, transparent);
   text-decoration: none;
   font-size: 12px;
 }
@@ -146,7 +146,7 @@
 }
 
 .kanoe-nav-link {
-  color: color-mix(in srgb, var(--csk-white) 85%, transparent);
+  color: color-mix(in srgb, var(--csk-color-text-on-fill) 85%, transparent);
   text-decoration: none;
   padding: 8px 12px;
   border-radius: 4px;
@@ -156,12 +156,12 @@
 
 .kanoe-nav-link:hover {
   color: var(--csk-color-text-on-fill);
-  background-color: color-mix(in srgb, var(--csk-white) 10%, transparent);
+  background-color: color-mix(in srgb, var(--csk-color-surface) 10%, transparent);
 }
 
 .kanoe-nav-link--active {
   color: var(--csk-color-text-on-fill);
-  background-color: color-mix(in srgb, var(--csk-white) 15%, transparent);
+  background-color: color-mix(in srgb, var(--csk-color-surface) 15%, transparent);
 }
 
 .kanoe-header__actions {
@@ -183,18 +183,18 @@
 .kanoe-btn--outline {
   color: var(--csk-color-text-on-fill);
   background-color: transparent;
-  border: 1px solid color-mix(in srgb, var(--csk-white) 50%, transparent);
+  border: 1px solid color-mix(in srgb, var(--csk-color-surface) 50%, transparent);
 }
 
 .kanoe-btn--outline:hover {
-  background-color: color-mix(in srgb, var(--csk-white) 10%, transparent);
-  border-color: var(--csk-color-text-on-fill);
+  background-color: color-mix(in srgb, var(--csk-color-surface) 10%, transparent);
+  border-color: var(--csk-color-surface);
 }
 
 .kanoe-btn--primary {
   color: var(--csk-color-action);
-  background-color: var(--csk-color-text-on-fill);
-  border: 1px solid var(--csk-color-text-on-fill);
+  background-color: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-surface);
 }
 
 .kanoe-btn--primary:hover {
@@ -208,7 +208,7 @@
   width: 36px;
   height: 36px;
   padding: 0;
-  color: color-mix(in srgb, var(--csk-white) 80%, transparent);
+  color: color-mix(in srgb, var(--csk-color-text-on-fill) 80%, transparent);
   background: transparent;
   border: none;
   border-radius: 4px;
@@ -216,7 +216,7 @@
 }
 
 .kanoe-btn--search:hover {
-  background-color: color-mix(in srgb, var(--csk-white) 10%, transparent);
+  background-color: color-mix(in srgb, var(--csk-color-surface) 10%, transparent);
   color: var(--csk-color-text-on-fill);
 }
 
@@ -231,7 +231,7 @@
    ============================================================================= */
 
 .kanoe-breadcrumb {
-  background-color: var(--csk-color-text-on-fill);
+  background-color: var(--csk-color-surface);
   border-bottom: 1px solid var(--csk-color-border-2);
   padding: 12px 0;
 }
@@ -274,7 +274,7 @@
    ============================================================================= */
 
 .kanoe-page-title {
-  background-color: var(--csk-color-text-on-fill);
+  background-color: var(--csk-color-surface);
   padding: 20px 0;
   border-bottom: 1px solid var(--csk-color-border-2);
 }
@@ -353,7 +353,7 @@
    ============================================================================= */
 
 .kanoe-sidebar-widget {
-  background-color: var(--csk-color-text-on-fill);
+  background-color: var(--csk-color-surface);
   border: 1px solid var(--csk-color-border-2);
   border-radius: 4px;
   padding: 16px;
@@ -404,7 +404,7 @@
    ============================================================================= */
 
 .kanoe-embed {
-  background-color: var(--csk-color-text-on-fill);
+  background-color: var(--csk-color-surface);
   border: 1px solid var(--csk-color-border-2);
   border-radius: 4px;
   padding: 16px;
@@ -418,7 +418,7 @@
 
 .kanoe-footer {
   background-color: var(--csk-color-text);
-  color: color-mix(in srgb, var(--csk-white) 70%, transparent);
+  color: color-mix(in srgb, var(--csk-color-text-on-fill) 70%, transparent);
   padding: 40px 0 24px;
   margin-top: auto;
 }
@@ -443,7 +443,7 @@
 .kanoe-footer__tagline {
   margin: 0;
   font-size: 14px;
-  color: color-mix(in srgb, var(--csk-white) 60%, transparent);
+  color: color-mix(in srgb, var(--csk-color-text-on-fill) 60%, transparent);
 }
 
 .kanoe-footer__links {
@@ -471,7 +471,7 @@
 }
 
 .kanoe-footer__column a {
-  color: color-mix(in srgb, var(--csk-white) 60%, transparent);
+  color: color-mix(in srgb, var(--csk-color-text-on-fill) 60%, transparent);
   text-decoration: none;
   font-size: 14px;
 }
@@ -482,13 +482,13 @@
 
 .kanoe-footer__bottom {
   padding-top: 24px;
-  border-top: 1px solid color-mix(in srgb, var(--csk-white) 10%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--csk-color-surface) 10%, transparent);
 }
 
 .kanoe-footer__copyright {
   margin: 0;
   font-size: 13px;
-  color: color-mix(in srgb, var(--csk-white) 50%, transparent);
+  color: color-mix(in srgb, var(--csk-color-text-on-fill) 50%, transparent);
 }
 
 .kanoe-footer__text {

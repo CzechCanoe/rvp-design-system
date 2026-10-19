@@ -28,8 +28,6 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   clearable?: boolean;
   /** Callback when clear button is clicked */
   onClear?: () => void;
-  /** Use display font for label (aesthetic emphasis) */
-  displayLabel?: boolean;
 }
 
 /**
@@ -52,7 +50,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       iconRight,
       clearable = false,
       onClear,
-      displayLabel = false,
       disabled,
       className,
       id,
@@ -99,7 +96,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const labelClasses = [
       'csk-input-label',
-      displayLabel && 'csk-input-label--display',
     ]
       .filter(Boolean)
       .join(' ');

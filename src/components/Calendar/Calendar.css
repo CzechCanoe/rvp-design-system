@@ -395,19 +395,9 @@
   background-color: color-mix(in srgb, var(--csk-color-live) 25%, transparent);
 }
 
-/* Deadline event with energy pulse */
+/* Registration deadline: warning colour, static (motion is reserved for live data) */
 .csk-calendar__event--warning[data-deadline="true"] {
-  border-left: 2px solid var(--csk-color-live);
-  animation: csk-calendar-event-deadline-pulse 3s ease-in-out infinite;
-}
-
-@keyframes csk-calendar-event-deadline-pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--csk-color-live) 0%, transparent);
-  }
-  50% {
-    box-shadow: inset 0 0 6px color-mix(in srgb, var(--csk-color-live) 15%, transparent);
-  }
+  border-left: 2px solid var(--csk-color-warning);
 }
 
 .csk-calendar__event-live {
@@ -485,7 +475,7 @@
   background-color: var(--csk-color-surface);
   border: 1px solid var(--csk-color-border);
   border-radius: var(--csk-radius-md);
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
   padding: var(--csk-space-3);
   min-width: 180px;
   max-width: 250px;
@@ -979,7 +969,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding: var(--csk-space-2);
-  background: linear-gradient(180deg, var(--csk-color-highlight-bg) 0%, transparent 100%);
+  background: var(--csk-color-highlight-bg);
 }
 
 /* Weekday cells - minimal, compact */
@@ -1065,7 +1055,7 @@
   font-size: var(--csk-text-xl);
   font-weight: var(--csk-font-weight-bold);
   background: var(--csk-color-brand);
-  color: white;
+  color: var(--csk-color-text-on-fill);
   border-radius: var(--csk-radius-md);
   box-shadow: 0 2px 8px color-mix(in srgb, var(--csk-color-action) 25%, transparent);
 }
@@ -1105,14 +1095,12 @@
 
 /* Weekend today highlight */
 .csk-calendar--weekend-showcase .csk-calendar__day--weekend.csk-calendar__day--today {
-  background: linear-gradient(135deg, var(--csk-color-highlight-bg) 0%, var(--csk-color-surface) 100%);
+  background: var(--csk-color-highlight-bg);
   border-left-color: var(--csk-color-action);
   border-left-width: 4px;
 }
 
 .csk-calendar--weekend-showcase .csk-calendar__day--weekend.csk-calendar__day--today .csk-calendar__day-number {
-  box-shadow: 0 4px 12px color-mix(in srgb, var(--csk-color-action) 35%, transparent);
-  animation: csk-calendar-today-pulse 2s ease-in-out infinite;
 }
 
 /* Weekday today - subtle */
@@ -1122,7 +1110,7 @@
 
 .csk-calendar--weekend-showcase .csk-calendar__day:not(.csk-calendar__day--weekend).csk-calendar__day--today .csk-calendar__day-number {
   background: var(--csk-color-action);
-  color: white;
+  color: var(--csk-color-text-on-fill);
   border-radius: var(--csk-radius-pill);
 }
 

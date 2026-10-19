@@ -32,8 +32,6 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement
   iconLeft?: ReactNode;
   /** Placeholder text (displayed as first disabled option) */
   placeholder?: string;
-  /** Use display font for label (aesthetic emphasis) */
-  displayLabel?: boolean;
 }
 
 /**
@@ -54,7 +52,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       errorMessage,
       iconLeft,
       placeholder,
-      displayLabel = false,
       disabled,
       className,
       id,
@@ -97,7 +94,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const labelClasses = [
       'csk-select-label',
-      displayLabel && 'csk-select-label--display',
     ]
       .filter(Boolean)
       .join(' ');

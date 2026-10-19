@@ -7,7 +7,6 @@
  * - Radius: radius-lg
  * - Shadows: shadow-toast
  * - Transitions: duration-fast, duration-moderate, ease-out
- * - Gradients: gradient-primary, gradient-success, etc.
  */
 
 /* ==========================================================================
@@ -83,24 +82,12 @@
   padding: var(--csk-space-4);
   background-color: var(--csk-color-surface);
   border-radius: var(--csk-radius-lg);
-  box-shadow:
-    0 10px 40px -10px color-mix(in srgb, var(--csk-color-text) 20%, transparent),
-    0 4px 16px -4px color-mix(in srgb, var(--csk-color-text) 10%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--csk-color-text) 5%, transparent);
+  box-shadow: var(--csk-shadow-sm);
   pointer-events: auto;
   overflow: hidden;
   transition:
     transform var(--csk-transition-fast),
     box-shadow var(--csk-transition-fast);
-}
-
-/* Hover lift effect */
-.csk-toast:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 14px 48px -10px color-mix(in srgb, var(--csk-color-text) 25%, transparent),
-    0 6px 20px -4px color-mix(in srgb, var(--csk-color-text) 12%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--csk-color-text) 5%, transparent);
 }
 
 /* ==========================================================================
@@ -285,19 +272,19 @@
 
 /* Variant-specific progress colors */
 .csk-toast--success .csk-toast__progress-bar {
-  background: linear-gradient(90deg, var(--csk-color-success), var(--csk-color-success));
+  background: var(--csk-color-success);
 }
 
 .csk-toast--warning .csk-toast__progress-bar {
-  background: linear-gradient(90deg, var(--csk-color-warning), var(--csk-color-warning));
+  background: var(--csk-color-warning);
 }
 
 .csk-toast--error .csk-toast__progress-bar {
-  background: linear-gradient(90deg, var(--csk-color-error), var(--csk-color-error));
+  background: var(--csk-color-error);
 }
 
 .csk-toast--info .csk-toast__progress-bar {
-  background: linear-gradient(90deg, var(--csk-color-info), var(--csk-color-info));
+  background: var(--csk-color-info);
 }
 
 /* ==========================================================================
@@ -354,13 +341,6 @@
   line-height: var(--csk-line-height-snug);
   color: var(--csk-color-text);
   margin-bottom: var(--csk-space-1);
-}
-
-/* Display font for title (aesthetic enhancement) */
-.csk-toast--display-title .csk-toast__title {
-  font-family: var(--csk-font-display);
-  font-weight: var(--csk-font-weight-bold);
-  letter-spacing: var(--csk-letter-spacing-tight);
 }
 
 .csk-toast__message {
@@ -458,7 +438,7 @@
 }
 
 /* ==========================================================================
- * VARIANT STYLES - Enhanced with gradients and glows
+ * VARIANT STYLES
  * ========================================================================== */
 
 /* Default variant */
@@ -472,29 +452,16 @@
 
 /* Success variant */
 .csk-toast--success {
-  border-left: 4px solid transparent;
-  border-image: linear-gradient(180deg, var(--csk-color-success), var(--csk-color-success)) 1;
-  background:
-    linear-gradient(var(--csk-color-surface), var(--csk-color-surface)) padding-box,
-    linear-gradient(180deg, var(--csk-color-success), var(--csk-color-success)) border-box;
+  border-left: 4px solid var(--csk-color-success);
 }
 
 .csk-toast--success .csk-toast__icon {
   color: var(--csk-color-success);
 }
 
-/* Success icon glow */
-.csk-toast--success:not(.csk-toast--exiting) .csk-toast__icon {
-  filter: drop-shadow(0 0 6px var(--csk-color-success));
-}
-
 /* Warning variant */
 .csk-toast--warning {
-  border-left: 4px solid transparent;
-  border-image: linear-gradient(180deg, var(--csk-color-warning), var(--csk-color-warning)) 1;
-  background:
-    linear-gradient(var(--csk-color-surface), var(--csk-color-surface)) padding-box,
-    linear-gradient(180deg, var(--csk-color-warning), var(--csk-color-warning)) border-box;
+  border-left: 4px solid var(--csk-color-warning);
 }
 
 .csk-toast--warning .csk-toast__icon {
@@ -507,11 +474,7 @@
 
 /* Error variant */
 .csk-toast--error {
-  border-left: 4px solid transparent;
-  border-image: linear-gradient(180deg, var(--csk-color-error), var(--csk-color-error)) 1;
-  background:
-    linear-gradient(var(--csk-color-surface), var(--csk-color-surface)) padding-box,
-    linear-gradient(180deg, var(--csk-color-error), var(--csk-color-error)) border-box;
+  border-left: 4px solid var(--csk-color-error);
 }
 
 .csk-toast--error .csk-toast__icon {
@@ -524,11 +487,7 @@
 
 /* Info variant */
 .csk-toast--info {
-  border-left: 4px solid transparent;
-  border-image: linear-gradient(180deg, var(--csk-color-info), var(--csk-color-info)) 1;
-  background:
-    linear-gradient(var(--csk-color-surface), var(--csk-color-surface)) padding-box,
-    linear-gradient(180deg, var(--csk-color-info), var(--csk-color-info)) border-box;
+  border-left: 4px solid var(--csk-color-info);
 }
 
 .csk-toast--info .csk-toast__icon {
@@ -545,17 +504,6 @@
 
 [data-theme="dark"] .csk-toast {
   background-color: var(--csk-color-surface);
-  box-shadow:
-    0 10px 40px -10px color-mix(in srgb, var(--csk-color-text) 50%, transparent),
-    0 4px 16px -4px color-mix(in srgb, var(--csk-color-text) 30%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--csk-white) 5%, transparent);
-}
-
-[data-theme="dark"] .csk-toast:hover {
-  box-shadow:
-    0 14px 48px -10px color-mix(in srgb, var(--csk-color-text) 60%, transparent),
-    0 6px 20px -4px color-mix(in srgb, var(--csk-color-text) 35%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--csk-white) 8%, transparent);
 }
 
 [data-theme="dark"] .csk-toast__action {
@@ -576,7 +524,7 @@
 }
 
 [data-theme="dark"] .csk-toast__progress {
-  background-color: color-mix(in srgb, var(--csk-white) 10%, transparent);
+  background-color: color-mix(in srgb, var(--csk-color-surface) 10%, transparent);
 }
 
 /* ==========================================================================

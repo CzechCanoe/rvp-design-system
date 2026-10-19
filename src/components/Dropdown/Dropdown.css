@@ -302,7 +302,7 @@
 .csk-dropdown-button--primary {
   background-color: var(--csk-color-action);
   border: 1px solid var(--csk-color-action);
-  color: white;
+  color: var(--csk-color-text-on-fill);
 }
 
 .csk-dropdown-button--primary:hover {

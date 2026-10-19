@@ -186,7 +186,7 @@
     0 8px 24px -4px color-mix(in srgb, var(--csk-color-text) 6%, transparent);
   border: 1px solid var(--csk-color-border);
   border-left: 4px solid;
-  border-image: linear-gradient(180deg, var(--csk-color-action) 0%, var(--csk-color-live) 100%) 1;
+  border-image: linear-gradient(180deg, var(--csk-color-action) 0%, var(--csk-color-action) 100%) 1;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;

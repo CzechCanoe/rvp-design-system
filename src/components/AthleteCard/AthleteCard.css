@@ -47,7 +47,7 @@
 .csk-athlete-card--style-aesthetic {
   background: var(--csk-color-surface-2);
   border: none;
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 }
 
 /* Featured + Aesthetic - angular clip for sporty feel */
@@ -126,7 +126,7 @@
   padding: var(--csk-space-6);
   background: var(--csk-color-surface-2);
   border: none;
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 }
 
 .csk-athlete-card--featured::before {
@@ -144,7 +144,7 @@
   width: 96px;
   height: 96px;
   margin-bottom: var(--csk-space-2);
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
   border: 3px solid var(--csk-color-surface);
 }
 
@@ -209,12 +209,12 @@
   background: var(--csk-color-surface-2);
   border-color: var(--csk-color-border);
   transform: translateY(-2px);
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 }
 
 .csk-athlete-card--clickable:active {
   transform: translateY(0);
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 }
 
 .csk-athlete-card--clickable:focus-visible {
@@ -224,23 +224,23 @@
 
 /* Clickable + Style variant hovers */
 .csk-athlete-card--clickable.csk-athlete-card--style-aesthetic:hover {
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
   transform: translateY(-3px);
 }
 
 .csk-athlete-card--clickable.csk-athlete-card--style-aesthetic:active {
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
   transform: translateY(0);
 }
 
 /* Clickable + Featured hover */
 .csk-athlete-card--clickable.csk-athlete-card--featured:hover {
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
   transform: translateY(-4px);
 }
 
 .csk-athlete-card--clickable.csk-athlete-card--featured:active {
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
   transform: translateY(0);
 }
 
@@ -262,11 +262,11 @@
 /* Avatar glow effect for featured/aesthetic variants */
 .csk-athlete-card--featured .csk-athlete-card__avatar,
 .csk-athlete-card--style-aesthetic .csk-athlete-card__avatar {
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 }
 
 .csk-athlete-card--clickable:hover .csk-athlete-card__avatar {
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 }
 
 .csk-athlete-card__image {
@@ -311,11 +311,11 @@
   font-size: var(--csk-text-sm);
   font-weight: var(--csk-font-weight-bold);
   font-variant-numeric: tabular-nums;
-  color: var(--csk-white);
+  color: var(--csk-color-text-on-fill);
   background: var(--csk-color-brand);
   border-radius: var(--csk-radius-pill);
   border: 2px solid var(--csk-color-surface);
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
   transition: transform var(--csk-transition-fast);
 }
 
@@ -425,22 +425,22 @@
 
 /* VT class badges */
 .csk-athlete-card__badge--vt-m {
-  color: var(--csk-white);
+  color: var(--csk-color-text-on-fill);
   background: var(--csk-violet);
 }
 
 .csk-athlete-card__badge--vt-a {
-  color: var(--csk-white);
+  color: var(--csk-color-text-on-fill);
   background: var(--csk-red);
 }
 
 .csk-athlete-card__badge--vt-b {
-  color: var(--csk-white);
+  color: var(--csk-color-text-on-fill);
   background: var(--csk-amber);
 }
 
 .csk-athlete-card__badge--vt-c {
-  color: var(--csk-white);
+  color: var(--csk-color-text-on-fill);
   background: var(--csk-green);
 }
 

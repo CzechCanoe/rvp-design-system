@@ -96,7 +96,7 @@
   /* Shape */
   background-color: var(--csk-color-surface);
   border-radius: var(--csk-radius-pill);
-  box-shadow: var(--csk-shadow-sm);
+  box-shadow: none;
 
   /* Animation */
   transition: var(--csk-transition-fast);

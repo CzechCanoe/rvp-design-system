@@ -189,7 +189,7 @@
 }
 
 .csk-timeline__item--completed .csk-timeline__icon {
-  color: white;
+  color: var(--csk-color-text-on-fill);
 }
 
 .csk-timeline__item--completed .csk-timeline__connector {
@@ -233,7 +233,7 @@
 }
 
 .csk-timeline__item--error .csk-timeline__icon {
-  color: white;
+  color: var(--csk-color-text-on-fill);
 }
 
 .csk-timeline__item--error .csk-timeline__title {
