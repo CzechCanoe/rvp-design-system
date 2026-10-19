@@ -63,10 +63,8 @@ jobs:
       # Snapshot/functional test failures are tolerated in update mode (the CI job reports them),
       # but a crashed run (Storybook down, Playwright error) must fail the job: the JSON report
       # has to exist and contain at least one executed test.
-      - name: Update component, container-query and cross-browser snapshots
-        run: |
-          PLAYWRIGHT_JSON_OUTPUT_NAME=results-components.json npm run test:update:components -- --reporter=json,line || true
-          PLAYWRIGHT_JSON_OUTPUT_NAME=results-other.json npm run test:update:other -- --reporter=json,line || true
+      - name: Update snapshots of all non-prototype specs (chromium)
+        run: PLAYWRIGHT_JSON_OUTPUT_NAME=results-all.json npm run test:update:all -- --reporter=json,line || true
 
       - name: Update prototype snapshots
         if: ${{ inputs.prototypes }}
@@ -74,7 +72,7 @@ jobs:
 
       - name: Verify Playwright actually ran
         run: |
-          FILES="results-components.json results-other.json"
+          FILES="results-all.json"
           if [ "${{ inputs.prototypes }}" = "true" ]; then FILES="$FILES results-prototypes.json"; fi
           for f in $FILES; do
             node -e '
