@@ -2,7 +2,7 @@
  * Card Component Styles - CSK RVP Design System
  *
  * Uses design tokens for consistent styling.
- * Supports variants: surface, elevated, outlined, aesthetic
+ * Supports variants: surface, outlined
  * Supports padding: none, sm, md, lg
  */
 
@@ -34,22 +34,15 @@
    VARIANTS
    ========================================================================== */
 
-/* Surface - flat card with subtle background */
+/* Surface - white card with a hairline border (reference .card) */
 .csk-card--surface {
-  background-color: var(--csk-color-surface-2);
+  background-color: var(--csk-color-surface);
   border: 1px solid var(--csk-color-border);
 }
 
-/* Elevated - card with shadow */
-.csk-card--elevated {
-  background-color: var(--csk-color-surface);
-  border: 1px solid transparent;
-  box-shadow: none;
-}
-
-/* Outlined - card with visible border */
+/* Outlined - transparent card, for placing on tinted backgrounds */
 .csk-card--outlined {
-  background-color: var(--csk-color-surface);
+  background-color: transparent;
   border: 1px solid var(--csk-color-border);
 }
 
@@ -79,7 +72,7 @@
 
 .csk-card__header {
   padding: var(--csk-space-4);
-  border-bottom: 1px solid var(--csk-color-border);
+  border-bottom: 1px solid var(--csk-color-border-2);
 }
 
 .csk-card--padding-sm .csk-card__header {
@@ -96,7 +89,7 @@
 
 .csk-card__footer {
   padding: var(--csk-space-4);
-  border-top: 1px solid var(--csk-color-border);
+  border-top: 1px solid var(--csk-color-border-2);
   margin-top: auto;
 }
 
@@ -135,109 +128,15 @@
 
 /* Hover states for clickable cards */
 .csk-card--clickable.csk-card--surface:hover {
-  background-color: var(--csk-color-surface-3);
-  border-color: var(--csk-color-border);
-}
-
-.csk-card--clickable.csk-card--elevated:hover {
-  box-shadow: none;
-  transform: translateY(-2px);
-}
-
-.csk-card--clickable.csk-card--outlined:hover {
   background-color: var(--csk-color-surface-2);
   border-color: var(--csk-color-action);
 }
 
-/* Active states for clickable cards */
-.csk-card--clickable.csk-card--surface:active {
-  background-color: var(--csk-color-surface-3);
-}
-
-.csk-card--clickable.csk-card--elevated:active {
-  box-shadow: none;
-  transform: translateY(0);
-}
-
-.csk-card--clickable.csk-card--outlined:active {
-  background-color: var(--csk-color-surface-3);
-}
-
-/* ==========================================================================
-   REDUCED MOTION
-   ========================================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  .csk-card--clickable.csk-card--elevated:hover,
-  .csk-card--clickable.csk-card--aesthetic:hover {
-    transform: none;
-  }
-
-  .csk-card--clickable.csk-card--elevated:active,
-  .csk-card--clickable.csk-card--aesthetic:active {
-    transform: none;
-  }
-}
-
-/* ==========================================================================
-   AESTHETIC VARIANT - Dynamic Sport
-   Mesh background, border-accent, display font titles
-   ========================================================================== */
-
-.csk-card--aesthetic {
-  position: relative;
-  background: none;
+.csk-card--clickable.csk-card--outlined:hover {
   background-color: var(--csk-color-surface);
-  border: 1px solid var(--csk-color-border);
-  border-left: 4px solid var(--csk-color-brand);
-  box-shadow: none;
-  overflow: visible;
+  border-color: var(--csk-color-action);
 }
 
-.csk-card--aesthetic .csk-card__header {
-  border-bottom-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
-}
-
-.csk-card--aesthetic .csk-card__footer {
-  border-top-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
-}
-
-/* Aesthetic card title styling */
-.csk-card--aesthetic .csk-card__title {
-  font-family: var(--csk-font-display);
-  font-weight: var(--csk-font-weight-bold);
-  letter-spacing: var(--csk-letter-spacing-tight);
-}
-
-/* Clickable aesthetic */
-.csk-card--clickable.csk-card--aesthetic:hover {
-  box-shadow: none;
-  transform: translateY(-2px);
-}
-
-.csk-card--clickable.csk-card--aesthetic:active {
-  box-shadow: none;
-  transform: translateY(0);
-}
-
-/* ==========================================================================
-   DARK MODE - AESTHETIC
-   ========================================================================== */
-
-[data-theme="dark"] .csk-card--aesthetic {
-  background: none;
-  background-color: var(--csk-color-surface);
-  border-color: var(--csk-color-border);
-}
-
-[data-theme="dark"] .csk-card--aesthetic .csk-card__header {
-  border-bottom-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
-}
-
-[data-theme="dark"] .csk-card--aesthetic .csk-card__footer {
-  border-top-color: color-mix(in srgb, var(--csk-color-action) 15%, transparent);
-}
-
-[data-theme="dark"] .csk-card--clickable.csk-card--aesthetic:hover {
-  box-shadow: none;
+.csk-card--clickable:active {
+  background-color: var(--csk-color-surface-3);
 }

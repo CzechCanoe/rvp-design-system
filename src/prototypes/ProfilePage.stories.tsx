@@ -545,7 +545,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
     {
       key: 'category',
       header: 'Kategorie',
-      cell: (row) => <Badge outlined>{row.category}</Badge>,
+      cell: (row) => <Badge variant="outline">{row.category}</Badge>,
     },
     {
       key: 'rank',
@@ -629,7 +629,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
                 <div className="profile-page-header__badges">
                   <Badge section={section}>{getSectionName(section)}</Badge>
                   <Badge vtClass={athlete.vtClass}>{getVtClassName(athlete.vtClass)}</Badge>
-                  <Badge outlined>{athlete.club}</Badge>
+                  <Badge variant="outline">{athlete.club}</Badge>
                 </div>
               </div>
               {isOwnProfile && (
@@ -706,7 +706,7 @@ function ProfilePage({ isOwnProfile = false, section = 'dv', variant = 'satellit
             ]}
             activeTab={activeTab}
             onChange={setActiveTab}
-            variant="aesthetic"
+            variant="line"
           />
 
           {/* Tab Content */}

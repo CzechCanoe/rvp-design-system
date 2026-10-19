@@ -12,7 +12,7 @@ export type { InputProps, InputType, InputSize, InputState } from './Input';
 
 // SearchInput
 export { SearchInput } from './SearchInput';
-export type { SearchInputProps, SearchInputSize, SearchFilterChip } from './SearchInput';
+export type { SearchInputProps, SearchInputSize } from './SearchInput';
 
 // Select
 export { Select } from './Select';
@@ -62,7 +62,7 @@ export type { ModalProps, ModalSize } from './Modal';
 
 // Tabs
 export { Tabs } from './Tabs';
-export type { TabsProps, TabItem, TabsVariant, TabsSize } from './Tabs';
+export type { TabsProps, TabItem, TabsVariant, TabsSize, TabsOverflow } from './Tabs';
 
 // Toast
 export { ToastProvider, useToast } from './Toast';
@@ -112,7 +112,7 @@ export { Avatar, AvatarGroup } from './Avatar';
 export type {
   AvatarProps,
   AvatarSize,
-  AvatarVariant,
+  AvatarShape,
   AvatarColor,
   AvatarGroupProps,
 } from './Avatar';
@@ -267,7 +267,6 @@ export type {
   FilterPillsProps,
   FilterPill,
   FilterPillsSize,
-  FilterPillsVariant,
 } from './FilterPills';
 
 // PodiumCard

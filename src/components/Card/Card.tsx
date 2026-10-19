@@ -1,7 +1,7 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import './Card.css';
 
-export type CardVariant = 'surface' | 'elevated' | 'outlined' | 'aesthetic';
+export type CardVariant = 'surface' | 'outlined';
 export type CardPadding = 'none' | 'sm' | 'md' | 'lg';
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
@@ -28,7 +28,8 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * Card component for grouping related content.
  *
- * Supports multiple variants (surface, elevated, outlined, aesthetic),
+ * Slots: `header`, body (children) and `footer`.
+ * Supports variants (surface, outlined),
  * padding sizes (none, sm, md, lg), and clickable state.
  * Can render as a div or anchor based on props.
  */

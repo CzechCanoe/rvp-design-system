@@ -280,7 +280,7 @@ const ResultsPage = ({
           badges={
             <>
               {isLive && <LiveIndicator variant="live" size="md" label="LIVE" energyGlow />}
-              {!isLive && <Badge variant="success" glow>Oficiální výsledky</Badge>}
+              {!isLive && <Badge variant="success">Oficiální výsledky</Badge>}
             </>
           }
           metadata={[

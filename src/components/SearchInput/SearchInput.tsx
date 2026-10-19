@@ -10,18 +10,7 @@ import {
 } from 'react';
 import './SearchInput.css';
 
-export type SearchInputSize = 'sm' | 'md' | 'lg';
-
-export interface SearchFilterChip {
-  /** Unique identifier */
-  id: string;
-  /** Display label */
-  label: string;
-  /** Optional icon */
-  icon?: ReactNode;
-  /** Optional color variant */
-  color?: 'default' | 'primary' | 'dv' | 'ry' | 'vt' | 'energy';
-}
+export type SearchInputSize = 'sm' | 'md';
 
 export interface SearchInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange'> {
@@ -37,12 +26,6 @@ export interface SearchInputProps
   onChange?: (value: string) => void;
   /** Callback when search is submitted (Enter key) */
   onSearch?: (value: string) => void;
-  /** Available filter chips */
-  chips?: SearchFilterChip[];
-  /** Currently active chip IDs */
-  activeChips?: string[];
-  /** Callback when chip is toggled */
-  onChipToggle?: (chipId: string, active: boolean) => void;
   /** Show loading indicator */
   loading?: boolean;
   /** Debounce delay for onChange in ms (0 to disable) */
@@ -99,10 +82,11 @@ const ClearIcon = () => (
 );
 
 /**
- * SearchInput component with filter chips.
+ * SearchInput component.
  *
- * Combines a search input field with optional filter chips for quick filtering.
- * Supports debounced search, loading states, and keyboard navigation.
+ * Search field in two sizes (md 40 px, sm 34 px). Quick filters are separate
+ * FilterPills placed next to it. Supports debounced search, loading states,
+ * and keyboard navigation.
  */
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
   (
@@ -113,9 +97,6 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       value: controlledValue,
       onChange,
       onSearch,
-      chips = [],
-      activeChips = [],
-      onChipToggle,
       loading = false,
       debounceMs = 300,
       icon,
@@ -210,16 +191,6 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       [currentValue, onSearch, handleClear, onKeyDown]
     );
 
-    const handleChipClick = useCallback(
-      (chipId: string) => {
-        if (onChipToggle) {
-          const isActive = activeChips.includes(chipId);
-          onChipToggle(chipId, !isActive);
-        }
-      },
-      [activeChips, onChipToggle]
-    );
-
     const wrapperClasses = [
       'csk-search-input',
       `csk-search-input--${size}`,
@@ -231,7 +202,6 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       .filter(Boolean)
       .join(' ');
 
-    const hasChips = chips.length > 0;
     const showClear = currentValue && !disabled;
 
     return (
@@ -268,37 +238,6 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
             </button>
           )}
         </div>
-
-        {hasChips && (
-          <div className="csk-search-input__chips" role="group" aria-label="Rychlé filtry">
-            {chips.map((chip) => {
-              const isActive = activeChips.includes(chip.id);
-              const chipClasses = [
-                'csk-search-input__chip',
-                chip.color && `csk-search-input__chip--${chip.color}`,
-                isActive && 'csk-search-input__chip--active',
-              ]
-                .filter(Boolean)
-                .join(' ');
-
-              return (
-                <button
-                  key={chip.id}
-                  type="button"
-                  className={chipClasses}
-                  onClick={() => handleChipClick(chip.id)}
-                  aria-pressed={isActive}
-                  disabled={disabled}
-                >
-                  {chip.icon && (
-                    <span className="csk-search-input__chip-icon">{chip.icon}</span>
-                  )}
-                  <span className="csk-search-input__chip-label">{chip.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        )}
 
         {(helperText || resultsCount !== undefined) && (
           <div className="csk-search-input__footer">

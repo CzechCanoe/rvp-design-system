@@ -16,13 +16,8 @@ const meta: Meta<typeof Button> = {
     },
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md'],
       description: 'Size of the button',
-    },
-    accent: {
-      control: 'select',
-      options: ['none', 'energy'],
-      description: 'Accent style for CTA emphasis (adds energy glow on hover)',
     },
     fullWidth: {
       control: 'boolean',
@@ -88,13 +83,12 @@ export const Sizes: Story = {
     <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
       <Button size="sm">Small</Button>
       <Button size="md">Medium</Button>
-      <Button size="lg">Large</Button>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Three sizes: sm (32px), md (40px), lg (52px). Large size uses display font (Barlow Semi Condensed) for prominent CTAs.',
+        story: 'Two sizes: sm (32 px) and md (40 px); both keep a minimum touch width of 44 px.',
       },
     },
   },
@@ -199,69 +193,22 @@ export const FullWidth: Story = {
 };
 
 /* ==========================================================================
-   LARGE CTA BUTTONS
+   SMALL VARIANTS
    ========================================================================== */
 
-export const LargeCTA: Story = {
+export const SmallVariants: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
-        <Button variant="primary" size="lg">
-          Sledovat live
-        </Button>
-        <Button variant="secondary" size="lg">
-          Registrovat závod
-        </Button>
-        <Button variant="danger" size="lg">
-          Zrušit registraci
-        </Button>
-      </div>
-      <div style={{ fontSize: '12px', color: '#666' }}>
-        Large buttons use Barlow Semi Condensed display font with tighter letter-spacing for prominent CTAs.
-      </div>
+    <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+      <Button size="sm" variant="primary">Primary</Button>
+      <Button size="sm" variant="secondary">Secondary</Button>
+      <Button size="sm" variant="ghost">Ghost</Button>
+      <Button size="sm" variant="danger">Danger</Button>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Large buttons for hero CTAs and prominent actions.',
-      },
-    },
-  },
-};
-
-/* ==========================================================================
-   ENERGY ACCENT
-   ========================================================================== */
-
-export const EnergyAccent: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
-        <Button variant="primary" accent="energy">
-          Registrovat se
-        </Button>
-        <Button variant="primary" accent="energy" size="lg">
-          Sledovat live
-        </Button>
-      </div>
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
-        <Button variant="secondary" accent="energy">
-          Přihlásit
-        </Button>
-        <Button variant="ghost" accent="energy">
-          Více info
-        </Button>
-      </div>
-      <div style={{ fontSize: '12px', color: '#666' }}>
-        Energy accent adds coral-orange glow on hover for prominent CTAs. Use sparingly for key actions like registration, live tracking, or deadlines.
-      </div>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Energy accent adds a vibrant coral-orange glow effect on hover. Use for prominent CTAs that need extra visual emphasis.',
+        story: 'Every variant at size sm (32 px high, 44 px minimum touch width).',
       },
     },
   },

@@ -8,12 +8,14 @@ export type BadgeVariant =
   | 'warning'
   | 'error'
   | 'info'
-  | 'energy';
+  | 'level'
+  | 'outline'
+  | 'live';
 
 export type BadgeSection = 'dv' | 'ry' | 'vt';
 export type BadgeVtClass = 'm' | 'a' | 'b' | 'c';
 
-export type BadgeSize = 'sm' | 'md' | 'lg';
+export type BadgeSize = 'sm' | 'md';
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   /** Visual variant of the badge */
@@ -24,12 +26,8 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   vtClass?: BadgeVtClass;
   /** Size of the badge */
   size?: BadgeSize;
-  /** Use outlined style instead of filled */
-  outlined?: boolean;
   /** Use pill shape (fully rounded) */
   pill?: boolean;
-  /** Add pulsing glow effect (use with energy variant for live/urgent indicators) */
-  glow?: boolean;
   /** Optional icon to display before content */
   icon?: ReactNode;
   /** Badge content */
@@ -39,8 +37,9 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 /**
  * Badge component for displaying status, labels, and categories.
  *
- * Supports semantic variants (success, warning, error, info),
- * CSK-specific sections (DV, RY, VT), and VT classes (M, A, B, C).
+ * Variants: default, primary, success, warning, error, info, level (race level),
+ * outline, live. CSK-specific sections (DV, RY, VT) and VT classes (M, A, B, C)
+ * via props. Value states (official, provisional ...) are StatusBadge.
  */
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
   (
@@ -49,9 +48,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       section,
       vtClass,
       size = 'md',
-      outlined = false,
       pill = false,
-      glow = false,
       icon,
       className,
       children,
@@ -74,9 +71,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       'csk-badge',
       getColorClass(),
       `csk-badge--${size}`,
-      outlined && 'csk-badge--outlined',
       pill && 'csk-badge--pill',
-      glow && 'csk-badge--glow',
       className,
     ]
       .filter(Boolean)
@@ -84,6 +79,9 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
 
     return (
       <span ref={ref} className={classes} {...props}>
+        {variant === 'live' && !section && !vtClass && (
+          <span className="csk-badge__dot" aria-hidden="true" />
+        )}
         {icon && <span className="csk-badge__icon">{icon}</span>}
         {children && <span className="csk-badge__content">{children}</span>}
       </span>

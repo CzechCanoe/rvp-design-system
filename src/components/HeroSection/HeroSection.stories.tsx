@@ -271,7 +271,7 @@ export const WithFloatingStats: Story = {
     ],
     actions: <HeroActionButton label="Sdílet" icon="share" />,
     floatingContent: (
-      <Card variant="elevated" style={{ padding: 'var(--csk-space-4)' }}>
+      <Card variant="surface" style={{ padding: 'var(--csk-space-4)' }}>
         <StatsBar items={athleteStats} variant="cards" centered />
       </Card>
     ),
@@ -395,7 +395,7 @@ export const ClubProfile: Story = {
     ],
     actions: <HeroActionButton label="Sdílet" icon="share" />,
     floatingContent: (
-      <Card variant="elevated" style={{ padding: 'var(--csk-space-4)' }}>
+      <Card variant="surface" style={{ padding: 'var(--csk-space-4)' }}>
         <StatsBar items={clubStats} variant="cards" centered />
       </Card>
     ),

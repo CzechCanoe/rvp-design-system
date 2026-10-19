@@ -282,6 +282,9 @@ test.describe('Color Contrast', () => {
   test('Badge variants have sufficient contrast', async ({ page }) => {
     await page.goto('/iframe.html?id=components-badge--default&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
+    // let Storybook's own axe run settle, otherwise axe reports "already running"
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(300);
 
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2aa'])
@@ -294,6 +297,9 @@ test.describe('Color Contrast', () => {
   test('Button variants have sufficient contrast', async ({ page }) => {
     await page.goto('/iframe.html?id=components-button--variants&viewMode=story');
     await page.waitForSelector('#storybook-root', { state: 'visible' });
+    // let Storybook's own axe run settle, otherwise axe reports "already running"
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(300);
 
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2aa'])
@@ -308,6 +314,9 @@ test.describe('Color Contrast', () => {
       '/iframe.html?id=components-card--variants&viewMode=story&globals=theme:dark'
     );
     await page.waitForSelector('#storybook-root', { state: 'visible' });
+    // let Storybook's own axe run settle, otherwise axe reports "already running"
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(300);
 
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2aa'])

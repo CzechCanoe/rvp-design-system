@@ -329,13 +329,13 @@ function AthletePublicProfile({
         backgroundImage={showBackgroundImage ? heroBackgroundUrl : undefined}
         badges={
           <>
-            <Badge section={section} size="lg">
+            <Badge section={section} size="md">
               {getSectionName(section)}
             </Badge>
-            <Badge vtClass={athlete.vtClass} size="lg">
+            <Badge vtClass={athlete.vtClass} size="md">
               {getVtClassName(athlete.vtClass)}
             </Badge>
-            <Badge outlined size="lg">{athlete.vtPoints} bodů</Badge>
+            <Badge variant="outline" size="md">{athlete.vtPoints} bodů</Badge>
           </>
         }
         metadata={[

@@ -1,10 +1,11 @@
 /**
  * Badge Component Styles - CSK RVP Design System
  *
- * Supports variants: default, primary, success, warning, error, info
- * Supports CSK sections: dv, ry, vt
- * Supports VT classes: m, a, b, c
- * Supports modifiers: outlined, pill
+ * Variants: default, primary, success, warning, error, info, level, live, outline
+ * CSK sections (prop `section`): dv, ry, vt
+ * VT classes (prop `vtClass`): m, a, b, c
+ * Sizes: md (22 px), sm (18 px)
+ * Value states (official, provisional, review, ...) belong to StatusBadge.
  */
 
 /* ==========================================================================
@@ -15,21 +16,18 @@
   /* Layout */
   display: inline-flex;
   align-items: center;
-  gap: var(--csk-space-1);
+  gap: 6px;
 
   /* Typography */
   font-family: var(--csk-font-sans);
-  font-weight: var(--csk-font-weight-medium);
+  font-weight: var(--csk-font-weight-semibold);
   line-height: 1;
   white-space: nowrap;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
 
   /* Shape */
   border-radius: var(--csk-radius-sm);
   border: 1px solid transparent;
-
-  /* Transition - enhanced for modern feel */
-  transition: var(--csk-transition-fast);
 }
 
 /* ==========================================================================
@@ -37,223 +35,123 @@
    ========================================================================== */
 
 .csk-badge--sm {
-  font-size: var(--csk-text-sm);
-  padding: calc(var(--csk-space-1) / 2) calc(var(--csk-space-1) * 1.5);
-  min-height: 20px;
+  font-size: var(--csk-text-xs);
+  padding: 0 6px;
+  height: 18px;
 }
 
 .csk-badge--md {
-  font-size: var(--csk-text-md);
-  padding: var(--csk-space-1) var(--csk-space-2);
-  min-height: 24px;
-}
-
-.csk-badge--lg {
-  font-size: var(--csk-text-base);
-  padding: calc(var(--csk-space-1) * 1.5) var(--csk-space-3);
-  min-height: 32px;
-  font-family: var(--csk-font-display);
-  font-weight: var(--csk-font-weight-semibold);
-  letter-spacing: var(--csk-letter-spacing-tight);
+  font-size: 12px;
+  padding: 0 var(--csk-space-2);
+  height: 22px;
 }
 
 /* ==========================================================================
-   VARIANTS - FILLED (default)
+   VARIANTS
    ========================================================================== */
 
-/* Default - neutral gray */
+/* Default - neutral */
 .csk-badge--default {
   background-color: var(--csk-color-surface-3);
   color: var(--csk-color-text-2);
-  border-color: var(--csk-color-border-2);
 }
 
-/* Primary - brand blue */
+/* Primary - action blue */
 .csk-badge--primary {
   background-color: var(--csk-color-action);
-  color: var(--csk-color-surface);
-  border-color: var(--csk-color-action);
+  color: var(--csk-color-text-on-fill);
 }
 
-/* Success - green */
+/* Semantic tints (checks, notes) */
 .csk-badge--success {
-  background-color: var(--csk-color-success);
-  color: var(--csk-color-surface);
-  border-color: var(--csk-color-success);
+  background-color: var(--csk-color-success-bg);
+  color: var(--csk-color-success-text);
 }
 
-/* Warning - amber */
 .csk-badge--warning {
-  background-color: var(--csk-color-warning);
-  color: var(--csk-color-text);
-  border-color: var(--csk-color-warning);
+  background-color: var(--csk-color-warning-bg);
+  color: var(--csk-color-warning-text);
 }
 
-/* Error - red */
 .csk-badge--error {
-  background-color: var(--csk-color-error);
-  color: var(--csk-color-surface);
-  border-color: var(--csk-color-error);
+  background-color: var(--csk-color-error-bg);
+  color: var(--csk-color-error-text);
 }
 
-/* Info - blue */
 .csk-badge--info {
-  background-color: var(--csk-color-info);
-  color: var(--csk-color-surface);
-  border-color: var(--csk-color-info);
+  background-color: var(--csk-color-info-bg);
+  color: var(--csk-color-info-text);
 }
 
-/* Energy - coral-orange for live/urgent indicators */
-.csk-badge--energy {
-  background: var(--csk-color-action);
-  color: var(--csk-color-surface);
-  border-color: transparent;
-  box-shadow: none;
+/* Level - race level (ČP, MČR, NKZ ...) */
+.csk-badge--level {
+  background-color: var(--csk-color-highlight-bg);
+  color: var(--csk-color-highlight-text);
 }
 
-/* ==========================================================================
-   CSK SECTIONS - FILLED
-   ========================================================================== */
-
-/* DV - Divoká voda (Whitewater) - blue with gradient */
-.csk-badge--section-dv {
-  background: var(--csk-color-section-dv);
-  color: var(--csk-color-surface);
-  border-color: transparent;
-  box-shadow: none;
-}
-
-/* RY - Rychlostní (Sprint) - green with gradient */
-.csk-badge--section-ry {
-  background: var(--csk-color-section-ry);
-  color: var(--csk-color-surface);
-  border-color: transparent;
-  box-shadow: none;
-}
-
-/* VT - Vodní turistika (Touring) - red with gradient */
-.csk-badge--section-vt {
-  background: var(--csk-color-section-vt);
-  color: var(--csk-color-surface);
-  border-color: transparent;
-  box-shadow: none;
-}
-
-/* ==========================================================================
-   VT CLASSES - FILLED WITH SUBTLE GRADIENT
-   ========================================================================== */
-
-/* M - Mistr (Master) - purple with gradient */
-.csk-badge--vt-m {
-  background: var(--csk-violet);
-  color: var(--csk-color-surface);
-  border-color: transparent;
-  box-shadow: none;
-  font-weight: var(--csk-font-weight-semibold);
-}
-
-/* A - Class A - red with gradient */
-.csk-badge--vt-a {
-  background: var(--csk-red);
-  color: var(--csk-color-surface);
-  border-color: transparent;
-  box-shadow: none;
-}
-
-/* B - Class B - amber with gradient */
-.csk-badge--vt-b {
-  background: var(--csk-amber);
-  color: var(--csk-color-text);
-  border-color: transparent;
-  box-shadow: none;
-}
-
-/* C - Class C - green with gradient */
-.csk-badge--vt-c {
-  background: var(--csk-green);
-  color: var(--csk-color-surface);
-  border-color: transparent;
-  box-shadow: none;
-}
-
-/* ==========================================================================
-   OUTLINED VARIANTS
-   ========================================================================== */
-
-.csk-badge--outlined {
+/* Outline - neutral, border only */
+.csk-badge--outline {
   background-color: transparent;
-}
-
-.csk-badge--outlined.csk-badge--default {
-  color: var(--csk-color-text-2);
   border-color: var(--csk-color-border);
+  color: var(--csk-color-text-2);
 }
 
-.csk-badge--outlined.csk-badge--primary {
-  color: var(--csk-color-action);
-  border-color: var(--csk-color-action);
+/* Live - red, upper case, with a dot */
+.csk-badge--live {
+  background-color: var(--csk-color-live);
+  color: var(--csk-color-text-on-fill);
+  text-transform: uppercase;
 }
 
-.csk-badge--outlined.csk-badge--success {
-  color: var(--csk-color-success);
-  border-color: var(--csk-color-success);
+.csk-badge__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: currentColor;
+  flex-shrink: 0;
 }
 
-.csk-badge--outlined.csk-badge--warning {
-  color: var(--csk-color-warning);
-  border-color: var(--csk-color-warning);
+/* ==========================================================================
+   CSK SECTIONS
+   ========================================================================== */
+
+.csk-badge--section-dv {
+  background-color: var(--csk-color-section-dv);
+  color: var(--csk-color-text-on-fill);
 }
 
-.csk-badge--outlined.csk-badge--error {
-  color: var(--csk-color-error);
-  border-color: var(--csk-color-error);
+.csk-badge--section-ry {
+  background-color: var(--csk-color-section-ry);
+  color: var(--csk-color-text-on-fill);
 }
 
-.csk-badge--outlined.csk-badge--info {
-  color: var(--csk-color-info);
-  border-color: var(--csk-color-info);
+.csk-badge--section-vt {
+  background-color: var(--csk-color-section-vt);
+  color: var(--csk-color-text-on-fill);
 }
 
-.csk-badge--outlined.csk-badge--energy {
-  color: var(--csk-color-action);
-  border-color: var(--csk-color-action);
+/* ==========================================================================
+   VT CLASSES
+   ========================================================================== */
+
+.csk-badge--vt-m {
+  background-color: var(--csk-violet);
+  color: var(--csk-color-text-on-fill);
 }
 
-/* CSK Sections - Outlined */
-.csk-badge--outlined.csk-badge--section-dv {
-  color: var(--csk-color-section-dv);
-  border-color: var(--csk-color-section-dv);
+.csk-badge--vt-a {
+  background-color: var(--csk-red);
+  color: var(--csk-color-text-on-fill);
 }
 
-.csk-badge--outlined.csk-badge--section-ry {
-  color: var(--csk-color-section-ry);
-  border-color: var(--csk-color-section-ry);
+.csk-badge--vt-b {
+  background-color: var(--csk-amber);
+  color: var(--csk-color-text-on-fill);
 }
 
-.csk-badge--outlined.csk-badge--section-vt {
-  color: var(--csk-color-section-vt);
-  border-color: var(--csk-color-section-vt);
-}
-
-/* VT Classes - Outlined */
-.csk-badge--outlined.csk-badge--vt-m {
-  color: var(--csk-violet);
-  border-color: var(--csk-violet);
-}
-
-.csk-badge--outlined.csk-badge--vt-a {
-  color: var(--csk-red);
-  border-color: var(--csk-red);
-}
-
-.csk-badge--outlined.csk-badge--vt-b {
-  color: var(--csk-color-warning);
-  border-color: var(--csk-amber);
-}
-
-.csk-badge--outlined.csk-badge--vt-c {
-  color: var(--csk-green);
-  border-color: var(--csk-green);
+.csk-badge--vt-c {
+  background-color: var(--csk-green);
+  color: var(--csk-color-text-on-fill);
 }
 
 /* ==========================================================================
@@ -262,55 +160,6 @@
 
 .csk-badge--pill {
   border-radius: var(--csk-radius-pill);
-}
-
-/* ==========================================================================
-   GLOW EFFECT
-   Pulsing glow for live/urgent indicators
-   ========================================================================== */
-
-@keyframes csk-badge-glow-pulse {
-  0%, 100% {
-    box-shadow: none;
-  }
-  50% {
-    box-shadow: none;
-  }
-}
-
-.csk-badge--glow {
-  animation: csk-badge-glow-pulse 2s ease-in-out infinite;
-}
-
-.csk-badge--glow.csk-badge--energy {
-  box-shadow: none;
-}
-
-/* Glow for other variants - use their respective colors */
-.csk-badge--glow.csk-badge--success {
-  animation-name: csk-badge-glow-pulse-success;
-}
-
-@keyframes csk-badge-glow-pulse-success {
-  0%, 100% {
-    box-shadow: 0 0 8px color-mix(in srgb, var(--csk-color-success) 40%, transparent);
-  }
-  50% {
-    box-shadow: 0 0 24px color-mix(in srgb, var(--csk-color-success) 60%, transparent);
-  }
-}
-
-.csk-badge--glow.csk-badge--error {
-  animation-name: csk-badge-glow-pulse-error;
-}
-
-@keyframes csk-badge-glow-pulse-error {
-  0%, 100% {
-    box-shadow: 0 0 8px color-mix(in srgb, var(--csk-color-error) 40%, transparent);
-  }
-  50% {
-    box-shadow: 0 0 24px color-mix(in srgb, var(--csk-color-error) 60%, transparent);
-  }
 }
 
 /* ==========================================================================
@@ -324,34 +173,16 @@
   flex-shrink: 0;
 }
 
-.csk-badge--sm .csk-badge__icon {
-  width: 12px;
-  height: 12px;
-}
-
+.csk-badge--sm .csk-badge__icon,
 .csk-badge--sm .csk-badge__icon svg {
   width: 12px;
   height: 12px;
 }
 
-.csk-badge--md .csk-badge__icon {
-  width: 14px;
-  height: 14px;
-}
-
+.csk-badge--md .csk-badge__icon,
 .csk-badge--md .csk-badge__icon svg {
   width: 14px;
   height: 14px;
-}
-
-.csk-badge--lg .csk-badge__icon {
-  width: 16px;
-  height: 16px;
-}
-
-.csk-badge--lg .csk-badge__icon svg {
-  width: 16px;
-  height: 16px;
 }
 
 /* ==========================================================================
@@ -360,18 +191,4 @@
 
 .csk-badge__content {
   display: inline-block;
-}
-
-/* ==========================================================================
-   REDUCED MOTION
-   ========================================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  .csk-badge {
-    transition: none;
-  }
-
-  .csk-badge--glow {
-    animation: none;
-  }
 }

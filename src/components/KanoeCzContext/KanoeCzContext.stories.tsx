@@ -309,7 +309,6 @@ export const ButtonsInContext: Story = {
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
           <Button variant="primary" size="sm">Malé</Button>
           <Button variant="primary" size="md">Střední</Button>
-          <Button variant="primary" size="lg">Velké</Button>
         </div>
       </div>
     ),
@@ -382,7 +381,7 @@ export const CardsInContext: Story = {
             </p>
             <Button variant="secondary" size="sm" fullWidth disabled>Uzavřeno</Button>
           </Card>
-          <Card variant="elevated">
+          <Card variant="surface">
             <Badge variant="warning" size="sm">Brzy</Badge>
             <h3 style={{ margin: '8px 0', fontSize: '16px' }}>SP Praha 2024</h3>
             <p style={{ margin: '0 0 12px', fontSize: '14px', color: '#6c757d' }}>

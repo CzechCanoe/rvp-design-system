@@ -73,6 +73,15 @@
   border-radius: var(--csk-radius-sm);
 }
 
+/* Square: event and club logos, shown whole on a plain background */
+.csk-avatar--square {
+  background-color: var(--csk-color-surface);
+}
+
+.csk-avatar--square .csk-avatar__image {
+  object-fit: contain;
+}
+
 /* ==========================================================================
    Color Variants (for initials/fallback)
    ========================================================================== */

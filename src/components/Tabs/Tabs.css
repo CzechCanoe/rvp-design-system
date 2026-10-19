@@ -2,11 +2,12 @@
  * Tabs Component Styles
  *
  * Variants:
- * - line: Underlined tabs with animated indicator
- * - pills: Filled pill-shaped tabs
- * - aesthetic: Gradient underline for expressive styling
+ * - line: underlined tabs with panels (navy underline, as in the reference)
+ * - pills: segmented tabs with panels
+ * - nav: navigation chips without panels (class tabs, day tabs)
  *
- * Sizes: sm, md, lg
+ * Sizes: sm, md
+ * Overflow: wrap (default), scroll, carousel (edge mask + arrows)
  */
 
 /* =============================================================================
@@ -17,6 +18,11 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.csk-tabs__viewport {
+  position: relative;
+  min-width: 0;
 }
 
 /* Tab List */
@@ -44,22 +50,21 @@
   transition:
     color var(--csk-transition-fast),
     background-color var(--csk-transition-fast),
-    border-color var(--csk-transition-fast),
-    box-shadow var(--csk-transition-fast),
-    transform var(--csk-transition-fast);
+    border-color var(--csk-transition-fast);
 }
 
 .csk-tabs__tab:hover:not(:disabled) {
-  color: var(--csk-color-text);
+  color: var(--csk-color-brand);
 }
 
 .csk-tabs__tab:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--csk-color-surface), 0 0 0 4px var(--csk-color-focus);
+  outline: 2px solid var(--csk-color-focus);
+  outline-offset: -2px;
 }
 
 .csk-tabs__tab--active {
-  color: var(--csk-color-action);
+  color: var(--csk-color-brand);
+  font-weight: var(--csk-font-weight-semibold);
 }
 
 .csk-tabs__tab--disabled {
@@ -73,12 +78,6 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: transform var(--csk-transition-fast);
-}
-
-/* Icon hover animation */
-.csk-tabs__tab:hover:not(:disabled) .csk-tabs__icon {
-  transform: scale(1.1);
 }
 
 /* Label */
@@ -89,18 +88,6 @@
 /* Panel */
 .csk-tabs__panel {
   padding-top: var(--csk-space-4);
-  animation: csk-tabs-panel-fade-in 0.2s ease-out;
-}
-
-@keyframes csk-tabs-panel-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .csk-tabs__panel:focus {
@@ -121,12 +108,10 @@
 }
 
 .csk-tabs--line .csk-tabs__tab {
-  position: relative;
   margin-bottom: -1px;
   border-radius: 0;
 }
 
-/* Animated underline using ::after pseudo-element */
 .csk-tabs--line .csk-tabs__tab::after {
   content: '';
   position: absolute;
@@ -134,10 +119,10 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background: var(--csk-color-action);
+  background: var(--csk-color-brand);
   transition:
-    width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-    left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    width var(--csk-transition-fast),
+    left var(--csk-transition-fast);
 }
 
 .csk-tabs--line .csk-tabs__tab--active::after {
@@ -145,100 +130,69 @@
   left: 0;
 }
 
-/* Hover preview - subtle underline hint */
 .csk-tabs--line .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active)::after {
   width: 50%;
   left: 25%;
   background: var(--csk-color-border);
 }
 
-/* Hover translateY effect */
-.csk-tabs--line .csk-tabs__tab:hover:not(:disabled) {
-  transform: translateY(-1px);
-}
-
 /* =============================================================================
-   VARIANT: PILLS
+   VARIANT: PILLS (segmented)
    ============================================================================= */
 
 .csk-tabs--pills .csk-tabs__list {
-  background-color: var(--csk-color-surface-2);
+  background-color: var(--csk-color-surface-3);
   border-radius: var(--csk-radius-lg);
-  padding: var(--csk-space-1);
-  gap: var(--csk-space-1);
+  padding: 2px;
+  gap: 2px;
 }
 
 .csk-tabs--pills .csk-tabs__tab {
   border-radius: var(--csk-radius-md);
-  transition:
-    color var(--csk-transition-fast),
-    background-color var(--csk-transition-fast),
-    box-shadow var(--csk-transition-fast),
-    transform var(--csk-transition-fast);
 }
 
 .csk-tabs--pills .csk-tabs__tab--active {
   background-color: var(--csk-color-surface);
-  color: var(--csk-color-text);
-  box-shadow: none;
+  color: var(--csk-color-brand);
 }
 
 .csk-tabs--pills .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active) {
-  background-color: var(--csk-color-surface-3);
-  transform: translateY(-1px);
+  background-color: var(--csk-color-surface-2);
 }
 
 /* =============================================================================
-   VARIANT: AESTHETIC (Gradient underline for expressive styling)
+   VARIANT: NAV (chips, no panels)
    ============================================================================= */
 
-.csk-tabs--aesthetic .csk-tabs__list {
-  border-bottom: 1px solid var(--csk-color-border);
-  gap: 0;
+.csk-tabs--nav .csk-tabs__list {
+  gap: var(--csk-space-2);
 }
 
-.csk-tabs--aesthetic .csk-tabs__tab {
-  position: relative;
-  margin-bottom: -1px;
-  border-radius: 0;
+.csk-tabs--nav .csk-tabs__tab {
+  flex: none;
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-pill);
+  background-color: var(--csk-color-surface);
+  font-size: var(--csk-text-sm);
 }
 
-/* Gradient animated underline */
-.csk-tabs--aesthetic .csk-tabs__tab::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 3px;
-  background: var(--csk-color-brand);
-  border-radius: var(--csk-radius-sm) var(--csk-radius-sm) 0 0;
-  transition:
-    width var(--csk-transition-slow),
-    left var(--csk-transition-slow);
+.csk-tabs--nav .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active) {
+  background-color: var(--csk-color-surface-2);
 }
 
-.csk-tabs--aesthetic .csk-tabs__tab--active {
-  color: var(--csk-color-action);
-  font-weight: var(--csk-font-weight-semibold);
+.csk-tabs--nav .csk-tabs__tab--active,
+.csk-tabs--nav .csk-tabs__tab--active:hover:not(:disabled) {
+  background-color: var(--csk-color-brand);
+  border-color: var(--csk-color-brand);
+  color: var(--csk-color-text-on-fill);
 }
 
-.csk-tabs--aesthetic .csk-tabs__tab--active::after {
-  width: 100%;
-  left: 0;
+.csk-tabs--nav .csk-tabs__tab:focus-visible {
+  outline-offset: 2px;
 }
 
-/* Hover preview with gradient hint */
-.csk-tabs--aesthetic .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active)::after {
-  width: 60%;
-  left: 20%;
-  background: var(--csk-color-highlight-bg);
-  opacity: 0.6;
-}
-
-/* Hover translateY effect */
-.csk-tabs--aesthetic .csk-tabs__tab:hover:not(:disabled) {
-  transform: translateY(-1px);
+.csk-tabs--nav .csk-tabs__tab--disabled {
+  background-color: var(--csk-color-surface-2);
 }
 
 /* =============================================================================
@@ -247,16 +201,12 @@
 
 /* Small */
 .csk-tabs--sm .csk-tabs__tab {
-  padding: calc(var(--csk-space-1) * 1.5) var(--csk-space-3);
+  padding: 0 var(--csk-space-3);
   font-size: var(--csk-text-md);
   min-height: 32px;
 }
 
-.csk-tabs--sm .csk-tabs__icon {
-  width: 14px;
-  height: 14px;
-}
-
+.csk-tabs--sm .csk-tabs__icon,
 .csk-tabs--sm .csk-tabs__icon svg {
   width: 14px;
   height: 14px;
@@ -266,48 +216,29 @@
   padding-top: var(--csk-space-3);
 }
 
+.csk-tabs--sm.csk-tabs--nav .csk-tabs__tab {
+  min-height: 30px;
+  padding: 0 11px;
+  font-size: var(--csk-text-sm);
+}
+
 /* Medium (default) */
 .csk-tabs--md .csk-tabs__tab {
   padding: var(--csk-space-2) var(--csk-space-4);
   font-size: var(--csk-text-base);
-  min-height: 44px;
+  min-height: var(--csk-tap);
 }
 
-.csk-tabs--md .csk-tabs__icon {
-  width: 18px;
-  height: 18px;
-}
-
+.csk-tabs--md .csk-tabs__icon,
 .csk-tabs--md .csk-tabs__icon svg {
   width: 18px;
   height: 18px;
 }
 
-.csk-tabs--md .csk-tabs__panel {
-  padding-top: var(--csk-space-4);
-}
-
-/* Large - uses display font for aesthetic emphasis */
-.csk-tabs--lg .csk-tabs__tab {
-  padding: var(--csk-space-3) var(--csk-space-6);
-  font-size: var(--csk-text-lg);
-  font-family: var(--csk-font-display);
-  letter-spacing: var(--csk-letter-spacing-tight);
-  min-height: 52px;
-}
-
-.csk-tabs--lg .csk-tabs__icon {
-  width: 20px;
-  height: 20px;
-}
-
-.csk-tabs--lg .csk-tabs__icon svg {
-  width: 20px;
-  height: 20px;
-}
-
-.csk-tabs--lg .csk-tabs__panel {
-  padding-top: var(--csk-space-6);
+.csk-tabs--md.csk-tabs--nav .csk-tabs__tab {
+  min-height: 34px;
+  padding: 0 var(--csk-space-3);
+  font-size: var(--csk-text-sm);
 }
 
 /* =============================================================================
@@ -323,68 +254,98 @@
 }
 
 /* =============================================================================
-   ENERGY ACCENT
-   Coral-orange energy colors for active tab indicator
+   OVERFLOW: SCROLL + CAROUSEL
    ============================================================================= */
 
-/* Energy accent for line variant */
-.csk-tabs--line.csk-tabs--energy-accent .csk-tabs__tab--active::after {
-  background: var(--csk-color-action);
+.csk-tabs--overflow-scroll .csk-tabs__list,
+.csk-tabs--overflow-carousel .csk-tabs__list {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
 }
 
-.csk-tabs--line.csk-tabs--energy-accent .csk-tabs__tab--active {
-  color: var(--csk-color-action);
+.csk-tabs--overflow-scroll .csk-tabs__list::-webkit-scrollbar,
+.csk-tabs--overflow-carousel .csk-tabs__list::-webkit-scrollbar {
+  display: none;
 }
 
-.csk-tabs--line.csk-tabs--energy-accent .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active)::after {
-  background: var(--csk-color-action);
+.csk-tabs--overflow-scroll .csk-tabs__tab,
+.csk-tabs--overflow-carousel .csk-tabs__tab {
+  flex-shrink: 0;
 }
 
-/* Energy accent for aesthetic variant */
-.csk-tabs--aesthetic.csk-tabs--energy-accent .csk-tabs__tab--active::after {
-  background: var(--csk-color-action);
+/* Room for the focus ring of chips, which a scroll container would clip */
+.csk-tabs--overflow-carousel.csk-tabs--nav .csk-tabs__list,
+.csk-tabs--overflow-scroll.csk-tabs--nav .csk-tabs__list {
+  padding: 3px;
+  margin: -3px;
 }
 
-.csk-tabs--aesthetic.csk-tabs--energy-accent .csk-tabs__tab--active {
-  color: var(--csk-color-action);
+/* Edge mask: fade the side(s) that have more content */
+.csk-tabs--overflow-carousel.csk-tabs--can-scroll-end .csk-tabs__list {
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 48px), transparent);
+  mask-image: linear-gradient(to right, black calc(100% - 48px), transparent);
 }
 
-.csk-tabs--aesthetic.csk-tabs--energy-accent .csk-tabs__tab:hover:not(:disabled):not(.csk-tabs__tab--active)::after {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--csk-color-action) 50%, transparent) 0%, color-mix(in srgb, var(--csk-color-action) 40%, transparent) 100%);
+.csk-tabs--overflow-carousel.csk-tabs--can-scroll-start .csk-tabs__list {
+  -webkit-mask-image: linear-gradient(to left, black calc(100% - 48px), transparent);
+  mask-image: linear-gradient(to left, black calc(100% - 48px), transparent);
 }
 
-/* Energy accent for pills variant */
-.csk-tabs--pills.csk-tabs--energy-accent .csk-tabs__tab--active {
-  background: var(--csk-color-action);
-  color: var(--csk-color-text-on-fill);
-  box-shadow: 0 2px 8px -2px color-mix(in srgb, var(--csk-color-action) 40%, transparent);
+.csk-tabs--overflow-carousel.csk-tabs--can-scroll-start.csk-tabs--can-scroll-end .csk-tabs__list {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 48px,
+    black calc(100% - 48px),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 48px,
+    black calc(100% - 48px),
+    transparent
+  );
 }
 
-.csk-tabs--pills.csk-tabs--energy-accent .csk-tabs__tab--active:hover {
-  box-shadow: 0 4px 12px -2px color-mix(in srgb, var(--csk-color-action) 50%, transparent);
+/* Arrows */
+.csk-tabs__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-pill);
+  background-color: var(--csk-color-surface);
+  color: var(--csk-color-brand);
+  font-size: var(--csk-text-xl);
+  line-height: 1;
+  cursor: pointer;
 }
 
-/* =============================================================================
-   DARK MODE
-   ============================================================================= */
-
-[data-theme="dark"] .csk-tabs--pills .csk-tabs__list {
-  background-color: var(--csk-color-surface-2);
+.csk-tabs__arrow:hover {
+  background-color: var(--csk-color-highlight-bg);
 }
 
-[data-theme="dark"] .csk-tabs--pills .csk-tabs__tab--active {
-  background-color: var(--csk-color-surface-3);
+.csk-tabs__arrow:focus-visible {
+  outline: 2px solid var(--csk-color-focus);
+  outline-offset: 2px;
 }
 
-/* Dark mode energy accent */
-[data-theme="dark"] .csk-tabs--line.csk-tabs--energy-accent .csk-tabs__tab--active,
-[data-theme="dark"] .csk-tabs--aesthetic.csk-tabs--energy-accent .csk-tabs__tab--active {
-  color: var(--csk-color-action);
+.csk-tabs__arrow--start {
+  left: 0;
 }
 
-[data-theme="dark"] .csk-tabs--pills.csk-tabs--energy-accent .csk-tabs__tab--active {
-  background: var(--csk-color-action);
-  color: var(--csk-color-text-on-fill);
+.csk-tabs__arrow--end {
+  right: 0;
 }
 
 /* =============================================================================
@@ -393,20 +354,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .csk-tabs__tab,
-  .csk-tabs__tab::after,
-  .csk-tabs__icon {
+  .csk-tabs__tab::after {
     transition: none;
-  }
-
-  .csk-tabs__tab:hover:not(:disabled) {
-    transform: none;
-  }
-
-  .csk-tabs__tab:hover:not(:disabled) .csk-tabs__icon {
-    transform: none;
-  }
-
-  .csk-tabs__panel {
-    animation: none;
   }
 }

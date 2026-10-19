@@ -1,4 +1,4 @@
-/* FilterPills - Active filter tags with remove functionality */
+/* FilterPills - pills as in the reference (.pill): 34 / 30 px high, active = navy */
 
 .csk-filter-pills {
   display: flex;
@@ -24,28 +24,56 @@
 .csk-filter-pills__pill {
   display: inline-flex;
   align-items: center;
-  gap: var(--csk-space-2);
-  padding: var(--csk-space-1) var(--csk-space-3);
-  font-size: var(--csk-text-md);
+  gap: var(--csk-space-1);
+  height: 34px;
+  padding: 0 var(--csk-space-3);
+  font-size: var(--csk-text-sm);
   font-weight: var(--csk-font-weight-medium);
-  background: linear-gradient(
-    135deg,
-    var(--csk-color-highlight-bg),
-    var(--csk-color-highlight-bg)
-  );
-  border: 1px solid var(--csk-color-highlight-border);
+  background-color: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
   border-radius: var(--csk-radius-pill);
-  color: var(--csk-color-brand);
-  transition: all var(--csk-transition-fast);
+  color: var(--csk-color-text-2);
+  transition: var(--csk-transition-fast);
+  white-space: nowrap;
 }
 
-.csk-filter-pills__pill:hover {
-  background: linear-gradient(
-    135deg,
-    var(--csk-color-highlight-bg),
-    var(--csk-color-highlight-border)
-  );
-  border-color: var(--csk-color-highlight-border);
+.csk-filter-pills__pill--active {
+  background-color: var(--csk-color-brand);
+  border-color: var(--csk-color-brand);
+  color: var(--csk-color-text-on-fill);
+}
+
+.csk-filter-pills__pill--toggle:hover {
+  background-color: var(--csk-color-surface-2);
+}
+
+.csk-filter-pills__pill--active.csk-filter-pills__pill--toggle:hover {
+  background-color: var(--csk-color-action-hover);
+  border-color: var(--csk-color-action-hover);
+}
+
+/* Label holders (toggle button or plain content) */
+.csk-filter-pills__toggle,
+.csk-filter-pills__content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--csk-space-1);
+  height: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+}
+
+.csk-filter-pills__toggle {
+  cursor: pointer;
+}
+
+.csk-filter-pills__toggle:focus-visible {
+  outline: 2px solid var(--csk-color-focus);
+  outline-offset: 4px;
+  border-radius: var(--csk-radius-pill);
 }
 
 /* Pill label */
@@ -65,18 +93,17 @@
   height: 18px;
   padding: 0;
   margin-left: var(--csk-space-1);
-  background: var(--csk-color-highlight-border);
+  background: transparent;
   border: none;
   border-radius: var(--csk-radius-pill);
-  color: var(--csk-color-brand);
+  color: inherit;
   cursor: pointer;
-  transition: all var(--csk-transition-fast);
+  transition: var(--csk-transition-fast);
 }
 
 .csk-filter-pills__remove:hover {
-  background: var(--csk-color-error);
-  color: var(--csk-color-text-on-fill);
-  transform: scale(1.1);
+  background: var(--csk-color-error-bg);
+  color: var(--csk-color-error-text);
 }
 
 .csk-filter-pills__remove:focus-visible {
@@ -86,18 +113,17 @@
 
 /* Clear all button */
 .csk-filter-pills__clear-all {
-  font-size: var(--csk-text-md);
+  font-size: var(--csk-text-sm);
   font-weight: var(--csk-font-weight-medium);
-  color: var(--csk-color-action-hover);
+  color: var(--csk-color-action);
   background: none;
   border: none;
   cursor: pointer;
   padding: var(--csk-space-1) var(--csk-space-3);
-  transition: all var(--csk-transition-fast);
 }
 
 .csk-filter-pills__clear-all:hover {
-  color: var(--csk-color-brand);
+  color: var(--csk-color-action-hover);
   text-decoration: underline;
 }
 
@@ -111,11 +137,9 @@
    Size Variants
    ========================================================================== */
 
-/* Small */
 .csk-filter-pills--sm .csk-filter-pills__pill {
-  padding: 2px var(--csk-space-2);
-  font-size: var(--csk-text-sm);
-  gap: var(--csk-space-1);
+  height: 30px;
+  padding: 0 11px;
 }
 
 .csk-filter-pills--sm .csk-filter-pills__remove {
@@ -123,97 +147,6 @@
   height: 14px;
 }
 
-.csk-filter-pills--sm .csk-filter-pills__clear-all {
-  font-size: var(--csk-text-sm);
-}
-
 .csk-filter-pills--sm.csk-filter-pills--bordered {
   padding-top: var(--csk-space-3);
-}
-
-/* Large */
-.csk-filter-pills--lg .csk-filter-pills__pill {
-  padding: var(--csk-space-2) var(--csk-space-4);
-  font-size: var(--csk-text-base);
-}
-
-.csk-filter-pills--lg .csk-filter-pills__remove {
-  width: 22px;
-  height: 22px;
-}
-
-.csk-filter-pills--lg .csk-filter-pills__clear-all {
-  font-size: var(--csk-text-base);
-}
-
-.csk-filter-pills--lg.csk-filter-pills--bordered {
-  padding-top: var(--csk-space-5);
-}
-
-/* ==========================================================================
-   Subtle Variant
-   ========================================================================== */
-
-.csk-filter-pills--subtle .csk-filter-pills__pill {
-  background: var(--csk-color-surface-2);
-  border-color: var(--csk-color-border);
-  color: var(--csk-color-text);
-}
-
-.csk-filter-pills--subtle .csk-filter-pills__pill:hover {
-  background: var(--csk-color-surface-3);
-  border-color: var(--csk-color-border);
-}
-
-.csk-filter-pills--subtle .csk-filter-pills__remove {
-  background: var(--csk-color-surface-3);
-  color: var(--csk-color-text-3);
-}
-
-/* ==========================================================================
-   Dark Mode
-   ========================================================================== */
-
-[data-theme='dark'] .csk-filter-pills__pill {
-  background: linear-gradient(
-    135deg,
-    var(--csk-color-brand),
-    var(--csk-color-brand)
-  );
-  border-color: var(--csk-color-brand);
-  color: var(--csk-color-highlight-border);
-}
-
-[data-theme='dark'] .csk-filter-pills__pill:hover {
-  background: linear-gradient(
-    135deg,
-    var(--csk-color-brand),
-    var(--csk-color-brand)
-  );
-  border-color: var(--csk-color-action-hover);
-}
-
-[data-theme='dark'] .csk-filter-pills__remove {
-  background: var(--csk-color-brand);
-  color: var(--csk-color-highlight-border);
-}
-
-[data-theme='dark'] .csk-filter-pills__clear-all {
-  color: var(--csk-color-action);
-}
-
-[data-theme='dark'] .csk-filter-pills__clear-all:hover {
-  color: var(--csk-color-highlight-border);
-}
-
-/* Dark mode subtle variant */
-[data-theme='dark'] .csk-filter-pills--subtle .csk-filter-pills__pill {
-  background: var(--csk-color-surface-2);
-  border-color: var(--csk-color-border);
-  color: var(--csk-color-text);
-}
-
-[data-theme='dark'] .csk-filter-pills--subtle .csk-filter-pills__remove {
-  background: var(--csk-color-surface-3);
-  color: var(--csk-color-text-3);
 }

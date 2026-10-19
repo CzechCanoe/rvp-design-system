@@ -2,8 +2,7 @@ import { type HTMLAttributes } from 'react';
 import { Icon, type IconName } from '../Icon';
 import './FilterPills.css';
 
-export type FilterPillsSize = 'sm' | 'md' | 'lg';
-export type FilterPillsVariant = 'default' | 'subtle';
+export type FilterPillsSize = 'sm' | 'md';
 
 export interface FilterPill {
   /** Unique identifier for the filter */
@@ -14,6 +13,10 @@ export interface FilterPill {
   icon?: IconName;
   /** Optional value (used for callback) */
   value?: string;
+  /** Pressed (navy) state. Defaults to true: pills are active filters */
+  active?: boolean;
+  /** Shows a remove button ("U18 ✕"). Defaults to true when `onRemove` is set */
+  dismissible?: boolean;
 }
 
 export interface FilterPillsProps extends HTMLAttributes<HTMLDivElement> {
@@ -23,6 +26,8 @@ export interface FilterPillsProps extends HTMLAttributes<HTMLDivElement> {
   searchQuery?: string;
   /** Label prefix for search filter */
   searchLabel?: string;
+  /** Callback when a pill is toggled; renders the label as a toggle button (`aria-pressed`) */
+  onFilterToggle?: (key: string) => void;
   /** Callback when a filter is removed */
   onRemove?: (key: string) => void;
   /** Callback when search is cleared */
@@ -31,10 +36,8 @@ export interface FilterPillsProps extends HTMLAttributes<HTMLDivElement> {
   onClearAll?: () => void;
   /** Label for clear all button */
   clearAllLabel?: string;
-  /** Size variant */
+  /** Size: md = 34 px, sm = 30 px high */
   size?: FilterPillsSize;
-  /** Visual variant */
-  variant?: FilterPillsVariant;
   /** Show separator line at top */
   bordered?: boolean;
   /** Hide if no filters are active */
@@ -44,9 +47,9 @@ export interface FilterPillsProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * FilterPills component for displaying active filters with remove functionality.
  *
- * Used in list pages (Athletes, Clubs, Calendar, Rankings) to show and manage
- * active filters. Each pill can be individually removed, and a "clear all" option
- * resets all filters at once.
+ * Pills match the reference `.pill` (34 / 30 px high, active = navy). A pill is a
+ * toggle (`onFilterToggle`, `aria-pressed`), can be dismissible ("U18 ✕") and a "clear all"
+ * option resets all filters at once.
  *
  * @example
  * ```tsx
@@ -66,13 +69,13 @@ export function FilterPills({
   filters,
   searchQuery,
   searchLabel = 'Hledání',
+  onFilterToggle,
   onRemove,
   onClearSearch,
   onClearAll,
   clearAllLabel = 'Zrušit vše',
   size = 'md',
-  variant = 'default',
-  bordered = true,
+  bordered = false,
   hideWhenEmpty = true,
   className,
   ...props
@@ -87,7 +90,6 @@ export function FilterPills({
   const classes = [
     'csk-filter-pills',
     `csk-filter-pills--${size}`,
-    `csk-filter-pills--${variant}`,
     bordered && 'csk-filter-pills--bordered',
     className,
   ]
@@ -100,7 +102,7 @@ export function FilterPills({
         {/* Search query pill */}
         {searchQuery && (
           <span className="csk-filter-pills__pill">
-            <Icon name="search" size={size === 'sm' ? 12 : size === 'lg' ? 16 : 14} />
+            <Icon name="search" size={size === 'sm' ? 12 : 14} />
             <span className="csk-filter-pills__label">
               {searchLabel}: "{searchQuery}"
             </span>
@@ -111,31 +113,58 @@ export function FilterPills({
                 onClick={onClearSearch}
                 aria-label={`Zrušit hledání "${searchQuery}"`}
               >
-                <Icon name="x" size={size === 'sm' ? 10 : size === 'lg' ? 14 : 12} />
+                <Icon name="x" size={size === 'sm' ? 10 : 12} />
               </button>
             )}
           </span>
         )}
 
         {/* Filter pills */}
-        {filters.map((filter) => (
-          <span key={filter.key} className="csk-filter-pills__pill">
-            {filter.icon && (
-              <Icon name={filter.icon} size={size === 'sm' ? 12 : size === 'lg' ? 16 : 14} />
-            )}
-            <span className="csk-filter-pills__label">{filter.label}</span>
-            {onRemove && (
-              <button
-                type="button"
-                className="csk-filter-pills__remove"
-                onClick={() => onRemove(filter.key)}
-                aria-label={`Zrušit filtr ${filter.label}`}
-              >
-                <Icon name="x" size={size === 'sm' ? 10 : size === 'lg' ? 14 : 12} />
-              </button>
-            )}
-          </span>
-        ))}
+        {filters.map((filter) => {
+          const active = filter.active ?? true;
+          const dismissible = filter.dismissible ?? Boolean(onRemove);
+          const pillClasses = [
+            'csk-filter-pills__pill',
+            active && 'csk-filter-pills__pill--active',
+            onFilterToggle && 'csk-filter-pills__pill--toggle',
+          ]
+            .filter(Boolean)
+            .join(' ');
+          const content = (
+            <>
+              {filter.icon && (
+                <Icon name={filter.icon} size={size === 'sm' ? 12 : 14} />
+              )}
+              <span className="csk-filter-pills__label">{filter.label}</span>
+            </>
+          );
+          return (
+            <span key={filter.key} className={pillClasses}>
+              {onFilterToggle ? (
+                <button
+                  type="button"
+                  className="csk-filter-pills__toggle"
+                  aria-pressed={active}
+                  onClick={() => onFilterToggle(filter.key)}
+                >
+                  {content}
+                </button>
+              ) : (
+                <span className="csk-filter-pills__content">{content}</span>
+              )}
+              {dismissible && onRemove && (
+                <button
+                  type="button"
+                  className="csk-filter-pills__remove"
+                  onClick={() => onRemove(filter.key)}
+                  aria-label={`Zrušit filtr ${filter.label}`}
+                >
+                  <Icon name="x" size={size === 'sm' ? 10 : 12} />
+                </button>
+              )}
+            </span>
+          );
+        })}
 
         {/* Clear all button */}
         {hasFilters && onClearAll && (
