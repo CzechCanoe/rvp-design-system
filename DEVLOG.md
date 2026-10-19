@@ -6969,3 +6969,15 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 
 ### T8 závěr (2026-10-19)
 - Merge `origin/main` (T4, T5, T7); stories používají reálné Tabs nav/carousel, Badge, Button, StatusBadge, SegmentedControl, DataAge.
+
+---
+
+## 2026-10-19 - CI: update-snapshots pokrývá všechny non-prototype specs
+
+### Dokončeno
+- [x] `test:update:all` (chromium, `--grep-invert @prototype`) nahrazuje `test:update:components` + `test:update:other`; workflow = jeden Playwright run + guard na JSON report
+- [x] `ci.yml`: job `report-status` zapíše výsledek dispatchnutého CI jako commit status na HEAD (PR ho zobrazí)
+
+### Problémy a řešení
+1. **Problém:** po bot commitu PR nemá checks (`pull_request` run `action_required`)
+   **Řešení:** příčina = actor github-actions[bot] + approval policy `first_time_contributors`; bez admin změny nastavení nelze schválit. Dispatchnutý run teď posílá commit status.
