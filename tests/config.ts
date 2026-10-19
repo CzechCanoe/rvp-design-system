@@ -26,6 +26,7 @@ export const coreComponents: ComponentConfig[] = [
   { name: 'Input', storyId: 'components-input--default', tier: 'core' },
   { name: 'Input-States', storyId: 'components-input--states', tier: 'core' },
   { name: 'Select', storyId: 'components-select--default', tier: 'core' },
+  { name: 'Select-Warning', storyId: 'components-select--warning', tier: 'core' },
   { name: 'Checkbox', storyId: 'components-checkbox--default', tier: 'core' },
   { name: 'Radio', storyId: 'components-radio--default', tier: 'core' },
   { name: 'Switch', storyId: 'components-switch--default', tier: 'core' },
@@ -89,6 +90,10 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'TimeValue-Formats', storyId: 'components-timevalue--formats', tier: 'specific' },
   { name: 'RunningTime-States', storyId: 'components-runningtime--states', tier: 'specific' },
   { name: 'DataAge-Overview', storyId: 'components-dataage--overview', tier: 'specific' },
+  // T13: DeadlineBadge has no time-dependent state (the application passes the text), so the stories are deterministic.
+  { name: 'DeadlineBadge-AllKinds', storyId: 'components-deadlinebadge--all-kinds', tier: 'specific' },
+  { name: 'WeekendCalendar', storyId: 'components-weekendcalendar--default', tier: 'specific', cssFeatures: ['grid', 'container-queries'] },
+  { name: 'WeekendCalendar-InNarrowContainer', storyId: 'components-weekendcalendar--in-narrow-container', tier: 'specific', cssFeatures: ['container-queries'] },
 ];
 
 /** All components for visual regression testing */
@@ -157,6 +162,9 @@ export const viewportStories: Array<{ name: string; storyId: string }> = [
   { name: 'ProposalList', storyId: 'components-proposallist--default' },
   { name: 'ProposalList-Single', storyId: 'components-proposallist--single-proposal' },
   { name: 'SummaryCard', storyId: 'components-summarycard--default' },
+  // v2 T13: WeekendCalendar (dates column / band by container query)
+  { name: 'WeekendCalendar-Default', storyId: 'components-weekendcalendar--default' },
+  { name: 'WeekendCalendar-CurrentWeekend', storyId: 'components-weekendcalendar--current-weekend' },
 ];
 
 /**
@@ -173,6 +181,8 @@ export const pageStories: Array<{ name: string; storyId: string }> = [
   { name: 'Live-Program', storyId: 'live--program' },
   // v2 T14: club entry (reference Prihlaska.html); functional checks in tests/entry.spec.ts
   { name: 'Entry-ClubEntry', storyId: 'entry--club-entry' },
+  // v2 T13: Calendar page (reference Kalendar). Same spec/tolerance; the file is live-pages.spec.ts.
+  { name: 'Calendar-Season', storyId: 'calendar--season' },
 ];
 
 export const pageStoryMaxDiffPixels = 80;

@@ -1,11 +1,11 @@
-import { forwardRef, useId, type HTMLAttributes, type ReactNode } from "react";
-import { Badge, type BadgeVariant } from "../Badge";
-import { Button } from "../Button";
-import { Select, type SelectOption } from "../Select";
-import "./EntryTable.css";
+import { forwardRef, useId, type HTMLAttributes, type ReactNode } from 'react';
+import { Badge, type BadgeVariant } from '../Badge';
+import { Button } from '../Button';
+import { Select, type SelectOption } from '../Select';
+import './EntryTable.css';
 
 /** Result of one check of a member (registration, fees, medical ...). Text is always shown, colour is only a hint. */
-export type EntryCheckTone = "ok" | "warn" | "error" | "neutral";
+export type EntryCheckTone = 'ok' | 'warn' | 'error' | 'neutral';
 
 export interface EntryCheck {
   /** Short text, e.g. `platná`, `propadla 3. 4.` */
@@ -68,32 +68,29 @@ export interface EntryTableLabels {
   empty: ReactNode;
 }
 
-const names = (b: EntryBoat) => b.members.map((m) => m.name).join(", ");
+const names = (b: EntryBoat) => b.members.map((m) => m.name).join(', ');
 
 export const ENTRY_TABLE_LABELS: EntryTableLabels = {
-  athlete: "Závodník",
-  crew: "Posádka",
-  year: "Roč.",
-  category: "Věková kat.",
-  rankingClass: "VT",
-  fee: "Startovné",
-  actions: "Akce",
-  removeAthlete: "odebrat",
-  removeBoat: "odebrat loď",
-  replaceMember: "vyměnit člena",
+  athlete: 'Závodník',
+  crew: 'Posádka',
+  year: 'Roč.',
+  category: 'Věková kat.',
+  rankingClass: 'VT',
+  fee: 'Startovné',
+  actions: 'Akce',
+  removeAthlete: 'odebrat',
+  removeBoat: 'odebrat loď',
+  replaceMember: 'vyměnit člena',
   categoryOf: (b) => `Věková kategorie: ${names(b)}`,
   removeAthleteOf: (b) => `Odebrat závodníka: ${names(b)}`,
   removeBoatOf: (b) => `Odebrat loď: ${names(b)}`,
   replaceMemberOf: (b) => `Vyměnit člena lodi: ${names(b)}`,
-  warnPrefix: "Upozornění: ",
-  errorPrefix: "Chyba: ",
-  empty: "Zatím žádná přihlášená loď",
+  warnPrefix: 'Upozornění: ',
+  errorPrefix: 'Chyba: ',
+  empty: 'Zatím žádná přihlášená loď',
 };
 
-export interface EntryTableProps extends Omit<
-  HTMLAttributes<HTMLDivElement>,
-  "children"
-> {
+export interface EntryTableProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** Accessible name of the table (e.g. the class: `K1 muži`). */
   caption: string;
   boats: EntryBoat[];
@@ -109,10 +106,10 @@ export interface EntryTableProps extends Omit<
 }
 
 const TONE_VARIANT: Record<EntryCheckTone, BadgeVariant> = {
-  ok: "success",
-  warn: "warning",
-  error: "error",
-  neutral: "default",
+  ok: 'success',
+  warn: 'warning',
+  error: 'error',
+  neutral: 'default',
 };
 
 /**
@@ -142,16 +139,12 @@ export const EntryTable = forwardRef<HTMLDivElement, EntryTableProps>(
     const crew = boats.some((b) => b.members.length > 1 || b.openSeat);
 
     const prefix = (tone: EntryCheckTone) =>
-      tone === "warn"
-        ? text.warnPrefix
-        : tone === "error"
-          ? text.errorPrefix
-          : "";
+      tone === 'warn' ? text.warnPrefix : tone === 'error' ? text.errorPrefix : '';
 
     return (
       <div
         ref={ref}
-        className={["csk-entry-table", className].filter(Boolean).join(" ")}
+        className={['csk-entry-table', className].filter(Boolean).join(' ')}
         role="region"
         aria-label={caption}
         tabIndex={0}
@@ -194,42 +187,25 @@ export const EntryTable = forwardRef<HTMLDivElement, EntryTableProps>(
                     return (
                       <tr
                         key={r}
-                        className={
-                          last
-                            ? "csk-entry-table__row csk-entry-table__row--last"
-                            : "csk-entry-table__row"
-                        }
+                        className={last ? 'csk-entry-table__row csk-entry-table__row--last' : 'csk-entry-table__row'}
                       >
                         {member ? (
                           <>
-                            <th
-                              scope="row"
-                              className="csk-entry-table__cell csk-entry-table__name"
-                            >
-                              <b>{member.name}</b>{" "}
+                            <th scope="row" className="csk-entry-table__cell csk-entry-table__name">
+                              <b>{member.name}</b>{' '}
                               <span className="csk-entry-table__muted">
-                                {[member.role, member.regNo]
-                                  .filter(Boolean)
-                                  .join(" · ")}
+                                {[member.role, member.regNo].filter(Boolean).join(' · ')}
                               </span>
                             </th>
-                            <td className="csk-entry-table__cell csk-entry-table__num">
-                              {member.year}
-                            </td>
+                            <td className="csk-entry-table__cell csk-entry-table__num">{member.year}</td>
                           </>
                         ) : (
-                          <td
-                            className="csk-entry-table__cell csk-entry-table__open"
-                            colSpan={2}
-                          >
+                          <td className="csk-entry-table__cell csk-entry-table__open" colSpan={2}>
                             {boat.openSeat}
                           </td>
                         )}
                         {first && (
-                          <td
-                            rowSpan={rows}
-                            className="csk-entry-table__cell csk-entry-table__category"
-                          >
+                          <td rowSpan={rows} className="csk-entry-table__cell csk-entry-table__category">
                             <Select
                               id={`${uid}-${boat.id}-cat`}
                               size="sm"
@@ -237,40 +213,25 @@ export const EntryTable = forwardRef<HTMLDivElement, EntryTableProps>(
                               aria-describedby={warn ? hintId : undefined}
                               options={categoryOptions}
                               value={boat.category}
-                              className={
-                                warn
-                                  ? "csk-entry-table__select csk-entry-table__select--warn"
-                                  : "csk-entry-table__select"
-                              }
-                              onChange={(e) =>
-                                onCategoryChange?.(boat, e.target.value)
-                              }
+                              state={warn ? 'warning' : 'default'}
+                              onChange={(e) => onCategoryChange?.(boat, e.target.value)}
                             />
                             {warn && (
-                              <div
-                                id={hintId}
-                                className="csk-entry-table__hint"
-                              >
+                              <div id={hintId} className="csk-entry-table__hint">
                                 {boat.categoryWarning}
                               </div>
                             )}
                           </td>
                         )}
-                        <td className="csk-entry-table__cell csk-entry-table__num">
-                          {member?.rankingClass}
-                        </td>
+                        <td className="csk-entry-table__cell csk-entry-table__num">{member?.rankingClass}</td>
                         {checkColumns.map((_, i) => {
                           const check = member?.checks[i];
-                          const tone = check?.tone ?? "ok";
+                          const tone = check?.tone ?? 'ok';
                           return (
                             <td key={i} className="csk-entry-table__cell">
                               {check && (
                                 <Badge variant={TONE_VARIANT[tone]} size="sm">
-                                  {prefix(tone) && (
-                                    <span className="csk-entry-table__sr">
-                                      {prefix(tone)}
-                                    </span>
-                                  )}
+                                  {prefix(tone) && <span className="csk-entry-table__sr">{prefix(tone)}</span>}
                                   {check.label}
                                 </Badge>
                               )}
@@ -285,10 +246,7 @@ export const EntryTable = forwardRef<HTMLDivElement, EntryTableProps>(
                             >
                               {boat.fee}
                             </td>
-                            <td
-                              rowSpan={rows}
-                              className="csk-entry-table__cell csk-entry-table__actions"
-                            >
+                            <td rowSpan={rows} className="csk-entry-table__cell csk-entry-table__actions">
                               <div className="csk-entry-table__actions-inner">
                                 {rows > 1 && onReplaceMember && (
                                   <Button
@@ -304,16 +262,10 @@ export const EntryTable = forwardRef<HTMLDivElement, EntryTableProps>(
                                   <Button
                                     variant="ghost"
                                     size="sm"
-                                    aria-label={
-                                      rows > 1
-                                        ? text.removeBoatOf(boat)
-                                        : text.removeAthleteOf(boat)
-                                    }
+                                    aria-label={rows > 1 ? text.removeBoatOf(boat) : text.removeAthleteOf(boat)}
                                     onClick={() => onRemove(boat)}
                                   >
-                                    {rows > 1
-                                      ? text.removeBoat
-                                      : text.removeAthlete}
+                                    {rows > 1 ? text.removeBoat : text.removeAthlete}
                                   </Button>
                                 )}
                               </div>
@@ -333,4 +285,4 @@ export const EntryTable = forwardRef<HTMLDivElement, EntryTableProps>(
   },
 );
 
-EntryTable.displayName = "EntryTable";
+EntryTable.displayName = 'EntryTable';

@@ -5,6 +5,7 @@ import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { Button } from '../../components/Button';
 import { Card } from '../../components/Card';
 import { Checkbox } from '../../components/Checkbox';
+import { DeadlineBadge } from '../../components/DeadlineBadge';
 import { EntryTable, type EntryBoat } from '../../components/EntryTable';
 import {
   c2Boats,
@@ -55,17 +56,6 @@ const open = (
     </Button>
   </>
 );
-
-function Deadline({ label, children, accent }: { label: string; children: string; accent?: boolean }) {
-  return (
-    <div className="entry-page__deadline">
-      <span className="entry-page__deadline-label">{label}</span>
-      <span className={accent ? 'entry-page__deadline-value entry-page__deadline-value--accent' : 'entry-page__deadline-value'}>
-        {children}
-      </span>
-    </div>
-  );
-}
 
 function ClassCard({
   title,
@@ -153,10 +143,8 @@ function ClubEntryPage() {
           titleAfter={<Badge variant="outline">{sent ? 'Odeslaná' : 'Rozpracovaná'}</Badge>}
           aside={
             <>
-              <Deadline label="Uzávěrka přihlášek" accent>
-                za 5 dní · st 13. 5. 23:59
-              </Deadline>
-              <Deadline label="Dohlášky">do po 18. 5., +100 %</Deadline>
+              <DeadlineBadge kind="closing" label="Uzávěrka za 5 dní" date="st 13. 5. 23:59" />
+              <DeadlineBadge kind="late" date="po 18. 5., +100 %" />
             </>
           }
           actions={

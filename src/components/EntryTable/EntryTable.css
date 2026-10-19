@@ -94,10 +94,6 @@
   color: var(--csk-color-warning-text);
 }
 
-.csk-entry-table__select--warn .csk-select {
-  border-color: var(--csk-color-warning-text);
-}
-
 .csk-entry-table__actions {
   text-align: right;
   white-space: nowrap;

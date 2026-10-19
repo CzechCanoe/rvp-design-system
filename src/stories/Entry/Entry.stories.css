@@ -90,25 +90,3 @@
   flex-direction: column;
   gap: var(--csk-space-3);
 }
-
-.entry-page__deadline {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.entry-page__deadline-label {
-  font-size: var(--csk-text-sm);
-  color: var(--csk-color-text-3);
-}
-
-.entry-page__deadline-value {
-  font-weight: var(--csk-font-weight-semibold);
-}
-
-.entry-page__deadline-value--accent {
-  font-family: var(--csk-font-display);
-  font-size: var(--csk-text-xl);
-  font-weight: var(--csk-font-weight-bold);
-  color: var(--csk-color-state-provisional-text);
-}

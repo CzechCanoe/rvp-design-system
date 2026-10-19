@@ -4,7 +4,7 @@
  * Enhanced with modern focus states, gradient accents, and subtle shadows.
  * Matches Input component styling for consistency.
  * Supports sizes: sm, md, lg
- * Supports states: default, error, success
+ * Supports states: default, error, warning, success
  */
 
 /* ==========================================================================
@@ -120,6 +120,11 @@
     0 0 12px color-mix(in srgb, var(--csk-color-error) 15%, transparent);
 }
 
+.csk-select-container--warning .csk-select:focus {
+  border-color: var(--csk-color-warning-text);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-warning) 25%, transparent);
+}
+
 .csk-select-container--success .csk-select:focus {
   border-color: var(--csk-color-success);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--csk-color-success) 12%, transparent),
@@ -137,6 +142,10 @@
   border-color: var(--csk-color-error);
 }
 
+.csk-select-container--warning .csk-select:hover:not(:disabled):not(:focus) {
+  border-color: var(--csk-color-warning-text);
+}
+
 .csk-select-container--success .csk-select:hover:not(:disabled):not(:focus) {
   border-color: var(--csk-color-success);
 }
@@ -148,6 +157,11 @@
 .csk-select-container--error .csk-select {
   border-color: var(--csk-color-error);
   background-color: color-mix(in srgb, var(--csk-color-error) 2%, transparent);
+}
+
+.csk-select-container--warning .csk-select {
+  border-color: var(--csk-color-warning-text);
+  background-color: var(--csk-color-warning-bg);
 }
 
 .csk-select-container--success .csk-select {
@@ -337,6 +351,11 @@
   align-items: center;
   gap: var(--csk-space-1);
   transition: color var(--csk-transition-fast);
+}
+
+.csk-select-helper--warning {
+  color: var(--csk-color-warning-text);
+  font-weight: var(--csk-font-weight-medium);
 }
 
 .csk-select-helper--error {

@@ -351,3 +351,14 @@ export { ProposalList, PROPOSAL_LIST_LABELS } from './ProposalList';
 export type { ProposalListProps, ProposalListLabels, Proposal } from './ProposalList';
 export { SummaryCard } from './SummaryCard';
 export type { SummaryCardProps, SummaryRow } from './SummaryCard';
+
+// Calendar by weekends (v2 T13)
+export { DeadlineBadge, DEADLINE_LABELS } from './DeadlineBadge';
+export type { DeadlineBadgeProps, DeadlineKind } from './DeadlineBadge';
+export { WeekendCalendar } from './WeekendCalendar';
+export type {
+  WeekendCalendarProps,
+  CalendarGroup,
+  CalendarEventRow,
+  CalendarEventDocument,
+} from './WeekendCalendar';
