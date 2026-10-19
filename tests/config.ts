@@ -80,6 +80,12 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'States-Overview', storyId: 'states-overview--default', tier: 'specific' },
   { name: 'EmptyState', storyId: 'components-emptystate--default', tier: 'specific' },
   { name: 'Skeleton', storyId: 'components-skeleton--default', tier: 'specific', cssFeatures: ['animations', 'shimmer'] },
+  { name: 'SegmentedControl', storyId: 'components-segmentedcontrol--default', tier: 'specific' },
+  { name: 'SegmentedControl-Wrapping360', storyId: 'components-segmentedcontrol--wrapping-360', tier: 'specific' },
+  { name: 'StarButton', storyId: 'components-starbutton--default', tier: 'specific' },
+  { name: 'FavoritesToggle', storyId: 'components-favoritestoggle--default', tier: 'specific' },
+  { name: 'TableToolbar', storyId: 'components-tabletoolbar--default', tier: 'specific' },
+  { name: 'TableToolbar-Mobile', storyId: 'components-tabletoolbar--mobile', tier: 'specific' },
   // T6 time components: stories use createTestClock() at a fixed time, so nothing ticks.
   // Never list RunningTime 'Real Clock' (components-runningtime--real-clock, tag no-snapshot): it ticks in real time.
   // 'State Switching' (interactive acceptance story) is checked by axe only; its controls are Buttons owned by T4.
