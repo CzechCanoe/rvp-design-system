@@ -21,7 +21,14 @@ export type ResultRowState = 'provisional' | 'review';
 
 export type Podium = 1 | 2 | 3;
 
-/** A value that may arrive as a plain number, `null` (not known) or an `Observed<number>`. */
+/**
+ * A value that may arrive as a plain number, `null` (not known) or an `Observed<number>`.
+ * Used for cell values that go straight to `TimeValue` / `PenaltyChip`, which accept the
+ * same union (`RunCell.time`, `RunCell.penalty`, `RunDetailRun` times). Row-level facts
+ * (`ResultRow.rank`, `result`, `diff`) take `Observed<number>` only: their `not-yet` vs
+ * `unavailable` state drives the row (`diff: not-yet` = „čeká“, no rank = „·“), which a
+ * bare `null` cannot tell apart.
+ */
 export type ObservedNumber = Observed<number> | number | null;
 
 /** Running time of a run in progress, as delivered (see `RunningTime`). */

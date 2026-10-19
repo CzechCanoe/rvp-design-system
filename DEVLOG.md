@@ -7034,3 +7034,16 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 
 ### Snapshoty (T10)
 - CI commit `test: update snapshots (CI)` přidal 18 snapshotů OnCoursePanel (9 stories × 390 + 1280, chromium).
+
+## 2026-10-19 - v2 T9 follow-ups: memo řádků, zúžené overridy, neposouzená penalizace
+
+### Dokončeno
+- [x] Memo řádků i s inline callbacky: `onToggle` / `onFavoriteChange` přes latest-ref (stabilní obaly), `labels` porovnané klíč po klíči, `renderDetail` se volá v tabulce jen pro rozbalené řádky (prop `detail`); test počítá rendery řádků po rozbalení / hvězdičce
+- [x] Kompaktní `MarkBadge` jen v buňkách datových řádků (`.csk-results-table__row`), ne v `RunDetail` rozbaleného řádku; hack okrajů `StarButton` zdokumentován s TODO na T7 (a `MarkBadge size` na T5)
+- [x] Neposouzená penalizace jednotně „(·)“ v tabulce i v `RunDetail` (přes `PenaltyText`)
+- [x] Doc komentář `ObservedNumber`: proč buňky (`RunCell.time/penalty`) berou i `number | null` a řádkové hodnoty (`rank`, `result`, `diff`) jen `Observed`
+
+### Poznámky
+- Rozbalený řádek se dál překresluje s každým renderem tabulky (detail může záviset na stavu aplikace).
+- Veřejné exporty a názvy beze změny (T10/T11 je používají).
+- CI přegenerovalo jen `RunDetail-OnCourse` (mobil + desktop): Tr. 2. jízdy „—“ → „(·)“.
