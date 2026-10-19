@@ -7110,3 +7110,18 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 
 ### Poznámky
 Gaps for T18/T19 are listed in the PR body.
+
+---
+
+## 2026-10-19 - v2 T15: ProfileHeader + SeasonSparkline + RivalsList
+
+### Dokončeno
+- [x] `ProfileHeader` (variants `page` / `band`, StatTile row, Avatar default), `SeasonSparkline` (inline SVG, title/desc, provisional hollow marker, no motion), `RivalsList` (signed point gaps, own row highlighted)
+- [x] Stories `Athlete/PublicProfile` (Profil.html) and `Athlete/MobileProfile` (ProfilMobil.html) from DS components; component stories; added to snapshot lists (pageStories, specificComponents) and axe list
+
+### Problémy a řešení
+1. **Problém:** Avatar tops out at 96 px, the reference portrait is 128 px.
+   **Řešení:** scoped size override in ProfileHeader.css; portrait stays an `avatar` slot (live-mini 100x140 portrait is an open maintainer question).
+
+### Poznámky
+Gaps (last-result card, results list rows, TimeValue without minutes) are listed in the PR body.

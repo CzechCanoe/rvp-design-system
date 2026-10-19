@@ -1,0 +1,193 @@
+/* ProfileHeader: athlete profile head. Colours come from semantic tokens only. */
+
+.csk-profile-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-3);
+  font-family: var(--csk-font-sans);
+  color: var(--csk-color-text);
+}
+
+.csk-profile-header__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--csk-space-6);
+}
+
+.csk-profile-header__avatar {
+  flex: none;
+}
+
+.csk-profile-header__avatar .csk-avatar--2xl {
+  width: 128px;
+  height: 128px;
+  font-size: var(--csk-text-3xl);
+}
+
+.csk-profile-header__main {
+  display: flex;
+  flex: 1 1 420px;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.csk-profile-header__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--csk-space-2);
+}
+
+.csk-profile-header__name {
+  margin: 0;
+  font-family: var(--csk-font-display);
+  font-size: var(--csk-text-3xl);
+  font-weight: var(--csk-font-weight-bold);
+  line-height: var(--csk-line-height-tight);
+  overflow-wrap: anywhere;
+}
+
+.csk-profile-header__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--csk-space-1) 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--csk-text-base);
+  color: var(--csk-color-text-2);
+}
+
+.csk-profile-header__meta a {
+  color: var(--csk-color-action);
+}
+
+.csk-profile-header__tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: var(--csk-space-1);
+}
+
+.csk-profile-header__tile {
+  min-width: 150px;
+  padding: 10px 14px;
+  border-radius: var(--csk-radius-md);
+  gap: 2px;
+}
+
+.csk-profile-header__tile .csk-stat-tile__main {
+  flex-wrap: wrap;
+}
+
+.csk-profile-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* ---- band: phone "Moje" profile on the navy band ---- */
+
+.csk-profile-header--band {
+  gap: 12px;
+  padding: 12px 16px 18px;
+  background: var(--csk-color-brand);
+  color: var(--csk-color-text-on-fill);
+}
+
+.csk-profile-header--band a {
+  color: inherit;
+}
+
+.csk-profile-header--band a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.csk-profile-header__topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.csk-profile-header__topbar .csk-profile-header__actions {
+  margin-left: auto;
+}
+
+.csk-profile-header--band .csk-profile-header__row {
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.csk-profile-header--band .csk-profile-header__avatar .csk-avatar {
+  width: 68px;
+  height: 68px;
+  font-size: var(--csk-text-2xl);
+  border: 3px solid color-mix(in srgb, var(--csk-color-text-on-fill) 40%, transparent);
+}
+
+.csk-profile-header--band .csk-profile-header__main {
+  flex: 1 1 auto;
+  gap: 4px;
+}
+
+.csk-profile-header--band .csk-profile-header__name {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.csk-profile-header--band .csk-profile-header__meta {
+  gap: 0;
+  font-size: var(--csk-text-sm);
+  color: inherit;
+}
+
+.csk-profile-header--band .csk-profile-header__meta li + li::before {
+  content: '·';
+  margin-inline: 0.4em;
+}
+
+.csk-profile-header--band .csk-profile-header__badges {
+  gap: 6px;
+}
+
+/* badges on navy: translucent white pad, white text */
+.csk-profile-header--band .csk-profile-header__badges .csk-badge {
+  background: color-mix(in srgb, var(--csk-color-text-on-fill) 16%, transparent);
+  color: var(--csk-color-text-on-fill);
+}
+
+.csk-profile-header--band .csk-profile-header__tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--csk-space-2);
+  margin-top: 0;
+}
+
+.csk-profile-header--band .csk-profile-header__tile {
+  min-width: 0;
+  padding: var(--csk-space-2) 10px;
+  background: color-mix(in srgb, var(--csk-color-text-on-fill) 10%, transparent);
+  border: 0;
+  color: var(--csk-color-text-on-fill);
+}
+
+.csk-profile-header--band .csk-stat-tile__label,
+.csk-profile-header--band .csk-stat-tile__hint {
+  font-size: var(--csk-text-xs);
+  color: var(--csk-color-text-on-fill);
+}
+
+.csk-profile-header--band .csk-stat-tile__value {
+  font-size: var(--csk-text-2xl);
+  color: var(--csk-color-text-on-fill);
+}
+
+.csk-profile-header--band .csk-stat-tile__delta {
+  font-size: 12px;
+  color: var(--csk-color-state-provisional-bg);
+}

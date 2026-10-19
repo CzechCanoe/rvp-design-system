@@ -89,6 +89,16 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'TimeValue-Formats', storyId: 'components-timevalue--formats', tier: 'specific' },
   { name: 'RunningTime-States', storyId: 'components-runningtime--states', tier: 'specific' },
   { name: 'DataAge-Overview', storyId: 'components-dataage--overview', tier: 'specific' },
+  // v2 T15: profile components
+  { name: 'ProfileHeader-Page', storyId: 'components-profileheader--page', tier: 'specific' },
+  { name: 'ProfileHeader-Band', storyId: 'components-profileheader--band', tier: 'specific' },
+  { name: 'ProfileHeader-WithoutTiles', storyId: 'components-profileheader--without-tiles', tier: 'specific' },
+  { name: 'SeasonSparkline', storyId: 'components-seasonsparkline--default', tier: 'specific' },
+  { name: 'SeasonSparkline-AllOfficial', storyId: 'components-seasonsparkline--all-official', tier: 'specific' },
+  { name: 'SeasonSparkline-TwoRaces', storyId: 'components-seasonsparkline--two-races', tier: 'specific' },
+  { name: 'RivalsList', storyId: 'components-rivalslist--default', tier: 'specific' },
+  { name: 'RivalsList-LeaderAndTie', storyId: 'components-rivalslist--leader-and-tie', tier: 'specific' },
+  { name: 'RivalsList-LongName', storyId: 'components-rivalslist--long-name', tier: 'specific' },
 ];
 
 /** All components for visual regression testing */
@@ -164,6 +174,9 @@ export const pageStories: Array<{ name: string; storyId: string }> = [
   { name: 'Live-Official', storyId: 'live--official' },
   { name: 'Live-Disconnected', storyId: 'live--disconnected' },
   { name: 'Live-Program', storyId: 'live--program' },
+  // v2 T15: athlete pages (references Profil.html, ProfilMobil.html)
+  { name: 'Athlete-PublicProfile', storyId: 'athlete--public-profile' },
+  { name: 'Athlete-MobileProfile', storyId: 'athlete--mobile-profile' },
 ];
 
 export const pageStoryMaxDiffPixels = 80;

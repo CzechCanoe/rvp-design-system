@@ -69,6 +69,10 @@ const specificComponents = [
   { name: 'OnCoursePanel-Stale', storyId: 'components-oncoursepanel--stale' },
   { name: 'OnCoursePanel-TimeToBeat', storyId: 'components-oncoursepanel--time-to-beat' },
   { name: 'OnCoursePanel-Collapsed', storyId: 'components-oncoursepanel--collapsed' },
+  { name: 'ProfileHeader-Page', storyId: 'components-profileheader--page' },
+  { name: 'ProfileHeader-Band', storyId: 'components-profileheader--band' },
+  { name: 'SeasonSparkline', storyId: 'components-seasonsparkline--default' },
+  { name: 'RivalsList', storyId: 'components-rivalslist--default' },
 ];
 
 // Helper to run axe and check results

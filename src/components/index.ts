@@ -336,3 +336,11 @@ export type {
   OnCourseRiderStatus,
   OnCourseTimeToBeat,
 } from './OnCoursePanel';
+
+// ProfileHeader + SeasonSparkline + RivalsList (v2 T15)
+export { ProfileHeader } from './ProfileHeader';
+export type { ProfileHeaderProps, ProfileHeaderTile, ProfileHeaderVariant } from './ProfileHeader';
+export { SeasonSparkline, SEASON_SPARKLINE_LABELS } from './SeasonSparkline';
+export type { SeasonSparklineProps, SeasonSparklinePoint, SeasonSparklineLabels } from './SeasonSparkline';
+export { RivalsList, RIVALS_LIST_LABELS } from './RivalsList';
+export type { RivalsListProps, RivalsListItem, RivalsListLabels } from './RivalsList';
