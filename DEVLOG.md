@@ -6910,3 +6910,6 @@ Label eventy dřív spouštěly přeskočené CI běhy, které přes concurrency
 ### Poznámky
 - Zmrzlá hodnota zůstává na `elapsedSeconds + 3 s` (bez skoku zpět), `now()` prohlížečových hodin je `Date.now()` (počítá i spánek telefonu, potřebné pro `mode="absolute"`).
 - `OnCourseRider` / `ResultsTable` mají skládat tyto komponenty; konec jízdy (status ≠ on-course) řeší aplikace přepnutím na `TimeValue`.
+
+### T8 doplněk (2026-10-19)
+- Merge `origin/main` (T6), placeholder DataAge ve stories nahrazen skutečným `DataAge` (fixní testovací `Clock`). Zbývá vyměnit placeholdery T4/T5/T7.
