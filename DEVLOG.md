@@ -7095,6 +7095,17 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 
 ---
 
+## 2026-10-19 - fix: StatusBadge on the navy EventHeader
+
+### Dokončeno
+- [x] EventHeader wraps its status slot in `data-tone="on-dark"`; StatusBadge.css gives `stale` light text and underline there (was 1.81:1 on navy). Other states keep their own surface/fill and pass axe.
+- [x] Story `EventHeader/StatusStates` (all six states); added to axe (accessibility.spec, results-table.spec via viewportStories) and the 390/1280 snapshot list.
+
+### Poznámky
+Live1/Live5 reference shows no on-dark badge; no new token needed (`--csk-color-text-on-fill`).
+
+---
+
 ## 2026-10-19 - v2 T12: Page stories Live
 
 ### Dokončeno
@@ -7110,6 +7121,9 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 
 ### Poznámky
 Gaps for T18/T19 are listed in the PR body.
+
+### Doplněk (PR #72): Live story
+- Live/Disconnected: header shows `StatusBadge stale`; `.live-page__status` / `__foot` use xs text-2, foot padding left to Card footer; dismissible category pill clears story state.
 
 ---
 

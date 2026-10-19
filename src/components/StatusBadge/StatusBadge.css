@@ -77,6 +77,16 @@
   padding-right: 0;
 }
 
+/*
+ * On a dark band (EventHeader wraps its status slot in data-tone="on-dark").
+ * Filled states keep their own light surface or red fill and stay readable on navy;
+ * only the transparent "stale" has no surface of its own and takes light text.
+ */
+[data-tone='on-dark'] .csk-status-badge--stale {
+  color: var(--csk-color-text-on-fill);
+  border-bottom-color: var(--csk-color-text-on-fill);
+}
+
 .csk-status-badge__dot {
   width: 7px;
   height: 7px;
