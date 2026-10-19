@@ -7103,3 +7103,21 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 
 ### Poznámky
 Live1/Live5 reference shows no on-dark badge; no new token needed (`--csk-color-text-on-fill`).
+
+---
+
+## 2026-10-19 - v2 T12: Page stories Live
+
+### Dokončeno
+- [x] `src/stories/Live/`: stories `Live/Running`, `Expanded`, `Startlist`, `Official`, `Disconnected`, `Program` (reference Live1-6), only DS components, local CSS = page layout only
+- [x] One shared `createTestClock()` (15:24:45 Europe/Prague); Disconnected = stale OnCoursePanel + DataAge offline + Notice
+- [x] `tests/live-pages.spec.ts` + `pageStories` in `tests/config.ts`: 390 and 1280 snapshots (80 px), overflow check, axe
+
+### Problémy a řešení
+1. **Problém:** axe contrast: global `.live-page a` colour overrode the EventHeader back link; muted status text on page ground.
+   **Řešení:** scoped link class, `text-2` for status/foot lines.
+2. **Problém:** `StatusBadge stale` on the navy EventHeader fails contrast (1.81).
+   **Řešení:** Disconnected story shows no header badge (reported as gap).
+
+### Poznámky
+Gaps for T18/T19 are listed in the PR body.

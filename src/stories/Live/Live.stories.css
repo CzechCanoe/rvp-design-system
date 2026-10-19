@@ -1,0 +1,79 @@
+/* Page layout of the Live page stories: ground, gutters and spacing only (reference Live1-6). Components are never restyled. */
+
+.live-page {
+  background: var(--csk-color-surface-2);
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-md);
+}
+
+.live-page__nav {
+  padding: var(--csk-space-2);
+  background: var(--csk-color-surface);
+  border-bottom: 1px solid var(--csk-color-border);
+}
+
+.live-page__body {
+  padding: var(--csk-space-2);
+}
+
+@media (min-width: 768px) {
+  .live-page__nav,
+  .live-page__body {
+    padding-inline: var(--csk-space-6);
+  }
+}
+
+.live-page__nav-inner,
+.live-page__body-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-2);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--csk-container-xl);
+  margin-inline: auto;
+}
+
+.live-page__nav-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--csk-space-2);
+}
+
+.live-page__status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--csk-space-2);
+  padding: var(--csk-space-2);
+  border-bottom: 1px solid var(--csk-color-border-2);
+  font-size: var(--csk-text-xs);
+  color: var(--csk-color-text-2);
+}
+
+.live-page__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--csk-space-3);
+  font-size: var(--csk-text-xs);
+  color: var(--csk-color-text-2);
+}
+
+.live-page__foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--csk-space-3);
+  margin-left: auto;
+}
+
+.live-page__link {
+  color: var(--csk-color-action);
+}
+
+.live-page__choice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--csk-space-3);
+  margin-top: var(--csk-space-1);
+}
