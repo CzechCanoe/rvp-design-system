@@ -7011,3 +7011,20 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 ### Poznámka po CI (T9)
 - Snapshoty 390 + 1280 vygenerovalo CI (`test: update snapshots (CI)`, 31 PNG, jen ResultsTable / RunDetail).
 - Výkon 100 řádků v CI (4 workery paralelně): medián 306.5 ms (146–454 ms), rozpočet testu 800 ms.
+
+---
+
+## 2026-10-19 - v2 T11: StartlistTable + ProgramList
+
+### Dokončeno
+- [x] `StartlistTable`: thin wrapper over `ResultsTable columns="startlist"` with its own row type `StartlistRow` (no rank/result, `starts[]` with time or mark); no change inside ResultsTable
+- [x] `ProgramList` (days, items with time/title/subtitle/state/progress/note/href/running); running rows on `live-bg` with Live badge, several at once (Live6)
+- [x] Stories (Live3, Live6), unit tests, `tests/live-tables.spec.ts` (390 px overflow, stacked starts, two running phases), axe + viewport snapshot entries
+
+### Problémy a řešení
+1. **Problém:** `ResultRow` requires rank/result.
+   **Řešení:** the wrapper fills `unavailable` (not-applicable) internally; the application never sees it.
+
+### Poznámky
+- Running time in ProgramList uses `error-text` (red-dark): `live` red is not AA on `live-bg` (same rule as in ResultsTable).
+- The Notice with the choice of running phases stays in the application (COMPONENTS.md).
