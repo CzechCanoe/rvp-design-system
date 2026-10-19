@@ -7025,3 +7025,4 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 ### Poznámky
 - Rozbalený řádek se dál překresluje s každým renderem tabulky (detail může záviset na stavu aplikace).
 - Veřejné exporty a názvy beze změny (T10/T11 je používají).
+- CI přegenerovalo jen `RunDetail-OnCourse` (mobil + desktop): Tr. 2. jízdy „—“ → „(·)“.
