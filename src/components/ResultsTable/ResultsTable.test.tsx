@@ -1,9 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
+import { useState } from 'react';
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import { createTestClock } from '../../clock';
 import { ResultsTable } from './ResultsTable';
 import { RunDetail } from './RunDetail';
-import type { ResultRow } from './types';
+import type { ResultRow, ResultRowId } from './types';
 import {
   STORY_NOW,
   brRows,
@@ -197,6 +198,63 @@ describe('ResultsTable', () => {
     expect(screen.getByRole('columnheader', { name: 'Result' })).toBeInTheDocument();
   });
 
+  it('with inline callbacks and labels, an update re-renders only the affected rows', () => {
+    // labels.toggle is called once per row render (accessible name of the expand button)
+    const toggleLabel = vi.fn((row: ResultRow) => `Detail: ${row.name}`);
+    const rendered = () => toggleLabel.mock.calls.map(([row]) => row.name).sort();
+    function App() {
+      const [rows, setRows] = useState(brRows);
+      const [expanded, setExpanded] = useState<ResultRowId | null>(null);
+      return (
+        <ResultsTable
+          rows={rows}
+          columns="pair"
+          clock={clock}
+          labels={{ toggle: toggleLabel, empty: 'Nic' }}
+          expandedId={expanded}
+          onToggle={(id) => setExpanded((current) => (current === id ? null : id))}
+          onFavoriteChange={(row, favorite) =>
+            setRows((current) => current.map((r) => (r.id === row.id ? { ...r, favorite } : r)))
+          }
+          renderDetail={(row) => <span>detail {row.bib}</span>}
+        />
+      );
+    }
+    render(<App />);
+    expect(toggleLabel).toHaveBeenCalledTimes(brRows.length);
+
+    toggleLabel.mockClear();
+    fireEvent.click(screen.getByText('REZEK Adam'));
+    expect(screen.getByText('detail 35')).toBeInTheDocument();
+    expect(rendered()).toEqual(['REZEK Adam']);
+
+    toggleLabel.mockClear();
+    fireEvent.click(screen.getByRole('button', { name: 'Detail: REZEK Adam' }));
+    expect(screen.queryByText('detail 35')).toBeNull();
+    expect(rendered()).toEqual(['REZEK Adam']);
+
+    toggleLabel.mockClear();
+    fireEvent.click(screen.getByRole('button', { name: 'Oblíbený: DUSIK Krzysztof' }));
+    expect(screen.getByRole('button', { name: 'Oblíbený: DUSIK Krzysztof' })).toHaveAttribute('aria-pressed', 'true');
+    expect(rendered()).toEqual(['DUSIK Krzysztof']);
+
+    // An expanded row re-renders with every table render (its detail may depend on application state)
+    fireEvent.click(screen.getByText('REZEK Adam'));
+    toggleLabel.mockClear();
+    fireEvent.click(screen.getByRole('button', { name: 'Oblíbený: HNILICA Lukas' }));
+    expect(rendered()).toEqual(['HNILICA Lukas', 'REZEK Adam']);
+  });
+
+  it('calls the latest handlers after a re-render', () => {
+    const first = vi.fn();
+    const second = vi.fn();
+    const { rerender } = render(<ResultsTable rows={brRows.slice(0, 1)} columns="pair" onToggle={first} />);
+    rerender(<ResultsTable rows={brRows.slice(0, 1)} columns="pair" onToggle={second} />);
+    fireEvent.click(screen.getByText('HNILICA Lukas'));
+    expect(first).not.toHaveBeenCalled();
+    expect(second).toHaveBeenCalledWith('k1m-41', brRows[0]);
+  });
+
   it('renders 100 rows', () => {
     const { container } = render(<ResultsTable rows={makeRows(100)} columns="pair" onToggle={() => {}} />);
     expect(container.querySelectorAll('tbody tr')).toHaveLength(100);
@@ -237,6 +295,16 @@ describe('RunDetail', () => {
     expect(screen.getByText('DNF')).toHaveClass('csk-mark-badge');
     expect(screen.getByText('bez konfigurace tratě')).toBeInTheDocument();
     expect(screen.getByText('neposouzeno')).toBeInTheDocument();
+  });
+
+  it('shows a penalty that is not judged as „(·)“, the same form as the table', () => {
+    const { container } = render(
+      <RunDetail runs={[{ label: '2. jízda', time: known(90.38), penalty: null, total: known(90.38), counts: true }]} />
+    );
+    const penalty = container.querySelector('.csk-run-detail__kv .csk-penalty-text--unjudged');
+    expect(penalty).toHaveTextContent('(·)neposouzeno');
+    const table = render(<ResultsTable rows={[{ ...brRows[0], runs: [{ time: known(89.83), penalty: null }] }]} />);
+    expect(table.container.querySelector('.csk-penalty-text--unjudged')).toHaveTextContent('(·)neposouzeno');
   });
 });
 

@@ -143,6 +143,24 @@ test.describe('ResultsTable - expanded row', () => {
     });
   }
 
+  test('marks are compact in the row cells but full size in an expanded RunDetail', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 900 });
+    await open(page, 'components-resultstable--expanded');
+    await page.getByRole('button', { name: 'Detail: HRADECKÝ Daniel' }).click();
+    await expect(page.locator('.csk-run-detail .csk-mark-badge').first()).toBeVisible();
+    const heights = await page.evaluate(() => {
+      const of = (sel: string) =>
+        [...document.querySelectorAll(sel)]
+          .filter((el) => (el as HTMLElement).offsetParent !== null)
+          .map((el) => Math.round(el.getBoundingClientRect().height));
+      return { row: of('.csk-results-table__row .csk-mark-badge'), detail: of('.csk-run-detail .csk-mark-badge') };
+    });
+    expect(heights.row.length).toBeGreaterThan(0);
+    expect([...new Set(heights.row)]).toEqual([18]);
+    expect(heights.detail.length).toBeGreaterThan(0);
+    expect([...new Set(heights.detail)]).toEqual([22]);
+  });
+
   test('expanding does not change the column widths', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await open(page, 'components-resultstable--expanded');

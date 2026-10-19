@@ -2,8 +2,12 @@ import {
   Fragment,
   forwardRef,
   memo,
+  useCallback,
+  useEffect,
   useId,
+  useLayoutEffect,
   useMemo,
+  useRef,
   type HTMLAttributes,
   type MouseEvent,
   type ReactNode,
@@ -129,6 +133,11 @@ export interface ResultsTableProps extends Omit<HTMLAttributes<HTMLDivElement>, 
 // Row
 // ============================================================================
 
+/**
+ * Shared by all rows. Stays referentially stable across table renders as long as
+ * columns, labels (key by key) and clock do: the handlers are stable wrappers
+ * around the latest props, so inline callbacks do not re-render every row.
+ */
 interface RowContext {
   columns: ResultsTableColumns;
   runCount: number;
@@ -138,10 +147,14 @@ interface RowContext {
   favorites: boolean;
   totalCells: number;
   idPrefix: string;
-  onToggle?: ResultsTableProps['onToggle'];
-  onFavoriteChange?: ResultsTableProps['onFavoriteChange'];
-  renderDetail?: ResultsTableProps['renderDetail'];
+  onToggle: (id: ResultRowId, row: ResultRow) => void;
+  onFavoriteChange: (row: ResultRow, favorite: boolean) => void;
 }
+
+// useLayoutEffect warns during SSR; fall back to useEffect there (as Tabs does).
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
+const LABEL_KEYS = Object.keys(RESULTS_TABLE_LABELS) as Array<keyof ResultsTableLabels>;
 
 const range = (n: number) => Array.from({ length: n }, (_, i) => i);
 
@@ -197,13 +210,22 @@ function StartStack({ row, ctx }: { row: ResultRow; ctx: RowContext }) {
   );
 }
 
+/**
+ * One result row (+ its detail row). Memoised: it re-renders when its `row`
+ * object, its expanded state or the shared context change. An expanded row also
+ * re-renders with every table render, because its `detail` (from `renderDetail`)
+ * may depend on application state the table cannot see.
+ */
 const ResultsTableRow = memo(function ResultsTableRow({
   row,
   expanded,
+  detail,
   ctx,
 }: {
   row: ResultRow;
   expanded: boolean;
+  /** Rendered detail of an expanded row; `undefined` = no detail row. */
+  detail: ReactNode | undefined;
   ctx: RowContext;
 }) {
   const { labels } = ctx;
@@ -214,7 +236,7 @@ const ResultsTableRow = memo(function ResultsTableRow({
   const waiting = isNotYet(row.diff);
   const mutedResult = Boolean(row.running) || waiting || nonRanked;
   const detailId = `${ctx.idPrefix}-detail-${String(row.id)}`;
-  const hasDetail = expanded && Boolean(ctx.renderDetail);
+  const hasDetail = expanded && detail !== undefined;
 
   // Name line 2: state badge, NR mark and note first (they must stay visible), then the club (mobile only).
   const hasExtras = Boolean(row.state || nonRanked || row.note);
@@ -237,7 +259,7 @@ const ResultsTableRow = memo(function ResultsTableRow({
     const target = e.target as Element;
     const interactive = target.closest(INTERACTIVE);
     if (interactive && !interactive.hasAttribute('data-csk-row-toggle')) return;
-    ctx.onToggle?.(row.id, row);
+    ctx.onToggle(row.id, row);
   };
 
   const classes = [
@@ -312,7 +334,7 @@ const ResultsTableRow = memo(function ResultsTableRow({
             <StarButton
               pressed={Boolean(row.favorite)}
               label={labels.favorite(row)}
-              onPressedChange={(next) => ctx.onFavoriteChange?.(row, next)}
+              onPressedChange={(next) => ctx.onFavoriteChange(row, next)}
             />
           </td>
         )}
@@ -356,7 +378,7 @@ const ResultsTableRow = memo(function ResultsTableRow({
       {hasDetail && (
         <tr className="csk-results-table__detail-row" id={detailId}>
           <td colSpan={ctx.totalCells} className="csk-results-table__detail-cell">
-            <div className="csk-results-table__detail">{ctx.renderDetail?.(row)}</div>
+            <div className="csk-results-table__detail">{detail}</div>
           </td>
         </tr>
       )}
@@ -399,7 +421,24 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
     ref
   ) => {
     const idPrefix = useId();
-    const labels = useMemo(() => ({ ...RESULTS_TABLE_LABELS, ...labelsProp }), [labelsProp]);
+    // Compared key by key, so an inline `labels={{ … }}` with the same values keeps the rows memoised.
+    const labelValues = LABEL_KEYS.map((key) => labelsProp?.[key]);
+    const labels = useMemo(
+      () => ({ ...RESULTS_TABLE_LABELS, ...labelsProp }),
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- fixed-length list of the label values
+      labelValues
+    );
+
+    // Latest-ref handlers: rows get stable callbacks that always call the current props.
+    const handlers = useRef({ onToggle, onFavoriteChange });
+    useIsomorphicLayoutEffect(() => {
+      handlers.current = { onToggle, onFavoriteChange };
+    });
+    const toggle = useCallback((id: ResultRowId, row: ResultRow) => handlers.current.onToggle?.(id, row), []);
+    const favorite = useCallback(
+      (row: ResultRow, next: boolean) => handlers.current.onFavoriteChange?.(row, next),
+      []
+    );
     const startlist = columns === 'startlist';
     const runCount = startlist
       ? Math.max(1, ...rows.map((r) => r.runs.length))
@@ -423,11 +462,10 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
         favorites,
         totalCells,
         idPrefix,
-        onToggle,
-        onFavoriteChange,
-        renderDetail,
+        onToggle: toggle,
+        onFavoriteChange: favorite,
       }),
-      [columns, runCount, labels, clock, expandable, favorites, totalCells, idPrefix, onToggle, onFavoriteChange, renderDetail]
+      [columns, runCount, labels, clock, expandable, favorites, totalCells, idPrefix, toggle, favorite]
     );
 
     const expanded = useMemo(() => {
@@ -504,9 +542,18 @@ export const ResultsTable = forwardRef<HTMLDivElement, ResultsTableProps>(
                 </td>
               </tr>
             ) : (
-              rows.map((row) => (
-                <ResultsTableRow key={row.id} row={row} expanded={expanded.has(row.id)} ctx={ctx} />
-              ))
+              rows.map((row) => {
+                const isExpanded = expanded.has(row.id);
+                return (
+                  <ResultsTableRow
+                    key={row.id}
+                    row={row}
+                    expanded={isExpanded}
+                    detail={isExpanded && renderDetail ? renderDetail(row) : undefined}
+                    ctx={ctx}
+                  />
+                );
+              })
             )}
           </tbody>
         </table>
