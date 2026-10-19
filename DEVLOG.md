@@ -6966,3 +6966,6 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 
 ### T8 doplněk (2026-10-19)
 - Merge `origin/main` (T6), placeholder DataAge ve stories nahrazen skutečným `DataAge` (fixní testovací `Clock`). Zbývá vyměnit placeholdery T4/T5/T7.
+
+### T8 závěr (2026-10-19)
+- Merge `origin/main` (T4, T5, T7); stories používají reálné Tabs nav/carousel, Badge, Button, StatusBadge, SegmentedControl, DataAge.
