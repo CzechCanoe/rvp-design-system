@@ -195,6 +195,7 @@ export function ResultsCard({
 }: ResultsCardProps) {
   const [q, setQ] = useState('');
   const [onlyFavorites, setOnlyFavorites] = useState(false);
+  const [category, setCategory] = useState(activeCategory);
   return (
     <Card
       variant="surface"
@@ -219,12 +220,12 @@ export function ResultsCard({
           )
         }
       >
-        {activeCategory ? (
+        {category ? (
           <FilterPills
             size="sm"
             aria-label="Aktivní filtry"
-            filters={[{ key: activeCategory, label: activeCategory, dismissible: true }]}
-            onRemove={() => {}}
+            filters={[{ key: category, label: category, dismissible: true }]}
+            onRemove={() => setCategory(undefined)}
           />
         ) : (
           <TableToolbarButton>

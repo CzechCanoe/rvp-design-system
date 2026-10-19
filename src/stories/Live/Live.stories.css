@@ -48,13 +48,16 @@
   gap: var(--csk-space-2);
   padding: var(--csk-space-2);
   border-bottom: 1px solid var(--csk-color-border-2);
+  font-size: var(--csk-text-xs);
+  color: var(--csk-color-text-2);
 }
 
 .live-page__foot {
   display: flex;
   flex-wrap: wrap;
   gap: var(--csk-space-3);
-  padding: var(--csk-space-2);
+  font-size: var(--csk-text-xs);
+  color: var(--csk-color-text-2);
 }
 
 .live-page__foot-links {
