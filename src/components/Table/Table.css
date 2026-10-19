@@ -73,7 +73,7 @@
    ============================================================================= */
 
 .csk-table__thead {
-  background: var(--csk-color-highlight-bg);
+  background: var(--csk-color-brand);
 }
 
 .csk-table__th {
