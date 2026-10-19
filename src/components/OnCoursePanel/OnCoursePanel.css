@@ -1,0 +1,145 @@
+/* =============================================================================
+   OnCoursePanel – athletes on course (reference Live1 .oc, Live5 stale)
+   Mobile: one list. From 640 px of the panel's own width: three columns.
+   ============================================================================= */
+
+.csk-oncourse-panel {
+  container: csk-oncourse-panel / inline-size;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-info);
+  border-radius: var(--csk-radius-lg);
+  font-family: var(--csk-font-sans);
+  color: var(--csk-color-text);
+}
+
+/* Stale: the frame goes neutral, nothing else changes or disappears */
+.csk-oncourse-panel--stale {
+  border-color: var(--csk-color-border);
+}
+
+.csk-oncourse-panel__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--csk-space-2);
+  padding: var(--csk-space-2) var(--csk-space-3);
+  border-bottom: 1px solid var(--csk-color-border-2);
+  font-size: var(--csk-text-xs);
+}
+
+.csk-oncourse-panel--collapsed .csk-oncourse-panel__header {
+  border-bottom: 0;
+}
+
+.csk-oncourse-panel__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--csk-space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--csk-color-brand);
+  cursor: pointer;
+}
+
+.csk-oncourse-panel__toggle--static {
+  cursor: default;
+}
+
+.csk-oncourse-panel--stale .csk-oncourse-panel__toggle {
+  color: var(--csk-color-text-3);
+}
+
+.csk-oncourse-panel__toggle:focus-visible {
+  outline: 2px solid var(--csk-color-brand);
+  outline-offset: 2px;
+  border-radius: var(--csk-radius-sm);
+}
+
+.csk-oncourse-panel__title {
+  font-weight: var(--csk-font-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.csk-oncourse-panel__chevron {
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  margin-top: -3px;
+}
+
+.csk-oncourse-panel--collapsed .csk-oncourse-panel__chevron {
+  transform: rotate(-45deg);
+  margin-top: 0;
+}
+
+.csk-oncourse-panel__meta {
+  margin-left: auto;
+  color: var(--csk-color-text-3);
+}
+
+.csk-oncourse-panel__subheader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--csk-space-1) var(--csk-space-3);
+  padding: var(--csk-space-1) var(--csk-space-3);
+  border-bottom: 1px solid var(--csk-color-border-2);
+  font-size: var(--csk-text-xs);
+  color: var(--csk-color-text-3);
+}
+
+.csk-oncourse-panel--collapsed .csk-oncourse-panel__subheader {
+  display: none;
+}
+
+.csk-oncourse-panel__body[hidden] {
+  display: none;
+}
+
+.csk-oncourse-panel__riders {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.csk-oncourse-panel__item {
+  min-width: 0;
+  border-bottom: 1px solid var(--csk-color-border-2);
+}
+
+.csk-oncourse-panel__item:last-child {
+  border-bottom: 0;
+}
+
+/* Desktop: three columns; further riders wrap to new rows, none is hidden */
+@container csk-oncourse-panel (min-width: 640px) {
+  .csk-oncourse-panel__riders {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .csk-oncourse-panel__item {
+    border-bottom: 1px solid var(--csk-color-border-2);
+    border-right: 1px solid var(--csk-color-border-2);
+  }
+
+  .csk-oncourse-panel__item:nth-child(3n) {
+    border-right: 0;
+  }
+
+  /* No rule under the last row */
+  .csk-oncourse-panel__item:nth-last-child(-n + 3):nth-child(3n + 1),
+  .csk-oncourse-panel__item:nth-last-child(-n + 3):nth-child(3n + 1) ~ .csk-oncourse-panel__item {
+    border-bottom: 0;
+  }
+}

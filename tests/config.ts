@@ -140,6 +140,16 @@ export const viewportStories: Array<{ name: string; storyId: string }> = [
   { name: 'RunDetail-SingleRun', storyId: 'components-rundetail--single-run' },
   { name: 'RunDetail-OnCourse', storyId: 'components-rundetail--on-course' },
   { name: 'RunDetail-Loading', storyId: 'components-rundetail--loading' },
+  // v2 T10: OnCoursePanel (3 columns by container query). Not listed: Empty (renders nothing), RealClock (ticks).
+  { name: 'OnCoursePanel-ThreeRiders', storyId: 'components-oncoursepanel--three-riders' },
+  { name: 'OnCoursePanel-SixRiders', storyId: 'components-oncoursepanel--six-riders' },
+  { name: 'OnCoursePanel-Stale', storyId: 'components-oncoursepanel--stale' },
+  { name: 'OnCoursePanel-StaleSixRiders', storyId: 'components-oncoursepanel--stale-six-riders' },
+  { name: 'OnCoursePanel-TimeToBeat', storyId: 'components-oncoursepanel--time-to-beat' },
+  { name: 'OnCoursePanel-WithLeader', storyId: 'components-oncoursepanel--with-leader' },
+  { name: 'OnCoursePanel-Collapsed', storyId: 'components-oncoursepanel--collapsed' },
+  { name: 'OnCoursePanel-InNarrowContainer', storyId: 'components-oncoursepanel--in-narrow-container' },
+  { name: 'OnCoursePanel-RiderStates', storyId: 'components-oncoursepanel--rider-states' },
 ];
 
 // =============================================================================

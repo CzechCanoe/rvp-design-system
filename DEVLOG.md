@@ -7014,6 +7014,28 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 
 ---
 
+## 2026-10-19 - v2 T10: OnCoursePanel + OnCourseRider
+
+### Dokončeno
+- [x] `OnCourseRider` (at-start / running / finished-pending, split, toLeader, timeToBeat target/delta, gates, featured, stale)
+- [x] `OnCoursePanel` (mobil seznam, desktop 3 sloupce přes container query, `stale` + `DataAge` + `StatusBadge stale`, `collapsed`, `leader`, prázdný = nerenderuje se)
+- [x] Stories: ThreeRiders, SixRiders, Stale (= Live5), StaleSixRiders, TimeToBeat, WithLeader, Collapsed, InNarrowContainer, Empty, RiderStates, RealClock (no-snapshot)
+- [x] Unit testy, axe spec, `viewportStories` (390 + 1280)
+
+### Problémy a řešení
+1. **Problém:** tónované pozadí `featured` řádku (surface-2) srazilo kontrast červeného běžícího času na 4,26:1 (axe).
+   **Řešení:** `featured` = proužek 3 px v brand barvě + semibold jméno, bez tónu.
+2. **Problém:** výsledek v pravém sloupci zužoval jména na 3 sloupcích.
+   **Řešení:** split / na vedení / timeToBeat v samostatném řádku pod jménem.
+
+### Poznámky
+- `time` pro `finished-pending` je `finish: { time, penalty }`; `time` (RunningSpec) jen pro `running`.
+- Stale panel předává jezdcům `staleAfterSeconds=0`, takže čas mrzne hned a ukáže stáří přes `RunningTime`.
+
+### Snapshoty (T10)
+- CI commit `test: update snapshots (CI)` přidal 18 snapshotů OnCoursePanel (9 stories × 390 + 1280, chromium).
+
+
 ## 2026-10-19 - v2 T11: StartlistTable + ProgramList
 
 ### Dokončeno
@@ -7064,3 +7086,9 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 ### Poznámky
 - Před: Playwright job 6 m 18 s, 567 testů (472 + 95 @prototype). Po: viz PR.
 - KanoeCzContext (verdikt Z) zůstává jako host dekorátor.
+
+### Review follow-ups (T10)
+- Stale panel neprepisuje `staleAfterSeconds` (zadny skok zpet o 3 s); Stale story ma `elapsedSeconds: 43.5` (+3 s = 46.5).
+- Live5 detaily: sekundarni radek zustava, `0.0` na startu je v stale tecovane, penalizace `+2 tr.`, stari zmrazeneho casu pod casem.
+- Radek jezdce je CSS grid (bib | jmeno | cas), podradek ve sloupci jmena bez pevne sirky BibBadge.
+- Po T17a: jen light varianty (a11y spec uz bez dark).
