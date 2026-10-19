@@ -57,6 +57,22 @@
   font-size: var(--csk-text-2xl);
 }
 
+.csk-avatar--3xl {
+  width: 128px;
+  height: 128px;
+  font-size: var(--csk-text-3xl);
+}
+
+/* Ring: border inside the box, so the size stays the nominal one */
+.csk-avatar--ring {
+  box-sizing: border-box;
+  border: 3px solid var(--csk-color-border);
+}
+
+[data-tone='on-dark'] .csk-avatar--ring {
+  border-color: var(--csk-color-on-dark-ring);
+}
+
 /* ==========================================================================
    Shape Variants
    ========================================================================== */

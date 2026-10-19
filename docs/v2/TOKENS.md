@@ -73,6 +73,7 @@ Cíl: jeden prefix, jedna paleta, žádné režimy kromě `embed`. Zdroj hodnot:
 | `--csk-gold-dark` / `--csk-silver-dark` / `--csk-bronze-dark` | `#8a6a00` / `#5f6b78` / `#8a4b1f` | pojmenování barev textu pořadí z tabulky primitiv |
 | `--csk-color-text-on-fill` | `--csk-white` | text na brand / action / live / sekci |
 | `--csk-color-overlay` | `--csk-ink` 50 % | podklad Modalu |
+| `--csk-color-on-dark-pad` / `-ring` | `--csk-white` 14 % / 40 % | podložka Badge a StatTile a kroužek Avataru uvnitř kontejneru `data-tone="on-dark"` (tmavý pás profilu) |
 | `--csk-color-focus` | `--csk-blue` | focus outline (`.in:focus` v referenci) |
 | `--csk-color-highlight-bg` / `-border` / `-text` | `--csk-blue-100` / `-200` / `--csk-blue-dark` | podložka, aktivní položka, úroveň závodu; rám zvýrazněné karty |
 | `--csk-color-live-bg` | `--csk-red-100` | běžící řádek v programu |

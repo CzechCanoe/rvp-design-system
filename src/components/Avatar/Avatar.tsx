@@ -1,7 +1,7 @@
 import { forwardRef, useState, type ImgHTMLAttributes, type ReactNode } from 'react';
 import './Avatar.css';
 
-export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
 export type AvatarShape = 'circular' | 'rounded' | 'square';
 export type AvatarColor =
   | 'default'
@@ -27,6 +27,8 @@ export interface AvatarProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, '
   size?: AvatarSize;
   /** Shape. `square` is for event and club logos: the image is contained, never cropped */
   shape?: AvatarShape;
+  /** Ring around the avatar (profile header); on `data-tone="on-dark"` it turns translucent white */
+  ring?: boolean;
   /** Background color for initials/fallback */
   color?: AvatarColor;
   /** Custom icon to display as fallback */
@@ -87,6 +89,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       name,
       size = 'md',
       shape = 'circular',
+      ring = false,
       color = 'default',
       icon,
       status,
@@ -108,6 +111,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       `csk-avatar--${size}`,
       `csk-avatar--${shape}`,
       !hasImage && `csk-avatar--${color}`,
+      ring && 'csk-avatar--ring',
       className,
     ]
       .filter(Boolean)
