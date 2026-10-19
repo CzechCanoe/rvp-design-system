@@ -187,6 +187,21 @@ const CalendarIcon = () => (
   </svg>
 );
 
+/** Warning state: advises, never blocks (e.g. age category differs from the year of birth). */
+export const Warning: Story = {
+  render: () => (
+    <div style={{ width: '280px' }}>
+      <Select
+        options={disciplineOptions}
+        label="Věková kategorie"
+        state="warning"
+        defaultValue="dv"
+        helperText="ročník 2011 odpovídá U16"
+      />
+    </div>
+  ),
+};
+
 export const WithIcon: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '280px' }}>

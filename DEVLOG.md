@@ -7127,6 +7127,22 @@ Gaps for T18/T19 are listed in the PR body.
 
 ---
 
+## 2026-10-19 - v2 T14: EntryTable + ProposalList + SummaryCard
+
+### Dokončeno
+- [x] EntryTable (C2 jako dvouřádková loď s rowSpan, kontroly jako Badge, select kategorie v buňce, akce), ProposalList, SummaryCard
+- [x] Story `Entry/ClubEntry` podle reference Prihlaska.html (390 + 1280), component stories, unit + Playwright testy (varování neblokuje odeslání)
+
+### Problémy a řešení
+1. **Problém:** kontrast textu na info pozadí v ProposalList (4.2:1)
+   **Řešení:** hint používá `--csk-color-text-2`
+
+### Poznámky
+Mezery DS: Select bez `state="warning"` (varovné ohraničení řeší EntryTable přes vlastní třídu), EntryTable na telefonu jen horizontální scroll uvnitř komponenty (bez kartového režimu), bez DeadlineBadge (text v PageTitle).
+
+CI snapshots for T14 generated (`test: update snapshots (CI)`); PR #80.
+
+
 ## 2026-10-19 - v2 T15: ProfileHeader + SeasonSparkline + RivalsList
 
 ### Dokončeno
@@ -7183,3 +7199,5 @@ Snapshots Event-Detail (390 + 1280) vygenerovány v CI (PR #77).
 Review T16: ResultsCard/LiveResults/storyClock moved to src/stories/_shared (Live and Event import from there), PageLayout footer added, link styling via layout CSS.
 Review T16 snapshots regenerated in CI.
 T16: Event-Detail snapshots regenerated after merging #72.
+
+T14 follow-up: `Select state="warning"`, DeadlineBadge in Entry/ClubEntry, main merged, CI snapshots regenerated.

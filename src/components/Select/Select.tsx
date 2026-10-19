@@ -2,7 +2,7 @@ import { forwardRef, type SelectHTMLAttributes, type ReactNode } from 'react';
 import './Select.css';
 
 export type SelectSize = 'sm' | 'md' | 'lg';
-export type SelectState = 'default' | 'error' | 'success';
+export type SelectState = 'default' | 'error' | 'warning' | 'success';
 
 export interface SelectOption {
   /** Option value */
@@ -161,7 +161,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             {errorMessage}
           </span>
         ) : helperText ? (
-          <span id={helperId} className="csk-select-helper">
+          <span id={helperId} className={state === 'warning' ? 'csk-select-helper csk-select-helper--warning' : 'csk-select-helper'}>
             {helperText}
           </span>
         ) : null}

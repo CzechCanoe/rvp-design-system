@@ -337,6 +337,22 @@ export type {
   OnCourseTimeToBeat,
 } from './OnCoursePanel';
 
+// EntryTable + ProposalList + SummaryCard (v2 T14, office tone)
+export { EntryTable, ENTRY_TABLE_LABELS } from './EntryTable';
+export type {
+  EntryTableProps,
+  EntryTableLabels,
+  EntryBoat,
+  EntryMember,
+  EntryCheck,
+  EntryCheckTone,
+} from './EntryTable';
+export { ProposalList, PROPOSAL_LIST_LABELS } from './ProposalList';
+export type { ProposalListProps, ProposalListLabels, Proposal } from './ProposalList';
+export { SummaryCard } from './SummaryCard';
+export type { SummaryCardProps, SummaryRow } from './SummaryCard';
+
+
 // ProfileHeader + SeasonSparkline + RivalsList (v2 T15)
 export { ProfileHeader } from './ProfileHeader';
 export type { ProfileHeaderProps, ProfileHeaderTile, ProfileHeaderVariant } from './ProfileHeader';

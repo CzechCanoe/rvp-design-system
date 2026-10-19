@@ -1,0 +1,112 @@
+/* EntryTable (office tone): dense table; on a phone it scrolls horizontally inside the component */
+
+.csk-entry-table {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-md);
+  color: var(--csk-color-text);
+  -webkit-overflow-scrolling: touch;
+}
+
+.csk-entry-table:focus-visible {
+  outline: 2px solid var(--csk-color-action);
+  outline-offset: -2px;
+}
+
+.csk-entry-table__table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+.csk-entry-table__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.csk-entry-table thead th {
+  padding: var(--csk-space-2) 6px;
+  font-size: var(--csk-text-xs);
+  font-weight: var(--csk-font-weight-semibold);
+  letter-spacing: var(--csk-letter-spacing-caps);
+  text-transform: uppercase;
+  text-align: left;
+  white-space: nowrap;
+  color: var(--csk-color-text-3);
+  border-bottom: 1px solid var(--csk-color-border);
+}
+
+.csk-entry-table__cell {
+  padding: var(--csk-space-2) 6px;
+  font-weight: inherit;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.csk-entry-table__row--last > * {
+  border-bottom: 1px solid var(--csk-color-border-2);
+}
+
+.csk-entry-table__boat:last-child .csk-entry-table__row--last > * {
+  border-bottom: 0;
+}
+
+.csk-entry-table__num {
+  font-variant-numeric: tabular-nums;
+}
+
+.csk-entry-table thead th.csk-entry-table__num,
+.csk-entry-table__fee {
+  text-align: right;
+}
+
+.csk-entry-table__muted,
+.csk-entry-table__open {
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+}
+
+.csk-entry-table__name {
+  min-width: 150px;
+}
+
+.csk-entry-table__name .csk-entry-table__muted {
+  white-space: nowrap;
+}
+
+.csk-entry-table__category {
+  min-width: 120px;
+}
+
+.csk-entry-table__hint {
+  margin-top: var(--csk-space-1);
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-warning-text);
+}
+
+.csk-entry-table__actions {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.csk-entry-table__empty {
+  padding: var(--csk-space-6) var(--csk-space-4);
+  text-align: center;
+  color: var(--csk-color-text-3);
+}
+
+.csk-entry-table__actions-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
