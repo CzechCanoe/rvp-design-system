@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { containerQueryComponents, embedPrototypes, testDefaults } from './config';
+import { containerQueryComponents, testDefaults } from './config';
 import { applyQuarantine } from './quarantine';
 
 /**
@@ -110,71 +110,12 @@ test.describe('Narrow Container Layout Tests', () => {
   }
 });
 
-test.describe('Embed Prototype Container Responsiveness', { tag: '@prototype' }, () => {
-  for (const prototype of embedPrototypes) {
-    test.describe(`${prototype.name}`, () => {
-      // Test at narrow width (sidebar embed scenario)
-      test('renders correctly at narrow width (300px)', async ({ page }) => {
-        await page.setViewportSize({ width: 350, height: 900 });
-
-        await page.goto(`/iframe.html?id=${prototype.storyId}&viewMode=story`);
-        await page.waitForSelector('#storybook-root', { state: 'visible', timeout: 30000 });
-        await page.waitForLoadState('networkidle');
-        await page.waitForTimeout(1000);
-
-        const root = page.locator('#storybook-root');
-        await expect(root).toBeVisible();
-
-        // Verify content renders at narrow width
-        const contentLength = await root.evaluate((el) => el.textContent?.trim().length ?? 0);
-        expect(contentLength).toBeGreaterThan(50);
-
-        // Visual regression at narrow width
-        await expect(root).toHaveScreenshot(
-          `container-responsive/${prototype.name}-narrow.png`,
-          {
-            maxDiffPixels: 100,
-            animations: 'disabled',
-          }
-        );
-      });
-
-      // Test at medium width (main content embed scenario)
-      test('renders correctly at medium width (600px)', async ({ page }) => {
-        await page.setViewportSize({ width: 650, height: 900 });
-
-        await page.goto(`/iframe.html?id=${prototype.storyId}&viewMode=story`);
-        await page.waitForSelector('#storybook-root', { state: 'visible', timeout: 30000 });
-        await page.waitForLoadState('networkidle');
-        await page.waitForTimeout(1000);
-
-        const root = page.locator('#storybook-root');
-        await expect(root).toBeVisible();
-
-        // Verify content renders at medium width
-        const contentLength = await root.evaluate((el) => el.textContent?.trim().length ?? 0);
-        expect(contentLength).toBeGreaterThan(50);
-
-        await expect(root).toHaveScreenshot(
-          `container-responsive/${prototype.name}-medium.png`,
-          {
-            maxDiffPixels: 100,
-            animations: 'disabled',
-          }
-        );
-      });
-    });
-  }
-});
-
 test.describe('Overflow Prevention Tests', () => {
   const componentsToTest = [
     { name: 'Badge', storyId: 'components-badge--csk-sections', selector: '.csk-badge' },
     { name: 'Button', storyId: 'components-button--variants', selector: '.csk-button' },
     { name: 'Card', storyId: 'components-card--default', selector: '.csk-card' },
     { name: 'Tabs', storyId: 'components-tabs--default', selector: '.csk-tabs' },
-    { name: 'AthleteCard', storyId: 'components-athletecard--default', selector: '.csk-athlete-card' },
-    { name: 'StatCard', storyId: 'components-statcard--default', selector: '.csk-stat-card' },
   ];
 
   for (const component of componentsToTest) {
@@ -254,43 +195,6 @@ test.describe('Text Truncation and Ellipsis', () => {
     // But the page itself should not overflow
     expect(pageOverflows).toBe(false);
   });
-});
-
-test.describe('KanoeCzContext Embed Widths', { tag: '@prototype' }, () => {
-  // Test embed scenarios with different kanoe.cz sidebar configurations
-  const embedWidths = [
-    { name: 'sidebar-narrow', width: 320, description: 'Narrow sidebar widget' },
-    { name: 'sidebar-wide', width: 480, description: 'Wide sidebar widget' },
-    { name: 'main-content', width: 720, description: 'Main content area' },
-    { name: 'full-width', width: 1000, description: 'Full width container' },
-  ];
-
-  for (const config of embedWidths) {
-    test(`CalendarPage embed at ${config.name} (${config.width}px)`, async ({ page }) => {
-      await page.setViewportSize({ width: config.width + 50, height: 800 });
-
-      await page.goto('/iframe.html?id=prototypes-calendar-page--embed&viewMode=story');
-      await page.waitForSelector('#storybook-root', { state: 'visible', timeout: 30000 });
-      await page.waitForLoadState('networkidle');
-      await page.waitForTimeout(1000);
-
-      const root = page.locator('#storybook-root');
-      await expect(root).toBeVisible();
-
-      // Verify content at this width
-      const contentLength = await root.evaluate((el) => el.textContent?.trim().length ?? 0);
-      expect(contentLength).toBeGreaterThan(50);
-
-      // Take screenshot for visual verification
-      await expect(root).toHaveScreenshot(
-        `kanoe-embed/calendar-${config.name}.png`,
-        {
-          maxDiffPixels: 80,
-          animations: 'disabled',
-        }
-      );
-    });
-  }
 });
 
 test.describe('Container Query CSS Support', () => {

@@ -45,7 +45,6 @@ const specificComponents = [
   { name: 'Calendar', storyId: 'components-calendar--default' },
   { name: 'ResultsTable', storyId: 'components-resultstable--default' },
   { name: 'LiveIndicator', storyId: 'components-liveindicator--default' },
-  { name: 'StatCard', storyId: 'components-statcard--default' },
   { name: 'StatusBadge-AllStates', storyId: 'components-statusbadge--all-states' },
   { name: 'StatusBadge-ProvisionalAndReview', storyId: 'components-statusbadge--provisional-and-review' },
   { name: 'MarkBadge-AllMarks', storyId: 'components-markbadge--all-marks' },
@@ -56,7 +55,6 @@ const specificComponents = [
   { name: 'Notice-AllTones', storyId: 'components-notice--all-tones' },
   { name: 'StatTile', storyId: 'components-stattile--with-delta' },
   { name: 'States-Overview', storyId: 'states-overview--default' },
-  { name: 'AthleteCard', storyId: 'components-athletecard--default' },
   { name: 'SegmentedControl', storyId: 'components-segmentedcontrol--default' },
   { name: 'SegmentedControl-Wrapping360', storyId: 'components-segmentedcontrol--wrapping-360' },
   { name: 'StarButton', storyId: 'components-starbutton--default' },
@@ -68,25 +66,13 @@ const specificComponents = [
   { name: 'DataAge', storyId: 'components-dataage--overview' },
 ];
 
-// Prototype pages to test
-const prototypes = [
-  { name: 'LivePage-Embed', storyId: 'prototypes-live-page--embed' },
-  { name: 'ResultsPage-Embed', storyId: 'prototypes-results-page--embed' },
-  { name: 'CalendarPage-Embed', storyId: 'prototypes-calendar-page--embed' },
-  { name: 'EventDetailPage-Embed', storyId: 'prototypes-event-detail-page--embed' },
-  { name: 'ProfilePage', storyId: 'prototypes-profilepage--satellite' },
-  { name: 'DashboardPage', storyId: 'prototypes-dashboard-page--satellite' },
-];
-
 // Helper to run axe and check results
 async function runA11yTest(
   page: import('@playwright/test').Page,
   storyId: string,
-  componentName: string,
-  theme: 'light' | 'dark' = 'light'
+  componentName: string
 ) {
-  const themeParam = theme === 'dark' ? '&globals=theme:dark' : '';
-  await page.goto(`/iframe.html?id=${storyId}&viewMode=story${themeParam}`);
+  await page.goto(`/iframe.html?id=${storyId}&viewMode=story`);
   await page.waitForSelector('#storybook-root', { state: 'visible' });
   await page.waitForLoadState('networkidle');
   await page.waitForTimeout(300);
@@ -97,7 +83,7 @@ async function runA11yTest(
 
   // Log violations for debugging
   if (accessibilityScanResults.violations.length > 0) {
-    console.log(`\n${componentName} (${theme}) violations:`);
+    console.log(`\n${componentName} violations:`);
     for (const violation of accessibilityScanResults.violations) {
       console.log(`  - ${violation.id}: ${violation.description}`);
       console.log(`    Impact: ${violation.impact}`);
@@ -111,12 +97,7 @@ async function runA11yTest(
 test.describe('Accessibility - Core Components (Tier 1)', () => {
   for (const component of coreComponents) {
     test(`${component.name} - WCAG 2.1 AA (light)`, async ({ page }) => {
-      const results = await runA11yTest(page, component.storyId, component.name, 'light');
-      expect(results.violations).toEqual([]);
-    });
-
-    test(`${component.name} - WCAG 2.1 AA (dark)`, async ({ page }) => {
-      const results = await runA11yTest(page, component.storyId, component.name, 'dark');
+      const results = await runA11yTest(page, component.storyId, component.name);
       expect(results.violations).toEqual([]);
     });
   }
@@ -125,12 +106,7 @@ test.describe('Accessibility - Core Components (Tier 1)', () => {
 test.describe('Accessibility - Advanced Components (Tier 2)', () => {
   for (const component of advancedComponents) {
     test(`${component.name} - WCAG 2.1 AA (light)`, async ({ page }) => {
-      const results = await runA11yTest(page, component.storyId, component.name, 'light');
-      expect(results.violations).toEqual([]);
-    });
-
-    test(`${component.name} - WCAG 2.1 AA (dark)`, async ({ page }) => {
-      const results = await runA11yTest(page, component.storyId, component.name, 'dark');
+      const results = await runA11yTest(page, component.storyId, component.name);
       expect(results.violations).toEqual([]);
     });
   }
@@ -139,26 +115,7 @@ test.describe('Accessibility - Advanced Components (Tier 2)', () => {
 test.describe('Accessibility - Specific Components (Tier 3)', () => {
   for (const component of specificComponents) {
     test(`${component.name} - WCAG 2.1 AA (light)`, async ({ page }) => {
-      const results = await runA11yTest(page, component.storyId, component.name, 'light');
-      expect(results.violations).toEqual([]);
-    });
-
-    test(`${component.name} - WCAG 2.1 AA (dark)`, async ({ page }) => {
-      const results = await runA11yTest(page, component.storyId, component.name, 'dark');
-      expect(results.violations).toEqual([]);
-    });
-  }
-});
-
-test.describe('Accessibility - Prototypes', () => {
-  for (const prototype of prototypes) {
-    test(`${prototype.name} - WCAG 2.1 AA (light)`, async ({ page }) => {
-      const results = await runA11yTest(page, prototype.storyId, prototype.name, 'light');
-      expect(results.violations).toEqual([]);
-    });
-
-    test(`${prototype.name} - WCAG 2.1 AA (dark)`, async ({ page }) => {
-      const results = await runA11yTest(page, prototype.storyId, prototype.name, 'dark');
+      const results = await runA11yTest(page, component.storyId, component.name);
       expect(results.violations).toEqual([]);
     });
   }
@@ -314,46 +271,5 @@ test.describe('Color Contrast', () => {
     expect(results.violations.filter((v) => v.id === 'color-contrast')).toEqual([]);
   });
 
-  test('Card variants have sufficient contrast (dark mode)', async ({ page }) => {
-    await page.goto(
-      '/iframe.html?id=components-card--variants&viewMode=story&globals=theme:dark'
-    );
-    await page.waitForSelector('#storybook-root', { state: 'visible' });
-    // let Storybook's own axe run settle, otherwise axe reports "already running"
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(300);
 
-    const results = await new AxeBuilder({ page })
-      .withTags(['wcag2aa'])
-      .include('.csk-card')
-      .analyze();
-
-    expect(results.violations.filter((v) => v.id === 'color-contrast')).toEqual([]);
-  });
-
-  test('StatCard has sufficient contrast in both themes', async ({ page }) => {
-    // Light mode
-    await page.goto('/iframe.html?id=components-statcard--default&viewMode=story');
-    await page.waitForSelector('#storybook-root', { state: 'visible' });
-
-    const lightResults = await new AxeBuilder({ page })
-      .withTags(['wcag2aa'])
-      .include('.csk-stat-card')
-      .analyze();
-
-    expect(lightResults.violations.filter((v) => v.id === 'color-contrast')).toEqual([]);
-
-    // Dark mode
-    await page.goto(
-      '/iframe.html?id=components-statcard--default&viewMode=story&globals=theme:dark'
-    );
-    await page.waitForSelector('#storybook-root', { state: 'visible' });
-
-    const darkResults = await new AxeBuilder({ page })
-      .withTags(['wcag2aa'])
-      .include('.csk-stat-card')
-      .analyze();
-
-    expect(darkResults.violations.filter((v) => v.id === 'color-contrast')).toEqual([]);
-  });
 });

@@ -7048,3 +7048,19 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 - Rozbalený řádek se dál překresluje s každým renderem tabulky (detail může záviset na stavu aplikace).
 - Veřejné exporty a názvy beze změny (T10/T11 je používají).
 - CI přegenerovalo jen `RunDetail-OnCourse` (mobil + desktop): Tr. 2. jízdy „—“ → „(·)“.
+
+---
+
+## 2026-10-19 - v2 T17a: Prořezání 1.x a zeštíhlení CI
+
+### Dokončeno
+- [x] Smazáno 11 komponent s verdiktem X (Navigation, HeroSection, SectionHeader, StatsBar, StatCard, ActionCard, AthleteCard, ListItem, ResultItem, PodiumCard, DateBadge) + exporty
+- [x] Smazáno `src/prototypes/` (vč. `legacyResults.ts`), `src/stories/Aesthetic.stories.tsx`, Storybook Theme toolbar (jen light)
+- [x] Testy: smazán `prototypes.spec.ts`, `cross-browser.spec.ts`, všechny `-dark` varianty, `@prototype` testy; QUARANTINE vyprázdněna; Playwright jen projekt chromium
+- [x] `check-no-hex.baseline.json` smazán, kontrola je striktní
+- [x] CI: smazán `skip-snapshots-label.yml` a `skip_snapshots`/`prototypes` inputy, job `changes` (Playwright na PR jen při změně src/tests/.storybook/package*/playwright.config/workflows)
+- [x] CLAUDE.md: tabulka test skriptů, pravidlo o vlastním finálním commitu zrušeno
+
+### Poznámky
+- Před: Playwright job 6 m 18 s, 567 testů (472 + 95 @prototype). Po: viz PR.
+- KanoeCzContext (verdikt Z) zůstává jako host dekorátor.

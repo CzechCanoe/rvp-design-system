@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Playwright configuration for visual regression testing
- * Captures screenshots of all prototypes and Storybook components
+ * Captures screenshots of Storybook components and layouts
  */
 export default defineConfig({
   testDir: './tests',
@@ -24,6 +24,9 @@ export default defineConfig({
     reducedMotion: 'reduce',
   },
 
+  // Chromium is the only snapshot authority (PR CI runs --project=chromium).
+  // The other projects are for the occasional full cross-browser run
+  // (dispatch CI with browsers=all): functional + axe only, --ignore-snapshots.
   projects: [
     {
       name: 'chromium',
