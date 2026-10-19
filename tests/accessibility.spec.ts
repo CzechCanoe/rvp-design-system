@@ -52,6 +52,10 @@ const specificComponents = [
   { name: 'StarButton', storyId: 'components-starbutton--default' },
   { name: 'FavoritesToggle', storyId: 'components-favoritestoggle--default' },
   { name: 'TableToolbar', storyId: 'components-tabletoolbar--default' },
+  { name: 'TimeValue', storyId: 'components-timevalue--observed-states' },
+  { name: 'RunningTime', storyId: 'components-runningtime--states' },
+  { name: 'RunningTime-StateSwitching', storyId: 'components-runningtime--state-switching' },
+  { name: 'DataAge', storyId: 'components-dataage--overview' },
 ];
 
 // Prototype pages to test

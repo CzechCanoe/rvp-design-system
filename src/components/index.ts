@@ -327,3 +327,19 @@ export type { FavoritesToggleProps } from './FavoritesToggle';
 // TableToolbar
 export { TableToolbar, TableToolbarButton } from './TableToolbar';
 export type { TableToolbarProps, TableToolbarButtonProps } from './TableToolbar';
+// TimeValue
+export { TimeValue } from './TimeValue';
+export type {
+  TimeValueProps,
+  TimeValueVariant,
+  TimeValuePrecision,
+  TimeValueAlign,
+} from './TimeValue';
+
+// RunningTime
+export { RunningTime, RUNNING_STALE_AFTER_SECONDS } from './RunningTime';
+export type { RunningTimeProps } from './RunningTime';
+
+// DataAge
+export { DataAge } from './DataAge';
+export type { DataAgeProps, DataAgeMode, DataAgeConnection } from './DataAge';

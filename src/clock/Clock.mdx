@@ -1,0 +1,88 @@
+{/* Clock.mdx */}
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Context/Clock" />
+
+# Clock – injektovaný čas
+
+Každé pravidlo „životnosti zobrazení“ (běžící čas, zmrznutí po 3 s, stáří dat) čte čas jen přes injektovaný
+`Clock` (c123 `TEST-ARCHITECTURE` §5). Komponenty DS nikdy nevolají `Date.now`, `performance.now`,
+`setTimeout`, `setInterval` ani `requestAnimationFrame` přímo; jediné povolené místo je `createBrowserClock()`.
+Hlídá to unit test `src/clock/noRealTime.test.ts` (statická kontrola zdrojů) a testy komponent se spy na
+`Date.now` / `performance.now`.
+
+```ts
+interface Clock {
+  now(): number;                                   // epoch ms
+  setTimeout(fn: () => void, ms: number): ClockHandle;
+  clearTimeout(handle: ClockHandle): void;
+  requestFrame(fn: (time: number) => void): ClockHandle; // time = now() ve snímku
+  cancelFrame(handle: ClockHandle): void;
+}
+```
+
+Rozhraní odpovídá `Clock` z ekosystému c123, aplikace tedy může předat vlastní instanci.
+
+## Odkud komponenta hodiny bere
+
+1. prop `clock` na komponentě (`RunningTime`, `DataAge`),
+2. jinak nejbližší `<ClockProvider clock={…}>`,
+3. jinak sdílené `createBrowserClock()`.
+
+Aplikace dá `ClockProvider` do kořene a **stejnými hodinami** razítkuje příjem dat:
+`receivedAt = clock.now()` v okamžiku, kdy hodnota dorazila. Nikdy se neodečítá `observedAt` serveru
+od lokálních hodin (CONTRACTS §2.6).
+
+```tsx
+import { ClockProvider, createBrowserClock, RunningTime } from '@czechcanoe/rvp-design-system';
+
+const clock = createBrowserClock();
+
+// při příjmu attempt.updated s outcome.kind === 'running':
+const running = { elapsedSeconds: msg.running.elapsedSeconds, receivedAt: clock.now() };
+
+<ClockProvider clock={clock}>
+  <RunningTime elapsedSeconds={running.elapsedSeconds} receivedAt={running.receivedAt} />
+</ClockProvider>
+```
+
+`createBrowserClock().now()` je `Date.now()`: na rozdíl od `performance.now()` počítá i dobu, kdy telefon spí,
+takže stáří dat po odemčení obrazovky sedí, a `DataAge mode="absolute"` potřebuje skutečný čas. Snímky obaluje
+skutečné `requestAnimationFrame`.
+
+## Politika zobrazení (pro testy aplikace)
+
+- **`RunningTime` tiká:** poslední `elapsedSeconds` + lokální čas od příjmu, zaokrouhleno dolů na `precision`.
+  Perioda: každý snímek (`requestFrame`); překreslí se jen při změně zobrazených číslic.
+- **`RunningTime` mrzne:** `RUNNING_STALE_AFTER_SECONDS` = 3 s od příjmu (prop `staleAfterSeconds`), nejpozději
+  v prvním snímku po termínu.
+- **Zmrzlá hodnota:** zůstane na `elapsedSeconds + 3 s` (bez skoku zpět), varianta `stale` + stáří z `DataAge`;
+  žádné další snímky, dokud nepřijde nová hodnota.
+- **`DataAge` relativně:** „právě teď“, „před N s“, „před N min“, „před N h“ (zaokrouhleno dolů); překreslí se
+  přes `clock.setTimeout` přesně při další změně textu.
+- **`DataAge` absolutně:** „stav ze HH:MM:SS“; netiká.
+
+Nová hodnota = nové `elapsedSeconds` a/nebo `receivedAt`; displej na ni okamžitě skočí (i dozadu) a znovu tiká.
+Když jezdec opustí trať (`status` ≠ `on-course`), aplikace místo `RunningTime` vykreslí `TimeValue`.
+
+## Testy a stories
+
+```ts
+const clock = createTestClock({ now: Date.UTC(2026, 9, 4, 12, 32, 10) });
+render(<RunningTime elapsedSeconds={46.1} receivedAt={clock.now()} clock={clock} />);
+act(() => { clock.advance(400); clock.flushFrames(); });   // → 46.5
+```
+
+- `advance(ms)` posune čas a spustí splatné `setTimeout` v pořadí splatnosti; snímky nespouští.
+- `flushFrames()` spustí jeden snímek (callbacky zaregistrované během něj čekají na další).
+- `pendingFrames()` / `pendingTimers()` pro aserce („po zmrznutí už nežádá snímky“).
+- Žádný globální fake-timer patch.
+
+Stories pro snapshoty používají `createTestClock()` s pevným časem a nikdy neflushují snímky, takže na screenshotu
+nic netiká. Story, která tiká v reálném čase (`RunningTime` → *Real Clock*), má tag `no-snapshot` a nesmí se
+přidat do `tests/config.ts`.
+
+## Pohyb
+
+Tikající číslice jsou data, ne dekorace. `TimeValue`, `RunningTime` a `DataAge` nemají žádné přechody ani animace,
+takže `prefers-reduced-motion` nemá co vypínat.
