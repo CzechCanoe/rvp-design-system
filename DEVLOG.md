@@ -7199,3 +7199,5 @@ Snapshots Event-Detail (390 + 1280) vygenerovány v CI (PR #77).
 Review T16: ResultsCard/LiveResults/storyClock moved to src/stories/_shared (Live and Event import from there), PageLayout footer added, link styling via layout CSS.
 Review T16 snapshots regenerated in CI.
 T16: Event-Detail snapshots regenerated after merging #72.
+
+T14 follow-up: `Select state="warning"`, DeadlineBadge in Entry/ClubEntry, main merged, CI snapshots regenerated.
