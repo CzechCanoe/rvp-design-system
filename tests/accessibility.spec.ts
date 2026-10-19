@@ -70,6 +70,9 @@ const specificComponents = [
   { name: 'OnCoursePanel-Stale', storyId: 'components-oncoursepanel--stale' },
   { name: 'OnCoursePanel-TimeToBeat', storyId: 'components-oncoursepanel--time-to-beat' },
   { name: 'OnCoursePanel-Collapsed', storyId: 'components-oncoursepanel--collapsed' },
+  { name: 'DeadlineBadge-AllKinds', storyId: 'components-deadlinebadge--all-kinds' },
+  { name: 'WeekendCalendar', storyId: 'components-weekendcalendar--default' },
+  { name: 'WeekendCalendar-InNarrowContainer', storyId: 'components-weekendcalendar--in-narrow-container' },
 ];
 
 // Helper to run axe and check results

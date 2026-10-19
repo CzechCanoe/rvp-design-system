@@ -1,0 +1,133 @@
+/* Page layout of the Calendar page story (reference Kalendar): spacing and columns only, components are never restyled. */
+
+.calendar-page {
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-md);
+}
+
+.calendar-page__body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-block: 20px 40px;
+}
+
+.calendar-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--csk-space-3);
+  padding: 12px 14px;
+  background: var(--csk-color-surface-2);
+  border-radius: var(--csk-radius-lg);
+}
+
+.calendar-page__checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--csk-space-2) var(--csk-space-4);
+  margin-left: auto;
+}
+
+.calendar-page__columns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--csk-space-6);
+}
+
+.calendar-page__main {
+  flex: 999 1 640px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.calendar-page__aside {
+  flex: 1 1 280px;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-4);
+}
+
+.calendar-page__month {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.calendar-page__h2 {
+  margin: 0;
+  font-family: var(--csk-font-display);
+  font-size: var(--csk-text-2xl);
+}
+
+.calendar-page__h3 {
+  margin: 0;
+  font-size: var(--csk-text-xl);
+  font-family: var(--csk-font-display);
+}
+
+.calendar-page__muted {
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text-3);
+}
+
+.calendar-page__card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--csk-space-2);
+}
+
+.calendar-page__deadlines {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.calendar-page__deadlines li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--csk-color-border-2);
+}
+
+.calendar-page__deadline-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--csk-space-2);
+}
+
+.calendar-page__card-foot {
+  padding: 10px 18px;
+  font-size: var(--csk-text-sm);
+}
+
+.calendar-page__stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-2);
+  margin: 0 0 var(--csk-space-3);
+}
+
+.calendar-page__stats div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-page__stats dt {
+  margin: 0;
+}
+
+.calendar-page__stats dd {
+  margin: 0;
+  font-weight: var(--csk-font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
