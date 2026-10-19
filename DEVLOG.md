@@ -6886,3 +6886,27 @@ Label eventy dřív spouštěly přeskočené CI běhy, které přes concurrency
 ### Poznámky
 - Test „Backdrop-filter renders or has fallback" (story Header sticky-with-blur) smazán, blur v2 neexistuje; snapshoty Header-Glass smazány.
 - Placeholdery ve stories: Tabs carousel (T4), StatusBadge LIVE (T5), SegmentedControl (T7), Badge/Button (T4), DataAge (T6).
+
+---
+
+## 2026-10-19 - v2 T6: TimeValue, RunningTime, DataAge, Clock
+
+### Dokončeno
+- [x] `src/clock/`: `Clock` (rozhraní c123: `now`, `setTimeout`, `clearTimeout`, `requestFrame`, `cancelFrame`), `createBrowserClock()` (jediné místo se skutečným časem), `createTestClock()` (`advance`, `flushFrames`, `pendingFrames`, `pendingTimers`), `ClockProvider`, `useClock`; dokumentace `Context/Clock` (MDX)
+- [x] `src/types/`: `Observed<T>`, `ObservedState`, `UnavailableReason` (kontraktní envelope je přiřaditelný bez mapování)
+- [x] `TimeValue` (Observed stavy, varianty, `align="decimal"`, `sign` s U+2212), `RunningTime` (tik přes `requestFrame`, snap, zmrznutí po 3 s, stale + věk), `DataAge` (relative/absolute, connection tečka + text)
+- [x] Unit testy (test clock, spy na `Date.now` / `performance.now` / timery / rAF s filtrem na přímého volajícího, statická kontrola zdrojů `noRealTime.test.ts`)
+- [x] Stories s pevným časem (test clock), interaktivní `RunningTime/State Switching` (AK), `Real Clock` jen mimo snapshoty (tag `no-snapshot`)
+- [x] `tests/config.ts` (5 snapshotů), a11y (4 stories), `tests/time-components.spec.ts` (funkční průchod AK story, reálné tikání, bez animací)
+
+### Problémy a řešení
+1. **Problém:** spy zachytil `performance.now` z React scheduleru volaného uvnitř `onFrame` (první vlastní rámec ve stacku).
+   **Řešení:** počítá se jen přímý volající (první rámec mimo spy/tinyspy).
+2. **Problém:** MDX v Storybooku nevykreslí GFM tabulku.
+   **Řešení:** politika zobrazení jako seznam.
+3. **Problém:** port 6006 obsazený jiným agentem (Playwright by použil cizí server).
+   **Řešení:** lokálně dočasný config s vlastním portem (necommitnutý).
+
+### Poznámky
+- Zmrzlá hodnota zůstává na `elapsedSeconds + 3 s` (bez skoku zpět), `now()` prohlížečových hodin je `Date.now()` (počítá i spánek telefonu, potřebné pro `mode="absolute"`).
+- `OnCourseRider` / `ResultsTable` mají skládat tyto komponenty; konec jízdy (status ≠ on-course) řeší aplikace přepnutím na `TimeValue`.

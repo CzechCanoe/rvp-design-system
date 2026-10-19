@@ -325,3 +325,20 @@ export type {
   DateBadgeSection,
   DateBadgeSize,
 } from './DateBadge';
+
+// TimeValue
+export { TimeValue } from './TimeValue';
+export type {
+  TimeValueProps,
+  TimeValueVariant,
+  TimeValuePrecision,
+  TimeValueAlign,
+} from './TimeValue';
+
+// RunningTime
+export { RunningTime, RUNNING_STALE_AFTER_SECONDS } from './RunningTime';
+export type { RunningTimeProps } from './RunningTime';
+
+// DataAge
+export { DataAge } from './DataAge';
+export type { DataAgeProps, DataAgeMode, DataAgeConnection } from './DataAge';

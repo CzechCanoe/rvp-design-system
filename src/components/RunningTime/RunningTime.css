@@ -1,0 +1,30 @@
+/* =============================================================================
+   RunningTime – ticking TimeValue; when stale, frozen value + its age
+   Ticking digits are data, not decoration: no transitions or animations here.
+   ============================================================================= */
+
+.csk-running-time {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--csk-space-2);
+  white-space: nowrap;
+}
+
+.csk-running-time__age {
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-xs);
+  font-weight: var(--csk-font-weight-regular);
+  color: var(--csk-color-text-3);
+}
+
+.csk-running-time__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
