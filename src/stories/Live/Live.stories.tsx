@@ -158,7 +158,7 @@ export const Disconnected: Story = {
     <LivePage
       title="Olympic Hopes 2026"
       subtitle={SUBTITLE}
-      status={null}
+      status={<StatusBadge state="stale" />}
       dataAge={
         <DataAge
           receivedAt={STORY_NOW - STALE_AGE_SECONDS * 1000}

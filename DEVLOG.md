@@ -7095,6 +7095,17 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 
 ---
 
+## 2026-10-19 - fix: StatusBadge on the navy EventHeader
+
+### Dokončeno
+- [x] EventHeader wraps its status slot in `data-tone="on-dark"`; StatusBadge.css gives `stale` light text and underline there (was 1.81:1 on navy). Other states keep their own surface/fill and pass axe.
+- [x] Story `EventHeader/StatusStates` (all six states); added to axe (accessibility.spec, results-table.spec via viewportStories) and the 390/1280 snapshot list.
+
+### Poznámky
+Live1/Live5 reference shows no on-dark badge; no new token needed (`--csk-color-text-on-fill`).
+
+---
+
 ## 2026-10-19 - v2 T12: Page stories Live
 
 ### Dokončeno
@@ -7110,6 +7121,29 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 
 ### Poznámky
 Gaps for T18/T19 are listed in the PR body.
+
+### Doplněk (PR #72): Live story
+- Live/Disconnected: header shows `StatusBadge stale`; `.live-page__status` / `__foot` use xs text-2, foot padding left to Card footer; dismissible category pill clears story state.
+
+---
+
+## 2026-10-19 - v2 T13: WeekendCalendar + DeadlineBadge
+
+### Dokončeno
+- [x] `DeadlineBadge` (open / closing / closed / late; text a datum dodává aplikace, žádné čtení času, žádná animace; warning jen pro `closing`, prošlá uzávěrka je neutrální `closed`)
+- [x] `WeekendCalendar` (víkendy + `weekday` řádky, `current`, container query 720 px)
+- [x] Story `Calendar/Season` (reference Kalendar), stories komponent, unit testy, snapshot/axe seznamy v `tests/`
+
+### Problémy a řešení
+1. **Problém:** `text-3` na `surface-2` v levém sloupci má kontrast 4.46.
+   **Řešení:** label a poznámka používají `text-2`.
+2. **Problém:** `results-table.spec.ts` iteruje `viewportStories` a čeká na results selektory.
+   **Řešení:** přidán `.csk-weekend-calendar` do selektoru.
+
+### Poznámky
+Existující `Calendar` (verdikt Z) beze změny API. Mezery DS: Button bez `href` (odkaz jako tlačítko), Card bez zvýrazněné varianty (Moje lhůty), PageLayout footer bez paddingu.
+
+Snapshoty vygenerovány v CI (label update-snapshots); PR #79.
 
 ---
 

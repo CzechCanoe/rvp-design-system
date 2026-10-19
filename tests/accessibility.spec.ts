@@ -63,12 +63,16 @@ const specificComponents = [
   { name: 'TimeValue', storyId: 'components-timevalue--observed-states' },
   { name: 'RunningTime', storyId: 'components-runningtime--states' },
   { name: 'RunningTime-StateSwitching', storyId: 'components-runningtime--state-switching' },
+  { name: 'EventHeader-StatusStates', storyId: 'components-eventheader--status-states' },
   { name: 'DataAge', storyId: 'components-dataage--overview' },
   { name: 'OnCoursePanel-ThreeRiders', storyId: 'components-oncoursepanel--three-riders' },
   { name: 'OnCoursePanel-SixRiders', storyId: 'components-oncoursepanel--six-riders' },
   { name: 'OnCoursePanel-Stale', storyId: 'components-oncoursepanel--stale' },
   { name: 'OnCoursePanel-TimeToBeat', storyId: 'components-oncoursepanel--time-to-beat' },
   { name: 'OnCoursePanel-Collapsed', storyId: 'components-oncoursepanel--collapsed' },
+  { name: 'DeadlineBadge-AllKinds', storyId: 'components-deadlinebadge--all-kinds' },
+  { name: 'WeekendCalendar', storyId: 'components-weekendcalendar--default' },
+  { name: 'WeekendCalendar-InNarrowContainer', storyId: 'components-weekendcalendar--in-narrow-container' },
 ];
 
 // Helper to run axe and check results

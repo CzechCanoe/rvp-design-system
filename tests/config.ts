@@ -89,6 +89,10 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'TimeValue-Formats', storyId: 'components-timevalue--formats', tier: 'specific' },
   { name: 'RunningTime-States', storyId: 'components-runningtime--states', tier: 'specific' },
   { name: 'DataAge-Overview', storyId: 'components-dataage--overview', tier: 'specific' },
+  // T13: DeadlineBadge has no time-dependent state (the application passes the text), so the stories are deterministic.
+  { name: 'DeadlineBadge-AllKinds', storyId: 'components-deadlinebadge--all-kinds', tier: 'specific' },
+  { name: 'WeekendCalendar', storyId: 'components-weekendcalendar--default', tier: 'specific', cssFeatures: ['grid', 'container-queries'] },
+  { name: 'WeekendCalendar-InNarrowContainer', storyId: 'components-weekendcalendar--in-narrow-container', tier: 'specific', cssFeatures: ['container-queries'] },
 ];
 
 /** All components for visual regression testing */
@@ -129,6 +133,7 @@ export const viewportStories: Array<{ name: string; storyId: string }> = [
   { name: 'ResultsTable-Expanded', storyId: 'components-resultstable--expanded' },
   { name: 'ResultsTable-Startlist', storyId: 'components-resultstable--startlist' },
   { name: 'ResultsTable-Empty', storyId: 'components-resultstable--empty' },
+  { name: 'EventHeader-StatusStates', storyId: 'components-eventheader--status-states' },
   { name: 'StartlistTable', storyId: 'components-startlisttable--default' },
   { name: 'StartlistTable-SingleStart', storyId: 'components-startlisttable--single-start' },
   { name: 'StartlistTable-WithNotice', storyId: 'components-startlisttable--with-notice' },
@@ -150,6 +155,9 @@ export const viewportStories: Array<{ name: string; storyId: string }> = [
   { name: 'OnCoursePanel-Collapsed', storyId: 'components-oncoursepanel--collapsed' },
   { name: 'OnCoursePanel-InNarrowContainer', storyId: 'components-oncoursepanel--in-narrow-container' },
   { name: 'OnCoursePanel-RiderStates', storyId: 'components-oncoursepanel--rider-states' },
+  // v2 T13: WeekendCalendar (dates column / band by container query)
+  { name: 'WeekendCalendar-Default', storyId: 'components-weekendcalendar--default' },
+  { name: 'WeekendCalendar-CurrentWeekend', storyId: 'components-weekendcalendar--current-weekend' },
 ];
 
 /**
@@ -164,6 +172,8 @@ export const pageStories: Array<{ name: string; storyId: string }> = [
   { name: 'Live-Official', storyId: 'live--official' },
   { name: 'Live-Disconnected', storyId: 'live--disconnected' },
   { name: 'Live-Program', storyId: 'live--program' },
+  // v2 T13: Calendar page (reference Kalendar). Same spec/tolerance; the file is live-pages.spec.ts.
+  { name: 'Calendar-Season', storyId: 'calendar--season' },
   { name: 'Event-Detail', storyId: 'event-detail--default' },
 ];
 
