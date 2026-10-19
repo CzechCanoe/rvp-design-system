@@ -17,7 +17,7 @@ const meta: Meta<typeof Avatar> = {
   argTypes: {
     size: {
       control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
       description: 'Size of the avatar',
     },
     shape: {
@@ -295,4 +295,17 @@ export const EventLogo: Story = {
       },
     },
   },
+};
+
+/** 3xl (128 px) is the public profile; `ring` is the profile-band ring (translucent white on `data-tone="on-dark"`). */
+export const LargeAndRing: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
+      <Avatar initials="JN" size="3xl" color="primary" shape="rounded" />
+      <Avatar initials="JN" size="xl" color="primary" ring />
+      <div data-tone="on-dark" style={{ padding: 16, background: 'var(--csk-color-brand)' }}>
+        <Avatar initials="JN" size="xl" color="primary" ring />
+      </div>
+    </div>
+  ),
 };

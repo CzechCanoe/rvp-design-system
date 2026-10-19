@@ -46,6 +46,11 @@
   border: 1px solid var(--csk-color-border);
 }
 
+/* Highlight tone - brand-tinted frame (after the variant so it wins on equal specificity) */
+.csk-card.csk-card--highlight {
+  border-color: var(--csk-color-highlight-border);
+}
+
 /* ==========================================================================
    PADDING
    ========================================================================== */

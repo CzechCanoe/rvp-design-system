@@ -278,3 +278,15 @@ export const EventCard: Story = {
     },
   },
 };
+
+/** `tone="highlight"`: brand-tinted frame for the card that matters now. */
+export const Highlight: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+      <Card style={{ width: 260 }}>Default tone</Card>
+      <Card tone="highlight" style={{ width: 260 }}>
+        Highlight tone
+      </Card>
+    </div>
+  ),
+};
