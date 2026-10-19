@@ -199,16 +199,38 @@ export type {
   AthleteVtClass,
 } from './AthleteCard';
 
-// ResultsTable
-export { ResultsTable } from './ResultsTable';
+// ResultsTable v2 + RunDetail (+ row/cell primitives shared with the other live tables)
+export {
+  ResultsTable,
+  RESULTS_TABLE_LABELS,
+  RunDetail,
+  RUN_DETAIL_LABELS,
+  AthleteName,
+  RankValue,
+  RunValue,
+  PenaltyText,
+} from './ResultsTable';
 export type {
   ResultsTableProps,
-  ResultsTableSize,
-  ResultsTableVariant,
-  ResultsTableColumn,
-  ResultEntry,
-  ResultSection,
-  ResultStatus,
+  ResultsTableLabels,
+  ResultsTableColumns,
+  ResultsTableDensity,
+  ResultRow,
+  ResultRowId,
+  ResultRowState,
+  ResultCategoryRank,
+  RunCell,
+  RunningSpec,
+  ObservedNumber,
+  Podium,
+  RunDetailProps,
+  RunDetailRun,
+  RunDetailRank,
+  RunDetailLabels,
+  AthleteNameProps,
+  RankValueProps,
+  RunValueProps,
+  PenaltyTextProps,
 } from './ResultsTable';
 
 // LiveIndicator

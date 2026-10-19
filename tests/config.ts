@@ -122,6 +122,30 @@ export const layoutStories: Array<{ name: string; storyId: string; a11y?: boolea
   { name: 'Layout-Urad', storyId: 'layout-urad--default' },
 ];
 
+/**
+ * Responsive stories snapshotted at phone 390 and desktop 1280 by tests/components.spec.ts
+ * ('Components - <viewport>'). v2 T9: ResultsTable + RunDetail (columns switch by container query).
+ * The live tables of T10-T12 can add their stories here.
+ * Not listed: components-resultstable--hundred-rows (performance probe with a measured time) and
+ * components-resultstable--in-narrow-container (functional container-query check), both in
+ * tests/results-table.spec.ts.
+ */
+export const viewportStories: Array<{ name: string; storyId: string }> = [
+  { name: 'ResultsTable-BR', storyId: 'components-resultstable--default' },
+  { name: 'ResultsTable-SingleRun', storyId: 'components-resultstable--single-run' },
+  { name: 'ResultsTable-CategoryRanks', storyId: 'components-resultstable--category-ranks' },
+  { name: 'ResultsTable-OnCourse', storyId: 'components-resultstable--on-course' },
+  { name: 'ResultsTable-UnderReview', storyId: 'components-resultstable--under-review' },
+  { name: 'ResultsTable-Marks', storyId: 'components-resultstable--marks' },
+  { name: 'ResultsTable-Expanded', storyId: 'components-resultstable--expanded' },
+  { name: 'ResultsTable-Startlist', storyId: 'components-resultstable--startlist' },
+  { name: 'ResultsTable-Empty', storyId: 'components-resultstable--empty' },
+  { name: 'RunDetail', storyId: 'components-rundetail--default' },
+  { name: 'RunDetail-SingleRun', storyId: 'components-rundetail--single-run' },
+  { name: 'RunDetail-OnCourse', storyId: 'components-rundetail--on-course' },
+  { name: 'RunDetail-Loading', storyId: 'components-rundetail--loading' },
+];
+
 /** Components with CSS features worth cross-browser testing */
 export const crossBrowserComponents = allComponents.filter(c => c.cssFeatures && c.cssFeatures.length > 0);
 
@@ -259,7 +283,7 @@ export const containerQueryComponents: ContainerQueryComponent[] = [
     name: 'ResultsTable',
     storyId: 'components-resultstable--default',
     breakpoints: [400, 600, 800],
-    selector: '.csk-results-table-wrapper',
+    selector: '.csk-results-table',
   },
 ];
 

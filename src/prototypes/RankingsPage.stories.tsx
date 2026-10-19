@@ -7,7 +7,8 @@ import { Select } from '../components/Select';
 import { Tabs } from '../components/Tabs';
 import { Pagination } from '../components/Pagination';
 import { Badge } from '../components/Badge';
-import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
+import { ResultsTable } from '../components/ResultsTable';
+import { toResultRows, type LegacyResultEntry as ResultEntry } from './legacyResults';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import { Icon } from '../components/Icon';
 import { StatsBar, type StatsBarItem } from '../components/StatsBar';
@@ -477,42 +478,12 @@ const RankingsPage = ({
 
           {/* Rankings Table */}
           <ResultsTable
-            results={tableResults}
-            variant="striped"
-            styleVariant="default"
-            size="md"
-            showClub={true}
-            showCategory={true}
-            showAgeCategory={sectionFilter !== 'vt'}
-            showPoints={true}
-            showTimeDiff={false}
-            showPodiumHighlights={true}
-            highlightPositions={3}
+            rows={toResultRows(tableResults).map((row, i) => ({
+              ...row,
+              note: `${tableResults[i].points ?? 0} b. · ${String(tableResults[i].meta?.races ?? 0)} závodů`,
+            }))}
+            columns="single"
             caption={`Žebříček ${sectionFilter.toUpperCase()} - Sezóna ${seasonFilter}`}
-            renderCell={(entry, columnKey) => {
-              if (columnKey === 'totalTime') {
-                // Show races count instead of time
-                const races = entry.meta?.races as number | undefined;
-                return (
-                  <span style={{ fontSize: 'var(--text-sm-size)', color: 'var(--color-text-secondary)' }}>
-                    {races} závodů
-                  </span>
-                );
-              }
-              if (columnKey === 'name' && entry.section === 'vt' && entry.meta?.vtClass) {
-                const vtClass = entry.meta.vtClass as 'm' | 'a' | 'b' | 'c';
-                return (
-                  <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-2)' }}>
-                    {entry.name}
-                    <Badge
-                      vtClass={vtClass}
-                      size="sm"
-                    />
-                  </span>
-                );
-              }
-              return undefined;
-            }}
           />
 
           {/* Pagination */}

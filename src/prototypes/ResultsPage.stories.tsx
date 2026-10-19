@@ -11,7 +11,8 @@ import { Select } from '../components/Select';
 import { Tabs } from '../components/Tabs';
 import { LiveIndicator } from '../components/LiveIndicator';
 import { Pagination } from '../components/Pagination';
-import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
+import { ResultsTable } from '../components/ResultsTable';
+import { legacyColumns, toResultRows, type LegacyResultEntry as ResultEntry } from './legacyResults';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import { Icon } from '../components/Icon';
 import { CSKLogo } from '../components/CSKLogo';
@@ -423,16 +424,8 @@ const ResultsPage = ({
 
               {/* Results Table */}
               <ResultsTable
-                results={paginatedResults}
-                variant="striped"
-                styleVariant="gradient"
-                size="md"
-                showRuns={false}
-                showTimeDiff={true}
-                showClub={true}
-                showPodiumHighlights={true}
-                stickyHeader
-                onRowClick={(entry) => console.log('Row clicked:', entry)}
+                rows={toResultRows(paginatedResults)}
+                columns={legacyColumns(paginatedResults)}
               />
 
               {/* Pagination */}

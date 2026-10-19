@@ -1,0 +1,290 @@
+/* =============================================================================
+   RunDetail – content of an expanded results row
+   Mobile: summary line, runs one under another, actions. From 640 px of its
+   own width (or density="desktop"): summary column left, runs side by side.
+   Full width, no left indentation.
+   ============================================================================= */
+
+/* Text right on the grey ground uses text-2: text-3 is below AA on surface-2 (4.46:1) */
+.csk-run-detail {
+  container: csk-run-detail / inline-size;
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-sm);
+  color: var(--csk-color-text);
+  background: var(--csk-color-surface-2);
+}
+
+.csk-run-detail__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'summary'
+    'runs'
+    'actions';
+  gap: var(--csk-space-2);
+  padding: 10px 12px 12px;
+}
+
+/* Summary: bib, ranks, state */
+.csk-run-detail__summary {
+  grid-area: summary;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--csk-space-1) 10px;
+  min-width: 0;
+}
+
+.csk-run-detail__bib {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--csk-space-1);
+  font-size: var(--csk-text-xs);
+  color: var(--csk-color-text-2);
+}
+
+.csk-run-detail__ranks {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0 var(--csk-space-2);
+}
+
+.csk-run-detail__rank b {
+  font-weight: var(--csk-font-weight-semibold);
+}
+
+.csk-run-detail__rank + .csk-run-detail__rank::before {
+  content: '·';
+  margin-right: var(--csk-space-2);
+  color: var(--csk-color-text-3);
+}
+
+.csk-run-detail__rank-diff {
+  color: var(--csk-color-text-2);
+}
+
+.csk-run-detail__rank-diff .csk-time-value {
+  color: inherit;
+}
+
+.csk-run-detail__state {
+  margin-left: auto;
+}
+
+/* Runs */
+.csk-run-detail__runs {
+  grid-area: runs;
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-2);
+  min-width: 0;
+}
+
+.csk-run-detail__run {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: 8px 10px;
+  background: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-md);
+}
+
+.csk-run-detail__run--counts {
+  border-color: var(--csk-color-action);
+  box-shadow: 0 0 0 1px var(--csk-color-highlight-border);
+}
+
+.csk-run-detail__run-head {
+  display: flex;
+  align-items: center;
+  gap: var(--csk-space-2);
+  min-width: 0;
+  font-size: var(--csk-text-xs);
+  font-weight: var(--csk-font-weight-semibold);
+  letter-spacing: var(--csk-letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--csk-color-text-3);
+  white-space: nowrap;
+}
+
+.csk-run-detail__run--counts .csk-run-detail__run-label {
+  color: var(--csk-color-highlight-text);
+}
+
+.csk-run-detail__counts {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.csk-run-detail__run-meta {
+  margin-left: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: var(--csk-font-weight-regular);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Time · penalty · total */
+.csk-run-detail__kv {
+  display: flex;
+  gap: 14px;
+  margin: 0;
+}
+
+.csk-run-detail__kv > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.csk-run-detail__kv dt {
+  font-size: var(--csk-text-xs);
+  letter-spacing: var(--csk-letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--csk-color-text-3);
+}
+
+.csk-run-detail__kv dd {
+  margin: 0;
+  font-family: var(--csk-font-mono);
+  font-size: var(--csk-text-sm);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.csk-run-detail__mono {
+  font-family: var(--csk-font-mono);
+}
+
+.csk-run-detail__unknown {
+  color: var(--csk-color-text-3);
+}
+
+.csk-run-detail__note {
+  margin: 0;
+  font-size: var(--csk-text-xs);
+  color: var(--csk-color-text-3);
+}
+
+.csk-run-detail__empty {
+  margin: 0;
+  color: var(--csk-color-text-2);
+}
+
+/* Actions (links) */
+.csk-run-detail__actions {
+  grid-area: actions;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--csk-space-1) 14px;
+  font-size: var(--csk-text-xs);
+}
+
+.csk-run-detail__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =============================================================================
+   Side by side. The same block twice: density="desktop" and container query.
+   Keep both copies identical.
+   ============================================================================= */
+
+.csk-run-detail--desktop .csk-run-detail__inner {
+  grid-template-columns: minmax(150px, max-content) minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'summary runs'
+    'actions runs';
+  gap: var(--csk-space-2) 14px;
+  padding: 12px 18px 14px;
+  align-items: start;
+}
+
+.csk-run-detail--desktop .csk-run-detail__summary {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.csk-run-detail--desktop .csk-run-detail__ranks {
+  flex-direction: column;
+}
+
+.csk-run-detail--desktop .csk-run-detail__rank + .csk-run-detail__rank::before {
+  content: none;
+}
+
+.csk-run-detail--desktop .csk-run-detail__state {
+  margin-left: 0;
+}
+
+.csk-run-detail--desktop .csk-run-detail__runs {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.csk-run-detail--desktop .csk-run-detail__run {
+  flex: 1 1 0;
+}
+
+.csk-run-detail--desktop .csk-run-detail__actions {
+  flex-direction: column;
+  gap: var(--csk-space-1);
+}
+
+@container csk-run-detail (min-width: 640px) {
+  .csk-run-detail:not(.csk-run-detail--mobile) .csk-run-detail__inner {
+    grid-template-columns: minmax(150px, max-content) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'summary runs'
+      'actions runs';
+    gap: var(--csk-space-2) 14px;
+    padding: 12px 18px 14px;
+    align-items: start;
+  }
+
+  .csk-run-detail:not(.csk-run-detail--mobile) .csk-run-detail__summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .csk-run-detail:not(.csk-run-detail--mobile) .csk-run-detail__ranks {
+    flex-direction: column;
+  }
+
+  .csk-run-detail:not(.csk-run-detail--mobile) .csk-run-detail__rank + .csk-run-detail__rank::before {
+    content: none;
+  }
+
+  .csk-run-detail:not(.csk-run-detail--mobile) .csk-run-detail__state {
+    margin-left: 0;
+  }
+
+  .csk-run-detail:not(.csk-run-detail--mobile) .csk-run-detail__runs {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .csk-run-detail:not(.csk-run-detail--mobile) .csk-run-detail__run {
+    flex: 1 1 0;
+  }
+
+  .csk-run-detail:not(.csk-run-detail--mobile) .csk-run-detail__actions {
+    flex-direction: column;
+    gap: var(--csk-space-1);
+  }
+}

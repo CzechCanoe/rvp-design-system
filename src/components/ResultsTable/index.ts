@@ -1,19 +1,22 @@
-export {
-  ResultsTable,
-  type ResultsTableProps,
-  type ResultsTableSize,
-  type ResultsTableVariant,
-  type ResultsTableStyleVariant,
-  type ResultsTableColumn,
-  type ResultEntry,
-  type ResultSection,
-  type ResultStatus,
-} from './ResultsTable';
+export { ResultsTable, RESULTS_TABLE_LABELS } from './ResultsTable';
+export type { ResultsTableProps, ResultsTableLabels } from './ResultsTable';
 
-export {
-  RunDetailModal,
-  type RunDetailModalProps,
-  type AthleteRunDetail,
-  type RunDetail,
-  type GatePenalty,
-} from './RunDetailModal';
+export { RunDetail, RUN_DETAIL_LABELS } from './RunDetail';
+export type { RunDetailProps, RunDetailRun, RunDetailRank, RunDetailLabels } from './RunDetail';
+
+// Row / cell primitives shared with the other live tables (on-course panel, start list)
+export { AthleteName, RankValue, RunValue, PenaltyText } from './cells';
+export type { AthleteNameProps, RankValueProps, RunValueProps, PenaltyTextProps } from './cells';
+
+export type {
+  ResultRow,
+  ResultRowId,
+  ResultRowState,
+  ResultCategoryRank,
+  ResultsTableColumns,
+  ResultsTableDensity,
+  RunCell,
+  RunningSpec,
+  ObservedNumber,
+  Podium,
+} from './types';

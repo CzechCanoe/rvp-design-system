@@ -9,7 +9,8 @@ import { Icon } from '../components/Icon';
 import { Input } from '../components/Input';
 import { Tabs } from '../components/Tabs';
 import { LiveIndicator } from '../components/LiveIndicator';
-import { ResultsTable, type ResultEntry } from '../components/ResultsTable';
+import { ResultsTable } from '../components/ResultsTable';
+import { legacyColumns, toResultRows, type LegacyResultEntry as ResultEntry } from './legacyResults';
 import { CSKLogo } from '../components/CSKLogo';
 import { KanoeCzContext } from '../components/KanoeCzContext';
 import { HeroSection, type HeroSectionMetaItem } from '../components/HeroSection';
@@ -377,14 +378,8 @@ const EventDetailPage = ({
               />
             </div>
             <ResultsTable
-              results={generateResults(selectedCategory)}
-              variant="striped"
-              styleVariant={isEmbed ? 'embed' : 'gradient'}
-              size="md"
-              showTimeDiff
-              showClub
-              showPodiumHighlights
-              stickyHeader
+              rows={toResultRows(generateResults(selectedCategory))}
+              columns={legacyColumns(generateResults(selectedCategory))}
             />
           </div>
         );

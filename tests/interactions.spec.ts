@@ -606,11 +606,11 @@ test.describe('Data Components', () => {
       await page.waitForSelector('#storybook-root', { state: 'visible' });
       await page.waitForTimeout(testDefaults.settleTime);
 
-      const table = page.locator('.csk-results-table').first();
+      const table = page.locator('.csk-results-table__table').first();
       await expect(table).toBeVisible();
 
       // Should have position column
-      const positionCells = table.locator('td:first-child, .csk-results-table__position');
+      const positionCells = table.locator('tbody .csk-rank-value__main');
       const count = await positionCells.count();
       expect(count).toBeGreaterThan(0);
 
@@ -627,11 +627,11 @@ test.describe('Data Components', () => {
       await page.waitForSelector('#storybook-root', { state: 'visible' });
       await page.waitForTimeout(testDefaults.settleTime);
 
-      const table = page.locator('.csk-results-table').first();
+      const table = page.locator('.csk-results-table__table').first();
       await expect(table).toBeVisible();
 
       // Table should not overflow its container
-      const wrapper = page.locator('.csk-results-table-wrapper').first();
+      const wrapper = page.locator('.csk-results-table').first();
       if (await wrapper.count() > 0) {
         const overflows = await wrapper.evaluate((el) => el.scrollWidth > el.clientWidth);
         // ResultsTable wrapper handles horizontal scroll, so this is acceptable
