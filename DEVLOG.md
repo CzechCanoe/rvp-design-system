@@ -7183,3 +7183,15 @@ Snapshots Event-Detail (390 + 1280) vygenerovány v CI (PR #77).
 Review T16: ResultsCard/LiveResults/storyClock moved to src/stories/_shared (Live and Event import from there), PageLayout footer added, link styling via layout CSS.
 Review T16 snapshots regenerated in CI.
 T16: Event-Detail snapshots regenerated after merging #72.
+
+---
+
+## 2026-10-19 - Fix: v2 spec gaps phase 4
+
+### Dokončeno
+- [x] TableToolbar "Detailní" switch: 44 px touch row; wired in Event/Detail via ResultsCard `detailSwitch` (expands all rows through the `expandedId` array)
+- [x] PageLayout footer: side padding, top rule, centred, tokens only
+- [x] Filled star: `Icon` `filled` prop, used by WeekendCalendar (StarButton/FavoritesToggle already filled)
+
+### Poznámky
+Live*.html do not show "Detailní" (only Zavod.html), so only Event/Detail uses it. New stories: TableToolbar DetailOn, Icon FilledStar.

@@ -37,17 +37,7 @@ export default meta;
 type Story = StoryObj<typeof PageLayout>;
 
 const SimpleFooter = () => (
-  <div
-    style={{
-      padding: '20px 24px',
-      textAlign: 'center',
-      borderTop: '1px solid var(--csk-color-border)',
-      fontSize: 13,
-      color: 'var(--csk-color-text-3)',
-    }}
-  >
-    © 2026 Český svaz kanoistů
-  </div>
+  <>© 2026 Český svaz kanoistů · Výsledky jsou oficiální po schválení vrchním rozhodčím a počtářem.</>
 );
 
 const header = (

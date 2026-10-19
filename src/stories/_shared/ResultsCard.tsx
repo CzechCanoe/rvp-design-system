@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { createContext, useContext, useState, type ReactNode } from 'react';
 import { Card } from '../../components/Card';
 import { FilterPills } from '../../components/FilterPills';
 import { FavoritesToggle } from '../../components/FavoritesToggle';
@@ -8,9 +8,13 @@ import { known, rezekDetail } from '../../components/ResultsTable/ResultsTable.f
 import { knownNumber } from '../../components/ResultsTable/values';
 import { SearchInput } from '../../components/SearchInput';
 import { StatusBadge, type StatusBadgeState } from '../../components/StatusBadge';
+import { Switch } from '../../components/Switch';
 import { TableToolbar, TableToolbarButton } from '../../components/TableToolbar';
 import { liveClock } from './storyClock';
 import './ResultsCard.css';
+
+/** "Detailní" switch state of the surrounding ResultsCard: expands every row of LiveResults. */
+const DetailContext = createContext(false);
 
 export interface ResultsCardProps {
   /** Status badge and text above the table. */
@@ -24,6 +28,8 @@ export interface ResultsCardProps {
   /** Number of favourites; `undefined` = no favourites toggle. */
   favorites?: number;
   searchLabel?: string;
+  /** Show the "Detailní" switch (reference Zavod); expands all rows of the LiveResults inside. */
+  detailSwitch?: boolean;
 }
 
 /** Toolbar + status line + table + footer in one outlined card. */
@@ -36,7 +42,9 @@ export function ResultsCard({
   activeCategory,
   favorites,
   searchLabel = 'Hledat závodníka',
+  detailSwitch = false,
 }: ResultsCardProps) {
+  const [detail, setDetail] = useState(false);
   const [q, setQ] = useState('');
   const [onlyFavorites, setOnlyFavorites] = useState(false);
   const [category, setCategory] = useState(activeCategory);
@@ -63,6 +71,11 @@ export function ResultsCard({
             <FavoritesToggle pressed={onlyFavorites} onPressedChange={setOnlyFavorites} count={favorites} label="Jen oblíbení" />
           )
         }
+        detail={
+          detailSwitch ? (
+            <Switch size="sm" label="Detailní" checked={detail} onChange={(e) => setDetail(e.target.checked)} />
+          ) : undefined
+        }
       >
         {category ? (
           <FilterPills
@@ -83,7 +96,7 @@ export function ResultsCard({
           {status && <span>{status}</span>}
         </div>
       )}
-      {children}
+      <DetailContext.Provider value={detail}>{children}</DetailContext.Provider>
     </Card>
   );
 }
@@ -129,12 +142,13 @@ export interface LiveResultsProps {
 export function LiveResults({ rows: initial, columns = 'pair', initialExpanded = null }: LiveResultsProps) {
   const [rows, setRows] = useState(initial);
   const [expanded, setExpanded] = useState<ResultRowId | null>(initialExpanded);
+  const detail = useContext(DetailContext);
   return (
     <ResultsTable
       rows={rows}
       columns={columns}
       clock={liveClock}
-      expandedId={expanded}
+      expandedId={detail ? rows.map((r) => r.id) : expanded}
       onToggle={(id) => setExpanded((current) => (current === id ? null : id))}
       onFavoriteChange={(row, favorite) =>
         setRows((current) => current.map((r) => (r.id === row.id ? { ...r, favorite } : r)))

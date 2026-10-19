@@ -14,10 +14,10 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function Demo() {
+function Demo({ initialDetail = false }: { initialDetail?: boolean }) {
   const [q, setQ] = useState('');
   const [fav, setFav] = useState(false);
-  const [detail, setDetail] = useState(false);
+  const [detail, setDetail] = useState(initialDetail);
   return (
     <TableToolbar
       aria-label="Nástroje tabulky"
@@ -61,6 +61,16 @@ export const Mobile: Story = {
   render: () => (
     <div style={{ width: 390 }}>
       <Demo />
+    </div>
+  ),
+};
+
+/** "Detailní" switch turned on (role="switch", whole row is a 44 px touch target). */
+export const DetailOn: Story = {
+  args: { 'aria-label': 'Nástroje tabulky' },
+  render: () => (
+    <div style={{ width: 720 }}>
+      <Demo initialDetail />
     </div>
   ),
 };

@@ -76,7 +76,7 @@ function EventRow({ event }: { event: CalendarEventRow }) {
           <span className="csk-weekend-calendar__title">{title}</span>
           {event.favorite && (
             <span className="csk-weekend-calendar__star">
-              <Icon name="star" size="sm" aria-hidden />
+              <Icon name="star" size="sm" filled aria-hidden />
               <span className="csk-weekend-calendar__sr">Sledovaný závod</span>
             </span>
           )}
