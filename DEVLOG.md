@@ -7128,3 +7128,5 @@ Gaps for T18/T19 are listed in the PR body.
 
 ### Poznámky
 Existující `Calendar` (verdikt Z) beze změny API. Mezery DS: Button bez `href` (odkaz jako tlačítko), Card bez zvýrazněné varianty (Moje lhůty), PageLayout footer bez paddingu.
+
+Snapshoty vygenerovány v CI (label update-snapshots); PR #79.
