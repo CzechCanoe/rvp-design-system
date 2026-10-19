@@ -56,6 +56,8 @@ export interface ProgramListProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   days: ProgramDay[];
   /** Overrides of the Czech texts. */
   labels?: Partial<ProgramListLabels>;
+  /** Heading level of the day headings (default 3). */
+  headingLevel?: 2 | 3 | 4 | 5 | 6;
 }
 
 /**
@@ -65,19 +67,26 @@ export interface ProgramListProps extends Omit<HTMLAttributes<HTMLDivElement>, '
  * application puts a `Notice` with the choice above the list.
  */
 export const ProgramList = forwardRef<HTMLDivElement, ProgramListProps>(
-  ({ days, labels: labelsProp, className, ...props }, ref) => {
+  ({ days, labels: labelsProp, headingLevel = 3, className, ...props }, ref) => {
     const labels = { ...PROGRAM_LIST_LABELS, ...labelsProp };
     const idPrefix = useId();
+    const Heading = `h${headingLevel}` as const;
     return (
-      <div ref={ref} className={['csk-program-list', className].filter(Boolean).join(' ')} {...props}>
+      <div
+        ref={ref}
+        role="group"
+        aria-label={labels.list}
+        className={['csk-program-list', className].filter(Boolean).join(' ')}
+        {...props}
+      >
         {days.map((day, d) => {
           const headingId = `${idPrefix}-day-${d}`;
           return (
             <section key={d} className="csk-program-list__day" aria-labelledby={headingId}>
               <header className="csk-program-list__head">
-                <h3 id={headingId} className="csk-program-list__label">
+                <Heading id={headingId} className="csk-program-list__label">
                   {day.label}
-                </h3>
+                </Heading>
                 {day.note && <span className="csk-program-list__day-note">{day.note}</span>}
               </header>
               <ul className="csk-program-list__items">

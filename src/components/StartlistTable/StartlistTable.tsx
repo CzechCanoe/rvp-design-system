@@ -1,7 +1,7 @@
 import { forwardRef, useMemo, type ReactNode } from 'react';
 import type { Observed } from '../../types';
 import type { Mark } from '../MarkBadge';
-import { ResultsTable, type ResultsTableProps } from '../ResultsTable/ResultsTable';
+import { ResultsTable, type ResultsTableLabels, type ResultsTableProps } from '../ResultsTable/ResultsTable';
 import type { ResultRow, ResultRowId } from '../ResultsTable/types';
 
 /** One start slot of an athlete; position in `StartlistRow.starts` = run number. */
@@ -28,8 +28,38 @@ export interface StartlistRow {
   starts: StartlistStart[];
 }
 
+/** Texts of the start list (Czech defaults). */
+export interface StartlistTableLabels {
+  bib: ReactNode;
+  athlete: ReactNode;
+  club: ReactNode;
+  /** Header of the start column, given the number of starts: default `Start` / `Start 1. / 2.`. */
+  start: (starts: number) => ReactNode;
+  /** Screen-reader header of the favourites column. */
+  favoriteColumn: string;
+  /** Accessible name of the favourite star. */
+  favorite: (row: StartlistRow) => string;
+  /** Content of an empty table. */
+  empty: ReactNode;
+}
+
+export const STARTLIST_TABLE_LABELS: StartlistTableLabels = {
+  bib: 'St. č.',
+  athlete: 'Závodník',
+  club: 'Oddíl',
+  start: (n) => (n > 1 ? `Start ${Array.from({ length: n }, (_, i) => `${i + 1}.`).join(' / ')}` : 'Start'),
+  favoriteColumn: 'Oblíbení',
+  favorite: (row) => `Oblíbený: ${row.name}`,
+  empty: 'Startovní listina zatím není k dispozici',
+};
+
 export interface StartlistTableProps
-  extends Omit<ResultsTableProps, 'rows' | 'columns' | 'expandedId' | 'onToggle' | 'renderDetail' | 'onFavoriteChange'> {
+  extends Omit<
+    ResultsTableProps,
+    'rows' | 'columns' | 'expandedId' | 'onToggle' | 'renderDetail' | 'onFavoriteChange' | 'labels'
+  > {
+  /** Overrides of the Czech texts. */
+  labels?: Partial<StartlistTableLabels>;
   /** Rows in start order (the application sorts). */
   rows: StartlistRow[];
   /** Favourite star toggled. Enables the favourites column; the state stays in `row.favorite`. */
@@ -38,8 +68,13 @@ export interface StartlistTableProps
 
 const UNAVAILABLE: Observed<number> = { state: 'unavailable', reason: 'not-applicable' };
 
+/** One converted row per source row, so ResultsTable's row memo keeps working while the rows are unchanged. */
+const converted = new WeakMap<StartlistRow, ResultRow>();
+
 function toResultRow(row: StartlistRow): ResultRow {
-  return {
+  const cached = converted.get(row);
+  if (cached) return cached;
+  const result: ResultRow = {
     id: row.id,
     rank: UNAVAILABLE,
     bib: row.bib,
@@ -50,6 +85,8 @@ function toResultRow(row: StartlistRow): ResultRow {
     runs: row.starts.map((s) => ({ time: null, start: s.time, mark: s.mark })),
     result: UNAVAILABLE,
   };
+  converted.set(row, result);
+  return result;
 }
 
 /**
@@ -62,9 +99,23 @@ function toResultRow(row: StartlistRow): ResultRow {
  * invent them.
  */
 export const StartlistTable = forwardRef<HTMLDivElement, StartlistTableProps>(
-  ({ rows, onFavoriteChange, labels, ...props }, ref) => {
+  ({ rows, onFavoriteChange, labels: labelsProp, ...props }, ref) => {
     const resultRows = useMemo(() => rows.map(toResultRow), [rows]);
     const byId = useMemo(() => new Map(rows.map((r) => [r.id, r])), [rows]);
+    const starts = Math.max(1, ...rows.map((r) => r.starts.length));
+    const text = useMemo(() => ({ ...STARTLIST_TABLE_LABELS, ...labelsProp }), [labelsProp]);
+    const tableLabels = useMemo<Partial<ResultsTableLabels>>(
+      () => ({
+        bib: text.bib,
+        athlete: text.athlete,
+        club: text.club,
+        start: text.start(starts),
+        favoriteColumn: text.favoriteColumn,
+        favorite: (row) => text.favorite(byId.get(row.id) ?? { id: row.id, bib: row.bib, name: row.name, starts: [] }),
+        empty: text.empty,
+      }),
+      [text, starts, byId]
+    );
     const handleFavorite = onFavoriteChange
       ? (row: ResultRow, favorite: boolean) => {
           const source = byId.get(row.id);
@@ -78,7 +129,7 @@ export const StartlistTable = forwardRef<HTMLDivElement, StartlistTableProps>(
         rows={resultRows}
         columns="startlist"
         onFavoriteChange={handleFavorite}
-        labels={{ empty: 'Startovní listina zatím není k dispozici', ...labels }}
+        labels={tableLabels}
       />
     );
   }

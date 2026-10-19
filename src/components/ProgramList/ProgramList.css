@@ -125,7 +125,7 @@
 
 .csk-program-list__item--running .csk-program-list__time {
   font-weight: var(--csk-font-weight-semibold);
-  color: var(--csk-color-error-text);
+  color: var(--csk-color-live-text);
 }
 
 .csk-program-list__item--running .csk-program-list__sub {

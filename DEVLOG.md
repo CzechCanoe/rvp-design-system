@@ -7031,3 +7031,7 @@ Předběžné vs. V revizi: vyplněný čtverec vs. obrysová kurzívní pilulka
 
 ### Poznámka po CI (T11)
 - Snapshoty 390 + 1280 vygenerovalo CI (`test: update snapshots (CI)`): StartlistTable (4 stories), ProgramList (3 stories).
+
+### Review fixes (T11)
+- Start column header derived from the max number of starts („Start 1. / 2.“); own `StartlistTableLabels` (no ResultRow internals); converted rows cached in a WeakMap per source row.
+- New semantic token `--csk-color-live-text` (red-dark) for the running-phase time; ProgramList `headingLevel`, `aria-label` from `labels.list`; axe for the new stories only in `viewportStories` (results-table.spec).

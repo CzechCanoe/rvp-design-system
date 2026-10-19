@@ -76,6 +76,7 @@ Cíl: jeden prefix, jedna paleta, žádné režimy kromě `embed`. Zdroj hodnot:
 | `--csk-color-focus` | `--csk-blue` | focus outline (`.in:focus` v referenci) |
 | `--csk-color-highlight-bg` / `-border` / `-text` | `--csk-blue-100` / `-200` / `--csk-blue-dark` | podložka, aktivní položka, úroveň závodu; rám zvýrazněné karty |
 | `--csk-color-live-bg` | `--csk-red-100` | běžící řádek v programu |
+| `--csk-color-live-text` | `--csk-red-dark` | text na `live-bg` (čas běžící fáze), AA; rodina stavů, nezaměňovat s `-error-text` |
 | `--csk-color-state-*-text` | official / provisional / review = základní barva, unknown = `--csk-ink-2` | text na `-bg` s kontrastem AA; `--csk-gray` na `--csk-gray-100` má 2.8:1 a `--csk-ink-3` 4.3:1 |
 | `--csk-color-state-stale` | `--csk-gray` | tečkované podtržení zastavené hodnoty |
 | `--csk-color-success` / `-warning` / `-error` / `-info` (+ `-bg`, `-text`) | zelená / jantar / červená / modrá, `-100`, `-dark` | poznámky, hlášky, validace formulářů; odděleno od stavů hodnoty a od LIVE |

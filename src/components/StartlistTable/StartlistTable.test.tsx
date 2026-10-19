@@ -21,6 +21,13 @@ describe('StartlistTable', () => {
     expect(second).toHaveTextContent('DNS');
   });
 
+  it('derives the start column header from the number of starts', () => {
+    const { rerender } = render(<StartlistTable rows={rows} />);
+    expect(screen.getByRole('columnheader', { name: 'Start 1. / 2.' })).toBeInTheDocument();
+    rerender(<StartlistTable rows={rows.map((r) => ({ ...r, starts: r.starts.slice(0, 1) }))} />);
+    expect(screen.getByRole('columnheader', { name: 'Start' })).toBeInTheDocument();
+  });
+
   it('reports the favourite toggle with the start-list row', () => {
     const onFavoriteChange = vi.fn();
     render(<StartlistTable rows={rows} onFavoriteChange={onFavoriteChange} />);

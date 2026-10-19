@@ -66,13 +66,6 @@ const specificComponents = [
   { name: 'RunningTime', storyId: 'components-runningtime--states' },
   { name: 'RunningTime-StateSwitching', storyId: 'components-runningtime--state-switching' },
   { name: 'DataAge', storyId: 'components-dataage--overview' },
-  { name: 'StartlistTable', storyId: 'components-startlisttable--default' },
-  { name: 'StartlistTable-SingleStart', storyId: 'components-startlisttable--single-start' },
-  { name: 'StartlistTable-WithNotice', storyId: 'components-startlisttable--with-notice' },
-  { name: 'StartlistTable-Empty', storyId: 'components-startlisttable--empty' },
-  { name: 'ProgramList-TwoRunningPhases', storyId: 'components-programlist--two-running-phases' },
-  { name: 'ProgramList-OneRunningPhase', storyId: 'components-programlist--one-running-phase' },
-  { name: 'ProgramList-TwoDays', storyId: 'components-programlist--two-days' },
 ];
 
 // Prototype pages to test
