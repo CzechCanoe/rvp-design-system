@@ -1,6 +1,6 @@
 # Migrace a release 2.0.0 (as-built)
 
-Breaking changes níže jsou porovnané se zveřejněnou verzí **1.2.0** (`git diff v1.2.0..main -- src`). Popis nových komponent je v `COMPONENTS.md`, úplné API v `docs/COMPONENT_API.md`. T19 ještě přidá další změny (Button `href`, `DocumentList`, `ResultsPanel`, `TimeValue format`, …); doplní je do tohoto souboru sám.
+Breaking changes níže jsou porovnané se zveřejněnou verzí **1.2.0** (`git diff v1.2.0..main -- src`). Popis nových komponent je v `COMPONENTS.md`, úplné API v `docs/COMPONENT_API.md`. Zahrnuje i změny z T19 (#84: Button `href`, `DocumentList`, `ResultsPanel`, `TimeValue format`, smazaný `LiveIndicator`, token `--csk-ink-3`, …).
 
 ## Verze a větve
 
@@ -26,28 +26,30 @@ Breaking changes níže jsou porovnané se zveřejněnou verzí **1.2.0** (`git 
 
 Navigation (`MainNav`, `NavItem`, `BreadcrumbChevronIcon`), HeroSection (+ `HeroActionButton`), SectionHeader, StatsBar, StatCard, ActionCard, AthleteCard, ListItem, ResultItem, PodiumCard, DateBadge. `ResultsTable` 1.x je přepsaná (viz níže) včetně typů `ResultEntry`, `ResultStatus`, `ResultSection`, `ResultsTableColumn`, `ResultsTableSize`, `ResultsTableVariant` a komponenty `RunDetailModal`. Pryč jsou i typy `AvatarVariant` (nově `AvatarShape`), `HeaderSize`, `FilterPillsVariant`, `SearchFilterChip`.
 
-`LiveIndicator` je zrušený, nahrazuje ho `StatusBadge state="live"`. Na `main` je ještě v kódu (používá ho `Calendar` / `CalendarList` `showLive`), T19 ho smaže; nový kód ho nepoužívá. `FilterPills` zůstává pod tímto jménem (upravená komponenta, nepřejmenovaná na `Pills`). Beze změny zůstávají `Calendar`, `CalendarList`, `KanoeCzContext`.
+`LiveIndicator` je smazaný včetně typů `LiveIndicatorProps`, `LiveIndicatorVariant`, `LiveIndicatorSize`, `LiveIndicatorColor` (T19); nahrazuje ho `StatusBadge state="live"`. `Calendar` / `CalendarList` s `showLive` ukazují místo tečky `StatusBadge state="live" size="sm"` (odznak „Live“). `FilterPills` zůstává pod tímto jménem (upravená komponenta, nepřejmenovaná na `Pills`). Beze změny API zůstávají `Calendar`, `CalendarList` (jen vzhled `showLive`, viz výše) a `KanoeCzContext`.
 
 ### Změny props a variant
 
 | Komponenta | 1.2.0 | 2.0 |
 |---|---|---|
-| Button | `size` `sm`/`md`/`lg`; `accent="energy"` | `size` `sm`/`md`; `accent` pryč |
+| Button | `size` `sm`/`md`/`lg`; `accent="energy"`; `ButtonProps` jedno rozhraní, ref `HTMLButtonElement` | `size` `sm`/`md`; `accent` pryč; nová odkazová forma `href` / `as="a"` (`<a>` se stejným vzhledem). **`ButtonProps` je union** `ButtonAsButtonProps \| ButtonAsLinkProps` (společné `ButtonOwnProps`): JSX se nemění, ale `interface X extends ButtonProps` už nejde, náhrada `ButtonAsButtonProps`; **ref je `HTMLButtonElement \| HTMLAnchorElement`** (`useRef<HTMLButtonElement>` pro `<Button ref>` zúžit nebo přetypovat) |
 | Badge | `variant` včetně `energy`; `size` včetně `lg`; `glow`, `outlined` | `variant` `level`, `outline`, `live` místo `energy`; `size` `sm`/`md`; `glow`, `outlined` pryč |
 | Card | `variant` `surface`/`elevated`/`outlined`/`aesthetic` | `variant` `surface`/`outlined`; nový `tone` `default`/`highlight` |
 | Input, Select | `energyFocus`, `displayLabel` | pryč; `Select` má navíc `state="warning"` |
 | SearchInput | `size` včetně `lg`; `chips`, `activeChips`, `onChipToggle` | `size` `sm`/`md`; chipy pryč (použij `FilterPills` / `TableToolbarButton`) |
 | Tabs | `variant` `line`/`pills`/`aesthetic`; `size` včetně `lg`; `energyAccent` | `variant` `line`/`pills`/`nav`; `size` `sm`/`md`; nové `overflow` (`wrap`/`scroll`/`carousel`), `previousLabel`, `nextLabel` |
-| Avatar | `variant` (`circular`/`rounded`/`square`), `size` do `2xl` | `shape` (stejné hodnoty), `size` do `3xl`, nový `ring` |
+| Avatar | `variant` (`circular`/`rounded`/`square`), `size` do `2xl` | `shape` (stejné hodnoty + nový `portrait` 5 : 7 pro loga akcí), `size` do `3xl`, nový `ring` |
 | Icon | – | nový `filled` |
 | FilterPills | `variant` `default`/`subtle`, `size` včetně `lg` | `variant` pryč, `size` `sm`/`md`, nový `onFilterToggle` |
 | Header | `variant` `default`/`elevated`/`gradient`/`satellite`; `size`, `bordered`, `blurOnScroll`, `scrollThreshold` | `variant` `site`/`satellite`/`app`; uvedené props pryč; nový `club` (výchozí `maxWidth` je `full`) |
-| PageLayout | `variant` `standalone`/`satellite`/`embed` | `variant` `tribuna`/`urad`/`embed`; nové sloty `banner`, `bottomBar`, `stickyHeader` |
+| PageLayout | `variant` `standalone`/`satellite`/`embed` | `variant` `tribuna`/`urad`/`embed`; nové sloty `banner`, `bottomBar`, `stickyHeader`; šířka kontejneru jako CSS proměnná `--csk-page-max-width` na kořeni (typ `PageLayoutMaxWidth`) |
 | ResultsTable | props `results`, `section`, `variant`, `size`, `show*`, `renderCell`, `onRowClick`, … | nové `rows: ResultRow[]`, `columns`, `density`, `expandedId`, `onToggle`, `renderDetail`, `onFavoriteChange`, `clock`, `labels`; jiný datový model (`COMPONENTS.md` §3) |
+| Table | obal s `overflow-x: auto` bez fokusu; řaditelná hlavička = `th` s `onClick` | API beze změny; přetékající obal (telefon) je focusovatelný (`tabIndex=0`, s `caption` `role="region"`), přibude tab stop; řaditelná hlavička je `<button type="button">` v `<th>` (klávesnice, `aria-sort` na `th`), selektory testů na `th` klik / fokus upravit |
+| Calendar, CalendarList | `showLive` → `LiveIndicator` | `showLive` → `StatusBadge state="live" size="sm"` |
 
 ### Nové komponenty
 
-`StatusBadge`, `MarkBadge`, `PenaltyChip`, `GateGrid`, `BibBadge`, `Notice`, `StatTile`, `TimeValue`, `RunningTime`, `DataAge`, `SegmentedControl`, `StarButton`, `FavoritesToggle`, `TableToolbar`, `Subbar`, `Breadcrumbs`, `PageTitle`, `BottomBar`, `EventHeader`, `RunDetail`, `StartlistTable`, `ProgramList`, `OnCoursePanel`, `OnCourseRider`, `WeekendCalendar`, `DeadlineBadge`, `EntryTable`, `ProposalList`, `SummaryCard`, `ProfileHeader`, `SeasonSparkline`, `RivalsList`, plus `Clock` (`createBrowserClock`, `createTestClock`, `ClockProvider`, `useClock`) a typ `Observed<T>`.
+`StatusBadge`, `MarkBadge`, `PenaltyChip`, `GateGrid`, `BibBadge`, `Notice`, `StatTile`, `TimeValue`, `RunningTime`, `DataAge`, `SegmentedControl`, `StarButton`, `FavoritesToggle`, `TableToolbar`, `Subbar`, `Breadcrumbs`, `PageTitle`, `BottomBar`, `EventHeader`, `ResultsPanel`, `RunDetail`, `StartlistTable`, `ProgramList`, `OnCoursePanel`, `OnCourseRider`, `WeekendCalendar`, `DocumentList`, `DeadlineBadge`, `EntryTable`, `ProposalList`, `SummaryCard`, `ProfileHeader`, `SeasonSparkline`, `RivalsList`, plus `Clock` (`createBrowserClock`, `createTestClock`, `ClockProvider`, `useClock`) a typ `Observed<T>`.
 
 ## Kdy migrovat c123-live-mini
 
@@ -64,16 +66,17 @@ Definicí hotovo je `CLIENT-OBLIGATIONS.md` sekce „live-mini-client“. DS v2 
 
 | Dnes v live-mini (vlastní) | Po v2 |
 |---|---|
-| `ResultList.tsx` + 423 ř. CSS | `ResultsTable` + `RunDetail` + `TableToolbar`; mapování kontraktu → `ResultRow` zůstává v aplikaci (`utils/mapToResultsTable.ts` se přepíše) |
+| `ResultList.tsx` + 423 ř. CSS | `ResultsPanel` (Card + `TableToolbar` + stavový řádek + tabulka + patička) s `ResultsTable` + `RunDetail`; mapování kontraktu → `ResultRow` zůstává v aplikaci (`utils/mapToResultsTable.ts` se přepíše) |
+| `:global` na `.csk-table-toolbar` kvůli 390 px | nic: hledání drží min. 10rem, ovládací prvky se zalomí jako skupina na další řádek; skrytí „Detailní“ na mobilu = prop neposlat |
 | `ClassTabs.tsx` s `:global` karuselem | `Tabs variant="nav" overflow="carousel"` |
 | `DataViewSelector.tsx` (pills ↔ dropdown) | `BottomBar` na mobilu, `SegmentedControl` na desktopu |
-| `OnCoursePanel.tsx`, `GatePenalties.tsx` | `OnCoursePanel`, `OnCourseRider`, `GateGrid`, `PenaltyChip`, `RunningTime` |
+| `OnCoursePanel.tsx`, `GatePenalties.tsx` | `OnCoursePanel`, `OnCourseRider` (`penalty` u jezdce na trati), `GateGrid`, `PenaltyChip` (číslo branky v chipu, barva = penalizace, jako `GatePenalties`), `RunningTime` |
 | `RunDetailExpand.tsx` | `RunDetail` |
 | `StartlistTable.tsx` | `StartlistTable` |
 | `ScheduleView.tsx` | `ProgramList` |
-| `EventHeader.tsx` (`HeroSection minimal` + avatar override) | `EventHeader`, `Avatar shape="square"` |
+| `EventHeader.tsx` (`HeroSection minimal` + `EventHeader.module.css` `:global(.csk-hero-section__avatar .csk-avatar--rounded)` 100 × 140) | `EventHeader logo={<Avatar shape="portrait" src=… />}` (40 × 56; `shape="square"` 40 × 40); uvnitř `PageLayout maxWidth="lg"` se obsah hlavičky zarovná s kontejnerem sám, bez CSS aplikace; vlastní 14 px okraj hlavičky netřeba (okraj = `--csk-layout-gutter` jako `PageLayout padded`) |
 | `StarButton`, `FavoritesToggle`, bib badge CSS ×3 | `StarButton`, `FavoritesToggle`, `BibBadge` |
-| `ConnectionStatus.tsx` (nepoužitý), stav spojení jako badge v hero | `DataAge` s `connection` |
+| `ConnectionStatus.tsx` (nepoužitý), stav spojení jako badge v hero | `DataAge` s `connection`; v `EventHeader condensed` se vykreslí kompaktně sám (`variant="compact"`) |
 | `NotificationPrompt.tsx` (nepoužitý) | `Notice` |
 | `SectionHeading` inline styly v `EventList` | `PageTitle` / nadpis sekce v `Card` |
 | 143 odkazů na neexistující `--csk-*` tokeny | skutečné `--csk-*` tokeny; všechny `.module.css` projít |
@@ -83,9 +86,9 @@ Pořadí v live-mini: 1) bump na `^2.0.0` jako samostatný `chore:` commit (CLAU
 ## Testy a snapshoty (stav po T17)
 
 - `tests/config.ts` obsahuje jen v2 story ID (komponenty `allComponents`, `viewportStories`, `layoutStories`, `pageStories`, `containerQueryComponents`); `QUARANTINE` je prázdná a má taková zůstat (chyby se opravují, ne karanténují). Tolerance: komponenty 30 px, Page stories a layouty 80 px, animované 100+ px.
-- Snapshoty jsou jen chromium a jen světlé téma; generuje je výhradně CI (label `update-snapshots`), na ARM se spouští `--ignore-snapshots`. Plný běh přes všechny prohlížeče (firefox, webkit, mobile-chrome, mobile-safari, funkčně a axe) je `workflow_dispatch` s `browsers=all`; před vydáním 2.0.0 se pouští v T19.
-- Unit vrstva (Vitest + Testing Library, `npm run test:unit`): `Badge`, `DataAge`, `EntryTable`, `OnCoursePanel`, `PenaltyChip`, `ResultsTable`, `RunningTime`, `StartlistTable`, `StatusBadge`, `Tabs`, `TimeValue`, `WeekendCalendar`, `ThemeContext`, `Clock`. Časové chování se testuje s `createTestClock()`, nikdy s globálním fake-timer patchem; `src/clock/noRealTime.test.ts` staticky hlídá, že `TimeValue`, `RunningTime`, `DataAge` a `src/clock/` čtou čas jen přes `Clock`.
-- Accessibility spec (`@axe-core/playwright`) běží nad stories z `tests/config.ts`; kontrast 4.5:1 je v tokenech ověřený.
+- Snapshoty jsou jen chromium a jen světlé téma; generuje je výhradně CI (label `update-snapshots`), na ARM se spouští `--ignore-snapshots`. Plný běh přes všechny prohlížeče (firefox, webkit, mobile-chrome, mobile-safari, funkčně a axe) je `workflow_dispatch` s `browsers=all`; před vydáním 2.0.0 proběhl v T19 (výsledek v PR T19z).
+- Unit vrstva (Vitest + Testing Library, `npm run test:unit`): `Badge`, `Button`, `DataAge`, `DocumentList`, `EntryTable`, `FavoritesToggle`, `OnCoursePanel`, `PenaltyChip`, `ResultsPanel`, `ResultsTable`, `RunningTime`, `StartlistTable`, `StatusBadge`, `Table`, `Tabs`, `TimeValue`, `WeekendCalendar`, `ThemeContext`, `Clock`. Časové chování se testuje s `createTestClock()`, nikdy s globálním fake-timer patchem; `src/clock/noRealTime.test.ts` staticky hlídá, že `TimeValue`, `RunningTime`, `DataAge` a `src/clock/` čtou čas jen přes `Clock`.
+- Accessibility spec (`@axe-core/playwright`) běží nad stories z `tests/config.ts`; kontrast 4.5:1 je v tokenech ověřený (`--csk-color-text-3` od T19 i na `surface-2`, `TOKENS.md` „Změněno v T19“).
 - CI (`.github/workflows/ci.yml`): lint (ESLint + `check-no-hex`), typecheck, unit testy, build, build Storybooku, Playwright chromium (jen při změně `src/`, `tests/`, `.storybook/`, `package*.json`, konfigurace Playwrightu nebo workflow).
 
 ## Dokumentace

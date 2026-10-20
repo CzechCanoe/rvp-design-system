@@ -23,7 +23,7 @@
 
 .csk-penalty-chip--clean {
   background: var(--csk-color-surface-3);
-  color: var(--csk-color-text-2);
+  color: var(--csk-color-text-3);
 }
 
 .csk-penalty-chip--touch {

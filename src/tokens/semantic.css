@@ -21,7 +21,7 @@
      ------------------------------------------------------------------------- */
   --csk-color-text: var(--csk-ink);                 /* body text, values */
   --csk-color-text-2: var(--csk-ink-2);             /* secondary text */
-  --csk-color-text-3: var(--csk-ink-3);             /* labels, meta (4.8:1 on surface) */
+  --csk-color-text-3: var(--csk-ink-3);             /* labels, meta (5.5:1 surface, 5.1:1 surface-2) */
   --csk-color-text-on-fill: var(--csk-white);       /* text on brand/action/live/section fills */
 
   /* ---------------------------------------------------------------------------
@@ -71,7 +71,7 @@
   --csk-color-state-review-text: var(--csk-violet);
   --csk-color-state-unknown: var(--csk-gray);       /* non-text only (3.2:1 on surface) */
   --csk-color-state-unknown-bg: var(--csk-gray-100);
-  --csk-color-state-unknown-text: var(--csk-ink-2);
+  --csk-color-state-unknown-text: var(--csk-ink-3); /* 4.9:1 on -bg (reference .b-unk) */
   --csk-color-state-stale: var(--csk-gray);         /* dotted underline of a stale running value */
 
   /* ---------------------------------------------------------------------------

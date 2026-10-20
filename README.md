@@ -42,8 +42,8 @@ Tmavé téma se ve 2.0 nekreslí; `theme: 'system'` se vykreslí světle.
 | Základ a formuláře | Button, Input, SearchInput, Select, Checkbox, Radio, Switch, Card, Badge, Avatar, Icon, Table, Modal, Dropdown, Toast, Pagination, Progress, Skeleton, EmptyState, Dropzone, Timeline, Wizard, Calendar |
 | Navigace a stránka | Header, Subbar, Breadcrumbs, PageTitle, PageLayout, BottomBar, Tabs, FilterPills, SegmentedControl, TableToolbar, CSKLogo |
 | Stavy a čísla | StatusBadge, MarkBadge, PenaltyChip, GateGrid, BibBadge, Notice, StatTile, TimeValue, RunningTime, DataAge, StarButton, FavoritesToggle |
-| Živé výsledky | EventHeader, ResultsTable, RunDetail, StartlistTable, ProgramList, OnCoursePanel |
-| Kalendář, přihlášky, profil | WeekendCalendar, DeadlineBadge, EntryTable, ProposalList, SummaryCard, ProfileHeader, SeasonSparkline, RivalsList |
+| Živé výsledky | EventHeader, ResultsPanel, ResultsTable, RunDetail, StartlistTable, ProgramList, OnCoursePanel |
+| Kalendář, přihlášky, profil | WeekendCalendar, DeadlineBadge, DocumentList, EntryTable, ProposalList, SummaryCard, ProfileHeader, SeasonSparkline, RivalsList |
 
 ## Page stories
 

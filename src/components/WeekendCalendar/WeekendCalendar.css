@@ -65,7 +65,7 @@
   font-weight: var(--csk-font-weight-semibold);
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--csk-color-text-2);
+  color: var(--csk-color-text-3);
 }
 
 .csk-weekend-calendar__group--current .csk-weekend-calendar__label,
@@ -89,7 +89,7 @@
 
 .csk-weekend-calendar__note {
   font-size: var(--csk-text-sm);
-  color: var(--csk-color-text-2);
+  color: var(--csk-color-text-3);
 }
 
 /* Rows */

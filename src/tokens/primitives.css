@@ -23,7 +23,7 @@
   /* Ink (text) */
   --csk-ink: #1b1f26;
   --csk-ink-2: #444b55;
-  --csk-ink-3: #6b7280;
+  --csk-ink-3: #626a75;  /* AA on every ground: 5.5:1 surface, 5.1:1 surface-2, 4.7:1 surface-3 (T19, #84.9) */
 
   /* Lines */
   --csk-line: #d9dee5;

@@ -7359,3 +7359,35 @@ Snapshoty se generují jen v CI (label `update-snapshots`, pokud se vzhled hlavi
 
 ### Poznámky
 - Šedý kroužek `offline` na `surface-2` má 2,9 : 1 (token `--csk-color-state-unknown` podle #84.8), uvedeno v PR.
+
+---
+
+## 2026-10-20 - v2 T19z: ink-3 kontrastní token, as-built dokumentace T19, běh všech prohlížečů
+
+### Dokončeno
+- [x] `--csk-ink-3` `#6b7280` → `#626a75` (#84.9): text-3 na surface 5.47, surface-2 5.05, surface-3 4.69, všechny tónované podložky ≥ 4.64 (tabulka v `TOKENS.md` „Změněno v T19“)
+- [x] Obcházení starého kontrastu vrácené na text-3 tam, kde reference používá ink-3: `--csk-color-state-unknown-text` (ink-2 → ink-3), WeekendCalendar štítek + poznámka, Calendar dny mimo měsíc, ResultsTable řádek V revizi (přemapování text-3 pryč, podium-1 zůstává, zlatá na fialové 4.3:1), RunDetail rozdíl pořadí, ProgramList podtitul běžící fáze, PenaltyChip čistá branka, ProposalList nápověda, story States/Overview
+- [x] Doc delty #89, #90, #88, #92, #93 v `COMPONENTS.md` (+ sekce 9 „Změny v T19“), `MIGRATION.md`, `TOKENS.md` (`--csk-layout-gutter`); `CLAUDE.md` (typy, LiveIndicator pryč), `PLAN.md`, `README.md` (ResultsPanel, DocumentList)
+- [x] `npm run docs:api -- --check` čisté; lint / typecheck / build / test:unit (179) exit 0
+
+### Problémy a řešení
+1. **Problém:** `update-snapshots` neudělal commit („No snapshot changes“), i když se ink-3 změnil.
+   **Řešení:** rozdíl `#6b7280` → `#626a75` je v YIQ metrice pixelmatch 0.033, pod výchozím prahem Playwrightu 0.2, takže snímky se porovnají jako shodné; chromium se snapshoty je zelený, baseline zůstává. Žádná změna tolerance.
+2. **Problém:** během práce se mergovaly #92 a #93.
+   **Řešení:** `git merge origin/main` dvakrát, doc delty obou PR doplněny, finální `browsers=all` až na hlavě s oběma.
+
+### Poznámky
+- `Release-As: 2.0.0` záměrně není v tomto PR (přijde samostatně po porovnání v1 / v2 maintainerem).
+- Neměněno: text-2 tam, kde reference má ink-2 nebo kde nejde o kontrastní obcházení (placeholdery stories, podložky na bílé).
+
+---
+
+## 2026-10-20 - v2 T19z: snapshoty s novým ink-3 (update-snapshots mode=all)
+
+### Dokončeno
+- [x] `update-snapshots.yml`: vstup `workflow_dispatch` `mode` (`changed` výchozí, `all`), label dál `changed`; popsáno v `CLAUDE.md` Testování
+- [x] Dispatch `mode=all` na `feat/v2-19z-final` → bot commit `1931715` (173 PNG), 548 passed, 0 unexpected
+- [x] Kontrola 3 PNG (přesné pixely `#6b7280` → `#626a75`): WeekendCalendar 251 → 0 starých / 340 nových, StatusBadge-AllStates 39 → 0 / 69, PenaltyChip-AllStates čistá „0“ v ink-3 (vizuálně)
+
+### Poznámky
+Label `update-snapshots` přepisuje jen snapshoty, které porovnání neprojdou; změny pod prahem `threshold 0.2` (tady ≈ 0.033) potřebují `mode=all`, jinak baseline zůstane se starou barvou.
