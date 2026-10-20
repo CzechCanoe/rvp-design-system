@@ -274,7 +274,7 @@ Zdroj: `src/components/Table/Table.tsx`
 | `hoverable?` | `boolean` |  | Enable hover effect on rows |
 | `emptyState?` | `ReactNode` |  | Custom empty state content |
 | `loading?` | `boolean` |  | Loading state |
-| `caption?` | `string` |  | Caption for accessibility |
+| `caption?` | `string` |  | Caption for accessibility; also names the wrapper region while the table scrolls |
 | `captionVisible?` | `boolean` |  | Show caption visually |
 | `defaultSortKey?` | `string` |  | Initial sort column key |
 | `defaultSortDirection?` | `SortDirection` |  | Initial sort direction |

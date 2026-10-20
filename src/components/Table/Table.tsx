@@ -1,8 +1,6 @@
 import {
   forwardRef,
-  useEffect,
   useId,
-  useLayoutEffect,
   useRef,
   useState,
   type HTMLAttributes,
@@ -10,9 +8,8 @@ import {
   type ThHTMLAttributes,
   type TdHTMLAttributes,
 } from 'react';
+import { useIsomorphicLayoutEffect } from '../../hooks';
 import './Table.css';
-
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 // ============================================================================
 // Types
