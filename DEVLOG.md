@@ -7303,3 +7303,22 @@ T19b follow-up: main merged (T17 docs, T19a states), conflicting Live/Event PNGs
 
 ### Poznámky
 - Řazené hlavičky (`th` s onClick) nejsou ovladatelné klávesnicí – mimo rozsah T19c, kandidát na samostatné issue.
+
+---
+
+## 2026-10-20 - Fáze 5 / T19: Klávesnicové řazení v Table (#84)
+
+### Dokončeno
+- [x] Řaditelná hlavička `Table` (`Th sortable`) je nativní `<button type="button">` uvnitř `<th>`; `th` nemá `tabindex` ani `onClick`, `aria-sort` (`ascending` / `descending` / `none`) zůstává na `th`
+- [x] Enter / Space přepínají řazení (asc → desc → bez řazení) nativně přes button
+- [x] Vzhled beze změny: button resetuje UA styly a dědí písmo hlavičky; `::after` přes celou buňku drží stejnou klikací plochu i focus ring (`--csk-color-focus`, offset -2px jako dřív)
+- [x] Unit test (`@testing-library/user-event`: Tab, Enter, Space) + Playwright `sortable headers sort from the keyboard` (Tab, Enter/Space, `aria-sort`, pořadí řádků, barva focus ringu)
+- [x] Kontrola ostatních tabulek: `ResultsTable`, `StartlistTable`, `EntryTable` neřadí (řadí aplikace), jiný mechanismus řazení v DS není
+- [x] JSDoc `Th` / `ColumnDef.sortable` + `npm run docs:api`
+
+### Problémy a řešení
+1. **Problém:** jsdom nesyntetizuje click z Enter/Space přes `fireEvent`.
+   **Řešení:** `@testing-library/user-event` přidán jako explicitní devDependency ve verzi, která už byla v lockfile (14.5.2 přes `@storybook/test`), takže lockfile se mění jen o jeden řádek.
+
+### Poznámky
+Snapshoty se generují jen v CI (label `update-snapshots`, pokud se vzhled hlavičky změní).
