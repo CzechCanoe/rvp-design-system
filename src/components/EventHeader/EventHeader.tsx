@@ -1,5 +1,6 @@
 import { forwardRef, type ReactNode, type HTMLAttributes } from 'react';
 import type { PageLayoutMaxWidth } from '../PageLayout';
+import { DataAgeVariantContext } from '../DataAge/DataAgeVariantContext';
 import './EventHeader.css';
 
 export interface EventHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
@@ -9,7 +10,10 @@ export interface EventHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
   subtitle?: ReactNode;
   /** Status element, typically `<StatusBadge state="live" />` */
   status?: ReactNode;
-  /** Data age element, typically `<DataAge />` ("aktualizováno před 1 s") */
+  /**
+   * Data age element, typically `<DataAge />` ("aktualizováno před 1 s"). When `condensed`, a `DataAge` without its own
+   * `variant` renders the compact form (dot + "před 1 s", full text in `title` and for screen readers).
+   */
   dataAge?: ReactNode;
   /** Link back to the event list; omitted = no back link */
   backHref?: string;
@@ -22,13 +26,15 @@ export interface EventHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
   logo?: ReactNode;
   /**
    * One-row variant for a scrolled page: back · name · status · data age; the subtitle and
-   * the logo are hidden. The application decides when to switch (scroll position); the component only draws it.
+   * the logo are hidden, `DataAge` in the `dataAge` slot switches to `variant="compact"`.
+   * The application decides when to switch (scroll position); the component only draws it.
    */
   condensed?: boolean;
   /**
    * Width of the content inside the full-width navy band, on the scale of `PageLayout maxWidth`.
    * Default: the content width of the surrounding `PageLayout` (CSS variable `--csk-page-max-width`),
-   * outside a PageLayout `--csk-layout-max-width` (1200 px, as PageTitle). Inner gutter 14 px, 24 px from a 768 px wide header.
+   * outside a PageLayout `--csk-layout-max-width` (1200 px, as PageTitle). Inner gutter: the token `--csk-layout-gutter`
+   * (16 px phone, 24 px from 768 px), the same as the padded PageLayout container, so header and page content line up.
    */
   maxWidth?: PageLayoutMaxWidth;
 }
@@ -93,7 +99,11 @@ export const EventHeader = forwardRef<HTMLElement, EventHeaderProps>(
                 {status}
               </div>
             )}
-            {condensed && dataAge && <span className="csk-event-header__age">{dataAge}</span>}
+            {condensed && dataAge && (
+              <span className="csk-event-header__age">
+                <DataAgeVariantContext.Provider value="compact">{dataAge}</DataAgeVariantContext.Provider>
+              </span>
+            )}
           </div>
         </div>
       </header>

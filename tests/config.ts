@@ -121,6 +121,8 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'EventHeader-LogoShapes', storyId: 'components-eventheader--logo-shapes', tier: 'specific' },
   { name: 'TableToolbar-Crowded390', storyId: 'components-tabletoolbar--crowded-390', tier: 'specific' },
   { name: 'TableToolbar-OneRow390', storyId: 'components-tabletoolbar--one-row-390', tier: 'specific' },
+  // v2 T19 (#84, live-mini comparison): compact DataAge (dot + short age) for the condensed EventHeader
+  { name: 'DataAge-Compact', storyId: 'components-dataage--compact', tier: 'specific' },
 ];
 
 /** All components for visual regression testing */
@@ -143,6 +145,8 @@ export const layoutStories: Array<{ name: string; storyId: string; a11y?: boolea
   { name: 'Layout-Urad', storyId: 'layout-urad--default' },
   // v2 T19: EventHeader content aligned with the PageLayout container (1200 and 1024)
   { name: 'EventHeader-ContainerWidth', storyId: 'components-eventheader--container-width' },
+  // v2 T19 (#84, live-mini comparison): header and page content share the gutter token (default + condensed)
+  { name: 'EventHeader-PageGutter', storyId: 'components-eventheader--page-gutter' },
 ];
 
 /**

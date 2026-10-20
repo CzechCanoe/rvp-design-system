@@ -21,7 +21,9 @@ const meta = {
           'through `clock.setTimeout` exactly when the text changes; `mode="absolute"` → „stav ze 14:32:10“. ' +
           '`connection` adds a dot + text in the same line (never a banner over content): `ok` green, `reconnecting` amber, ' +
           '`offline` grey (never red: red is LIVE only). Colour and size of the text are inherited, ' +
-          'so it works on the surface and on the brand band. Stories use `createTestClock()` at a fixed time.',
+          'so it works on the surface and on the brand band. `variant="compact"` (automatic in `EventHeader condensed`) ' +
+          'draws only the dot and the short age („před 4 s“), the rest is read out and in `title`. ' +
+          'Stories use `createTestClock()` at a fixed time.',
       },
     },
   },
@@ -30,6 +32,7 @@ const meta = {
     clock: { control: false },
     receivedAt: { control: 'number', description: '`clock.now()` at receipt (story clock is at 2026-10-04 14:32:10)' },
     mode: { control: 'inline-radio', options: ['relative', 'absolute'] },
+    variant: { control: 'inline-radio', options: ['default', 'compact'] },
     connection: { control: 'inline-radio', options: [undefined, 'ok', 'reconnecting', 'offline'] },
     label: { control: 'text' },
     emptyLabel: { control: 'text' },
@@ -146,6 +149,67 @@ export const Overview: Story = {
           connection="offline"
           style={{ marginLeft: 'auto' }}
         />
+      </div>
+    </div>
+  ),
+};
+
+/**
+ * `variant="compact"`: dot + short age for a one-row header (`EventHeader condensed` switches to it by itself).
+ * The prefix („aktualizováno“, „stav ze“) and the connection text are not drawn: screen readers get them
+ * (visually hidden) and the full text is in `title`. The dot is always there, coloured by `connection`
+ * (without it the text colour).
+ */
+export const Compact: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--csk-space-6)' }}>
+      <div style={grid}>
+        <Row label="compact · 4 s">
+          <DataAge receivedAt={STORY_NOW - 4_000} clock={storyClock} variant="compact" />
+        </Row>
+        <Row label="compact · 2 min">
+          <DataAge receivedAt={STORY_NOW - 125_000} clock={storyClock} variant="compact" />
+        </Row>
+        <Row label="compact · absolute">
+          <DataAge receivedAt={STORY_NOW} clock={storyClock} variant="compact" mode="absolute" timeZone={TZ} />
+        </Row>
+        <Row label="compact · bez dat">
+          <DataAge receivedAt={null} clock={storyClock} variant="compact" />
+        </Row>
+        <Row label="compact · ok">
+          <DataAge receivedAt={STORY_NOW - 1_000} clock={storyClock} variant="compact" connection="ok" />
+        </Row>
+        <Row label="compact · reconnecting">
+          <DataAge receivedAt={STORY_NOW - 12_000} clock={storyClock} variant="compact" connection="reconnecting" />
+        </Row>
+        <Row label="compact · offline">
+          <DataAge receivedAt={STORY_NOW - 95_000} clock={storyClock} variant="compact" connection="offline" />
+        </Row>
+      </div>
+
+      <div style={band}>
+        <span>Olympic Hopes 2026</span>
+        <DataAge
+          receivedAt={STORY_NOW - 4_000}
+          clock={storyClock}
+          variant="compact"
+          connection="ok"
+          style={{ marginLeft: 'auto' }}
+        />
+      </div>
+      <div style={band}>
+        <span>Olympic Hopes 2026</span>
+        <DataAge
+          receivedAt={STORY_NOW - 12_000}
+          clock={storyClock}
+          variant="compact"
+          connection="reconnecting"
+          style={{ marginLeft: 'auto' }}
+        />
+      </div>
+      <div style={band}>
+        <span>Olympic Hopes 2026</span>
+        <DataAge receivedAt={STORY_NOW - 4_000} clock={storyClock} variant="compact" style={{ marginLeft: 'auto' }} />
       </div>
     </div>
   ),

@@ -34,6 +34,9 @@
   background: var(--csk-color-state-unknown);
 }
 
+/* Compact (variant="compact", one-row header): dot + short age; the prefix and the connection text are
+   .csk-data-age__sr (read out, not drawn). Without `connection` the dot takes the text colour (rule above). */
+
 .csk-data-age__connection {
   flex: none;
   font-weight: var(--csk-font-weight-semibold);

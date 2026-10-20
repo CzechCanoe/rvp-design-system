@@ -30,7 +30,10 @@ export interface PageLayoutProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   /** Maximum width of the content container (exposed as `--csk-page-max-width`) */
   maxWidth?: PageLayoutMaxWidth;
-  /** Add side padding to the main content area (16 px phone, 24 px desktop) */
+  /**
+   * Add side padding to the main content area: the token `--csk-layout-gutter` (16 px phone, 24 px from 768 px),
+   * the same gutter as `EventHeader`, so header and page content start at the same x.
+   */
   padded?: boolean;
   /** Keep the header area at the top while scrolling */
   stickyHeader?: boolean;
