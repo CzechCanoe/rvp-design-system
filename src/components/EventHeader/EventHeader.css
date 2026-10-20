@@ -1,13 +1,51 @@
 /* EventHeader: compact live header on the navy band */
 
 .csk-event-header {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 10px 14px 12px;
+  /* The inner gutter follows the header width (a phone frame on a wide screen keeps 14 px) */
+  container-type: inline-size;
+  padding: 10px 0 12px;
   background: var(--csk-color-brand);
   color: var(--csk-color-text-on-fill);
   font-family: var(--csk-font-sans);
+}
+
+/* Content width on the PageLayout scale; default = the surrounding PageLayout container */
+.csk-event-header--max-sm {
+  --csk-page-max-width: 640px;
+}
+
+.csk-event-header--max-md {
+  --csk-page-max-width: 768px;
+}
+
+.csk-event-header--max-lg {
+  --csk-page-max-width: 1024px;
+}
+
+.csk-event-header--max-xl {
+  --csk-page-max-width: var(--csk-layout-max-width);
+}
+
+.csk-event-header--max-full {
+  --csk-page-max-width: none;
+}
+
+.csk-event-header__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--csk-page-max-width, var(--csk-layout-max-width));
+  margin-inline: auto;
+  padding-inline: 14px;
+}
+
+/* Same gutter as the padded PageLayout container from 768 px */
+@container (min-width: 768px) {
+  .csk-event-header__inner {
+    padding-inline: var(--csk-space-6);
+  }
 }
 
 .csk-event-header a {
@@ -50,6 +88,7 @@
   min-width: 0;
 }
 
+/* Logo slot: square 40 × 40, portrait (Avatar shape="portrait") 40 × 56; the logo is never cropped */
 .csk-event-header__logo {
   flex: none;
   display: flex;
@@ -57,6 +96,20 @@
   height: 40px;
   overflow: hidden;
   border-radius: var(--csk-radius-md);
+}
+
+.csk-event-header__logo:has(> .csk-avatar--portrait) {
+  height: 56px;
+}
+
+.csk-event-header__logo > .csk-avatar,
+.csk-event-header__logo > img {
+  width: 100%;
+  height: 100%;
+}
+
+.csk-event-header__logo > img {
+  object-fit: contain;
 }
 
 .csk-event-header__text {
@@ -83,13 +136,19 @@
   margin-left: auto;
 }
 
-/* One row for a scrolled page */
+/* One row for a scrolled page: back · name · status · data age */
 .csk-event-header--condensed {
-  padding: 6px 14px;
+  padding-block: 6px;
 }
 
 .csk-event-header--condensed .csk-event-header__row {
-  gap: var(--csk-space-3);
+  gap: var(--csk-space-2);
+}
+
+/* The name gives way first (down to 5rem), then the data age gets an ellipsis */
+.csk-event-header--condensed .csk-event-header__text {
+  flex: 1 1000 auto;
+  min-width: 5rem;
 }
 
 .csk-event-header--condensed .csk-event-header__title {
@@ -99,7 +158,16 @@
   text-overflow: ellipsis;
 }
 
+.csk-event-header--condensed .csk-event-header__age {
+  display: flex;
+  flex: 0 1 auto;
+  min-width: 0;
+  margin-left: 0;
+  font-size: 12px;
+}
+
 .csk-event-header--condensed .csk-event-header__back {
+  flex: none;
   min-width: var(--csk-tap);
   min-height: var(--csk-tap);
   margin: -10px 0 -10px -14px;

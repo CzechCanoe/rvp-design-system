@@ -148,7 +148,7 @@ function ClubEntryPage() {
             </>
           }
           actions={
-            <Button variant="secondary" size="sm">
+            <Button variant="secondary" size="sm" href="#propozice">
               Propozice
             </Button>
           }

@@ -213,3 +213,65 @@ export const SmallVariants: Story = {
     },
   },
 };
+
+/* ==========================================================================
+   LINK FORM
+   ========================================================================== */
+
+/**
+ * `href` (or `as="a"`) renders an `<a>` with the identical look, focus ring and sizes, for navigation:
+ * documents, "Přihlásit", a phase on the live page. Actions stay buttons.
+ * A disabled link drops `href` (not focusable, not navigable) and carries `aria-disabled`;
+ * `target="_blank"` gets `rel="noopener noreferrer"` unless `rel` is given.
+ */
+export const AsLink: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <Button href="#prihlasit">Přihlásit</Button>
+        <Button href="#propozice" variant="secondary">
+          Propozice (PDF)
+        </Button>
+        <Button href="#pridat" variant="ghost">
+          + Přidat do K1 muži
+        </Button>
+        <Button href="#odhlasit" variant="danger">
+          Odhlásit oddíl
+        </Button>
+      </div>
+      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <Button as="a" href="#k1m2" size="sm">
+          K1 muži · 2. jízda
+        </Button>
+        <Button href="#c1w2" size="sm" variant="secondary">
+          C1 ženy · 2. jízda
+        </Button>
+        <Button
+          href="https://www.canoeicf.com"
+          target="_blank"
+          size="sm"
+          variant="secondary"
+          iconRight={<ArrowRightIcon />}
+        >
+          canoeicf.com
+        </Button>
+      </div>
+      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <Button href="#prihlasit" disabled>
+          Přihlásit (disabled)
+        </Button>
+        <Button href="#propozice" variant="secondary" disabled>
+          Propozice (disabled)
+        </Button>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Link form: `href` / `as="a"`, same look as the button. Disabled links have no `href` and `aria-disabled="true"`.',
+      },
+    },
+  },
+};

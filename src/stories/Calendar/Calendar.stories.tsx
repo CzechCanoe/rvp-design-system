@@ -88,9 +88,15 @@ function CalendarPage() {
           meta={<span>Termínová listina všech sekcí. Víkend za víkendem, protože tak se sezóna žije.</span>}
           actions={
             <>
-              <Button variant="secondary" size="sm">Přidat do kalendáře (iCal)</Button>
-              <Button variant="secondary" size="sm">Tabulka</Button>
-              <Button variant="secondary" size="sm">PDF termínovka</Button>
+              <Button variant="secondary" size="sm" href="#ical">
+                Přidat do kalendáře (iCal)
+              </Button>
+              <Button variant="secondary" size="sm" href="#tabulka">
+                Tabulka
+              </Button>
+              <Button variant="secondary" size="sm" href="#terminovka.pdf">
+                PDF termínovka
+              </Button>
             </>
           }
         />

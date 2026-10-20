@@ -1,0 +1,5 @@
+/* Links in the expanded row detail of the page stories. Components are never restyled. */
+
+.story-results__link {
+  color: var(--csk-color-action);
+}

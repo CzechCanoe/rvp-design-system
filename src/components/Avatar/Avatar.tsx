@@ -2,7 +2,7 @@ import { forwardRef, useState, type ImgHTMLAttributes, type ReactNode } from 're
 import './Avatar.css';
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
-export type AvatarShape = 'circular' | 'rounded' | 'square';
+export type AvatarShape = 'circular' | 'rounded' | 'square' | 'portrait';
 export type AvatarColor =
   | 'default'
   | 'primary'
@@ -25,7 +25,10 @@ export interface AvatarProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, '
   name?: string;
   /** Size of the avatar */
   size?: AvatarSize;
-  /** Shape. `square` is for event and club logos: the image is contained, never cropped */
+  /**
+   * Shape. `square` is for event and club logos, `portrait` (5 : 7, width from `size`, e.g. md 40 × 56)
+   * for upright event posters and logos; both contain the image, never crop it
+   */
   shape?: AvatarShape;
   /** Ring around the avatar (profile header); on `data-tone="on-dark"` it turns translucent white */
   ring?: boolean;

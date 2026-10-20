@@ -16,13 +16,8 @@
   padding: var(--csk-space-2);
 }
 
-@media (min-width: 768px) {
-  .live-page__nav,
-  .live-page__body {
-    padding-inline: var(--csk-space-6);
-  }
-}
-
+/* Content column: 1024 px including the 24 px gutter, the same box as EventHeader maxWidth="lg"
+   (and PageLayout maxWidth="lg"), so the header text lines up with the content */
 .live-page__nav-inner,
 .live-page__body-inner {
   display: flex;
@@ -34,6 +29,18 @@
   margin-inline: auto;
 }
 
+@media (min-width: 768px) {
+  .live-page__nav,
+  .live-page__body {
+    padding-inline: 0;
+  }
+
+  .live-page__nav-inner,
+  .live-page__body-inner {
+    padding-inline: var(--csk-space-6);
+  }
+}
+
 .live-page__nav-row {
   display: flex;
   flex-wrap: wrap;
@@ -41,13 +48,9 @@
   gap: var(--csk-space-2);
 }
 
-.live-page__link {
-  color: var(--csk-color-action);
-}
-
 .live-page__choice {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--csk-space-3);
+  gap: var(--csk-space-2);
   margin-top: var(--csk-space-1);
 }

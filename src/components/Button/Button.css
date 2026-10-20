@@ -3,6 +3,7 @@
  *
  * Supports variants: primary, secondary, ghost, danger
  * Supports sizes: md (40 px), sm (32 px); min touch width 44 px
+ * The same classes style the <button> and the link form (<a>, href / as="a").
  */
 
 /* ==========================================================================
@@ -54,6 +55,12 @@
   opacity: 0.5;
 }
 
+/* Link form (href / as="a"): same look; host link styles (underline, hover colour) never leak in */
+.csk-button:hover,
+.csk-button:focus {
+  text-decoration: none;
+}
+
 /* ==========================================================================
    VARIANTS
    ========================================================================== */
@@ -68,11 +75,13 @@
 .csk-button--primary:hover:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--csk-color-action-hover);
   border-color: var(--csk-color-action-hover);
+  color: var(--csk-color-text-on-fill);
 }
 
 .csk-button--primary:active:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--csk-color-brand);
   border-color: var(--csk-color-brand);
+  color: var(--csk-color-text-on-fill);
 }
 
 /* Secondary - secondary actions with border emphasis */
@@ -119,11 +128,13 @@
 .csk-button--danger:hover:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--csk-color-error-text);
   border-color: var(--csk-color-error-text);
+  color: var(--csk-color-text-on-fill);
 }
 
 .csk-button--danger:active:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--csk-color-error-text);
   border-color: var(--csk-color-error-text);
+  color: var(--csk-color-text-on-fill);
 }
 
 .csk-button--danger:focus-visible {

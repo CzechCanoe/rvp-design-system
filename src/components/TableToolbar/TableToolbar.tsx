@@ -8,7 +8,7 @@ type TableToolbarName =
 export type TableToolbarProps = TableToolbarName & TableToolbarBaseProps;
 
 interface TableToolbarBaseProps extends HTMLAttributes<HTMLDivElement> {
-  /** Search field; grows to take the remaining width (e.g. SearchInput) */
+  /** Search field; grows to take the remaining width, never narrower than 10rem (e.g. SearchInput) */
   search?: ReactNode;
   /** Filter pills (TableToolbarButton); labels never wrap */
   children?: ReactNode;
@@ -18,7 +18,13 @@ interface TableToolbarBaseProps extends HTMLAttributes<HTMLDivElement> {
   detail?: ReactNode;
 }
 
-/** Container for search + pills + favourites toggle + detail switch above a table. */
+/**
+ * Container for search + pills + favourites toggle + detail switch above a table.
+ *
+ * One row while the search keeps at least 10rem (160 px). When the controls do not fit next to it
+ * (390 px phone with round, category, ★ and "Detailní"), they move as a group to the next row and the
+ * search takes the full first row; inside the group each control keeps its width and wraps whole.
+ */
 export function TableToolbar({
   search,
   children,
@@ -28,12 +34,17 @@ export function TableToolbar({
   ...props
 }: TableToolbarProps) {
   const classes = ['csk-table-toolbar', className].filter(Boolean).join(' ');
+  const hasControls = Boolean(children || favorites || detail);
   return (
     <div className={classes} role="group" {...props}>
       {search && <div className="csk-table-toolbar__search">{search}</div>}
-      {children}
-      {favorites}
-      {detail && <div className="csk-table-toolbar__detail">{detail}</div>}
+      {hasControls && (
+        <div className="csk-table-toolbar__controls">
+          {children}
+          {favorites}
+          {detail && <div className="csk-table-toolbar__detail">{detail}</div>}
+        </div>
+      )}
     </div>
   );
 }
