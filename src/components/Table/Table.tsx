@@ -1,5 +1,9 @@
 import {
   forwardRef,
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useRef,
   useState,
   type HTMLAttributes,
   type ReactNode,
@@ -7,6 +11,8 @@ import {
   type TdHTMLAttributes,
 } from 'react';
 import './Table.css';
+
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 // ============================================================================
 // Types
@@ -62,7 +68,7 @@ export interface TableProps<T> extends Omit<HTMLAttributes<HTMLTableElement>, 'c
   emptyState?: ReactNode;
   /** Loading state */
   loading?: boolean;
-  /** Caption for accessibility */
+  /** Caption for accessibility; also names the wrapper region while the table scrolls */
   caption?: string;
   /** Show caption visually */
   captionVisible?: boolean;
@@ -195,6 +201,28 @@ function TableInner<T>(
   }: TableProps<T>,
   ref: React.ForwardedRef<HTMLTableElement>
 ) {
+  // A wrapper that scrolls (narrow viewport, sticky header) must be reachable by keyboard
+  // (WCAG 2.1.1, axe scrollable-region-focusable). It becomes focusable (with a caption, a
+  // named region) only while it actually overflows, so a table that fits adds no tab stop.
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [scrollable, setScrollable] = useState(false);
+  const captionId = useId();
+
+  useIsomorphicLayoutEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+    const update = () =>
+      setScrollable(
+        wrapper.scrollWidth > wrapper.clientWidth || wrapper.scrollHeight > wrapper.clientHeight
+      );
+    update();
+    if (typeof ResizeObserver === 'undefined') return;
+    const observer = new ResizeObserver(update);
+    observer.observe(wrapper);
+    if (wrapper.firstElementChild) observer.observe(wrapper.firstElementChild);
+    return () => observer.disconnect();
+  }, []);
+
   // Internal sort state (uncontrolled mode)
   const [internalSortKey, setInternalSortKey] = useState<string | null>(defaultSortKey || null);
   const [internalSortDirection, setInternalSortDirection] =
@@ -337,10 +365,21 @@ function TableInner<T>(
   };
 
   return (
-    <div className={wrapperClasses}>
+    <div
+      ref={wrapperRef}
+      className={wrapperClasses}
+      {...(scrollable && {
+        tabIndex: 0,
+        role: caption ? 'region' : undefined,
+        'aria-labelledby': caption ? captionId : undefined,
+      })}
+    >
       <table ref={ref} className={tableClasses} {...props}>
         {caption && (
-          <caption className={captionVisible ? 'csk-table__caption' : 'csk-table__caption--sr-only'}>
+          <caption
+            id={captionId}
+            className={captionVisible ? 'csk-table__caption' : 'csk-table__caption--sr-only'}
+          >
             {caption}
           </caption>
         )}
