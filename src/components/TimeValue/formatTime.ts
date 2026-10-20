@@ -2,7 +2,7 @@ import type { Observed, ObservedState } from '../../types';
 
 export type TimeValuePrecision = 1 | 2;
 
-/** `seconds`: `89.81` (slalom); `clock`: `m:ss.d` / `h:mm:ss.d` (downhill, long times). */
+// `seconds`: `89.81` (slalom); `clock`: `m:ss.d` / `h:mm:ss.d` (downhill, long times).
 export type TimeValueFormat = 'seconds' | 'clock';
 
 export interface TimeParts {

@@ -18,7 +18,7 @@ export interface MarkBadgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'c
   mark: Mark;
 }
 
-/** Czech description of each mark, used as the default `title`. */
+// Czech description of each mark, used as the default `title`.
 export const MARK_DESCRIPTIONS: Record<Mark, string> = {
   DNS: 'Nestartoval',
   'DNS-A': 'Nestartoval, omluven',

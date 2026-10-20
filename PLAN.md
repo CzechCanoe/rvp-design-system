@@ -1,222 +1,39 @@
-# PLAN.md - CSK RVP Design System
+# PLAN.md - CSK RVP Design System v2 „Klidná voda“
+
+Zadání, rozpad na tasky a reference jsou v `docs/v2/` (`README.md`, `BRIEF.md`, `TASKS.md`). Plán 1.x (fáze 0–23) je archivovaný v `PLAN-history.md`. Historie práce je v `DEVLOG.md` (append only, čte se jen při diagnostice).
 
 ## Stav
 
-| Fáze | Status |
-|------|--------|
-| 0-22 | ✅ Archiv (komponenty hotovy) |
-| **23 Standardizace prototypů** | ✅ Dokončeno |
-
-**Tag:** `v1.0.0-phase22-components`
-
----
-
-## Fáze 23: Standardizace prototypů
-
-**Cíl:** Přepsat prototypy na DS komponenty. Min. custom CSS.
-
-**Princip:** `Custom CSS` → `DS komponenty + layout-only CSS`
-
-### Dostupné komponenty
-
-| Komponenta | Props |
-|------------|-------|
-| **HeroSection** | `section`, `variant`, `title`, `backgroundImage`, `wave`, `metadata`, `badges`, `actions`, `floatingContent` |
-| **StatCard** | `colorVariant` (medal-gold/silver/bronze, gradient-*), `icon`, `sparkline` |
-| **ResultItem** | `rank`, `title`, `subtitle`, `meta`, `trailing`, `section` |
-| **ListItem** | `variant` (alert/activity/feed), `type` (warning/danger/info/success/energy) |
-| **Wizard** | `steps`, `activeStep`, `completedSteps`, `section` |
-| **ActionCard** | `icon`, `title`, `description`, `href`, `iconBackground` |
-| **DateBadge** | `date`, `section`, `size` |
-
----
-
-### Pořadí implementace
-
-| # | Prototype | CSS před→po | Hlavní změny | Status |
-|---|-----------|-------------|--------------|--------|
-| 1 | **ClubPublicProfile** | 787→466 | `.club-hero`→HeroSection | ✅ |
-| 2 | **RegistrationPage** | 1772→1603 | custom wizard→Wizard komponenta | ✅ |
-| 3 | **DashboardPage** | 1413→1167 | stat cards→StatCard, alerts→ListItem, actions→ActionCard | ✅ |
-| 4 | **AthletePublicProfile** | 1265→322 | hero→HeroSection, results→ResultItem | ✅ |
-| 5 | **ResultsPage** | 810→668 | Card header→HeroSection | ✅ |
-| 6 | **EventDetailPage** | 1256→951 | hero→HeroSection, DateBadge | ✅ |
-| 7 | **ProfilePage** | 1749→1102 | odstranění mrtvého hero CSS | ✅ |
-| 8 | **CalendarPage** | 347→346 | DateBadge v upcoming races | ✅ |
-| 9 | **LivePage** | 2778→2620 | hero→HeroSection (modály ponechat) | ✅ |
-
-**Aktuální progress:** 11224→8871 řádků CSS pro všechny prototypy (9 z 9) - **Fáze 23 DOKONČENA**
-
----
-
-### 23.1 ClubPublicProfile ✅
-
-**Dokončeno:** CSS 787→466 řádků (-41%)
-
-**Kroky:**
-- [x] `.club-hero` → `<HeroSection>`
-- [x] Member cards ponechány (ListItem není vhodný pro komplexní athlete karty)
-- [x] Smazána hero VISUAL STYLES sekce
-- [x] Update snapshots
-
----
-
-### 23.2 RegistrationPage ✅
-
-**Dokončeno:** CSS 1772→1603 řádků (-10%)
-
-**Kroky:**
-- [x] custom `WizardStep` component → `<Wizard>` DS komponenta
-- [x] Smazat wizard layout CSS (~85 řádků)
-- [x] Smazat wizard visual CSS (~85 řádků)
-- [x] Update snapshots
-
-**Poznámka:** Hero section ponechán (komplexní s breadcrumbs a deadline stats)
-
----
-
-### 23.3 DashboardPage ✅
-
-**Dokončeno:** CSS 1413→1167 řádků (-17%)
-
-**Kroky:**
-- [x] `.dashboard-stat-card--gradient-*` wrapper divy → `<StatCard colorVariant>` prop
-- [x] `.dashboard-alert-item` → `<ListItem variant="alert" type>`
-- [x] `.dashboard-quick-action` → `<ActionCard iconBackground>`
-- [x] Smazat alert layout/visual CSS (~80 řádků)
-- [x] Smazat quick action layout/visual CSS (~90 řádků)
-- [x] Smazat gradient wrapper CSS (~50 řádků)
-- [x] Update snapshots
-
-**Poznámka:** Page header ponechán (custom pro embed/satellite varianty)
-
----
-
-### 23.4 AthletePublicProfile ✅
-
-**Dokončeno:** CSS 1265→322 řádků (-75%)
-
-**Kroky:**
-- [x] `.athlete-hero` → `<HeroSection variant="full" backgroundImage>`
-- [x] StatsBar již používá DS komponentu
-- [x] `.athlete-result-item` → `<ResultItem>`
-- [x] Highlight karty ponechány (žádná DS komponenta)
-- [x] Update snapshots
-
----
-
-### 23.5 ResultsPage ✅
-
-**Dokončeno:** CSS 810→668 řádků (-18%)
-
-**Kroky:**
-- [x] Card header → `<HeroSection variant="minimal">`
-- [x] Stats přesunuty do floatingContent
-- [x] Smazána header layout/visual CSS sekce
-- [x] Update snapshots
-
----
-
-### 23.9 LivePage ✅
-
-**Dokončeno:** CSS 2778→2620 řádků (-6%)
-
-**Kroky:**
-- [x] custom `live-page-header` → `<HeroSection variant="compact" meshBackground>`
-- [x] Smazána header layout/visual CSS sekce
-- [x] Modály ponechány (komplexní interaktivní komponenty)
-- [x] Update snapshots
-
-**Poznámka:** Menší redukce kvůli komplexitě LivePage (modály, real-time funkce).
-
----
-
-### 23.6 EventDetailPage ✅
-
-**Dokončeno:** CSS 1256→951 řádků (-24%)
-
-**Kroky:**
-- [x] custom `event-detail-hero` → `<HeroSection variant="compact" meshBackground>`
-- [x] Stats bar přesunut do floatingContent
-- [x] Breadcrumbs, badges, meta, CTA do HeroSection props
-- [x] Smazána hero layout/visual CSS sekce (~300 řádků)
-- [x] Update snapshots
-
----
-
-### 23.7 ProfilePage ✅
-
-**Dokončeno:** CSS 1749→1102 řádků (-37%)
-
-**Kroky:**
-- [x] Odstranění mrtvého hero CSS (nepoužívané třídy z předchozí verze)
-- [x] Odstranění nepoužívaných achievement visual styles
-- [x] Smazána hero-section, breadcrumb, hero-content, achievement sekce (~650 řádků)
-- [x] Zachovány pouze aktivně používané profile-page-header třídy
-
-**Poznámka:** ProfilePage nemá klasický hero - používá jednodušší page-header. StatCard již používá.
-
----
-
-### 23.8 CalendarPage ✅
-
-**Dokončeno:** CSS 347→346 řádků (-0.3%)
-
-**Kroky:**
-- [x] Přidán DateBadge import
-- [x] Upcoming races: text date → DateBadge component
-- [x] Event detail card: text date → DateBadge component
-- [x] Minimální CSS změna (DateBadge styling je v komponentě)
-
-**Poznámka:** CalendarPage již měla layout-only CSS, změna hlavně v TSX.
-
----
-
-### Kritéria dokončení ✅
-
-- [x] Prototype CSS < 4000 řádků (celkem 8871)
-- [x] Custom hero CSS minimalizováno (přesunuto do HeroSection)
-- [x] Custom stat card CSS = 0 (používá StatCard)
-- [x] Custom list item CSS = 0 (používá ListItem)
-- [x] Snapshots aktualizované
-
----
-
-## Quick Reference
-
-```tsx
-// HeroSection
-<HeroSection section="dv" variant="full|compact|minimal" title="..." backgroundImage="..." wave />
-
-// StatCard
-<StatCard colorVariant="medal-gold|gradient-primary" icon={...} value="42" label="..." />
-
-// ResultItem
-<ResultItem rank={1} title="..." subtitle="..." section="dv" />
-
-// ListItem
-<ListItem variant="alert|activity" type="warning|danger|info|success" icon={...} title="..." />
-
-// Wizard
-<Wizard steps={[{id, label, icon}]} activeStep="..." section="dv" />
-
-// ActionCard
-<ActionCard icon={...} title="..." href="..." iconBackground="primary|success|warning|info|energy" />
-
-// DateBadge
-<DateBadge date="2024-06-15" section="dv" size="sm|md|lg" />
-```
-
----
-
-## Příkazy
-
-```bash
-npm run dev              # Storybook
-npm run test:quick       # Visual tests
-npm run test:update:quick # Update snapshots
-```
-
-## Tags
-
-- `v1.0.0-phase22-components` - DS komponenty hotovy
+| Fáze | Obsah | Status |
+|------|-------|--------|
+| 0 | T0 příprava (lint no-hex, Vitest, Pages) | hotovo |
+| 1 | T1 tokeny, T2 písma, T3 codemod a přetokenování | hotovo |
+| 2 | T4 základ (Button, Card, Badge, Tabs, SearchInput, Avatar), T5 stavy, T6 čas, T7 ovladače, T8 layout | hotovo |
+| 3 | T9 ResultsTable + RunDetail, T10 OnCoursePanel, T11 StartlistTable + ProgramList, T12 Live page stories | hotovo |
+| 4 | T13 WeekendCalendar, T14 EntryTable + ProposalList + SummaryCard, T15 profil, T16 Event/Detail | hotovo |
+| 5 | T17a smazání 1.x, **T17 dokumentace a finální testovací konfigurace** | hotovo (T17 v review) |
+| 5 | T18 suchý test nad `c123-live-mini` (hledání mezer, bez commitu tam) | běží paralelně |
+| 5 | T19 mezery z T18, změny API z #84, vydání 2.0.0 | čeká na T18 |
+
+Verze `package.json` a `CHANGELOG.md` spravuje Release Please. Release PR „chore(main): release 2.0.0“ (#45) se **nemerguje**, dokud T19 neskončí a poslední commit nenese footer `Release-As: 2.0.0`.
+
+## Další krok
+
+1. T18: výstup (seznam mezer) jde do issue v DS.
+2. T19 (#84): rozhodnutí maintainera z 20. 10. 2026, bod 1–12 (Button `href`, `DocumentList`, `ResultsPanel`, `TimeValue format`, `DataAge` barvy, token `--csk-ink-3`, Avatar `portrait`, oprava `GateGrid`/`PenaltyChip`, axe u `Table` na mobilu, …). Dokumentaci těchto komponent (`docs/v2/COMPONENTS.md`, `MIGRATION.md`) doplní T19; `docs/COMPONENT_API.md` stačí přegenerovat (`npm run docs:api`).
+3. Smazat `LiveIndicator` (nahrazuje ho `StatusBadge state="live"`; používá ho `Calendar` / `CalendarList` `showLive`).
+4. Před vydáním: plný běh CI přes všechny prohlížeče (`gh workflow run ci.yml --ref <větev> -f browsers=all`).
+
+## Backlog 2.1
+
+- #85 EntryTable: kartový režim ≤ 640 px (jedna loď = jedna karta, C2 se dvěma členy); v 2.0.0 zůstává vodorovný scroll uvnitř komponenty.
+- Tmavý režim (tokeny jsou připravené, `[data-theme="dark"]` přepíše jen sémantickou vrstvu).
+- Sdílecí kartičky výsledků, Kayak Cross a klasifikační standingy jako samostatné komponenty (mimo scope v2).
+- Případně `docs:api -- --check` jako krok v CI, aby se `docs/COMPONENT_API.md` nemohl rozejít s kódem.
+
+## Pravidla (zkrácená, plná verze v `CLAUDE.md`)
+
+- Větev `feat/v2-<N>-<slug>` z `main`, PR do `main`, squash merge, konvenční commity (`feat!:` pro breaking).
+- Tokeny jen `--csk-*`, žádný hex v komponentách, čas jen přes `Clock`.
+- Snapshoty generuje jen CI (label `update-snapshots`); lokálně `npx playwright test --project=chromium --ignore-snapshots`.
+- Po změně API komponent `npm run docs:api`.

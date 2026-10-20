@@ -46,7 +46,11 @@ export interface RunningSpec {
  * (index 0 = 1st run); a missing slot renders as "not known".
  */
 export interface RunCell {
-  /** Time shown for the run (the application decides whether raw or with penalties). */
+  /**
+   * Time shown for the run (the application decides whether raw or with penalties).
+   * `null` (or a `not-yet` / `unavailable` `Observed`) renders as "not known" (—); only a
+   * `known` `0` renders as `0.00`. Never pass `null` for a time that is really zero.
+   */
   time: ObservedNumber;
   /**
    * Penalty seconds shown after the time. Omitted = nothing shown; `null` (or a

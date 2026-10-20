@@ -3,45 +3,48 @@ import { Meta } from '@storybook/blocks';
 
 <Meta title="Introduction" />
 
-# CSK RVP Design System
+# CSK RVP Design System v2 „Klidná voda“
 
-Design systém pro registrační a výsledkový portál **Českého svazu kanoistů**.
+Design systém pro registrační a výsledkový portál **Českého svazu kanoistů**: kalendář závodů, výsledky, live výsledky, přihlášky klubů a profily závodníků.
 
 ## Co zde najdete
 
-### Prototypes (celé stránky)
+### Tokens
 
-Ukázky kompletních stránek - kalendář, výsledky, profily závodníků atd.
+Paleta, stavy hodnot (Oficiální, Předběžné, V revizi, Neznámo, Live, Zastaveno), škály písma a mezer: **Tokens → Overview**.
 
-**Každý prototyp má dvě varianty:**
+### Components
 
-- **Embed** - Komponenta vložená do stránky kanoe.cz (bez vlastního headeru)
-- **Satellite** - Samostatná aplikace s vlastním headerem (např. zavody.kanoe.cz)
+Jednotlivé stavební bloky: tlačítka, formuláře, tabulky, stavové odznaky, časy, živé výsledky (`ResultsTable`, `OnCoursePanel`, `ProgramList`), kalendář po víkendech, přihláška klubu, profil závodníka.
 
-### Components (jednotlivé prvky)
+### Stránky (Page stories)
 
-Tlačítka, karty, tabulky, formuláře a další stavební bloky.
+Celé obrazovky složené jen z komponent DS, jedna na obrazovku z reference:
+
+- **Live** – Running, Expanded, Startlist, Official, Disconnected, Program
+- **Event → Detail** – detail závodu
+- **Calendar → Season** – kalendář sezóny po víkendech
+- **Entry → Club Entry** – přihláška klubu (úřad)
+- **Athlete** – veřejný a mobilní profil
+- **Layout** – Tribuna, Úřad a embed (`PageLayout`)
+
+Stránky mají fixní čas a fake `Clock`, takže se nic neposouvá a snapshoty jsou stabilní.
 
 ## Ovládání v toolbaru
 
-Vpravo nahoře najdete přepínače:
+- **Theme** – světlý režim (tmavý se ve v2.0 nekreslí, vykreslí se světle)
+- **Embed** – Standalone / Embed (pro kanoe.cz, `data-mode="embed"`)
 
-- **Theme** - Světlý režim (tmavý se ve v2.0 nekreslí, vykreslí se světle)
-- **Embed** - Standalone / Embed (pro kanoe.cz, `data-mode="embed"`)
+## Principy
 
-Přehled tokenů (paleta, stavy hodnot, škály) je v **Tokens → Overview**.
-
-## Jak začít
-
-1. Klikněte na **Prototypes** v levém menu - uvidíte ukázky celých stránek
-2. Prozkoumejte **Components** - jednotlivé UI prvky s dokumentací
-3. Použijte přepínač Embed/Satellite pro zobrazení různých variant
+- Tři tóny jednoho systému: **Tribuna** (diváci, bílá), **Úřad** (šedá pracovní plocha), **Moje** (profil, telefon jako výchozí plátno).
+- Stavy hodnot jsou páteř: komponenty přijímají `Observed<T>`, značky a stavy, ne doménu.
+- Čas přes injektovaný `Clock`, nikdy `Date.now()` v komponentě.
+- Pohyb jen u dat; `prefers-reduced-motion` se respektuje všude.
 
 ## Technické info
 
-- React 18+ s TypeScript
-- CSS custom properties (tokeny)
-- Podpora light/dark theme
-- Mobile-first design
-
-*Verze: 1.0.1*
+- React 18/19, TypeScript, CSS custom properties `--csk-*`
+- Barlow Semi Condensed, IBM Plex Sans a IBM Plex Mono (self-hosted)
+- Mobile-first, 390 px je výchozí plátno pro live a profil
+- Přehled API: `docs/COMPONENT_API.md` (generováno `npm run docs:api`)

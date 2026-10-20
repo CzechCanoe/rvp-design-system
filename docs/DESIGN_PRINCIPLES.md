@@ -1,4 +1,6 @@
-# Design Principles - CSK RVP Design System
+# Design Principles - CSK RVP Design System (1.x, historický dokument)
+
+> **Neplatí pro v2.** Tenhle dokument je výzkumný podklad verze 1.x (dva režimy utility/expressive, dark mode, Inter, `#1176a6`). Aktuální principy jsou v [`DESIGN_PRINCIPLES.md`](../DESIGN_PRINCIPLES.md) v kořeni repa a v `docs/v2/`. Ponecháno jako historie spolu s `docs/branding/`, `docs/research/` a `docs/review/`.
 
 Základní principy a standardy pro vizuální a technický design systému registračního a výsledkového servisu Českého svazu kanoistů.
 
