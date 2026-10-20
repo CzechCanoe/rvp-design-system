@@ -128,7 +128,34 @@
   transform: scale(0.98);
 }
 
-.csk-table__th--sortable:focus-visible {
+/* Sort control: a native button that looks like the plain header label */
+.csk-table__sort-button {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  text-align: inherit;
+  white-space: inherit;
+  color: inherit;
+  cursor: inherit;
+}
+
+/* The click target and focus ring cover the whole header cell, as before */
+.csk-table__sort-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.csk-table__sort-button:focus-visible {
+  outline: none;
+}
+
+.csk-table__sort-button:focus-visible::after {
   outline: 2px solid var(--csk-color-focus);
   outline-offset: -2px;
 }
