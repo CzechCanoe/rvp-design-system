@@ -58,7 +58,8 @@ type Story = StoryObj<typeof meta>;
 // Sample Data
 // =============================================================================
 
-const today = new Date();
+// Fixed date: snapshots must not change with the day or month the tests run on.
+const today = new Date(2026, 9, 15);
 const year = today.getFullYear();
 const month = today.getMonth();
 
@@ -151,6 +152,8 @@ const cskRaceEvents: CalendarEvent[] = [
  */
 export const Default: Story = {
   args: {
+    defaultDate: today,
+    highlightToday: false,
     events: cskRaceEvents,
     size: 'lg',
     onEventClick: (event) => console.log('Event clicked:', event),

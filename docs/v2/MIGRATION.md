@@ -1,31 +1,66 @@
-# Migrace a release 2.0.0
+# Migrace a release 2.0.0 (as-built)
+
+Breaking changes níže jsou porovnané se zveřejněnou verzí **1.2.0** (`git diff v1.2.0..main -- src`). Popis nových komponent je v `COMPONENTS.md`, úplné API v `docs/COMPONENT_API.md`. T19 ještě přidá další změny (Button `href`, `DocumentList`, `ResultsPanel`, `TimeValue format`, …); doplní je do tohoto souboru sám.
 
 ## Verze a větve
 
 - Vývoj v2 běží přímo nad `main`: větve `feat/v2-<N>-<slug>` podle `TASKS.md`, PR do `main`, squash merge, konvenční commity. Breaking změny jako `feat!:` nebo s footerem `BREAKING CHANGE:`.
-- Každý merge do `main` spustí CI a nasazení Storybooku na GitHub Pages, takže rozpracovaný v2 je kdykoli k prohlédnutí. Tag `v1.2.0` a balíček 1.2.0 na GitHub Packages zůstávají nedotčené; `c123-live-mini` na `legacy-2026` je pinovaný lockfilem.
-- Release Please po prvním `feat!:` otevře rolling release PR na 2.0.0 (config má `bump-minor-pre-major: false`, takže `feat!:` znamená major). **Release PR se nemerguje až do konce fáze 5.** Jeho merge vytvoří tag `v2.0.0`, GitHub Release a spustí `publish.yml`. Poslední commit T19 nese pro jistotu footer `Release-As: 2.0.0`.
-- Mezi fázemi je `main` v přechodném stavu (část komponent v2, část 1.x). To je záměr; kdo potřebuje stabilní 1.x, instaluje `@czechcanoe/rvp-design-system@1.2.0`.
+- Každý merge do `main` spustí CI a nasazení Storybooku na GitHub Pages. Tag `v1.2.0` a balíček 1.2.0 na GitHub Packages zůstávají nedotčené; `c123-live-mini` na `legacy-2026` je pinovaný lockfilem.
+- Release Please drží rolling release PR na 2.0.0 (config má `bump-minor-pre-major: false`, takže `feat!:` znamená major). **Release PR (#45) se nemerguje do konce T19.** Jeho merge vytvoří tag `v2.0.0`, GitHub Release a spustí `publish.yml`. Poslední commit T19 nese footer `Release-As: 2.0.0`.
+- Mezi fázemi byl `main` v přechodném stavu (část komponent v2, část 1.x). Kdo potřebuje stabilní 1.x, instaluje `@czechcanoe/rvp-design-system@1.2.0`.
 - Řada 1.x se po 2.0.0 neudržuje.
 
 ## Breaking changes (do CHANGELOG a do PR popisu)
 
-1. **Tokeny**: všechny proměnné přejmenované na `--csk-*`; neprefixované `--color-*`, `--spacing-*`, `--text-*`, `--radius-*`, `--shadow-*`, `--gradient-*` neexistují. Mapování v `TOKENS.md`.
-2. **Režimy**: `data-mode="utility" | "expressive"` bez účinku; zůstává jen `data-mode="embed"`. `ThemeProvider` ztrácí prop `mode` (ponechá `theme` pro budoucí dark).
-3. **Písma**: Inter a JetBrains Mono nahrazeny IBM Plex Sans / Mono a Barlow Semi Condensed. Cesty k fontům v `dist/` se mění.
-4. **Odstraněné komponenty**: Navigation, HeroSection, SectionHeader, StatsBar, StatCard, ActionCard, AthleteCard, ListItem, ResultItem, PodiumCard, DateBadge, FilterPills (přejmenováno na `Pills`), `ResultsTable` 1.x (`ResultEntry` model) včetně `RunDetailModal`.
-5. **Odstraněné varianty**: `Button gradient | gradient-energy`, `Card elevated | gradient | aesthetic`, `Badge gradient | energy`, `Tabs energyAccent`, `LiveIndicator` (nahrazuje `StatusBadge state="live"`).
-6. **Utility třídy** `csk-reveal`, `csk-mesh-bg--*`, `csk-color-on-surface-muted` zrušené.
-7. **Prototypy** `src/prototypes/*` a jejich stories zrušené; nahrazeny Page stories z v2 komponent.
-8. **Nový povinný peer**: žádný. `react` ^18 || ^19 zůstává.
+### Globální
+
+1. **Tokeny**: všechny CSS proměnné jsou `--csk-*`; neprefixované `--color-*`, `--spacing-*`, `--text-*`, `--radius-*`, `--shadow-*`, `--gradient-*`, `--font-family-*` neexistují. Mapování 1.x → 2.0 je v `TOKENS.md`. Kdo v aplikaci používal `var(--color-…)`, musí přejít na sémantické `--csk-color-*`.
+2. **Režimy**: `data-mode="utility"` a `"expressive"` zrušeny, zůstává jen `data-mode="embed"`. Soubory `utility.css`, `expressive.css`, `aesthetic.css`, `gradients.css`, `effects.css`, `mode.css` jsou pryč.
+3. **ThemeProvider / useTheme**: pryč `defaultMode`, `modeStorageKey`, `mode`, `setMode`, `toggleMode`, `toggleTheme`, typ `DisplayMode`. Nově `embed?: boolean` (nastaví `data-mode="embed"`). `ColorTheme` je `'light' | 'system'` (uložené `'dark'` se mapuje na `light`; tmavé téma se ve 2.0 nekreslí). `useTheme()` vrací `theme`, `resolvedTheme`, `setTheme`, `embed`.
+4. **Písma**: Inter a JetBrains Mono nahrazeny Barlow Semi Condensed, IBM Plex Sans a IBM Plex Mono. Woff2 soubory jsou v `dist/fonts/` (`exports` má nově `./fonts/*`), `@font-face` je v CSS balíčku. Aplikace, které si Inter nahrávaly samy a spoléhaly na `--font-family-sans`, musí přejít na `--csk-font-sans`.
+5. **Utility třídy** `csk-reveal*` a `csk-mesh-bg*` zrušené.
+6. **Prototypy** `src/prototypes/*` a jejich stories zrušené; nahrazují je Page stories (`Live/*`, `Event/Detail`, `Calendar/Season`, `Entry/ClubEntry`, `Athlete/*`).
+7. **Peer dependencies** beze změny (`react` a `react-dom` ^18 || ^19).
+
+### Odstraněné komponenty a exporty
+
+Navigation (`MainNav`, `NavItem`, `BreadcrumbChevronIcon`), HeroSection (+ `HeroActionButton`), SectionHeader, StatsBar, StatCard, ActionCard, AthleteCard, ListItem, ResultItem, PodiumCard, DateBadge. `ResultsTable` 1.x je přepsaná (viz níže) včetně typů `ResultEntry`, `ResultStatus`, `ResultSection`, `ResultsTableColumn`, `ResultsTableSize`, `ResultsTableVariant` a komponenty `RunDetailModal`. Pryč jsou i typy `AvatarVariant` (nově `AvatarShape`), `HeaderSize`, `FilterPillsVariant`, `SearchFilterChip`.
+
+`LiveIndicator` je zrušený, nahrazuje ho `StatusBadge state="live"`. Na `main` je ještě v kódu (používá ho `Calendar` / `CalendarList` `showLive`), T19 ho smaže; nový kód ho nepoužívá. `FilterPills` zůstává pod tímto jménem (upravená komponenta, nepřejmenovaná na `Pills`). Beze změny zůstávají `Calendar`, `CalendarList`, `KanoeCzContext`.
+
+### Změny props a variant
+
+| Komponenta | 1.2.0 | 2.0 |
+|---|---|---|
+| Button | `size` `sm`/`md`/`lg`; `accent="energy"` | `size` `sm`/`md`; `accent` pryč |
+| Badge | `variant` včetně `energy`; `size` včetně `lg`; `glow`, `outlined` | `variant` `level`, `outline`, `live` místo `energy`; `size` `sm`/`md`; `glow`, `outlined` pryč |
+| Card | `variant` `surface`/`elevated`/`outlined`/`aesthetic` | `variant` `surface`/`outlined`; nový `tone` `default`/`highlight` |
+| Input, Select | `energyFocus`, `displayLabel` | pryč; `Select` má navíc `state="warning"` |
+| SearchInput | `size` včetně `lg`; `chips`, `activeChips`, `onChipToggle` | `size` `sm`/`md`; chipy pryč (použij `FilterPills` / `TableToolbarButton`) |
+| Tabs | `variant` `line`/`pills`/`aesthetic`; `size` včetně `lg`; `energyAccent` | `variant` `line`/`pills`/`nav`; `size` `sm`/`md`; nové `overflow` (`wrap`/`scroll`/`carousel`), `previousLabel`, `nextLabel` |
+| Avatar | `variant` (`circular`/`rounded`/`square`), `size` do `2xl` | `shape` (stejné hodnoty), `size` do `3xl`, nový `ring` |
+| Icon | – | nový `filled` |
+| FilterPills | `variant` `default`/`subtle`, `size` včetně `lg` | `variant` pryč, `size` `sm`/`md`, nový `onFilterToggle` |
+| Header | `variant` `default`/`elevated`/`gradient`/`satellite`; `size`, `bordered`, `blurOnScroll`, `scrollThreshold` | `variant` `site`/`satellite`/`app`; uvedené props pryč; nový `club` (výchozí `maxWidth` je `full`) |
+| PageLayout | `variant` `standalone`/`satellite`/`embed` | `variant` `tribuna`/`urad`/`embed`; nové sloty `banner`, `bottomBar`, `stickyHeader` |
+| ResultsTable | props `results`, `section`, `variant`, `size`, `show*`, `renderCell`, `onRowClick`, … | nové `rows: ResultRow[]`, `columns`, `density`, `expandedId`, `onToggle`, `renderDetail`, `onFavoriteChange`, `clock`, `labels`; jiný datový model (`COMPONENTS.md` §3) |
+
+### Nové komponenty
+
+`StatusBadge`, `MarkBadge`, `PenaltyChip`, `GateGrid`, `BibBadge`, `Notice`, `StatTile`, `TimeValue`, `RunningTime`, `DataAge`, `SegmentedControl`, `StarButton`, `FavoritesToggle`, `TableToolbar`, `Subbar`, `Breadcrumbs`, `PageTitle`, `BottomBar`, `EventHeader`, `RunDetail`, `StartlistTable`, `ProgramList`, `OnCoursePanel`, `OnCourseRider`, `WeekendCalendar`, `DeadlineBadge`, `EntryTable`, `ProposalList`, `SummaryCard`, `ProfileHeader`, `SeasonSparkline`, `RivalsList`, plus `Clock` (`createBrowserClock`, `createTestClock`, `ClockProvider`, `useClock`) a typ `Observed<T>`.
 
 ## Kdy migrovat c123-live-mini
 
-**Až v M5 Live, ne dřív.** Venues jedou tag `legacy-2026` a větev `legacy/2026` bere jen `fix:` commity; bump DS na major tam nepatří. Na `main` se klient v M5 píše znovu proti kontraktu (handshake, SSE, `Observed` stavy, `Clock` pravidlo, on-course z `attempt.updated`), takže migrace dnešního klienta na v2 by byla práce, kterou M5 zahodí. DS v2 se staví teď a nezávisle, protože jeho model je vizuální, ne doménový. V M5 se stane zadáním UI: Page stories `Live/*` jsou kostra nového klienta, mapování kontraktu na `ResultRow` je jediná aplikační vrstva. Mezery v DS se hledají předem suchým testem (T18) a znovu na začátku M5. Jediná výjimka: dílčí `fix:` na `legacy/2026` (nižší hero, ztráta na mobilu), pokud má být něco vidět na Jarním slalomu; bez DS.
+**Až v M5 Live, ne dřív.** Venues jedou tag `legacy-2026` a větev `legacy/2026` bere jen `fix:` commity; bump DS na major tam nepatří. Na `main` se klient v M5 píše znovu proti kontraktu (handshake, SSE, `Observed` stavy, `Clock` pravidlo, on-course z `attempt.updated`), takže migrace dnešního klienta na v2 by byla práce, kterou M5 zahodí. DS v2 je postavený nezávisle, protože jeho model je vizuální, ne doménový. V M5 se stane zadáním UI: Page stories `Live/*` jsou kostra nového klienta, mapování kontraktu na `ResultRow` je jediná aplikační vrstva. Mezery v DS hledá předem suchý test (T18) a znovu začátek M5. Jediná výjimka: dílčí `fix:` na `legacy/2026`, pokud má být něco vidět na Jarním slalomu; bez DS.
+
+## Poznámka pro konzumenty (z T18)
+
+- Instalace lokálně zabaleného DS (`npm pack` → `npm i ./….tgz`) potřebuje `NODE_AUTH_TOKEN` pro GitHub Packages.
+- Tgz zabalený z `main` nese do vydání verzi 1.x, takže npm může vzít 1.x z cache. Před instalací smaž záznam DS z lockfilu (a případně `node_modules/@czechcanoe/rvp-design-system`). Týká se hlavně migrace live-mini v M5.
 
 ## Dopad na c123-live-mini (M5 Live v rebuildu)
 
-Migrace live-mini je součástí milníku M5 a definicí hotovo je `CLIENT-OBLIGATIONS.md` sekce „live-mini-client“. DS v2 jí má umožnit tohle:
+Definicí hotovo je `CLIENT-OBLIGATIONS.md` sekce „live-mini-client“. DS v2 jí umožňuje:
 
 | Dnes v live-mini (vlastní) | Po v2 |
 |---|---|
@@ -36,7 +71,7 @@ Migrace live-mini je součástí milníku M5 a definicí hotovo je `CLIENT-OBLIG
 | `RunDetailExpand.tsx` | `RunDetail` |
 | `StartlistTable.tsx` | `StartlistTable` |
 | `ScheduleView.tsx` | `ProgramList` |
-| `EventHeader.tsx` (`HeroSection minimal` + avatar override) | `EventHeader` |
+| `EventHeader.tsx` (`HeroSection minimal` + avatar override) | `EventHeader`, `Avatar shape="square"` |
 | `StarButton`, `FavoritesToggle`, bib badge CSS ×3 | `StarButton`, `FavoritesToggle`, `BibBadge` |
 | `ConnectionStatus.tsx` (nepoužitý), stav spojení jako badge v hero | `DataAge` s `connection` |
 | `NotificationPrompt.tsx` (nepoužitý) | `Notice` |
@@ -45,15 +80,16 @@ Migrace live-mini je součástí milníku M5 a definicí hotovo je `CLIENT-OBLIG
 
 Pořadí v live-mini: 1) bump na `^2.0.0` jako samostatný `chore:` commit (CLAUDE.md DS, pravidlo 6), 2) tokeny, 3) komponenta po komponentě, 4) smazat `:global` overridy a mrtvý kód, 5) tier-3 testy s fake `Clock` podle TEST-ARCHITECTURE §5.
 
-## Testy a snapshoty
+## Testy a snapshoty (stav po T17)
 
-- Vizuální snapshoty (`tests/*-snapshots/`) se po v2 **všechny přegenerují**; diffy proti 1.x nemají smysl. Postup: v každé fázi `npm run test:update:quick` jen pro stories, kterých se fáze týká, a diff obrázek přiložit do PR.
-- `tests/config.ts` se přepisuje ve fázi 5 (nové story ID, tolerance podle CLAUDE.md: komponenty 30 px, stránky 80 px, animované 100+ px).
-- Přibývá unit vrstva (Vitest + Testing Library) pro `RunningTime`, `DataAge`, `TimeValue` a `SegmentedControl`: časové chování se testuje s `createTestClock()`, nikdy s globálním fake-timer patchem (TEST-ARCHITECTURE §5).
-- Accessibility spec (`@axe-core/playwright`) zůstává a rozšiřuje se o nové stories; kontrast 4.5:1 je v tokenech ověřený, komponenty ho nesmí rozbít opacitou.
-- CI (`.github/workflows/ci.yml`) beze změny: lint, typecheck, build, build-storybook, Playwright chromium.
+- `tests/config.ts` obsahuje jen v2 story ID (komponenty `allComponents`, `viewportStories`, `layoutStories`, `pageStories`, `containerQueryComponents`); `QUARANTINE` je prázdná a má taková zůstat (chyby se opravují, ne karanténují). Tolerance: komponenty 30 px, Page stories a layouty 80 px, animované 100+ px.
+- Snapshoty jsou jen chromium a jen světlé téma; generuje je výhradně CI (label `update-snapshots`), na ARM se spouští `--ignore-snapshots`. Plný běh přes všechny prohlížeče (firefox, webkit, mobile-chrome, mobile-safari, funkčně a axe) je `workflow_dispatch` s `browsers=all`; před vydáním 2.0.0 se pouští v T19.
+- Unit vrstva (Vitest + Testing Library, `npm run test:unit`): `Badge`, `DataAge`, `EntryTable`, `OnCoursePanel`, `PenaltyChip`, `ResultsTable`, `RunningTime`, `StartlistTable`, `StatusBadge`, `Tabs`, `TimeValue`, `WeekendCalendar`, `ThemeContext`, `Clock`. Časové chování se testuje s `createTestClock()`, nikdy s globálním fake-timer patchem; `src/clock/noRealTime.test.ts` staticky hlídá, že `TimeValue`, `RunningTime`, `DataAge` a `src/clock/` čtou čas jen přes `Clock`.
+- Accessibility spec (`@axe-core/playwright`) běží nad stories z `tests/config.ts`; kontrast 4.5:1 je v tokenech ověřený.
+- CI (`.github/workflows/ci.yml`): lint (ESLint + `check-no-hex`), typecheck, unit testy, build, build Storybooku, Playwright chromium (jen při změně `src/`, `tests/`, `.storybook/`, `package*.json`, konfigurace Playwrightu nebo workflow).
 
 ## Dokumentace
 
-- `README.md`, `CLAUDE.md` (Quick Reference typů, kanoe.cz kontext: primární barva už není `#1176a6`), `DESIGN_PRINCIPLES.md` (přepsat na principy z `BRIEF.md`, sekce Dynamic Sport Aesthetic pryč), `docs/COMPONENT_API.md` (přegenerovat), `PLAN.md` (nový plán = `TASKS.md`), `DEVLOG.md` append-only záznam za každou fázi.
-- `docs/branding/`, `docs/research/`, `docs/review/` zůstávají jako historie; `docs/v2/` je aktuální.
+- `README.md`, `CLAUDE.md`, `DESIGN_PRINCIPLES.md`, `PLAN.md` a `.storybook` Introduction popisují v2 (T17). `docs/DESIGN_PRINCIPLES.md` je označený jako historický, stejně jako `docs/branding/`, `docs/research/` a `docs/review/`; `docs/v2/` je aktuální.
+- `docs/COMPONENT_API.md` se generuje skriptem `scripts/gen-component-api.mjs` (`npm run docs:api`, kontrola `npm run docs:api -- --check`) z TypeScript typů a JSDoc. Po změně API komponent ho přegeneruj.
+- `DEVLOG.md` je append-only záznam za každou fázi.

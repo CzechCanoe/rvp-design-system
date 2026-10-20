@@ -3,9 +3,7 @@ import {
   forwardRef,
   memo,
   useCallback,
-  useEffect,
   useId,
-  useLayoutEffect,
   useMemo,
   useRef,
   type HTMLAttributes,
@@ -13,6 +11,7 @@ import {
   type ReactNode,
 } from 'react';
 import type { Clock } from '../../clock/Clock';
+import { useIsomorphicLayoutEffect } from '../../hooks';
 import { BibBadge } from '../BibBadge';
 import { Icon } from '../Icon';
 import { MarkBadge } from '../MarkBadge';
@@ -44,7 +43,10 @@ export interface ResultsTableLabels {
   club: ReactNode;
   /** Mobile header of the stacked runs (`pair`). */
   runs: ReactNode;
-  /** Desktop headers of the runs (`pair`). */
+  /**
+   * Desktop headers of the runs (`pair`). An array is a new object on every render when
+   * written inline, which breaks the row memoisation (see `ResultsTableProps.labels`).
+   */
   runLabels: ReactNode[];
   /** Header of the run column (`single`). */
   singleRun: ReactNode;
@@ -115,13 +117,22 @@ export interface ResultsTableProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   expandedId?: ResultRowId | readonly ResultRowId[] | null;
   /** Row clicked anywhere (or its expand button activated). Enables the expand column. */
   onToggle?: (id: ResultRowId, row: ResultRow) => void;
-  /** Content of an expanded row (usually `RunDetail`); spans the full table width, no indentation. */
+  /**
+   * Content of an expanded row (usually `RunDetail`); spans the full table width, no indentation.
+   * Returning `undefined` renders no detail row at all (the row looks expanded but adds nothing);
+   * return `null` or an element for an (empty) detail row. Called on every table render for expanded
+   * rows only, because the detail may depend on application state the table cannot see.
+   */
   renderDetail?: (row: ResultRow) => ReactNode;
   /** Favourite star toggled. Enables the favourites column; the state stays in `row.favorite`. */
   onFavoriteChange?: (row: ResultRow, favorite: boolean) => void;
   /** Clock for running times (else the nearest `ClockProvider`). */
   clock?: Clock;
-  /** Overrides of the Czech texts. */
+  /**
+   * Overrides of the Czech texts. Values are compared one by one (`Object.is`), so inline strings
+   * keep the memoised rows. An inline array (`runLabels`) or inline JSX label is a new object on
+   * every render and re-renders all rows: define those outside the component or memoise them.
+   */
   labels?: Partial<ResultsTableLabels>;
   /** Table caption for screen readers (visually hidden). */
   caption?: ReactNode;
@@ -150,9 +161,6 @@ interface RowContext {
   onToggle: (id: ResultRowId, row: ResultRow) => void;
   onFavoriteChange: (row: ResultRow, favorite: boolean) => void;
 }
-
-// useLayoutEffect warns during SSR; fall back to useEffect there (as Tabs does).
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 const LABEL_KEYS = Object.keys(RESULTS_TABLE_LABELS) as Array<keyof ResultsTableLabels>;
 
