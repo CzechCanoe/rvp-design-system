@@ -1106,7 +1106,7 @@ optionally with connection liveness. Inline, one line, never a banner.
 | `clock?` | `Clock` |  | Clock to measure age with; defaults to the nearest `ClockProvider`, else the browser clock. |
 | `mode?` | `"relative" \| "absolute"` | `relative` | `relative` → „aktualizováno před 1 s“ (ticks every second), `absolute` → „stav ze 14:32:10“. |
 | `variant?` | `"default" \| "compact"` |  | `default` → prefix + age („aktualizováno před 4 s“, connection text visible when not `ok`). `compact` → dot + age only („● před 4 s“, „● 14:32:10“) for a one-row header: the prefix and the connection text stay for screen readers (visually hidden) and in `title`; the dot is always drawn (connection colour, else the text colour). Omitted: `compact` inside `EventHeader condensed`, else `default`. |
-| `connection?` | `"ok" \| "reconnecting" \| "offline"` |  | Connection liveness as a dot + text in the same line (never a banner). Omit for no dot. Dot colours: `ok` green, `reconnecting` amber, `offline` grey (never red: red is reserved for LIVE). |
+| `connection?` | `"ok" \| "reconnecting" \| "offline"` |  | Connection liveness as a dot + text in the same line (never a banner). Omit for no dot. Dot colour and shape: `ok` green filled disc, `reconnecting` amber half-filled, `offline` grey hollow ring (never red: red is reserved for LIVE). Inside `data-tone="on-dark"` (EventHeader) the colours are lightened for the navy band. |
 | `label?` | `string` |  | Text before the age; default `aktualizováno` (relative) / `stav ze` (absolute); `''` for none. |
 | `connectionLabels?` | `Partial<Record<DataAgeConnection, string>>` |  | Override connection texts (defaults: ok „připojeno“ for screen readers only, „obnovuji spojení“, „bez spojení“). |
 | `emptyLabel?` | `string` | `zatím bez dat` | Text when `receivedAt` is `null` (default „zatím bez dat“). |
@@ -1154,7 +1154,7 @@ The title never wraps in the condensed state.
 | `title` | `ReactNode` |  | Event name |
 | `subtitle?` | `ReactNode` |  | Place · day · phase (hidden when condensed) |
 | `status?` | `ReactNode` |  | Status element, typically `<StatusBadge state="live" />` |
-| `dataAge?` | `ReactNode` |  | Data age element, typically `<DataAge />` ("aktualizováno před 1 s"). When `condensed`, a `DataAge` without its own `variant` renders the compact form (dot + "před 1 s", full text in `title` and for screen readers). |
+| `dataAge?` | `ReactNode` |  | Data age element, typically `<DataAge />` ("aktualizováno před 1 s"). When `condensed`, a `DataAge` without its own `variant` renders the compact form (dot + "před 1 s", full text in `title` and for screen readers). The slot has `data-tone="on-dark"`, so the connection dot is lightened for the navy band. |
 | `backHref?` | `string` |  | Link back to the event list; omitted = no back link |
 | `backLabel?` | `string` | `Závody` | Text of the back link |
 | `logo?` | `ReactNode` |  | Optional event logo (hidden when condensed), typically `<Avatar shape="square" />` (40 × 40) or `<Avatar shape="portrait" />` for an upright poster (40 × 56, 5 : 7). The slot follows the shape. |

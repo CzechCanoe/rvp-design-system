@@ -19,8 +19,9 @@ const meta = {
           'How old the shown data is, measured from its receipt on the injected `Clock` (`receivedAt` = `clock.now()` ' +
           'when the data arrived, never the server\'s `observedAt`). `mode="relative"` → „aktualizováno před 1 s“, updated ' +
           'through `clock.setTimeout` exactly when the text changes; `mode="absolute"` → „stav ze 14:32:10“. ' +
-          '`connection` adds a dot + text in the same line (never a banner over content): `ok` green, `reconnecting` amber, ' +
-          '`offline` grey (never red: red is LIVE only). Colour and size of the text are inherited, ' +
+          '`connection` adds a dot + text in the same line (never a banner over content): `ok` green filled disc, ' +
+          '`reconnecting` amber half-filled, `offline` grey hollow ring (shape as well as colour; never red: red is LIVE only). ' +
+          'On a navy band put it inside `data-tone="on-dark"` (EventHeader does) for lightened dot colours. Colour and size of the text are inherited, ' +
           'so it works on the surface and on the brand band. `variant="compact"` (automatic in `EventHeader condensed`) ' +
           'draws only the dot and the short age („před 4 s“), the rest is read out and in `title`. ' +
           'Stories use `createTestClock()` at a fixed time.',
@@ -123,7 +124,7 @@ export const Overview: Story = {
         </Row>
       </div>
 
-      <div style={band}>
+      <div style={band} data-tone="on-dark">
         <span>‹ Závody</span>
         <DataAge
           receivedAt={STORY_NOW - 1_000}
@@ -132,7 +133,7 @@ export const Overview: Story = {
           style={{ marginLeft: 'auto' }}
         />
       </div>
-      <div style={band}>
+      <div style={band} data-tone="on-dark">
         <span>‹ Závody</span>
         <DataAge
           receivedAt={STORY_NOW - 12_000}
@@ -141,7 +142,7 @@ export const Overview: Story = {
           style={{ marginLeft: 'auto' }}
         />
       </div>
-      <div style={band}>
+      <div style={band} data-tone="on-dark">
         <span>‹ Závody</span>
         <DataAge
           receivedAt={STORY_NOW - 34_000}
@@ -157,8 +158,8 @@ export const Overview: Story = {
 /**
  * `variant="compact"`: dot + short age for a one-row header (`EventHeader condensed` switches to it by itself).
  * The prefix („aktualizováno“, „stav ze“) and the connection text are not drawn: screen readers get them
- * (visually hidden) and the full text is in `title`. The dot is always there, coloured by `connection`
- * (without it the text colour).
+ * (visually hidden) and the full text is in `title`. The dot is always there; `connection` sets its colour and
+ * shape (filled / half / ring), so the state does not rely on colour alone; without it a disc in the text colour.
  */
 export const Compact: Story = {
   render: () => (
@@ -187,7 +188,7 @@ export const Compact: Story = {
         </Row>
       </div>
 
-      <div style={band}>
+      <div style={band} data-tone="on-dark">
         <span>Olympic Hopes 2026</span>
         <DataAge
           receivedAt={STORY_NOW - 4_000}
@@ -197,7 +198,7 @@ export const Compact: Story = {
           style={{ marginLeft: 'auto' }}
         />
       </div>
-      <div style={band}>
+      <div style={band} data-tone="on-dark">
         <span>Olympic Hopes 2026</span>
         <DataAge
           receivedAt={STORY_NOW - 12_000}
@@ -207,7 +208,17 @@ export const Compact: Story = {
           style={{ marginLeft: 'auto' }}
         />
       </div>
-      <div style={band}>
+      <div style={band} data-tone="on-dark">
+        <span>Olympic Hopes 2026</span>
+        <DataAge
+          receivedAt={STORY_NOW - 95_000}
+          clock={storyClock}
+          variant="compact"
+          connection="offline"
+          style={{ marginLeft: 'auto' }}
+        />
+      </div>
+      <div style={band} data-tone="on-dark">
         <span>Olympic Hopes 2026</span>
         <DataAge receivedAt={STORY_NOW - 4_000} clock={storyClock} variant="compact" style={{ marginLeft: 'auto' }} />
       </div>

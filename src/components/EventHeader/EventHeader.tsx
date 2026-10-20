@@ -13,6 +13,7 @@ export interface EventHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
   /**
    * Data age element, typically `<DataAge />` ("aktualizováno před 1 s"). When `condensed`, a `DataAge` without its own
    * `variant` renders the compact form (dot + "před 1 s", full text in `title` and for screen readers).
+   * The slot has `data-tone="on-dark"`, so the connection dot is lightened for the navy band.
    */
   dataAge?: ReactNode;
   /** Link back to the event list; omitted = no back link */
@@ -83,7 +84,11 @@ export const EventHeader = forwardRef<HTMLElement, EventHeaderProps>(
           {!condensed && (back || dataAge) && (
             <div className="csk-event-header__top">
               {back}
-              {dataAge && <span className="csk-event-header__age">{dataAge}</span>}
+              {dataAge && (
+                <span className="csk-event-header__age" data-tone="on-dark">
+                  {dataAge}
+                </span>
+              )}
             </div>
           )}
 
@@ -100,7 +105,7 @@ export const EventHeader = forwardRef<HTMLElement, EventHeaderProps>(
               </div>
             )}
             {condensed && dataAge && (
-              <span className="csk-event-header__age">
+              <span className="csk-event-header__age" data-tone="on-dark">
                 <DataAgeVariantContext.Provider value="compact">{dataAge}</DataAgeVariantContext.Provider>
               </span>
             )}

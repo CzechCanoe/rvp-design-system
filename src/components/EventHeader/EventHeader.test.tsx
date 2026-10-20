@@ -18,6 +18,19 @@ describe('EventHeader data age', () => {
     expect(age).toHaveAttribute('title', 'aktualizováno před 4 s');
   });
 
+  it('puts the data age on the dark tone in both forms (lightened connection dot)', () => {
+    const clock = createTestClock({ now: T0 + 4_000 });
+    const { container } = render(
+      <>
+        <EventHeader title="A" dataAge={<DataAge receivedAt={T0} clock={clock} connection="offline" />} />
+        <EventHeader title="B" condensed dataAge={<DataAge receivedAt={T0} clock={clock} connection="offline" />} />
+      </>
+    );
+    const slots = container.querySelectorAll('.csk-event-header__age');
+    expect(slots).toHaveLength(2);
+    for (const slot of slots) expect(slot).toHaveAttribute('data-tone', 'on-dark');
+  });
+
   it('not condensed keeps the default form; an explicit variant wins', () => {
     const clock = createTestClock({ now: T0 + 4_000 });
     const { container } = render(

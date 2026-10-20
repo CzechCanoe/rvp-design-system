@@ -27,7 +27,8 @@ export interface DataAgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'chi
   variant?: DataAgeVariant;
   /**
    * Connection liveness as a dot + text in the same line (never a banner). Omit for no dot.
-   * Dot colours: `ok` green, `reconnecting` amber, `offline` grey (never red: red is reserved for LIVE).
+   * Dot colour and shape: `ok` green filled disc, `reconnecting` amber half-filled, `offline` grey hollow ring
+   * (never red: red is reserved for LIVE). Inside `data-tone="on-dark"` (EventHeader) the colours are lightened for the navy band.
    */
   connection?: DataAgeConnection;
   /** Text before the age; default `aktualizováno` (relative) / `stav ze` (absolute); `''` for none. */
