@@ -8,6 +8,13 @@ import './PageLayout.css';
  */
 export type PageLayoutVariant = 'tribuna' | 'urad' | 'embed';
 
+/**
+ * Content width: `sm` 640, `md` 768, `lg` 1024, `xl` `--csk-layout-max-width` (1200), `full` none.
+ * The value is exposed as the CSS variable `--csk-page-max-width`, so a full-width band in `header`
+ * or `banner` (EventHeader) aligns its content with the page container.
+ */
+export type PageLayoutMaxWidth = 'sm' | 'md' | 'lg' | 'xl' | 'full';
+
 export interface PageLayoutProps extends HTMLAttributes<HTMLDivElement> {
   /** Layout variant determines the surface and which slots render */
   variant?: PageLayoutVariant;
@@ -21,8 +28,8 @@ export interface PageLayoutProps extends HTMLAttributes<HTMLDivElement> {
   footer?: ReactNode;
   /** Main content */
   children: ReactNode;
-  /** Maximum width of the content container */
-  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  /** Maximum width of the content container (exposed as `--csk-page-max-width`) */
+  maxWidth?: PageLayoutMaxWidth;
   /** Add side padding to the main content area (16 px phone, 24 px desktop) */
   padded?: boolean;
   /** Keep the header area at the top while scrolling */

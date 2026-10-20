@@ -1,10 +1,18 @@
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import {
+  forwardRef,
+  type AnchorHTMLAttributes,
+  type ButtonHTMLAttributes,
+  type ForwardedRef,
+  type MouseEvent,
+  type ReactNode,
+} from 'react';
 import './Button.css';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 export type ButtonSize = 'sm' | 'md';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+/** Props shared by the button and the link form. */
+export interface ButtonOwnProps {
   /** Visual variant of the button */
   variant?: ButtonVariant;
   /** Size of the button */
@@ -15,90 +23,152 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconLeft?: ReactNode;
   /** Icon to display after the label */
   iconRight?: ReactNode;
-  /** Loading state */
+  /** Loading state (behaves as disabled) */
   loading?: boolean;
   /** Children content */
   children?: ReactNode;
 }
+
+/** `<button>` form (default). */
+export interface ButtonAsButtonProps extends ButtonOwnProps, ButtonHTMLAttributes<HTMLButtonElement> {
+  as?: 'button';
+  href?: never;
+}
+
+/**
+ * Link form: renders `<a>` with the same look, for navigation (documents, another page).
+ * Chosen by `href` or `as="a"`.
+ */
+export interface ButtonAsLinkProps extends ButtonOwnProps, AnchorHTMLAttributes<HTMLAnchorElement> {
+  as?: 'a';
+  /** Target of the link */
+  href: string;
+  /**
+   * A link cannot be disabled natively: the component drops `href` (not focusable, not navigable),
+   * sets `role="link"` + `aria-disabled="true"` and ignores clicks. Same look as a disabled button.
+   */
+  disabled?: boolean;
+  /**
+   * Passed through as given. Without `rel`, `target="_blank"` gets `noopener noreferrer`.
+   */
+  rel?: string;
+}
+
+export type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps;
+
+const Spinner = () => (
+  <span className="csk-button__spinner" aria-hidden="true">
+    <svg className="csk-button__spinner-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeDasharray="31.4 31.4"
+      />
+    </svg>
+  </span>
+);
 
 /**
  * Button component for user actions.
  *
  * Supports multiple variants (primary, secondary, ghost, danger),
  * sizes (md 40 px, sm 32 px; touch width at least 44 px), and states (disabled, loading).
+ *
+ * With `href` (or `as="a"`) it renders a link with the identical look and focus ring,
+ * for navigation such as "Propozice (PDF)" or "Přihlásit". Actions stay `<button>`.
  */
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      variant = 'primary',
-      size = 'md',
-      fullWidth = false,
-      iconLeft,
-      iconRight,
-      loading = false,
-      disabled,
-      className,
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const isDisabled = disabled || loading;
+export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>((props, ref) => {
+  const {
+    as,
+    variant = 'primary',
+    size = 'md',
+    fullWidth = false,
+    iconLeft,
+    iconRight,
+    loading = false,
+    className,
+    children,
+    ...rest
+  } = props;
 
-    const classes = [
-      'csk-button',
-      `csk-button--${variant}`,
-      `csk-button--${size}`,
-      fullWidth && 'csk-button--full-width',
-      loading && 'csk-button--loading',
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
+  const classes = [
+    'csk-button',
+    `csk-button--${variant}`,
+    `csk-button--${size}`,
+    fullWidth && 'csk-button--full-width',
+    loading && 'csk-button--loading',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
+  const content = (
+    <>
+      {loading && <Spinner />}
+      {!loading && iconLeft && (
+        <span className="csk-button__icon csk-button__icon--left" aria-hidden="true">
+          {iconLeft}
+        </span>
+      )}
+      {children && <span className="csk-button__label">{children}</span>}
+      {!loading && iconRight && (
+        <span className="csk-button__icon csk-button__icon--right" aria-hidden="true">
+          {iconRight}
+        </span>
+      )}
+    </>
+  );
+
+  if (as === 'a' || rest.href !== undefined) {
+    const { disabled, href, target, rel, onClick, role, ...anchorProps } = rest as Omit<
+      ButtonAsLinkProps,
+      keyof ButtonOwnProps | 'as'
+    >;
+    const isDisabled = Boolean(disabled || loading);
+    const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+      if (isDisabled) {
+        event.preventDefault();
+        return;
+      }
+      onClick?.(event);
+    };
     return (
-      <button
-        ref={ref}
+      <a
+        ref={ref as ForwardedRef<HTMLAnchorElement>}
         className={classes}
-        disabled={isDisabled}
-        aria-disabled={isDisabled}
-        aria-busy={loading}
-        {...props}
+        {...anchorProps}
+        href={isDisabled ? undefined : href}
+        role={isDisabled ? 'link' : role}
+        aria-disabled={isDisabled || undefined}
+        aria-busy={loading || undefined}
+        target={target}
+        rel={rel ?? (target === '_blank' ? 'noopener noreferrer' : undefined)}
+        onClick={handleClick}
       >
-        {loading && (
-          <span className="csk-button__spinner" aria-hidden="true">
-            <svg
-              className="csk-button__spinner-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeDasharray="31.4 31.4"
-              />
-            </svg>
-          </span>
-        )}
-        {!loading && iconLeft && (
-          <span className="csk-button__icon csk-button__icon--left" aria-hidden="true">
-            {iconLeft}
-          </span>
-        )}
-        {children && <span className="csk-button__label">{children}</span>}
-        {!loading && iconRight && (
-          <span className="csk-button__icon csk-button__icon--right" aria-hidden="true">
-            {iconRight}
-          </span>
-        )}
-      </button>
+        {content}
+      </a>
     );
   }
-);
+
+  const { disabled, ...buttonProps } = rest as Omit<ButtonAsButtonProps, keyof ButtonOwnProps | 'as' | 'href'>;
+  const isDisabled = disabled || loading;
+
+  return (
+    <button
+      ref={ref as ForwardedRef<HTMLButtonElement>}
+      className={classes}
+      disabled={isDisabled}
+      aria-disabled={isDisabled}
+      aria-busy={loading}
+      {...buttonProps}
+    >
+      {content}
+    </button>
+  );
+});
 
 Button.displayName = 'Button';

@@ -4,7 +4,14 @@ export type { IconProps, IconName } from './Icon';
 
 // Button
 export { Button } from './Button';
-export type { ButtonProps, ButtonVariant, ButtonSize } from './Button';
+export type {
+  ButtonProps,
+  ButtonOwnProps,
+  ButtonAsButtonProps,
+  ButtonAsLinkProps,
+  ButtonVariant,
+  ButtonSize,
+} from './Button';
 
 // Input
 export { Input } from './Input';
@@ -249,7 +256,7 @@ export type {
 
 // PageLayout
 export { PageLayout } from './PageLayout';
-export type { PageLayoutProps, PageLayoutVariant } from './PageLayout';
+export type { PageLayoutProps, PageLayoutVariant, PageLayoutMaxWidth } from './PageLayout';
 
 // CSKLogo
 export { CSKLogo } from './CSKLogo';
@@ -292,6 +299,14 @@ export type { FavoritesToggleProps } from './FavoritesToggle';
 // TableToolbar
 export { TableToolbar, TableToolbarButton } from './TableToolbar';
 export type { TableToolbarProps, TableToolbarButtonProps } from './TableToolbar';
+
+// ResultsPanel (v2 T19: toolbar + status line + table + footer)
+export { ResultsPanel } from './ResultsPanel';
+export type { ResultsPanelProps } from './ResultsPanel';
+
+// DocumentList (v2 T19: event documents with format suffix)
+export { DocumentList, DOCUMENT_KIND_LABELS } from './DocumentList';
+export type { DocumentListProps, DocumentListItem, DocumentKind, DocumentFormat } from './DocumentList';
 // Value states and numbers (v2 T5)
 export { StatusBadge, STATUS_BADGE_LABELS } from './StatusBadge';
 export type { StatusBadgeProps, StatusBadgeState, StatusBadgeSize } from './StatusBadge';

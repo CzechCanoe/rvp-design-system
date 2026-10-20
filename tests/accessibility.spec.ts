@@ -81,6 +81,18 @@ const specificComponents = [
   { name: 'DeadlineBadge-AllKinds', storyId: 'components-deadlinebadge--all-kinds' },
   { name: 'WeekendCalendar', storyId: 'components-weekendcalendar--default' },
   { name: 'WeekendCalendar-InNarrowContainer', storyId: 'components-weekendcalendar--in-narrow-container' },
+  // v2 T19 (T19b): Button link form, DocumentList, ResultsPanel, EventHeader logo/condensed, Avatar portrait, TableToolbar at 390
+  { name: 'Button-AsLink', storyId: 'components-button--as-link' },
+  { name: 'DocumentList', storyId: 'components-documentlist--default' },
+  { name: 'DocumentList-KindsAndDates', storyId: 'components-documentlist--kinds-and-dates' },
+  { name: 'ResultsPanel', storyId: 'components-resultspanel--default' },
+  { name: 'ResultsPanel-Official', storyId: 'components-resultspanel--official' },
+  { name: 'ResultsPanel-TableOnly', storyId: 'components-resultspanel--table-only' },
+  { name: 'Avatar-Portrait', storyId: 'components-avatar--portrait' },
+  { name: 'EventHeader-Condensed', storyId: 'components-eventheader--condensed' },
+  { name: 'EventHeader-LogoShapes', storyId: 'components-eventheader--logo-shapes' },
+  { name: 'TableToolbar-Crowded390', storyId: 'components-tabletoolbar--crowded-390' },
+  { name: 'TableToolbar-OneRow390', storyId: 'components-tabletoolbar--one-row-390' },
 ];
 
 // Helper to run axe and check results

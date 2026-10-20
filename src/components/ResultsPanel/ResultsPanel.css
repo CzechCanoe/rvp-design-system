@@ -1,6 +1,6 @@
-/* Shared results card of the page stories: layout and spacing only. Components are never restyled. */
+/* ResultsPanel: toolbar + status line + table + footer in one card (reference Live1-5, Zavod) */
 
-.story-results__status {
+.csk-results-panel__status {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -11,7 +11,7 @@
   color: var(--csk-color-text-2);
 }
 
-.story-results__foot {
+.csk-results-panel__foot {
   display: flex;
   flex-wrap: wrap;
   gap: var(--csk-space-3);
@@ -19,14 +19,17 @@
   color: var(--csk-color-text-2);
 }
 
-.story-results__foot-links {
+.csk-results-panel__foot-links {
   display: flex;
   flex-wrap: wrap;
   gap: var(--csk-space-3);
   margin-left: auto;
 }
 
-
-.story-results__link {
+.csk-results-panel__foot a:not(.csk-button) {
   color: var(--csk-color-action);
+}
+
+.csk-results-panel__foot a:not(.csk-button):hover {
+  color: var(--csk-color-action-hover);
 }

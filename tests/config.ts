@@ -110,6 +110,14 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'DeadlineBadge-AllKinds', storyId: 'components-deadlinebadge--all-kinds', tier: 'specific' },
   { name: 'WeekendCalendar', storyId: 'components-weekendcalendar--default', tier: 'specific', cssFeatures: ['grid', 'container-queries'] },
   { name: 'WeekendCalendar-InNarrowContainer', storyId: 'components-weekendcalendar--in-narrow-container', tier: 'specific', cssFeatures: ['container-queries'] },
+  // v2 T19 (#84.1, .2, .5, .10, T18 gap 2): Button link form, DocumentList, EventHeader logo/condensed, Avatar portrait, TableToolbar at 390
+  { name: 'Button-AsLink', storyId: 'components-button--as-link', tier: 'specific' },
+  { name: 'DocumentList', storyId: 'components-documentlist--default', tier: 'specific' },
+  { name: 'DocumentList-KindsAndDates', storyId: 'components-documentlist--kinds-and-dates', tier: 'specific' },
+  { name: 'Avatar-Portrait', storyId: 'components-avatar--portrait', tier: 'specific' },
+  { name: 'EventHeader-LogoShapes', storyId: 'components-eventheader--logo-shapes', tier: 'specific' },
+  { name: 'TableToolbar-Crowded390', storyId: 'components-tabletoolbar--crowded-390', tier: 'specific' },
+  { name: 'TableToolbar-OneRow390', storyId: 'components-tabletoolbar--one-row-390', tier: 'specific' },
 ];
 
 /** All components for visual regression testing */
@@ -130,6 +138,8 @@ export const layoutStories: Array<{ name: string; storyId: string; a11y?: boolea
   // a11y off: the KanoeCzContext mock itself has axe violations (1.x mock, kept only as the embed host decorator)
   { name: 'Layout-Tribuna-Embed', storyId: 'layout-tribuna--embed', a11y: false },
   { name: 'Layout-Urad', storyId: 'layout-urad--default' },
+  // v2 T19: EventHeader content aligned with the PageLayout container (1200 and 1024)
+  { name: 'EventHeader-ContainerWidth', storyId: 'components-eventheader--container-width' },
 ];
 
 /**
@@ -182,6 +192,10 @@ export const viewportStories: Array<{ name: string; storyId: string }> = [
   // v2 T13: WeekendCalendar (dates column / band by container query)
   { name: 'WeekendCalendar-Default', storyId: 'components-weekendcalendar--default' },
   { name: 'WeekendCalendar-CurrentWeekend', storyId: 'components-weekendcalendar--current-weekend' },
+  // v2 T19 (#84.3): ResultsPanel (toolbar + status line + ResultsTable + footer)
+  { name: 'ResultsPanel', storyId: 'components-resultspanel--default' },
+  { name: 'ResultsPanel-Official', storyId: 'components-resultspanel--official' },
+  { name: 'ResultsPanel-TableOnly', storyId: 'components-resultspanel--table-only' },
 ];
 
 /**

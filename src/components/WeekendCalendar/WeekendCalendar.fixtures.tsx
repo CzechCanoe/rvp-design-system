@@ -113,7 +113,11 @@ export const mayWeekends: CalendarGroup[] = [
         details: ['Lipno', 'SK Lipno', 'so i ne'],
         deadline: { kind: 'closing', label: 'Uzávěrka za 5 dní', date: 'st 13. 5. 23:59' },
         documents: [{ label: 'Propozice', href: '#propozice' }],
-        status: <Button size="sm">Přihlásit</Button>,
+        status: (
+          <Button size="sm" href="#prihlaska">
+            Přihlásit
+          </Button>
+        ),
       },
       {
         id: 'mcr',
@@ -130,7 +134,7 @@ export const mayWeekends: CalendarGroup[] = [
           </>
         ),
         status: (
-          <Button size="sm" variant="secondary">
+          <Button size="sm" variant="secondary" href="#prihlaska">
             Přihlásit
           </Button>
         ),

@@ -1,10 +1,11 @@
 import { forwardRef, type ReactNode, type HTMLAttributes } from 'react';
+import type { PageLayoutMaxWidth } from '../PageLayout';
 import './EventHeader.css';
 
 export interface EventHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   /** Event name */
   title: ReactNode;
-  /** Place · day · phase */
+  /** Place · day · phase (hidden when condensed) */
   subtitle?: ReactNode;
   /** Status element, typically `<StatusBadge state="live" />` */
   status?: ReactNode;
@@ -14,18 +15,28 @@ export interface EventHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
   backHref?: string;
   /** Text of the back link */
   backLabel?: string;
-  /** Optional event logo (hidden when condensed) */
+  /**
+   * Optional event logo (hidden when condensed), typically `<Avatar shape="square" />` (40 × 40)
+   * or `<Avatar shape="portrait" />` for an upright poster (40 × 56, 5 : 7). The slot follows the shape.
+   */
   logo?: ReactNode;
   /**
-   * One-row variant for a scrolled page. The application decides when to switch
-   * (scroll position); the component only draws it.
+   * One-row variant for a scrolled page: back · name · status · data age; the subtitle and
+   * the logo are hidden. The application decides when to switch (scroll position); the component only draws it.
    */
   condensed?: boolean;
+  /**
+   * Width of the content inside the full-width navy band, on the scale of `PageLayout maxWidth`.
+   * Default: the content width of the surrounding `PageLayout` (CSS variable `--csk-page-max-width`),
+   * outside a PageLayout `--csk-layout-max-width` (1200 px, as PageTitle). Inner gutter 14 px, 24 px from a 768 px wide header.
+   */
+  maxWidth?: PageLayoutMaxWidth;
 }
 
 /**
  * Compact live header (about 95 px on a phone, one row when `condensed`).
- * Navy band; the title never wraps in the condensed state.
+ * Navy band over the full width; the content is aligned with the page container.
+ * The title never wraps in the condensed state.
  */
 export const EventHeader = forwardRef<HTMLElement, EventHeaderProps>(
   (
@@ -38,12 +49,18 @@ export const EventHeader = forwardRef<HTMLElement, EventHeaderProps>(
       backLabel = 'Závody',
       logo,
       condensed = false,
+      maxWidth,
       className,
       ...props
     },
     ref
   ) => {
-    const classes = ['csk-event-header', condensed && 'csk-event-header--condensed', className]
+    const classes = [
+      'csk-event-header',
+      condensed && 'csk-event-header--condensed',
+      maxWidth && `csk-event-header--max-${maxWidth}`,
+      className,
+    ]
       .filter(Boolean)
       .join(' ');
 
@@ -56,23 +73,28 @@ export const EventHeader = forwardRef<HTMLElement, EventHeaderProps>(
 
     return (
       <header ref={ref} className={classes} {...props}>
-        {!condensed && (back || dataAge) && (
-          <div className="csk-event-header__top">
-            {back}
-            {dataAge && <span className="csk-event-header__age">{dataAge}</span>}
-          </div>
-        )}
+        <div className="csk-event-header__inner">
+          {!condensed && (back || dataAge) && (
+            <div className="csk-event-header__top">
+              {back}
+              {dataAge && <span className="csk-event-header__age">{dataAge}</span>}
+            </div>
+          )}
 
-        <div className="csk-event-header__row">
-          {condensed && back}
-          {!condensed && logo && <div className="csk-event-header__logo">{logo}</div>}
-          <div className="csk-event-header__text">
-            <span className="csk-event-header__title">{title}</span>
-            {!condensed && subtitle && (
-              <span className="csk-event-header__subtitle">{subtitle}</span>
+          <div className="csk-event-header__row">
+            {condensed && back}
+            {!condensed && logo && <div className="csk-event-header__logo">{logo}</div>}
+            <div className="csk-event-header__text">
+              <span className="csk-event-header__title">{title}</span>
+              {!condensed && subtitle && <span className="csk-event-header__subtitle">{subtitle}</span>}
+            </div>
+            {status && (
+              <div className="csk-event-header__status" data-tone="on-dark">
+                {status}
+              </div>
             )}
+            {condensed && dataAge && <span className="csk-event-header__age">{dataAge}</span>}
           </div>
-          {status && <div className="csk-event-header__status" data-tone="on-dark">{status}</div>}
         </div>
       </header>
     );

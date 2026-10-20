@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Button } from '../../components/Button';
 import { DataAge } from '../../components/DataAge';
 import { Notice } from '../../components/Notice';
 import { OnCoursePanel } from '../../components/OnCoursePanel';
@@ -7,7 +8,7 @@ import { ProgramList } from '../../components/ProgramList';
 import { brRows, categoryRows, dnsRow } from '../../components/ResultsTable/ResultsTable.fixtures';
 import { StatusBadge } from '../../components/StatusBadge';
 import { sunday, startlistRows } from './Live.fixtures';
-import { ResultsCard, LiveResults } from '../_shared/ResultsCard';
+import { LiveResultsPanel, LiveResults } from '../_shared/LiveResults';
 import { STORY_NOW, ageAt, liveClock } from '../_shared/storyClock';
 import { CLASSES, CLASS_CODES, LiveNav, LivePage, LiveStartlist } from './LivePage';
 
@@ -41,27 +42,28 @@ export const Running: Story = {
       nav={<LiveNav days={days} day="sun" classes={CLASSES} activeClass="K1 muži" />}
     >
       <OnCoursePanel riders={liveRiders(STORY_NOW)} phaseLabel="K1 muži · 2. jízda" clock={liveClock} timeZone="Europe/Prague" />
-      <ResultsCard state="provisional" status="po 2. jízdě · 8 z 24 v cíli" favorites={2}>
+      <LiveResultsPanel state="provisional" status="po 2. jízdě · 8 z 24 v cíli" favorites={2}>
         <LiveResults rows={brRows} />
-      </ResultsCard>
+      </LiveResultsPanel>
     </LivePage>
   ),
 };
 
-/** Reference Live2: expanded row; the header is condensed (one row) as after scrolling, the day switch is gone. */
+/** Reference Live2: expanded row; the header is condensed (one row: name · status · data age) as after scrolling, the day switch is gone. */
 export const Expanded: Story = {
   render: () => (
     <LivePage
       title="Olympic Hopes 2026"
       subtitle="Ne 4. 10. · K1 muži · 2. jízdy"
+      dataAge={ageAt(1)}
       condensed
       section="results"
       nav={<LiveNav days={[]} day="sun" classes={CLASSES} activeClass="K1 muži" />}
     >
       <Notice tone="info">Při scrollu se hlavička stáhne na jeden řádek, navigace zůstane nahoře.</Notice>
-      <ResultsCard favorites={2}>
+      <LiveResultsPanel favorites={2}>
         <LiveResults rows={[...brRows.slice(0, 4), dnsRow]} initialExpanded="k1m-35" />
-      </ResultsCard>
+      </LiveResultsPanel>
     </LivePage>
   ),
 };
@@ -80,14 +82,14 @@ export const Startlist: Story = {
       <Notice tone="info">
         Výsledky se objeví, jakmile dojede první loď. Hvězdičkou si označ své, pošleme upozornění na start a cíl.
       </Notice>
-      <ResultsCard
+      <LiveResultsPanel
         status="K1 muži · 88 lodí · 1. jízda od 11:21, 2. jízda od 15:21 · interval 45 s"
-        foot="Zobrazeno 11 z 88"
-        footLinks={<a className="live-page__link" href="#all">Celá startovka</a>}
+        footer="Zobrazeno 11 z 88"
+        footerLinks={<a href="#all">Celá startovka</a>}
         searchLabel="Hledat závodníka nebo st. číslo"
       >
         <LiveStartlist rows={startlistRows} />
-      </ResultsCard>
+      </LiveResultsPanel>
     </LivePage>
   ),
 };
@@ -118,21 +120,21 @@ export const Official: Story = {
         />
       }
     >
-      <ResultsCard
+      <LiveResultsPanel
         state="official"
         status="schváleno 20. 9. 16:40 · pořadí v U18, vedle celkové"
         activeCategory="U18"
         favorites={0}
-        foot="7 v U18 · 31 celkem"
-        footLinks={
+        footer="7 v U18 · 31 celkem"
+        footerLinks={
           <>
-            <a className="live-page__link" href="#pdf">Oficiální PDF</a>
-            <a className="live-page__link" href="#kanoe">Na kanoe.cz</a>
+            <a href="#pdf">Oficiální PDF</a>
+            <a href="#kanoe">Na kanoe.cz</a>
           </>
         }
       >
         <LiveResults rows={categoryRows} columns="single" />
-      </ResultsCard>
+      </LiveResultsPanel>
     </LivePage>
   ),
 };
@@ -177,7 +179,7 @@ export const Disconnected: Story = {
         clock={liveClock}
         timeZone="Europe/Prague"
       />
-      <ResultsCard
+      <LiveResultsPanel
         state="provisional"
         status={
           <>
@@ -187,7 +189,7 @@ export const Disconnected: Story = {
         favorites={2}
       >
         <LiveResults rows={brRows.slice(0, 6).map((r) => ({ ...r, state: undefined, note: undefined }))} />
-      </ResultsCard>
+      </LiveResultsPanel>
       <Notice tone="info" title="Zásady stavu bez spojení">
         Nic se nemaže ani nešedne do nečitelna. Běžící časy se zastaví a dostanou tečkovanou linku se stářím.
         Hlavička nese jen jeden řádek o spojení, žádný banner přes obsah.
@@ -208,8 +210,12 @@ export const Program: Story = {
     >
       <Notice tone="warn" title="Právě běží dvě kategorie naráz">
         <span className="live-page__choice">
-          <a className="live-page__link" href="#k1m2">K1 muži · 2. jízda</a>
-          <a className="live-page__link" href="#c1w2">C1 ženy · 2. jízda</a>
+          <Button href="#k1m2" size="sm">
+            K1 muži · 2. jízda
+          </Button>
+          <Button href="#c1w2" size="sm" variant="secondary">
+            C1 ženy · 2. jízda
+          </Button>
         </span>
       </Notice>
       <ProgramList days={[sunday]} />

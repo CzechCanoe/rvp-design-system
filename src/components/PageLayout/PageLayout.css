@@ -37,25 +37,30 @@
   margin-inline: auto;
 }
 
-/* Max width variants */
-.csk-page-layout--max-sm .csk-page-layout__container {
-  max-width: 640px;
+/* Max width variants: set on the root as --csk-page-max-width, so full-width bands in
+   header/banner (EventHeader) align their content with the container */
+.csk-page-layout--max-sm {
+  --csk-page-max-width: 640px;
 }
 
-.csk-page-layout--max-md .csk-page-layout__container {
-  max-width: 768px;
+.csk-page-layout--max-md {
+  --csk-page-max-width: 768px;
 }
 
-.csk-page-layout--max-lg .csk-page-layout__container {
-  max-width: 1024px;
+.csk-page-layout--max-lg {
+  --csk-page-max-width: 1024px;
 }
 
-.csk-page-layout--max-xl .csk-page-layout__container {
-  max-width: var(--csk-layout-max-width);
+.csk-page-layout--max-xl {
+  --csk-page-max-width: var(--csk-layout-max-width);
 }
 
-.csk-page-layout--max-full .csk-page-layout__container {
-  max-width: none;
+.csk-page-layout--max-full {
+  --csk-page-max-width: none;
+}
+
+.csk-page-layout__container {
+  max-width: var(--csk-page-max-width, var(--csk-layout-max-width));
 }
 
 /* Padding */

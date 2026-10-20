@@ -1,28 +1,22 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
-import { Card } from '../../components/Card';
 import { FilterPills } from '../../components/FilterPills';
 import { FavoritesToggle } from '../../components/FavoritesToggle';
 import { Icon } from '../../components/Icon';
+import { ResultsPanel, type ResultsPanelProps } from '../../components/ResultsPanel';
 import { ResultsTable, RunDetail, type ResultRow, type ResultRowId } from '../../components/ResultsTable';
 import { known, rezekDetail } from '../../components/ResultsTable/ResultsTable.fixtures';
 import { knownNumber } from '../../components/ResultsTable/values';
 import { SearchInput } from '../../components/SearchInput';
-import { StatusBadge, type StatusBadgeState } from '../../components/StatusBadge';
 import { Switch } from '../../components/Switch';
-import { TableToolbar, TableToolbarButton } from '../../components/TableToolbar';
+import { TableToolbarButton } from '../../components/TableToolbar';
 import { liveClock } from './storyClock';
-import './ResultsCard.css';
+import './LiveResults.css';
 
-/** "Detailní" switch state of the surrounding ResultsCard: expands every row of LiveResults. */
+/** "Detailní" switch state of the surrounding panel: expands every row of LiveResults. */
 const DetailContext = createContext(false);
 
-export interface ResultsCardProps {
-  /** Status badge and text above the table. */
-  state?: StatusBadgeState;
-  status?: ReactNode;
-  foot?: ReactNode;
-  footLinks?: ReactNode;
-  children: ReactNode;
+export interface LiveResultsPanelProps
+  extends Omit<ResultsPanelProps, 'search' | 'filters' | 'favorites' | 'detail'> {
   /** Active category filter shown as a dismissible pill instead of the Kategorie button. */
   activeCategory?: string;
   /** Number of favourites; `undefined` = no favourites toggle. */
@@ -32,52 +26,30 @@ export interface ResultsCardProps {
   detailSwitch?: boolean;
 }
 
-/** Toolbar + status line + table + footer in one outlined card. */
-export function ResultsCard({
-  state,
-  status,
-  foot,
-  footLinks,
-  children,
+/**
+ * The design system's ResultsPanel with the toolbar state a page holds (search text, ★ filter,
+ * category, "Detailní"). The application owns this state in real use; the panel only lays it out.
+ */
+export function LiveResultsPanel({
   activeCategory,
   favorites,
   searchLabel = 'Hledat závodníka',
   detailSwitch = false,
-}: ResultsCardProps) {
+  children,
+  ...panelProps
+}: LiveResultsPanelProps) {
   const [detail, setDetail] = useState(false);
   const [q, setQ] = useState('');
   const [onlyFavorites, setOnlyFavorites] = useState(false);
   const [category, setCategory] = useState(activeCategory);
   return (
-    <Card
-      variant="surface"
-      padding="none"
-      footer={
-        foot || footLinks ? (
-          <div className="story-results__foot">
-            {foot && <span>{foot}</span>}
-            {footLinks && <span className="story-results__foot-links">{footLinks}</span>}
-          </div>
-        ) : undefined
+    <ResultsPanel
+      {...panelProps}
+      search={
+        <SearchInput size="sm" fullWidth aria-label={searchLabel} placeholder={searchLabel} value={q} onChange={setQ} />
       }
-    >
-      <TableToolbar
-        aria-label="Nástroje tabulky"
-        search={
-          <SearchInput size="sm" fullWidth aria-label={searchLabel} placeholder={searchLabel} value={q} onChange={setQ} />
-        }
-        favorites={
-          favorites === undefined ? undefined : (
-            <FavoritesToggle pressed={onlyFavorites} onPressedChange={setOnlyFavorites} count={favorites} label="Jen oblíbení" />
-          )
-        }
-        detail={
-          detailSwitch ? (
-            <Switch size="sm" label="Detailní" checked={detail} onChange={(e) => setDetail(e.target.checked)} />
-          ) : undefined
-        }
-      >
-        {category ? (
+      filters={
+        category ? (
           <FilterPills
             size="sm"
             aria-label="Aktivní filtry"
@@ -88,16 +60,21 @@ export function ResultsCard({
           <TableToolbarButton>
             Kategorie <Icon name="chevron-down" size="sm" aria-hidden />
           </TableToolbarButton>
-        )}
-      </TableToolbar>
-      {(state || status) && (
-        <div className="story-results__status">
-          {state && <StatusBadge state={state} />}
-          {status && <span>{status}</span>}
-        </div>
-      )}
+        )
+      }
+      favorites={
+        favorites === undefined ? undefined : (
+          <FavoritesToggle pressed={onlyFavorites} onPressedChange={setOnlyFavorites} count={favorites} label="Jen oblíbení" />
+        )
+      }
+      detail={
+        detailSwitch ? (
+          <Switch size="sm" label="Detailní" checked={detail} onChange={(e) => setDetail(e.target.checked)} />
+        ) : undefined
+      }
+    >
       <DetailContext.Provider value={detail}>{children}</DetailContext.Provider>
-    </Card>
+    </ResultsPanel>
   );
 }
 
