@@ -201,7 +201,7 @@ export const viewportStories: Array<{ name: string; storyId: string }> = [
 /**
  * Live page stories (v2 T12, reference Live1-6): full pages composed of design system components,
  * snapshotted at phone 390 (primary canvas) and desktop 1280 by tests/live-pages.spec.ts.
- * Prototype tolerance (80 px, see CLAUDE.md Testování). All use one fixed test clock.
+ * Page tolerance (`pageStoryMaxDiffPixels`, 80 px, see CLAUDE.md Testování). All use one fixed test clock.
  */
 export const pageStories: Array<{ name: string; storyId: string }> = [
   { name: 'Live-Running', storyId: 'live--running' },
@@ -290,7 +290,6 @@ export const a11yAdvancedComponents = advancedComponents
   }));
 
 export const a11ySpecificComponents = specificComponents
-  .filter(c => !c.name.includes('Glass')) // Skip glass variant
   .map(c => ({
     name: c.name.replace('-', ' '),
     storyId: c.storyId,

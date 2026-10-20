@@ -17,7 +17,7 @@ patterns=(
 )
 
 for pattern in "${patterns[@]}"; do
-    count=$(grep -r "$pattern" src/components/*.css src/tokens/*.css 2>/dev/null | wc -l)
+    count=$(grep -r "$pattern" src/components/*/*.css src/tokens/*.css 2>/dev/null | wc -l)
     if [ "$count" -gt 50 ]; then
         echo "  '$pattern': $count occurrences (might be extractable to utility)"
     fi
@@ -27,13 +27,6 @@ echo ""
 echo "=== Checking for @keyframes definitions ==="
 echo "Component keyframes:"
 grep -r "@keyframes" src/components --include="*.css" -l 2>/dev/null | while read file; do
-    kf_count=$(grep -c "@keyframes" "$file")
-    echo "  $file: $kf_count keyframes"
-done
-
-echo ""
-echo "Prototype keyframes (should be minimal):"
-grep -r "@keyframes" src/prototypes --include="*.css" -l 2>/dev/null | while read file; do
     kf_count=$(grep -c "@keyframes" "$file")
     echo "  $file: $kf_count keyframes"
 done

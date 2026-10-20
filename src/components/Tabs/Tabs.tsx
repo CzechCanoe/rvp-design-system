@@ -2,14 +2,13 @@ import {
   forwardRef,
   useState,
   useCallback,
-  useEffect,
-  useLayoutEffect,
   useRef,
   useId,
   type HTMLAttributes,
   type ReactNode,
   type KeyboardEvent,
 } from 'react';
+import { useIsomorphicLayoutEffect } from '../../hooks';
 import './Tabs.css';
 
 export type TabsVariant = 'line' | 'pills' | 'nav';
@@ -24,9 +23,6 @@ function prefersReducedMotion(): boolean {
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
   );
 }
-
-// useLayoutEffect warns during SSR; fall back to useEffect there.
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 export interface TabItem {
   /** Unique identifier for the tab */
