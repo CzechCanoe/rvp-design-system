@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
 import { TimeValue } from './TimeValue';
-import { formatTimeParts } from './formatTime';
+import { formatClockParts, formatTimeParts } from './formatTime';
 
 const text = (el: HTMLElement) => el.textContent;
 
@@ -21,7 +21,51 @@ describe('formatTimeParts', () => {
   });
 });
 
+describe('formatClockParts', () => {
+  it('writes m:ss under an hour and h:mm:ss from an hour on', () => {
+    expect(formatClockParts(842.6, 1, false)).toEqual({ sign: '', int: '14:02', frac: '6' });
+    expect(formatClockParts(31.2, 1, false)).toEqual({ sign: '', int: '0:31', frac: '2' });
+    expect(formatClockParts(0, 1, false)).toEqual({ sign: '', int: '0:00', frac: '0' });
+    expect(formatClockParts(4502.25, 2, false)).toEqual({ sign: '', int: '1:15:02', frac: '25' });
+  });
+
+  it('rounds before splitting, so the seconds never read 60', () => {
+    expect(formatClockParts(59.96, 1, false)).toEqual({ sign: '', int: '1:00', frac: '0' });
+    expect(formatClockParts(3599.97, 1, false)).toEqual({ sign: '', int: '1:00:00', frac: '0' });
+  });
+
+  it('signs differences like the seconds format', () => {
+    expect(formatClockParts(62.3, 1, true)).toEqual({ sign: '+', int: '1:02', frac: '3' });
+    expect(formatClockParts(-5.04, 1, true)).toEqual({ sign: '−', int: '0:05', frac: '0' });
+    expect(formatClockParts(0.01, 1, true).sign).toBe('');
+  });
+});
+
 describe('TimeValue', () => {
+  it('formats seconds by default with 2 decimals, clock with 1 (#84.7)', () => {
+    const { container } = render(
+      <>
+        <TimeValue value={842.6} />
+        <TimeValue value={842.6} format="clock" />
+        <TimeValue value={842.64} format="clock" precision={2} />
+        <TimeValue value={31.2} format="clock" sign />
+        <TimeValue value={{ state: 'not-yet' }} format="clock" align="decimal" />
+      </>
+    );
+    const [seconds, clock, clock2, diff, unknown] = container.querySelectorAll<HTMLElement>('.csk-time-value');
+    expect(text(seconds)).toBe('842.60');
+    expect(text(clock)).toBe('14:02.6');
+    expect(text(clock2)).toBe('14:02.64');
+    expect(text(diff)).toBe('+0:31.2');
+    expect(unknown.querySelector('.csk-time-value__frac--placeholder')?.textContent).toBe('.0');
+  });
+
+  it('aligns a clock time on the decimal point', () => {
+    const { container } = render(<TimeValue value={842.6} format="clock" align="decimal" />);
+    expect(container.querySelector('.csk-time-value__int')?.textContent).toBe('14:02');
+    expect(container.querySelector('.csk-time-value__frac')?.textContent).toBe('.6');
+  });
+
   it('renders a known value, including a real zero', () => {
     const { container } = render(
       <>

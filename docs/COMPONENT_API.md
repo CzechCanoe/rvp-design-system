@@ -8,7 +8,7 @@ Import: `import { Button } from '@czechcanoe/rvp-design-system'`. Popisy props j
 
 - **Základ a formuláře**: Button, Input, SearchInput, Select, Checkbox, Radio, Switch, Card, Badge, Avatar, AvatarGroup, Icon, Table, Td, Th, Modal, Dropdown, DropdownButton, ToastProvider, Pagination, Progress, Skeleton, SkeletonAvatar, SkeletonButton, SkeletonCard, SkeletonTable, SkeletonText, EmptyState, Dropzone, Timeline, Wizard, Calendar, CalendarList
 - **Navigace a stránka**: Header, Subbar, Breadcrumbs, PageTitle, PageLayout, BottomBar, Tabs, FilterPills, SegmentedControl, TableToolbar, TableToolbarButton, CSKLogo
-- **Stavy a čísla**: StatusBadge, MarkBadge, PenaltyChip, GateGrid, BibBadge, Notice, StatTile, TimeValue, RunningTime, DataAge, StarButton, FavoritesToggle, LiveIndicator
+- **Stavy a čísla**: StatusBadge, MarkBadge, PenaltyChip, GateGrid, BibBadge, Notice, StatTile, TimeValue, RunningTime, DataAge, StarButton, FavoritesToggle
 - **Živé výsledky**: EventHeader, ResultsPanel, AthleteName, PenaltyText, RankValue, ResultsTable, RunDetail, RunValue, StartlistTable, ProgramList, OnCoursePanel, OnCourseRider
 - **Kalendář, přihlášky, profil**: WeekendCalendar, DOCUMENT_KIND_LABELS, DocumentList, DeadlineBadge, EntryTable, ProposalList, SummaryCard, ProfileHeader, SeasonSparkline, RivalsList
 
@@ -693,7 +693,7 @@ and CSK-specific section colors for disciplines.
 | `highlightToday?` | `boolean` | `true` | Highlight today |
 | `showEventPreview?` | `boolean` | `false` | Show event preview tooltip on hover |
 | `animated?` | `boolean` | `true` | Enable animated transitions |
-| `showLive?` | `boolean` | `false` | Show live indicator for events with data.isLive |
+| `showLive?` | `boolean` | `false` | Show a `StatusBadge state="live"` for events with `data.isLive` |
 | `weekendShowcase?` | `boolean` | `false` | Weekend showcase layout - the recommended layout for sports calendars. Weekdays are minimized (compact columns with event dots). Weekend days are prominent (large cards with full event details). Ideal for canoe racing calendars where 90% of events are on weekends. |
 
 ### CalendarList
@@ -721,7 +721,7 @@ and mobile views where vertical list is more appropriate.
 | `title?` | `string` |  | Title for the list |
 | `showViewAll?` | `boolean` | `false` | Show "View all" link |
 | `onViewAllClick?` | `(() => void)` |  | Callback for "View all" click |
-| `showLive?` | `boolean` | `false` | Show live indicator for events with data.isLive |
+| `showLive?` | `boolean` | `false` | Show a `StatusBadge state="live"` for events with `data.isLive` |
 
 ## Navigace a stránka
 
@@ -978,22 +978,27 @@ and "review" differ in shape too (filled square vs. outlined italic pill), and
 
 Zdroj: `src/components/MarkBadge/MarkBadge.tsx`
 
-Outlined result mark (DNS, DNF, DSQ…) shown in place of a time.
+Outlined result mark (DNS, DNF, DSQ, CAP…) shown in place of a time; all marks share one shape.
 
 | Prop | Typ | Výchozí | Popis |
 |---|---|---|---|
-| `mark` | `"DNS" \| "DNS-A" \| "DNS-B" \| "DNF" \| "DSQ" \| "NR"` |  | Result mark. Rendered instead of a time, never next to it. |
+| `mark` | `"DNS" \| "DNS-A" \| "DNS-B" \| "DNF" \| "DSQ" \| "DSQ-R" \| "DQB" \| "CAP" \| "RAL" \| "NR"` |  | Result mark. Rendered instead of a time, never next to it. |
 
 ### PenaltyChip
 
 Zdroj: `src/components/PenaltyChip/PenaltyChip.tsx`
 
-Penalty of one gate (or a team total). Colour is never the only carrier: the value is always shown.
+Penalty of one gate (or a run's penalty sum / a team total).
+
+With `gate`: the gate number on a penalty-coloured chip (reference Live1 `.pen`),
+so a row of gates reads as gates, not as „0 0 2 0“. Without `gate`: the value.
+Colour is never the only carrier: the penalty is always in `title` and
+`aria-label`, and a not-judged gate differs in shape (dotted frame).
 
 | Prop | Typ | Výchozí | Popis |
 |---|---|---|---|
 | `penalty` | `number \| null` |  | Penalty seconds. 0 = clean, 2 = touch, 50 = miss, `null` = not judged (never 0). Team totals are plain numbers. |
-| `gate?` | `number` |  | Gate number, used for the accessible name |
+| `gate?` | `number` |  | Gate number. With a gate the chip shows the **gate number** and the colour carries the penalty (grey 0, amber 2, red 50, dotted frame = not judged); the penalty itself is in `title` and `aria-label` („Branka 3: 2 s“). Without a gate (a run's penalty sum in a results cell, team totals) the chip shows the penalty value. |
 | `upstream?` | `boolean` | `false` | Gate negotiated upstream (italic + underline) |
 | `size?` | `"sm" \| "md"` | `md` |  |
 
@@ -1001,7 +1006,9 @@ Penalty of one gate (or a team total). Colour is never the only carrier: the val
 
 Zdroj: `src/components/GateGrid/GateGrid.tsx`
 
-Wrapping grid of per-gate penalties.
+Wrapping grid of per-gate penalties: each chip shows its gate number, coloured by
+the penalty (grey 0, amber 2, red 50, dotted frame = not judged yet); the penalty
+is in the chip's `title` and `aria-label`.
 
 | Prop | Typ | Výchozí | Popis |
 |---|---|---|---|
@@ -1049,12 +1056,14 @@ Zdroj: `src/components/TimeValue/TimeValue.tsx`
 
 A time or time difference in IBM Plex Mono with tabular digits; never wraps.
 Renders the three `Observed` states: `known` as the number, `not-yet` and
-`unavailable` alike as "not known".
+`unavailable` alike as "not known". `format="clock"` writes long times as
+`m:ss.d` (downhill).
 
 | Prop | Typ | Výchozí | Popis |
 |---|---|---|---|
 | `value` | `number \| Observed<number> \| null` |  | Time in seconds, plain or as an `Observed<number>`. `null`, `not-yet` and `unavailable` all render as "not known" (—); a known `0` renders as `0.00`. |
-| `precision?` | `1 \| 2` | `2` | Decimal places (default 2; running times use 1). |
+| `format?` | `"seconds" \| "clock"` | `seconds` | `seconds` (default): plain seconds, `89.81`. `clock`: minutes and seconds, `m:ss.d` (`14:02.6`), `h:mm:ss.d` from one hour on; for downhill and other long times. Signed differences work in both (`+1:02.3`). |
+| `precision?` | `1 \| 2` |  | Decimal places (default 2 for `seconds`, 1 for `clock`; running times use 1). |
 | `variant?` | `"default" \| "best" \| "running" \| "stale" \| "muted"` | `default` | Visual state of the value (default `default`). |
 | `align?` | `"decimal"` |  | `decimal`: integer part right-aligned in a 3ch box so stacked values line up on the decimal point. |
 | `sign?` | `boolean` | `false` | Signed difference: `+1.53` / `−0.87`; zero stays unsigned (`0.00`). |
@@ -1095,7 +1104,7 @@ optionally with connection liveness. Inline, one line, never a banner.
 | `receivedAt` | `number \| null` |  | When the data arrived, in the clock's time (`clock.now()` at receipt, epoch ms). Never the server's `observedAt`. `null` = nothing received yet. |
 | `clock?` | `Clock` |  | Clock to measure age with; defaults to the nearest `ClockProvider`, else the browser clock. |
 | `mode?` | `"relative" \| "absolute"` | `relative` | `relative` → „aktualizováno před 1 s“ (ticks every second), `absolute` → „stav ze 14:32:10“. |
-| `connection?` | `"ok" \| "reconnecting" \| "offline"` |  | Connection liveness as a dot + text in the same line (never a banner). Omit for no dot. |
+| `connection?` | `"ok" \| "reconnecting" \| "offline"` |  | Connection liveness as a dot + text in the same line (never a banner). Omit for no dot. Dot colours: `ok` green, `reconnecting` amber, `offline` grey (never red: red is reserved for LIVE). |
 | `label?` | `string` |  | Text before the age; default `aktualizováno` (relative) / `stav ze` (absolute); `''` for none. |
 | `connectionLabels?` | `Partial<Record<DataAgeConnection, string>>` |  | Override connection texts (defaults: ok „připojeno“ for screen readers only, „obnovuji spojení“, „bez spojení“). |
 | `emptyLabel?` | `string` | `zatím bez dat` | Text when `receivedAt` is `null` (default „zatím bez dat“). |
@@ -1119,41 +1128,14 @@ Star toggle: 22 px glyph inside a 44 x 44 px touch target.
 
 Zdroj: `src/components/FavoritesToggle/FavoritesToggle.tsx`
 
-"★ 2" filter toggle: 34 px visible pill inside a 44 px touch target.
+"★ 2" filter toggle (just ☆ with no favourites): 34 px visible pill inside a 44 px touch target.
 
 | Prop | Typ | Výchozí | Popis |
 |---|---|---|---|
 | `pressed` | `boolean` |  | Whether the "favourites only" filter is on (state is owned by the app) |
-| `count` | `number` |  | Number of favourites shown next to the star |
+| `count` | `number` |  | Number of favourites. `0` shows only an empty star (☆); otherwise a filled star and the count („★ 2“). The pressed state is the navy fill of the pill. |
 | `label` | `string` |  | Accessible name, e.g. "Jen oblíbení" (the count is appended) |
 | `onPressedChange?` | `((pressed: boolean) => void)` |  |  |
-
-### LiveIndicator
-
-Zdroj: `src/components/LiveIndicator/LiveIndicator.tsx`
-
-LiveIndicator component for displaying live status, recording state, or connection status.
-
-Used in:
-- Live results pages
-- Real-time timing displays
-- Connection status indicators
-- Recording status
-
-The indicator consists of a pulsing dot with optional label text.
-
-| Prop | Typ | Výchozí | Popis |
-|---|---|---|---|
-| `variant?` | `"default" \| "live" \| "recording" \| "offline" \| "connecting"` | `default` | Visual variant of the indicator |
-| `size?` | `"sm" \| "md" \| "lg" \| "xl"` | `md` | Size of the indicator |
-| `color?` | `"default" \| "primary" \| "success" \| "warning" \| "error" \| "info"` | `default` | Color variant (overridden by variant for special states) |
-| `styleVariant?` | `"default" \| "badge"` | `default` | Style variant for different visual treatments |
-| `pulse?` | `boolean` | `true` | Enable pulse animation |
-| `label?` | `ReactNode` |  | Show text label next to indicator |
-| `labelPosition?` | `"left" \| "right"` | `right` | Position of the label relative to the dot |
-| `inline?` | `boolean` | `false` | Display as inline element |
-| `glow?` | `boolean` | `false` | Show glow effect around the dot |
-| `energyGlow?` | `boolean` | `false` | Use energy (coral-orange) color with dramatic glow effect |
 
 ## Živé výsledky
 
@@ -1361,7 +1343,8 @@ nothing; when the data stops it stays and turns stale.
 Zdroj: `src/components/OnCoursePanel/OnCourseRider.tsx`
 
 One athlete in the on-course panel: bib, name, running time (or the finish
-waiting for the result), split, gap, time to beat and the gate penalties.
+waiting for the result), penalty so far, split, gap, time to beat and the
+gate penalties.
 
 | Prop | Typ | Výchozí | Popis |
 |---|---|---|---|
@@ -1371,6 +1354,7 @@ waiting for the result), split, gap, time to beat and the gate penalties.
 | `secondary?` | `ReactNode` |  | Second line while on course (club, previous run…). The start and the finish replace it with their status text. |
 | `status` | `"at-start" \| "running" \| "finished-pending"` |  |  |
 | `time?` | `RunningSpec` |  | `running`: the delivered running time (ticks through the `Clock`, freezes 3 s after receipt). Other statuses do not use it. |
+| `penalty?` | `ObservedNumber` |  | `running`: penalty seconds so far, as delivered (contract `outcome.penaltySeconds` of a running outcome), shown as „+2 tr.“ next to the split; a value not known yet reads „(·) tr.“, never „+0 tr.“. Omitted = nothing shown (the application decides whether a clean 0 is worth showing). Other statuses do not use it. |
 | `finish?` | `{ time: ObservedNumber; penalty?: ObservedNumber; }` |  | `finished-pending`: finish time and penalties, not settled yet. |
 | `gates?` | `GateGridGate[]` |  | Per-gate penalties; gates not passed yet are `penalty: null`. |
 | `split?` | `number` |  | Number of the last split passed (`split 2`). |

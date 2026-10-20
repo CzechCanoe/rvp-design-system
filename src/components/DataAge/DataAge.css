@@ -25,12 +25,13 @@
   background: var(--csk-color-success);
 }
 
+/* Reconnecting: amber. Offline: grey, like every other "not known" state. Never red (red is LIVE only). */
 .csk-data-age--reconnecting .csk-data-age__dot {
   background: var(--csk-color-warning);
 }
 
 .csk-data-age--offline .csk-data-age__dot {
-  background: var(--csk-color-error);
+  background: var(--csk-color-state-unknown);
 }
 
 .csk-data-age__connection {

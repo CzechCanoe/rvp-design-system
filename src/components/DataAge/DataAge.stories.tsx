@@ -19,7 +19,8 @@ const meta = {
           'How old the shown data is, measured from its receipt on the injected `Clock` (`receivedAt` = `clock.now()` ' +
           'when the data arrived, never the server\'s `observedAt`). `mode="relative"` → „aktualizováno před 1 s“, updated ' +
           'through `clock.setTimeout` exactly when the text changes; `mode="absolute"` → „stav ze 14:32:10“. ' +
-          '`connection` adds a dot + text in the same line (never a banner over content). Colour and size are inherited, ' +
+          '`connection` adds a dot + text in the same line (never a banner over content): `ok` green, `reconnecting` amber, ' +
+          '`offline` grey (never red: red is LIVE only). Colour and size of the text are inherited, ' +
           'so it works on the surface and on the brand band. Stories use `createTestClock()` at a fixed time.',
       },
     },
@@ -125,6 +126,15 @@ export const Overview: Story = {
           receivedAt={STORY_NOW - 1_000}
           clock={storyClock}
           connection="ok"
+          style={{ marginLeft: 'auto' }}
+        />
+      </div>
+      <div style={band}>
+        <span>‹ Závody</span>
+        <DataAge
+          receivedAt={STORY_NOW - 12_000}
+          clock={storyClock}
+          connection="reconnecting"
           style={{ marginLeft: 'auto' }}
         />
       </div>

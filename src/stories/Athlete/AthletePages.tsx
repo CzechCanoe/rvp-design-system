@@ -82,14 +82,14 @@ const resultColumns: ColumnDef<SeasonResult>[] = [
     header: 'Výsledek',
     align: 'right',
     cell: (r) =>
-      r.seconds !== undefined ? <TimeValue value={r.seconds} /> : r.text ? <span className="athlete-page__mono">{r.text}</span> : '·',
+      r.seconds !== undefined ? <TimeValue value={r.seconds} format={r.format} /> : '·',
   },
   {
     key: 'diff',
     header: 'Ztráta',
     align: 'right',
     cell: (r) =>
-      r.diff === null ? <span className="athlete-page__muted">–</span> : <TimeValue value={r.diff} sign variant="muted" precision={r.text ? 1 : 2} />,
+      r.diff === null ? <span className="athlete-page__muted">–</span> : <TimeValue value={r.diff} sign variant="muted" precision={r.format === 'clock' ? 1 : 2} />,
   },
   {
     key: 'points',
@@ -305,7 +305,7 @@ const mobileColumns: ColumnDef<SeasonResult>[] = [
       <>
         <span className="athlete-page__race">{r.race.replace('Český pohár', 'ČP').replace(' ve slalomu', '')}</span>
         <div className="athlete-page__sub">
-          {r.date} · K1M{r.seconds !== undefined && <> · <TimeValue value={r.seconds} /></>}
+          {r.date} · K1M{r.seconds !== undefined && <> · <TimeValue value={r.seconds} format={r.format} /></>}
         </div>
       </>
     ),

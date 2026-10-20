@@ -30,7 +30,7 @@ export interface OnCourseRiderLabels {
   /** Text between a `delta` time to beat and its holder (default `k času`). */
   deltaTo: string;
   split: string;
-  /** Short for „penalty seconds“ after a finished time (default `tr.`). */
+  /** Short for „penalty seconds“ after a running or finished time (default `tr.`). */
   penalty: string;
 }
 
@@ -58,6 +58,13 @@ export interface OnCourseRiderProps extends Omit<HTMLAttributes<HTMLDivElement>,
    * Other statuses do not use it.
    */
   time?: RunningSpec;
+  /**
+   * `running`: penalty seconds so far, as delivered (contract `outcome.penaltySeconds`
+   * of a running outcome), shown as „+2 tr.“ next to the split; a value not known
+   * yet reads „(·) tr.“, never „+0 tr.“. Omitted = nothing shown (the application
+   * decides whether a clean 0 is worth showing). Other statuses do not use it.
+   */
+  penalty?: ObservedNumber;
   /** `finished-pending`: finish time and penalties, not settled yet. */
   finish?: { time: ObservedNumber; penalty?: ObservedNumber };
   /** Per-gate penalties; gates not passed yet are `penalty: null`. */
@@ -90,7 +97,8 @@ function penaltyLabel(penalty: ObservedNumber, unit: string): ReactNode {
 
 /**
  * One athlete in the on-course panel: bib, name, running time (or the finish
- * waiting for the result), split, gap, time to beat and the gate penalties.
+ * waiting for the result), penalty so far, split, gap, time to beat and the
+ * gate penalties.
  */
 export const OnCourseRider = forwardRef<HTMLDivElement, OnCourseRiderProps>(
   (
@@ -101,6 +109,7 @@ export const OnCourseRider = forwardRef<HTMLDivElement, OnCourseRiderProps>(
       secondary,
       status,
       time,
+      penalty,
       finish,
       gates,
       split,
@@ -153,12 +162,11 @@ export const OnCourseRider = forwardRef<HTMLDivElement, OnCourseRiderProps>(
     }
 
     const subs: ReactNode[] = [];
-    if (status === 'finished-pending' && finish && finish.penalty !== undefined) {
-      subs.push(
-        <span key="pen">
-          {penaltyLabel(finish.penalty, labels.penalty)}
-        </span>
-      );
+    // Penalty so far (running) or of the finish (finished-pending), in the same shape: „+2 tr.“ / „(·) tr.“
+    const shownPenalty =
+      status === 'running' ? penalty : status === 'finished-pending' ? finish?.penalty : undefined;
+    if (shownPenalty !== undefined) {
+      subs.push(<span key="pen">{penaltyLabel(shownPenalty, labels.penalty)}</span>);
     }
     if (status === 'running' && (split !== undefined || toLeader !== undefined)) {
       subs.push(
