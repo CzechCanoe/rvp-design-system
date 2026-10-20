@@ -5,7 +5,7 @@
    Full width, no left indentation.
    ============================================================================= */
 
-/* Text right on the grey ground uses text-2: text-3 is below AA on surface-2 (4.46:1) */
+/* Muted text on the grey ground is text-3 (5.1:1 on surface-2 since #84.9), as in the reference */
 .csk-run-detail {
   container: csk-run-detail / inline-size;
   font-family: var(--csk-font-sans);
@@ -60,7 +60,7 @@
 }
 
 .csk-run-detail__rank-diff {
-  color: var(--csk-color-text-2);
+  color: var(--csk-color-text-3);
 }
 
 .csk-run-detail__rank-diff .csk-time-value {

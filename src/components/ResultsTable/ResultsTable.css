@@ -264,9 +264,8 @@
   background-color: var(--csk-color-state-review-bg);
 }
 
-/* AA on the violet tint: muted text and the gold rank number turn darker inside the row */
+/* AA on the violet tint: the gold rank number turns darker inside the row (text-3 keeps 4.6:1 there) */
 .csk-results-table__row--review:not(.csk-results-table__row--running) {
-  --csk-color-text-3: var(--csk-color-text-2);
   --csk-color-podium-1-text: var(--csk-color-text-2);
 }
 

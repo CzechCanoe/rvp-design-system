@@ -82,11 +82,11 @@
 }
 
 .states-overview__time--stale {
-  color: var(--csk-color-text-2);
+  color: var(--csk-color-text-3);
   border-bottom: 2px dotted var(--csk-color-state-stale);
 }
 
 .states-overview__note {
   font-size: var(--csk-text-sm);
-  color: var(--csk-color-text-2);
+  color: var(--csk-color-text-3);
 }

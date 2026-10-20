@@ -30,7 +30,7 @@ Cíl: jeden prefix, jedna paleta, žádné režimy kromě `embed`. Zdroj hodnot:
 | `--csk-red-100` | `#fdecea` | podložka chyby, běžící řádek v programu |
 | `--csk-ink` | `#1b1f26` | text |
 | `--csk-ink-2` | `#444b55` | vedlejší text |
-| `--csk-ink-3` | `#6b7280` | popisky, meta (4.6:1 na bílé) |
+| `--csk-ink-3` | `#626a75` | popisky, meta; AA na všech plochách (5.5:1 bílá, 5.1:1 `ground-2`, 4.7:1 `ground-3`). Do T19 `#6b7280` (4.8:1 na bílé, 4.46:1 na `ground-2`), viz „Změněno v T19“ |
 | `--csk-line` | `#d9dee5` | rámy |
 | `--csk-line-2` | `#eceff3` | oddělovače řádků |
 | `--csk-ground` | `#ffffff` | plocha tribuny |
@@ -78,7 +78,7 @@ Cíl: jeden prefix, jedna paleta, žádné režimy kromě `embed`. Zdroj hodnot:
 | `--csk-color-highlight-bg` / `-border` / `-text` | `--csk-blue-100` / `-200` / `--csk-blue-dark` | podložka, aktivní položka, úroveň závodu; rám zvýrazněné karty |
 | `--csk-color-live-bg` | `--csk-red-100` | běžící řádek v programu |
 | `--csk-color-live-text` | `--csk-red-dark` | text na `live-bg` (čas běžící fáze), AA; rodina stavů, nezaměňovat s `-error-text` |
-| `--csk-color-state-*-text` | official / provisional / review = základní barva, unknown = `--csk-ink-2` | text na `-bg` s kontrastem AA; `--csk-gray` na `--csk-gray-100` má 2.8:1 a `--csk-ink-3` 4.3:1 |
+| `--csk-color-state-*-text` | official / provisional / review = základní barva, unknown = `--csk-ink-3` | text na `-bg` s kontrastem AA; `--csk-gray` na `--csk-gray-100` má 2.8:1, `--csk-ink-3` 4.9:1 (do T19 `--csk-ink-2`, protože starý `ink-3` měl 4.3:1) |
 | `--csk-color-state-stale` | `--csk-gray` | tečkované podtržení zastavené hodnoty |
 | `--csk-color-success` / `-warning` / `-error` / `-info` (+ `-bg`, `-text`) | zelená / jantar / červená / modrá, `-100`, `-dark` | poznámky, hlášky, validace formulářů; odděleno od stavů hodnoty a od LIVE |
 | `--csk-color-podium-1-text` / `-2-text` / `-3-text` | `--csk-gold-dark` / … | číslo pořadí |
@@ -94,6 +94,24 @@ Cíl: jeden prefix, jedna paleta, žádné režimy kromě `embed`. Zdroj hodnot:
 - Sémantické tokeny odkazují jen na primitiva, nikdy na jiný sémantický token, aby `[data-theme="dark"]` mohl přepsat libovolnou podmnožinu.
 - `[data-mode="embed"]` přepisuje `--csk-radius-sm/md/lg` na 2 / 4 / 4px a `--csk-shadow-sm` na `none`. Systémové písmo volitelně přes `data-font="system"` vedle `data-mode="embed"`.
 - `--csk-color-state-*` a `--csk-color-live*` jsou jen pro stavy hodnoty (Oficiální, Předběžné, V revizi, Neznámo, Live, stale). Hlášky, varování a validace používají `--csk-color-success*` / `-warning*` / `-error*` / `-info*`; codemod T3 mapuje podle tabulky níže.
+
+### Změněno v T19 (#84.9)
+
+`--csk-ink-3` `#6b7280` → `#626a75`, aby `--csk-color-text-3` splnil AA 4.5:1 i na šedých a tónovaných plochách (WCAG 2.1 relativní jas):
+
+| Plocha | `#6b7280` (do T19) | `#626a75` |
+|---|---|---|
+| `surface` / `ground` `#ffffff` | 4.83 | 5.47 |
+| `surface-2` / `ground-2` `#f4f6f8` | 4.46 | 5.05 |
+| `surface-3` / `ground-3` `#eaeef2` | 4.15 | 4.69 |
+| `state-unknown-bg` `#f1f2f4` | 4.32 | 4.88 |
+| `highlight-bg` / `info-bg` `#e8f0fa` | 4.21 | 4.76 |
+| `live-bg` / `error-bg` `#fdecea` | 4.23 | 4.78 |
+| `state-review-bg` `#efeafa` | 4.10 | 4.64 |
+| `state-provisional-bg` `#fff3dc` | 4.40 | 4.98 |
+| `state-official-bg` `#e4f3e8` | 4.21 | 4.76 |
+
+Obcházení starého kontrastu (`text-3` → `text-2`) se vrátilo na `text-3` tam, kde reference používá `--ink-3`: `--csk-color-state-unknown-text` (`ink-2` → `ink-3`, `.b-unk`), `WeekendCalendar` štítek a poznámka víkendu, `Calendar` čísla dnů mimo měsíc, `ResultsTable` řádek V revizi (bez přemapování `text-3`; zlaté pořadí na fialové má 4.3:1, takže `podium-1-text` → `text-2` zůstává), `RunDetail` rozdíl pořadí, `ProgramList` podtitul běžící fáze, `PenaltyChip` čistá branka (`.pen-0`), `ProposalList` nápověda v hlavičce, story `States/Overview` (zastavený čas a poznámky pásu).
 
 ## Typografie
 

@@ -169,7 +169,7 @@
 }
 
 .csk-calendar__day--outside .csk-calendar__day-number {
-  color: var(--csk-color-text-2);
+  color: var(--csk-color-text-3);
 }
 
 .csk-calendar__day--today {

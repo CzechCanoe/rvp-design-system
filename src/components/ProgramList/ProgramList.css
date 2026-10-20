@@ -127,7 +127,3 @@
   font-weight: var(--csk-font-weight-semibold);
   color: var(--csk-color-live-text);
 }
-
-.csk-program-list__item--running .csk-program-list__sub {
-  color: var(--csk-color-text-2);
-}
