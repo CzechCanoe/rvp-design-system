@@ -29,14 +29,15 @@
   color: var(--csk-color-success);
 }
 
-/* Reconnecting: amber, half filled. Offline: grey ring, like every other "not known" state. Never red (red is LIVE only). */
+/* Reconnecting: amber, half filled. Offline: grey ring (#84.8), in the darker text grey so the thin ring keeps
+   >= 3:1 on surface and surface-2 (--csk-color-state-unknown is 2.9:1 on surface-2). Never red (red is LIVE only). */
 .csk-data-age--reconnecting .csk-data-age__dot {
   color: var(--csk-color-warning);
   border-width: 2px 2px 2px 5px;
 }
 
 .csk-data-age--offline .csk-data-age__dot {
-  color: var(--csk-color-state-unknown);
+  color: var(--csk-color-text-3);
   border-width: 2px;
 }
 

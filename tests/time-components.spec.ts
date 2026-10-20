@@ -66,7 +66,8 @@ test.describe('Time components', () => {
       return {
         offline: dots('offline'),
         reconnecting: dots('reconnecting'),
-        grey: resolve('--csk-color-state-unknown'),
+        // offline is grey in the darker text grey (>= 3:1 on surface-2, review of #93)
+        grey: resolve('--csk-color-text-3'),
         amber: resolve('--csk-color-warning'),
         reds: [resolve('--csk-color-error'), resolve('--csk-color-live')],
       };
@@ -78,7 +79,8 @@ test.describe('Time components', () => {
     for (const c of [...colours.offline, ...colours.reconnecting]) expect(colours.reds).not.toContain(c);
   });
 
-  // Review of #93 (WCAG 1.4.1 / 1.4.11): the state has a shape too, and the dot keeps >= 3:1 on surface and navy band
+  // Review of #93 (WCAG 1.4.1 / 1.4.11): the state has a shape too, and the dot keeps >= 3:1 on the navy band
+  // and, off the band, on both light grounds (surface and surface-2 / ground-2)
   for (const story of ['components-dataage--overview', 'components-dataage--compact']) {
     test(`DataAge dot shapes and contrast (${story})`, async ({ page }) => {
       await page.goto(`/iframe.html?id=${story}&viewMode=story`);
@@ -107,17 +109,28 @@ test.describe('Time components', () => {
           }
           return 'rgb(255, 255, 255)';
         };
+        const resolve = (token: string) => {
+          const probe = document.createElement('span');
+          probe.style.backgroundColor = `var(${token})`;
+          document.body.appendChild(probe);
+          const value = getComputedStyle(probe).backgroundColor;
+          probe.remove();
+          return value;
+        };
+        const lightGrounds = ['--csk-color-surface', '--csk-color-surface-2'].map(resolve);
         return [...document.querySelectorAll('#storybook-root .csk-data-age__dot')].map((el) => {
           const cs = getComputedStyle(el);
           const state = ['ok', 'reconnecting', 'offline'].find((s) =>
             el.parentElement!.classList.contains(`csk-data-age--${s}`)
           );
+          const onDark = !!el.closest('[data-tone="on-dark"]');
+          const grounds = onDark ? [backdrop(el)] : lightGrounds;
           return {
             state: state ?? 'none',
             widths: [cs.borderTopWidth, cs.borderRightWidth, cs.borderBottomWidth, cs.borderLeftWidth].map(parseFloat),
             width: parseFloat(cs.width),
-            contrast: ratio(cs.borderTopColor, backdrop(el)),
-            onDark: !!el.closest('[data-tone="on-dark"]'),
+            contrast: Math.min(...grounds.map((g) => ratio(cs.borderTopColor, g))),
+            onDark,
           };
         });
       });
