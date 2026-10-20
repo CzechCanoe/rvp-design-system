@@ -21,13 +21,13 @@ Verze `package.json` a `CHANGELOG.md` spravuje Release Please. Release PR „cho
 
 1. T18: výstup (seznam mezer) jde do issue v DS.
 2. T19 (#84): rozhodnutí maintainera z 20. 10. 2026, bod 1–12 (Button `href`, `DocumentList`, `ResultsPanel`, `TimeValue format`, `DataAge` barvy, token `--csk-ink-3`, Avatar `portrait`, oprava `GateGrid`/`PenaltyChip`, axe u `Table` na mobilu, …). Dokumentaci těchto komponent (`docs/v2/COMPONENTS.md`, `MIGRATION.md`) doplní T19; `docs/COMPONENT_API.md` stačí přegenerovat (`npm run docs:api`).
-3. Před vydáním: plný běh CI přes všechny prohlížeče (`gh workflow run ci.yml --ref <větev> -f browsers=all`).
+3. Smazat `LiveIndicator` (nahrazuje ho `StatusBadge state="live"`; používá ho `Calendar` / `CalendarList` `showLive`).
+4. Před vydáním: plný běh CI přes všechny prohlížeče (`gh workflow run ci.yml --ref <větev> -f browsers=all`).
 
 ## Backlog 2.1
 
 - #85 EntryTable: kartový režim ≤ 640 px (jedna loď = jedna karta, C2 se dvěma členy); v 2.0.0 zůstává vodorovný scroll uvnitř komponenty.
 - Tmavý režim (tokeny jsou připravené, `[data-theme="dark"]` přepíše jen sémantickou vrstvu).
-- `LiveIndicator` (1.x, zůstal kvůli `Calendar` / `CalendarList` `showLive`, má `energyGlow`) sjednotit se `StatusBadge state="live"` a oranžový glow odstranit.
 - Sdílecí kartičky výsledků, Kayak Cross a klasifikační standingy jako samostatné komponenty (mimo scope v2).
 - Případně `docs:api -- --check` jako krok v CI, aby se `docs/COMPONENT_API.md` nemohl rozejít s kódem.
 

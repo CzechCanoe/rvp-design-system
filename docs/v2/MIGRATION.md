@@ -26,7 +26,7 @@ Breaking changes níže jsou porovnané se zveřejněnou verzí **1.2.0** (`git 
 
 Navigation (`MainNav`, `NavItem`, `BreadcrumbChevronIcon`), HeroSection (+ `HeroActionButton`), SectionHeader, StatsBar, StatCard, ActionCard, AthleteCard, ListItem, ResultItem, PodiumCard, DateBadge. `ResultsTable` 1.x je přepsaná (viz níže) včetně typů `ResultEntry`, `ResultStatus`, `ResultSection`, `ResultsTableColumn`, `ResultsTableSize`, `ResultsTableVariant` a komponenty `RunDetailModal`. Pryč jsou i typy `AvatarVariant` (nově `AvatarShape`), `HeaderSize`, `FilterPillsVariant`, `SearchFilterChip`.
 
-Nezrušeno, i když to zadání původně předpokládalo: `FilterPills` (zůstává pod tímto jménem), `LiveIndicator` (používá ho `Calendar` / `CalendarList`; nový kód má používat `StatusBadge state="live"`), `Calendar`, `CalendarList`, `KanoeCzContext`.
+`LiveIndicator` je zrušený, nahrazuje ho `StatusBadge state="live"`. Na `main` je ještě v kódu (používá ho `Calendar` / `CalendarList` `showLive`), T19 ho smaže; nový kód ho nepoužívá. `FilterPills` zůstává pod tímto jménem (upravená komponenta, nepřejmenovaná na `Pills`). Beze změny zůstávají `Calendar`, `CalendarList`, `KanoeCzContext`.
 
 ### Změny props a variant
 
@@ -52,6 +52,11 @@ Nezrušeno, i když to zadání původně předpokládalo: `FilterPills` (zůst�
 ## Kdy migrovat c123-live-mini
 
 **Až v M5 Live, ne dřív.** Venues jedou tag `legacy-2026` a větev `legacy/2026` bere jen `fix:` commity; bump DS na major tam nepatří. Na `main` se klient v M5 píše znovu proti kontraktu (handshake, SSE, `Observed` stavy, `Clock` pravidlo, on-course z `attempt.updated`), takže migrace dnešního klienta na v2 by byla práce, kterou M5 zahodí. DS v2 je postavený nezávisle, protože jeho model je vizuální, ne doménový. V M5 se stane zadáním UI: Page stories `Live/*` jsou kostra nového klienta, mapování kontraktu na `ResultRow` je jediná aplikační vrstva. Mezery v DS hledá předem suchý test (T18) a znovu začátek M5. Jediná výjimka: dílčí `fix:` na `legacy/2026`, pokud má být něco vidět na Jarním slalomu; bez DS.
+
+## Poznámka pro konzumenty (z T18)
+
+- Instalace lokálně zabaleného DS (`npm pack` → `npm i ./….tgz`) potřebuje `NODE_AUTH_TOKEN` pro GitHub Packages.
+- Tgz zabalený z `main` nese do vydání verzi 1.x, takže npm může vzít 1.x z cache. Před instalací smaž záznam DS z lockfilu (a případně `node_modules/@czechcanoe/rvp-design-system`). Týká se hlavně migrace live-mini v M5.
 
 ## Dopad na c123-live-mini (M5 Live v rebuildu)
 

@@ -32,7 +32,7 @@ Legenda stavu vůči 1.x: **Z** beze změny API (jen přetokenováno) · **U** u
 | BottomBar | N | spodní navigace telefonu: `items: { icon, label, href, active }[]` (4 se vejdou na 390 px), 60 px, cíle 44 px; wrapper je size container, od 768 px šířky kontejneru se skryje (chová se správně i v úzkém embedu) |
 | CSKLogo | Z | |
 | KanoeCzContext | Z | jen Storybook dekorátor pro embed (mock kanoe.cz, má vlastní axe chyby, proto je `a11y: false` u embed layout story) |
-| LiveIndicator | Z | zůstal z 1.x, protože ho používají `Calendar` / `CalendarList` (`showLive`); má ještě `energyGlow`. Nový kód používá `StatusBadge state="live"`. Sjednocení je v backlogu 2.1 |
+| LiveIndicator | X | zrušený, nahrazuje ho `StatusBadge state="live"`; na `main` zatím zůstává v kódu (`Calendar` / `CalendarList` `showLive`, má `energyGlow`), T19 ho smaže. Nepoužívat |
 
 ## 2. Stavy a čísla
 
@@ -166,7 +166,7 @@ Stránky složené jen z komponent DS, jedna na obrazovku z reference, s fixním
 | `PageLayout` varianty implicitně | `tribuna`, `urad`, `embed` se sloty `header`, `banner`, `bottomBar`, `footer` |
 | `TimeValue value: number \| null` | navíc `Observed<number>` |
 | `RunningTime` / `DataAge` v seznamu knihovny | exportováno také `RUNNING_STALE_AFTER_SECONDS`, `STATUS_BADGE_LABELS`, `MARK_DESCRIPTIONS`, `*_LABELS` |
-| `LiveIndicator` odstranit | zůstal kvůli `Calendar` / `CalendarList` (viz sekce 1) |
+| `LiveIndicator` odstranit | zatím v kódu kvůli `Calendar` / `CalendarList`, maže T19 |
 
 ## 9. Co přijde v T19 (nepopsáno zde)
 
