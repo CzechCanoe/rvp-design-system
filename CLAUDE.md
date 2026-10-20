@@ -43,7 +43,8 @@ src/
 ```typescript
 // Stavy hodnot a čísla
 type StatusBadgeState = 'official' | 'provisional' | 'review' | 'unknown' | 'live' | 'stale';
-type Mark = 'DNS' | 'DNS-A' | 'DNS-B' | 'DNF' | 'DSQ' | 'NR';
+type Mark = 'DNS' | 'DNS-A' | 'DNS-B' | 'DNF' | 'DSQ' | 'DSQ-R' | 'DQB' | 'CAP' | 'RAL' | 'NR';
+type TimeValueFormat = 'seconds' | 'clock';  // clock = m:ss.d (sjezd)
 type Observed<T> = { state: 'known'; value: T; provisional?: boolean }
                  | { state: 'not-yet' } | { state: 'unavailable'; reason?: string };
 
@@ -56,6 +57,7 @@ type BadgeVtClass = 'm' | 'a' | 'b' | 'c';  // LOWERCASE!
 // Card, Button
 type CardVariant = 'surface' | 'outlined';   // + tone="default" | "highlight"
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
+// ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps (href / as="a" → <a>)
 
 // Layout a režimy
 type PageLayoutVariant = 'tribuna' | 'urad' | 'embed';
@@ -128,7 +130,7 @@ npm run docs:api          # přegeneruje docs/COMPONENT_API.md (po každé změn
 
 - **Výchozí komponenty:** 30 px
 - **Page stories a layouty** (`pageStories`, `layoutStories`): 80 px
-- **Animované prvky** (StatusBadge live, LiveIndicator, Skeleton): 100+ px
+- **Animované prvky** (StatusBadge live, Skeleton): 100+ px
 - **Dynamický obsah** (countdown): 1500+ px
 - **Minor rendering variance** (fonty, ikony): 500 px
 
