@@ -6,14 +6,17 @@ export interface FavoritesToggleProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'aria-label' | 'aria-pressed'> {
   /** Whether the "favourites only" filter is on (state is owned by the app) */
   pressed: boolean;
-  /** Number of favourites shown next to the star */
+  /**
+   * Number of favourites. `0` shows only an empty star (☆); otherwise a filled
+   * star and the count („★ 2“). The pressed state is the navy fill of the pill.
+   */
   count: number;
   /** Accessible name, e.g. "Jen oblíbení" (the count is appended) */
   label: string;
   onPressedChange?: (pressed: boolean) => void;
 }
 
-/** "★ 2" filter toggle: 34 px visible pill inside a 44 px touch target. */
+/** "★ 2" filter toggle (just ☆ with no favourites): 34 px visible pill inside a 44 px touch target. */
 export function FavoritesToggle({
   pressed,
   count,
@@ -39,8 +42,8 @@ export function FavoritesToggle({
       {...props}
     >
       <span className="csk-favorites-toggle__pill" aria-hidden="true">
-        <StarGlyph filled={pressed} />
-        <span className="csk-favorites-toggle__count">{count}</span>
+        <StarGlyph filled={count > 0} />
+        {count > 0 && <span className="csk-favorites-toggle__count">{count}</span>}
       </span>
     </button>
   );

@@ -23,7 +23,7 @@ const check = process.argv.includes('--check');
 const GROUPS = [
   ['Základ a formuláře', ['Button', 'Input', 'SearchInput', 'Select', 'Checkbox', 'Radio', 'Switch', 'Card', 'Badge', 'Avatar', 'Icon', 'Table', 'Modal', 'Dropdown', 'Toast', 'Pagination', 'Progress', 'Skeleton', 'EmptyState', 'Dropzone', 'Timeline', 'Wizard', 'Calendar']],
   ['Navigace a stránka', ['Header', 'Subbar', 'Breadcrumbs', 'PageTitle', 'PageLayout', 'BottomBar', 'Tabs', 'FilterPills', 'SegmentedControl', 'TableToolbar', 'CSKLogo', 'KanoeCzContext']],
-  ['Stavy a čísla', ['StatusBadge', 'MarkBadge', 'PenaltyChip', 'GateGrid', 'BibBadge', 'Notice', 'StatTile', 'TimeValue', 'RunningTime', 'DataAge', 'StarButton', 'FavoritesToggle', 'LiveIndicator']],
+  ['Stavy a čísla', ['StatusBadge', 'MarkBadge', 'PenaltyChip', 'GateGrid', 'BibBadge', 'Notice', 'StatTile', 'TimeValue', 'RunningTime', 'DataAge', 'StarButton', 'FavoritesToggle']],
   ['Živé výsledky', ['EventHeader', 'ResultsTable', 'StartlistTable', 'ProgramList', 'OnCoursePanel']],
   ['Kalendář, přihlášky, profil', ['WeekendCalendar', 'DeadlineBadge', 'EntryTable', 'ProposalList', 'SummaryCard', 'ProfileHeader', 'SeasonSparkline', 'RivalsList']],
 ];

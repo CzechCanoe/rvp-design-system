@@ -7243,6 +7243,28 @@ Merged main (T14), touch-target check and Athlete footer fix; snapshots refreshe
 
 ---
 
+## 2026-10-20 - Fáze 5 / T19a: stavy (gate chips, čas, značky, stáří dat), odstranění LiveIndicator
+
+### Dokončeno
+- [x] #84.11 regrese: `PenaltyChip` s `gate` ukazuje číslo branky, barva = penalizace (0 šedá, 2 jantar, 50 červená, `null` tečkovaný rám s číslem), penalizace v `title` + `aria-label`; bez `gate` dál hodnota (+ `title`). Opraveno centrálně, GateGrid / OnCourseRider / RunDetail to přebírají
+- [x] #84.8 `DataAge`: offline šedá tečka (`--csk-color-state-unknown`), reconnecting jantar, nikdy červená
+- [x] #84.7 `TimeValue format: 'seconds' | 'clock'` (clock = `m:ss.d`, od hodiny `h:mm:ss.d`, výchozí přesnost 1); profil závodníka má sjezd přes `format="clock"`
+- [x] #84.6 `FavoritesToggle`: count 0 → jen ☆, jinak „★ N“ (plná hvězda podle počtu, stisk = navy pilulka)
+- [x] T18 (b) `OnCourseRider.penalty` u `running` („+2 tr.“, neznámá „(·) tr.“)
+- [x] T18 (c) `MarkBadge`: `CAP`, `RAL`, `DSQ-R`, `DQB` (stejný obrysový tvar, české title)
+- [x] T18 (d) / MIGRATION: `LiveIndicator` smazán (Calendar/CalendarList → `StatusBadge state="live" size="sm"`), export, story, testy, snapshot
+- [x] Nové stories: PenaltyChip GateNumbers, TimeValue ClockFormat, FavoritesToggle Counts, OnCoursePanel RunningPenalty; snapshot + axe seznamy
+
+### Problémy a řešení
+1. **Problém:** unit test barvy tečky DataAge: vitest má `css: false`, `?raw` import CSS vrací prázdný řetězec, `node:fs` nemá typy
+   **Řešení:** barvy ověřuje Playwright (`tests/time-components.spec.ts`, computed barva vs. token), unit test jen třídy
+
+### Poznámky
+Popisky DSQ-R / DQB c123 dokumentace nedefinuje; použity ICF/ODF významy (v jízdě / nesportovní chování), přepsatelné přes `title`. COMPONENTS.md / MIGRATION.md / COMPONENT_API.md / README doplní finální T19 PR (doc deltas v PR).
+Stale gates: `opacity .7` (Live5) removed from `OnCourseRider` – with gate numbers as text the faded not-judged number fell to 2.75:1 (axe OnCoursePanel-Stale, Live-Disconnected); staleness is carried by the dotted time, Zastaveno and „stav ze“.
+
+---
+
 ## 2026-10-20 - Fáze 5 T19c: Table a11y na mobilních prohlížečích (#84, bod 12)
 
 ### Dokončeno

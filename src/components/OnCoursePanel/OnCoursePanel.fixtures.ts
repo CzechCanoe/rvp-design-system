@@ -59,6 +59,7 @@ export function sixRiders(now: number = STORY_NOW): OnCourseRiderData[] {
       secondary: 'Kanoe Tatra klub Lipt. Mikuláš',
       status: 'running',
       time: { elapsedSeconds: 31.8, receivedAt: now - 700 },
+      penalty: 50,
       split: 1,
       toLeader: 1.42,
       gates: gatesUntil(8, 22, { 6: 50 }),
@@ -81,5 +82,48 @@ export function sixRiders(now: number = STORY_NOW): OnCourseRiderData[] {
       finish: { time: 93.12, penalty: null },
     },
     fabian,
+  ];
+}
+
+/**
+ * Running riders with their penalty so far (contract `outcome.penaltySeconds`): a touch, a miss, a clean run
+ * and a penalty the source cannot deliver right now („(·) tr.“, never „+0 tr.“).
+ */
+export function runningPenaltyRiders(now: number = STORY_NOW): OnCourseRiderData[] {
+  const [hnilica] = liveRiders(now);
+  return [
+    { ...hnilica, penalty: 2 },
+    {
+      bib: 44,
+      name: 'KULTAN Andrej',
+      categoryTag: 'U16',
+      secondary: 'Kanoe Tatra klub Lipt. Mikuláš',
+      status: 'running',
+      time: { elapsedSeconds: 61.2, receivedAt: now - 300 },
+      penalty: 52,
+      split: 3,
+      toLeader: 3.4,
+      gates: gatesUntil(14, 22, { 6: 50, 9: 2 }),
+    },
+    {
+      bib: 47,
+      name: 'ŠEVČÍK Matyáš',
+      categoryTag: 'U18',
+      secondary: 'TJ Dukla Praha',
+      status: 'running',
+      time: { elapsedSeconds: 12.3, receivedAt: now - 200 },
+      penalty: 0,
+      gates: gatesUntil(4, 22),
+    },
+    {
+      bib: 52,
+      name: 'NOVOTNÝ Petr',
+      categoryTag: 'U18',
+      secondary: 'USK Praha',
+      status: 'running',
+      time: { elapsedSeconds: 22.7, receivedAt: now - 500 },
+      penalty: { state: 'unavailable', reason: 'source-unreachable' },
+      gates: gatesUntil(6, 22),
+    },
   ];
 }

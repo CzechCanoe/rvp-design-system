@@ -5,7 +5,16 @@ import { FavoritesToggle } from './FavoritesToggle';
 const meta = {
   title: 'Components/FavoritesToggle',
   component: FavoritesToggle,
-  parameters: { layout: 'padded' },
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        component:
+          '„Favourites only“ filter: „★ N“ with favourites, just ☆ with none. The pressed state is the navy pill. ' +
+          '34 px visible pill inside a 44 px touch target; the state is owned by the application.',
+      },
+    },
+  },
 } satisfies Meta<typeof FavoritesToggle>;
 
 export default meta;
@@ -25,4 +34,17 @@ export const Default: Story = {
     };
     return <Demo />;
   },
+};
+
+/** Count 0 shows only ☆ (no „0“); otherwise „★ N“. Off and pressed for both. */
+export const Counts: Story = {
+  args: { pressed: false, count: 0, label: 'Jen oblíbení' },
+  render: () => (
+    <div style={{ display: 'flex', gap: 8 }}>
+      <FavoritesToggle pressed={false} count={0} label="Jen oblíbení" />
+      <FavoritesToggle pressed count={0} label="Jen oblíbení" />
+      <FavoritesToggle pressed={false} count={2} label="Jen oblíbení" />
+      <FavoritesToggle pressed count={2} label="Jen oblíbení" />
+    </div>
+  ),
 };

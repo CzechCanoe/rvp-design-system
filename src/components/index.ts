@@ -210,15 +210,6 @@ export type { StartlistTableProps, StartlistTableLabels, StartlistRow, Startlist
 export { ProgramList, PROGRAM_LIST_LABELS } from './ProgramList';
 export type { ProgramListProps, ProgramListLabels, ProgramDay, ProgramItem } from './ProgramList';
 
-// LiveIndicator
-export { LiveIndicator } from './LiveIndicator';
-export type {
-  LiveIndicatorProps,
-  LiveIndicatorVariant,
-  LiveIndicatorSize,
-  LiveIndicatorColor,
-} from './LiveIndicator';
-
 // EmptyState
 export { EmptyState } from './EmptyState';
 export type {
@@ -315,6 +306,7 @@ export type {
   TimeValueVariant,
   TimeValuePrecision,
   TimeValueAlign,
+  TimeValueFormat,
 } from './TimeValue';
 
 // RunningTime

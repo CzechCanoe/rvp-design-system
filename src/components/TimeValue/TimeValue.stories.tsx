@@ -14,14 +14,16 @@ const meta = {
           'A time or time difference in seconds, set in IBM Plex Mono with tabular digits; never wraps. ' +
           'Accepts a plain number or an `Observed<number>`: `known` renders the number (a known `0` is `0.00`), ' +
           '`not-yet`, `unavailable` and `null` all render as "not known" (—, read as „neznámo“). ' +
-          '`align="decimal"` lines stacked values up on the decimal point; `sign` renders differences as `+1.53` / `−0.87`.',
+          '`align="decimal"` lines stacked values up on the decimal point; `sign` renders differences as `+1.53` / `−0.87`. ' +
+          '`format="clock"` writes long times (downhill) as `m:ss.d`, `h:mm:ss.d` from one hour on; its default precision is 1.',
       },
     },
   },
   tags: ['autodocs'],
   argTypes: {
     value: { control: 'number', description: 'Seconds, `null`, or an `Observed<number>`' },
-    precision: { control: 'inline-radio', options: [1, 2] },
+    format: { control: 'inline-radio', options: ['seconds', 'clock'] },
+    precision: { control: 'inline-radio', options: [undefined, 1, 2] },
     variant: { control: 'select', options: ['default', 'best', 'running', 'stale', 'muted'] },
     align: { control: 'inline-radio', options: [undefined, 'decimal'] },
     sign: { control: 'boolean' },
@@ -29,7 +31,7 @@ const meta = {
   },
   args: {
     value: 89.81,
-    precision: 2,
+    format: 'seconds',
     variant: 'default',
     sign: false,
   },
@@ -154,6 +156,43 @@ export const Formats: Story = {
           <TimeValue value={1.53} sign align="decimal" />
           <TimeValue value={-0.87} sign align="decimal" />
           <TimeValue value={12.06} sign align="decimal" />
+        </span>
+      </Row>
+    </div>
+  ),
+};
+
+/** `format="clock"`: downhill and other long times, `m:ss.d` (1 decimal by default), `h:mm:ss.d` from one hour on. */
+export const ClockFormat: Story = {
+  render: () => (
+    <div style={grid}>
+      <Row label="seconds (default) · 842.6">
+        <TimeValue value={842.6} />
+      </Row>
+      <Row label='format="clock" · 842.6'>
+        <TimeValue value={842.6} format="clock" />
+      </Row>
+      <Row label="clock · under a minute">
+        <TimeValue value={58.4} format="clock" />
+      </Row>
+      <Row label="clock · from an hour on">
+        <TimeValue value={4502.2} format="clock" />
+      </Row>
+      <Row label="clock · precision 2">
+        <TimeValue value={842.64} format="clock" precision={2} />
+      </Row>
+      <Row label="clock · sign (difference)">
+        <span style={{ display: 'inline-flex', gap: 'var(--csk-space-4)' }}>
+          <TimeValue value={62.3} format="clock" sign variant="muted" />
+          <TimeValue value={-5.04} format="clock" sign variant="muted" />
+        </span>
+      </Row>
+      <Row label='clock · align="decimal"'>
+        <span style={stack}>
+          <TimeValue value={842.6} format="clock" align="decimal" variant="best" />
+          <TimeValue value={873.8} format="clock" align="decimal" />
+          <TimeValue value={1204.1} format="clock" align="decimal" />
+          <TimeValue value={{ state: 'not-yet' }} format="clock" align="decimal" />
         </span>
       </Row>
     </div>

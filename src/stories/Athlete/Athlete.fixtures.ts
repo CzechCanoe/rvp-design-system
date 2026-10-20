@@ -1,5 +1,6 @@
 import type { ProfileHeaderTile } from '../../components/ProfileHeader';
 import type { RivalsListItem } from '../../components/RivalsList';
+import type { TimeValueFormat } from '../../components/TimeValue';
 
 /** Deterministic data of the athlete page stories (references Profil.html, ProfilMobil.html). */
 
@@ -15,9 +16,10 @@ export interface SeasonResult {
   category: string;
   rank: number | null;
   of?: number;
-  /** Result text as the application formats it (slalom seconds or a downhill clock time). */
+  /** Result time in seconds. */
   seconds?: number;
-  text?: string;
+  /** `clock` for downhill (`14:02.6`, TimeValue `format="clock"`); slalom stays in seconds. */
+  format?: TimeValueFormat;
   /** Gap to the winner in seconds; null = no gap shown. */
   diff: number | null;
   points: number | null;
@@ -30,7 +32,7 @@ export const seasonResults: SeasonResult[] = [
   { id: 'r2', date: '18. 5.', race: 'Český pohár #2 ve slalomu', place: 'Praha – Troja · neděle', category: 'K1 muži', rank: 2, of: 24, seconds: 93.1, diff: 0.41, points: 80, status: 'provisional' },
   { id: 'r3', date: '10. 5.', race: 'Český pohár #1 ve slalomu', place: 'Praha – Troja', category: 'K1 muži', rank: 5, of: 26, seconds: 95.02, diff: 2.9, points: 45, status: 'official' },
   { id: 'r4', date: '26. 4.', race: 'Jarní slalom, České Budějovice', place: 'veřejný závod', category: 'K1 muži', rank: 3, of: 31, seconds: 101.77, diff: 4.12, points: null, status: 'official' },
-  { id: 'r5', date: '12. 4.', race: 'Sjezd na Otavě', place: 'Sušice · klasický sjezd', category: 'K1 muži', rank: 7, of: 19, text: '14:02.6', diff: 31.2, points: null, status: 'official' },
+  { id: 'r5', date: '12. 4.', race: 'Sjezd na Otavě', place: 'Sušice · klasický sjezd', category: 'K1 muži', rank: 7, of: 19, seconds: 842.6, format: 'clock', diff: 31.2, points: null, status: 'official' },
   { id: 'r6', date: '29. 3.', race: 'Zimní pohár, Roudnice', place: 'halový slalom', category: 'K1 muži', rank: null, diff: null, points: null, status: 'official', dnf: true },
 ];
 
