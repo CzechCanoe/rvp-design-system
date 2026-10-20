@@ -7287,3 +7287,19 @@ Stale gates: `opacity .7` (Live5) removed from `OnCourseRider` – with gate num
 Docs (COMPONENTS.md, MIGRATION.md) dělá závěrečné PR T19, delty jsou v těle PR. Mimo scope zůstalo z T18: `backAs`, `DropdownButton variant="pill"`, `PageLayout padded="tight"` / sticky banner, skrytí „Detailní“ na mobilu.
 
 T19b follow-up: main merged (T17 docs, T19a states), conflicting Live/Event PNGs taken from main and re-rendered by CI `update-snapshots`; `docs:api` regenerated (DocumentList, ResultsPanel grouped).
+
+---
+
+## 2026-10-20 - Fáze 5 T19c: Table a11y na mobilních prohlížečích (#84, bod 12)
+
+### Dokončeno
+- [x] Axe `scrollable-region-focusable` (serious) na `.csk-table-wrapper` v `mobile-chrome` a `mobile-safari` (dispatch run 39207107031, `browsers=all`) opraveno v komponentě, bez vypínání pravidla
+- [x] Wrapper, který skutečně přetéká (Pixel 5: scrollWidth 471 > clientWidth 361), dostane `tabIndex=0`; s `caption` navíc `role="region"` + `aria-labelledby` na caption; `:focus-visible` outline jako EntryTable
+- [x] Unit testy `Table.test.tsx` (fit → bez tab stopu, overflow → focusable region pojmenovaný caption, overflow bez caption → focusable)
+
+### Problémy a řešení
+1. **Problém:** Na úzkém viewportu tabulka přetéká a wrapper s `overflow-x: auto` nemá žádný focusovatelný obsah → klávesnicí nejde scrollovat (WCAG 2.1.1).
+   **Řešení:** Měření přetečení (ResizeObserver na wrapper + table); focusovatelný jen při přetečení, takže desktop (tabulka se vejde) nemá navíc tab stop a snapshoty se nemění.
+
+### Poznámky
+- Řazené hlavičky (`th` s onClick) nejsou ovladatelné klávesnicí – mimo rozsah T19c, kandidát na samostatné issue.
