@@ -3,7 +3,14 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ClockProvider, createBrowserClock, createTestClock } from '../../clock';
 import { OnCoursePanel } from './OnCoursePanel';
 import { OnCourseRider } from './OnCourseRider';
-import { STALE_SINCE, STORY_NOW, gatesUntil, liveRiders, sixRiders } from './OnCoursePanel.fixtures';
+import {
+  STALE_SINCE,
+  STORY_NOW,
+  gatesUntil,
+  liveRiders,
+  runningPenaltyRiders,
+  sixRiders,
+} from './OnCoursePanel.fixtures';
 import './OnCoursePanel.stories.css';
 
 /** Static stories: frames are never flushed, so running times never tick in screenshots. */
@@ -104,6 +111,7 @@ export const TimeToBeat: Story = {
         secondary: 'Kanoe Tatra klub Lipt. Mikuláš',
         status: 'running',
         time: { elapsedSeconds: 61.2, receivedAt: STORY_NOW - 300 },
+        penalty: 2,
         gates: gatesUntil(14, 22, { 9: 2 }),
         timeToBeat: { mode: 'delta', value: 1.35, holder: 'HNILICA' },
       },
@@ -118,6 +126,13 @@ export const TimeToBeat: Story = {
     ],
   },
 };
+
+/**
+ * Penalty so far of riders on course (`penalty`, contract `outcome.penaltySeconds`), in the same shape as at
+ * the finish: „+2 tr.“, „+52 tr.“, a clean „+0 tr.“ when the application passes it, and „(·) tr.“ when the
+ * value is not known (never „+0 tr.“). The gate chips carry the gate numbers.
+ */
+export const RunningPenalty: Story = { args: { riders: runningPenaltyRiders() } };
 
 /** The leader of the phase in the header. */
 export const WithLeader: Story = {

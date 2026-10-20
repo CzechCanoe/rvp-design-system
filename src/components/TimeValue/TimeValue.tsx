@@ -1,9 +1,15 @@
 import { forwardRef, type HTMLAttributes } from 'react';
 import type { Observed } from '../../types';
-import { formatTimeParts, resolveTime, type TimeValuePrecision } from './formatTime';
+import {
+  formatClockParts,
+  formatTimeParts,
+  resolveTime,
+  type TimeValueFormat,
+  type TimeValuePrecision,
+} from './formatTime';
 import './TimeValue.css';
 
-export type { TimeValuePrecision } from './formatTime';
+export type { TimeValueFormat, TimeValuePrecision } from './formatTime';
 export type TimeValueVariant = 'default' | 'best' | 'running' | 'stale' | 'muted';
 export type TimeValueAlign = 'decimal';
 
@@ -13,7 +19,13 @@ export interface TimeValueProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'c
    * `unavailable` all render as "not known" (—); a known `0` renders as `0.00`.
    */
   value: number | null | Observed<number>;
-  /** Decimal places (default 2; running times use 1). */
+  /**
+   * `seconds` (default): plain seconds, `89.81`. `clock`: minutes and seconds,
+   * `m:ss.d` (`14:02.6`), `h:mm:ss.d` from one hour on; for downhill and other
+   * long times. Signed differences work in both (`+1:02.3`).
+   */
+  format?: TimeValueFormat;
+  /** Decimal places (default 2 for `seconds`, 1 for `clock`; running times use 1). */
   precision?: TimeValuePrecision;
   /** Visual state of the value (default `default`). */
   variant?: TimeValueVariant;
@@ -30,13 +42,15 @@ const UNKNOWN = '—';
 /**
  * A time or time difference in IBM Plex Mono with tabular digits; never wraps.
  * Renders the three `Observed` states: `known` as the number, `not-yet` and
- * `unavailable` alike as "not known".
+ * `unavailable` alike as "not known". `format="clock"` writes long times as
+ * `m:ss.d` (downhill).
  */
 export const TimeValue = forwardRef<HTMLSpanElement, TimeValueProps>(
   (
     {
       value,
-      precision = 2,
+      format = 'seconds',
+      precision: precisionProp,
       variant = 'default',
       align,
       sign = false,
@@ -48,6 +62,7 @@ export const TimeValue = forwardRef<HTMLSpanElement, TimeValueProps>(
   ) => {
     const { state, seconds } = resolveTime(value);
     const decimal = align === 'decimal';
+    const precision: TimeValuePrecision = precisionProp ?? (format === 'clock' ? 1 : 2);
 
     const classNames = [
       'csk-time-value',
@@ -79,7 +94,7 @@ export const TimeValue = forwardRef<HTMLSpanElement, TimeValueProps>(
       );
     }
 
-    const parts = formatTimeParts(seconds, precision, sign);
+    const parts = (format === 'clock' ? formatClockParts : formatTimeParts)(seconds, precision, sign);
 
     return (
       <span ref={ref} className={classNames} data-state={state} {...props}>

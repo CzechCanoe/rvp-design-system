@@ -17,7 +17,10 @@ export interface DataAgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'chi
   clock?: Clock;
   /** `relative` → „aktualizováno před 1 s“ (ticks every second), `absolute` → „stav ze 14:32:10“. */
   mode?: DataAgeMode;
-  /** Connection liveness as a dot + text in the same line (never a banner). Omit for no dot. */
+  /**
+   * Connection liveness as a dot + text in the same line (never a banner). Omit for no dot.
+   * Dot colours: `ok` green, `reconnecting` amber, `offline` grey (never red: red is reserved for LIVE).
+   */
   connection?: DataAgeConnection;
   /** Text before the age; default `aktualizováno` (relative) / `stav ze` (absolute); `''` for none. */
   label?: string;

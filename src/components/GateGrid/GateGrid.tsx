@@ -15,7 +15,11 @@ export interface GateGridProps extends HTMLAttributes<HTMLDivElement> {
   unavailable?: boolean;
 }
 
-/** Wrapping grid of per-gate penalties. */
+/**
+ * Wrapping grid of per-gate penalties: each chip shows its gate number, coloured by
+ * the penalty (grey 0, amber 2, red 50, dotted frame = not judged yet); the penalty
+ * is in the chip's `title` and `aria-label`.
+ */
 export const GateGrid = forwardRef<HTMLDivElement, GateGridProps>(
   ({ gates, size = 'md', unavailable = false, className, ...props }, ref) => {
     const classes = ['csk-gate-grid', `csk-gate-grid--${size}`, className].filter(Boolean).join(' ');

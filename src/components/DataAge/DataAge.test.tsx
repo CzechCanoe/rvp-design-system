@@ -95,6 +95,24 @@ describe('DataAge', () => {
   });
 });
 
+describe('DataAge offline (#84.8)', () => {
+  it('offline has its own state class and dot, reconnecting keeps its own (colours: tests/time-components.spec.ts)', () => {
+    const clock = createTestClock({ now: T0 + 42_000 });
+    const { container } = render(
+      <>
+        <DataAge receivedAt={T0} clock={clock} connection="offline" mode="absolute" timeZone="Europe/Prague" />
+        <DataAge receivedAt={T0} clock={clock} connection="reconnecting" />
+      </>
+    );
+    const [offline, reconnecting] = container.querySelectorAll('.csk-data-age');
+    expect(offline).toHaveClass('csk-data-age--offline');
+    expect(offline).not.toHaveClass('csk-data-age--reconnecting');
+    expect(offline.querySelector('.csk-data-age__dot')).toHaveAttribute('aria-hidden', 'true');
+    expect(offline).toHaveTextContent('bez spojení·stav ze 14:32:10');
+    expect(reconnecting).toHaveClass('csk-data-age--reconnecting');
+  });
+});
+
 describe('DataAge and real time', () => {
   let spy: ReturnType<typeof spyOnRealTime> | undefined;
   afterEach(() => spy?.restore());

@@ -101,6 +101,26 @@ describe('ResultsTable', () => {
     expect(nr.querySelector('.csk-rank-value--none')).toHaveTextContent('bez pořadí');
   });
 
+  it('RAL (ranked as last) keeps its known rank next to the mark', () => {
+    const ral: ResultRow = {
+      id: 'ral-9',
+      rank: known(24),
+      bib: 9,
+      name: 'MAREK Jiří',
+      club: 'KK Opava',
+      runs: [{ time: known(110.2), penalty: 0 }],
+      result: known(110.2),
+      mark: 'RAL',
+    };
+    const { container } = render(<ResultsTable rows={[brRows[0], ral]} columns="single" />);
+    const row = rowOf(container, 'MAREK Jiří');
+    expect(row.querySelector('.csk-rank-value')).toHaveTextContent('24');
+    expect(row.querySelector('.csk-results-table__result-main .csk-mark-badge')).toHaveAttribute(
+      'title',
+      'Zařazen na poslední místo'
+    );
+  });
+
   it('unavailable values render as not known (—), not as 0', () => {
     const { container } = render(<ResultsTable rows={markRows} columns="pair" />);
     const row = rowOf(container, 'ŘÍHA Adam');

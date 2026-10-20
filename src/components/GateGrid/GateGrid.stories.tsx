@@ -14,7 +14,10 @@ const meta = {
     layout: 'padded',
     docs: {
       description: {
-        component: 'Wrapping grid of per-gate penalties. `unavailable` shows "bez konfigurace tratě".',
+        component:
+          'Wrapping grid of per-gate penalties. Each chip shows the gate number; the colour carries the penalty ' +
+          '(grey 0, amber 2, red 50, dotted frame = not judged yet), the penalty is in `title` (hover) and ' +
+          '`aria-label`. `unavailable` shows "bez konfigurace tratě".',
       },
     },
   },

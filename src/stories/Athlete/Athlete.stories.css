@@ -139,11 +139,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-.athlete-page__mono {
-  font-family: var(--csk-font-mono);
-  font-variant-numeric: tabular-nums;
-}
-
 .athlete-page__rank {
   font-family: var(--csk-font-display);
   font-size: var(--csk-text-lg);

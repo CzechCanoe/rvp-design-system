@@ -85,11 +85,9 @@
   font-weight: var(--csk-font-weight-semibold);
 }
 
-/* Stale: nothing is live any more, the gates fade like the values */
-.csk-oncourse-rider--stale .csk-oncourse-rider__gates {
-  opacity: 0.7;
-}
-
+/* Stale: nothing is live any more. The gates are not faded (reference Live5 has opacity .7): the chips carry
+   gate numbers as text, and a faded not-judged number drops below 4.5:1 („nic nešedne do nečitelna“).
+   Staleness is stated by the frozen, dotted time, the Zastaveno badge and „stav ze“. */
 .csk-oncourse-rider--stale .csk-athlete-name__name {
   color: var(--csk-color-text-2);
 }

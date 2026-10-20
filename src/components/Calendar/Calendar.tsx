@@ -6,7 +6,7 @@ import {
   type HTMLAttributes,
   type ReactNode,
 } from 'react';
-import { LiveIndicator } from '../LiveIndicator';
+import { StatusBadge } from '../StatusBadge';
 import './Calendar.css';
 
 export type CalendarView = 'month' | 'week';
@@ -69,7 +69,7 @@ export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onS
   showEventPreview?: boolean;
   /** Enable animated transitions */
   animated?: boolean;
-  /** Show live indicator for events with data.isLive */
+  /** Show a `StatusBadge state="live"` for events with `data.isLive` */
   showLive?: boolean;
   /**
    * Weekend showcase layout - the recommended layout for sports calendars.
@@ -342,7 +342,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
           <span className="csk-calendar__event-title">{event.title}</span>
           {eventIsLive && (
             <span className="csk-calendar__event-live">
-              <LiveIndicator variant="live" size="sm" />
+              <StatusBadge state="live" size="sm" />
             </span>
           )}
         </>
