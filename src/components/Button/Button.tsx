@@ -13,24 +13,43 @@ export type ButtonSize = 'sm' | 'md';
 
 /** Props shared by the button and the link form. */
 export interface ButtonOwnProps {
-  /** Visual variant of the button */
+  /**
+   * Visual variant of the button
+   * @default 'primary'
+   */
   variant?: ButtonVariant;
-  /** Size of the button */
+  /**
+   * Size of the button
+   * @default 'md'
+   */
   size?: ButtonSize;
-  /** Full width button */
+  /**
+   * Full width button
+   * @default false
+   */
   fullWidth?: boolean;
   /** Icon to display before the label */
   iconLeft?: ReactNode;
   /** Icon to display after the label */
   iconRight?: ReactNode;
-  /** Loading state (behaves as disabled) */
+  /**
+   * Loading state (behaves as disabled)
+   * @default false
+   */
   loading?: boolean;
+  /**
+   * Disabled. A `<button>` gets `disabled`; a link cannot be disabled natively, so it drops `href`
+   * (not focusable, not navigable), gets `role="link"` + `aria-disabled="true"` and ignores clicks.
+   * Same look in both forms.
+   */
+  disabled?: boolean;
   /** Children content */
   children?: ReactNode;
 }
 
 /** `<button>` form (default). */
 export interface ButtonAsButtonProps extends ButtonOwnProps, ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Element: `button` (default) or `a` (link form, needs `href`) */
   as?: 'button';
   href?: never;
 }
@@ -40,17 +59,14 @@ export interface ButtonAsButtonProps extends ButtonOwnProps, ButtonHTMLAttribute
  * Chosen by `href` or `as="a"`.
  */
 export interface ButtonAsLinkProps extends ButtonOwnProps, AnchorHTMLAttributes<HTMLAnchorElement> {
+  /** Element: `button` (default) or `a` (link form, needs `href`) */
   as?: 'a';
-  /** Target of the link */
+  /**
+   * Link target: renders `<a>` with the identical look and focus ring. `rel` is passed through;
+   * without it `target="_blank"` gets `noopener noreferrer`.
+   */
   href: string;
-  /**
-   * A link cannot be disabled natively: the component drops `href` (not focusable, not navigable),
-   * sets `role="link"` + `aria-disabled="true"` and ignores clicks. Same look as a disabled button.
-   */
-  disabled?: boolean;
-  /**
-   * Passed through as given. Without `rel`, `target="_blank"` gets `noopener noreferrer`.
-   */
+  /** Passed through as given. Without `rel`, `target="_blank"` gets `noopener noreferrer`. */
   rel?: string;
 }
 
@@ -90,6 +106,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
     iconLeft,
     iconRight,
     loading = false,
+    disabled,
     className,
     children,
     ...rest
@@ -124,7 +141,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
   );
 
   if (as === 'a' || rest.href !== undefined) {
-    const { disabled, href, target, rel, onClick, role, ...anchorProps } = rest as Omit<
+    const { href, target, rel, onClick, role, ...anchorProps } = rest as Omit<
       ButtonAsLinkProps,
       keyof ButtonOwnProps | 'as'
     >;
@@ -154,7 +171,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
     );
   }
 
-  const { disabled, ...buttonProps } = rest as Omit<ButtonAsButtonProps, keyof ButtonOwnProps | 'as' | 'href'>;
+  const buttonProps = rest as Omit<ButtonAsButtonProps, keyof ButtonOwnProps | 'as' | 'href'>;
   const isDisabled = disabled || loading;
 
   return (
