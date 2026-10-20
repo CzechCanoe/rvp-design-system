@@ -7322,3 +7322,22 @@ T19b follow-up: main merged (T17 docs, T19a states), conflicting Live/Event PNGs
 
 ### Poznámky
 Snapshoty se generují jen v CI (label `update-snapshots`, pokud se vzhled hlavičky změní).
+
+---
+
+## 2026-10-20 - Fáze 5 (T19, #84): EventHeader gutter a kompaktní DataAge
+
+### Dokončeno
+- [x] Nový token `--csk-layout-gutter` (16 px, od 768 px viewportu 24 px) v `spacing.css`; jediný zdroj pro `PageLayout padded` (kontejner i patička) a `EventHeader` (vnitřní okraj, zpětný odkaz v condensed)
+- [x] EventHeader na telefonu 16 px místo 14 px; obsah hlavičky a stránky začíná na stejném x (390 i 1280)
+- [x] `DataAge variant="compact"`: tečka + krátké stáří („před 4 s“, „14:32:10“), prefix a text spojení jen pro čtečky (`.csk-data-age__sr`) a v `title`
+- [x] `EventHeader condensed` dává DataAge kompaktní tvar sám (interní `DataAgeVariantContext`, explicitní `variant` má přednost)
+- [x] Stories `DataAge/Compact`, `EventHeader/PageGutter` (390 + 1280, default + condensed); unit testy; Playwright zarovnání při 390 a 1280
+
+### Problémy a řešení
+1. **Problém:** `export type { DataAgeVariant }` v `DataAge.tsx` zmátl react-docgen-typescript (DataAge v COMPONENT_API „bez props“).
+   **Řešení:** typ se exportuje z `DataAgeVariantContext.ts` přes `index.ts`.
+
+### Poznámky
+- Gutter se teď přepíná podle viewportu (`@media`) jako PageLayout, ne podle šířky hlavičky (`@container`); EventHeader už není size container.
+- Doc delty pro T19z (COMPONENTS.md, TOKENS.md) jsou v PR.
