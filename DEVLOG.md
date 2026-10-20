@@ -7235,3 +7235,4 @@ Merged main (T14), touch-target check and Athlete footer fix; snapshots refreshe
 
 ### Poznámky
 Popisky DSQ-R / DQB c123 dokumentace nedefinuje; použity ICF/ODF významy (v jízdě / nesportovní chování), přepsatelné přes `title`. COMPONENTS.md / MIGRATION.md / COMPONENT_API.md / README doplní finální T19 PR (doc deltas v PR).
+Stale gates: `opacity .7` (Live5) removed from `OnCourseRider` – with gate numbers as text the faded not-judged number fell to 2.75:1 (axe OnCoursePanel-Stale, Live-Disconnected); staleness is carried by the dotted time, Zastaveno and „stav ze“.
