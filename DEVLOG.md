@@ -7285,3 +7285,5 @@ Stale gates: `opacity .7` (Live5) removed from `OnCourseRider` – with gate num
 
 ### Poznámky
 Docs (COMPONENTS.md, MIGRATION.md) dělá závěrečné PR T19, delty jsou v těle PR. Mimo scope zůstalo z T18: `backAs`, `DropdownButton variant="pill"`, `PageLayout padded="tight"` / sticky banner, skrytí „Detailní“ na mobilu.
+
+T19b follow-up: main merged (T17 docs, T19a states), conflicting Live/Event PNGs taken from main and re-rendered by CI `update-snapshots`; `docs:api` regenerated (DocumentList, ResultsPanel grouped).
