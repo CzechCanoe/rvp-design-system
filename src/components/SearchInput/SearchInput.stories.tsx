@@ -15,9 +15,7 @@ SearchInput is a search field in two sizes (md 40 px, sm 34 px). Quick filters a
 
 ## Features
 - Debounced search with configurable delay
-- Filter chips for quick category selection
 - Loading state with spinner
-- Energy focus variant for Dynamic Sport aesthetic
 - Full keyboard support (Enter to search, Escape to clear)
 - Results count display
 - Helper text support

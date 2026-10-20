@@ -6,8 +6,8 @@ Pracovní složka pro major release 2.0.0. Vznikla z revize designu v říjnu 20
 |---|---|---|
 | `BRIEF.md` | Směr: proč v2, principy, co se mění a co zůstává | každý agent na začátku |
 | `TOKENS.md` | Nový tokenový systém a mapování starých tokenů | agent na fázi 1 |
-| `COMPONENTS.md` | Inventura komponent: zachovat / změnit / odstranit / nové, s API | agenti na fázích 2–4 |
-| `MIGRATION.md` | Breaking changes, verze, větve, testy, dopad na c123-live-mini | maintainer, agent na fázi 5 |
+| `COMPONENTS.md` | Komponenty podle skutečného stavu (as-built): záměr, pravidla, mechanismy; úplné props jsou v `docs/COMPONENT_API.md` | každý, kdo komponenty používá nebo mění |
+| `MIGRATION.md` | Breaking changes proti 1.2.0, verze, větve, testy, dopad na c123-live-mini | maintainer, agent na fázi 5, konzumenti DS |
 | `TASKS.md` | Rozpad na issues s akceptačními kritérii a pořadím | orchestrátor |
 | `reference/` | Statický HTML+CSS návrh obrazovek (zdroj pravdy pro vzhled) | každý agent při implementaci |
 

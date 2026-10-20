@@ -7217,6 +7217,32 @@ Merged main (T14), touch-target check and Athlete footer fix; snapshots refreshe
 
 ---
 
+## 2026-10-20 - v2 T17: Dokumentace a finální testovací konfigurace
+
+### Dokončeno
+- [x] `scripts/gen-component-api.mjs` + `npm run docs:api` (react-docgen-typescript, `--check`), `docs/COMPONENT_API.md` přegenerován (77 komponent z exportů `src/components/index.ts`)
+- [x] `docs/v2/COMPONENTS.md` a `MIGRATION.md` přepsány as-built (breaking changes proti 1.2.0 ověřeny diffem typů a props)
+- [x] `CLAUDE.md`, `README.md`, `DESIGN_PRINCIPLES.md`, `PLAN.md` (v2 stav, T18/T19, backlog 2.1), `src/Introduction.mdx`, `Icon.tsx` bez prototypů/režimů/gradientů; starý PLAN.md přesunut do `PLAN-history.md`; `docs/DESIGN_PRINCIPLES.md` označen jako historický
+- [x] `useIsomorphicLayoutEffect` do `src/hooks/` (Tabs, ResultsTable)
+- [x] JSDoc: `labels` memo (inline `runLabels` / JSX), `renderDetail` vracející `undefined`, `RunCell.time` `null`
+- [x] `scripts/*audit*.sh` bez `src/prototypes`, smazané vygenerované `scripts/audit-output/` (nyní v .gitignore)
+- [x] `tests/config.ts`: všech 136 story ID ověřeno proti `storybook-static/index.json`, odstraněn filtr „Glass“ a zastaralý komentář
+
+### Problémy a řešení
+1. **Problém:** docgen bral jako komponenty i Lucide ikony importované do Icon.tsx a pomocné story komponenty.
+   **Řešení:** jen názvy exportované z `src/components/index.ts`, deklarované (ne importované) v souboru komponenty.
+2. **Problém:** `docs/v2` tvrdilo, že 1.x měla gradient varianty Button/Card/Badge; ve v1.2.0 byly jiné (`accent=energy`, `elevated`, `aesthetic`, `energy`).
+   **Řešení:** MIGRATION.md je psaná podle diffu proti tagu v1.2.0.
+
+### Poznámky
+`LiveIndicator` a `FilterPills` zůstaly (v MIGRATION označené jako odstraněné/přejmenované); `CalendarCards` se neexportuje. `docs:api -- --check` zatím není v CI (návrh v PLAN.md, backlog).
+
+### T17 doplnění
+- Calendar `Default` story používala reálné dnešní datum, snapshot se měnil každý den (CI selhalo na Calendar a container-queries). Story má fixní datum, snapshoty přegenerovány CI.
+- Rozhodnutí T18: LiveIndicator je v docs veden jako zrušený (maže T19), poznámka pro konzumenty o lokální instalaci tgz.
+
+---
+
 ## 2026-10-20 - Fáze 5 T19c: Table a11y na mobilních prohlížečích (#84, bod 12)
 
 ### Dokončeno

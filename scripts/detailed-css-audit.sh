@@ -32,18 +32,19 @@ grep -rohE "csk-[a-zA-Z0-9_-]+" src/*.tsx src/**/*.tsx 2>/dev/null | sort -u | h
 echo ""
 echo "=== Checking specific potential dead patterns ==="
 
-# Check for old variant names that might have been removed
+# Check for 1.x variant names that were removed in v2 (CSS left behind without a TSX user)
 echo ""
-echo "Old variant patterns to check:"
+echo "Removed 1.x variant patterns to check:"
 patterns=(
     "csk-button--glass"
     "csk-card--glass"
     "csk-badge--glass"
     "csk-badge--gradient"
-    "csk-button--gradient-"
-    "csk-tabs--line"
-    "csk-tabs--pills"
+    "csk-badge--energy"
+    "csk-button--gradient"
     "csk-card--gradient"
+    "csk-card--aesthetic"
+    "csk-card--elevated"
 )
 
 for pattern in "${patterns[@]}"; do
@@ -59,7 +60,3 @@ echo "=== Size Analysis ==="
 echo ""
 echo "Component CSS files by size (largest first):"
 find src/components -name "*.css" -exec wc -l {} \; | sort -rn | head -10
-
-echo ""
-echo "Prototype CSS files by size (largest first):"
-find src/prototypes -name "*.css" -exec wc -l {} \; | sort -rn | head -10
