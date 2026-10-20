@@ -330,7 +330,7 @@ export type { RunningTimeProps } from './RunningTime';
 
 // DataAge
 export { DataAge } from './DataAge';
-export type { DataAgeProps, DataAgeMode, DataAgeConnection } from './DataAge';
+export type { DataAgeProps, DataAgeMode, DataAgeConnection, DataAgeVariant } from './DataAge';
 
 // OnCoursePanel + OnCourseRider (v2 T10)
 export { OnCoursePanel, ON_COURSE_PANEL_LABELS, OnCourseRider, ON_COURSE_RIDER_LABELS } from './OnCoursePanel';

@@ -113,6 +113,69 @@ describe('DataAge offline (#84.8)', () => {
   });
 });
 
+describe('DataAge compact', () => {
+  /** Text a sighted user sees: the element text without the visually hidden parts. */
+  const visibleText = (el: Element) =>
+    [...el.querySelectorAll('.csk-data-age__text')].map((n) => n.textContent).join('');
+
+  it('draws a dot and the short age; prefix only for screen readers and in title', () => {
+    const clock = createTestClock({ now: T0 + 4_000 });
+    const { container } = render(<DataAge receivedAt={T0} clock={clock} variant="compact" />);
+    const el = container.querySelector('.csk-data-age')!;
+    expect(el).toHaveClass('csk-data-age--compact');
+    expect(el.querySelector('.csk-data-age__dot')).toHaveAttribute('aria-hidden', 'true');
+    expect(visibleText(el)).toBe('před 4 s');
+    expect(el.querySelector('time')).toHaveAttribute('datetime', '2026-10-04T12:32:10.000Z');
+    expect(el.querySelector('.csk-data-age__sr')).toHaveTextContent('aktualizováno');
+    expect(el).toHaveTextContent('aktualizováno před 4 s');
+    expect(el).toHaveAttribute('title', 'aktualizováno před 4 s');
+    // still ticks on the injected clock
+    act(() => clock.advance(1_000));
+    expect(visibleText(el)).toBe('před 5 s');
+    expect(el).toHaveAttribute('title', 'aktualizováno před 5 s');
+  });
+
+  it('hides the connection text but keeps it for screen readers and in title', () => {
+    const clock = createTestClock({ now: T0 + 12_000 });
+    const { container } = render(
+      <>
+        <DataAge receivedAt={T0} clock={clock} variant="compact" connection="reconnecting" />
+        <DataAge receivedAt={T0} clock={clock} variant="compact" connection="ok" />
+      </>
+    );
+    const [reconnecting, ok] = container.querySelectorAll('.csk-data-age');
+    expect(reconnecting).toHaveClass('csk-data-age--reconnecting');
+    expect(reconnecting.querySelector('.csk-data-age__connection')).toBeNull();
+    expect(visibleText(reconnecting)).toBe('před 12 s');
+    expect(reconnecting).toHaveTextContent('obnovuji spojení, aktualizováno před 12 s');
+    expect(reconnecting).toHaveAttribute('title', 'obnovuji spojení · aktualizováno před 12 s');
+    expect(ok).toHaveAttribute('title', 'aktualizováno před 12 s');
+    expect(ok).toHaveTextContent('připojeno, aktualizováno před 12 s');
+  });
+
+  it('absolute and empty forms drop only the prefix', () => {
+    const clock = createTestClock({ now: T0 + 30_000 });
+    const { container } = render(
+      <>
+        <DataAge receivedAt={T0} clock={clock} variant="compact" mode="absolute" timeZone="Europe/Prague" />
+        <DataAge receivedAt={null} clock={clock} variant="compact" />
+      </>
+    );
+    const [absolute, empty] = container.querySelectorAll('.csk-data-age');
+    expect(visibleText(absolute)).toBe('14:32:10');
+    expect(absolute).toHaveAttribute('title', 'stav ze 14:32:10');
+    expect(visibleText(empty)).toBe('zatím bez dat');
+    expect(empty.querySelector('.csk-data-age__sr')).toBeNull();
+    expect(empty.querySelector('.csk-data-age__dot')).not.toBeNull();
+  });
+
+  it('a title prop overrides the generated one', () => {
+    const clock = createTestClock({ now: T0 + 1_000 });
+    const { container } = render(<DataAge receivedAt={T0} clock={clock} variant="compact" title="Stáří dat" />);
+    expect(container.querySelector('.csk-data-age')).toHaveAttribute('title', 'Stáří dat');
+  });
+});
+
 describe('DataAge and real time', () => {
   let spy: ReturnType<typeof spyOnRealTime> | undefined;
   afterEach(() => spy?.restore());

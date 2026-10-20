@@ -1,7 +1,8 @@
-import { forwardRef, useEffect, useMemo, useState, type HTMLAttributes } from 'react';
+import { forwardRef, useContext, useEffect, useMemo, useState, type HTMLAttributes } from 'react';
 import type { Clock } from '../../clock/Clock';
 import { useClock } from '../../clock/useClock';
 import { formatAgeCs, msUntilNextAgeChange } from './formatAge';
+import { DataAgeVariantContext, type DataAgeVariant } from './DataAgeVariantContext';
 import './DataAge.css';
 
 export type DataAgeMode = 'relative' | 'absolute';
@@ -18,8 +19,16 @@ export interface DataAgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'chi
   /** `relative` → „aktualizováno před 1 s“ (ticks every second), `absolute` → „stav ze 14:32:10“. */
   mode?: DataAgeMode;
   /**
+   * `default` → prefix + age („aktualizováno před 4 s“, connection text visible when not `ok`).
+   * `compact` → dot + age only („● před 4 s“, „● 14:32:10“) for a one-row header: the prefix and the connection
+   * text stay for screen readers (visually hidden) and in `title`; the dot is always drawn (connection colour, else the text colour).
+   * Omitted: `compact` inside `EventHeader condensed`, else `default`.
+   */
+  variant?: DataAgeVariant;
+  /**
    * Connection liveness as a dot + text in the same line (never a banner). Omit for no dot.
-   * Dot colours: `ok` green, `reconnecting` amber, `offline` grey (never red: red is reserved for LIVE).
+   * Dot colour and shape: `ok` green filled disc, `reconnecting` amber half-filled, `offline` grey hollow ring
+   * (never red: red is reserved for LIVE). Inside `data-tone="on-dark"` (EventHeader) the colours are lightened for the navy band.
    */
   connection?: DataAgeConnection;
   /** Text before the age; default `aktualizováno` (relative) / `stav ze` (absolute); `''` for none. */
@@ -45,6 +54,7 @@ const DEFAULT_CONNECTION_LABELS: Record<DataAgeConnection, string> = {
 /**
  * How old the shown data is, measured from its receipt on the injected clock,
  * optionally with connection liveness. Inline, one line, never a banner.
+ * `variant="compact"` (automatic in `EventHeader condensed`) draws only a dot and the short age.
  */
 export const DataAge = forwardRef<HTMLSpanElement, DataAgeProps>(
   (
@@ -52,6 +62,7 @@ export const DataAge = forwardRef<HTMLSpanElement, DataAgeProps>(
       receivedAt,
       clock: clockProp,
       mode = 'relative',
+      variant: variantProp,
       connection,
       label,
       connectionLabels,
@@ -65,6 +76,9 @@ export const DataAge = forwardRef<HTMLSpanElement, DataAgeProps>(
     ref
   ) => {
     const clock = useClock(clockProp);
+    const contextVariant = useContext(DataAgeVariantContext);
+    const variant = variantProp ?? contextVariant ?? 'default';
+    const compact = variant === 'compact';
     const hasData = receivedAt !== null && Number.isFinite(receivedAt);
     const [tick, setTick] = useState(0);
 
@@ -88,18 +102,18 @@ export const DataAge = forwardRef<HTMLSpanElement, DataAgeProps>(
       [locale, timeZone]
     );
 
-    let text: string;
+    let prefix = '';
+    let value: string;
     let dateTime: string | undefined;
     if (!hasData) {
-      text = emptyLabel;
+      value = emptyLabel;
     } else {
       const at = receivedAt as number;
       dateTime = new Date(at).toISOString();
-      const prefix = label ?? (mode === 'absolute' ? 'stav ze' : 'aktualizováno');
-      const value =
-        mode === 'absolute' ? timeFormat.format(at) : formatAge(Math.max(0, clock.now() - at) / 1000);
-      text = prefix ? `${prefix} ${value}` : value;
+      prefix = label ?? (mode === 'absolute' ? 'stav ze' : 'aktualizováno');
+      value = mode === 'absolute' ? timeFormat.format(at) : formatAge(Math.max(0, clock.now() - at) / 1000);
     }
+    const text = prefix ? `${prefix} ${value}` : value;
 
     const connectionText = connection
       ? (connectionLabels?.[connection] ?? DEFAULT_CONNECTION_LABELS[connection])
@@ -107,11 +121,31 @@ export const DataAge = forwardRef<HTMLSpanElement, DataAgeProps>(
 
     const classNames = [
       'csk-data-age',
+      compact && 'csk-data-age--compact',
       connection && `csk-data-age--${connection}`,
       className,
     ]
       .filter(Boolean)
       .join(' ');
+
+    if (compact) {
+      // Dot + age only; everything the default form shows is still read out and in the tooltip.
+      const fullText = connectionText && connection !== 'ok' ? `${connectionText} · ${text}` : text;
+      return (
+        <span ref={ref} className={classNames} data-mode={mode} title={fullText} {...props}>
+          <span className="csk-data-age__dot" aria-hidden="true" />
+          {connectionText && <span className="csk-data-age__sr">{`${connectionText}, `}</span>}
+          {prefix && <span className="csk-data-age__sr">{`${prefix} `}</span>}
+          {dateTime ? (
+            <time className="csk-data-age__text" dateTime={dateTime}>
+              {value}
+            </time>
+          ) : (
+            <span className="csk-data-age__text">{value}</span>
+          )}
+        </span>
+      );
+    }
 
     return (
       <span ref={ref} className={classNames} data-mode={mode} {...props}>

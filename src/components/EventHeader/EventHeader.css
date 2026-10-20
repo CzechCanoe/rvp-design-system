@@ -1,8 +1,6 @@
 /* EventHeader: compact live header on the navy band */
 
 .csk-event-header {
-  /* The inner gutter follows the header width (a phone frame on a wide screen keeps 14 px) */
-  container-type: inline-size;
   padding: 10px 0 12px;
   background: var(--csk-color-brand);
   color: var(--csk-color-text-on-fill);
@@ -38,14 +36,8 @@
   width: 100%;
   max-width: var(--csk-page-max-width, var(--csk-layout-max-width));
   margin-inline: auto;
-  padding-inline: 14px;
-}
-
-/* Same gutter as the padded PageLayout container from 768 px */
-@container (min-width: 768px) {
-  .csk-event-header__inner {
-    padding-inline: var(--csk-space-6);
-  }
+  /* Same gutter token as the padded PageLayout container (16 px phone, 24 px from 768 px) */
+  padding-inline: var(--csk-layout-gutter);
 }
 
 .csk-event-header a {
@@ -145,7 +137,8 @@
   gap: var(--csk-space-2);
 }
 
-/* The name gives way first (down to 5rem), then the data age gets an ellipsis */
+/* The name gives way first (down to 5rem), then the data age gets an ellipsis.
+   The data age is the compact DataAge here (dot + „před 4 s“, full text in title / for screen readers). */
 .csk-event-header--condensed .csk-event-header__text {
   flex: 1 1000 auto;
   min-width: 5rem;
@@ -170,8 +163,9 @@
   flex: none;
   min-width: var(--csk-tap);
   min-height: var(--csk-tap);
-  margin: -10px 0 -10px -14px;
-  padding-left: 14px;
+  /* The tap area reaches the band edge, the glyph stays on the gutter line */
+  margin: -10px 0 -10px calc(-1 * var(--csk-layout-gutter));
+  padding-left: var(--csk-layout-gutter);
   font-size: var(--csk-text-xl);
 }
 

@@ -52,20 +52,22 @@ test.describe('Time components', () => {
     const colours = await page.evaluate(() => {
       const resolve = (token: string) => {
         const probe = document.createElement('span');
-        probe.style.background = `var(${token})`;
+        probe.style.color = `var(${token})`;
         document.body.appendChild(probe);
-        const value = getComputedStyle(probe).backgroundColor;
+        const value = getComputedStyle(probe).color;
         probe.remove();
         return value;
       };
+      // the dot is drawn with borders in its `color`; dots on the navy band (data-tone="on-dark") are lightened
       const dots = (connection: string) =>
-        [...document.querySelectorAll(`#storybook-root .csk-data-age--${connection} .csk-data-age__dot`)].map(
-          (el) => getComputedStyle(el).backgroundColor
-        );
+        [...document.querySelectorAll(`#storybook-root .csk-data-age--${connection} .csk-data-age__dot`)]
+          .filter((el) => !el.closest('[data-tone="on-dark"]'))
+          .map((el) => getComputedStyle(el).borderTopColor);
       return {
         offline: dots('offline'),
         reconnecting: dots('reconnecting'),
-        grey: resolve('--csk-color-state-unknown'),
+        // offline is grey in the darker text grey (>= 3:1 on surface-2, review of #93)
+        grey: resolve('--csk-color-text-3'),
         amber: resolve('--csk-color-warning'),
         reds: [resolve('--csk-color-error'), resolve('--csk-color-live')],
       };
@@ -76,6 +78,77 @@ test.describe('Time components', () => {
     for (const c of colours.reconnecting) expect(c).toBe(colours.amber);
     for (const c of [...colours.offline, ...colours.reconnecting]) expect(colours.reds).not.toContain(c);
   });
+
+  // Review of #93 (WCAG 1.4.1 / 1.4.11): the state has a shape too, and the dot keeps >= 3:1 on the navy band
+  // and, off the band, on both light grounds (surface and surface-2 / ground-2)
+  for (const story of ['components-dataage--overview', 'components-dataage--compact']) {
+    test(`DataAge dot shapes and contrast (${story})`, async ({ page }) => {
+      await page.goto(`/iframe.html?id=${story}&viewMode=story`);
+      await page.waitForSelector('#storybook-root .csk-data-age--offline', { state: 'visible' });
+      const dots = await page.evaluate(() => {
+        // computed colours are rgb(0-255) or, for color-mix(), color(srgb 0-1)
+        const rgb = (c: string) => {
+          const v = (c.replace('srgb', '').match(/[\d.]+/g) ?? []).slice(0, 3).map(Number);
+          return c.startsWith('color(') ? v.map((x) => x * 255) : v;
+        };
+        const lum = (c: string) => {
+          const [r, g, b] = rgb(c).map((v) => {
+            const s = v / 255;
+            return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+          });
+          return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        };
+        const ratio = (a: string, b: string) => {
+          const [hi, lo] = [lum(a), lum(b)].sort((x, y) => y - x);
+          return (hi + 0.05) / (lo + 0.05);
+        };
+        const backdrop = (el: Element) => {
+          for (let n: Element | null = el.parentElement; n; n = n.parentElement) {
+            const bg = getComputedStyle(n).backgroundColor;
+            if (bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') return bg;
+          }
+          return 'rgb(255, 255, 255)';
+        };
+        const resolve = (token: string) => {
+          const probe = document.createElement('span');
+          probe.style.backgroundColor = `var(${token})`;
+          document.body.appendChild(probe);
+          const value = getComputedStyle(probe).backgroundColor;
+          probe.remove();
+          return value;
+        };
+        const lightGrounds = ['--csk-color-surface', '--csk-color-surface-2'].map(resolve);
+        return [...document.querySelectorAll('#storybook-root .csk-data-age__dot')].map((el) => {
+          const cs = getComputedStyle(el);
+          const state = ['ok', 'reconnecting', 'offline'].find((s) =>
+            el.parentElement!.classList.contains(`csk-data-age--${s}`)
+          );
+          const onDark = !!el.closest('[data-tone="on-dark"]');
+          const grounds = onDark ? [backdrop(el)] : lightGrounds;
+          return {
+            state: state ?? 'none',
+            widths: [cs.borderTopWidth, cs.borderRightWidth, cs.borderBottomWidth, cs.borderLeftWidth].map(parseFloat),
+            width: parseFloat(cs.width),
+            contrast: Math.min(...grounds.map((g) => ratio(cs.borderTopColor, g))),
+            onDark,
+          };
+        });
+      });
+      expect(dots.length).toBeGreaterThan(0);
+      for (const dot of dots) {
+        const half = dot.width / 2;
+        if (dot.state === 'ok' || dot.state === 'none') expect(dot.widths, dot.state).toEqual([half, half, half, half]);
+        if (dot.state === 'reconnecting') {
+          // half filled: the left border fills its half, the others are a thin ring
+          expect(dot.widths[3]).toBe(half);
+          for (const w of dot.widths.slice(0, 3)) expect(w).toBeLessThan(half);
+        }
+        if (dot.state === 'offline') for (const w of dot.widths) expect(w).toBeLessThan(half); // hollow ring
+        expect(dot.contrast, `${dot.state}${dot.onDark ? ' on dark' : ''}`).toBeGreaterThanOrEqual(3);
+      }
+      expect(dots.some((d) => d.onDark && d.state !== 'none')).toBe(true);
+    });
+  }
 
   test('static stories do not animate (reduced motion, ticking digits are data)', async ({ page }) => {
     for (const id of ['components-runningtime--states', 'components-dataage--overview', 'components-timevalue--variants']) {

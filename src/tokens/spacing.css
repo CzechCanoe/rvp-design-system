@@ -23,4 +23,14 @@
 
   /* Content width of a page (reference .wrap) */
   --csk-layout-max-width: 1200px;
+
+  /* Side gutter of the page content: 16 px phone, 24 px from 768 px. One source for
+     PageLayout (padded container, footer) and full-width bands (EventHeader), so their content lines up. */
+  --csk-layout-gutter: var(--csk-space-4);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --csk-layout-gutter: var(--csk-space-6);
+  }
 }

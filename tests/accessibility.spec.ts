@@ -96,6 +96,8 @@ const specificComponents = [
   { name: 'EventHeader-LogoShapes', storyId: 'components-eventheader--logo-shapes' },
   { name: 'TableToolbar-Crowded390', storyId: 'components-tabletoolbar--crowded-390' },
   { name: 'TableToolbar-OneRow390', storyId: 'components-tabletoolbar--one-row-390' },
+  // v2 T19 (#84, live-mini comparison): compact DataAge (prefix and connection text visually hidden)
+  { name: 'DataAge-Compact', storyId: 'components-dataage--compact' },
 ];
 
 // Helper to run axe and check results
