@@ -7379,3 +7379,15 @@ Snapshoty se generují jen v CI (label `update-snapshots`, pokud se vzhled hlavi
 ### Poznámky
 - `Release-As: 2.0.0` záměrně není v tomto PR (přijde samostatně po porovnání v1 / v2 maintainerem).
 - Neměněno: text-2 tam, kde reference má ink-2 nebo kde nejde o kontrastní obcházení (placeholdery stories, podložky na bílé).
+
+---
+
+## 2026-10-20 - v2 T19z: snapshoty s novým ink-3 (update-snapshots mode=all)
+
+### Dokončeno
+- [x] `update-snapshots.yml`: vstup `workflow_dispatch` `mode` (`changed` výchozí, `all`), label dál `changed`; popsáno v `CLAUDE.md` Testování
+- [x] Dispatch `mode=all` na `feat/v2-19z-final` → bot commit `1931715` (173 PNG), 548 passed, 0 unexpected
+- [x] Kontrola 3 PNG (přesné pixely `#6b7280` → `#626a75`): WeekendCalendar 251 → 0 starých / 340 nových, StatusBadge-AllStates 39 → 0 / 69, PenaltyChip-AllStates čistá „0“ v ink-3 (vizuálně)
+
+### Poznámky
+Label `update-snapshots` přepisuje jen snapshoty, které porovnání neprojdou; změny pod prahem `threshold 0.2` (tady ≈ 0.033) potřebují `mode=all`, jinak baseline zůstane se starou barvou.
