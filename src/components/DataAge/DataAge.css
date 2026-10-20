@@ -13,26 +13,50 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* The dot is drawn with borders in its `color`, so the state has a shape as well as a colour (WCAG 1.4.1)
+   and survives forced colours: ok = filled disc, reconnecting = half-filled, offline = hollow ring.
+   Without `connection` (compact only) a filled disc in the text colour. */
 .csk-data-age__dot {
   flex: none;
-  width: 8px;
-  height: 8px;
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  border: 5px solid currentColor;
   border-radius: var(--csk-radius-pill);
-  background: currentColor;
 }
 
 .csk-data-age--ok .csk-data-age__dot {
-  background: var(--csk-color-success);
+  color: var(--csk-color-success);
 }
 
-/* Reconnecting: amber. Offline: grey, like every other "not known" state. Never red (red is LIVE only). */
+/* Reconnecting: amber, half filled. Offline: grey ring (#84.8), in the darker text grey so the thin ring keeps
+   >= 3:1 on surface and surface-2 (--csk-color-state-unknown is 2.9:1 on surface-2). Never red (red is LIVE only). */
 .csk-data-age--reconnecting .csk-data-age__dot {
-  background: var(--csk-color-warning);
+  color: var(--csk-color-warning);
+  border-width: 2px 2px 2px 5px;
 }
 
 .csk-data-age--offline .csk-data-age__dot {
-  background: var(--csk-color-state-unknown);
+  color: var(--csk-color-text-3);
+  border-width: 2px;
 }
+
+/* On the navy band (data-tone="on-dark", set by EventHeader around its data age) the state colours are lightened
+   towards the text colour so the dot keeps >= 3:1 against the band (green/amber ≈ 4.1:1, grey ≈ 5.2:1). */
+[data-tone='on-dark'] .csk-data-age--ok .csk-data-age__dot {
+  color: color-mix(in srgb, var(--csk-color-success) 50%, var(--csk-color-text-on-fill));
+}
+
+[data-tone='on-dark'] .csk-data-age--reconnecting .csk-data-age__dot {
+  color: color-mix(in srgb, var(--csk-color-warning) 50%, var(--csk-color-text-on-fill));
+}
+
+[data-tone='on-dark'] .csk-data-age--offline .csk-data-age__dot {
+  color: color-mix(in srgb, var(--csk-color-state-unknown) 50%, var(--csk-color-text-on-fill));
+}
+
+/* Compact (variant="compact", one-row header): dot + short age; the prefix and the connection text are
+   .csk-data-age__sr (read out, not drawn). */
 
 .csk-data-age__connection {
   flex: none;

@@ -102,6 +102,66 @@ test.describe('Layout - EventHeader content width', () => {
   });
 });
 
+// Live-mini comparison (#84): EventHeader and the padded PageLayout share the gutter token (16 px / 24 px)
+for (const viewport of [
+  { width: 390, gutter: 16 },
+  { width: 1280, gutter: 24 },
+]) {
+  test.describe(`Layout - EventHeader page gutter (${viewport.width}px)`, () => {
+    test.use({ viewport: { width: viewport.width, height: 800 } });
+
+    test('header content starts where the page content starts (default and condensed)', async ({ page }) => {
+      await page.goto('/iframe.html?id=components-eventheader--page-gutter&viewMode=story');
+      await page.waitForSelector('.csk-event-header--condensed');
+      const layouts = page.locator('.csk-page-layout');
+      await expect(layouts).toHaveCount(2);
+      for (let i = 0; i < 2; i++) {
+        const layout = layouts.nth(i);
+        const content = (await layout.locator('.csk-page-layout__container > *').first().boundingBox())!;
+        const container = (await layout.locator('.csk-page-layout__container').boundingBox())!;
+        expect(Math.round(content.x - container.x)).toBe(viewport.gutter);
+        // left edge of every header part = left edge of the page content
+        const row = (await layout.locator('.csk-event-header__row').boundingBox())!;
+        expect(Math.abs(row.x - content.x), `row ${i}`).toBeLessThanOrEqual(0.5);
+        const back = layout.locator('.csk-event-header__back');
+        const backText = await back.evaluate((e) => {
+          // the glyph, not the tap area (condensed: the tap area reaches the band edge)
+          const r = document.createRange();
+          r.selectNodeContents(e.firstElementChild!);
+          return r.getBoundingClientRect().x;
+        });
+        expect(Math.abs(backText - content.x), `back ${i}`).toBeLessThanOrEqual(0.5);
+        if (i === 0) {
+          const top = (await layout.locator('.csk-event-header__top').boundingBox())!;
+          const title = (await layout.locator('.csk-event-header__title').boundingBox())!;
+          expect(Math.abs(top.x - content.x)).toBeLessThanOrEqual(0.5);
+          expect(Math.abs(title.x - content.x)).toBeLessThanOrEqual(0.5);
+        }
+        // right edges too: the last header part ends where the page content ends
+        const inner = (await layout.locator('.csk-event-header__inner').boundingBox())!;
+        const innerPadding = await layout
+          .locator('.csk-event-header__inner')
+          .evaluate((e) => parseFloat(getComputedStyle(e).paddingRight));
+        expect(Math.abs(inner.x + inner.width - innerPadding - (content.x + content.width))).toBeLessThanOrEqual(0.5);
+      }
+    });
+
+    test('container width story: header text on the page content line', async ({ page }) => {
+      await page.goto('/iframe.html?id=components-eventheader--container-width&viewMode=story');
+      await page.waitForSelector('.csk-event-header');
+      const layouts = page.locator('.csk-page-layout');
+      for (let i = 0; i < 2; i++) {
+        const layout = layouts.nth(i);
+        const content = (await layout.locator('.csk-page-layout__container > *').first().boundingBox())!;
+        const back = (await layout.locator('.csk-event-header__back').boundingBox())!;
+        const title = (await layout.locator('.csk-event-header__title').boundingBox())!;
+        expect(Math.abs(back.x - content.x)).toBeLessThanOrEqual(0.5);
+        expect(Math.abs(title.x - content.x)).toBeLessThanOrEqual(0.5);
+      }
+    });
+  });
+}
+
 test.describe('Layout - EventHeader condensed and logo', () => {
   test.use({ viewport: { width: 390, height: 800 } });
 
@@ -122,7 +182,16 @@ test.describe('Layout - EventHeader condensed and logo', () => {
     expect(boxes[0].x + boxes[0].width).toBeLessThanOrEqual(boxes[1].x);
     expect(boxes[1].x + boxes[1].width).toBeLessThanOrEqual(boxes[2].x);
     expect(boxes[2].x + boxes[2].width).toBeLessThanOrEqual(390);
-    await expect(page.locator('.csk-event-header__age')).toContainText('aktualizováno');
+    // compact DataAge: dot + short age drawn, the prefix only for screen readers and in title
+    const age = page.locator('.csk-event-header__age .csk-data-age');
+    await expect(age).toHaveClass(/csk-data-age--compact/);
+    await expect(age.locator('.csk-data-age__dot')).toBeVisible();
+    await expect(age.locator('.csk-data-age__text')).toHaveText('před 1 s');
+    await expect(age).toHaveAttribute('title', 'aktualizováno před 1 s');
+    await expect(age).toContainText('aktualizováno');
+    // the title is not cut: the text box is as wide as its content
+    const title = page.locator('.csk-event-header__title');
+    expect(await title.evaluate((e) => e.scrollWidth - e.clientWidth)).toBeLessThanOrEqual(0);
   });
 
   test('logo slot follows the Avatar shape: portrait 40 x 56, square 40 x 40', async ({ page }) => {

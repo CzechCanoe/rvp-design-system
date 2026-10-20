@@ -3,9 +3,15 @@ import { EventHeader, type EventHeaderProps } from './EventHeader';
 import { Avatar } from '../Avatar';
 import { PageLayout } from '../PageLayout';
 import { StatusBadge, type StatusBadgeState } from '../StatusBadge';
+import { DataAge } from '../DataAge';
+import { createTestClock } from '../../clock';
 import { ContentPlaceholder, StoryDataAge } from '../PageLayout/layoutStoryParts';
 
 const STATES: StatusBadgeState[] = ['official', 'provisional', 'review', 'unknown', 'live', 'stale'];
+
+/** Fixed clock for the PageGutter story (nothing ticks in screenshots). */
+const GUTTER_NOW = Date.UTC(2026, 9, 4, 12, 32, 10);
+const gutterClock = createTestClock({ now: GUTTER_NOW });
 
 const meta: Meta<typeof EventHeader> = {
   title: 'Components/EventHeader',
@@ -18,7 +24,9 @@ const meta: Meta<typeof EventHeader> = {
           'Compact header of the live view. `condensed` is the one-row state for a scrolled page (back · name · status · data age, ' +
           'no subtitle); the application decides when to switch. `status` and `dataAge` are slots for StatusBadge and DataAge. ' +
           'The navy band spans the full width, its content follows the page container: inside a `PageLayout` the width of ' +
-          'its `maxWidth` (CSS variable `--csk-page-max-width`), otherwise 1200 px; `maxWidth` sets it explicitly.',
+          'its `maxWidth` (CSS variable `--csk-page-max-width`), otherwise 1200 px; `maxWidth` sets it explicitly. ' +
+          'The side gutter is the page gutter token `--csk-layout-gutter` (16 px phone, 24 px from 768 px), as in a padded PageLayout. ' +
+          'When condensed, a DataAge in the `dataAge` slot renders its compact form (dot + „před 1 s“).',
       },
     },
   },
@@ -49,7 +57,10 @@ const base: EventHeaderProps = {
 
 export const Default: Story = { args: base };
 
-/** Scrolled page: one row, name · status · data age; the subtitle is hidden, the name gets an ellipsis first. */
+/**
+ * Scrolled page: one row, name · status · data age; the subtitle is hidden, the name gets an ellipsis first.
+ * The DataAge in the slot switches to its compact form („před 1 s“, full text in `title` and for screen readers).
+ */
 export const Condensed: Story = { args: { ...Default.args, condensed: true } };
 
 export const LongTitle: Story = {
@@ -109,6 +120,36 @@ export const ContainerWidth: Story = {
           <ContentPlaceholder label='PageLayout maxWidth="lg" (1024 px)' height={56} />
         </div>
       </PageLayout>
+    </div>
+  ),
+};
+
+/**
+ * Header and page content start on the same line: EventHeader uses the gutter token of the padded PageLayout
+ * (`--csk-layout-gutter`, 16 px phone, 24 px from 768 px). Default and condensed header in a full-width page;
+ * condensed renders the compact DataAge (dot + „před 4 s“) by itself. Snapshotted at 390 and 1280.
+ */
+export const PageGutter: Story = {
+  parameters: { phoneFrame: false },
+  render: () => (
+    <div style={{ display: 'grid', gap: 24 }}>
+      {[false, true].map((condensed) => (
+        <PageLayout
+          key={String(condensed)}
+          stickyHeader={false}
+          banner={
+            <EventHeader
+              {...base}
+              condensed={condensed}
+              dataAge={<DataAge receivedAt={GUTTER_NOW - 4_000} clock={gutterClock} connection="ok" />}
+            />
+          }
+        >
+          <div style={{ paddingBlock: 12 }}>
+            <ContentPlaceholder label={condensed ? 'Obsah stránky (condensed)' : 'Obsah stránky'} height={56} />
+          </div>
+        </PageLayout>
+      ))}
     </div>
   ),
 };

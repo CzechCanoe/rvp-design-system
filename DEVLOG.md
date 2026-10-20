@@ -7322,3 +7322,40 @@ T19b follow-up: main merged (T17 docs, T19a states), conflicting Live/Event PNGs
 
 ### Poznámky
 Snapshoty se generují jen v CI (label `update-snapshots`, pokud se vzhled hlavičky změní).
+
+---
+
+## 2026-10-20 - Fáze 5 (T19, #84): EventHeader gutter a kompaktní DataAge
+
+### Dokončeno
+- [x] Nový token `--csk-layout-gutter` (16 px, od 768 px viewportu 24 px) v `spacing.css`; jediný zdroj pro `PageLayout padded` (kontejner i patička) a `EventHeader` (vnitřní okraj, zpětný odkaz v condensed)
+- [x] EventHeader na telefonu 16 px místo 14 px; obsah hlavičky a stránky začíná na stejném x (390 i 1280)
+- [x] `DataAge variant="compact"`: tečka + krátké stáří („před 4 s“, „14:32:10“), prefix a text spojení jen pro čtečky (`.csk-data-age__sr`) a v `title`
+- [x] `EventHeader condensed` dává DataAge kompaktní tvar sám (interní `DataAgeVariantContext`, explicitní `variant` má přednost)
+- [x] Stories `DataAge/Compact`, `EventHeader/PageGutter` (390 + 1280, default + condensed); unit testy; Playwright zarovnání při 390 a 1280
+
+### Problémy a řešení
+1. **Problém:** `export type { DataAgeVariant }` v `DataAge.tsx` zmátl react-docgen-typescript (DataAge v COMPONENT_API „bez props“).
+   **Řešení:** typ se exportuje z `DataAgeVariantContext.ts` přes `index.ts`.
+
+### Poznámky
+- Gutter se teď přepíná podle viewportu (`@media`) jako PageLayout, ne podle šířky hlavičky (`@container`); EventHeader už není size container.
+- Doc delty pro T19z (COMPONENTS.md, TOKENS.md) jsou v PR.
+
+---
+
+## 2026-10-20 - Fáze 5 (T19, #84): review #93 – tvar a kontrast tečky DataAge
+
+### Dokončeno
+- [x] Tečka spojení kreslená rámečkem v `color`: `ok` plný kruh, `reconnecting` napůl plný, `offline` dutý kroužek (WCAG 1.4.1), v default i compact; 10 px místo 8 px
+- [x] `EventHeader` dává slotům stáří dat `data-tone="on-dark"`; DataAge pod ním zesvětlí barvy tečky (`color-mix` 50 % s `--csk-color-text-on-fill`) → ≥ 3:1 proti navy (≈ 4,1 / 4,1 / 5,2 : 1); na surface 5,4 / 5,4 / 3,2 : 1
+- [x] Playwright `DataAge dot shapes and contrast` (Overview + Compact), test #84.8 čte `border-color`; unit test `data-tone` v EventHeader
+
+### Problémy a řešení
+1. **Problém:** 8px tečka s napůl plným tvarem byla při 1× k nerozeznání od kroužku.
+   **Řešení:** 10 px (plný 5 px rámeček, napůl 2/2/2/5 px, kroužek 2 px).
+2. **Problém:** `getComputedStyle` vrací pro `color-mix()` formát `color(srgb …)` (0–1), test kontrastu ho četl jako 0–255.
+   **Řešení:** parser v testu rozlišuje `rgb()` a `color(srgb …)`.
+
+### Poznámky
+- Šedý kroužek `offline` na `surface-2` má 2,9 : 1 (token `--csk-color-state-unknown` podle #84.8), uvedeno v PR.

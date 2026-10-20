@@ -826,7 +826,7 @@ centered content and footer.
 | `footer?` | `ReactNode` |  | Footer content (hidden in embed) |
 | `children` | `ReactNode` |  | Main content |
 | `maxWidth?` | `"sm" \| "md" \| "lg" \| "xl" \| "full"` | `xl` | Maximum width of the content container (exposed as `--csk-page-max-width`) |
-| `padded?` | `boolean` | `true` | Add side padding to the main content area (16 px phone, 24 px desktop) |
+| `padded?` | `boolean` | `true` | Add side padding to the main content area: the token `--csk-layout-gutter` (16 px phone, 24 px from 768 px), the same gutter as `EventHeader`, so header and page content start at the same x. |
 | `stickyHeader?` | `boolean` | `true` | Keep the header area at the top while scrolling |
 
 ### BottomBar
@@ -1098,13 +1098,15 @@ Zdroj: `src/components/DataAge/DataAge.tsx`
 
 How old the shown data is, measured from its receipt on the injected clock,
 optionally with connection liveness. Inline, one line, never a banner.
+`variant="compact"` (automatic in `EventHeader condensed`) draws only a dot and the short age.
 
 | Prop | Typ | Výchozí | Popis |
 |---|---|---|---|
 | `receivedAt` | `number \| null` |  | When the data arrived, in the clock's time (`clock.now()` at receipt, epoch ms). Never the server's `observedAt`. `null` = nothing received yet. |
 | `clock?` | `Clock` |  | Clock to measure age with; defaults to the nearest `ClockProvider`, else the browser clock. |
 | `mode?` | `"relative" \| "absolute"` | `relative` | `relative` → „aktualizováno před 1 s“ (ticks every second), `absolute` → „stav ze 14:32:10“. |
-| `connection?` | `"ok" \| "reconnecting" \| "offline"` |  | Connection liveness as a dot + text in the same line (never a banner). Omit for no dot. Dot colours: `ok` green, `reconnecting` amber, `offline` grey (never red: red is reserved for LIVE). |
+| `variant?` | `"default" \| "compact"` |  | `default` → prefix + age („aktualizováno před 4 s“, connection text visible when not `ok`). `compact` → dot + age only („● před 4 s“, „● 14:32:10“) for a one-row header: the prefix and the connection text stay for screen readers (visually hidden) and in `title`; the dot is always drawn (connection colour, else the text colour). Omitted: `compact` inside `EventHeader condensed`, else `default`. |
+| `connection?` | `"ok" \| "reconnecting" \| "offline"` |  | Connection liveness as a dot + text in the same line (never a banner). Omit for no dot. Dot colour and shape: `ok` green filled disc, `reconnecting` amber half-filled, `offline` grey hollow ring (never red: red is reserved for LIVE). Inside `data-tone="on-dark"` (EventHeader) the colours are lightened for the navy band. |
 | `label?` | `string` |  | Text before the age; default `aktualizováno` (relative) / `stav ze` (absolute); `''` for none. |
 | `connectionLabels?` | `Partial<Record<DataAgeConnection, string>>` |  | Override connection texts (defaults: ok „připojeno“ for screen readers only, „obnovuji spojení“, „bez spojení“). |
 | `emptyLabel?` | `string` | `zatím bez dat` | Text when `receivedAt` is `null` (default „zatím bez dat“). |
@@ -1152,12 +1154,12 @@ The title never wraps in the condensed state.
 | `title` | `ReactNode` |  | Event name |
 | `subtitle?` | `ReactNode` |  | Place · day · phase (hidden when condensed) |
 | `status?` | `ReactNode` |  | Status element, typically `<StatusBadge state="live" />` |
-| `dataAge?` | `ReactNode` |  | Data age element, typically `<DataAge />` ("aktualizováno před 1 s") |
+| `dataAge?` | `ReactNode` |  | Data age element, typically `<DataAge />` ("aktualizováno před 1 s"). When `condensed`, a `DataAge` without its own `variant` renders the compact form (dot + "před 1 s", full text in `title` and for screen readers). The slot has `data-tone="on-dark"`, so the connection dot is lightened for the navy band. |
 | `backHref?` | `string` |  | Link back to the event list; omitted = no back link |
 | `backLabel?` | `string` | `Závody` | Text of the back link |
 | `logo?` | `ReactNode` |  | Optional event logo (hidden when condensed), typically `<Avatar shape="square" />` (40 × 40) or `<Avatar shape="portrait" />` for an upright poster (40 × 56, 5 : 7). The slot follows the shape. |
-| `condensed?` | `boolean` | `false` | One-row variant for a scrolled page: back · name · status · data age; the subtitle and the logo are hidden. The application decides when to switch (scroll position); the component only draws it. |
-| `maxWidth?` | `"sm" \| "md" \| "lg" \| "xl" \| "full"` |  | Width of the content inside the full-width navy band, on the scale of `PageLayout maxWidth`. Default: the content width of the surrounding `PageLayout` (CSS variable `--csk-page-max-width`), outside a PageLayout `--csk-layout-max-width` (1200 px, as PageTitle). Inner gutter 14 px, 24 px from a 768 px wide header. |
+| `condensed?` | `boolean` | `false` | One-row variant for a scrolled page: back · name · status · data age; the subtitle and the logo are hidden, `DataAge` in the `dataAge` slot switches to `variant="compact"`. The application decides when to switch (scroll position); the component only draws it. |
+| `maxWidth?` | `"sm" \| "md" \| "lg" \| "xl" \| "full"` |  | Width of the content inside the full-width navy band, on the scale of `PageLayout maxWidth`. Default: the content width of the surrounding `PageLayout` (CSS variable `--csk-page-max-width`), outside a PageLayout `--csk-layout-max-width` (1200 px, as PageTitle). Inner gutter: the token `--csk-layout-gutter` (16 px phone, 24 px from 768 px), the same as the padded PageLayout container, so header and page content line up. |
 
 ### ResultsPanel
 

@@ -151,6 +151,7 @@ const OTHER = [
   '--csk-shadow-sm',
   '--csk-tap',
   '--csk-layout-max-width',
+  '--csk-layout-gutter',
   '--csk-transition-fast',
   '--csk-transition-slow',
 ];
