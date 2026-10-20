@@ -59,7 +59,7 @@ import {
 
 /**
  * Icon name mapping to Lucide icons
- * Maps semantic names used in prototypes to actual Lucide icons
+ * Maps semantic names used by the components and applications to actual Lucide icons
  */
 const iconMap = {
   // Navigation & UI
@@ -173,7 +173,7 @@ const sizeMap = {
 /**
  * Icon component - unified icon system for the design system
  *
- * Uses Lucide React icons with semantic naming that matches the prototypes.
+ * Uses Lucide React icons with semantic naming (`calendar`, `clock`, `star`, ...).
  *
  * @example
  * ```tsx

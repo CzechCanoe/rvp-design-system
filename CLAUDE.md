@@ -8,14 +8,14 @@ Designový systém pro veřejné sekce webů ČSK: kalendář závodů, výsledk
 
 ---
 
-## v2 „Klidná voda“: probíhá, čti nejdřív
+## v2 „Klidná voda“
 
-Na `main` běží přechod na major verzi 2.0.0. Zadání je v `docs/v2/` (`README.md` → `BRIEF.md` → `TASKS.md`; `TOKENS.md`, `COMPONENTS.md`, `MIGRATION.md`, `reference/` podle tasku). Platí:
+Na `main` je major verze 2.0.0 (vydání po T19). Zadání a stav jsou v `docs/v2/` (`README.md` → `BRIEF.md` → `TASKS.md`; `TOKENS.md`, `COMPONENTS.md` = as-built popis komponent, `MIGRATION.md` = breaking changes, `reference/` = vzhled obrazovek). Platí:
 
 - Práce jde po issues „v2 T<N>“, větev `feat/v2-<N>-<slug>` z `main`, PR do `main`. Storybook se po každém merge nasazuje na GitHub Pages.
-- Rolling release PR od Release Please („chore(main): release 2.0.0“) se **nemerguje** až do konce fáze 5. Feature PR se mergují normálně.
-- Kde `docs/v2` a tenhle soubor nesouhlasí (typy, režimy, barvy níže), platí `docs/v2`. Quick Reference níže popisuje 1.x a aktualizuje se v T17.
-- Tokeny jen `--csk-*`, nikdy hex v komponentách; `src/prototypes/` byl smazán v T17a, nové obrazovky jsou Page stories.
+- Rolling release PR od Release Please („chore(main): release 2.0.0“) se **nemerguje** až do konce T19. Feature PR se mergují normálně.
+- Tokeny jen `--csk-*`, nikdy hex v komponentách (`npm run lint` to hlídá). Žádné režimy `utility` / `expressive`, gradienty ani prototypy: obrazovky jsou Page stories (`src/stories/`).
+- Čas jen přes `Clock` (`src/clock/`), v komponentách nikdy `Date.now()` ani `setTimeout`.
 
 ---
 
@@ -24,53 +24,73 @@ Na `main` běží přechod na major verzi 2.0.0. Zadání je v `docs/v2/` (`READ
 ### Struktura src/
 ```
 src/
-├── components/     # React komponenty (Button, Card, Badge, ...)
-├── context/        # ThemeContext (mode, theme)
-├── tokens/         # CSS tokeny
-│   ├── colors.css, typography.css, spacing.css, ...
-│   ├── utility.css, expressive.css, embed.css  # režimy
-│   ├── mode.css                                 # přepínání režimů
-│   └── container-queries.css                    # CQ foundation
-├── prototypes/     # Celostránkové prototypy
-├── hooks/          # Custom hooks
-└── styles/         # Globální styly
+├── components/     # React komponenty (Button, ResultsTable, StatusBadge, ...), každá ve vlastní složce
+├── stories/        # Page stories (Live, Event, Calendar, Entry, Athlete), Tokens/Overview, sdílené helpery
+├── context/        # ThemeContext (theme, embed)
+├── clock/          # Clock, createBrowserClock, createTestClock, ClockProvider
+├── types/          # Observed<T>
+├── hooks/          # interní hooky (useIsomorphicLayoutEffect), nejsou veřejné API
+├── tokens/         # CSS tokeny --csk-*
+│   ├── primitives.css, semantic.css            # paleta, sémantická vrstva
+│   ├── typography.css, spacing.css, radius.css, shadows.css
+│   ├── embed.css                               # jediný režim: data-mode="embed"
+│   └── container-queries.css                   # CQ foundation
+└── styles/         # Globální styly a fonty
 ```
 
 ### Hlavní typy (pro stories)
 
 ```typescript
+// Stavy hodnot a čísla
+type StatusBadgeState = 'official' | 'provisional' | 'review' | 'unknown' | 'live' | 'stale';
+type Mark = 'DNS' | 'DNS-A' | 'DNS-B' | 'DNF' | 'DSQ' | 'NR';
+type Observed<T> = { state: 'known'; value: T; provisional?: boolean }
+                 | { state: 'not-yet' } | { state: 'unavailable'; reason?: string };
+
 // Badge
 type BadgeVariant = 'default' | 'primary' | 'success' | 'warning' | 'error' | 'info'
-                  | 'gradient' | 'energy';
+                  | 'level' | 'outline' | 'live';
 type BadgeSection = 'dv' | 'ry' | 'vt';
 type BadgeVtClass = 'm' | 'a' | 'b' | 'c';  // LOWERCASE!
 
-// Card
-type CardVariant = 'surface' | 'elevated' | 'outlined' | 'gradient' | 'aesthetic';
+// Card, Button
+type CardVariant = 'surface' | 'outlined';   // + tone="default" | "highlight"
+type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 
-// Button
-type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger'
-                   | 'gradient' | 'gradient-energy';
-
-// Display modes
-type DisplayMode = 'utility' | 'expressive' | 'embed';
-type ColorTheme = 'light' | 'dark' | 'system';
+// Layout a režimy
+type PageLayoutVariant = 'tribuna' | 'urad' | 'embed';
+type HeaderVariant = 'site' | 'satellite' | 'app';
+type ColorTheme = 'light' | 'system';        // v2.0 kreslí jen světlé téma
+// <ThemeProvider embed> nastaví data-mode="embed"; na tmavém pásu platí data-tone="on-dark"
 ```
+
+Úplný přehled props je v `docs/COMPONENT_API.md` (generováno, viz níže).
 
 ### Klíčové soubory
 | Co | Kde |
 |----|-----|
 | ThemeContext | `src/context/ThemeContext.tsx` |
-| Přepínání režimů | `src/tokens/mode.css` |
+| Tokeny (paleta, sémantika) | `src/tokens/primitives.css`, `src/tokens/semantic.css`; popis v `docs/v2/TOKENS.md` |
 | Embed tokeny | `src/tokens/embed.css` |
-| kanoe.cz mock | `src/components/KanoeCzContext/` |
+| Clock | `src/clock/` (`Clock.mdx` = pravidla) |
+| Exporty | `src/index.ts`, `src/components/index.ts` |
+| kanoe.cz mock (jen dekorátor embed stories) | `src/components/KanoeCzContext/` |
+| Konfigurace vizuálních testů | `tests/config.ts` |
+| API komponent | `docs/COMPONENT_API.md` (generované) |
 
 ### Příkazy
 ```bash
-npm run dev          # Storybook dev server
-npm run build        # Production build
-npm run build-storybook  # Static Storybook
+npm run dev               # Vite dev server
+npm run storybook         # Storybook dev server (:6006)
+npm run build             # Production build (tsc + vite)
+npm run build-storybook   # Static Storybook
+npm run lint              # ESLint + check-no-hex
+npm run typecheck         # tsc --noEmit
+npm run test:unit         # Vitest
+npm run docs:api          # přegeneruje docs/COMPONENT_API.md (po každé změně API komponent)
 ```
+
+**Po změně API komponenty** (props, typy, JSDoc) spusť `npm run docs:api` a commitni výsledek; `npm run docs:api -- --check` ověří, že je soubor aktuální. `docs/v2/COMPONENTS.md` popisuje záměr a doménová pravidla, ne tabulky props.
 
 ---
 
@@ -80,7 +100,7 @@ npm run build-storybook  # Static Storybook
 
 | Script | Co testuje | Čas | Kdy použít |
 |--------|------------|-----|------------|
-| `npm run test` | Vše (jen light, jen chromium) | ~3 min | CI/CD, před release |
+| `npm run test` | Vše (jen light, jen chromium; na ARM s `--ignore-snapshots`) | ~3 min | CI/CD, před release |
 | `npm run test:components` | Komponenty (`components.spec.ts`), chromium | ~1-2 min | Změny v komponentách |
 | `npm run test:update` | Update snapshots všech specs (chromium) | ~3 min | **Jen CI** (workflow), lokálně ne |
 
@@ -107,7 +127,8 @@ npm run build-storybook  # Static Storybook
 ### Tolerance (maxDiffPixels)
 
 - **Výchozí komponenty:** 30 px
-- **Animované prvky** (LiveIndicator, Skeleton): 100+ px
+- **Page stories a layouty** (`pageStories`, `layoutStories`): 80 px
+- **Animované prvky** (StatusBadge live, LiveIndicator, Skeleton): 100+ px
 - **Dynamický obsah** (countdown): 1500+ px
 - **Minor rendering variance** (fonty, ikony): 500 px
 
@@ -138,7 +159,7 @@ npm run build-storybook  # Static Storybook
 
 ### Před zahájením práce
 
-1. Během v2: přečti `docs/v2/README.md` a issue svého tasku. `PLAN.md` je stav 1.x a přepíše se v T17.
+1. Přečti `PLAN.md` (stav v2, krátký), `docs/v2/README.md` a issue svého tasku.
 2. Pokud je krok příliš velký, rozděl na menší části
 
 ### Během práce
@@ -188,7 +209,10 @@ EOF
 | Soubor | Účel | Kdy číst |
 |--------|------|----------|
 | `docs/v2/` | Zadání v2 (brief, tokeny, komponenty, tasky) | **Vždy na začátku během v2** |
-| `PLAN.md` | Plán 1.x, historický | Jen při diagnostice |
+| `PLAN.md` | Stav v2 a backlog 2.1 (krátký) | **Vždy na začátku** |
+| `DESIGN_PRINCIPLES.md` | Principy designu v2 | Při návrhu nové komponenty |
+| `docs/COMPONENT_API.md` | API komponent (generované) | Při práci s props |
+| `PLAN-history.md` | Plán 1.x, historický | Jen při diagnostice |
 | `CLAUDE.md` | Pokyny + quick reference | Vždy (automaticky) |
 | `DEVLOG.md` | Historie práce | **Jen při diagnostice** |
 | `PROJECT.md` | Přehled projektu | Při potřebě kontextu |
