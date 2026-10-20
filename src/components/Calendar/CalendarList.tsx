@@ -5,7 +5,7 @@ import {
   type ReactNode,
 } from 'react';
 import type { CalendarEvent } from './Calendar';
-import { LiveIndicator } from '../LiveIndicator';
+import { StatusBadge } from '../StatusBadge';
 import './CalendarList.css';
 
 export type CalendarListVariant = 'default' | 'compact';
@@ -41,7 +41,7 @@ export interface CalendarListProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   showViewAll?: boolean;
   /** Callback for "View all" click */
   onViewAllClick?: () => void;
-  /** Show live indicator for events with data.isLive */
+  /** Show a `StatusBadge state="live"` for events with `data.isLive` */
   showLive?: boolean;
 }
 
@@ -219,9 +219,7 @@ export const CalendarList = forwardRef<HTMLDivElement, CalendarListProps>(
           <div className="csk-calendar-list__event-content">
             <div className="csk-calendar-list__event-title-row">
               <span className="csk-calendar-list__event-title">{event.title}</span>
-              {eventIsLive && (
-                <LiveIndicator variant="live" size="sm" />
-              )}
+              {eventIsLive && <StatusBadge state="live" size="sm" />}
             </div>
             <span className="csk-calendar-list__event-date">
               {formatDateRange(event.start, event.end, locale, showEndDate)}

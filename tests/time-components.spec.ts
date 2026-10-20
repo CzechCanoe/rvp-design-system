@@ -46,6 +46,37 @@ test.describe('Time components', () => {
     await expect(time).not.toHaveText(first ?? '', { timeout: 2_000 });
   });
 
+  test('DataAge dots: offline grey, reconnecting amber, never red (#84.8)', async ({ page }) => {
+    await page.goto(story('components-dataage--overview'));
+    await page.waitForSelector('#storybook-root .csk-data-age--offline', { state: 'visible' });
+    const colours = await page.evaluate(() => {
+      const resolve = (token: string) => {
+        const probe = document.createElement('span');
+        probe.style.background = `var(${token})`;
+        document.body.appendChild(probe);
+        const value = getComputedStyle(probe).backgroundColor;
+        probe.remove();
+        return value;
+      };
+      const dots = (connection: string) =>
+        [...document.querySelectorAll(`#storybook-root .csk-data-age--${connection} .csk-data-age__dot`)].map(
+          (el) => getComputedStyle(el).backgroundColor
+        );
+      return {
+        offline: dots('offline'),
+        reconnecting: dots('reconnecting'),
+        grey: resolve('--csk-color-state-unknown'),
+        amber: resolve('--csk-color-warning'),
+        reds: [resolve('--csk-color-error'), resolve('--csk-color-live')],
+      };
+    });
+    expect(colours.offline.length).toBeGreaterThan(0);
+    expect(colours.reconnecting.length).toBeGreaterThan(0);
+    for (const c of colours.offline) expect(c).toBe(colours.grey);
+    for (const c of colours.reconnecting) expect(c).toBe(colours.amber);
+    for (const c of [...colours.offline, ...colours.reconnecting]) expect(colours.reds).not.toContain(c);
+  });
+
   test('static stories do not animate (reduced motion, ticking digits are data)', async ({ page }) => {
     for (const id of ['components-runningtime--states', 'components-dataage--overview', 'components-timevalue--variants']) {
       await page.goto(story(id));

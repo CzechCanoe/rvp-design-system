@@ -63,11 +63,12 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'Dropzone', storyId: 'components-dropzone--default', tier: 'specific' },
   { name: 'Timeline', storyId: 'components-timeline--default', tier: 'specific' },
   { name: 'ResultsTable', storyId: 'components-resultstable--default', tier: 'specific' },
-  { name: 'LiveIndicator', storyId: 'components-liveindicator--default', tier: 'specific', cssFeatures: ['animations', 'keyframes'], maxDiffPixels: 100 },
   { name: 'StatusBadge-AllStates', storyId: 'components-statusbadge--all-states', tier: 'specific' },
   { name: 'StatusBadge-Live', storyId: 'components-statusbadge--live', tier: 'specific', cssFeatures: ['animations', 'keyframes'], maxDiffPixels: 100 },
   { name: 'MarkBadge-AllMarks', storyId: 'components-markbadge--all-marks', tier: 'specific' },
   { name: 'PenaltyChip-AllStates', storyId: 'components-penaltychip--all-states', tier: 'specific' },
+  // v2 T19a (#84.11): with a gate the chip shows the gate number, the colour carries the penalty
+  { name: 'PenaltyChip-GateNumbers', storyId: 'components-penaltychip--gate-numbers', tier: 'specific' },
   { name: 'GateGrid', storyId: 'components-gategrid--default', tier: 'specific' },
   { name: 'GateGrid-Unavailable', storyId: 'components-gategrid--unavailable', tier: 'specific' },
   { name: 'BibBadge', storyId: 'components-bibbadge--default', tier: 'specific' },
@@ -80,6 +81,7 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'SegmentedControl-Wrapping360', storyId: 'components-segmentedcontrol--wrapping-360', tier: 'specific' },
   { name: 'StarButton', storyId: 'components-starbutton--default', tier: 'specific' },
   { name: 'FavoritesToggle', storyId: 'components-favoritestoggle--default', tier: 'specific' },
+  { name: 'FavoritesToggle-Counts', storyId: 'components-favoritestoggle--counts', tier: 'specific' },
   { name: 'TableToolbar', storyId: 'components-tabletoolbar--default', tier: 'specific' },
   { name: 'TableToolbar-Mobile', storyId: 'components-tabletoolbar--mobile', tier: 'specific' },
   { name: 'TableToolbar-DetailOn', storyId: 'components-tabletoolbar--detail-on', tier: 'specific' },
@@ -90,6 +92,7 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'TimeValue-Variants', storyId: 'components-timevalue--variants', tier: 'specific' },
   { name: 'TimeValue-ObservedStates', storyId: 'components-timevalue--observed-states', tier: 'specific' },
   { name: 'TimeValue-Formats', storyId: 'components-timevalue--formats', tier: 'specific' },
+  { name: 'TimeValue-ClockFormat', storyId: 'components-timevalue--clock-format', tier: 'specific' },
   { name: 'RunningTime-States', storyId: 'components-runningtime--states', tier: 'specific' },
   { name: 'DataAge-Overview', storyId: 'components-dataage--overview', tier: 'specific' },
   // v2 T15: profile components and the additive variants they need (on-dark tone, Avatar 3xl/ring, Card highlight)
@@ -172,6 +175,7 @@ export const viewportStories: Array<{ name: string; storyId: string }> = [
   { name: 'OnCoursePanel-Collapsed', storyId: 'components-oncoursepanel--collapsed' },
   { name: 'OnCoursePanel-InNarrowContainer', storyId: 'components-oncoursepanel--in-narrow-container' },
   { name: 'OnCoursePanel-RiderStates', storyId: 'components-oncoursepanel--rider-states' },
+  { name: 'OnCoursePanel-RunningPenalty', storyId: 'components-oncoursepanel--running-penalty' },
   // v2 T14: office components (EntryTable scrolls horizontally inside itself on a phone)
   { name: 'EntryTable-SingleBoats', storyId: 'components-entrytable--single-boats' },
   { name: 'EntryTable-TwoPersonBoats', storyId: 'components-entrytable--two-person-boats' },

@@ -36,12 +36,12 @@
   color: var(--csk-color-error-text);
 }
 
-/* Not judged: dashed frame, never reads as 0 */
+/* Not judged: dotted frame (gate mode keeps the gate number inside), never reads as 0 */
 .csk-penalty-chip--unjudged {
   background: transparent;
   color: var(--csk-color-text-3);
-  border-color: var(--csk-color-border);
-  border-style: dashed;
+  border-color: var(--csk-color-state-unknown);
+  border-style: dotted;
 }
 
 .csk-penalty-chip--upstream {
