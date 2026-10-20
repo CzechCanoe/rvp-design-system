@@ -28,7 +28,7 @@ export interface ColumnDef<T> {
   cell?: (row: T, rowIndex: number) => ReactNode;
   /** Accessor key for simple data access */
   accessor?: keyof T;
-  /** Whether the column is sortable */
+  /** Whether the column is sortable (its header becomes a button: click, Enter or Space) */
   sortable?: boolean;
   /** Custom sort function */
   sortFn?: (a: T, b: T, direction: SortDirection) => number;
@@ -88,11 +88,14 @@ export interface TableProps<T> extends Omit<HTMLAttributes<HTMLTableElement>, 'c
 // ============================================================================
 
 export interface ThProps extends ThHTMLAttributes<HTMLTableCellElement> {
-  /** Sort state */
+  /** Sort state; sets `aria-sort` on the th (`ascending` / `descending`; `none` on an unsorted sortable column) */
   sortDirection?: SortDirection;
-  /** Whether this column is sortable */
+  /**
+   * Whether this column is sortable. The header content then renders as a native
+   * `<button>` inside the `<th>`, so Tab focuses it and Enter / Space call `onSort`.
+   */
   sortable?: boolean;
-  /** Click handler for sort */
+  /** Sort handler, called on click, Enter or Space on the header button */
   onSort?: () => void;
 }
 
@@ -107,25 +110,26 @@ const Th = forwardRef<HTMLTableCellElement, ThProps>(
       .filter(Boolean)
       .join(' ');
 
-    return (
-      <th
-        ref={ref}
-        className={classes}
-        onClick={sortable ? onSort : undefined}
-        aria-sort={
-          sortDirection === 'asc'
-            ? 'ascending'
-            : sortDirection === 'desc'
-              ? 'descending'
-              : sortable
-                ? 'none'
-                : undefined
-        }
-        {...props}
-      >
-        <span className="csk-table__th-content">
-          {children}
-          {sortable && (
+    const ariaSort =
+      sortDirection === 'asc'
+        ? 'ascending'
+        : sortDirection === 'desc'
+          ? 'descending'
+          : sortable
+            ? 'none'
+            : undefined;
+
+    // Sorting is a real button (WCAG 2.1.1): the th itself stays a plain header cell
+    // without tabindex or click handler; aria-sort lives on the th as ARIA requires.
+    if (sortable) {
+      return (
+        <th ref={ref} className={classes} aria-sort={ariaSort} {...props}>
+          <button
+            type="button"
+            className="csk-table__th-content csk-table__sort-button"
+            onClick={onSort}
+          >
+            {children}
             <span className="csk-table__sort-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path
@@ -140,8 +144,14 @@ const Th = forwardRef<HTMLTableCellElement, ThProps>(
                 />
               </svg>
             </span>
-          )}
-        </span>
+          </button>
+        </th>
+      );
+    }
+
+    return (
+      <th ref={ref} className={classes} aria-sort={ariaSort} {...props}>
+        <span className="csk-table__th-content">{children}</span>
       </th>
     );
   }
