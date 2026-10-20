@@ -302,9 +302,9 @@ Zdroj: `src/components/Table/Table.tsx`
 
 | Prop | Typ | Výchozí | Popis |
 |---|---|---|---|
-| `sortDirection?` | `SortDirection` |  | Sort state |
-| `sortable?` | `boolean` |  | Whether this column is sortable |
-| `onSort?` | `(() => void)` |  | Click handler for sort |
+| `sortDirection?` | `SortDirection` |  | Sort state; sets `aria-sort` on the th (`ascending` / `descending`; `none` on an unsorted sortable column) |
+| `sortable?` | `boolean` |  | Whether this column is sortable. The header content then renders as a native `<button>` inside the `<th>`, so Tab focuses it and Enter / Space call `onSort`. |
+| `onSort?` | `(() => void)` |  | Sort handler, called on click, Enter or Space on the header button |
 
 ### Modal
 

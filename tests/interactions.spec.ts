@@ -598,6 +598,56 @@ test.describe('Data Components', () => {
         expect(text?.trim().length).toBeGreaterThan(0);
       }
     });
+
+    // WCAG 2.1.1: the sort control is a native button in the th; Enter/Space sort.
+    test('sortable headers sort from the keyboard', async ({ page }) => {
+      await page.goto('/iframe.html?id=components-table--default&viewMode=story');
+      await page.waitForSelector('#storybook-root', { state: 'visible' });
+      await page.waitForTimeout(testDefaults.settleTime);
+
+      const table = page.locator('#storybook-root table').first();
+      const button = table.getByRole('button', { name: 'Jméno' });
+      const th = table.getByRole('columnheader', { name: 'Jméno' });
+      const firstName = table.locator('tbody tr').first().locator('td').first();
+
+      // The header cells are no tab stops of their own
+      await expect(table.locator('thead th[tabindex]')).toHaveCount(0);
+      await expect(th).toHaveAttribute('aria-sort', 'none');
+
+      // Tab reaches the first sort button (a scrolling wrapper on narrow viewports comes first)
+      for (let i = 0; i < 3 && !(await button.evaluate((el) => el === document.activeElement)); i++) {
+        await page.keyboard.press('Tab');
+      }
+      await expect(button).toBeFocused();
+
+      // Visible focus ring in the focus token colour, drawn over the whole header cell
+      const ring = await button.evaluate((el) => {
+        const probe = document.createElement('span');
+        probe.style.color = 'var(--csk-color-focus)';
+        document.body.append(probe);
+        const focus = getComputedStyle(probe).color;
+        probe.remove();
+        const after = getComputedStyle(el, '::after');
+        return { style: after.outlineStyle, color: after.outlineColor, focus };
+      });
+      expect(ring.style).toBe('solid');
+      expect(ring.color).toBe(ring.focus);
+
+      const initialFirst = (await firstName.textContent())?.trim();
+
+      await page.keyboard.press('Enter');
+      await expect(th).toHaveAttribute('aria-sort', 'ascending');
+      await expect(firstName).toHaveText('Eva Černá');
+
+      await page.keyboard.press('Space');
+      await expect(th).toHaveAttribute('aria-sort', 'descending');
+      await expect(firstName).toHaveText('Tomáš Procházka');
+
+      await page.keyboard.press('Enter');
+      await expect(th).toHaveAttribute('aria-sort', 'none');
+      await expect(firstName).toHaveText(initialFirst ?? '');
+      await expect(button).toBeFocused();
+    });
   });
 
   test.describe('ResultsTable', () => {
