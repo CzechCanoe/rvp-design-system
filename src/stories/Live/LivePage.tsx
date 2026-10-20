@@ -132,6 +132,7 @@ export function LivePage({ title, subtitle, status, dataAge, condensed, section 
         header={
           <>
             <EventHeader
+              maxWidth="lg"
               backHref="#zavody"
               title={title}
               subtitle={subtitle}

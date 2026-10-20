@@ -22,7 +22,7 @@ const meta: Meta<typeof Avatar> = {
     },
     shape: {
       control: 'select',
-      options: ['circular', 'rounded', 'square'],
+      options: ['circular', 'rounded', 'square', 'portrait'],
       description: 'Shape variant',
     },
     color: {
@@ -295,6 +295,34 @@ export const EventLogo: Story = {
       },
     },
   },
+};
+
+/* ==========================================================================
+   PORTRAIT: UPRIGHT EVENT LOGOS AND POSTERS
+   ========================================================================== */
+
+// Upright poster (5:7), inline so the story needs no network
+const posterLogo =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140"><rect width="100" height="140" fill="navy"/><rect x="10" y="10" width="80" height="60" fill="white"/><path d="M10 100c15-12 25-12 40 0s25 12 40 0" stroke="white" stroke-width="6" fill="none"/></svg>'
+  );
+
+/**
+ * `shape="portrait"`: 5 : 7, the width comes from `size` (md 40 × 56, lg 48 × 67, xl 64 × 90, 2xl 96 × 134).
+ * The image is contained, never cropped: a wide logo is letterboxed, an upright poster fills the frame.
+ */
+export const Portrait: Story = {
+  render: () => (
+    <div style={{ display: 'flex', alignItems: 'flex-end', gap: '16px', flexWrap: 'wrap' }}>
+      <Avatar src={posterLogo} alt="Plakát akce" size="2xl" shape="portrait" />
+      <Avatar src={posterLogo} alt="Plakát akce" size="xl" shape="portrait" />
+      <Avatar src={posterLogo} alt="Plakát akce" size="lg" shape="portrait" />
+      <Avatar src={posterLogo} alt="Plakát akce" size="md" shape="portrait" />
+      <Avatar src={wideLogo} alt="Logo akce" size="xl" shape="portrait" />
+      <Avatar initials="OH" size="xl" color="primary" shape="portrait" />
+    </div>
+  ),
 };
 
 /** 3xl (128 px) is the public profile; `ring` is the profile-band ring (translucent white on `data-tone="on-dark"`). */

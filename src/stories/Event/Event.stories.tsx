@@ -5,6 +5,7 @@ import { Badge } from '../../components/Badge';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { Button } from '../../components/Button';
 import { Card } from '../../components/Card';
+import { DocumentList } from '../../components/DocumentList';
 import { Header } from '../../components/Header';
 import { Notice } from '../../components/Notice';
 import { OnCoursePanel } from '../../components/OnCoursePanel';
@@ -19,7 +20,7 @@ import { StatusBadge } from '../../components/StatusBadge';
 import { Subbar } from '../../components/Subbar';
 import { Tabs } from '../../components/Tabs';
 import { sunday } from '../Live/Live.fixtures';
-import { ResultsCard, LiveResults } from '../_shared/ResultsCard';
+import { LiveResultsPanel, LiveResults } from '../_shared/LiveResults';
 import { STORY_NOW, ageAt, liveClock } from '../_shared/storyClock';
 import './Event.stories.css';
 
@@ -108,7 +109,9 @@ function EventDetail() {
             }
             actions={
               <>
-                <Button variant="secondary">Propozice (PDF)</Button>
+                <Button variant="secondary" href="#propozice">
+                  Propozice (PDF)
+                </Button>
                 <Button variant="secondary">★ Sledovat</Button>
               </>
             }
@@ -130,16 +133,16 @@ function EventDetail() {
                 clock={liveClock}
                 timeZone="Europe/Prague"
               />
-              <ResultsCard
+              <LiveResultsPanel
                 state="provisional"
                 status="K1 muži · neděle · 2. jízdy · 8 z 24 v cíli"
                 favorites={2}
                 detailSwitch
                 searchLabel="Hledat závodníka, oddíl, st. č."
-                foot="24 lodí, zobrazeno 9"
-                footLinks={
+                footer="24 lodí, zobrazeno 9"
+                footerLinks={
                   <>
-                    <a className="event-page__link" href="#all">Zobrazit všechny</a>
+                    <a href="#all">Zobrazit všechny</a>
                     <span className="event-page__muted">
                       Počítá se lepší jízda · oficiální po schválení vrchním rozhodčím a počtářem
                     </span>
@@ -147,7 +150,7 @@ function EventDetail() {
                 }
               >
                 <LiveResults rows={[...brRows.slice(0, 8), dnsRow]} columns="pair" initialExpanded="k1m-35" />
-              </ResultsCard>
+              </LiveResultsPanel>
               <Card
                 variant="surface"
                 padding="none"
@@ -157,8 +160,12 @@ function EventDetail() {
                     <StatusBadge state="official" />
                     <span className="event-page__muted">schváleno 3. 10. 17:05</span>
                     <span className="event-page__collapsed-actions">
-                      <Button variant="secondary" size="sm">PDF</Button>
-                      <Button variant="secondary" size="sm">XLSX</Button>
+                      <Button variant="secondary" size="sm" href="#k1m-sobota.pdf" aria-label="Výsledky K1 muži sobota, PDF">
+                        PDF
+                      </Button>
+                      <Button variant="secondary" size="sm" href="#k1m-sobota.xlsx" aria-label="Výsledky K1 muži sobota, XLSX">
+                        XLSX
+                      </Button>
                     </span>
                   </div>
                 }
@@ -174,11 +181,22 @@ function EventDetail() {
                 <ProgramList days={[programDay]} />
               </Card>
               <Card variant="surface" header={<h3 className="event-page__heading">Dokumenty</h3>}>
-                <div className="event-page__list">
-                  <a className="event-page__link" href="#p">Propozice závodu (PDF)</a>
-                  <a className="event-page__link" href="#s">Startovní listiny (PDF)</a>
-                  <a className="event-page__link" href="#r">Výsledky sobota, oficiální (PDF · XLSX · XML)</a>
-                </div>
+                <DocumentList
+                  aria-label="Dokumenty"
+                  items={[
+                    { label: 'Propozice závodu', href: '#p', kind: 'pdf' },
+                    { label: 'Startovní listiny', href: '#s', kind: 'pdf' },
+                    {
+                      label: 'Výsledky sobota, oficiální',
+                      href: '#r.pdf',
+                      kind: 'pdf',
+                      formats: [
+                        { kind: 'xlsx', href: '#r.xlsx' },
+                        { kind: 'xml', href: '#r.xml' },
+                      ],
+                    },
+                  ]}
+                />
               </Card>
               <Notice tone="info" title="Protest">
                 Do 30 minut od vyvěšení výsledků kategorie, vklad 500 Kč u vrchního rozhodčího.

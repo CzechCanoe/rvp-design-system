@@ -98,6 +98,18 @@
   object-fit: contain;
 }
 
+/* Portrait: upright event logo or poster, 5 : 7; the width comes from the size, the height follows */
+.csk-avatar--portrait {
+  height: auto;
+  aspect-ratio: 5 / 7;
+  border-radius: var(--csk-radius-sm);
+  background-color: var(--csk-color-surface);
+}
+
+.csk-avatar--portrait .csk-avatar__image {
+  object-fit: contain;
+}
+
 /* ==========================================================================
    Color Variants (for initials/fallback)
    ========================================================================== */
@@ -232,7 +244,8 @@
 
 /* Adjust status position for different shapes */
 .csk-avatar--rounded .csk-avatar__status,
-.csk-avatar--square .csk-avatar__status {
+.csk-avatar--square .csk-avatar__status,
+.csk-avatar--portrait .csk-avatar__status {
   bottom: -2px;
   right: -2px;
 }

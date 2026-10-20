@@ -9,8 +9,8 @@ Import: `import { Button } from '@czechcanoe/rvp-design-system'`. Popisy props j
 - **Základ a formuláře**: Button, Input, SearchInput, Select, Checkbox, Radio, Switch, Card, Badge, Avatar, AvatarGroup, Icon, Table, Td, Th, Modal, Dropdown, DropdownButton, ToastProvider, Pagination, Progress, Skeleton, SkeletonAvatar, SkeletonButton, SkeletonCard, SkeletonTable, SkeletonText, EmptyState, Dropzone, Timeline, Wizard, Calendar, CalendarList
 - **Navigace a stránka**: Header, Subbar, Breadcrumbs, PageTitle, PageLayout, BottomBar, Tabs, FilterPills, SegmentedControl, TableToolbar, TableToolbarButton, CSKLogo
 - **Stavy a čísla**: StatusBadge, MarkBadge, PenaltyChip, GateGrid, BibBadge, Notice, StatTile, TimeValue, RunningTime, DataAge, StarButton, FavoritesToggle
-- **Živé výsledky**: EventHeader, AthleteName, PenaltyText, RankValue, ResultsTable, RunDetail, RunValue, StartlistTable, ProgramList, OnCoursePanel, OnCourseRider
-- **Kalendář, přihlášky, profil**: WeekendCalendar, DeadlineBadge, EntryTable, ProposalList, SummaryCard, ProfileHeader, SeasonSparkline, RivalsList
+- **Živé výsledky**: EventHeader, ResultsPanel, AthleteName, PenaltyText, RankValue, ResultsTable, RunDetail, RunValue, StartlistTable, ProgramList, OnCoursePanel, OnCourseRider
+- **Kalendář, přihlášky, profil**: WeekendCalendar, DOCUMENT_KIND_LABELS, DocumentList, DeadlineBadge, EntryTable, ProposalList, SummaryCard, ProfileHeader, SeasonSparkline, RivalsList
 
 ## Základ a formuláře
 
@@ -23,14 +23,20 @@ Button component for user actions.
 Supports multiple variants (primary, secondary, ghost, danger),
 sizes (md 40 px, sm 32 px; touch width at least 44 px), and states (disabled, loading).
 
+With `href` (or `as="a"`) it renders a link with the identical look and focus ring,
+for navigation such as "Propozice (PDF)" or "Přihlásit". Actions stay `<button>`.
+
 | Prop | Typ | Výchozí | Popis |
 |---|---|---|---|
-| `variant?` | `"primary" \| "secondary" \| "ghost" \| "danger"` | `primary` | Visual variant of the button |
-| `size?` | `"sm" \| "md"` | `md` | Size of the button |
+| `as?` | `"button" \| "a"` |  | Element: `button` (default) or `a` (link form, needs `href`) |
+| `href?` | `string` |  | Link target: renders `<a>` with the identical look and focus ring. `rel` is passed through; without it `target="_blank"` gets `noopener noreferrer`. |
+| `variant?` | `"primary" \| "secondary" \| "ghost" \| "danger"` | `'primary'` | Visual variant of the button |
+| `size?` | `"sm" \| "md"` | `'md'` | Size of the button |
 | `fullWidth?` | `boolean` | `false` | Full width button |
 | `iconLeft?` | `ReactNode` |  | Icon to display before the label |
 | `iconRight?` | `ReactNode` |  | Icon to display after the label |
-| `loading?` | `boolean` | `false` | Loading state |
+| `loading?` | `boolean` | `false` | Loading state (behaves as disabled) |
+| `disabled?` | `boolean` |  | Disabled. A `<button>` gets `disabled`; a link cannot be disabled natively, so it drops `href` (not focusable, not navigable), gets `role="link"` + `aria-disabled="true"` and ignores clicks. Same look in both forms. |
 | `children?` | `ReactNode` |  | Children content |
 
 ### Input
@@ -218,7 +224,7 @@ Features:
 | `initials?` | `string` |  | Initials to display when no image is provided or image fails to load |
 | `name?` | `string` |  | Full name to generate initials from (alternative to initials prop) |
 | `size?` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "2xl" \| "3xl"` | `md` | Size of the avatar |
-| `shape?` | `"circular" \| "rounded" \| "square"` | `circular` | Shape. `square` is for event and club logos: the image is contained, never cropped |
+| `shape?` | `"circular" \| "rounded" \| "square" \| "portrait"` | `circular` | Shape. `square` is for event and club logos, `portrait` (5 : 7, width from `size`, e.g. md 40 × 56) for upright event posters and logos; both contain the image, never crop it |
 | `ring?` | `boolean` | `false` | Ring around the avatar (profile header); on `data-tone="on-dark"` it turns translucent white |
 | `color?` | `"default" \| "primary" \| "success" \| "warning" \| "error" \| "info" \| "dv" \| "ry" \| "vt"` | `default` | Background color for initials/fallback |
 | `icon?` | `ReactNode` |  | Custom icon to display as fallback |
@@ -819,7 +825,7 @@ centered content and footer.
 | `bottomBar?` | `ReactNode` |  | Phone navigation after the content, e.g. `<BottomBar />` (hidden in embed) |
 | `footer?` | `ReactNode` |  | Footer content (hidden in embed) |
 | `children` | `ReactNode` |  | Main content |
-| `maxWidth?` | `"sm" \| "md" \| "lg" \| "xl" \| "full"` | `xl` | Maximum width of the content container |
+| `maxWidth?` | `"sm" \| "md" \| "lg" \| "xl" \| "full"` | `xl` | Maximum width of the content container (exposed as `--csk-page-max-width`) |
 | `padded?` | `boolean` | `true` | Add side padding to the main content area (16 px phone, 24 px desktop) |
 | `stickyHeader?` | `boolean` | `true` | Keep the header area at the top while scrolling |
 
@@ -912,11 +918,15 @@ Zdroj: `src/components/TableToolbar/TableToolbar.tsx`
 
 Container for search + pills + favourites toggle + detail switch above a table.
 
+One row while the search keeps at least 10rem (160 px). When the controls do not fit next to it
+(390 px phone with round, category, ★ and "Detailní"), they move as a group to the next row and the
+search takes the full first row; inside the group each control keeps its width and wraps whole.
+
 | Prop | Typ | Výchozí | Popis |
 |---|---|---|---|
 | `aria-label?` | `string` |  | Defines a string value that labels the current element. @see aria-labelledby. |
 | `aria-labelledby?` | `string` |  | Identifies the element (or elements) that labels the current element. @see aria-describedby. |
-| `search?` | `ReactNode` |  | Search field; grows to take the remaining width (e.g. SearchInput) |
+| `search?` | `ReactNode` |  | Search field; grows to take the remaining width, never narrower than 10rem (e.g. SearchInput) |
 | `children?` | `ReactNode` |  | Filter pills (TableToolbarButton); labels never wrap |
 | `favorites?` | `ReactNode` |  | Favourites toggle (FavoritesToggle) |
 | `detail?` | `ReactNode` |  | "Detailní" switch |
@@ -1134,18 +1144,42 @@ Zdroj: `src/components/FavoritesToggle/FavoritesToggle.tsx`
 Zdroj: `src/components/EventHeader/EventHeader.tsx`
 
 Compact live header (about 95 px on a phone, one row when `condensed`).
-Navy band; the title never wraps in the condensed state.
+Navy band over the full width; the content is aligned with the page container.
+The title never wraps in the condensed state.
 
 | Prop | Typ | Výchozí | Popis |
 |---|---|---|---|
 | `title` | `ReactNode` |  | Event name |
-| `subtitle?` | `ReactNode` |  | Place · day · phase |
+| `subtitle?` | `ReactNode` |  | Place · day · phase (hidden when condensed) |
 | `status?` | `ReactNode` |  | Status element, typically `<StatusBadge state="live" />` |
 | `dataAge?` | `ReactNode` |  | Data age element, typically `<DataAge />` ("aktualizováno před 1 s") |
 | `backHref?` | `string` |  | Link back to the event list; omitted = no back link |
 | `backLabel?` | `string` | `Závody` | Text of the back link |
-| `logo?` | `ReactNode` |  | Optional event logo (hidden when condensed) |
-| `condensed?` | `boolean` | `false` | One-row variant for a scrolled page. The application decides when to switch (scroll position); the component only draws it. |
+| `logo?` | `ReactNode` |  | Optional event logo (hidden when condensed), typically `<Avatar shape="square" />` (40 × 40) or `<Avatar shape="portrait" />` for an upright poster (40 × 56, 5 : 7). The slot follows the shape. |
+| `condensed?` | `boolean` | `false` | One-row variant for a scrolled page: back · name · status · data age; the subtitle and the logo are hidden. The application decides when to switch (scroll position); the component only draws it. |
+| `maxWidth?` | `"sm" \| "md" \| "lg" \| "xl" \| "full"` |  | Width of the content inside the full-width navy band, on the scale of `PageLayout maxWidth`. Default: the content width of the surrounding `PageLayout` (CSS variable `--csk-page-max-width`), outside a PageLayout `--csk-layout-max-width` (1200 px, as PageTitle). Inner gutter 14 px, 24 px from a 768 px wide header. |
+
+### ResultsPanel
+
+Zdroj: `src/components/ResultsPanel/ResultsPanel.tsx`
+
+Results panel: one outlined card with the table toolbar (search · filters · ★ · Detailní),
+a status line (StatusBadge + text), the table and a footer (counts left, links right).
+Layout only: every value and state (search text, favourites, expanded rows) is the application's.
+
+| Prop | Typ | Výchozí | Popis |
+|---|---|---|---|
+| `search?` | `ReactNode` |  | Toolbar: search field, typically `<SearchInput size="sm" fullWidth />` |
+| `filters?` | `ReactNode` |  | Toolbar: filter pills (`TableToolbarButton`, `FilterPills dismissible`) |
+| `favorites?` | `ReactNode` |  | Toolbar: favourites toggle (`FavoritesToggle`) |
+| `detail?` | `ReactNode` |  | Toolbar: "Detailní" switch (`Switch size="sm"`); the application expands the rows |
+| `toolbarLabel?` | `string` | `Nástroje tabulky` | Accessible name of the toolbar |
+| `state?` | `"official" \| "provisional" \| "review" \| "unknown" \| "live" \| "stale"` |  | Status line: state of the shown results as a `StatusBadge` |
+| `status?` | `ReactNode` |  | Status line: text after the badge ("po 2. jízdě · 8 z 24 v cíli", a `DataAge`) |
+| `children` | `ReactNode` |  | The table: `ResultsTable`, `StartlistTable` or an `EmptyState` |
+| `footer?` | `ReactNode` |  | Footer, left: counts ("Zobrazeno 11 z 88") |
+| `footerLinks?` | `ReactNode` |  | Footer, right: links ("Oficiální PDF", "Na kanoe.cz") |
+| `tone?` | `"default" \| "highlight"` |  | Tone of the frame (default `default`) |
 
 ### AthleteName
 
@@ -1346,6 +1380,26 @@ and the columns of a race wrap under its title.
 | Prop | Typ | Výchozí | Popis |
 |---|---|---|---|
 | `weekends` | `CalendarGroup[]` |  | Weekends in order, weekday items between them |
+
+### DOCUMENT_KIND_LABELS
+
+Zdroj: `src/components/DocumentList/DocumentList.tsx`
+
+Format suffixes (reference `Zavod.html`); `link` has none.
+
+_Bez vlastních props._
+
+### DocumentList
+
+Zdroj: `src/components/DocumentList/DocumentList.tsx`
+
+List of documents of an event (propositions, start lists, results) with the format suffix
+after the name: "Propozice závodu (PDF)". Plain links, no buttons; the application formats dates.
+
+| Prop | Typ | Výchozí | Popis |
+|---|---|---|---|
+| `items` | `DocumentListItem[]` |  |  |
+| `kindLabels?` | `Partial<Record<DocumentKind, string>>` |  | Override the format suffixes |
 
 ### DeadlineBadge
 

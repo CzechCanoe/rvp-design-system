@@ -1,0 +1,62 @@
+/* DocumentList: documents of an event, name + format suffix as a link (reference Zavod.html) */
+
+.csk-document-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--csk-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-md);
+  line-height: var(--csk-line-height-snug);
+  color: var(--csk-color-text);
+}
+
+.csk-document-list__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--csk-space-2);
+  min-width: 0;
+}
+
+.csk-document-list__name {
+  min-width: 0;
+}
+
+.csk-document-list__link {
+  color: var(--csk-color-action);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.csk-document-list__link:hover {
+  color: var(--csk-color-action-hover);
+  text-decoration: underline;
+}
+
+.csk-document-list__link:focus-visible {
+  outline: 2px solid var(--csk-color-focus);
+  outline-offset: 2px;
+  border-radius: var(--csk-radius-sm);
+}
+
+.csk-document-list__formats {
+  color: var(--csk-color-action);
+  white-space: nowrap;
+}
+
+/* Format links sit next to plain text: underlined, never told apart by colour alone (WCAG 1.4.1) */
+.csk-document-list__formats .csk-document-list__link {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.csk-document-list__date {
+  margin-left: auto;
+  color: var(--csk-color-text-3);
+  font-size: var(--csk-text-sm);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}

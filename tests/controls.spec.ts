@@ -19,6 +19,8 @@ const stories = [
   'components-tabletoolbar--default',
   'components-tabletoolbar--mobile',
   'components-tabletoolbar--detail-on',
+  'components-tabletoolbar--crowded-390',
+  'components-tabletoolbar--one-row-390',
 ];
 
 async function open(page: import('@playwright/test').Page, id: string) {
@@ -98,5 +100,52 @@ test.describe('Controls - toggles', () => {
     await expect(toggle).toHaveAttribute('aria-label', 'Jen oblíbení (2)');
     await toggle.click();
     await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  });
+});
+
+// v2 T19 (#83 T18 gap 2): at 390 px the search keeps a usable width, the controls wrap as a group
+test.describe('Controls - TableToolbar at 390 px', () => {
+  for (const id of [
+    'components-tabletoolbar--crowded-390',
+    'components-tabletoolbar--mobile',
+    'components-tabletoolbar--one-row-390',
+  ]) {
+    test(`${id} - search input is at least 160 px wide, nothing overflows the toolbar`, async ({ page }) => {
+      await open(page, id);
+      const toolbar = (await page.locator('.csk-table-toolbar').boundingBox())!;
+      expect(toolbar.width).toBeLessThanOrEqual(390);
+      const input = (await page.locator('.csk-table-toolbar__search input').boundingBox())!;
+      expect(input.width).toBeGreaterThanOrEqual(160);
+      const controls = page.locator('.csk-table-toolbar__controls > *');
+      for (let i = 0; i < (await controls.count()); i++) {
+        const box = (await controls.nth(i).boundingBox())!;
+        expect(box.x, `control ${i} left`).toBeGreaterThanOrEqual(toolbar.x);
+        expect(box.x + box.width, `control ${i} right`).toBeLessThanOrEqual(toolbar.x + toolbar.width + 0.5);
+      }
+    });
+  }
+
+  test('crowded: search takes the full first row, controls start below it', async ({ page }) => {
+    await open(page, 'components-tabletoolbar--crowded-390');
+    const search = (await page.locator('.csk-table-toolbar__search').boundingBox())!;
+    const controls = (await page.locator('.csk-table-toolbar__controls').boundingBox())!;
+    const toolbar = (await page.locator('.csk-table-toolbar').boundingBox())!;
+    // full row = toolbar width minus its 8 px side padding
+    expect(search.width).toBeGreaterThanOrEqual(toolbar.width - 2 * 8 - 1);
+    expect(controls.y).toBeGreaterThanOrEqual(search.y + search.height);
+    // labels never wrap: every pill / segment is a single line
+    for (const sel of ['.csk-table-toolbar__pill', '.csk-segmented__label']) {
+      const els = page.locator(sel);
+      for (let i = 0; i < (await els.count()); i++) {
+        expect(await els.nth(i).evaluate((e) => getComputedStyle(e).whiteSpace)).toBe('nowrap');
+      }
+    }
+  });
+
+  test('few controls stay on the search row (reference Live1)', async ({ page }) => {
+    await open(page, 'components-tabletoolbar--one-row-390');
+    const search = (await page.locator('.csk-table-toolbar__search').boundingBox())!;
+    const controls = (await page.locator('.csk-table-toolbar__controls').boundingBox())!;
+    expect(Math.abs(controls.y + controls.height / 2 - (search.y + search.height / 2))).toBeLessThanOrEqual(2);
   });
 });

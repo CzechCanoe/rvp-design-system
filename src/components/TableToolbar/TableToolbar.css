@@ -1,7 +1,10 @@
-/* TableToolbar – search grows, everything else keeps its width */
+/* TableToolbar – search grows (at least 10rem), everything else keeps its width.
+   When the controls do not fit next to the search, the whole group wraps to the next row
+   and the search takes the full first row; inside the group controls wrap whole, never their labels. */
 
 .csk-table-toolbar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--csk-space-1);
   padding: var(--csk-space-1) var(--csk-space-2);
@@ -10,7 +13,16 @@
 }
 
 .csk-table-toolbar__search {
-  flex: 1 1 0;
+  flex: 1 1 10rem;
+  min-width: min(10rem, 100%);
+}
+
+.csk-table-toolbar__controls {
+  display: flex;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--csk-space-1);
   min-width: 0;
 }
 
