@@ -44,7 +44,7 @@ Navigation (`MainNav`, `NavItem`, `BreadcrumbChevronIcon`), HeroSection (+ `Hero
 | Header | `variant` `default`/`elevated`/`gradient`/`satellite`; `size`, `bordered`, `blurOnScroll`, `scrollThreshold` | `variant` `site`/`satellite`/`app`; uvedené props pryč; nový `club` (výchozí `maxWidth` je `full`) |
 | PageLayout | `variant` `standalone`/`satellite`/`embed` | `variant` `tribuna`/`urad`/`embed`; nové sloty `banner`, `bottomBar`, `stickyHeader`; šířka kontejneru jako CSS proměnná `--csk-page-max-width` na kořeni (typ `PageLayoutMaxWidth`) |
 | ResultsTable | props `results`, `section`, `variant`, `size`, `show*`, `renderCell`, `onRowClick`, … | nové `rows: ResultRow[]`, `columns`, `density`, `expandedId`, `onToggle`, `renderDetail`, `onFavoriteChange`, `clock`, `labels`; jiný datový model (`COMPONENTS.md` §3) |
-| Table | obal s `overflow-x: auto` bez fokusu | API beze změny; přetékající obal (telefon) je focusovatelný (`tabIndex=0`, s `caption` `role="region"`), přibude tab stop |
+| Table | obal s `overflow-x: auto` bez fokusu; řaditelná hlavička = `th` s `onClick` | API beze změny; přetékající obal (telefon) je focusovatelný (`tabIndex=0`, s `caption` `role="region"`), přibude tab stop; řaditelná hlavička je `<button type="button">` v `<th>` (klávesnice, `aria-sort` na `th`), selektory testů na `th` klik / fokus upravit |
 | Calendar, CalendarList | `showLive` → `LiveIndicator` | `showLive` → `StatusBadge state="live" size="sm"` |
 
 ### Nové komponenty
