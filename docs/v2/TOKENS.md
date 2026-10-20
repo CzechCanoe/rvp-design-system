@@ -88,6 +88,7 @@ Cíl: jeden prefix, jedna paleta, žádné režimy kromě `embed`. Zdroj hodnot:
 | `--csk-letter-spacing-tight` / `-caps` | -0.005em / 0.04em | nadpisy / verzálková záhlaví tabulek |
 | `--csk-space-10` / `-12` | 40px / 48px | mezery sekcí a okraje stránky v referenci |
 | `--csk-layout-max-width` | 1200px | `.wrap` v referenci |
+| `--csk-layout-gutter` | `--csk-space-4` 16px, od 768 px viewportu `--csk-space-6` 24px | boční okraj obsahu stránky: `PageLayout padded` i vnitřní okraj `EventHeader` (přidáno v T19, #93) |
 | `--csk-container-xs` … `-xl` | 320 … 1024px | přejmenované `--container-*` z `container-queries.css` |
 
 - `--csk-text-*` jsou v `rem` (16px kořen), px hodnoty výše platí.

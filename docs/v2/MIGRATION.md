@@ -74,9 +74,9 @@ Definicí hotovo je `CLIENT-OBLIGATIONS.md` sekce „live-mini-client“. DS v2 
 | `RunDetailExpand.tsx` | `RunDetail` |
 | `StartlistTable.tsx` | `StartlistTable` |
 | `ScheduleView.tsx` | `ProgramList` |
-| `EventHeader.tsx` (`HeroSection minimal` + `EventHeader.module.css` `:global(.csk-hero-section__avatar .csk-avatar--rounded)` 100 × 140) | `EventHeader logo={<Avatar shape="portrait" src=… />}` (40 × 56; `shape="square"` 40 × 40); uvnitř `PageLayout maxWidth="lg"` se obsah hlavičky zarovná s kontejnerem sám, bez CSS aplikace |
+| `EventHeader.tsx` (`HeroSection minimal` + `EventHeader.module.css` `:global(.csk-hero-section__avatar .csk-avatar--rounded)` 100 × 140) | `EventHeader logo={<Avatar shape="portrait" src=… />}` (40 × 56; `shape="square"` 40 × 40); uvnitř `PageLayout maxWidth="lg"` se obsah hlavičky zarovná s kontejnerem sám, bez CSS aplikace; vlastní 14 px okraj hlavičky netřeba (okraj = `--csk-layout-gutter` jako `PageLayout padded`) |
 | `StarButton`, `FavoritesToggle`, bib badge CSS ×3 | `StarButton`, `FavoritesToggle`, `BibBadge` |
-| `ConnectionStatus.tsx` (nepoužitý), stav spojení jako badge v hero | `DataAge` s `connection` |
+| `ConnectionStatus.tsx` (nepoužitý), stav spojení jako badge v hero | `DataAge` s `connection`; v `EventHeader condensed` se vykreslí kompaktně sám (`variant="compact"`) |
 | `NotificationPrompt.tsx` (nepoužitý) | `Notice` |
 | `SectionHeading` inline styly v `EventList` | `PageTitle` / nadpis sekce v `Card` |
 | 143 odkazů na neexistující `--csk-*` tokeny | skutečné `--csk-*` tokeny; všechny `.module.css` projít |
