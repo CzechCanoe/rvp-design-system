@@ -7236,3 +7236,7 @@ Merged main (T14), touch-target check and Athlete footer fix; snapshots refreshe
 
 ### Poznámky
 `LiveIndicator` a `FilterPills` zůstaly (v MIGRATION označené jako odstraněné/přejmenované); `CalendarCards` se neexportuje. `docs:api -- --check` zatím není v CI (návrh v PLAN.md, backlog).
+
+### T17 doplnění
+- Calendar `Default` story používala reálné dnešní datum, snapshot se měnil každý den (CI selhalo na Calendar a container-queries). Story má fixní datum, snapshoty přegenerovány CI.
+- Rozhodnutí T18: LiveIndicator je v docs veden jako zrušený (maže T19), poznámka pro konzumenty o lokální instalaci tgz.
