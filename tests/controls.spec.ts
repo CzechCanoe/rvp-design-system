@@ -40,7 +40,14 @@ test.describe('Controls - touch targets', () => {
       const count = await els.count();
       expect(count).toBeGreaterThan(0);
       for (let i = 0; i < count; i++) {
-        const box = await els.nth(i).boundingBox();
+        const el = els.nth(i);
+        if (!(await el.isVisible())) {
+          // Only the desktop-only "Detailní" switch may be absent (display: none below 769 px, detailToggle)
+          expect(await el.evaluate((e) => !!e.closest('.csk-table-toolbar__detail--desktop')), `hidden element ${i}`).toBe(true);
+          expect(page.viewportSize()!.width, `hidden element ${i} on a desktop viewport`).toBeLessThan(769);
+          continue;
+        }
+        const box = await el.boundingBox();
         expect(box, `element ${i}`).not.toBeNull();
         expect(box!.width, `width of element ${i}`).toBeGreaterThanOrEqual(44);
         expect(box!.height, `height of element ${i}`).toBeGreaterThanOrEqual(44);
@@ -119,7 +126,8 @@ test.describe('Controls - TableToolbar at 390 px', () => {
       expect(toolbar.width).toBeLessThanOrEqual(390);
       const input = (await page.locator('.csk-table-toolbar__search input').boundingBox())!;
       expect(input.width).toBeGreaterThanOrEqual(160);
-      const controls = page.locator('.csk-table-toolbar__controls > *');
+      // Rendered controls only: the desktop-only "Detailní" switch is display: none on a phone viewport
+      const controls = page.locator('.csk-table-toolbar__controls > *').filter({ visible: true });
       for (let i = 0; i < (await controls.count()); i++) {
         const box = (await controls.nth(i).boundingBox())!;
         expect(box.x, `control ${i} left`).toBeGreaterThanOrEqual(toolbar.x);

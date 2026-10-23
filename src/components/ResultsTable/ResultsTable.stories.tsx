@@ -259,14 +259,14 @@ export const InNarrowContainer: Story = {
 function HundredRowsProbe(props: ResultsTableProps) {
   const rows = useMemo(() => makeRows(100), []);
   const [mount, setMount] = useState(0);
-  const [ms, setMs] = useState<number | null>(null);
+  const [measure, setMeasure] = useState<{ ms: number; run: number } | null>(null);
   const start = useRef(performance.now());
   const tableRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     // Forces layout, so the measure covers React render + commit + layout of all rows.
     void tableRef.current?.offsetHeight;
-    setMs(performance.now() - start.current);
+    setMeasure({ ms: performance.now() - start.current, run: mount });
   }, [mount]);
 
   return (
@@ -282,7 +282,7 @@ function HundredRowsProbe(props: ResultsTableProps) {
           Vykreslit znovu
         </button>
         <span>
-          100 řádků vykresleno za <output data-testid="render-ms">{ms === null ? '…' : ms.toFixed(1)}</output> ms
+          100 řádků vykresleno za <output data-testid="render-ms" data-run={measure?.run}>{measure === null ? '…' : measure.ms.toFixed(1)}</output> ms
           (render + commit + layout)
         </span>
       </div>

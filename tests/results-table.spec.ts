@@ -219,9 +219,10 @@ test.describe('ResultsTable - 100 rows (performance)', () => {
 
     const samples: number[] = [];
     for (let i = 0; i < 5; i++) {
-      const before = await output.textContent();
       await page.getByRole('button', { name: 'Vykreslit znovu' }).click();
-      await expect(output).not.toHaveText(before ?? '');
+      // Wait for this run's measurement by its run number, not for a different value: two runs may
+      // measure the same time (WebKit clamps performance.now() to whole milliseconds)
+      await expect(output).toHaveAttribute('data-run', String(i + 1));
       samples.push(Number(await output.textContent()));
     }
     samples.sort((a, b) => a - b);
