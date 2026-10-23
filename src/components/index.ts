@@ -289,7 +289,7 @@ export type { FavoritesToggleProps } from './FavoritesToggle';
 
 // TableToolbar
 export { TableToolbar, TableToolbarButton } from './TableToolbar';
-export type { TableToolbarProps, TableToolbarButtonProps } from './TableToolbar';
+export type { TableToolbarProps, TableToolbarButtonProps, TableToolbarDetailToggle } from './TableToolbar';
 
 // ResultsPanel (v2 T19: toolbar + status line + table + footer)
 export { ResultsPanel } from './ResultsPanel';

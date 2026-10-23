@@ -123,6 +123,8 @@ export const specificComponents: ComponentConfig[] = [
   { name: 'TableToolbar-OneRow390', storyId: 'components-tabletoolbar--one-row-390', tier: 'specific' },
   // v2 T19 (#84, live-mini comparison): compact DataAge (dot + short age) for the condensed EventHeader
   { name: 'DataAge-Compact', storyId: 'components-dataage--compact', tier: 'specific' },
+  // v2 T19 (#84): Dropdown trigger with the TableToolbar pill look (Kategorie ▾)
+  { name: 'Dropdown-PillTrigger', storyId: 'components-dropdown--pill-trigger', tier: 'specific' },
 ];
 
 /** All components for visual regression testing */
@@ -168,6 +170,11 @@ export const viewportStories: Array<{ name: string; storyId: string }> = [
   { name: 'ResultsTable-Startlist', storyId: 'components-resultstable--startlist' },
   { name: 'ResultsTable-Empty', storyId: 'components-resultstable--empty' },
   { name: 'EventHeader-StatusStates', storyId: 'components-eventheader--status-states' },
+  // v2 T19 (#84): two-line title at 390 px grows the band (min-height), subtitle visible, no overlap
+  { name: 'EventHeader-LongTitleMobile', storyId: 'components-eventheader--long-title-mobile' },
+  // v2 T19 (#84): TableToolbar detailToggle (desktop = no „Detailní“ below 769 px, two rows at 390)
+  { name: 'TableToolbar-Responsive', storyId: 'components-tabletoolbar--responsive' },
+  { name: 'TableToolbar-DetailToggleAlways', storyId: 'components-tabletoolbar--detail-toggle-always' },
   { name: 'StartlistTable', storyId: 'components-startlisttable--default' },
   { name: 'StartlistTable-SingleStart', storyId: 'components-startlisttable--single-start' },
   { name: 'StartlistTable-WithNotice', storyId: 'components-startlisttable--with-notice' },

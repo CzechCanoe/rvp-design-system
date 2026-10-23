@@ -205,4 +205,74 @@ test.describe('Layout - EventHeader condensed and logo', () => {
     const img = slots.nth(0).locator('img');
     expect(await img.evaluate((e) => getComputedStyle(e).objectFit)).toBe('contain');
   });
+
+  test('condensed height equals the token --csk-event-header-condensed-h', async ({ page }) => {
+    await page.goto('/iframe.html?id=components-eventheader--condensed&viewMode=story');
+    await page.waitForSelector('.csk-event-header--condensed');
+    const { height, token } = await page.locator('.csk-event-header').evaluate((e) => ({
+      height: e.getBoundingClientRect().height,
+      token: parseFloat(getComputedStyle(e).getPropertyValue('--csk-event-header-condensed-h')),
+    }));
+    expect(token).toBeGreaterThan(0);
+    expect(Math.abs(height - token)).toBeLessThanOrEqual(0.5);
+  });
 });
+
+// v2 T19 (#84): the sticky condensed header of a Live page never covers the class carousel
+test.describe('Layout - Live page scroll padding', () => {
+  test.use({ viewport: { width: 390, height: 500 } });
+
+  test('scroll-padding-top = condensed header height; a focused class tab lands below the header', async ({ page }) => {
+    await page.goto('/iframe.html?id=live--expanded&viewMode=story');
+    await page.waitForSelector('.csk-event-header--condensed');
+    const header = page.locator('.csk-event-header');
+    const height = (await header.boundingBox())!.height;
+    const padding = await page.evaluate(() => parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop));
+    expect(Math.abs(padding - height)).toBeLessThanOrEqual(0.5);
+    // scroll to the end, then bring the active class tab back by keyboard focus
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    const tab = page.getByRole('tab', { name: 'K1 muži' });
+    await tab.focus();
+    await page.evaluate(() => document.activeElement!.scrollIntoView({ block: 'start' }));
+    const headerBox = (await header.boundingBox())!;
+    const tabBox = (await tab.boundingBox())!;
+    expect(headerBox.y).toBeLessThanOrEqual(0.5); // sticky
+    expect(tabBox.y).toBeGreaterThanOrEqual(headerBox.y + headerBox.height - 0.5);
+  });
+});
+
+// v2 T19 (#84): no fixed height; a two-line title at 390 px grows the band instead of clipping the subtitle
+for (const width of [390, 1280]) {
+  test.describe(`Layout - EventHeader long title (${width}px)`, () => {
+    test.use({ viewport: { width, height: 800 } });
+
+    test('subtitle visible inside the band, no overlap with the next sibling', async ({ page }) => {
+      await page.goto('/iframe.html?id=components-eventheader--long-title-mobile&viewMode=story');
+      await page.waitForSelector('.csk-event-header');
+      await page.evaluate(() => document.fonts.ready);
+      const header = page.locator('.csk-event-header');
+      const band = (await header.boundingBox())!;
+      const title = page.locator('.csk-event-header__title');
+      const titleBox = (await title.boundingBox())!;
+      const lineHeight = await title.evaluate((e) => parseFloat(getComputedStyle(e).lineHeight));
+      if (width === 390) {
+        // the story is meaningful only when the name really wraps
+        expect(titleBox.height).toBeGreaterThan(1.5 * lineHeight);
+      }
+      const subtitle = page.locator('.csk-event-header__subtitle');
+      await expect(subtitle).toBeVisible();
+      const sub = (await subtitle.boundingBox())!;
+      expect(sub.y).toBeGreaterThanOrEqual(titleBox.y + titleBox.height - 0.5);
+      expect(sub.y + sub.height).toBeLessThanOrEqual(band.y + band.height + 0.5);
+      // nothing inside the band is clipped
+      expect(await header.evaluate((e) => e.scrollHeight - e.clientHeight)).toBeLessThanOrEqual(0);
+      // the element after the header area starts below the band
+      const next = await page.evaluate(() => {
+        const wrapper = document.querySelector('.csk-event-header')!.parentElement!;
+        const sibling = wrapper.nextElementSibling!;
+        return { y: sibling.getBoundingClientRect().y, name: sibling.className };
+      });
+      expect(next.y, next.name).toBeGreaterThanOrEqual(band.y + band.height - 0.5);
+    });
+  });
+}

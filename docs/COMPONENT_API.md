@@ -376,7 +376,7 @@ Zdroj: `src/components/Dropdown/Dropdown.tsx`
 |---|---|---|---|
 | `children` | `ReactNode` |  | Button label |
 | `size?` | `"sm" \| "md" \| "lg"` | `md` | Size of the button |
-| `variant?` | `"default" \| "primary" \| "ghost"` | `default` | Variant styling |
+| `variant?` | `"default" \| "primary" \| "ghost" \| "pill"` | `default` | Variant styling. `pill`: the look of the TableToolbar pills (34 px pill, `size` ignored); the Dropdown trigger around it becomes a 44 px touch target. Use it for a filter menu in a `TableToolbar` / `ResultsPanel filters` („Kategorie ▾“). |
 | `open?` | `boolean` |  | Whether dropdown is open (for chevron rotation) |
 
 ### ToastProvider
@@ -921,6 +921,7 @@ Container for search + pills + favourites toggle + detail switch above a table.
 One row while the search keeps at least 10rem (160 px). When the controls do not fit next to it
 (390 px phone with round, category, ★ and "Detailní"), they move as a group to the next row and the
 search takes the full first row; inside the group each control keeps its width and wraps whole.
+The "Detailní" switch is desktop-only by default (`detailToggle`), so a phone has at most two rows.
 
 | Prop | Typ | Výchozí | Popis |
 |---|---|---|---|
@@ -930,6 +931,7 @@ search takes the full first row; inside the group each control keeps its width a
 | `children?` | `ReactNode` |  | Filter pills (TableToolbarButton); labels never wrap |
 | `favorites?` | `ReactNode` |  | Favourites toggle (FavoritesToggle) |
 | `detail?` | `ReactNode` |  | "Detailní" switch |
+| `detailToggle?` | `"desktop" \| "always"` | `desktop` | Where the `detail` switch is shown: `'desktop'` (default) hides it below 769 px viewport width (phone: the toolbar keeps two rows, search · controls), `'always'` shows it on every width. Hiding is visual only (`display: none`); the application keeps the detail state. |
 
 ### TableToolbarButton
 
@@ -1147,7 +1149,10 @@ Zdroj: `src/components/EventHeader/EventHeader.tsx`
 
 Compact live header (about 95 px on a phone, one row when `condensed`).
 Navy band over the full width; the content is aligned with the page container.
-The title never wraps in the condensed state.
+No fixed height: `min-height` only, so a title wrapped to two lines (390 px) pushes the subtitle
+and the content below down instead of clipping them. The title never wraps in the condensed state;
+the condensed height is the token `--csk-event-header-condensed-h` (36 px), for `scroll-padding-top`
+of a page with a sticky condensed header.
 
 | Prop | Typ | Výchozí | Popis |
 |---|---|---|---|
@@ -1175,9 +1180,10 @@ Layout only: every value and state (search text, favourites, expanded rows) is t
 | `filters?` | `ReactNode` |  | Toolbar: filter pills (`TableToolbarButton`, `FilterPills dismissible`) |
 | `favorites?` | `ReactNode` |  | Toolbar: favourites toggle (`FavoritesToggle`) |
 | `detail?` | `ReactNode` |  | Toolbar: "Detailní" switch (`Switch size="sm"`); the application expands the rows |
+| `detailToggle?` | `"desktop" \| "always"` |  | Toolbar: where the "Detailní" switch is shown; `'desktop'` (default) hides it below 769 px (`TableToolbar detailToggle`) |
 | `toolbarLabel?` | `string` | `Nástroje tabulky` | Accessible name of the toolbar |
 | `state?` | `"official" \| "provisional" \| "review" \| "unknown" \| "live" \| "stale"` |  | Status line: state of the shown results as a `StatusBadge` |
-| `status?` | `ReactNode` |  | Status line: text after the badge ("po 2. jízdě · 8 z 24 v cíli", a `DataAge`) |
+| `status?` | `ReactNode` |  | Status line: text after the badge. Any node, so it carries a progress note („po 2. jízdě · 8 z 24 v cíli“), a `DataAge`, or both (`<><DataAge … /> · po 2. jízdě · 8 z 24 v cíli</>`); it wraps under the badge when narrow. |
 | `children` | `ReactNode` |  | The table: `ResultsTable`, `StartlistTable` or an `EmptyState` |
 | `footer?` | `ReactNode` |  | Footer, left: counts ("Zobrazeno 11 z 88") |
 | `footerLinks?` | `ReactNode` |  | Footer, right: links ("Oficiální PDF", "Na kanoe.cz") |

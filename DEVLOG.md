@@ -7391,3 +7391,22 @@ Snapshoty se generují jen v CI (label `update-snapshots`, pokud se vzhled hlavi
 
 ### Poznámky
 Label `update-snapshots` přepisuje jen snapshoty, které porovnání neprojdou; změny pod prahem `threshold 0.2` (tady ≈ 0.033) potřebují `mode=all`, jinak baseline zůstane se starou barvou.
+
+---
+
+## 2026-10-23 - Fáze 5 / T19: EventHeader min-height, condensed token, TableToolbar detailToggle, Dropdown pill (#84)
+
+### Dokončeno
+- [x] EventHeader jen `min-height` (= `--csk-event-header-condensed-h`); story `EventHeader/LongTitleMobile` (390 + 1280), Playwright: podtitul vidět, žádný překryv s dalším sourozencem
+- [x] Token `--csk-event-header-condensed-h` (36 px) = výška `condensed`; `Live/*` lepí jen EventHeader (`header`), navigace je `banner`, `html:has(.live-page) { scroll-padding-top }`; Playwright: fokus na tab třídy skončí pod hlavičkou
+- [x] `TableToolbar detailToggle` `'desktop'` (výchozí, skryto pod 769 px) / `'always'`, předává i `ResultsPanel`; stories `Responsive`, `DetailToggleAlways`; Playwright: 390 px dva řádky, 1280 px jeden
+- [x] `DropdownButton variant="pill"` (bez refaktoru Dropdown; `trigger` je obsahový slot, `trigger="pill"` doslova nejde) – „Kategorie“ v ResultsPanel / Live / Event stories, story `Dropdown/PillTrigger`
+- [x] ResultsPanel `status` nese poznámku o průběhu i s DataAge (ověřeno, unit test), `statusNote` se nepřidával
+- [x] MIGRATION.md poznámky pro M5 (a–e), COMPONENTS.md, TOKENS.md, `docs:api`
+
+### Problémy a řešení
+1. **Problém:** lokálně padá axe `Avatar` (aria-prohibited-attr) – nesouvisí se změnou (Avatar nedotčen), na Pi bez sítě se nenačte obrázek
+   **Řešení:** ponecháno, CI rozhodne
+
+### Poznámky
+StatusBadge „scheduled“ se nepřidával (rozhodnutí maintainera).

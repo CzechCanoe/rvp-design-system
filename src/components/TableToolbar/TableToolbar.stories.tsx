@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { TableToolbar, TableToolbarButton } from './TableToolbar';
+import { TableToolbar, TableToolbarButton, type TableToolbarDetailToggle } from './TableToolbar';
 import { FavoritesToggle } from '../FavoritesToggle';
 import { SearchInput } from '../SearchInput';
 import { SegmentedControl } from '../SegmentedControl';
@@ -20,7 +20,15 @@ const rounds = [
   { value: '2', label: '2. jízda' },
 ];
 
-function Demo({ initialDetail = false, withRound = false }: { initialDetail?: boolean; withRound?: boolean }) {
+function Demo({
+  initialDetail = false,
+  withRound = false,
+  detailToggle,
+}: {
+  initialDetail?: boolean;
+  withRound?: boolean;
+  detailToggle?: TableToolbarDetailToggle;
+}) {
   const [q, setQ] = useState('');
   const [fav, setFav] = useState(false);
   const [detail, setDetail] = useState(initialDetail);
@@ -28,6 +36,7 @@ function Demo({ initialDetail = false, withRound = false }: { initialDetail?: bo
   return (
     <TableToolbar
       aria-label="Nástroje tabulky"
+      detailToggle={detailToggle}
       search={
         <SearchInput
           size="sm"
@@ -119,4 +128,22 @@ export const OneRow390: Story = {
       </div>
     );
   },
+};
+
+/**
+ * Full width, every control of c123-live-mini. `detailToggle="desktop"` (default): on a phone (below 769 px
+ * viewport) the „Detailní“ switch is hidden and the toolbar has two rows, search · round · Kategorie · ★;
+ * on desktop one row with „Detailní“. Snapshotted at 390 and 1280.
+ */
+export const Responsive: Story = {
+  args: { 'aria-label': 'Nástroje tabulky' },
+  parameters: { layout: 'fullscreen' },
+  render: () => <Demo withRound />,
+};
+
+/** `detailToggle="always"`: „Detailní“ stays on a phone too (it wraps whole to the next row when needed). */
+export const DetailToggleAlways: Story = {
+  args: { 'aria-label': 'Nástroje tabulky' },
+  parameters: { layout: 'fullscreen' },
+  render: () => <Demo withRound detailToggle="always" />,
 };

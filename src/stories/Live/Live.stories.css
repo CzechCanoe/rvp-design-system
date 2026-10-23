@@ -1,5 +1,10 @@
 /* Page layout of the Live page stories: ground, gutters and spacing only (reference Live1-6). Components are never restyled. */
 
+/* The sticky condensed EventHeader must not cover what the page scrolls to (class carousel, focused rows) */
+html:has(.live-page) {
+  scroll-padding-top: var(--csk-event-header-condensed-h);
+}
+
 .live-page {
   background: var(--csk-color-surface-2);
   font-family: var(--csk-font-sans);

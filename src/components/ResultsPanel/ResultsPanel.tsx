@@ -1,7 +1,7 @@
 import { forwardRef, type ReactNode } from 'react';
 import { Card, type CardProps } from '../Card';
 import { StatusBadge, type StatusBadgeState } from '../StatusBadge';
-import { TableToolbar } from '../TableToolbar';
+import { TableToolbar, type TableToolbarDetailToggle } from '../TableToolbar';
 import './ResultsPanel.css';
 
 export interface ResultsPanelProps
@@ -17,11 +17,16 @@ export interface ResultsPanelProps
   favorites?: ReactNode;
   /** Toolbar: "Detailní" switch (`Switch size="sm"`); the application expands the rows */
   detail?: ReactNode;
+  /** Toolbar: where the "Detailní" switch is shown; `'desktop'` (default) hides it below 769 px (`TableToolbar detailToggle`) */
+  detailToggle?: TableToolbarDetailToggle;
   /** Accessible name of the toolbar */
   toolbarLabel?: string;
   /** Status line: state of the shown results as a `StatusBadge` */
   state?: StatusBadgeState;
-  /** Status line: text after the badge ("po 2. jízdě · 8 z 24 v cíli", a `DataAge`) */
+  /**
+   * Status line: text after the badge. Any node, so it carries a progress note („po 2. jízdě · 8 z 24 v cíli“),
+   * a `DataAge`, or both (`<><DataAge … /> · po 2. jízdě · 8 z 24 v cíli</>`); it wraps under the badge when narrow.
+   */
   status?: ReactNode;
   /** The table: `ResultsTable`, `StartlistTable` or an `EmptyState` */
   children: ReactNode;
@@ -43,6 +48,7 @@ export const ResultsPanel = forwardRef<HTMLDivElement, ResultsPanelProps>(
       filters,
       favorites,
       detail,
+      detailToggle,
       toolbarLabel = 'Nástroje tabulky',
       state,
       status,
@@ -74,7 +80,7 @@ export const ResultsPanel = forwardRef<HTMLDivElement, ResultsPanelProps>(
         {...props}
       >
         {hasToolbar && (
-          <TableToolbar aria-label={toolbarLabel} search={search} favorites={favorites} detail={detail}>
+          <TableToolbar aria-label={toolbarLabel} search={search} favorites={favorites} detail={detail} detailToggle={detailToggle}>
             {filters}
           </TableToolbar>
         )}

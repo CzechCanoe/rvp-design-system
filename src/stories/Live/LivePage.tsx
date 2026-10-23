@@ -121,7 +121,12 @@ export interface LivePageProps {
   children: ReactNode;
 }
 
-/** Page frame of the Live stories: EventHeader, navigation band, content ground and BottomBar. */
+/**
+ * Page frame of the Live stories: EventHeader, navigation band, content ground and BottomBar.
+ * Only the EventHeader is sticky (`header`); the day / class navigation is the `banner` and scrolls away.
+ * The page sets `scroll-padding-top: var(--csk-event-header-condensed-h)` (Live.stories.css), so the class
+ * carousel or a row scrolled to / focused by keyboard lands below the sticky condensed header, not under it.
+ */
 export function LivePage({ title, subtitle, status, dataAge, condensed, section = 'results', nav, children }: LivePageProps) {
   return (
     <ClockProvider clock={liveClock}>
@@ -129,20 +134,19 @@ export function LivePage({ title, subtitle, status, dataAge, condensed, section 
         className="live-page"
         padded={false}
         maxWidth="full"
+        stickyHeader
         header={
-          <>
-            <EventHeader
-              maxWidth="lg"
-              backHref="#zavody"
-              title={title}
-              subtitle={subtitle}
-              status={status === undefined ? <StatusBadge state="live" /> : status}
-              dataAge={dataAge}
-              condensed={condensed}
-            />
-            {nav}
-          </>
+          <EventHeader
+            maxWidth="lg"
+            backHref="#zavody"
+            title={title}
+            subtitle={subtitle}
+            status={status === undefined ? <StatusBadge state="live" /> : status}
+            dataAge={dataAge}
+            condensed={condensed}
+          />
         }
+        banner={nav}
         bottomBar={<BottomBar items={bottomItems(section)} />}
       >
         <div className="live-page__body">

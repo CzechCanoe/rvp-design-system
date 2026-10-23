@@ -453,8 +453,12 @@ export interface DropdownButtonProps extends HTMLAttributes<HTMLSpanElement> {
   children: ReactNode;
   /** Size of the button */
   size?: DropdownSize;
-  /** Variant styling */
-  variant?: 'default' | 'primary' | 'ghost';
+  /**
+   * Variant styling. `pill`: the look of the TableToolbar pills (34 px pill, `size` ignored);
+   * the Dropdown trigger around it becomes a 44 px touch target. Use it for a filter menu in a
+   * `TableToolbar` / `ResultsPanel filters` („Kategorie ▾“).
+   */
+  variant?: 'default' | 'primary' | 'ghost' | 'pill';
   /** Whether dropdown is open (for chevron rotation) */
   open?: boolean;
 }

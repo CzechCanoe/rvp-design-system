@@ -27,6 +27,10 @@
   /* Side gutter of the page content: 16 px phone, 24 px from 768 px. One source for
      PageLayout (padded container, footer) and full-width bands (EventHeader), so their content lines up. */
   --csk-layout-gutter: var(--csk-space-4);
+
+  /* Height of the condensed (one-row) EventHeader. Pages with a sticky condensed header use it
+     as scroll-padding-top, so focused or scrolled-to content (class carousel) is not covered. */
+  --csk-event-header-condensed-h: 36px;
 }
 
 @media (min-width: 768px) {
