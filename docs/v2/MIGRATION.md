@@ -101,6 +101,8 @@ Navíc z T19 pro M5: sticky zúžená hlavička + `scroll-padding-top: var(--csk
 
 Pořadí v live-mini: 1) bump na `^2.0.0` jako samostatný `chore:` commit (CLAUDE.md DS, pravidlo 6), 2) tokeny, 3) komponenta po komponentě, 4) smazat `:global` overridy a mrtvý kód, 5) tier-3 testy s fake `Clock` podle TEST-ARCHITECTURE §5.
 
+Startovní bod pro M5: [`live-mini-migration.patch`](./live-mini-migration.patch) je suchý přepis dnešního klienta (výstup T18 a porovnání), základ `c123-live-mini` commit `d216f6a`, 35 souborů. Na tomto základu projde `git apply --check`; k použití potřebuje nainstalovaný DS 2.0.0 (`package.json` a lockfile v patchi nejsou). Je to výchozí bod, ne hotová migrace: neaplikovat naslepo, M5 klient se na `main` píše znovu proti kontraktu a patch slouží jako předloha mapování na komponenty a tokeny.
+
 ## Testy a snapshoty (stav po T17)
 
 - `tests/config.ts` obsahuje jen v2 story ID (komponenty `allComponents`, `viewportStories`, `layoutStories`, `pageStories`, `containerQueryComponents`); `QUARANTINE` je prázdná a má taková zůstat (chyby se opravují, ne karanténují). Tolerance: komponenty 30 px, Page stories a layouty 80 px, animované 100+ px.

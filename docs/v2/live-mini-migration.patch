@@ -1,0 +1,4071 @@
+diff --git a/packages/client/src/App.test.tsx b/packages/client/src/App.test.tsx
+index 8c95b3c..bc1ab41 100644
+--- a/packages/client/src/App.test.tsx
++++ b/packages/client/src/App.test.tsx
+@@ -102,8 +102,8 @@ describe('App', () => {
+       expect(screen.getByText('Demo Event')).toBeTruthy();
+     });
+ 
+-    // LiveIndicator renders with csk-live-indicator class
+-    expect(document.querySelector('.csk-live-indicator')).toBeTruthy();
++    // StatusBadge state="live" marks a running event
++    expect(document.querySelector('.csk-status-badge--live')).toBeTruthy();
+   });
+ 
+   it('shows loading state initially', () => {
+diff --git a/packages/client/src/App.tsx b/packages/client/src/App.tsx
+index 6fccf9b..ee3d93f 100644
+--- a/packages/client/src/App.tsx
++++ b/packages/client/src/App.tsx
+@@ -1,59 +1,22 @@
+-import { SHARED_VERSION } from '@c123-live-mini/shared';
+-import { PageLayout, Header } from '@czechcanoe/rvp-design-system';
+ import { Route, Switch, Router } from 'wouter';
+ import { useHashLocation } from 'wouter/use-hash-location';
+ import { EventListPage } from './pages/EventListPage';
+ import { EventDetailPage } from './pages/EventDetailPage';
+-import { branding } from './config/branding';
+ 
+ function App() {
+-  const headerContent = (
+-    <Header
+-      variant="satellite"
+-      appName={branding.appName}
+-      homeLink={branding.homeLink}
+-      homeLinkLabel={branding.homeLinkLabel}
+-    />
+-  );
+-
+-  const footerContent = (
+-    <div
+-      style={{
+-        padding: '1rem',
+-        textAlign: 'center',
+-        fontSize: '0.875rem',
+-        color: 'var(--csk-color-text-tertiary)',
+-      }}
+-    >
+-      Powered by c123-live-mini (shared v{SHARED_VERSION})
+-    </div>
+-  );
+-
+   return (
+     <Router hook={useHashLocation}>
+-      <PageLayout
+-        variant="satellite"
+-        maxWidth="md"
+-        header={headerContent}
+-        footer={footerContent}
+-      >
+-        <Switch>
+-          <Route path="/">
+-            <EventListPage />
+-          </Route>
+-          <Route path="/events/:eventId/race/:raceId">
+-            {(params) => (
+-              <EventDetailPage
+-                eventId={params.eventId}
+-                raceId={params.raceId}
+-              />
+-            )}
+-          </Route>
+-          <Route path="/events/:eventId">
+-            {(params) => <EventDetailPage eventId={params.eventId} />}
+-          </Route>
+-        </Switch>
+-      </PageLayout>
++      <Switch>
++        <Route path="/">
++          <EventListPage />
++        </Route>
++        <Route path="/events/:eventId/race/:raceId">
++          {(params) => <EventDetailPage eventId={params.eventId} raceId={params.raceId} />}
++        </Route>
++        <Route path="/events/:eventId">
++          {(params) => <EventDetailPage eventId={params.eventId} />}
++        </Route>
++      </Switch>
+     </Router>
+   );
+ }
+diff --git a/packages/client/src/components/AppShell.tsx b/packages/client/src/components/AppShell.tsx
+new file mode 100644
+index 0000000..f9df281
+--- /dev/null
++++ b/packages/client/src/components/AppShell.tsx
+@@ -0,0 +1,62 @@
++import { useEffect, type ReactNode } from 'react';
++import { SHARED_VERSION } from '@c123-live-mini/shared';
++import { Header, PageLayout } from '@czechcanoe/rvp-design-system';
++import { branding } from '../config/branding';
++
++/**
++ * Page frame. Pages render it themselves so a page can put its own full-width
++ * band (EventHeader) under the app header. `stickyBand` puts the band into the
++ * sticky header area (for a header that condenses on scroll). `nav` is the
++ * full-width navigation band under it (days, classes); it scrolls away.
++ * `padded` gives the content the DS gutter, so it lines up with the EventHeader content.
++ */
++export function AppShell({
++  banner,
++  stickyBand = false,
++  nav,
++  bottomBar,
++  padded = false,
++  children,
++}: {
++  banner?: ReactNode;
++  stickyBand?: boolean;
++  nav?: ReactNode;
++  bottomBar?: ReactNode;
++  padded?: boolean;
++  children: ReactNode;
++}) {
++  // Anything scrolled to (class carousel, focused row) lands below the sticky
++  // app header (48 px) + condensed EventHeader, not under them.
++  useEffect(() => {
++    if (!stickyBand) return;
++    const root = document.documentElement;
++    root.style.scrollPaddingTop = 'calc(48px + var(--csk-event-header-condensed-h))';
++    return () => {
++      root.style.scrollPaddingTop = '';
++    };
++  }, [stickyBand]);
++
++  return (
++    <PageLayout
++      variant="tribuna"
++      maxWidth="lg"
++      padded={padded}
++      header={
++        <>
++          <Header
++            variant="satellite"
++            appName={branding.appName}
++            homeLink={branding.homeLink}
++            homeLinkLabel={branding.homeLinkLabel}
++          />
++          {stickyBand && banner}
++        </>
++      }
++      banner={stickyBand ? nav : (banner ?? nav)}
++      bottomBar={bottomBar}
++      footer={<>Powered by c123-live-mini (shared v{SHARED_VERSION})</>}
++    >
++      {children}
++    </PageLayout>
++  );
++}
+diff --git a/packages/client/src/components/CategoryFilter.tsx b/packages/client/src/components/CategoryFilter.tsx
+deleted file mode 100644
+index 23f2fd1..0000000
+--- a/packages/client/src/components/CategoryFilter.tsx
++++ /dev/null
+@@ -1,47 +0,0 @@
+-import { Dropdown, DropdownButton, type DropdownItem } from '@czechcanoe/rvp-design-system';
+-import type { CategoryInfo } from '../services/api';
+-
+-interface CategoryFilterProps {
+-  categories: CategoryInfo[];
+-  selectedCatId: string | null;
+-  onCategoryChange: (catId: string | null) => void;
+-}
+-
+-export function CategoryFilter({
+-  categories,
+-  selectedCatId,
+-  onCategoryChange,
+-}: CategoryFilterProps) {
+-  if (categories.length === 0) return null;
+-
+-  const selectedLabel = selectedCatId
+-    ? categories.find((c) => c.catId === selectedCatId)?.name ?? 'Kategorie'
+-    : 'Kategorie';
+-
+-  const items: DropdownItem[] = [
+-    {
+-      id: '__all__',
+-      label: 'Vše',
+-      onClick: () => onCategoryChange(null),
+-    },
+-    ...categories.map((cat) => ({
+-      id: cat.catId,
+-      label: cat.name,
+-      onClick: () => onCategoryChange(cat.catId),
+-    })),
+-  ];
+-
+-  return (
+-    <Dropdown
+-      trigger={
+-        <DropdownButton size="sm" variant="ghost">
+-          {selectedLabel}
+-        </DropdownButton>
+-      }
+-      items={items}
+-      size="sm"
+-      position="bottom-end"
+-      aria-label="Filtr kategorie"
+-    />
+-  );
+-}
+diff --git a/packages/client/src/components/ClassTabs.module.css b/packages/client/src/components/ClassTabs.module.css
+deleted file mode 100644
+index 733a0b1..0000000
+--- a/packages/client/src/components/ClassTabs.module.css
++++ /dev/null
+@@ -1,94 +0,0 @@
+-/**
+- * ClassTabs styles
+- * Desktop: tabs wrap naturally (no carousel).
+- * Mobile: horizontal scroll with gradient fade hint, no arrows needed.
+- */
+-
+-/* Desktop: wrapping layout, no carousel */
+-.carouselWrapper {
+-  position: relative;
+-}
+-
+-/* Hide panel area — class tabs are purely navigational */
+-.carousel :global(.csk-tabs__panel) {
+-  display: none;
+-}
+-
+-.carousel :global([role="tablist"]) {
+-  flex-wrap: wrap;
+-}
+-
+-/* Mobile: horizontal scroll carousel */
+-@media (max-width: 640px) {
+-  .carousel {
+-    overflow-x: auto;
+-    -webkit-overflow-scrolling: touch;
+-    scrollbar-width: none;
+-    /* Fade right edge to signal more content */
+-    mask-image: linear-gradient(to right, black 70%, transparent 100%);
+-    -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%);
+-  }
+-
+-  .carousel::-webkit-scrollbar {
+-    display: none;
+-  }
+-
+-  .carousel :global([role="tablist"]) {
+-    flex-wrap: nowrap;
+-  }
+-
+-  .carousel :global([role="tab"]) {
+-    white-space: nowrap;
+-    flex-shrink: 0;
+-  }
+-
+-  /* Right chevron — bounces every 10s */
+-  .carouselWrapper::after {
+-    content: '›';
+-    position: absolute;
+-    right: 0.1rem;
+-    top: 50%;
+-    transform: translateY(-50%);
+-    font-size: 1.5rem;
+-    line-height: 1;
+-    color: var(--csk-color-primary, #e65c00);
+-    pointer-events: none;
+-    animation: carousel-hint 10s ease-in-out infinite;
+-  }
+-
+-  /* Left fade + chevron — only when scrolled */
+-  .scrolled .carousel {
+-    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 70%, transparent 100%);
+-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 70%, transparent 100%);
+-  }
+-
+-  .scrolled::before {
+-    content: '‹';
+-    position: absolute;
+-    left: 0.1rem;
+-    top: 50%;
+-    transform: translateY(-50%);
+-    font-size: 1.5rem;
+-    line-height: 1;
+-    color: var(--csk-color-primary, #e65c00);
+-    pointer-events: none;
+-    z-index: 1;
+-  }
+-}
+-
+-@keyframes carousel-hint {
+-  /* Invisible most of the cycle */
+-  0%, 74%  { opacity: 0; transform: translateY(-50%) translateX(0); }
+-  /* Bounce 1 */
+-  78%      { opacity: 1; transform: translateY(-50%) translateX(0); }
+-  81%      { opacity: 1; transform: translateY(-50%) translateX(6px); }
+-  84%      { opacity: 1; transform: translateY(-50%) translateX(0); }
+-  /* Bounce 2 */
+-  87%      { opacity: 1; transform: translateY(-50%) translateX(6px); }
+-  90%      { opacity: 1; transform: translateY(-50%) translateX(0); }
+-  /* Bounce 3 */
+-  93%      { opacity: 1; transform: translateY(-50%) translateX(6px); }
+-  96%      { opacity: 1; transform: translateY(-50%) translateX(0); }
+-  /* Fade out */
+-  100%     { opacity: 0; transform: translateY(-50%) translateX(0); }
+-}
+diff --git a/packages/client/src/components/ClassTabs.tsx b/packages/client/src/components/ClassTabs.tsx
+index 2124e89..1b64388 100644
+--- a/packages/client/src/components/ClassTabs.tsx
++++ b/packages/client/src/components/ClassTabs.tsx
+@@ -1,7 +1,5 @@
+-import { useRef, useEffect, useState, useCallback } from 'react';
+ import { Tabs, type TabItem } from '@czechcanoe/rvp-design-system';
+ import type { ClassGroup } from '../utils/groupRaces';
+-import styles from './ClassTabs.module.css';
+ 
+ interface ClassTabsProps {
+   classGroups: ClassGroup[];
+@@ -10,45 +8,22 @@ interface ClassTabsProps {
+   classNameMap?: Record<string, string>;
+ }
+ 
+-export function ClassTabs({
+-  classGroups,
+-  selectedClassId,
+-  onClassChange,
+-  classNameMap,
+-}: ClassTabsProps) {
+-  const scrollRef = useRef<HTMLDivElement>(null);
+-  const [scrolled, setScrolled] = useState(false);
+-
+-  const handleScroll = useCallback(() => {
+-    setScrolled((scrollRef.current?.scrollLeft ?? 0) > 4);
+-  }, []);
+-
+-  // On mobile: scroll active tab into view
+-  useEffect(() => {
+-    if (!scrollRef.current || !selectedClassId) return;
+-    const activeTab = scrollRef.current.querySelector('[role="tab"][aria-selected="true"]');
+-    if (activeTab) {
+-      activeTab.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+-    }
+-  }, [selectedClassId]);
+-
++/** Class navigation: chips without panels, carousel with edge mask and the active class kept in view. */
++export function ClassTabs({ classGroups, selectedClassId, onClassChange, classNameMap }: ClassTabsProps) {
+   const tabs: TabItem[] = classGroups.map((group) => ({
+     id: group.classId,
+     label: classNameMap?.[group.classId] ?? group.classId,
+-    content: null,
+   }));
+ 
+   return (
+-    <div className={`${styles.carouselWrapper} ${scrolled ? styles.scrolled : ''}`}>
+-      <div className={styles.carousel} ref={scrollRef} onScroll={handleScroll}>
+-        <Tabs
+-          tabs={tabs}
+-          activeTab={selectedClassId ?? undefined}
+-          onChange={onClassChange}
+-          variant="pills"
+-          energyAccent
+-        />
+-      </div>
+-    </div>
++    <Tabs
++      variant="nav"
++      size="sm"
++      overflow="carousel"
++      tabs={tabs}
++      activeTab={selectedClassId ?? undefined}
++      onChange={onClassChange}
++      aria-label="Třída"
++    />
+   );
+ }
+diff --git a/packages/client/src/components/ConnectionStatus.module.css b/packages/client/src/components/ConnectionStatus.module.css
+deleted file mode 100644
+index a04c41c..0000000
+--- a/packages/client/src/components/ConnectionStatus.module.css
++++ /dev/null
+@@ -1,10 +0,0 @@
+-.liveContainer {
+-  display: flex;
+-  align-items: center;
+-  gap: 0.5rem;
+-}
+-
+-.liveText {
+-  font-size: var(--csk-font-size-sm, 0.875rem);
+-  color: var(--csk-color-text-secondary, #4b5563);
+-}
+diff --git a/packages/client/src/components/ConnectionStatus.tsx b/packages/client/src/components/ConnectionStatus.tsx
+deleted file mode 100644
+index 098177c..0000000
+--- a/packages/client/src/components/ConnectionStatus.tsx
++++ /dev/null
+@@ -1,54 +0,0 @@
+-/**
+- * ConnectionStatus Component
+- *
+- * Displays WebSocket connection state using rvp-design-system components.
+- * Shows live indicator when connected, badge when reconnecting/offline.
+- *
+- * Visual states:
+- * - Connected: Green LiveIndicator with "Live" text
+- * - Reconnecting: Yellow Badge "Reconnecting..."
+- * - Disconnected: Gray Badge "Offline — polling"
+- * - Connecting: Gray Badge "Connecting..."
+- */
+-
+-import { LiveIndicator, Badge } from '@czechcanoe/rvp-design-system';
+-import type { ConnectionState } from '../hooks/useEventWebSocket';
+-import styles from './ConnectionStatus.module.css';
+-
+-interface ConnectionStatusProps {
+-  connectionState: ConnectionState;
+-}
+-
+-export function ConnectionStatus({ connectionState }: ConnectionStatusProps) {
+-  if (connectionState === 'connected') {
+-    return (
+-      <div className={styles.liveContainer}>
+-        <LiveIndicator variant="live" size="sm" energyGlow />
+-        <span className={styles.liveText}>Live</span>
+-      </div>
+-    );
+-  }
+-
+-  if (connectionState === 'reconnecting') {
+-    return (
+-      <Badge variant="warning" size="sm">
+-        Reconnecting...
+-      </Badge>
+-    );
+-  }
+-
+-  if (connectionState === 'connecting') {
+-    return (
+-      <Badge variant="default" size="sm">
+-        Connecting...
+-      </Badge>
+-    );
+-  }
+-
+-  // Disconnected - polling fallback
+-  return (
+-    <Badge variant="default" size="sm">
+-      Offline — polling
+-    </Badge>
+-  );
+-}
+diff --git a/packages/client/src/components/DataViewSelector.module.css b/packages/client/src/components/DataViewSelector.module.css
+index a29094b..c145ce5 100644
+--- a/packages/client/src/components/DataViewSelector.module.css
++++ b/packages/client/src/components/DataViewSelector.module.css
+@@ -1,17 +1,10 @@
++/* On phones the BottomBar switches the view (it hides itself from 768 px) */
+ .desktopOnly {
+-  display: block;
+-}
+-
+-.mobileOnly {
+   display: none;
+ }
+ 
+-@media (max-width: 640px) {
++@media (min-width: 768px) {
+   .desktopOnly {
+-    display: none;
+-  }
+-
+-  .mobileOnly {
+     display: block;
+   }
+ }
+diff --git a/packages/client/src/components/DataViewSelector.tsx b/packages/client/src/components/DataViewSelector.tsx
+index 36b02bc..8e66707 100644
+--- a/packages/client/src/components/DataViewSelector.tsx
++++ b/packages/client/src/components/DataViewSelector.tsx
+@@ -1,10 +1,5 @@
+-import {
+-  Tabs,
+-  Dropdown,
+-  DropdownButton,
+-  type TabItem,
+-  type DropdownItem,
+-} from '@czechcanoe/rvp-design-system';
++import type { MouseEvent, ReactNode } from 'react';
++import { BottomBar, SegmentedControl, type TabItem } from '@czechcanoe/rvp-design-system';
+ import styles from './DataViewSelector.module.css';
+ 
+ interface DataViewSelectorProps {
+@@ -13,42 +8,76 @@ interface DataViewSelectorProps {
+   onChange: (id: string) => void;
+ }
+ 
++/** Results / start list / programme on desktop; on phones the view switch is the BottomBar. */
+ export function DataViewSelector({ tabs, activeTab, onChange }: DataViewSelectorProps) {
+-  const activeLabel = tabs.find((t) => t.id === activeTab)?.label ?? activeTab;
++  return (
++    <div className={styles.desktopOnly}>
++      <SegmentedControl
++        size="sm"
++        aria-label="Zobrazení dat"
++        items={tabs.map((t) => ({ value: t.id, label: t.label }))}
++        value={activeTab}
++        onChange={onChange}
++      />
++    </div>
++  );
++}
+ 
+-  const items: DropdownItem[] = tabs.map((tab) => ({
+-    id: tab.id,
+-    label: tab.label,
+-    onClick: () => onChange(tab.id),
++const iconProps = { viewBox: '0 0 24 24', 'aria-hidden': true } as const;
++const ICONS: Record<string, ReactNode> = {
++  results: (
++    <svg {...iconProps}>
++      <path d="M4 6h16M4 12h10M4 18h13" />
++    </svg>
++  ),
++  startlist: (
++    <svg {...iconProps}>
++      <path d="M5 21V4M5 4h12l-2 4 2 4H5" />
++    </svg>
++  ),
++  oncourse: (
++    <svg {...iconProps}>
++      <path d="M3 14c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 9c2-2 4-2 6 0s4 2 6 0 4-2 6 0" />
++    </svg>
++  ),
++  schedule: (
++    <svg {...iconProps}>
++      <circle cx="12" cy="12" r="8" />
++      <path d="M12 8v4l3 2" />
++    </svg>
++  ),
++};
++
++interface DataViewBottomBarProps extends DataViewSelectorProps {
++  /** „Na trati“: show and scroll to the on-course panel; omitted when nobody is on the water. */
++  onOnCourse?: () => void;
++}
++
++/**
++ * Phone view switch (hidden by the DS from 768 px). BottomBar items are links; the
++ * app routes by hash, so clicks are taken over here and the href is only a key.
++ */
++export function DataViewBottomBar({ tabs, activeTab, onChange, onOnCourse }: DataViewBottomBarProps) {
++  const items = [
++    ...tabs.filter((t) => t.id !== 'schedule'),
++    ...(onOnCourse ? [{ id: 'oncourse', label: 'Na trati' }] : []),
++    ...tabs.filter((t) => t.id === 'schedule'),
++  ].map((t) => ({
++    id: t.id,
++    label: String(t.label),
++    href: `#${t.id}`,
++    active: t.id === activeTab,
++    icon: ICONS[t.id],
+   }));
+ 
+-  return (
+-    <>
+-      {/* Desktop: pills tabs */}
+-      <div className={styles.desktopOnly}>
+-        <Tabs
+-          tabs={tabs}
+-          activeTab={activeTab}
+-          onChange={onChange}
+-          variant="pills"
+-          size="sm"
+-          energyAccent
+-        />
+-      </div>
+-      {/* Mobile: dropdown */}
+-      <div className={styles.mobileOnly}>
+-        <Dropdown
+-          trigger={
+-            <DropdownButton size="sm" variant="primary">
+-              {activeLabel}
+-            </DropdownButton>
+-          }
+-          items={items}
+-          size="sm"
+-          position="bottom-end"
+-          aria-label="Zobrazení dat"
+-        />
+-      </div>
+-    </>
+-  );
++  const handleClick = (e: MouseEvent<HTMLElement>) => {
++    const link = (e.target as HTMLElement).closest('a');
++    if (!link) return;
++    e.preventDefault();
++    const id = link.getAttribute('href')?.slice(1) ?? '';
++    if (id === 'oncourse') onOnCourse?.();
++    else onChange(id);
++  };
++
++  return <BottomBar items={items} sticky aria-label="Zobrazení dat" onClick={handleClick} />;
+ }
+diff --git a/packages/client/src/components/EventHeader.module.css b/packages/client/src/components/EventHeader.module.css
+deleted file mode 100644
+index 45abeb2..0000000
+--- a/packages/client/src/components/EventHeader.module.css
++++ /dev/null
+@@ -1,32 +0,0 @@
+-/**
+- * EventHeader styles
+- *
+- * Circle avatars (initials fallback): no overrides needed — DS defaults work.
+- * Rounded avatars (uploaded image): larger rectangular area, no ring shadow.
+- */
+-
+-/* Negative horizontal margin cancels .pageWrapper padding so the hero
+- * bleeds edge-to-edge while tables keep their outer margin (#159). */
+-.wrapper {
+-  margin: 0 -0.5rem;
+-}
+-
+-@media (min-width: 641px) {
+-  .wrapper {
+-    margin: 0 -1rem;
+-  }
+-}
+-
+-/* Rectangular image avatar — bigger than the circle, no ring */
+-.wrapper :global(.csk-hero-section__avatar .csk-avatar--rounded) {
+-  width: 100px;
+-  height: 140px;
+-  box-shadow: none;
+-}
+-
+-.wrapper :global(.csk-avatar--rounded .csk-avatar__image) {
+-  object-fit: contain;
+-  border-radius: inherit;
+-  width: 100%;
+-  height: 100%;
+-}
+diff --git a/packages/client/src/components/EventHeader.tsx b/packages/client/src/components/EventHeader.tsx
+index 61aeecd..ef2bcaa 100644
+--- a/packages/client/src/components/EventHeader.tsx
++++ b/packages/client/src/components/EventHeader.tsx
+@@ -1,71 +1,72 @@
+-import { HeroSection, Badge, type HeroSectionMetaItem } from '@czechcanoe/rvp-design-system';
++import {
++  Avatar,
++  DataAge,
++  EventHeader as DsEventHeader,
++  StatusBadge,
++  type DataAgeConnection,
++} from '@czechcanoe/rvp-design-system';
+ import type { EventDetail } from '../services/api';
+ import type { ConnectionState } from '../hooks/useEventWebSocket';
+-import styles from './EventHeader.module.css';
+ 
+ interface EventHeaderProps {
+   event: EventDetail;
++  /** Live connection; omitted for events that are not followed live. */
+   connectionState?: ConnectionState;
++  /** `clock.now()` of the last live message. */
++  receivedAt?: number | null;
++  condensed?: boolean;
+ }
+ 
+-function getInitials(title: string): string {
+-  const words = title.trim().split(/\s+/);
+-  if (words.length >= 2) {
+-    return (words[0][0] + words[1][0]).toUpperCase();
+-  }
+-  return title.slice(0, 2).toUpperCase();
+-}
+-
+-function StatusBadges({ status, connectionState }: { status: EventDetail['status']; connectionState?: ConnectionState }) {
+-  // Connection state takes priority for live events
+-  if (connectionState === 'reconnecting') {
+-    return <Badge variant="warning" size="sm">Obnovování</Badge>;
+-  }
+-  if (connectionState === 'disconnected') {
+-    return <Badge variant="default" size="sm">Offline</Badge>;
+-  }
++const CONNECTION: Record<ConnectionState, DataAgeConnection> = {
++  connected: 'ok',
++  connecting: 'reconnecting',
++  reconnecting: 'reconnecting',
++  disconnected: 'offline',
++};
+ 
++function EventStatus({ status, stale }: { status: EventDetail['status']; stale: boolean }) {
++  if (stale && status === 'running') return <StatusBadge state="stale" />;
+   switch (status) {
+     case 'running':
+-      return <Badge variant="energy" size="sm" glow>Live</Badge>;
+-    case 'finished':
+-      return <Badge variant="default">Dokončeno</Badge>;
++      return <StatusBadge state="live" />;
+     case 'official':
+-      return <Badge variant="success">Oficiální výsledky</Badge>;
++      return <StatusBadge state="official" />;
++    case 'finished':
++      // finished, not yet official
++      return <StatusBadge state="provisional" />;
+     case 'startlist':
+-      return <Badge variant="info">Startovní listina</Badge>;
++      // GAP (T18): no neutral "Startovní listina" state; `unknown` with a label is the nearest.
++      return <StatusBadge state="unknown" label="Startovní listina" />;
+     default:
+       return null;
+   }
+ }
+ 
+-export function EventHeader({ event, connectionState }: EventHeaderProps) {
+-  const subtitle = [event.subTitle, event.location, event.discipline]
++function formatDates(start: string | null, end: string | null): string | undefined {
++  const fmt = (iso: string) => new Date(iso).toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric' });
++  if (!start) return undefined;
++  return end && end !== start ? `${fmt(start)}–${fmt(end)}` : fmt(start);
++}
++
++export function EventHeader({ event, connectionState, receivedAt = null, condensed }: EventHeaderProps) {
++  const subtitle = [event.subTitle, event.location, event.discipline, formatDates(event.startDate, event.endDate)]
+     .filter(Boolean)
+     .join(' · ');
+-
+-  const metadata: HeroSectionMetaItem[] = [];
+-
+-  const dates = [event.startDate, event.endDate].filter(Boolean).join(' – ');
+-  if (dates) {
+-    metadata.push({ key: 'dates', label: 'Termín', value: dates });
+-  }
+-  // facility omitted — redundant with location in subtitle (#100)
++  const live = connectionState !== undefined;
++  const stale = live && connectionState !== 'connected';
+ 
+   return (
+-    <div className={styles.wrapper}>
+-      <HeroSection
+-        variant="minimal"
+-        section="dv"
+-        title={event.mainTitle}
+-        subtitle={subtitle || undefined}
+-        avatarSrc={event.imageUrl ?? undefined}
+-        avatarShape={event.imageUrl ? 'rounded' : undefined}
+-        avatarInitials={event.imageUrl ? undefined : getInitials(event.mainTitle)}
+-        badges={<StatusBadges status={event.status} connectionState={connectionState} />}
+-        metadata={metadata.length > 0 ? metadata : undefined}
+-        meshBackground
+-      />
+-    </div>
++    <DsEventHeader
++      title={event.mainTitle}
++      subtitle={subtitle || undefined}
++      backHref="#/"
++      status={<EventStatus status={event.status} stale={stale} />}
++      dataAge={live ? <DataAge receivedAt={receivedAt} connection={CONNECTION[connectionState]} /> : undefined}
++      logo={
++        // Event posters are upright: 40 × 56 (5 : 7), contained
++        event.imageUrl ? <Avatar src={event.imageUrl} alt="" shape="portrait" size="md" /> : undefined
++      }
++      condensed={condensed}
++    />
+   );
+ }
+diff --git a/packages/client/src/components/EventList.tsx b/packages/client/src/components/EventList.tsx
+index 2a26ab3..d75eca3 100644
+--- a/packages/client/src/components/EventList.tsx
++++ b/packages/client/src/components/EventList.tsx
+@@ -2,8 +2,8 @@ import {
+   Card,
+   Badge,
+   EmptyState,
+-  LiveIndicator,
+   Icon,
++  StatusBadge,
+ } from '@czechcanoe/rvp-design-system';
+ import type { PublicEventStatus } from '@c123-live-mini/shared';
+ import type { EventListItem } from '../services/api';
+@@ -20,10 +20,10 @@ interface EventListProps {
+ 
+ function getStatusVariant(
+   status: PublicEventStatus
+-): 'success' | 'default' | 'info' | 'energy' {
++): 'success' | 'default' | 'info' | 'live' {
+   switch (status) {
+     case 'running':
+-      return 'energy';
++      return 'live';
+     case 'finished':
+     case 'official':
+       return 'info';
+@@ -106,7 +106,7 @@ export function EventList({
+         return (
+           <Card
+             key={event.eventId}
+-            variant={emphasised ? 'aesthetic' : 'elevated'}
++            variant={emphasised ? 'outlined' : 'surface'}
+             padding="md"
+             clickable
+             onClick={() => onSelectEvent(event.eventId)}
+@@ -200,21 +200,13 @@ export function EventList({
+                   flexShrink: 0,
+                 }}
+               >
+-                {isRunning && (
+-                  <LiveIndicator
+-                    variant="live"
+-                    size="sm"
+-                    energyGlow
+-                    pulse
+-                  />
++                {isRunning ? (
++                  <StatusBadge state="live" label={getStatusLabel(event.status)} />
++                ) : (
++                  <Badge variant={getStatusVariant(event.status)} size="md">
++                    {getStatusLabel(event.status)}
++                  </Badge>
+                 )}
+-                <Badge
+-                  variant={getStatusVariant(event.status)}
+-                  size="md"
+-                  glow={isRunning}
+-                >
+-                  {getStatusLabel(event.status)}
+-                </Badge>
+                 <Icon
+                   name="chevron-right"
+                   size="md"
+diff --git a/packages/client/src/components/FavoritesToggle.module.css b/packages/client/src/components/FavoritesToggle.module.css
+deleted file mode 100644
+index 4a5d80e..0000000
+--- a/packages/client/src/components/FavoritesToggle.module.css
++++ /dev/null
+@@ -1,44 +0,0 @@
+-.toggleBtn {
+-  display: inline-flex;
+-  align-items: center;
+-  gap: 4px;
+-  padding: 4px 10px;
+-  border: 1px solid var(--csk-color-border-secondary, #e5e7eb);
+-  border-radius: 6px;
+-  font-size: 11px;
+-  font-weight: 500;
+-  background: var(--color-bg-primary, white);
+-  color: var(--csk-color-text-secondary, #6b7280);
+-  cursor: pointer;
+-  white-space: nowrap;
+-  -webkit-tap-highlight-color: transparent;
+-}
+-
+-.toggleBtn.active {
+-  background: var(--csk-color-primary, #2563eb);
+-  color: white;
+-  border-color: var(--csk-color-primary, #2563eb);
+-}
+-
+-.star {
+-  font-size: 13px;
+-}
+-
+-.badge {
+-  display: inline-flex;
+-  align-items: center;
+-  justify-content: center;
+-  min-width: 16px;
+-  height: 16px;
+-  padding: 0 4px;
+-  border-radius: 8px;
+-  font-size: 10px;
+-  font-weight: 700;
+-  background: var(--csk-color-primary, #2563eb);
+-  color: white;
+-}
+-
+-.toggleBtn.active .badge {
+-  background: white;
+-  color: var(--csk-color-primary, #2563eb);
+-}
+diff --git a/packages/client/src/components/FavoritesToggle.tsx b/packages/client/src/components/FavoritesToggle.tsx
+deleted file mode 100644
+index e9896b9..0000000
+--- a/packages/client/src/components/FavoritesToggle.tsx
++++ /dev/null
+@@ -1,23 +0,0 @@
+-import styles from './FavoritesToggle.module.css';
+-
+-interface FavoritesToggleProps {
+-  active: boolean;
+-  count: number;
+-  onToggle: () => void;
+-}
+-
+-export function FavoritesToggle({ active, count, onToggle }: FavoritesToggleProps) {
+-  if (count === 0 && !active) return null;
+-
+-  return (
+-    <button
+-      className={`${styles.toggleBtn} ${active ? styles.active : ''}`}
+-      onClick={onToggle}
+-      aria-label={active ? 'Zobrazit všechny' : 'Zobrazit oblíbené'}
+-      type="button"
+-    >
+-      <span className={styles.star}>{'\u2605'}</span>
+-      <span className={styles.badge}>{count}</span>
+-    </button>
+-  );
+-}
+diff --git a/packages/client/src/components/GatePenalties.module.css b/packages/client/src/components/GatePenalties.module.css
+deleted file mode 100644
+index aadbad1..0000000
+--- a/packages/client/src/components/GatePenalties.module.css
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/**
+- * Layout styles for GatePenalties
+- * Uses DS CSS variables for colors and spacing tokens
+- */
+-
+-.container {
+-  display: flex;
+-  flex-wrap: wrap;
+-  gap: 0.25rem;
+-}
+-
+-.reverseGate {
+-  font-style: italic;
+-  text-decoration: underline;
+-}
+diff --git a/packages/client/src/components/GatePenalties.tsx b/packages/client/src/components/GatePenalties.tsx
+deleted file mode 100644
+index 0fe2065..0000000
+--- a/packages/client/src/components/GatePenalties.tsx
++++ /dev/null
+@@ -1,58 +0,0 @@
+-/**
+- * GatePenalties Component
+- *
+- * Displays gate-by-gate penalty visualization using compact badges.
+- * Each gate shows: number and penalty status (clean/touch/miss).
+- * Reverse gates are styled with italic + underlined number.
+- *
+- * Visual coding:
+- * - Green: 0 (clean gate)
+- * - Yellow: 2 (touch penalty)
+- * - Red: 50 (missed gate)
+- * - Gray: null (not yet passed)
+- */
+-
+-import { Badge } from '@czechcanoe/rvp-design-system';
+-import type { PublicGate } from '@c123-live-mini/shared';
+-import styles from './GatePenalties.module.css';
+-
+-interface GatePenaltiesProps {
+-  gates: PublicGate[];
+-}
+-
+-function getPenaltyVariant(penalty: number | null): 'success' | 'warning' | 'error' | 'default' {
+-  if (penalty === null) return 'default';
+-  if (penalty === 0) return 'success';
+-  if (penalty === 2) return 'warning';
+-  return 'error';
+-}
+-
+-function GateLabel({ gate }: { gate: PublicGate }) {
+-  const isReverse = gate.type === 'reverse';
+-  return (
+-    <span className={isReverse ? styles.reverseGate : undefined}>
+-      {gate.number}
+-    </span>
+-  );
+-}
+-
+-export function GatePenalties({ gates }: GatePenaltiesProps) {
+-  if (gates.length === 0) {
+-    return null;
+-  }
+-
+-  return (
+-    <div className={styles.container}>
+-      {gates.map((gate) => (
+-        <Badge
+-          key={gate.number}
+-          variant={getPenaltyVariant(gate.penalty)}
+-          size="sm"
+-          title={`Gate ${gate.number} (${gate.type}): ${gate.penalty === null ? 'Not passed' : gate.penalty === 0 ? 'Clean' : `+${gate.penalty}s`}`}
+-        >
+-          <GateLabel gate={gate} />
+-        </Badge>
+-      ))}
+-    </div>
+-  );
+-}
+diff --git a/packages/client/src/components/OnCoursePanel.module.css b/packages/client/src/components/OnCoursePanel.module.css
+deleted file mode 100644
+index 6e00c17..0000000
+--- a/packages/client/src/components/OnCoursePanel.module.css
++++ /dev/null
+@@ -1,155 +0,0 @@
+-/**
+- * OnCoursePanel compact layout styles
+- */
+-
+-.header {
+-  display: flex;
+-  align-items: center;
+-  gap: var(--csk-spacing-2, 0.5rem);
+-}
+-
+-.label {
+-  font-size: var(--csk-font-size-sm, 0.875rem);
+-  font-weight: var(--csk-font-weight-semibold, 600);
+-  text-transform: uppercase;
+-  letter-spacing: 0.05em;
+-  color: var(--color-energy-500, #f97316);
+-}
+-
+-.toggleButton {
+-  display: inline-flex;
+-  align-items: center;
+-  justify-content: center;
+-  width: 2rem;
+-  height: 2rem;
+-  border: none;
+-  background: transparent;
+-  cursor: pointer;
+-  color: var(--csk-color-text-secondary, #525252);
+-  border-radius: var(--csk-radius-sm, 4px);
+-  transition: background-color 0.15s ease, color 0.15s ease;
+-  flex-shrink: 0;
+-}
+-
+-.toggleButton:hover {
+-  background-color: var(--csk-color-bg-secondary, #f5f5f5);
+-  color: var(--csk-color-on-surface, #171717);
+-}
+-
+-.chevron {
+-  font-size: 1.25rem;
+-  line-height: 1;
+-  display: inline-block;
+-  transform: rotate(-90deg);
+-  transition: transform 0.2s ease;
+-  font-style: normal;
+-}
+-
+-.chevronOpen {
+-  transform: rotate(90deg);
+-}
+-
+-.panelContent {
+-  margin-top: 0.5rem;
+-  display: flex;
+-  flex-direction: column;
+-  gap: 0.375rem;
+-}
+-
+-@keyframes fadeSlideIn {
+-  0% { opacity: 0; transform: translateY(-6px); }
+-  100% { opacity: 1; transform: translateY(0); }
+-}
+-
+-.entry {
+-  padding: 0.5rem 0.625rem;
+-  background-color: var(--csk-color-bg-secondary, #f5f5f5);
+-  border: 1px solid var(--csk-color-border-secondary, #e5e5e5);
+-  border-radius: var(--csk-radius-sm, 4px);
+-  display: flex;
+-  flex-direction: column;
+-  gap: 0.25rem;
+-  animation: fadeSlideIn 0.3s ease-out;
+-}
+-
+-.bibBadge {
+-  display: inline-flex;
+-  align-items: center;
+-  justify-content: center;
+-  min-width: 1.5rem;
+-  padding: 0.0625rem 0.3rem;
+-  border-radius: 3px;
+-  background: var(--csk-color-bg-secondary, #f3f4f6);
+-  border: 1px solid var(--csk-color-border-secondary, #e5e7eb);
+-  font-size: 0.6875rem;
+-  font-weight: 600;
+-  color: var(--csk-color-text-secondary, #6b7280);
+-  line-height: 1.4;
+-  flex-shrink: 0;
+-}
+-
+-/* Desktop: single row */
+-.mainRow {
+-  display: flex;
+-  align-items: center;
+-  gap: 0.375rem;
+-  min-width: 0;
+-}
+-
+-.athleteName {
+-  font-weight: var(--csk-font-weight-semibold, 600);
+-  font-size: var(--csk-font-size-sm, 0.875rem);
+-  white-space: nowrap;
+-  overflow: hidden;
+-  text-overflow: ellipsis;
+-  min-width: 0;
+-}
+-
+-.athleteClub {
+-  font-size: var(--csk-font-size-xs, 0.75rem);
+-  color: var(--csk-color-text-tertiary, #a3a3a3);
+-  white-space: nowrap;
+-  flex-shrink: 1;
+-  overflow: hidden;
+-  text-overflow: ellipsis;
+-}
+-
+-.spacer {
+-  flex: 1;
+-  min-width: 0.25rem;
+-}
+-
+-.inlineTime {
+-  font-family: var(--csk-font-mono, ui-monospace, monospace);
+-  font-size: var(--csk-font-size-sm, 0.875rem);
+-  color: var(--csk-color-on-surface, #171717);
+-  font-weight: var(--csk-font-weight-medium, 500);
+-  white-space: nowrap;
+-  flex-shrink: 0;
+-}
+-
+-.inlinePen {
+-  color: var(--csk-color-on-surface, #171717);
+-}
+-
+-.inlineTotal {
+-  font-weight: var(--csk-font-weight-semibold, 600);
+-  color: var(--csk-color-warning, #ea580c);
+-}
+-
+-.rankBadge {
+-  flex-shrink: 0;
+-}
+-
+-.gateRow {
+-  padding-left: 0.25rem;
+-  min-width: 0;
+-  overflow-x: auto;
+-}
+-
+-/* Mobile: hide club, keep times on same row right-aligned */
+-@media (max-width: 640px) {
+-  .athleteClub {
+-    display: none;
+-  }
+-}
+diff --git a/packages/client/src/components/OnCoursePanel.tsx b/packages/client/src/components/OnCoursePanel.tsx
+index 0505c32..b9295ee 100644
+--- a/packages/client/src/components/OnCoursePanel.tsx
++++ b/packages/client/src/components/OnCoursePanel.tsx
+@@ -1,84 +1,60 @@
+ /**
+- * OnCoursePanel Component
+- *
+- * Collapsible panel showing athletes currently on the water.
+- * Compact layout: single-row with inline times, gate penalties below.
++ * OnCoursePanel – athletes currently on the water, above the results.
++ * Maps the legacy on-course entries onto the DS rider model.
+  */
+ 
+-import { Card, LiveIndicator, Badge } from '@czechcanoe/rvp-design-system';
++import type { ReactNode } from 'react';
++import { OnCoursePanel as DsOnCoursePanel, type OnCourseRiderData } from '@czechcanoe/rvp-design-system';
+ import type { PublicOnCourseEntry } from '@c123-live-mini/shared';
+-import { GatePenalties } from './GatePenalties';
+-import { formatTime, formatPenalty } from '../utils/formatTime';
+-import styles from './OnCoursePanel.module.css';
++import { parseDiff, seconds, toGates } from '../utils/mapToResultsTable';
+ 
+ interface OnCoursePanelProps {
+   oncourse: PublicOnCourseEntry[];
+   isOpen: boolean;
+   onToggle: () => void;
++  /** `clock.now()` when the on-course set last arrived. */
++  receivedAt: number | null;
++  /** No live connection: everything shown is frozen, nothing removed. */
++  stale?: boolean;
++  /** Phase of the shown race, „K1 muži · 2. jízda“. */
++  phaseLabel?: ReactNode;
+ }
+ 
+-export function OnCoursePanel({ oncourse, isOpen, onToggle }: OnCoursePanelProps) {
++/** Penalty seconds after a time: a clean run (0) shows nothing, as live-mini does today. */
++function penaltySoFar(pen: number | null): number | null | undefined {
++  return pen === 0 ? undefined : seconds(pen);
++}
++
++function toRider(entry: PublicOnCourseEntry, receivedAt: number): OnCourseRiderData {
++  const delta = parseDiff(entry.ttbDiff);
++  return {
++    bib: entry.bib,
++    name: entry.name,
++    secondary: entry.club || undefined,
++    status: entry.completed ? 'finished-pending' : 'running',
++    time: entry.time != null ? { elapsedSeconds: entry.time / 100, receivedAt } : undefined,
++    penalty: entry.completed ? undefined : penaltySoFar(entry.pen),
++    // Finish time without penalties; the penalty follows as „+2 tr.“ (live-mini: time +pen = total)
++    finish: entry.completed ? { time: seconds(entry.time), penalty: penaltySoFar(entry.pen) } : undefined,
++    gates: toGates(entry.gates),
++    timeToBeat: delta !== undefined && entry.ttbName ? { mode: 'delta', value: delta, holder: entry.ttbName } : undefined,
++    // GAP (T18 #12): no slot for the live rank (#N); the total (time + penalty) is not shown either.
++  };
++}
++
++export function OnCoursePanel({ oncourse, isOpen, onToggle, receivedAt, stale = false, phaseLabel }: OnCoursePanelProps) {
+   // Only show competitors that have actually started (#139)
+   const started = oncourse.filter((e) => e.dtStart != null && e.dtStart !== '');
+-
+-  if (started.length === 0) {
+-    return null;
+-  }
++  const at = receivedAt ?? 0;
+ 
+   return (
+-    <Card variant="aesthetic">
+-      <div className={styles.header}>
+-        <span className={styles.label}>Na trati</span>
+-        <LiveIndicator variant="live" size="sm" energyGlow />
+-        <Badge variant="default" size="sm">{started.length}</Badge>
+-        <span className={styles.spacer} />
+-        <button
+-          className={styles.toggleButton}
+-          onClick={onToggle}
+-          aria-label={isOpen ? 'Sbalit panel' : 'Rozbalit panel'}
+-          aria-expanded={isOpen}
+-        >
+-          <span className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ''}`}>›</span>
+-        </button>
+-      </div>
+-
+-      {isOpen && (
+-        <div className={styles.panelContent}>
+-          {started.map((entry) => (
+-            <div key={`${entry.raceId}-${entry.bib}`} className={styles.entry}>
+-              {/* Line 1: bib, name (club) ... time +pen = total #rank */}
+-              <div className={styles.mainRow}>
+-                <span className={styles.bibBadge}>{entry.bib}</span>
+-                <span className={styles.athleteName}>{entry.name}</span>
+-                {entry.club && (
+-                  <span className={styles.athleteClub}>({entry.club})</span>
+-                )}
+-                <span className={styles.spacer} />
+-                <span className={styles.inlineTime}>
+-                  {entry.pen != null && entry.pen > 0 ? (
+-                    <>
+-                      {formatTime(entry.time)}
+-                      <span className={styles.inlinePen}> +{formatPenalty(entry.pen)}</span>
+-                      <span className={styles.inlineTotal}> = {formatTime(entry.total)}</span>
+-                    </>
+-                  ) : (
+-                    <span className={styles.inlineTotal}>{entry.total !== null ? formatTime(entry.total) : '—'}</span>
+-                  )}
+-                </span>
+-                {entry.rank !== null && (
+-                  <Badge variant="primary" size="sm">#{entry.rank}</Badge>
+-                )}
+-              </div>
+-              {/* Line 2: gate penalties */}
+-              {entry.gates && entry.gates.length > 0 && (
+-                <div className={styles.gateRow}>
+-                  <GatePenalties gates={entry.gates} />
+-                </div>
+-              )}
+-            </div>
+-          ))}
+-        </div>
+-      )}
+-    </Card>
++    <DsOnCoursePanel
++      riders={started.map((e) => toRider(e, at))}
++      collapsed={!isOpen}
++      onCollapsedChange={onToggle}
++      stale={stale}
++      receivedAt={receivedAt}
++      phaseLabel={phaseLabel}
++    />
+   );
+ }
+diff --git a/packages/client/src/components/ResultList.br-status.test.tsx b/packages/client/src/components/ResultList.br-status.test.tsx
+index 5db9cd0..fddde2b 100644
+--- a/packages/client/src/components/ResultList.br-status.test.tsx
++++ b/packages/client/src/components/ResultList.br-status.test.tsx
+@@ -184,7 +184,7 @@ describe('ResultList — BR mobile stacked cell (#159)', () => {
+     );
+ 
+     // The old `.brRunLabel` spans no longer exist in the mobile stacked cell.
+-    const mobileCell = container.querySelector('[class*="brRunsStacked"]');
++    const mobileCell = container.querySelector('.csk-results-table__stack');
+     expect(mobileCell).not.toBeNull();
+     expect(mobileCell!.querySelector('[class*="brRunLabel"]')).toBeNull();
+   });
+@@ -210,7 +210,7 @@ describe('ResultList — BR mobile stacked cell (#159)', () => {
+       />
+     );
+ 
+-    const mobileCell = container.querySelector('[class*="brRunsStacked"]');
++    const mobileCell = container.querySelector('.csk-results-table__stack');
+     expect(mobileCell).not.toBeNull();
+     // Missing run 2 slot renders as em-dash placeholder.
+     expect(mobileCell!.textContent).toContain('—');
+diff --git a/packages/client/src/components/ResultList.module.css b/packages/client/src/components/ResultList.module.css
+deleted file mode 100644
+index 70ff69b..0000000
+--- a/packages/client/src/components/ResultList.module.css
++++ /dev/null
+@@ -1,423 +0,0 @@
+-/**
+- * ResultList styles
+- * Uses DS CSS variables for all visual properties.
+- * Features: podium highlights, striped rows, sticky header, responsive hiding.
+- */
+-
+-.tableWrapper {
+-  position: relative;
+-  width: 100%;
+-  overflow-x: auto;
+-  -webkit-overflow-scrolling: touch;
+-  border-radius: var(--radius-lg);
+-  box-shadow: var(--shadow-sm);
+-  background-color: var(--color-bg-primary);
+-}
+-
+-/* --- Integrated table toolbar --- */
+-.tableToolbar {
+-  display: flex;
+-  align-items: center;
+-  gap: 0.5rem;
+-  padding: 0.25rem 0.5rem;
+-  background: var(--csk-color-surface, #f9fafb);
+-  border: 1px solid var(--csk-color-border-secondary, #e5e7eb);
+-  border-bottom: none;
+-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+-  flex-wrap: wrap;
+-}
+-
+-.toolbarRight {
+-  display: flex;
+-  align-items: center;
+-  gap: 0.5rem;
+-  margin-left: auto;
+-  flex-shrink: 0;
+-}
+-
+-.searchWrapper {
+-  flex: 1;
+-  min-width: 8rem;
+-  max-width: 14rem;
+-}
+-
+-/* Prevent iOS Safari viewport zoom on focus of the DS SearchInput.
+- * Context: see EventDetailPage.module.css — same override, co-located with the
+- * other SearchInput usage in the table toolbar. Gated to touch devices via
+- * `pointer: coarse`. Specificity matches the DS compound selector.
+- * TODO: remove once the DS exposes a prop or token for iOS-safe input sizing
+- * (see OpenCanoeTiming/c123-live-mini issue #160).
+- */
+-@media (pointer: coarse) {
+-  .searchWrapper :global(.csk-search-input .csk-search-input__input) {
+-    font-size: 16px;
+-  }
+-}
+-
+-/* ViewMode hidden on mobile — marginal feature */
+-.viewModeDesktopOnly {
+-  display: none;
+-}
+-
+-/* When toolbar present, remove top border-radius from table head */
+-.tableWithToolbar .headerRow th:first-child {
+-  border-top-left-radius: 0;
+-}
+-
+-.tableWithToolbar .headerRow th:last-child {
+-  border-top-right-radius: 0;
+-}
+-
+-@media (min-width: 769px) {
+-  .viewModeDesktopOnly {
+-    display: block;
+-  }
+-}
+-
+-@media (max-width: 768px) {
+-  .searchWrapper {
+-    min-width: 6rem;
+-    max-width: none;
+-    flex: 1;
+-  }
+-}
+-
+-/* Table base — separate (not collapse) so border-radius works on th */
+-.table {
+-  width: 100%;
+-  border-collapse: separate;
+-  border-spacing: 0;
+-  font-size: var(--csk-font-size-sm, 0.875rem);
+-  line-height: 1.4;
+-}
+-
+-/* Header — matches DS Table header (.csk-table__thead / .csk-table__th) */
+-/* Gradient on thead (full-width), not per-cell */
+-.tableHead {
+-  background: var(--gradient-primary-soft);
+-  position: sticky;
+-  top: 0;
+-  z-index: 1;
+-}
+-
+-.headerRow th:first-child {
+-  border-top-left-radius: var(--radius-md);
+-}
+-
+-.headerRow th:last-child {
+-  border-top-right-radius: var(--radius-md);
+-}
+-
+-.headerCell {
+-  padding: var(--spacing-3) var(--spacing-4);
+-  font-weight: var(--font-weight-semibold);
+-  font-size: var(--font-size-sm);
+-  color: var(--color-text-inverse);
+-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+-  white-space: nowrap;
+-  text-align: left;
+-  border-bottom: none;
+-  vertical-align: middle;
+-  background: transparent;
+-}
+-
+-/* Data rows */
+-.dataRow {
+-  border-bottom: 1px solid var(--csk-color-border-secondary, #e5e7eb);
+-  transition: background-color 0.15s ease;
+-}
+-
+-.clickable {
+-  cursor: pointer;
+-}
+-
+-.clickable:hover {
+-  background-color: var(--csk-color-bg-hover, rgba(0, 0, 0, 0.04));
+-}
+-
+-.stripedRow {
+-  background-color: var(--csk-color-bg-secondary, rgba(0, 0, 0, 0.02));
+-}
+-
+-.stripedRow:hover {
+-  background-color: var(--csk-color-bg-hover, rgba(0, 0, 0, 0.04));
+-}
+-
+-.expandedDataRow {
+-  background-color: var(--csk-color-bg-hover, rgba(0, 0, 0, 0.04));
+-  border-bottom: none;
+-}
+-
+-/* Cells */
+-.cell {
+-  padding: 0.5rem;
+-  vertical-align: middle;
+-}
+-
+-.alignCenter {
+-  text-align: center;
+-}
+-
+-.alignRight {
+-  text-align: right;
+-}
+-
+-/* Expand column */
+-.expandCol {
+-  width: 28px;
+-  padding: 0.5rem 0.25rem;
+-  text-align: center;
+-}
+-
+-/* Rank column — zero horizontal cell padding; the 26px podium circle and
+- * plain numbers get centred inside the 32px column header/cell. */
+-.rankCol {
+-  padding-left: 0;
+-  padding-right: 0;
+-}
+-
+-.chevron {
+-  display: inline-block;
+-  font-size: 1rem;
+-  color: var(--csk-color-text-tertiary, #9ca3af);
+-  transition: transform 0.2s ease;
+-  transform: rotate(0deg);
+-}
+-
+-.chevronOpen {
+-  transform: rotate(90deg);
+-  color: var(--csk-color-primary, #2563eb);
+-}
+-
+-/* Detail expansion row */
+-.detailRow td {
+-  padding: 0;
+-  border-bottom: 1px solid var(--csk-color-border-secondary, #e5e7eb);
+-}
+-
+-/* --- Podium highlights --- */
+-.rowGold {
+-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.12) 0%, transparent 60%);
+-  box-shadow: inset 3px 0 0 #fbbf24;
+-}
+-
+-.rowSilver {
+-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.1) 0%, transparent 60%);
+-  box-shadow: inset 3px 0 0 #9ca3af;
+-}
+-
+-.rowBronze {
+-  background: linear-gradient(90deg, rgba(205, 127, 50, 0.1) 0%, transparent 60%);
+-  box-shadow: inset 3px 0 0 #d97706;
+-}
+-
+-/* --- Rank styling --- */
+-.rankPodium {
+-  display: inline-flex;
+-  align-items: center;
+-  justify-content: center;
+-  width: 26px;
+-  height: 26px;
+-  border-radius: 50%;
+-  font-weight: 700;
+-  font-size: 0.8125rem;
+-}
+-
+-.rankGold {
+-  background: linear-gradient(135deg, #fef3c7, #fde68a);
+-  color: #92400e;
+-}
+-
+-.rankSilver {
+-  background: linear-gradient(135deg, #f3f4f6, #d1d5db);
+-  color: #374151;
+-}
+-
+-.rankBronze {
+-  background: linear-gradient(135deg, #fef3c7, #fed7aa);
+-  color: #9a3412;
+-}
+-
+-.rankText {
+-  font-weight: 500;
+-  color: var(--csk-color-text-secondary, #6b7280);
+-}
+-
+-.rankDash {
+-  color: var(--csk-color-text-tertiary, #9ca3af);
+-}
+-
+-/* --- Typography --- */
+-
+-/* Applied to <td>/<th> — forces table cell to shrink instead of expanding
+-   to fit content. Required for text-overflow: ellipsis without table-layout: fixed. */
+-.nameCol {
+-  max-width: 0;
+-  overflow: hidden;
+-}
+-
+-.nameCell {
+-  display: flex;
+-  align-items: center;
+-  gap: 0.375rem;
+-  min-width: 0;
+-}
+-
+-.nameCellBody {
+-  flex: 1;
+-  min-width: 0;
+-}
+-
+-.athleteName {
+-  display: flex;
+-  align-items: center;
+-  gap: 0.25rem;
+-  font-weight: 500;
+-  color: var(--csk-color-text-primary, #111827);
+-  min-width: 0;
+-}
+-
+-.athleteNameText {
+-  overflow: hidden;
+-  text-overflow: ellipsis;
+-  white-space: nowrap;
+-  min-width: 0;
+-}
+-
+-.athleteClub {
+-  font-size: var(--csk-font-size-xs, 0.75rem);
+-  color: var(--csk-color-text-tertiary, #9ca3af);
+-  margin-top: 0.0625rem;
+-  overflow: hidden;
+-  text-overflow: ellipsis;
+-  white-space: nowrap;
+-  min-width: 0;
+-}
+-
+-.athleteClubText {
+-  overflow: hidden;
+-  text-overflow: ellipsis;
+-  white-space: nowrap;
+-  min-width: 0;
+-}
+-
+-.monoText {
+-  font-family: var(--csk-font-mono, 'JetBrains Mono', 'Fira Code', monospace);
+-  font-variant-numeric: tabular-nums;
+-}
+-
+-.totalText {
+-  font-weight: 600;
+-}
+-
+-.penaltyText {
+-  font-family: var(--csk-font-mono, 'JetBrains Mono', 'Fira Code', monospace);
+-  font-variant-numeric: tabular-nums;
+-  color: var(--csk-color-warning, #d97706);
+-  font-weight: 600;
+-}
+-
+-.betterRun {
+-  font-weight: 700;
+-  color: var(--csk-color-primary, #2563eb);
+-}
+-
+-.behindText {
+-  font-family: var(--csk-font-mono, 'JetBrains Mono', 'Fira Code', monospace);
+-  font-variant-numeric: tabular-nums;
+-  color: var(--csk-color-text-tertiary, #9ca3af);
+-  font-size: var(--csk-font-size-xs, 0.75rem);
+-}
+-
+-/* --- Category tag after name --- */
+-.catTag {
+-  font-size: 0.625rem;
+-  font-weight: 500;
+-  color: var(--csk-color-text-tertiary, #9ca3af);
+-  flex-shrink: 0;
+-}
+-
+-/* --- Mobile-only BR runs stacked --- */
+-.brRunsStacked {
+-  display: flex;
+-  flex-direction: column;
+-  gap: 0.125rem;
+-}
+-
+-.brRunLine {
+-  display: flex;
+-  align-items: baseline;
+-  gap: 0.25rem;
+-  font-size: var(--csk-font-size-xs, 0.75rem);
+-  white-space: nowrap;
+-}
+-
+-/* Muted placeholder for a missing BR run slot (em-dash shows instead of a time). */
+-.brRunLineDim {
+-  opacity: 0.45;
+-}
+-
+-.brRunPen {
+-  font-size: 0.6875rem;
+-  color: var(--csk-color-warning, #d97706);
+-}
+-
+-/* Desktop BR run column wrapper — keep time + penalty on a single line so
+- * the column grows to fit instead of wrapping "(54)" onto its own line. */
+-.brRunDesktop {
+-  white-space: nowrap;
+-}
+-
+-/* Mobile-only columns (hidden on desktop, shown on mobile) */
+-.mobileOnly {
+-  display: none;
+-}
+-
+-/* Split-span time value for mobile BR stacked cell — aligns on decimal
+- * across rows regardless of integer width (85.20 / 100.50). */
+-.timeValue {
+-  font-family: var(--csk-font-mono, 'JetBrains Mono', 'Fira Code', monospace);
+-  font-variant-numeric: tabular-nums;
+-  white-space: nowrap;
+-}
+-
+-.timeInt {
+-  display: inline-block;
+-  min-width: 3ch;
+-  text-align: right;
+-}
+-
+-.timeFrac {
+-  display: inline-block;
+-  text-align: left;
+-}
+-
+-.timeDash {
+-  color: var(--csk-color-text-tertiary, #9ca3af);
+-  font-family: var(--csk-font-mono, 'JetBrains Mono', 'Fira Code', monospace);
+-}
+-
+-
+-/* --- Responsive --- */
+-@media (max-width: 640px) {
+-  .hideOnMobile {
+-    display: none;
+-  }
+-
+-  .mobileOnly {
+-    display: table-cell;
+-  }
+-
+-  .headerCell {
+-    padding: 0.5rem 0.375rem;
+-  }
+-
+-  .cell {
+-    padding: 0.375rem;
+-  }
+-
+-  .table {
+-    font-size: 0.8125rem;
+-  }
+-
+-}
+diff --git a/packages/client/src/components/ResultList.tsx b/packages/client/src/components/ResultList.tsx
+index d147c02..badc3a2 100644
+--- a/packages/client/src/components/ResultList.tsx
++++ b/packages/client/src/components/ResultList.tsx
+@@ -1,348 +1,25 @@
+-import { Fragment } from 'react';
++import { useMemo, type ReactNode } from 'react';
+ import {
+-  Badge,
++  Dropdown,
++  DropdownButton,
+   EmptyState,
++  FavoritesToggle,
++  FilterPills,
++  ResultsPanel,
++  ResultsTable,
++  RunDetail,
+   SearchInput,
++  SegmentedControl,
++  Switch,
++  type DropdownItem,
++  type ResultRow,
+ } from '@czechcanoe/rvp-design-system';
+-import type { ResultEntry, ResultsResponse, RaceInfo, CategoryInfo } from '../services/api';
++import type { ResultsResponse, RaceInfo, CategoryInfo, ResultEntry } from '../services/api';
+ import type { RunDetailData } from '../hooks/useEventLiveState';
+-import { formatTime, formatPenalty } from '../utils/formatTime';
+-import { RunDetailExpand } from './RunDetailExpand';
+-import { ViewModeToggle, type ViewMode } from './ViewModeToggle';
+-import { RoundTabs } from './RoundTabs';
+-import { CategoryFilter } from './CategoryFilter';
+-import { StarButton } from './StarButton';
+-import { FavoritesToggle } from './FavoritesToggle';
+-import styles from './ResultList.module.css';
++import { getRaceTypeLabel, isBestRunRace } from '../utils/raceTypeLabels';
++import { raceState, rowId, toResultRow, toRunDetail } from '../utils/mapToResultsTable';
+ 
+-interface Column {
+-  key: string;
+-  header: string;
+-  align?: 'left' | 'center' | 'right';
+-  width?: string;
+-  hideOnMobile?: boolean;
+-  mobileOnly?: boolean;
+-  cellClassName?: string;
+-  render: (row: ResultEntry, index: number) => React.ReactNode;
+-}
+-
+-/** Name cell with ☆ [Name / [cat] | Club] layout — star vertically centered across row. */
+-function NameCell({
+-  row,
+-  favorites,
+-}: {
+-  row: ResultEntry;
+-  favorites?: {
+-    isFavorite: (bib: number, classId: string) => boolean;
+-    onToggle: (bib: number, classId: string) => void;
+-    classId: string | null;
+-  };
+-}) {
+-  return (
+-    <div className={styles.nameCell}>
+-      {favorites && row.bib != null && favorites.classId && (
+-        <StarButton
+-          active={favorites.isFavorite(row.bib, favorites.classId)}
+-          onClick={() => favorites.onToggle(row.bib!, favorites.classId!)}
+-        />
+-      )}
+-      <div className={styles.nameCellBody}>
+-        <div className={styles.athleteName}>
+-          <span className={styles.athleteNameText}>{row.name}</span>
+-          {row.catId && <span className={styles.catTag}>{row.catId}</span>}
+-        </div>
+-        {row.club && (
+-          <div className={styles.athleteClub}>
+-            <span className={styles.athleteClubText}>{row.club}</span>
+-          </div>
+-        )}
+-      </div>
+-    </div>
+-  );
+-}
+-
+-/** Split-span time value for decimal-point alignment in stacked mobile cells.
+- *  The integer part right-aligns in a fixed 3ch box, the fraction part left-aligns;
+- *  the decimal point therefore sits at a consistent offset across stacked rows. */
+-function TimeValue({ centis }: { centis: number | null }) {
+-  if (centis == null) {
+-    return <span className={styles.timeDash}>—</span>;
+-  }
+-  const formatted = (centis / 100).toFixed(2);
+-  const [intPart, fracPart] = formatted.split('.');
+-  return (
+-    <span className={styles.timeValue}>
+-      <span className={styles.timeInt}>{intPart}</span>
+-      <span className={styles.timeFrac}>.{fracPart}</span>
+-    </span>
+-  );
+-}
+-
+-function buildStandardColumns(
+-  selectedCatId: string | null,
+-  favorites?: { isFavorite: (bib: number, classId: string) => boolean; onToggle: (bib: number, classId: string) => void; classId: string | null },
+-): Column[] {
+-  const useCategory = Boolean(selectedCatId);
+-  const cols: Column[] = [
+-    {
+-      key: 'rnk',
+-      header: 'Poř.',
+-      width: '32px',
+-      align: 'center',
+-      cellClassName: styles.rankCol,
+-      render: (row) => {
+-        const rank = useCategory ? (row.catRnk ?? row.rnk) : row.rnk;
+-        return <RankCell rank={rank} status={row.status} />;
+-      },
+-    },
+-    {
+-      key: 'name',
+-      header: 'Jméno',
+-      width: '100%',
+-      cellClassName: styles.nameCol,
+-      render: (row) => <NameCell row={row} favorites={favorites} />,
+-    },
+-  ];
+-  cols.push(
+-    {
+-      key: 'time',
+-      header: 'Čas',
+-      align: 'right',
+-      hideOnMobile: true,
+-      render: (row) => {
+-        if (row.status) return <StatusBadge status={row.status} />;
+-        return <span className={styles.monoText}>{formatTime(row.time)}</span>;
+-      },
+-    },
+-    {
+-      key: 'pen',
+-      header: 'Trest',
+-      align: 'right',
+-      width: '52px',
+-      hideOnMobile: true,
+-      render: (row) => {
+-        if (row.status) return null;
+-        const val = formatPenalty(row.pen);
+-        if (!val) return null;
+-        return <span className={styles.penaltyText}>{val}</span>;
+-      },
+-    },
+-    {
+-      key: 'total',
+-      header: 'Výsledek',
+-      align: 'right',
+-      render: (row) => {
+-        if (row.status) return <StatusBadge status={row.status} />;
+-        return <span className={`${styles.monoText} ${styles.totalText}`}>{formatTime(row.total)}</span>;
+-      },
+-    },
+-    {
+-      key: 'behind',
+-      header: 'Ztráta',
+-      align: 'right',
+-      hideOnMobile: true,
+-      render: (row) => {
+-        const behind = useCategory ? (row.catTotalBehind ?? row.totalBehind) : row.totalBehind;
+-        return <span className={styles.behindText}>{behind ?? ''}</span>;
+-      },
+-    },
+-  );
+-  return cols;
+-}
+-
+-/**
+- * Resolve BR run 1 / run 2 values from a row.
+- *
+- * Server convention: when both runs exist, `prev*` holds BR1 and `time/pen/total`
+- * holds BR2. When only one run exists, `prev*` is null and `time/pen/total` holds
+- * that single run — the `betterRunNr` field indicates whether it was run 1 or run 2.
+- */
+-function resolveBrRuns(row: ResultEntry) {
+-  const br1Status = row.prevStatus ?? null;
+-  const br2Status = row.currStatus ?? null;
+-  // BR1 is "present" when it has either a time or a status.
+-  const hasBr1 = row.prevTotal != null || br1Status != null;
+-  if (hasBr1) {
+-    return {
+-      run1: { total: row.prevTotal ?? null, pen: row.prevPen ?? null, status: br1Status },
+-      run2: { total: row.total ?? null, pen: row.pen ?? null, status: br2Status },
+-    };
+-  }
+-  // Only one run exists — route by betterRunNr (#155). For all-DNF singletons
+-  // betterRunNr is null; fall back to run1 (matches pre-#155 behavior).
+-  const single = { total: row.total ?? null, pen: row.pen ?? null, status: br2Status };
+-  const empty = { total: null, pen: null, status: null };
+-  if (row.betterRunNr === 2) {
+-    return { run1: empty, run2: single };
+-  }
+-  return { run1: single, run2: empty };
+-}
+-
+-/** Mobile-only cell showing both BR runs stacked.
+- *  Position = run number (no label). Missing slot renders as em-dash placeholder
+- *  so the "top = run 1" convention is preserved even when only one run has data. */
+-function BrRunsCell({ row }: { row: ResultEntry }) {
+-  const { run1, run2 } = resolveBrRuns(row);
+-  const isBetter1 = row.betterRunNr === 1;
+-  const isBetter2 = row.betterRunNr === 2;
+-
+-  const renderLine = (
+-    run: { total: number | null; pen: number | null; status: string | null },
+-    isBetter: boolean,
+-    key: string,
+-  ) => {
+-    const hasData = run.total != null || run.status != null;
+-    const dimClass = hasData ? '' : styles.brRunLineDim;
+-    return (
+-      <div key={key} className={`${styles.brRunLine} ${isBetter ? styles.betterRun : ''} ${dimClass}`}>
+-        {run.status ? (
+-          <StatusBadge status={run.status} />
+-        ) : (
+-          <>
+-            <TimeValue centis={run.total} />
+-            {run.pen != null && run.pen > 0 && (
+-              <span className={styles.brRunPen}>({formatPenalty(run.pen)})</span>
+-            )}
+-          </>
+-        )}
+-      </div>
+-    );
+-  };
+-
+-  return (
+-    <div className={styles.brRunsStacked}>
+-      {renderLine(run1, isBetter1, 'run1')}
+-      {renderLine(run2, isBetter2, 'run2')}
+-    </div>
+-  );
+-}
+-
+-function buildBestRunColumns(
+-  selectedCatId: string | null,
+-  favorites?: { isFavorite: (bib: number, classId: string) => boolean; onToggle: (bib: number, classId: string) => void; classId: string | null },
+-): Column[] {
+-  const useCategory = Boolean(selectedCatId);
+-  return [
+-    {
+-      key: 'rnk',
+-      header: 'Poř.',
+-      width: '32px',
+-      align: 'center',
+-      cellClassName: styles.rankCol,
+-      render: (row) => {
+-        const rank = useCategory ? (row.catRnk ?? row.rnk) : row.rnk;
+-        return <RankCell rank={rank} status={row.status} />;
+-      },
+-    },
+-    {
+-      key: 'name',
+-      header: 'Jméno',
+-      width: '100%',
+-      cellClassName: styles.nameCol,
+-      render: (row) => <NameCell row={row} favorites={favorites} />,
+-    },
+-    {
+-      key: 'brRuns',
+-      header: 'Jízdy',
+-      width: '1px',
+-      mobileOnly: true,
+-      render: (row) => <BrRunsCell row={row} />,
+-    },
+-    {
+-      key: 'run1',
+-      header: '1. jízda',
+-      align: 'right',
+-      hideOnMobile: true,
+-      render: (row) => {
+-        const { run1 } = resolveBrRuns(row);
+-        if (run1.status) return <StatusBadge status={run1.status} />;
+-        if (run1.total == null) return <span className={styles.monoText}>-</span>;
+-        const isBetter = row.betterRunNr === 1;
+-        return (
+-          <span className={`${styles.brRunDesktop} ${isBetter ? styles.betterRun : ''}`}>
+-            <span className={styles.monoText}>{formatTime(run1.total)}</span>
+-            {run1.pen != null && run1.pen > 0 && (
+-              <span className={styles.brRunPen}>&nbsp;({formatPenalty(run1.pen)})</span>
+-            )}
+-          </span>
+-        );
+-      },
+-    },
+-    {
+-      key: 'run2',
+-      header: '2. jízda',
+-      align: 'right',
+-      hideOnMobile: true,
+-      render: (row) => {
+-        const { run2 } = resolveBrRuns(row);
+-        if (run2.status) return <StatusBadge status={run2.status} />;
+-        if (run2.total == null) return <span className={styles.monoText}>-</span>;
+-        const isBetter = row.betterRunNr === 2;
+-        return (
+-          <span className={`${styles.brRunDesktop} ${isBetter ? styles.betterRun : ''}`}>
+-            <span className={styles.monoText}>{formatTime(run2.total)}</span>
+-            {run2.pen != null && run2.pen > 0 && (
+-              <span className={styles.brRunPen}>&nbsp;({formatPenalty(run2.pen)})</span>
+-            )}
+-          </span>
+-        );
+-      },
+-    },
+-    {
+-      key: 'totalTotal',
+-      header: 'Výsledek',
+-      width: '1px',
+-      align: 'right',
+-      hideOnMobile: true,
+-      render: (row) => {
+-        if (row.status) return null;
+-        return (
+-          <span className={`${styles.monoText} ${styles.totalText}`}>
+-            {formatTime(row.totalTotal ?? null)}
+-          </span>
+-        );
+-      },
+-    },
+-    {
+-      key: 'behind',
+-      header: 'Ztráta',
+-      align: 'right',
+-      hideOnMobile: true,
+-      render: (row) => {
+-        const behind = useCategory ? (row.catTotalBehind ?? row.totalBehind) : row.totalBehind;
+-        return <span className={styles.behindText}>{behind ?? ''}</span>;
+-      },
+-    },
+-  ];
+-}
+-
+-/** Rank display with podium styling */
+-function RankCell({ rank, status }: { rank: number | null; status: string | null }) {
+-  if (status) return <span className={styles.rankDash}>-</span>;
+-  if (rank === null) return <span className={styles.rankDash}>-</span>;
+-  if (rank <= 3) {
+-    const podiumClass = rank === 1 ? styles.rankGold : rank === 2 ? styles.rankSilver : styles.rankBronze;
+-    return <span className={`${styles.rankPodium} ${podiumClass}`}>{rank}</span>;
+-  }
+-  return <span className={styles.rankText}>{rank}</span>;
+-}
+-
+-/** Status badge for DNS/DNF/DSQ */
+-function StatusBadge({ status }: { status: string }) {
+-  return (
+-    <Badge variant="error" size="sm">
+-      {status}
+-    </Badge>
+-  );
+-}
+-
+-function getRowPodiumClass(rank: number | null, status: string | null): string {
+-  if (status || rank === null) return '';
+-  if (rank === 1) return styles.rowGold;
+-  if (rank === 2) return styles.rowSilver;
+-  if (rank === 3) return styles.rowBronze;
+-  return '';
+-}
++export type ViewMode = 'simple' | 'detailed';
+ 
+ interface ResultListProps {
+   data: ResultsResponse;
+@@ -354,7 +31,7 @@ interface ResultListProps {
+   detailedLoading?: Set<string>;
+   viewMode?: ViewMode;
+   onViewModeChange?: (mode: ViewMode) => void;
+-  // Round tabs
++  // Round selection
+   roundRaces?: RaceInfo[];
+   selectedRaceId?: string | null;
+   onRaceChange?: (raceId: string) => void;
+@@ -362,9 +39,7 @@ interface ResultListProps {
+   showRoundTabs?: boolean;
+   // Search (uncontrolled — no value prop, just onChange callback)
+   onSearchChange?: (q: string) => void;
+-  /** Forces SearchInput to remount, resetting its uncontrolled internal value. Change this
+-   *  when the filter context changes (e.g. class/category switch) so a stale query can't
+-   *  stay in the DOM input while the parent state has moved on. See #149. */
++  /** Forces SearchInput to remount, resetting its uncontrolled internal value (#149). */
+   searchResetKey?: string;
+   // Category
+   categories?: CategoryInfo[];
+@@ -376,12 +51,19 @@ interface ResultListProps {
+   showOnlyFavorites?: boolean;
+   onToggleShowFavorites?: () => void;
+   favoritesCount?: number;
++  /** Status line text after the badge, e.g. „2. jízda · 8 z 24 v cíli“ (composed by the page). */
++  status?: ReactNode;
++}
++
++/** DNS/DNF/DSQ go last; the server order is kept otherwise. */
++function sortMarksLast(results: ResultEntry[]): ResultEntry[] {
++  return [...results].sort((a, b) => Number(Boolean(a.status)) - Number(Boolean(b.status)));
+ }
+ 
+ export function ResultList({
+   data,
+-  isBestRun,
+-  selectedCatId,
++  isBestRun = false,
++  selectedCatId = null,
+   expandedRows = new Set(),
+   onToggleExpand,
+   detailedCache = {},
+@@ -399,170 +81,150 @@ export function ResultList({
+   onCategoryChange,
+   isFavorite,
+   onToggleFavorite,
+-  raceClassId,
+-  showOnlyFavorites,
++  raceClassId = null,
++  showOnlyFavorites = false,
+   onToggleShowFavorites,
+   favoritesCount = 0,
++  status,
+ }: ResultListProps) {
+   const { results, race } = data;
+ 
+-  const effectiveExpandedRows = viewMode === 'detailed'
+-    ? new Set(results.map((r) => `${race.raceId}-${r.bib}`))
+-    : expandedRows;
+-
+-  const sorted = [...results].sort((a, b) => {
+-    if (a.status && !b.status) return 1;
+-    if (!a.status && b.status) return -1;
+-    return 0;
+-  });
+-
+-  const favoritesParam = isFavorite && onToggleFavorite
+-    ? { isFavorite, onToggle: onToggleFavorite, classId: raceClassId ?? null }
+-    : undefined;
++  const sorted = useMemo(() => sortMarksLast(results), [results]);
++  const byId = useMemo(() => {
++    const map = new Map<string, ResultEntry>();
++    sorted.forEach((r, i) => map.set(rowId(race.raceId, r, i), r));
++    return map;
++  }, [sorted, race.raceId]);
++
++  const rows: ResultRow[] = useMemo(
++    () =>
++      sorted.map((r, i) =>
++        toResultRow(r, i, {
++          raceId: race.raceId,
++          isBestRun,
++          selectedCatId,
++          classId: raceClassId,
++          isFavorite,
++        }),
++      ),
++    [sorted, race.raceId, isBestRun, selectedCatId, raceClassId, isFavorite],
++  );
+ 
+-  const columns = isBestRun
+-    ? buildBestRunColumns(selectedCatId ?? null, favoritesParam)
+-    : buildStandardColumns(selectedCatId ?? null, favoritesParam);
++  const expandedId = viewMode === 'detailed' ? rows.map((r) => r.id) : [...expandedRows];
+ 
+-  const hasToolbar = onViewModeChange || showRoundTabs || onSearchChange || categories.length > 0 || onToggleShowFavorites;
++  const hasToolbar =
++    onViewModeChange || showRoundTabs || onSearchChange || categories.length > 0 || onToggleShowFavorites;
+ 
+   if (sorted.length === 0 && !hasToolbar) {
+-    return (
+-      <EmptyState
+-        title="Zatím žádné výsledky"
+-        description="Výsledky se zobrazí po zahájení závodu."
+-      />
+-    );
++    return <EmptyState title="Zatím žádné výsledky" description="Výsledky se zobrazí po zahájení závodu." />;
+   }
+ 
++  const categoryItems: DropdownItem[] = [
++    { id: '__all__', label: 'Vše', onClick: () => onCategoryChange?.(null) },
++    ...categories.map((cat) => ({ id: cat.catId, label: cat.name, onClick: () => onCategoryChange?.(cat.catId) })),
++  ];
++  const selectedCategory = selectedCatId ? categories.find((c) => c.catId === selectedCatId) : undefined;
++
+   return (
+-    <div className={styles.tableWrapper}>
+-      {hasToolbar && (
+-        <div className={styles.tableToolbar}>
+-          {showRoundTabs && roundRaces && onRaceChange && (
+-            <RoundTabs
+-              races={roundRaces}
+-              selectedRaceId={selectedRaceId ?? null}
+-              onRaceChange={onRaceChange}
+-              hasMergedBR={hasMergedBR}
+-            />
+-          )}
+-          {onSearchChange && (
+-            <div className={styles.searchWrapper}>
+-              <SearchInput
+-                key={searchResetKey}
++    <ResultsPanel
++      state={raceState(race.raceStatus)}
++      status={status}
++      search={
++        onSearchChange && (
++          <SearchInput
++            key={searchResetKey}
++            size="sm"
++            fullWidth
++            aria-label="Hledat závodníka"
++            placeholder="Hledat závodníka..."
++            onChange={onSearchChange}
++            debounceMs={200}
++          />
++        )
++      }
++      favorites={
++        onToggleShowFavorites && (
++          <FavoritesToggle
++            pressed={showOnlyFavorites}
++            count={favoritesCount}
++            label="Jen oblíbení"
++            onPressedChange={onToggleShowFavorites}
++          />
++        )
++      }
++      detail={
++        onViewModeChange && (
++          <Switch
++            size="sm"
++            label="Detailní"
++            checked={viewMode === 'detailed'}
++            onChange={(e) => onViewModeChange(e.target.checked ? 'detailed' : 'simple')}
++          />
++        )
++      }
++      filters={
++        (showRoundTabs || categories.length > 0) && (
++          <>
++            {showRoundTabs && roundRaces && onRaceChange && (
++              <SegmentedControl
+                 size="sm"
+-                placeholder="Hledat závodníka..."
+-                onChange={onSearchChange}
+-                debounceMs={200}
+-              />
+-            </div>
+-          )}
+-          <div className={styles.toolbarRight}>
+-            {onCategoryChange && categories.length > 0 && (
+-              <CategoryFilter
+-                categories={categories}
+-                selectedCatId={selectedCatId ?? null}
+-                onCategoryChange={onCategoryChange}
+-              />
+-            )}
+-            {onToggleShowFavorites && (
+-              <FavoritesToggle
+-                active={showOnlyFavorites ?? false}
+-                count={favoritesCount}
+-                onToggle={onToggleShowFavorites}
++                aria-label="Kolo"
++                items={roundRaces.map((r) => ({
++                  value: r.raceId,
++                  label: getRaceTypeLabel(r.raceType, hasMergedBR && isBestRunRace(r.raceType)),
++                }))}
++                value={selectedRaceId ?? ''}
++                onChange={onRaceChange}
+               />
+             )}
+-            {onViewModeChange && (
+-              <div className={styles.viewModeDesktopOnly}>
+-                <ViewModeToggle viewMode={viewMode} onViewModeChange={onViewModeChange} />
+-              </div>
+-            )}
+-          </div>
+-        </div>
+-      )}
+-      <table className={`${styles.table} ${hasToolbar ? styles.tableWithToolbar : ''}`}>
+-          <thead className={styles.tableHead}>
+-            <tr className={styles.headerRow}>
+-              {onToggleExpand && <th className={`${styles.headerCell} ${styles.expandCol}`}></th>}
+-              {columns.map((col) => (
+-                <th
+-                  key={col.key}
+-                  className={`${styles.headerCell} ${getAlignClass(col.align)} ${col.hideOnMobile ? styles.hideOnMobile : ''} ${col.mobileOnly ? styles.mobileOnly : ''} ${col.cellClassName ?? ''}`}
+-                  style={col.width ? { width: col.width } : undefined}
+-                >
+-                  {col.header}
+-                </th>
++            {onCategoryChange && categories.length > 0 &&
++              (selectedCategory ? (
++                <FilterPills
++                  size="sm"
++                  aria-label="Aktivní filtry"
++                  filters={[{ key: selectedCategory.catId, label: selectedCategory.name, dismissible: true }]}
++                  onRemove={() => onCategoryChange(null)}
++                />
++              ) : (
++                <Dropdown
++                  trigger={<DropdownButton variant="pill">Kategorie</DropdownButton>}
++                  items={categoryItems}
++                  size="sm"
++                  position="bottom-end"
++                  aria-label="Filtr kategorie"
++                />
+               ))}
+-            </tr>
+-          </thead>
+-          <tbody>
+-            {sorted.length === 0 ? (
+-              <tr>
+-                <td colSpan={columns.length + (onToggleExpand ? 1 : 0)}>
+-                  <EmptyState
+-                    title="Žádné výsledky"
+-                    description="Zkuste upravit hledání nebo filtry."
+-                  />
+-                </td>
+-              </tr>
+-            ) : sorted.map((row, index) => {
+-              const rowKey = `${race.raceId}-${row.bib}`;
+-              const isExpanded = effectiveExpandedRows.has(rowKey);
+-              const isLoading = detailedLoading.has(rowKey);
+-              const detail = detailedCache[rowKey] ?? null;
+-              const podiumClass = getRowPodiumClass(row.rnk, row.status);
+-              return (
+-                <Fragment key={rowKey}>
+-                  <tr
+-                    onClick={onToggleExpand ? () => onToggleExpand(rowKey) : undefined}
+-                    className={`${styles.dataRow} ${podiumClass} ${index % 2 === 1 ? styles.stripedRow : ''} ${onToggleExpand ? styles.clickable : ''} ${isExpanded ? styles.expandedDataRow : ''}`}
+-                  >
+-                    {onToggleExpand && (
+-                      <td className={`${styles.cell} ${styles.expandCol}`}>
+-                        <span className={`${styles.chevron} ${isExpanded ? styles.chevronOpen : ''}`}>
+-                          ›
+-                        </span>
+-                      </td>
+-                    )}
+-                    {columns.map((col) => (
+-                      <td
+-                        key={col.key}
+-                        className={`${styles.cell} ${getAlignClass(col.align)} ${col.hideOnMobile ? styles.hideOnMobile : ''} ${col.mobileOnly ? styles.mobileOnly : ''} ${col.cellClassName ?? ''}`}
+-                      >
+-                        {col.render(row, index)}
+-                      </td>
+-                    ))}
+-                  </tr>
+-                  {isExpanded && onToggleExpand && (
+-                    <tr className={styles.detailRow}>
+-                      <td colSpan={columns.length + 1}>
+-                        <RunDetailExpand
+-                          detail={detail}
+-                          isLoading={isLoading}
+-                          isBestRun={isBestRun}
+-                          bib={row.bib}
+-                          catRnk={row.catRnk}
+-                          catId={row.catId}
+-                          betterRunNr={row.betterRunNr}
+-                          prevStatus={row.prevStatus}
+-                          currStatus={row.currStatus}
+-                        />
+-                      </td>
+-                    </tr>
+-                  )}
+-                </Fragment>
+-              );
+-            })}
+-          </tbody>
+-
+-        </table>
+-    </div>
++          </>
++        )
++      }
++    >
++      <ResultsTable
++        rows={rows}
++        columns={isBestRun ? 'pair' : 'single'}
++        caption="Výsledky"
++        expandedId={expandedId}
++        onToggle={onToggleExpand ? (id) => onToggleExpand(String(id)) : undefined}
++        onFavoriteChange={
++          onToggleFavorite && raceClassId
++            ? (row) => {
++                const source = byId.get(String(row.id));
++                if (source?.bib != null) onToggleFavorite(source.bib, raceClassId);
++              }
++            : undefined
++        }
++        renderDetail={(row) => {
++          const source = byId.get(String(row.id));
++          if (!source) return null;
++          const key = String(row.id);
++          return (
++            <RunDetail
++              {...toRunDetail(source, detailedCache[key] ?? null, isBestRun)}
++              loading={detailedLoading.has(key)}
++            />
++          );
++        }}
++        emptyState={<EmptyState title="Žádné výsledky" description="Zkuste upravit hledání nebo filtry." />}
++      />
++    </ResultsPanel>
+   );
+ }
+-
+-function getAlignClass(align?: 'left' | 'center' | 'right'): string {
+-  if (align === 'center') return styles.alignCenter;
+-  if (align === 'right') return styles.alignRight;
+-  return '';
+-}
+diff --git a/packages/client/src/components/RoundTabs.tsx b/packages/client/src/components/RoundTabs.tsx
+deleted file mode 100644
+index 9f66559..0000000
+--- a/packages/client/src/components/RoundTabs.tsx
++++ /dev/null
+@@ -1,35 +0,0 @@
+-import { Tabs, type TabItem } from '@czechcanoe/rvp-design-system';
+-import type { RaceInfo } from '../services/api';
+-import { getRaceTypeLabel, isBestRunRace } from '../utils/raceTypeLabels';
+-
+-interface RoundTabsProps {
+-  races: RaceInfo[];
+-  selectedRaceId: string | null;
+-  onRaceChange: (raceId: string) => void;
+-  /** When true, BR2 is labeled as "Závod" (both BR1+BR2 merged) */
+-  hasMergedBR?: boolean;
+-}
+-
+-export function RoundTabs({
+-  races,
+-  selectedRaceId,
+-  onRaceChange,
+-  hasMergedBR = false,
+-}: RoundTabsProps) {
+-  const tabs: TabItem[] = races.map((race) => ({
+-    id: race.raceId,
+-    label: getRaceTypeLabel(race.raceType, hasMergedBR && isBestRunRace(race.raceType)),
+-    content: null,
+-  }));
+-
+-  return (
+-    <Tabs
+-      tabs={tabs}
+-      activeTab={selectedRaceId ?? undefined}
+-      onChange={onRaceChange}
+-      variant="pills"
+-      size="sm"
+-      energyAccent
+-    />
+-  );
+-}
+diff --git a/packages/client/src/components/RunDetailExpand.module.css b/packages/client/src/components/RunDetailExpand.module.css
+deleted file mode 100644
+index ed1d6d6..0000000
+--- a/packages/client/src/components/RunDetailExpand.module.css
++++ /dev/null
+@@ -1,142 +0,0 @@
+-/**
+- * RunDetailExpand styles
+- * Clean detail panel with unified time breakdown layout.
+- */
+-
+-.container {
+-  padding: 0.625rem 0.625rem 0.625rem 1.25rem;
+-  background-color: var(--csk-color-bg-secondary, #f9fafb);
+-  border-left: 3px solid var(--csk-color-primary, #2563eb);
+-}
+-
+-@media (min-width: 641px) {
+-  .container {
+-    padding: 0.75rem 0.75rem 0.75rem 1.5rem;
+-  }
+-}
+-
+-.detailHeader {
+-  display: flex;
+-  align-items: center;
+-  gap: 0;
+-  font-size: var(--csk-font-size-sm, 0.875rem);
+-  color: var(--csk-color-text-secondary, #6b7280);
+-  margin-bottom: 0.5rem;
+-}
+-
+-.detailHeaderLabel {
+-  color: var(--csk-color-text-tertiary, #9ca3af);
+-  font-size: var(--csk-font-size-xs, 0.75rem);
+-  margin-right: 0.375rem;
+-}
+-
+-.detailHeaderBib {
+-  display: inline-flex;
+-  align-items: center;
+-  justify-content: center;
+-  min-width: 1.25rem;
+-  padding: 0.0625rem 0.2rem;
+-  border-radius: 3px;
+-  background: var(--csk-color-bg-primary, #fff);
+-  border: 1px solid var(--csk-color-border-secondary, #e5e7eb);
+-  font-size: 0.6875rem;
+-  font-weight: 600;
+-  color: var(--csk-color-text-secondary, #6b7280);
+-  line-height: 1.4;
+-}
+-
+-.detailHeaderMeta {
+-  font-weight: 400;
+-  color: var(--csk-color-text-secondary, #6b7280);
+-}
+-
+-.noData {
+-  font-size: var(--csk-font-size-sm, 0.875rem);
+-  color: var(--csk-color-text-tertiary, #9ca3af);
+-  font-style: italic;
+-}
+-
+-/* --- Time breakdown row --- */
+-.timeBreakdown {
+-  display: flex;
+-  flex-wrap: wrap;
+-  gap: 0.75rem;
+-  margin-bottom: 0.375rem;
+-}
+-
+-.timeItem {
+-  display: flex;
+-  flex-direction: column;
+-  gap: 0.125rem;
+-}
+-
+-.timeLabel {
+-  font-size: var(--csk-font-size-xs, 0.75rem);
+-  color: var(--csk-color-text-tertiary, #9ca3af);
+-  text-transform: uppercase;
+-  letter-spacing: 0.03em;
+-  font-weight: 500;
+-}
+-
+-.timeValue {
+-  font-family: var(--csk-font-mono, monospace);
+-  font-size: var(--csk-font-size-sm, 0.875rem);
+-  color: var(--csk-color-text-primary, #111827);
+-}
+-
+-/* --- Gate badges --- */
+-.gatesSection {
+-  margin-top: 0.25rem;
+-}
+-
+-/* --- BR two-run layout --- */
+-.runsGrid {
+-  display: grid;
+-  grid-template-columns: 1fr 1fr;
+-  gap: 0.75rem;
+-}
+-
+-@media (max-width: 640px) {
+-  .runsGrid {
+-    grid-template-columns: 1fr;
+-  }
+-}
+-
+-.runSection {
+-  padding: 0.5rem;
+-  border-radius: var(--csk-radius-sm, 4px);
+-  border: 1px solid var(--csk-color-border-secondary, #e5e7eb);
+-  background: var(--csk-color-bg-primary, #fff);
+-}
+-
+-.runSectionBetter {
+-  border-color: var(--csk-color-primary, #2563eb);
+-  background: rgba(37, 99, 235, 0.04);
+-}
+-
+-.runSectionPlaceholder {
+-  opacity: 0.5;
+-}
+-
+-.runSectionLabel {
+-  font-size: var(--csk-font-size-xs, 0.75rem);
+-  font-weight: 600;
+-  color: var(--csk-color-text-secondary, #6b7280);
+-  text-transform: uppercase;
+-  letter-spacing: 0.03em;
+-  margin-bottom: 0.375rem;
+-  display: flex;
+-  align-items: center;
+-  gap: 0.375rem;
+-}
+-
+-.betterBadge {
+-  font-size: 0.625rem;
+-  font-weight: 500;
+-  color: var(--csk-color-primary, #2563eb);
+-  background: rgba(37, 99, 235, 0.1);
+-  padding: 0.0625rem 0.375rem;
+-  border-radius: 9999px;
+-  text-transform: uppercase;
+-  letter-spacing: 0.05em;
+-}
+diff --git a/packages/client/src/components/RunDetailExpand.test.tsx b/packages/client/src/components/RunDetailExpand.test.tsx
+deleted file mode 100644
+index de617dd..0000000
+--- a/packages/client/src/components/RunDetailExpand.test.tsx
++++ /dev/null
+@@ -1,69 +0,0 @@
+-/**
+- * @vitest-environment jsdom
+- *
+- * Unit tests for the RunDetailExpand header (#159) — verifies the four
+- * variants of the "St.č. [bib], N. CAT" header per the spec.
+- */
+-import { describe, it, expect, afterEach } from 'vitest';
+-import { render, cleanup } from '@testing-library/react';
+-import { RunDetailExpand } from './RunDetailExpand';
+-
+-const detail = {
+-  time: 8500,
+-  pen: 0,
+-  total: 8500,
+-  gates: null,
+-  prevTime: null,
+-  prevPen: null,
+-  prevTotal: null,
+-  prevGates: null,
+-};
+-
+-function header(container: HTMLElement): HTMLElement | null {
+-  return container.querySelector('[class*="detailHeader"]');
+-}
+-
+-describe('RunDetailExpand — header (#159)', () => {
+-  afterEach(() => cleanup());
+-
+-  it('renders "St.č. [25], 3. DM" when bib, catRnk, and catId are all set', () => {
+-    const { container } = render(
+-      <RunDetailExpand detail={detail} isLoading={false} bib={25} catRnk={3} catId="DM" />
+-    );
+-    const h = header(container);
+-    expect(h).not.toBeNull();
+-    expect(h!.textContent).toContain('St.č.');
+-    expect(h!.textContent).toContain('25');
+-    expect(h!.textContent).toContain('3. DM');
+-  });
+-
+-  it('renders "St.č. [25], DM" when catId is set but catRnk is null', () => {
+-    const { container } = render(
+-      <RunDetailExpand detail={detail} isLoading={false} bib={25} catRnk={null} catId="DM" />
+-    );
+-    const h = header(container);
+-    expect(h!.textContent).toContain('25');
+-    expect(h!.textContent).toContain('DM');
+-    // No rank prefix like "3. DM"
+-    expect(h!.textContent).not.toMatch(/\d+\.\s+DM/);
+-  });
+-
+-  it('renders just "St.č. [25]" when catId is missing, even if catRnk is set', () => {
+-    const { container } = render(
+-      <RunDetailExpand detail={detail} isLoading={false} bib={25} catRnk={3} catId={null} />
+-    );
+-    const h = header(container);
+-    expect(h!.textContent).toContain('25');
+-    // Rank without category is suppressed — no ", 3." suffix
+-    expect(h!.textContent).not.toMatch(/,\s*3\./);
+-  });
+-
+-  it('falls back to "-" when bib is null', () => {
+-    const { container } = render(
+-      <RunDetailExpand detail={detail} isLoading={false} bib={null} catRnk={null} catId={null} />
+-    );
+-    const h = header(container);
+-    expect(h).not.toBeNull();
+-    expect(h!.textContent).toContain('-');
+-  });
+-});
+diff --git a/packages/client/src/components/RunDetailExpand.tsx b/packages/client/src/components/RunDetailExpand.tsx
+deleted file mode 100644
+index 5202f8d..0000000
+--- a/packages/client/src/components/RunDetailExpand.tsx
++++ /dev/null
+@@ -1,203 +0,0 @@
+-/**
+- * RunDetailExpand Component
+- *
+- * Displays inline detail for a run below the result row.
+- * Shows time breakdown (time/pen/total) and gate-by-gate penalties.
+- * For BR races, always shows both runs side by side — missing run as placeholder.
+- */
+-
+-import { SkeletonText } from '@czechcanoe/rvp-design-system';
+-import type { RunDetailData } from '../hooks/useEventLiveState';
+-import { formatTime, formatPenalty } from '../utils/formatTime';
+-import { GatePenalties } from './GatePenalties';
+-import styles from './RunDetailExpand.module.css';
+-
+-interface RunDetailExpandProps {
+-  detail: RunDetailData | null;
+-  isLoading: boolean;
+-  isBestRun?: boolean;
+-  /** Bib of the athlete for the detail header. */
+-  bib?: number | null;
+-  /** Age category rank — shown as "N." prefix when both catRnk and catId exist. */
+-  catRnk?: number | null;
+-  /** Age category id (e.g. "DM") — required for catRnk to render. */
+-  catId?: string | null;
+-  betterRunNr?: number | null;
+-  // Per-run status (#162): when set, render DNS/DNF/DSQ in place of
+-  // time/total. Distinguishes "run attempted but didn't finish" from
+-  // "run hasn't happened yet" (both-null → dashed placeholder).
+-  prevStatus?: string | null;
+-  currStatus?: string | null;
+-}
+-
+-function TimeBreakdown({ time, pen, total }: {
+-  time: number | null;
+-  pen: number | null;
+-  total: number | null;
+-}) {
+-  return (
+-    <div className={styles.timeBreakdown}>
+-      <div className={styles.timeItem}>
+-        <span className={styles.timeLabel}>Čas</span>
+-        <span className={styles.timeValue}>{formatTime(time)}</span>
+-      </div>
+-      <div className={styles.timeItem}>
+-        <span className={styles.timeLabel}>Pen</span>
+-        <span className={styles.timeValue}>{pen != null ? String(pen / 100) : '-'}</span>
+-      </div>
+-      <div className={styles.timeItem}>
+-        <span className={styles.timeLabel}>Celkem</span>
+-        <span className={styles.timeValue}>{formatTime(total)}</span>
+-      </div>
+-    </div>
+-  );
+-}
+-
+-function RunBlock({ label, isBetter, time, pen, total, gates }: {
+-  label: string;
+-  isBetter: boolean;
+-  time: number | null;
+-  pen: number | null;
+-  total: number | null;
+-  gates: RunDetailData['gates'];
+-}) {
+-  return (
+-    <div className={`${styles.runSection} ${isBetter ? styles.runSectionBetter : ''}`}>
+-      <div className={styles.runSectionLabel}>
+-        {label}
+-        {isBetter && <span className={styles.betterBadge}>lepší</span>}
+-      </div>
+-      <TimeBreakdown time={time} pen={pen} total={total} />
+-      {gates && gates.length > 0 && (
+-        <div className={styles.gatesSection}>
+-          <GatePenalties gates={gates} />
+-        </div>
+-      )}
+-    </div>
+-  );
+-}
+-
+-/** Compact header for the detail panel: "St.č. [25], 3. DM".
+- *  - catRnk without catId is suppressed (no orphan "3." without a category label).
+- *  - catId without catRnk renders as "St.č. [25], DM".
+- *  - bib missing falls back to "-". */
+-function DetailHeader({ bib, catRnk, catId }: {
+-  bib?: number | null;
+-  catRnk?: number | null;
+-  catId?: string | null;
+-}) {
+-  const showCat = Boolean(catId);
+-  const showRank = showCat && catRnk != null;
+-  return (
+-    <div className={styles.detailHeader}>
+-      <span className={styles.detailHeaderLabel}>St.č.</span>
+-      <span className={styles.detailHeaderBib}>{bib ?? '-'}</span>
+-      {showCat && (
+-        <span className={styles.detailHeaderMeta}>
+-          {showRank ? `, ${catRnk}. ${catId}` : `, ${catId}`}
+-        </span>
+-      )}
+-    </div>
+-  );
+-}
+-
+-function RunPlaceholder({ label, status }: { label: string; status?: string | null }) {
+-  return (
+-    <div className={`${styles.runSection} ${styles.runSectionPlaceholder}`}>
+-      <div className={styles.runSectionLabel}>{label}</div>
+-      <div className={styles.timeBreakdown}>
+-        <div className={styles.timeItem}>
+-          <span className={styles.timeLabel}>Čas</span>
+-          <span className={styles.timeValue}>{status ?? '-'}</span>
+-        </div>
+-        <div className={styles.timeItem}>
+-          <span className={styles.timeLabel}>Celkem</span>
+-          <span className={styles.timeValue}>{status ?? '-'}</span>
+-        </div>
+-      </div>
+-    </div>
+-  );
+-}
+-
+-export function RunDetailExpand({ detail, isLoading, isBestRun, bib, catRnk, catId, betterRunNr, prevStatus, currStatus }: RunDetailExpandProps) {
+-  if (isLoading) {
+-    return (
+-      <div className={styles.container}>
+-        <SkeletonText />
+-        <SkeletonText fontSize="sm" />
+-      </div>
+-    );
+-  }
+-
+-  if (!detail) {
+-    return (
+-      <div className={styles.container}>
+-        <div className={styles.noData}>Detail není k dispozici</div>
+-      </div>
+-    );
+-  }
+-
+-  // BR race — always show two run blocks
+-  // Server convention: when both runs exist, detail.prev* = BR1 and detail.* = BR2.
+-  // When only one run was ingested, detail.prev* is null and detail.* holds that
+-  // single run — betterRunNr indicates whether it was run 1 or run 2 so the data
+-  // can be routed into the correct block.
+-  if (isBestRun) {
+-    const hasBothRuns = detail.prevTotal != null;
+-    const primary = { time: detail.time, pen: detail.pen, total: detail.total, gates: detail.gates };
+-    const empty = { time: null, pen: null, total: null, gates: null };
+-
+-    let run1: { time: number | null; pen: number | null; total: number | null; gates: RunDetailData['gates'] };
+-    let run2: { time: number | null; pen: number | null; total: number | null; gates: RunDetailData['gates'] };
+-
+-    if (hasBothRuns) {
+-      run1 = {
+-        time: detail.prevTime ?? null,
+-        pen: detail.prevPen ?? null,
+-        total: detail.prevTotal ?? null,
+-        gates: detail.prevGates ?? null,
+-      };
+-      run2 = primary;
+-    } else if (betterRunNr === 2) {
+-      run1 = empty;
+-      run2 = primary;
+-    } else {
+-      run1 = primary;
+-      run2 = empty;
+-    }
+-
+-    const run1HasData = run1.total != null;
+-    const run2HasData = run2.total != null;
+-
+-    return (
+-      <div className={styles.container}>
+-        <DetailHeader bib={bib} catRnk={catRnk} catId={catId} />
+-        <div className={styles.runsGrid}>
+-          {run1HasData ? (
+-            <RunBlock label="1. jízda" isBetter={betterRunNr === 1} time={run1.time} pen={run1.pen} total={run1.total} gates={run1.gates} />
+-          ) : (
+-            <RunPlaceholder label="1. jízda" status={prevStatus} />
+-          )}
+-          {run2HasData ? (
+-            <RunBlock label="2. jízda" isBetter={betterRunNr === 2} time={run2.time} pen={run2.pen} total={run2.total} gates={run2.gates} />
+-          ) : (
+-            <RunPlaceholder label="2. jízda" status={currStatus} />
+-          )}
+-        </div>
+-      </div>
+-    );
+-  }
+-
+-  // Single-run race — one block
+-  return (
+-    <div className={styles.container}>
+-      <DetailHeader bib={bib} catRnk={catRnk} catId={catId} />
+-      <TimeBreakdown time={detail.time} pen={detail.pen} total={detail.total} />
+-      {detail.gates && detail.gates.length > 0 && (
+-        <div className={styles.gatesSection}>
+-          <GatePenalties gates={detail.gates} />
+-        </div>
+-      )}
+-    </div>
+-  );
+-}
+diff --git a/packages/client/src/components/StarButton.module.css b/packages/client/src/components/StarButton.module.css
+deleted file mode 100644
+index 81b0c39..0000000
+--- a/packages/client/src/components/StarButton.module.css
++++ /dev/null
+@@ -1,36 +0,0 @@
+-.starBtn {
+-  display: inline-flex;
+-  align-items: center;
+-  justify-content: center;
+-  width: 28px;
+-  height: 28px;
+-  border: none;
+-  background: none;
+-  cursor: pointer;
+-  font-size: 22px;
+-  line-height: 1;
+-  padding: 0;
+-  flex-shrink: 0;
+-  color: var(--csk-color-text-tertiary, #9ca3af);
+-  -webkit-tap-highlight-color: transparent;
+-  vertical-align: middle;
+-}
+-
+-.starBtn.active {
+-  color: var(--csk-color-warning, #f59e0b);
+-}
+-
+-@media (pointer: coarse) {
+-  .starBtn {
+-    position: relative;
+-  }
+-  .starBtn::before {
+-    content: '';
+-    position: absolute;
+-    top: 50%;
+-    left: 50%;
+-    transform: translate(-50%, -50%);
+-    width: 44px;
+-    height: 44px;
+-  }
+-}
+diff --git a/packages/client/src/components/StarButton.tsx b/packages/client/src/components/StarButton.tsx
+deleted file mode 100644
+index 2f9aba1..0000000
+--- a/packages/client/src/components/StarButton.tsx
++++ /dev/null
+@@ -1,22 +0,0 @@
+-import styles from './StarButton.module.css';
+-
+-interface StarButtonProps {
+-  active: boolean;
+-  onClick: (e: React.MouseEvent) => void;
+-}
+-
+-export function StarButton({ active, onClick }: StarButtonProps) {
+-  return (
+-    <button
+-      className={`${styles.starBtn} ${active ? styles.active : ''}`}
+-      onClick={(e) => {
+-        e.stopPropagation();
+-        onClick(e);
+-      }}
+-      aria-label={active ? 'Odebrat z oblíbených' : 'Přidat do oblíbených'}
+-      type="button"
+-    >
+-      {active ? '\u2605' : '\u2606'}
+-    </button>
+-  );
+-}
+diff --git a/packages/client/src/components/StartlistTable.tsx b/packages/client/src/components/StartlistTable.tsx
+index 3884577..41358d9 100644
+--- a/packages/client/src/components/StartlistTable.tsx
++++ b/packages/client/src/components/StartlistTable.tsx
+@@ -2,9 +2,9 @@ import {
+   Table,
+   EmptyState,
+   type ColumnDef,
++  StarButton,
+ } from '@czechcanoe/rvp-design-system';
+ import type { StartlistDisplayRow } from '../services/api';
+-import { StarButton } from './StarButton';
+ import styles from './StartlistTable.module.css';
+ 
+ function formatStartTime(isoString: string | null | undefined): string {
+@@ -80,8 +80,9 @@ function buildColumns(
+             {row.name}
+             {favorites && row.bib != null && favorites.classId && (
+               <StarButton
+-                active={favorites.isFavorite(row.bib, favorites.classId)}
+-                onClick={() => favorites.onToggle(row.bib!, favorites.classId!)}
++                pressed={favorites.isFavorite(row.bib, favorites.classId)}
++                label={`Oblíbený: ${row.name}`}
++                onPressedChange={() => favorites.onToggle(row.bib!, favorites.classId!)}
+               />
+             )}
+           </div>
+diff --git a/packages/client/src/components/ViewModeToggle.tsx b/packages/client/src/components/ViewModeToggle.tsx
+deleted file mode 100644
+index b228f71..0000000
+--- a/packages/client/src/components/ViewModeToggle.tsx
++++ /dev/null
+@@ -1,20 +0,0 @@
+-import { Switch } from '@czechcanoe/rvp-design-system';
+-
+-export type ViewMode = 'simple' | 'detailed';
+-
+-interface ViewModeToggleProps {
+-  viewMode: ViewMode;
+-  onViewModeChange: (mode: ViewMode) => void;
+-}
+-
+-export function ViewModeToggle({ viewMode, onViewModeChange }: ViewModeToggleProps) {
+-  return (
+-    <Switch
+-      size="sm"
+-      label="Detailní"
+-      labelPosition="left"
+-      checked={viewMode === 'detailed'}
+-      onChange={(e) => onViewModeChange(e.target.checked ? 'detailed' : 'simple')}
+-    />
+-  );
+-}
+diff --git a/packages/client/src/pages/EventDetailPage.module.css b/packages/client/src/pages/EventDetailPage.module.css
+index f1f24bb..4de1bdf 100644
+--- a/packages/client/src/pages/EventDetailPage.module.css
++++ b/packages/client/src/pages/EventDetailPage.module.css
+@@ -3,19 +3,29 @@
+  * Uses DS CSS variables for colors and spacing tokens
+  */
+ 
++/* Width and gutter come from PageLayout (maxWidth lg, padded): aligned with the EventHeader */
+ .pageWrapper {
+-  padding: 0 0.5rem;
+-  max-width: 960px;
+-  margin: 0 auto;
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
++  padding-block: 0.5rem;
+ }
+ 
+-@media (min-width: 641px) {
+-  .pageWrapper {
+-    padding: 0 1rem;
+-  }
++/* Navigation band under the EventHeader (days, classes, view): one surface band,
++   content in the same 1024 px column as the EventHeader and the results */
++.navBand {
++  padding-block: var(--csk-space-2);
++  background: var(--csk-color-surface);
++  border-bottom: 1px solid var(--csk-color-border);
++}
++
++/* Same box as PageLayout maxWidth="lg" padded: the gutter is inside the 1024 px */
++.navInner {
++  box-sizing: border-box;
++  width: 100%;
++  max-width: var(--csk-container-xl);
++  margin-inline: auto;
++  padding-inline: var(--csk-layout-gutter);
+ }
+ 
+ /* NAV ROW 1: Days (left) + Data View toggle (right) */
+@@ -33,11 +43,6 @@
+   flex-shrink: 0;
+ }
+ 
+-/* Hide tab panel area — day tabs are purely navigational, no content panels needed */
+-.dayTabs :global(.csk-tabs__panel) {
+-  display: none;
+-}
+-
+ /* ClassTabs — desktop: grows to fill space between days and data view */
+ .classTabs {
+   flex: 1;
+@@ -76,19 +81,3 @@
+   min-width: 8rem;
+   max-width: 20rem;
+ }
+-
+-/* Prevent iOS Safari viewport zoom on focus of the DS SearchInput.
+- * The design system's `size="sm"` / `size="md"` produce an input with
+- * font-size below 16px (0.75rem and 0.875rem via CSS vars), which triggers
+- * Safari's auto-zoom on any touch device. Only touch/coarse-pointer devices
+- * exhibit the bug, so the override is gated behind `pointer: coarse` and
+- * leaves the mouse-driven desktop design untouched. Specificity matches the
+- * DS compound selector `.csk-search-input--sm .csk-search-input__input`.
+- * TODO: remove once the DS exposes a prop or token for iOS-safe input sizing
+- * (see OpenCanoeTiming/c123-live-mini issue #160).
+- */
+-@media (pointer: coarse) {
+-  .startlistSearch :global(.csk-search-input .csk-search-input__input) {
+-    font-size: 16px;
+-  }
+-}
+diff --git a/packages/client/src/pages/EventDetailPage.tsx b/packages/client/src/pages/EventDetailPage.tsx
+index 6d98a6e..b52ad16 100644
+--- a/packages/client/src/pages/EventDetailPage.tsx
++++ b/packages/client/src/pages/EventDetailPage.tsx
+@@ -4,8 +4,10 @@ import {
+   Card,
+   EmptyState,
+   Button,
+-  Tabs,
+   SearchInput,
++  SegmentedControl,
++  FavoritesToggle,
++  useClock,
+   type TabItem,
+ } from '@czechcanoe/rvp-design-system';
+ import { useLocation } from 'wouter';
+@@ -23,16 +25,15 @@ import {
+   type StartlistDisplayRow,
+ } from '../services/api';
+ import { groupRaces, extractDays, getDisplayRaces, pickDefaultDay, type ClassGroup, type DayInfo } from '../utils/groupRaces';
+-import { isBestRunRace } from '../utils/raceTypeLabels';
++import { getRaceTypeLabel, isBestRunRace } from '../utils/raceTypeLabels';
+ import { EventHeader } from '../components/EventHeader';
+ import { ClassTabs } from '../components/ClassTabs';
+-import { DataViewSelector } from '../components/DataViewSelector';
+-import { ResultList } from '../components/ResultList';
++import { DataViewSelector, DataViewBottomBar } from '../components/DataViewSelector';
++import { ResultList, type ViewMode } from '../components/ResultList';
+ import { StartlistTable } from '../components/StartlistTable';
+-import { FavoritesToggle } from '../components/FavoritesToggle';
+ import { OnCoursePanel } from '../components/OnCoursePanel';
+ import { ScheduleView } from '../components/ScheduleView';
+-import type { ViewMode } from '../components/ViewModeToggle';
++import { AppShell } from '../components/AppShell';
+ import { useEventLiveState, type EventLiveStateAction } from '../hooks/useEventLiveState';
+ import { useFavorites } from '../hooks/useFavorites';
+ import { useEventWebSocket } from '../hooks/useEventWebSocket';
+@@ -103,6 +104,12 @@ export function EventDetailPage({ eventId, raceId: urlRaceId }: EventDetailPageP
+ 
+   // OnCourse panel state
+   const [oncoursePanelOpen, setOncoursePanelOpen] = useState(true);
++  const onCourseRef = useRef<HTMLDivElement>(null);
++
++  // Receipt times on the injected clock (DataAge, RunningTime)
++  const clock = useClock();
++  const [liveReceivedAt, setLiveReceivedAt] = useState<number | null>(null);
++  const [oncourseReceivedAt, setOncourseReceivedAt] = useState<number | null>(null);
+ 
+   // Expandable rows state
+   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
+@@ -143,8 +150,24 @@ export function EventDetailPage({ eventId, raceId: urlRaceId }: EventDetailPageP
+       }
+     : null;
+ 
++  // EventHeader condenses to one row once the page is scrolled (hysteresis avoids flicker
++  // when the header height change moves the scroll position).
++  const [headerCondensed, setHeaderCondensed] = useState(false);
++  useEffect(() => {
++    const onScroll = () =>
++      setHeaderCondensed((c) => (c ? window.scrollY > 40 : window.scrollY > 120));
++    window.addEventListener('scroll', onScroll, { passive: true });
++    return () => window.removeEventListener('scroll', onScroll);
++  }, []);
++
++  // A new on-course set is a new delivery of every running time
++  useEffect(() => {
++    setOncourseReceivedAt(clock.now());
++  }, [liveState.oncourse, clock]);
++
+   // WebSocket message handler
+   const handleWsMessage = useCallback((message: WsMessage) => {
++    setLiveReceivedAt(clock.now());
+     // Re-fetch results for the active race after WS_FULL/WS_REFRESH. When detail is
+     // currently shown for any row (manual expand or detailed view mode) request the
+     // detailed=true flavour so the cache replaces stale entries in place — avoids the
+@@ -205,7 +228,7 @@ export function EventDetailPage({ eventId, raceId: urlRaceId }: EventDetailPageP
+         }
+         break;
+     }
+-  }, [dispatch, eventId, selectedRaceId, selectedCatId, expandedRows, viewMode]);
++  }, [dispatch, eventId, selectedRaceId, selectedCatId, expandedRows, viewMode, clock]);
+ 
+   // Connect WebSocket for running/startlist events
+   const shouldConnect = eventDetail && (eventDetail.status === 'running' || eventDetail.status === 'startlist');
+@@ -708,6 +731,13 @@ export function EventDetailPage({ eventId, raceId: urlRaceId }: EventDetailPageP
+     return days.map((d) => ({ id: d.date, label: d.label, content: null }));
+   }, [days]);
+ 
++  // BottomBar „Na trati“: back to results with the on-course panel open and in view
++  const showOnCourse = useCallback(() => {
++    setDataView('results');
++    setOncoursePanelOpen(true);
++    onCourseRef.current?.scrollIntoView({ block: 'start' });
++  }, []);
++
+   // Clear search when switching data view
+   const handleDataViewChange = useCallback((id: string) => {
+     setDataView(id as DataView);
+@@ -717,7 +747,8 @@ export function EventDetailPage({ eventId, raceId: urlRaceId }: EventDetailPageP
+   // 404 / error
+   if (eventState === 'error') {
+     return (
+-      <section>
++      <AppShell padded>
++      <section className={styles.pageWrapper}>
+         <Card>
+           <EmptyState
+             title={eventError ?? 'Chyba'}
+@@ -734,14 +765,17 @@ export function EventDetailPage({ eventId, raceId: urlRaceId }: EventDetailPageP
+           />
+         </Card>
+       </section>
++      </AppShell>
+     );
+   }
+ 
+   if (eventState === 'loading' || eventState === 'idle') {
+     return (
+-      <section>
+-        <SkeletonCard />
+-      </section>
++      <AppShell padded>
++        <section className={styles.pageWrapper}>
++          <SkeletonCard />
++        </section>
++      </AppShell>
+     );
+   }
+ 
+@@ -763,49 +797,92 @@ export function EventDetailPage({ eventId, raceId: urlRaceId }: EventDetailPageP
+     : false;
+   const isBR = selectedRace ? isBestRunRace(selectedRace.raceType) : false;
+ 
+-  return (
+-    <section className={styles.pageWrapper}>
+-      {eventDetail && (
+-        <EventHeader event={eventDetail} connectionState={shouldConnect ? connectionState : undefined} />
+-      )}
++  const live = Boolean(shouldConnect);
+ 
+-      <OnCoursePanel
+-        oncourse={liveState.oncourse}
+-        isOpen={oncoursePanelOpen}
+-        onToggle={() => setOncoursePanelOpen(!oncoursePanelOpen)}
+-      />
+-
+-      {/* NAV ROW: Days (left) + ClassTabs (center, desktop only inline) + Data View (right) */}
+-      <div className={styles.navigationRow}>
+-        {days.length > 1 && (
+-          <div className={styles.dayTabs}>
+-            <Tabs
+-              tabs={dayTabs}
+-              activeTab={selectedDay ?? dayTabs[0]?.id}
+-              onChange={handleDayChange}
+-              variant="pills"
+-              size="sm"
+-              energyAccent
+-            />
+-          </div>
+-        )}
+-        {dataView !== 'schedule' && showClassTabs && (
+-          <div className={`${styles.classTabs} ${classTabsStandalone ? styles.classTabsStandalone : ''}`}>
+-            <ClassTabs
+-              classGroups={filteredClassGroups}
+-              selectedClassId={selectedClassId}
+-              onClassChange={handleClassChange}
+-              classNameMap={classNameMap}
+-            />
++  // „K1 muži · 2. jízda“: heading of the on-course panel
++  const selectedClass = liveState.classes.find((c) => c.classId === selectedRaceClassId);
++  const roundLabel = selectedRace ? getRaceTypeLabel(selectedRace.raceType) : '';
++  const phaseLabel =
++    [selectedClass?.longTitle ?? selectedClass?.name, roundLabel].filter(Boolean).join(' · ') || undefined;
++
++  // Status line of the results: „2. jízda · 6 z 10 v cíli“ while the race is not official
++  const finishedCount = results?.results.filter((r) => r.total != null).length ?? 0;
++  const resultsStatus =
++    results && results.race.raceStatus !== 11 && results.results.length > 0
++      ? [roundLabel, `${finishedCount} z ${results.results.length} v cíli`].filter(Boolean).join(' · ')
++      : undefined;
++
++  return (
++    <AppShell
++      stickyBand
++      padded
++      nav={
++        <div className={styles.navBand}>
++          <div className={styles.navInner}>
++            <div className={styles.navigationRow}>
++              {days.length > 1 && (
++                <div className={styles.dayTabs}>
++                  <SegmentedControl
++                    size="sm"
++                    aria-label="Den"
++                    items={dayTabs.map((d) => ({ value: d.id, label: d.label }))}
++                    value={selectedDay ?? dayTabs[0]?.id ?? ''}
++                    onChange={handleDayChange}
++                  />
++                </div>
++              )}
++              {dataView !== 'schedule' && showClassTabs && (
++                <div className={`${styles.classTabs} ${classTabsStandalone ? styles.classTabsStandalone : ''}`}>
++                  <ClassTabs
++                    classGroups={filteredClassGroups}
++                    selectedClassId={selectedClassId}
++                    onClassChange={handleClassChange}
++                    classNameMap={classNameMap}
++                  />
++                </div>
++              )}
++              {resultsState === 'success' && (
++                <DataViewSelector
++                  tabs={dataViewTabs}
++                  activeTab={dataView}
++                  onChange={handleDataViewChange}
++                />
++              )}
++            </div>
+           </div>
+-        )}
+-        {resultsState === 'success' && (
+-          <DataViewSelector
++        </div>
++      }
++      bottomBar={
++        resultsState === 'success' && (
++          <DataViewBottomBar
+             tabs={dataViewTabs}
+             activeTab={dataView}
+             onChange={handleDataViewChange}
++            onOnCourse={liveState.oncourse.length > 0 ? showOnCourse : undefined}
++          />
++        )
++      }
++      banner={
++        eventDetail && (
++          <EventHeader
++            event={eventDetail}
++            connectionState={live ? connectionState : undefined}
++            receivedAt={liveReceivedAt}
++            condensed={headerCondensed}
+           />
+-        )}
++        )
++      }
++    >
++    <section className={styles.pageWrapper}>
++      <div ref={onCourseRef}>
++        <OnCoursePanel
++          oncourse={liveState.oncourse}
++          isOpen={oncoursePanelOpen}
++          onToggle={() => setOncoursePanelOpen(!oncoursePanelOpen)}
++          receivedAt={oncourseReceivedAt}
++          stale={live && connectionState !== 'connected'}
++          phaseLabel={phaseLabel}
++        />
+       </div>
+ 
+       {resultsState === 'loading' && <SkeletonCard />}
+@@ -854,6 +931,7 @@ export function EventDetailPage({ eventId, raceId: urlRaceId }: EventDetailPageP
+           showOnlyFavorites={favorites.showOnlyFavorites}
+           onToggleShowFavorites={() => favorites.setShowOnlyFavorites(!favorites.showOnlyFavorites)}
+           favoritesCount={favorites.favoritesCount}
++          status={resultsStatus}
+         />
+       )}
+ 
+@@ -870,9 +948,10 @@ export function EventDetailPage({ eventId, raceId: urlRaceId }: EventDetailPageP
+             />
+           </div>
+           <FavoritesToggle
+-            active={favorites.showOnlyFavorites}
++            pressed={favorites.showOnlyFavorites}
+             count={favorites.favoritesCount}
+-            onToggle={() => favorites.setShowOnlyFavorites(!favorites.showOnlyFavorites)}
++            label="Jen oblíbení"
++            onPressedChange={favorites.setShowOnlyFavorites}
+           />
+         </div>
+       )}
+@@ -942,5 +1021,6 @@ export function EventDetailPage({ eventId, raceId: urlRaceId }: EventDetailPageP
+         </Card>
+       )}
+     </section>
++    </AppShell>
+   );
+ }
+diff --git a/packages/client/src/pages/EventListPage.tsx b/packages/client/src/pages/EventListPage.tsx
+index 57f214f..b1cdb62 100644
+--- a/packages/client/src/pages/EventListPage.tsx
++++ b/packages/client/src/pages/EventListPage.tsx
+@@ -1,17 +1,18 @@
+ import { useState, useEffect, useCallback, useMemo } from 'react';
+ import {
+-  HeroSection,
++  PageTitle,
+   SkeletonCard,
+   Card,
+   EmptyState,
+   Button,
+   Badge,
+-  LiveIndicator,
++  StatusBadge,
+ } from '@czechcanoe/rvp-design-system';
+ import { useLocation } from 'wouter';
+ import { getEvents, ApiError, type EventListItem } from '../services/api';
+ import { EventList } from '../components/EventList';
+ import { branding } from '../config/branding';
++import { AppShell } from '../components/AppShell';
+ 
+ type LoadingState = 'idle' | 'loading' | 'success' | 'error';
+ 
+@@ -108,7 +109,7 @@ function SectionHeading({ title, description, isLive }: SectionHeadingProps) {
+       >
+         {title}
+         {isLive && (
+-          <LiveIndicator variant="live" size="md" energyGlow pulse />
++          <StatusBadge state="live" />
+         )}
+       </h2>
+       <p
+@@ -171,27 +172,20 @@ export function EventListPage() {
+   const showHeadings = visibleSectionCount > 1;
+ 
+   return (
+-    <>
+-      <HeroSection
+-        variant="compact"
+-        section="dv"
++    <AppShell>
++      <PageTitle
+         title={branding.appSubtitle}
+-        titleAccent={branding.appSubtitleAccent}
+-        meshBackground
+-        patternOverlay
+         badges={
+           liveCount > 0 ? (
+-            <Badge variant="energy" size="lg" glow>
++            <Badge variant="live" size="md">
+               LIVE • {liveCount}
+             </Badge>
+           ) : undefined
+         }
+-        className="csk-reveal csk-reveal-1"
+       />
+ 
+       <div
+-        className="csk-mesh-bg--subtle"
+-        style={{
++                style={{
+           display: 'flex',
+           flexDirection: 'column',
+           gap: '2.25rem',
+@@ -226,7 +220,7 @@ export function EventListPage() {
+             groups[key].length > 0 ? (
+               <section
+                 key={key}
+-                className={`csk-reveal csk-reveal-${idx + 2}`}
++                
+               >
+                 {showHeadings && (
+                   <SectionHeading
+@@ -244,6 +238,6 @@ export function EventListPage() {
+             ) : null
+           )}
+       </div>
+-    </>
++    </AppShell>
+   );
+ }
+diff --git a/packages/client/src/utils/mapToResultsTable.test.ts b/packages/client/src/utils/mapToResultsTable.test.ts
+index 01317f5..00f937c 100644
+--- a/packages/client/src/utils/mapToResultsTable.test.ts
++++ b/packages/client/src/utils/mapToResultsTable.test.ts
+@@ -1,172 +1,78 @@
+ import { describe, it, expect } from 'vitest';
+-import { mapResultToDS, mapResultsToDS } from './mapToResultsTable';
+ import type { ResultEntry } from '../services/api';
++import { raceState, toGates, toMark, toResultRow } from './mapToResultsTable';
+ 
+-function makeResult(overrides: Partial<ResultEntry> = {}): ResultEntry {
++function row(overrides: Partial<ResultEntry> & { name: string }): ResultEntry {
+   return {
+-    athleteId: 'ath-1',
++    rnk: null,
+     bib: 1,
+-    name: 'Test Athlete',
+-    club: 'Club A',
+-    nat: 'CZE',
+-    time: 8520,
+-    pen: 200,
+-    total: 8720,
+-    rnk: 1,
+-    totalBehind: null,
++    athleteId: null,
++    noc: null,
++    club: null,
++    catId: null,
+     catRnk: null,
++    time: null,
++    pen: null,
++    total: null,
++    totalBehind: null,
+     catTotalBehind: null,
+     status: null,
+-    prevRnk: null,
+     ...overrides,
+   };
+ }
+ 
+-describe('mapResultToDS', () => {
+-  describe('single-run race', () => {
+-    it('maps basic fields correctly', () => {
+-      const result = makeResult();
+-      const ds = mapResultToDS(result, false);
+-
+-      expect(ds.id).toBe('ath-1');
+-      expect(ds.name).toBe('Test Athlete');
+-      expect(ds.club).toBe('Club A');
+-      expect(ds.startNumber).toBe(1);
+-      expect(ds.rank).toBe(1);
+-    });
+-
+-    it('converts times from hundredths to seconds', () => {
+-      const result = makeResult({ time: 8520, pen: 200, total: 8720 });
+-      const ds = mapResultToDS(result, false);
+-
+-      expect(ds.run1Time).toBe(85.2);
+-      expect(ds.run1Penalty).toBe(2);
+-      expect(ds.totalTime).toBe(87.2);
+-    });
++const opts = { raceId: 'K1M_ST_BR2_6', isBestRun: true, selectedCatId: null, classId: 'K1M_ST' };
+ 
+-    it('handles null times', () => {
+-      const result = makeResult({ time: null, pen: null, total: null });
+-      const ds = mapResultToDS(result, false);
+-
+-      expect(ds.run1Time).toBeUndefined();
+-      expect(ds.run1Penalty).toBeUndefined();
+-      expect(ds.totalTime).toBeUndefined();
+-    });
++describe('toMark', () => {
++  it('keeps CAP as its own mark, not DNF', () => {
++    expect(toMark('CAP')).toBe('CAP');
++    expect(toMark('cap')).toBe('CAP');
+   });
+ 
+-  describe('best-run race', () => {
+-    it('maps both runs when prevTotal exists', () => {
+-      const result = makeResult({
+-        time: 9000,
+-        pen: 0,
+-        total: 9000,
+-        prevTime: 9200,
+-        prevPen: 200,
+-        prevTotal: 9400,
+-        totalTotal: 9000,
+-        betterRunNr: 2,
+-      });
+-      const ds = mapResultToDS(result, true);
+-
+-      expect(ds.run1Time).toBe(92);       // prevTime
+-      expect(ds.run1Penalty).toBe(2);      // prevPen
+-      expect(ds.run2Time).toBe(90);        // time (current/primary)
+-      expect(ds.run2Penalty).toBe(0);      // pen
+-      expect(ds.totalTime).toBe(90);       // totalTotal (best of both)
+-    });
+-
+-    it('maps to run1 slot when only BR1 available', () => {
+-      const result = makeResult({
+-        time: 9200,
+-        pen: 200,
+-        total: 9400,
+-        prevTotal: null,
+-        totalTotal: null,
+-        betterRunNr: 1,
+-      });
+-      const ds = mapResultToDS(result, true);
+-
+-      expect(ds.run1Time).toBe(92);
+-      expect(ds.run1Penalty).toBe(2);
+-      expect(ds.run2Time).toBeUndefined();
+-      expect(ds.totalTime).toBe(94);       // falls back to total
+-    });
+-
+-    // Regression test for issue #155: when a competitor only completed BR2
+-    // (e.g. DNS in BR1), the primary slot carries Run 2 data and betterRunNr=2
+-    // tells the mapper to route it into run2, not run1.
+-    it('maps to run2 slot when only BR2 available (issue #155)', () => {
+-      const result = makeResult({
+-        time: 9200,
+-        pen: 200,
+-        total: 9400,
+-        prevTotal: null,
+-        totalTotal: 9400,
+-        betterRunNr: 2,
+-      });
+-      const ds = mapResultToDS(result, true);
+-
+-      expect(ds.run1Time).toBeUndefined();
+-      expect(ds.run1Penalty).toBeUndefined();
+-      expect(ds.run2Time).toBe(92);
+-      expect(ds.run2Penalty).toBe(2);
+-      expect(ds.totalTime).toBe(94);
+-    });
++  it('maps the contract marks and ignores unknown statuses', () => {
++    expect(toMark('dsq-r')).toBe('DSQ-R');
++    expect(toMark('DQB')).toBe('DQB');
++    expect(toMark('RAL')).toBe('RAL');
++    expect(toMark('OK')).toBeUndefined();
++    expect(toMark(null)).toBeUndefined();
+   });
++});
+ 
+-  describe('status mapping', () => {
+-    it('maps known statuses', () => {
+-      expect(mapResultToDS(makeResult({ status: 'dns' }), false).status).toBe('dns');
+-      expect(mapResultToDS(makeResult({ status: 'dnf' }), false).status).toBe('dnf');
+-      expect(mapResultToDS(makeResult({ status: 'dsq' }), false).status).toBe('dsq');
+-    });
+-
+-    it('returns undefined for null/empty status', () => {
+-      expect(mapResultToDS(makeResult({ status: null }), false).status).toBeUndefined();
+-    });
++describe('toResultRow', () => {
++  it('shows a capsize per run and no rank', () => {
++    const r = toResultRow(row({ name: 'SVOBODA Karel', status: 'CAP', prevStatus: 'CAP', currStatus: 'DNS' }), 0, opts);
++    expect(r.mark).toBe('CAP');
++    expect(r.rank).toEqual({ state: 'unavailable' });
++    expect(r.runs.map((c) => c.mark)).toEqual(['CAP', 'DNS']);
+   });
+ 
+-  describe('category rank', () => {
+-    it('uses catRnk when selectedCatId is set', () => {
+-      const result = makeResult({ rnk: 5, catRnk: 2, catTotalBehind: '+1.50' });
+-      const ds = mapResultToDS(result, false, 'cat-1');
+-
+-      expect(ds.rank).toBe(2);
+-      expect(ds.timeDiff).toBe(1.5);
+-    });
+-
+-    it('uses overall rnk when no selectedCatId', () => {
+-      const result = makeResult({ rnk: 5, catRnk: 2 });
+-      const ds = mapResultToDS(result, false);
+-
+-      expect(ds.rank).toBe(5);
+-    });
++  it('keeps the placement of a RAL row', () => {
++    const r = toResultRow(row({ name: 'LAST Tom', rnk: 12, status: 'RAL' }), 0, opts);
++    expect(r.mark).toBe('RAL');
++    expect(r.rank).toEqual({ state: 'known', value: 12 });
+   });
++});
+ 
+-  describe('timeDiff parsing', () => {
+-    it('parses positive diff', () => {
+-      const ds = mapResultToDS(makeResult({ totalBehind: '+2.34' }), false);
+-      expect(ds.timeDiff).toBe(2.34);
+-    });
+-
+-    it('parses negative diff', () => {
+-      const ds = mapResultToDS(makeResult({ totalBehind: '-0.50' }), false);
+-      expect(ds.timeDiff).toBe(-0.5);
+-    });
+-
+-    it('returns undefined for null diff', () => {
+-      const ds = mapResultToDS(makeResult({ totalBehind: null }), false);
+-      expect(ds.timeDiff).toBeUndefined();
+-    });
++describe('raceState', () => {
++  it('maps C123 race statuses to the results state', () => {
++    expect(raceState(3)).toBeUndefined();
++    expect(raceState(5)).toBe('provisional');
++    expect(raceState(10)).toBe('provisional');
++    expect(raceState(11)).toBe('official');
++    expect(raceState(12)).toBeUndefined();
+   });
+ });
+ 
+-describe('mapResultsToDS', () => {
+-  it('maps array of results', () => {
+-    const results = [makeResult({ name: 'A' }), makeResult({ name: 'B' })];
+-    const mapped = mapResultsToDS(results, false);
+-    expect(mapped).toHaveLength(2);
+-    expect(mapped[0].name).toBe('A');
+-    expect(mapped[1].name).toBe('B');
++describe('toGates', () => {
++  it('keeps the gate numbers and marks upstream gates', () => {
++    expect(
++      toGates([
++        { number: 1, type: 'normal', penalty: 0 },
++        { number: 5, type: 'reverse', penalty: 2 },
++      ]),
++    ).toEqual([
++      { gate: 1, penalty: 0, upstream: false },
++      { gate: 5, penalty: 2, upstream: true },
++    ]);
+   });
+ });
+diff --git a/packages/client/src/utils/mapToResultsTable.ts b/packages/client/src/utils/mapToResultsTable.ts
+index 5c23fec..b71447e 100644
+--- a/packages/client/src/utils/mapToResultsTable.ts
++++ b/packages/client/src/utils/mapToResultsTable.ts
+@@ -1,152 +1,223 @@
+ /**
+- * Mapper utility: API ResultEntry → rvp-design-system ResultEntry
++ * Mapper: live-mini API → rvp-design-system v2 visual model.
+  *
+- * Converts race result data from the c123-live-mini API format to the
+- * format expected by the ResultsTable component in @czechcanoe/rvp-design-system.
++ * The design system takes states, not domain (`ResultRow`, `RunCell`,
++ * `Observed<T>`, `Mark`). This is the only application layer between the
++ * legacy API and the DS tables.
+  *
+  * Time units:
+- *   API:  hundredths of a second (integer)
++ *   API:  hundredths of a second (integer); gate penalties in seconds
+  *   DS:   seconds (float)
+  */
+ 
+-import type { ResultEntry as ApiResultEntry } from '../services/api';
+-import type { ResultEntry as DSResultEntry } from '@czechcanoe/rvp-design-system';
++import type {
++  GateGridGate,
++  Mark,
++  Observed,
++  ResultRow,
++  RunCell,
++  RunDetailProps,
++  RunDetailRun,
++  StatusBadgeState,
++} from '@czechcanoe/rvp-design-system';
++import type { PublicGate } from '@c123-live-mini/shared';
++import type { ResultEntry } from '../services/api';
++import type { RunDetailData } from '../hooks/useEventLiveState';
+ 
+-/**
+- * Valid status values accepted by the design system ResultsTable.
+- */
+-type DSResultStatus = 'dns' | 'dnf' | 'dsq' | 'final' | 'provisional' | 'live';
+-
+-const STATUS_MAP: Record<string, DSResultStatus> = {
+-  dns: 'dns',
+-  dnf: 'dnf',
+-  dsq: 'dsq',
+-  final: 'final',
+-  provisional: 'provisional',
+-  live: 'live',
+-};
++const NOT_YET: Observed<number> = { state: 'not-yet' };
+ 
+-/**
+- * Convert hundredths of a second to seconds.
+- * Returns undefined when the value is null or undefined.
+- */
+-function hundredthsToSeconds(hundredths: number | null | undefined): number | undefined {
+-  if (hundredths == null) return undefined;
+-  return hundredths / 100;
++/** Hundredths → seconds; `null` stays `null` (not known). */
++export function seconds(hundredths: number | null | undefined): number | null {
++  return hundredths == null ? null : hundredths / 100;
+ }
+ 
+-/**
+- * Parse a timeDiff string such as "+1.23" or "-0.50" into a numeric seconds value.
+- * Returns undefined when the string is null, empty, or cannot be parsed.
+- */
+-function parseTimeDiff(behind: string | null | undefined): number | undefined {
++function observed(hundredths: number | null | undefined): Observed<number> {
++  return hundredths == null ? NOT_YET : { state: 'known', value: hundredths / 100 };
++}
++
++function observedCount(value: number | null | undefined): Observed<number> {
++  return value == null ? NOT_YET : { state: 'known', value };
++}
++
++/** "+1.23" / "-0.50" → seconds; empty or unparsable → undefined. */
++export function parseDiff(behind: string | null | undefined): number | undefined {
+   if (!behind) return undefined;
+   const parsed = parseFloat(behind.replace('+', ''));
+-  return isNaN(parsed) ? undefined : parsed;
++  return Number.isNaN(parsed) ? undefined : parsed;
++}
++
++// Legacy statuses (DNS/DNF/DSQ/CAP) and the contract's further marks, matched case-insensitively.
++const MARKS: Record<string, Mark> = {
++  DNS: 'DNS',
++  DNF: 'DNF',
++  DSQ: 'DSQ',
++  CAP: 'CAP',
++  RAL: 'RAL',
++  DQB: 'DQB',
++  'DSQ-R': 'DSQ-R',
++};
++
++export function toMark(status: string | null | undefined): Mark | undefined {
++  if (!status) return undefined;
++  return MARKS[status.toUpperCase()];
+ }
+ 
+ /**
+- * Map an API status string to a design-system ResultStatus union value.
+- * Unknown / empty status strings are returned as undefined.
++ * State of the shown results from the C123 race status: 5–10 (on start … unofficial)
++ * provisional, 11 official; scheduled and cancelled races show no state.
+  */
+-function mapStatus(status: string | null | undefined): DSResultStatus | undefined {
+-  if (!status) return undefined;
+-  return STATUS_MAP[status.toLowerCase()] ?? undefined;
++export function raceState(raceStatus: number | null | undefined): StatusBadgeState | undefined {
++  if (raceStatus == null) return undefined;
++  if (raceStatus === 11) return 'official';
++  return raceStatus >= 5 && raceStatus <= 10 ? 'provisional' : undefined;
+ }
+ 
++export function toGates(gates: PublicGate[] | null | undefined): GateGridGate[] | undefined {
++  if (!gates || gates.length === 0) return undefined;
++  return gates.map((g) => ({ gate: g.number, penalty: g.penalty, upstream: g.type === 'reverse' }));
++}
++
++interface RunSlot {
++  total: number | null;
++  pen: number | null;
++  status: string | null;
++}
++
++const EMPTY_SLOT: RunSlot = { total: null, pen: null, status: null };
++
+ /**
+- * Map a single API ResultEntry to the design-system ResultEntry format.
+- *
+- * @param result        - Source result from the API.
+- * @param isBestRun     - True when the race is a BR (best-run) race containing two runs.
+- * @param selectedCatId - When set, use category rank/diff instead of overall rank/diff.
++ * BR run 1 / run 2 of a row. Server convention: with both runs `prev*` = BR1 and
++ * `time/pen/total` = BR2; with one run `prev*` is null and `betterRunNr` says which.
+  */
+-export function mapResultToDS(
+-  result: ApiResultEntry,
+-  isBestRun: boolean,
+-  selectedCatId?: string | null
+-): DSResultEntry {
+-  // --- Identity ---
+-  const id: string | number = result.athleteId ?? result.bib ?? '';
+-  const startNumber = result.bib ?? undefined;
+-
+-  // --- Rank / time diff ---
+-  const useCategory = Boolean(selectedCatId);
+-  const rank = (useCategory ? result.catRnk : result.rnk) ?? undefined;
+-  const timeDiff = parseTimeDiff(useCategory ? result.catTotalBehind : result.totalBehind);
+-
+-  // --- Status ---
+-  const status = mapStatus(result.status);
+-
+-  // --- Times ---
+-  let run1Time: number | undefined;
+-  let run1Penalty: number | undefined;
+-  let run2Time: number | undefined;
+-  let run2Penalty: number | undefined;
+-  let totalTime: number | undefined;
+-
+-  if (isBestRun) {
+-    // Server convention: primary run is BR2 when both exist.
+-    //   result.time / result.pen / result.total  → Run 2 (current / primary)
+-    //   result.prevTime / result.prevPen / result.prevTotal → Run 1 (previous)
+-    // When only one run has been ingested, prevTotal is null and the primary
+-    // slot holds that single run — betterRunNr indicates which run it is so we
+-    // can route the value to the correct run1/run2 column.
+-    const hasBothRuns = result.prevTotal != null;
+-
+-    if (hasBothRuns) {
+-      run1Time = hundredthsToSeconds(result.prevTime);
+-      run1Penalty = hundredthsToSeconds(result.prevPen);
+-      run2Time = hundredthsToSeconds(result.time);
+-      run2Penalty = hundredthsToSeconds(result.pen);
+-    } else if (result.betterRunNr === 2) {
+-      // Only Run 2 available (athlete DNS'd Run 1) — map to run2 slot.
+-      run2Time = hundredthsToSeconds(result.time);
+-      run2Penalty = hundredthsToSeconds(result.pen);
+-    } else {
+-      // Only Run 1 available (or no clean run yet) — map to run1 slot.
+-      run1Time = hundredthsToSeconds(result.time);
+-      run1Penalty = hundredthsToSeconds(result.pen);
+-    }
+-
+-    // Best-of-both-runs aggregate total (totalTotal), or fall back to the
+-    // single-run total when only one run has been ingested yet.
+-    totalTime = hundredthsToSeconds(result.totalTotal ?? result.total);
++export function resolveBrRuns(row: ResultEntry): { run1: RunSlot; run2: RunSlot } {
++  const br1Status = row.prevStatus ?? null;
++  const br2Status = row.currStatus ?? null;
++  const hasBr1 = row.prevTotal != null || br1Status != null;
++  if (hasBr1) {
++    return {
++      run1: { total: row.prevTotal ?? null, pen: row.prevPen ?? null, status: br1Status },
++      run2: { total: row.total ?? null, pen: row.pen ?? null, status: br2Status },
++    };
++  }
++  const single = { total: row.total ?? null, pen: row.pen ?? null, status: br2Status };
++  return row.betterRunNr === 2 ? { run1: EMPTY_SLOT, run2: single } : { run1: single, run2: EMPTY_SLOT };
++}
++
++/** Penalty after a run time: a clean run (0) shows nothing, as live-mini does today. */
++function runPenalty(pen: number | null | undefined): number | null | undefined {
++  return pen === 0 ? undefined : seconds(pen);
++}
++
++function slotToCell(slot: RunSlot, best: boolean): RunCell | undefined {
++  const mark = toMark(slot.status);
++  if (mark) return { time: null, mark };
++  if (slot.total == null) return undefined; // missing slot = not known
++  return { time: seconds(slot.total), penalty: runPenalty(slot.pen), best };
++}
++
++export interface RowMapOptions {
++  raceId: string;
++  isBestRun: boolean;
++  selectedCatId: string | null;
++  classId: string | null;
++  isFavorite?: (bib: number, classId: string) => boolean;
++}
++
++export function rowId(raceId: string, row: ResultEntry, index: number): string {
++  return `${raceId}-${row.bib ?? `i${index}`}`;
++}
++
++export function toResultRow(row: ResultEntry, index: number, opts: RowMapOptions): ResultRow {
++  const useCategory = Boolean(opts.selectedCatId);
++  const mark = toMark(row.status);
++  // RAL (ranked as last) keeps its placement; every other mark has none.
++  const ranked = !mark || mark === 'RAL';
++  const shownRank = useCategory ? (row.catRnk ?? row.rnk) : row.rnk;
++  const podium = !mark && shownRank != null && shownRank >= 1 && shownRank <= 3 ? (shownRank as 1 | 2 | 3) : undefined;
++  const diff = parseDiff(useCategory ? (row.catTotalBehind ?? row.totalBehind) : row.totalBehind);
++
++  let runs: RunCell[];
++  let result: Observed<number>;
++  if (opts.isBestRun) {
++    const { run1, run2 } = resolveBrRuns(row);
++    runs = [slotToCell(run1, row.betterRunNr === 1), slotToCell(run2, row.betterRunNr === 2)].map(
++      (c) => c ?? { time: null },
++    );
++    result = observed(row.totalTotal ?? null);
+   } else {
+-    // Single-run race: straightforward mapping.
+-    run1Time = hundredthsToSeconds(result.time);
+-    run1Penalty = hundredthsToSeconds(result.pen);
+-    totalTime = hundredthsToSeconds(result.total);
++    runs = mark ? [] : [{ time: seconds(row.time), penalty: runPenalty(row.pen) }];
++    result = observed(row.total);
+   }
+ 
+   return {
+-    id,
+-    rank,
+-    name: result.name,
+-    club: result.club ?? undefined,
+-    startNumber,
+-    run1Time,
+-    run1Penalty,
+-    run2Time,
+-    run2Penalty,
+-    totalTime,
+-    timeDiff,
+-    status,
+-    previousRank: result.prevRnk ?? undefined,
++    id: rowId(opts.raceId, row, index),
++    rank: ranked ? observedCount(row.rnk) : { state: 'unavailable' },
++    categoryRank:
++      useCategory && row.catId
++        ? { rank: ranked ? observedCount(row.catRnk) : { state: 'unavailable' }, category: row.catId }
++        : undefined,
++    podium,
++    bib: row.bib ?? '–',
++    name: row.name,
++    categoryTag: useCategory ? undefined : (row.catId ?? undefined),
++    club: row.club ?? undefined,
++    favorite:
++      row.bib != null && opts.classId && opts.isFavorite ? opts.isFavorite(row.bib, opts.classId) : false,
++    runs,
++    result,
++    diff: diff === undefined || diff === 0 ? undefined : { state: 'known', value: diff },
++    mark,
+   };
+ }
+ 
+-/**
+- * Map an array of API ResultEntry objects to design-system ResultEntry objects.
+- *
+- * @param results       - Source results from the API.
+- * @param isBestRun     - True when the race is a BR (best-run) race.
+- * @param selectedCatId - When set, use category rank/diff instead of overall rank/diff.
+- */
+-export function mapResultsToDS(
+-  results: ApiResultEntry[],
++/** Detail of an expanded row (`RunDetail` props) from the lazily loaded breakdown. */
++export function toRunDetail(
++  row: ResultEntry,
++  detail: RunDetailData | null,
+   isBestRun: boolean,
+-  selectedCatId?: string | null
+-): DSResultEntry[] {
+-  return results.map((result) => mapResultToDS(result, isBestRun, selectedCatId));
++): Pick<RunDetailProps, 'bib' | 'ranks' | 'runs'> {
++  const ranks: RunDetailProps['ranks'] = [{ rank: row.rnk, label: 've třídě' }];
++  if (row.catId) ranks.push({ rank: row.catRnk, label: `v ${row.catId}` });
++
++  const base = { bib: row.bib ?? undefined, ranks };
++  if (!detail) return { ...base, runs: [] };
++
++  const block = (
++    label: string,
++    time: number | null | undefined,
++    pen: number | null | undefined,
++    total: number | null | undefined,
++    gates: PublicGate[] | null | undefined,
++    counts: boolean,
++    status: string | null | undefined,
++  ): RunDetailRun => ({
++    label,
++    time: seconds(time),
++    penalty: seconds(pen),
++    total: seconds(total),
++    gates: toGates(gates),
++    counts,
++    mark: total == null ? toMark(status) : undefined,
++  });
++
++  if (!isBestRun) {
++    return {
++      ...base,
++      runs: [block('Jízda', detail.time, detail.pen, detail.total, detail.gates, false, row.status)],
++    };
++  }
++
++  const hasBoth = detail.prevTotal != null;
++  const primary = [detail.time, detail.pen, detail.total, detail.gates] as const;
++  const prev = [detail.prevTime, detail.prevPen, detail.prevTotal, detail.prevGates] as const;
++  const empty = [null, null, null, null] as const;
++  const r1 = hasBoth ? prev : row.betterRunNr === 2 ? empty : primary;
++  const r2 = hasBoth ? primary : row.betterRunNr === 2 ? primary : empty;
++  return {
++    ...base,
++    runs: [
++      block('1. jízda', ...r1, row.betterRunNr === 1, row.prevStatus),
++      block('2. jízda', ...r2, row.betterRunNr === 2, row.currStatus),
++    ],
++  };
+ }
