@@ -7428,3 +7428,15 @@ StatusBadge „scheduled“ se nepřidával (rozhodnutí maintainera).
 
 ### Poznámky
 Snapshoty Avatar a EventHeader (condensed, page gutter) regenerovány v CI (update-snapshots).
+
+---
+
+## 2026-10-23 - v2: live-mini migration patch pro M5 (release ready)
+
+### Dokončeno
+- [x] `docs/v2/live-mini-migration.patch` (suchý přepis c123-live-mini @ d216f6a, 35 souborů, beze změn)
+- [x] MIGRATION.md: odstavec s odkazem v sekci Dopad na c123-live-mini
+- [x] Poslední commit v2 cyklu nese `Release-As: 2.0.0`
+
+### Poznámky
+Patch je startovní bod pro M5, neaplikovat naslepo; potřebuje DS 2.0.0, package.json a lockfile nejsou součástí.
