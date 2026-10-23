@@ -7410,3 +7410,21 @@ Label `update-snapshots` přepisuje jen snapshoty, které porovnání neprojdou;
 
 ### Poznámky
 StatusBadge „scheduled“ se nepřidával (rozhodnutí maintainera).
+
+---
+
+## 2026-10-23 - v2: Cross-browser fixes before 2.0.0 (#84)
+
+### Dokončeno
+- [x] EventHeader condensed: status slot `display: flex` (inline badge na block line boxu přidával descent strutu, FF/WebKit 37.1 px místo 36)
+- [x] motion.css reduced motion: `transition-duration: 0s` místo 0.01ms (transition-property `all` → každá změna se animovala, WebKit vzorkoval outline-color focus ringu na začátku)
+- [x] Avatar stories: inline SVG placeholder fotky místo i.pravatar.cc (networkidle timeout ve Firefoxu)
+- [x] ResultsTable 100-rows probe: `data-run`, test čeká na číslo běhu (WebKit měřil 2× stejnou hodnotu)
+- [x] controls.spec: desktop-only „Detailní“ se na telefonu neměří, jen ověří, že je skrytý záměrně
+
+### Problémy a řešení
+1. **Problém:** WebKit na ARM Pi nejde nainstalovat (host requirements).
+   **Řešení:** Firefox + mobile-chrome lokálně (vlastní PLAYWRIGHT_BROWSERS_PATH ve scratchpadu), WebKit jen v CI dispatch `browsers=all`.
+
+### Poznámky
+Snapshoty Avatar a EventHeader (condensed, page gutter) regenerovány v CI (update-snapshots).
