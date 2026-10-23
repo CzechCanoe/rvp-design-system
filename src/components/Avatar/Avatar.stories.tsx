@@ -41,13 +41,26 @@ const meta: Meta<typeof Avatar> = {
 export default meta;
 type Story = StoryObj<typeof Avatar>;
 
+// Placeholder profile photos, inline so the stories need no network (an external image service kept
+// the page from reaching network idle in Firefox CI). Head + shoulders silhouette, background by seed.
+const photoBackgrounds = ['steelblue', 'seagreen', 'peru', 'slategray', 'cadetblue', 'indianred', 'darkkhaki'];
+function photo(seed: number): string {
+  const bg = photoBackgrounds[seed % photoBackgrounds.length];
+  return (
+    'data:image/svg+xml;utf8,' +
+    encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"><rect width="150" height="150" fill="${bg}"/><circle cx="75" cy="60" r="28" fill="white" fill-opacity="0.85"/><path d="M25 150c0-32 22-52 50-52s50 20 50 52z" fill="white" fill-opacity="0.85"/></svg>`
+    )
+  );
+}
+
 /* ==========================================================================
    DEFAULT
    ========================================================================== */
 
 export const Default: Story = {
   args: {
-    src: 'https://i.pravatar.cc/150?u=athlete1',
+    src: photo(0),
     alt: 'Jan Novák',
     size: 'lg',
   },
@@ -63,9 +76,9 @@ export const Variants: Story = {
       <div>
         <p style={{ marginBottom: '8px', fontSize: '14px', color: '#666' }}>With Image</p>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <Avatar src="https://i.pravatar.cc/150?u=shape1" size="lg" shape="circular" alt="Circular" />
-          <Avatar src="https://i.pravatar.cc/150?u=shape2" size="lg" shape="rounded" alt="Rounded" />
-          <Avatar src="https://i.pravatar.cc/150?u=shape3" size="lg" shape="square" alt="Square" />
+          <Avatar src={photo(1)} size="lg" shape="circular" alt="Circular" />
+          <Avatar src={photo(2)} size="lg" shape="rounded" alt="Rounded" />
+          <Avatar src={photo(3)} size="lg" shape="square" alt="Square" />
         </div>
       </div>
       <div>
@@ -163,10 +176,10 @@ export const Colors: Story = {
 export const WithStatus: Story = {
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-      <Avatar src="https://i.pravatar.cc/150?u=status1" size="lg" status="online" alt="Online" />
-      <Avatar src="https://i.pravatar.cc/150?u=status2" size="lg" status="away" alt="Away" />
-      <Avatar src="https://i.pravatar.cc/150?u=status3" size="lg" status="busy" alt="Busy" />
-      <Avatar src="https://i.pravatar.cc/150?u=status4" size="lg" status="offline" alt="Offline" />
+      <Avatar src={photo(4)} size="lg" status="online" alt="Online" />
+      <Avatar src={photo(5)} size="lg" status="away" alt="Away" />
+      <Avatar src={photo(6)} size="lg" status="busy" alt="Busy" />
+      <Avatar src={photo(7)} size="lg" status="offline" alt="Offline" />
     </div>
   ),
   parameters: {
@@ -188,12 +201,12 @@ export const Group: Story = {
       <div>
         <p style={{ marginBottom: '8px', fontSize: '14px', color: '#666' }}>With overflow indicator</p>
         <AvatarGroup max={4} size="md">
-          <Avatar src="https://i.pravatar.cc/150?u=group1" alt="User 1" />
-          <Avatar src="https://i.pravatar.cc/150?u=group2" alt="User 2" />
-          <Avatar src="https://i.pravatar.cc/150?u=group3" alt="User 3" />
-          <Avatar src="https://i.pravatar.cc/150?u=group4" alt="User 4" />
-          <Avatar src="https://i.pravatar.cc/150?u=group5" alt="User 5" />
-          <Avatar src="https://i.pravatar.cc/150?u=group6" alt="User 6" />
+          <Avatar src={photo(1)} alt="User 1" />
+          <Avatar src={photo(2)} alt="User 2" />
+          <Avatar src={photo(3)} alt="User 3" />
+          <Avatar src={photo(4)} alt="User 4" />
+          <Avatar src={photo(5)} alt="User 5" />
+          <Avatar src={photo(6)} alt="User 6" />
         </AvatarGroup>
       </div>
       <div>
@@ -224,7 +237,7 @@ export const AthleteProfile: Story = {
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
       <Avatar
-        src="https://i.pravatar.cc/150?u=athlete-profile"
+        src={photo(4)}
         size="2xl"
         shape="circular"
         status="online"

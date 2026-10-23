@@ -158,6 +158,12 @@
   text-overflow: ellipsis;
 }
 
+/* Flex, not block: an inline badge on a block line box adds the strut's descent (+0.5 px Chromium,
+   +1.1 px Firefox / WebKit), so the row would outgrow the 24 px of the condensed token */
+.csk-event-header--condensed .csk-event-header__status {
+  display: flex;
+}
+
 .csk-event-header--condensed .csk-event-header__age {
   display: flex;
   flex: 0 1 auto;

@@ -70,7 +70,10 @@
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    /* 0s, not 0.01ms: transition-property defaults to `all`, so a non-zero duration here would start a
+       transition on every property change (e.g. a focus ring's outline-color fading in from currentColor,
+       sampled mid-way by WebKit) */
+    transition-duration: 0s !important;
     scroll-behavior: auto !important;
   }
 }
