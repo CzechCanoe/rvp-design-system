@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Dropdown, DropdownButton, type DropdownItem } from './Dropdown';
 import { Button } from '../Button';
 import { Avatar } from '../Avatar';
+import { TableToolbar, TableToolbarButton } from '../TableToolbar';
 
 const meta: Meta<typeof Dropdown> = {
   title: 'Components/Dropdown',
@@ -516,6 +517,41 @@ export const YearNavigation: Story = {
         }
         size="sm"
       />
+    );
+  },
+};
+
+const categoryItems: DropdownItem[] = ['Všechny kategorie', 'U14', 'U16', 'U18', 'U23', 'Muži', 'Veteráni'].map(
+  (label) => ({ id: label, label })
+);
+
+/**
+ * `DropdownButton variant="pill"`: the trigger looks like a TableToolbar pill (34 px pill, 44 px touch
+ * target on the trigger button) and sits next to `TableToolbarButton` pills, e.g. „Kategorie ▾“ in a ResultsPanel.
+ */
+export const PillTrigger: Story = {
+  parameters: { layout: 'padded' },
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <div style={{ width: 390 }}>
+        <TableToolbar aria-label="Nástroje tabulky">
+          <Dropdown
+            items={categoryItems}
+            size="sm"
+            open={open}
+            onOpenChange={setOpen}
+            aria-label="Kategorie"
+            trigger={
+              <DropdownButton variant="pill" open={open}>
+                Kategorie
+              </DropdownButton>
+            }
+          />
+          <TableToolbarButton>Pilulka</TableToolbarButton>
+          <TableToolbarButton pressed>Zapnuto</TableToolbarButton>
+        </TableToolbar>
+      </div>
     );
   },
 };

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
 /**
  * T7 controls: touch targets (>= 44 x 44 px, measured on the bounding box of every
@@ -8,7 +8,7 @@ import { test, expect } from '@playwright/test';
  */
 
 const OWN =
-  '.csk-segmented__item, .csk-star-button, .csk-favorites-toggle, .csk-table-toolbar__button, .csk-table-toolbar__detail .csk-switch-label';
+  '.csk-segmented__item, .csk-star-button, .csk-favorites-toggle, .csk-table-toolbar__button, .csk-table-toolbar__detail .csk-switch-label, .csk-dropdown__trigger';
 
 const stories = [
   'components-segmentedcontrol--default',
@@ -21,6 +21,9 @@ const stories = [
   'components-tabletoolbar--detail-on',
   'components-tabletoolbar--crowded-390',
   'components-tabletoolbar--one-row-390',
+  'components-tabletoolbar--responsive',
+  'components-tabletoolbar--detail-toggle-always',
+  'components-dropdown--pill-trigger',
 ];
 
 async function open(page: import('@playwright/test').Page, id: string) {
@@ -147,5 +150,63 @@ test.describe('Controls - TableToolbar at 390 px', () => {
     const search = (await page.locator('.csk-table-toolbar__search').boundingBox())!;
     const controls = (await page.locator('.csk-table-toolbar__controls').boundingBox())!;
     expect(Math.abs(controls.y + controls.height / 2 - (search.y + search.height / 2))).toBeLessThanOrEqual(2);
+  });
+});
+
+// v2 T19 (#84): detailToggle="desktop" (default) hides „Detailní“ below 769 px; at 390 px the toolbar has two rows
+test.describe('Controls - TableToolbar detailToggle', () => {
+  async function rows(page: Page) {
+    const centers = new Set<number>();
+    const parts = page.locator('.csk-table-toolbar__search, .csk-table-toolbar__controls > *');
+    for (let i = 0; i < (await parts.count()); i++) {
+      const part = parts.nth(i);
+      if (!(await part.isVisible())) continue;
+      const box = (await part.boundingBox())!;
+      centers.add(Math.round(box.y + box.height / 2));
+    }
+    return centers.size;
+  }
+
+  test.describe('390 px', () => {
+    test.use({ viewport: { width: 390, height: 800 } });
+
+    test('default: no „Detailní“, two rows (search, then round · Kategorie · ★)', async ({ page }) => {
+      await open(page, 'components-tabletoolbar--responsive');
+      await expect(page.locator('.csk-table-toolbar__detail')).toBeHidden();
+      expect(await rows(page)).toBe(2);
+      const search = (await page.locator('.csk-table-toolbar__search').boundingBox())!;
+      const controls = (await page.locator('.csk-table-toolbar__controls').boundingBox())!;
+      expect(controls.y).toBeGreaterThanOrEqual(search.y + search.height);
+    });
+
+    test('always: „Detailní“ stays visible', async ({ page }) => {
+      await open(page, 'components-tabletoolbar--detail-toggle-always');
+      await expect(page.locator('.csk-table-toolbar__detail')).toBeVisible();
+    });
+  });
+
+  test.describe('1280 px', () => {
+    test.use({ viewport: { width: 1280, height: 800 } });
+
+    test('default: „Detailní“ visible, one row', async ({ page }) => {
+      await open(page, 'components-tabletoolbar--responsive');
+      await expect(page.locator('.csk-table-toolbar__detail')).toBeVisible();
+      expect(await rows(page)).toBe(1);
+    });
+  });
+});
+
+// v2 T19 (#84): Dropdown trigger with the TableToolbar pill look
+test.describe('Controls - Dropdown pill trigger', () => {
+  test('same 34 px pill as TableToolbarButton, 44 px target, opens the menu', async ({ page }) => {
+    await open(page, 'components-dropdown--pill-trigger');
+    const pill = (await page.locator('.csk-dropdown-button--pill').boundingBox())!;
+    const toolbarPill = (await page.locator('.csk-table-toolbar__pill').first().boundingBox())!;
+    expect(Math.round(pill.height)).toBe(Math.round(toolbarPill.height));
+    expect(Math.abs(pill.y + pill.height / 2 - (toolbarPill.y + toolbarPill.height / 2))).toBeLessThanOrEqual(1);
+    const trigger = page.locator('.csk-dropdown__trigger');
+    await trigger.click();
+    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.getByRole('menuitem', { name: 'U18' })).toBeVisible();
   });
 });

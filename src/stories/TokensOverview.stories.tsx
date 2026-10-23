@@ -152,6 +152,7 @@ const OTHER = [
   '--csk-tap',
   '--csk-layout-max-width',
   '--csk-layout-gutter',
+  '--csk-event-header-condensed-h',
   '--csk-transition-fast',
   '--csk-transition-slow',
 ];

@@ -43,7 +43,10 @@ export interface EventHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
 /**
  * Compact live header (about 95 px on a phone, one row when `condensed`).
  * Navy band over the full width; the content is aligned with the page container.
- * The title never wraps in the condensed state.
+ * No fixed height: `min-height` only, so a title wrapped to two lines (390 px) pushes the subtitle
+ * and the content below down instead of clipping them. The title never wraps in the condensed state;
+ * the condensed height is the token `--csk-event-header-condensed-h` (36 px), for `scroll-padding-top`
+ * of a page with a sticky condensed header.
  */
 export const EventHeader = forwardRef<HTMLElement, EventHeaderProps>(
   (

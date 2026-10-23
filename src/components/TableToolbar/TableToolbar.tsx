@@ -16,7 +16,16 @@ interface TableToolbarBaseProps extends HTMLAttributes<HTMLDivElement> {
   favorites?: ReactNode;
   /** "Detailní" switch */
   detail?: ReactNode;
+  /**
+   * Where the `detail` switch is shown: `'desktop'` (default) hides it below 769 px viewport width
+   * (phone: the toolbar keeps two rows, search · controls), `'always'` shows it on every width.
+   * Hiding is visual only (`display: none`); the application keeps the detail state.
+   */
+  detailToggle?: TableToolbarDetailToggle;
 }
+
+/** Where the "Detailní" switch of a TableToolbar is shown. */
+export type TableToolbarDetailToggle = 'desktop' | 'always';
 
 /**
  * Container for search + pills + favourites toggle + detail switch above a table.
@@ -24,12 +33,14 @@ interface TableToolbarBaseProps extends HTMLAttributes<HTMLDivElement> {
  * One row while the search keeps at least 10rem (160 px). When the controls do not fit next to it
  * (390 px phone with round, category, ★ and "Detailní"), they move as a group to the next row and the
  * search takes the full first row; inside the group each control keeps its width and wraps whole.
+ * The "Detailní" switch is desktop-only by default (`detailToggle`), so a phone has at most two rows.
  */
 export function TableToolbar({
   search,
   children,
   favorites,
   detail,
+  detailToggle = 'desktop',
   className,
   ...props
 }: TableToolbarProps) {
@@ -42,7 +53,9 @@ export function TableToolbar({
         <div className="csk-table-toolbar__controls">
           {children}
           {favorites}
-          {detail && <div className="csk-table-toolbar__detail">{detail}</div>}
+          {detail && (
+            <div className={`csk-table-toolbar__detail csk-table-toolbar__detail--${detailToggle}`}>{detail}</div>
+          )}
         </div>
       )}
     </div>

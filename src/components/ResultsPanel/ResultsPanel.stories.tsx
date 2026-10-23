@@ -7,8 +7,29 @@ import { ResultsTable, type ResultRow, type ResultRowId } from '../ResultsTable'
 import { STORY_NOW, brRows, categoryRows } from '../ResultsTable/ResultsTable.fixtures';
 import { SearchInput } from '../SearchInput';
 import { Switch } from '../Switch';
-import { TableToolbarButton } from '../TableToolbar';
+import { Dropdown, DropdownButton } from '../Dropdown';
 import { ResultsPanel } from './ResultsPanel';
+
+const CATEGORIES = ['U14', 'U16', 'U18', 'U23', 'Muži', 'Veteráni'];
+
+/** „Kategorie ▾“ filter menu: Dropdown with the TableToolbar pill trigger; picking one sets the filter. */
+function CategoryMenu({ onSelect }: { onSelect: (category: string) => void }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <Dropdown
+      size="sm"
+      open={open}
+      onOpenChange={setOpen}
+      aria-label="Kategorie"
+      items={CATEGORIES.map((c) => ({ id: c, label: c, onClick: () => onSelect(c) }))}
+      trigger={
+        <DropdownButton variant="pill" open={open}>
+          Kategorie
+        </DropdownButton>
+      }
+    />
+  );
+}
 
 /** Static stories: frames are never flushed, so running times never tick in screenshots. */
 const storyClock = createTestClock({ now: STORY_NOW });
@@ -78,7 +99,7 @@ function Demo({
             onRemove={() => setCategory(undefined)}
           />
         ) : (
-          <TableToolbarButton>Kategorie ▾</TableToolbarButton>
+          <CategoryMenu onSelect={setCategory} />
         )
       }
       favorites={

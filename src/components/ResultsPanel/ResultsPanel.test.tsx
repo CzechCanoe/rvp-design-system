@@ -50,6 +50,38 @@ describe('ResultsPanel', () => {
     expect(screen.getByText('tabulka')).toBeInTheDocument();
   });
 
+  it('status line carries a progress note next to a DataAge-like node', () => {
+    const { container } = render(
+      <ResultsPanel
+        state="provisional"
+        status={
+          <>
+            <time>14:32:10</time> · po 2. jízdě · 8 z 24 v cíli
+          </>
+        }
+      >
+        <p>tabulka</p>
+      </ResultsPanel>
+    );
+    const line = container.querySelector('.csk-results-panel__status')!;
+    expect(line).toHaveTextContent('Předběžné14:32:10 · po 2. jízdě · 8 z 24 v cíli');
+  });
+
+  it('passes detailToggle to the toolbar (default desktop)', () => {
+    const { container, rerender } = render(
+      <ResultsPanel detail={<label>Detailní</label>}>
+        <p>tabulka</p>
+      </ResultsPanel>
+    );
+    expect(container.querySelector('.csk-table-toolbar__detail')).toHaveClass('csk-table-toolbar__detail--desktop');
+    rerender(
+      <ResultsPanel detail={<label>Detailní</label>} detailToggle="always">
+        <p>tabulka</p>
+      </ResultsPanel>
+    );
+    expect(container.querySelector('.csk-table-toolbar__detail')).toHaveClass('csk-table-toolbar__detail--always');
+  });
+
   it('names the toolbar with toolbarLabel', () => {
     render(
       <ResultsPanel toolbarLabel="Filtry startovky" search={<input aria-label="Hledat" />}>

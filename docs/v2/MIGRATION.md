@@ -46,6 +46,9 @@ Navigation (`MainNav`, `NavItem`, `BreadcrumbChevronIcon`), HeroSection (+ `Hero
 | ResultsTable | props `results`, `section`, `variant`, `size`, `show*`, `renderCell`, `onRowClick`, … | nové `rows: ResultRow[]`, `columns`, `density`, `expandedId`, `onToggle`, `renderDetail`, `onFavoriteChange`, `clock`, `labels`; jiný datový model (`COMPONENTS.md` §3) |
 | Table | obal s `overflow-x: auto` bez fokusu; řaditelná hlavička = `th` s `onClick` | API beze změny; přetékající obal (telefon) je focusovatelný (`tabIndex=0`, s `caption` `role="region"`), přibude tab stop; řaditelná hlavička je `<button type="button">` v `<th>` (klávesnice, `aria-sort` na `th`), selektory testů na `th` klik / fokus upravit |
 | Calendar, CalendarList | `showLive` → `LiveIndicator` | `showLive` → `StatusBadge state="live" size="sm"` |
+| TableToolbar (nová v 2.0) | – | `detailToggle` `'desktop'` (výchozí) / `'always'`: slot `detail` („Detailní“) je ve výchozím stavu **pod 769 px skrytý**; kdo ho chce i na telefonu, pošle `detailToggle="always"` (stejně `ResultsPanel detailToggle`) |
+| EventHeader (nová v 2.0) | – | bez pevné výšky (`min-height`), dvouřádkový název pás zvětší; výška `condensed` = token `--csk-event-header-condensed-h` (36 px) pro `scroll-padding-top` |
+| DropdownButton | `variant` `default`/`primary`/`ghost` | navíc `pill` (vzhled pilulky toolbaru, spouštěč 44 px) |
 
 ### Nové komponenty
 
@@ -67,7 +70,8 @@ Definicí hotovo je `CLIENT-OBLIGATIONS.md` sekce „live-mini-client“. DS v2 
 | Dnes v live-mini (vlastní) | Po v2 |
 |---|---|
 | `ResultList.tsx` + 423 ř. CSS | `ResultsPanel` (Card + `TableToolbar` + stavový řádek + tabulka + patička) s `ResultsTable` + `RunDetail`; mapování kontraktu → `ResultRow` zůstává v aplikaci (`utils/mapToResultsTable.ts` se přepíše) |
-| `:global` na `.csk-table-toolbar` kvůli 390 px | nic: hledání drží min. 10rem, ovládací prvky se zalomí jako skupina na další řádek; skrytí „Detailní“ na mobilu = prop neposlat |
+| `:global` na `.csk-table-toolbar` kvůli 390 px | nic: hledání drží min. 10rem, ovládací prvky se zalomí jako skupina na další řádek; „Detailní“ je pod 769 px skrytý sám (`detailToggle="desktop"`, výchozí), na 390 px tedy dva řádky |
+| `DataViewSelector` / vlastní tlačítko „Kategorie“ | `Dropdown` se spouštěčem `DropdownButton variant="pill"` vedle `TableToolbarButton` |
 | `ClassTabs.tsx` s `:global` karuselem | `Tabs variant="nav" overflow="carousel"` |
 | `DataViewSelector.tsx` (pills ↔ dropdown) | `BottomBar` na mobilu, `SegmentedControl` na desktopu |
 | `OnCoursePanel.tsx`, `GatePenalties.tsx` | `OnCoursePanel`, `OnCourseRider` (`penalty` u jezdce na trati), `GateGrid`, `PenaltyChip` (číslo branky v chipu, barva = penalizace, jako `GatePenalties`), `RunningTime` |
@@ -80,6 +84,20 @@ Definicí hotovo je `CLIENT-OBLIGATIONS.md` sekce „live-mini-client“. DS v2 
 | `NotificationPrompt.tsx` (nepoužitý) | `Notice` |
 | `SectionHeading` inline styly v `EventList` | `PageTitle` / nadpis sekce v `Card` |
 | 143 odkazů na neexistující `--csk-*` tokeny | skutečné `--csk-*` tokeny; všechny `.module.css` projít |
+
+### Poznámky pro M5 (rozhodnutí maintainera v T19; v live-mini se zatím nic nemění)
+
+a) **Pořadí stránky:** `EventHeader` → navigace (dny, třídy) → `OnCoursePanel` s `phaseLabel` „K1 muži · 2. jízda“ → `ResultsPanel`. Tak jsou složené `Live/Running` a `Live/Disconnected`.
+
+b) **Přepínání pohledu na mobilu** přes `BottomBar` (Výsledky · Startovka · Na trati · Program), ne `SegmentedControl` uprostřed stránky.
+
+c) **Desktop:** jeden šedý navigační pás dny · třídy · pohled (jako `Event/Detail`, `.event-page__filters`), ne tři samostatné řádky.
+
+d) **Stavový řádek s poznámkou o průběhu:** `ResultsPanel state="provisional" status="po 2. jízdě · 8 z 24 v cíli"`; s `DataAge` ve stejném řádku `status={<><DataAge … /> · …</>}`. Text skládá aplikace z kontraktu.
+
+e) **Stáří dat z heartbeatu kontraktu**, ne jen z WebSocketu: `DataAge receivedAt` = `clock.now()` při posledním heartbeatu nebo zprávě kontraktu (cokoli dorazilo naposled), `connection` podle heartbeatu; samotné otevřené spojení WebSocket neznamená čerstvá data.
+
+Navíc z T19 pro M5: sticky zúžená hlavička + `scroll-padding-top: var(--csk-event-header-condensed-h)` na scrollujícím kontejneru (stories `Live/*`), „Detailní“ na telefonu nic neposílat navíc (výchozí `detailToggle="desktop"` ho skryje), „Kategorie“ jako `Dropdown` s `DropdownButton variant="pill"`.
 
 Pořadí v live-mini: 1) bump na `^2.0.0` jako samostatný `chore:` commit (CLAUDE.md DS, pravidlo 6), 2) tokeny, 3) komponenta po komponentě, 4) smazat `:global` overridy a mrtvý kód, 5) tier-3 testy s fake `Clock` podle TEST-ARCHITECTURE §5.
 

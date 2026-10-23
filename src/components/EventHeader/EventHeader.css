@@ -1,6 +1,10 @@
 /* EventHeader: compact live header on the navy band */
 
 .csk-event-header {
+  /* Never a fixed height: the band grows with a wrapped title (two lines at 390 px) and the subtitle;
+     the floor is the condensed height (token), so header + content below never overlap. */
+  box-sizing: border-box;
+  min-height: var(--csk-event-header-condensed-h);
   padding: 10px 0 12px;
   background: var(--csk-color-brand);
   color: var(--csk-color-text-on-fill);
@@ -128,8 +132,11 @@
   margin-left: auto;
 }
 
-/* One row for a scrolled page: back · name · status · data age */
+/* One row for a scrolled page: back · name · status · data age.
+   Height = --csk-event-header-condensed-h (6 px + 24 px row + 6 px); pages use it as scroll-padding-top. */
 .csk-event-header--condensed {
+  display: flex;
+  align-items: center;
   padding-block: 6px;
 }
 

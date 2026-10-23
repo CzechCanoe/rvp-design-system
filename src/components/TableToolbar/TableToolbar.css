@@ -31,6 +31,13 @@
   white-space: nowrap;
 }
 
+/* detailToggle="desktop" (default): no "Detailní" on a phone / narrow tablet (below 769 px viewport) */
+@media (max-width: 768px) {
+  .csk-table-toolbar__detail--desktop {
+    display: none;
+  }
+}
+
 /* 44 px touch target for the whole switch row (label included) */
 .csk-table-toolbar__detail .csk-switch-label {
   min-height: 44px;

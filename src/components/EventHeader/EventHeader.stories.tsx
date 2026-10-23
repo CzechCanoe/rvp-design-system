@@ -70,6 +70,31 @@ export const LongTitle: Story = {
   },
 };
 
+/**
+ * A name that wraps to two lines on a 390 px phone: the band grows (`min-height`, no fixed height),
+ * the subtitle stays visible under the title and the page content starts below the band.
+ * Snapshotted at 390 and 1280 (at 1280 the name fits one row); overlap checked in tests/layout.spec.ts.
+ */
+export const LongTitleMobile: Story = {
+  parameters: { phoneFrame: false },
+  render: () => (
+    <PageLayout
+      stickyHeader={false}
+      header={
+        <EventHeader
+          {...base}
+          title="Mistrovství ČR ve slalomu na divoké vodě 2026"
+          subtitle="České Vrbné · sobota 19. 9. · kvalifikace"
+        />
+      }
+    >
+      <div style={{ paddingBlock: 12 }}>
+        <ContentPlaceholder label="Obsah stránky" height={56} />
+      </div>
+    </PageLayout>
+  ),
+};
+
 // Upright poster (5:7) and a square logo, inline so the story needs no network
 const posterLogo =
   'data:image/svg+xml;utf8,' +

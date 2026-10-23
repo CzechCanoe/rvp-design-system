@@ -321,6 +321,37 @@
   background-color: var(--csk-color-surface-2);
 }
 
+/* Variant: Pill – the TableToolbar pill (34 px visible); the trigger button around it is the 44 px target */
+.csk-dropdown-button.csk-dropdown-button--pill {
+  gap: var(--csk-space-1);
+  height: 34px;
+  min-height: 0;
+  padding: 0 var(--csk-space-3);
+  background: var(--csk-color-surface);
+  border: 1px solid var(--csk-color-border);
+  border-radius: var(--csk-radius-pill);
+  color: var(--csk-color-text-2);
+  font-family: var(--csk-font-sans);
+  font-size: var(--csk-text-sm);
+  font-weight: var(--csk-font-weight-medium);
+  white-space: nowrap;
+}
+
+.csk-dropdown-button--pill:hover {
+  background-color: var(--csk-color-surface-2);
+}
+
+.csk-dropdown__trigger:has(> .csk-dropdown-button--pill) {
+  justify-content: center;
+  min-width: var(--csk-tap);
+  min-height: var(--csk-tap);
+}
+
+.csk-dropdown__trigger:has(> .csk-dropdown-button--pill):focus-visible {
+  outline-offset: -2px;
+  border-radius: var(--csk-radius-pill);
+}
+
 /* Label */
 .csk-dropdown-button__label {
   flex: 1;

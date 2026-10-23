@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
+import { Dropdown, DropdownButton } from '../../components/Dropdown';
 import { FilterPills } from '../../components/FilterPills';
 import { FavoritesToggle } from '../../components/FavoritesToggle';
 import { Icon } from '../../components/Icon';
@@ -8,9 +9,29 @@ import { known, rezekDetail } from '../../components/ResultsTable/ResultsTable.f
 import { knownNumber } from '../../components/ResultsTable/values';
 import { SearchInput } from '../../components/SearchInput';
 import { Switch } from '../../components/Switch';
-import { TableToolbarButton } from '../../components/TableToolbar';
 import { liveClock } from './storyClock';
 import './LiveResults.css';
+
+const CATEGORIES = ['U14', 'U16', 'U18', 'U23', 'Muži', 'Veteráni'];
+
+/** „Kategorie ▾“ filter menu: Dropdown with the TableToolbar pill trigger; picking one sets the filter. */
+function CategoryMenu({ onSelect }: { onSelect: (category: string) => void }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <Dropdown
+      size="sm"
+      open={open}
+      onOpenChange={setOpen}
+      aria-label="Kategorie"
+      items={CATEGORIES.map((c) => ({ id: c, label: c, onClick: () => onSelect(c) }))}
+      trigger={
+        <DropdownButton variant="pill" open={open}>
+          Kategorie
+        </DropdownButton>
+      }
+    />
+  );
+}
 
 /** "Detailní" switch state of the surrounding panel: expands every row of LiveResults. */
 const DetailContext = createContext(false);
@@ -57,9 +78,7 @@ export function LiveResultsPanel({
             onRemove={() => setCategory(undefined)}
           />
         ) : (
-          <TableToolbarButton>
-            Kategorie <Icon name="chevron-down" size="sm" aria-hidden />
-          </TableToolbarButton>
+          <CategoryMenu onSelect={setCategory} />
         )
       }
       favorites={
